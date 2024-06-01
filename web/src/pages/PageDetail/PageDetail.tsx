@@ -91,14 +91,12 @@ export const PageText = ({
         components={{
           types: {
             image: ({value, isInline}) => {
-              const imageUrl = urlBuilder(sanityClient).image(value).width(isInline ? 100 : 800).fit('max').auto('format').url();
+              const imageUrl = urlBuilder(sanityClient).image(value).width(isInline ? 100 : 300).fit('max').auto('format').url();
               return (
                 <img src={imageUrl} />
               )
             },
             youtube: (props) => {
-              console.log(props);
-
               return <VideoURLPlayer title={props.value.url} />
             }
           },
@@ -115,14 +113,17 @@ const ArticleContainer = styled.div`
 
   margin-left: 118px;
 
+  @media (max-width: 768px) {
+    margin-left: 12px;
+  }
+
 
 `
 
 // TODO: redefine responsiveness
 const PageTextContainer = styled.div`
 
-  max-width: 90%;
-  margin: auto 0;
+  overflow: none;
 
   @media (min-width: 1000px) {
     max-width: 800px;

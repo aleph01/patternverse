@@ -19,7 +19,8 @@ export const VideoURLPlayer = ({title}: VideoURLPlayerProps) => {
               }
             }
           }}
-
+          width='100%'
+          height='100%'
         />
       </VideoContainer>
     </VideoContainerWrapper>
@@ -28,14 +29,16 @@ export const VideoURLPlayer = ({title}: VideoURLPlayerProps) => {
 }
 
 const VideoContainerWrapper = styled.div`
-  margin: 20px 0px;
-  position: relative;
-
-  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+position: relative;
+padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
 `
 
-const VideoContainer = styled.div`
+export const VideoContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-`
+  width: 100%;
+  height: 100%;
+
+  margin: 24px auto;
+`;

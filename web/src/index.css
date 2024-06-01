@@ -7,10 +7,15 @@ body {
   background-image: radial-gradient(#c0c0c0 0.5px, var(--appBackground) 0.5px);
   background-size: 10px 10px;
 
+  margin: 0;
 }
 
 
 :root {
+  --breakpointTablet: 768;
+
+  --textScale: 1.0;
+
   --appBackground: #FFFDFD;
   --appYellow: #F7E120;
 
@@ -20,4 +25,11 @@ body {
   --appPurple: #0007A1;
   --appRed: #FF0000;
   --appGreen: #03A100
+}
+
+@media (max-width: 768px) {
+  :root {
+    --textScale: 0.6;
+  }
+
 }

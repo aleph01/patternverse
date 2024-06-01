@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
-  position: sticky;
-  top: 0;
+  //position: sticky;
+  //top: 0;
   margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 48px;
+
+  @media (max-width: 768px) {
+    gap: 24px;
+  }
 `;
 
 export const InnerContainer = styled.div`

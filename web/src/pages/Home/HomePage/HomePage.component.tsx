@@ -10,7 +10,11 @@ import { ContentContainer, ImageContainer } from "./HomePage.styled";
 export const HomePage = () => {
 
   return (
-    <PageLayout>
+    <PageLayout
+      headerProps={{
+        link: "/impressum"
+      }}
+    >
       <ContentContainer>
         <Row spacing={96} fullwidth>
           <About />
