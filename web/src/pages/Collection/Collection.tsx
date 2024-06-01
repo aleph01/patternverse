@@ -1,9 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { gql, useQuery } from "urql";
 import { PVSpinner } from "../../components/PVSpinner";
-import { Row } from "../../components/Row";
 import styled from "styled-components";
-import { PVLogo } from "../../assets";
+import { PageLayout } from "../../components/PageLayout";
+import { Pattern } from "../../gql/graphql";
+import { Column } from "../../components/Column";
+import { ItemListing } from "../../components/ItemListing";
 
 
 export const Collection = () => {
@@ -34,46 +36,31 @@ export const Collection = () => {
   }
 
   return (
-    <PageContainer>
-      <Header title={data.Collection.title} />
-    </PageContainer>
+    <PageLayout headerProps={{
+      link: "/",
+      title: data.Collection.title!,
+    }}>
+      <ContentContainer>
+        <Column>
+          {data.Collection.patterns?.map((p: Pattern) =>
+            <ItemListing
+              id={p._id!}
+              title={p.title!}
+
+            />
+          )}
+        </Column>
+      </ContentContainer>
+
+    </PageLayout>
   )
 
 }
 
-const PageContainer = styled.div`
-`;
 
-
-interface HeaderProps {
-  title: string;
-}
-
-const Header = ({title}: HeaderProps) => {
-
-  return (
-    <HeaderContainer>
-      <Row fullwidth>
-        <Row childrenflex={false} spacing={60}>
-          <Link to="/">
-            <PVLogoContainer><PVLogo /></PVLogoContainer>
-          </Link>
-          <HeaderTextContainer>
-            {title}
-          </HeaderTextContainer>
-        </Row>
-      </Row>
-    </HeaderContainer>
-  )
-
-}
-
-const HeaderContainer = styled.div`
-  position: sticky;
-  top: 0;
-
-  background: white;
-  margin-bottom: 20px;
+export const ContentContainer = styled.div`
+  margin: 24px;
+  width: 90%;
 `
 
 export const PVLogoContainer = styled.div`
@@ -86,9 +73,5 @@ export const PVLogoContainer = styled.div`
   }
 
   cursor: pointer;
-
-`
-
-const HeaderTextContainer = styled.h1`
 
 `

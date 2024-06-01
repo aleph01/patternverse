@@ -7,6 +7,7 @@ export const Flex = ({
   childrenflex = true,
   wrap = 'wrap',
   spacing = 24,
+  inline,
   ...other
 }: FlexProps) => {
   return (
@@ -15,6 +16,7 @@ export const Flex = ({
       childrenflex={childrenflex}
       wrap={wrap}
       spacing={spacing}
+      inline={inline}
       {...other}
     >
       {children}

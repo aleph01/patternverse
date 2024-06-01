@@ -5,5 +5,5 @@ export interface RowProps extends Omit<FlexProps, 'direction'> {
 
 }
 
-export const Row = ({inline = true, ...props}: RowProps) =>
-  <Flex direction="row" inline={inline} {...props} />
+export const Row = ({inline = true, crossaxisalignment="start", ...props}: RowProps) =>
+  <Flex direction="row" crossaxisalignment={crossaxisalignment} inline={inline} {...props} />

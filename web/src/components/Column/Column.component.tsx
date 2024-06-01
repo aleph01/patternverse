@@ -5,5 +5,10 @@ export interface ColumnProps extends Omit<FlexProps, 'direction'> {
 
 }
 
-export const Column = ({inline = true, ...props}: ColumnProps) =>
-  <Flex direction="column" inline={inline} {...props} />
+export const Column = ({inline = true, crossaxisalignment="start", ...props}: ColumnProps) =>
+  <Flex
+    direction="column"
+    crossaxisalignment={crossaxisalignment}
+    inline={inline}
+    {...props}
+  />

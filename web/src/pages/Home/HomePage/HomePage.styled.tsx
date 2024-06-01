@@ -7,3 +7,14 @@ export const SearchBarContainer = styled.div`
   align-items: center;
   width: 100%;
 `;
+
+export const ImageContainer = styled.div`
+  img {
+    width: 200px;
+  }
+`
+
+export const ContentContainer = styled.div`
+  margin: 24px;
+  width: 90%;
+`

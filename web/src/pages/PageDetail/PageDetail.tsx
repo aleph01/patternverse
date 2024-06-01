@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Row } from "../../components/Row";
-import { ChevronRight, PVLogo } from "../../assets";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { gql, useQuery } from "urql";
 import { PVSpinner } from "../../components/PVSpinner";
 import { PortableText } from "@portabletext/react";
@@ -10,7 +9,7 @@ import urlBuilder from '@sanity/image-url';
 import { sanityClient } from "../../graphql/client";
 import { VideoURLPlayer } from "../../components/VideoURLPlayer";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Column } from "../../components/Column";
+import { PageLayout } from "../../components/PageLayout";
 
 
 export const PageDetail = () => {
@@ -38,9 +37,10 @@ export const PageDetail = () => {
   }
 
   return (
-    <PageContainer>
-      <Header title={data.Pattern.title} />
-
+    <PageLayout headerProps={{
+      link: "/",
+      title: data.Pattern.title,
+    }}>
       <ArticleContainer>
         <Row crossaxisalignment="start" mainaxisalignment="start" childrenflex={false} inline={false} >
           <PageTextContainer>
@@ -48,56 +48,13 @@ export const PageDetail = () => {
               portableText={data.Pattern.bodyRaw}
             />
           </PageTextContainer>
-          <ArticleDetailsContainer>
-            <Column childrenflex={false}>
-              <ExpandContractButton>
-                <ChevronRight />
-              </ExpandContractButton>
-            </Column>
-          </ArticleDetailsContainer>
+
         </Row>
       </ArticleContainer>
-    </PageContainer>
+
+    </PageLayout>
   )
 }
-
-const PageContainer = styled.div`
-`;
-
-interface HeaderProps {
-  title: string;
-}
-
-const Header = ({title}: HeaderProps) => {
-
-  return (
-    <HeaderContainer>
-      <Row fullwidth>
-        <Row childrenflex={false} spacing={60}>
-          <Link to="/">
-            <PVLogoContainer><PVLogo /></PVLogoContainer>
-          </Link>
-          <HeaderTextContainer>
-            {title}
-          </HeaderTextContainer>
-        </Row>
-      </Row>
-    </HeaderContainer>
-  )
-
-}
-
-const HeaderContainer = styled.div`
-  position: sticky;
-  top: 0;
-
-  background: white;
-  margin-bottom: 20px;
-`
-
-const HeaderTextContainer = styled.h1`
-
-`
 
 export const ArticleDetailsContainer = styled.div`
   max-width: 200px;
@@ -156,11 +113,7 @@ export const PageText = ({
 
 const ArticleContainer = styled.div`
 
-  margin-left: 12px;
-
-  @media (min-width: 1000px) {
-    margin-left: 200px;
-  }
+  margin-left: 118px;
 
 
 `
@@ -188,16 +141,16 @@ const BlockQuoteContainer = styled.div`
   }
 `
 
-const ExpandContractButton = styled.div`
-  background: var(--appYellow);
-  width: 34px;
-  height: 34px;
-  border-radius: 5px;
-  cursor: pointer;
+// const ExpandContractButton = styled.div`
+//   background: var(--appYellow);
+//   width: 34px;
+//   height: 34px;
+//   border-radius: 5px;
+//   cursor: pointer;
 
-  & svg {
-    width: 100%;
-    height: 100%;
-    scale: 0.6;
-  }
-`
+//   & svg {
+//     width: 100%;
+//     height: 100%;
+//     scale: 0.6;
+//   }
+// `

@@ -17,7 +17,7 @@ export interface FlexProps extends HTMLAttributes<HTMLDivElement> {
   wrap?: Wrap;
   spacing?: number;
   fullwidth?: boolean;
-  fullHeight?: boolean;
+  fullheight?: boolean;
   childrenflex?: boolean;
   inline?: boolean;
   mainaxisalignment?: AxisAlignment;

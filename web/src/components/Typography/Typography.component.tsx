@@ -7,10 +7,10 @@ const Base = styled.p`
   margin: 0px;
 `;
 
-export const HeaderText = ({ size = 40, color = "#000", children}: TextProps) => {
+export const HeaderText = ({ size = 40, color = "#000", fontFamily, children}: TextProps) => {
 
   return (
-    <StyledNormalText size={size} color={color}>
+    <StyledNormalText size={size} color={color} fontFamily={fontFamily}>
       {children}
     </StyledNormalText>
   )

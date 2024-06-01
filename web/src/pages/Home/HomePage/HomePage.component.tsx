@@ -1,22 +1,23 @@
-import styled from "styled-components"
 import { Row } from "../../../components/Row"
 import { HeaderText, StyledBoldText } from "../../../components/Typography"
-import { Header } from "../Header/Header.component"
+import { PageLayout } from "../../../components/PageLayout";
 import { Column } from "../../../components/Column"
 import { TextWithUnderline } from "../../../components/Typography/TextWithUnderline"
 import { PatternversePatternIllustration } from "../../../assets"
+import { CollectionsSection } from "../OverviewSection/CollectionsSection/CollectionSection.component"
+import { ContentContainer, ImageContainer } from "./HomePage.styled";
 
 export const HomePage = () => {
 
   return (
-    <>
-      <Header />
-      <AboutContainer>
-        <About />
-      </AboutContainer>
-
-    </>
-
+    <PageLayout>
+      <ContentContainer>
+        <Row spacing={96} fullwidth>
+          <About />
+          <CollectionsSection />
+        </Row>
+      </ContentContainer>
+    </PageLayout>
   )
 }
 
@@ -49,17 +50,3 @@ const About = () => {
   )
 
 }
-
-const ImageContainer = styled.div`
-  img {
-    width: 200px;
-  }
-`
-
-const AboutContainer = styled.div`
-  display: flex;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  margin: 24px;
-`

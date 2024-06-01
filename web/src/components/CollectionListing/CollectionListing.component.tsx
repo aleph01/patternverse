@@ -17,7 +17,7 @@ export const CollectionListing = ({id, title, color}: CollectionListingProps) =>
   return (
     <Link to={`/collections/${id}`}>
       <CollectionListingContainer hover={hover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-      <Row>
+      <Row childrenflex={false} crossaxisalignment="center">
         <CollectionBlockColor color={color} />
         <ListingText>{title}</ListingText>
       </Row>
@@ -43,7 +43,7 @@ interface CollectionListingContainerProps {
 }
 
 const CollectionListingContainer = styled.div<CollectionListingContainerProps>`
-padding-top: 12px;
+  padding-top: 12px;
   padding-bottom: 12px;
 
   width: 300px;
@@ -61,6 +61,8 @@ padding-top: 12px;
       & p, div {
         transform: translateX(12px);
       }
+
+      padding-right: 24px;
 
       border-radius: 5px;
 

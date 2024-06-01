@@ -7,7 +7,7 @@ export const StyledFlex = styled.div<FlexProps>`
   margin: 0;
   flex-wrap: ${({ wrap }) => wrap};
   ${({ fullwidth }) => fullwidth && 'width: 100%;'}
-  ${({ fullHeight }) => fullHeight && 'height: 100%;'}
+  ${({ fullheight }) => fullheight && 'height: 100%;'}
 
   ${({ spacing }) => spacing && `gap: ${spacing}px;`}
 
