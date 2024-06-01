@@ -1,0 +1,23 @@
+
+body {
+  font-family: "Noto Serif";
+  background: var(--appBackground);
+
+  opacity: 0.8;
+  background-image: radial-gradient(#c0c0c0 0.5px, var(--appBackground) 0.5px);
+  background-size: 10px 10px;
+
+}
+
+
+:root {
+  --appBackground: #FFFDFD;
+  --appYellow: #F7E120;
+
+  --textBlack: #303030;
+  --textGrey: #9B9B9B;
+
+  --appPurple: #0007A1;
+  --appRed: #FF0000;
+  --appGreen: #03A100
+}
