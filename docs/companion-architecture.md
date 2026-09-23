@@ -40,9 +40,14 @@ local or remote provider and must not fall back to a cloud provider silently.
 
 1. **Core and contracts (started):** establish source-qualified session state,
    pure transitions, and storage/reply ports with tests.
-2. **Rust bridge:** expose the existing Pattern Markdown engine through a
-   stable adapter contract. Validate native desktop and browser feasibility
-   before deciding whether a WebAssembly build is appropriate.
+2. **Rust bridge (native adapter started):**
+   `@patternverse/native-pattern-adapter` targets Mira's existing
+   `session_pattern_run` Tauri command. It only launches an explicitly linked,
+   immutable library revision and leaves execution and reply validation in
+   Rust. The Svelte shell is not yet wired to that native command. Browser
+   availability still needs a separate feasibility check before deciding
+   whether a WebAssembly build is appropriate; there is no JavaScript
+   reimplementation or cloud fallback.
 3. **Storage adapters:** load and save versioned sessions in encrypted local
    storage. Provide an explicit, tested migration from existing Mira session
    formats; never overwrite or discard originals during import.
