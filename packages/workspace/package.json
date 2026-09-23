@@ -1,0 +1,31 @@
+{
+  "name": "@patternverse/workspace",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./library": {
+      "types": "./dist/library.d.ts",
+      "default": "./src/library.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@patternverse/schema": "workspace:*",
+    "dexie": "4.4.4",
+    "minisearch": "7.2.0"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "6.2.5",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  }
+}

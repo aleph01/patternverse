@@ -1,0 +1,35 @@
+{
+  "name": "patternverse",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A personal-first environment for reusable procedural knowledge.",
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=22.22.0 <23",
+    "pnpm": ">=10.14.0 <11"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @patternverse/web dev",
+    "build": "pnpm -r --if-present build",
+    "test": "pnpm -r --if-present test",
+    "test:e2e": "pnpm --filter @patternverse/web test:e2e",
+    "check": "pnpm -r --if-present check",
+    "lint": "eslint . && pnpm check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate:content": "pnpm --filter @patternverse/compiler validate:content",
+    "compile:content": "pnpm --filter @patternverse/compiler compile:content",
+    "compile:content:production": "pnpm --filter @patternverse/compiler compile:content:production"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.8.0",
+    "eslint-plugin-svelte": "3.22.0",
+    "globals": "17.9.0",
+    "prettier": "3.9.6",
+    "prettier-plugin-svelte": "4.1.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.66.0"
+  }
+}

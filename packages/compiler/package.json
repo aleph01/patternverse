@@ -1,0 +1,32 @@
+{
+  "name": "@patternverse/compiler",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./practice": "./src/practice.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "validate:content": "pnpm --filter @patternverse/schema build && pnpm build && node dist/cli.js validate ../../patternverse.yaml ../../content",
+    "compile:content": "pnpm --filter @patternverse/schema build && pnpm build && node dist/cli.js build ../../patternverse.yaml ../../content ../../generated/commons.json",
+    "compile:content:production": "pnpm --filter @patternverse/schema build && pnpm build && node dist/cli.js build ../../patternverse.yaml ../../content ../../generated/commons.json --exclude-drafts"
+  },
+  "dependencies": {
+    "@patternverse/schema": "workspace:*",
+    "remark-parse": "11.0.0",
+    "unified": "11.0.5",
+    "unist-util-visit": "5.1.0",
+    "yaml": "2.9.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/mdast": "4.0.4",
+    "@types/node": "22.18.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  }
+}

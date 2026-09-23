@@ -1,0 +1,17 @@
+node_modules/
+.pnpm-store/
+.DS_Store
+
+# Builds and generated files
+build/
+dist/
+generated/
+coverage/
+test-results/
+playwright-report/
+.svelte-kit/
+
+# Local environment
+.env
+.env.*
+!.env.example
