@@ -70,8 +70,8 @@ still sends content to a remote service for processing; it is not local inferenc
 4. **Svelte companion (browser conversation implemented):** Mira has a main-nav
    destination, source-qualified handoff from library patterns, session creation,
    rename/delete, modality switching, editable/restorable modality prompts, and
-   OpenRouter ZDR replies. The five desktop modality defaults have been copied
-   without shortening them; ACT remains a compact interim default. A selected
+   OpenRouter ZDR replies. All six desktop modality defaults have been copied
+   without shortening them. A selected
    Commons pattern with an existing linear Practice can open that practice.
    This is _article context_, not Pattern Markdown execution. Guided technique
    selection, multi-turn exercise state, and the Rust host are not connected yet.
