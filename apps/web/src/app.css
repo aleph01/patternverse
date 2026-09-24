@@ -134,6 +134,17 @@ footer {
   color: var(--green-dark);
 }
 
+.mira-nav-link {
+  font-size: 0.76rem;
+  font-weight: 850;
+  text-transform: lowercase;
+}
+
+.mira-nav-link:hover,
+.mira-nav-link:focus-visible {
+  color: var(--green-dark);
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -4148,6 +4159,125 @@ footer p {
   .practice-add-block {
     align-items: stretch;
     flex-direction: column;
+  }
+}
+
+.mira-page {
+  min-height: calc(100vh - 82px);
+}
+
+.mira-intro {
+  padding: clamp(5rem, 10vw, 9rem) max(3vw, calc((100vw - 1440px) / 2));
+  border-bottom: 1px solid var(--ink);
+}
+
+.mira-eyebrow,
+.mira-pattern-cta > div > p {
+  margin: 0 0 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mira-intro h1 {
+  margin: 0;
+  font-size: clamp(4rem, 10vw, 10rem);
+  line-height: 0.86;
+  letter-spacing: -0.085em;
+}
+
+.mira-intro h1 span {
+  color: var(--green-dark);
+}
+
+.mira-intro > p:last-child {
+  max-width: 39rem;
+  margin: 2rem 0 0;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  line-height: 1.4;
+}
+
+.mira-context,
+.mira-transition,
+.mira-pattern-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+  padding: clamp(2rem, 5vw, 4rem) max(3vw, calc((100vw - 1440px) / 2));
+  border-bottom: 1px solid var(--ink);
+}
+
+.mira-context {
+  background: var(--mint);
+}
+
+.mira-context h2,
+.mira-transition h2,
+.mira-pattern-cta h2 {
+  max-width: 18ch;
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.mira-context div > p:last-child,
+.mira-transition > p:not(.mira-eyebrow) {
+  max-width: 42rem;
+  margin: 1.2rem 0 0;
+  line-height: 1.5;
+}
+
+.mira-context a,
+.mira-transition a,
+.mira-pattern-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  font-size: 0.82rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.mira-context a:hover,
+.mira-transition a:hover,
+.mira-pattern-cta a:hover {
+  color: var(--green-dark);
+}
+
+.mira-transition {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  max-width: 62rem;
+  border-right: 1px solid var(--ink);
+}
+
+.mira-transition a {
+  width: fit-content;
+  margin-top: 1rem;
+}
+
+.mira-pattern-cta {
+  background: #e8f5ed;
+}
+
+.mira-pattern-cta h2 {
+  max-width: 22ch;
+}
+
+@media (max-width: 760px) {
+  .mira-context,
+  .mira-pattern-cta {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .mira-transition {
+    border-right: 0;
   }
 }
 

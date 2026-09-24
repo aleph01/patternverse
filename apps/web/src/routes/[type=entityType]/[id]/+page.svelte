@@ -5,6 +5,7 @@
   import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
   import UnifiedVerseGroups from '$lib/components/UnifiedVerseGroups.svelte';
   import UsefulnessControl from '$lib/components/UsefulnessControl.svelte';
+  import { miraPatternQuery } from '$lib/mira/context';
   import { verseAccentClass } from '$lib/verse-accent';
 
   let { data } = $props();
@@ -44,6 +45,20 @@
         <h2 id="practice-cta-heading">put this pattern into practice.</h2>
       </div>
       <a href={resolve(`/pattern/${data.entity.id}/practice`)}>Begin Practice</a>
+    </aside>
+  {/if}
+
+  {#if data.entity.type === 'pattern'}
+    <aside class="mira-pattern-cta" aria-labelledby="mira-pattern-heading">
+      <div>
+        <p>With Mira</p>
+        <h2 id="mira-pattern-heading">A place for this pattern in Mira.</h2>
+      </div>
+      <a
+        href={`${resolve('/mira')}${miraPatternQuery({ sourceId: data.entity.sourceId, entityId: data.entity.id })}`}
+      >
+        Preview Mira <span aria-hidden="true">↗</span>
+      </a>
     </aside>
   {/if}
 

@@ -51,7 +51,10 @@ local or remote provider and must not fall back to a cloud provider silently.
 3. **Storage adapters:** load and save versioned sessions in encrypted local
    storage. Provide an explicit, tested migration from existing Mira session
    formats; never overwrite or discard originals during import.
-4. **Svelte companion:** build the Mira conversation, session list, modality
+4. **Svelte companion (shell started):** Mira now has a navigation destination,
+   and a library pattern can open that destination with its exact source-qualified
+   identity. The page explicitly marks conversations as unavailable; no private
+   sessions are loaded, imported, or synced. Next, build the conversation, session list, modality
    selection, and pattern-selection flows inside the Patternverse shell.
    Connect the UI to the core and real platform adapters, not placeholder
    responses.
