@@ -31,10 +31,21 @@ path is developed. They are not silently treated as equivalent to Pattern
 Markdown programs.
 
 Mira sessions are private data, separate from publishable knowledge. The
-existing Patternverse Dropbox sync is not end-to-end encrypted, so it must not
-receive conversation transcripts. Any future session sync requires an explicit
-opt-in and an end-to-end-encrypted design. A model adapter must name the active
-local or remote provider and must not fall back to a cloud provider silently.
+browser adapter encrypts sessions, prompt overrides, and the OpenRouter key with
+AES-GCM before writing to its own IndexedDB database. Its non-extractable device
+key is also stored in that browser profile: this protects stored data from casual
+disk inspection, **not** from malicious same-origin scripts or someone who can
+use an unlocked browser profile. Clearing browser storage can permanently remove
+the key and transcripts, so the UI offers a passphrase-encrypted portable archive.
+The archive deliberately excludes the OpenRouter key and importing it never
+overwrites existing sessions. Ordinary app opening does not require a passphrase.
+
+The existing Patternverse Dropbox sync is not end-to-end encrypted, so it must
+not receive conversation transcripts. Any future session sync requires explicit
+opt-in and an end-to-end-encrypted design. The browser model adapter is explicitly
+OpenRouter: it requires a user-supplied key and model, sends only on user submit,
+requests ZDR and denial of data collection, and disables provider fallbacks. ZDR
+still sends content to a remote service for processing; it is not local inference.
 
 ## Migration sequence
 
@@ -48,16 +59,18 @@ local or remote provider and must not fall back to a cloud provider silently.
    availability still needs a separate feasibility check before deciding
    whether a WebAssembly build is appropriate; there is no JavaScript
    reimplementation or cloud fallback.
-3. **Storage adapters:** load and save versioned sessions in encrypted local
-   storage. Provide an explicit, tested migration from existing Mira session
-   formats; never overwrite or discard originals during import.
-4. **Svelte companion (shell started):** Mira now has a navigation destination,
-   and a library pattern can open that destination with its exact source-qualified
-   identity. The page explicitly marks conversations as unavailable; no private
-   sessions are loaded, imported, or synced. Next, build the conversation, session list, modality
-   selection, and pattern-selection flows inside the Patternverse shell.
-   Connect the UI to the core and real platform adapters, not placeholder
-   responses.
+3. **Storage adapters (browser path implemented):** encrypted device-local
+   sessions and versioned portable archives are tested. Explicit migration from
+   the previous Mira desktop/phone formats is still needed; originals must never
+   be overwritten or discarded.
+4. **Svelte companion (browser conversation implemented):** Mira has a main-nav
+   destination, source-qualified handoff from library patterns, session creation,
+   rename/delete, modality switching, editable/restorable modality prompts, and
+   OpenRouter ZDR replies. The five desktop modality defaults have been copied
+   without shortening them; ACT remains a compact interim default. A selected
+   Commons pattern with an existing linear Practice can open that practice.
+   This is _article context_, not Pattern Markdown execution. Guided technique
+   selection, multi-turn exercise state, and the Rust host are not connected yet.
 5. **Platform parity:** migrate phone/PWA and desktop-specific capabilities
    (voice, local model, remote ZDR provider) behind adapters. Verify privacy,
    accessibility, and existing workflow parity before retiring old UI paths.

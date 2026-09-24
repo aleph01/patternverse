@@ -16,9 +16,11 @@
 
 <header class="entity-hero">
   {#if practiceHref}
+    <!-- eslint-disable svelte/no-navigation-without-resolve -- practiceHref is resolved by the page loader. -->
     <a class="entity-practice-shortcut" href={practiceHref}
       >try this practice <span aria-hidden="true">→</span></a
     >
+    <!-- eslint-enable svelte/no-navigation-without-resolve -->
   {/if}
   <div class="entity-kicker">
     <span>{entity.type}</span>

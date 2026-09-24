@@ -171,8 +171,10 @@
       <div class="organizer-intro">
         <p>Occasional tools for maintaining the structure of your Patternverse.</p>
         <nav aria-label="Create a Verse or Collection">
+          <!-- eslint-disable svelte/no-navigation-without-resolve -- The editor base path is resolved before local query parameters are added. -->
           <a class="button-link" href={`${resolve('/editor')}?type=verse`}>New verse</a>
           <a class="button-link" href={`${resolve('/editor')}?type=collection`}>New collection</a>
+          <!-- eslint-enable svelte/no-navigation-without-resolve -->
         </nav>
       </div>
 
