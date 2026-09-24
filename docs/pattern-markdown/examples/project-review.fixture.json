@@ -1,0 +1,7 @@
+{
+  "inputs": { "topic": { "type": "text", "value": "a weekend project" } },
+  "replies": [
+    { "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Plant herbs" } },
+    { "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Choose a pot" } }
+  ]
+}

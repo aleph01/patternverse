@@ -1,0 +1,9 @@
+{"inputs":{},"steps":[
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"begin"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Learning."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Curiosity."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Read one page."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Limited time and tiredness."}},
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"adapt"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Choose one question and rest."}}
+]}

@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "situation": { "type": "text", "value": "I want to make time for a creative project." }
+  },
+  "replies": [
+    {
+      "expected_kind": "agent.generate",
+      "result": {
+        "kind": "generated",
+        "value": {
+          "type": "choices",
+          "value": [
+            { "value": "time", "label": "Making time" },
+            { "value": "confidence", "label": "Finding confidence" },
+            { "value": "starting", "label": "Taking the first step" }
+          ]
+        }
+      }
+    },
+    {
+      "expected_kind": "interaction.choose",
+      "result": { "kind": "selected", "value": "starting" }
+    }
+  ]
+}

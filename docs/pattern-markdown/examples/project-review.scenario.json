@@ -1,0 +1,20 @@
+{
+  "inputs": { "topic": { "type": "text", "value": "a weekend project" } },
+  "steps": [
+    { "action": "expect", "status": "Waiting", "pending_kind": "interaction.ask", "ledger_len": 0 },
+    { "action": "reject_reply", "result": { "kind": "rating", "value": 5 } },
+    { "action": "reply", "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Plant herbs" } },
+    { "action": "repeat_last" },
+    { "action": "pause", "target": "root" },
+    { "action": "restart" },
+    { "action": "expect", "status": "Paused", "pending_kind": "interaction.ask", "ledger_len": 1 },
+    { "action": "resume", "target": "root" },
+    { "action": "retry" },
+    { "action": "reply", "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Choose a pot" } },
+    { "action": "restart" },
+    { "action": "repeat_last" },
+    { "action": "expect", "status": "Completed", "pending_kind": null, "ledger_len": 2 },
+    { "action": "acknowledge_content" },
+    { "action": "restart" }
+  ]
+}

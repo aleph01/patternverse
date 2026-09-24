@@ -1,0 +1,8 @@
+{"inputs":{},"steps":[
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"begin"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I must do this perfectly."}},
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"try"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"The thought is still there, with no change."}},
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"continue"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Curiosity while making a first draft."}}
+]}

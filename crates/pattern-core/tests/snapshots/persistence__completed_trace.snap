@@ -1,0 +1,24 @@
+---
+source: tests/persistence.rs
+expression: summary
+snapshot_kind: text
+---
+[
+  "RunStarted",
+  "NodeEntered(NodeId(0))",
+  "effect.requested",
+  "NodeEntered(NodeId(1))",
+  "effect.requested",
+  "BindingCommitted(BindingId(0))",
+  "effect.fulfilled",
+  "NodeEntered(NodeId(2))",
+  "effect.requested",
+  "NodeEntered(NodeId(3))",
+  "effect.requested",
+  "BindingCommitted(BindingId(1))",
+  "effect.fulfilled",
+  "NodeEntered(NodeId(4))",
+  "effect.requested",
+  "NodeEntered(NodeId(5))",
+  "Completed"
+]

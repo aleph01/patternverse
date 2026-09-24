@@ -1,0 +1,11 @@
+{"inputs":{},"steps":[
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"begin"}},
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"ordinary"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"A colleague requested help late in the day."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Offer help tomorrow, not tonight."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Collegiality."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Keep my evening free."}},
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"balance"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I can look tomorrow morning. I am unavailable tonight."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Repeat the boundary and pause the conversation."}}
+]}

@@ -1,0 +1,13 @@
+{
+  "inputs": { "topic": { "type": "text", "value": "a weekend project" } },
+  "replies": [
+    { "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Sketch a tree" } },
+    { "expected_kind": "interaction.rate", "result": { "kind": "rating", "value": 8 } },
+    { "expected_kind": "interaction.choose", "result": { "kind": "selected", "value": "add" } },
+    { "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Plant herbs" } },
+    { "expected_kind": "interaction.rate", "result": { "kind": "rating", "value": 6 } },
+    { "expected_kind": "interaction.choose", "result": { "kind": "selected", "value": "finish" } },
+    { "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Find a pencil" } },
+    { "expected_kind": "interaction.ask", "result": { "kind": "text", "value": "Choose a pot" } }
+  ]
+}

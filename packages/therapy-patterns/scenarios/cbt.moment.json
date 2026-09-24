@@ -1,0 +1,9 @@
+{"inputs":{},"steps":[
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"begin"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"A colleague did not answer my greeting."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I assumed they were upset with me."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Anxious."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I avoided talking at lunch."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I stayed unsure about what happened."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I want to separate what I know from what I guessed."}}
+]}

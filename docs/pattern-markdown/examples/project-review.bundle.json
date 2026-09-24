@@ -1,0 +1,7 @@
+{
+  "root": "project.review",
+  "patterns": {
+    "project.review": ":language 1\n:title \"Project review\"\n:input topic text\n:output plan\n!use project.step as plan {\n    :with topic\n}\n!show {\n    First step: {{plan.next_step}}\n}\n-> end\n",
+    "project.step": ":language 1\n:title \"Choose a small step\"\n:input topic text\n:output next_step\n!ask detail {\n    What would you like to try for {{topic}}?\n}\n!ask next_step {\n    What is one small step toward {{detail}}?\n}\n-> end\n"
+  }
+}

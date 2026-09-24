@@ -1,0 +1,9 @@
+{"inputs":{},"steps":[
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"begin"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"A little connection."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Write a brief note to a friend."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"After tea."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I may feel tired."}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"Save a draft and rest."}},
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"keep"}}
+]}

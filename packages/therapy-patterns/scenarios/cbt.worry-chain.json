@@ -1,0 +1,12 @@
+{"inputs":{},"steps":[
+  {"action":"reply","expected_kind":"interaction.choose","result":{"kind":"selected","value":"begin"}},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I would fail the exam."}},
+  {"action":"restart"},
+  {"action":"reply","expected_kind":"language.realize","result":{"kind":"realized","value":"If you failed the exam, what would be the worst thing about that?"}},
+  {"action":"restart"},
+  {"action":"reply","expected_kind":"interaction.ask","result":{"kind":"text","value":"I wouldn't finish my degree."}},
+  {"action":"reply","expected_kind":"language.realize","result":{"kind":"realized","value":"If you couldn't finish your degree, what would be the worst thing about that?"}},
+  {"action":"stop_loop"},
+  {"action":"restart"},
+  {"action":"acknowledge_content"}
+]}

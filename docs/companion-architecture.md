@@ -51,7 +51,11 @@ still sends content to a remote service for processing; it is not local inferenc
 
 1. **Core and contracts (started):** establish source-qualified session state,
    pure transitions, and storage/reply ports with tests.
-2. **Rust bridge (native adapter started):**
+2. **Rust bridge (engine migrated, native adapter started):**
+   `crates/pattern-core` and the private `packages/therapy-patterns` fixtures
+   now live in Patternverse and pass their Rust tests, formatting, and strict
+   Clippy checks. This preserves the original language implementation; it does
+   not itself connect the browser or native UI to a pattern host.
    `@patternverse/native-pattern-adapter` targets Mira's existing
    `session_pattern_run` Tauri command. It only launches an explicitly linked,
    immutable library revision and leaves execution and reply validation in
