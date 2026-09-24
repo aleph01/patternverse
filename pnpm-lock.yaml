@@ -35,6 +35,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@patternverse/companion-core':
+        specifier: workspace:*
+        version: link:../../packages/companion-core
       '@patternverse/compiler':
         specifier: workspace:*
         version: link:../../packages/compiler
@@ -105,6 +108,9 @@ importers:
       '@types/mdast':
         specifier: 4.0.4
         version: 4.0.4
+      fake-indexeddb:
+        specifier: 6.2.5
+        version: 6.2.5
       jsdom:
         specifier: ^30.0.1
         version: 30.0.1

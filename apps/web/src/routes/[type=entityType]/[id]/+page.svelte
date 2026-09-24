@@ -54,11 +54,13 @@
         <p>With Mira</p>
         <h2 id="mira-pattern-heading">A place for this pattern in Mira.</h2>
       </div>
+      <!-- eslint-disable svelte/no-navigation-without-resolve -- The base route is resolved before adding source-qualified query parameters. -->
       <a
         href={`${resolve('/mira')}${miraPatternQuery({ sourceId: data.entity.sourceId, entityId: data.entity.id })}`}
       >
         Preview Mira <span aria-hidden="true">↗</span>
       </a>
+      <!-- eslint-enable svelte/no-navigation-without-resolve -->
     </aside>
   {/if}
 

@@ -5,6 +5,11 @@ import { loadCommons, summarizeEntity } from '$lib/server/commons';
 export const load: PageServerLoad = async () => {
   const corpus = await loadCommons();
   return {
-    patterns: corpus.entities.filter((entity) => entity.type === 'pattern').map(summarizeEntity),
+    patterns: corpus.entities
+      .filter((entity) => entity.type === 'pattern')
+      .map((entity) => ({
+        ...summarizeEntity(entity),
+        hasPractice: Boolean(entity.practice),
+      })),
   };
 };
