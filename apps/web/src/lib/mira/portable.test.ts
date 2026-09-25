@@ -22,6 +22,7 @@ describe('portable Mira archives', () => {
     expect(await readPortableArchive(raw, 'long passphrase', cryptography)).toEqual({
       sessions: [session],
       promptOverrides: { narm: 'My prompt' },
+      runs: [],
     });
     await expect(readPortableArchive(raw, 'wrong passphrase', cryptography)).rejects.toThrow();
   });
@@ -49,5 +50,31 @@ describe('portable Mira archives', () => {
       openRouterKey: 'my-current-key',
       promptOverrides: { narm: 'Current prompt' },
     });
+  });
+
+  it('includes encrypted guided progress and validates it before importing', async () => {
+    const store = createPrivateMiraStore({
+      indexedDB,
+      crypto: cryptography,
+      databaseName: `mira-run-import-${crypto.randomUUID()}`,
+    });
+    await store.save(session);
+    const saved = { privateExercise: 'A difficult moment', revision: 2 };
+    const raw = await exportPortableArchive([session], settings, 'long passphrase', cryptography, [
+      { sessionId: session.id, saved },
+    ]);
+    expect(raw).not.toContain(saved.privateExercise);
+    await expect(
+      importPortableArchive(store, raw, 'long passphrase', cryptography, async () => {
+        throw new Error('Invalid Rust checkpoint');
+      }),
+    ).rejects.toThrow('Invalid Rust checkpoint');
+    expect(await store.list()).toHaveLength(1);
+    expect(
+      await importPortableArchive(store, raw, 'long passphrase', cryptography, async () => {}),
+    ).toBe(1);
+    const imported = (await store.list()).find((item) => item.id !== session.id);
+    expect(imported).toBeDefined();
+    expect((await store.loadRun(imported!.id))?.saved).toEqual(saved);
   });
 });

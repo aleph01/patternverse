@@ -1,0 +1,16 @@
+{
+  "name": "pattern-wasm",
+  "type": "module",
+  "description": "Browser WebAssembly bridge for Patternverse therapy patterns",
+  "version": "0.1.0",
+  "files": [
+    "pattern_wasm_bg.wasm",
+    "pattern_wasm.js",
+    "pattern_wasm.d.ts"
+  ],
+  "main": "pattern_wasm.js",
+  "types": "pattern_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

@@ -180,6 +180,16 @@ impl SavedRun {
         if source(&run.technique_id).is_none() {
             return Err(HostError::UnknownTechnique);
         }
+        if run
+            .manager
+            .snapshot()
+            .sources()
+            .get(&run.technique_id)
+            .map(String::as_str)
+            != source(&run.technique_id)
+        {
+            return Err(HostError::InvalidRun);
+        }
         manager::replay(&run.manager).map_err(|_| HostError::InvalidRun)?;
         Ok(run)
     }
@@ -367,6 +377,13 @@ mod tests {
         bytes[0] = b'!';
         assert_eq!(
             SavedRun::restore(&bytes).unwrap_err(),
+            HostError::InvalidRun
+        );
+        let mut mismatched: serde_json::Value =
+            serde_json::from_slice(&run.save().unwrap()).unwrap();
+        mismatched["technique_id"] = serde_json::json!("act.values");
+        assert_eq!(
+            SavedRun::restore(&serde_json::to_vec(&mismatched).unwrap()).unwrap_err(),
             HostError::InvalidRun
         );
         assert_eq!(

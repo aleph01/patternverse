@@ -4,12 +4,15 @@ const DATABASE_NAME = 'patternverse-mira-private-v1';
 const KEY_STORE = 'keys';
 const SESSION_STORE = 'sessions';
 const SETTINGS_STORE = 'settings';
+const RUN_STORE = 'runs';
 const DEVICE_KEY_ID = 'device';
 const SETTINGS_ID = 'current';
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
 type Envelope = Readonly<{ version: 1; iv: ArrayBuffer; ciphertext: ArrayBuffer }>;
+type RunEnvelope = Envelope & Readonly<{ token: string }>;
+export type PrivateRun = Readonly<{ saved: unknown; token: string }>;
 export type MiraSettings = Readonly<{
   model: string;
   openRouterKey: string;
@@ -22,6 +25,8 @@ export interface PrivateMiraStore extends SessionRepository {
   remove(id: string): Promise<void>;
   loadSettings(): Promise<MiraSettings>;
   saveSettings(settings: MiraSettings): Promise<void>;
+  loadRun(sessionId: string): Promise<PrivateRun | null>;
+  saveRun(sessionId: string, saved: unknown, expectedToken: string | null): Promise<string>;
 }
 
 export type PrivateStoreOptions = Readonly<{
@@ -39,12 +44,12 @@ export function createPrivateMiraStore(options: PrivateStoreOptions = {}): Priva
 
   const open = (): Promise<IDBDatabase> =>
     new Promise((resolve, reject) => {
-      const request = storage.open(databaseName, 1);
+      const request = storage.open(databaseName, 2);
       request.onupgradeneeded = () => {
         const database = request.result;
-        database.createObjectStore(KEY_STORE);
-        database.createObjectStore(SESSION_STORE);
-        database.createObjectStore(SETTINGS_STORE);
+        for (const name of [KEY_STORE, SESSION_STORE, SETTINGS_STORE, RUN_STORE]) {
+          if (!database.objectStoreNames.contains(name)) database.createObjectStore(name);
+        }
       };
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error ?? new Error('Private storage is unavailable.'));
@@ -126,7 +131,13 @@ export function createPrivateMiraStore(options: PrivateStoreOptions = {}): Priva
       );
       return sessions.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
     },
-    remove: async (id) => withDatabase((database) => erase(database, SESSION_STORE, id)),
+    remove: async (id) =>
+      withDatabase((database) =>
+        writeMany(database, [SESSION_STORE, RUN_STORE], (transaction) => {
+          transaction.objectStore(SESSION_STORE).delete(id);
+          transaction.objectStore(RUN_STORE).delete(id);
+        }),
+      ),
     loadSettings: async () => {
       const envelope = await withDatabase((database) =>
         read<Envelope>(database, SETTINGS_STORE, SETTINGS_ID),
@@ -138,6 +149,44 @@ export function createPrivateMiraStore(options: PrivateStoreOptions = {}): Priva
     saveSettings: async (settings) => {
       const envelope = await seal('settings', SETTINGS_ID, validateSettings(settings));
       await withDatabase((database) => put(database, SETTINGS_STORE, SETTINGS_ID, envelope));
+    },
+    loadRun: async (sessionId) => {
+      const envelope = await withDatabase((database) =>
+        read<RunEnvelope>(database, RUN_STORE, sessionId),
+      );
+      if (!envelope) return null;
+      if (!string(envelope.token, 100) || !envelope.token)
+        throw new Error('Private exercise data is damaged.');
+      return { saved: await unseal('run', sessionId, envelope), token: envelope.token };
+    },
+    saveRun: async (sessionId, saved, expectedToken) => {
+      if (!sessionId || JSON.stringify(saved).length > 8 * 1024 * 1024)
+        throw new Error('Exercise checkpoint is invalid or too large.');
+      const envelope: RunEnvelope = {
+        ...(await seal('run', sessionId, saved)),
+        token: cryptography.randomUUID(),
+      };
+      await withDatabase(
+        (database) =>
+          new Promise<void>((resolve, reject) => {
+            const transaction = database.transaction(RUN_STORE, 'readwrite');
+            const table = transaction.objectStore(RUN_STORE);
+            const request = table.get(sessionId);
+            request.onsuccess = () => {
+              const current = request.result as RunEnvelope | undefined;
+              if ((current?.token ?? null) !== expectedToken) {
+                transaction.abort();
+                reject(new Error('Exercise changed elsewhere. Reload it before continuing.'));
+                return;
+              }
+              table.put(envelope, sessionId);
+            };
+            transaction.oncomplete = () => resolve();
+            transaction.onabort = transaction.onerror = () =>
+              reject(transaction.error ?? new Error('Private exercise could not be saved.'));
+          }),
+      );
+      return envelope.token;
     },
   };
 }
@@ -247,6 +296,20 @@ function write(
   });
 }
 
+function writeMany(
+  database: IDBDatabase,
+  stores: string[],
+  operation: (transaction: IDBTransaction) => void,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction(stores, 'readwrite');
+    operation(transaction);
+    transaction.oncomplete = () => resolve();
+    transaction.onabort = transaction.onerror = () =>
+      reject(transaction.error ?? new Error('Private Mira data could not be saved.'));
+  });
+}
+
 function put(database: IDBDatabase, store: string, id: string, value: unknown): Promise<void> {
   return write(database, store, (table) => {
     table.put(value, id);
@@ -256,11 +319,5 @@ function put(database: IDBDatabase, store: string, id: string, value: unknown): 
 function add(database: IDBDatabase, store: string, id: string, value: unknown): Promise<void> {
   return write(database, store, (table) => {
     table.add(value, id);
-  });
-}
-
-function erase(database: IDBDatabase, store: string, id: string): Promise<void> {
-  return write(database, store, (table) => {
-    table.delete(id);
   });
 }

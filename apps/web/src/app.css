@@ -4632,6 +4632,135 @@ footer p {
   font-size: 0.8rem;
   opacity: 0.7;
 }
+.mira-guided {
+  margin-bottom: 1rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--ink);
+  border-radius: 0.8rem;
+  background: #f7f8f3;
+}
+.mira-guided-heading,
+.mira-guided-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.mira-guided-heading h3,
+.mira-guided-heading h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.mira-guided-heading .mira-eyebrow {
+  margin: 0 0 0.25rem;
+}
+.mira-guided-actions button,
+.mira-guided-options button,
+.mira-guided-step form button,
+.mira-technique-dialog button {
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  background: white;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+.mira-guided-actions .mira-guided-stop {
+  font-size: 0.75rem;
+}
+.mira-guided-step,
+.mira-guided-history {
+  max-width: 48rem;
+}
+.mira-guided-step > p,
+.mira-guided-history p {
+  white-space: pre-wrap;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.mira-guided-history {
+  max-height: 12rem;
+  overflow: auto;
+  opacity: 0.7;
+  font-size: 0.8rem;
+}
+.mira-guided-answer {
+  margin-left: 1rem;
+  font-weight: 700;
+}
+.mira-guided-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.mira-guided-step form {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+}
+.mira-guided-step textarea {
+  width: min(100%, 38rem);
+  padding: 0.75rem;
+  border: 1px solid var(--ink);
+  border-radius: 0.5rem;
+  font: inherit;
+}
+.mira-guided-error {
+  color: #8d2921;
+}
+.mira-guided-finished {
+  margin-bottom: 0;
+  font-size: 0.8rem;
+}
+@media (max-width: 500px) {
+  .mira-guided-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .mira-guided-actions {
+    justify-content: flex-end;
+  }
+}
+.mira-technique-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(12 25 22 / 48%);
+}
+.mira-technique-dialog {
+  width: min(100%, 38rem);
+  max-height: min(80vh, 45rem);
+  overflow: auto;
+  padding: 1.5rem;
+  border: 1px solid var(--ink);
+  border-radius: 0.8rem;
+  background: white;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 20%);
+}
+.mira-technique-dialog > p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.mira-technique-list {
+  display: grid;
+  gap: 0.5rem;
+}
+.mira-technique-list button {
+  display: grid;
+  gap: 0.2rem;
+  text-align: left;
+  border-radius: 0.6rem;
+}
+.mira-technique-list button:not(:disabled):hover {
+  background: var(--mint);
+}
+.mira-technique-list small {
+  opacity: 0.65;
+}
 .mira-composer {
   display: flex;
   align-items: end;

@@ -57,11 +57,13 @@ still sends content to a remote service for processing; it is not local inferenc
    Clippy checks. `crates/pattern-host` now provides a bounded, versioned JSON
    boundary for listing modality-specific bundled exercises, starting a run,
    restoring its pinned checkpoint, and applying explicit participant commands.
-   Its native one-shot executable keeps private input on stdin. The host returns
-   a checkpoint and a replay-safe view together; an app adapter must encrypt and
-   atomically compare-and-swap the checkpoint **before** rendering or dispatching
-   the next effect. This preserves the original language implementation; it does
-   not itself connect the browser or native UI to the host.
+   Its native one-shot executable keeps private input on stdin. A thin
+   `pattern-wasm` wrapper runs the same host locally in the browser. The web app
+   encrypts each checkpoint in IndexedDB and atomically compares an opaque
+   generation token before publishing the next view. No historical effect is
+   redispatched after reload. The compiled browser bundle is checked in and can
+   be regenerated with `pnpm build:pattern-wasm` using Rust's
+   `wasm32-unknown-unknown` target and `wasm-pack`.
    `@patternverse/native-pattern-adapter` targets Mira's existing
    `session_pattern_run` Tauri command. It only launches an explicitly linked,
    immutable library revision and leaves execution and reply validation in
@@ -79,8 +81,11 @@ still sends content to a remote service for processing; it is not local inferenc
    OpenRouter ZDR replies. All six desktop modality defaults have been copied
    without shortening them. A selected
    Commons pattern with an existing linear Practice can open that practice.
-   This is _article context_, not Pattern Markdown execution. Guided technique
-   selection, multi-turn exercise state, and the Rust host are not connected yet.
+   This is _article context_, not Pattern Markdown execution. Separately, the
+   guided-technique card now executes the six non-AI CBT, ACT, and DBT exercises
+   through Rust WebAssembly, filtered by modality. Progress resumes after reload
+   and is included in version-two encrypted archives. The AI-dependent worry
+   chain is listed but disabled until its explicit model-effect adapter exists.
 5. **Platform parity:** migrate phone/PWA and desktop-specific capabilities
    (voice, local model, remote ZDR provider) behind adapters. Verify privacy,
    accessibility, and existing workflow parity before retiring old UI paths.

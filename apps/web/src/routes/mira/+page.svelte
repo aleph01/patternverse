@@ -15,6 +15,7 @@
     type MiraPatternSummary,
   } from '$lib/mira/context';
   import { MODALITIES, modalityById } from '$lib/mira/modalities';
+  import GuidedTechnique from '$lib/mira/GuidedTechnique.svelte';
   import { exportPortableArchive, importPortableArchive } from '$lib/mira/portable';
   import {
     createOpenRouterReplyProvider,
@@ -28,7 +29,7 @@
   } from '$lib/mira/private-store';
 
   let { data } = $props();
-  let store: PrivateMiraStore | undefined;
+  let store = $state<PrivateMiraStore | undefined>(undefined);
   let sessions = $state<readonly Session[]>([]);
   let settings = $state<MiraSettings>({
     model: '',
@@ -330,11 +331,26 @@
   }
 
   async function exportSessions() {
-    if (transferring) return;
+    const availableStore = store;
+    if (!availableStore || transferring) return;
     transferring = true;
     clearMessages();
     try {
-      const encrypted = await exportPortableArchive(sessions, settings, archivePassphrase);
+      const runs = (
+        await Promise.all(
+          sessions.map(async (session) => {
+            const record = await availableStore.loadRun(session.id);
+            return record ? { sessionId: session.id, saved: record.saved } : null;
+          }),
+        )
+      ).filter((run): run is { sessionId: string; saved: unknown } => run !== null);
+      const encrypted = await exportPortableArchive(
+        sessions,
+        settings,
+        archivePassphrase,
+        crypto,
+        runs,
+      );
       const url = URL.createObjectURL(new Blob([encrypted], { type: 'application/json' }));
       const link = document.createElement('a');
       link.href = url;
@@ -656,6 +672,11 @@
               Mira is reflecting…
             </p>{/if}
         </div>
+        {#if store}<GuidedTechnique
+            sessionId={active.id}
+            modalityId={active.modalityId}
+            {store}
+          />{/if}
         <form
           class="mira-composer"
           onsubmit={(event) => {

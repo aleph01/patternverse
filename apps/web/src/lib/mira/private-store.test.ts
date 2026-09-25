@@ -64,4 +64,34 @@ describe('private Mira storage', () => {
     expect(await store.load('one')).toBeNull();
     expect((await store.list()).map((session) => session.id)).toEqual(['two']);
   });
+
+  it('encrypts exercise checkpoints and rejects stale cross-tab writes', async () => {
+    const setup = options();
+    const first = createPrivateMiraStore(setup);
+    const second = createPrivateMiraStore(setup);
+    await first.save(createSession('guided', 'cbt', '2026-09-25T10:00:00Z'));
+    const initial = { privateAnswer: 'Only in encrypted bytes', revision: 0 };
+    const token = await first.saveRun('guided', initial, null);
+    expect(await second.loadRun('guided')).toEqual({ saved: initial, token });
+    const nextToken = await second.saveRun('guided', { ...initial, revision: 1 }, token);
+    await expect(first.saveRun('guided', { ...initial, revision: 2 }, token)).rejects.toThrow(
+      'Exercise changed elsewhere',
+    );
+    expect((await first.loadRun('guided'))?.token).toBe(nextToken);
+    const database = await new Promise<IDBDatabase>((resolve) => {
+      const request = indexedDB.open(setup.databaseName);
+      request.onsuccess = () => resolve(request.result);
+    });
+    try {
+      const raw = await new Promise<unknown>((resolve) => {
+        const request = database.transaction('runs').objectStore('runs').get('guided');
+        request.onsuccess = () => resolve(request.result);
+      });
+      expect(JSON.stringify(raw)).not.toContain(initial.privateAnswer);
+    } finally {
+      database.close();
+    }
+    await first.remove('guided');
+    expect(await second.loadRun('guided')).toBeNull();
+  });
 });

@@ -12,6 +12,7 @@ export default tseslint.config(
       '**/coverage/**',
       '**/playwright-report/**',
       '**/test-results/**',
+      '**/src/lib/mira/engine/**',
     ],
   },
   eslint.configs.recommended,

@@ -1,0 +1,14 @@
+[package]
+name = "pattern-wasm"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.84"
+publish = false
+description = "Browser WebAssembly bridge for Patternverse therapy patterns"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pattern-host = { path = "../pattern-host" }
+wasm-bindgen = "0.2"

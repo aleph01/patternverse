@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "pnpm --filter @patternverse/web dev",
     "build": "pnpm -r --if-present build",
+    "build:pattern-wasm": "sh scripts/build-pattern-wasm.sh",
     "test": "pnpm -r --if-present test",
     "test:e2e": "pnpm --filter @patternverse/web test:e2e",
     "check": "pnpm -r --if-present check",

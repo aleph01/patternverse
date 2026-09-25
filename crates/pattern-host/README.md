@@ -14,10 +14,11 @@ UI). Only `view.pending` may be answered or dispatched; `view.items` is historic
 display data and must never trigger a model call. `apply` requires the UI's
 `expected_revision`. Invalid commands and malformed checkpoints fail closed.
 
-The host **does not persist or encrypt checkpoints**. An app adapter must
-encrypt `saved`, compare-and-swap the previous revision when publishing, and
-commit it before displaying the new view or dispatching a pending AI effect.
-This contract is not yet wired to Patternverse chat or a browser WASM build.
+The host **does not persist or encrypt checkpoints**. The Patternverse browser
+adapter uses a small WebAssembly bridge and encrypted IndexedDB records. It
+compares the previous revision and commits `saved` before showing the new view.
+AI-dependent effects remain unavailable in the browser until an explicit,
+privacy-preserving effect adapter is added.
 
 Run `cargo test --locked`, `cargo fmt --check`, and
 `cargo clippy --locked --all-targets -- -D warnings` here to verify the host.
