@@ -1,0 +1,15 @@
+[package]
+name = "pattern-host"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.84"
+publish = false
+description = "Portable host boundary for Patternverse guided therapy patterns"
+
+[dependencies]
+pattern-core = { path = "../pattern-core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+serde_json = "1"

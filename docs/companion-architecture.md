@@ -54,8 +54,14 @@ still sends content to a remote service for processing; it is not local inferenc
 2. **Rust bridge (engine migrated, native adapter started):**
    `crates/pattern-core` and the private `packages/therapy-patterns` fixtures
    now live in Patternverse and pass their Rust tests, formatting, and strict
-   Clippy checks. This preserves the original language implementation; it does
-   not itself connect the browser or native UI to a pattern host.
+   Clippy checks. `crates/pattern-host` now provides a bounded, versioned JSON
+   boundary for listing modality-specific bundled exercises, starting a run,
+   restoring its pinned checkpoint, and applying explicit participant commands.
+   Its native one-shot executable keeps private input on stdin. The host returns
+   a checkpoint and a replay-safe view together; an app adapter must encrypt and
+   atomically compare-and-swap the checkpoint **before** rendering or dispatching
+   the next effect. This preserves the original language implementation; it does
+   not itself connect the browser or native UI to the host.
    `@patternverse/native-pattern-adapter` targets Mira's existing
    `session_pattern_run` Tauri command. It only launches an explicitly linked,
    immutable library revision and leaves execution and reply validation in
