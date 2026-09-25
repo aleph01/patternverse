@@ -56,11 +56,7 @@ describe('Practice session', () => {
   });
 
   it('preserves responses and timers across Back and Next', () => {
-    const first = updatePracticeResponse(
-      createPracticeSession('test'),
-      'answer',
-      'Keep me',
-    );
+    const first = updatePracticeResponse(createPracticeSession('test'), 'answer', 'Keep me');
     const second = advancePractice(practice, first).session;
     const withTimer = {
       ...second,
