@@ -87,13 +87,8 @@ footer {
 }
 
 .wordmark {
-  font-size: 1rem;
-  font-weight: 900;
-  letter-spacing: -0.035em;
-}
-
-.wordmark span {
-  color: var(--green-dark);
+  display: inline-flex;
+  align-items: center;
 }
 
 .personal-workspace-link {

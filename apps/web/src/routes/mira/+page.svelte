@@ -12,6 +12,7 @@
     type Session,
   } from '@patternverse/companion-core';
   import { getLocalWorkspace } from '$lib/client/workspace';
+  import PatternverseLogo from '$lib/components/PatternverseLogo.svelte';
   import {
     findMiraPattern,
     parseMiraPatternQuery,
@@ -585,7 +586,7 @@
 
 <main class="mira-app">
   <header class="mira-app-header">
-    <div class="mira-brand"><a href={resolve('/')}>patternverse</a><span>/ mira</span></div>
+    <div class="mira-brand"><a href={resolve('/')} aria-label="Patternverse home"><PatternverseLogo compact /></a><span>/ mira</span></div>
     <div class="mira-header-tools">
       <span class="mira-runtime-label"
         ><span aria-hidden="true" class:available={desktop && runtime.status === 'ready'}
