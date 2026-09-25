@@ -7,6 +7,7 @@ const contentRoot = resolve(process.cwd(), '../../content');
 const manifestPath = resolve(process.cwd(), '../../patternverse.yaml');
 
 export default defineConfig({
+  ssr: { noExternal: ['@lucide/svelte'] },
   plugins: [
     {
       name: 'patternverse-content-reload',

@@ -1,11 +1,14 @@
 <script lang="ts">
   import { afterNavigate } from '$app/navigation';
+  import '$lib/mira/workspace.css';
   import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
+  import { ArrowUp, BookOpen, MessageCircle, Mic, Plus, Settings2, Square } from '@lucide/svelte';
   import {
     createSession,
     submitMessage,
     transition,
+    type Effect,
     type Session,
   } from '@patternverse/companion-core';
   import { getLocalWorkspace } from '$lib/client/workspace';
@@ -15,7 +18,21 @@
     type MiraPatternSummary,
   } from '$lib/mira/context';
   import { MODALITIES, modalityById } from '$lib/mira/modalities';
+  import { recordedBlobToWhisperWav } from '$lib/mira/audio';
   import GuidedTechnique from '$lib/mira/GuidedTechnique.svelte';
+  import {
+    createNativeReplyProvider,
+    downloadLocalModel,
+    hasNativeMira,
+    localRuntimeStatus,
+    localSetup,
+    requestNativeMicrophone,
+    restartLocalRuntime,
+    selectLocalModel,
+    transcribeLocally,
+    type LocalModelChoice,
+    type LocalRuntimeStatus,
+  } from '$lib/mira/native';
   import { exportPortableArchive, importPortableArchive } from '$lib/mira/portable';
   import {
     createOpenRouterReplyProvider,
@@ -57,7 +74,17 @@
   let importFile = $state<File | null>(null);
   let transferring = $state(false);
   let composer = $state<HTMLTextAreaElement>();
+  let desktop = $state(false);
+  let runtime = $state<LocalRuntimeStatus>({ status: 'starting' });
+  let localChoices = $state<readonly LocalModelChoice[]>([]);
+  let modelProgress = $state('');
+  let pickerSelecting = $state(false);
+  let voicePhase = $state<'idle' | 'requesting' | 'recording' | 'transcribing'>('idle');
   let controller: AbortController | undefined;
+  let recorder: MediaRecorder | undefined;
+  let microphoneStream: MediaStream | undefined;
+  let recordingTimeout: number | undefined;
+  let disposed = false;
 
   const active = $derived(
     sessions.find((session) => session.id === settings.activeSessionId) ?? null,
@@ -65,6 +92,9 @@
   const selectedPattern = $derived(findMiraPattern(context, [...personal, ...data.patterns]));
   const activePattern = $derived(
     findMiraPattern(active?.activePattern ?? null, [...personal, ...data.patterns]),
+  );
+  const libraryPatterns = $derived(
+    [...personal, ...data.patterns].filter((entry) => entry.type === 'pattern'),
   );
   const returnHref = $derived(
     selectedPattern?.sourceId === 'personal'
@@ -79,6 +109,17 @@
   });
   onMount(() => {
     let alive = true;
+    desktop = hasNativeMira();
+    const localPoll = desktop
+      ? window.setInterval(() => void refreshNativeRuntime().catch(() => undefined), 3000)
+      : undefined;
+    const shortcut = (event: KeyboardEvent) => {
+      if (event.shiftKey && event.code === 'Space' && view === 'chat' && active) {
+        event.preventDefault();
+        pickerSelecting = true;
+      }
+    };
+    window.addEventListener('keydown', shortcut);
     async function initialize() {
       store = createPrivateMiraStore();
       const [saved, preferences] = await Promise.all([store.list(), store.loadSettings()]);
@@ -105,6 +146,7 @@
       keyDraft = settings.openRouterKey;
       modelDraft = settings.model;
       promptDraft = settings.promptOverrides[promptModality] ?? modalityById(promptModality).prompt;
+      if (desktop) await refreshNativeRuntime();
     }
     void initialize()
       .catch((cause) => {
@@ -123,9 +165,72 @@
       });
     return () => {
       alive = false;
+      disposed = true;
       controller?.abort();
+      if (localPoll !== undefined) window.clearInterval(localPoll);
+      window.removeEventListener('keydown', shortcut);
+      if (recordingTimeout !== undefined) window.clearTimeout(recordingTimeout);
+      if (recorder?.state === 'recording') recorder.stop();
+      microphoneStream?.getTracks().forEach((track) => track.stop());
     };
   });
+
+  async function refreshNativeRuntime() {
+    if (!desktop) return;
+    runtime = await localRuntimeStatus();
+    if (runtime.status !== 'ready') return;
+    const setup = await localSetup();
+    localChoices = setup.choices;
+    const chosen =
+      setup.choices.find((item) => item.id === settings.model && item.installed) ??
+      setup.choices.find((item) => item.id === setup.selectedModelId && item.installed) ??
+      setup.choices.find((item) => item.recommended && item.installed) ??
+      setup.choices.find((item) => item.installed);
+    if (chosen && chosen.id !== settings.model && store) {
+      settings = { ...settings, model: chosen.id };
+      await store.saveSettings(settings);
+    }
+  }
+
+  async function retryNativeRuntime() {
+    error = '';
+    try {
+      runtime = await restartLocalRuntime();
+      await refreshNativeRuntime();
+    } catch (cause) {
+      error = messageOf(cause);
+    }
+  }
+
+  async function chooseLocalModel(id: string) {
+    if (!store) return;
+    await selectLocalModel(id);
+    settings = { ...settings, model: id };
+    await store.saveSettings(settings);
+    notice = 'Local model selected.';
+  }
+
+  async function installLocalModel(id: string) {
+    modelProgress = 'Preparing local model download…';
+    try {
+      await downloadLocalModel(id, (event) => {
+        if (event.kind === 'progress' && event.totalBytes && event.completedBytes !== undefined) {
+          modelProgress = `Downloading local model · ${Math.floor((event.completedBytes / event.totalBytes) * 100)}%`;
+        } else if (event.kind === 'complete') {
+          modelProgress = '';
+          void refreshNativeRuntime()
+            .then(() => chooseLocalModel(id))
+            .catch((cause) => (error = messageOf(cause)));
+        } else if (event.kind === 'failed' || event.kind === 'cancelled') {
+          modelProgress = '';
+          error = event.detailCode || 'Local model download did not finish.';
+        }
+      });
+    } catch (cause) {
+      modelProgress = '';
+      error = messageOf(cause);
+    }
+  }
 
   function clearMessages() {
     error = '';
@@ -179,6 +284,17 @@
           .session,
       );
   }
+  async function chooseLibraryPattern(pattern: MiraPatternSummary) {
+    if (!active) return;
+    await saveSession(
+      transition(active, {
+        type: 'select-pattern',
+        pattern: { sourceId: pattern.sourceId, entityId: pattern.id },
+        at: new Date().toISOString(),
+      }).session,
+    );
+    pickerSelecting = false;
+  }
   async function chooseModality(id: string) {
     if (!active || id === active.modalityId) return;
     controller?.abort();
@@ -193,7 +309,12 @@
     const session = active;
     const text = draft.trim();
     if (!store || !session || !text || sending) return;
-    if (!settings.openRouterKey || !settings.model) {
+    if (desktop && (runtime.status !== 'ready' || !settings.model)) {
+      view = 'settings';
+      error = 'Prepare and choose a local model before sending.';
+      return;
+    }
+    if (!desktop && (!settings.openRouterKey || !settings.model)) {
       view = 'settings';
       error = 'Connect OpenRouter and choose a zero-retention model before sending.';
       return;
@@ -210,13 +331,16 @@
         ? transition(item, { type: 'submit', message, replyId }).session
         : item,
     );
-    const provider = createOpenRouterReplyProvider({
+    const providerOptions = {
       settings,
-      patternContext: async (effect) => {
+      patternContext: async (effect: Effect) => {
         const found = findMiraPattern(effect.activePattern, [...personal, ...data.patterns]);
         return found ? { title: found.title, summary: found.summary ?? '' } : null;
       },
-    });
+    };
+    const provider = desktop
+      ? createNativeReplyProvider(providerOptions)
+      : createOpenRouterReplyProvider(providerOptions);
     try {
       await submitMessage(
         session.id,
@@ -243,6 +367,73 @@
       sending = false;
       controller = undefined;
       composer?.focus();
+    }
+  }
+
+  async function toggleVoiceInput() {
+    if (voicePhase === 'recording') {
+      if (recorder?.state === 'recording') recorder.stop();
+      return;
+    }
+    if (voicePhase !== 'idle') return;
+    if (!desktop) {
+      error = 'Local voice input is available in the desktop app.';
+      return;
+    }
+    voicePhase = 'requesting';
+    clearMessages();
+    try {
+      await requestNativeMicrophone();
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true },
+        video: false,
+      });
+      microphoneStream = stream;
+      const mime = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm'].find((type) =>
+        MediaRecorder.isTypeSupported(type),
+      );
+      const current = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+      const chunks: Blob[] = [];
+      const sessionId = active?.id;
+      current.addEventListener('dataavailable', (event) => {
+        if (event.data.size) chunks.push(event.data);
+      });
+      current.addEventListener('stop', () => {
+        microphoneStream?.getTracks().forEach((track) => track.stop());
+        microphoneStream = undefined;
+        recorder = undefined;
+        if (recordingTimeout !== undefined) window.clearTimeout(recordingTimeout);
+        if (disposed) return;
+        voicePhase = 'transcribing';
+        void (async () => {
+          try {
+            const wav = await recordedBlobToWhisperWav(
+              new Blob(chunks, { type: current.mimeType }),
+            );
+            const text = await transcribeLocally(wav);
+            if (!disposed && active?.id === sessionId && text) {
+              draft = [draft.trim(), text].filter(Boolean).join(' ');
+              composer?.focus();
+            }
+          } catch (cause) {
+            if (!disposed) error = messageOf(cause);
+          } finally {
+            if (!disposed) voicePhase = 'idle';
+          }
+        })();
+      });
+      recorder = current;
+      current.start(1000);
+      voicePhase = 'recording';
+      recordingTimeout = window.setTimeout(() => {
+        if (current.state === 'recording') current.stop();
+      }, 120_000);
+    } catch (cause) {
+      microphoneStream?.getTracks().forEach((track) => track.stop());
+      microphoneStream = undefined;
+      recorder = undefined;
+      voicePhase = 'idle';
+      error = messageOf(cause);
     }
   }
   async function deleteSession(session: Session) {
@@ -388,325 +579,442 @@
 </script>
 
 <svelte:head>
-  <title>Mira — Patternverse</title>
-  <meta name="description" content="Mira, your private reflective companion within Patternverse." />
+  <title>mira — patternverse</title>
+  <meta name="description" content="mira, your private reflective companion within Patternverse." />
 </svelte:head>
 
 <main class="mira-app">
   <header class="mira-app-header">
-    <div>
-      <p class="mira-eyebrow">Patternverse · Companion</p>
-      <h1>Mira<span>.</span></h1>
-    </div>
-    <nav aria-label="Mira sections" class="mira-app-tabs">
+    <div class="mira-brand"><a href={resolve('/')}>patternverse</a><span>/ mira</span></div>
+    <div class="mira-header-tools">
+      <span class="mira-runtime-label"
+        ><span aria-hidden="true" class:available={desktop && runtime.status === 'ready'}
+        ></span>{desktop
+          ? runtime.status === 'ready'
+            ? 'Local model ready'
+            : 'Local model ' + runtime.status
+          : 'Browser · OpenRouter'}</span
+      >
+      <a
+        href={resolve('/my')}
+        class="mira-icon-button"
+        aria-label="Open pattern library"
+        title="Pattern library"><BookOpen size={19} /></a
+      >
       <button
         type="button"
+        class="mira-icon-button"
+        aria-label="Open settings"
+        title="Settings"
+        onclick={() => (view = 'settings')}><Settings2 size={19} /></button
+      >
+    </div>
+  </header>
+  <div class="mira-app-body">
+    <nav aria-label="mira sections" class="mira-app-tabs">
+      <button
+        type="button"
+        aria-label="Conversation"
+        title="Conversation"
         aria-current={view === 'chat' ? 'page' : undefined}
         onclick={() => {
           view = 'chat';
           clearMessages();
-        }}>Conversation</button
+        }}><MessageCircle size={19} /></button
       >
       <button
         type="button"
+        aria-label="Sessions"
+        title="Sessions"
         aria-current={view === 'sessions' ? 'page' : undefined}
         onclick={() => {
           view = 'sessions';
           clearMessages();
-        }}>Sessions</button
+        }}><BookOpen size={19} /></button
       >
       <button
         type="button"
+        aria-label="Settings"
+        title="Settings"
         aria-current={view === 'settings' ? 'page' : undefined}
         onclick={() => {
           view = 'settings';
           clearMessages();
-        }}>Settings</button
+        }}><Settings2 size={19} /></button
       >
     </nav>
-  </header>
-  {#if error}<p class="mira-app-alert" role="alert">{error}</p>{/if}
-  {#if notice}<p class="mira-app-notice" role="status">{notice}</p>{/if}
+    <div class="mira-workspace">
+      {#if error}<p class="mira-app-alert" role="alert">{error}</p>{/if}
+      {#if notice}<p class="mira-app-notice" role="status">{notice}</p>{/if}
 
-  {#if !ready}
-    <div class="mira-app-empty"><p>Opening private sessions…</p></div>
-  {:else if view === 'sessions'}
-    <section class="mira-app-panel" aria-labelledby="mira-sessions-heading">
-      <div class="mira-section-heading">
-        <div>
-          <p class="mira-eyebrow">Private on this device</p>
-          <h2 id="mira-sessions-heading">Sessions</h2>
-        </div>
-        <button type="button" onclick={() => newSession()}
-          >New session <span aria-hidden="true">＋</span></button
-        >
-      </div>
-      {#if sessions.length === 0}<p>No sessions yet. Start one whenever you are ready.</p>{/if}
-      <div class="mira-session-grid">
-        {#each sessions as session (session.id)}
-          <article class="mira-session-card">
+      {#if !ready}
+        <div class="mira-app-empty"><p>Opening private sessions…</p></div>
+      {:else if view === 'sessions'}
+        <section class="mira-app-panel" aria-labelledby="mira-sessions-heading">
+          <div class="mira-section-heading">
+            <div>
+              <p class="mira-eyebrow">Private on this device</p>
+              <h2 id="mira-sessions-heading">Sessions</h2>
+            </div>
+            <button type="button" onclick={() => newSession()}
+              >New session <span aria-hidden="true">＋</span></button
+            >
+          </div>
+          {#if sessions.length === 0}<p>No sessions yet. Start one whenever you are ready.</p>{/if}
+          <div class="mira-session-grid">
+            {#each sessions as session (session.id)}
+              <article class="mira-session-card">
+                <p>
+                  {modalityById(session.modalityId).name} · {new Date(
+                    session.updatedAt,
+                  ).toLocaleDateString()}
+                </p>
+                {#if renameId === session.id}
+                  <form
+                    onsubmit={(event) => {
+                      event.preventDefault();
+                      void renameSession(session);
+                    }}
+                  >
+                    <label for={`mira-rename-${session.id}`}>Session name</label><input
+                      id={`mira-rename-${session.id}`}
+                      bind:value={renameDraft}
+                      maxlength="120"
+                    />
+                    <button type="submit">Save</button><button
+                      type="button"
+                      onclick={() => {
+                        renameId = null;
+                        renameDraft = '';
+                      }}>Cancel</button
+                    >
+                  </form>
+                {:else}
+                  <h3>{session.title}</h3>
+                  <span>{session.messages.length} messages</span>
+                  <div class="mira-session-actions">
+                    <button type="button" onclick={() => activate(session.id)}>Open</button><button
+                      type="button"
+                      onclick={() => {
+                        renameId = session.id;
+                        renameDraft = session.title;
+                      }}>Rename</button
+                    ><button type="button" class="danger" onclick={() => deleteSession(session)}
+                      >Delete</button
+                    >
+                  </div>
+                {/if}
+              </article>
+            {/each}
+          </div>
+          <section class="mira-archive" aria-labelledby="mira-archive-heading">
+            <h3 id="mira-archive-heading">Encrypted backup &amp; transfer</h3>
             <p>
-              {modalityById(session.modalityId).name} · {new Date(
-                session.updatedAt,
-              ).toLocaleDateString()}
+              Export a portable archive or import one you chose. Nothing is imported automatically.
+              The archive excludes your OpenRouter key.
             </p>
-            {#if renameId === session.id}
-              <form
-                onsubmit={(event) => {
-                  event.preventDefault();
-                  void renameSession(session);
-                }}
+            <label for="mira-archive-passphrase">Archive passphrase</label>
+            <input
+              id="mira-archive-passphrase"
+              type="password"
+              bind:value={archivePassphrase}
+              autocomplete="new-password"
+              minlength="8"
+            />
+            <div class="mira-settings-actions">
+              <button
+                type="button"
+                onclick={exportSessions}
+                disabled={transferring || !sessions.length}>Export encrypted archive</button
               >
-                <label for={`mira-rename-${session.id}`}>Session name</label><input
-                  id={`mira-rename-${session.id}`}
-                  bind:value={renameDraft}
-                  maxlength="120"
+              <label class="mira-file-label" for="mira-import-file">Choose archive</label>
+              <input
+                id="mira-import-file"
+                type="file"
+                accept="application/json,.json"
+                onchange={(event) => {
+                  importFile = event.currentTarget.files?.[0] ?? null;
+                }}
+              />
+              <button type="button" onclick={importSessions} disabled={transferring || !importFile}
+                >Import selected archive</button
+              >
+            </div>
+            {#if importFile}<p>Selected: {importFile.name}</p>{/if}
+          </section>
+        </section>
+      {:else if view === 'settings'}
+        <section class="mira-app-panel mira-settings" aria-labelledby="mira-settings-heading">
+          <div class="mira-section-heading">
+            <div>
+              <p class="mira-eyebrow">Your preferences</p>
+              <h2 id="mira-settings-heading">Settings</h2>
+            </div>
+          </div>
+          <div class="mira-settings-grid">
+            <section aria-labelledby="mira-provider-heading">
+              {#if desktop}
+                <h3 id="mira-provider-heading">Local model</h3>
+                <p>
+                  Conversations run in this app’s local model process. No cloud fallback is used.
+                  Download a model once, then choose it here.
+                </p>
+                {#if runtime.status !== 'ready'}<p role="status">
+                    Local runtime: {runtime.status}{runtime.detailCode
+                      ? ` · ${runtime.detailCode}`
+                      : ''}
+                  </p>{/if}
+                {#if runtime.status === 'unavailable' || runtime.status === 'stopped'}<button
+                    type="button"
+                    onclick={retryNativeRuntime}>Retry local runtime</button
+                  >{/if}
+                {#each localChoices as choice (choice.id)}
+                  <div class="mira-local-model">
+                    <div>
+                      <strong>{choice.title}</strong><small>{choice.id} · {choice.summary}</small>
+                    </div>
+                    {#if choice.installed}
+                      <button
+                        type="button"
+                        class:chosen={settings.model === choice.id}
+                        onclick={() => chooseLocalModel(choice.id)}
+                        >{settings.model === choice.id ? 'Selected' : 'Use model'}</button
+                      >
+                    {:else}
+                      <button
+                        type="button"
+                        disabled={!choice.canInstall || Boolean(modelProgress)}
+                        onclick={() => installLocalModel(choice.id)}>Download</button
+                      >
+                    {/if}
+                  </div>
+                {/each}
+                {#if modelProgress}<p role="status">{modelProgress}</p>{/if}
+                {#if localChoices.length === 0}<p>Preparing local model choices…</p>{/if}
+              {:else}
+                <h3 id="mira-provider-heading">AI connection</h3>
+                <p>
+                  Messages are encrypted on this device. Sending a message shares its recent context
+                  with your chosen OpenRouter model for processing. Zero-data-retention routing is
+                  required; it is not fully local AI.
+                </p>
+                <label for="mira-key">OpenRouter API key</label><input
+                  id="mira-key"
+                  type="password"
+                  bind:value={keyDraft}
+                  autocomplete="off"
+                  spellcheck="false"
                 />
-                <button type="submit">Save</button><button
+                <button
                   type="button"
-                  onclick={() => {
-                    renameId = null;
-                    renameDraft = '';
-                  }}>Cancel</button
+                  onclick={refreshModels}
+                  disabled={loadingModels || !keyDraft.trim()}
+                  >{loadingModels ? 'Checking models…' : 'Find zero-retention models'}</button
                 >
-              </form>
-            {:else}
-              <h3>{session.title}</h3>
-              <span>{session.messages.length} messages</span>
-              <div class="mira-session-actions">
-                <button type="button" onclick={() => activate(session.id)}>Open</button><button
-                  type="button"
-                  onclick={() => {
-                    renameId = session.id;
-                    renameDraft = session.title;
-                  }}>Rename</button
-                ><button type="button" class="danger" onclick={() => deleteSession(session)}
-                  >Delete</button
+                <label for="mira-model">Model</label>
+                {#if models.length > 0}
+                  <select id="mira-model" bind:value={modelDraft}
+                    ><option value="">Choose a model</option
+                    >{#each models as model (model.id)}<option value={model.id}
+                        >{model.name} · {model.id}</option
+                      >{/each}</select
+                  >
+                {:else}<input
+                    id="mira-model"
+                    bind:value={modelDraft}
+                    placeholder="Select after checking available models"
+                    spellcheck="false"
+                  />{/if}
+                <button type="button" class="mira-primary" onclick={saveConnection}
+                  >Save connection</button
+                >
+              {/if}
+            </section>
+            <section aria-labelledby="mira-prompt-heading">
+              <h3 id="mira-prompt-heading">Therapy modalities</h3>
+              <p>
+                Each modality has an editable guidance prompt. The selected modality belongs to each
+                session and can change during it.
+              </p>
+              <label for="mira-prompt-modality">Prompt to edit</label><select
+                id="mira-prompt-modality"
+                value={promptModality}
+                onchange={(event) => selectPromptModality(event.currentTarget.value)}
+                >{#each MODALITIES as modality (modality.id)}<option value={modality.id}
+                    >{modality.name}</option
+                  >{/each}</select
+              >
+              <label for="mira-prompt-text">Guidance</label><textarea
+                id="mira-prompt-text"
+                bind:value={promptDraft}
+                rows="14"
+                maxlength="30000"></textarea>
+              <div class="mira-settings-actions">
+                <button type="button" class="mira-primary" onclick={savePrompt}>Save prompt</button
+                ><button type="button" onclick={restorePrompt}>Restore default</button>
+              </div>
+            </section>
+          </div>
+        </section>
+      {:else}
+        <section class="mira-chat" aria-label="mira conversation">
+          {#if context && selectedPattern && (active?.activePattern?.entityId !== context.entityId || active?.activePattern?.sourceId !== context.sourceId)}
+            <div class="mira-context-choice">
+              <div>
+                <p class="mira-eyebrow">From your library · {selectedPattern.sourceId}</p>
+                <h2>{selectedPattern.title}</h2>
+                <p>
+                  Explore this pattern with mira in a new or existing session. This attaches it as
+                  context; it does not start a guided exercise.
+                </p>
+              </div>
+              <div class="mira-context-actions">
+                <button type="button" onclick={() => newSession(true)}>New session</button
+                >{#if active}<button type="button" onclick={() => useContext(active)}
+                    >Use current session</button
+                  >{/if}
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- returnHref is composed from resolved app routes. -->
+                <a href={returnHref}>Back to pattern</a>
+              </div>
+            </div>
+          {:else if context && !selectedPattern}<p class="mira-app-notice">
+              This pattern could not be found in its original library source.
+            </p>{/if}
+          {#if !active}
+            <div class="mira-app-empty">
+              <p class="mira-eyebrow">A place to begin</p>
+              <h2>Make room to reflect.</h2>
+              <p>
+                Start a private conversation. You can choose a therapy modality and change it later.
+              </p>
+              <button
+                type="button"
+                class="mira-primary"
+                onclick={() => newSession(Boolean(context && selectedPattern))}
+                >New session <span aria-hidden="true">→</span></button
+              >
+            </div>
+          {:else}
+            <div class="mira-chat-toolbar">
+              <div>
+                <h2>{active.title}</h2>
+              </div>
+              <div>
+                <label for="mira-active-modality">Therapy modality</label><select
+                  id="mira-active-modality"
+                  value={active.modalityId}
+                  onchange={(event) => chooseModality(event.currentTarget.value)}
+                  >{#each MODALITIES as modality (modality.id)}<option value={modality.id}
+                      >{modality.name}</option
+                    >{/each}</select
                 >
               </div>
-            {/if}
-          </article>
-        {/each}
-      </div>
-      <section class="mira-archive" aria-labelledby="mira-archive-heading">
-        <h3 id="mira-archive-heading">Encrypted backup &amp; transfer</h3>
-        <p>
-          Export a portable archive or import one you chose. Nothing is imported automatically. The
-          archive excludes your OpenRouter key.
-        </p>
-        <label for="mira-archive-passphrase">Archive passphrase</label>
-        <input
-          id="mira-archive-passphrase"
-          type="password"
-          bind:value={archivePassphrase}
-          autocomplete="new-password"
-          minlength="8"
-        />
-        <div class="mira-settings-actions">
-          <button type="button" onclick={exportSessions} disabled={transferring || !sessions.length}
-            >Export encrypted archive</button
-          >
-          <label class="mira-file-label" for="mira-import-file">Choose archive</label>
-          <input
-            id="mira-import-file"
-            type="file"
-            accept="application/json,.json"
-            onchange={(event) => {
-              importFile = event.currentTarget.files?.[0] ?? null;
-            }}
-          />
-          <button type="button" onclick={importSessions} disabled={transferring || !importFile}
-            >Import selected archive</button
-          >
-        </div>
-        {#if importFile}<p>Selected: {importFile.name}</p>{/if}
-      </section>
-    </section>
-  {:else if view === 'settings'}
-    <section class="mira-app-panel mira-settings" aria-labelledby="mira-settings-heading">
-      <div class="mira-section-heading">
-        <div>
-          <p class="mira-eyebrow">Your preferences</p>
-          <h2 id="mira-settings-heading">Settings</h2>
-        </div>
-      </div>
-      <div class="mira-settings-grid">
-        <section aria-labelledby="mira-provider-heading">
-          <h3 id="mira-provider-heading">AI connection</h3>
-          <p>
-            Messages are encrypted on this device. Sending a message shares its recent context with
-            your chosen OpenRouter model for processing. Zero-data-retention routing is required; it
-            is not fully local AI.
-          </p>
-          <label for="mira-key">OpenRouter API key</label><input
-            id="mira-key"
-            type="password"
-            bind:value={keyDraft}
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <button type="button" onclick={refreshModels} disabled={loadingModels || !keyDraft.trim()}
-            >{loadingModels ? 'Checking models…' : 'Find zero-retention models'}</button
-          >
-          <label for="mira-model">Model</label>
-          {#if models.length > 0}
-            <select id="mira-model" bind:value={modelDraft}
-              ><option value="">Choose a model</option>{#each models as model (model.id)}<option
-                  value={model.id}>{model.name} · {model.id}</option
-                >{/each}</select
-            >
-          {:else}<input
-              id="mira-model"
-              bind:value={modelDraft}
-              placeholder="Select after checking available models"
-              spellcheck="false"
-            />{/if}
-          <button type="button" class="mira-primary" onclick={saveConnection}
-            >Save connection</button
-          >
-        </section>
-        <section aria-labelledby="mira-prompt-heading">
-          <h3 id="mira-prompt-heading">Therapy modalities</h3>
-          <p>
-            Each modality has an editable guidance prompt. The selected modality belongs to each
-            session and can change during it.
-          </p>
-          <label for="mira-prompt-modality">Prompt to edit</label><select
-            id="mira-prompt-modality"
-            value={promptModality}
-            onchange={(event) => selectPromptModality(event.currentTarget.value)}
-            >{#each MODALITIES as modality (modality.id)}<option value={modality.id}
-                >{modality.name}</option
-              >{/each}</select
-          >
-          <label for="mira-prompt-text">Guidance</label><textarea
-            id="mira-prompt-text"
-            bind:value={promptDraft}
-            rows="14"
-            maxlength="30000"></textarea>
-          <div class="mira-settings-actions">
-            <button type="button" class="mira-primary" onclick={savePrompt}>Save prompt</button
-            ><button type="button" onclick={restorePrompt}>Restore default</button>
-          </div>
-        </section>
-      </div>
-    </section>
-  {:else}
-    <section class="mira-chat" aria-label="Mira conversation">
-      {#if context && selectedPattern && (active?.activePattern?.entityId !== context.entityId || active?.activePattern?.sourceId !== context.sourceId)}
-        <div class="mira-context-choice">
-          <div>
-            <p class="mira-eyebrow">From your library · {selectedPattern.sourceId}</p>
-            <h2>{selectedPattern.title}</h2>
-            <p>
-              Explore this pattern with Mira in a new or existing session. This attaches it as
-              context; it does not start a guided exercise.
-            </p>
-          </div>
-          <div class="mira-context-actions">
-            <button type="button" onclick={() => newSession(true)}>New session</button
-            >{#if active}<button type="button" onclick={() => useContext(active)}
-                >Use current session</button
-              >{/if}
-            <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- returnHref is composed from resolved app routes. -->
-            <a href={returnHref}>Back to pattern</a>
-          </div>
-        </div>
-      {:else if context && !selectedPattern}<p class="mira-app-notice">
-          This pattern could not be found in its original library source.
-        </p>{/if}
-      {#if !active}
-        <div class="mira-app-empty">
-          <p class="mira-eyebrow">A place to begin</p>
-          <h2>Make room to reflect.</h2>
-          <p>
-            Start a private conversation. You can choose a therapy modality and change it later.
-          </p>
-          <button
-            type="button"
-            class="mira-primary"
-            onclick={() => newSession(Boolean(context && selectedPattern))}
-            >New session <span aria-hidden="true">→</span></button
-          >
-        </div>
-      {:else}
-        <div class="mira-chat-toolbar">
-          <div>
-            <p class="mira-eyebrow">Private conversation</p>
-            <h2>{active.title}</h2>
-          </div>
-          <div>
-            <label for="mira-active-modality">Therapy modality</label><select
-              id="mira-active-modality"
-              value={active.modalityId}
-              onchange={(event) => chooseModality(event.currentTarget.value)}
-              >{#each MODALITIES as modality (modality.id)}<option value={modality.id}
-                  >{modality.name}</option
-                >{/each}</select
-            >
-          </div>
-        </div>
-        {#if active.activePattern}<div class="mira-active-pattern">
-            <span>Library pattern: {activePattern?.title ?? active.activePattern.entityId}</span
-            >{#if activePattern?.hasPractice && activePattern.sourceId === 'commons'}<a
-                href={resolve(`/pattern/${activePattern.id}/practice`)}
-                >Open interactive practice ↗</a
-              >{/if}
-            <button
-              type="button"
-              onclick={removePattern}
-              aria-label="Remove selected library pattern">×</button
-            >
-          </div>{/if}
-        <div class="mira-messages" aria-live="polite">
-          {#if active.messages.length === 0}<p class="mira-chat-welcome">
-              What would you like to explore?
-            </p>{/if}
-          {#each active.messages as message (message.id)}<article
-              class:from-user={message.role === 'user'}
-            >
-              <p class="mira-message-role">{message.role === 'user' ? 'You' : 'Mira'}</p>
-              <p>{message.text}</p>
-            </article>{/each}
-          {#if sending && active.pendingReplyId}<p class="mira-thinking" role="status">
-              Mira is reflecting…
-            </p>{/if}
-        </div>
-        {#if store}<GuidedTechnique
-            sessionId={active.id}
-            modalityId={active.modalityId}
-            {store}
-          />{/if}
-        <form
-          class="mira-composer"
-          onsubmit={(event) => {
-            event.preventDefault();
-            void send();
-          }}
-        >
-          <label class="visually-hidden" for="mira-message">Message Mira</label><textarea
-            id="mira-message"
-            bind:this={composer}
-            bind:value={draft}
-            rows="3"
-            maxlength="30000"
-            placeholder="Write what's on your mind…"
-            onkeydown={(event) => {
-              if (event.key === 'Enter' && !event.shiftKey) {
+            </div>
+            {#if active.activePattern}<div class="mira-active-pattern">
+                <span>Library pattern: {activePattern?.title ?? active.activePattern.entityId}</span
+                >{#if activePattern?.hasPractice && activePattern.sourceId === 'commons'}<a
+                    href={resolve(`/pattern/${activePattern.id}/practice`)}
+                    >Open interactive practice ↗</a
+                  >{/if}
+                <button
+                  type="button"
+                  onclick={removePattern}
+                  aria-label="Remove selected library pattern">×</button
+                >
+              </div>{/if}
+            <div class="mira-messages" aria-live="polite">
+              {#if active.messages.length === 0}<p class="mira-chat-welcome">
+                  What would you like to explore?
+                </p>{/if}
+              {#each active.messages as message (message.id)}<article
+                  class:from-user={message.role === 'user'}
+                >
+                  <p class="mira-message-role">{message.role === 'user' ? 'You' : 'mira'}</p>
+                  <p>{message.text}</p>
+                </article>{/each}
+              {#if sending && active.pendingReplyId}<p class="mira-thinking" role="status">
+                  mira is reflecting…
+                </p>{/if}
+            </div>
+            {#if store}<GuidedTechnique
+                sessionId={active.id}
+                modalityId={active.modalityId}
+                {store}
+                patterns={libraryPatterns}
+                onPatternSelect={chooseLibraryPattern}
+                bind:selecting={pickerSelecting}
+              />{/if}
+            <form
+              class="mira-composer"
+              onsubmit={(event) => {
                 event.preventDefault();
                 void send();
-              }
-            }}></textarea><button
-            type="submit"
-            class="mira-primary"
-            disabled={!draft.trim() || sending}>Send <span aria-hidden="true">↗</span></button
-          >
-        </form>
-        <p class="mira-chat-disclaimer">
-          Mira is an AI companion, not a therapist or emergency service. Replies are processed by
-          your chosen provider when you send.
-        </p>
+              }}
+            >
+              <label class="visually-hidden" for="mira-message">Message mira</label><textarea
+                id="mira-message"
+                bind:this={composer}
+                bind:value={draft}
+                rows="1"
+                maxlength="30000"
+                placeholder="Message mira…"
+                onkeydown={(event) => {
+                  if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    void send();
+                  }
+                }}></textarea>
+              <div class="mira-composer-footer">
+                <div class="mira-composer-tools">
+                  <button
+                    type="button"
+                    class="mira-icon-button"
+                    aria-label="Choose a pattern or therapy technique"
+                    aria-keyshortcuts="Shift+Space"
+                    title="Patterns &amp; techniques · Shift+Space"
+                    onclick={() => (pickerSelecting = true)}><Plus size={20} /></button
+                  >
+                  <span class="mira-modality-chip">{modalityById(active.modalityId).name}</span>
+                  {#if voicePhase !== 'idle'}<span class="mira-voice-state" role="status"
+                      >{voicePhase === 'recording'
+                        ? '● Recording…'
+                        : voicePhase === 'transcribing'
+                          ? 'Transcribing locally…'
+                          : 'Opening microphone…'}</span
+                    >{/if}
+                </div>
+                <div class="mira-composer-tools">
+                  {#if desktop}<button
+                      type="button"
+                      class="mira-icon-button"
+                      aria-label={voicePhase === 'recording'
+                        ? 'Stop dictation'
+                        : 'Start voice input'}
+                      title={voicePhase === 'recording' ? 'Stop dictation' : 'Dictate locally'}
+                      disabled={voicePhase === 'requesting' || voicePhase === 'transcribing'}
+                      onclick={toggleVoiceInput}
+                      >{#if voicePhase === 'recording'}<Square size={17} />{:else}<Mic
+                          size={19}
+                        />{/if}</button
+                    >{/if}
+                  <button
+                    type="submit"
+                    class="mira-send-button"
+                    aria-label="Send message"
+                    title="Send"
+                    disabled={!draft.trim() || sending}><ArrowUp size={19} /></button
+                  >
+                </div>
+              </div>
+            </form>
+            <p class="mira-chat-disclaimer">
+              mira is an AI companion, not a therapist or emergency service. {desktop
+                ? 'Replies and dictation are processed on this device.'
+                : 'Replies are processed by your chosen provider when you send.'}
+            </p>
+          {/if}
+        </section>
       {/if}
-    </section>
-  {/if}
+    </div>
+  </div>
 </main>

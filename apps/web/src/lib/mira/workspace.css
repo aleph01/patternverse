@@ -1,0 +1,324 @@
+/* Mira is a focused workspace, not an editorial landing page. */
+.mira-app {
+  min-height: 100dvh;
+  background: #fafbf7;
+}
+.mira-app-header {
+  height: 58px;
+  padding: 0 1.25rem;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #d8dfd7;
+}
+.mira-brand,
+.mira-header-tools,
+.mira-runtime-label,
+.mira-app-tabs,
+.mira-composer-tools {
+  display: flex;
+  align-items: center;
+}
+.mira-brand {
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.mira-brand a {
+  text-decoration: none;
+}
+.mira-brand span {
+  color: #66756b;
+  font-weight: 500;
+}
+.mira-header-tools {
+  gap: 0.35rem;
+}
+.mira-runtime-label {
+  gap: 0.4rem;
+  margin-right: 0.6rem;
+  color: #66756b;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.mira-runtime-label span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a0aaa1;
+}
+.mira-runtime-label span.available {
+  background: #3a8062;
+}
+.mira-app-body {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  min-height: calc(100dvh - 58px);
+}
+.mira-app-tabs {
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  border-right: 1px solid #d8dfd7;
+}
+.mira-app-tabs button,
+.mira-app .mira-icon-button {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.mira-app-tabs button[aria-current='page'],
+.mira-app-tabs button:hover,
+.mira-app .mira-icon-button:hover {
+  background: #e9f0e9;
+}
+.mira-workspace {
+  min-width: 0;
+}
+.mira-app-panel {
+  max-width: 1120px;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+.mira-section-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+.mira-chat {
+  display: flex;
+  height: calc(100dvh - 58px);
+  min-height: 32rem;
+  max-width: none;
+  padding: 0;
+}
+.mira-chat-toolbar {
+  min-height: 57px;
+  align-items: center;
+  padding: 0.55rem 1.5rem;
+  border-bottom: 1px solid #d8dfd7;
+}
+.mira-chat-toolbar h2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.96rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.mira-chat-toolbar > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+.mira-chat-toolbar select {
+  width: auto;
+  max-width: 15rem;
+  padding: 0.35rem 0.6rem;
+  border-color: #cbd5cc;
+  font-size: 0.78rem;
+}
+.mira-chat-toolbar label {
+  color: #66756b;
+  font-weight: 500;
+}
+.mira-messages {
+  width: min(100%, 760px);
+  min-height: 0;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  overflow-y: auto;
+  gap: 1.5rem;
+}
+.mira-messages article {
+  max-width: min(84%, 42rem);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.mira-messages article.from-user {
+  padding: 0.8rem 1rem;
+  border-radius: 14px 14px 4px 14px;
+  background: #e9f0e9;
+}
+.mira-message-role {
+  margin: 0 0 0.45rem;
+  color: #66756b;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.mira-messages article.from-user .mira-message-role {
+  display: none;
+}
+.mira-chat-welcome {
+  margin: auto 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+.mira-guided {
+  width: min(calc(100% - 2.5rem), 720px);
+  max-height: 42dvh;
+  margin: 0 auto 0.75rem;
+  padding: 1rem 1.15rem;
+  overflow-y: auto;
+  border: 1px solid #d5ded4;
+  background: #f4f7f2;
+}
+.mira-picker-section {
+  margin: 1.2rem 0 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #66756b;
+}
+.mira-technique-dialog {
+  border-color: #d5ded4;
+}
+.mira-technique-dialog .mira-guided-heading {
+  flex-direction: row;
+  align-items: center;
+}
+.mira-technique-dialog .mira-guided-heading button {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-color: #d5ded4;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+.mira-composer {
+  display: block;
+  width: min(calc(100% - 2.5rem), 720px);
+  margin: 0 auto;
+  padding: 0.65rem 0.75rem;
+  border-color: #bdcdbf;
+  border-radius: 14px;
+}
+.mira-composer textarea {
+  display: block;
+  width: 100%;
+  min-height: 2.7rem;
+  max-height: 11rem;
+  resize: vertical;
+  padding: 0.35rem 0.25rem;
+  font-size: 0.95rem;
+}
+.mira-composer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.mira-composer-tools {
+  gap: 0.4rem;
+}
+.mira-modality-chip {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #d8dfd7;
+  border-radius: 8px;
+  color: #66756b;
+  font-size: 0.73rem;
+}
+.mira-voice-state {
+  color: #366d52;
+  font-size: 0.76rem;
+}
+.mira-app .mira-send-button {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--ink);
+  color: white;
+}
+.mira-chat-disclaimer {
+  width: min(calc(100% - 2.5rem), 720px);
+  margin: 0.55rem auto 0.8rem;
+  color: #66756b;
+  font-size: 0.7rem;
+}
+.mira-local-model {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid #d8dfd7;
+}
+.mira-local-model strong,
+.mira-local-model small {
+  display: block;
+}
+.mira-local-model small {
+  margin-top: 0.2rem;
+  color: #66756b;
+  font-size: 0.75rem;
+}
+.mira-local-model button {
+  border: 1px solid #bbcdbf;
+  border-radius: 9px;
+  padding: 0.45rem 0.7rem;
+  background: transparent;
+  white-space: nowrap;
+}
+.mira-local-model button.chosen {
+  background: #e3eee4;
+}
+@media (max-width: 760px) {
+  .mira-app-header {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0.75rem;
+  }
+  .mira-runtime-label {
+    display: none;
+  }
+  .mira-app-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .mira-app-tabs {
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.35rem;
+    border-right: 0;
+    border-bottom: 1px solid #d8dfd7;
+  }
+  .mira-chat {
+    height: calc(100dvh - 108px);
+  }
+  .mira-chat-toolbar {
+    padding: 0.55rem 0.85rem;
+  }
+  .mira-chat-toolbar > div:last-child {
+    width: auto;
+  }
+  .mira-chat-toolbar label {
+    display: none;
+  }
+  .mira-chat-toolbar select {
+    max-width: 8rem;
+  }
+  .mira-messages {
+    padding: 1.3rem 0.85rem;
+  }
+  .mira-composer,
+  .mira-guided,
+  .mira-chat-disclaimer {
+    width: calc(100% - 1.4rem);
+  }
+}

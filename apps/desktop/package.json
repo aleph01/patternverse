@@ -1,0 +1,16 @@
+{
+  "name": "@patternverse/desktop",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare:ollama": "../../scripts/prepare-ollama-sidecar.sh",
+    "prepare:whisper": "../../scripts/prepare-whisper-sidecar.sh",
+    "desktop:dev": "pnpm prepare:ollama && pnpm prepare:whisper && tauri dev",
+    "desktop:build": "pnpm prepare:ollama && pnpm prepare:whisper && tauri build",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4"
+  }
+}

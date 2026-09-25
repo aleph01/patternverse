@@ -114,3 +114,6 @@ docs/               architecture and content documentation
 The web build is fully static and lands in `apps/web/build`. `apps/web/wrangler.jsonc` declares that
 directory for Cloudflare Pages. Deployment remains a separate explicit action; CI first proves that
 the corpus, packages, site, and essential browser journeys are healthy.
+
+For the macOS Patternverse app with locally run **mira** and optional local dictation, see the
+[desktop setup guide](apps/desktop/README.md).

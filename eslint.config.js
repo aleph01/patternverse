@@ -13,6 +13,7 @@ export default tseslint.config(
       '**/playwright-report/**',
       '**/test-results/**',
       '**/src/lib/mira/engine/**',
+      '**/src-tauri/gen/**',
     ],
   },
   eslint.configs.recommended,

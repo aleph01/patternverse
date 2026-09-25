@@ -1,17 +1,18 @@
 <script lang="ts">
+  import { page } from '$app/state';
   import SiteFooter from '$lib/components/SiteFooter.svelte';
   import SiteHeader from '$lib/components/SiteHeader.svelte';
   import PwaStatus from '$lib/components/PwaStatus.svelte';
   import '../app.css';
 
   let { children } = $props();
+  const companionPage = $derived(page.url.pathname === '/mira');
 </script>
 
 <svelte:head>
   <title>Patternverse — Find a useful pattern</title>
 </svelte:head>
 
-<SiteHeader />
-<PwaStatus />
+{#if !companionPage}<SiteHeader /><PwaStatus />{/if}
 {@render children()}
-<SiteFooter />
+{#if !companionPage}<SiteFooter />{/if}

@@ -1,0 +1,28 @@
+[package]
+name = "patternverse-desktop"
+version = "0.1.0"
+description = "Native local model and transcription host for Patternverse"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+
+[lib]
+name = "patternverse_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+base64 = "0.22"
+block2 = "0.6"
+libc = "0.2"
+objc2 = "0.6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
+
+[profile.dev]
+debug = 0
+incremental = false

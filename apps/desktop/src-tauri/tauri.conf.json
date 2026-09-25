@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Patternverse",
+  "version": "0.1.0",
+  "identifier": "com.patternverse.desktop",
+  "build": {
+    "beforeDevCommand": "pnpm -C ../web dev --host 127.0.0.1 --port 1420 --strictPort",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "pnpm -C ../web build",
+    "frontendDist": "../../web/build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "url": "/mira",
+        "title": "patternverse",
+        "width": 1200,
+        "height": 820,
+        "minWidth": 720,
+        "minHeight": 620,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; font-src 'self'; img-src 'self' asset: data:; object-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; base-uri 'self'; frame-src 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["app", "dmg"],
+    "shortDescription": "A local-first companion and pattern library",
+    "category": "Lifestyle",
+    "externalBin": ["binaries/ollama", "binaries/whisper-cli"],
+    "resources": {
+      "binaries/ollama-runtime/dist/darwin/": "binaries/ollama-runtime/dist/darwin/",
+      "binaries/whisper-model/ggml-base-q5_1.bin": "binaries/whisper-model/ggml-base-q5_1.bin",
+      "../../../THIRD_PARTY_NOTICES.md": "THIRD_PARTY_NOTICES.md"
+    },
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns"],
+    "macOS": {
+      "minimumSystemVersion": "12.0",
+      "hardenedRuntime": true,
+      "entitlements": "Entitlements.plist"
+    }
+  }
+}
