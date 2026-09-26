@@ -3,7 +3,7 @@
   import '$lib/mira/workspace.css';
   import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
-  import { ArrowUp, BookOpen, MessageCircle, Mic, Plus, Settings2, Square } from '@lucide/svelte';
+  import { ArrowUp, BookOpen, History, MessageCircle, Mic, Plus, Settings2, Square } from '@lucide/svelte';
   import {
     createSession,
     submitMessage,
@@ -596,19 +596,6 @@
             : 'Local model ' + runtime.status
           : 'Browser · OpenRouter'}</span
       >
-      <a
-        href={resolve('/my')}
-        class="mira-icon-button"
-        aria-label="Open pattern library"
-        title="Pattern library"><BookOpen size={19} /></a
-      >
-      <button
-        type="button"
-        class="mira-icon-button"
-        aria-label="Open settings"
-        title="Settings"
-        onclick={() => (view = 'settings')}><Settings2 size={19} /></button
-      >
     </div>
   </header>
   <div class="mira-app-body">
@@ -631,7 +618,10 @@
         onclick={() => {
           view = 'sessions';
           clearMessages();
-        }}><BookOpen size={19} /></button
+        }}><History size={19} /></button
+      >
+      <a href={resolve('/my')} aria-label="Pattern library" title="Pattern library"
+        ><BookOpen size={19} /></a
       >
       <button
         type="button"
