@@ -21,31 +21,46 @@ test('keeps mira chat-focused and selects a library pattern in the conversation'
   await expect(picker).toBeVisible();
 });
 
-test('keeps compact mira navigation unique and within the viewport', async ({ page }) => {
+test('keeps only history and settings in the header at narrow widths', async ({ page }) => {
   await page.setViewportSize({ width: 696, height: 807 });
   await page.goto('/mira');
 
-  const navigation = page.getByRole('navigation', { name: 'mira sections' });
-  await expect(navigation.getByRole('button', { name: 'Conversation' })).toHaveCount(1);
-  await expect(navigation.getByRole('button', { name: 'Sessions' })).toHaveCount(1);
-  await expect(navigation.getByRole('link', { name: 'Pattern library' })).toHaveCount(1);
-  await expect(navigation.getByRole('button', { name: 'Settings' })).toHaveCount(1);
-  await expect(page.getByRole('button', { name: 'Open settings' })).toHaveCount(0);
-  await expect(page.getByRole('link', { name: 'Open pattern library' })).toHaveCount(0);
+  const header = page.locator('.mira-app-header');
+  await expect(header.getByRole('button')).toHaveCount(2);
+  await expect(header.getByRole('button', { name: 'Previous sessions' })).toBeEnabled();
+  await expect(header.getByRole('button', { name: 'Settings' })).toBeEnabled();
+  await expect(page.getByRole('navigation', { name: 'mira sections' })).toHaveCount(0);
+  await expect(page.locator('.mira-chat-disclaimer')).toHaveCount(0);
 
   for (const width of [696, 430, 320]) {
     await page.setViewportSize({ width, height: 807 });
     const layout = await page.evaluate(() => {
       const header = document.querySelector('.mira-app-header')!.getBoundingClientRect();
-      const nav = document.querySelector('.mira-app-tabs')!.getBoundingClientRect();
+      const brand = document.querySelector('.mira-brand')!.getBoundingClientRect();
+      const tools = document.querySelector('.mira-header-tools')!.getBoundingClientRect();
       return {
         scrollWidth: document.documentElement.scrollWidth,
         viewportWidth: window.innerWidth,
         headerBottom: header.bottom,
-        navTop: nav.top,
+        brandRight: brand.right,
+        toolsLeft: tools.left,
       };
     });
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
-    expect(layout.navTop).toBe(width < 430 ? layout.headerBottom : 0);
+    expect(layout.brandRight).toBeLessThan(layout.toolsLeft);
+    expect(layout.headerBottom).toBe(58);
   }
+
+  await header.getByRole('button', { name: 'Previous sessions' }).click();
+  const history = page.getByRole('dialog', { name: 'Sessions' });
+  await expect(history).toBeVisible();
+  await history.getByRole('button', { name: 'Close sessions' }).click();
+  await expect(history).toHaveCount(0);
+
+  await header.getByRole('button', { name: 'Settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Settings' });
+  await expect(settings).toBeVisible();
+  await expect(settings.getByLabel('Model')).toHaveValue('openrouter/auto');
+  await settings.press('Escape');
+  await expect(settings).toHaveCount(0);
 });

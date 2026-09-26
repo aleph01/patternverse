@@ -12,8 +12,6 @@
 }
 .mira-brand,
 .mira-header-tools,
-.mira-runtime-label,
-.mira-app-tabs,
 .mira-composer-tools {
   display: flex;
   align-items: center;
@@ -34,36 +32,9 @@
 .mira-header-tools {
   gap: 0.35rem;
 }
-.mira-runtime-label {
-  gap: 0.4rem;
-  margin-right: 0.6rem;
-  color: #66756b;
-  font-size: 0.75rem;
-  white-space: nowrap;
-}
-.mira-runtime-label span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #a0aaa1;
-}
-.mira-runtime-label span.available {
-  background: #3a8062;
-}
 .mira-app-body {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
   min-height: calc(100dvh - 58px);
 }
-.mira-app-tabs {
-  flex-direction: column;
-  justify-content: start;
-  gap: 0.5rem;
-  padding: 0.75rem 0.5rem;
-  border-right: 1px solid #d8dfd7;
-}
-.mira-app-tabs button,
-.mira-app-tabs a,
 .mira-app .mira-icon-button {
   display: inline-grid;
   place-items: center;
@@ -76,35 +47,119 @@
   color: var(--ink);
   cursor: pointer;
 }
-.mira-app-tabs button[aria-current='page'],
-.mira-app-tabs button:hover,
-.mira-app-tabs a:hover,
-.mira-app-tabs a:focus-visible,
-.mira-app .mira-icon-button:hover {
+.mira-app .mira-icon-button:hover,
+.mira-app .mira-icon-button[aria-expanded='true'] {
   background: #e9f0e9;
 }
 .mira-workspace {
+  position: relative;
   min-width: 0;
 }
-.mira-app-panel {
-  max-width: 1120px;
-  padding: clamp(1.5rem, 4vw, 3rem);
+.mira-panel-backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: #1d2b225c;
+  cursor: pointer;
+}
+.mira-app .mira-drawer {
+  position: fixed;
+  z-index: 21;
+  inset: 0 0 0 auto;
+  width: min(440px, 100vw);
+  max-width: none;
+  height: 100dvh;
+  margin: 0;
+  padding: 1.5rem;
+  overflow-y: auto;
+  border-left: 1px solid #d8dfd7;
+  background: #fafbf7;
+  box-shadow: -12px 0 32px #15271a21;
+}
+.mira-drawer .mira-section-heading {
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 .mira-section-heading h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+}
+.mira-app .mira-drawer .mira-section-heading > button {
+  flex: 0 0 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+}
+.mira-drawer-new {
+  margin-bottom: 1.2rem;
+  border: 1px solid #bdcdbf;
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  background: transparent;
+  color: var(--ink);
+}
+.mira-drawer .mira-session-grid,
+.mira-drawer .mira-settings-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.mira-drawer .mira-session-card,
+.mira-drawer .mira-settings-grid > section,
+.mira-drawer .mira-archive {
+  border-color: #d8dfd7;
+  border-radius: 10px;
+  background: #fff;
+  padding: 1rem;
+}
+.mira-drawer .mira-session-card h3 {
+  font-size: 1.1rem;
+}
+.mira-drawer .mira-archive {
+  margin-top: 1.25rem;
+}
+.mira-session-modality-setting,
+.mira-settings-safety {
+  margin-top: 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid #d8dfd7;
+}
+.mira-session-modality-setting label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.mira-session-modality-setting select {
+  width: 100%;
+  border: 1px solid #bdcdbf;
+  border-radius: 8px;
+  padding: 0.65rem 0.8rem;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+.mira-settings-safety {
+  color: #66756b;
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 .mira-chat {
   display: flex;
   height: calc(100dvh - 58px);
   min-height: 32rem;
   max-width: none;
-  padding: 0;
+  padding: 0 0 max(0.8rem, env(safe-area-inset-bottom));
 }
 .mira-chat-toolbar {
-  min-height: 57px;
+  width: min(100%, 760px);
+  min-height: 61px;
   align-items: center;
-  padding: 0.55rem 1.5rem;
-  border-bottom: 1px solid #d8dfd7;
+  margin: 0 auto;
+  padding: 0.55rem 1.25rem;
+  border-bottom: 0;
 }
 .mira-chat-toolbar h2 {
   overflow: hidden;
@@ -114,22 +169,10 @@
   font-weight: 650;
   letter-spacing: -0.01em;
 }
-.mira-chat-toolbar > div:last-child {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  min-width: 0;
-}
-.mira-chat-toolbar select {
-  width: auto;
-  max-width: 15rem;
-  padding: 0.35rem 0.6rem;
-  border-color: #cbd5cc;
-  font-size: 0.78rem;
-}
-.mira-chat-toolbar label {
+.mira-chat-toolbar span {
   color: #66756b;
-  font-weight: 500;
+  font-size: 0.78rem;
+  white-space: nowrap;
 }
 .mira-messages {
   width: min(100%, 760px);
@@ -280,12 +323,6 @@
   background: var(--ink);
   color: white;
 }
-.mira-chat-disclaimer {
-  width: min(calc(100% - 2.5rem), 720px);
-  margin: 0.55rem auto 0.8rem;
-  color: #66756b;
-  font-size: 0.7rem;
-}
 .mira-local-model {
   display: flex;
   align-items: center;
@@ -319,68 +356,24 @@
     align-items: center;
     padding: 0 0.75rem;
   }
-  .mira-runtime-label {
-    display: none;
-  }
   .mira-header-tools {
-    display: none;
-  }
-  .mira-app-body {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(0, 1fr);
-  }
-  .mira-app-tabs {
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.25rem;
-    padding: 0.25rem;
-    border-right: 0;
-    border-bottom: 1px solid #d8dfd7;
+    display: flex;
   }
   .mira-chat {
-    height: calc(100dvh - 105px);
+    height: calc(100dvh - 58px);
   }
   .mira-chat-toolbar {
     padding: 0.55rem 0.85rem;
-  }
-  .mira-chat-toolbar > div:last-child {
-    width: auto;
-  }
-  .mira-chat-toolbar label {
-    display: none;
-  }
-  .mira-chat-toolbar select {
-    max-width: 8rem;
   }
   .mira-messages {
     padding: 1.3rem 0.85rem;
   }
   .mira-composer,
-  .mira-guided,
-  .mira-chat-disclaimer {
+  .mira-guided {
     width: calc(100% - 1.4rem);
   }
-  .mira-chat-disclaimer {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
-@media (min-width: 430px) and (max-width: 760px) {
-  .mira-app {
-    position: relative;
-  }
-  .mira-app-body {
-    display: block;
-    min-height: calc(100dvh - 58px);
-  }
-  .mira-app-tabs {
-    position: absolute;
-    top: 0;
-    right: 0.75rem;
-    height: 58px;
-    padding: 0;
-    border-bottom: 0;
-  }
-  .mira-chat {
-    height: calc(100dvh - 58px);
+  .mira-app .mira-drawer {
+    width: 100vw;
+    border-left: 0;
   }
 }

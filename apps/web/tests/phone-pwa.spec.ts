@@ -25,8 +25,10 @@ test('keeps saved Mira sessions and the pattern editor available offline', async
   await expect(page.getByRole('heading', { name: 'edit Offline pocket pattern' })).toBeVisible();
 
   await page.goto('/mira');
-  await page.getByRole('button', { name: 'Sessions' }).click();
-  await expect(page.getByRole('heading', { name: 'New session' })).toBeVisible();
+  await page.getByRole('button', { name: 'Previous sessions' }).click();
+  await expect(
+    page.getByRole('dialog', { name: 'Sessions' }).getByRole('button', { name: 'New session' }),
+  ).toBeVisible();
 });
 
 test('keeps the principal phone screens within a narrow viewport', async ({ page }) => {
