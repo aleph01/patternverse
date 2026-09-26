@@ -162,6 +162,24 @@
 .mira-messages article.from-user .mira-message-role {
   display: none;
 }
+.mira-speak-button {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-top: 0.45rem;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #66756b;
+  cursor: pointer;
+}
+.mira-speak-button:hover,
+.mira-speak-button:focus-visible {
+  background: #e9f0e9;
+  color: var(--ink);
+}
 .mira-chat-welcome {
   margin: auto 0;
   font-size: clamp(1.6rem, 3vw, 2.4rem);
@@ -236,6 +254,20 @@
 .mira-voice-state {
   color: #366d52;
   font-size: 0.76rem;
+}
+.mira-speech-preference {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
+}
+.mira-speech-preference input {
+  width: 1rem;
+  height: 1rem;
+}
+.mira-speech-note {
+  color: #66756b;
+  font-size: 0.78rem;
 }
 .mira-app .mira-send-button {
   display: inline-grid;
@@ -327,6 +359,9 @@
   .mira-guided,
   .mira-chat-disclaimer {
     width: calc(100% - 1.4rem);
+  }
+  .mira-chat-disclaimer {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 @media (min-width: 430px) and (max-width: 760px) {

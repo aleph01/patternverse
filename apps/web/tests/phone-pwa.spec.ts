@@ -40,3 +40,67 @@ test('keeps the principal phone screens within a narrow viewport', async ({ page
     }
   }
 });
+
+test('offers dictation and spoken replies with a zero-retention automatic model', async ({
+  page,
+}) => {
+  await page.goto('/mira');
+  await page.getByRole('button', { name: 'New session' }).click();
+  await expect(page.getByRole('button', { name: 'Start voice input' })).toBeVisible();
+  await page.getByRole('button', { name: 'Settings' }).click();
+  await expect(page.getByLabel('Model')).toHaveValue('openrouter/auto');
+  await expect(page.getByLabel('Read new replies aloud automatically')).not.toBeChecked();
+});
+
+test('dictation updates the draft live and never sends it by itself', async ({ page }) => {
+  await page.addInitScript(() => {
+    class FakeRecognition {
+      lang = '';
+      continuous = false;
+      interimResults = false;
+      onresult: ((event: { results: ArrayLike<[{ transcript: string }]> }) => void) | null = null;
+      onerror = null;
+      onend: (() => void) | null = null;
+      start() {
+        (window as typeof window & { testRecognition?: FakeRecognition }).testRecognition = this;
+      }
+      stop() {
+        this.onend?.();
+      }
+      abort() {
+        this.onend?.();
+      }
+    }
+    (
+      window as typeof window & {
+        SpeechRecognition?: typeof FakeRecognition;
+        webkitSpeechRecognition?: typeof FakeRecognition;
+      }
+    ).SpeechRecognition = FakeRecognition;
+    (
+      window as typeof window & { webkitSpeechRecognition?: typeof FakeRecognition }
+    ).webkitSpeechRecognition = FakeRecognition;
+  });
+  await page.goto('/mira');
+  await page.getByRole('button', { name: 'New session' }).click();
+  await page.getByRole('button', { name: 'Start voice input' }).click();
+  await page.evaluate(() => {
+    const recognition = (
+      window as typeof window & {
+        testRecognition?: {
+          onresult: ((event: { results: ArrayLike<[{ transcript: string }]> }) => void) | null;
+        };
+      }
+    ).testRecognition;
+    recognition?.onresult?.({ results: [[{ transcript: 'I feel more grounded' }]] });
+  });
+  await expect(page.getByRole('textbox', { name: 'Message mira' })).toHaveValue(
+    'I feel more grounded',
+  );
+  await page.getByRole('button', { name: 'Stop dictation' }).click();
+  await expect(page.getByRole('button', { name: 'Start voice input' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Message mira' })).toHaveValue(
+    'I feel more grounded',
+  );
+  await expect(page.getByText('I feel more grounded', { exact: true })).toHaveCount(0);
+});

@@ -3,7 +3,17 @@
   import '$lib/mira/workspace.css';
   import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
-  import { ArrowUp, BookOpen, History, MessageCircle, Mic, Plus, Settings2, Square } from '@lucide/svelte';
+  import {
+    ArrowUp,
+    BookOpen,
+    History,
+    MessageCircle,
+    Mic,
+    Plus,
+    Settings2,
+    Square,
+    Volume2,
+  } from '@lucide/svelte';
   import {
     createSession,
     submitMessage,
@@ -20,6 +30,7 @@
   } from '$lib/mira/context';
   import { MODALITIES, modalityById } from '$lib/mira/modalities';
   import { recordedBlobToWhisperWav } from '$lib/mira/audio';
+  import { startBrowserDictation, type BrowserDictation } from '$lib/mira/browser-voice';
   import GuidedTechnique from '$lib/mira/GuidedTechnique.svelte';
   import {
     createNativeReplyProvider,
@@ -37,6 +48,7 @@
   import { exportPortableArchive, importPortableArchive } from '$lib/mira/portable';
   import {
     createOpenRouterReplyProvider,
+    DEFAULT_OPENROUTER_MODEL,
     listZdrModels,
     type ZdrModel,
   } from '$lib/mira/openrouter';
@@ -81,10 +93,13 @@
   let modelProgress = $state('');
   let pickerSelecting = $state(false);
   let voicePhase = $state<'idle' | 'requesting' | 'recording' | 'transcribing'>('idle');
+  let speakingId = $state<string | null>(null);
   let controller: AbortController | undefined;
+  let browserDictation: BrowserDictation | undefined;
   let recorder: MediaRecorder | undefined;
   let microphoneStream: MediaStream | undefined;
   let recordingTimeout: number | undefined;
+  let dictationFinishTimeout: number | undefined;
   let disposed = false;
 
   const active = $derived(
@@ -140,6 +155,7 @@
       sessions = restored;
       settings = {
         ...preferences,
+        model: !desktop && !preferences.model ? DEFAULT_OPENROUTER_MODEL : preferences.model,
         activeSessionId: restored.some((item) => item.id === preferences.activeSessionId)
           ? preferences.activeSessionId
           : (restored[0]?.id ?? null),
@@ -171,6 +187,9 @@
       if (localPoll !== undefined) window.clearInterval(localPoll);
       window.removeEventListener('keydown', shortcut);
       if (recordingTimeout !== undefined) window.clearTimeout(recordingTimeout);
+      if (dictationFinishTimeout !== undefined) window.clearTimeout(dictationFinishTimeout);
+      browserDictation?.cancel();
+      window.speechSynthesis?.cancel();
       if (recorder?.state === 'recording') recorder.stop();
       microphoneStream?.getTracks().forEach((track) => track.stop());
     };
@@ -350,6 +369,11 @@
         { sessions: store, replies: provider, clock: { now: () => new Date().toISOString() } },
         controller.signal,
       );
+      if (settings.autoSpeak) {
+        const completed = await store.load(session.id);
+        const reply = completed?.messages.at(-1);
+        if (reply?.role === 'assistant') speakReply(reply.id, reply.text);
+      }
       if (session.title === 'New session') {
         const latest = await store.load(session.id);
         if (latest)
@@ -373,12 +397,54 @@
 
   async function toggleVoiceInput() {
     if (voicePhase === 'recording') {
-      if (recorder?.state === 'recording') recorder.stop();
+      if (desktop && recorder?.state === 'recording') recorder.stop();
+      else if (browserDictation) {
+        voicePhase = 'transcribing';
+        dictationFinishTimeout = window.setTimeout(() => {
+          browserDictation?.cancel();
+          browserDictation = undefined;
+          voicePhase = 'idle';
+        }, 3_000);
+        browserDictation.stop();
+      }
       return;
     }
     if (voicePhase !== 'idle') return;
     if (!desktop) {
-      error = 'Local voice input is available in the desktop app.';
+      const originalDraft = draft.trim();
+      voicePhase = 'requesting';
+      clearMessages();
+      try {
+        browserDictation = startBrowserDictation(window, {
+          onText: (text) => {
+            if (!disposed) draft = [originalDraft, text].filter(Boolean).join(' ');
+          },
+          onEnd: () => {
+            browserDictation = undefined;
+            if (recordingTimeout !== undefined) window.clearTimeout(recordingTimeout);
+            if (dictationFinishTimeout !== undefined) window.clearTimeout(dictationFinishTimeout);
+            if (!disposed) {
+              voicePhase = 'idle';
+              composer?.focus();
+            }
+          },
+          onError: (message) => {
+            if (recordingTimeout !== undefined) window.clearTimeout(recordingTimeout);
+            if (dictationFinishTimeout !== undefined) window.clearTimeout(dictationFinishTimeout);
+            browserDictation = undefined;
+            if (!disposed) {
+              error = message;
+              voicePhase = 'idle';
+            }
+          },
+        });
+        voicePhase = 'recording';
+        recordingTimeout = window.setTimeout(() => browserDictation?.stop(), 120_000);
+      } catch (cause) {
+        browserDictation = undefined;
+        voicePhase = 'idle';
+        error = messageOf(cause);
+      }
       return;
     }
     voicePhase = 'requesting';
@@ -436,6 +502,44 @@
       voicePhase = 'idle';
       error = messageOf(cause);
     }
+  }
+
+  function speakReply(id: string, text: string) {
+    if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+      error = 'Spoken replies are unavailable in this browser.';
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = navigator.language || 'en-US';
+    utterance.rate = 0.96;
+    utterance.onend = () => {
+      if (speakingId === id) speakingId = null;
+    };
+    utterance.onerror = () => {
+      if (speakingId === id) speakingId = null;
+    };
+    speakingId = id;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function toggleSpokenReply(id: string, text: string) {
+    if (speakingId === id) {
+      window.speechSynthesis.cancel();
+      speakingId = null;
+    } else speakReply(id, text);
+  }
+
+  function stopSpokenReply() {
+    window.speechSynthesis?.cancel();
+    speakingId = null;
+  }
+
+  async function toggleAutoSpeak() {
+    if (!store) return;
+    const next = { ...settings, autoSpeak: !settings.autoSpeak };
+    await store.saveSettings(next);
+    settings = next;
   }
   async function deleteSession(session: Session) {
     if (
@@ -586,7 +690,11 @@
 
 <main class="mira-app">
   <header class="mira-app-header">
-    <div class="mira-brand"><a href={resolve('/')} aria-label="Patternverse home"><PatternverseLogo compact /></a><span>/ mira</span></div>
+    <div class="mira-brand">
+      <a href={resolve('/')} aria-label="Patternverse home"><PatternverseLogo compact /></a><span
+        >/ mira</span
+      >
+    </div>
     <div class="mira-header-tools">
       <span class="mira-runtime-label"
         ><span aria-hidden="true" class:available={desktop && runtime.status === 'ready'}
@@ -606,6 +714,7 @@
         title="Conversation"
         aria-current={view === 'chat' ? 'page' : undefined}
         onclick={() => {
+          stopSpokenReply();
           view = 'chat';
           clearMessages();
         }}><MessageCircle size={19} /></button
@@ -616,6 +725,7 @@
         title="Sessions"
         aria-current={view === 'sessions' ? 'page' : undefined}
         onclick={() => {
+          stopSpokenReply();
           view = 'sessions';
           clearMessages();
         }}><History size={19} /></button
@@ -629,6 +739,7 @@
         title="Settings"
         aria-current={view === 'settings' ? 'page' : undefined}
         onclick={() => {
+          stopSpokenReply();
           view = 'settings';
           clearMessages();
         }}><Settings2 size={19} /></button
@@ -789,6 +900,10 @@
                   with your chosen OpenRouter model for processing. Zero-data-retention routing is
                   required; it is not fully local AI.
                 </p>
+                <p>
+                  By default, OpenRouter chooses a suitable model for each conversation with
+                  zero-retention routing required. You can choose a specific model below.
+                </p>
                 <label for="mira-key">OpenRouter API key</label><input
                   id="mira-key"
                   type="password"
@@ -805,7 +920,8 @@
                 <label for="mira-model">Model</label>
                 {#if models.length > 0}
                   <select id="mira-model" bind:value={modelDraft}
-                    ><option value="">Choose a model</option
+                    ><option value={DEFAULT_OPENROUTER_MODEL}
+                      >Automatic · zero-retention required</option
                     >{#each models as model (model.id)}<option value={model.id}
                         >{model.name} · {model.id}</option
                       >{/each}</select
@@ -813,13 +929,24 @@
                 {:else}<input
                     id="mira-model"
                     bind:value={modelDraft}
-                    placeholder="Select after checking available models"
+                    placeholder="openrouter/auto"
                     spellcheck="false"
                   />{/if}
                 <button type="button" class="mira-primary" onclick={saveConnection}
                   >Save connection</button
                 >
               {/if}
+              <label class="mira-speech-preference">
+                <input
+                  type="checkbox"
+                  checked={settings.autoSpeak ?? false}
+                  onchange={toggleAutoSpeak}
+                />
+                <span>Read new replies aloud automatically</span>
+              </label>
+              <p class="mira-speech-note">
+                Spoken replies use the voices available in your browser or device.
+              </p>
             </section>
             <section aria-labelledby="mira-prompt-heading">
               <h3 id="mira-prompt-heading">Therapy modalities</h3>
@@ -922,6 +1049,18 @@
                 >
                   <p class="mira-message-role">{message.role === 'user' ? 'You' : 'mira'}</p>
                   <p>{message.text}</p>
+                  {#if message.role === 'assistant'}<button
+                      type="button"
+                      class="mira-speak-button"
+                      aria-label={speakingId === message.id
+                        ? 'Stop spoken reply'
+                        : 'Play spoken reply'}
+                      title={speakingId === message.id ? 'Stop reading' : 'Read aloud'}
+                      onclick={() => toggleSpokenReply(message.id, message.text)}
+                      >{#if speakingId === message.id}<Square size={16} />{:else}<Volume2
+                          size={17}
+                        />{/if}</button
+                    >{/if}
                 </article>{/each}
               {#if sending && active.pendingReplyId}<p class="mira-thinking" role="status">
                   mira is reflecting…
@@ -946,6 +1085,7 @@
                 id="mira-message"
                 bind:this={composer}
                 bind:value={draft}
+                readonly={!desktop && voicePhase !== 'idle'}
                 rows="1"
                 maxlength="30000"
                 placeholder="Message mira…"
@@ -970,24 +1110,24 @@
                       >{voicePhase === 'recording'
                         ? '● Recording…'
                         : voicePhase === 'transcribing'
-                          ? 'Transcribing locally…'
+                          ? desktop
+                            ? 'Transcribing locally…'
+                            : 'Finishing dictation…'
                           : 'Opening microphone…'}</span
                     >{/if}
                 </div>
                 <div class="mira-composer-tools">
-                  {#if desktop}<button
-                      type="button"
-                      class="mira-icon-button"
-                      aria-label={voicePhase === 'recording'
-                        ? 'Stop dictation'
-                        : 'Start voice input'}
-                      title={voicePhase === 'recording' ? 'Stop dictation' : 'Dictate locally'}
-                      disabled={voicePhase === 'requesting' || voicePhase === 'transcribing'}
-                      onclick={toggleVoiceInput}
-                      >{#if voicePhase === 'recording'}<Square size={17} />{:else}<Mic
-                          size={19}
-                        />{/if}</button
-                    >{/if}
+                  <button
+                    type="button"
+                    class="mira-icon-button"
+                    aria-label={voicePhase === 'recording' ? 'Stop dictation' : 'Start voice input'}
+                    title={voicePhase === 'recording' ? 'Stop dictation' : 'Dictate a message'}
+                    disabled={voicePhase === 'requesting' || voicePhase === 'transcribing'}
+                    onclick={toggleVoiceInput}
+                    >{#if voicePhase === 'recording'}<Square size={17} />{:else}<Mic
+                        size={19}
+                      />{/if}</button
+                  >
                   <button
                     type="submit"
                     class="mira-send-button"
@@ -1001,7 +1141,7 @@
             <p class="mira-chat-disclaimer">
               mira is an AI companion, not a therapist or emergency service. {desktop
                 ? 'Replies and dictation are processed on this device.'
-                : 'Replies are processed by your chosen provider when you send.'}
+                : 'Replies are processed by your chosen provider when you send. Browser dictation may use Apple’s speech service.'}
             </p>
           {/if}
         </section>

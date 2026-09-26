@@ -934,6 +934,54 @@ main {
   padding-top: 1.25rem;
 }
 
+.sync-controls {
+  display: grid;
+  justify-items: start;
+  gap: 0.8rem;
+  max-width: 680px;
+  padding-top: 2rem;
+}
+
+.sync-controls h3,
+.sync-controls p {
+  margin: 0;
+}
+
+.sync-controls p {
+  color: #cac9c1;
+  line-height: 1.5;
+}
+
+.sync-controls label {
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+
+.sync-controls input,
+.sync-controls select {
+  width: min(100%, 420px);
+  min-height: 44px;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #77776e;
+  border-radius: 4px;
+  background: #252521;
+  color: var(--paper);
+  font: inherit;
+}
+
+.sync-conflicts {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #77776e;
+}
+
+.sync-conflicts label {
+  display: grid;
+  gap: 0.4rem;
+}
+
 .oauth-callback-page {
   display: grid;
   min-height: calc(100vh - 164px);

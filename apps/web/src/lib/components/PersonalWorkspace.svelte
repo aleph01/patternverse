@@ -35,6 +35,8 @@
 
   onMount(() => {
     let active = true;
+    const syncCompleted = () => void reload();
+    window.addEventListener('patternverse:sync-complete', syncCompleted);
     void getLocalWorkspace()
       .then(async (localWorkspace) => {
         workspace = localWorkspace;
@@ -49,6 +51,7 @@
       });
     return () => {
       active = false;
+      window.removeEventListener('patternverse:sync-complete', syncCompleted);
     };
   });
 

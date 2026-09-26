@@ -287,15 +287,21 @@ test('protects unsaved editor changes during navigation', async ({ page }) => {
   await page.getByLabel('Title', { exact: true }).fill('An Unsaved Thought');
 
   const firstDialogPromise = page.waitForEvent('dialog');
-  const firstClickPromise = page.getByRole('link', { name: 'Patternverse home' }).click();
+  const firstClickPromise = page
+    .getByRole('banner')
+    .getByRole('link', { name: 'Patternverse home' })
+    .click();
   const firstDialog = await firstDialogPromise;
   expect(firstDialog.message()).toContain('Leave without saving');
   await firstDialog.dismiss();
   await firstClickPromise;
-  await expect(page).toHaveURL(/\/editor$/);
+  await expect(page).toHaveURL(/\/editor\?type=pattern$/);
 
   const secondDialogPromise = page.waitForEvent('dialog');
-  const secondClickPromise = page.getByRole('link', { name: 'Patternverse home' }).click();
+  const secondClickPromise = page
+    .getByRole('banner')
+    .getByRole('link', { name: 'Patternverse home' })
+    .click();
   const secondDialog = await secondDialogPromise;
   await secondDialog.accept();
   await secondClickPromise;

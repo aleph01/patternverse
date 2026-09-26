@@ -18,6 +18,7 @@ export type MiraSettings = Readonly<{
   openRouterKey: string;
   promptOverrides: Readonly<Record<string, string>>;
   activeSessionId: string | null;
+  autoSpeak?: boolean;
 }>;
 
 export interface PrivateMiraStore extends SessionRepository {
@@ -144,7 +145,13 @@ export function createPrivateMiraStore(options: PrivateStoreOptions = {}): Priva
       );
       return envelope
         ? validateSettings(await unseal('settings', SETTINGS_ID, envelope))
-        : { model: '', openRouterKey: '', promptOverrides: {}, activeSessionId: null };
+        : {
+            model: '',
+            openRouterKey: '',
+            promptOverrides: {},
+            activeSessionId: null,
+            autoSpeak: false,
+          };
     },
     saveSettings: async (settings) => {
       const envelope = await seal('settings', SETTINGS_ID, validateSettings(settings));
@@ -242,6 +249,7 @@ function validateSettings(value: unknown): MiraSettings {
     !isRecord(value) ||
     !string(value.model, 300) ||
     !string(value.openRouterKey, 2000) ||
+    (value.autoSpeak !== undefined && typeof value.autoSpeak !== 'boolean') ||
     (value.activeSessionId !== null && !string(value.activeSessionId, 100)) ||
     !isRecord(value.promptOverrides) ||
     Object.keys(value.promptOverrides).length > 20 ||
@@ -249,7 +257,7 @@ function validateSettings(value: unknown): MiraSettings {
   ) {
     throw new Error('Private Mira settings are invalid.');
   }
-  return value as MiraSettings;
+  return { ...value, autoSpeak: value.autoSpeak === true } as MiraSettings;
 }
 
 function string(value: unknown, max: number): value is string {

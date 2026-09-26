@@ -4,6 +4,7 @@ import type { MiraSettings } from './private-store';
 
 const CHAT_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const ZDR_URL = 'https://openrouter.ai/api/v1/endpoints/zdr';
+export const DEFAULT_OPENROUTER_MODEL = 'openrouter/auto';
 
 export type ZdrModel = Readonly<{ id: string; name: string }>;
 export type { PatternContext } from './conversation-prompt';
