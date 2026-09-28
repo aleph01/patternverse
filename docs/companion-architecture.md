@@ -47,6 +47,12 @@ OpenRouter: it requires a user-supplied key and model, sends only on user submit
 requests ZDR and denial of data collection, and disables provider fallbacks. ZDR
 still sends content to a remote service for processing; it is not local inference.
 
+When the separate [voice-control mode](mira-voice-control.md) is enabled, ambiguous
+UI commands can also request model interpretation. That request includes only
+the current utterance and menu labels, not the transcript or composer draft.
+Desktop interpretation remains local; browser interpretation requires the same
+OpenRouter ZDR routing. Models cannot send messages or start exercises.
+
 ## Migration sequence
 
 1. **Core and contracts (started):** establish source-qualified session state,
