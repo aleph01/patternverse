@@ -64,3 +64,42 @@ test('keeps only history and settings in the header at narrow widths', async ({ 
   await settings.press('Escape');
   await expect(settings).toHaveCount(0);
 });
+
+test('shows reported monthly spending and warns without blocking replies', async ({ page }) => {
+  let replies = 0;
+  await page.route('https://openrouter.ai/api/v1/key', (route) =>
+    route.fulfill({
+      contentType: 'application/json',
+      body: JSON.stringify({
+        data: { usage_monthly: 2.5, limit: 10, limit_remaining: 7.5, limit_reset: 'monthly' },
+      }),
+    }),
+  );
+  await page.route('https://openrouter.ai/api/v1/chat/completions', (route) => {
+    replies += 1;
+    return route.fulfill({
+      contentType: 'application/json',
+      body: JSON.stringify({ choices: [{ message: { content: 'I am here.' } }] }),
+    });
+  });
+
+  await page.goto('/mira');
+  await page.getByRole('button', { name: 'New session' }).click();
+  await page.getByRole('button', { name: 'Settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Settings' });
+  await settings.getByLabel('OpenRouter API key').fill('test-key');
+  await settings.getByRole('button', { name: 'Save connection' }).click();
+  await expect(settings.getByText('$2.50 this month')).toBeVisible();
+  await settings.getByLabel('Monthly warning threshold (USD)').fill('1');
+  await settings.getByRole('button', { name: 'Save budget' }).click();
+  await expect(settings.getByText('Monthly budget reached.', { exact: false })).toBeVisible();
+  await settings.getByRole('button', { name: 'Close settings' }).click();
+  await expect(page.getByText('You can still send messages.', { exact: false })).toBeVisible();
+  await page.getByRole('textbox', { name: 'Message mira' }).fill('Hello');
+  await page.getByRole('button', { name: 'Send message' }).click();
+  await expect(page.getByText('I am here.')).toBeVisible();
+  expect(replies).toBe(1);
+  await page.reload();
+  await page.getByRole('button', { name: 'Settings' }).click();
+  await expect(page.getByLabel('Monthly warning threshold (USD)')).toHaveValue('1');
+});

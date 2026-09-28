@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createOpenRouterReplyProvider, listZdrModels } from './openrouter';
+import { createOpenRouterReplyProvider, getOpenRouterKeyUsage, listZdrModels } from './openrouter';
 
 const settings = {
   model: 'example/model',
@@ -17,6 +17,39 @@ const effect = {
 };
 
 describe('OpenRouter adapter', () => {
+  it('reads OpenRouter-reported monthly key charges and provider limits', async () => {
+    const transport = vi.fn(
+      async () =>
+        new Response(
+          JSON.stringify({
+            data: {
+              usage_monthly: 1.2345,
+              limit: 10,
+              limit_remaining: 8.7655,
+              limit_reset: 'monthly',
+            },
+          }),
+          { status: 200 },
+        ),
+    ) as unknown as typeof fetch;
+    expect(await getOpenRouterKeyUsage('private-key', transport)).toEqual({
+      monthlyUsd: 1.2345,
+      providerLimitUsd: 10,
+      providerRemainingUsd: 8.7655,
+      providerLimitReset: 'monthly',
+    });
+    expect(vi.mocked(transport).mock.calls[0][0]).toBe('https://openrouter.ai/api/v1/key');
+  });
+
+  it('does not turn a missing or invalid provider usage report into zero spend', async () => {
+    const transport = vi.fn(
+      async () =>
+        new Response(JSON.stringify({ data: { usage_monthly: 'unknown' } }), { status: 200 }),
+    ) as unknown as typeof fetch;
+    await expect(getOpenRouterKeyUsage('private-key', transport)).rejects.toThrow(
+      'invalid monthly usage',
+    );
+  });
   it('discovers only returned zero-retention endpoints', async () => {
     const transport = vi.fn(
       async () =>

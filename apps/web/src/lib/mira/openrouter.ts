@@ -4,9 +4,16 @@ import type { MiraSettings } from './private-store';
 
 const CHAT_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const ZDR_URL = 'https://openrouter.ai/api/v1/endpoints/zdr';
+const KEY_URL = 'https://openrouter.ai/api/v1/key';
 export const DEFAULT_OPENROUTER_MODEL = 'openrouter/auto';
 
 export type ZdrModel = Readonly<{ id: string; name: string }>;
+export type OpenRouterKeyUsage = Readonly<{
+  monthlyUsd: number;
+  providerLimitUsd: number | null;
+  providerRemainingUsd: number | null;
+  providerLimitReset: string | null;
+}>;
 export type { PatternContext } from './conversation-prompt';
 export type OpenRouterOptions = Readonly<{
   settings: MiraSettings;
@@ -38,6 +45,34 @@ export async function listZdrModels(
     });
   }
   return [...models.values()].sort((left, right) => left.name.localeCompare(right.name));
+}
+
+/** Read OpenRouter's billed usage for the current key, including usage outside Mira. */
+export async function getOpenRouterKeyUsage(
+  apiKey: string,
+  transport: typeof fetch = fetch,
+): Promise<OpenRouterKeyUsage> {
+  if (!apiKey.trim()) throw new Error('Connect an OpenRouter API key first.');
+  const response = await transport(KEY_URL, {
+    headers: { Authorization: `Bearer ${apiKey.trim()}` },
+    cache: 'no-store',
+  });
+  const payload: unknown = await response.json().catch(() => null);
+  if (!response.ok) throw new Error(`Could not load OpenRouter usage (HTTP ${response.status}).`);
+  const data = isRecord(payload) ? payload.data : null;
+  if (!isRecord(data) || !nonnegativeFinite(data.usage_monthly)) {
+    throw new Error('OpenRouter returned an invalid monthly usage report.');
+  }
+  return {
+    monthlyUsd: data.usage_monthly,
+    providerLimitUsd: nonnegativeFinite(data.limit) ? data.limit : null,
+    providerRemainingUsd: nonnegativeFinite(data.limit_remaining) ? data.limit_remaining : null,
+    providerLimitReset: typeof data.limit_reset === 'string' ? data.limit_reset : null,
+  };
+}
+
+function nonnegativeFinite(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0;
 }
 
 /** Explicit cloud adapter: request-level ZDR is mandatory and there is no fallback provider. */

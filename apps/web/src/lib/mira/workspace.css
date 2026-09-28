@@ -146,6 +146,42 @@
   font-size: 0.78rem;
   line-height: 1.5;
 }
+.mira-cost-overview .mira-cost-total {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+.mira-cost-total span {
+  color: #66756b;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.mira-cost-overview progress {
+  width: 100%;
+  height: 0.5rem;
+  accent-color: #617d69;
+}
+.mira-cost-overview .mira-budget-warning,
+.mira-chat-budget-warning {
+  border: 1px solid #dec58e;
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  background: #fff8e9;
+  color: #654817;
+  line-height: 1.45;
+}
+.mira-cost-overview .mira-cost-timestamp,
+.mira-cost-overview .mira-cost-note {
+  color: #66756b;
+  font-size: 0.76rem;
+}
+.mira-chat-budget-warning {
+  width: min(calc(100% - 2.5rem), 720px);
+  margin: 0.6rem auto 0;
+  font-size: 0.78rem;
+}
 .mira-chat {
   display: flex;
   height: calc(100dvh - 58px);

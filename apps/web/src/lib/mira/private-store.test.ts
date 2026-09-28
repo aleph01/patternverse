@@ -31,6 +31,7 @@ describe('private Mira storage', () => {
       openRouterKey: 'secret-key',
       promptOverrides: {},
       activeSessionId: session.id,
+      monthlyBudgetUsd: 5,
     });
 
     const second = createPrivateMiraStore(setup);
@@ -38,6 +39,7 @@ describe('private Mira storage', () => {
     expect(await second.loadSettings()).toMatchObject({
       openRouterKey: 'secret-key',
       activeSessionId: session.id,
+      monthlyBudgetUsd: 5,
     });
     const database = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open(setup.databaseName);

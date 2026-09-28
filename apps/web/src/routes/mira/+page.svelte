@@ -39,7 +39,9 @@
   import {
     createOpenRouterReplyProvider,
     DEFAULT_OPENROUTER_MODEL,
+    getOpenRouterKeyUsage,
     listZdrModels,
+    type OpenRouterKeyUsage,
     type ZdrModel,
   } from '$lib/mira/openrouter';
   import {
@@ -56,6 +58,7 @@
     openRouterKey: '',
     promptOverrides: {},
     activeSessionId: null,
+    monthlyBudgetUsd: null,
   });
   let personal = $state<readonly MiraPatternSummary[]>([]);
   let context = $state<ReturnType<typeof parseMiraPatternQuery>>(null);
@@ -64,6 +67,11 @@
   let draft = $state('');
   let keyDraft = $state('');
   let modelDraft = $state('');
+  let budgetDraft = $state('');
+  let keyUsage = $state<OpenRouterKeyUsage | null>(null);
+  let usageCheckedAt = $state<string | null>(null);
+  let usageError = $state('');
+  let loadingUsage = $state(false);
   let promptDraft = $state('');
   let promptModality = $state('narm');
   let models = $state<readonly ZdrModel[]>([]);
@@ -110,6 +118,22 @@
         ? resolve('/[type=entityType]/[id]', { type: 'pattern', id: selectedPattern.id })
         : resolve('/'),
   );
+  const formatUsd = (amount: number) =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 4,
+    }).format(amount);
+  const isCurrentUtcMonth = (checkedAt: string | null) => {
+    if (!checkedAt) return false;
+    const checked = new Date(checkedAt);
+    const now = new Date();
+    return (
+      checked.getUTCFullYear() === now.getUTCFullYear() &&
+      checked.getUTCMonth() === now.getUTCMonth()
+    );
+  };
 
   afterNavigate(() => {
     context = parseMiraPatternQuery(new URLSearchParams(window.location.search));
@@ -154,7 +178,10 @@
       if (!desktop && !preferences.model) await store.saveSettings(settings);
       keyDraft = settings.openRouterKey;
       modelDraft = settings.model;
+      budgetDraft = settings.monthlyBudgetUsd?.toString() ?? '';
       promptDraft = settings.promptOverrides[promptModality] ?? modalityById(promptModality).prompt;
+      if (!desktop && settings.openRouterKey && settings.monthlyBudgetUsd != null)
+        void refreshUsage();
       if (desktop) await refreshNativeRuntime();
     }
     void initialize()
@@ -263,6 +290,7 @@
     view = panel;
     await tick();
     document.querySelector<HTMLElement>('.mira-app-panel[role="dialog"]')?.focus();
+    if (panel === 'settings' && !desktop && settings.openRouterKey) void refreshUsage();
   }
   function closePanel() {
     const wasOpen = view !== 'chat';
@@ -377,6 +405,19 @@
       void openPanel('settings', undefined, true);
       return;
     }
+    if (!desktop && settings.monthlyBudgetUsd !== null && settings.monthlyBudgetUsd !== undefined) {
+      sending = true;
+      try {
+        const usage = await getOpenRouterKeyUsage(settings.openRouterKey);
+        keyUsage = usage;
+        usageCheckedAt = new Date().toISOString();
+        usageError = '';
+      } catch (cause) {
+        usageError = messageOf(cause);
+      } finally {
+        sending = false;
+      }
+    }
     clearMessages();
     const now = new Date().toISOString();
     const message = { id: crypto.randomUUID(), role: 'user' as const, text, createdAt: now };
@@ -422,6 +463,7 @@
     } catch (cause) {
       error = messageOf(cause);
     } finally {
+      if (!desktop) void refreshUsage();
       const latest = await store.load(session.id);
       if (latest)
         sessions = [latest, ...sessions.filter((item) => item.id !== latest.id)].sort(
@@ -618,8 +660,41 @@
     const next = { ...settings, openRouterKey: keyDraft.trim(), model: modelDraft.trim() };
     await store.saveSettings(next);
     settings = next;
+    keyUsage = null;
+    usageCheckedAt = null;
+    usageError = '';
+    if (next.openRouterKey) void refreshUsage();
     notice = 'Provider settings saved encrypted on this device.';
     error = '';
+  }
+  async function saveBudget() {
+    if (!store) return;
+    const amount = budgetDraft.trim() ? Number(budgetDraft) : null;
+    if (amount !== null && (!Number.isFinite(amount) || amount <= 0 || amount > 1_000_000)) {
+      error = 'Enter a monthly budget greater than $0, or leave it empty to remove the limit.';
+      return;
+    }
+    const next = { ...settings, monthlyBudgetUsd: amount };
+    await store.saveSettings(next);
+    settings = next;
+    notice = amount === null ? 'Monthly Mira budget removed.' : 'Monthly Mira budget saved.';
+    error = '';
+  }
+  async function refreshUsage() {
+    const key = settings.openRouterKey;
+    if (!key || desktop) return;
+    loadingUsage = true;
+    usageError = '';
+    try {
+      const usage = await getOpenRouterKeyUsage(key);
+      if (key !== settings.openRouterKey) return;
+      keyUsage = usage;
+      usageCheckedAt = new Date().toISOString();
+    } catch (cause) {
+      if (key === settings.openRouterKey) usageError = messageOf(cause);
+    } finally {
+      loadingUsage = false;
+    }
   }
   async function refreshModels() {
     loadingModels = true;
@@ -1015,6 +1090,73 @@
                   Spoken replies use the voices available in your browser or device.
                 </p>
               </section>
+              {#if !desktop}
+                <section class="mira-cost-overview" aria-labelledby="mira-cost-heading">
+                  <h3 id="mira-cost-heading">OpenRouter costs</h3>
+                  <p>
+                    Reported spending for this API key, including use outside Mira. OpenRouter
+                    resets monthly usage at midnight UTC on the first of the month.
+                  </p>
+                  {#if settings.openRouterKey}
+                    {#if keyUsage && isCurrentUtcMonth(usageCheckedAt)}
+                      <p class="mira-cost-total">
+                        {formatUsd(keyUsage.monthlyUsd)} <span>this month</span>
+                      </p>
+                      {#if settings.monthlyBudgetUsd != null}
+                        <progress
+                          aria-label="Monthly budget used"
+                          value={Math.min(keyUsage.monthlyUsd / settings.monthlyBudgetUsd, 1)}
+                          max="1"
+                        ></progress>
+                        <p>
+                          {formatUsd(Math.max(settings.monthlyBudgetUsd - keyUsage.monthlyUsd, 0))} before
+                          your Mira warning threshold.
+                        </p>
+                        {#if keyUsage.monthlyUsd >= settings.monthlyBudgetUsd}<p
+                            class="mira-budget-warning"
+                            role="status"
+                          >
+                            Monthly budget reached. Mira will warn you, but replies remain
+                            available.
+                          </p>{/if}
+                      {/if}
+                      {#if keyUsage.providerLimitUsd != null}<p>
+                          OpenRouter key limit: {formatUsd(
+                            keyUsage.providerLimitUsd,
+                          )}{keyUsage.providerLimitReset
+                            ? ` · resets ${keyUsage.providerLimitReset}`
+                            : ''}.
+                        </p>{/if}
+                      {#if usageCheckedAt}<p class="mira-cost-timestamp">
+                          Checked {new Date(usageCheckedAt).toLocaleString()}
+                        </p>{/if}
+                    {:else if !loadingUsage}<p>No current-month usage report available yet.</p>{/if}
+                    {#if usageError}<p class="mira-budget-warning" role="status">
+                        Could not refresh OpenRouter usage: {usageError}
+                      </p>{/if}
+                    <button type="button" onclick={refreshUsage} disabled={loadingUsage}
+                      >{loadingUsage ? 'Checking usage…' : 'Refresh costs'}</button
+                    >
+                  {:else}<p>Connect an OpenRouter API key to see its reported spending.</p>{/if}
+                  <label for="mira-budget">Monthly warning threshold (USD)</label>
+                  <input
+                    id="mira-budget"
+                    type="number"
+                    min="0.01"
+                    max="1000000"
+                    step="0.01"
+                    inputmode="decimal"
+                    placeholder="No budget set"
+                    value={budgetDraft}
+                    oninput={(event) => (budgetDraft = event.currentTarget.value)}
+                  />
+                  <button type="button" onclick={saveBudget}>Save budget</button>
+                  <p class="mira-cost-note">
+                    This warning threshold is saved on this device; it is not a spending cap. For an
+                    enforced limit across devices, set a monthly limit on your OpenRouter API key.
+                  </p>
+                </section>
+              {/if}
               <section aria-labelledby="mira-prompt-heading">
                 <h3 id="mira-prompt-heading">Therapy modalities</h3>
                 <p>
@@ -1048,6 +1190,13 @@
           </div>
         {/if}
         <section class="mira-chat" aria-label="mira conversation" inert={view !== 'chat'}>
+          {#if !desktop && keyUsage && isCurrentUtcMonth(usageCheckedAt) && settings.monthlyBudgetUsd != null && keyUsage.monthlyUsd >= settings.monthlyBudgetUsd}
+            <p class="mira-chat-budget-warning" role="status">
+              OpenRouter spending has reached your monthly warning threshold ({formatUsd(
+                keyUsage.monthlyUsd,
+              )} of {formatUsd(settings.monthlyBudgetUsd)}). You can still send messages.
+            </p>
+          {/if}
           {#if context && selectedPattern && (active?.activePattern?.entityId !== context.entityId || active?.activePattern?.sourceId !== context.sourceId)}
             <div class="mira-context-choice">
               <div>
