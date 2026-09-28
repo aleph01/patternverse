@@ -1,4 +1,8 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+  import { Play, X } from '@lucide/svelte';
+  import { focusPicker } from './dialog-focus';
+  import { searchVoiceChoices } from './voice-commands';
   import {
     listTechniques,
     loadGuidedRun,
@@ -18,13 +22,15 @@
     store,
     patterns = [],
     onPatternSelect,
+    voiceFeedback,
     selecting = $bindable(false),
   }: {
     sessionId: string;
     modalityId: string;
     store: PrivateMiraStore;
     patterns?: readonly MiraPatternSummary[];
-    onPatternSelect?: (pattern: MiraPatternSummary) => void;
+    onPatternSelect?: (pattern: MiraPatternSummary) => void | Promise<void>;
+    voiceFeedback?: Snippet;
     selecting?: boolean;
   } = $props();
   let run = $state<GuidedRun | null>(null);
@@ -32,6 +38,67 @@
   let working = $state(false);
   let answerDraft = $state('');
   let error = $state('');
+  let search = $state('');
+  let selectedId = $state<string | null>(null);
+  const pickerChoices = $derived([
+    ...techniques.map((item) => ({
+      id: `technique:${item.id}`,
+      label: item.title,
+      description: item.needs_ai ? 'AI wording not connected yet' : 'Guided reflection',
+      disabled: working || active || item.needs_ai,
+    })),
+    ...patterns.map((item) => ({
+      id: `pattern:${item.sourceId}:${item.id}`,
+      label: item.title,
+      description: item.summary || 'Use as conversation context',
+      disabled: working,
+    })),
+  ]);
+  const visibleChoices = $derived(searchVoiceChoices(pickerChoices, search));
+  const selected = $derived(pickerChoices.find((item) => item.id === selectedId));
+
+  /** Voice navigation uses exactly the numbered options shown in the picker. */
+  export function voiceChoices() {
+    return visibleChoices;
+  }
+  export function searchPatterns(query: string) {
+    search = query;
+    selecting = true;
+  }
+  export function selectPattern(id: string): string {
+    const choice = visibleChoices.find((item) => item.id === id && !item.disabled);
+    if (!choice) return 'That pattern is not available.';
+    selectedId = id;
+    return `${choice.label} selected. Say “start” when ready, or “dismiss”.`;
+  }
+  export function describeSelection(): string {
+    return selected
+      ? `${selected.label}. ${selected.description}`
+      : 'Select a numbered pattern first.';
+  }
+  export function hasSelection(): boolean {
+    return Boolean(selected);
+  }
+  export function dismissSelection() {
+    selectedId = null;
+    selecting = false;
+  }
+  export async function startSelection(): Promise<string> {
+    if (!selected || selected.disabled) return 'Select an available pattern first.';
+    const id = selected.id;
+    if (id.startsWith('technique:')) await start(id.slice('technique:'.length));
+    else {
+      const pattern = patterns.find((item) => `pattern:${item.sourceId}:${item.id}` === id);
+      if (!pattern) return 'That pattern is no longer available.';
+      await onPatternSelect?.(pattern);
+      selecting = false;
+    }
+    if (error) return error;
+    selectedId = null;
+    return id.startsWith('technique:')
+      ? 'Exercise started.'
+      : 'Pattern added to this conversation.';
+  }
 
   $effect(() => {
     const id = sessionId;
@@ -40,6 +107,8 @@
     run = null;
     techniques = [];
     error = '';
+    selectedId = null;
+    search = '';
     void Promise.all([loadGuidedRun(store, id), listTechniques(modality)])
       .then(([saved, available]) => {
         if (live) {
@@ -77,35 +146,6 @@
     const value = result.value;
     if (typeof value !== 'string') return '';
     return choices(effect).find((option) => option.value === value)?.label ?? value;
-  }
-  function focusDialog(node: HTMLElement) {
-    const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    node.focus();
-    const onKeydown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        selecting = false;
-        return;
-      }
-      if (event.key !== 'Tab') return;
-      const buttons = [...node.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')];
-      if (!buttons.length) return;
-      const first = buttons[0];
-      const last = buttons[buttons.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    node.addEventListener('keydown', onKeydown);
-    return {
-      destroy: () => {
-        node.removeEventListener('keydown', onKeydown);
-        previous?.focus();
-      },
-    };
   }
   async function start(id: string) {
     if (working) return;
@@ -235,7 +275,7 @@
       aria-labelledby="mira-techniques-title"
       class="mira-technique-dialog"
       tabindex="-1"
-      use:focusDialog
+      use:focusPicker={() => (selecting = false)}
     >
       <div class="mira-guided-heading">
         <h2 id="mira-techniques-title">Patterns &amp; therapy techniques</h2>
@@ -249,38 +289,50 @@
         Choose a guided technique for {modalityById(modalityId).name}, or bring a library pattern
         into this conversation.
       </p>
-      <h3 class="mira-picker-section">Therapy techniques</h3>
-      {#if techniques.length === 0}<p>
-          No guided techniques are available for this modality yet.
-        </p>{/if}
-      <div class="mira-technique-list">
-        {#each techniques as technique (technique.id)}
+      <label class="visually-hidden" for="mira-pattern-search">Search patterns and techniques</label
+      >
+      <input
+        id="mira-pattern-search"
+        type="search"
+        bind:value={search}
+        placeholder="Search patterns and techniques…"
+      />
+      {#if voiceFeedback}{@render voiceFeedback()}{/if}
+      {#if selected}<section class="mira-pattern-preview" aria-label="Selected pattern">
+          <div>
+            <h3>{selected.label}</h3>
+            <p>{selected.description}</p>
+          </div>
           <button
             type="button"
-            disabled={working || active || technique.needs_ai}
-            onclick={() => start(technique.id)}
+            aria-label={selected.id.startsWith('technique:')
+              ? 'Start selected exercise'
+              : 'Use selected pattern'}
+            title="Start"
+            disabled={selected.disabled}
+            onclick={() => startSelection()}><Play size={17} /></button
           >
-            <span>{technique.title}</span>
-            {#if technique.needs_ai}<small>AI wording not connected yet</small>{:else}<small
-                >Start guided reflection →</small
-              >{/if}
-          </button>
-        {/each}
-      </div>
-      <h3 class="mira-picker-section">Patterns</h3>
-      {#if patterns.length === 0}<p>No library patterns are available yet.</p>{/if}
-      <div class="mira-technique-list">
-        {#each patterns as pattern (`${pattern.sourceId}:${pattern.id}`)}
           <button
             type="button"
-            onclick={() => {
-              onPatternSelect?.(pattern);
-              selecting = false;
-            }}
+            aria-label="Dismiss selected pattern"
+            onclick={() => (selectedId = null)}><X size={17} /></button
           >
-            <span>{pattern.title}</span><small
-              >{pattern.sourceId === 'personal' ? 'Your library' : 'Patternverse library'} · Use as conversation
-              context</small
+        </section>{/if}
+      {#if error}<p role="alert">{error}</p>{/if}
+      {#if visibleChoices.length === 0}<p>No matching patterns or techniques.</p>{/if}
+      <div class="mira-technique-list">
+        {#each visibleChoices as choice, index (choice.id)}
+          <button
+            type="button"
+            disabled={choice.disabled}
+            aria-pressed={selectedId === choice.id}
+            onclick={() => selectPattern(choice.id)}
+          >
+            <span><span class="mira-choice-number">{index + 1}</span> {choice.label}</span>
+            <small
+              >{choice.id.startsWith('technique:')
+                ? choice.description
+                : 'Library pattern · conversation context'}</small
             >
           </button>
         {/each}

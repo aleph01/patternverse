@@ -3,7 +3,17 @@
   import '$lib/mira/workspace.css';
   import { resolve } from '$app/paths';
   import { onMount, tick } from 'svelte';
-  import { ArrowUp, History, Mic, Plus, Settings2, Square, Volume2, X } from '@lucide/svelte';
+  import {
+    ArrowUp,
+    History,
+    Mic,
+    Plus,
+    Settings2,
+    Square,
+    Volume2,
+    AudioLines,
+    X,
+  } from '@lucide/svelte';
   import {
     createSession,
     submitMessage,
@@ -20,7 +30,16 @@
   } from '$lib/mira/context';
   import { MODALITIES, modalityById } from '$lib/mira/modalities';
   import { recordedBlobToWhisperWav } from '$lib/mira/audio';
-  import { startBrowserDictation, type BrowserDictation } from '$lib/mira/browser-voice';
+  import {
+    startBrowserDictation,
+    startBrowserVoiceControl,
+    type BrowserDictation,
+  } from '$lib/mira/browser-voice';
+  import { startNativeVoiceControl } from '$lib/mira/native-voice-listener';
+  import { createVoiceController, type VoiceState } from '$lib/mira/voice-controller';
+  import { searchVoiceChoices, type VoiceCommand } from '$lib/mira/voice-commands';
+  import VoiceFeedback from '$lib/mira/VoiceFeedback.svelte';
+  import ModalityPicker from '$lib/mira/ModalityPicker.svelte';
   import GuidedTechnique from '$lib/mira/GuidedTechnique.svelte';
   import {
     createNativeReplyProvider,
@@ -32,6 +51,7 @@
     restartLocalRuntime,
     selectLocalModel,
     transcribeLocally,
+    requestLocalText,
     type LocalModelChoice,
     type LocalRuntimeStatus,
   } from '$lib/mira/native';
@@ -41,6 +61,7 @@
     DEFAULT_OPENROUTER_MODEL,
     getOpenRouterKeyUsage,
     listZdrModels,
+    interpretOpenRouterVoiceCommand,
     type OpenRouterKeyUsage,
     type ZdrModel,
   } from '$lib/mira/openrouter';
@@ -100,6 +121,133 @@
   let recordingTimeout: number | undefined;
   let dictationFinishTimeout: number | undefined;
   let disposed = false;
+  let guided = $state<ReturnType<typeof GuidedTechnique>>();
+  let modalitySelecting = $state(false);
+  let modalitySearch = $state('');
+  let voiceState = $state<VoiceState>({ phase: 'off', heard: '', feedback: '' });
+  const modalityChoices = MODALITIES.map(({ id, name }) => ({ id, label: name }));
+  const visibleModalities = $derived(searchVoiceChoices(modalityChoices, modalitySearch));
+  const voiceControl = createVoiceController({
+    listen: (callbacks) =>
+      desktop ? startNativeVoiceControl(callbacks) : startBrowserVoiceControl(window, callbacks),
+    context: () => ({
+      sessionId: active?.id ?? null,
+      surface: modalitySelecting ? 'modalities' : pickerSelecting ? 'patterns' : view,
+      choices: modalitySelecting
+        ? visibleModalities
+        : pickerSelecting
+          ? (guided?.voiceChoices() ?? [])
+          : [],
+      modalities: modalityChoices,
+      selectedPattern: guided?.hasSelection() ?? false,
+    }),
+    speaking: () => speakingId !== null,
+    execute: executeVoiceCommand,
+    interpret: async (messages, signal) => {
+      if (sending)
+        throw new Error('mira is replying. Try a direct command, or wait for the reply.');
+      if (desktop) return requestLocalText(settings.model, messages, signal);
+      try {
+        return await interpretOpenRouterVoiceCommand(settings, messages, signal);
+      } finally {
+        if (!disposed) void refreshUsage();
+      }
+    },
+    changed: (state) => {
+      if (!disposed) voiceState = state;
+    },
+  });
+
+  /** Route spoken intents through the same application actions used by visible controls. */
+  async function executeVoiceCommand(command: VoiceCommand): Promise<string> {
+    switch (command.type) {
+      case 'draft':
+        if (view !== 'chat' || pickerSelecting || modalitySelecting)
+          return 'Close this panel to draft a message.';
+        draft = `${draft.trimEnd()}${draft.trim() ? ' ' : ''}${command.text}`.slice(0, 30000);
+        return 'Draft updated · say “send” when ready.';
+      case 'send':
+        if (view !== 'chat' || pickerSelecting || modalitySelecting)
+          return 'Close this panel before sending your message.';
+        if (sending) return 'mira is still replying. Your draft is kept.';
+        if (!draft.trim()) return 'Your message is empty.';
+        void send();
+        return 'Sending your message…';
+      case 'patterns':
+        closePanel();
+        modalitySelecting = false;
+        await tick();
+        guided?.searchPatterns(command.query);
+        return 'Choose a numbered result, then say “start”.';
+      case 'modalities':
+        closePanel();
+        pickerSelecting = false;
+        modalitySearch = command.query;
+        modalitySelecting = true;
+        return 'Choose a numbered therapy approach.';
+      case 'search':
+        if (modalitySelecting) modalitySearch = command.query;
+        else if (pickerSelecting) guided?.searchPatterns(command.query);
+        return 'Search updated.';
+      case 'select':
+        if (modalitySelecting) {
+          await setVoiceModality(command.id);
+          return 'Therapy approach changed.';
+        }
+        return pickerSelecting
+          ? (guided?.selectPattern(command.id) ?? 'Open patterns first.')
+          : 'Open a selector first.';
+      case 'modality':
+        await setVoiceModality(command.id);
+        return 'Therapy approach changed.';
+      case 'start':
+        return pickerSelecting
+          ? ((await guided?.startSelection()) ?? 'Select a pattern first.')
+          : 'Open patterns and select one first.';
+      case 'describe':
+        return guided?.describeSelection() ?? 'Select a pattern first.';
+      case 'read': {
+        const reply = active?.messages.findLast((message) => message.role === 'assistant');
+        if (!reply) return 'There is no reply to read yet.';
+        return speakReply(reply.id, reply.text)
+          ? 'Reading the latest reply.'
+          : 'Spoken replies are unavailable in this browser.';
+      }
+      case 'stop-reading':
+        stopSpokenReply();
+        return 'Reading stopped.';
+      case 'close':
+        if (pickerSelecting) guided?.dismissSelection();
+        modalitySelecting = false;
+        pickerSelecting = false;
+        closePanel();
+        return 'Back to the conversation.';
+      case 'settings':
+      case 'sessions':
+        pickerSelecting = false;
+        modalitySelecting = false;
+        if (view !== command.type) await openPanel(command.type);
+        return `${command.type === 'settings' ? 'Settings' : 'Previous sessions'} opened.`;
+      case 'stop':
+        voiceControl.stop();
+        return 'Voice control stopped.';
+      case 'notice':
+        return command.text;
+    }
+  }
+  async function setVoiceModality(id: string) {
+    if (!modalityChoices.some((item) => item.id === id)) return;
+    await chooseModality(id);
+    modalitySelecting = false;
+    pickerSelecting = false;
+  }
+  function toggleVoiceControl() {
+    if (voiceState.phase !== 'off') voiceControl.stop();
+    else if (voicePhase === 'idle') {
+      stopSpokenReply();
+      void voiceControl.start();
+    }
+  }
 
   const active = $derived(
     sessions.find((session) => session.id === settings.activeSessionId) ?? null,
@@ -151,6 +299,13 @@
       }
     };
     window.addEventListener('keydown', shortcut);
+    const suspendVoice = () => {
+      if (document.hidden && voiceState.phase !== 'off')
+        voiceControl.stop(
+          'Voice control stopped while the app was in the background. Tap the waveform to resume.',
+        );
+    };
+    document.addEventListener('visibilitychange', suspendVoice);
     async function initialize() {
       store = createPrivateMiraStore();
       const [saved, preferences] = await Promise.all([store.list(), store.loadSettings()]);
@@ -202,6 +357,8 @@
     return () => {
       alive = false;
       disposed = true;
+      voiceControl.stop();
+      document.removeEventListener('visibilitychange', suspendVoice);
       controller?.abort();
       if (localPoll !== undefined) window.clearInterval(localPoll);
       window.removeEventListener('keydown', shortcut);
@@ -395,6 +552,10 @@
     const session = active;
     const text = draft.trim();
     if (!store || !session || !text || sending) return;
+    if (voiceState.phase === 'interpreting') {
+      notice = 'Please wait for voice command interpretation to finish.';
+      return;
+    }
     if (desktop && (runtime.status !== 'ready' || !settings.model)) {
       error = 'Prepare and choose a local model before sending.';
       void openPanel('settings', undefined, true);
@@ -476,6 +637,7 @@
   }
 
   async function toggleVoiceInput() {
+    if (voiceState.phase !== 'off') return;
     if (voicePhase === 'recording') {
       if (desktop && recorder?.state === 'recording') recorder.stop();
       else if (browserDictation) {
@@ -587,32 +749,42 @@
   function speakReply(id: string, text: string) {
     if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
       error = 'Spoken replies are unavailable in this browser.';
-      return;
+      return false;
     }
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = navigator.language || 'en-US';
     utterance.rate = 0.96;
     utterance.onend = () => {
-      if (speakingId === id) speakingId = null;
+      if (speakingId === id) {
+        speakingId = null;
+        voiceControl.playbackEnded();
+      }
     };
-    utterance.onerror = () => {
-      if (speakingId === id) speakingId = null;
+    utterance.onerror = (event) => {
+      if (speakingId === id) {
+        speakingId = null;
+        voiceControl.playbackEnded();
+        if (event.error !== 'canceled' && event.error !== 'interrupted')
+          error = 'The device could not read this reply. Try its play button.';
+      }
     };
     speakingId = id;
+    voiceControl.playbackStarted();
     window.speechSynthesis.speak(utterance);
+    return true;
   }
 
   function toggleSpokenReply(id: string, text: string) {
     if (speakingId === id) {
-      window.speechSynthesis.cancel();
-      speakingId = null;
+      stopSpokenReply();
     } else speakReply(id, text);
   }
 
   function stopSpokenReply() {
     window.speechSynthesis?.cancel();
     speakingId = null;
+    voiceControl.playbackEnded();
   }
 
   async function toggleAutoSpeak() {
@@ -796,6 +968,10 @@
   }
 </script>
 
+{#snippet voiceFeedback()}
+  <VoiceFeedback state={voiceState} onStop={() => voiceControl.stop()} />
+{/snippet}
+
 <svelte:head>
   <title>mira — patternverse</title>
   <meta name="description" content="mira, your private reflective companion within Patternverse." />
@@ -854,6 +1030,7 @@
             onkeydown={handlePanelKeydown}
             aria-labelledby="mira-sessions-heading"
           >
+            {@render voiceFeedback()}
             <div class="mira-section-heading">
               <div>
                 <h2 id="mira-sessions-heading">Sessions</h2>
@@ -968,6 +1145,7 @@
             onkeydown={handlePanelKeydown}
             aria-labelledby="mira-settings-heading"
           >
+            {@render voiceFeedback()}
             <div class="mira-section-heading">
               <div>
                 <h2 id="mira-settings-heading">Settings</h2>
@@ -1089,6 +1267,25 @@
                 <p class="mira-speech-note">
                   Spoken replies use the voices available in your browser or device.
                 </p>
+                <details class="mira-speech-note">
+                  <summary>Voice control</summary>
+                  <p>
+                    The waveform button starts hands-free control; the microphone still only
+                    dictates. Speak a message, pause, then say “send”. Try “open patterns”, “search
+                    for reframing”, “choose the first one”, then “start”. Say “choose therapy
+                    approach”, “read the last reply”, or “stop listening”.
+                  </p>
+                  <p>
+                    Listening pauses during readback and resumes afterward, to prevent the reply
+                    becoming a command. It stops when the app goes into the background.
+                  </p>
+                  <p>
+                    {desktop
+                      ? 'Audio is transcribed by the local Whisper engine. Unclear commands use your selected local model.'
+                      : 'Speech recognition uses your browser’s speech service, which may process audio remotely. Its policy is separate from OpenRouter ZDR. Unclear commands and visible menu labels go to your selected OpenRouter model with ZDR required; this uses API credits.'}
+                    Feedback stays on screen.
+                  </p>
+                </details>
               </section>
               {#if !desktop}
                 <section class="mira-cost-overview" aria-labelledby="mira-cost-heading">
@@ -1277,13 +1474,26 @@
                 </p>{/if}
             </div>
             {#if store}<GuidedTechnique
+                bind:this={guided}
                 sessionId={active.id}
                 modalityId={active.modalityId}
                 {store}
                 patterns={libraryPatterns}
                 onPatternSelect={chooseLibraryPattern}
                 bind:selecting={pickerSelecting}
+                {voiceFeedback}
               />{/if}
+            {#if modalitySelecting}
+              <ModalityPicker
+                choices={visibleModalities}
+                bind:search={modalitySearch}
+                selected={active.modalityId}
+                onSelect={(id) => void setVoiceModality(id)}
+                onClose={() => (modalitySelecting = false)}
+                feedback={voiceFeedback}
+              />
+            {/if}
+            {#if !pickerSelecting && !modalitySelecting && view === 'chat'}{@render voiceFeedback()}{/if}
             <form
               class="mira-composer"
               onsubmit={(event) => {
@@ -1315,7 +1525,15 @@
                     title="Patterns &amp; techniques · Shift+Space"
                     onclick={() => (pickerSelecting = true)}><Plus size={20} /></button
                   >
-                  <span class="mira-modality-chip">{modalityById(active.modalityId).name}</span>
+                  <button
+                    type="button"
+                    class="mira-modality-chip"
+                    aria-label="Choose therapy approach"
+                    onclick={() => {
+                      modalitySearch = '';
+                      modalitySelecting = true;
+                    }}>{modalityById(active.modalityId).name}</button
+                  >
                   {#if voicePhase !== 'idle'}<span class="mira-voice-state" role="status"
                       >{voicePhase === 'recording'
                         ? '● Recording…'
@@ -1332,11 +1550,24 @@
                     class="mira-icon-button"
                     aria-label={voicePhase === 'recording' ? 'Stop dictation' : 'Start voice input'}
                     title={voicePhase === 'recording' ? 'Stop dictation' : 'Dictate a message'}
-                    disabled={voicePhase === 'requesting' || voicePhase === 'transcribing'}
+                    disabled={voiceState.phase !== 'off' ||
+                      voicePhase === 'requesting' ||
+                      voicePhase === 'transcribing'}
                     onclick={toggleVoiceInput}
                     >{#if voicePhase === 'recording'}<Square size={17} />{:else}<Mic
                         size={19}
                       />{/if}</button
+                  >
+                  <button
+                    type="button"
+                    class="mira-icon-button"
+                    aria-label={voiceState.phase === 'off'
+                      ? 'Start voice control'
+                      : 'Stop voice control'}
+                    aria-pressed={voiceState.phase !== 'off'}
+                    title="Voice control · speak commands and draft messages"
+                    disabled={voicePhase !== 'idle'}
+                    onclick={toggleVoiceControl}><AudioLines size={20} /></button
                   >
                   <button
                     type="submit"

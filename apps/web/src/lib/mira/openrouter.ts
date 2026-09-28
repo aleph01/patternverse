@@ -5,6 +5,36 @@ import type { MiraSettings } from './private-store';
 const CHAT_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const ZDR_URL = 'https://openrouter.ai/api/v1/endpoints/zdr';
 const KEY_URL = 'https://openrouter.ai/api/v1/key';
+
+/** Command interpretation follows the same mandatory ZDR policy as conversational replies. */
+export async function interpretOpenRouterVoiceCommand(
+  settings: MiraSettings,
+  messages: readonly { role: string; content: string }[],
+  signal: AbortSignal,
+  transport: typeof fetch = fetch,
+): Promise<string> {
+  if (!settings.openRouterKey.trim() || !settings.model.trim())
+    throw new Error('Connect OpenRouter in Settings to interpret this command.');
+  const response = await transport(CHAT_URL, {
+    method: 'POST',
+    signal,
+    headers: {
+      Authorization: `Bearer ${settings.openRouterKey.trim()}`,
+      'Content-Type': 'application/json',
+      'X-OpenRouter-Title': 'Patternverse Mira',
+    },
+    body: JSON.stringify({
+      model: settings.model,
+      messages,
+      stream: false,
+      max_tokens: 160,
+      provider: { zdr: true, data_collection: 'deny', allow_fallbacks: false },
+    }),
+  });
+  const payload: unknown = await response.json().catch(() => null);
+  if (!response.ok) throw new Error(providerError(payload, response.status));
+  return extractReply(payload);
+}
 export const DEFAULT_OPENROUTER_MODEL = 'openrouter/auto';
 
 export type ZdrModel = Readonly<{ id: string; name: string }>;

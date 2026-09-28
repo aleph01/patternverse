@@ -47,14 +47,16 @@ export function encodeWhisperWav(
   return bytes;
 }
 
-export async function recordedBlobToWhisperWav(blob: Blob): Promise<Uint8Array> {
+export async function recordedBlobToWhisperWav(blob: Blob, fromSeconds = 0): Promise<Uint8Array> {
   const AudioContextClass = window.AudioContext;
   if (!AudioContextClass) throw new Error('VOICE_AUDIO_DECODER_UNAVAILABLE');
   const context = new AudioContextClass();
   try {
     const decoded = await context.decodeAudioData(await blob.arrayBuffer());
     const channels = Array.from({ length: decoded.numberOfChannels }, (_, index) =>
-      decoded.getChannelData(index),
+      decoded
+        .getChannelData(index)
+        .subarray(Math.max(0, Math.floor(fromSeconds * decoded.sampleRate))),
     );
     return encodeWhisperWav(channels, decoded.sampleRate);
   } finally {

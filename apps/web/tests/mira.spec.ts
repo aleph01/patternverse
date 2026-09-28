@@ -12,8 +12,12 @@ test('keeps mira chat-focused and selects a library pattern in the conversation'
   await page.getByRole('button', { name: 'Choose a pattern or therapy technique' }).click();
   const picker = page.getByRole('dialog', { name: 'Patterns & therapy techniques' });
   await expect(picker).toBeVisible();
-  await expect(picker.getByRole('heading', { name: 'Patterns', exact: true })).toBeVisible();
+  await expect(
+    picker.getByRole('searchbox', { name: 'Search patterns and techniques' }),
+  ).toBeVisible();
   await picker.getByRole('button', { name: /Creative Reframing/ }).click();
+  await expect(picker.getByRole('region', { name: 'Selected pattern' })).toBeVisible();
+  await picker.getByRole('button', { name: 'Use selected pattern' }).click();
   await expect(picker).toHaveCount(0);
   await expect(page.getByText('Library pattern: Creative Reframing')).toBeVisible();
 

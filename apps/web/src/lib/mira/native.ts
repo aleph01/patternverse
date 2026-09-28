@@ -97,49 +97,20 @@ export function createNativeReplyProvider(options: {
         { role: 'system', content: conversationSystemPrompt(effect, options.settings, context) },
         ...effect.messages.slice(-24).map((item) => ({ role: item.role, content: item.text })),
       ];
-      const channel = new Channel<ChatEvent>();
-      let fullText = '';
-      let resolveReply!: (result: { text?: string; error?: string }) => void;
-      const completed = new Promise<{ text?: string; error?: string }>((resolve) => {
-        resolveReply = resolve;
-      });
-      channel.onmessage = (event) => {
-        if (event.kind === 'text') fullText += event.text;
-        if (event.kind === 'done') resolveReply({ text: fullText.trim() });
-        if (event.kind === 'cancelled') resolveReply({ error: 'Local reply cancelled.' });
-        if (event.kind === 'failed')
-          resolveReply({ error: event.detailCode || 'Local model could not reply.' });
+      const text = await requestLocalText(options.settings.model, messages, signal);
+      return {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        text,
+        createdAt: new Date().toISOString(),
       };
-      const generation = await invoke<number>('conversation_chat', {
-        modelId: options.settings.model,
-        messages,
-        onEvent: channel,
-      });
-      const cancel = () => {
-        void invoke('conversation_cancel', { generation }).catch(() => undefined);
-      };
-      if (signal.aborted) cancel();
-      signal.addEventListener('abort', cancel, { once: true });
-      try {
-        const result = await completed;
-        if (result.error) throw new Error(result.error);
-        const text = result.text ?? '';
-        if (!text) throw new Error('The local model returned an empty reply.');
-        return {
-          id: crypto.randomUUID(),
-          role: 'assistant',
-          text,
-          createdAt: new Date().toISOString(),
-        };
-      } finally {
-        signal.removeEventListener('abort', cancel);
-      }
     },
   };
 }
 
 /** Captured audio is sent only through IPC to the bundled, local Whisper worker. */
-export async function transcribeLocally(wav: Uint8Array): Promise<string> {
+export async function transcribeLocally(wav: Uint8Array, signal?: AbortSignal): Promise<string> {
+  signal?.throwIfAborted();
   if (!hasNativeMira()) throw new Error('Local dictation is available only in the desktop app.');
   const chunks: string[] = [];
   for (let offset = 0; offset < wav.length; offset += 32_768)
@@ -161,9 +132,60 @@ export async function transcribeLocally(wav: Uint8Array): Promise<string> {
     language: 'auto',
     onEvent: channel,
   });
-  const result = await completed;
-  if (result.error) throw new Error(result.error);
-  return result.text ?? '';
+  const cancel = () => {
+    void invoke('transcription_cancel').catch(() => undefined);
+    resolveText({ error: 'Dictation cancelled.' });
+  };
+  signal?.addEventListener('abort', cancel, { once: true });
+  if (signal?.aborted) cancel();
+  try {
+    const result = await completed;
+    if (result.error) throw new Error(result.error);
+    return result.text ?? '';
+  } finally {
+    signal?.removeEventListener('abort', cancel);
+  }
+}
+
+/** Shared cancellable native generation boundary for conversation and isolated UI interpretation. */
+export async function requestLocalText(
+  modelId: string,
+  messages: readonly { role: string; content: string }[],
+  signal: AbortSignal,
+): Promise<string> {
+  signal.throwIfAborted();
+  if (!hasNativeMira() || !modelId) throw new Error('Choose a local model in the desktop app.');
+  const channel = new Channel<ChatEvent>();
+  let text = '';
+  let finish!: (result: { text?: string; error?: string }) => void;
+  const completed = new Promise<{ text?: string; error?: string }>((resolve) => {
+    finish = resolve;
+  });
+  channel.onmessage = (event) => {
+    if (event.kind === 'text') text += event.text;
+    if (event.kind === 'done') finish({ text });
+    if (event.kind === 'failed' || event.kind === 'cancelled')
+      finish({ error: event.detailCode || 'Local generation did not finish.' });
+  };
+  const generation = await invoke<number>('conversation_chat', {
+    modelId,
+    messages,
+    onEvent: channel,
+  });
+  const cancel = () => {
+    void invoke('conversation_cancel', { generation }).catch(() => undefined);
+    finish({ error: 'Local generation cancelled.' });
+  };
+  signal.addEventListener('abort', cancel, { once: true });
+  if (signal.aborted) cancel();
+  try {
+    const result = await completed;
+    if (result.error) throw new Error(result.error);
+    if (!result.text?.trim()) throw new Error('The local model returned an empty reply.');
+    return result.text.trim();
+  } finally {
+    signal.removeEventListener('abort', cancel);
+  }
 }
 
 export async function requestNativeMicrophone(): Promise<void> {

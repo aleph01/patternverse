@@ -1,5 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createOpenRouterReplyProvider, getOpenRouterKeyUsage, listZdrModels } from './openrouter';
+import {
+  createOpenRouterReplyProvider,
+  getOpenRouterKeyUsage,
+  listZdrModels,
+  interpretOpenRouterVoiceCommand,
+} from './openrouter';
 
 const settings = {
   model: 'example/model',
@@ -17,6 +22,25 @@ const effect = {
 };
 
 describe('OpenRouter adapter', () => {
+  it('keeps command interpretation on the selected model with mandatory ZDR', async () => {
+    const transport = vi.fn(
+      async () =>
+        new Response(
+          JSON.stringify({ choices: [{ message: { content: '{"type":"patterns","query":""}' } }] }),
+        ),
+    ) as unknown as typeof fetch;
+    const messages = [{ role: 'user', content: 'show patterns' }];
+    const signal = new AbortController().signal;
+    await interpretOpenRouterVoiceCommand(settings, messages, signal, transport);
+    const request = vi.mocked(transport).mock.calls[0]![1]!;
+    expect(request.signal).toBe(signal);
+    expect(JSON.parse(request.body as string)).toMatchObject({
+      model: settings.model,
+      messages,
+      provider: { zdr: true, data_collection: 'deny', allow_fallbacks: false },
+    });
+    expect(transport).toHaveBeenCalledOnce();
+  });
   it('reads OpenRouter-reported monthly key charges and provider limits', async () => {
     const transport = vi.fn(
       async () =>
