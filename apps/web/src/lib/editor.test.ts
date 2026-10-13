@@ -5,8 +5,28 @@ import {
   slugFromTitle,
   validateEditorValues,
 } from './editor';
+import { getEditorEntityType, isEditorEntityType } from './editor/entityTypes';
 
 describe('browser editor model', () => {
+  it.each(['concept', 'practice'] as const)(
+    'preserves existing %s records without offering their type for creation',
+    (type) => {
+      expect(isEditorEntityType(type)).toBe(false);
+      expect(getEditorEntityType(type).label).toBe(type);
+      const existing = {
+        id: `existing-${type}`,
+        type,
+        sourceId: 'personal',
+        status: 'draft' as const,
+        title: `Existing ${type}`,
+        body: 'Keep this article.',
+      };
+      const result = validateEditorValues(editorValuesFromEntity(existing));
+      expect(result.success).toBe(true);
+      if (result.success) expect(result.entity).toEqual(existing);
+    },
+  );
+
   it('creates valid Drafts by default and reports structured validation errors', () => {
     const values = emptyEditorValues();
     values.id = 'reduce-friction';
@@ -45,7 +65,7 @@ describe('browser editor model', () => {
     expect(slugFromTitle('Über clarity & pace')).toBe('uber-clarity-pace');
   });
 
-  it('stores a visual Practice as portable fenced YAML and restores the builder model', () => {
+  it('imports legacy structured practices but only writes Pattern Language', () => {
     const values = emptyEditorValues();
     values.id = 'small-step';
     values.title = 'Small Step';
@@ -63,12 +83,14 @@ describe('browser editor model', () => {
     const result = validateEditorValues(values);
     expect(result.success).toBe(true);
     if (!result.success) return;
-    expect(result.entity.body).toContain('```patternverse-practice');
-    expect(result.entity.body).toContain('title: Small Step Practice');
+    expect(result.entity.body).toContain('```patternverse-language');
+    expect(result.entity.body).not.toContain('```patternverse-practice');
+    expect(result.entity.body).toContain(':title "Small Step Practice"');
 
     const restored = editorValuesFromEntity(result.entity);
     expect(restored.body).toBe(values.body);
-    expect(restored.practice).toEqual(values.practice);
+    expect(restored.practice).toBeUndefined();
+    expect(restored.languagePracticeSource).toContain('!form');
   });
 
   it('blocks saving an invalid visual Practice without discarding its article', () => {
@@ -82,5 +104,28 @@ describe('browser editor model', () => {
     expect(result.success).toBe(false);
     if (!result.success) expect(result.errors.join(' ')).toContain('Practice title is required');
     expect(values.body).toBe('Still here.');
+  });
+
+  it('round trips language source without mixing it into the article or legacy practice', () => {
+    const values = emptyEditorValues();
+    Object.assign(values, {
+      id: 'source-practice',
+      title: 'Source Practice',
+      body: 'An unchanged article.',
+      languagePracticeSource: ':language 1\n!show {\n```js\nexample\n```\n}\n-> end',
+    });
+    const result = validateEditorValues(values);
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.entity.body).toContain('````patternverse-language');
+    const restored = editorValuesFromEntity(result.entity);
+    expect(restored.languagePracticeSource).toBe(values.languagePracticeSource);
+    expect(restored.body).toBe(values.body);
+    expect(restored.practice).toBeUndefined();
+    values.practice = { title: 'Old practice', steps: [] };
+    expect(validateEditorValues(values).success).toBe(false);
+    values.practice = undefined;
+    values.type = 'collection';
+    expect(validateEditorValues(values).success).toBe(false);
   });
 });

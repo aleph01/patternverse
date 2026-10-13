@@ -1,4 +1,5 @@
 import type { EntityType } from '@patternverse/schema';
+import { isPersonalCreationType } from '@patternverse/workspace';
 
 export type EditorEntityTypeOption = {
   readonly type: EntityType;
@@ -7,12 +8,12 @@ export type EditorEntityTypeOption = {
   readonly description: string;
 };
 
-export const EDITOR_ENTITY_TYPES: readonly EditorEntityTypeOption[] = [
+const ENTITY_TYPE_DETAILS: readonly EditorEntityTypeOption[] = [
   {
     type: 'pattern',
     label: 'pattern',
     pluralLabel: 'patterns',
-    description: 'A reusable approach to a recurring situation.',
+    description: 'A reusable approach, with an optional interactive practice.',
   },
   {
     type: 'concept',
@@ -40,8 +41,12 @@ export const EDITOR_ENTITY_TYPES: readonly EditorEntityTypeOption[] = [
   },
 ];
 
-export const isEditorEntityType = (value: string | null): value is EntityType =>
-  EDITOR_ENTITY_TYPES.some((option) => option.type === value);
+/** Creation choices; older concepts and standalone practices remain editable. */
+export const EDITOR_ENTITY_TYPES = ENTITY_TYPE_DETAILS.filter((option) =>
+  isPersonalCreationType(option.type),
+);
+
+export const isEditorEntityType = isPersonalCreationType;
 
 export const getEditorEntityType = (type: EntityType): EditorEntityTypeOption =>
-  EDITOR_ENTITY_TYPES.find((option) => option.type === type) ?? EDITOR_ENTITY_TYPES[0];
+  ENTITY_TYPE_DETAILS.find((option) => option.type === type) ?? ENTITY_TYPE_DETAILS[0];

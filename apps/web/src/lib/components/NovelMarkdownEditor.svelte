@@ -1,102 +1,34 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
-  import { Editor, type Editor as TiptapEditor } from '@tiptap/core';
-  import Placeholder from '@tiptap/extension-placeholder';
-  import { TableKit } from '@tiptap/extension-table';
-  import { Markdown } from '@tiptap/markdown';
-  import StarterKit from '@tiptap/starter-kit';
-  import GlobalDragHandle from 'tiptap-extension-global-drag-handle';
-
-  type SlashItem = {
-    id: 'text' | 'h1' | 'h2' | 'h3' | 'bullet' | 'numbered' | 'quote' | 'code' | 'rule' | 'table';
-    label: string;
-    description: string;
-    mark: string;
-    keywords: string;
-  };
+  import type { Editor as TiptapEditor } from '@tiptap/core';
+  import { createMarkdownEditor } from '$lib/novel-editor/instance';
+  import {
+    filterSlashItems,
+    runSlashCommand,
+    slashKeyAction,
+    slashMenuPosition,
+    slashTrigger,
+    type SlashItem,
+  } from '$lib/novel-editor/slash';
+  import {
+    applyEditorLink,
+    linkDraft,
+    removeEditorLink,
+    restoreLinkSelection,
+  } from '$lib/novel-editor/links';
+  import { createTableControls } from '$lib/novel-editor/tables';
 
   let {
     value,
     disabled = false,
+    comfortable = false,
     onchange,
   }: {
     value: string;
     disabled?: boolean;
+    comfortable?: boolean;
     onchange: (markdown: string) => void;
   } = $props();
-
-  const slashItems: readonly SlashItem[] = [
-    {
-      id: 'text',
-      label: 'Text',
-      description: 'A simple paragraph',
-      mark: 'T',
-      keywords: 'paragraph plain',
-    },
-    {
-      id: 'h1',
-      label: 'Heading 1',
-      description: 'Large section heading',
-      mark: 'H1',
-      keywords: 'title heading',
-    },
-    {
-      id: 'h2',
-      label: 'Heading 2',
-      description: 'Medium section heading',
-      mark: 'H2',
-      keywords: 'subtitle heading',
-    },
-    {
-      id: 'h3',
-      label: 'Heading 3',
-      description: 'Small section heading',
-      mark: 'H3',
-      keywords: 'heading',
-    },
-    {
-      id: 'bullet',
-      label: 'Bullet list',
-      description: 'Create an unordered list',
-      mark: '•',
-      keywords: 'unordered list',
-    },
-    {
-      id: 'numbered',
-      label: 'Numbered list',
-      description: 'Create an ordered list',
-      mark: '1.',
-      keywords: 'ordered list',
-    },
-    {
-      id: 'quote',
-      label: 'Quote',
-      description: 'Capture a quotation',
-      mark: '“',
-      keywords: 'blockquote citation',
-    },
-    {
-      id: 'code',
-      label: 'Code block',
-      description: 'Write preformatted code',
-      mark: '</>',
-      keywords: 'code preformatted',
-    },
-    {
-      id: 'rule',
-      label: 'Divider',
-      description: 'Separate sections visually',
-      mark: '—',
-      keywords: 'horizontal rule separator',
-    },
-    {
-      id: 'table',
-      label: 'Table',
-      description: 'Insert a three-column table',
-      mark: '▦',
-      keywords: 'grid rows columns',
-    },
-  ];
 
   let editorElement: HTMLDivElement;
   let editorShell: HTMLDivElement;
@@ -117,105 +49,55 @@
   let tableActionLeft = $state(0);
   let tableActionTop = $state(0);
   let tableActionPlacement = $state<'side' | 'above'>('side');
-  let tableActionPosition = $state(0);
-  let tablePointerActive = false;
 
-  const visibleSlashItems = $derived(
-    slashItems.filter((item) => {
-      const query = slashQuery.trim().toLowerCase();
-      return !query || `${item.label} ${item.keywords}`.toLowerCase().includes(query);
-    }),
-  );
+  let tableControls: ReturnType<typeof createTableControls> | undefined;
+  const visibleSlashItems = $derived(filterSlashItems(slashQuery));
 
   $effect(() => {
     editor?.setEditable(!disabled);
   });
 
   const updateSlashMenu = (instance: TiptapEditor): void => {
-    const { selection } = instance.state;
-    if (!selection.empty) {
+    const trigger = slashTrigger(instance);
+    if (!trigger) {
       slashOpen = false;
       return;
     }
-
-    const fromPosition = selection.$from;
-    const beforeCursor = fromPosition.parent.textBetween(
-      0,
-      fromPosition.parentOffset,
-      undefined,
-      '\ufffc',
+    if (trigger.query !== slashQuery) slashIndex = 0;
+    slashQuery = trigger.query;
+    slashRange = trigger.range;
+    const position = slashMenuPosition(
+      instance.view.coordsAtPos(instance.state.selection.from),
+      editorShell.getBoundingClientRect(),
     );
-    const match = beforeCursor.match(/(?:^|\s)\/([\w ]*)$/);
-    if (!match) {
-      slashOpen = false;
-      return;
-    }
-
-    const nextQuery = match[1] ?? '';
-    if (nextQuery !== slashQuery) slashIndex = 0;
-    slashQuery = nextQuery;
-    slashRange = {
-      from: selection.from - nextQuery.length - 1,
-      to: selection.from,
-    };
-
-    const caret = instance.view.coordsAtPos(selection.from);
-    const shell = editorShell.getBoundingClientRect();
-    slashLeft = Math.max(12, Math.min(caret.left - shell.left, shell.width - 312));
-    slashTop = caret.bottom - shell.top + 10;
+    slashLeft = position.left;
+    slashTop = position.top;
     slashOpen = true;
   };
 
   const runSlashItem = (item: SlashItem): void => {
     if (!editor) return;
-    const chain = editor.chain().focus().deleteRange(slashRange);
-
-    if (item.id === 'text') chain.setParagraph().run();
-    if (item.id === 'h1') chain.setHeading({ level: 1 }).run();
-    if (item.id === 'h2') chain.setHeading({ level: 2 }).run();
-    if (item.id === 'h3') chain.setHeading({ level: 3 }).run();
-    if (item.id === 'bullet') chain.toggleBulletList().run();
-    if (item.id === 'numbered') chain.toggleOrderedList().run();
-    if (item.id === 'quote') chain.toggleBlockquote().run();
-    if (item.id === 'code') chain.toggleCodeBlock().run();
-    if (item.id === 'rule') chain.setHorizontalRule().run();
-    if (item.id === 'table') chain.insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
-
+    runSlashCommand(editor, item.id, slashRange);
     slashOpen = false;
   };
 
   const handleSlashKey = (event: KeyboardEvent): boolean => {
     if (!slashOpen) return false;
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      slashIndex = (slashIndex + 1) % Math.max(visibleSlashItems.length, 1);
-      return true;
-    }
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      slashIndex =
-        (slashIndex - 1 + Math.max(visibleSlashItems.length, 1)) %
-        Math.max(visibleSlashItems.length, 1);
-      return true;
-    }
-    if (event.key === 'Enter' && visibleSlashItems[slashIndex]) {
-      event.preventDefault();
-      runSlashItem(visibleSlashItems[slashIndex]);
-      return true;
-    }
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      slashOpen = false;
-      return true;
-    }
-    return false;
+    const action = slashKeyAction(event.key, slashIndex, visibleSlashItems.length);
+    if (action.kind === 'ignore') return false;
+    event.preventDefault();
+    if (action.kind === 'select') slashIndex = action.index;
+    if (action.kind === 'run') runSlashItem(visibleSlashItems[action.index]);
+    if (action.kind === 'close') slashOpen = false;
+    return true;
   };
 
   const openLinkEditor = async (): Promise<void> => {
     if (!editor) return;
-    linkRange = { from: editor.state.selection.from, to: editor.state.selection.to };
-    linkWasActive = editor.isActive('link');
-    linkHref = String(editor.getAttributes('link').href ?? '');
+    const draft = linkDraft(editor);
+    linkRange = draft.range;
+    linkWasActive = draft.wasActive;
+    linkHref = draft.href;
     linkOpen = true;
     await tick();
     linkInput?.focus();
@@ -224,132 +106,47 @@
 
   const closeLinkEditor = (): void => {
     linkOpen = false;
-    editor?.chain().focus().setTextSelection(linkRange).run();
+    if (editor) restoreLinkSelection(editor, linkRange);
   };
 
   const applyLink = (): void => {
     if (!editor) return;
-    const href = linkHref.trim();
-    const chain = editor.chain().focus().setTextSelection(linkRange);
-    if (linkWasActive) chain.extendMarkRange('link');
-    if (href) chain.setLink({ href }).run();
-    else chain.unsetLink().run();
+    applyEditorLink(editor, { range: linkRange, wasActive: linkWasActive, href: linkHref });
     linkOpen = false;
   };
 
   const removeLink = (): void => {
     if (!editor) return;
-    editor.chain().focus().setTextSelection(linkRange).extendMarkRange('link').unsetLink().run();
+    removeEditorLink(editor, linkRange);
     linkOpen = false;
   };
 
-  const placeTableAction = (instance: TiptapEditor, table: HTMLTableElement): void => {
-    const firstCell = table.querySelector<HTMLElement>('th, td');
-    if (!firstCell) return;
-
-    const shellRect = editorShell.getBoundingClientRect();
-    const tableRect = table.getBoundingClientRect();
-    const roomToTheRight = shellRect.right - tableRect.right;
-    tableActionPlacement = roomToTheRight >= 72 ? 'side' : 'above';
-
-    if (tableActionPlacement === 'side') {
-      tableActionLeft = tableRect.right - shellRect.left + 8;
-      tableActionTop = Math.max(tableRect.top - shellRect.top, -shellRect.top + 8);
-    } else {
-      tableActionLeft = tableRect.right - shellRect.left;
-      tableActionTop = tableRect.top - shellRect.top - 8;
-    }
-    tableActionPosition = instance.view.posAtDOM(firstCell, 0) + 1;
-    tableActionVisible = true;
-  };
-
-  const tableFromTarget = (target: EventTarget | null): HTMLTableElement | undefined => {
-    if (!(target instanceof Element)) return undefined;
-    return (target.closest('table') as HTMLTableElement | null) ?? undefined;
-  };
-
-  const updateTableActionFromPointer = (event: PointerEvent): void => {
-    const table = tableFromTarget(event.target);
-    const isAction =
-      event.target instanceof Element && Boolean(event.target.closest('.table-hover-action'));
-
-    if (table && editor) {
-      tablePointerActive = true;
-      placeTableAction(editor, table);
-      return;
-    }
-
-    tablePointerActive = isAction;
-    if (!isAction && !editor?.isActive('table')) {
-      tableActionVisible = false;
-    }
-  };
-
-  const updateTableActionFromSelection = (instance: TiptapEditor): void => {
-    if (!instance.isActive('table')) {
-      if (!tablePointerActive) {
-        tableActionVisible = false;
-      }
-      return;
-    }
-
-    const domAtSelection = instance.view.domAtPos(instance.state.selection.from).node;
-    const element =
-      domAtSelection instanceof Element ? domAtSelection : domAtSelection.parentElement;
-    const table = element?.closest('table') as HTMLTableElement | null;
-    if (table) placeTableAction(instance, table);
-  };
-
-  const deleteContextTable = (): void => {
-    if (!editor || tableActionPosition < 1) return;
-    editor.chain().focus().setTextSelection(tableActionPosition).deleteTable().run();
-    tablePointerActive = false;
-    tableActionVisible = false;
-  };
+  const deleteContextTable = (): void => tableControls?.deleteTable();
 
   onMount(() => {
-    const instance = new Editor({
-      element: editorElement,
-      extensions: [
-        StarterKit.configure({
-          heading: { levels: [1, 2, 3] },
-          link: { openOnClick: false, autolink: true, defaultProtocol: 'https' },
-          dropcursor: { color: '#007a4d', width: 3 },
-        }),
-        Markdown.configure({
-          indentation: { style: 'space', size: 2 },
-        }),
-        Placeholder.configure({
-          placeholder: 'Start writing, or press / for commands…',
-          showOnlyWhenEditable: true,
-        }),
-        TableKit.configure({
-          table: { resizable: true },
-        }),
-        GlobalDragHandle.configure({
-          dragHandleWidth: 24,
-          scrollTreshold: 80,
-        }),
-      ],
-      content: value,
-      contentType: 'markdown',
-      editable: !disabled,
-      editorProps: {
-        attributes: {
-          class: 'novel-prose',
-          'aria-label': 'Visual Markdown editor',
-          spellcheck: 'true',
-        },
-        handleKeyDown: (_view, event) => handleSlashKey(event),
+    tableControls = createTableControls(
+      editorShell,
+      () => editor,
+      (action) => {
+        tableActionVisible = action.visible;
+        tableActionLeft = action.left;
+        tableActionTop = action.top;
+        tableActionPlacement = action.placement;
       },
+    );
+    const instance = createMarkdownEditor({
+      element: editorElement,
+      value,
+      editable: !disabled,
+      handleKeyDown: (_view, event) => handleSlashKey(event),
       onCreate: ({ editor: current }) => {
         editor = current;
         editorState = { editor: current };
-        updateTableActionFromSelection(current);
+        tableControls?.selection(current);
       },
       onTransaction: ({ editor: current }) => {
         editorState = { editor: current };
-        updateTableActionFromSelection(current);
+        tableControls?.selection(current);
       },
       onSelectionUpdate: ({ editor: current }) => updateSlashMenu(current),
       onUpdate: ({ editor: current }) => {
@@ -358,20 +155,14 @@
       },
       onBlur: ({ editor: current }) => {
         onchange(current.getMarkdown());
-        if (!tablePointerActive) tableActionVisible = false;
+        tableControls?.blur();
       },
     });
-
     editor = instance;
     editorState = { editor: instance };
-    editorShell.addEventListener('pointermove', updateTableActionFromPointer);
-    editorShell.addEventListener('pointerleave', () => {
-      tablePointerActive = false;
-      if (!instance.isActive('table')) tableActionVisible = false;
-    });
 
     return () => {
-      editorShell.removeEventListener('pointermove', updateTableActionFromPointer);
+      tableControls?.dispose();
       instance.destroy();
     };
   });
@@ -380,6 +171,7 @@
 <div
   class="novel-editor-shell"
   class:is-disabled={disabled}
+  class:comfortable
   bind:this={editorShell}
   role="region"
   aria-label="Visual Markdown editor"
@@ -529,6 +321,23 @@
 </div>
 
 <style>
+  .comfortable :global(.novel-prose) {
+    max-width: 760px;
+    margin: 0 auto;
+    min-height: 480px;
+    padding: 2rem clamp(0.75rem, 3vw, 2rem);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .comfortable :global(.novel-prose h1) {
+    font-size: 2rem;
+  }
+  .comfortable :global(.novel-prose h2) {
+    font-size: 1.5rem;
+  }
+  .comfortable :global(.novel-prose h3) {
+    font-size: 1.1rem;
+  }
   .novel-editor-shell {
     position: relative;
     min-height: 560px;
@@ -914,6 +723,21 @@
   }
 
   @media (max-width: 700px) {
+    .novel-formatting-toolbar {
+      flex-wrap: wrap;
+    }
+
+    .link-editor {
+      flex: 1 0 100%;
+      max-width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .link-editor input {
+      min-width: 0;
+      flex-basis: 100%;
+    }
+
     .novel-editor-shell,
     .novel-editor,
     :global(.novel-editor .novel-prose) {
