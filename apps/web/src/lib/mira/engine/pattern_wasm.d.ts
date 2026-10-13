@@ -7,11 +7,26 @@
  */
 export function dispatch(request: string): string;
 
+/**
+ * Inspect and test unsaved source locally. No storage, network, or inference.
+ */
+export function editor(request: string): string;
+
+/**
+ * Run a bounded, ephemeral source preview through the same Rust compiler and runtime.
+ *
+ * # Errors
+ * Returns source diagnostics or a runtime contract error; makes no model or storage calls.
+ */
+export function preview(source: string): string;
+
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
     readonly dispatch: (a: number, b: number) => [number, number, number, number];
+    readonly editor: (a: number, b: number) => [number, number, number, number];
+    readonly preview: (a: number, b: number) => [number, number, number, number];
     readonly __wbindgen_externrefs: WebAssembly.Table;
     readonly __wbindgen_malloc: (a: number, b: number) => number;
     readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
