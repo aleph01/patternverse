@@ -1,0 +1,749 @@
+{
+  "title": "Neuro-Linguistic Programming",
+  "domain": "therapy",
+  "collection_id": "neuro-linguistic-programming",
+  "method": "nlp",
+  "original_collection": "Sleight of Mouth",
+  "original_domain": "Reframing & Communication",
+  "description": "These fourteen articles adapt the canonical patterns in Robert Dilts’s Sleight of Mouth for Patternverse’s Reframing and Communication domain. Each explains a different way of examining a belief: its language, scope, evidence, purposes, consequences, or context. The examples are newly written and the source references use the book’s printed page numbers.\n\nThe collection treats the patterns as tools for inquiry and communication. Their presence in the source is not evidence that a verbal reframe reliably produces psychological change. A useful alternative interpretation must remain answerable to the facts, the people involved, and the consequences of acting on it.\n\nThe articles use connected essay prose. Metadata, recommendation queries, and graphic briefs are kept outside the main argument. The graphic briefs describe possible illustrations; they are not completed graphics.",
+  "import_source": "patterns.json; the HTML reading editions and plugin-style-update.txt are not loaded or applied",
+  "patterns": [
+    {
+      "title": "Find the Positive Intention",
+      "domain": "Reframing & Communication",
+      "short_description": "Separate an understandable concern from the strategy currently used to protect it.",
+      "use_when": [
+        "An objection repeatedly triggers defensiveness.",
+        "A shared concern is hidden behind opposing strategies."
+      ],
+      "goals": [
+        "Understand the concern behind a response.",
+        "Compare alternative ways to address the concern."
+      ],
+      "mechanisms": ["intention inquiry", "concern and strategy distinction"],
+      "related_patterns": [
+        "Redefine the Terms",
+        "Shift the Outcome",
+        "Put a Frame Around the Belief"
+      ],
+      "not_ideal_when": [
+        "Understanding a motive is being used to excuse harm or override a boundary."
+      ],
+      "example_user_queries": [
+        "My colleague rejects every proposal and we keep arguing.",
+        "How can I understand what someone is trying to protect?",
+        "We agree quality matters but disagree about what to do.",
+        "I keep avoiding feedback even though I want to improve.",
+        "Someone objects to my plan and I get defensive.",
+        "How can I acknowledge a concern without accepting the proposed solution?",
+        "I want to find another way to meet the same need.",
+        "I suspect this habit serves a purpose but I cannot see it."
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "find-the-positive-intention",
+      "slug": "find-the-positive-intention",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Intention",
+        "chapter": 2,
+        "printed_pages": "41–49",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Show one concern, reliable billing, alongside three strategies: delay all work, delay billing only, and run a limited pilot. Keep consequences visible.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "redefine-the-terms",
+        "shift-the-outcome",
+        "put-a-frame-around-the-belief"
+      ],
+      "article_sha256": "ee07ec5f18a5575b7b9510f79f5f3485a72a334fd3b06f1baae90a6b51888c2f",
+      "article_word_count": 925
+    },
+    {
+      "title": "Redefine the Terms",
+      "domain": "Reframing & Communication",
+      "short_description": "Replace a loaded label with an accurate description that reveals neglected distinctions.",
+      "use_when": [
+        "One word dominates a self-assessment or disagreement.",
+        "An ambiguous label obscures different practical concerns."
+      ],
+      "goals": [
+        "Make descriptions more accurate.",
+        "Reveal where an effective response could begin."
+      ],
+      "mechanisms": ["semantic framing", "descriptive precision"],
+      "related_patterns": ["Chunk Down", "Inspect How You Know", "Find the Positive Intention"],
+      "not_ideal_when": [
+        "Softer wording would conceal loss, responsibility, or an important fact."
+      ],
+      "example_user_queries": [
+        "I call myself lazy and it does not help me change anything.",
+        "We keep saying the project failed but mean different things.",
+        "A client says it is too expensive and I do not know the real objection.",
+        "How can I describe a setback accurately without making it sound total?",
+        "A label someone used is shaping how I see the whole situation.",
+        "I want language that is kinder without being misleading.",
+        "We are arguing about whether someone is difficult.",
+        "How can I separate what happened from the label we gave it?"
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "redefine-the-terms",
+      "slug": "redefine-the-terms",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Redefining",
+        "chapter": 2,
+        "printed_pages": "49–53",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Compare three descriptions of one missed deadline: missed commitment, functioning prototype, delayed release. Under each, show the fact it highlights and the fact it leaves unstated.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": ["chunk-down", "inspect-how-you-know", "find-the-positive-intention"],
+      "article_sha256": "e1641720b1e4f82ca70256d3b15b80bbdf35c4cb1ccd195b54969fd675f84c9b",
+      "article_word_count": 870
+    },
+    {
+      "title": "Follow the Consequences",
+      "domain": "Reframing & Communication",
+      "short_description": "Examine the behavior and downstream effects encouraged by a belief or rule.",
+      "use_when": [
+        "A plausible rule has unexamined effects in use.",
+        "Immediate benefits obscure later costs."
+      ],
+      "goals": [
+        "Make intermediate causal steps inspectable.",
+        "Compare a rule’s intended purpose with its observed effects."
+      ],
+      "mechanisms": ["consequence analysis", "behavioral feedback"],
+      "related_patterns": [
+        "Change the Frame Size",
+        "Find the Positive Intention",
+        "Look for the Exception"
+      ],
+      "not_ideal_when": [
+        "Possible consequences are being presented as inevitable or used as threats."
+      ],
+      "example_user_queries": [
+        "This rule sounds sensible but our team hides problems.",
+        "What happens if I keep acting on this assumption?",
+        "Agreeing keeps the peace now but I resent it later.",
+        "I want to see what a belief encourages me to do.",
+        "We only look at the immediate benefit of this policy.",
+        "How can I trace the steps between a rule and its effects?",
+        "I worry an expectation is making the problem worse.",
+        "Could this belief be useful in one way and costly in another?"
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "follow-the-consequences",
+      "slug": "follow-the-consequences",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Consequence",
+        "chapter": 5,
+        "printed_pages": "127–130",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "diagram",
+        "brief": "Show a loop: errors treated as unacceptable, errors hidden, collective repair delayed, larger late failures, stricter intolerance. Label the links as a possible organizational sequence.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "change-the-frame-size",
+        "find-the-positive-intention",
+        "look-for-the-exception"
+      ],
+      "article_sha256": "e4f72adbbafb0af978ed8229d8f0675a9730fc24afeb83a0e3f99a3846f419f1",
+      "article_word_count": 858
+    },
+    {
+      "title": "Chunk Down",
+      "domain": "Reframing & Communication",
+      "short_description": "Unpack a broad judgment into specific components, events, or observations.",
+      "use_when": [
+        "A sweeping claim makes a difficulty appear uniform.",
+        "A proposed solution is poorly connected to specific failures."
+      ],
+      "goals": [
+        "Recover variation within a broad claim.",
+        "Identify the component that needs a response."
+      ],
+      "mechanisms": ["decomposition", "specificity"],
+      "related_patterns": ["Chunk Up", "Redefine the Terms", "Look for the Exception"],
+      "not_ideal_when": [
+        "Further detail distracts from a demonstrated larger pattern or delays a decision."
+      ],
+      "example_user_queries": [
+        "Our communication is bad but nobody says what specifically goes wrong.",
+        "I think I cannot present but some parts go well.",
+        "The problem feels too large to understand.",
+        "People say the product is not ready and mean different things.",
+        "How can I identify the part of this task I actually struggle with?",
+        "We keep proposing broad fixes that do not work.",
+        "I want concrete observations behind this judgment.",
+        "A general label seems to hide several different problems."
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "chunk-down",
+      "slug": "chunk-down",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Chunk Down",
+        "chapter": 3,
+        "printed_pages": "63–65",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "map",
+        "brief": "Show presenting decomposed into explaining, pacing, examples, and questions. Mark unexpected questions as the specific difficulty, leaving the other components neutral.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": ["chunk-up", "redefine-the-terms", "look-for-the-exception"],
+      "article_sha256": "323d936f47c957ed6cce24aaa80bad7279d8ea28d498fc97747d793f9df65ccc",
+      "article_word_count": 847
+    },
+    {
+      "title": "Chunk Up",
+      "domain": "Reframing & Communication",
+      "short_description": "Understand a specific method or event as one member of a broader category.",
+      "use_when": [
+        "A preferred method has become the only imaginable solution.",
+        "A specific result is being treated as a verdict on a whole activity."
+      ],
+      "goals": [
+        "Recover alternative ways to achieve a purpose.",
+        "Find a useful category that connects opposing proposals."
+      ],
+      "mechanisms": ["abstraction", "category expansion"],
+      "related_patterns": [
+        "Chunk Down",
+        "Find the Positive Intention",
+        "Try Another Model of the World"
+      ],
+      "not_ideal_when": [
+        "The broader category removes constraints essential to the actual decision."
+      ],
+      "example_user_queries": [
+        "We disagree about the format but may want the same result.",
+        "I think there is only one proper way to do this.",
+        "What larger purpose does this particular method serve?",
+        "I can only work under one arrangement and it rarely happens.",
+        "One course went badly and now I doubt whether I can learn this subject.",
+        "How can I find alternatives without losing what matters?",
+        "We are attached to different tools and the discussion is stuck.",
+        "I want a broader category that helps us compare options."
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "chunk-up",
+      "slug": "chunk-up",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Chunk Up",
+        "chapter": 3,
+        "printed_pages": "66–67",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "map",
+        "brief": "Place dashboard and monthly report within providing reliable visibility, alongside hybrid options. Make the parent category and concrete alternatives visually distinct.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "chunk-down",
+        "find-the-positive-intention",
+        "try-another-model-of-the-world"
+      ],
+      "article_sha256": "88638d034c9be38096060613dc63f2651b5bbb0e8df48575d79c31d5665ab4e8",
+      "article_word_count": 860
+    },
+    {
+      "title": "Find an Analogy",
+      "domain": "Reframing & Communication",
+      "short_description": "Use a structurally similar relationship in another domain to clarify the original problem.",
+      "use_when": [
+        "Direct explanation keeps repeating without understanding.",
+        "An abstract relationship is hard to picture."
+      ],
+      "goals": [
+        "Make a neglected relationship understandable.",
+        "Return to the original case with a more useful question."
+      ],
+      "mechanisms": ["relational mapping", "model comparison"],
+      "related_patterns": ["Chunk Up", "Try Another Model of the World", "Inspect How You Know"],
+      "not_ideal_when": [
+        "A vivid metaphor is being substituted for evidence about the actual case."
+      ],
+      "example_user_queries": [
+        "I cannot explain why everything on the page cannot have equal emphasis.",
+        "The technical explanation makes sense to me but not my client.",
+        "How can I make this abstract relationship easier to understand?",
+        "Our team treats changing a plan as failure.",
+        "I want a comparison that reveals the structure of this problem.",
+        "This metaphor sounds good but I wonder where it breaks down.",
+        "I judge exploratory work as if it should already be finished.",
+        "Can a familiar example help someone see a different possibility?"
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "find-an-analogy",
+      "slug": "find-an-analogy",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Analogy",
+        "chapter": 3,
+        "printed_pages": "68–72",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Use two aligned columns for plan and route. Map destination to outcome, road closure to new information, and rerouting to revision. Below, name the limit: organizational commitments require negotiation.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": ["chunk-up", "try-another-model-of-the-world", "inspect-how-you-know"],
+      "article_sha256": "b670d8a8e7b903574169f050dde40da46b5b0a2489ff56ac056d0d6cfa96d386",
+      "article_word_count": 837
+    },
+    {
+      "title": "Change the Frame Size",
+      "domain": "Reframing & Communication",
+      "short_description": "Vary the time horizon, people considered, or system boundary around an event.",
+      "use_when": [
+        "One event overwhelms a longer history.",
+        "A local saving may transfer costs elsewhere.",
+        "A large ambition obscures a manageable next decision."
+      ],
+      "goals": [
+        "Choose a context proportionate to the judgment.",
+        "Reveal costs and options outside the current boundary."
+      ],
+      "mechanisms": ["temporal framing", "system boundary selection"],
+      "related_patterns": ["Follow the Consequences", "Chunk Down", "Chunk Up"],
+      "not_ideal_when": ["Wider perspective is being used to dismiss a present difficulty."],
+      "example_user_queries": [
+        "One bad presentation feels like it defines my whole career.",
+        "This saves our department time but may burden customers.",
+        "I only see the immediate benefit of this decision.",
+        "The whole project feels impossible to contemplate.",
+        "How will this choice look across several years?",
+        "Whose costs are missing from our assessment?",
+        "I need a smaller time frame so I can see what is doable.",
+        "How do I know whether I am judging this at the right scale?"
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "change-the-frame-size",
+      "slug": "change-the-frame-size",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Change Frame Size",
+        "chapter": 2,
+        "printed_pages": "34–37",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Compare one maintenance decision across quarter and three-year horizons, and across department and customer boundaries. Use qualitative consequences, without invented numerical data.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": ["follow-the-consequences", "chunk-down", "chunk-up"],
+      "article_sha256": "efa2e02c1da8bdeedc53cf9680d60e1ad5c4ed58208e1589ca652e7f840d86e2",
+      "article_word_count": 838
+    },
+    {
+      "title": "Shift the Outcome",
+      "domain": "Reframing & Communication",
+      "short_description": "Examine and revise the goal against which an activity is being evaluated.",
+      "use_when": [
+        "Exploratory work is judged as finished performance.",
+        "A conversation’s working goal has drifted from its purpose."
+      ],
+      "goals": [
+        "Align judgment with the activity’s legitimate purpose.",
+        "Recognize different outcomes without erasing commitments."
+      ],
+      "mechanisms": ["goal reframing", "evaluation criteria"],
+      "related_patterns": [
+        "Move Up the Value Hierarchy",
+        "Change the Frame Size",
+        "Find the Positive Intention"
+      ],
+      "not_ideal_when": ["A new goal would obscure a failed commitment or a necessary constraint."],
+      "example_user_queries": [
+        "The test revealed problems and I feel it failed.",
+        "I am judging every rough draft as though it should be publishable.",
+        "Our meeting became an argument instead of helping us understand the delay.",
+        "What was this activity actually supposed to achieve?",
+        "We learned a lot but missed the target and I want an honest assessment.",
+        "I think I am optimizing for the wrong result.",
+        "How can I value learning without moving the goalposts?",
+        "This conversation did not settle the issue but may have clarified it."
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "shift-the-outcome",
+      "slug": "shift-the-outcome",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Another Outcome",
+        "chapter": 2,
+        "printed_pages": "26–30",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Show the same prototype confusion evaluated against production readiness and discovery of usability problems. Preserve the observation in both views.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "move-up-the-value-hierarchy",
+        "change-the-frame-size",
+        "find-the-positive-intention"
+      ],
+      "article_sha256": "efea5852283132aec3e71a8a39b3c99176946ceca4c5b6013b8f5bc15d544b5a",
+      "article_word_count": 844
+    },
+    {
+      "title": "Try Another Model of the World",
+      "domain": "Reframing & Communication",
+      "short_description": "Reconsider an event through another person’s assumptions, priorities, and distinctions.",
+      "use_when": [
+        "A behavior seems to have only one possible interpretation.",
+        "Different roles or conventions produce recurring misunderstanding."
+      ],
+      "goals": [
+        "Understand the logic behind another position.",
+        "Identify interpretations that require clarification."
+      ],
+      "mechanisms": ["perspective taking", "interpretive model comparison"],
+      "related_patterns": [
+        "Inspect How You Know",
+        "Find the Positive Intention",
+        "Find an Analogy"
+      ],
+      "not_ideal_when": [
+        "Imagined perspectives become stereotypes or replace asking the actual person."
+      ],
+      "example_user_queries": [
+        "My colleague was quiet and I assume they disliked my idea.",
+        "Engineering and support keep talking past each other.",
+        "My friend sees caring differently from me.",
+        "How might the same event look from another role?",
+        "We treat our own conventions as obvious facts.",
+        "I want to understand a position without necessarily agreeing with it.",
+        "Could this behavior mean something different to the person doing it?",
+        "How can I check whether my interpretation of someone is fair?"
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "try-another-model-of-the-world",
+      "slug": "try-another-model-of-the-world",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Model of the World",
+        "chapter": 2,
+        "printed_pages": "55–58",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Present one setup flow through engineering’s focus on capability and support’s focus on recovery from confusion. Do not assign either perspective a superior rank.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "inspect-how-you-know",
+        "find-the-positive-intention",
+        "find-an-analogy"
+      ],
+      "article_sha256": "af78e6f69c63201ce69a08c29fcda224c14ba44f9539ecd301855866cbb0e314",
+      "article_word_count": 814
+    },
+    {
+      "title": "Inspect How You Know",
+      "domain": "Reframing & Communication",
+      "short_description": "Trace the observations, memories, inferences, and representations supporting a belief.",
+      "use_when": [
+        "A conclusion feels certain but its evidence is unclear.",
+        "An ambiguous measure is doing too much work in an argument."
+      ],
+      "goals": [
+        "Distinguish observation from inference.",
+        "Calibrate confidence and identify useful checks."
+      ],
+      "mechanisms": ["evidence tracing", "metacognitive inquiry"],
+      "related_patterns": ["Look for the Exception", "Chunk Down", "Put a Frame Around the Belief"],
+      "not_ideal_when": [
+        "Inquiry becomes an impossible demand for certainty or an adversarial demand for proof."
+      ],
+      "example_user_queries": [
+        "I feel certain someone is annoyed but I only have a late reply.",
+        "How did I arrive at this conclusion?",
+        "A vivid imagined scene feels like something I observed.",
+        "Our manager thinks morale improved because nobody complains.",
+        "I want to separate the data from my interpretation.",
+        "What would make this belief better supported?",
+        "I doubt my skill despite having concrete positive feedback.",
+        "How much evidence is enough for this particular decision?"
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "medium",
+      "id": "inspect-how-you-know",
+      "slug": "inspect-how-you-know",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Reality Strategy",
+        "chapter": 4,
+        "printed_pages": "89–97",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "diagram",
+        "brief": "Use distinct boxes for observation, remembered context, imagined scene, and inference in the unanswered-message example. Connect each contribution to a provisional conclusion, labeling its evidential role.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "look-for-the-exception",
+        "chunk-down",
+        "put-a-frame-around-the-belief"
+      ],
+      "article_sha256": "2b9997cf27d991458e04111b0b7366132804dac6919996561543fca40c1b3f14",
+      "article_word_count": 833
+    },
+    {
+      "title": "Look for the Exception",
+      "domain": "Reframing & Communication",
+      "short_description": "Find a relevant case that tests the scope of a generalization and reveals missing conditions.",
+      "use_when": [
+        "Absolute language closes down inquiry.",
+        "Repeated experiences have become an inevitable rule."
+      ],
+      "goals": [
+        "Replace unsupported universality with a more conditional account.",
+        "Discover the conditions behind variation."
+      ],
+      "mechanisms": ["counterexample", "scope testing"],
+      "related_patterns": ["Chunk Down", "Inspect How You Know", "Apply the Rule to Itself"],
+      "not_ideal_when": [
+        "An isolated case is being used to deny a strong statistical tendency or repeated harm."
+      ],
+      "example_user_queries": [
+        "I always ruin interviews, or at least it feels that way.",
+        "I think disagreeing inevitably makes my manager angry.",
+        "I cannot imagine this ever going differently.",
+        "There was one time it worked and I want to understand why.",
+        "How can I test whether this rule really has no exceptions?",
+        "I only create worthwhile work when inspired, but is that true?",
+        "Someone uses a single success to claim a service is reliable.",
+        "I want to acknowledge a repeated problem without calling it universal."
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "easy",
+      "id": "look-for-the-exception",
+      "slug": "look-for-the-exception",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Counter Example",
+        "chapter": 6,
+        "printed_pages": "167–174",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Compare two claims: A always implies B, tested by A without B; B requires A, tested by B without A. State that an exception does not erase a statistical tendency.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": ["chunk-down", "inspect-how-you-know", "apply-the-rule-to-itself"],
+      "article_sha256": "31331a154ef6323e23175cbdde9e5f80ae3e623d9fcf58ac9ce0325baf9033d5",
+      "article_word_count": 818
+    },
+    {
+      "title": "Move Up the Value Hierarchy",
+      "domain": "Reframing & Communication",
+      "short_description": "Reconsider a judgment through a criterion that deserves greater priority in the current trade-off.",
+      "use_when": [
+        "Two legitimate values conflict.",
+        "One dominant criterion obscures a justified cost."
+      ],
+      "goals": [
+        "Make priorities explicit and accountable.",
+        "Preserve lower-priority values where possible."
+      ],
+      "mechanisms": ["value comparison", "criterion precedence"],
+      "related_patterns": [
+        "Shift the Outcome",
+        "Find the Positive Intention",
+        "Follow the Consequences"
+      ],
+      "not_ideal_when": [
+        "An appeal to loyalty or generosity is being used to override another person’s boundaries."
+      ],
+      "example_user_queries": [
+        "I want to keep the peace but also need to be honest.",
+        "We can keep the deadline only by accepting an important defect.",
+        "Which value should take priority in this situation?",
+        "I choose the cheapest option even when reliability matters more.",
+        "Accepting a cost makes me feel the decision must be wrong.",
+        "Two worthwhile goals conflict and I need a defensible trade-off.",
+        "Someone invokes loyalty to justify demands that feel unreasonable.",
+        "Can we honor both values even if one needs to govern the decision?"
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "medium",
+      "id": "move-up-the-value-hierarchy",
+      "slug": "move-up-the-value-hierarchy",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Hierarchy of Criteria",
+        "chapter": 4,
+        "printed_pages": "98–107",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "comparison",
+        "brief": "Compare deadline and accurate billing in the Thursday defect scenario, showing accuracy as a release constraint and punctuality retained where feasible. Avoid a universal ladder of values.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "shift-the-outcome",
+        "find-the-positive-intention",
+        "follow-the-consequences"
+      ],
+      "article_sha256": "f5b1af15f6ee1fe3ab7a6d1b482e4697a9f56573ba5bfa41bb7d09b966eca476",
+      "article_word_count": 805
+    },
+    {
+      "title": "Apply the Rule to Itself",
+      "domain": "Reframing & Communication",
+      "short_description": "Examine whether a statement meets the relationship or standard it expresses.",
+      "use_when": [
+        "A broad rule appears to exempt itself.",
+        "Self-application may reveal missing scope or inconsistency."
+      ],
+      "goals": [
+        "Clarify a principle’s boundaries.",
+        "Distinguish contradiction from noncompliance and useful qualification."
+      ],
+      "mechanisms": ["self-reference", "consistency checking"],
+      "related_patterns": [
+        "Look for the Exception",
+        "Inspect How You Know",
+        "Put a Frame Around the Belief"
+      ],
+      "not_ideal_when": [
+        "A clever retort would misrepresent ordinary language or distract from a valid concern."
+      ],
+      "example_user_queries": [
+        "Someone says nobody should tell other people what to do.",
+        "The transparency rule itself has no written rationale.",
+        "A principle seems to exempt its own author.",
+        "How can I check whether this standard applies consistently?",
+        "The person criticizing a behavior also does it; does that refute the criticism?",
+        "This claim about beliefs might also apply to itself.",
+        "I want to qualify an absolute rule rather than win a debate.",
+        "A statement looks contradictory but maybe its scope is unclear."
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "medium",
+      "id": "apply-the-rule-to-itself",
+      "slug": "apply-the-rule-to-itself",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Apply to Self",
+        "chapter": 8,
+        "printed_pages": "234–239",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "diagram",
+        "brief": "Use a compact branching diagram: rule, scope includes its own statement, self-test, then survives, needs qualification, or contradicts itself. Distinguish a person failing a rule from the rule being false.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "look-for-the-exception",
+        "inspect-how-you-know",
+        "put-a-frame-around-the-belief"
+      ],
+      "article_sha256": "a56943069b6cb3168e55b54d9cbaf3cd803aab30f8bec26d69fe10aacee9438d",
+      "article_word_count": 836
+    },
+    {
+      "title": "Put a Frame Around the Belief",
+      "domain": "Reframing & Communication",
+      "short_description": "Examine a belief through the context, conditions, or functions that may sustain it.",
+      "use_when": [
+        "A belief feels identical with reality.",
+        "Repeated debate about its content does not clarify it."
+      ],
+      "goals": [
+        "Make a belief available as an object of inquiry.",
+        "Compare sustaining conditions with the present situation."
+      ],
+      "mechanisms": ["contextualization", "metacognition"],
+      "related_patterns": [
+        "Find the Positive Intention",
+        "Inspect How You Know",
+        "Apply the Rule to Itself"
+      ],
+      "not_ideal_when": [
+        "An invented psychological explanation would replace consideration of the person’s reasons."
+      ],
+      "example_user_queries": [
+        "I must anticipate every problem even in a cheap experiment.",
+        "Where does this assumption get its authority?",
+        "Our team may only hear from customers who care about price.",
+        "The belief becomes stronger in certain situations.",
+        "Arguing with this thought never seems to help me understand it.",
+        "Can I consider a belief’s context without assuming it is false?",
+        "I want to understand why a rule fits one environment but not another.",
+        "I do not know the origin of a belief and do not want to invent one."
+      ],
+      "tags": ["reframing", "communication", "beliefs"],
+      "difficulty": "medium",
+      "id": "put-a-frame-around-the-belief",
+      "slug": "put-a-frame-around-the-belief",
+      "source": {
+        "author": "Robert Dilts",
+        "title": "Sleight of Mouth",
+        "canonical_pattern": "Meta Frame",
+        "chapter": 8,
+        "printed_pages": "240–242",
+        "note": "Source-derived concept; examples and explanatory prose are newly written. Page references use the book’s printed numbering."
+      },
+      "visual_decision": {
+        "type": "map",
+        "brief": "Place the preparation rule inside a contextual frame labeled error costs, current uncertainty, and past work settings. Mark these as possible influences, not established causes.",
+        "status": "brief only"
+      },
+      "related_pattern_ids": [
+        "find-the-positive-intention",
+        "inspect-how-you-know",
+        "apply-the-rule-to-itself"
+      ],
+      "article_sha256": "06d32a400292306727929104f2fd68b1a06716c21b14c31044226ab4aaf54173",
+      "article_word_count": 832
+    }
+  ]
+}

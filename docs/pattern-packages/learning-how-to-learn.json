@@ -1,0 +1,508 @@
+{
+  "collection": {
+    "id": "learning-how-to-learn",
+    "title": "Learning How to Learn",
+    "verse": "learning"
+  },
+  "source": "User-supplied set of 15 learning articles, imported without rewriting the article text.",
+  "patterns": [
+    {
+      "id": "active-recall",
+      "title": "Active Recall",
+      "short_description": "Retrieve knowledge from memory rather than judging learning while the answer is still visible.",
+      "aliases": ["Retrieval Practice"],
+      "tags": ["learning", "memory", "retrieval"],
+      "use_when": [
+        "Rereading feels fluent but knowledge disappears when the source is closed.",
+        "You need to find gaps in what you can remember or explain."
+      ],
+      "related_patterns": ["spaced-practice", "feynman-technique", "reconstruct-the-map"],
+      "example_user_queries": [
+        "I keep rereading but nothing sticks.",
+        "I understand the chapter while reading but forget it afterwards.",
+        "How can I tell whether I actually know this material?",
+        "My flashcards test isolated facts but not the bigger picture.",
+        "I recognize the answer but cannot produce it myself.",
+        "How can I remember a song without looking at the lyrics?",
+        "I want to find the gaps in what I studied.",
+        "I need to explain a topic without my notes."
+      ],
+      "domain": "learning",
+      "article_markdown": "Rereading can create a strong feeling of familiarity without producing equally strong memory. As long as the material remains visible, it is difficult to tell whether you actually know it or simply recognize it. This is why a chapter can feel completely clear on the third reading and strangely empty once the book is closed.\n\nActive recall removes that support. Instead of exposing yourself to the material again, you try to reconstruct it from memory. A language learner attempts to produce a word before checking the translation; someone studying history writes down the causes of an event without looking at their notes; a musician tries to play a passage without the score.\n\nThe important feature is not the quiz format itself. It is the act of retrieval. Recalling something requires the mind to rebuild access to information rather than merely confirm that the information looks familiar. That effort can both reveal what is missing and strengthen later access to what was successfully retrieved.\n\nActive recall is especially useful because it makes gaps visible. Suppose you have read several pages about the French Revolution. While reading, everything appears coherent: financial crisis, class conflict, Enlightenment ideas, political deadlock. When you put the book aside and try to reconstruct the explanation, perhaps you remember all the pieces but cannot explain how they connect. That is a more informative result than another smooth rereading.\n\nThe technique can be applied badly, however. Turning an entire subject into hundreds of tiny fact cards may improve recall of isolated details while weakening the larger structure. Retrieval should match the kind of knowledge you ultimately want to use. If you need to remember a fact, retrieve the fact. If you need to explain a mechanism, reconstruct the mechanism. If you need to perform a skill, attempt the performance itself.\n\nIt can also be useful to vary the scale of retrieval. Sometimes recall a single definition; sometimes reconstruct an entire topic; sometimes explain a concept aloud from memory. This avoids confusing “being able to answer a prompt” with genuinely possessing the knowledge.\n\nThe deeper principle is simple: do not judge learning only while the answer is still in front of you. The moment the source disappears is often the moment when knowledge becomes visible.",
+      "article_sha256": "2ef6d8d97029b0a2aef15b50bc18593c91ab1d5f20575aa86846ec83666f3f2e",
+      "article_word_count": 375,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "spaced-practice",
+      "title": "Spaced Practice",
+      "short_description": "Return to important knowledge across time instead of concentrating all practice into one session.",
+      "aliases": ["Spaced Repetition", "Distributed Practice"],
+      "tags": ["learning", "memory", "spacing"],
+      "use_when": [
+        "Material feels secure today but becomes inaccessible weeks later.",
+        "You want to retain knowledge or repertoire beyond an immediate test."
+      ],
+      "related_patterns": ["active-recall", "interleaving", "run-learning-experiments"],
+      "example_user_queries": [
+        "I forget everything a few weeks after studying.",
+        "How often should I revisit what I learned?",
+        "Cramming helps me pass but I lose the knowledge later.",
+        "I want to keep a language available for years.",
+        "My music repertoire fades unless I play it every day.",
+        "Reviewing after a break feels like I am getting worse.",
+        "How can I fit revision into several short sessions?",
+        "I need a sustainable way to maintain what I know."
+      ],
+      "domain": "learning",
+      "article_markdown": "Learning something once does not mean it will remain available. Material that feels secure at the end of an afternoon can become surprisingly inaccessible a few weeks later. Cramming often works well enough for immediate performance, but it can create a misleading sense of permanence.\n\nSpaced practice works with forgetting rather than pretending it will not happen. Instead of concentrating all study into one period, you return to the material across time. The return happens after some of the original accessibility has faded, which means the knowledge has to be reconstructed rather than simply continued from fresh memory.\n\nA singer might learn a song on Monday, revisit it on Thursday, and sing it again the following week. A language learner may encounter the same vocabulary tomorrow, several days later, and then again after a longer interval. Someone learning the names of plants might revisit the same species during different walks rather than studying all the photographs in one evening.\n\nThe difficulty created by spacing is useful. If you review immediately, the material may still be so fresh that almost no retrieval effort is required. If you wait until everything is completely gone, you may simply be relearning from scratch. The interesting region lies somewhere in between: the material has become less available, but not inaccessible.\n\nThis is one reason spacing often feels less satisfying than cramming. A concentrated session produces visible fluency. Spaced practice repeatedly confronts you with partial forgetting. The learner may even feel as though progress is slower because every session begins with some friction.\n\nThat friction is not necessarily evidence that the method is failing. It can be part of what makes the memory more durable.\n\nThere is no universally correct interval. The right spacing depends on the material, prior knowledge, importance, and how long you want to retain it. Something needed only for tomorrow deserves a different schedule from a language, a professional skill, or a piece of musical repertoire you hope to keep for years.\n\nSpacing also works at larger scales. Ideas can return in later chapters, courses, projects, conversations, and real-world encounters. The central idea is not to optimize a perfect review calendar. It is to give important knowledge repeated chances to survive time.",
+      "article_sha256": "ed07ab0371ba1f0ce006ae90faa2f1ed9c078b6f19a12a4dd34afee4d7facf59",
+      "article_word_count": 370,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "interleaving",
+      "title": "Interleaving",
+      "short_description": "Mix related kinds of practice so that choosing the right approach becomes part of the task.",
+      "aliases": ["Interleaved Practice"],
+      "tags": ["learning", "practice", "discrimination"],
+      "use_when": [
+        "You can perform a technique when prompted but cannot recognize when to use it.",
+        "Similar cases or methods are easy to confuse."
+      ],
+      "related_patterns": ["learn-through-contrast", "practice-the-real-thing", "spaced-practice"],
+      "example_user_queries": [
+        "I solve exercises correctly only when I know which method to use.",
+        "Different grammar rules blur together in conversation.",
+        "Should I practice one kind of problem at a time?",
+        "I cannot distinguish similar birds outside the guidebook.",
+        "Switching between exercises makes me feel less fluent.",
+        "I want to choose the right technique without being told.",
+        "My practice works in blocks but not with mixed problems.",
+        "How can I learn to recognize which situation I am facing?"
+      ],
+      "domain": "learning",
+      "article_markdown": "Practice becomes easier when the next problem looks like the previous one. If you spend twenty minutes repeating one dance step, one grammatical construction, or one type of chess position, you rarely have to decide what kind of situation you are facing. The task has already been identified for you.\n\nInterleaving deliberately mixes related kinds of practice. Instead of working through all examples of A before moving to B and C, the learner encounters A, C, B, A, B, C and has to identify what each case requires.\n\nThat extra decision matters. A birdwatcher ultimately needs to distinguish a chaffinch from several similar birds, not identify twenty photographs already grouped under the heading “chaffinch.” A language learner has to choose the appropriate tense in conversation, not merely complete a worksheet in which every blank requires the same tense.\n\nThis is why interleaving can initially make practice feel worse. Repetition creates rhythm and confidence. Switching breaks that rhythm. The learner hesitates, makes more mistakes, and may feel less fluent even while learning something more useful.\n\nThe hidden skill being practiced is discrimination. Before applying a method, movement, concept, or category, the learner first has to recognize what kind of situation this is. In many real settings, that recognition is as important as execution itself.\n\nInterleaving works particularly well when the items are related enough to be confused. Mixing watercolor painting with French vocabulary and tennis serves would mostly create inconvenience. Mixing several related brush techniques, several grammatical constructions, or several species of similar trees can sharpen perception because the learner has to notice which features actually matter.\n\nBlocked practice still has a place. When something is entirely new, a short period of repetition can help establish the basic form. Someone learning a dance step may need to repeat it several times before mixing it with others. Interleaving becomes more valuable once the problem shifts from “Can I do this?” to “Do I know when this applies?”\n\nReal life rarely labels the next situation. Interleaving makes practice a little more honest by removing that label.",
+      "article_sha256": "54b5d1ec7f05f9bd52f166d425acfc87faceff7b8d0a88d59240d2b1d9840f3e",
+      "article_word_count": 343,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "feynman-technique",
+      "title": "Feynman Technique",
+      "short_description": "Explain an idea in your own words to discover where terminology is hiding gaps in understanding.",
+      "aliases": ["Explain It in Your Own Words", "Self-Explanation"],
+      "tags": ["learning", "understanding", "explanation"],
+      "use_when": [
+        "An explanation feels clear until you try to reconstruct it yourself.",
+        "Technical terms are substituting for an explanation you can unpack."
+      ],
+      "related_patterns": ["active-recall", "create-your-own-example", "re-encode-the-idea"],
+      "example_user_queries": [
+        "I can repeat the definition but cannot explain what it means.",
+        "I get stuck when someone asks why this works.",
+        "How can I check whether I really understand a concept?",
+        "My explanation keeps using the same technical words.",
+        "The textbook makes sense but my own explanation falls apart.",
+        "I want to find where my reasoning becomes vague.",
+        "Can I use specialist vocabulary without hiding behind it?",
+        "I cannot explain why this scene or painting has its effect."
+      ],
+      "domain": "learning",
+      "article_markdown": "Some ideas feel clear until you try to explain them. Familiar terminology can create an impression of understanding while quietly carrying most of the meaning for you. You recognize the words, follow the explanation, and feel that the concept makes sense—until you attempt to reconstruct it yourself.\n\nThe Feynman Technique tests this by asking you to explain an idea in your own words. Whenever the explanation becomes vague, circular, or dependent on a term you cannot unpack, you have found a place where your understanding may still be thin.\n\nSuppose you say that inflation happens because “the purchasing power of money decreases.” The sentence may be correct, but it does not explain much. Why does purchasing power decrease? Why do prices rise? What role do supply, demand, wages, expectations, or monetary conditions play? Each attempt to unpack the explanation reveals whether the words are carrying genuine understanding or merely familiarity.\n\nThe technique is often summarized as “explain it to a child,” but simplicity is not really the point. Some topics genuinely require technical language. A musician may need terms such as tonic and dominant; a biologist may need to talk about alleles; a psychologist may need the language of reinforcement or working memory.\n\nThe stronger principle is explanatory accountability. If you use a term, you should have some grasp of what work that term is doing. Technical vocabulary should compress understanding rather than replace it.\n\nThe technique also works well outside academic subjects. Try explaining why a scene in a film feels tense, what makes a particular painting visually balanced, why one joke works better than another, or why a conflict between two people keeps escalating. The moment your explanation turns into “it just does” or repeats the original claim in different words, you have found something worth examining.\n\nA good explanation does not need to be elegant on the first attempt. In fact, roughness is useful. The point is to expose where the explanatory chain breaks, return to the source or examples, repair that gap, and try again.\n\nThe Feynman Technique is therefore less about sounding simple than about discovering where your own understanding stops.",
+      "article_sha256": "93cb00c0711e2fee53fa626aea5a6c1044bbf2d041e05f13928bc8105e2aab89",
+      "article_word_count": 356,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "generate-before-looking",
+      "title": "Generate Before Looking",
+      "short_description": "Make a brief prediction or attempt before revealing the answer so that information becomes feedback.",
+      "aliases": ["Predict Before Revealing the Answer"],
+      "tags": ["learning", "prediction", "feedback"],
+      "use_when": [
+        "Answers seem obvious after you see them but you could not have produced them.",
+        "You want to expose assumptions before hindsight hides them."
+      ],
+      "related_patterns": ["active-recall", "create-your-own-example", "run-learning-experiments"],
+      "example_user_queries": [
+        "Every solution looks obvious once I read it.",
+        "I check the answer before making a real attempt.",
+        "How can I make feedback more meaningful?",
+        "I want to notice which clues my predictions miss.",
+        "Historical outcomes feel inevitable after I learn them.",
+        "How long should I struggle before looking at a solution?",
+        "I want to describe what I notice before reading expert notes.",
+        "I keep recognizing answers instead of forming my own ideas."
+      ],
+      "domain": "learning",
+      "article_markdown": "An answer often looks obvious after it has been revealed. Once you know the ending of a story, the result of an experiment, or the meaning of an unfamiliar word, it becomes difficult to recover the uncertainty that existed beforehand. The solution seems more predictable than it really was.\n\nGenerate Before Looking preserves that uncertainty for a moment. Before seeing the answer, make a prediction, propose an explanation, attempt the problem, or guess what will happen next.\n\nA person learning wine tasting might describe what they smell before reading the tasting notes. Someone watching a documentary might predict why an archaeological settlement was abandoned before hearing the researchers' interpretation. A reader encountering an unfamiliar word might infer its meaning from context before reaching for a dictionary.\n\nThe attempt may be wrong, and that is not a defect. Once you have generated an expectation, the actual answer has something to collide with. The difference becomes meaningful: Why did I expect this? Which clue did I miss? What assumption led me in the wrong direction?\n\nThis changes the learner's relationship to the answer. Instead of information simply arriving, it becomes feedback on a model you had already begun to construct.\n\nThe attempt does not need to be long. One of the easiest ways to misuse this pattern is to turn every lesson into a heroic struggle. Spending thirty frustrating minutes trying to reinvent something that could have been explained clearly in five is not automatically better learning. Often a brief, genuine attempt is enough.\n\nThe pattern is especially useful in domains where hindsight is powerful. Historical events look inevitable once we know what happened. Scientific findings seem obvious once we hear the result. Artistic choices can look natural after seeing the finished work. Making a prediction first restores some of the original uncertainty.\n\nA simple habit captures the idea well: before revealing the answer, decide what you think the answer might be.",
+      "article_sha256": "ebeda058d2375369581df006476292ceee2bb1d996e2d3f1ddd903ee2b32c37a",
+      "article_word_count": 320,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "learn-through-contrast",
+      "title": "Learn Through Contrast",
+      "short_description": "Compare nearby examples and boundary cases to identify the differences that actually matter.",
+      "aliases": ["Contrastive Learning"],
+      "tags": ["learning", "comparison", "discrimination"],
+      "use_when": [
+        "Related categories look similar and their boundaries are unclear.",
+        "You notice many features but do not know which deserve attention."
+      ],
+      "related_patterns": [
+        "interleaving",
+        "create-your-own-example",
+        "use-contrast-not-just-examples"
+      ],
+      "example_user_queries": [
+        "I cannot tell two similar categories apart.",
+        "Examples help me recognize a concept but not its boundaries.",
+        "Which differences between these cases actually matter?",
+        "I want to learn what an expert notices that I miss.",
+        "Two nearly identical sentences mean different things to me.",
+        "How can I practice judging ambiguous cases?",
+        "I need a way to compare examples without getting lost in details.",
+        "I understand obvious examples but struggle with near misses."
+      ],
+      "domain": "learning",
+      "article_markdown": "A single example can show what something looks like, but it often does a poor job of showing where its boundaries lie. Distinctions become clearer when similar things are placed beside one another and compared.\n\nLearn Through Contrast means studying related cases together and asking which differences actually matter. A language learner compares two nearly identical sentences with different meanings; an art student looks at paintings that sit near the boundary between two movements; a mushroom forager studies edible species beside dangerous lookalikes.\n\nThe value of contrast comes from selective attention. Beginners often notice many features without knowing which ones are important. An experienced birdwatcher may identify a species from a tiny marking, posture, or flight pattern that a beginner hardly registers. The eyes are seeing similar information, but they are weighting it differently.\n\nCarefully chosen comparisons teach the learner what deserves attention.\n\nThe strongest contrasts are often close ones. If two examples differ in ten ways, it is hard to know which difference matters. If they differ in only one or two features, those features become much more informative. This is why minimal pairs are so powerful in language learning: a tiny change in sound or grammar can produce a clear change in meaning.\n\nBoundary cases are particularly valuable once the basic categories are understood. Obvious examples teach recognition; ambiguous examples teach judgment. Someone learning about satire may benefit more from comparing satire with parody or sincere imitation than from seeing ten unmistakable examples of satire.\n\nThe same applies to choices rather than categories. A photographer can compare two nearly identical images taken from slightly different positions and notice how one shift changes the relationship between subject and background. A cook can compare the same sauce before and after adding acidity and learn what that small change contributes.\n\nThe guiding question is not merely “How are these different?” It is: **Which differences change what this is, how it works, or what I should do?**\n\nContrast turns similarity from a source of confusion into a learning tool.",
+      "article_sha256": "f829845782ca05473b7805d80acea8cc570f78c0354ffb5684c0531ff5c1569b",
+      "article_word_count": 337,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "practice-the-real-thing",
+      "title": "Practice the Real Thing",
+      "short_description": "Include the actual activity in your practice so that exercises do not become substitutes for performance.",
+      "aliases": ["Direct Practice"],
+      "tags": ["learning", "practice", "transfer"],
+      "use_when": [
+        "You perform well in exercises but struggle in real situations.",
+        "Your practice removes complications that competent performance actually requires."
+      ],
+      "related_patterns": ["drill-the-bottleneck", "interleaving", "fade-the-worked-example"],
+      "example_user_queries": [
+        "My language app scores are good but I cannot hold a conversation.",
+        "I rehearse alone but struggle when performing for people.",
+        "I watch cooking videos but still feel lost preparing a meal.",
+        "How can I make my practice transfer to real life?",
+        "I am getting better at exercises rather than the actual skill.",
+        "Real tasks are much less predictable than my training.",
+        "I want to practice under more realistic conditions.",
+        "Do my drills actually prepare me for what I want to do?"
+      ],
+      "domain": "learning",
+      "article_markdown": "It is possible to become very good at exercises that resemble the skill you actually want. A language app, a writing course, or a series of cooking videos can produce real learning while still leaving an important gap between practice and performance.\n\nPractice the Real Thing means making sure that the actual activity appears regularly in the learning process. If you want to speak Italian, have conversations. If you want to perform music, play for other people. If you want to become comfortable cooking, prepare complete meals rather than only studying recipes or isolated techniques.\n\nReal situations contain complications that exercises conveniently remove. Conversations are unpredictable, audiences create pressure, ingredients vary, and real tasks rarely announce which technique should be used. These complications can feel inconvenient, but they are often part of what competence actually requires.\n\nA person might perform perfectly in a language exercise that asks for the correct past tense while still struggling to use that tense in a fast conversation. The exercise teaches the construction; the conversation teaches when and how to access it under realistic conditions.\n\nDirect practice should also vary enough that the skill does not become tied to one narrow context. A speaker who only rehearses alone can benefit from different rooms, audiences, time limits, and levels of preparation. A cook who always follows the same recipe can try the same underlying technique with different ingredients.\n\nThis does not mean abandoning drills, exercises, or simplified practice. Those are often useful precisely because they make parts of a complex skill easier to isolate. The problem arises when they quietly become substitutes for the activity they were meant to support.\n\nA useful test is to ask: if I became excellent at my current practice, would that automatically make me good at the thing I ultimately care about?\n\nIf the answer is only partly, the learning probably needs more contact with the real thing.",
+      "article_sha256": "ebf2958dc6ac966a3f159e3902e3efac3aec01e327bb5617a9f79758fbf03caa",
+      "article_word_count": 317,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "drill-the-bottleneck",
+      "title": "Drill the Bottleneck",
+      "short_description": "Find the narrow component limiting your performance, practice it deliberately, then reintegrate it into the whole.",
+      "aliases": ["Isolate the Weak Point"],
+      "tags": ["learning", "practice", "bottlenecks"],
+      "use_when": [
+        "One recurring error or difficult component keeps limiting the whole activity.",
+        "Repeating the whole task spends most of your time on things that already work."
+      ],
+      "related_patterns": [
+        "practice-the-real-thing",
+        "run-learning-experiments",
+        "fade-the-worked-example"
+      ],
+      "example_user_queries": [
+        "I keep making the same mistake in an otherwise fluent performance.",
+        "One transition ruins a song I can mostly play.",
+        "I repeat the whole task without improving the difficult part.",
+        "How can I identify what is actually holding me back?",
+        "The problem appears in one place but may have another cause.",
+        "My isolated practice improves but the whole performance does not.",
+        "I want to concentrate practice where it will help most.",
+        "Which subskill should I work on next?"
+      ],
+      "domain": "learning",
+      "article_markdown": "Complex skills are rarely equally weak everywhere. Often one relatively narrow component limits the whole performance.\n\nA guitarist may know an entire song except for one transition. A language learner may communicate fluently until a particular grammatical construction appears. A swimmer may have strong endurance but lose efficiency because of one technical flaw. Repeating the whole activity can mean spending most of the time practicing things that already work.\n\nDrill the Bottleneck means identifying the component that repeatedly causes difficulty and giving it disproportionate attention.\n\nThe guitarist isolates the transition. The language learner creates sentences that repeatedly force the troublesome construction. The swimmer focuses on the part of the stroke that is producing drag. In each case, practice becomes narrower for a while so that improvement can become more concentrated.\n\nRecurring errors are useful clues. If the same mistake keeps appearing, it may point toward a deeper bottleneck: a missing subskill, an inaccurate mental model, or a cue the learner consistently overlooks. Instead of correcting only the visible error, ask what generated it.\n\nThe challenge is diagnosis. What looks like the bottleneck may only be where the problem becomes visible. A singer who repeatedly enters late may not have a timing problem at all; perhaps they are hearing the phrase structure incorrectly. Someone struggling to finish essays may blame motivation when the real difficulty is deciding on an argument before drafting.\n\nIsolation also has limits. A passage mastered separately can still fail when placed back into the song, and a grammatical construction drilled in exercises may still disappear in conversation. The weak component eventually has to be reintegrated into the whole performance.\n\nThe pattern is therefore not “break everything into smaller parts.” It is more selective: find the narrow place currently restricting progress, work there intensively, and then see whether the whole system improves.",
+      "article_sha256": "6b31cc4be4f4f31876c0bd2c3239d8b3c5e6f2bb294c32132d24001164fe934e",
+      "article_word_count": 304,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "fade-the-worked-example",
+      "title": "Fade the Worked Example",
+      "short_description": "Gradually remove support from a complete model until you can perform the task independently.",
+      "aliases": ["Worked-Example Fading", "Fade the Scaffolding"],
+      "tags": ["learning", "scaffolding", "independence"],
+      "use_when": [
+        "A blank page is overwhelming but a complete example leaves too little independence.",
+        "You can follow a template but struggle when the support disappears."
+      ],
+      "related_patterns": [
+        "practice-the-real-thing",
+        "move-from-concrete-to-abstract",
+        "generate-before-looking"
+      ],
+      "example_user_queries": [
+        "I can follow a worked solution but cannot start alone.",
+        "A blank page gives me too many decisions at once.",
+        "How can I move from copying an example to doing it myself?",
+        "I have become dependent on a writing template.",
+        "Removing all the guidance at once feels too difficult.",
+        "When should I stop using the prompts and guidelines?",
+        "I want to learn a complex task with gradually less help.",
+        "My performance falls apart when the example is taken away."
+      ],
+      "domain": "learning",
+      "article_markdown": "A completed example provides clarity but little independence. A blank page provides independence but can overwhelm a beginner with too many decisions at once.\n\nFade the Worked Example creates a bridge between the two. Start with a complete model, then gradually remove parts of the support until the learner can perform the task independently.\n\nSomeone learning portrait drawing might first study a fully constructed head with visible guidelines for proportion. The next exercise may provide only a few of those guides. Later there are only reference points, and eventually the learner begins from an empty page.\n\nThe same pattern works in writing. A learner might first examine an annotated essay showing what each paragraph is doing, then receive an outline with some missing sections, then only a broad question, and finally write independently.\n\nThis gradual removal of support reduces unnecessary difficulty. When a task is new, the learner may not yet have enough mental structure to handle every decision at once. A worked example allows attention to focus on the organization of the task without simultaneously inventing every step.\n\nThe danger is leaving the support in place too long. A singer who always rehearses while reading the lyrics may become good at reading and singing together rather than remembering the piece. A student who always writes from a rigid template may struggle when the template disappears.\n\nThe support should therefore become less complete as competence grows.\n\nFading is useful because independence does not need to arrive as a cliff. There can be many steps between “watch someone do it” and “do everything yourself.” Designing those intermediate steps often makes the transition smoother and more reliable.",
+      "article_sha256": "411b05ca8114441d4eedf91fe57036e629a2a615399880777d252c3e7a039d8b",
+      "article_word_count": 275,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "move-from-concrete-to-abstract",
+      "title": "Move From Concrete to Abstract",
+      "short_description": "Use varied concrete cases to reveal a shared principle that can transfer to unfamiliar situations.",
+      "aliases": ["Concrete-to-Abstract Learning"],
+      "tags": ["learning", "abstraction", "transfer"],
+      "use_when": [
+        "A correct abstract definition provides little intuitive grip.",
+        "You understand one example but cannot recognize its structure elsewhere."
+      ],
+      "related_patterns": [
+        "create-your-own-example",
+        "learn-through-contrast",
+        "re-encode-the-idea"
+      ],
+      "example_user_queries": [
+        "The definition is accurate but means very little to me.",
+        "I understand the example but cannot apply the principle elsewhere.",
+        "I keep associating a concept with just one familiar story.",
+        "How can I turn several examples into a general model?",
+        "Abstract language feels empty without a concrete case.",
+        "I want to recognize the same idea in a new setting.",
+        "Should I begin with examples or with a definition?",
+        "How can I move between a general principle and a specific situation?"
+      ],
+      "domain": "learning",
+      "article_markdown": "Abstract ideas are useful because they apply across many situations, but this generality can also make them difficult to grasp. A definition may be perfectly accurate while still giving the beginner very little to think with.\n\nMove From Concrete to Abstract begins with specific situations and gradually reveals what they have in common. Opportunity cost might begin with choosing between a concert and visiting a friend, then appear in government budgets, business decisions, and everyday time management before being stated as a general economic principle.\n\nThe movement matters because examples provide cognitive grip. A learner can reason about a specific choice more easily than about an abstract relation between alternatives. Once several examples are available, the common structure becomes easier to see.\n\nMultiple examples are important because a single one can become fused with the concept. Fractions can accidentally become “pieces of pizza,” conditioning can become “the thing with Pavlov's dog,” and opportunity cost can become “the concert example.” Variation reveals what is essential and what belonged only to the original story.\n\nThe abstraction becomes useful when it travels. If the learner can recognize the same structure in an unfamiliar setting, the concept has become more than a remembered example.\n\nExperts often move in both directions. When an abstract idea becomes difficult, they construct a concrete case. When many examples begin to accumulate, they compress them back into a more general model. Learning often oscillates between these two levels rather than progressing only upward.\n\nThe danger of abstraction too early is empty language: the learner can repeat the definition without anything behind it. The danger of remaining concrete too long is the opposite: the learner understands each example but cannot transfer the principle.\n\nConcrete cases provide something to stand on. Abstraction makes it possible to move.",
+      "article_sha256": "95657c46bcb7c630ca4744a69f3b49e3e331662df910e170734c099263c4d173",
+      "article_word_count": 296,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "create-your-own-example",
+      "title": "Create Your Own Example",
+      "short_description": "Invent and verify new examples and near-misses to test which features of a concept are essential.",
+      "aliases": ["Generate Examples and Non-Examples"],
+      "tags": ["learning", "examples", "understanding"],
+      "use_when": [
+        "You recognize the teacher's examples but are unsure what makes them count.",
+        "A concept has fuzzy boundaries that need closer examination."
+      ],
+      "related_patterns": [
+        "learn-through-contrast",
+        "move-from-concrete-to-abstract",
+        "feynman-technique"
+      ],
+      "example_user_queries": [
+        "I recognize the examples in the lesson but cannot invent a new one.",
+        "How do I know which features make this a valid example?",
+        "I want to test a concept in a different context.",
+        "Where is the boundary between an example and a near miss?",
+        "I worry that all my examples reflect the same misunderstanding.",
+        "Can I apply this compositional principle to a new scene?",
+        "I need to distinguish the idea from the details of its original example.",
+        "How can I check whether an example I made up is correct?"
+      ],
+      "domain": "learning",
+      "article_markdown": "Examples supplied by a teacher are unusually helpful because they were chosen specifically to illustrate the idea. The surrounding lesson also gives away what concept the example is supposed to demonstrate.\n\nCreating your own example removes those clues. To invent a valid new case, you have to decide which features of the concept are essential and which were merely part of the examples you were shown.\n\nSuppose you are learning about confirmation bias. After reading examples involving politics and social media, try to invent one involving gardening, friendship, or choosing a restaurant. The new context forces you to extract the structure of the bias rather than imitate the surface details of the original examples.\n\nThe technique becomes stronger when you also create a near-miss. Invent something that looks similar but does not actually qualify, then explain why. If a person reads only restaurant reviews after already deciding where to eat, is that necessarily confirmation bias? What else would need to be true?\n\nThis is especially useful for concepts with fuzzy boundaries. Creating both examples and non-examples forces the learner to commit to an interpretation rather than simply recognize the teacher's choices.\n\nThe method works in creative domains too. After learning a particular compositional principle in photography, invent a completely different scene that uses the same principle. After studying a poetic device, write a line that uses it and another that looks similar but does something else.\n\nSelf-generated examples can be wrong, so verification matters. A learner can build an entire family of examples around a misunderstanding. Checking against a reliable source or knowledgeable person keeps the exercise anchored.\n\nBut even a wrong example can be revealing. It shows not only what the concept means in the textbook, but what you thought it meant.",
+      "article_sha256": "8b37262df9d8668ddd5d25c997db01bfc3fae41e979b2c574bdd789c6b12a9a5",
+      "article_word_count": 293,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "reconstruct-the-map",
+      "title": "Reconstruct the Map",
+      "short_description": "Rebuild a subject's structure from memory to reveal missing connections and give individual facts a place.",
+      "aliases": ["Rebuild the Knowledge Map"],
+      "tags": ["learning", "structure", "retrieval"],
+      "use_when": [
+        "You remember individual facts but not how they fit together.",
+        "Your notes are shorter without being easier to navigate."
+      ],
+      "related_patterns": ["active-recall", "map-before-you-learn", "re-encode-the-idea"],
+      "example_user_queries": [
+        "I know lots of facts but cannot see how they connect.",
+        "My notes feel like a pile of disconnected information.",
+        "How can I rebuild the structure of a subject without looking?",
+        "I want to find the missing connections in what I studied.",
+        "I can name the events but cannot explain their relationships.",
+        "How can I compress notes without losing their meaning?",
+        "A tidy outline hides the overlaps and exceptions in this subject.",
+        "I need a navigable overview rather than another list of facts."
+      ],
+      "domain": "learning",
+      "article_markdown": "A person can know many individual facts while still lacking a sense of how they fit together. The result is knowledge that feels more like a drawer full of objects than a navigable landscape.\n\nReconstruct the Map means putting the source aside and rebuilding the structure of a subject from memory. Someone studying jazz history might sketch the relationships among blues, swing, bebop, cool jazz, modal jazz, free jazz, major musicians, and historical periods.\n\nThe point is not to produce a beautiful diagram. The missing connections, misplaced branches, and uncertain relationships reveal which parts of the subject have not yet formed a coherent structure.\n\nThe map can take many forms. A historian might draw a timeline with causal arrows. A biologist might sketch relationships among systems. A reader of philosophy might arrange thinkers by disagreements rather than chronology. A cook might organize dozens of recipes into broader families such as braises, emulsions, doughs, and stocks.\n\nAs the structure becomes clearer, compression often follows naturally. Several individual facts become instances of one broader principle, and dozens of details acquire places inside a smaller number of meaningful categories.\n\nGood compression does not simply make the notes shorter. It preserves relationships. A subway map omits almost everything about a city, but it keeps what matters for navigating the rail system. A good knowledge map does something similar.\n\nThere is also a danger in making the map too tidy. Real subjects contain overlap, exceptions, feedback loops, and competing interpretations. The purpose is not to force everything into a perfect tree.\n\nThe aim is to create enough structure that the details stop floating independently. Facts answer local questions; a map lets you move through the territory.",
+      "article_sha256": "f4b3d29aea52f8c2099331ab3eb9313ce4a78830c181085687908196ce95b84f",
+      "article_word_count": 281,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "re-encode-the-idea",
+      "title": "Re-Encode the Idea",
+      "short_description": "Translate knowledge into another representation to expose gaps and make understanding more portable.",
+      "aliases": ["Translate Between Representations"],
+      "tags": ["learning", "representation", "understanding"],
+      "use_when": [
+        "Knowledge is fluent in one form but fragile when the format changes.",
+        "A diagram, timeline, demonstration, or explanation could expose relationships hidden by the current form."
+      ],
+      "related_patterns": [
+        "feynman-technique",
+        "reconstruct-the-map",
+        "choose-the-representation-before-solving"
+      ],
+      "example_user_queries": [
+        "I can follow the paragraph but cannot draw what it describes.",
+        "I recognize the diagram but cannot explain it aloud.",
+        "How can I translate this chapter into a meaningful timeline?",
+        "My understanding depends on the exact wording of the textbook.",
+        "Drawing the arrows makes me unsure what causes what.",
+        "I want to understand what different representations reveal and hide.",
+        "Can I turn a recipe or process into a structural sketch?",
+        "I need to check whether my knowledge survives a change of format."
+      ],
+      "domain": "learning",
+      "article_markdown": "Understanding sometimes becomes trapped in the form in which it was learned. You can follow the paragraph but cannot draw the process, recognize the diagram but cannot explain it, or remember the timeline without understanding the causal story.\n\nRe-Encode the Idea means translating knowledge into another representation. Turn a historical chapter into a timeline, a recipe into a sequence of transformations, a piece of music into a structural sketch, or a verbal explanation into a diagram.\n\nTranslation forces choices. A paragraph can remain comfortably vague about what causes what, while drawing arrows between the elements may immediately expose uncertainty. A chart can reveal trends that were difficult to notice in prose, while explaining that chart aloud can reveal whether you understand what the axes actually mean.\n\nDifferent representations highlight different properties. A story foregrounds sequence and motivation. A diagram foregrounds relationships. A physical demonstration makes movement visible. A metaphor highlights selected similarities. A compact symbolic representation can make structure easier to manipulate.\n\nNo representation captures everything. In fact, part of the value comes from noticing what each form reveals and hides.\n\nSuppose you understand the water cycle as a list: evaporation, condensation, precipitation, runoff. Drawing it may immediately raise questions. Where does groundwater fit? Is the system really linear? What returns water to the atmosphere from plants and soil?\n\nThe attempt to translate creates pressure on the understanding.\n\nRe-encoding is especially useful when knowledge feels fluent in one form but fragile elsewhere. If you can only explain the idea in the same words as the textbook, or only recognize the diagram you were shown, the understanding may still be tightly coupled to the original representation.\n\nAn idea that survives translation has usually become more portable.",
+      "article_sha256": "5b38b63f8fcf603ece59bb03da8b78c2a85ad1a0a2d16c26ad02c29fdefe509c",
+      "article_word_count": 285,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "map-before-you-learn",
+      "title": "Map Before You Learn",
+      "short_description": "Survey a subject's goals, prerequisites, and subskills before choosing a provisional learning route.",
+      "aliases": ["Survey the Learning Territory"],
+      "tags": ["learning", "planning", "orientation"],
+      "use_when": [
+        "A large subject has many possible routes and you do not know where to begin.",
+        "You may be moving efficiently through material that does not serve your goal."
+      ],
+      "related_patterns": [
+        "reconstruct-the-map",
+        "run-learning-experiments",
+        "reduce-the-first-step"
+      ],
+      "example_user_queries": [
+        "I want to learn a large subject but do not know where to start.",
+        "Which prerequisites should I learn before this course?",
+        "I keep choosing courses without knowing what skills I actually need.",
+        "How can I compare different curricula without planning forever?",
+        "I want a rough overview before committing to a learning path.",
+        "What does competent performance in this field actually involve?",
+        "Researching the perfect course has become a way to avoid starting.",
+        "I need a provisional route that I can revise as I learn."
+      ],
+      "domain": "learning",
+      "article_markdown": "Beginning immediately feels productive, but it is easy to spend weeks moving efficiently in the wrong direction. Large subjects often contain many possible routes, prerequisites, and subskills, only some of which matter for a particular goal.\n\nMap Before You Learn means spending a modest amount of time surveying the territory before committing deeply to one path.\n\nSuppose you decide to learn watercolor painting. Before working systematically through the first course you find, you compare several curricula. The same themes keep appearing: water control, pigment behavior, washes, edges, value, color mixing, composition. You also notice that botanical painting, landscapes, and urban sketching emphasize these foundations differently.\n\nThe map begins to emerge.\n\nA similar approach works in almost any field. Someone learning a language may discover that pronunciation deserves early attention. A person learning local history may realize that geography and a basic timeline make later reading easier to organize. Someone learning photography may discover that composition, light, exposure, and editing are distinct but interacting areas.\n\nThe initial map will be imperfect because beginners do not yet know enough to design the perfect curriculum. That is not a problem. The purpose is orientation, not omniscience.\n\nA small amount of mapping can reveal missing prerequisites, irrelevant material, or a more useful order of study. It can also clarify what competent performance actually looks like, which is often less obvious than expected.\n\nThere is a danger of turning preparation into procrastination. Researching the perfect course, book list, or method can become an elaborate way of avoiding contact with the subject itself.\n\nThe map should therefore be temporary. Its job is to reduce unnecessary wandering, not eliminate uncertainty.\n\nLook at the territory, choose a plausible route, and then start moving.",
+      "article_sha256": "b5ee8adafc6c5400451c63169af3188291287d4882eaf9799d3dd07b3fab6cd8",
+      "article_word_count": 285,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    },
+    {
+      "id": "run-learning-experiments",
+      "title": "Run Learning Experiments",
+      "short_description": "Change one meaningful part of your learning method and observe whether it improves the outcome you care about.",
+      "aliases": ["Experiment With Your Learning Method"],
+      "tags": ["learning", "experimentation", "feedback"],
+      "use_when": [
+        "General principles do not settle the practical details of your learning routine.",
+        "You need to adapt practice to an individual bottleneck without relying only on how easy it feels."
+      ],
+      "related_patterns": [
+        "drill-the-bottleneck",
+        "spaced-practice",
+        "prefer-the-smallest-useful-experiment"
+      ],
+      "example_user_queries": [
+        "My study routine feels productive but I am not sure it works.",
+        "How can I test a change in the way I practice?",
+        "I spend my music practice playing things I already know.",
+        "My vocabulary cards help recognition but not spontaneous use.",
+        "I want to adapt a learning method to my own bottleneck.",
+        "How can I tell which change in my routine made a difference?",
+        "Should I trust how easy a study session feels?",
+        "I need to compare practice formats without changing everything at once."
+      ],
+      "domain": "learning",
+      "article_markdown": "General learning principles can take you surprisingly far, but they do not determine every practical decision. Different subjects, goals, schedules, and bottlenecks leave plenty of room for adaptation.\n\nRun Learning Experiments means deliberately changing one aspect of how you learn and observing what happens.\n\nA guitarist might notice that practice keeps dissolving into playing songs they already know. For two weeks, they reorganize the session: technique first, one difficult passage second, free playing last. The question is not whether the new routine feels virtuous, but whether it produces more consistent progress.\n\nA language learner might notice that vocabulary cards work well for recognition but poorly for spontaneous use. They keep the cards but add a short daily paragraph that must include several recently learned words. If those words begin appearing more naturally in conversation, the experiment has taught them something about the gap in their previous practice.\n\nThe point is not to trust every subjective impression. Methods that feel easy can produce weak retention, and strong evidence about learning should carry more weight than a personal hunch. Personal experimentation should refine good principles rather than replace them.\n\nThe most useful experiments often occur in the large space where research does not prescribe an exact implementation. How long should sessions be? Which kinds of examples help you see a difficult idea? When should support be removed? Which practice format creates enough challenge without becoming discouraging?\n\nIt helps to change one meaningful thing at a time. If you redesign the schedule, materials, goals, and environment simultaneously, it becomes difficult to know what actually helped.\n\nAs learning becomes more advanced, the limiting problems often become more individual. At that point, learning how you learn is not a distraction from the subject.\n\nIt becomes part of the subject.",
+      "article_sha256": "04c02830d2f1a9e0a19c7b7ef01c3ffe006153572e33958f3b545fc333c07832",
+      "article_word_count": 294,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied prose and examples without adding diagrams; use the existing deterministic native icon for browsing."
+      },
+      "practice": null
+    }
+  ],
+  "note": "The strict public schema uses summary, aliases, tags, verses, and wiki links. Richer authoring metadata and eight natural-language recommendation examples per article are preserved here for future retrieval integration; the current search does not consume this sidecar."
+}

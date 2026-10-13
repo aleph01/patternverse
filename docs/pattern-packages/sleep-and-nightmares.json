@@ -1,0 +1,49 @@
+{
+  "format_version": 1,
+  "title": "Sleep and Nightmares",
+  "verse": "therapy",
+  "collection": "sleep-and-nightmares",
+  "source_sha256": "1d53a337df7657e66645e4fdc94c6f0636a877485502b4dc991666fb4d25ada7",
+  "patterns": [
+    {
+      "id": "rewrite-the-nightmare",
+      "title": "Rewrite the Nightmare",
+      "domain": "therapy",
+      "short_description": "Revise a recurring nightmare while awake and rehearse the changed version.",
+      "use_when": [
+        "A recurring nightmare returns to the same threat or helpless ending.",
+        "The dream feels manageable enough to approach while awake."
+      ],
+      "goals": [
+        "Develop an alternative dream script.",
+        "Practice alternative imagery without forcing an immediate change in sleep."
+      ],
+      "mechanisms": [
+        "Imagery rescripting and waking rehearsal; the precise clinical mechanism remains debated."
+      ],
+      "tags": ["nightmares", "sleep", "imagery", "rehearsal"],
+      "related_patterns": ["cbt-worry-time", "cbt-activity-mood"],
+      "difficulty": "Introductory, with clinical support when distress is overwhelming",
+      "estimated_practice_time": "10–15 minutes to draft; 10–20 minutes of daytime rehearsal (timer defaults to 10 minutes)",
+      "prerequisites": ["One nightmare that feels manageable to approach while awake."],
+      "not_ideal_when": [
+        "Engaging with the dream causes overwhelming distress, dissociation, or worsening symptoms."
+      ],
+      "example_user_queries": [
+        "I keep having the same nightmare. Is there anything I can do while awake?",
+        "My dream always ends with me trapped and helpless.",
+        "I wake up frightened by a dream that keeps coming back.",
+        "Can I change how a recurring nightmare ends?",
+        "I keep dreaming that something is chasing me.",
+        "How can I rehearse a less frightening version of a dream?",
+        "Do I have to understand what a nightmare means before changing it?",
+        "I cannot visualize clearly. Can I still work with a recurring dream?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "The supplied corridor example and concise process line already explain the sequence; no additional illustration is needed."
+      },
+      "original_article_sha256": "619f9ab58a449346096a755210bd1aa146d7440103ac965708039da317d6ecdd"
+    }
+  ]
+}

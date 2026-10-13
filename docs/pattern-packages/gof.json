@@ -1,0 +1,980 @@
+{
+  "title": "GoF Design Patterns",
+  "domain": "software-engineering",
+  "source_reference": {
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+    "authors": ["Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides"],
+    "url": "https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610",
+    "role": "Canonical collection attribution and category reference; article prose, examples, and diagrams are original educational explanations."
+  },
+  "import_source": "patterns.json (individual articles and HTML reading edition are not loaded)",
+  "patterns": [
+    {
+      "title": "Factory Method",
+      "category": "Creational",
+      "short_description": "Let a reusable workflow delegate object creation to an overridable method.",
+      "use_when": [
+        "A shared workflow needs different concrete collaborators",
+        "A framework needs an extension point for creating a product"
+      ],
+      "related_patterns": ["Abstract Factory", "Template Method", "Strategy"],
+      "not_ideal_when": [
+        "The only need is a small conditional constructor",
+        "Runtime configuration would be clearer than subclassing"
+      ],
+      "example_user_queries": [
+        "My framework knows too much about the classes plugins create.",
+        "I keep copying a workflow just to change one object.",
+        "How can subclasses choose the component a process uses?",
+        "Every new exporter forces changes in the main workflow.",
+        "I want an extension point without exposing the entire algorithm.",
+        "A reusable process needs different implementations of one collaborator.",
+        "How can I share the steps but vary the object being created?",
+        "I need a library to call user supplied creation logic."
+      ],
+      "slug": "factory-method",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "creational", "factory-method"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/factory-method.svg",
+        "caption": "A shared publishing workflow calls a creation hook; specialized creators supply the concrete exporter.",
+        "alt_text": "A shared publishing workflow calls a creation hook; specialized creators supply the concrete exporter.",
+        "public_path": "/diagrams/gof/factory-method.svg"
+      },
+      "article_format": "markdown",
+      "id": "factory-method",
+      "related_pattern_ids": ["abstract-factory", "template-method", "strategy"],
+      "article_sha256": "38db9b0f215bb634574120b2f089e92f0e1657b0801e82547a10f54521a292d0",
+      "article_word_count": 825
+    },
+    {
+      "title": "Abstract Factory",
+      "category": "Creational",
+      "short_description": "Create families of compatible products through one coherent creation interface.",
+      "use_when": [
+        "Several collaborators must belong to the same implementation family",
+        "A client should switch a whole platform or provider without mixing variants"
+      ],
+      "related_patterns": ["Factory Method", "Bridge", "Builder"],
+      "not_ideal_when": [
+        "Only one independent product varies",
+        "Product families have no meaningful compatibility constraint"
+      ],
+      "example_user_queries": [
+        "My components accidentally mix implementations from different providers.",
+        "How can I switch a whole backend consistently?",
+        "Different platforms need matching sets of UI components.",
+        "Selecting each dependency separately leads to incompatible combinations.",
+        "I need one choice to configure several related collaborators.",
+        "My tests should replace a complete family of infrastructure objects.",
+        "How can client code avoid knowing which platform it runs on?",
+        "Adding a provider duplicates wiring across several constructors."
+      ],
+      "slug": "abstract-factory",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "creational", "abstract-factory"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/abstract-factory.svg",
+        "caption": "One family choice supplies a coherent set of widgets rather than independently mixing products.",
+        "alt_text": "One family choice supplies a coherent set of widgets rather than independently mixing products.",
+        "public_path": "/diagrams/gof/abstract-factory.svg"
+      },
+      "article_format": "markdown",
+      "id": "abstract-factory",
+      "related_pattern_ids": ["factory-method", "bridge", "builder"],
+      "article_sha256": "87156cda4e53ae0a826014d90941d3e3599e651cf6653fe3f3e2853c891234ef",
+      "article_word_count": 849
+    },
+    {
+      "title": "Builder",
+      "category": "Creational",
+      "short_description": "Separate staged construction of a complex result from the result itself.",
+      "use_when": [
+        "An object needs several meaningful construction steps",
+        "Different representations share a construction process"
+      ],
+      "related_patterns": ["Abstract Factory", "Prototype", "Facade"],
+      "not_ideal_when": [
+        "A small immutable value can be constructed clearly with named arguments",
+        "The staged API permits invalid intermediate objects to escape"
+      ],
+      "example_user_queries": [
+        "My constructor has too many parameters to read safely.",
+        "Building a report requires several coordinated steps.",
+        "I want the same assembly process to produce different outputs.",
+        "Optional settings make object creation confusing.",
+        "How can I keep partially configured objects away from callers?",
+        "I need to validate a result after all its parts are supplied.",
+        "Object construction is tangled with the finished object behavior.",
+        "Several callers repeat the same complicated setup sequence."
+      ],
+      "slug": "builder",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "creational", "builder"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/builder.svg",
+        "caption": "Construction state stays in the builder; completion validates it and produces a finished report.",
+        "alt_text": "Construction state stays in the builder; completion validates it and produces a finished report.",
+        "public_path": "/diagrams/gof/builder.svg"
+      },
+      "article_format": "markdown",
+      "id": "builder",
+      "related_pattern_ids": ["abstract-factory", "prototype", "facade"],
+      "article_sha256": "e4f2f68ea916ac4ddd2488d3e21474cc3432e1bb24b04891fef51508c5ace2d1",
+      "article_word_count": 874
+    },
+    {
+      "title": "Prototype",
+      "category": "Creational",
+      "short_description": "Create a new object by copying an existing configured representative.",
+      "use_when": [
+        "A configured template is easier to copy than reconstruct",
+        "Concrete types should supply their own duplication behavior"
+      ],
+      "related_patterns": ["Builder", "Abstract Factory", "Flyweight"],
+      "not_ideal_when": [
+        "Object identity represents an external resource that cannot meaningfully be copied",
+        "Copying would silently preserve shared mutable state"
+      ],
+      "example_user_queries": [
+        "I need several independent variants of a configured object.",
+        "Recreating a template requires repeating a lot of setup.",
+        "My editor should duplicate items without knowing their concrete types.",
+        "How can plugins define how their objects are copied?",
+        "I want to start from an existing example and customize it.",
+        "Copying an object accidentally changes the original.",
+        "Objects are expensive to configure from scratch.",
+        "How should cloning handle nested mutable data?"
+      ],
+      "slug": "prototype",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "creational", "prototype"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/prototype.svg",
+        "caption": "A domain-aware copy keeps the template configuration, gives the copy a new identity, and separates mutable annotations.",
+        "alt_text": "A domain-aware copy keeps the template configuration, gives the copy a new identity, and separates mutable annotations.",
+        "public_path": "/diagrams/gof/prototype.svg"
+      },
+      "article_format": "markdown",
+      "id": "prototype",
+      "related_pattern_ids": ["builder", "abstract-factory", "flyweight"],
+      "article_sha256": "1791a089d09713a55afc9d3b6bc5b3d297f020dffac457848938777756c17dc1",
+      "article_word_count": 848
+    },
+    {
+      "title": "Singleton",
+      "category": "Creational",
+      "short_description": "Restrict a class to one instance within a defined scope and expose shared access to it.",
+      "use_when": [
+        "A resource genuinely requires one coordinated owner within a process",
+        "A class must enforce a single-instance lifecycle rather than merely happen to be shared"
+      ],
+      "related_patterns": ["Facade", "Abstract Factory", "Proxy"],
+      "not_ideal_when": [
+        "The only motivation is convenient global access",
+        "Multiple test or tenant contexts need independent instances",
+        "The actual uniqueness requirement spans processes"
+      ],
+      "example_user_queries": [
+        "I need one component to own a process-wide resource.",
+        "Global shared state makes my tests affect each other.",
+        "Does using one instance require a singleton class?",
+        "I want every caller to use the same coordinator.",
+        "My singleton exists once in each worker and still races.",
+        "How can I control who initializes a shared service?",
+        "A globally accessible object hides too many dependencies.",
+        "I need to distinguish one per process from one for the whole system."
+      ],
+      "slug": "singleton",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "creational", "singleton"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/singleton.svg",
+        "caption": "A shared instance is unique only within its defined scope. Another process can have another instance.",
+        "alt_text": "A shared instance is unique only within its defined scope. Another process can have another instance.",
+        "public_path": "/diagrams/gof/singleton.svg"
+      },
+      "article_format": "markdown",
+      "id": "singleton",
+      "related_pattern_ids": ["facade", "abstract-factory", "proxy"],
+      "article_sha256": "2043091909edf0df3af216f59cccbb23d8df618e1a06716268cb5394dfaaff93",
+      "article_word_count": 841
+    },
+    {
+      "title": "Adapter",
+      "category": "Structural",
+      "short_description": "Translate an existing interface into the contract a client expects.",
+      "use_when": [
+        "An existing component has useful behavior behind an incompatible interface",
+        "A boundary should isolate an external API from application code"
+      ],
+      "related_patterns": ["Facade", "Bridge", "Proxy"],
+      "not_ideal_when": [
+        "The underlying behaviors cannot satisfy the expected contract",
+        "Both interfaces are owned locally and can be simplified directly"
+      ],
+      "example_user_queries": [
+        "A vendor API does not match the interface my application uses.",
+        "I want to replace a dependency without changing every caller.",
+        "Integration details keep leaking into business logic.",
+        "My existing library has the right behavior but the wrong method names.",
+        "Two systems express the same operation with different data formats.",
+        "How can I wrap a legacy component behind a cleaner contract?",
+        "I need to translate external failures into application-level results.",
+        "My callers should not depend on provider-specific response objects."
+      ],
+      "slug": "adapter",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "structural", "adapter"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Introductory",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/adapter.svg",
+        "caption": "The application uses its mail contract; the adapter translates payloads and results at the provider boundary.",
+        "alt_text": "The application uses its mail contract; the adapter translates payloads and results at the provider boundary.",
+        "public_path": "/diagrams/gof/adapter.svg"
+      },
+      "article_format": "markdown",
+      "id": "adapter",
+      "related_pattern_ids": ["facade", "bridge", "proxy"],
+      "article_sha256": "265fa00df922ebd731ee14416a0710f85fcb80b90edd9d2c419c6bb4c9ee42e0",
+      "article_word_count": 805
+    },
+    {
+      "title": "Bridge",
+      "category": "Structural",
+      "short_description": "Separate an abstraction from its implementation so two dimensions can vary independently.",
+      "use_when": [
+        "Two independent design dimensions are multiplying subclasses",
+        "High-level operations should work with interchangeable lower-level implementations"
+      ],
+      "related_patterns": ["Adapter", "Strategy", "Abstract Factory"],
+      "not_ideal_when": [
+        "There is only one actual dimension of variation",
+        "Most combinations are invalid and the separation would imply false independence"
+      ],
+      "example_user_queries": [
+        "Adding a new platform doubles the number of classes.",
+        "I have subclasses for every combination of feature and backend.",
+        "My abstraction and implementation need to evolve separately.",
+        "How can several high-level tools share interchangeable low-level implementations?",
+        "A class hierarchy mixes product features with transport choices.",
+        "I need to choose a renderer without changing each shape class.",
+        "Two dimensions of variation keep getting tangled together.",
+        "How can I avoid a subclass for every possible pairing?"
+      ],
+      "slug": "bridge",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "structural", "bridge"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Advanced",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/bridge.svg",
+        "caption": "Shape variants use a renderer contract. Shape and renderer families can evolve along separate dimensions.",
+        "alt_text": "Shape variants use a renderer contract. Shape and renderer families can evolve along separate dimensions.",
+        "public_path": "/diagrams/gof/bridge.svg"
+      },
+      "article_format": "markdown",
+      "id": "bridge",
+      "related_pattern_ids": ["adapter", "strategy", "abstract-factory"],
+      "article_sha256": "12396e754819800be0eec36c26ee8d6e7e751e560bfd6d814d9ac2004d8efc72",
+      "article_word_count": 823
+    },
+    {
+      "title": "Composite",
+      "category": "Structural",
+      "short_description": "Give individual objects and groups a common interface for recursive tree operations.",
+      "use_when": [
+        "A domain contains nested part–whole structures",
+        "Clients should treat a leaf and a group uniformly for selected operations"
+      ],
+      "related_patterns": ["Iterator", "Visitor", "Decorator"],
+      "not_ideal_when": [
+        "The relationship is primarily a graph with shared ownership or cycles",
+        "Leaves and groups have almost no meaningful common operations"
+      ],
+      "example_user_queries": [
+        "My code handles one item and a group through separate branches.",
+        "I need to operate on nested groups of objects.",
+        "Folders and individual files should share some behavior.",
+        "A document contains sections inside other sections.",
+        "How can an operation apply to an entire tree without special cases everywhere?",
+        "My drawing editor groups shapes recursively.",
+        "Tree traversal logic is duplicated across callers.",
+        "I want a meaningful common interface for leaves and containers."
+      ],
+      "slug": "composite",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "structural", "composite"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/composite.svg",
+        "caption": "Groups contain components, including nested groups. A shared move operation follows the part–whole tree.",
+        "alt_text": "Groups contain components, including nested groups. A shared move operation follows the part–whole tree.",
+        "public_path": "/diagrams/gof/composite.svg"
+      },
+      "article_format": "markdown",
+      "id": "composite",
+      "related_pattern_ids": ["iterator", "visitor", "decorator"],
+      "article_sha256": "db1ec7406f08d6f0501117905511dd3daecfd761c25425dd4668b2783b5502d0",
+      "article_word_count": 823
+    },
+    {
+      "title": "Decorator",
+      "category": "Structural",
+      "short_description": "Compose optional responsibilities by wrapping an object behind the same contract.",
+      "use_when": [
+        "Independent behaviors need to be combined at runtime",
+        "Inheritance is producing a class for every feature combination"
+      ],
+      "related_patterns": ["Proxy", "Composite", "Strategy"],
+      "not_ideal_when": [
+        "Wrapper order cannot be understood or constrained",
+        "The feature needs broad access to internal invariants rather than the public contract"
+      ],
+      "example_user_queries": [
+        "Optional features keep multiplying my subclasses.",
+        "I want to add behavior to one object without changing its class.",
+        "Logging and validation should compose around the same service.",
+        "How can I combine features at runtime?",
+        "I need wrappers that callers can use through the original interface.",
+        "A feature matrix is turning into dozens of class names.",
+        "The order of my wrappers changes the result.",
+        "I want behavior layers with clear ownership and cleanup."
+      ],
+      "slug": "decorator",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "structural", "decorator"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/decorator.svg",
+        "caption": "This writer composition compresses before encrypting, then stores the bytes. Reversing wrappers changes the operation.",
+        "alt_text": "This writer composition compresses before encrypting, then stores the bytes. Reversing wrappers changes the operation.",
+        "public_path": "/diagrams/gof/decorator.svg"
+      },
+      "article_format": "markdown",
+      "id": "decorator",
+      "related_pattern_ids": ["proxy", "composite", "strategy"],
+      "article_sha256": "880f3df4734d4c933711bf05b88b8039fbc8a2812fe97bcb559366d05fde03f5",
+      "article_word_count": 814
+    },
+    {
+      "title": "Facade",
+      "category": "Structural",
+      "short_description": "Offer a focused interface over a subsystem with several collaborating components.",
+      "use_when": [
+        "Clients repeatedly coordinate the same subsystem operations",
+        "Most callers need a simpler view than the full subsystem API"
+      ],
+      "related_patterns": ["Adapter", "Mediator", "Abstract Factory"],
+      "not_ideal_when": [
+        "The interface would conceal essential failure or consistency information",
+        "The facade is becoming a universal service for unrelated operations"
+      ],
+      "example_user_queries": [
+        "Every caller needs to understand several internal components.",
+        "Starting one operation requires a complicated sequence of API calls.",
+        "I want a simple entry point for a subsystem.",
+        "Internal implementation changes keep affecting application code.",
+        "How can I hide routine coordination without hiding failures?",
+        "My tests need to replace a whole subsystem boundary.",
+        "Several screens repeat the same orchestration code.",
+        "A library exposes far more detail than most clients need."
+      ],
+      "slug": "facade",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "structural", "facade"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Introductory",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/facade.svg",
+        "caption": "The export facade owns routine subsystem coordination; callers request one meaningful export operation.",
+        "alt_text": "The export facade owns routine subsystem coordination; callers request one meaningful export operation.",
+        "public_path": "/diagrams/gof/facade.svg"
+      },
+      "article_format": "markdown",
+      "id": "facade",
+      "related_pattern_ids": ["adapter", "mediator", "abstract-factory"],
+      "article_sha256": "a7723ba800b02302e7f734bcd2ae25ac287621824670812b5574a9e7571550b1",
+      "article_word_count": 838
+    },
+    {
+      "title": "Flyweight",
+      "category": "Structural",
+      "short_description": "Share reusable intrinsic state while keeping context-specific state outside the shared object.",
+      "use_when": [
+        "A very large population repeats the same substantial state",
+        "Shared state can remain stable across many contexts"
+      ],
+      "related_patterns": ["Prototype", "Composite", "Proxy"],
+      "not_ideal_when": [
+        "Most object state is unique or heavily mutable",
+        "Sharing overhead exceeds the measured memory benefit"
+      ],
+      "example_user_queries": [
+        "Millions of small objects repeat the same metadata.",
+        "My editor uses too much memory for repeated text styles.",
+        "How can I share stable data without mixing per-instance state?",
+        "Each map marker duplicates the same visual assets.",
+        "I need to separate shared properties from position and selection.",
+        "Caching whole objects accidentally shares mutable state.",
+        "Would interning repeated values reduce memory usage?",
+        "How can many logical objects use fewer physical representations?"
+      ],
+      "slug": "flyweight",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "structural", "flyweight"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Advanced",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/flyweight.svg",
+        "caption": "Two logical trees retain independent location and selection while referencing one shared intrinsic tree type.",
+        "alt_text": "Two logical trees retain independent location and selection while referencing one shared intrinsic tree type.",
+        "public_path": "/diagrams/gof/flyweight.svg"
+      },
+      "article_format": "markdown",
+      "id": "flyweight",
+      "related_pattern_ids": ["prototype", "composite", "proxy"],
+      "article_sha256": "1a986356bc2a22dd0f5462c11ad2c70f6681ba1e87586cf009609c9418f5617e",
+      "article_word_count": 847
+    },
+    {
+      "title": "Proxy",
+      "category": "Structural",
+      "short_description": "Stand in for another object to mediate access while preserving its useful interface.",
+      "use_when": [
+        "Access requires lazy creation or a controlled boundary",
+        "A remote or expensive subject needs a local representative"
+      ],
+      "related_patterns": ["Decorator", "Adapter", "Facade"],
+      "not_ideal_when": [
+        "Mediation would make critical latency or failure behavior misleading",
+        "The proxy bypasses the authoritative enforcement boundary"
+      ],
+      "example_user_queries": [
+        "I want to load an expensive object only when it is used.",
+        "A local interface needs to represent a remote service.",
+        "How can access be mediated without changing ordinary callers?",
+        "Some operations need permission checks before delegation.",
+        "I need to cache requests behind a stable service contract.",
+        "My wrapper should control when the real object is created.",
+        "Remote calls look local and their failures surprise callers.",
+        "How can I avoid exposing a resource directly to every client?"
+      ],
+      "slug": "proxy",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "structural", "proxy"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/proxy.svg",
+        "caption": "The client asks a lazy image proxy to render. The proxy loads its real image on first demand, then delegates.",
+        "alt_text": "The client asks a lazy image proxy to render. The proxy loads its real image on first demand, then delegates.",
+        "public_path": "/diagrams/gof/proxy.svg"
+      },
+      "article_format": "markdown",
+      "id": "proxy",
+      "related_pattern_ids": ["decorator", "adapter", "facade"],
+      "article_sha256": "d70d72a3bf3066c2643076c94c4aea1d3071272d5d953566beb917b8cf733499",
+      "article_word_count": 820
+    },
+    {
+      "title": "Chain of Responsibility",
+      "category": "Behavioral",
+      "short_description": "Let a request pass through candidate handlers without coupling its sender to a specific receiver.",
+      "use_when": [
+        "The appropriate receiver depends on context or runtime configuration",
+        "Candidate handlers need a deliberate fallback order"
+      ],
+      "related_patterns": ["Observer", "Command", "Decorator"],
+      "not_ideal_when": [
+        "The receiver is fixed and direct delegation is clearer",
+        "Several independent listeners must all receive the same event"
+      ],
+      "example_user_queries": [
+        "A request should fall back through several possible handlers.",
+        "The sender should not know which component handles a request.",
+        "I need a configurable order for resolving a value.",
+        "Unhandled requests disappear silently in my routing code.",
+        "My input event should reach the nearest suitable receiver.",
+        "Adding a handler means editing a central conditional.",
+        "I want to separate request creation from receiver selection.",
+        "How can I make handler ordering and stopping rules explicit?"
+      ],
+      "slug": "chain-of-responsibility",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "chain-of-responsibility"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/chain-of-responsibility.svg",
+        "caption": "A shortcut moves outward only when a candidate passes. Handling stops propagation; the application is a fallback.",
+        "alt_text": "A shortcut moves outward only when a candidate passes. Handling stops propagation; the application is a fallback.",
+        "public_path": "/diagrams/gof/chain-of-responsibility.svg"
+      },
+      "article_format": "markdown",
+      "id": "chain-of-responsibility",
+      "related_pattern_ids": ["observer", "command", "decorator"],
+      "article_sha256": "bcb310f8f23a7d07611211f0ec5d65ddcd7aa7e270b09f02626290781ba096c1",
+      "article_word_count": 843
+    },
+    {
+      "title": "Command",
+      "category": "Behavioral",
+      "short_description": "Represent an operation as an object or value so it can be stored, scheduled, or composed.",
+      "use_when": [
+        "Actions need to outlive the UI event that created them",
+        "Operations need queuing, history, or explicit execution ownership"
+      ],
+      "related_patterns": ["Memento", "Strategy", "Chain of Responsibility"],
+      "not_ideal_when": [
+        "A direct function call already expresses the complete need",
+        "The design assumes every operation can be automatically undone"
+      ],
+      "example_user_queries": [
+        "Buttons and shortcuts duplicate the same action logic.",
+        "I want to queue operations for later execution.",
+        "How can actions be represented as data rather than immediate calls?",
+        "My editor needs an undo history.",
+        "I need to record which operations were requested.",
+        "A background worker should execute a request created elsewhere.",
+        "I want to combine several actions into one meaningful operation.",
+        "How can retry and execution ownership be explicit?"
+      ],
+      "slug": "command",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "command"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/command.svg",
+        "caption": "Several invokers can create the same action representation. Execution and undo history have explicit owners.",
+        "alt_text": "Several invokers can create the same action representation. Execution and undo history have explicit owners.",
+        "public_path": "/diagrams/gof/command.svg"
+      },
+      "article_format": "markdown",
+      "id": "command",
+      "related_pattern_ids": ["memento", "strategy", "chain-of-responsibility"],
+      "article_sha256": "3bc3d2543bb74fd21baef8d1c7576c7db35e489500b591a7c5b18908a1156842",
+      "article_word_count": 840
+    },
+    {
+      "title": "Interpreter",
+      "category": "Behavioral",
+      "short_description": "Model a small language through expression objects that evaluate its grammar.",
+      "use_when": [
+        "A compact recurring expression language needs domain-specific meaning",
+        "Grammar alternatives map cleanly to a small set of expression types"
+      ],
+      "related_patterns": ["Composite", "Visitor", "Strategy"],
+      "not_ideal_when": [
+        "The language is large or requires sophisticated parsing and tooling",
+        "A mature parser or query language already meets the need"
+      ],
+      "example_user_queries": [
+        "Users need to express small rules rather than fixed options.",
+        "I want to evaluate combinations of domain-specific expressions.",
+        "Conditional logic is being encoded in ad hoc strings.",
+        "How can a small grammar become an explicit object structure?",
+        "My rule language needs predictable evaluation semantics.",
+        "I need to keep parsing separate from evaluating expressions.",
+        "A few recurring boolean expressions should be composable.",
+        "When does a custom mini-language become too complex?"
+      ],
+      "slug": "interpreter",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "interpreter"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Advanced",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/interpreter.svg",
+        "caption": "Compound expressions recursively evaluate terminal expressions against a deliberate task context.",
+        "alt_text": "Compound expressions recursively evaluate terminal expressions against a deliberate task context.",
+        "public_path": "/diagrams/gof/interpreter.svg"
+      },
+      "article_format": "markdown",
+      "id": "interpreter",
+      "related_pattern_ids": ["composite", "visitor", "strategy"],
+      "article_sha256": "74f3b18b7da193f5ad18d02073b559399b7e1eaf8bd27f9d4f10ed84ce22b994",
+      "article_word_count": 823
+    },
+    {
+      "title": "Iterator",
+      "category": "Behavioral",
+      "short_description": "Traverse elements through a common protocol without exposing a collection’s representation.",
+      "use_when": [
+        "Clients need sequential access to different storage structures",
+        "Traversal state should be separate from the collection itself"
+      ],
+      "related_patterns": ["Composite", "Visitor", "Strategy"],
+      "not_ideal_when": [
+        "A client needs random access that the traversal interface does not provide",
+        "Traversal hides resource ownership or unstable mutation semantics"
+      ],
+      "example_user_queries": [
+        "My algorithm should work on several kinds of collections.",
+        "I want to traverse a tree without exposing its internal nodes.",
+        "Loading every result at once uses too much memory.",
+        "How can two readers walk the same collection independently?",
+        "Collection storage details keep leaking into callers.",
+        "I need a lazy sequence with a clear end condition.",
+        "What should happen if data changes during traversal?",
+        "A database cursor needs predictable cleanup when iteration stops."
+      ],
+      "slug": "iterator",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "iterator"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Introductory",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/iterator.svg",
+        "caption": "Independent iterators own separate positions over the same collection. The client consumes elements through the traversal protocol.",
+        "alt_text": "Independent iterators own separate positions over the same collection. The client consumes elements through the traversal protocol.",
+        "public_path": "/diagrams/gof/iterator.svg"
+      },
+      "article_format": "markdown",
+      "id": "iterator",
+      "related_pattern_ids": ["composite", "visitor", "strategy"],
+      "article_sha256": "0367856b0cf1948120b704bd9209047704624c217d7d68b4b8bde65a4fb3bfc8",
+      "article_word_count": 821
+    },
+    {
+      "title": "Mediator",
+      "category": "Behavioral",
+      "short_description": "Place collaboration rules in a coordinator instead of spreading them across peer objects.",
+      "use_when": [
+        "Many components know too much about one another",
+        "Interaction rules change independently from component behavior"
+      ],
+      "related_patterns": ["Observer", "Facade", "Command"],
+      "not_ideal_when": [
+        "A few direct relationships are already clear",
+        "The coordinator would absorb unrelated domain logic"
+      ],
+      "example_user_queries": [
+        "My UI controls all call one another directly.",
+        "Changing one component breaks several peers.",
+        "Where should collaboration rules between components live?",
+        "A dialog has tangled enable and disable logic.",
+        "I want to reuse a component outside its current screen.",
+        "How can I reduce peer-to-peer dependency relationships?",
+        "The same interaction rule is repeated in several objects.",
+        "My event coordinator is becoming too large to understand."
+      ],
+      "slug": "mediator",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "mediator"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/mediator.svg",
+        "caption": "Participants report events to one scoped mediator, which owns the collaboration rules and updates other participants.",
+        "alt_text": "Participants report events to one scoped mediator, which owns the collaboration rules and updates other participants.",
+        "public_path": "/diagrams/gof/mediator.svg"
+      },
+      "article_format": "markdown",
+      "id": "mediator",
+      "related_pattern_ids": ["observer", "facade", "command"],
+      "article_sha256": "4ee25d742b7e3b170487700f6f741215c517a7b9d49d50d24b57730428a84cce",
+      "article_word_count": 851
+    },
+    {
+      "title": "Memento",
+      "category": "Behavioral",
+      "short_description": "Capture restorable state without requiring the caretaker to inspect its internal representation.",
+      "use_when": [
+        "An object needs snapshots or rollback of its own state",
+        "History management should remain separate from state representation"
+      ],
+      "related_patterns": ["Command", "Prototype", "State"],
+      "not_ideal_when": [
+        "Restoration is expected to reverse external effects",
+        "Snapshots are too expensive or incompatible without a defined policy"
+      ],
+      "example_user_queries": [
+        "My editor needs to restore an earlier state.",
+        "The undo manager knows too much about object internals.",
+        "How can I save a checkpoint without exposing private fields?",
+        "I want rollback for a local configuration change.",
+        "Copying random fields does not restore a valid object.",
+        "Snapshots consume too much memory.",
+        "A saved state must survive changes to the object structure.",
+        "What should be included in a restoration boundary?"
+      ],
+      "slug": "memento",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "memento"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/memento.svg",
+        "caption": "The originator captures and restores its coherent state. The caretaker retains an opaque memento without editing its internals.",
+        "alt_text": "The originator captures and restores its coherent state. The caretaker retains an opaque memento without editing its internals.",
+        "public_path": "/diagrams/gof/memento.svg"
+      },
+      "article_format": "markdown",
+      "id": "memento",
+      "related_pattern_ids": ["command", "prototype", "state"],
+      "article_sha256": "1a5f7a1b05d385b2f39af14e48961db1462ea4aa31fbe38ddf351b5b82fe1abd",
+      "article_word_count": 828
+    },
+    {
+      "title": "Observer",
+      "category": "Behavioral",
+      "short_description": "Let subscribers receive notifications when a subject changes without hard-coding its dependents.",
+      "use_when": [
+        "An open-ended set of dependents reacts to one subject",
+        "The subject should publish change information without knowing each consumer"
+      ],
+      "related_patterns": ["Mediator", "Chain of Responsibility", "Command"],
+      "not_ideal_when": [
+        "A fixed direct call is clearer",
+        "Subscribers rely on unspecified order or atomic delivery"
+      ],
+      "example_user_queries": [
+        "Several views need to react when one model changes.",
+        "My model knows every component that depends on it.",
+        "How can new listeners be added without editing the publisher?",
+        "A subscriber remains active after its screen closes.",
+        "Notifications trigger recursive updates.",
+        "I need to distinguish a state snapshot from a change event.",
+        "Listener ordering is creating hidden dependencies.",
+        "One failing subscriber prevents others from being notified."
+      ],
+      "slug": "observer",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "observer"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/observer.svg",
+        "caption": "The document publishes one coherent title change to independent subscribers. Their subscription lifetimes remain explicit.",
+        "alt_text": "The document publishes one coherent title change to independent subscribers. Their subscription lifetimes remain explicit.",
+        "public_path": "/diagrams/gof/observer.svg"
+      },
+      "article_format": "markdown",
+      "id": "observer",
+      "related_pattern_ids": ["mediator", "chain-of-responsibility", "command"],
+      "article_sha256": "924b61da9d8d3741b565105b6cea13358387dbec5f26f469caf97f660ad8e007",
+      "article_word_count": 822
+    },
+    {
+      "title": "State",
+      "category": "Behavioral",
+      "short_description": "Move state-dependent behavior into explicit state objects and delegate through the current state.",
+      "use_when": [
+        "Several operations repeatedly branch on the same lifecycle state",
+        "States have distinct behavior and deliberate transitions"
+      ],
+      "related_patterns": ["Strategy", "Memento", "Template Method"],
+      "not_ideal_when": [
+        "A small transition table or enum remains easier to read",
+        "The design hides transition rules across too many objects"
+      ],
+      "example_user_queries": [
+        "Every method has a switch on the same status field.",
+        "My workflow behaves differently depending on its lifecycle stage.",
+        "Invalid actions are scattered across conditional branches.",
+        "How can I make state transitions and allowed operations explicit?",
+        "Adding a status means editing many methods.",
+        "An object changes behavior after an event.",
+        "I need to distinguish interchangeable policies from lifecycle states.",
+        "My state classes make it difficult to see the whole transition graph."
+      ],
+      "slug": "state",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "state"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/state.svg",
+        "caption": "The upload delegates behavior to its active state. Pause and resume are lifecycle transitions; completion leads to a different valid operation set.",
+        "alt_text": "The upload delegates behavior to its active state. Pause and resume are lifecycle transitions; completion leads to a different valid operation set.",
+        "public_path": "/diagrams/gof/state.svg"
+      },
+      "article_format": "markdown",
+      "id": "state",
+      "related_pattern_ids": ["strategy", "memento", "template-method"],
+      "article_sha256": "c4eba7783ff857a18821212f0b8685f33d51cc04eae834146aa8116b0d2144d1",
+      "article_word_count": 830
+    },
+    {
+      "title": "Strategy",
+      "category": "Behavioral",
+      "short_description": "Make a varying algorithm or policy explicit and replaceable behind a common contract.",
+      "use_when": [
+        "A task has several meaningful interchangeable algorithms",
+        "Policy varies independently from the context that uses it"
+      ],
+      "related_patterns": ["State", "Template Method", "Bridge"],
+      "not_ideal_when": [
+        "There is only one trivial implementation with no useful boundary",
+        "Strategies cannot honestly fulfill the same behavioral contract"
+      ],
+      "example_user_queries": [
+        "My method has a large conditional for different algorithms.",
+        "I want to choose a policy at runtime.",
+        "Different customers need different rules for the same task.",
+        "How can I test an algorithm separately from its surrounding workflow?",
+        "Adding a variant keeps changing the main service.",
+        "I need interchangeable behavior without a subclass for the whole service.",
+        "Several implementations should return the same kind of result.",
+        "How can a function parameter replace a strategy class?"
+      ],
+      "slug": "strategy",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "strategy"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Introductory",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/strategy.svg",
+        "caption": "The order workflow delegates to a pricing contract; the selected algorithm is separate from the stable surrounding workflow.",
+        "alt_text": "The order workflow delegates to a pricing contract; the selected algorithm is separate from the stable surrounding workflow.",
+        "public_path": "/diagrams/gof/strategy.svg"
+      },
+      "article_format": "markdown",
+      "id": "strategy",
+      "related_pattern_ids": ["state", "template-method", "bridge"],
+      "article_sha256": "67de7ae4946f23a896b2ac2be1f1c1489b3f0004d2741268d779f1d43200fcd5",
+      "article_word_count": 815
+    },
+    {
+      "title": "Template Method",
+      "category": "Behavioral",
+      "short_description": "Define a stable algorithm skeleton and allow subclasses to customize selected steps.",
+      "use_when": [
+        "Several processes share an invariant sequence with specific variation points",
+        "An inheritance-based framework needs constrained extension hooks"
+      ],
+      "related_patterns": ["Factory Method", "Strategy", "State"],
+      "not_ideal_when": [
+        "Runtime composition fits the variation better than inheritance",
+        "Subclasses must frequently bypass the fixed sequence"
+      ],
+      "example_user_queries": [
+        "Several implementations copy the same workflow skeleton.",
+        "I want extensions to customize steps without changing their order.",
+        "A base process should enforce validation before execution.",
+        "How can I keep common cleanup in one place?",
+        "Subclasses repeat orchestration but differ in one stage.",
+        "I need narrow hooks rather than overriding the whole method.",
+        "When is composition clearer than inheriting a process?",
+        "My subclass hooks depend on undocumented internal state."
+      ],
+      "slug": "template-method",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "template-method"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Intermediate",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/template-method.svg",
+        "caption": "The base importer owns step order. A format-specific override supplies reading while shared validation and cleanup stay in the workflow.",
+        "alt_text": "The base importer owns step order. A format-specific override supplies reading while shared validation and cleanup stay in the workflow.",
+        "public_path": "/diagrams/gof/template-method.svg"
+      },
+      "article_format": "markdown",
+      "id": "template-method",
+      "related_pattern_ids": ["factory-method", "strategy", "state"],
+      "article_sha256": "c3dddff806d431d31c706ba9313d7ed70b066cefb813606d178d2d6822d17e21",
+      "article_word_count": 843
+    },
+    {
+      "title": "Visitor",
+      "category": "Behavioral",
+      "short_description": "Organize operations separately from a stable family of element types using type-specific dispatch.",
+      "use_when": [
+        "A stable object structure needs many different operations",
+        "Type-specific operations should not all live inside the element classes"
+      ],
+      "related_patterns": ["Composite", "Iterator", "Interpreter"],
+      "not_ideal_when": [
+        "Element types change frequently while operations remain stable",
+        "Traversal or pattern matching can express the operation more simply"
+      ],
+      "example_user_queries": [
+        "My syntax tree classes contain too many unrelated operations.",
+        "I want to add analyses without editing every element implementation.",
+        "Different node types need different handling in one operation.",
+        "How can behavior be organized by operation rather than by data type?",
+        "I keep using type checks throughout a tree walk.",
+        "The object structure is stable but new reports keep arriving.",
+        "Adding a node type breaks many external operations.",
+        "When is a visitor preferable to pattern matching?"
+      ],
+      "slug": "visitor",
+      "domain": "Software Engineering",
+      "collection": "Object-Oriented Design / GoF Design Patterns",
+      "tags": ["object-oriented-design", "behavioral", "visitor"],
+      "prerequisites": ["Basic familiarity with objects, interfaces, composition, and inheritance"],
+      "difficulty": "Advanced",
+      "graphic": {
+        "type": "diagram",
+        "path": "graphics/visitor.svg",
+        "caption": "An element accepts the selected operation and dispatches to its type-specific visitor method. The visitor owns the operation.",
+        "alt_text": "An element accepts the selected operation and dispatches to its type-specific visitor method. The visitor owns the operation.",
+        "public_path": "/diagrams/gof/visitor.svg"
+      },
+      "article_format": "markdown",
+      "id": "visitor",
+      "related_pattern_ids": ["composite", "iterator", "interpreter"],
+      "article_sha256": "b29746671e2acbc59adda86d6283a64c2b9f641059f9b9e565ccab4cab1307b8",
+      "article_word_count": 820
+    }
+  ]
+}

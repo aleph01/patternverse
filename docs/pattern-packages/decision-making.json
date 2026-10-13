@@ -1,0 +1,218 @@
+{
+  "note": "Authoring metadata for this content package. The public V1 schema supports summary, aliases, tags, verses, and wiki links, but not these richer fields. Recommendation examples are prepared here for future retrieval integration; the current app does not consume this sidecar.",
+  "patterns": [
+    {
+      "id": "separate-reversible-from-irreversible-decisions",
+      "title": "Separate Reversible from Irreversible Decisions",
+      "domain": "decision-making",
+      "short_description": "Match deliberation to the cost of being wrong and the cost of changing course.",
+      "use_when": [
+        "You are overanalyzing a low-cost choice or considering a commitment that may be hard to undo."
+      ],
+      "estimated_practice_time": "5–10 minutes",
+      "related_patterns": [
+        "prefer-the-smallest-useful-experiment",
+        "look-for-the-decisive-unknown"
+      ],
+      "example_user_queries": [
+        "I keep researching a choice I could easily undo.",
+        "How much thought does this decision deserve?",
+        "I'm about to make a commitment and want to know what could stick.",
+        "I can leave later, but switching would be expensive.",
+        "How do I decide which choices need more caution?",
+        "Can I try this before committing fully?",
+        "I want to know the downside if I change my mind.",
+        "I'm treating a major commitment like a harmless trial."
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    },
+    {
+      "id": "define-the-decision-before-comparing-options",
+      "title": "Define the Decision Before Comparing Options",
+      "domain": "decision-making",
+      "short_description": "Clarify the desired outcome and genuine constraints before judging alternatives.",
+      "use_when": [
+        "You keep comparing options but suspect that the question itself is too narrow or unclear."
+      ],
+      "estimated_practice_time": "10 minutes",
+      "related_patterns": ["make-trade-offs-explicit", "look-for-the-decisive-unknown"],
+      "example_user_queries": [
+        "I can't tell whether I need a new job or a different way of working.",
+        "I'm comparing two solutions but haven't defined the problem.",
+        "My choice feels like either staying forever or quitting immediately.",
+        "How do I find out what I really need from this decision?",
+        "I think some of these constraints might just be assumptions.",
+        "What alternatives am I missing?",
+        "We disagree about what we're actually deciding.",
+        "I want to improve the question before scoring the options."
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    },
+    {
+      "id": "run-a-premortem",
+      "title": "Run a Premortem",
+      "domain": "decision-making",
+      "short_description": "Imagine a plan has failed, then identify plausible causes and safeguards before committing.",
+      "use_when": [
+        "A favored plan has momentum and ordinary questions are not surfacing its vulnerabilities."
+      ],
+      "estimated_practice_time": "10–20 minutes",
+      "related_patterns": [
+        "look-for-the-decisive-unknown",
+        "prefer-the-smallest-useful-experiment"
+      ],
+      "example_user_queries": [
+        "Everyone likes this plan but I'm worried we're missing something.",
+        "What could realistically make this project fail?",
+        "I want to spot preventable risks before committing.",
+        "It's hard to criticize the plan once the team has agreed.",
+        "How do I turn a list of worries into changes to the plan?",
+        "I want to investigate why I might regret moving.",
+        "Our project has several dependencies that could interact.",
+        "How can we make space for doubt without vetoing everything?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    },
+    {
+      "id": "prefer-the-smallest-useful-experiment",
+      "title": "Prefer the Smallest Useful Experiment",
+      "domain": "decision-making",
+      "short_description": "Replace speculation with the smallest safe real-world test that teaches you something important.",
+      "use_when": ["Research cannot answer how a choice will work or feel in practice."],
+      "estimated_practice_time": "10–15 minutes to design; execution varies",
+      "related_patterns": [
+        "separate-reversible-from-irreversible-decisions",
+        "look-for-the-decisive-unknown"
+      ],
+      "example_user_queries": [
+        "I've researched this career but don't know whether I'd enjoy it.",
+        "How can I try self-employment without quitting my job?",
+        "I want to test whether people will actually pay.",
+        "What small action would tell me if this idea is feasible?",
+        "I keep working on the logo instead of testing demand.",
+        "How do I make a trial realistic enough to teach me something?",
+        "I want to avoid an expensive two-year mistake.",
+        "What would count as evidence against my idea?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    },
+    {
+      "id": "make-trade-offs-explicit",
+      "title": "Make Trade-offs Explicit",
+      "domain": "decision-making",
+      "short_description": "Name what each option gives you and what it asks you to sacrifice.",
+      "use_when": [
+        "No option gives you everything, or repeated arguments conceal different priorities."
+      ],
+      "estimated_practice_time": "10 minutes",
+      "related_patterns": [
+        "map-outcomes-likelihoods-and-preferences",
+        "define-the-decision-before-comparing-options"
+      ],
+      "example_user_queries": [
+        "I want a job with more money and freedom but can't find both.",
+        "How do I choose between a cheaper apartment and a shorter commute?",
+        "I keep treating every disadvantage as a reason not to decide.",
+        "We're arguing about solutions but might value different things.",
+        "Which sacrifices am I actually willing to make?",
+        "My pros-and-cons list keeps getting longer.",
+        "The decision matrix gives a number but not clarity.",
+        "How much convenience would I give up for privacy?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    },
+    {
+      "id": "keep-a-decision-journal",
+      "title": "Keep a Decision Journal",
+      "domain": "decision-making",
+      "short_description": "Record reasoning and expectations before outcomes make the past seem more predictable.",
+      "use_when": [
+        "You want to learn from repeated, uncertain, or consequential decisions without confusing luck and judgment."
+      ],
+      "estimated_practice_time": "5–10 minutes per meaningful decision",
+      "related_patterns": [
+        "map-outcomes-likelihoods-and-preferences",
+        "look-for-the-decisive-unknown"
+      ],
+      "example_user_queries": [
+        "I forget what I believed before I saw the result.",
+        "How do I learn from decisions without judging only the outcome?",
+        "I got lucky but I'm not sure the decision was sound.",
+        "A reasonable plan failed and I want to learn fairly.",
+        "I keep underestimating how long projects take.",
+        "How can I record my uncertainty before hindsight changes it?",
+        "I want to review whether my forecasts are well calibrated.",
+        "What evidence would make me change my mind?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    },
+    {
+      "id": "map-outcomes-likelihoods-and-preferences",
+      "title": "Map Outcomes, Likelihoods, and Preferences",
+      "domain": "decision-making",
+      "short_description": "Separate possible futures, their likelihood, and how much you value them.",
+      "use_when": [
+        "Uncertain futures, hopes, and fears are getting mixed together while you compare options."
+      ],
+      "estimated_practice_time": "15–25 minutes",
+      "related_patterns": ["make-trade-offs-explicit", "look-for-the-decisive-unknown"],
+      "example_user_queries": [
+        "I keep comparing job labels instead of the futures they could create.",
+        "I want this outcome so much that it feels more likely.",
+        "A frightening downside dominates my attention.",
+        "How do I separate probabilities from what I prefer?",
+        "I'm only imagining total success or complete failure.",
+        "I want to compare uncertain options without fake precision.",
+        "Which probability estimates actually drive my choice?",
+        "How do I include an unlikely outcome that matters enormously?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    },
+    {
+      "id": "look-for-the-decisive-unknown",
+      "title": "Look for the Decisive Unknown",
+      "domain": "decision-making",
+      "short_description": "Focus investigation on the uncertainty that could actually change what you choose.",
+      "use_when": [
+        "Many unanswered questions are creating a research loop, but only a few would change the choice."
+      ],
+      "estimated_practice_time": "10–15 minutes",
+      "related_patterns": ["prefer-the-smallest-useful-experiment", "run-a-premortem"],
+      "example_user_queries": [
+        "There are dozens of things I could research before deciding.",
+        "What information would actually change my choice?",
+        "I keep learning interesting things that don't affect the decision.",
+        "One answer might flip which option I prefer.",
+        "How can I stop using research to postpone commitment?",
+        "The decision depends on whether one threshold is crossed.",
+        "Is the cost of more information worth it?",
+        "What should I test before choosing?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "Preserve the supplied article and its concrete examples without adding decorative artwork; the guided worksheet provides the applied structure."
+      }
+    }
+  ]
+}

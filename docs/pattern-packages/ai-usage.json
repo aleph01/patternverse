@@ -1,0 +1,399 @@
+{
+  "format_version": 1,
+  "title": "Thinking with Language Models",
+  "verse": "ai-usage",
+  "collection": "thinking-with-language-models",
+  "source_sha256": "1f6f26a6a51c8e884b257c8b6ad6c6b8d6171d86a2be0be8a1725c8af8cb5d1b",
+  "reconciliation": {
+    "id": "look-for-the-decisive-unknown",
+    "original_body_sha256": "94cbea9d57553d86f45f665644dd771a1628dc3f59af639f13000701cc6c093b",
+    "original_practice_sha256": "9c4583d742b3370cc6ea25c4f60dfc20c4d9a508d44b5f257c8272d5f27203c8",
+    "practice_migration": "The embedded YAML worksheet was converted to grouped Pattern Language; original checksums remain historical provenance.",
+    "migrated_practice_sha256": "0927ee3280f5011d7b3972af218da0f597876c3ff8d990adc82fdda3b3876577",
+    "migrated_body_sha256": "b49a2063fcd0f2710e5e2bb21979c5bae16e390625e719842c39e969854a4af9",
+    "supplement_heading": "Using this pattern with language models"
+  },
+  "patterns": [
+    {
+      "id": "separate-exploration-from-selection",
+      "slug": "separate-exploration-from-selection",
+      "title": "Separate Exploration from Selection",
+      "source_title": "Separate Exploration from Selection",
+      "short_description": "Generate genuinely different possibilities before comparing them against explicit criteria.",
+      "tags": [
+        "ai-usage",
+        "thinking-with-language-models",
+        "exploration",
+        "decision-making",
+        "creativity"
+      ],
+      "verses": ["ai-usage"],
+      "use_when": [
+        "The answer space is open and the first plausible idea is narrowing the conversation.",
+        "You need alternatives that differ in assumptions or mechanisms, not cosmetic details."
+      ],
+      "not_ideal_when": [
+        "There is one factual answer.",
+        "More alternatives are delaying a decision that depends on missing information."
+      ],
+      "prerequisites": ["A task with more than one plausible approach."],
+      "difficulty": "Introductory",
+      "related_patterns": [
+        {
+          "id": "reframing-generate-real-options",
+          "title": "Generate Real Options",
+          "relationship": "Vary the underlying assumptions, not just surface details."
+        },
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown",
+          "relationship": "Stop generating when the choice turns on missing information."
+        },
+        {
+          "id": "attack-then-repair",
+          "title": "Attack, Then Repair",
+          "relationship": "Stress-test a selected proposal before developing it further."
+        }
+      ],
+      "example_user_queries": [
+        "The AI keeps giving me variations of its first idea. How can I get genuinely different options?",
+        "How can I use a language model to explore software architectures before choosing one?",
+        "I need naming ideas in several directions, not more names like the first suggestion.",
+        "Can you help me separate brainstorming from judging the ideas?",
+        "How do I ask an AI to compare options against my actual priorities?",
+        "When should I stop asking for more alternatives and start deciding?",
+        "How can I explore different ways to organize research notes?",
+        "The first decent design is taking over the conversation. How can I reopen the possibilities?"
+      ],
+      "article_markdown": "A language model is very good at making something plausible. That is useful when you need an answer quickly, but it can become a weakness when the real problem is discovering what the possibilities are.\n\nAsk, “What architecture should I use for this application?” and a model may immediately settle on one coherent architecture. Ask, “What should this landing page look like?” and it may give you a single competent design direction. Ask for a name, and the first few suggestions may establish a theme that everything afterward continues to imitate.\n\nThe problem is not necessarily that the first answer is bad. The problem is that **generation and judgment have happened at the same time**.\n\nA better pattern is to separate them.\n\nFirst explore. Then select.\n\n## Two different cognitive jobs\n\nExploration asks:\n\n> What could we do?\n\nSelection asks:\n\n> Given the possibilities, which ones fit what we care about?\n\nThese are different jobs.\n\nDuring exploration, variety matters. You want the model to travel into different parts of the solution space: conservative and experimental approaches, different mechanisms, different assumptions, perhaps even approaches that contradict one another.\n\nDuring selection, variety is no longer the objective. Now the question becomes which alternatives survive the relevant constraints and criteria.\n\nCombining the two tends to create premature convergence. As soon as one idea looks promising, subsequent thinking becomes organized around it.\n\nThis resembles brainstorming in human groups. If every suggestion is immediately debated, judged, defended, or rejected, fewer genuinely different ideas tend to appear. Judgment becomes an invisible constraint on generation.\n\nWith an LLM, the same effect can happen within a single response.\n\n## What exploration should look like\n\nSuppose you are designing a tool for organizing research notes.\n\nInstead of asking:\n\n> Design the best way to organize research notes.\n\nyou might first ask:\n\n> Generate six fundamentally different organizational models for research notes. Make them differ in the underlying metaphor, not merely in UI details. Do not rank them yet.\n\nThe model might produce:\n\n- hierarchical notebooks,\n- a graph of linked ideas,\n- a chronological research log,\n- question-centered collections,\n- evidence/claim maps,\n- automatically generated topic clusters.\n\nOnly afterward do you introduce your criteria:\n\n> Now compare these approaches for a solo researcher who frequently revisits old material, dislikes manual organization, and wants to trace claims back to sources.\n\nThe second step operates on a richer set of candidates than the original one-shot question probably would have produced.\n\nThe important phrase is **fundamentally different**. Asking for “five options” often produces five cosmetic variations of one underlying idea. Good exploration explicitly asks the model to vary assumptions, mechanisms, or frames.\n\n## Creative work\n\nThe pattern becomes especially visible in creative work.\n\nImagine asking an LLM for a title for a novel about belonging, illness, and a community that slowly becomes a home.\n\nThe model proposes *Where We Remain*.\n\nIf you immediately say, “Give me more like that,” the search space has already narrowed. You may get *Where We Stay*, *The Places We Remain*, *Those Who Remain*, and so on.\n\nInstead, exploration can deliberately open several territories:\n\n> Generate title directions using six different sources: place, action, metaphor, contradiction, dialogue, and an ordinary concrete object. Give five titles in each direction. Do not choose among them.\n\nSelection can come later.\n\nThis does not guarantee brilliance. It does reduce the chance that the first adequate idea quietly determines the whole search.\n\n## Selection deserves its own prompt\n\nThe second phase should not simply be:\n\n> Which is best?\n\nThat recreates ambiguity.\n\nSelection becomes more useful when the model knows what to optimize for:\n\n> Compare the candidates for memorability, emotional ambiguity, thematic fit, and whether they sound overly literary.\n\nAt this point, the model is not being asked to invent and evaluate simultaneously. It has a stable set of candidates and a visible basis for comparison.\n\nYou can even separate selection further:\n\n**Explore → establish criteria → compare → decide**\n\nFor difficult decisions, this additional separation can matter.\n\n## Why it works\n\nLLMs generate each continuation in the context of what has already been generated. Early outputs therefore influence later ones. A specific framing, example, or candidate can become an attractor around which subsequent responses cluster.\n\nSeparating exploration from selection deliberately changes that conversational structure.\n\nThe exploration phase protects diversity.\n\nThe selection phase introduces constraints only after diversity exists.\n\nThis is particularly useful because many real tasks have an **exploration–exploitation trade-off**. You need enough exploration to discover promising regions before investing deeply in one of them.\n\nAn LLM makes exploitation extremely easy: give it one reasonable direction and it can elaborate it indefinitely. The more important skill is sometimes knowing when not to elaborate yet.\n\n## Where it helps most\n\nThis pattern is valuable when the answer space is genuinely open:\n\n- architecture and product decisions,\n- naming and branding,\n- writing and story development,\n- research hypotheses,\n- debugging strategies,\n- business models,\n- design concepts,\n- explanations and metaphors,\n- possible diagnoses of a technical failure,\n- ways of structuring a difficult problem.\n\nIt matters less when there is essentially one factual answer.\n\nYou do not need six creative approaches to converting Celsius to Fahrenheit.\n\n## A common failure: fake diversity\n\nOne danger is believing that quantity equals exploration.\n\nTen alternatives can still represent one idea.\n\nFor example:\n\n1. use PostgreSQL,\n2. use PostgreSQL with Redis,\n3. use PostgreSQL with read replicas,\n4. use managed PostgreSQL,\n5. use PostgreSQL with a different ORM.\n\nThat may be useful later, but it is not broad exploration if the important decision is actually about the system's data model.\n\nThe remedy is to specify what dimension should differ:\n\n> Generate approaches based on fundamentally different storage models.\n\nor:\n\n> Each option should make a different assumption about how users retrieve information.\n\nGood exploration varies the underlying logic.\n\n## Another failure: staying in exploration forever\n\nThe opposite problem also exists.\n\nLLMs can generate alternatives almost without limit. More possibilities eventually become noise.\n\nExploration should stop when additional candidates are mostly recombinations of ideas you already have or when the decision hinges on information rather than imagination.\n\nAt that point, move into selection—or into another pattern entirely, such as **Expose the Decisive Unknown**.\n\nThe purpose is not maximal option generation.\n\nIt is enough diversity to make the eventual choice meaningful.",
+      "article_sha256": "a2e02b641535c3885fa5c39bb37baaa7fbc7639bef12559025d7101d0772f445",
+      "article_word_count": 1054,
+      "visual_decision": "A simple process diagram works well:\n\n`Explore widely → establish criteria → compare → select → develop`",
+      "graphic": {
+        "public_path": "/diagrams/ai-usage/separate-exploration-from-selection.svg",
+        "alt_text": "Five distinct stages: explore widely, establish criteria, compare candidates, select, then develop the chosen direction.",
+        "caption": "Explore different possibilities first; introduce criteria before selecting and developing one."
+      },
+      "practice": "absent"
+    },
+    {
+      "id": "preserve-the-invariants",
+      "slug": "preserve-the-invariants",
+      "title": "Preserve the Invariants",
+      "source_title": "Preserve the Invariants",
+      "short_description": "State what must remain true while asking a language model to revise, refactor, or redesign something.",
+      "tags": [
+        "ai-usage",
+        "thinking-with-language-models",
+        "constraints",
+        "revision",
+        "design-intent"
+      ],
+      "verses": ["ai-usage"],
+      "use_when": [
+        "An artifact has valuable behavior or qualities that a revision must preserve.",
+        "Repeated iterations are drifting away from earlier design decisions."
+      ],
+      "not_ideal_when": [
+        "Every incidental detail has been made non-negotiable.",
+        "Conflicting constraints make the requested improvement impossible."
+      ],
+      "prerequisites": [
+        "An existing artifact and a distinction between desired changes and essential properties."
+      ],
+      "difficulty": "Introductory",
+      "related_patterns": [
+        {
+          "id": "attack-then-repair",
+          "title": "Attack, Then Repair",
+          "relationship": "Repair weaknesses without removing the proposal’s core advantage."
+        },
+        {
+          "id": "use-contrast-not-just-examples",
+          "title": "Use Contrast, Not Just Examples",
+          "relationship": "Show the boundary between acceptable and broken revisions."
+        },
+        {
+          "id": "choose-the-representation-before-solving",
+          "title": "Choose the Representation Before Solving",
+          "relationship": "Make the stable structure of the artifact inspectable."
+        }
+      ],
+      "example_user_queries": [
+        "How can I ask an AI to refactor code without changing its behavior?",
+        "The model makes my article shorter but removes the example I need. What should I specify?",
+        "How do I keep existing URLs and stored user data safe during an AI-assisted redesign?",
+        "My design keeps drifting during revisions. How can I state what must stay?",
+        "What is the difference between a revision goal and an invariant?",
+        "How can I ask for a warmer tone while preserving technical distinctions?",
+        "What should I do when my must-keep constraints conflict?",
+        "How do I maintain the important decisions in a long collaboration with an AI?"
+      ],
+      "article_markdown": "Revision sounds simple until the thing being revised has several qualities worth keeping.\n\nYou ask an LLM to make an article shorter, and it removes the example that made the argument understandable. You ask it to simplify some code, and it changes behavior that was intentionally unusual. You ask it to make a design more playful, and accessibility or information density disappears along the way.\n\nThe model followed the instruction.\n\nIt just did not know which parts of the existing solution were sacred.\n\nWhenever you ask an LLM to change something, consider stating what **must remain true after the change**.\n\nThese are the invariants.\n\n## Change happens inside a boundary\n\nMost revision prompts describe the delta:\n\n> Make this more concise.\n\n> Refactor this.\n\n> Make the interface simpler.\n\n> Rewrite this in a warmer tone.\n\nBut a useful revision has two sides:\n\n**What should change?**\n\nand\n\n**What must survive the change?**\n\nAn invariant is anything that belongs to the second category.\n\nFor prose, invariants might include:\n\n- preserve the argument,\n- keep the concrete example,\n- retain uncertainty,\n- do not make the tone more promotional.\n\nFor software:\n\n- public behavior must remain unchanged,\n- existing URLs must continue working,\n- do not alter the database schema,\n- preserve keyboard navigation,\n- maintain offline support.\n\nFor product design:\n\n- the main action must remain visible without scrolling,\n- advanced users must still have access to detailed controls,\n- mobile and desktop must use the same conceptual workflow.\n\nThese constraints define the safe region within which improvement can occur.\n\n## Why ordinary revision prompts drift\n\nLLMs do not inherently know which properties of an artifact are intentional.\n\nImagine a function containing what appears to be unnecessary duplication. You ask:\n\n> Clean this up.\n\nThe model notices the duplication and extracts a shared abstraction.\n\nBut perhaps the duplication was deliberate because the two paths are expected to evolve independently.\n\nFrom the surface alone, both interpretations are plausible.\n\nThe same thing happens with writing. Repetition might be accidental, or it might provide rhythm. An awkward phrase might be accidental, or it might preserve an important distinction. A long form might be verbosity, or it might be necessary completeness.\n\nThe more complex the artifact, the more dangerous the assumption that “improve” has only one dimension.\n\nStating invariants gives the model a map of the design intent it cannot reliably infer.\n\n## An example in software\n\nSuppose a Svelte application works well, but the frontend has become difficult to maintain.\n\nA weak request would be:\n\n> Refactor this frontend and improve the component structure.\n\nA stronger one might say:\n\n> Refactor the component structure to reduce duplication and clarify responsibilities. Preserve existing visible behavior, routes, keyboard shortcuts, persisted user data, and current API contracts. Do not redesign the UI as part of the refactor.\n\nNotice how much more freedom this actually gives the model.\n\nThat may seem paradoxical. Constraints sound restrictive.\n\nBut without them, the model must constantly guess whether each change is acceptable. With them, the stable surface is clear, and the model can be aggressive inside the permitted area.\n\nConstraints create a safer space for creativity.\n\n## An example in writing\n\nSuppose an essay has a strong observation but feels meandering.\n\nYou might say:\n\n> Cut this by approximately 30%. Preserve the opening anecdote, the distinction between loneliness and solitude, and the ambiguous ending. Remove repetition before removing examples.\n\nNow the model has priorities.\n\nWithout those instructions, “shorter” may mean compressing every section equally. With them, shortening becomes a design problem: what can disappear while the identity of the piece remains intact?\n\nThat is the heart of this pattern.\n\n## Invariants reveal what the artifact *is*\n\nThere is another benefit.\n\nWhen you identify invariants, you are forced to articulate what makes the current thing itself.\n\nA product may contain hundreds of implementation details, but only a few define its identity.\n\nA story may contain dozens of scenes, yet only certain emotional relationships are essential.\n\nA software system may have complicated internals, while its true contract consists of five observable behaviors.\n\nSo invariants are not merely prompting instructions. They are a way of extracting the **stable structure beneath an implementation**.\n\nThis is especially valuable in long-running conversations with an LLM. As the artifact evolves, earlier decisions can disappear from the active context or become diluted among later instructions.\n\nA short invariant list acts as a persistent design constitution.\n\n## Not every constraint is an invariant\n\nIt is useful to distinguish invariants from goals.\n\n“Make the page load faster” is a goal.\n\n“The page must continue working without JavaScript” is an invariant.\n\n“Make the prose friendlier” is a goal.\n\n“Do not remove the technical terminology” is an invariant.\n\nGoals determine where you want to move.\n\nInvariants define the boundaries you cannot cross.\n\nA strong revision prompt often contains both.\n\n## Beware of too many invariants\n\nIf everything must stay the same, nothing can improve.\n\nUsers sometimes accumulate constraints after every unsatisfactory iteration until the model has almost no maneuvering room:\n\n- keep the structure,\n- keep every example,\n- keep every phrase I like,\n- preserve the length,\n- change the tone substantially,\n- make it much simpler.\n\nSome combinations are impossible.\n\nInvariants should represent genuinely important properties, not every accidental feature of the current version.\n\nOne useful question is:\n\n> If this property changed, would I regard the result as a different thing or as a broken revision?\n\nIf yes, it may be an invariant.\n\nIf not, it is probably negotiable.\n\n## Invariants can have priorities\n\nSometimes constraints conflict.\n\nA refactor might preserve perfect backward compatibility but remain unnecessarily complex. A rewritten article might preserve every nuance but fail to become shorter.\n\nRather than pretending all invariants are absolute, they can be ranked:\n\n**Must preserve**\n- API compatibility\n- stored user data\n\n**Prefer to preserve**\n- existing component boundaries\n- exact keyboard shortcuts\n\nThis allows graceful trade-offs when perfection is impossible.\n\n## A pattern for long collaborations\n\nPreserving invariants becomes increasingly important as LLMs move from answering questions to carrying out extended work.\n\nA coding agent may modify dozens of files. A writing assistant may rewrite a chapter repeatedly. A design agent may iterate through many versions.\n\nAt that scale, the task is no longer simply “generate something good.”\n\nIt becomes:\n\n> Move this system toward a better state without losing the properties that made the previous state valuable.\n\nThat is a much richer problem.\n\nAnd the most useful information you can give the model may not be another instruction about what to change.\n\nIt may be a precise statement of what must remain true.",
+      "article_sha256": "207400978ab040d73757e0f6b30457648a43c57a166deeeaede5b14ceca04f7f",
+      "article_word_count": 1102,
+      "visual_decision": "A before/after diagram with a fixed center:\n\n`Current artifact → transformation → revised artifact`\n\nwith a surrounding band labeled **Invariants remain true**.",
+      "graphic": {
+        "public_path": "/diagrams/ai-usage/preserve-the-invariants.svg",
+        "alt_text": "A boundary labeled Invariants remain true surrounds the current artifact, transformation, and revised artifact.",
+        "caption": "Transformation happens inside a boundary: the essential properties remain true."
+      },
+      "practice": "absent"
+    },
+    {
+      "id": "look-for-the-decisive-unknown",
+      "slug": "look-for-the-decisive-unknown",
+      "title": "Look for the Decisive Unknown",
+      "source_title": "Expose the Decisive Unknown",
+      "short_description": "Focus investigation on the uncertainty that could actually change what you choose.",
+      "tags": [
+        "ai-usage",
+        "thinking-with-language-models",
+        "decision-making",
+        "uncertainty",
+        "research"
+      ],
+      "verses": ["decision-making", "ai-usage"],
+      "use_when": [
+        "Plausible missing assumptions would lead to different recommendations.",
+        "A model is giving broad advice or a long checklist instead of identifying the next useful observation."
+      ],
+      "not_ideal_when": [
+        "A cheap experiment costs less than further questioning.",
+        "The proposed decisive unknown is being treated as a certainty rather than a hypothesis."
+      ],
+      "prerequisites": ["A choice or investigation with plausible alternative outcomes."],
+      "difficulty": "Introductory",
+      "related_patterns": [
+        {
+          "id": "prefer-the-smallest-useful-experiment",
+          "title": "Prefer the Smallest Useful Experiment",
+          "relationship": "A cheap test may resolve the uncertainty better than another question."
+        },
+        {
+          "id": "run-a-premortem",
+          "title": "Run a Premortem",
+          "relationship": "Identify uncertainties through concrete failure scenarios."
+        },
+        {
+          "id": "separate-exploration-from-selection",
+          "title": "Separate Exploration from Selection",
+          "relationship": "Distinguish a lack of possibilities from a lack of information."
+        },
+        {
+          "id": "choose-the-representation-before-solving",
+          "title": "Choose the Representation Before Solving",
+          "relationship": "Represent the question as branches that lead to different actions."
+        }
+      ],
+      "example_user_queries": [
+        "The AI asks me too many questions. Which missing fact would actually change its recommendation?",
+        "How can I identify the one observation that would narrow down a software bug?",
+        "Should I use a local or cloud database if I have not settled the offline requirement?",
+        "What should I measure before asking the model for performance fixes?",
+        "How can I stop the AI from silently filling in important assumptions?",
+        "I have lots of advice but still feel one crucial piece is missing. What should I ask?",
+        "Can you show how different answers to an unknown would change the next action?",
+        "When is a quick experiment more useful than gathering more context?"
+      ],
+      "article_markdown": "Many weak answers are not caused by poor reasoning. They are caused by one missing fact.\n\nYou ask an LLM whether you should use a local database or a cloud database. It gives a nuanced comparison. Halfway through reading it, you realize that the answer changes completely depending on whether the application must work offline.\n\nYou ask how to structure a course. The model writes several paragraphs before it becomes clear that the real issue is whether the students already know the prerequisites.\n\nYou ask why a system is slow. The model lists twelve possible bottlenecks, but one measurement—whether the delay occurs before or after the database query—would eliminate most of them.\n\nNot all missing information is equally valuable.\n\nThe useful question is:\n\n> **Which unknown, if resolved, would most change what we should do?**\n\nExpose that unknown first.\n\n## From missing information to valuable information\n\nWhen context is incomplete, a common prompting strategy is:\n\n> Ask me any questions you need.\n\nThat is better than guessing, but it has a weakness. The model may produce a long interview:\n\n- What is your budget?\n- What framework are you using?\n- How many users?\n- What is your deadline?\n- What platforms?\n- What is your preferred design style?\n- What are your performance requirements?\n\nSome of these questions may matter. Others may not affect the answer at all.\n\nA better approach asks the model to reason about the **value of information**.\n\n> What is the single missing fact that would most change your recommendation?\n\nNow the model is not merely looking for absent details. It is estimating which uncertainty is decision-relevant.\n\nThat is a more powerful operation.\n\n## A technical example\n\nSuppose an application occasionally loses user edits.\n\nThere are dozens of possible causes:\n\n- failed network requests,\n- race conditions,\n- stale state,\n- database errors,\n- autosave timing,\n- multiple tabs,\n- optimistic updates,\n- browser storage problems.\n\nThe model could immediately generate a large debugging checklist.\n\nBut suppose the decisive unknown is:\n\n> Are the lost edits visible in the network request payload?\n\nIf **no**, the problem is probably upstream in client state or autosave logic.\n\nIf **yes**, attention shifts downstream toward transport, backend processing, or persistence.\n\nOne observation divides the search space.\n\nThat is a decisive unknown.\n\nA good LLM interaction might therefore begin:\n\n> Before suggesting fixes, identify the observation that would split the plausible causes most sharply.\n\nNow the model becomes an information-gathering partner rather than a speculation engine.\n\n## Decision trees are hiding everywhere\n\nMany questions that look like ordinary requests are actually incomplete decision trees.\n\nConsider:\n\n> Should I build this feature?\n\nThe answer may depend on whether users are already attempting the underlying task manually.\n\nIf they are, the feature may solve an observed problem.\n\nIf they are not, the problem may be hypothetical.\n\nThat unknown may be more important than implementation cost, UI design, or technical elegance.\n\nA useful mental model is:\n\n**Possible worlds → missing observation → worlds separate → better action**\n\nThe best next question is often the one that divides plausible worlds into groups that lead to different actions.\n\n## Why this matters with LLMs\n\nLanguage models are unusually capable of filling gaps.\n\nThat is one of their strengths.\n\nIt is also one reason missing context can be hard to notice.\n\nIf you omit an important assumption, the response usually does not collapse. The model supplies a plausible assumption and continues smoothly.\n\nThe resulting answer may therefore sound more certain and complete than the underlying information warrants.\n\nAsking for the decisive unknown interrupts this process.\n\nInstead of silently completing the problem, the model inspects the uncertainty surrounding it.\n\nThis is especially valuable whenever plausible assumptions lead to different actions.\n\n## Example: choosing a tool\n\nImagine asking:\n\n> Which note-taking system should I use?\n\nThe model could compare Notion, Obsidian, Apple Notes, Logseq, and others.\n\nBut perhaps the decisive unknown is:\n\n> Do you want to organize information manually, or do you want the system to work even if you barely organize anything?\n\nThat preference may change the recommendation more than dozens of feature comparisons.\n\nNotice that this is not merely “ask more questions.”\n\nIt is **find the branching variable**.\n\n## Example: explaining something\n\nThe same pattern applies outside decisions.\n\nSuppose someone says:\n\n> I don't understand monads.\n\nThe model could launch into a detailed tutorial.\n\nBut the decisive unknown might be what exactly is failing:\n\n- the category theory vocabulary,\n- the motivation,\n- the type signatures,\n- the relationship to familiar programming constructs,\n- or the laws.\n\nAn answer aimed at the wrong gap can be technically excellent and practically useless.\n\nAsking:\n\n> Which distinction should we clarify to determine what part is actually confusing?\n\ncan dramatically shorten the path to understanding.\n\n## Decisive does not mean certain\n\nThe model may be wrong about which unknown matters most.\n\nTreat its proposal as a hypothesis.\n\nSometimes two or three unknowns have similar information value. In that case, it can be useful to ask for a small ranked set and explain how each answer would change the next step.\n\nFor example:\n\n> Identify the three highest-value unknowns. For each one, show how different answers would change your recommendation.\n\nThat makes the reasoning inspectable.\n\n## When not to use it\n\nThe pattern is unnecessary when the cost of gathering information exceeds the cost of trying something.\n\nIf changing a button label takes thirty seconds, there is little reason to conduct an elaborate uncertainty analysis. Make the change and observe what happens.\n\nThis connects naturally to **Smallest Useful Experiment**: sometimes the best way to resolve the decisive unknown is not another question but a cheap experiment.\n\nThe pattern is most useful when:\n\n- the decision is expensive or difficult to reverse,\n- there are many plausible explanations,\n- context is incomplete,\n- the model is producing broad generic advice,\n- additional data is available but expensive to collect,\n- or you feel that the conversation contains lots of information but still lacks one crucial piece.\n\nThe goal is not to eliminate uncertainty.\n\nIt is to find the uncertainty worth eliminating.",
+      "article_sha256": "265debf34c902adf3e653d0a491cba46d6a007059b6a72d7333fa89cf840bf66",
+      "article_word_count": 1021,
+      "visual_decision": "A branching diagram:\n\n`Current uncertainty → decisive question → Answer A / Answer B → different next actions`",
+      "graphic": {
+        "public_path": "/diagrams/ai-usage/look-for-the-decisive-unknown.svg",
+        "alt_text": "A decisive question splits the investigation into Answer A leading to Action A and Answer B leading to Action B.",
+        "caption": "Ask the question whose different answers lead to different next actions."
+      },
+      "practice": "existing practice preserved"
+    },
+    {
+      "id": "use-contrast-not-just-examples",
+      "slug": "use-contrast-not-just-examples",
+      "title": "Use Contrast, Not Just Examples",
+      "source_title": "Use Contrast, Not Just Examples",
+      "short_description": "Pair the desired result with a nearby but wrong example to make subtle boundaries visible.",
+      "tags": [
+        "ai-usage",
+        "thinking-with-language-models",
+        "examples",
+        "contrast",
+        "communication"
+      ],
+      "verses": ["ai-usage"],
+      "use_when": [
+        "Words such as clean, restrained, or innovative are producing different interpretations.",
+        "Positive examples contain incidental features the model is copying."
+      ],
+      "not_ideal_when": [
+        "The negative example is so obviously wrong that it adds no useful distinction.",
+        "Exact imitation of examples is replacing understanding of the intended difference."
+      ],
+      "prerequisites": [
+        "Examples near the desired boundary and an explanation of the relevant distinction."
+      ],
+      "difficulty": "Introductory",
+      "related_patterns": [
+        {
+          "id": "preserve-the-invariants",
+          "title": "Preserve the Invariants",
+          "relationship": "Separate essential qualities from incidental features."
+        },
+        {
+          "id": "choose-the-representation-before-solving",
+          "title": "Choose the Representation Before Solving",
+          "relationship": "Use a comparison format when it reveals the important boundary."
+        },
+        {
+          "id": "reframing-generate-real-options",
+          "title": "Generate Real Options",
+          "relationship": "Distinguish conceptually different options from cosmetic variations."
+        }
+      ],
+      "example_user_queries": [
+        "How can I explain to an AI what I mean by understated writing?",
+        "The model copies the colors in my reference instead of the information hierarchy. How do I clarify?",
+        "Can I show the model an example that is close to what I want but still wrong?",
+        "How do I get a friendly email without excessive enthusiasm?",
+        "How can I specify the difference between simple and simplistic?",
+        "The AI gives me feature ideas when I want new product concepts. How can I show the difference?",
+        "How do I describe the right amount of technical depth using too little and too much examples?",
+        "How can I prevent the model from overfitting to my examples?"
+      ],
+      "article_markdown": "Suppose you want an LLM to write in a style you find understated.\n\nYou provide an example.\n\nThe model sees short sentences, concrete nouns, little ornament, and dry humor. Which of those characteristics matters? Perhaps all of them. Perhaps only one.\n\nAn example demonstrates what belongs inside a category.\n\nIt does not always reveal the category's boundary.\n\nContrast does.\n\nInstead of only showing what you want, show what is **nearby but wrong**.\n\nThe difference between the two often communicates more than either example alone.\n\n## Categories are defined by boundaries\n\nConsider these instructions:\n\n> Keep the prose emotionally restrained.\n\nThat phrase admits many interpretations.\n\nNow add two examples:\n\n**Wanted:**\n\n> He looked at the empty chair for a moment, then carried both cups back to the kitchen.\n\n**Not wanted:**\n\n> The empty chair struck him with the unbearable weight of everything he had lost.\n\nSuddenly “emotionally restrained” is much more concrete.\n\nThe distinction is not “do not write about emotion.” The first example is full of emotion. The difference lies in how explicitly it is named and amplified.\n\nContrast reveals that boundary.\n\n## Why positive examples can mislead\n\nA single example contains many properties that are incidental.\n\nImagine showing an LLM a dashboard you like. It contains:\n\n- a dark background,\n- three columns,\n- large numbers,\n- small labels,\n- rounded cards,\n- a particular typography,\n- restrained use of color.\n\nYou may actually care about the information hierarchy.\n\nThe model may infer that you care about dark mode and cards.\n\nThe problem is underdetermination: many rules could explain the same example.\n\nA contrasting example removes possibilities.\n\n> I like A because the hierarchy is obvious even though it contains a lot of information. I dislike B because every metric has equal visual weight. The card shapes and colors are irrelevant.\n\nNow the signal becomes much clearer.\n\nIn machine-learning terms, you have supplied both positive and negative evidence.\n\nIn ordinary language: you have shown the model where the line is.\n\n## Contrast can be subtle\n\nThe most informative negative example is not always something obviously bad.\n\nCompare:\n\n> Write a friendly email.\n\nA poor contrasting example might be openly hostile. That teaches very little. The model already understands that hostility is not friendliness.\n\nA better contrast is something close to the target:\n\n**Wanted:** warm, concise, direct.\n\n**Too far:** warm but overly enthusiastic and full of exclamation marks.\n\nThe narrower the distinction, the more useful the contrast can become.\n\nThis is especially important for qualities such as:\n\n- understated versus flat,\n- rigorous versus academic,\n- playful versus silly,\n- concise versus abrupt,\n- simple versus simplistic,\n- confident versus overconfident,\n- poetic versus ornate,\n- informal versus sloppy.\n\nThese are fuzzy boundaries. Definitions help, but contrasts make the differences visible.\n\n## Contrast in technical tasks\n\nThe pattern is not limited to style.\n\nSuppose you are extracting reusable patterns from books.\n\nYou might tell the model:\n\n> A pattern should be a reusable response to a recurring situation.\n\nThen provide contrast:\n\n**Pattern:** “Separate reversible from irreversible decisions.”\n\n**Not a pattern:** “Jeff Bezos calls some decisions two-way doors.”\n\nThe first describes transferable knowledge.\n\nThe second is an anecdotal attribution.\n\nOr:\n\n**Pattern:** “Batch independent database writes.”\n\n**Not a pattern:** “Use `executemany()` in Python.”\n\nThe first expresses a broadly reusable strategy.\n\nThe second is one implementation.\n\nThese pairs teach the conceptual level you want.\n\n## Contrast as debugging\n\nContrast is also a powerful way to correct an LLM after an unsatisfactory result.\n\nSuppose the model generates six product ideas and they all feel like minor feature additions.\n\nInstead of saying:\n\n> Make them more innovative.\n\nyou can identify the boundary:\n\n> These are feature ideas: they extend the current product while keeping the same basic interaction model. I want concept ideas: approaches that could change how the user performs the task entirely.\n\nThen give one example of each.\n\nThat is much more informative than an adjective like “innovative.”\n\nMany difficult prompt iterations become easier once the user stops searching for a better adjective and instead shows a pair of neighboring cases.\n\n## Contrastive sets\n\nSometimes one pair is not enough.\n\nYou can build a small contrastive set:\n\n**Too little**  \nThe article is only a definition and a few bullets.\n\n**Target**  \nThe article develops a mental model, gives concrete examples, explains limitations, and remains readable.\n\n**Too much**  \nThe article becomes an academic survey with citations for every sentence and excessive theoretical background.\n\nNow the desired region has boundaries on both sides.\n\nThis “too little / target / too much” structure is particularly useful when controlling:\n\n- length,\n- technical depth,\n- humor,\n- formality,\n- visual density,\n- abstraction,\n- creativity,\n- assertiveness.\n\n## Why the pattern works\n\nWords such as “clean,” “professional,” “natural,” “elegant,” and “deep” describe large semantic territories.\n\nPeople often believe these instructions are precise because they know what the words mean *to themselves*. The model has access only to the words and surrounding context.\n\nContrast externalizes the distinction.\n\nRather than trying to define “not too polished but still professional” perfectly, you can demonstrate:\n\n> This feels too corporate. This feels too casual. Aim between them, closer to the second.\n\nContrast converts tacit preference into observable structure.\n\n## Don't overfit the examples\n\nThere is a danger.\n\nIf examples are too detailed or the instruction implies exact imitation, the model may reproduce surface characteristics rather than infer the underlying distinction.\n\nThe remedy is to name the difference explicitly:\n\n> The important distinction is the amount of emotional interpretation, not sentence length or subject matter.\n\nExamples plus explanation are usually stronger than examples alone.\n\nThe goal is not copying.\n\nIt is discrimination.\n\nWhen you need an LLM to understand a subtle category, especially one that you find difficult to define, do not only ask:\n\n> Can I show you what I mean?\n\nAsk:\n\n> Can I show you what I mean—and what I almost mean, but don't?\n\nThat second example may carry more information than the first.",
+      "article_sha256": "dc6317e8e7d9ce06ce350469853033bebbd6b32f0d60b84006ddcca10ce1b25d",
+      "article_word_count": 994,
+      "visual_decision": "A three-part comparison:\n\n`Too little ← Target → Too much`\n\nor paired examples with the differing feature highlighted.",
+      "graphic": {
+        "public_path": "/diagrams/ai-usage/use-contrast-not-just-examples.svg",
+        "alt_text": "Three neighboring examples: Too little, Target, and Too much. The target is distinguished by the amount of useful detail, not decoration.",
+        "caption": "Show the target and its neighboring boundaries; name the distinction that matters."
+      },
+      "practice": "absent"
+    },
+    {
+      "id": "choose-the-representation-before-solving",
+      "slug": "choose-the-representation-before-solving",
+      "title": "Choose the Representation Before Solving",
+      "source_title": "Choose the Representation Before Solving",
+      "short_description": "Choose a form that reveals the important relationships before asking a model to solve the problem.",
+      "tags": [
+        "ai-usage",
+        "thinking-with-language-models",
+        "representation",
+        "reasoning",
+        "problem-structuring"
+      ],
+      "verses": ["ai-usage"],
+      "use_when": [
+        "States, dependencies, comparisons, or sequences are getting lost in prose.",
+        "An implementation vocabulary is arriving before the problem is understood."
+      ],
+      "not_ideal_when": [
+        "A diagram or matrix merely makes a simple answer look organized.",
+        "A rigid representation destroys contextual or emotional nuance."
+      ],
+      "prerequisites": ["An idea of the relationship that needs to become easier to inspect."],
+      "difficulty": "Introductory",
+      "related_patterns": [
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown",
+          "relationship": "A decision tree makes the branching variable visible."
+        },
+        {
+          "id": "preserve-the-invariants",
+          "title": "Preserve the Invariants",
+          "relationship": "Preserve important relationships when compressing information."
+        },
+        {
+          "id": "reframing-identify-problem-form",
+          "title": "Identify the Problem Form",
+          "relationship": "Clarify what kind of problem is being represented."
+        }
+      ],
+      "example_user_queries": [
+        "Should I ask the AI for a graph, timeline, or table instead of another explanation?",
+        "How can I model an onboarding workflow before redesigning it?",
+        "The architecture discussion is jumping to microservices too early. How do I represent the domain first?",
+        "How can I turn a philosophical argument into premises and conclusions?",
+        "What representation would make the dependencies in this problem easier to see?",
+        "When does a matrix help and when is it just decorative organization?",
+        "Can two representations show different useful aspects of the same problem?",
+        "How can I use a language model to turn messy notes into a structure I can inspect?"
+      ],
+      "article_markdown": "Some problems are difficult because the answer is difficult.\n\nOthers are difficult because the problem is represented badly.\n\nA long paragraph describing a software system may become obvious when converted into a dependency graph. A confusing historical narrative may become clear on a timeline. A product decision may become manageable as a table of alternatives and criteria. A complex workflow may reveal its flaws as a state machine.\n\nLanguage models make it easy to move directly from a question to prose.\n\nSometimes that is exactly the wrong first move.\n\nBefore solving the problem, choose the representation that makes the structure visible.\n\n## The hidden power of intermediate representations\n\nConsider this request:\n\n> Help me redesign the onboarding flow. Users create an account, sometimes import existing data, may connect an integration, can skip profile setup, and need to select a workspace before entering the app. Some people are invited to an existing workspace rather than creating one.\n\nA model can discuss this in paragraphs.\n\nBut the important structure is not primarily verbal. It concerns states, branches, prerequisites, and transitions.\n\nA more useful first step might be:\n\n> Represent the onboarding flow as states and transitions before suggesting changes.\n\nNow contradictions become easier to spot:\n\n- Can a user connect an integration before a workspace exists?\n- What happens if an invited user skips profile setup?\n- Which states are optional?\n- Which transitions can fail?\n- Where can the user resume after interruption?\n\nThe representation exposes the problem.\n\nOnly afterward does redesign make sense.\n\n## Representation determines what becomes easy to see\n\nDifferent forms foreground different relationships.\n\nA **timeline** makes sequence and duration visible.\n\nA **matrix** makes systematic comparison visible.\n\nA **tree** makes branching decisions visible.\n\nA **graph** makes relationships and dependencies visible.\n\nA **state machine** makes allowed transitions visible.\n\nA **hierarchy** makes containment and abstraction visible.\n\nA **table** makes recurring attributes comparable.\n\nA **rubric** makes evaluation criteria explicit.\n\nA **causal loop** makes feedback visible.\n\nA **map** makes spatial relationships visible.\n\nA **taxonomy** makes categories and boundaries visible.\n\nA **worked example** makes transformation visible.\n\nThe question is therefore not merely:\n\n> What information do we have?\n\nIt is:\n\n> In what form would the important relationships become easiest to reason about?\n\n## An example: choosing an architecture\n\nSuppose you ask:\n\n> How should this system be architected?\n\nThe model might immediately propose services, databases, and APIs.\n\nInstead, ask it first to represent the domain:\n\n> Before proposing an architecture, model the major entities, responsibilities, information flows, and boundaries.\n\nThis prevents an implementation vocabulary from arriving too early.\n\nOnce the domain structure is visible, the architecture can respond to it.\n\nThis matters because premature implementation can distort understanding. If you begin with “Which microservices do we need?”, you have already assumed microservices are the appropriate representation of the system.\n\nChoosing the representation first creates a small pause between **understanding the thing** and **deciding how to build it**.\n\n## An example: understanding an argument\n\nImagine asking an LLM to analyze a philosophical essay.\n\nA prose summary may simply reproduce the essay at lower resolution.\n\nInstead:\n\n> Represent the central argument as premises, intermediate claims, objections, and conclusions.\n\nNow you can see whether a conclusion actually follows from its premises.\n\nOr ask:\n\n> Create a map showing which claims depend on which others.\n\nThe result becomes a structure you can inspect.\n\nAgain, the representation performs part of the reasoning.\n\n## Representation is compression\n\nA good representation discards irrelevant detail while preserving important relationships.\n\nThat is why it helps.\n\nA subway map does not preserve the exact geography of a city. It preserves connectivity.\n\nA musical score does not preserve the sound of a performance. It preserves a useful structure from which performance can be reconstructed.\n\nA software interface diagram does not preserve every line of code. It preserves components and their relationships.\n\nThe art is choosing what information should survive the compression.\n\nAn LLM can help with this choice:\n\n> What representation would make the bottleneck in this problem most visible?\n\nThat question is often more useful than:\n\n> Solve this.\n\n## Don't force everything into diagrams\n\nThe pattern has an obvious failure mode: representation theater.\n\nA simple question does not become deeper because it has been turned into a matrix.\n\nSome tasks are already expressed in the right form. Others depend on nuance that a rigid representation destroys.\n\nFor example, a table comparing emotional experiences may falsely imply that fuzzy, contextual qualities are cleanly separable.\n\nRepresentation is useful when it reveals structure, not when it merely makes an answer look organized.\n\nThe test is simple:\n\n> Does this form make a relationship easier to inspect than prose would?\n\nIf not, prose may be better.\n\n## Multiple representations can expose different truths\n\nFor especially complex problems, one representation may not be enough.\n\nA product can be represented as:\n\n- a user journey,\n- a state machine,\n- a data model,\n- a component hierarchy.\n\nEach view answers a different question.\n\nThis is analogous to technical drawings of a physical object. A front view, side view, and cross-section are not competing descriptions. They expose different dimensions.\n\nYou can therefore ask:\n\n> Give me two different representations of this problem and explain what each makes visible that the other hides.\n\nThis can be surprisingly powerful.\n\n## Why LLMs make this pattern practical\n\nHumans often avoid restructuring information because doing so takes time.\n\nTurning notes into a taxonomy, building a comparison matrix, or drawing a dependency map can require significant manual effort.\n\nAn LLM dramatically lowers that cost.\n\nThat means representation can become an ordinary reasoning step rather than something reserved for formal analysis.\n\nThe workflow becomes:\n\n**Raw problem → useful representation → inspect structure → solve**\n\nThe important insight is that the second step is not cosmetic formatting.\n\nIt is part of thinking.\n\nOften, a problem that appears difficult in prose becomes almost mechanical once represented correctly.\n\nAnd sometimes the greatest contribution an LLM can make is not supplying an answer.\n\nIt is helping you discover what shape the problem should have before you try to answer it.",
+      "article_sha256": "77b6b896e9a4918e18d4ca76059b9b6922809800b9c7e5715ddc3d9f0426a0fe",
+      "article_word_count": 1012,
+      "visual_decision": "A transformation diagram:\n\n`Messy information → representation → visible structure → solution`\n\nwith example branches for timeline, graph, matrix, and state machine.",
+      "graphic": {
+        "public_path": "/diagrams/ai-usage/choose-the-representation-before-solving.svg",
+        "alt_text": "A raw problem can become a timeline, graph, matrix, or state machine. A useful view reveals structure that informs the solution.",
+        "caption": "Choose the view that exposes the relevant relationship, then inspect it before solving."
+      },
+      "practice": "absent"
+    },
+    {
+      "id": "attack-then-repair",
+      "slug": "attack-then-repair",
+      "title": "Attack, Then Repair",
+      "source_title": "Attack, Then Repair",
+      "short_description": "Challenge a proposal with concrete failure scenarios, then repair it without losing its valuable core.",
+      "tags": [
+        "ai-usage",
+        "thinking-with-language-models",
+        "critique",
+        "failure-modes",
+        "iteration"
+      ],
+      "verses": ["ai-usage"],
+      "use_when": [
+        "A fluent proposal sounds convincing but has not been tested against consequences.",
+        "Errors would be expensive, hard to notice, or difficult to reverse."
+      ],
+      "not_ideal_when": [
+        "The task is low-stakes and adversarial analysis adds little value.",
+        "The critique produces ritual caveats rather than changes to the design."
+      ],
+      "prerequisites": ["A proposal to examine and a clear idea of its core advantage."],
+      "difficulty": "Intermediate",
+      "related_patterns": [
+        {
+          "id": "preserve-the-invariants",
+          "title": "Preserve the Invariants",
+          "relationship": "Keep the valuable core while addressing weaknesses."
+        },
+        {
+          "id": "run-a-premortem",
+          "title": "Run a Premortem",
+          "relationship": "Find concrete scenarios that would make the proposal fail."
+        },
+        {
+          "id": "prefer-the-smallest-useful-experiment",
+          "title": "Prefer the Smallest Useful Experiment",
+          "relationship": "Test the repaired proposal rather than relying only on critique."
+        }
+      ],
+      "example_user_queries": [
+        "The AI makes my idea sound good, but how can I find the strongest reasons it might fail?",
+        "How do I ask for useful criticism instead of three generic caveats?",
+        "Can a model attack a design’s assumptions rather than just its implementation?",
+        "How can I repair a proposal without discarding its main advantage?",
+        "What would a skeptical maintainer or security reviewer notice about this architecture?",
+        "How do I construct a counterexample to a rule the AI proposed?",
+        "When should I stop repeating the attack and repair loop?",
+        "How can I tell whether an AI-assisted design has survived meaningful scrutiny?"
+      ],
+      "article_markdown": "An LLM can make an idea sound good remarkably quickly.\n\nGive it a proposed architecture and it can explain why the architecture is sensible. Give it a business idea and it can articulate its advantages. Give it an argument and it can make the argument clearer and more persuasive.\n\nThis fluency creates a particular danger: **plausibility can arrive before robustness**.\n\nOnce an answer sounds coherent, it becomes tempting to refine its presentation rather than challenge its substance.\n\nA useful counter-pattern is to make criticism a distinct phase.\n\nFirst propose.\n\nThen attack.\n\nThen repair.\n\n## Why criticism should come after construction\n\nIf criticism is introduced too early, it can suppress useful ideas.\n\nAsk a model to devise “an innovative but realistic product idea with no major flaws,” and the constraints fight each other during generation. The result may be safe but uninspired.\n\nInstead:\n\n> Propose a bold solution.\n\nThen:\n\n> Now assume this solution fails. Find the strongest reasons it could fail.\n\nThen:\n\n> Revise the solution to address the most serious weaknesses without losing the qualities that made the original attractive.\n\nEach phase has a different objective.\n\nGeneration tries to build.\n\nAttack tries to break.\n\nRepair tries to preserve value while reducing fragility.\n\nThis is different from simply asking:\n\n> Improve your answer.\n\n“Improve” provides no mechanism. Attack and repair provide a process.\n\n## Attack the strongest version\n\nGood criticism is not random negativity.\n\nSuppose the model proposes using a local-first architecture for a collaborative application.\n\nA superficial attack might say:\n\n> Synchronization could be complicated.\n\nTrue, but not especially useful.\n\nA stronger attack asks:\n\n- What happens when two devices modify the same object offline?\n- Which data types cannot be merged automatically?\n- What happens if migrations occur while a client has been offline for six months?\n- What consistency guarantees are users actually expecting?\n- Which operations become dangerous if authorization is checked only after synchronization?\n\nNow the critique generates design information.\n\nThe point is not to produce objections for their own sake.\n\nIt is to search for **failure modes that would change the design**.\n\n## Role reversal can help\n\nOne way to strengthen the attack phase is to deliberately switch perspective.\n\nAfter writing a proposal:\n\n> Review this as a skeptical security engineer.\n\nor:\n\n> Review this as the maintainer who will inherit the system in two years.\n\nor:\n\n> Review this from the perspective of a new user encountering it for the first time.\n\nDifferent perspectives reveal different failure surfaces.\n\nA founder may notice strategic weakness.\n\nA support agent may notice operational complexity.\n\nA user may notice confusing assumptions.\n\nA database engineer may notice consistency problems.\n\nYou do not need theatrical role-playing. The useful part is selecting an adversarial lens that exposes information the original perspective tends to ignore.\n\n## Attack assumptions, not only implementations\n\nSome of the most valuable critiques happen one level above the proposed solution.\n\nSuppose you ask for a feature that automatically categorizes every incoming note.\n\nThe model designs a sophisticated classification system.\n\nAttack could focus on accuracy, latency, taxonomy drift, or model costs.\n\nBut a deeper challenge might be:\n\n> Why does every note need a category at all?\n\nPerhaps the feature solves the wrong problem.\n\nThis is why a strong attack phase looks at several layers:\n\n- **execution:** can this actually work?\n- **failure:** what happens when it goes wrong?\n- **assumptions:** what must be true for this to be useful?\n- **incentives:** how might people respond differently than expected?\n- **edge cases:** where does the model break?\n- **alternatives:** is there a simpler way to achieve the same goal?\n\nThe attack phase is most valuable when it is allowed to challenge the frame, not merely polish implementation details.\n\n## Repair is not replacement\n\nAfter criticism, there is a temptation to discard the original idea entirely.\n\nThat is often wasteful.\n\nA proposal usually contains something valuable, or it would not have survived the generation phase.\n\nRepair asks:\n\n> Which weaknesses are fundamental, and which can be addressed while preserving the core advantage?\n\nSuppose a proposed interface relies heavily on keyboard shortcuts. The attack phase reveals that new users may never discover them.\n\nReplacement might remove keyboard shortcuts.\n\nRepair might preserve them while adding discoverability: contextual hints, a command palette, visible shortcut labels, and gradual onboarding.\n\nThe resulting system keeps the original strength—speed for experienced users—while addressing the weakness.\n\nThis connects closely to **Preserve the Invariants**.\n\nRepair works best when the model knows what qualities of the original solution should survive.\n\n## Don't ask the model to perform a ritual\n\nThere is a common weak version of this pattern:\n\n> Critique your answer.\n\nThe model dutifully produces three mild caveats:\n\n- it may require resources,\n- implementation details may vary,\n- more testing is needed.\n\nNothing changes.\n\nThe critique has become ceremonial.\n\nA better attack prompt creates stakes:\n\n> Identify three concrete scenarios in which this design would produce a bad outcome. At least one must challenge a core assumption rather than an implementation detail.\n\nOr:\n\n> Try to construct a counterexample that breaks the rule you proposed.\n\nOr:\n\n> What would make us regret this decision six months from now?\n\nThese prompts force the critique toward consequences.\n\n## The attack should be proportional\n\nNot every task needs adversarial analysis.\n\nIf you ask an LLM to write a birthday message, running a red-team phase is excessive.\n\nThe pattern becomes valuable when errors are:\n\n- expensive,\n- hard to notice,\n- difficult to reverse,\n- likely to hide behind plausible reasoning,\n- or capable of propagating into later work.\n\nArchitecture, strategy, important writing, research reasoning, product decisions, plans, and complex code are good candidates.\n\nThe attack phase can also scale with stakes. A small decision might get one challenge. A consequential design might undergo several attack–repair cycles.\n\n## Iterating the loop\n\nThe basic pattern is:\n\n**Propose → Attack → Repair**\n\nBut it can repeat:\n\n**Propose → Attack → Repair → Re-attack → Repair**\n\nEach cycle should become more specific.\n\nThe first attack might reveal structural weaknesses.\n\nThe second can target the repaired areas.\n\nEventually, additional attacks begin producing minor edge cases rather than meaningful changes. That is a useful stopping signal.\n\nThe goal is not an unassailable solution. Such a thing rarely exists.\n\nThe goal is a solution that has survived deliberate attempts to expose its weaknesses.\n\n## From agreeable assistant to thinking partner\n\nLLMs are often used in a conversational mode where the user proposes an idea and the model helps develop it.\n\nThat collaboration feels productive because progress is visible.\n\nBut development and validation are different activities.\n\nA model that only elaborates your ideas can become an extraordinarily sophisticated confirmation machine.\n\nThe attack phase changes the relationship.\n\nYou are no longer asking:\n\n> Can you help me make this idea work?\n\nYou are also asking:\n\n> What would have to be true for this idea *not* to work?\n\nOnly then do you return to construction.\n\nThe result is not pessimism.\n\nIt is better engineering of ideas.",
+      "article_sha256": "3486466413702830cd9da4f4cfa85219289d945695629d6696bc2fb54305c4ce",
+      "article_word_count": 1167,
+      "visual_decision": "A circular flow:\n\n`Propose → Attack → Repair → Test again`\n\nwith **Preserve the valuable core** at the center.",
+      "graphic": {
+        "public_path": "/diagrams/ai-usage/attack-then-repair.svg",
+        "alt_text": "A loop moves from Propose to Attack to Repair to Test again. Preserve the valuable core stays at the center.",
+        "caption": "Separate construction, criticism, and repair. Test again while preserving the valuable core."
+      },
+      "practice": "absent"
+    }
+  ]
+}
