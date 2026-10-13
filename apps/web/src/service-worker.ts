@@ -1,13 +1,20 @@
 /// <reference lib="webworker" />
 
 import { base, build, files, prerendered, version } from '$service-worker';
+import { precacheUrls } from './lib/service-worker-cache';
 
 const worker = self as unknown as ServiceWorkerGlobalScope;
 
 const CACHE_PREFIX = 'patternverse-';
 const PRECACHE = `${CACHE_PREFIX}precache-${version}`;
 const RUNTIME = `${CACHE_PREFIX}runtime-${version}`;
-const APP_SHELL = [...new Set([...build, ...files, ...prerendered])];
+const isAuthorizationPath = (path: string): boolean => path.startsWith(`${base}/auth/`);
+const APP_SHELL = precacheUrls([...build, ...files, ...prerendered], worker.location.origin).filter(
+  (asset) => {
+    const { pathname } = new URL(asset);
+    return !isAuthorizationPath(pathname) && !pathname.endsWith('/_headers');
+  },
+);
 const APP_SHELL_PATHS = new Set(
   APP_SHELL.map((asset) => new URL(asset, worker.location.origin).pathname),
 );
@@ -27,6 +34,10 @@ const cacheResponse = async (cacheName: string, request: Request, response: Resp
 };
 
 const cached = async (request: Request, ignoreSearch = false): Promise<Response | undefined> => {
+  // Fresh network copies must win over the install-time page snapshot when offline.
+  const runtime = await caches.open(RUNTIME);
+  const latest = await runtime.match(request, { ignoreSearch });
+  if (latest) return latest;
   const response = await caches.match(request, { ignoreSearch });
   return response ?? undefined;
 };
@@ -74,11 +85,6 @@ const staleWhileRevalidate = async (request: Request): Promise<Response> => {
 
 const appShellResponse = async (request: Request): Promise<Response> => {
   const cacheHit = await cached(request, true);
-  if (request.mode === 'navigate') {
-    void fetch(request)
-      .then(() => broadcastNetworkStatus(true))
-      .catch(() => broadcastNetworkStatus(false));
-  }
   if (cacheHit) return cacheHit;
   return networkFirst(request);
 };
@@ -112,6 +118,11 @@ worker.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== worker.location.origin) return;
+  // OAuth responses must never enter offline caches (including query-string credentials).
+  if (isAuthorizationPath(url.pathname)) {
+    event.respondWith(fetch(request, { cache: 'no-store' }));
+    return;
+  }
 
   if (request.headers.get('x-patternverse-network-probe') === '1') {
     event.respondWith(
@@ -128,13 +139,13 @@ worker.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (APP_SHELL_PATHS.has(url.pathname)) {
-    event.respondWith(appShellResponse(request));
+  if (request.mode === 'navigate' || url.pathname.endsWith('/__data.json')) {
+    event.respondWith(networkFirst(request));
     return;
   }
 
-  if (request.mode === 'navigate' || url.pathname.endsWith('/__data.json')) {
-    event.respondWith(networkFirst(request));
+  if (APP_SHELL_PATHS.has(url.pathname)) {
+    event.respondWith(appShellResponse(request));
     return;
   }
 

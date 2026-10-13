@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import type { Usefulness } from '@patternverse/workspace';
   import { getLocalWorkspace } from '$lib/client/workspace';
+  import { subscribeWorkspaceChanges } from '$lib/client/workspace-changes';
+  import { createWorkspaceRefresh } from '$lib/client/workspace-refresh';
 
   let {
     sourceId,
@@ -17,36 +18,58 @@
 
   let usefulness = $state<Usefulness>(null);
   let ready = $state(false);
+  let saving = $state(false);
   let errorMessage = $state('');
 
-  onMount(() => {
-    let active = true;
-    void getLocalWorkspace()
-      .then((workspace) => workspace.getUsefulness({ sourceId, entityId }))
-      .then((stored) => {
-        if (active) usefulness = stored;
-      })
-      .catch(() => {
-        if (active) errorMessage = 'Local usefulness is unavailable in this browser.';
-      })
-      .finally(() => {
-        if (active) ready = true;
-      });
+  $effect(() => {
+    const ref = { sourceId, entityId };
+    usefulness = null;
+    ready = false;
+    saving = false;
+    errorMessage = '';
+    const reader = createWorkspaceRefresh({
+      read: async () => (await getLocalWorkspace()).getUsefulness(ref),
+      apply: (stored) => {
+        usefulness = stored;
+        errorMessage = '';
+      },
+      failed: () => {
+        errorMessage = 'Local usefulness is unavailable in this browser.';
+      },
+      settled: () => {
+        ready = true;
+      },
+    });
+    const reload = () => {
+      void reader.refresh();
+    };
+    reload();
+    const unsubscribe = subscribeWorkspaceChanges(['ratings'], reload);
+    window.addEventListener('focus', reload);
     return () => {
-      active = false;
+      reader.dispose();
+      unsubscribe();
+      window.removeEventListener('focus', reload);
     };
   });
 
   const choose = async (value: Exclude<Usefulness, null>): Promise<void> => {
-    if (!ready) return;
+    if (!ready || saving) return;
+    const ref = { sourceId, entityId };
+    const current = () => sourceId === ref.sourceId && entityId === ref.entityId;
     const next = usefulness === value ? null : value;
+    saving = true;
     try {
       const workspace = await getLocalWorkspace();
-      await workspace.setUsefulness({ sourceId, entityId }, next);
-      usefulness = next;
-      errorMessage = '';
+      await workspace.setUsefulness(ref, next);
+      if (current()) {
+        usefulness = next;
+        errorMessage = '';
+      }
     } catch {
-      errorMessage = 'Could not save usefulness locally.';
+      if (current()) errorMessage = 'Could not save usefulness locally.';
+    } finally {
+      if (current()) saving = false;
     }
   };
 </script>
@@ -59,7 +82,7 @@
         type="button"
         class:active={usefulness === choice.value}
         aria-pressed={usefulness === choice.value}
-        disabled={!ready}
+        disabled={!ready || saving}
         onclick={() => choose(choice.value)}>{choice.label}</button
       >
     {/each}

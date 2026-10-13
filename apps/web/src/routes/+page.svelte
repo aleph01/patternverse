@@ -1,23 +1,17 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
-  import WorkspaceLibrary from '$lib/components/WorkspaceLibrary.svelte';
+  import PatternverseGuide from '$lib/components/PatternverseGuide.svelte';
+  import HeroTileArtwork from '$lib/illustrations/HeroTileArtwork.svelte';
   import { verseAccentClass } from '$lib/verse-accent';
 
   let { data } = $props();
 
   const VERSE_PREVIEW_LIMIT = 16;
   let versesExpanded = $state(false);
-  let libraryQuery = $state('');
   let visibleVerses = $derived(
     versesExpanded ? data.verses : data.verses.slice(0, VERSE_PREVIEW_LIMIT),
   );
   let hiddenVerseCount = $derived(Math.max(0, data.verses.length - VERSE_PREVIEW_LIMIT));
-
-  const submitSearch = (event: SubmitEvent): void => {
-    event.preventDefault();
-    document.querySelector('#library')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    history.replaceState(null, '', `${location.pathname}${location.search}#library`);
-  };
 </script>
 
 <svelte:head>
@@ -34,35 +28,26 @@
 
 <main>
   <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero-blocks" aria-hidden="true">
-      <span class="hero-block hero-block-green"></span>
-      <span class="hero-block hero-block-blue"></span>
-      <span class="hero-block hero-block-coral"></span>
-      <span class="hero-block hero-block-yellow"></span>
-    </div>
-    <div class="eyebrow">Your procedural knowledge library</div>
-    <h1 id="hero-heading">Find a pattern<br /> worth trying.</h1>
-    <p>Explore practical patterns, concepts, and practices. Keep what works close.</p>
-    <form class="search" id="search" role="search" onsubmit={submitSearch}>
-      <div class="search-row">
-        <input
-          id="knowledge-search"
-          name="q"
-          type="search"
-          aria-label="Search Patternverse"
-          placeholder="Search by title, idea, or keyword"
-          bind:value={libraryQuery}
-        />
-        <button type="submit">Search</button>
+    <div class="hero-inner">
+      <div class="hero-stage">
+        <div class="hero-art" aria-hidden="true">
+          <HeroTileArtwork />
+        </div>
+        <div class="hero-copy">
+          <div class="eyebrow">Patternverse / procedural knowledge library</div>
+          <h1 id="hero-heading">Ideas worth<br /> putting<br /> to work.</h1>
+          <p>
+            A curated library of patterns, concepts, and practices for turning useful ideas into
+            action.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href={resolve('/library')}>Browse the library <span>↗</span></a>
+            <a href="#home-about">What is the Patternverse? <span>→</span></a>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </section>
-
-  <WorkspaceLibrary
-    commons={data.entities}
-    commonsSearchDocuments={data.searchDocuments}
-    bind:query={libraryQuery}
-  />
 
   <section class="verses" aria-labelledby="verses-heading">
     <div class="section-heading">
@@ -78,7 +63,7 @@
           >
             <h3>{verse.title}</h3>
             <p>{verse.summary}</p>
-            <span class="verse-note">Patternverse Commons</span>
+            <span class="verse-note">Patternverse commons</span>
           </a>
         </article>
       {/each}
@@ -97,4 +82,6 @@
       </div>
     {/if}
   </section>
+
+  <PatternverseGuide />
 </main>

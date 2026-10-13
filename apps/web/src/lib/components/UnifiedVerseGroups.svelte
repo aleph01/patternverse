@@ -4,7 +4,8 @@
   import type { EntityType, RawEntity } from '@patternverse/schema';
   import { getLocalWorkspace } from '$lib/client/workspace';
   import type { EntitySummary } from '$lib/server/commons';
-  import EntityList from './EntityList.svelte';
+  import PaginatedEntityList from './PaginatedEntityList.svelte';
+  import LibraryViewSwitch from './LibraryViewSwitch.svelte';
 
   let {
     verseId,
@@ -15,6 +16,7 @@
   } = $props();
 
   let personal = $state<readonly RawEntity[]>([]);
+  let collectionLayout = $state<'cards' | 'list'>('cards');
 
   const personalMembers = $derived(
     personal
@@ -58,11 +60,11 @@
 </script>
 
 <div class="verse-groups">
-  {#each groupLabels as group (group.type)}
+  {#each groupLabels as group (`${verseId}:${group.type}`)}
     {@const groupMembers = membersOf(group.type)}
     {#if groupMembers.length > 0}
       <section class="primary-relationship" aria-labelledby={`${group.type}-heading`}>
-        <details class="relationship-disclosure">
+        <details class="relationship-disclosure" open={group.type === 'collection'}>
           <summary class="relationship-heading relationship-heading--simple">
             <h2 id={`${group.type}-heading`}>{group.title}</h2>
             <span class="relationship-heading-meta">
@@ -75,9 +77,37 @@
               <span class="disclosure-icon" aria-hidden="true"></span>
             </span>
           </summary>
-          <EntityList items={groupMembers} compact />
+          <div class:collection-browse={group.type === 'collection'}>
+            {#if group.type === 'collection'}
+              <div class="collections-toolbar">
+                <LibraryViewSwitch
+                  bind:layout={collectionLayout}
+                  label="Collections view"
+                  mobileVisible
+                />
+              </div>
+            {/if}
+            <PaginatedEntityList
+              items={groupMembers}
+              compact={group.type !== 'pattern' && group.type !== 'collection'}
+              layout={group.type === 'collection' ? collectionLayout : 'list'}
+              cardsOnMobile={group.type === 'collection'}
+              label={group.title}
+            />
+          </div>
         </details>
       </section>
     {/if}
   {/each}
 </div>
+
+<style>
+  .collection-browse {
+    container-type: inline-size;
+  }
+  .collections-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1.5rem 0 1rem;
+  }
+</style>

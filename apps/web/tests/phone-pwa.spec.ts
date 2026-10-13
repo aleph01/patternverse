@@ -6,7 +6,7 @@ test('keeps saved Mira sessions and the pattern editor available offline', async
 }) => {
   await page.goto('/mira');
   await page.getByRole('button', { name: 'New session' }).click();
-  await expect(page.getByRole('heading', { name: 'New session' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Message mira' })).toBeVisible();
 
   await page.goto('/editor?type=pattern');
   await expect(page.getByRole('heading', { name: 'new pattern' })).toBeVisible();
@@ -19,6 +19,7 @@ test('keeps saved Mira sessions and the pattern editor available offline', async
   await page.reload();
   await expect(page.getByRole('heading', { name: 'new pattern' })).toBeVisible();
   await page.getByRole('textbox', { name: 'Title' }).fill('Offline pocket pattern');
+  await page.getByRole('button', { name: 'Add Learning', exact: true }).click();
   await page.getByRole('button', { name: 'Save', exact: true }).click();
   await expect(page.getByText('Saved “Offline pocket pattern”')).toBeVisible();
   await page.reload();
@@ -34,7 +35,15 @@ test('keeps saved Mira sessions and the pattern editor available offline', async
 test('keeps the principal phone screens within a narrow viewport', async ({ page }) => {
   for (const width of [390, 320]) {
     await page.setViewportSize({ width, height: 740 });
-    for (const route of ['/', '/my', '/editor?type=pattern', '/mira']) {
+    for (const route of [
+      '/',
+      '/my',
+      '/editor?type=pattern',
+      '/mira',
+      '/about',
+      '/about/pattern-language',
+      '/about/mira',
+    ]) {
       await page.goto(route);
       await expect
         .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
@@ -50,7 +59,7 @@ test('offers dictation and spoken replies with a zero-retention automatic model'
   await page.getByRole('button', { name: 'New session' }).click();
   await expect(page.getByRole('button', { name: 'Start voice input' })).toBeVisible();
   await page.getByRole('button', { name: 'Settings' }).click();
-  await expect(page.getByLabel('Model')).toHaveValue('openrouter/auto');
+  await expect(page.getByLabel('Model', { exact: true })).toHaveValue('google/gemini-3.8-flash');
   await expect(page.getByLabel('Read new replies aloud automatically')).not.toBeChecked();
 });
 

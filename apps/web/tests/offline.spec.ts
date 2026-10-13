@@ -51,7 +51,54 @@ test('publishes an installable manifest and versioned service worker', async ({ 
     'href',
     './manifest.webmanifest',
   );
+  await expect(page.locator('footer')).not.toContainText('available offline');
+  await expect(page.locator('footer')).not.toContainText('local browser');
+});
+
+test('shows offline availability in an installed PWA context', async ({ page }) => {
+  await page.addInitScript(() => {
+    const matchMedia = window.matchMedia.bind(window);
+    window.matchMedia = (query) => {
+      const result = matchMedia(query);
+      if (query === '(display-mode: standalone)') {
+        Object.defineProperty(result, 'matches', { value: true });
+      }
+      return result;
+    };
+  });
+  await page.goto('/');
+  await waitForOfflineControl(page);
   await expect(page.locator('footer')).toContainText('available offline');
+});
+
+test('refreshes cached pages while online without losing offline navigation', async ({
+  context,
+  page,
+}) => {
+  await page.goto('/');
+  await waitForOfflineControl(page);
+
+  await page.evaluate(async () => {
+    const cacheName = (await caches.keys()).find((name) =>
+      name.startsWith('patternverse-precache-'),
+    );
+    if (!cacheName) throw new Error('Patternverse precache was not created.');
+    const cache = await caches.open(cacheName);
+    await cache.put(
+      new Request(new URL('/', location.origin)),
+      new Response('<!doctype html><title>Old page</title><h1>Stale homepage</h1>', {
+        headers: { 'Content-Type': 'text/html' },
+      }),
+    );
+  });
+
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Stale homepage' })).toHaveCount(0);
+  await expect(page.getByRole('navigation', { name: 'Main navigation' })).toContainText('about');
+
+  await context.setOffline(true);
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(page.getByRole('navigation', { name: 'Main navigation' })).toContainText('about');
 });
 
 test('keeps Commons search, reading, and personal editing available offline', async ({
@@ -65,18 +112,19 @@ test('keeps Commons search, reading, and personal editing available offline', as
   await page.getByRole('button', { name: 'Save', exact: true }).first().click();
   await expect(page.getByText('Saved “Offline Field Note” as draft.')).toBeVisible();
 
-  await page.goto('/');
+  await page.goto('/library');
   await waitForOfflineControl(page);
-  await page.getByLabel('Search Patternverse').fill('offline field note');
+  await page.getByRole('searchbox').fill('offline field note');
   await expect(page.locator('#library')).toContainText('Offline Field Note');
 
   await context.setOffline(true);
   await page.reload({ waitUntil: 'domcontentloaded' });
   await expect(page.getByText('Offline.', { exact: true })).toBeVisible();
 
-  await page.getByLabel('Search Patternverse').fill('working memory');
+  await page.getByRole('button', { name: 'Explore', exact: true }).click();
+  await page.getByRole('searchbox').fill('working memory');
   await expect(page.locator('#library')).toContainText('Working Memory');
-  await page.getByLabel('Search Patternverse').fill('offline field note');
+  await page.getByRole('searchbox').fill('offline field note');
   await expect(page.locator('#library')).toContainText('Offline Field Note');
 
   await page.goto('/pattern/creative-reframing', { waitUntil: 'domcontentloaded' });

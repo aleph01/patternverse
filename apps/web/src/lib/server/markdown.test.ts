@@ -29,6 +29,35 @@ const compiledEntities = (
 };
 
 describe('safe Markdown rendering', () => {
+  it('hides language practice source without hiding ordinary example code', async () => {
+    const entities = compiledEntities(
+      'Article.\n\n```patternverse-language\n:language 1\nanswer = !ask {\nHidden practice prompt\n}\n-> end\n```\n\n```pattern\nAn ordinary example\n```',
+    );
+    const html = await renderEntityMarkdown(
+      entities.find((entity) => entity.id === 'origin')!,
+      entities,
+    );
+    expect(html).toContain('Article.');
+    expect(html).toContain('An ordinary example');
+    expect(html).not.toContain('Hidden practice prompt');
+    expect(html).not.toContain('patternverse-language');
+  });
+  it('isolates repeated local SVG diagrams and safely renders their captions', async () => {
+    const diagram =
+      '![Diagram description](/diagrams/gof/observer.svg "Subject notifies observers")';
+    const entities = compiledEntities(`${diagram}\n\n${diagram}`);
+    const html = await renderEntityMarkdown(
+      entities.find((e) => e.id === 'origin')!,
+      entities,
+    );
+    const page = new DOMParser().parseFromString(html, 'text/html');
+    expect(page.querySelectorAll('figure.content-diagram')).toHaveLength(2);
+    expect(page.querySelectorAll('figcaption')).toHaveLength(2);
+    expect(page.querySelectorAll('[id]')).toHaveLength(0);
+    expect(page.querySelectorAll('img[alt="Diagram description"]')).toHaveLength(2);
+    expect(html).not.toContain('<svg');
+  });
+
   it('renders GFM and resolved wiki links while leaving inline code literal', async () => {
     const entities = compiledEntities(`
 ## Connections
@@ -87,5 +116,35 @@ const ordinaryCode = true;
     const html = await renderEntityMarkdown(origin, entities);
     expect(html).not.toContain('steps:');
     expect(html).toContain('ordinaryCode');
+  });
+
+  it('omits selected reading sections without changing neighboring prose', async () => {
+    const entities = compiledEntities(`
+Introduction.
+
+## With mira
+
+Open this in the companion.
+
+## How it works
+
+Keep this explanation.
+
+## Executable Pattern Markdown
+
+\`\`\`text
+!ask hidden_source
+\`\`\``);
+    const origin = entities.find((entity) => entity.id === 'origin');
+    if (!origin) throw new Error('Missing origin fixture.');
+
+    const html = await renderEntityMarkdown(origin, entities, {
+      omitSections: ['With mira', 'Executable Pattern Markdown'],
+    });
+    expect(html).toContain('Introduction.');
+    expect(html).toContain('<h2>How it works</h2>');
+    expect(html).toContain('Keep this explanation.');
+    expect(html).not.toContain('With mira');
+    expect(html).not.toContain('hidden_source');
   });
 });

@@ -1,6 +1,6 @@
 import { entityRefKey, type CompiledEntity, type ResolvedWikiLink } from '@patternverse/compiler';
-import type { Code, Link, Parent, Root, RootContent, Text } from 'mdast';
-import rehypeSanitize from 'rehype-sanitize';
+import type { Code, Heading, Link, Parent, Root, RootContent, Text } from 'mdast';
+import rehypeSanitize, { defaultSchema, type Options as SanitizeOptions } from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
@@ -9,6 +9,50 @@ import { unified } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 
 const WIKI_LINK_PATTERN = /\[\[([^\]\n]+)\]\]/g;
+
+// Keep diagrams in isolated image documents: repeated SVGs cannot collide with page IDs.
+// Only captioned, local diagram assets receive this presentation; raw HTML stays disabled.
+const diagramSanitizeSchema: SanitizeOptions = {
+  ...defaultSchema,
+  tagNames: [...(defaultSchema.tagNames ?? []), 'figure', 'figcaption'],
+  attributes: {
+    ...defaultSchema.attributes,
+    figure: [['className', 'content-diagram']],
+    div: [
+      ...(defaultSchema.attributes?.div ?? []),
+      ['className', 'diagram-scroll'],
+      ['role', 'region'],
+      'ariaLabel',
+    ],
+    span: [...(defaultSchema.attributes?.span ?? []), ['className', 'diagram-hint']],
+  },
+};
+
+export type MarkdownRenderOptions = Readonly<{ omitSections?: readonly string[] }>;
+
+/** Remove complete public-reading sections by heading, while retaining the source entity unchanged. */
+const removeSections = (tree: Root, omittedHeadings: readonly string[]): void => {
+  const omitted = new Set(omittedHeadings.map((heading) => heading.trim().toLocaleLowerCase()));
+  for (let index = 0; index < tree.children.length; index += 1) {
+    const node = tree.children[index];
+    if (node?.type !== 'heading' || !omitted.has(headingText(node))) continue;
+    let end = index + 1;
+    while (end < tree.children.length) {
+      const candidate = tree.children[end];
+      if (candidate?.type === 'heading' && candidate.depth <= node.depth) break;
+      end += 1;
+    }
+    tree.children.splice(index, end - index);
+    index -= 1;
+  }
+};
+
+const headingText = (heading: Heading): string =>
+  heading.children
+    .flatMap((child) => ('value' in child && typeof child.value === 'string' ? [child.value] : []))
+    .join('')
+    .trim()
+    .toLocaleLowerCase();
 
 const createWikiLinkQueues = (
   links: readonly ResolvedWikiLink[],
@@ -59,12 +103,71 @@ const replaceWikiLinks = (
 const remarkPatternverse = (
   entity: CompiledEntity,
   entityIndex: ReadonlyMap<string, CompiledEntity>,
+  options: MarkdownRenderOptions,
 ) => {
   const queues = createWikiLinkQueues(entity.links);
 
   return (tree: Root): void => {
+    removeSections(tree, options.omitSections ?? []);
+
+    visit(tree, 'paragraph', (node) => {
+      const image = node.children[0];
+      if (
+        node.children.length !== 1 ||
+        image?.type !== 'image' ||
+        !image.title ||
+        !/^\/diagrams\/[a-z0-9/-]+\.svg$/.test(image.url)
+      )
+        return;
+
+      node.data = {
+        hName: 'figure',
+        hProperties: { className: ['content-diagram'] },
+        hChildren: [
+          {
+            type: 'element',
+            tagName: 'div',
+            properties: {
+              className: ['diagram-scroll'],
+              tabIndex: 0,
+              role: 'region',
+              ariaLabel: `Scrollable diagram: ${image.alt ?? entity.title}`,
+            },
+            children: [
+              {
+                type: 'element',
+                tagName: 'img',
+                properties: { src: image.url, alt: image.alt ?? '', width: 720, height: 470 },
+                children: [],
+              },
+            ],
+          },
+          {
+            type: 'element',
+            tagName: 'figcaption',
+            properties: {},
+            children: [
+              { type: 'text', value: image.title },
+              {
+                type: 'element',
+                tagName: 'span',
+                properties: { className: ['diagram-hint'] },
+                children: [
+                  { type: 'text', value: 'Scroll horizontally to read all diagram labels.' },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+    });
+
     visit(tree, 'code', (node: Code, index, parent: Parent | undefined) => {
-      if (node.lang === 'patternverse-practice' && parent && index !== undefined) {
+      if (
+        (node.lang === 'patternverse-practice' || node.lang === 'patternverse-language') &&
+        parent &&
+        index !== undefined
+      ) {
         parent.children.splice(index, 1);
         return [SKIP, index];
       }
@@ -83,6 +186,7 @@ const remarkPatternverse = (
 export const renderEntityMarkdown = async (
   entity: CompiledEntity,
   entities: readonly CompiledEntity[],
+  options: MarkdownRenderOptions = {},
 ): Promise<string> => {
   const entityIndex = new Map(
     entities.map((candidate) => [entityRefKey(candidate.ref), candidate] as const),
@@ -91,9 +195,9 @@ export const renderEntityMarkdown = async (
   const output = await unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(() => remarkPatternverse(entity, entityIndex))
+    .use(() => remarkPatternverse(entity, entityIndex, options))
     .use(remarkRehype)
-    .use(rehypeSanitize)
+    .use(rehypeSanitize, diagramSanitizeSchema)
     .use(rehypeStringify)
     .process(entity.body);
 

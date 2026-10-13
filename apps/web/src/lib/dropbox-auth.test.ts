@@ -7,6 +7,18 @@ import {
 } from './client/dropbox-auth';
 
 describe('Dropbox browser authorization', () => {
+  it.each([
+    { accessToken: 'test', accountId: '', expiresAt: '2099-01-01' },
+    { accessToken: 'test', accountId: 'alice', expiresAt: 'invalid' },
+    null,
+  ])('rejects malformed stored credentials without returning them', (connection) => {
+    const storage = {
+      getItem: () => JSON.stringify(connection),
+      removeItem: vi.fn(),
+    } as unknown as Storage;
+    expect(readDropboxConnection(storage)).toBeUndefined();
+    expect(storage.removeItem).toHaveBeenCalledWith(DROPBOX_CONNECTION_STORAGE_KEY);
+  });
   it('creates an authorization-code request using PKCE and exact localhost callback', async () => {
     const { flow, url } = await createDropboxAuthorization(
       'public-app-key',

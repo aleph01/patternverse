@@ -7,10 +7,13 @@ test('chooses an entity type before showing its matching editor', async ({ page 
   await expect(page.getByLabel('Title', { exact: true })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Create a pattern' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Create a verse' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Create a collection' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Create a concept' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Create a practice' })).toHaveCount(0);
 
-  await page.getByRole('button', { name: 'Create a concept' }).click();
-  await expect(page).toHaveURL(/\/editor\?type=concept$/);
-  await expect(page.getByRole('heading', { name: 'New concept' })).toBeVisible();
+  await page.getByRole('button', { name: 'Create a pattern' }).click();
+  await expect(page).toHaveURL(/\/editor\?type=pattern$/);
+  await expect(page.getByRole('heading', { name: 'New pattern' })).toBeVisible();
   await expect(page.getByLabel('Type')).toHaveCount(0);
   await expect(page.getByLabel('Status')).toBeVisible();
   await expect(page.getByRole('region', { name: 'Verses' })).toBeVisible();
@@ -24,117 +27,65 @@ test('chooses an entity type before showing its matching editor', async ({ page 
   await expect(page.getByRole('region', { name: 'Visual Markdown editor' })).toHaveCount(0);
 });
 
+test('old creation URLs offer patterns instead of new concepts or standalone practices', async ({
+  page,
+}) => {
+  for (const type of ['concept', 'practice']) {
+    await page.goto(`/editor?type=${type}`);
+    await expect(
+      page.getByRole('heading', { name: 'What would you like to create?' }),
+    ).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Create a pattern' })).toBeVisible();
+    await expect(page.getByLabel('Title', { exact: true })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: `Create a ${type}` })).toHaveCount(0);
+  }
+});
+
 test('personal entities persist and support local status updates and deletion', async ({
   page,
 }) => {
-  await page.goto('/editor?type=pattern');
+  await page.goto('/editor?type=pattern&verse=creativity');
   await page.getByLabel('Title', { exact: true }).fill('My First Pattern');
-  await expect(page.getByLabel('ID · lowercase kebab-case')).toHaveValue('my-first-pattern');
+  await page.locator('summary').filter({ hasText: 'Credits & technical details' }).click();
+  await expect(page.getByLabel('Pattern ID', { exact: true })).toHaveValue('my-first-pattern');
   await page.locator('.novel-prose').fill('A private test entity.');
   await page.getByRole('button', { name: 'Save', exact: true }).first().click();
   await expect(page.getByText('Saved “My First Pattern” as draft.')).toBeVisible();
 
   await page.goto('/my');
 
-  const localEntity = page.locator('.workspace-entities article').filter({
+  await page.getByRole('button', { name: /^Patterns/ }).click();
+  const localEntity = page.locator('.content-card').filter({
     has: page.getByRole('heading', { name: 'My First Pattern' }),
   });
   await expect(localEntity).toContainText('pattern · mine · draft');
 
   await page.reload();
+  await page.getByRole('button', { name: /^Patterns/ }).click();
   await expect(localEntity).toContainText('pattern · mine · draft');
 
-  await localEntity.getByRole('button', { name: 'Publish locally' }).click();
-  await expect(localEntity).toContainText('pattern · mine · published');
+  await localEntity.getByRole('button', { name: 'Mark ready' }).click();
+  await expect(localEntity).toContainText('pattern · mine · ready');
 
   page.once('dialog', (dialog) => dialog.accept());
   await localEntity.getByRole('button', { name: 'Delete' }).click();
-  await expect(page.locator('.workspace-entities')).not.toBeVisible();
-  await expect(
-    page.getByText('Your personal patterns, concepts, and practices will appear here.'),
-  ).toBeVisible();
+  await expect(page.locator('.content-card')).toHaveCount(0);
+  await expect(page.getByText(/No personal patterns yet/)).toBeVisible();
 });
 
-test('occasionally manages personal Verses and Collections from a collapsed organizer', async ({
+test('workspace exposes creation and compact navigation without manual ordering', async ({
   page,
 }) => {
   await page.goto('/my');
-
-  const organizer = page.locator('.workspace-organizer');
-  await expect(organizer).not.toHaveAttribute('open', '');
-  await expect(page.getByRole('link', { name: 'New verse' })).not.toBeVisible();
-  await organizer.locator('summary').click();
-  await expect(page.getByRole('link', { name: 'New verse' })).toBeVisible();
-
-  await page.getByRole('link', { name: 'New verse' }).click();
-  await expect(page).toHaveURL(/\/editor\?type=verse$/);
-  await expect(page.getByRole('heading', { name: 'New verse' })).toBeVisible();
-  await expect(page.getByLabel('Type')).toHaveCount(0);
-  await expect(page.getByLabel('Status')).toHaveCount(0);
-  await expect(page.getByLabel('ID · lowercase kebab-case')).toHaveCount(0);
-  await page.getByLabel('Title', { exact: true }).fill('Personal Growth');
-  await page.getByLabel('Summary').fill('A broad lens for meaningful personal change.');
-  await expect(page.getByLabel('Aliases · one per line')).toHaveCount(0);
-  await expect(page.getByRole('region', { name: 'Visual Markdown editor' })).toHaveCount(0);
-  await page.getByRole('button', { name: 'Save', exact: true }).first().click();
-  await expect(page.getByText('Saved “Personal Growth” as draft.')).toBeVisible();
-
-  await page.goto('/my');
-  await organizer.locator('summary').click();
-  const verseRow = organizer.locator('.structure-list li').filter({ hasText: 'Personal Growth' });
-  await verseRow.getByRole('button', { name: 'Rename' }).click();
-  await verseRow.getByLabel('Rename Personal Growth').fill('Growth and Change');
-  await verseRow.getByRole('button', { name: 'Save name' }).click();
-  await expect(organizer.getByText('Growth and Change', { exact: true })).toBeVisible();
-
-  await page.goto('/editor?type=pattern');
-  await page.getByLabel('Title', { exact: true }).fill('Connected Pattern');
-  const verses = page.getByRole('region', { name: 'Verses' });
-  await verses.getByRole('searchbox', { name: 'Find Verses' }).fill('growth and change');
-  await verses.getByRole('button', { name: 'Add' }).click();
-  await page.getByRole('button', { name: 'Save', exact: true }).first().click();
-  await expect(page.getByText('Saved “Connected Pattern” as draft.')).toBeVisible();
-
-  await page.goto('/my');
-  await organizer.locator('summary').click();
-  const renamedVerse = organizer.locator('.structure-list li').filter({
-    hasText: 'Growth and Change',
-  });
-  const verseDialogPromise = page.waitForEvent('dialog');
-  const verseDeletePromise = renamedVerse.getByRole('button', { name: 'Delete' }).click();
-  const verseDialog = await verseDialogPromise;
-  expect(verseDialog.message()).toContain('This cannot be undone.');
-  expect(verseDialog.message()).toContain('1 personal entity');
-  await verseDialog.accept();
-  await verseDeletePromise;
-  await expect(organizer).not.toContainText('Growth and Change');
-
-  await page.getByRole('link', { name: 'New collection' }).click();
-  await expect(page).toHaveURL(/\/editor\?type=collection$/);
-  await expect(page.getByLabel('Type')).toHaveCount(0);
-  await page.getByLabel('Title', { exact: true }).fill('Weekly Focus');
-  await page.getByRole('button', { name: 'Save', exact: true }).first().click();
-  await expect(page.getByText('Saved “Weekly Focus” as draft.')).toBeVisible();
-
-  await page.goto('/my');
-  await organizer.locator('summary').click();
-  const collectionRow = organizer.locator('.structure-list li').filter({ hasText: 'Weekly Focus' });
-  await collectionRow.getByRole('button', { name: 'Rename' }).click();
-  await collectionRow.getByLabel('Rename Weekly Focus').fill('This Week');
-  await collectionRow.getByRole('button', { name: 'Save name' }).click();
-  await expect(organizer.getByText('This Week', { exact: true })).toBeVisible();
-
-  const renamedCollection = organizer
-    .locator('.structure-list li')
-    .filter({ hasText: 'This Week' });
-  const collectionDialogPromise = page.waitForEvent('dialog');
-  const collectionDeletePromise = renamedCollection.getByRole('button', { name: 'Delete' }).click();
-  const collectionDialog = await collectionDialogPromise;
-  expect(collectionDialog.message()).toContain('Delete collection “This Week”?');
-  expect(collectionDialog.message()).toContain('This cannot be undone.');
-  await collectionDialog.accept();
-  await collectionDeletePromise;
-  await expect(organizer).not.toContainText('This Week');
+  await expect(page.getByRole('link', { name: 'New verse', exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'New collection', exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'New pattern', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /reorder|move .* up/i })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Settings', exact: true }).click();
+  await expect(page.getByLabel('Workspace name')).toBeVisible();
+  await page.getByRole('button', { name: 'Sync & backup', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Download workspace backup' })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
 test('usefulness is private browser state that persists across reloads', async ({ page }) => {
@@ -173,7 +124,7 @@ test('creates, previews, validates, and edits a personal Markdown entity', async
 
   await page.getByRole('button', { name: 'Save', exact: true }).first().click();
   await expect(page.getByText('Saved “Notice the Next Move” as draft.')).toBeVisible();
-  await expect(page.getByText('Saved locally')).toBeVisible();
+  await expect(page.getByText('Saved on this device', { exact: true })).toBeVisible();
 
   await page.goto('/');
   const personalEntry = page.locator('#library .entity-list li').filter({
@@ -240,31 +191,27 @@ test('searches personal and Commons knowledge together with source and type filt
   await page.getByRole('button', { name: 'Save', exact: true }).first().click();
   await expect(page.getByText('Saved “My Momentum Reset” as draft.')).toBeVisible();
 
-  await page.goto('/');
-  await page.getByLabel('Search Patternverse').fill('my momentum reset');
-  await page.getByRole('button', { name: 'Search', exact: true }).click();
-  await expect(page).toHaveURL(/#library$/);
+  await page.goto('/library');
+  await page.getByRole('searchbox').fill('my momentum reset');
   await expect(page.locator('#library')).toContainText('My Momentum Reset');
   await expect(page.locator('#library')).toContainText('1 match');
-
-  await page.getByLabel('Only mine').check();
+  await page.getByRole('button', { name: /^My library/ }).click();
   await expect(page.locator('#library')).toContainText('My Momentum Reset');
-  await page.getByLabel('Search Patternverse').fill('creative reframing');
-  await expect(page.locator('#library')).toContainText('Nothing matched yet.');
-  await page.getByLabel('Only mine').uncheck();
+  await page.getByRole('searchbox').fill('creative reframing');
+  await expect(page.locator('#library')).toContainText('No matching patterns');
+  await page.getByRole('button', { name: 'Explore', exact: true }).click();
   await expect(page.locator('#library')).toContainText('Creative Reframing');
-  await page.getByLabel('Choose entity types').click();
-  await page.getByLabel('Patterns', { exact: true }).uncheck();
-  await page.getByLabel('Practices', { exact: true }).uncheck();
-  await expect(page.locator('#library')).toContainText('Nothing matched yet.');
+  await expect(page.getByRole('button', { name: 'Concepts', exact: true })).toHaveCount(0);
 
   await page.goto('/verse/creativity');
   await expect(page.locator('.verse-groups')).toContainText('My Momentum Reset');
   await expect(page.locator('.verse-groups')).toContainText('includes mine');
 });
 
-test('edits ordered Collection items and blocks invalid saves', async ({ page }) => {
-  await page.goto('/editor?type=collection');
+test('edits collection references without manual ordering and blocks invalid saves', async ({
+  page,
+}) => {
+  await page.goto('/editor?type=collection&verse=creativity');
   await page.getByLabel('Title', { exact: true }).fill('A Useful Order');
   await expect(page.getByLabel('ID · lowercase kebab-case')).toHaveValue('a-useful-order');
 
@@ -274,8 +221,8 @@ test('edits ordered Collection items and blocks invalid saves', async ({ page })
   await items.getByRole('button', { name: 'Add' }).click();
   await itemSearch.fill('working memory');
   await items.getByRole('button', { name: 'Add' }).click();
-  await items.getByRole('button', { name: 'Move Working Memory up' }).click();
-  await expect(items.locator('.lookup-selected li').first()).toContainText('Working Memory');
+  await expect(items.getByRole('button', { name: /^Move / })).toHaveCount(0);
+  await expect(items.locator('.lookup-selected li').first()).toContainText('Creative Reframing');
 
   await page.getByLabel('ID · lowercase kebab-case').fill('Invalid ID');
   await page.getByRole('button', { name: 'Save', exact: true }).first().click();
@@ -308,13 +255,37 @@ test('protects unsaved editor changes during navigation', async ({ page }) => {
   await expect(page).toHaveURL('/');
 });
 
-test('builds and restores an embedded Practice without editing YAML', async ({ page }) => {
-  await page.goto('/editor?type=pattern');
+test('preserves the builder for an existing legacy Practice without forced conversion', async ({
+  page,
+}) => {
+  await page.goto('/editor?type=pattern&verse=creativity');
   await page.getByLabel('Title', { exact: true }).fill('Builder Round Trip');
   await page.locator('.novel-prose').fill('This article stays ordinary Markdown.');
-
-  await page.getByText('Interactive practice', { exact: true }).click();
-  await page.getByRole('button', { name: 'Add practice' }).click();
+  await page.getByRole('button', { name: 'Save', exact: true }).click();
+  await expect(page.getByText('Saved “Builder Round Trip” as draft.')).toBeVisible();
+  // Simulate an existing portable legacy record in this isolated test browser.
+  await page.evaluate(async () => {
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const open = indexedDB.open('patternverse-workspace-v1');
+      open.onsuccess = () => resolve(open.result);
+      open.onerror = () => reject(open.error);
+    });
+    await new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction('entities', 'readwrite');
+      const store = transaction.objectStore('entities');
+      const read = store.get('builder-round-trip');
+      read.onsuccess = () =>
+        store.put({
+          ...read.result,
+          body: 'This article stays ordinary Markdown.\n\n```patternverse-practice\ntitle: Legacy Practice\nsteps:\n  - id: first-step\n    blocks:\n      - id: first-copy\n        type: markdown\n        content: Take a small step.\n```',
+        });
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error);
+    });
+    db.close();
+  });
+  await page.goto('/editor?id=builder-round-trip');
+  await expect(page.getByText('Existing structured practice · unchanged')).toBeVisible();
   const builder = page.getByRole('region', { name: 'Interactive practice builder' });
   await builder.getByLabel('Practice title').fill('Builder Practice');
   await builder.getByLabel('Introduction optional').fill('A portable guided sequence.');

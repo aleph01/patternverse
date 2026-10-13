@@ -5,7 +5,13 @@
 </script>
 
 <span class="patternverse-logo" class:compact>
-  <img src={`${base}/icons/patternverse-mark.svg`} alt="" aria-hidden="true" width="28" height="32" />
+  <img
+    src={`${base}/icons/patternverse-mark.png`}
+    alt=""
+    aria-hidden="true"
+    width="36"
+    height="35"
+  />
   <span>patternverse</span>
 </span>
 
@@ -24,8 +30,8 @@
 
   .patternverse-logo img {
     display: block;
-    width: 1.2em;
-    height: 1.37em;
+    width: 1.25em;
+    height: auto;
   }
 
   .patternverse-logo.compact {

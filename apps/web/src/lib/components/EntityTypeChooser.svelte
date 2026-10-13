@@ -21,4 +21,14 @@
       </button>
     {/each}
   </div>
+  <p>To create a practice, create a pattern and add its interactive practice.</p>
 </section>
+
+<style>
+  p {
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+</style>
