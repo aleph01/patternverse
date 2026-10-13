@@ -1,0 +1,72 @@
+.workspace {
+  background: var(--mint);
+}
+
+.library {
+  padding-top: clamp(2.5rem, 5vw, 5rem);
+}
+
+.library-view-all {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.library-view-all:hover,
+.library-view-all:focus-visible {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.library-page-intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 8rem) max(3vw, calc((100vw - 1440px) / 2));
+  border-bottom: 1px solid var(--ink);
+  background: linear-gradient(110deg, var(--mint) 0 72%, #eff2ff 72% 100%);
+}
+
+.library-page-intro::after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: 28%;
+  height: 100%;
+  background-image: radial-gradient(rgb(24 24 20 / 18%) 1px, transparent 1px);
+  background-size: 14px 14px;
+  content: '';
+  mask-image: linear-gradient(90deg, transparent, black 45%);
+}
+
+.library-page-intro > p:first-child {
+  margin: 0 0 1rem;
+  font-size: 0.76rem;
+  font-weight: 850;
+  text-transform: lowercase;
+}
+
+.library-page-intro h1 {
+  max-width: 11ch;
+  margin: 0;
+  font-family: Baskerville, 'Iowan Old Style', Georgia, serif;
+  font-size: clamp(3.2rem, 7vw, 7rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+}
+
+.library-page-intro > p:last-child {
+  max-width: 50ch;
+  margin: 2rem 0 0;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+}

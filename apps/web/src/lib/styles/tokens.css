@@ -1,0 +1,67 @@
+/* Shared decisions, not a replacement for feature-specific layout.
+ * Keep legacy names as aliases while consumers migrate incrementally.
+ * Dark surfaces opt in explicitly; this does not enable an app-wide dark mode.
+ */
+:root {
+  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ink: #181814;
+  --paper: #fff;
+  --text-muted-on-light: #62655f;
+  --text-on-dark: #fff;
+  --text-muted-on-dark: #cac9c1;
+  --surface-dark: #11110f;
+  --surface-dark-raised: #252521;
+  --border-on-dark: #66665f;
+  --border-control-on-dark: #77776e;
+  --muted: var(--text-muted-on-light);
+  --ink-muted: var(--text-muted-on-light);
+
+  --green: #05ce78;
+  --green-dark: #007a4d;
+  --entry-hover-background: #fbfefc;
+  --entry-hover-color: var(--green-dark);
+  --mint: #dff8ea;
+  --coral: #ff6b50;
+  --blue: #4169e1;
+  --yellow: #f3c84b;
+  --verse-1-rest: #edf8f1;
+  --verse-1-active: var(--green);
+  --verse-2-rest: #eef0fa;
+  --verse-2-active: var(--blue);
+  --verse-3-rest: #faf4dc;
+  --verse-3-active: var(--yellow);
+  --verse-4-rest: #faece8;
+  --verse-4-active: var(--coral);
+  --verse-5-rest: #f0ebf7;
+  --verse-5-active: #7259b8;
+  --verse-6-rest: #e7f5f3;
+  --verse-6-active: #187e76;
+  --verse-7-rest: #f6eafa;
+  --verse-7-active: #9252ad;
+  --verse-8-rest: #fae9ef;
+  --verse-8-active: #a83e68;
+  --verse-9-rest: #f9ecd9;
+  --verse-9-active: #cc8b32;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --text-xs: 0.75rem;
+  --text-control: 0.78rem;
+  --weight-control: 800;
+  --weight-label: 750;
+  --weight-eyebrow: 850;
+  --border-width: 1px;
+  --border-width-strong: 2px;
+  --line: var(--border-width-strong) solid var(--ink);
+  --radius-control: 4px;
+  --radius-panel: 10px;
+  --control-min-height: 44px;
+  --focus-color: #1557ff;
+  --focus-width: 3px;
+  --focus-offset: 3px;
+}

@@ -1,0 +1,318 @@
+.about-page {
+  background: var(--paper);
+}
+
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(88vh - 82px);
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 8rem) max(3vw, calc((100vw - 1440px) / 2));
+  border-bottom: 1px solid var(--ink);
+}
+
+.about-hero > :not(.about-hero-blocks) {
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero > p,
+.about-section-heading > p,
+.about-portability > p,
+.about-start > p,
+.about-install-intro > p {
+  margin: 0 0 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.about-hero h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(4.5rem, 10vw, 9.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.07em;
+  text-transform: lowercase;
+}
+
+.about-intro {
+  max-width: 62rem;
+  margin-top: clamp(3rem, 7vw, 6rem);
+}
+
+.about-intro p {
+  max-width: 42rem;
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  line-height: 1.4;
+}
+
+.about-hero-blocks {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+}
+
+.about-block {
+  position: absolute;
+  display: block;
+  aspect-ratio: 1;
+  mix-blend-mode: multiply;
+}
+
+.about-block-green {
+  top: -8%;
+  right: -2%;
+  width: clamp(190px, 27vw, 410px);
+  background: rgb(5 206 120 / 58%);
+}
+
+.about-block-blue {
+  top: 30%;
+  right: 16%;
+  width: clamp(150px, 21vw, 320px);
+  background: rgb(65 105 225 / 54%);
+}
+
+.about-block-yellow {
+  right: 2%;
+  bottom: -10%;
+  width: clamp(170px, 24vw, 370px);
+  background: rgb(243 200 75 / 62%);
+}
+
+.about-library,
+.about-structure {
+  padding: clamp(5rem, 9vw, 9rem) max(3vw, calc((100vw - 1440px) / 2));
+}
+
+.about-section-heading {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.about-section-heading h2,
+.about-start h2 {
+  max-width: 14ch;
+  margin: 0;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  text-transform: lowercase;
+}
+
+.library-model {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(4rem, 8vw, 8rem);
+  border: 1px solid var(--ink);
+}
+
+.library-model article {
+  min-height: 24rem;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.library-model article + article {
+  border-left: 1px solid var(--ink);
+}
+
+.library-model article:nth-child(1) {
+  background: var(--mint);
+}
+
+.library-model article:nth-child(2) {
+  background: var(--verse-2-rest);
+}
+
+.library-model article:nth-child(3) {
+  background: var(--verse-3-rest);
+}
+
+.library-model span,
+.library-model strong {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.library-model h3 {
+  margin: auto 0 1rem;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+}
+
+.library-model p {
+  min-height: 5.5em;
+  margin: 0 0 2rem;
+  line-height: 1.45;
+}
+
+.library-model-result {
+  margin: 2rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 850;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.about-portability {
+  display: grid;
+  grid-template-columns: 0.35fr 0.65fr;
+  column-gap: clamp(2rem, 6vw, 7rem);
+  padding: clamp(5rem, 9vw, 9rem) max(3vw, calc((100vw - 1440px) / 2));
+  color: white;
+  background: var(--ink);
+}
+
+.about-portability > p {
+  grid-column: 1 / -1;
+}
+
+.about-portability h2 {
+  margin: clamp(3rem, 7vw, 6rem) 0 0;
+  font-size: clamp(3.8rem, 8vw, 8rem);
+  line-height: 0.82;
+  letter-spacing: -0.065em;
+  text-transform: lowercase;
+}
+
+.about-portability > div {
+  align-self: end;
+}
+
+.about-portability > div p {
+  max-width: 40rem;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.45;
+}
+
+.about-structure dl {
+  margin: clamp(4rem, 8vw, 8rem) 0 0;
+}
+
+.about-structure dl > div {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
+  gap: 2rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid #9b9a93;
+}
+
+.about-structure dl > div:last-child {
+  border-bottom: 1px solid #9b9a93;
+}
+
+.about-structure dt {
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+}
+
+.about-structure dd {
+  max-width: 42rem;
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.45;
+}
+
+.about-start {
+  padding: clamp(5rem, 9vw, 9rem) max(3vw, calc((100vw - 1440px) / 2));
+  border-top: 1px solid var(--ink);
+  background: var(--mint);
+}
+
+.about-install {
+  padding: clamp(5rem, 9vw, 9rem) max(3vw, calc((100vw - 1440px) / 2));
+  color: white;
+  background: var(--ink);
+}
+
+.about-install-intro {
+  display: grid;
+  grid-template-columns: 0.35fr 0.65fr;
+  column-gap: clamp(2rem, 6vw, 7rem);
+}
+
+.about-install-intro > p {
+  grid-column: 1 / -1;
+}
+
+.about-install-intro h2 {
+  margin: clamp(3rem, 7vw, 6rem) 0 0;
+  font-size: clamp(3.8rem, 8vw, 8rem);
+  line-height: 0.82;
+  letter-spacing: -0.065em;
+  text-transform: lowercase;
+}
+
+.about-install-intro > div {
+  align-self: end;
+}
+
+.about-install-intro > div p {
+  max-width: 39rem;
+  margin: 0 0 1rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.45;
+}
+
+.about-install-intro small {
+  display: block;
+  max-width: 38rem;
+  color: #c8c8c2;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.about-install-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: clamp(4rem, 8vw, 8rem) 0 0;
+  padding: 0;
+  border-top: 1px solid #66665f;
+  border-left: 1px solid #66665f;
+  list-style: none;
+}
+
+.about-install-steps li {
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-right: 1px solid #66665f;
+  border-bottom: 1px solid #66665f;
+}
+
+.about-install-steps span {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.about-install-steps strong {
+  margin-top: auto;
+  font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+  letter-spacing: -0.035em;
+  text-transform: lowercase;
+}
+
+.about-install-steps p {
+  max-width: 31ch;
+  margin: 0.75rem 0 0;
+  color: #d7d7d1;
+  line-height: 1.45;
+}

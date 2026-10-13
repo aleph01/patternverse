@@ -1,0 +1,13 @@
+.section-heading h2 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 6vw, 6.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+  text-transform: lowercase;
+}
+
+.section-heading > p,
+.section-heading > div > p {
+  margin: 0 0 1rem;
+}

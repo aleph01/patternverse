@@ -1,0 +1,38 @@
+/* Art leads when the viewport is compact or narrower than wide 16:9 landscape. */
+@media (max-width: 1100px), (aspect-ratio < 16/9) {
+  .featured-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .featured-grid article,
+  .featured-grid article.lead {
+    grid-row: auto;
+    min-height: 0;
+  }
+  .featured-grid article > a {
+    height: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+  .featured-art,
+  .featured-grid article.lead .featured-art {
+    order: -1;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+    max-height: 420px;
+  }
+  .featured-copy,
+  .featured-grid article.lead .featured-copy {
+    min-height: 300px;
+    padding: 1.5rem;
+  }
+  .featured-grid h3,
+  .featured-grid article:not(.lead) h3 {
+    margin-top: 1.5rem;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+  }
+}
+@media (max-width: 900px) {
+  .featured-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

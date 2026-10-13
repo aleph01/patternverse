@@ -1,0 +1,164 @@
+:root {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+input,
+select,
+textarea,
+a {
+  border-radius: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+
+.site-header,
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 92px;
+  padding: 0 max(3vw, calc((100vw - 1440px) / 2));
+  border-bottom: 1px solid var(--ink);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-header {
+  gap: 2rem;
+  padding-block: 1rem;
+}
+
+.site-utilities {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  text-transform: none;
+}
+
+.site-utilities > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 0.25rem;
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+}
+
+.site-utilities a[aria-current='page'] {
+  color: var(--green-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
+}
+
+.about-link:hover,
+.about-link:focus-visible {
+  color: var(--green-dark);
+}
+
+.mira-nav-link:hover,
+.mira-nav-link:focus-visible {
+  color: var(--green-dark);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  font-size: 0.82rem;
+  font-weight: 750;
+  text-transform: lowercase;
+}
+
+nav a:hover {
+  color: var(--green-dark);
+}
+
+.pwa-status {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.65rem max(3vw, calc((100vw - 1440px) / 2));
+  border-bottom: 1px solid var(--ink);
+  color: white;
+  background: var(--ink);
+  font-size: 0.78rem;
+}
+
+.pwa-status p {
+  margin: 0;
+}
+
+.pwa-status.update {
+  color: var(--ink);
+  background: var(--green);
+}
+
+.pwa-status button {
+  min-height: 32px;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid currentColor;
+  color: inherit;
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+
+.pwa-status button:hover,
+.pwa-status button:focus-visible {
+  color: white;
+  background: var(--ink);
+}
+
+main {
+  overflow: hidden;
+}

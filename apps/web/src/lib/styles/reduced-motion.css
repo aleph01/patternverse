@@ -1,0 +1,16 @@
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .entity-list li,
+  .entity-copy h3,
+  .entity-copy h3 a,
+  .library-categories button::after {
+    transition: none;
+  }
+
+  .featured-grid article {
+    transition: none;
+  }
+}

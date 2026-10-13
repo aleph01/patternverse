@@ -1,0 +1,509 @@
+.practice-page {
+  min-height: calc(100vh - 82px);
+  background: #f1f0eb;
+}
+
+.practice-page-heading,
+.practice-readonly {
+  width: min(100% - 6vw, 960px);
+  margin: 0 auto;
+}
+
+.practice-page-heading {
+  padding: clamp(4rem, 9vw, 8rem) 0 clamp(3rem, 7vw, 6rem);
+}
+
+.practice-page-heading > a {
+  display: inline-block;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.practice-page-heading h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(4rem, 9vw, 8rem);
+  line-height: 0.87;
+  letter-spacing: -0.065em;
+  text-transform: lowercase;
+}
+
+.practice-page-heading > div {
+  max-width: 48ch;
+  margin-top: 2rem;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.45;
+}
+
+.practice-readonly {
+  padding-bottom: clamp(5rem, 10vw, 10rem);
+}
+
+.practice-step-preview {
+  padding: clamp(2rem, 5vw, 4rem);
+  background: white;
+}
+
+.practice-step-preview + .practice-step-preview {
+  margin-top: 1rem;
+}
+
+.practice-step-preview > span {
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.practice-step-preview h2 {
+  margin: 1rem 0 2.5rem;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+}
+
+.practice-blocks {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.practice-blocks .markdown-body {
+  max-width: 62ch;
+}
+
+.practice-field-preview,
+.practice-timer-preview {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1.25rem;
+  background: #eeece5;
+}
+
+.practice-field-preview span,
+.practice-timer-preview span {
+  color: #5a5952;
+}
+
+.practice-runner {
+  width: min(100% - 6vw, 960px);
+  margin: 0 auto;
+  padding-bottom: clamp(5rem, 10vw, 10rem);
+}
+
+.practice-complete,
+.practice-current-step {
+  padding: clamp(2rem, 5vw, 4rem);
+  background: white;
+}
+
+.practice-complete p,
+.practice-complete span {
+  margin: 0;
+}
+
+.practice-complete a {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 1.4rem;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  background: var(--green);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.practice-persistent-timers {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.practice-persistent-timers .practice-timer {
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  padding: 0.9rem 1.25rem;
+}
+
+.practice-persistent-timers .practice-timer-main {
+  justify-content: flex-end;
+}
+
+.practice-current-step > h2 {
+  max-width: 14ch;
+  margin: 0 0 clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  text-transform: lowercase;
+}
+
+.practice-response-field {
+  display: grid;
+  gap: 0.65rem;
+  font-weight: 800;
+}
+
+.practice-response-field input,
+.practice-response-field textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: #f7f6f1;
+  font: inherit;
+  font-weight: 450;
+  line-height: 1.5;
+}
+
+.practice-response-field [aria-invalid='true'] {
+  border-width: 2px;
+  border-color: #a43524;
+}
+
+.practice-field-error {
+  margin: -0.9rem 0 0;
+  color: #8a281b;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.practice-timer {
+  width: min(100%, 34rem);
+  display: grid;
+  gap: 0.75rem;
+  justify-self: start;
+  padding: 1.25rem;
+  color: white;
+  background: #171814;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%);
+}
+
+.practice-timer-label {
+  margin: 0;
+  color: #c9cac4;
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.practice-timer-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.practice-duration-editor {
+  display: flex;
+  align-items: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.practice-duration-editor input {
+  width: 2.2em;
+  padding: 0.1rem 0;
+  border: 0;
+  border-radius: 0;
+  color: white;
+  background: transparent;
+  font: inherit;
+  text-align: right;
+  appearance: textfield;
+}
+
+.practice-duration-editor input::-webkit-inner-spin-button,
+.practice-duration-editor input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.practice-duration-steppers {
+  display: grid;
+  gap: 0.22rem;
+  margin-left: 0.7rem;
+}
+
+.practice-duration-steppers button {
+  width: 1.7rem;
+  min-height: 1.7rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  background: rgb(255 255 255 / 11%);
+  cursor: pointer;
+  transition:
+    color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.practice-duration-steppers button:hover:not(:disabled),
+.practice-duration-steppers button:focus-visible {
+  color: var(--ink);
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
+.practice-duration-steppers button:active:not(:disabled) {
+  transform: translateY(0) scale(0.94);
+}
+
+.practice-duration-steppers button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.timer-step-chevron {
+  width: 0.42rem;
+  height: 0.42rem;
+  display: block;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+
+.timer-step-chevron--up {
+  margin-top: 0.2rem;
+  transform: rotate(-45deg);
+}
+
+.timer-step-chevron--down {
+  margin-bottom: 0.2rem;
+  transform: rotate(135deg);
+}
+
+.practice-timer-main > strong {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.practice-timer-main > strong.complete {
+  color: var(--green);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.practice-timer-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.practice-timer-controls button {
+  width: 3.25rem;
+  min-height: 3.25rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  background: rgb(255 255 255 / 11%);
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.practice-timer-controls button:first-child {
+  color: var(--ink);
+  background: var(--green);
+  box-shadow: 0 0.5rem 1.4rem rgb(5 206 120 / 24%);
+}
+
+.practice-timer-controls button:hover,
+.practice-timer-controls button:focus-visible {
+  background: rgb(255 255 255 / 19%);
+  transform: translateY(-2px);
+}
+
+.practice-timer-controls button:first-child:hover,
+.practice-timer-controls button:first-child:focus-visible {
+  background: #29df91;
+  box-shadow: 0 0.65rem 1.7rem rgb(5 206 120 / 34%);
+}
+
+.practice-timer-controls button:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.timer-control-icon {
+  display: block;
+}
+
+.timer-control-icon--play {
+  width: 0;
+  height: 0;
+  margin-left: 0.2rem;
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent;
+  border-left: 0.8rem solid currentColor;
+}
+
+.timer-control-icon--pause {
+  width: 0.85rem;
+  height: 1rem;
+  border-right: 0.25rem solid currentColor;
+  border-left: 0.25rem solid currentColor;
+}
+
+.timer-control-icon--reset {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.practice-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #c9c8c0;
+}
+
+.practice-step-position {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  color: #77766f;
+  font-size: 0.7rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.practice-step-position strong {
+  color: var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.practice-navigation-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.practice-navigation button {
+  min-width: 0;
+  min-height: 2.75rem;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  background: white;
+  font-weight: 850;
+  cursor: pointer;
+  transition:
+    color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.practice-navigation button:hover,
+.practice-navigation button:focus-visible {
+  color: white;
+  background: var(--ink);
+}
+
+.practice-navigation button:active {
+  transform: scale(0.96);
+}
+
+.practice-navigation .practice-step-button {
+  width: 2.75rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.practice-navigation .practice-back-button {
+  color: #77766f;
+  border-color: transparent;
+  background: transparent;
+}
+
+.practice-navigation .practice-back-button:hover,
+.practice-navigation .practice-back-button:focus-visible {
+  color: var(--ink);
+  background: rgb(24 24 20 / 6%);
+}
+
+.practice-navigation .practice-next-button {
+  color: white;
+  background: var(--ink);
+}
+
+.practice-navigation .practice-next-button:hover,
+.practice-navigation .practice-next-button:focus-visible {
+  color: var(--ink);
+  background: white;
+}
+
+.practice-navigation .practice-finish-button {
+  min-width: 6.5rem;
+  padding: 0 1rem;
+  color: white;
+  border-radius: 999px;
+  background: var(--ink);
+}
+
+.practice-navigation .practice-finish-button:hover,
+.practice-navigation .practice-finish-button:focus-visible {
+  color: var(--ink);
+  background: white;
+}
+
+.practice-navigation-chevron {
+  width: 0.62rem;
+  height: 0.62rem;
+  display: block;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+
+.practice-navigation-chevron--left {
+  margin-left: 0.25rem;
+  transform: rotate(-135deg);
+}
+
+.practice-navigation-chevron--right {
+  margin-right: 0.25rem;
+  transform: rotate(45deg);
+}
+
+.practice-complete {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.practice-complete h2 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  text-transform: lowercase;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
