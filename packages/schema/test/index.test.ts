@@ -3,12 +3,17 @@ import { describe, expect, it } from 'vitest';
 import {
   entityMetadataSchema,
   entityRefSchema,
+  entityRefKey,
   sourceManifestSchema,
   practiceDefinitionSchema,
   usefulnessSchema,
 } from '../src/index.js';
 
 describe('source and identity schemas', () => {
+  it('preserves stable source-qualified keys even with matching entity IDs', () => {
+    expect(entityRefKey({ sourceId: 'personal', entityId: 'shared' })).toBe('personal:shared');
+    expect(entityRefKey({ sourceId: 'commons', entityId: 'shared' })).toBe('commons:shared');
+  });
   it('accepts a version one corpus manifest and source-aware reference', () => {
     expect(
       sourceManifestSchema.parse({
@@ -59,7 +64,7 @@ describe('V1 entity union', () => {
     expect(entityMetadataSchema.safeParse(metadata).success).toBe(true);
   });
 
-  it('rejects tags and Verse item lists as unsupported schema extensions', () => {
+  it('accepts searchable tags but still rejects Verse item lists', () => {
     expect(
       entityMetadataSchema.safeParse({
         id: 'one',
@@ -67,6 +72,15 @@ describe('V1 entity union', () => {
         title: 'One',
         status: 'published',
         tags: ['unofficial'],
+      }).success,
+    ).toBe(true);
+    expect(
+      entityMetadataSchema.safeParse({
+        id: 'one',
+        type: 'pattern',
+        title: 'One',
+        status: 'published',
+        tags: [3],
       }).success,
     ).toBe(false);
     expect(

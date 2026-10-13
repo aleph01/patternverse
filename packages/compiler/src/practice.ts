@@ -1,107 +1,46 @@
-import { practiceDefinitionSchema, type PracticeDefinition } from '@patternverse/schema';
-import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
+import { articleWithoutFence } from './practice-fences.js';
 
-const PRACTICE_FENCE_PATTERN =
-  /^```patternverse-practice[ \t]*\r?\n([\s\S]*?)^```[ \t]*(?:\r?\n|$)/gm;
+// Keep both existing package entry points compatible without mixing legacy YAML
+// validation/serialization into the canonical Pattern Language authoring path.
+export {
+  legacyPracticeSource,
+  parsePracticeFromBody,
+  serializePracticeDefinition,
+  upsertPracticeFence,
+  type ParsedPracticeBody,
+} from './legacy-practice.js';
 
-type PracticeFence = {
-  readonly start: number;
-  readonly end: number;
-  readonly yaml: string;
-};
+const LANGUAGE_FENCE_PATTERN =
+  /^(`{3,})patternverse-language[ \t]*\r?\n([\s\S]*?)^\1[ \t]*(?:\r?\n|$)/gm;
 
-export type ParsedPracticeBody = {
-  readonly articleBody: string;
-  readonly practice?: PracticeDefinition;
-  readonly errors: readonly string[];
-};
-
-const findFences = (body: string): readonly PracticeFence[] =>
-  [...body.matchAll(PRACTICE_FENCE_PATTERN)].map((match) => ({
-    start: match.index,
-    end: match.index + match[0].length,
-    yaml: match[1] ?? '',
-  }));
-
-const articleWithoutFence = (body: string, fence?: PracticeFence): string => {
-  if (!fence) return body;
-  const before = body.slice(0, fence.start);
-  const after = body.slice(fence.end);
-
-  if (!after) {
-    if (before.endsWith('\r\n\r\n')) return before.slice(0, -4);
-    if (before.endsWith('\n\n')) return before.slice(0, -2);
-    if (before.endsWith('\r\n')) return before.slice(0, -2);
-    if (before.endsWith('\n')) return before.slice(0, -1);
-    return before;
-  }
-
-  if (!before) {
-    if (after.startsWith('\r\n')) return after.slice(2);
-    if (after.startsWith('\n')) return after.slice(1);
-    return after;
-  }
-
-  if (before.endsWith('\r\n') && after.startsWith('\r\n')) {
-    return `${before}${after.slice(2)}`;
-  }
-  if (before.endsWith('\n') && after.startsWith('\n')) {
-    return `${before}${after.slice(1)}`;
-  }
-  return `${before}${after}`;
-};
-
-export const parsePracticeFromBody = (body: string): ParsedPracticeBody => {
-  const fences = findFences(body);
-  const first = fences[0];
+/** Portable executable source stays distinct from illustrative `pattern` code blocks. */
+export const parseLanguagePracticeFromBody = (
+  body: string,
+): {
+  articleBody: string;
+  source?: string;
+  errors: readonly string[];
+} => {
+  const matches = [...body.matchAll(LANGUAGE_FENCE_PATTERN)];
+  const first = matches[0];
   if (!first) return { articleBody: body, errors: [] };
-  if (fences.length > 1) {
-    return {
-      articleBody: articleWithoutFence(body, first),
-      errors: ['A Practice may contain at most one patternverse-practice block.'],
-    };
-  }
-
-  try {
-    const parsed = practiceDefinitionSchema.safeParse(parseYaml(first.yaml));
-    if (!parsed.success) {
-      return {
-        articleBody: articleWithoutFence(body, first),
-        errors: parsed.error.issues.map((issue) => {
-          const field = issue.path.length > 0 ? `${issue.path.join('.')}: ` : '';
-          return `${field}${issue.message}`;
-        }),
-      };
-    }
-    return {
-      articleBody: articleWithoutFence(body, first),
-      practice: parsed.data,
-      errors: [],
-    };
-  } catch (error) {
-    return {
-      articleBody: articleWithoutFence(body, first),
-      errors: [error instanceof Error ? error.message : 'The Practice block is not valid YAML.'],
-    };
-  }
+  const source = (first[2] ?? '').replace(/\r?\n$/, '');
+  const fence = { start: first.index, end: first.index + first[0].length };
+  const errors =
+    matches.length > 1
+      ? ['Only one Pattern Language practice is allowed.']
+      : !source.trim()
+        ? ['Practice source cannot be empty.']
+        : new TextEncoder().encode(source).length > 65536
+          ? ['Practice source exceeds 64 KiB.']
+          : [];
+  return { articleBody: articleWithoutFence(body, fence), source, errors };
 };
 
-export const serializePracticeDefinition = (practice: PracticeDefinition): string =>
-  stringifyYaml(practice, { lineWidth: 0 }).trimEnd();
-
-export const upsertPracticeFence = (
-  articleOrBody: string,
-  practice: PracticeDefinition | undefined,
-): string => {
-  const fences = findFences(articleOrBody);
-  const first = fences[0];
-  if (!practice) return articleWithoutFence(articleOrBody, first);
-
-  const fence = `\`\`\`patternverse-practice\n${serializePracticeDefinition(practice)}\n\`\`\``;
-  if (first) {
-    return `${articleOrBody.slice(0, first.start)}${fence}${articleOrBody.slice(first.end)}`;
-  }
-  if (!articleOrBody) return fence;
-  const separator = articleOrBody.endsWith('\n') ? '\n' : '\n\n';
-  return `${articleOrBody}${separator}${fence}`;
+export const upsertLanguagePracticeFence = (body: string, source: string | undefined): string => {
+  const parsed = parseLanguagePracticeFromBody(body);
+  if (source === undefined) return parsed.articleBody;
+  const longest = Math.max(2, ...[...source.matchAll(/^`+/gm)].map((match) => match[0].length));
+  const fence = '`'.repeat(longest + 1);
+  return `${parsed.articleBody}${parsed.articleBody ? '\n\n' : ''}${fence}patternverse-language\n${source.replace(/\n$/, '')}\n${fence}`;
 };

@@ -48,7 +48,9 @@ export type AuthoredWikiLink = {
 
 export type ParsedEntity = RawEntity & {
   readonly wikiLinks: readonly AuthoredWikiLink[];
+  /** Import-only legacy data; execution must use languagePracticeSource. */
   readonly practice?: PracticeDefinition;
+  readonly languagePracticeSource?: string;
 };
 
 export type ResolvedWikiLink = AuthoredWikiLink & {
@@ -82,6 +84,7 @@ export type SearchDocument = {
   readonly status: RawEntity['status'];
   readonly title: string;
   readonly aliases: readonly string[];
+  readonly tags?: readonly string[];
   readonly summary: string;
   readonly body: string;
   readonly verseNames: readonly string[];

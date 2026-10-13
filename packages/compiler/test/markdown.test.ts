@@ -56,7 +56,7 @@ id: personal-note
 type: concept
 title: Personal Note
 status: draft
-tags:
+inventedField:
   - unsupported`);
     const commons = parseMarkdownEntity(source, {
       sourceId: 'commons',
@@ -78,16 +78,20 @@ tags:
 
     expect(commons.entity).toBeUndefined();
     expect(commons.diagnostics).toContainEqual(
-      expect.objectContaining({ code: 'unknown-field', severity: 'error', field: 'tags' }),
+      expect.objectContaining({ code: 'unknown-field', severity: 'error', field: 'inventedField' }),
     );
     expect(personal.entity).toBeDefined();
     expect(personal.diagnostics).toContainEqual(
-      expect.objectContaining({ code: 'unknown-field', severity: 'warning', field: 'tags' }),
+      expect.objectContaining({
+        code: 'unknown-field',
+        severity: 'warning',
+        field: 'inventedField',
+      }),
     );
-    expect(personal.entity).not.toHaveProperty('tags');
+    expect(personal.entity).not.toHaveProperty('inventedField');
     expect(publishedPersonal.entity).toBeUndefined();
     expect(publishedPersonal.diagnostics).toContainEqual(
-      expect.objectContaining({ code: 'unknown-field', severity: 'error', field: 'tags' }),
+      expect.objectContaining({ code: 'unknown-field', severity: 'error', field: 'inventedField' }),
     );
   });
 

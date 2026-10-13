@@ -1,4 +1,9 @@
-import type { EntityRef, PatternverseSource, RawEntity } from '@patternverse/schema';
+import {
+  entityRefKey,
+  type EntityRef,
+  type PatternverseSource,
+  type RawEntity,
+} from '@patternverse/schema';
 
 import type {
   CompileOptions,
@@ -11,7 +16,8 @@ import type {
   UnresolvedReference,
 } from './types.js';
 
-export const entityRefKey = (ref: EntityRef): string => `${ref.sourceId}:${ref.entityId}`;
+// Preserve the existing compiler/references API without a second identity implementation.
+export { entityRefKey } from '@patternverse/schema';
 
 const refFor = (entity: Pick<ParsedEntity, 'sourceId' | 'id'>): EntityRef => ({
   sourceId: entity.sourceId,
@@ -317,6 +323,7 @@ export const compileCorpus = (
     status: entity.status,
     title: entity.title,
     aliases: entity.aliases ?? [],
+    tags: entity.tags ?? [],
     summary: entity.summary ?? '',
     body: entity.body,
     verseNames: namesForRefs(entity.verseMemberships),

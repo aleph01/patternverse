@@ -12,6 +12,7 @@ export const entityMetadata = (entity: RawEntity): Entity => {
     summary: entity.summary,
     status: entity.status,
     aliases: entity.aliases,
+    tags: entity.tags,
     ...('verses' in entity ? { verses: entity.verses } : {}),
     attribution: entity.attribution,
     copied_from: entity.copied_from,

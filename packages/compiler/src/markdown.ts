@@ -2,7 +2,6 @@ import {
   entityIdSchema,
   entityMetadataSchema,
   rawEntitySchema,
-  practiceDefinitionSchema,
   type Entity,
   type PracticeDefinition,
 } from '@patternverse/schema';
@@ -13,6 +12,7 @@ import { visit } from 'unist-util-visit';
 import { parse as parseYaml } from 'yaml';
 
 import { diagnosticsFromZodError } from './diagnostics.js';
+import { legacyPracticeSource, parseLegacyPracticeYaml } from './legacy-practice.js';
 import type {
   AuthoredWikiLink,
   CompilerDiagnostic,
@@ -31,6 +31,7 @@ const allowedFieldsByType = {
     'summary',
     'status',
     'aliases',
+    'tags',
     'verses',
     'attribution',
     'copied_from',
@@ -42,6 +43,7 @@ const allowedFieldsByType = {
     'summary',
     'status',
     'aliases',
+    'tags',
     'verses',
     'attribution',
     'copied_from',
@@ -53,6 +55,7 @@ const allowedFieldsByType = {
     'summary',
     'status',
     'aliases',
+    'tags',
     'verses',
     'attribution',
     'copied_from',
@@ -66,6 +69,7 @@ const allowedFieldsByType = {
     'summary',
     'status',
     'aliases',
+    'tags',
     'verses',
     'attribution',
     'copied_from',
@@ -78,6 +82,7 @@ const allowedFieldsByType = {
     'summary',
     'status',
     'aliases',
+    'tags',
     'attribution',
     'copied_from',
   ]),
@@ -146,6 +151,7 @@ const parseBody = (
 ): {
   readonly wikiLinks: readonly AuthoredWikiLink[];
   readonly practice?: PracticeDefinition;
+  readonly languagePracticeSource?: string;
   readonly diagnostics: readonly CompilerDiagnostic[];
 } => {
   const tree = unified().use(remarkParse).parse(body) as Root;
@@ -162,7 +168,8 @@ const parseBody = (
   });
 
   visit(tree, 'code', (node: Code) => {
-    if (node.lang === 'patternverse-practice') practiceBlocks.push(node);
+    if (node.lang === 'patternverse-practice' || node.lang === 'patternverse-language')
+      practiceBlocks.push(node);
   });
 
   if (practiceBlocks.length > 1) {
@@ -171,7 +178,8 @@ const parseBody = (
       severity: 'error',
       file: sourcePath,
       entity: { sourceId: '', entityId: entity.id },
-      message: 'A Practice may contain at most one patternverse-practice block.',
+      message:
+        'A Pattern or Practice may contain at most one practice block (structured or Pattern Language).',
     });
   }
 
@@ -182,16 +190,29 @@ const parseBody = (
       severity: 'error',
       file: sourcePath,
       line: practiceBlocks[0]?.position?.start.line,
-      message: 'Only Pattern or Practice entities may contain a patternverse-practice block.',
+      message: 'Only Pattern or Practice entities may contain a practice block.',
     });
   }
 
   const block = practiceBlocks[0];
   if (!block || !supportsPractice) return { wikiLinks, diagnostics };
 
-  try {
-    const result = practiceDefinitionSchema.safeParse(parseYaml(block.value));
-    if (!result.success) {
+  if (block.lang === 'patternverse-language') {
+    if (!block.value.trim() || new TextEncoder().encode(block.value).length > 65536) {
+      diagnostics.push({
+        code: 'invalid-practice-block',
+        severity: 'error',
+        file: sourcePath,
+        message: 'Pattern Language practice must contain source within 64 KiB.',
+      });
+      return { wikiLinks, diagnostics };
+    }
+    return { wikiLinks, languagePracticeSource: block.value, diagnostics };
+  }
+
+  const result = parseLegacyPracticeYaml(block.value);
+  if (!result.success) {
+    if (result.kind === 'schema') {
       return {
         wikiLinks,
         diagnostics: [
@@ -204,8 +225,6 @@ const parseBody = (
       };
     }
 
-    return { wikiLinks, practice: result.data, diagnostics };
-  } catch (error) {
     return {
       wikiLinks,
       diagnostics: [
@@ -215,11 +234,17 @@ const parseBody = (
           severity: 'error',
           file: sourcePath,
           line: block.position?.start.line,
-          message: error instanceof Error ? error.message : 'The Practice block is not valid YAML.',
+          message: result.message,
         },
       ],
     };
   }
+  return {
+    wikiLinks,
+    practice: result.practice,
+    languagePracticeSource: legacyPracticeSource(result.practice),
+    diagnostics,
+  };
 };
 
 export const parseMarkdownEntity = (
@@ -309,6 +334,9 @@ export const parseMarkdownEntity = (
       ...rawEntityResult.data,
       wikiLinks: bodyResult.wikiLinks,
       ...(bodyResult.practice ? { practice: bodyResult.practice } : {}),
+      ...(bodyResult.languagePracticeSource
+        ? { languagePracticeSource: bodyResult.languagePracticeSource }
+        : {}),
     },
     diagnostics: [...initialDiagnostics, ...bodyResult.diagnostics].map((diagnostic) => ({
       ...diagnostic,

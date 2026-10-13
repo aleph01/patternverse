@@ -53,6 +53,7 @@ const commonMetadataShape = {
   summary: z.string().trim().min(1).optional(),
   status: entityStatusSchema,
   aliases: z.array(z.string().trim().min(1)).optional(),
+  tags: z.array(z.string().trim().min(1)).optional(),
   attribution: z.string().trim().min(1).optional(),
   copied_from: copiedFromSchema.optional(),
 };
@@ -217,6 +218,8 @@ export type Usefulness = z.infer<typeof usefulnessSchema>;
 export type PatternverseSourceManifest = z.infer<typeof sourceManifestSchema>;
 export type PatternverseSource = z.infer<typeof patternverseSourceSchema>;
 export type EntityRef = z.infer<typeof entityRefSchema>;
+/** Stable source-qualified identity shared by compilation, browsing and private user state. */
+export const entityRefKey = (ref: EntityRef): string => `${ref.sourceId}:${ref.entityId}`;
 export type CopiedFrom = z.infer<typeof copiedFromSchema>;
 export type PatternEntity = z.infer<typeof patternMetadataSchema>;
 export type ConceptEntity = z.infer<typeof conceptMetadataSchema>;
