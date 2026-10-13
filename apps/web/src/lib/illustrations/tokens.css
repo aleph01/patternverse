@@ -1,0 +1,18 @@
+/* Patternverse illustration language.
+ * Vocabulary: circle, semicircle, quarter circle, square, straight line.
+ * Composition: one idea, 2–4 main elements, generous empty space.
+ * Color: one dominant accent plus ink/white and, at most, one secondary accent.
+ * Treatment: flat fills; no gradients, textures, shadows, or stretched curves.
+ * Geometry: uniform scaling, quarter-turn rotations; diagonal lines may use 45°.
+ * Keep illustration colors independent of card hover/focus text colors.
+ */
+:root {
+  --illustration-ink: var(--ink);
+  --illustration-white: var(--paper);
+  --illustration-green: var(--green);
+  --illustration-mint: var(--mint);
+  --illustration-blue: var(--blue);
+  --illustration-blue-soft: #dfe9ff;
+  --illustration-coral: var(--coral);
+  --illustration-yellow: var(--yellow);
+}
