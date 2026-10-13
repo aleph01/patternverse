@@ -1,0 +1,25 @@
+{
+  "name": "@patternverse/guided-ai-worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "tsc --noEmit -p tsconfig.json",
+    "test": "pnpm build && vitest run"
+  },
+  "dependencies": {
+    "@patternverse/compiler": "workspace:*",
+    "@patternverse/guided-ai": "workspace:*",
+    "@patternverse/schema": "workspace:*",
+    "@patternverse/workspace": "workspace:*",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@types/node": "22.18.0",
+    "esbuild": "0.28.1",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  }
+}
