@@ -276,7 +276,22 @@ fn header(line: &str, offset: usize, span: Span) -> Result<(Block, bool), Vec<Di
         span: span.clone(),
         statements: vec![],
     };
-    if line.starts_with('!') && kind == "use" {
+    if kind == "show" && rest.starts_with("{{") {
+        let value = rest
+            .strip_prefix("{{")
+            .and_then(|v| v.strip_suffix("}}"))
+            .ok_or_else(|| {
+                vec![Diagnostic::error(
+                    "P_SHOW",
+                    "Expected '!show {{collection}}' with an optional property block",
+                    span.clone(),
+                )]
+            })?;
+        let reference = value.trim();
+        let start = rest_offset + 2 + value.len() - value.trim_start().len();
+        self::reference(reference, start).map_err(|e| vec![e])?;
+        block.argument = Some((reference.into(), start..start + reference.len()));
+    } else if line.starts_with('!') && kind == "use" {
         let tokens = words(rest, rest_offset)?;
         if tokens.len() != 3
             || tokens.iter().any(|w| w.quoted)
@@ -590,7 +605,7 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
                     || boundary(line.trim())))
                 || matches!(
                     block.kind.as_str(),
-                    "collect" | "?loop" | "refine" | "each" | "flow"
+                    "collect" | "?loop" | "refine" | "each" | "flow" | "form"
                 )
         });
         if extended_syntax && in_flow && functional::is_pure_line(line.trim()) {
@@ -663,7 +678,7 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
         if stack.last().is_some_and(|(block, _)| {
             !matches!(
                 block.kind.as_str(),
-                "collect" | "?loop" | "refine" | "each" | "flow"
+                "collect" | "?loop" | "refine" | "each" | "flow" | "form"
             )
         }) {
             let (block, explicit) = stack.last_mut().unwrap();
@@ -875,6 +890,15 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
             };
             match parsed_header {
                 Ok((block, explicit)) => {
+                    if block.kind == "form" && !explicit {
+                        errors.push(Diagnostic::error(
+                            "P017",
+                            "Forms require explicit braces",
+                            span,
+                        ));
+                        offset += raw.len();
+                        continue;
+                    }
                     if matches!(block.kind.as_str(), "collect" | "?loop" | "refine" | "each")
                         && (!explicit || stack.iter().any(|(b, _)| b.kind != "flow"))
                     {

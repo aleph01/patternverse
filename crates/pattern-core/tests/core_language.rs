@@ -403,7 +403,7 @@ fn source_shorthand_and_escaped_markdown_remain_data() {
     assert!(matches!(&first.effects[0].request,Request::Ask{prompt} if prompt=="How are you?"));
     let completed = answer(&first.state, Fulfillment::Text("{{unsafe}}".into()));
     assert!(
-        matches!(&completed.effects[0].request,Request::Show{markdown} if markdown=="!ask literal\n:option raw\n-> end\n}\nLiteral {{not_bound}} and {{unsafe}}\n\\path")
+        matches!(&completed.effects[0].request,Request::Show { markdown, .. } if markdown=="!ask literal\n:option raw\n-> end\n}\nLiteral {{not_bound}} and {{unsafe}}\n\\path")
     );
     let empty = start(":language 1\n!ask response\n-> end", BTreeMap::new());
     assert!(matches!(&empty.effects[0].request,Request::Ask{prompt} if prompt.is_empty()));

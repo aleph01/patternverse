@@ -71,7 +71,7 @@ fn parser_retains_realization_and_both_forms_resolve_separate_typed_semantic_inp
         );
         assert_eq!(done.state.status(), &Status::Completed);
         assert!(
-            matches!(&done.effects[0].request, Request::Show { markdown } if markdown == "You wrote an instruction-like phrase.")
+            matches!(&done.effects[0].request, Request::Show { markdown, .. } if markdown == "You wrote an instruction-like phrase.")
         );
     }
 }
@@ -86,7 +86,7 @@ fn literal_interpolation_is_unchanged_and_standalone_realization_is_visible_cont
     )
     .unwrap();
     assert!(
-        matches!(&turn.effects[0].request, Request::Show { markdown } if markdown.trim() == "You rated this 4 out of 10.")
+        matches!(&turn.effects[0].request, Request::Show { markdown, .. } if markdown.trim() == "You rated this 4 out of 10.")
     );
     assert!(matches!(
         turn.state.pending().unwrap().request,
@@ -142,7 +142,7 @@ fn loops_functionally_carry_the_latest_answer_with_fresh_locals_and_distinct_eff
     );
     assert_eq!(done.state.status(), &Status::Completed);
     assert!(
-        matches!(&done.effects[0].request, Request::Show { markdown } if markdown.trim() == "Done.")
+        matches!(&done.effects[0].request, Request::Show { markdown, .. } if markdown.trim() == "Done.")
     );
     assert_eq!(restore(&done.state), done.state);
 }
@@ -169,7 +169,7 @@ fn stopping_during_realization_or_question_exits_normally_and_rejects_late_answe
             let stopped = runtime::transition(&restore(&state), event.clone()).unwrap();
             assert_eq!(stopped.state.status(), &Status::Completed);
             assert!(
-                matches!(&stopped.effects[0].request, Request::Show { markdown } if markdown.trim() == "Done.")
+                matches!(&stopped.effects[0].request, Request::Show { markdown, .. } if markdown.trim() == "Done.")
             );
             assert_eq!(
                 runtime::transition(&stopped.state, event).unwrap().state,
@@ -394,8 +394,9 @@ fn manager_replays_loop_exit_and_records_specification_inputs_and_realized_text(
 
 #[test]
 fn bundled_worry_example_reaches_its_literal_closing_on_ui_stop() {
-    let source =
-        include_str!("../../../packages/therapy-patterns/patterns/cbt.worry-chain.pattern.md");
+    let source = include_str!(
+        "../../../packages/therapy-patterns/legacy/patterns/cbt.worry-chain.pattern.md"
+    );
     let state = reply(&start(source), Fulfillment::Selected("begin".into())).state;
     let state = reply(&state, Fulfillment::Text("I would fail the exam.".into())).state;
     let state = reply(
@@ -412,7 +413,7 @@ fn bundled_worry_example_reaches_its_literal_closing_on_ui_stop() {
     .unwrap();
     assert_eq!(stopped.state.status(), &Status::Completed);
     assert!(
-        matches!(&stopped.effects[0].request, Request::Show { markdown } if markdown.trim() == "Okay. Let's stop there.")
+        matches!(&stopped.effects[0].request, Request::Show { markdown, .. } if markdown.trim() == "Okay. Let's stop there.")
     );
     assert_eq!(
         reply(&start(source), Fulfillment::Selected("stop".into()))
@@ -428,13 +429,15 @@ fn worry_fixture_restarts_during_realization_and_question_then_persists_normal_s
         root: "worry".into(),
         patterns: BTreeMap::from([(
             "worry".into(),
-            include_str!("../../../packages/therapy-patterns/patterns/cbt.worry-chain.pattern.md")
-                .into(),
+            include_str!(
+                "../../../packages/therapy-patterns/legacy/patterns/cbt.worry-chain.pattern.md"
+            )
+            .into(),
         )]),
     })
     .unwrap();
     let scenario = serde_json::from_str(include_str!(
-        "../../../packages/therapy-patterns/scenarios/cbt.worry-chain.json"
+        "../../../packages/therapy-patterns/legacy/scenarios/cbt.worry-chain.json"
     ))
     .unwrap();
     let report = pattern_core::scenario::run(snapshot, "worry-fixture".into(), scenario).unwrap();
@@ -488,7 +491,7 @@ fn child_loop_stop_continues_parent_even_when_the_tree_was_paused() {
         assert!(
             matches!(&stopped.state.pending().unwrap().request, Request::Ask { prompt } if prompt.trim() == "Parent continuation?")
         );
-        assert!(stopped.effects.iter().any(|effect| matches!(&effect.request, Request::Show { markdown } if markdown.trim() == "Child closing.")));
+        assert!(stopped.effects.iter().any(|effect| matches!(&effect.request, Request::Show { markdown, .. } if markdown.trim() == "Child closing.")));
         assert!(!stopped
             .effects
             .iter()

@@ -15,6 +15,9 @@ pub mod inspection;
 mod procedures;
 mod scope;
 mod semantic;
+pub mod worksheet;
+mod worksheet_flow;
+mod worksheet_words;
 use scope::Scope;
 mod looping;
 mod refinement;
@@ -24,6 +27,15 @@ mod selection;
 use looping::CheckedLoop;
 pub(crate) use looping::Loop;
 pub use selection::{Selection, SelectionMode};
+mod image;
+mod show;
+mod timer;
+mod video;
+pub use image::Image;
+pub use timer::{Timer, MAX_TIMER_SECONDS};
+pub use video::{Video, VideoProvider};
+mod form;
+pub use form::{Form, FormBlock};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BindingId(pub usize);
@@ -64,6 +76,19 @@ struct CheckedCollection {
 }
 #[derive(Clone, Debug)]
 enum CheckedStep {
+    Form {
+        binding: String,
+        form: Form<Vec<CheckedPart>>,
+    },
+    ShowCollection {
+        source: CheckedExpr,
+        spec: crate::show::ShowSpec,
+    },
+    Timer {
+        binding: String,
+        timer: Timer,
+        prompt: Vec<CheckedPart>,
+    },
     Realize {
         binding: String,
         prompt: Vec<CheckedPart>,
@@ -139,6 +164,14 @@ enum CheckedStep {
         options: CheckedOptions,
         selection: Selection,
         prompt: Vec<CheckedPart>,
+    },
+    Image {
+        image: Image,
+        body: Vec<CheckedPart>,
+    },
+    Video {
+        video: Video,
+        body: Vec<CheckedPart>,
     },
     Show {
         body: Vec<CheckedPart>,
@@ -231,6 +264,19 @@ impl Case {
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub(crate) enum Instruction {
+    Form {
+        binding: BindingId,
+        form: Form<Vec<Part>>,
+    },
+    ShowCollection {
+        source: CompiledExpr,
+        spec: crate::show::ShowSpec,
+    },
+    Timer {
+        binding: BindingId,
+        timer: Timer,
+        prompt: Vec<Part>,
+    },
     Realize {
         binding: BindingId,
         prompt: Vec<Part>,
@@ -303,6 +349,14 @@ pub(crate) enum Instruction {
         options: Options,
         selection: Selection,
         prompt: Vec<Part>,
+    },
+    Image {
+        image: Image,
+        body: Vec<Part>,
+    },
+    Video {
+        video: Video,
+        body: Vec<Part>,
     },
     Show {
         body: Vec<Part>,
@@ -1045,6 +1099,12 @@ fn check_block(
     symbols: &mut Scope,
     dependencies: &BTreeMap<String, Dependency>,
 ) -> Check<CheckedStep> {
+    if b.kind == "form" {
+        return form::check(&b, symbols);
+    }
+    if b.kind == "show" && b.argument.is_some() {
+        return show::check(&b, symbols);
+    }
     if matches!(
         b.kind.as_str(),
         "bound_realize" | "classify" | "semantic_select" | "semantic_filter" | "semantic_rank"
@@ -1056,6 +1116,9 @@ fn check_block(
     }
     let prompt = check_template(&b, symbols)?;
     let step = match b.kind.as_str() {
+        "timer" => return timer::check(&b, symbols, prompt),
+        "video" => return video::check(&b, prompt),
+        "image" => return image::check(&b, prompt),
         "ask" => {
             attributes(&b, &[])?;
             let binding = required_binding(&b)?;
@@ -1668,6 +1731,10 @@ fn lower_step(
             .collect()
     };
     match step {
+        CheckedStep::ShowCollection { source, spec } => Instruction::ShowCollection {
+            source: expression::lower(source, &|(n, f): (String, Option<Field>)| (id(&n), f)),
+            spec,
+        },
         CheckedStep::Realize { binding, prompt } => Instruction::Realize {
             binding: id(&binding),
             prompt: template(prompt),
@@ -1789,6 +1856,19 @@ fn lower_step(
                 record_type: element_type,
             }))
         }
+        CheckedStep::Timer {
+            binding,
+            timer,
+            prompt,
+        } => Instruction::Timer {
+            binding: id(&binding),
+            timer,
+            prompt: template(prompt),
+        },
+        CheckedStep::Form { binding, form } => Instruction::Form {
+            binding: id(&binding),
+            form: form.map(template),
+        },
         CheckedStep::Ask { binding, prompt } => Instruction::Ask {
             binding: id(&binding),
             prompt: template(prompt),
@@ -1862,6 +1942,14 @@ fn lower_step(
                 )),
             },
             prompt: template(prompt),
+        },
+        CheckedStep::Image { image, body } => Instruction::Image {
+            image,
+            body: template(body),
+        },
+        CheckedStep::Video { video, body } => Instruction::Video {
+            video,
+            body: template(body),
         },
         CheckedStep::Show { body } => Instruction::Show {
             body: template(body),

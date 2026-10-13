@@ -135,18 +135,35 @@ fn run() -> Result<(), String> {
         runtime::start(pattern, "cli-interactive".into(), inputs).map_err(|e| e.to_string())?;
     loop {
         for effect in &turn.effects {
-            if let Request::Show { markdown } = &effect.request {
+            if let Request::Show { markdown, .. } = &effect.request {
                 println!("{markdown}");
+            } else if let Request::Image { markdown, image } = &effect.request {
+                println!(
+                    "Image: {}\n{}\nAlternative text: {}\n{markdown}",
+                    image.title.as_deref().unwrap_or("Image"),
+                    image.url,
+                    image.alt
+                );
+            } else if let Request::Video { markdown, video } = &effect.request {
+                println!(
+                    "Video: {}\n{}\nStart: {} seconds; end: {:?}\n{markdown}",
+                    video.title.as_deref().unwrap_or("Watch video"),
+                    video.url,
+                    video.start_seconds,
+                    video.end_seconds
+                );
             }
         }
         let Some(pending) = turn.state.pending() else {
             break;
         };
         match &pending.request {
+            Request::Form(form) => println!("{}\nEnter a JSON object mapping field IDs to tagged Values:", serde_json::to_string_pretty(form).map_err(|e| e.to_string())?),
             Request::Refine { review } => println!("{}\nReview choices: {:?}. Enter a decision name, or edit:your wording", review.candidate, review.choices),
             Request::Classify{definition,input,context}=>println!("CLASSIFY {}\nInput: {input:?}\nContext: {context:?}\nEnter a declared variant: {:?}",definition.name,definition.output.variants),
             Request::Suggest{mode,specification,candidates,..}=>println!("AI SUGGESTION {mode:?}\n{specification}\nCandidates: {candidates:?}\nEnter {{\"outcome\":\"decided\",\"ids\":[\"item-0\"]}} or explicit uncertainty:"),
             Request::Ask{prompt}=>println!("{prompt}\nEnter your response:"),
+            Request::Timer { prompt, timer } => println!("{prompt}\nTimer: {} seconds; adjustable {} ({}–{}); blocking {}. Enter a host-reported result JSON with duration_seconds, elapsed_seconds, completed:", timer.duration_seconds, timer.adjustable, timer.min_seconds, timer.max_seconds, timer.blocking),
             Request::Realize { specification, inputs } => println!("REALIZE\nSpecification: {specification}\nInputs: {inputs:?}\nEnter fixture wording:"),
             Request::Rate{prompt,rating}=>println!("{prompt}\nEnter a number from {} through {}:",rating.min,rating.max),
             Request::Generate{prompt,contract}=>println!("AI fixture request: {prompt}\nContract: {contract:?}\nEnter a tagged Value JSON object:"),
@@ -158,7 +175,7 @@ fn run() -> Result<(), String> {
                 println!("{prompt}\n{mode:?}: confirm {min}–{max} values (comma-separated; rank in your chosen order):");
                 for choice in options { println!("  {} — {}", choice.value, choice.label); }
             },
-            Request::Show{..}=>return Err("Unexpected blocking content effect".into()),
+            Request::Show{..} | Request::Video { .. } | Request::Image { .. } =>return Err("Unexpected blocking content effect".into()),
         }
         io::stdout().flush().map_err(|e| e.to_string())?;
         let mut input = String::new();
@@ -171,6 +188,14 @@ fn run() -> Result<(), String> {
         }
         let input = input.trim_end_matches(['\r', '\n']);
         let fulfillment = match &pending.request {
+            Request::Form(_) => match serde_json::from_str(input) {
+                Ok(value) => Fulfillment::Form(value),
+                Err(e) => {
+                    eprintln!("Invalid form result: {e}");
+                    turn.effects.clear();
+                    continue;
+                }
+            },
             Request::Refine { .. } => {
                 if let Some(text) = input.strip_prefix("edit:") {
                     Fulfillment::Edited(text.into())
@@ -198,6 +223,14 @@ fn run() -> Result<(), String> {
                 }
             },
             Request::Ask { .. } => Fulfillment::Text(input.into()),
+            Request::Timer { .. } => match serde_json::from_str(input) {
+                Ok(value) => Fulfillment::Timer(value),
+                Err(e) => {
+                    eprintln!("Invalid timer result: {e}");
+                    turn.effects.clear();
+                    continue;
+                }
+            },
             Request::Realize { .. } => Fulfillment::Realized(input.into()),
             Request::Rate { .. } => match input.parse::<f64>() {
                 Ok(n) => Fulfillment::Rating(n),
@@ -230,7 +263,7 @@ fn run() -> Result<(), String> {
                     SelectionMode::Rank => Fulfillment::Ranked(keys),
                 }
             }
-            Request::Show { .. } => unreachable!(),
+            Request::Show { .. } | Request::Video { .. } | Request::Image { .. } => unreachable!(),
         };
         match runtime::transition(
             &turn.state,

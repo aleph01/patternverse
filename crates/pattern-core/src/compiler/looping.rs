@@ -68,6 +68,8 @@ pub(super) fn check(
         yields_to_user |= matches!(
             step,
             CheckedStep::Ask { .. }
+                | CheckedStep::Form { .. }
+                | CheckedStep::Timer { .. }
                 | CheckedStep::Rate { .. }
                 | CheckedStep::Choose { .. }
                 | CheckedStep::Select { .. }

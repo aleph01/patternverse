@@ -1,4 +1,4 @@
-//! Product content fixtures exercise the portable runtime without adding therapy logic to it.
+//! Original product fixtures still replay after retirement, without adding therapy logic to the core.
 use pattern_core::{
     manager::{self, Command, ManagerLimits},
     runtime::{Event, Fulfillment, Receipt, Status},
@@ -20,7 +20,15 @@ fn directory() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../packages/therapy-patterns")
 }
 fn source(name: &str) -> String {
-    std::fs::read_to_string(directory().join(format!("patterns/{name}.pattern.md"))).unwrap()
+    let prefix = if name == "therapy.ready" {
+        ""
+    } else if name.starts_with("cbt.") || name.starts_with("act.") {
+        "legacy/"
+    } else {
+        "legacy/readiness/"
+    };
+    std::fs::read_to_string(directory().join(format!("{prefix}patterns/{name}.pattern.md")))
+        .unwrap()
 }
 fn snapshot(name: &str) -> ExecutableSnapshot {
     ExecutableSnapshot::build(SourceBundle {
@@ -33,8 +41,14 @@ fn snapshot(name: &str) -> ExecutableSnapshot {
     .unwrap()
 }
 fn fixture(name: &str) -> Scenario {
+    let prefix = if name.starts_with("cbt.") || name.starts_with("act.") {
+        "legacy/"
+    } else {
+        "legacy/readiness/"
+    };
     serde_json::from_str(
-        &std::fs::read_to_string(directory().join(format!("scenarios/{name}.json"))).unwrap(),
+        &std::fs::read_to_string(directory().join(format!("{prefix}scenarios/{name}.json")))
+            .unwrap(),
     )
     .unwrap()
 }

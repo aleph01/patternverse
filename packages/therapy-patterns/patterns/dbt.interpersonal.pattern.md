@@ -1,16 +1,6 @@
 :language 1
 :title "DBT · Clarify a request or boundary"
 :output outcome
-= focus "We can clarify what you want to communicate, while respecting the relationship and yourself. This is not a method for controlling another person's response."
-!use therapy.ready as readiness {
-    :with focus
-}
-?branch {
-    :when readiness.decision.value == "begin" -> check
-    :when readiness.decision.value == "support" -> support
-    :else -> declined
-}
-check:
 !choose safety {
     :option ordinary "A manageable everyday interaction"
     :option unsafe "There may be coercion or danger"

@@ -1,0 +1,8 @@
+{
+  "inputs": {},
+  "replies": [
+    {"expected_kind": "interaction.timer", "result": {"kind": "timer", "value": {"duration_seconds": 30, "elapsed_seconds": 30, "completed": true}}},
+    {"expected_kind": "interaction.timer", "result": {"kind": "timer", "value": {"duration_seconds": 120, "elapsed_seconds": 0, "completed": false}}},
+    {"expected_kind": "interaction.ask", "result": {"kind": "text", "value": "One small next step feels clearer."}}
+  ]
+}

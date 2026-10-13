@@ -16,6 +16,8 @@ change the PWA interpreter or rewrite existing saved Runs.
 
 ## Authoring reference
 
+- [Grouped worksheet forms and YAML migration](../practices.md): `!form`, required/optional
+  fields, typed record results, and the shared Patternverse website/editor runtime.
 - [Functional core](functional-core.md): universal bindings, pure helpers,
   records/lists, pipelines, `each`, explicit `yield`, and collection transforms.
 - [Typed semantic AI](semantic-ai.md): closed enums, exhaustive matching, explicit
@@ -23,7 +25,12 @@ change the PWA interpreter or rewrite existing saved Runs.
 - [Core syntax and immutable bindings](core-language.md): `!ask answer`, `!show`,
   `!agent result`, `= name expression`, forward branches and explicit completion.
 - [Single choice, multiple choice and ranking](selections.md).
+- [Images](images.md): `!image` with required alternatives, optional titles and captions.
+- [Videos](videos.md): `!video` with a source URL, excerpt bounds and playback options.
+- [Countdown timers](timers.md): `!timer`, bounded duration adjustment, blocking and background countdown widgets.
 - [Collections](collections.md): open-ended records and mapped records.
+- [Compositional displays](show.md): `!show {{items}}` with mapping, grouping,
+  ordering, relationships, and repeated context views.
 - [Realized wording and functional loops](realization.md): `~` and `?loop[max]`.
 - [Review and refinement](refine.md): `!refine[rounds=4, renewable]` and `-> propose`.
 - [Pinned imports](imports.md) and [child Pattern calls](composition.md).

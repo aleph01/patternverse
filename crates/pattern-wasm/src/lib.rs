@@ -9,3 +9,18 @@ pub fn dispatch(request: &str) -> Result<String, JsValue> {
         .map_err(|error| JsValue::from_str(&error.to_string()))?;
     String::from_utf8(bytes).map_err(|_| JsValue::from_str("PATTERN_RESPONSE_INVALID"))
 }
+
+/// Run a bounded, ephemeral source preview through the same Rust compiler and runtime.
+///
+/// # Errors
+/// Returns source diagnostics or a runtime contract error; makes no model or storage calls.
+#[wasm_bindgen]
+pub fn preview(source: &str) -> Result<String, JsValue> {
+    pattern_host::wire::preview(source).map_err(|error| JsValue::from_str(&error))
+}
+
+/// Inspect and test unsaved source locally. No storage, network, or inference.
+#[wasm_bindgen]
+pub fn editor(request: &str) -> Result<String, JsValue> {
+    pattern_host::editor::execute(request).map_err(|error| JsValue::from_str(&error))
+}

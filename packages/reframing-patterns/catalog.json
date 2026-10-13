@@ -1,0 +1,432 @@
+{
+  "namespace": "reframing",
+  "version": "1.0.0",
+  "language": 1,
+  "source": {
+    "type": "book-derived",
+    "work": "What's Your Problem?",
+    "author": "Thomas Wedell-Wedellsborg",
+    "note": "Original Patternverse adaptation; not reproduced text or an official implementation."
+  },
+  "patterns": [
+    {
+      "id": "reframing.rapid-reframe",
+      "title": "Rapid Reframe",
+      "summary": "Turn a stuck problem into a few meaningfully different frames and a testable next step.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "problem-solving", "strategy", "creativity"],
+      "inputs": [],
+      "outputs": ["selected_frame", "validation_plan"],
+      "dependencies": [
+        "reframing.frame-problem",
+        "reframing.review-frame",
+        "reframing.look-outside-frame",
+        "reframing.rethink-goal",
+        "reframing.break-tradeoff",
+        "reframing.generate-real-options",
+        "reframing.validate-frame"
+      ],
+      "sourceFile": "patterns/reframing.rapid-reframe.pattern.md"
+    },
+    {
+      "id": "reframing.frame-problem",
+      "title": "Frame the Problem",
+      "summary": "Turn a vague concern into a provisional statement that can be examined and changed.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "problem-solving", "clarity", "coaching"],
+      "inputs": [
+        {
+          "name": "problem",
+          "type": "text"
+        }
+      ],
+      "outputs": ["frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.frame-problem.pattern.md"
+    },
+    {
+      "id": "reframing.map-stakeholders",
+      "title": "Map Stakeholders",
+      "summary": "Notice who experiences, shapes, decides about, or is missing from the current problem frame.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "stakeholders", "systems-thinking", "perspective"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["stakeholders"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.map-stakeholders.pattern.md"
+    },
+    {
+      "id": "reframing.review-frame",
+      "title": "Review the Frame",
+      "summary": "Make a quick scan for assumptions that could be narrowing a problem statement.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "assumptions", "diagnosis", "problem-solving"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [
+        "reframing.verify-statement",
+        "reframing.remove-constraints",
+        "reframing.detect-baked-solution",
+        "reframing.identify-problem-form",
+        "reframing.locate-problem",
+        "reframing.inspect-emotion",
+        "reframing.break-tradeoff"
+      ],
+      "sourceFile": "patterns/reframing.review-frame.pattern.md"
+    },
+    {
+      "id": "reframing.verify-statement",
+      "title": "Verify the Statement",
+      "summary": "Separate consequential observations from interpretations and ask what evidence supports them.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "evidence", "assumptions", "critical-thinking"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.verify-statement.pattern.md"
+    },
+    {
+      "id": "reframing.remove-constraints",
+      "title": "Remove Constraints",
+      "summary": "Find restrictions implied by the wording that may not be genuine necessities.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "constraints", "creativity", "strategy"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.remove-constraints.pattern.md"
+    },
+    {
+      "id": "reframing.detect-baked-solution",
+      "title": "Detect a Baked-In Solution",
+      "summary": "Separate a desired outcome from the intervention already hidden in the problem statement.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "assumptions", "product", "strategy"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.detect-baked-solution.pattern.md"
+    },
+    {
+      "id": "reframing.identify-problem-form",
+      "title": "Identify the Problem Form",
+      "summary": "Notice whether a statement is mainly a pain point, goal, proposed solution, or specified problem.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "routing", "goals", "problem-solving"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["form", "candidate_frame"],
+      "dependencies": [
+        "reframing.frame-problem",
+        "reframing.rethink-goal",
+        "reframing.detect-baked-solution"
+      ],
+      "sourceFile": "patterns/reframing.identify-problem-form.pattern.md"
+    },
+    {
+      "id": "reframing.locate-problem",
+      "title": "Locate the Problem",
+      "summary": "Examine where agency and causation sit in the current wording.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "agency", "systems-thinking", "relationships"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.locate-problem.pattern.md"
+    },
+    {
+      "id": "reframing.inspect-emotion",
+      "title": "Inspect Emotional Language",
+      "summary": "Use charged words to uncover observations and meanings without dismissing the feeling.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "emotion", "relationships", "assumptions"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.inspect-emotion.pattern.md"
+    },
+    {
+      "id": "reframing.break-tradeoff",
+      "title": "Break a False Trade-Off",
+      "summary": "Question an either-or choice by examining the benefits each side is meant to protect.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "tradeoffs", "decision-making", "negotiation"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.break-tradeoff.pattern.md"
+    },
+    {
+      "id": "reframing.explore-or-break",
+      "title": "Explore or Break the Frame",
+      "summary": "Decide whether to inspect overlooked detail within a frame or try a substantially different one.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "perspective", "problem-solving"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": ["reframing.look-outside-frame", "reframing.rethink-goal"],
+      "sourceFile": "patterns/reframing.explore-or-break.pattern.md"
+    },
+    {
+      "id": "reframing.look-outside-frame",
+      "title": "Look Outside the Frame",
+      "summary": "Search beyond the current boundary for context that could change what the problem means.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "systems-thinking", "context", "perspective"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [
+        "reframing.escape-hammer",
+        "reframing.expand-time-window",
+        "reframing.find-hidden-influence",
+        "reframing.find-hidden-properties"
+      ],
+      "sourceFile": "patterns/reframing.look-outside-frame.pattern.md"
+    },
+    {
+      "id": "reframing.escape-hammer",
+      "title": "Escape Your Hammer",
+      "summary": "Notice when a favored tool or expertise may be shaping the problem to fit it.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "assumptions", "expertise", "creativity"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.escape-hammer.pattern.md"
+    },
+    {
+      "id": "reframing.expand-time-window",
+      "title": "Expand the Time Window",
+      "summary": "Look just before and after the visible episode for context that changes its interpretation.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "causality", "context", "history", "systems-thinking"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.expand-time-window.pattern.md"
+    },
+    {
+      "id": "reframing.find-hidden-influence",
+      "title": "Find Hidden Influences",
+      "summary": "Consider omitted systemic or contextual factors that could shape the visible difficulty.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "systems-thinking", "causality", "context"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.find-hidden-influence.pattern.md"
+    },
+    {
+      "id": "reframing.find-hidden-properties",
+      "title": "Find Hidden Properties",
+      "summary": "Look for less obvious uses or information in resources already present.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "creativity", "resources", "innovation"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.find-hidden-properties.pattern.md"
+    },
+    {
+      "id": "reframing.rethink-goal",
+      "title": "Rethink the Goal",
+      "summary": "Examine whether the stated objective is the best route to the outcome that matters.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "goals", "strategy", "decision-making"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [
+        "reframing.surface-higher-goals",
+        "reframing.challenge-goal-logic",
+        "reframing.alternative-paths"
+      ],
+      "sourceFile": "patterns/reframing.rethink-goal.pattern.md"
+    },
+    {
+      "id": "reframing.surface-higher-goals",
+      "title": "Surface Higher-Level Goals",
+      "summary": "Discover the outcomes an immediate goal is intended to make possible.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "goals", "motivation", "strategy"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.surface-higher-goals.pattern.md"
+    },
+    {
+      "id": "reframing.challenge-goal-logic",
+      "title": "Challenge Goal Logic",
+      "summary": "Test the assumed link between a near-term target and the outcome it is meant to create.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "goals", "assumptions", "causality"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.challenge-goal-logic.pattern.md"
+    },
+    {
+      "id": "reframing.alternative-paths",
+      "title": "Find Alternative Paths",
+      "summary": "Hold the desired outcome steady while considering other ways to reach it.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "goals", "options", "creativity"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["candidate_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.alternative-paths.pattern.md"
+    },
+    {
+      "id": "reframing.generate-real-options",
+      "title": "Generate Real Options",
+      "summary": "Build alternatives rooted in different theories of the problem, not cosmetic solution variants.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "decision-making", "options", "creativity"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        },
+        {
+          "name": "observations",
+          "type": "text"
+        }
+      ],
+      "outputs": ["options", "selected_frame"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.generate-real-options.pattern.md"
+    },
+    {
+      "id": "reframing.validate-frame",
+      "title": "Validate the Frame",
+      "summary": "Design a small real-world check that could strengthen, weaken, or refine a promising frame.",
+      "version": "1.0.0",
+      "collection": "reframing",
+      "tags": ["reframing", "validation", "experiments", "learning"],
+      "inputs": [
+        {
+          "name": "frame",
+          "type": "text"
+        }
+      ],
+      "outputs": ["validation_plan"],
+      "dependencies": [],
+      "sourceFile": "patterns/reframing.validate-frame.pattern.md"
+    }
+  ]
+}

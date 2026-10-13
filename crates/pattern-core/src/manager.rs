@@ -198,6 +198,50 @@ pub fn replay(state: &RunManager) -> Result<Replay, Error> {
     }
     Ok(rebuilt)
 }
+/// Reopen an accepted participant effect using the original snapshot and journal prefix.
+/// Later answers and derived effects are invalidated; historical effects are never dispatched.
+///
+/// # Errors
+/// Rejects invalid state, missing targets, and targets that are not participant interactions.
+pub fn rewind(state: &RunManager, run_id: &str, effect_id: &str) -> Result<RunManager, Error> {
+    replay(state)?;
+    let saved = &state.inner;
+    let mut current = start(
+        saved.snapshot.clone(),
+        saved.root_id.clone(),
+        saved.inputs.clone(),
+        saved.limits.clone(),
+    )?
+    .state;
+    for command in &saved.accepted {
+        if command.run_id == run_id
+            && matches!(&command.event, Event::Fulfill(receipt) if receipt.effect_id == effect_id)
+        {
+            let effect = current.pending().ok_or(Error::InvalidTree)?;
+            if effect.effect_id != effect_id
+                || effect.run_id != run_id
+                || !effect.request.kind().starts_with("interaction.")
+            {
+                return Err(Error::InvalidTree);
+            }
+            // A paused prefix must become editable without replaying future lifecycle commands.
+            if current.root().status() == &Status::Paused {
+                current = transition(
+                    &current,
+                    Command {
+                        run_id: current.root().run_id().into(),
+                        event: Event::Resume,
+                    },
+                )?
+                .state;
+            }
+            return Ok(current);
+        }
+        current = transition(&current, command.clone())?.state;
+    }
+    Err(Error::InvalidTree)
+}
+
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub struct RunTrace {
     pub run_id: String,

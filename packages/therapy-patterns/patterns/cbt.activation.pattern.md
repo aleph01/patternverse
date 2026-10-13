@@ -1,59 +1,31 @@
 :language 1
-:title "CBT · One manageable action"
+:title "Behavioral Activation"
 :output outcome
-= focus "We can plan something small without requiring motivation or promising a change in mood. Rest and support can be legitimate choices."
-!use therapy.ready as readiness {
-    :with focus
-}
-?branch {
-    :when readiness.decision.value == "begin" -> explore
-    :when readiness.decision.value == "support" -> support
-    :else -> declined
-}
-explore:
 !ask direction {
-    What part of today could use a little care, connection, enjoyment or structure?
+    What part of your day could use some care, enjoyment, connection, or meaning?
 }
-!ask action {
-    What is one small, safe action in that direction that fits your actual energy and circumstances?
+!ask activity {
+    Choose one small, safe activity that fits your energy and circumstances. Rest and support can also be meaningful choices.
 }
 !ask timing {
-    When or after what ordinary event could you try it? This is an invitation, not a commitment you must keep.
-}
-!ask obstacle {
-    What might get in the way?
+    When and where could you try it? Choose a realistic time or an ordinary event to link it to.
 }
 !ask fallback {
-    If that happens, what smaller action, rest or support would be reasonable instead?
+    What might get in the way? What smaller version or support would make it more manageable?
 }
-!choose decision {
-    :option keep "Keep this as an option"
-    :option leave "Leave the plan for now"
-    Your proposed action: {{action}}
-    Possible timing: {{timing}}
-    Your fallback: {{fallback}}
+!ask review {
+    If you have tried the activity, what did you notice about mood, pleasure, or accomplishment? Otherwise, when could you review it? A lack of improvement is information, not failure.
+}
+!show {
+    Your notes, in your own words:
 
-    Would you like to keep this option? It is not a test of effort or worth, and it does not need to improve your mood.
+    1. {{direction}}
+    2. {{activity}}
+    3. {{timing}}
+    4. {{fallback}}
+    5. {{review}}
+
+    You can leave this here or return later. Nothing has been scheduled or carried out for you.
 }
-?branch {
-    :when decision.value == "keep" -> kept
-    :else -> declined
-}
-kept:
-!show {
-    Your option is saved here. If you try it, you can notice what actually happens without grading yourself. Nothing has been scheduled or carried out for you.
-}
-= outcome "option_kept"
--> end
-support:
-!show {
-    Stop the exercise and seek immediate real-world support if needed. For immediate danger, contact local emergency services. A trusted person or qualified crisis service may help you get support; Mira cannot provide emergency care.
-}
-= outcome "support_requested"
--> end
-declined:
-!show {
-    No action is required. You can leave the plan, rest, or return to ordinary conversation.
-}
-= outcome "declined"
+= outcome "reflected"
 -> end

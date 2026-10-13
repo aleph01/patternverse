@@ -39,6 +39,12 @@ pub enum Request {
     Load {
         saved: serde_json::Value,
     },
+    Rewind {
+        saved: serde_json::Value,
+        expected_revision: u64,
+        run_id: String,
+        effect_id: String,
+    },
     Apply {
         saved: serde_json::Value,
         expected_revision: u64,
@@ -80,6 +86,12 @@ pub fn execute(bytes: &[u8]) -> Result<Vec<u8>, HostError> {
             inputs,
         } => run_response(SavedRun::start(&technique_id, &root_id, inputs)?)?,
         Request::Load { saved } => run_response(restore(&saved)?)?,
+        Request::Rewind {
+            saved,
+            expected_revision,
+            run_id,
+            effect_id,
+        } => run_response(restore(&saved)?.rewind_at(expected_revision, &run_id, &effect_id)?)?,
         Request::Apply {
             saved,
             expected_revision,
@@ -108,17 +120,56 @@ fn run_response(run: SavedRun) -> Result<Response, HostError> {
     })
 }
 
+/// Preview author-supplied source locally until its first interaction, without storage or AI calls.
+///
+/// # Errors
+/// Rejects oversized source, invalid grammar, or invalid initial inputs with source diagnostics.
+pub fn preview(source: &str) -> Result<String, String> {
+    if source.len() > 64 * 1024 {
+        return Err("Preview source exceeds 64 KiB".into());
+    }
+    let compiled = pattern_core::compiler::compile(source).map_err(|errors| {
+        serde_json::to_string(&errors).unwrap_or_else(|_| "Invalid Pattern Markdown".into())
+    })?;
+    let run = pattern_core::runtime::start(compiled, "local-preview".into(), BTreeMap::new())
+        .map_err(|error| error.to_string())?;
+    serde_json::to_string(&serde_json::json!({"effects":run.effects,"status":run.state.status()}))
+        .map_err(|error| error.to_string())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use serde_json::json;
+
+    /// The private author preview executes the same compiler and preserves source diagnostics.
+    #[test]
+    fn source_preview_runs_show_fixtures_and_rejects_invalid_source() {
+        for source in [
+            include_str!("../../../docs/pattern-markdown/examples/show-initiatives.pattern.md"),
+            include_str!("../../../docs/pattern-markdown/examples/show-relationships.pattern.md"),
+        ] {
+            let result: serde_json::Value =
+                serde_json::from_str(&preview(source).unwrap()).unwrap();
+            assert_eq!(result["status"], "Completed");
+            assert!(result["effects"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|effect| effect["request"]["payload"]["view"].is_object()));
+        }
+        let error: serde_json::Value =
+            serde_json::from_str(&preview("!show {{missing}}").unwrap_err()).unwrap();
+        assert!(error[0]["primary"]["start"].is_number());
+        assert!(preview(&" ".repeat(65_537)).unwrap_err().contains("64 KiB"));
+    }
 
     /// One caller can start, restore and advance without depending on platform code.
     #[test]
     fn transport_round_trips_one_participant_action() {
         let start = execute(
             &serde_json::to_vec(&json!({
-            "version": 1, "operation": "start", "technique_id": "act.values", "root_id": "r1", "inputs": {}
+            "version": 1, "operation": "start", "technique_id": "cbt.thought-record", "root_id": "r1", "inputs": {}
             }))
             .unwrap(),
         )
@@ -146,11 +197,26 @@ mod tests {
             "expected_revision": 0,
             "command": {
                 "run_id": effect["run_id"],
-                "event": {"Fulfill": {"effect_id": effect["effect_id"], "result": {"kind": "selected", "value": "begin"}}}
+                "event": {"Fulfill": {"effect_id": effect["effect_id"], "result": {"kind": "text", "value": "A recent conversation."}}}
             }
         })).unwrap()).unwrap()).unwrap();
         assert_eq!(applied["view"]["revision"], 1);
         assert_ne!(applied["view"]["pending"], started["view"]["pending"]);
+        let request = json!({
+            "version": 1, "operation": "rewind", "saved": applied["saved"],
+            "expected_revision": 1, "run_id": effect["run_id"], "effect_id": effect["effect_id"]
+        });
+        let reopened: serde_json::Value =
+            serde_json::from_slice(&execute(&serde_json::to_vec(&request).unwrap()).unwrap())
+                .unwrap();
+        assert_eq!(reopened["view"]["revision"], 2);
+        assert_eq!(reopened["view"]["pending"], started["view"]["pending"]);
+        let mut stale = request;
+        stale["expected_revision"] = json!(0);
+        assert_eq!(
+            execute(&serde_json::to_vec(&stale).unwrap()).unwrap_err(),
+            HostError::StaleRevision
+        );
     }
 
     /// Unknown fields and stale projections do not produce a new checkpoint.

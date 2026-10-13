@@ -119,14 +119,19 @@ impl<'de> Deserialize<'de> for Checkpoint {
         from_saved(inner).map_err(serde::de::Error::custom)
     }
 }
-/// Reconstruct historical Show effects by replay, deduplicated by effect identity.
+/// Reconstruct historical display effects by replay, deduplicated by effect identity.
 fn content_history(state: &RunManager) -> Result<Vec<Effect>, Error> {
     let replay = manager::replay(state)?;
     let mut seen = BTreeSet::new();
     Ok(replay
         .recorded_effects
         .into_iter()
-        .filter(|e| matches!(e.request, Request::Show { .. }) && seen.insert(e.effect_id.clone()))
+        .filter(|e| {
+            matches!(
+                e.request,
+                Request::Show { .. } | Request::Video { .. } | Request::Image { .. }
+            ) && seen.insert(e.effect_id.clone())
+        })
         .collect())
 }
 /// Validate checkpoint version, replayed content acknowledgements, and revision accounting.
@@ -294,11 +299,12 @@ pub fn apply(
             .checked_add(1)
             .ok_or(Error::CounterOverflow)?;
         next.inner.state = turn.state;
-        next.content.extend(
-            turn.effects
-                .into_iter()
-                .filter(|e| matches!(e.request, Request::Show { .. })),
-        );
+        next.content.extend(turn.effects.into_iter().filter(|e| {
+            matches!(
+                e.request,
+                Request::Show { .. } | Request::Video { .. } | Request::Image { .. }
+            )
+        }));
     }
     save(store, checkpoint, next)
 }

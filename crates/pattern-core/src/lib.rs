@@ -13,6 +13,7 @@ pub mod refine;
 pub mod runtime;
 pub mod scenario;
 pub mod semantic;
+pub mod show;
 pub mod snapshot;
 pub mod syntax;
 pub mod value;

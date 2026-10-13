@@ -1,5 +1,7 @@
 //! Read-only editor projections from the validated AST; never a second interpreter.
 use super::*;
+mod authoring;
+pub use authoring::{PathArm, Paths, Rule, SourceAttribute, SourceField, SourceStatement};
 
 #[derive(Clone, Debug, Serialize)]
 pub struct Binding {
@@ -38,6 +40,10 @@ pub struct Inspection {
     pub outputs: BTreeMap<String, Type>,
     pub bindings: Vec<Binding>,
     pub steps: Vec<Step>,
+    /// Lossless editing ranges from the existing parser, not executable instructions.
+    pub source_statements: Vec<SourceStatement>,
+    /// Only independently owned, linear arms are grouped for visual editing.
+    pub paths: Vec<Paths>,
     pub dependencies: BTreeMap<String, String>,
 }
 
@@ -48,8 +54,11 @@ impl CompiledPattern {
     /// # Errors
     /// Returns diagnostics if the compiled value's source or pinned interfaces are invalid.
     pub fn inspect(&self) -> Result<Inspection, Vec<Diagnostic>> {
-        let checked = syntax::parse(&self.source)
-            .and_then(|parsed| check(parsed, self.dependencies.clone()).map_err(|e| vec![e]))?;
+        let parsed = syntax::parse(&self.source)?;
+        let checked = check(parsed.clone(), self.dependencies.clone()).map_err(|e| vec![e])?;
+        let steps = outline(&checked.steps, &self.source);
+        let source_statements = authoring::statements(&parsed.statements, &self.source);
+        let paths = authoring::paths(&checked.steps, &steps, &source_statements, &self.source);
         Ok(Inspection {
             message_handler: self.message_handler.clone(),
             title: checked.title,
@@ -57,7 +66,9 @@ impl CompiledPattern {
             inputs: self.input_types(),
             outputs: self.output_types.clone(),
             bindings: bindings(&checked.symbols),
-            steps: outline(&checked.steps, &self.source),
+            steps,
+            source_statements,
+            paths,
             dependencies: self
                 .dependencies
                 .iter()
@@ -87,6 +98,7 @@ fn outline(steps: &[(CheckedStep, Span)], source: &str) -> Vec<Step> {
         .enumerate()
         .map(|(index, (step, span))| {
             let (kind, binding) = match step {
+                CheckedStep::Form { binding, .. } => ("form", Some(binding)),
                 CheckedStep::Realize { binding, .. } => ("realize", Some(binding)),
                 CheckedStep::Classify { binding, .. } => ("classify", Some(binding)),
                 CheckedStep::Suggest { binding, .. } => ("suggest", Some(binding)),
@@ -94,6 +106,7 @@ fn outline(steps: &[(CheckedStep, Span)], source: &str) -> Vec<Step> {
                 CheckedStep::Propose(_) => ("propose", None),
                 CheckedStep::Yield(_) => ("yield", None),
                 CheckedStep::Ask { binding, .. } => ("ask", Some(binding)),
+                CheckedStep::Timer { binding, .. } => ("timer", Some(binding)),
                 CheckedStep::Loop(body) => ("loop", Some(&body.binding)),
                 CheckedStep::Repeat(_) => ("repeat", None),
                 CheckedStep::Break => ("break", None),
@@ -126,7 +139,9 @@ fn outline(steps: &[(CheckedStep, Span)], source: &str) -> Vec<Step> {
                     Some(&body.binding),
                 ),
                 CheckedStep::Turn { binding, .. } => ("turn", binding.as_ref()),
-                CheckedStep::Show { .. } => ("show", None),
+                CheckedStep::Image { .. } => ("image", None),
+                CheckedStep::Video { .. } => ("video", None),
+                CheckedStep::Show { .. } | CheckedStep::ShowCollection { .. } => ("show", None),
                 CheckedStep::Branch { .. } => ("branch", None),
                 CheckedStep::Match { .. } => ("match", None),
                 CheckedStep::Jump(_) => ("jump", None),
@@ -179,18 +194,30 @@ fn outline(steps: &[(CheckedStep, Span)], source: &str) -> Vec<Step> {
 
 /// Project readable templates without resolving references or executing expressions.
 fn step_text(step: &CheckedStep, source: &str) -> String {
+    if let CheckedStep::Form { form, .. } = step {
+        return form
+            .title
+            .clone()
+            .unwrap_or_else(|| "Grouped questions".into());
+    }
+    if let CheckedStep::ShowCollection { spec, .. } = step {
+        return format!("Show {{{{{}}}}}", spec.source);
+    }
     let parts = match step {
         CheckedStep::Realize { prompt, .. }
         | CheckedStep::Suggest {
             criteria: prompt, ..
         }
         | CheckedStep::Ask { prompt, .. }
+        | CheckedStep::Timer { prompt, .. }
         | CheckedStep::Rate { prompt, .. }
         | CheckedStep::Choose { prompt, .. }
         | CheckedStep::Select { prompt, .. }
         | CheckedStep::Generate { prompt, .. }
         | CheckedStep::Turn { prompt, .. } => prompt,
-        CheckedStep::Show { body } => body,
+        CheckedStep::Image { body, .. }
+        | CheckedStep::Video { body, .. }
+        | CheckedStep::Show { body } => body,
         CheckedStep::Classify { definition, .. } => {
             return format!(
                 "{} → {} (AI interpretation)",

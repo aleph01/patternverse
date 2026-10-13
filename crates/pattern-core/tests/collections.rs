@@ -261,7 +261,7 @@ fn synthetic_example_simulates_open_then_mapped_records_in_the_real_runtime() {
         ]
     );
     assert!(
-        matches!(&result.effects.last().unwrap().request,Request::Show{markdown} if markdown=="You explored 2 ideas.")
+        matches!(&result.effects.last().unwrap().request,Request::Show { markdown, .. } if markdown=="You explored 2 ideas.")
     );
     restored(&result.state);
 }
@@ -294,7 +294,7 @@ fn record_paths_work_in_templates_expressions_and_dynamic_choices() {
         ])]
     );
     assert!(
-        matches!(&done.effects[0].request,Request::Show{markdown} if markdown.starts_with("Chose Alpha from"))
+        matches!(&done.effects[0].request,Request::Show { markdown, .. } if markdown.starts_with("Chose Alpha from"))
     );
 }
 

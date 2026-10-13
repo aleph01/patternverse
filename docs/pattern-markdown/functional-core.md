@@ -18,7 +18,7 @@ entry = {answer: answer, ratings: [2, 4], reviewed: false}
 ```
 
 `=` introduces an immutable binding, never reassignment. Enclosing names cannot be
-shadowed by iteration locals. Canonical bindings support `!ask`, `!rate 0..10`,
+shadowed by iteration locals. Canonical bindings support `!ask`, `!timer`, `!rate 0..10`,
 `!choose [flags]`, `!rank [flags]`, `!agent`, `!turn`, `!collect`, `!use child.name`,
 and `!refine[rounds=4, renewable] initial_text`. Existing `:with` input contracts,
 selection parameters and refinement participant controls are unchanged. `!show`

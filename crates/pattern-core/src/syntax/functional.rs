@@ -141,6 +141,8 @@ pub(super) fn header(
     if !matches!(
         kind,
         "!ask"
+            | "!form"
+            | "!timer"
             | "!rate"
             | "!choose"
             | "!rank"

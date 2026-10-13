@@ -1,115 +1,59 @@
-# Mira guided therapy-informed Patterns · 1.0.0
+# Guided CBT patterns
 
-Seven **guided self-reflections**, implemented in Pattern Markdown and executed by the
-existing Rust compiler/Manager. They are not complete treatment protocols, clinical
-assessment tools, or clinician-reviewed/validated interventions. No efficacy claim is made.
+The bundled CBT host catalog contains ten exercises, in this order:
 
-The original six episodes described below remain entirely scripted. The additional
-[`cbt.worry-chain`](patterns/cbt.worry-chain.pattern.md) demonstrates explicit AI
-wording (`~`) and an always-cancellable `?loop[10]`. It has its own opt-in introduction,
-no declared outcome, no readiness child and no proactive suggestion cues. Unlike the
-original six, it requires a selected local model. See the [realization guide](../../docs/pattern-markdown/realization.md)
-for its safety/semantic limits and restart/stop fixture. The shared contracts below
-describe the original six, not this new language-feature demonstration.
+1. Thought Record / Cognitive Restructuring (`cbt.thought-record`)
+2. Behavioral Activation (`cbt.activation`)
+3. Exposure (`cbt.exposure`)
+4. Behavioral Experiment (`cbt.experiment`)
+5. Problem Solving (`cbt.problem-solving`)
+6. Identify Cognitive Distortions (`cbt.thinking-patterns`)
+7. Downward Arrow (`cbt.downward-arrow`)
+8. Worry Time / Stimulus Control for Worry (`cbt.worry-time`)
+9. Activity–Mood Monitoring (`cbt.activity-mood`)
+10. Graded Task Assignment (`cbt.graded-task`)
 
-Choose CBT, ACT or DBT in Conversation settings, then use **Shift+Space → Guided
-exercise**. New releases are installed locally when the encrypted library next opens,
-including on existing installations. NARM remains the default. The website is unchanged.
-Every episode asks permission before collecting personal content, provides a decline
-and support exit, and supports the existing pause/resume/end controls at every wait.
+The release catalog and Rust host retain these ten. The public CBT article collection
+also includes the Double Standard Technique and Semantic Method, so its twelve members
+must not be confused with the ten bundled host IDs above. Readable article practices
+use the same Rust source runtime without requiring a bundled catalog entry.
+All ten guided sequences are scripted and run offline; none
+requires model generation. ACT and the former Therapy techniques umbrella collection
+are no longer offered. The two existing DBT host exercises also start directly at
+their exercise-specific step.
 
-## Release and migration manifests
+The sequences are original self-help adaptations, not diagnosis or treatment. They
+start directly when opened and allow pausing or ending. The DBT exercises retain
+their situation-specific safety and support choices. Thinking-pattern labels include
+disqualifying/discounting the positive and are
+tentative, not verdicts. Exposure is a planning/reflection exercise for manageable,
+objectively safe everyday situations, not trauma processing or specialist OCD or
+physical-sensation treatment. Planning never creates calendar events or notifications.
 
-The machine-readable release identities, modality links, legacy aliases and discovery
-cues are in [catalog.json](catalog.json). Source files are in `patterns/`; each has a
-deterministic successful path in `scenarios/`. The original six roots pin the `therapy.ready` child.
-These are **new finite guided versions**, not claims of exact behavioral parity with the
-legacy free-form prompts. No legacy source or saved customization is removed.
+## Sources and execution
 
-| Pattern | Legacy source / entry | Explicit user steps after consent | Result / deliberate difference |
-| --- | --- | --- | --- |
-| `cbt.moment` | `packages/approaches/cbt/src/techniques.ts`, `cbt-situation-thought-map` | event → interpretation → feeling → response → consequence → review | `reflected`; retains separation and tentative meaning, adds a fixed user-reviewed map instead of adaptive ongoing questioning |
-| `cbt.activation` | same file, `cbt-behavioral-activation` | direction → small action → timing → obstacle → fallback → optional acceptance | `option_kept`; preserves small safe actions and no mood promise, adds explicit planning and a decline branch |
-| `act.defusion` | new ACT episode; no legacy technique | thought → willingness → noticed experience → optional continuation → chosen direction | `noticed`; changes the relationship to thought without disputing truth or requiring relief; explicitly stops when unwelcome |
-| `act.values` | new ACT episode; no legacy technique | life area → chosen quality → small action → obstacle → keep/adapt/leave | `option_kept`; distinguishes freely chosen qualities from outcomes and obligations; supports smaller alternatives |
-| `dbt.pause` | `packages/approaches/dbt/src/techniques.ts`, `dbt-pause-observe` | safe-to-pause choice → observed event → feeling → urge → safe-next-step/support/stop | `option_considered`; preserves optional conservative pausing without physiological techniques; not a full STOP or crisis-treatment protocol |
-| `dbt.interpersonal` | same file, `dbt-interpersonal-effectiveness` | safety choice → event → objective → relationship → self-respect → priority → user's draft → fallback | `drafted`; preserves competing interpersonal aims and user agency, adds structured rehearsal; not a full DEAR MAN protocol and sends nothing |
+`patterns/` contains the active version-1 Pattern Markdown programs. Their content
+release is version 2.1.0, with Worry Time at 2.2.0 (DBT 1.1.0); the language and checkpoint formats have not
+changed.
+`content/patterns/` contains exact readable source copies plus scope/source notes.
+`content/collections/cbt.md` defines curated order.
+`apps/web/src/lib/mira/therapy-library.ts` maps article slugs to executable IDs.
 
-### Shared contracts
+Rust owns branching, reply validation, checkpoints, and replay. After editing a source
+or host catalog, rebuild the checked-in browser engine with `pnpm build:pattern-wasm`.
+Run the native host tests and browser tests to verify source/catalog parity.
 
-- **Prerequisites:** participant chooses a manageable everyday topic and explicitly
-  opts in. No diagnosis, inferred readiness, forced disclosure, exposure, trauma work,
-  extreme-temperature practice, exertion or breath-holding. Direct confrontation is
-  not rehearsed when the participant reports possible coercion/danger.
-- **Inputs:** `{}` for each root. All context is collected explicitly within the run;
-  ordinary chat, other sessions and hidden modality state are not injected.
-- **Outputs:** one declared `outcome: text`, bound on every completed path. Other
-  completion codes are `declined` and `support_requested`. Ask/choice bindings stay in
-  their run; user responses remain in the encrypted checkpoint and transcript, not a
-  generated diagnosis or automatic session summary. Cancellation has no success output.
-- **Runtime primitives:** `!use`, `!ask`, `!choose`, `!show`, immutable assignments,
-  participant-chosen branching and forward exits. No `!agent`, `!turn`, unbounded loop
-  or Host-owned therapeutic step logic. **No model inference is required by this pack.**
-- **UI state:** only ordinary pending/submitting, input drafts, selection and run
-  lifecycle controls. The existing generic renderers handle all six; no therapy-specific
-  widget or alternate executor was added.
-- **LLM context:** none for these episodes. Ordinary ACT chat separately uses the
-  editable ACT stance prompt and neutral turn bookkeeping. Future adaptive model steps
-  require separate context contracts, tests and review.
-- **Safety limits:** the support choices stop the workflow and point toward real-world
-  help. They are **not automatic crisis detection**. The scripts cannot assess risks or
-  interpret free-form disclosures. Pause/end remains available; this app is not urgent care.
+## Retired content and existing private runs
 
-## Compatibility, rollback and editing
+`legacy/` is outside the public content compiler. It preserves the removed ACT and
+redundant CBT articles, original executable sources, scenarios, and former audit notes.
+`legacy_library.rs` accepts exact archived sources only when restoring a replay-validated
+checkpoint; retired IDs cannot start a new run and are absent from all catalogs.
+Updated CBT and DBT IDs keep their older sources in `legacy/patterns/` and
+`legacy/readiness/` and `legacy/worry-time/` available for existing runs, so a catalog change
+does not rewrite or strand private exercise answers.
 
-Only built-in release IDs in the manifest can represent a legacy technique in the chat
-catalog. A corresponding guided entry replaces the **default discovery item**, not
-the old execution engine. It never takes over an already-active legacy technique.
-If the legacy prompt was customized, that legacy option remains canonical. If the
-legacy entry is disabled, its guided counterpart is also omitted from chat discovery.
-The guided version remains explicitly accessible from Pattern Library.
-
-Disable a guided entry in **Chat availability & suggestions** to return to its legacy
-picker option; a failed/unavailable library also leaves the legacy route available.
-Custom prompts and active sessions are never silently migrated. New ACT exercises have
-no legacy fallback and are independent from NARM. Local forks have no authority to hide
-a built-in technique, begin disabled, and can be edited/enabled explicitly.
-
-Installation adds missing release identities atomically. Existing source, preferences,
-forks and checkpoints are not overwritten; a full library is left usable without a
-partial pack installation. Releases remain read-only: use **Make my own copy** to edit.
-The editor currently edits only the root, not the pinned readiness child. A new release
-must use a new identity; source changes must never silently replace an installed version.
-
-Keep the legacy technique files, configuration IDs, prompt overrides, and existing
-session engine. Removal requires separate user approval after source/behavior review,
-evidence for live-model behavior where relevant, downgrade planning and parity tests.
-This pack does not complete all original M11 candidates or bypass the M12 reassessment.
-Generated-choice exercises, collection-based episodes, compiled `!refine`, and PWA
-support remain separate work; overt statements are not approximated with this pack.
-
-## Content references and review boundary
-
-Wording is original and intentionally brief; no proprietary worksheet is reproduced.
-The conceptual references are:
-
-- [Beck Institute resources](https://beckinstitute.org/cbt-resources/resources-for-professionals-and-students/cbtresources/)
-  and [behavioral activation discussion](https://beckinstitute.org/blog/beyond-behavioral-activation-what-to-do-when-unhelpful-thoughts-hinder-enjoyment/): separating experience into useful parts and planning realistic activity.
-- [ACBS overview of ACT](https://contextualscience.org/about_act) and
-  [defusion in practice](https://contextualscience.org/qa_cognitive_defusion_in_practice_with_john_blackl): flexible contact with thoughts and freely chosen values; avoid invalidating use of defusion.
-- [Behavioral Tech on DBT skills](https://behavioraltech.org/dbt-skills-coping-with-cancer-part-2/): mindfulness, tolerating distress and communicating needs while considering relationships and self-respect. Existing Mira DBT prompts supply the conservative pause/goal-clarification scope.
-
-These references do not endorse Mira or validate these adaptations. Clinical content
-review and evaluation with representative users remain outstanding before any broader
-therapeutic claim or distribution. Deterministic tests establish software behavior only.
-
-## Verification
-
-`crates/pattern-core/tests/therapy_patterns.rs` runs all six saved scenarios through the
-real portable runtime. It covers completion, early/late refusal, support exits,
-pause/restart/resume, rejected choices, duplicate replies, cancellation at every user
-boundary, pinned source, and rejection of ambient undeclared inputs. Native tests cover
-encrypted additive installation, no overwrite, no partial pack at capacity, and saved
-session modality checks. Catalog tests cover canonical defaults, customization/disable
-preservation, active legacy sessions and rollback. ACT state/switch/restore tests keep
-the new modality independent while retaining the NARM default.
+Old ACT conversations remain stored unchanged and are labeled as a retired approach.
+Their ordinary chat uses neutral reflection, not the retired stance or a silently
+substituted therapy approach. Stored custom prompts are preserved but not activated for
+the retired approach. New sessions use an available preference, falling back to NARM.

@@ -1,16 +1,6 @@
 :language 1
 :title "DBT · Pause and observe"
 :output outcome
-= focus "We can make room between an urge and an action, without judging the feeling or asking you to stay in an unsafe situation."
-!use therapy.ready as readiness {
-    :with focus
-}
-?branch {
-    :when readiness.decision.value == "begin" -> explore
-    :when readiness.decision.value == "support" -> support
-    :else -> declined
-}
-explore:
 !choose pause {
     :option observe "I can safely pause and notice"
     :option support "I need immediate help"

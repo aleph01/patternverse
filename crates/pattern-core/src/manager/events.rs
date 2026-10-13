@@ -103,6 +103,7 @@ pub(super) fn message(state: &RunManager, command: Command) -> Result<Transition
     let mut shown = pending.clone();
     shown.effect_id = format!("{id}:message");
     shown.request = Request::Show {
+        view: None,
         markdown: format!("You · {text}"),
     };
     result.effects.push(shown);

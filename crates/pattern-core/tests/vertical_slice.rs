@@ -63,7 +63,7 @@ fn theme_explorer_parses_validates_lowers_and_runs_same_core() {
         )])
     );
     assert!(
-        matches!(&simulation.effects[2].request,Request::Show{markdown} if markdown=="You chose **Taking the first step**.")
+        matches!(&simulation.effects[2].request,Request::Show { markdown, .. } if markdown=="You chose **Taking the first step**.")
     );
 }
 
@@ -280,7 +280,7 @@ fn literal_generated_directives_cannot_execute_as_language() {
     .unwrap();
     assert_eq!(turn.state.status(), &Status::Completed);
     assert_eq!(turn.effects.len(), 1);
-    assert!(matches!(&turn.effects[0].request,Request::Show{markdown} if markdown==payload));
+    assert!(matches!(&turn.effects[0].request,Request::Show { markdown, .. } if markdown==payload));
 }
 
 #[test]
@@ -309,7 +309,9 @@ fn static_choices_fields_and_conversational_turn_use_same_runtime() {
         end.state.outputs()["answer"],
         Value::Text("A reflection".into())
     );
-    assert!(matches!(&end.effects[0].request,Request::Show{markdown} if markdown=="A reflection"));
+    assert!(
+        matches!(&end.effects[0].request,Request::Show { markdown, .. } if markdown=="A reflection")
+    );
 }
 
 #[test]

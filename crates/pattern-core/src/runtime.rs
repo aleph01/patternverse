@@ -2,7 +2,7 @@
 use crate::{
     compiler::{
         BindingId, Collection, CollectionMode, CompiledPattern, Field, Instruction, Node, NodeId,
-        Options, Part, Rating, Selection, SelectionMode,
+        Options, Part, Rating, Selection, SelectionMode, Timer,
     },
     expression::{self, Expr},
     syntax::Span,
@@ -11,13 +11,16 @@ use crate::{
 use serde::{Deserialize, Deserializer, Serialize};
 use std::collections::BTreeMap;
 mod collection;
+mod form;
 mod looping;
 mod realization;
 mod refinement;
 mod selection;
 mod semantic;
+mod timer;
 use collection::CollectionFrame;
 use looping::LoopFrame;
+pub use timer::TimerResult;
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Limits {
@@ -47,6 +50,10 @@ pub struct CollectionContinuation {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", content = "payload")]
 pub enum Request {
+    #[serde(rename = "interaction.form")]
+    Form(crate::compiler::Form<String>),
+    #[serde(rename = "interaction.timer")]
+    Timer { prompt: String, timer: Timer },
     #[serde(rename = "semantic.classify")]
     Classify {
         definition: crate::semantic::Classifier,
@@ -91,13 +98,29 @@ pub enum Request {
         max: usize,
         prefer: Option<String>,
     },
+    #[serde(rename = "content.image")]
+    Image {
+        markdown: String,
+        image: crate::compiler::Image,
+    },
+    #[serde(rename = "content.video")]
+    Video {
+        markdown: String,
+        video: crate::compiler::Video,
+    },
     #[serde(rename = "content.show")]
-    Show { markdown: String },
+    Show {
+        markdown: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        view: Option<crate::show::ShowView>,
+    },
 }
 impl Request {
     /// Return the stable wire discriminator used to match Host handlers and fixture replies.
     pub fn kind(&self) -> &'static str {
         match self {
+            Self::Form(_) => "interaction.form",
+            Self::Timer { .. } => "interaction.timer",
             Self::Classify { .. } => "semantic.classify",
             Self::Suggest { .. } => "semantic.suggest",
             Self::Refine { .. } => "interaction.refine",
@@ -109,6 +132,8 @@ impl Request {
             Self::Choose { .. } => "interaction.choose",
             Self::Select { .. } => "interaction.select",
             Self::Show { .. } => "content.show",
+            Self::Video { .. } => "content.video",
+            Self::Image { .. } => "content.image",
         }
     }
 }
@@ -133,6 +158,8 @@ pub struct LoopContext {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", content = "value", rename_all = "snake_case")]
 pub enum Fulfillment {
+    Form(BTreeMap<String, Value>),
+    Timer(TimerResult),
     Classified(String),
     Suggested(crate::semantic::Suggestion),
     Reviewed(crate::refine::Decision),
@@ -801,8 +828,15 @@ fn drive(result: &mut Transition) -> Result<(), Error> {
                 collection::begin(result, &node, c)?;
                 continue;
             }
+            Instruction::Form { form, .. } => {
+                Request::Form(form.clone().try_map(|parts| render(&parts, state))?)
+            }
             Instruction::Ask { prompt, .. } => Request::Ask {
                 prompt: render(prompt, state)?,
+            },
+            Instruction::Timer { prompt, timer, .. } => Request::Timer {
+                prompt: render(prompt, state)?,
+                timer: timer.clone(),
             },
             Instruction::Rate { prompt, rating, .. } => Request::Rate {
                 prompt: render(prompt, state)?,
@@ -889,9 +923,26 @@ fn drive(result: &mut Transition) -> Result<(), Error> {
                 prompt,
                 ..
             } => selection::request(options, selection, render(prompt, state)?, state)?,
+            Instruction::Image { image, body } => Request::Image {
+                markdown: render(body, state)?,
+                image: image.clone(),
+            },
+            Instruction::Video { video, body } => Request::Video {
+                markdown: render(body, state)?,
+                video: video.clone(),
+            },
             Instruction::Show { body } => Request::Show {
                 markdown: render(body, state)?,
+                view: None,
             },
+            Instruction::ShowCollection { source, spec } => {
+                let value = evaluate(source, state)?;
+                let view = crate::show::resolve(spec, &value, node.span.clone());
+                Request::Show {
+                    markdown: view.text(),
+                    view: Some(view),
+                }
+            }
             Instruction::End => {
                 let state = &mut result.state.inner;
                 state.outputs = state
@@ -912,7 +963,10 @@ fn drive(result: &mut Transition) -> Result<(), Error> {
                 return Ok(());
             }
         };
-        let blocking = !matches!(request, Request::Show { .. });
+        let blocking = !matches!(
+            request,
+            Request::Show { .. } | Request::Video { .. } | Request::Image { .. }
+        );
         let effect = emit(result, &node, request)?;
         if blocking {
             result.state.inner.pending = Some(effect);
@@ -1102,6 +1156,14 @@ pub fn transition(state: &RunState, event: Event) -> Result<Transition, Error> {
         return Ok(result);
     }
     let (binding, value) = match (&node.instruction, &pending.request, &receipt.result) {
+        (Instruction::Form { binding, form }, Request::Form(_), Fulfillment::Form(answer)) => {
+            (Some(*binding), form::answer(form, answer)?)
+        }
+        (
+            Instruction::Timer { binding, timer, .. },
+            Request::Timer { .. },
+            Fulfillment::Timer(answer),
+        ) => (Some(*binding), timer::answer(timer, answer)?),
         (
             Instruction::Realize { binding, .. },
             Request::Realize { .. },
@@ -1220,6 +1282,7 @@ pub fn transition(state: &RunState, event: Event) -> Result<Transition, Error> {
             &node,
             Request::Show {
                 markdown: value.display(),
+                view: None,
             },
         )?;
     }
