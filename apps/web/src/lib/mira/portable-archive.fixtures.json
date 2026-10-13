@@ -1,0 +1,32 @@
+{
+  "passphrase": "fixture passphrase",
+  "session": {
+    "id": "session-1",
+    "title": "A café reflection 🌿",
+    "modalityId": "narm",
+    "activePattern": null,
+    "messages": [],
+    "pendingReplyId": null,
+    "createdAt": "2026-09-24T10:00:00Z",
+    "updatedAt": "2026-09-24T10:00:00Z"
+  },
+  "settings": {
+    "model": "private/model",
+    "openRouterKey": "never-export-this-key",
+    "promptOverrides": {
+      "narm": "Take a breath — then reflect."
+    },
+    "activeSessionId": "session-1"
+  },
+  "runs": [
+    {
+      "sessionId": "session-1",
+      "saved": {
+        "checkpoint": "historical",
+        "revision": 2
+      }
+    }
+  ],
+  "v1": "{\"format\":\"patternverse-mira\",\"version\":1,\"kdf\":\"PBKDF2-SHA256\",\"iterations\":310000,\"salt\":\"AAECAwQFBgcICQoLDA0ODw==\",\"iv\":\"AAECAwQFBgcICQoL\",\"ciphertext\":\"U1gu3v8ZhMosJZ0lpAOGU/odDR+CIs+zm7Q4i2f3LceX1Vs4bNzqopn5QBqJG/ufbOaHoZzxOJxmzOuuRUtRJVIE7vpXLEONzkafw0mYwoi0rFeZQ+1qxBLWGHN/70v8w9XDaPU65NTznaswioUx+Rha95l77TUyf7Ch00TVthWOt8rnGXMsRZXm1lTFQ2QKHqoLD5ybyQVDX8sm4N+1zf3Im8P0KRdEKaWOnoo0PZGmKs/qsj/q/ps4wOThN2AgLPhnW9ccqhTQ7USegimTCiWAULQhRaOXKpzzwPUG8L968MMX5xESUYYcwk5Yv9vF70pe6CAENZaGZLh78XVZXE8OtDMqk+roWjLqof593o+FMNar7A5mZpxBd/bYI0N9UrMI\"}",
+  "v2": "{\"format\":\"patternverse-mira\",\"version\":2,\"kdf\":\"PBKDF2-SHA256\",\"iterations\":310000,\"salt\":\"AAECAwQFBgcICQoLDA0ODw==\",\"iv\":\"AAECAwQFBgcICQoL\",\"ciphertext\":\"U1gu3v8ZhMosJZ0lpAOGU/odDR+CIs+zm7Q4i2f3LceX1Vs4bNzqopn5QBqJG/ufbOaHoZzxOJxmzOuuRUtRJVIE7vpXLEONzkafw0mYwoi0rFeZQ+1qxBLWGHN/70v8w9XDaPU65NTznaswioUx+Rha95l77TUyf7Ch00TVthWOt8rnGXMsRZXm1lTFQ2QKHqoLD5ybyQVDX8sm4N+1zf3Im8P0KRdEKaWOnoo0PZGmKs/qsj/q/ps4wOThN2AgLPhnW9ccqhTQ7USegimTCiWAULQhRaOXKpzzwPUG8L968MMX5xESUYYcwk5Yv9vF70pe6CAENZaGZLh78XVZXE8OtDMqk+roWjLqof593o+FMIfVMJrcTpQcRyQj9Si8qelGS599Njl1mTA7SnaHB17K5IjpWsidd5NZAOMTu1nQ1W4A+q7VUqJCvuMHwIE9vxP7xjLzWoBeHZ7/axzeHLFC1DK+oM4u/QcgpACpF9d1GaLdRsYf\"}"
+}
