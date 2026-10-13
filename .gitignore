@@ -10,11 +10,16 @@ coverage/
 test-results/
 playwright-report/
 .svelte-kit/
+.wrangler/
 target/
 apps/desktop/src-tauri/binaries/
 apps/desktop/src-tauri/gen/
 
 # Local environment
+.local/
 .env
 .env.*
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
 !.env.example

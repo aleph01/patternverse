@@ -8,19 +8,22 @@ export default tseslint.config(
     ignores: [
       '**/build/**',
       '**/dist/**',
+      '**/.local/**',
       '**/.svelte-kit/**',
+      '**/.wrangler/**',
       '**/coverage/**',
       '**/playwright-report/**',
       '**/test-results/**',
       '**/src/lib/mira/engine/**',
       '**/src-tauri/gen/**',
+      '**/worker-configuration.d.ts',
     ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   ...svelte.configs.recommended,
   {
-    files: ['**/*.svelte'],
+    files: ['**/*.svelte', '**/*.svelte.ts'],
     languageOptions: {
       parserOptions: {
         parser: tseslint.parser,

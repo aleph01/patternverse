@@ -11,12 +11,29 @@
   },
   "scripts": {
     "dev": "pnpm --filter @patternverse/web dev",
+    "studio": "pnpm --filter @patternverse/web studio",
+    "show:demo": "pnpm --filter @patternverse/web show:demo",
     "build": "pnpm -r --if-present build",
     "build:pattern-wasm": "sh scripts/build-pattern-wasm.sh",
+    "mcp:build": "pnpm --filter @patternverse/mcp build",
+    "guided-ai:build": "pnpm --filter @patternverse/guided-ai-worker build",
+    "guided-ai:test": "pnpm --filter @patternverse/guided-ai-worker test",
+    "guided-ai:types": "WRANGLER_LOG_PATH=/tmp/patternverse-guided-ai-wrangler.log wrangler types --config apps/guided-ai/wrangler.jsonc apps/guided-ai/worker-configuration.d.ts --strict-vars=false",
+    "guided-ai:dry-run": "WRANGLER_LOG_PATH=/tmp/patternverse-guided-ai-wrangler.log wrangler deploy --config apps/guided-ai/wrangler.jsonc --dry-run --outdir apps/guided-ai/dist/deploy",
+    "mcp:test": "pnpm --filter @patternverse/mcp test",
+    "mcp:smoke": "node apps/mcp/scripts/smoke-http.mjs",
+    "mcp:widget:test": "pnpm mcp:build && pnpm --filter @patternverse/web exec playwright test --config mcp-widget.playwright.config.ts",
+    "mcp:widget:preview": "pnpm mcp:build && pnpm --filter @patternverse/web exec vite --config mcp-widget-test.vite.config.ts",
+    "mcp:dev": "pnpm mcp:build && WRANGLER_LOG_PATH=/tmp/patternverse-mcp-wrangler.log wrangler dev --config apps/mcp/wrangler.jsonc",
+    "mcp:dry-run": "pnpm mcp:build && WRANGLER_LOG_PATH=/tmp/patternverse-mcp-wrangler.log wrangler deploy --config apps/mcp/wrangler.jsonc --dry-run --outdir apps/mcp/dist/deploy",
+    "deploy:web": "node scripts/deploy-web.mjs",
+    "test:deploy": "node --test scripts/deploy-web.test.mjs",
     "test": "pnpm -r --if-present test",
     "test:e2e": "pnpm --filter @patternverse/web test:e2e",
     "check": "pnpm -r --if-present check",
     "lint": "eslint . && pnpm check",
+    "audit:components": "node scripts/audit-components.mjs",
+    "test:audit": "node --test scripts/audit-components.test.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "validate:content": "pnpm --filter @patternverse/compiler validate:content",
@@ -31,6 +48,7 @@
     "prettier": "3.9.6",
     "prettier-plugin-svelte": "4.1.1",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.66.0"
+    "typescript-eslint": "8.66.0",
+    "wrangler": "^4.146.0"
   }
 }
