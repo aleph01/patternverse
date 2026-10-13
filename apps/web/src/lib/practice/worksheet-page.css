@@ -1,0 +1,40 @@
+.practice-page.practice-worksheet-page {
+  background: #fff;
+  color: #181814;
+}
+
+.practice-worksheet-page .practice-page-heading {
+  width: min(100%, 800px);
+  padding: 3rem 2rem 1.5rem 5.5rem;
+}
+
+.practice-worksheet-page .practice-page-heading > a {
+  margin-bottom: 1.5rem;
+  color: #62635d;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.practice-worksheet-page .practice-page-heading > p {
+  margin: 0 0 0.75rem;
+  color: #00865c;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+}
+
+.practice-worksheet-page .practice-page-heading h1 {
+  max-width: none;
+  font-family: inherit;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  text-transform: none;
+}
+
+@media (max-width: 680px) {
+  .practice-worksheet-page .practice-page-heading {
+    padding: 1.75rem 1rem 1.25rem;
+  }
+}

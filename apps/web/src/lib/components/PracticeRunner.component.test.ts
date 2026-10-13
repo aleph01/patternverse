@@ -1,8 +1,10 @@
 // @vitest-environment jsdom
-
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { PracticeDefinition } from '@patternverse/schema';
-import { cleanup, fireEvent, render, screen, within } from '@testing-library/svelte';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/svelte';
+import { afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { initSync } from '$lib/mira/engine/pattern_wasm.js';
 import PracticeRunner from './PracticeRunner.svelte';
 
 const practice: PracticeDefinition = {
@@ -13,13 +15,14 @@ const practice: PracticeDefinition = {
       id: 'write',
       title: 'Write',
       blocks: [
-        { id: 'copy', type: 'markdown', content: 'Rendered on the server.' },
+        { id: 'copy', type: 'markdown', content: '**Safe instructions**.' },
+        { id: 'answer', type: 'text-input', label: 'Your answer', multiline: true, required: true },
         {
-          id: 'answer',
+          id: 'optional',
           type: 'text-input',
-          label: 'Your answer',
-          multiline: true,
-          required: true,
+          label: 'Anything else',
+          multiline: false,
+          required: false,
         },
       ],
     },
@@ -46,103 +49,72 @@ const practice: PracticeDefinition = {
     },
   ],
 };
-
-const openRunner = () =>
+beforeAll(() =>
+  initSync({
+    module: readFileSync(resolve(process.cwd(), 'src/lib/mira/engine/pattern_wasm_bg.wasm')),
+  }),
+);
+afterEach(cleanup);
+const openRunner = async () => {
   render(PracticeRunner, {
     practiceId: 'test-practice',
     practice,
-    markdownHtml: { copy: '<p>Safe <strong>instructions</strong>.</p>' },
     returnHref: '/pattern/test',
     returnLabel: 'Test',
   });
-
-afterEach(() => {
-  cleanup();
-  vi.useRealTimers();
-});
-
-describe('Practice runner component', () => {
-  it('renders safe Markdown, updates text input, validates, and preserves the response on Back', async () => {
-    openRunner();
-
-    expect(screen.getByLabelText('Step 1 of 2')).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Back' })).toBeNull();
-    expect(screen.getByRole('button', { name: 'Next' }).textContent?.trim()).toBe('');
-    expect(screen.getByText('instructions')).toBeTruthy();
-    await fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    expect(screen.getByText('This field is required.')).toBeTruthy();
-
-    const response = screen.getByRole('textbox', { name: 'Your answer *' });
-    await fireEvent.input(response, { target: { value: 'A private answer' } });
-    await fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    expect(screen.getByLabelText('Step 2 of 2')).toBeTruthy();
-
-    expect(screen.getByRole('button', { name: 'Back' }).textContent?.trim()).toBe('');
-    await fireEvent.click(screen.getByRole('button', { name: 'Back' }));
-    expect(
-      (screen.getByRole('textbox', { name: 'Your answer *' }) as HTMLTextAreaElement).value,
-    ).toBe('A private answer');
-  });
-
-  it('shows adjustable and fixed timer defaults correctly', async () => {
-    openRunner();
-    expect(screen.getByRole('region', { name: 'Adjustable timer' })).toBeTruthy();
-    await fireEvent.input(screen.getByRole('textbox', { name: 'Your answer *' }), {
-      target: { value: 'Continue' },
-    });
-    await fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-
-    const minutes = screen.getByRole('spinbutton', { name: 'Adjustable timer in minutes' });
-    expect((minutes as HTMLInputElement).value).toBe('2');
-    expect(screen.queryByRole('spinbutton', { name: 'Fixed timer in minutes' })).toBeNull();
-    expect(screen.getByText('01:00')).toBeTruthy();
-
-    await fireEvent.click(screen.getByRole('button', { name: 'Back' }));
-    expect(screen.getByRole('region', { name: 'Adjustable timer' })).toBeTruthy();
-    await fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-
-    await fireEvent.click(
-      screen.getByRole('button', { name: 'Increase Adjustable timer by one minute' }),
+  await screen.findByRole('textbox', { name: 'Your answer' });
+};
+describe('shared Rust-backed practice runner', () => {
+  it('keeps grouped controls, validates required answers, and appends read-only history', async () => {
+    await openRunner();
+    expect(screen.getByRole('textbox', { name: /Anything else/ })).toBeTruthy();
+    expect(screen.getByText('Safe instructions')).toBeTruthy();
+    expect(screen.queryByRole('heading', { name: 'Wait' })).toBeNull();
+    const answer = screen.getByRole('textbox', { name: 'Your answer' });
+    await fireEvent.input(answer, { target: { value: '   ' } });
+    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    expect(screen.getByRole('alert').textContent).toContain('Please answer');
+    expect(screen.queryByRole('heading', { name: 'Wait' })).toBeNull();
+    await fireEvent.input(answer, { target: { value: 'A private answer' } });
+    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await screen.findByRole('heading', { name: 'Wait' });
+    expect(screen.getByRole('heading', { name: 'Write' })).toBeTruthy();
+    expect(screen.getByText('A private answer')).toBeTruthy();
+    expect(screen.getByText('Not answered')).toBeTruthy();
+    expect(screen.queryByRole('textbox', { name: 'Your answer' })).toBeNull();
+    expect(screen.getByText('Safe instructions')).toBeTruthy();
+    await waitFor(() =>
+      expect(document.activeElement).toBe(screen.getByRole('heading', { name: 'Wait' })),
     );
-    expect((minutes as HTMLInputElement).value).toBe('3');
-    await fireEvent.click(
-      screen.getByRole('button', { name: 'Decrease Adjustable timer by one minute' }),
+    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await screen.findByRole('heading', { name: 'A moment to review.' });
+    expect(screen.getByText('A private answer')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Return to pattern' }).getAttribute('href')).toBe(
+      '/pattern/test',
     );
-    expect((minutes as HTMLInputElement).value).toBe('2');
-
-    await fireEvent.change(minutes, { target: { value: '3' } });
-    expect(
-      (screen.getByRole('spinbutton', { name: 'Adjustable timer in minutes' }) as HTMLInputElement)
-        .value,
-    ).toBe('3');
   });
-
-  it('supports Start, Pause, Resume, and Reset with restrained live announcements', async () => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date('2026-08-05T12:00:00Z'));
-    openRunner();
-    await fireEvent.input(screen.getByRole('textbox', { name: 'Your answer *' }), {
-      target: { value: 'Continue' },
-    });
-    await fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-
-    const adjustable = screen.getByRole('region', { name: 'Adjustable timer' });
-    await fireEvent.click(within(adjustable).getByRole('button', { name: 'Start timer' }));
-    expect(adjustable.textContent).toContain('Timer started.');
+  it('makes persistent timers available from the start, and fixed timers in their original step', async () => {
+    await openRunner();
+    expect(screen.getByText('2 min')).toBeTruthy();
+    await fireEvent.click(screen.getByRole('button', { name: 'Increase timer by one minute' }));
+    expect(screen.getByText('3 min')).toBeTruthy();
+    await fireEvent.click(screen.getByRole('button', { name: 'Start timer' }));
     expect(screen.getByRole('button', { name: 'Pause timer' })).toBeTruthy();
-
-    await vi.advanceTimersByTimeAsync(30_000);
     await fireEvent.click(screen.getByRole('button', { name: 'Pause timer' }));
-    expect(adjustable.textContent).toContain('Timer paused.');
+    expect(screen.getByRole('button', { name: 'Resume timer' })).toBeTruthy();
     await fireEvent.click(screen.getByRole('button', { name: 'Resume timer' }));
-    expect(adjustable.textContent).toContain('Timer resumed.');
-    await fireEvent.click(screen.getAllByRole('button', { name: 'Reset timer' })[0]!);
+    await fireEvent.input(screen.getByRole('textbox', { name: 'Your answer' }), {
+      target: { value: 'Continue' },
+    });
+    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    const step = await screen.findByRole('region', { name: 'Wait' });
+    expect(within(step).getByText('1 min')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Pause timer' })).toBeTruthy();
     expect(
-      (
-        within(adjustable).getByRole('spinbutton', {
-          name: 'Adjustable timer in minutes',
-        }) as HTMLInputElement
-      ).value,
-    ).toBe('2');
+      within(screen.getByRole('complementary', { name: 'Practice timers' })).getByRole('button', {
+        name: 'Pause timer',
+      }),
+    ).toBeTruthy();
+    expect(within(step).queryByRole('spinbutton')).toBeNull();
   });
 });

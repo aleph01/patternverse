@@ -1,0 +1,3194 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`completion compatibility contract > preserves agentAttributes suggestions and edits > agentAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 33,
+      "source": "!agent suggestion {
+:returns text",
+    },
+    {
+      "caret": 26,
+      "source": "!agent suggestion {
+:min 1",
+    },
+    {
+      "caret": 26,
+      "source": "!agent suggestion {
+:max 3",
+    },
+  ],
+  "set": {
+    "from": 20,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":returns text",
+        "label": ":returns",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":min 1",
+        "label": ":min",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":max 3",
+        "label": ":max",
+      },
+    ],
+    "to": 21,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves boundCommands suggestions and edits > boundCommands 1`] = `
+{
+  "edits": [
+    {
+      "caret": 18,
+      "source": "result = !ask {
+  What comes to mind?
+}",
+    },
+    {
+      "caret": 96,
+      "source": "result = !form {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    What comes to mind?
+  }
+}",
+    },
+    {
+      "caret": 72,
+      "source": "result = !timer {
+  :duration 60
+  :adjustable false
+  :blocking true
+  Take a quiet pause.
+}",
+    },
+    {
+      "caret": 25,
+      "source": "result = !rate 0..10 {
+  How strong is it?
+}",
+    },
+    {
+      "caret": 21,
+      "source": "result = !choose {
+  Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+    },
+    {
+      "caret": 32,
+      "source": "result = !rank [from=items] {
+  Arrange these in your order.
+}",
+    },
+    {
+      "caret": 53,
+      "source": "result = !collect {
+  :max 3
+  response = !ask {
+    What would you add?
+  }
+  -> yield response
+}",
+    },
+    {
+      "caret": 73,
+      "source": "result = !refine[rounds=4] wording {
+  :as current
+  edited = !ask {
+    How would you change {{current}}?
+  }
+  -> propose edited
+}",
+    },
+    {
+      "caret": 36,
+      "source": "result = !agent {
+  :returns text
+  Prepare a short suggestion.
+}",
+    },
+    {
+      "caret": 19,
+      "source": "result = !turn {
+  Reflect briefly.
+}",
+    },
+    {
+      "caret": 14,
+      "source": "result = !use helper {
+  :with topic
+}",
+    },
+    {
+      "caret": 11,
+      "source": "result = ~ Restate {{original}} without changing meaning.",
+    },
+    {
+      "caret": 14,
+      "source": "result = trim(value)",
+    },
+    {
+      "caret": 19,
+      "source": "result = lowercase(value)",
+    },
+    {
+      "caret": 30,
+      "source": "result = normalize_whitespace(value)",
+    },
+    {
+      "caret": 15,
+      "source": "result = count(value)",
+    },
+    {
+      "caret": 17,
+      "source": "result = flatten(value)",
+    },
+    {
+      "caret": 15,
+      "source": "result = clamp(value, 0, 10)",
+    },
+    {
+      "caret": 16,
+      "source": "result = concat(value, "text")",
+    },
+    {
+      "caret": 13,
+      "source": "result = map(value, helper)",
+    },
+    {
+      "caret": 16,
+      "source": "result = filter(value, helper)",
+    },
+    {
+      "caret": 14,
+      "source": "result = fold(value, 0, helper)",
+    },
+  ],
+  "set": {
+    "from": 9,
+    "items": [
+      {
+        "detail": "Ask for text",
+        "insert": "!ask {
+  ¦What comes to mind?
+}",
+        "label": "!ask",
+      },
+      {
+        "detail": "Grouped questions · one record",
+        "insert": "!form {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    ¦What comes to mind?
+  }
+}",
+        "label": "!form",
+      },
+      {
+        "detail": "Countdown timer",
+        "insert": "!timer {
+  :duration 60
+  :adjustable false
+  :blocking true
+  ¦Take a quiet pause.
+}",
+        "label": "!timer",
+      },
+      {
+        "detail": "Ask for a rating",
+        "insert": "!rate 0..10 {
+  ¦How strong is it?
+}",
+        "label": "!rate",
+      },
+      {
+        "detail": "Participant choice",
+        "insert": "!choose {
+  ¦Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+        "label": "!choose",
+      },
+      {
+        "detail": "Participant ranking",
+        "insert": "!rank [from=items] {
+  ¦Arrange these in your order.
+}",
+        "label": "!rank",
+      },
+      {
+        "detail": "Collect explicit results",
+        "insert": "!collect {
+  :max 3
+  response = !ask {
+    ¦What would you add?
+  }
+  -> yield response
+}",
+        "label": "!collect",
+      },
+      {
+        "detail": "Participant review of wording",
+        "insert": "!refine[rounds=4] wording {
+  :as current
+  edited = !ask {
+    ¦How would you change {{current}}?
+  }
+  -> propose edited
+}",
+        "label": "!refine",
+      },
+      {
+        "detail": "Generate a typed value",
+        "insert": "!agent {
+  :returns text
+  ¦Prepare a short suggestion.
+}",
+        "label": "!agent",
+      },
+      {
+        "detail": "Conversational reply",
+        "insert": "!turn {
+  ¦Reflect briefly.
+}",
+        "label": "!turn",
+      },
+      {
+        "detail": "Call a pinned pattern",
+        "insert": "!use ¦helper {
+  :with topic
+}",
+        "label": "!use",
+      },
+      {
+        "detail": "Realize wording",
+        "insert": "~ ¦Restate {{original}} without changing meaning.",
+        "label": "~",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "trim(¦value)",
+        "label": "trim",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "lowercase(¦value)",
+        "label": "lowercase",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "normalize_whitespace(¦value)",
+        "label": "normalize_whitespace",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "count(¦value)",
+        "label": "count",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "flatten(¦value)",
+        "label": "flatten",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "clamp(¦value, 0, 10)",
+        "label": "clamp",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "concat(¦value, "text")",
+        "label": "concat",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "map(¦value, helper)",
+        "label": "map",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "filter(¦value, helper)",
+        "label": "filter",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "fold(¦value, 0, helper)",
+        "label": "fold",
+      },
+    ],
+    "to": 9,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves branchAttributes suggestions and edits > branchAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 16,
+      "source": "?branch {
+:when condition -> label",
+    },
+    {
+      "caret": 24,
+      "source": "?branch {
+:else -> label",
+    },
+  ],
+  "set": {
+    "from": 10,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":when ¦condition -> label",
+        "label": ":when",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":else -> label",
+        "label": ":else",
+      },
+    ],
+    "to": 11,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves caseInsensitive suggestions and edits > caseInsensitive 1`] = `
+{
+  "edits": [
+    {
+      "caret": 18,
+      "source": "!ask response {
+  What comes to mind?
+}",
+    },
+  ],
+  "set": {
+    "from": 0,
+    "items": [
+      {
+        "detail": "Ask for text",
+        "insert": "!ask response {
+  ¦What comes to mind?
+}",
+        "label": "!ask",
+      },
+    ],
+    "to": 3,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves chooseAttributes suggestions and edits > chooseAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 28,
+      "source": "!choose choice {
+:from items",
+    },
+    {
+      "caret": 29,
+      "source": "!choose choice {
+:option id "Label"",
+    },
+  ],
+  "set": {
+    "from": 17,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":from items",
+        "label": ":from",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":option id "¦Label"",
+        "label": ":option",
+      },
+    ],
+    "to": 18,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves chooseParameters suggestions and edits > chooseParameters 1`] = `
+{
+  "edits": [
+    {
+      "caret": 21,
+      "source": "!choose choice [multi",
+    },
+    {
+      "caret": 21,
+      "source": "!choose choice [min=1",
+    },
+    {
+      "caret": 21,
+      "source": "!choose choice [max=3",
+    },
+    {
+      "caret": 26,
+      "source": "!choose choice [from=items",
+    },
+    {
+      "caret": 32,
+      "source": "!choose choice [prefer=checklist",
+    },
+    {
+      "caret": 28,
+      "source": "!choose choice [prefer=chips",
+    },
+    {
+      "caret": 28,
+      "source": "!choose choice [prefer=radio",
+    },
+  ],
+  "set": {
+    "from": 16,
+    "items": [
+      {
+        "detail": "Optional parameter",
+        "insert": "multi",
+        "label": "multi",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "min=1",
+        "label": "min=1",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "max=3",
+        "label": "max=3",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "from=items",
+        "label": "from=items",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "prefer=checklist",
+        "label": "prefer=checklist",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "prefer=chips",
+        "label": "prefer=chips",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "prefer=radio",
+        "label": "prefer=radio",
+      },
+    ],
+    "to": 16,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves classifierAttributes suggestions and edits > classifierAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 50,
+      "source": "classifier intent -> Intent {
+:context prompt text",
+    },
+    {
+      "caret": 44,
+      "source": "classifier intent -> Intent {
+:case answer "Meaning"",
+    },
+    {
+      "caret": 45,
+      "source": "classifier intent -> Intent {
+:fallback other",
+    },
+  ],
+  "set": {
+    "from": 30,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":context prompt text",
+        "label": ":context",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":case answer "¦Meaning"",
+        "label": ":case",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":fallback other",
+        "label": ":fallback",
+      },
+    ],
+    "to": 31,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves classifiers suggestions and edits > classifiers 1`] = `
+{
+  "edits": [
+    {
+      "caret": 56,
+      "source": "classifier intent -> Intent {
+}
+kind = message ?~ intent",
+    },
+  ],
+  "set": {
+    "from": 50,
+    "items": [
+      {
+        "detail": "Classifier → Intent",
+        "insert": "intent",
+        "label": "intent",
+      },
+    ],
+    "to": 52,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves classifyAttributes suggestions and edits > classifyAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 31,
+      "source": "kind = value ?~ intent {
+:with input",
+    },
+  ],
+  "set": {
+    "from": 25,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":with ¦input",
+        "label": ":with",
+      },
+    ],
+    "to": 26,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves closedBindings suggestions and edits > closedBindings 1`] = `
+{
+  "edits": [],
+  "set": {
+    "from": 41,
+    "items": [],
+    "to": 44,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves collectAttributes suggestions and edits > collectAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 25,
+      "source": "!collect entries {
+:min 1",
+    },
+    {
+      "caret": 25,
+      "source": "!collect entries {
+:max 3",
+    },
+    {
+      "caret": 30,
+      "source": "!collect entries {
+:from items",
+    },
+    {
+      "caret": 27,
+      "source": "!collect entries {
+:as item",
+    },
+  ],
+  "set": {
+    "from": 19,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":min 1",
+        "label": ":min",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":max 3",
+        "label": ":max",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":from items",
+        "label": ":from",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":as item",
+        "label": ":as",
+      },
+    ],
+    "to": 20,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves collectTransitions suggestions and edits > collectTransitions 1`] = `
+{
+  "edits": [
+    {
+      "caret": 25,
+      "source": "!collect entries {
+-> end",
+    },
+    {
+      "caret": 28,
+      "source": "!collect entries {
+-> yield value",
+    },
+  ],
+  "set": {
+    "from": 22,
+    "items": [
+      {
+        "detail": "Finish the pattern",
+        "insert": "end",
+        "label": "end",
+      },
+      {
+        "detail": "Return this iteration's value",
+        "insert": "yield ¦value",
+        "label": "yield",
+      },
+    ],
+    "to": 22,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves commands suggestions and edits > commands 1`] = `
+{
+  "edits": [
+    {
+      "caret": 18,
+      "source": "!ask response {
+  What comes to mind?
+}",
+    },
+    {
+      "caret": 98,
+      "source": "!form reflection {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    What comes to mind?
+  }
+}",
+    },
+    {
+      "caret": 17,
+      "source": "!image {
+  :url "https://example.com/decision-tree.png"
+  :alt "A decision tree showing three possible next steps."
+}",
+    },
+    {
+      "caret": 17,
+      "source": "!video {
+  :url "https://youtu.be/M7lc1UVf-VE"
+}",
+    },
+    {
+      "caret": 10,
+      "source": "!show {
+  Notice this.
+}",
+    },
+    {
+      "caret": 69,
+      "source": "!timer pause {
+  :duration 60
+  :adjustable false
+  :blocking true
+  Take a quiet pause.
+}",
+    },
+    {
+      "caret": 23,
+      "source": "!rate rating 0..10 {
+  How strong is it?
+}",
+    },
+    {
+      "caret": 19,
+      "source": "!choose choice {
+  Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+    },
+    {
+      "caret": 31,
+      "source": "!rank ordered [from=items] {
+  Arrange these in your order.
+}",
+    },
+    {
+      "caret": 52,
+      "source": "!collect entries {
+  :max 3
+  response = !ask {
+    What would you add?
+  }
+  -> yield response
+}",
+    },
+    {
+      "caret": 73,
+      "source": "!refine[rounds=4] review = wording {
+  :as current
+  edited = !ask {
+    How would you change {{current}}?
+  }
+  -> propose edited
+}",
+    },
+    {
+      "caret": 38,
+      "source": "!agent suggestion {
+  :returns text
+  Prepare a short suggestion.
+}",
+    },
+    {
+      "caret": 19,
+      "source": "!turn response {
+  Reflect briefly.
+}",
+    },
+    {
+      "caret": 5,
+      "source": "!use helper as result {
+  :with topic
+}",
+    },
+    {
+      "caret": 2,
+      "source": "~ Restate {{original}} without changing meaning.",
+    },
+    {
+      "caret": 7,
+      "source": "?match value {
+  :case variant -> label
+  :else -> end
+}",
+    },
+    {
+      "caret": 47,
+      "source": "?loop[4] state = initial {
+  next = !ask {
+    What follows from {{state}}?
+  }
+  -> repeat next
+}",
+    },
+    {
+      "caret": 46,
+      "source": "classifier intent -> Intent {
+  :case answer "Answers the prompt."
+  :fallback other
+}",
+    },
+    {
+      "caret": 28,
+      "source": "type Intent = answer | other",
+    },
+    {
+      "caret": 38,
+      "source": "fn clean(s: text) -> text => s |> trim",
+    },
+    {
+      "caret": 5,
+      "source": "flow ask_topic {
+  :input topic text
+  :output answer
+  answer = !ask {
+    What comes to mind about {{topic}}?
+  }
+  -> end
+}",
+    },
+    {
+      "caret": 30,
+      "source": "events {
+  on user.message -> handle_message
+}",
+    },
+    {
+      "caret": 5,
+      "source": "trim(value)",
+    },
+    {
+      "caret": 10,
+      "source": "lowercase(value)",
+    },
+    {
+      "caret": 21,
+      "source": "normalize_whitespace(value)",
+    },
+    {
+      "caret": 6,
+      "source": "count(value)",
+    },
+    {
+      "caret": 8,
+      "source": "flatten(value)",
+    },
+    {
+      "caret": 6,
+      "source": "clamp(value, 0, 10)",
+    },
+    {
+      "caret": 7,
+      "source": "concat(value, "text")",
+    },
+    {
+      "caret": 4,
+      "source": "map(value, helper)",
+    },
+  ],
+  "set": {
+    "from": 0,
+    "items": [
+      {
+        "detail": "Ask for text",
+        "insert": "!ask response {
+  ¦What comes to mind?
+}",
+        "label": "!ask",
+      },
+      {
+        "detail": "Grouped questions · one record",
+        "insert": "!form reflection {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    ¦What comes to mind?
+  }
+}",
+        "label": "!form",
+      },
+      {
+        "detail": "Display an image",
+        "insert": "!image {
+  :url "¦https://example.com/decision-tree.png"
+  :alt "A decision tree showing three possible next steps."
+}",
+        "label": "!image",
+      },
+      {
+        "detail": "Display a video",
+        "insert": "!video {
+  :url "¦https://youtu.be/M7lc1UVf-VE"
+}",
+        "label": "!video",
+      },
+      {
+        "detail": "Display text",
+        "insert": "!show {
+  ¦Notice this.
+}",
+        "label": "!show",
+      },
+      {
+        "detail": "Countdown timer",
+        "insert": "!timer pause {
+  :duration 60
+  :adjustable false
+  :blocking true
+  ¦Take a quiet pause.
+}",
+        "label": "!timer",
+      },
+      {
+        "detail": "Ask for a rating",
+        "insert": "!rate rating 0..10 {
+  ¦How strong is it?
+}",
+        "label": "!rate",
+      },
+      {
+        "detail": "Participant choice",
+        "insert": "!choose choice {
+  ¦Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+        "label": "!choose",
+      },
+      {
+        "detail": "Participant ranking",
+        "insert": "!rank ordered [from=items] {
+  ¦Arrange these in your order.
+}",
+        "label": "!rank",
+      },
+      {
+        "detail": "Collect explicit results",
+        "insert": "!collect entries {
+  :max 3
+  response = !ask {
+    ¦What would you add?
+  }
+  -> yield response
+}",
+        "label": "!collect",
+      },
+      {
+        "detail": "Participant review of wording",
+        "insert": "!refine[rounds=4] review = wording {
+  :as current
+  edited = !ask {
+    ¦How would you change {{current}}?
+  }
+  -> propose edited
+}",
+        "label": "!refine",
+      },
+      {
+        "detail": "Generate a typed value",
+        "insert": "!agent suggestion {
+  :returns text
+  ¦Prepare a short suggestion.
+}",
+        "label": "!agent",
+      },
+      {
+        "detail": "Conversational reply",
+        "insert": "!turn response {
+  ¦Reflect briefly.
+}",
+        "label": "!turn",
+      },
+      {
+        "detail": "Call a pinned pattern",
+        "insert": "!use ¦helper as result {
+  :with topic
+}",
+        "label": "!use",
+      },
+      {
+        "detail": "Realize wording",
+        "insert": "~ ¦Restate {{original}} without changing meaning.",
+        "label": "~",
+      },
+      {
+        "detail": "Branch by value",
+        "insert": "?match ¦value {
+  :case variant -> label
+  :else -> end
+}",
+        "label": "?match",
+      },
+      {
+        "detail": "Cancellable interaction loop",
+        "insert": "?loop[4] state = initial {
+  next = !ask {
+    ¦What follows from {{state}}?
+  }
+  -> repeat next
+}",
+        "label": "?loop",
+      },
+      {
+        "detail": "Declare a semantic classifier",
+        "insert": "classifier intent -> Intent {
+  :case answer "¦Answers the prompt."
+  :fallback other
+}",
+        "label": "classifier",
+      },
+      {
+        "detail": "Declare a closed enum",
+        "insert": "type Intent = answer | other",
+        "label": "type",
+      },
+      {
+        "detail": "Declare a pure helper",
+        "insert": "fn clean(s: text) -> text => s |> trim",
+        "label": "fn",
+      },
+      {
+        "detail": "Declare an isolated effectful procedure",
+        "insert": "flow ¦ask_topic {
+  :input topic text
+  :output answer
+  answer = !ask {
+    What comes to mind about {{topic}}?
+  }
+  -> end
+}",
+        "label": "flow",
+      },
+      {
+        "detail": "Handle side questions only during this pattern",
+        "insert": "events {
+  on user.message -> ¦handle_message
+}",
+        "label": "events",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "trim(¦value)",
+        "label": "trim",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "lowercase(¦value)",
+        "label": "lowercase",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "normalize_whitespace(¦value)",
+        "label": "normalize_whitespace",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "count(¦value)",
+        "label": "count",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "flatten(¦value)",
+        "label": "flatten",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "clamp(¦value, 0, 10)",
+        "label": "clamp",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "concat(¦value, "text")",
+        "label": "concat",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "map(¦value, helper)",
+        "label": "map",
+      },
+    ],
+    "to": 0,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves comment suggestions and edits > comment 1`] = `
+{
+  "edits": [],
+  "set": {
+    "from": 2,
+    "items": [],
+    "to": 5,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves duplicateBindingAndFunction suggestions and edits > duplicateBindingAndFunction 1`] = `
+{
+  "edits": [
+    {
+      "caret": 26,
+      "source": "trim = "text"
+value = trim",
+    },
+    {
+      "caret": 27,
+      "source": "trim = "text"
+value = trim(value)",
+    },
+  ],
+  "set": {
+    "from": 22,
+    "items": [
+      {
+        "detail": "Binding · compiler checks availability",
+        "insert": "trim",
+        "label": "trim",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "trim(¦value)",
+        "label": "trim",
+      },
+    ],
+    "to": 24,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves enumCases suggestions and edits > enumCases 1`] = `
+{
+  "edits": [
+    {
+      "caret": 76,
+      "source": "type Intent = answer | other
+kind = Intent.answer
+?match kind {
+:case answer",
+    },
+    {
+      "caret": 75,
+      "source": "type Intent = answer | other
+kind = Intent.answer
+?match kind {
+:case other",
+    },
+  ],
+  "set": {
+    "from": 70,
+    "items": [
+      {
+        "detail": "Enum case",
+        "insert": "answer",
+        "label": "answer",
+      },
+      {
+        "detail": "Enum case",
+        "insert": "other",
+        "label": "other",
+      },
+    ],
+    "to": 70,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves enumTypes suggestions and edits > enumTypes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 44,
+      "source": "type Intent = answer | other
+value = Intent.",
+    },
+  ],
+  "set": {
+    "from": 37,
+    "items": [
+      {
+        "detail": "Enum type",
+        "insert": "Intent.",
+        "label": "Intent",
+      },
+    ],
+    "to": 39,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves enumVariants suggestions and edits > enumVariants 1`] = `
+{
+  "edits": [
+    {
+      "caret": 62,
+      "source": "type Intent = answer
+ | question | other
+value = Intent.answer",
+    },
+    {
+      "caret": 64,
+      "source": "type Intent = answer
+ | question | other
+value = Intent.question",
+    },
+    {
+      "caret": 61,
+      "source": "type Intent = answer
+ | question | other
+value = Intent.other",
+    },
+  ],
+  "set": {
+    "from": 49,
+    "items": [
+      {
+        "detail": "Enum variant",
+        "insert": "Intent.answer",
+        "label": "Intent.answer",
+      },
+      {
+        "detail": "Enum variant",
+        "insert": "Intent.question",
+        "label": "Intent.question",
+      },
+      {
+        "detail": "Enum variant",
+        "insert": "Intent.other",
+        "label": "Intent.other",
+      },
+    ],
+    "to": 56,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves eventHandlers suggestions and edits > eventHandlers 1`] = `
+{
+  "edits": [
+    {
+      "caret": 50,
+      "source": "flow handle {
+}
+events {
+on user.message -> handle",
+    },
+  ],
+  "set": {
+    "from": 44,
+    "items": [
+      {
+        "detail": "Active-pattern message handler",
+        "insert": "handle",
+        "label": "handle",
+      },
+    ],
+    "to": 46,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves explicitProse suggestions and edits > explicitProse 1`] = `
+{
+  "edits": [],
+  "set": {
+    "from": 15,
+    "items": [],
+    "to": 18,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves fieldAttributes suggestions and edits > fieldAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 48,
+      "source": "!form reflection {
+!ask thought {
+:required true",
+    },
+    {
+      "caret": 49,
+      "source": "!form reflection {
+!ask thought {
+:multiline true",
+    },
+    {
+      "caret": 48,
+      "source": "!form reflection {
+!ask thought {
+:placeholder "Write here…"",
+    },
+  ],
+  "set": {
+    "from": 34,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":required true",
+        "label": ":required",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":multiline true",
+        "label": ":multiline",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":placeholder "¦Write here…"",
+        "label": ":placeholder",
+      },
+    ],
+    "to": 35,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves flowAndImportCalls suggestions and edits > flowAndImportCalls 1`] = `
+{
+  "edits": [
+    {
+      "caret": 54,
+      "source": ":import "p@hash" as helper
+flow helper {
+}
+!use helper",
+    },
+  ],
+  "set": {
+    "from": 48,
+    "items": [
+      {
+        "detail": "Pinned pattern alias",
+        "insert": "helper",
+        "label": "helper",
+      },
+    ],
+    "to": 50,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves flowAttributes suggestions and edits > flowAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 31,
+      "source": "flow helper {
+:input topic text",
+    },
+    {
+      "caret": 28,
+      "source": "flow helper {
+:output result",
+    },
+  ],
+  "set": {
+    "from": 14,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":input topic text",
+        "label": ":input",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":output result",
+        "label": ":output",
+      },
+    ],
+    "to": 15,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves formAttributes suggestions and edits > formAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 27,
+      "source": "!form reflection {
+:title "Step title"",
+    },
+  ],
+  "set": {
+    "from": 19,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":title "¦Step title"",
+        "label": ":title",
+      },
+    ],
+    "to": 20,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves formTimerAttributes suggestions and edits > formTimerAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 46,
+      "source": "!form reflection {
+!timer pause {
+:duration 60",
+    },
+    {
+      "caret": 51,
+      "source": "!form reflection {
+!timer pause {
+:adjustable false",
+    },
+    {
+      "caret": 41,
+      "source": "!form reflection {
+!timer pause {
+:min 10",
+    },
+    {
+      "caret": 42,
+      "source": "!form reflection {
+!timer pause {
+:max 300",
+    },
+    {
+      "caret": 48,
+      "source": "!form reflection {
+!timer pause {
+:blocking true",
+    },
+    {
+      "caret": 46,
+      "source": "!form reflection {
+!timer pause {
+:sticky true",
+    },
+    {
+      "caret": 51,
+      "source": "!form reflection {
+!timer pause {
+:persistent false",
+    },
+  ],
+  "set": {
+    "from": 34,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":duration 60",
+        "label": ":duration",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":adjustable false",
+        "label": ":adjustable",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":min 10",
+        "label": ":min",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":max 300",
+        "label": ":max",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":blocking true",
+        "label": ":blocking",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":sticky true",
+        "label": ":sticky",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":persistent false",
+        "label": ":persistent",
+      },
+    ],
+    "to": 35,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves functionReturn suggestions and edits > functionReturn 1`] = `
+{
+  "edits": [
+    {
+      "caret": 39,
+      "source": "fn clean(s: text) -> !ask response {
+  What comes to mind?
+}",
+    },
+    {
+      "caret": 119,
+      "source": "fn clean(s: text) -> !form reflection {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    What comes to mind?
+  }
+}",
+    },
+    {
+      "caret": 38,
+      "source": "fn clean(s: text) -> !image {
+  :url "https://example.com/decision-tree.png"
+  :alt "A decision tree showing three possible next steps."
+}",
+    },
+    {
+      "caret": 38,
+      "source": "fn clean(s: text) -> !video {
+  :url "https://youtu.be/M7lc1UVf-VE"
+}",
+    },
+    {
+      "caret": 31,
+      "source": "fn clean(s: text) -> !show {
+  Notice this.
+}",
+    },
+    {
+      "caret": 90,
+      "source": "fn clean(s: text) -> !timer pause {
+  :duration 60
+  :adjustable false
+  :blocking true
+  Take a quiet pause.
+}",
+    },
+    {
+      "caret": 44,
+      "source": "fn clean(s: text) -> !rate rating 0..10 {
+  How strong is it?
+}",
+    },
+    {
+      "caret": 40,
+      "source": "fn clean(s: text) -> !choose choice {
+  Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+    },
+    {
+      "caret": 52,
+      "source": "fn clean(s: text) -> !rank ordered [from=items] {
+  Arrange these in your order.
+}",
+    },
+    {
+      "caret": 73,
+      "source": "fn clean(s: text) -> !collect entries {
+  :max 3
+  response = !ask {
+    What would you add?
+  }
+  -> yield response
+}",
+    },
+    {
+      "caret": 94,
+      "source": "fn clean(s: text) -> !refine[rounds=4] review = wording {
+  :as current
+  edited = !ask {
+    How would you change {{current}}?
+  }
+  -> propose edited
+}",
+    },
+    {
+      "caret": 59,
+      "source": "fn clean(s: text) -> !agent suggestion {
+  :returns text
+  Prepare a short suggestion.
+}",
+    },
+    {
+      "caret": 40,
+      "source": "fn clean(s: text) -> !turn response {
+  Reflect briefly.
+}",
+    },
+    {
+      "caret": 26,
+      "source": "fn clean(s: text) -> !use helper as result {
+  :with topic
+}",
+    },
+    {
+      "caret": 23,
+      "source": "fn clean(s: text) -> ~ Restate {{original}} without changing meaning.",
+    },
+    {
+      "caret": 28,
+      "source": "fn clean(s: text) -> ?match value {
+  :case variant -> label
+  :else -> end
+}",
+    },
+    {
+      "caret": 68,
+      "source": "fn clean(s: text) -> ?loop[4] state = initial {
+  next = !ask {
+    What follows from {{state}}?
+  }
+  -> repeat next
+}",
+    },
+    {
+      "caret": 67,
+      "source": "fn clean(s: text) -> classifier intent -> Intent {
+  :case answer "Answers the prompt."
+  :fallback other
+}",
+    },
+    {
+      "caret": 49,
+      "source": "fn clean(s: text) -> type Intent = answer | other",
+    },
+    {
+      "caret": 59,
+      "source": "fn clean(s: text) -> fn clean(s: text) -> text => s |> trim",
+    },
+    {
+      "caret": 26,
+      "source": "fn clean(s: text) -> flow ask_topic {
+  :input topic text
+  :output answer
+  answer = !ask {
+    What comes to mind about {{topic}}?
+  }
+  -> end
+}",
+    },
+    {
+      "caret": 51,
+      "source": "fn clean(s: text) -> events {
+  on user.message -> handle_message
+}",
+    },
+    {
+      "caret": 26,
+      "source": "fn clean(s: text) -> trim(value)",
+    },
+    {
+      "caret": 31,
+      "source": "fn clean(s: text) -> lowercase(value)",
+    },
+    {
+      "caret": 42,
+      "source": "fn clean(s: text) -> normalize_whitespace(value)",
+    },
+    {
+      "caret": 27,
+      "source": "fn clean(s: text) -> count(value)",
+    },
+    {
+      "caret": 29,
+      "source": "fn clean(s: text) -> flatten(value)",
+    },
+    {
+      "caret": 27,
+      "source": "fn clean(s: text) -> clamp(value, 0, 10)",
+    },
+    {
+      "caret": 28,
+      "source": "fn clean(s: text) -> concat(value, "text")",
+    },
+    {
+      "caret": 25,
+      "source": "fn clean(s: text) -> map(value, helper)",
+    },
+  ],
+  "set": {
+    "from": 21,
+    "items": [
+      {
+        "detail": "Ask for text",
+        "insert": "!ask response {
+  ¦What comes to mind?
+}",
+        "label": "!ask",
+      },
+      {
+        "detail": "Grouped questions · one record",
+        "insert": "!form reflection {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    ¦What comes to mind?
+  }
+}",
+        "label": "!form",
+      },
+      {
+        "detail": "Display an image",
+        "insert": "!image {
+  :url "¦https://example.com/decision-tree.png"
+  :alt "A decision tree showing three possible next steps."
+}",
+        "label": "!image",
+      },
+      {
+        "detail": "Display a video",
+        "insert": "!video {
+  :url "¦https://youtu.be/M7lc1UVf-VE"
+}",
+        "label": "!video",
+      },
+      {
+        "detail": "Display text",
+        "insert": "!show {
+  ¦Notice this.
+}",
+        "label": "!show",
+      },
+      {
+        "detail": "Countdown timer",
+        "insert": "!timer pause {
+  :duration 60
+  :adjustable false
+  :blocking true
+  ¦Take a quiet pause.
+}",
+        "label": "!timer",
+      },
+      {
+        "detail": "Ask for a rating",
+        "insert": "!rate rating 0..10 {
+  ¦How strong is it?
+}",
+        "label": "!rate",
+      },
+      {
+        "detail": "Participant choice",
+        "insert": "!choose choice {
+  ¦Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+        "label": "!choose",
+      },
+      {
+        "detail": "Participant ranking",
+        "insert": "!rank ordered [from=items] {
+  ¦Arrange these in your order.
+}",
+        "label": "!rank",
+      },
+      {
+        "detail": "Collect explicit results",
+        "insert": "!collect entries {
+  :max 3
+  response = !ask {
+    ¦What would you add?
+  }
+  -> yield response
+}",
+        "label": "!collect",
+      },
+      {
+        "detail": "Participant review of wording",
+        "insert": "!refine[rounds=4] review = wording {
+  :as current
+  edited = !ask {
+    ¦How would you change {{current}}?
+  }
+  -> propose edited
+}",
+        "label": "!refine",
+      },
+      {
+        "detail": "Generate a typed value",
+        "insert": "!agent suggestion {
+  :returns text
+  ¦Prepare a short suggestion.
+}",
+        "label": "!agent",
+      },
+      {
+        "detail": "Conversational reply",
+        "insert": "!turn response {
+  ¦Reflect briefly.
+}",
+        "label": "!turn",
+      },
+      {
+        "detail": "Call a pinned pattern",
+        "insert": "!use ¦helper as result {
+  :with topic
+}",
+        "label": "!use",
+      },
+      {
+        "detail": "Realize wording",
+        "insert": "~ ¦Restate {{original}} without changing meaning.",
+        "label": "~",
+      },
+      {
+        "detail": "Branch by value",
+        "insert": "?match ¦value {
+  :case variant -> label
+  :else -> end
+}",
+        "label": "?match",
+      },
+      {
+        "detail": "Cancellable interaction loop",
+        "insert": "?loop[4] state = initial {
+  next = !ask {
+    ¦What follows from {{state}}?
+  }
+  -> repeat next
+}",
+        "label": "?loop",
+      },
+      {
+        "detail": "Declare a semantic classifier",
+        "insert": "classifier intent -> Intent {
+  :case answer "¦Answers the prompt."
+  :fallback other
+}",
+        "label": "classifier",
+      },
+      {
+        "detail": "Declare a closed enum",
+        "insert": "type Intent = answer | other",
+        "label": "type",
+      },
+      {
+        "detail": "Declare a pure helper",
+        "insert": "fn clean(s: text) -> text => s |> trim",
+        "label": "fn",
+      },
+      {
+        "detail": "Declare an isolated effectful procedure",
+        "insert": "flow ¦ask_topic {
+  :input topic text
+  :output answer
+  answer = !ask {
+    What comes to mind about {{topic}}?
+  }
+  -> end
+}",
+        "label": "flow",
+      },
+      {
+        "detail": "Handle side questions only during this pattern",
+        "insert": "events {
+  on user.message -> ¦handle_message
+}",
+        "label": "events",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "trim(¦value)",
+        "label": "trim",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "lowercase(¦value)",
+        "label": "lowercase",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "normalize_whitespace(¦value)",
+        "label": "normalize_whitespace",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "count(¦value)",
+        "label": "count",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "flatten(¦value)",
+        "label": "flatten",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "clamp(¦value, 0, 10)",
+        "label": "clamp",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "concat(¦value, "text")",
+        "label": "concat",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "map(¦value, helper)",
+        "label": "map",
+      },
+    ],
+    "to": 21,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves helpers suggestions and edits > helpers 1`] = `
+{
+  "edits": [
+    {
+      "caret": 53,
+      "source": "fn clean(s: text) -> text => s |> trim
+value = clamp(value, 0, 10)",
+    },
+    {
+      "caret": 53,
+      "source": "fn clean(s: text) -> text => s |> trim
+value = clean()",
+    },
+  ],
+  "set": {
+    "from": 47,
+    "items": [
+      {
+        "detail": "Pure function",
+        "insert": "clamp(¦value, 0, 10)",
+        "label": "clamp",
+      },
+      {
+        "detail": "Declared pure helper",
+        "insert": "clean(¦)",
+        "label": "clean",
+      },
+    ],
+    "to": 49,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves implicitDirectiveBoundary suggestions and edits > implicitDirectiveBoundary 1`] = `
+{
+  "edits": [
+    {
+      "caret": 42,
+      "source": "!ask response
+Question?
+!show {
+{{response",
+    },
+  ],
+  "set": {
+    "from": 34,
+    "items": [
+      {
+        "detail": "Binding · compiler checks availability",
+        "insert": "response",
+        "label": "response",
+      },
+    ],
+    "to": 37,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves implicitProse suggestions and edits > implicitProse 1`] = `
+{
+  "edits": [],
+  "set": {
+    "from": 21,
+    "items": [],
+    "to": 24,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves indentedCommand suggestions and edits > indentedCommand 1`] = `
+{
+  "edits": [
+    {
+      "caret": 34,
+      "source": "# café 🙂
+	  !ask response {
+	    What comes to mind?
+	  }",
+    },
+  ],
+  "set": {
+    "from": 13,
+    "items": [
+      {
+        "detail": "Ask for text",
+        "insert": "!ask response {
+  ¦What comes to mind?
+}",
+        "label": "!ask",
+      },
+    ],
+    "to": 16,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves interpolation suggestions and edits > interpolation 1`] = `
+{
+  "edits": [
+    {
+      "caret": 33,
+      "source": ":input topic text
+!show {
+{{topic",
+    },
+  ],
+  "set": {
+    "from": 28,
+    "items": [
+      {
+        "detail": "Binding · compiler checks availability",
+        "insert": "topic",
+        "label": "topic",
+      },
+    ],
+    "to": 30,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves isolatedFlow suggestions and edits > isolatedFlow 1`] = `
+{
+  "edits": [
+    {
+      "caret": 64,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = topic",
+    },
+    {
+      "caret": 68,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !ask {
+  What comes to mind?
+}",
+    },
+    {
+      "caret": 146,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !form {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    What comes to mind?
+  }
+}",
+    },
+    {
+      "caret": 122,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !timer {
+  :duration 60
+  :adjustable false
+  :blocking true
+  Take a quiet pause.
+}",
+    },
+    {
+      "caret": 75,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !rate 0..10 {
+  How strong is it?
+}",
+    },
+    {
+      "caret": 71,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !choose {
+  Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+    },
+    {
+      "caret": 82,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !rank [from=items] {
+  Arrange these in your order.
+}",
+    },
+    {
+      "caret": 103,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !collect {
+  :max 3
+  response = !ask {
+    What would you add?
+  }
+  -> yield response
+}",
+    },
+    {
+      "caret": 123,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !refine[rounds=4] wording {
+  :as current
+  edited = !ask {
+    How would you change {{current}}?
+  }
+  -> propose edited
+}",
+    },
+    {
+      "caret": 86,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !agent {
+  :returns text
+  Prepare a short suggestion.
+}",
+    },
+    {
+      "caret": 69,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !turn {
+  Reflect briefly.
+}",
+    },
+    {
+      "caret": 64,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = !use helper {
+  :with topic
+}",
+    },
+    {
+      "caret": 61,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = ~ Restate {{original}} without changing meaning.",
+    },
+    {
+      "caret": 64,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = trim(value)",
+    },
+    {
+      "caret": 69,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = lowercase(value)",
+    },
+    {
+      "caret": 80,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = normalize_whitespace(value)",
+    },
+    {
+      "caret": 65,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = count(value)",
+    },
+    {
+      "caret": 67,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = flatten(value)",
+    },
+    {
+      "caret": 65,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = clamp(value, 0, 10)",
+    },
+    {
+      "caret": 66,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = concat(value, "text")",
+    },
+    {
+      "caret": 63,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = map(value, helper)",
+    },
+    {
+      "caret": 66,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = filter(value, helper)",
+    },
+    {
+      "caret": 64,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = fold(value, 0, helper)",
+    },
+  ],
+  "set": {
+    "from": 59,
+    "items": [
+      {
+        "detail": "Binding · compiler checks availability",
+        "insert": "topic",
+        "label": "topic",
+      },
+      {
+        "detail": "Ask for text",
+        "insert": "!ask {
+  ¦What comes to mind?
+}",
+        "label": "!ask",
+      },
+      {
+        "detail": "Grouped questions · one record",
+        "insert": "!form {
+  :title "Reflect"
+  !ask thought {
+    :required true
+    :multiline true
+    ¦What comes to mind?
+  }
+}",
+        "label": "!form",
+      },
+      {
+        "detail": "Countdown timer",
+        "insert": "!timer {
+  :duration 60
+  :adjustable false
+  :blocking true
+  ¦Take a quiet pause.
+}",
+        "label": "!timer",
+      },
+      {
+        "detail": "Ask for a rating",
+        "insert": "!rate 0..10 {
+  ¦How strong is it?
+}",
+        "label": "!rate",
+      },
+      {
+        "detail": "Participant choice",
+        "insert": "!choose {
+  ¦Choose what fits.
+  - first: "First option"
+  - second: "Second option"
+}",
+        "label": "!choose",
+      },
+      {
+        "detail": "Participant ranking",
+        "insert": "!rank [from=items] {
+  ¦Arrange these in your order.
+}",
+        "label": "!rank",
+      },
+      {
+        "detail": "Collect explicit results",
+        "insert": "!collect {
+  :max 3
+  response = !ask {
+    ¦What would you add?
+  }
+  -> yield response
+}",
+        "label": "!collect",
+      },
+      {
+        "detail": "Participant review of wording",
+        "insert": "!refine[rounds=4] wording {
+  :as current
+  edited = !ask {
+    ¦How would you change {{current}}?
+  }
+  -> propose edited
+}",
+        "label": "!refine",
+      },
+      {
+        "detail": "Generate a typed value",
+        "insert": "!agent {
+  :returns text
+  ¦Prepare a short suggestion.
+}",
+        "label": "!agent",
+      },
+      {
+        "detail": "Conversational reply",
+        "insert": "!turn {
+  ¦Reflect briefly.
+}",
+        "label": "!turn",
+      },
+      {
+        "detail": "Call a pinned pattern",
+        "insert": "!use ¦helper {
+  :with topic
+}",
+        "label": "!use",
+      },
+      {
+        "detail": "Realize wording",
+        "insert": "~ ¦Restate {{original}} without changing meaning.",
+        "label": "~",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "trim(¦value)",
+        "label": "trim",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "lowercase(¦value)",
+        "label": "lowercase",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "normalize_whitespace(¦value)",
+        "label": "normalize_whitespace",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "count(¦value)",
+        "label": "count",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "flatten(¦value)",
+        "label": "flatten",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "clamp(¦value, 0, 10)",
+        "label": "clamp",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "concat(¦value, "text")",
+        "label": "concat",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "map(¦value, helper)",
+        "label": "map",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "filter(¦value, helper)",
+        "label": "filter",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "fold(¦value, 0, helper)",
+        "label": "fold",
+      },
+    ],
+    "to": 59,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves iterationTransitions suggestions and edits > iterationTransitions 1`] = `
+{
+  "edits": [
+    {
+      "caret": 35,
+      "source": "entries = each item in [1] {
+-> end",
+    },
+    {
+      "caret": 38,
+      "source": "entries = each item in [1] {
+-> yield value",
+    },
+  ],
+  "set": {
+    "from": 32,
+    "items": [
+      {
+        "detail": "Finish the pattern",
+        "insert": "end",
+        "label": "end",
+      },
+      {
+        "detail": "Return this iteration's value",
+        "insert": "yield ¦value",
+        "label": "yield",
+      },
+    ],
+    "to": 32,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves loopTransitions suggestions and edits > loopTransitions 1`] = `
+{
+  "edits": [
+    {
+      "caret": 33,
+      "source": "?loop[4] state = initial {
+-> end",
+    },
+    {
+      "caret": 37,
+      "source": "?loop[4] state = initial {
+-> repeat value",
+    },
+    {
+      "caret": 35,
+      "source": "?loop[4] state = initial {
+-> break",
+    },
+  ],
+  "set": {
+    "from": 30,
+    "items": [
+      {
+        "detail": "Finish the pattern",
+        "insert": "end",
+        "label": "end",
+      },
+      {
+        "detail": "Next loop state",
+        "insert": "repeat ¦value",
+        "label": "repeat",
+      },
+      {
+        "detail": "Leave loop",
+        "insert": "break",
+        "label": "break",
+      },
+    ],
+    "to": 30,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves matchAttributes suggestions and edits > matchAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 21,
+      "source": "?match value {
+:case variant -> label",
+    },
+    {
+      "caret": 29,
+      "source": "?match value {
+:else -> label",
+    },
+  ],
+  "set": {
+    "from": 15,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":case ¦variant -> label",
+        "label": ":case",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":else -> label",
+        "label": ":else",
+      },
+    ],
+    "to": 16,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves nestedBindings suggestions and edits > nestedBindings 1`] = `
+{
+  "edits": [
+    {
+      "caret": 52,
+      "source": "entries = each item in [1] {
+local = 2
+value = local",
+    },
+  ],
+  "set": {
+    "from": 47,
+    "items": [
+      {
+        "detail": "Binding · compiler checks availability",
+        "insert": "local",
+        "label": "local",
+      },
+    ],
+    "to": 50,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves ordinaryAlternatives suggestions and edits > ordinaryAlternatives 1`] = `
+{
+  "edits": [
+    {
+      "caret": 15,
+      "source": "value = filter(value, helper)",
+    },
+  ],
+  "set": {
+    "from": 8,
+    "items": [
+      {
+        "detail": "Pure function",
+        "insert": "filter(¦value, helper)",
+        "label": "filter",
+      },
+    ],
+    "to": 10,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves pendingBinding suggestions and edits > pendingBinding 1`] = `
+{
+  "edits": [],
+  "set": {
+    "from": 18,
+    "items": [],
+    "to": 21,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves pipelineAlternatives suggestions and edits > pipelineAlternatives 1`] = `
+{
+  "edits": [
+    {
+      "caret": 27,
+      "source": "value = original |> filter(helper)",
+    },
+    {
+      "caret": 29,
+      "source": "value = original |> filter ~ Criteria",
+    },
+  ],
+  "set": {
+    "from": 20,
+    "items": [
+      {
+        "detail": "Pure function",
+        "insert": "filter(¦helper)",
+        "label": "filter",
+      },
+      {
+        "detail": "AI suggestion · not participant choice",
+        "insert": "filter ~ ¦Criteria",
+        "label": "filter",
+      },
+    ],
+    "to": 22,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves pipelineFunctions suggestions and edits > pipelineFunctions 1`] = `
+{
+  "edits": [
+    {
+      "caret": 26,
+      "source": "value = original |> clamp(0, 10)",
+    },
+  ],
+  "set": {
+    "from": 20,
+    "items": [
+      {
+        "detail": "Pure function",
+        "insert": "clamp(¦0, 10)",
+        "label": "clamp",
+      },
+    ],
+    "to": 22,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves prefixedEnumCases suggestions and edits > prefixedEnumCases 1`] = `
+{
+  "edits": [
+    {
+      "caret": 83,
+      "source": "type Intent = answer | other
+kind = Intent.answer
+?match kind {
+:case Intent.answer",
+    },
+    {
+      "caret": 82,
+      "source": "type Intent = answer | other
+kind = Intent.answer
+?match kind {
+:case Intent.other",
+    },
+  ],
+  "set": {
+    "from": 70,
+    "items": [
+      {
+        "detail": "Enum case",
+        "insert": "Intent.answer",
+        "label": "Intent.answer",
+      },
+      {
+        "detail": "Enum case",
+        "insert": "Intent.other",
+        "label": "Intent.other",
+      },
+    ],
+    "to": 77,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves pureFunctions suggestions and edits > pureFunctions 1`] = `
+{
+  "edits": [
+    {
+      "caret": 14,
+      "source": "value = clamp(value, 0, 10)",
+    },
+  ],
+  "set": {
+    "from": 8,
+    "items": [
+      {
+        "detail": "Pure function",
+        "insert": "clamp(¦value, 0, 10)",
+        "label": "clamp",
+      },
+    ],
+    "to": 10,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves quotedInterpolation suggestions and edits > quotedInterpolation 1`] = `
+{
+  "edits": [
+    {
+      "caret": 34,
+      "source": ":input topic text
+value = "{{topic",
+    },
+  ],
+  "set": {
+    "from": 29,
+    "items": [
+      {
+        "detail": "Binding · compiler checks availability",
+        "insert": "topic",
+        "label": "topic",
+      },
+    ],
+    "to": 31,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves quotedText suggestions and edits > quotedText 1`] = `
+{
+  "edits": [],
+  "set": {
+    "from": 9,
+    "items": [],
+    "to": 12,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves rankAttributes suggestions and edits > rankAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 27,
+      "source": "!rank ordered {
+:from items",
+    },
+    {
+      "caret": 28,
+      "source": "!rank ordered {
+:option id "Label"",
+    },
+  ],
+  "set": {
+    "from": 16,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":from items",
+        "label": ":from",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":option id "¦Label"",
+        "label": ":option",
+      },
+    ],
+    "to": 17,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves rankParameters suggestions and edits > rankParameters 1`] = `
+{
+  "edits": [
+    {
+      "caret": 25,
+      "source": "!rank ordered [from=items",
+    },
+    {
+      "caret": 26,
+      "source": "!rank ordered [label=label",
+    },
+    {
+      "caret": 29,
+      "source": "!rank ordered [prefer=reorder",
+    },
+  ],
+  "set": {
+    "from": 15,
+    "items": [
+      {
+        "detail": "Optional parameter",
+        "insert": "from=items",
+        "label": "from=items",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "label=label",
+        "label": "label=label",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "prefer=reorder",
+        "label": "prefer=reorder",
+      },
+    ],
+    "to": 15,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves rateAttributes suggestions and edits > rateAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 34,
+      "source": "!rate score 0..10 {
+:prefer slider",
+    },
+    {
+      "caret": 26,
+      "source": "!rate score 0..10 {
+:low "Low"",
+    },
+    {
+      "caret": 32,
+      "source": "!rate score 0..10 {
+:high "High"",
+    },
+  ],
+  "set": {
+    "from": 20,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":prefer slider",
+        "label": ":prefer",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":low "¦Low"",
+        "label": ":low",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":high "High"",
+        "label": ":high",
+      },
+    ],
+    "to": 21,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves refineAttributes suggestions and edits > refineAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 38,
+      "source": "!refine review = wording {
+:as current",
+    },
+  ],
+  "set": {
+    "from": 27,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":as current",
+        "label": ":as",
+      },
+    ],
+    "to": 28,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves refineParameters suggestions and edits > refineParameters 1`] = `
+{
+  "edits": [
+    {
+      "caret": 16,
+      "source": "!refine[rounds=4",
+    },
+    {
+      "caret": 17,
+      "source": "!refine[renewable",
+    },
+  ],
+  "set": {
+    "from": 8,
+    "items": [
+      {
+        "detail": "Optional parameter",
+        "insert": "rounds=4",
+        "label": "rounds=4",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "renewable",
+        "label": "renewable",
+      },
+    ],
+    "to": 8,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves refineTransitions suggestions and edits > refineTransitions 1`] = `
+{
+  "edits": [
+    {
+      "caret": 33,
+      "source": "!refine review = wording {
+-> end",
+    },
+    {
+      "caret": 38,
+      "source": "!refine review = wording {
+-> propose wording",
+    },
+  ],
+  "set": {
+    "from": 30,
+    "items": [
+      {
+        "detail": "Finish the pattern",
+        "insert": "end",
+        "label": "end",
+      },
+      {
+        "detail": "Return wording for review",
+        "insert": "propose ¦wording",
+        "label": "propose",
+      },
+    ],
+    "to": 30,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves replacement ranges inside a token and exact pinned imports 1`] = `
+{
+  "edit": {
+    "caret": 27,
+    "source": "# 🙂
+  !ask response {
+    What comes to mind?
+  }
+-> end",
+  },
+  "imports": {
+    "from": 8,
+    "items": [
+      {
+        "detail": "Pinned import · Saved pattern",
+        "insert": ""real@exact-pin" as helper",
+        "label": "saved",
+      },
+    ],
+    "to": 8,
+  },
+  "set": {
+    "from": 7,
+    "items": [
+      {
+        "detail": "Ask for text",
+        "insert": "!ask response {
+  ¦What comes to mind?
+}",
+        "label": "!ask",
+      },
+    ],
+    "to": 13,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves rootAttributes suggestions and edits > rootAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 11,
+      "source": ":language 1",
+    },
+    {
+      "caret": 8,
+      "source": ":title "Title"",
+    },
+    {
+      "caret": 17,
+      "source": ":input topic text",
+    },
+    {
+      "caret": 14,
+      "source": ":output result",
+    },
+    {
+      "caret": 8,
+      "source": ":import ",
+    },
+  ],
+  "set": {
+    "from": 0,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":language 1",
+        "label": ":language",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":title "¦Title"",
+        "label": ":title",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":input topic text",
+        "label": ":input",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":output result",
+        "label": ":output",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":import ¦",
+        "label": ":import",
+      },
+    ],
+    "to": 1,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves suppliedParameters suggestions and edits > suppliedParameters 1`] = `
+{
+  "edits": [
+    {
+      "caret": 49,
+      "source": "!choose choice [multi, min=1, prefer=chips, max=3",
+    },
+    {
+      "caret": 54,
+      "source": "!choose choice [multi, min=1, prefer=chips, from=items",
+    },
+  ],
+  "set": {
+    "from": 44,
+    "items": [
+      {
+        "detail": "Optional parameter",
+        "insert": "max=3",
+        "label": "max=3",
+      },
+      {
+        "detail": "Optional parameter",
+        "insert": "from=items",
+        "label": "from=items",
+      },
+    ],
+    "to": 44,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves timerAttributes suggestions and edits > timerAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 27,
+      "source": "!timer pause {
+:duration 60",
+    },
+    {
+      "caret": 32,
+      "source": "!timer pause {
+:adjustable false",
+    },
+    {
+      "caret": 22,
+      "source": "!timer pause {
+:min 10",
+    },
+    {
+      "caret": 23,
+      "source": "!timer pause {
+:max 300",
+    },
+    {
+      "caret": 29,
+      "source": "!timer pause {
+:blocking true",
+    },
+    {
+      "caret": 27,
+      "source": "!timer pause {
+:sticky true",
+    },
+  ],
+  "set": {
+    "from": 15,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":duration 60",
+        "label": ":duration",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":adjustable false",
+        "label": ":adjustable",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":min 10",
+        "label": ":min",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":max 300",
+        "label": ":max",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":blocking true",
+        "label": ":blocking",
+      },
+      {
+        "detail": "Attribute",
+        "insert": ":sticky true",
+        "label": ":sticky",
+      },
+    ],
+    "to": 16,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves transitions suggestions and edits > transitions 1`] = `
+{
+  "edits": [
+    {
+      "caret": 17,
+      "source": "finish:
+-> finish",
+    },
+    {
+      "caret": 14,
+      "source": "finish:
+-> end",
+    },
+  ],
+  "set": {
+    "from": 11,
+    "items": [
+      {
+        "detail": "Branch label",
+        "insert": "finish",
+        "label": "finish",
+      },
+      {
+        "detail": "Finish the pattern",
+        "insert": "end",
+        "label": "end",
+      },
+    ],
+    "to": 11,
+  },
+}
+`;
+
+exports[`completion compatibility contract > preserves useAttributes suggestions and edits > useAttributes 1`] = `
+{
+  "edits": [
+    {
+      "caret": 20,
+      "source": "!use helper {
+:with input",
+    },
+  ],
+  "set": {
+    "from": 14,
+    "items": [
+      {
+        "detail": "Attribute",
+        "insert": ":with ¦input",
+        "label": ":with",
+      },
+    ],
+    "to": 15,
+  },
+}
+`;

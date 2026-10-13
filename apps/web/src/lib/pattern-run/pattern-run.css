@@ -1,0 +1,407 @@
+.pattern-run {
+  /* The site's generic main clipping creates a non-scrolling sticky container. */
+  overflow: visible;
+  min-height: 100dvh;
+  background: #fff;
+  color: #181814;
+}
+.pattern-run-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 5rem;
+  padding: 1rem clamp(1rem, 4vw, 4rem);
+  border-bottom: 1px solid #deded9;
+}
+.pattern-run-brand {
+  display: inline-flex;
+  align-items: center;
+}
+.pattern-run-breadcrumb {
+  color: #9b9b94;
+  font-size: 1.4rem;
+}
+.pattern-run-parent {
+  color: #60625c;
+  font-size: 0.875rem;
+}
+.pattern-run-exit {
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 0.875rem;
+}
+.pattern-run-exit:hover,
+.pattern-run-parent:hover {
+  text-decoration: underline;
+}
+.pattern-run-layout {
+  width: min(100%, 800px);
+  margin: 0 auto;
+}
+.pattern-run-stage {
+  min-width: 0;
+  padding: 3rem 2rem 2rem 5.5rem;
+}
+.pattern-run-worksheet-heading {
+  margin-bottom: 2.75rem;
+}
+.pattern-run-worksheet-heading h1,
+.pattern-run-notice h1 {
+  margin: 0 0 0.75rem;
+  font-family: inherit;
+  font-size: clamp(1.75rem, 3.3vw, 2.5rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.pattern-run-worksheet-heading > p {
+  margin: 0;
+  line-height: 1.6;
+}
+.pattern-run-worksheet-heading .pattern-run-step-count {
+  margin-top: 1rem;
+  color: #6d716b;
+  font-size: 0.875rem;
+}
+.pattern-run-stage h2 {
+  line-height: 1.3;
+}
+.pattern-run-starting-context {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #deded9;
+}
+.pattern-run-starting-context h2,
+.pattern-run-completion h2 {
+  font-size: 1.375rem;
+  margin: 0 0 1rem;
+}
+.pattern-run-progress {
+  margin-bottom: 1rem;
+  color: #00865c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
+.pattern-run-intro {
+  margin: 0 0 1.25rem;
+  color: #50564f;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.pattern-run-stage form textarea,
+.pattern-run-key {
+  width: 100%;
+  min-height: 7.5rem;
+  padding: 0.875rem 1rem;
+  resize: vertical;
+  border: 1px solid #aeb7ae;
+  border-radius: 6px;
+  background: #fff;
+  color: #181814;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.pattern-run-input-label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+.pattern-run-stage form textarea::placeholder {
+  color: #737b73;
+}
+.pattern-run-stage form .pattern-run-key {
+  min-height: 3rem;
+}
+.pattern-run-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.875rem;
+}
+.pattern-run-primary,
+.pattern-run-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid #181814;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+.pattern-run-primary {
+  color: white;
+  background: #181814;
+}
+.pattern-run-secondary {
+  color: #181814;
+  background: #fff;
+  border-color: #aeb7ae;
+}
+.pattern-run-primary:hover:not(:disabled) {
+  background: #34372f;
+}
+.pattern-run-secondary:hover:not(:disabled) {
+  background: #f4f5f2;
+}
+.pattern-run-primary:disabled,
+.pattern-run-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pattern-run-primary:focus-visible,
+.pattern-run-secondary:focus-visible,
+.pattern-run-options button:focus-visible,
+.pattern-run-stage input:focus-visible,
+.pattern-run-stage textarea:focus-visible {
+  outline: 2px solid #00865c;
+  outline-offset: 3px;
+}
+.pattern-run-options {
+  display: grid;
+  gap: 0.625rem;
+}
+.pattern-run-options button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  min-height: 2.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #aeb7ae;
+  border-radius: 5px;
+  color: #181814;
+  background: #fff;
+  cursor: pointer;
+}
+.pattern-run-options button:hover:not(:disabled) {
+  border-color: #00865c;
+  background: #f5fbf7;
+}
+.pattern-run-options button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pattern-run-options button span {
+  color: #00865c;
+}
+.pattern-run-selections {
+  display: grid;
+  gap: 0.625rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.pattern-run-selections legend {
+  margin-bottom: 0.75rem;
+  color: #50564f;
+}
+.pattern-run-selections label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.75rem;
+  border: 1px solid #aeb7ae;
+  border-radius: 5px;
+  background: #fff;
+}
+.pattern-run-selections input {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  accent-color: #00865c;
+}
+.pattern-run-ranking {
+  list-style: none;
+  padding: 0;
+}
+.pattern-run-ranking li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid #aeb7ae;
+  border-radius: 5px;
+  background: white;
+}
+.pattern-run-ranking li span {
+  flex: 1;
+  min-width: 0;
+}
+.pattern-run-ranking button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border: 1px solid #d3d8d3;
+  border-radius: 4px;
+  background: #f4f5f2;
+  cursor: pointer;
+}
+.pattern-run-rating {
+  display: grid;
+  gap: 0.75rem;
+}
+.pattern-run-rating input {
+  width: 8rem;
+  min-height: 2.75rem;
+  padding: 0.75rem;
+  border: 1px solid #aeb7ae;
+  border-radius: 5px;
+  background: #fff;
+}
+.pattern-run-answer-label {
+  margin: 0 0 0.5rem;
+  color: #50564f;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+.pattern-run-previous-answer {
+  padding: 0.875rem 1rem;
+  border-radius: 5px;
+  background: #f5f5f3;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.pattern-run-next-hint {
+  margin: 0.75rem 0 0;
+  text-align: right;
+  color: #59675c;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.pattern-run-privacy {
+  margin: 1.5rem 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #deded9;
+  color: #687066;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.pattern-run-closing {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.pattern-run-completion {
+  scroll-margin-top: calc(var(--practice-timer-space, 0px) + 1.5rem);
+}
+.pattern-run-completion h2:focus {
+  outline: none;
+}
+.pattern-run-stop {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #50564f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.pattern-run-stop:hover {
+  color: #181814;
+}
+.pattern-run-notice {
+  width: min(100%, 44rem);
+  margin: 10vh auto;
+  padding: 1.5rem;
+}
+.pattern-run-notice a {
+  text-decoration: underline;
+}
+.pattern-run-error {
+  padding: 0.875rem 1rem;
+  border-left: 3px solid #9a5248;
+  background: #f9eee9;
+}
+.pattern-run-unavailable {
+  color: #8a534a;
+}
+.pattern-run-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 680px) {
+  .pattern-run-header {
+    min-height: 4.25rem;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem;
+  }
+  .pattern-run-header .patternverse-logo {
+    font-size: 1.1rem;
+  }
+  .pattern-run-breadcrumb,
+  .pattern-run-parent {
+    display: none;
+  }
+  .pattern-run-stage {
+    padding: 1.75rem 1rem 2rem;
+  }
+  .pattern-run-worksheet-heading {
+    margin-bottom: 2rem;
+  }
+  .pattern-run-worksheet-heading h1 {
+    font-size: 1.75rem;
+  }
+  .pattern-run-stage form,
+  .pattern-run-options,
+  .pattern-run-selections {
+    width: 100%;
+  }
+  .pattern-run-actions {
+    flex-wrap: wrap;
+  }
+  .pattern-run-actions > * {
+    flex: 1;
+  }
+  .pattern-run-next-hint {
+    text-align: left;
+  }
+}
+
+.pattern-run-review {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: #59675c;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.pattern-run-review button {
+  min-height: 44px;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: #00865c;
+  font-weight: 500;
+  cursor: pointer;
+}
+.pattern-run-review button:focus-visible {
+  outline: 2px solid #00865c;
+  outline-offset: 3px;
+}
+.pattern-run-retained-note {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #59675c;
+}
