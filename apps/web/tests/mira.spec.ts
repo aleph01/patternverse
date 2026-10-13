@@ -1,25 +1,57 @@
 import { expect, test } from '@playwright/test';
 
-test('keeps mira chat-focused and selects a library pattern in the conversation', async ({
+test('renames a session from the chat and keeps the name after reloading', async ({ page }) => {
+  test.skip(page.viewportSize()!.width <= 760, 'Phone session management lives in history.');
+  await page.goto('/mira');
+  await page.getByRole('button', { name: 'New session', exact: true }).click();
+  await page.getByRole('button', { name: 'Rename session', exact: true }).click();
+  const name = page.getByRole('textbox', { name: 'Session name', exact: true });
+  await expect(name).toBeFocused();
+  expect(await name.evaluate((input: HTMLInputElement) => input.selectionEnd)).toBe(
+    'New session'.length,
+  );
+  await page
+    .getByRole('textbox', { name: 'Session name', exact: true })
+    .fill('Making room for change');
+  await page.getByRole('button', { name: 'Save session name' }).click();
+  await expect(page.getByRole('heading', { name: 'Making room for change' })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Making room for change' })).toBeVisible();
+  await page.getByRole('button', { name: 'Rename session', exact: true }).click();
+  await page.getByRole('textbox', { name: 'Session name', exact: true }).fill('Do not keep this');
+  await page.getByRole('textbox', { name: 'Session name', exact: true }).press('Escape');
+  await expect(page.getByRole('heading', { name: 'Making room for change' })).toBeVisible();
+});
+
+test('keeps mira chat-focused and selects a therapeutic pattern for its method', async ({
   page,
 }) => {
   await page.goto('/mira');
   await page.getByRole('button', { name: 'New session' }).click();
-  await expect(page.getByRole('heading', { name: 'New session' })).toBeVisible();
+  if (page.viewportSize()!.width > 760)
+    await expect(page.getByRole('heading', { name: 'New session' })).toBeVisible();
+  else await expect(page.locator('.mira-chat-toolbar')).toBeHidden();
   await expect(page.getByRole('textbox', { name: 'Message mira' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Patternverse home' })).toHaveCount(1);
+  await expect(page.getByRole('link', { name: 'mira home' })).toHaveCount(1);
 
-  await page.getByRole('button', { name: 'Choose a pattern or therapy technique' }).click();
-  const picker = page.getByRole('dialog', { name: 'Patterns & therapy techniques' });
+  await page.getByRole('button', { name: 'Choose therapy approach' }).click();
+  await page
+    .getByRole('dialog', { name: 'Therapy approach' })
+    .getByRole('button', { name: /CBT/ })
+    .click();
+
+  await page.getByRole('button', { name: 'Choose a pattern or practice' }).click();
+  const picker = page.getByRole('dialog', { name: 'Patterns & practices' });
   await expect(picker).toBeVisible();
   await expect(
-    picker.getByRole('searchbox', { name: 'Search patterns and techniques' }),
+    picker.getByRole('searchbox', { name: 'Search patterns and practices' }),
   ).toBeVisible();
-  await picker.getByRole('button', { name: /Creative Reframing/ }).click();
+  await expect(picker.getByRole('button', { name: /Creative Reframing/ })).toHaveCount(0);
+  await picker.getByRole('button', { name: /Thought Record/ }).click();
   await expect(picker.getByRole('region', { name: 'Selected pattern' })).toBeVisible();
-  await picker.getByRole('button', { name: 'Use selected pattern' }).click();
+  await picker.getByRole('button', { name: 'Start selected exercise' }).click();
   await expect(picker).toHaveCount(0);
-  await expect(page.getByText('Library pattern: Creative Reframing')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'End exercise' })).toBeVisible();
 
   await page.keyboard.press('Shift+Space');
   await expect(picker).toBeVisible();
@@ -52,7 +84,7 @@ test('keeps only history and settings in the header at narrow widths', async ({ 
     });
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
     expect(layout.brandRight).toBeLessThan(layout.toolsLeft);
-    expect(layout.headerBottom).toBe(58);
+    expect(layout.headerBottom).toBe(60);
   }
 
   await header.getByRole('button', { name: 'Previous sessions' }).click();
@@ -64,7 +96,9 @@ test('keeps only history and settings in the header at narrow widths', async ({ 
   await header.getByRole('button', { name: 'Settings' }).click();
   const settings = page.getByRole('dialog', { name: 'Settings' });
   await expect(settings).toBeVisible();
-  await expect(settings.getByLabel('Model')).toHaveValue('openrouter/auto');
+  await expect(settings.getByLabel('Model', { exact: true })).toHaveValue(
+    'google/gemini-3.8-flash',
+  );
   await settings.press('Escape');
   await expect(settings).toHaveCount(0);
 });
@@ -91,8 +125,9 @@ test('shows reported monthly spending and warns without blocking replies', async
   await page.getByRole('button', { name: 'New session' }).click();
   await page.getByRole('button', { name: 'Settings' }).click();
   const settings = page.getByRole('dialog', { name: 'Settings' });
+  await settings.getByText('Advanced · enter an API key manually', { exact: true }).click();
   await settings.getByLabel('OpenRouter API key').fill('test-key');
-  await settings.getByRole('button', { name: 'Save connection' }).click();
+  await settings.getByRole('button', { name: 'Save API key' }).click();
   await expect(settings.getByText('$2.50 this month')).toBeVisible();
   await settings.getByLabel('Monthly warning threshold (USD)').fill('1');
   await settings.getByRole('button', { name: 'Save budget' }).click();

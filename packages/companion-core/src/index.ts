@@ -11,6 +11,8 @@ export type Message = Readonly<{
   role: 'user' | 'assistant';
   text: string;
   createdAt: string;
+  /** Explicit library references attached to this message, independent of session selection. */
+  patternMentions?: readonly (PatternRef & Readonly<{ title: string }>)[];
 }>;
 
 /** Pure domain state; adapters decide where and how it is stored. */
@@ -30,6 +32,7 @@ export type SessionEvent =
   | Readonly<{ type: 'set-modality'; modalityId: string; at: string }>
   | Readonly<{ type: 'select-pattern'; pattern: PatternRef | null; at: string }>
   | Readonly<{ type: 'submit'; message: Message; replyId: string }>
+  | Readonly<{ type: 'retry-reply'; replyId: string; at: string }>
   | Readonly<{ type: 'reply-received'; replyId: string; message: Message }>
   | Readonly<{ type: 'reply-failed'; replyId: string; at: string }>;
 
@@ -88,20 +91,11 @@ export function transition(session: Session, event: SessionEvent): Transition {
         pendingReplyId: requiredText(event.replyId, 'Reply ID'),
         updatedAt: message.createdAt,
       };
-      return {
-        session: next,
-        effects: [
-          {
-            type: 'request-reply',
-            sessionId: next.id,
-            replyId: event.replyId,
-            modalityId: next.modalityId,
-            activePattern: next.activePattern,
-            messages: next.messages,
-          },
-        ],
-      };
+      return requestReply(next, event.replyId);
     }
+    case 'retry-reply':
+      if (!canRetryReply(session)) throw new Error('There is no unanswered message to retry.');
+      return requestReply({ ...session, updatedAt: event.at }, event.replyId);
     case 'reply-received':
       if (session.pendingReplyId !== event.replyId) return unchangedEffects(session);
       if (event.message.role !== 'assistant')
@@ -122,6 +116,29 @@ export function transition(session: Session, event: SessionEvent): Transition {
   }
 }
 
+/** Only an unanswered final user message can be retried, never an in-flight reply. */
+export function canRetryReply(session: Session): boolean {
+  return !session.pendingReplyId && session.messages.at(-1)?.role === 'user';
+}
+
+/** Describe a provider request without duplicating the conversation transcript. */
+function requestReply(session: Session, replyId: string): Transition {
+  const next = { ...session, pendingReplyId: requiredText(replyId, 'Reply ID') };
+  return {
+    session: next,
+    effects: [
+      {
+        type: 'request-reply',
+        sessionId: next.id,
+        replyId: next.pendingReplyId,
+        modalityId: next.modalityId,
+        activePattern: next.activePattern,
+        messages: next.messages,
+      },
+    ],
+  };
+}
+
 function unchangedEffects(session: Session): Transition {
   return { session, effects: [] };
 }
@@ -140,7 +157,7 @@ export interface SessionRepository {
 
 /** A reply port. Implementations must make local/cloud selection explicit. */
 export interface ReplyProvider {
-  reply(effect: Effect, signal: AbortSignal): Promise<Message>;
+  reply(effect: Effect, signal: AbortSignal, onProgress?: (text: string) => void): Promise<Message>;
 }
 
 /** The narrow application boundary for carrying out a reply effect. */
@@ -148,6 +165,8 @@ export type CompanionPorts = Readonly<{
   sessions: SessionRepository;
   replies: ReplyProvider;
   clock: Readonly<{ now(): string }>;
+  /** Ephemeral progress is presented by the caller and is never persisted as a partial message. */
+  replyProgress?: (text: string) => void;
 }>;
 
 /**
@@ -162,15 +181,41 @@ export async function submitMessage(
   ports: CompanionPorts,
   signal: AbortSignal,
 ): Promise<Session> {
+  return performReply(sessionId, { type: 'submit', message, replyId }, ports, signal);
+}
+
+/** Request the missing reply using the saved transcript and current provider settings. */
+export async function retryReply(
+  sessionId: string,
+  replyId: string,
+  ports: CompanionPorts,
+  signal: AbortSignal,
+): Promise<Session> {
+  return performReply(
+    sessionId,
+    { type: 'retry-reply', replyId, at: ports.clock.now() },
+    ports,
+    signal,
+  );
+}
+
+/** Persist the request before contacting a provider and reject obsolete completions. */
+async function performReply(
+  sessionId: string,
+  event: Extract<SessionEvent, { type: 'submit' | 'retry-reply' }>,
+  ports: CompanionPorts,
+  signal: AbortSignal,
+): Promise<Session> {
+  const { replyId } = event;
   const current = await ports.sessions.load(sessionId);
   if (!current) throw new Error(`Session ${sessionId} was not found.`);
-  const submission = transition(current, { type: 'submit', message, replyId });
+  const submission = transition(current, event);
   await ports.sessions.save(submission.session);
   const effect = submission.effects[0];
   if (!effect) return submission.session;
 
   try {
-    const reply = await ports.replies.reply(effect, signal);
+    const reply = await ports.replies.reply(effect, signal, ports.replyProgress);
     const latest = await ports.sessions.load(sessionId);
     if (!latest) throw new Error(`Session ${sessionId} was not found.`);
     const completed = transition(latest, {

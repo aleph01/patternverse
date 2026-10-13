@@ -26,9 +26,11 @@ browser or native APIs.
 Library entities retain Patternverse's `(sourceId, entityId)` identity. A
 Patternverse _pattern article_ is descriptive content; an executable Pattern
 Markdown program is a distinct attached artifact. Existing linear
-`PracticeDefinition` documents remain readable while a deliberate conversion
-path is developed. They are not silently treated as equivalent to Pattern
-Markdown programs.
+`PracticeDefinition` YAML documents remain readable through an import-only converter.
+Public worksheets now use Pattern Language, including grouped `!form` interactions.
+Opening a legacy personal record prepares a converted draft; saving writes language
+source. The website and editor preview use the same Rust execution semantics.
+See [interactive practices](practices.md) for compatibility and privacy details.
 
 Mira sessions are private data, separate from publishable knowledge. The
 browser adapter encrypts sessions, prompt overrides, and the OpenRouter key with
@@ -40,10 +42,14 @@ the key and transcripts, so the UI offers a passphrase-encrypted portable archiv
 The archive deliberately excludes the OpenRouter key and importing it never
 overwrites existing sessions. Ordinary app opening does not require a passphrase.
 
-The existing Patternverse Dropbox sync is not end-to-end encrypted, so it must
-not receive conversation transcripts. Any future session sync requires explicit
-opt-in and an end-to-end-encrypted design. The browser model adapter is explicitly
-OpenRouter: it requires a user-supplied key and model, sends only on user submit,
+Dropbox sync is a separate, feature-flagged boundary. The older adapter uses a sync
+phrase; workspace sync supports both encrypted and explicitly disclosed sign-in-only
+remote protection, with automatic scheduling in sign-in-only builds. Provider credentials,
+settings and live Mira run caches remain excluded. None of these paths grants team
+access to Mira history. See [current sync behavior](sync/README.md), rather than the
+historical local-workspace milestone, for payload/protection and review rules.
+The browser conversation model adapter is explicitly OpenRouter: a PKCE connection or manual
+key supplies AI access, not Patternverse identity. It sends on user submit,
 requests ZDR and denial of data collection, and disables provider fallbacks. ZDR
 still sends content to a remote service for processing; it is not local inference.
 

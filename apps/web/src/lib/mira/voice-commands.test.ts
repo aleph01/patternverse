@@ -30,6 +30,9 @@ describe('voice intent vocabulary', () => {
       text: 'I wanted to send a letter',
     });
     expect(parseVoiceCommand('Mira, send it please.', context)).toEqual({ type: 'send' });
+    expect(parseVoiceCommand('Sent.', context)).toEqual({ type: 'send' });
+    expect(parseVoiceCommand('Mira, sent the message please.', context)).toEqual({ type: 'send' });
+    expect(parseVoiceCommand('I sent it yesterday', context)?.type).toBe('draft');
     expect(parseVoiceCommand('I feel a little sad today', context)?.type).toBe('draft');
   });
   it('separates opening, searching, selecting and starting', () => {

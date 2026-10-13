@@ -25,6 +25,9 @@ export type MiraPatternSummary = Readonly<{
   title: string;
   summary?: string;
   hasPractice?: boolean;
+  verses?: readonly string[];
+  tags?: readonly string[];
+  aliases?: readonly string[];
 }>;
 
 /** Only an exact source-qualified pattern match may populate the companion context. */

@@ -1,4 +1,5 @@
-import init, { dispatch } from './engine/pattern_wasm.js';
+import { executePatternRequest } from '$lib/pattern-runtime/wasm';
+import type { PatternEffect, PatternView, PatternRun } from '$lib/pattern-runtime/types';
 import type { PrivateMiraStore } from './private-store';
 
 export type Technique = Readonly<{
@@ -8,26 +9,13 @@ export type Technique = Readonly<{
   needs_ai: boolean;
 }>;
 
-export type GuidedEffect = Readonly<{
-  effect_id: string;
-  run_id: string;
-  request: Readonly<{
-    kind: string;
-    payload: Readonly<Record<string, unknown>>;
-  }>;
-}>;
-
-export type GuidedView = Readonly<{
-  technique_id: string;
-  root_id: string;
-  revision: number;
-  status: 'Waiting' | 'Paused' | 'Completed' | 'Cancelled' | 'Failed';
-  pending: GuidedEffect | null;
-  items: readonly Readonly<{ effect: GuidedEffect; result: unknown | null }>[];
-  outputs: Readonly<Record<string, unknown>>;
-}>;
+/** Compatibility names for Mira's existing persistence adapter. */
+export type GuidedEffect = PatternEffect;
+export type GuidedView = PatternView;
 
 export type GuidedRun = Readonly<{ view: GuidedView; token: string }>;
+/** An ephemeral run for focused practice outside a Mira conversation. */
+export type StandaloneRun = PatternRun;
 type RunResponse = Readonly<{ version: 1; kind: 'run'; saved: unknown; view: GuidedView }>;
 type CatalogResponse = Readonly<{
   version: 1;
@@ -35,15 +23,11 @@ type CatalogResponse = Readonly<{
   techniques: readonly Technique[];
 }>;
 
-let initialization: Promise<unknown> | undefined;
-
 /** Load the same Rust interpreter used by the native host; no JavaScript fallback exists. */
 async function execute(request: Record<string, unknown>): Promise<RunResponse | CatalogResponse> {
-  initialization ??= init();
-  await initialization;
   let parsed: unknown;
   try {
-    parsed = JSON.parse(dispatch(JSON.stringify({ version: 1, ...request })));
+    parsed = await executePatternRequest('catalog', { version: 1, ...request });
   } catch (cause) {
     throw new Error(`Guided exercise could not continue: ${String(cause)}`, { cause });
   }
@@ -63,6 +47,58 @@ export async function listTechniques(modality: string): Promise<readonly Techniq
   if (response.kind !== 'catalog' || !Array.isArray(response.techniques))
     throw new Error('Guided exercise catalog is invalid.');
   return response.techniques;
+}
+
+/** Start a bundled Pattern Markdown technique without creating a chat or writing private data. */
+export async function startStandaloneRun(
+  techniqueId: string,
+  textInputs: Readonly<Record<string, string>> = {},
+): Promise<StandaloneRun> {
+  const response = await execute({
+    operation: 'start',
+    technique_id: techniqueId,
+    root_id: crypto.randomUUID(),
+    inputs: Object.fromEntries(
+      Object.entries(textInputs).map(([name, value]) => [name, { type: 'text', value }]),
+    ),
+  });
+  if (response.kind !== 'run' || !validView(response.view))
+    throw new Error('Pattern Markdown returned an invalid run.');
+  return { view: response.view, saved: response.saved };
+}
+
+/** Advance the exact displayed revision; the caller owns this in-memory checkpoint. */
+export async function applyStandaloneAction(
+  current: StandaloneRun,
+  event: unknown,
+  runId: string,
+): Promise<StandaloneRun> {
+  const response = await execute({
+    operation: 'apply',
+    saved: current.saved,
+    expected_revision: current.view.revision,
+    command: { run_id: runId, event },
+  });
+  if (response.kind !== 'run' || !validView(response.view))
+    throw new Error('Pattern Markdown returned an invalid run.');
+  return { view: response.view, saved: response.saved };
+}
+
+/** Reopen an accepted participant interaction without reusing downstream results. */
+export async function rewindStandaloneRun(
+  current: StandaloneRun,
+  effect: PatternEffect,
+): Promise<StandaloneRun> {
+  const response = await execute({
+    operation: 'rewind',
+    saved: current.saved,
+    expected_revision: current.view.revision,
+    run_id: effect.run_id,
+    effect_id: effect.effect_id,
+  });
+  if (response.kind !== 'run' || !validView(response.view))
+    throw new Error('Pattern Markdown returned an invalid run.');
+  return { view: response.view, saved: response.saved };
 }
 
 /** Restore a pinned run without redispatching its historical effects. */

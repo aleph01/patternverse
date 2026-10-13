@@ -58,8 +58,7 @@ export function parseVoiceCommand(utterance: string, context: VoiceContext): Voi
   if (/^(stop listening|stop voice control|exit voice mode|turn off voice control)$/.test(text))
     return { type: 'stop' };
   if (/^(stop reading|stop speaking|be quiet)$/.test(text)) return { type: 'stop-reading' };
-  if (/^(send|send it|send message|send the message|send that)$/.test(text))
-    return { type: 'send' };
+  if (/^(?:send|sent)(?: it| message| the message| that)?$/.test(text)) return { type: 'send' };
   if (
     /^(start|start it|start (?:this|the|that|selected) (?:pattern|exercise|technique)|begin (?:this|the) exercise)$/.test(
       text,

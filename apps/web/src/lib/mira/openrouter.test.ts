@@ -4,6 +4,8 @@ import {
   getOpenRouterKeyUsage,
   listZdrModels,
   interpretOpenRouterVoiceCommand,
+  requestOpenRouterText,
+  OpenRouterConnectionError,
 } from './openrouter';
 
 const settings = {
@@ -22,6 +24,129 @@ const effect = {
 };
 
 describe('OpenRouter adapter', () => {
+  it.each([
+    [401, 'connection'],
+    [402, 'credits'],
+  ] as const)(
+    'turns HTTP %s into an actionable connection failure without retrying',
+    async (status, reason) => {
+      const transport = vi.fn(
+        async () => new Response('{"error":{"message":"provider detail"}}', { status }),
+      );
+      const failure = await requestOpenRouterText(
+        settings,
+        [],
+        new AbortController().signal,
+        transport,
+      ).catch((error: unknown) => error);
+      expect(failure).toBeInstanceOf(OpenRouterConnectionError);
+      expect(failure).toMatchObject({ reason });
+      expect(String(failure)).toContain('OpenRouter');
+      expect(transport).toHaveBeenCalledOnce();
+    },
+  );
+
+  it('recognizes a credit error delivered in a successful HTTP envelope', async () => {
+    const transport = vi.fn(
+      async () => new Response('{"error":{"code":402,"message":"No credits"}}'),
+    );
+    await expect(
+      requestOpenRouterText(settings, [], new AbortController().signal, transport),
+    ).rejects.toMatchObject({ reason: 'credits' });
+  });
+
+  it('keeps a rate limit separate from exhausted credit and does not reconnect automatically', async () => {
+    const transport = vi.fn(async () => new Response('{}', { status: 429 }));
+    await expect(
+      requestOpenRouterText(settings, [], new AbortController().signal, transport),
+    ).rejects.toThrow('Wait a little');
+    expect(transport).toHaveBeenCalledOnce();
+  });
+  it.each([
+    [
+      {
+        choices: [
+          { message: { content: null, reasoning: 'private reasoning' }, finish_reason: 'length' },
+        ],
+      },
+      'response limit',
+    ],
+    [{ choices: [{ message: { content: '' }, finish_reason: 'stop' }] }, 'no visible reply'],
+    [{ error: { message: 'Provider unavailable' } }, 'Provider unavailable'],
+  ])(
+    'explains unsuccessful responses without displaying reasoning or retrying',
+    async (payload, error) => {
+      const transport = vi.fn(async () => new Response(JSON.stringify(payload)));
+      const provider = createOpenRouterReplyProvider({
+        settings,
+        patternContext: async () => null,
+        fetch: transport,
+      });
+      await expect(provider.reply(effect, new AbortController().signal)).rejects.toThrow(error);
+      expect(transport).toHaveBeenCalledOnce();
+    },
+  );
+
+  it('reads visible text blocks while retaining a bounded reasoning budget and ZDR', async () => {
+    const transport = vi.fn(
+      async () =>
+        new Response(
+          JSON.stringify({
+            choices: [
+              { message: { content: [{ type: 'text', text: 'Hello.' }], reasoning: 'private' } },
+            ],
+          }),
+        ),
+    );
+    const provider = createOpenRouterReplyProvider({
+      settings,
+      patternContext: async () => null,
+      fetch: transport as typeof fetch,
+    });
+    expect((await provider.reply(effect, new AbortController().signal)).text).toBe('Hello.');
+    const body = JSON.parse(String(vi.mocked(transport as typeof fetch).mock.calls[0]![1]!.body));
+    expect(body).toMatchObject({
+      max_tokens: 4096,
+      reasoning: { effort: 'low', exclude: true },
+      provider: { zdr: true, allow_fallbacks: false },
+    });
+  });
+  it('streams visible reply text without exposing reasoning fragments', async () => {
+    const encoder = new TextEncoder();
+    const response = new Response(
+      new ReadableStream({
+        start(controller) {
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"delta":{"reasoning":"private","content":"Hello"}}]}\n\n',
+            ),
+          );
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"delta":{"content":" there."},"finish_reason":"stop"}]}\n\ndata: [DONE]\n\n',
+            ),
+          );
+          controller.close();
+        },
+      }),
+      { headers: { 'Content-Type': 'text/event-stream' } },
+    );
+    const transport = vi.fn(async () => response) as unknown as typeof fetch;
+    const progress: string[] = [];
+    const provider = createOpenRouterReplyProvider({
+      settings,
+      patternContext: async () => null,
+      fetch: transport,
+    });
+    const reply = await provider.reply(effect, new AbortController().signal, (text) =>
+      progress.push(text),
+    );
+    expect(reply.text).toBe('Hello there.');
+    expect(progress).toEqual(['Hello', 'Hello there.']);
+    expect(progress.join(' ')).not.toContain('private');
+    const body = JSON.parse(String(vi.mocked(transport).mock.calls[0]![1]!.body));
+    expect(body.stream).toBe(true);
+  });
   it('keeps command interpretation on the selected model with mandatory ZDR', async () => {
     const transport = vi.fn(
       async () =>

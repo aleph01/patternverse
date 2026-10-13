@@ -10,6 +10,7 @@
     onSelect,
     onClose,
     feedback,
+    restoreFocus = true,
   }: {
     choices: readonly VoiceChoice[];
     search?: string;
@@ -17,6 +18,7 @@
     onSelect: (id: string) => void;
     onClose: () => void;
     feedback: Snippet;
+    restoreFocus?: boolean;
   } = $props();
 </script>
 
@@ -33,7 +35,7 @@
     aria-labelledby="mira-modality-title"
     class="mira-technique-dialog"
     tabindex="-1"
-    use:focusPicker={onClose}
+    use:focusPicker={{ close: onClose, restoreFocus }}
   >
     <div class="mira-guided-heading">
       <h2 id="mira-modality-title">Therapy approach</h2>

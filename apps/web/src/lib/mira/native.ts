@@ -1,5 +1,6 @@
 import { Channel, invoke, isTauri } from '@tauri-apps/api/core';
 import type { Effect, Message, ReplyProvider } from '@patternverse/companion-core';
+import { conversationMessageText } from './pattern-mentions';
 import { conversationSystemPrompt, type PatternContext } from './conversation-prompt';
 import type { MiraSettings } from './private-store';
 
@@ -89,15 +90,21 @@ export function createNativeReplyProvider(options: {
   patternContext: (effect: Effect) => Promise<PatternContext>;
 }): ReplyProvider {
   return {
-    reply: async (effect: Effect, signal: AbortSignal): Promise<Message> => {
+    reply: async (
+      effect: Effect,
+      signal: AbortSignal,
+      onProgress?: (text: string) => void,
+    ): Promise<Message> => {
       if (!hasNativeMira()) throw new Error('Local model is available only in the desktop app.');
       if (!options.settings.model) throw new Error('Choose a downloaded local model in Settings.');
       const context = await options.patternContext(effect);
       const messages = [
         { role: 'system', content: conversationSystemPrompt(effect, options.settings, context) },
-        ...effect.messages.slice(-24).map((item) => ({ role: item.role, content: item.text })),
+        ...effect.messages
+          .slice(-24)
+          .map((item) => ({ role: item.role, content: conversationMessageText(item) })),
       ];
-      const text = await requestLocalText(options.settings.model, messages, signal);
+      const text = await requestLocalText(options.settings.model, messages, signal, onProgress);
       return {
         id: crypto.randomUUID(),
         role: 'assistant',
@@ -124,7 +131,11 @@ export async function transcribeLocally(wav: Uint8Array, signal?: AbortSignal): 
     if (event.kind === 'completed') resolveText({ text: event.text.trim() });
     if (event.kind === 'cancelled') resolveText({ error: 'Dictation cancelled.' });
     if (event.kind === 'failed')
-      resolveText({ error: event.detailCode || 'Local transcription failed.' });
+      resolveText(
+        event.detailCode === 'TRANSCRIPTION_NO_SPEECH'
+          ? { text: '' }
+          : { error: event.detailCode || 'Local transcription failed.' },
+      );
   };
   await invoke('transcription_start', {
     audioBase64: btoa(chunks.join('')),
@@ -152,6 +163,7 @@ export async function requestLocalText(
   modelId: string,
   messages: readonly { role: string; content: string }[],
   signal: AbortSignal,
+  onProgress?: (text: string) => void,
 ): Promise<string> {
   signal.throwIfAborted();
   if (!hasNativeMira() || !modelId) throw new Error('Choose a local model in the desktop app.');
@@ -162,7 +174,10 @@ export async function requestLocalText(
     finish = resolve;
   });
   channel.onmessage = (event) => {
-    if (event.kind === 'text') text += event.text;
+    if (event.kind === 'text') {
+      text += event.text;
+      onProgress?.(text);
+    }
     if (event.kind === 'done') finish({ text });
     if (event.kind === 'failed' || event.kind === 'cancelled')
       finish({ error: event.detailCode || 'Local generation did not finish.' });

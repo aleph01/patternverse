@@ -52,6 +52,11 @@ describe('voice controller lifecycle', () => {
     test.interim('send');
     await settle();
     expect(test.execute).not.toHaveBeenCalled();
+    expect(test.changed).toHaveBeenLastCalledWith(expect.objectContaining({ interim: '' }));
+    test.interim('I am thinking');
+    expect(test.changed).toHaveBeenLastCalledWith(
+      expect.objectContaining({ interim: 'I am thinking' }),
+    );
     test.say('I am thinking');
     await settle();
     expect(test.execute).toHaveBeenCalledWith({ type: 'draft', text: 'I am thinking' });

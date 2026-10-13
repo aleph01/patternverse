@@ -1,4 +1,6 @@
 import type { Session, SessionRepository } from '@patternverse/companion-core';
+import { conditionalRecordWrites, LocalSyncConflictError } from '@patternverse/workspace';
+import { notifyWorkspaceChanged } from '$lib/client/workspace-changes';
 
 const DATABASE_NAME = 'patternverse-mira-private-v1';
 const KEY_STORE = 'keys';
@@ -19,6 +21,7 @@ export type MiraSettings = Readonly<{
   promptOverrides: Readonly<Record<string, string>>;
   activeSessionId: string | null;
   autoSpeak?: boolean;
+  preferredModalityId?: string;
   monthlyBudgetUsd?: number | null;
 }>;
 
@@ -29,6 +32,8 @@ export interface PrivateMiraStore extends SessionRepository {
   saveSettings(settings: MiraSettings): Promise<void>;
   loadRun(sessionId: string): Promise<PrivateRun | null>;
   saveRun(sessionId: string, saved: unknown, expectedToken: string | null): Promise<string>;
+  /** Atomic, encrypted conversation CAS. Active replies/practices are not overwritten. */
+  applySyncSessions(expected: readonly Session[], desired: readonly Session[]): Promise<void>;
 }
 
 export type PrivateStoreOptions = Readonly<{
@@ -112,7 +117,85 @@ export function createPrivateMiraStore(options: PrivateStoreOptions = {}): Priva
     return JSON.parse(decoder.decode(plaintext));
   };
 
+  const applySyncSessions: PrivateMiraStore['applySyncSessions'] = async (expected, desired) => {
+    if (expected.length > 10000 || desired.length > 10000)
+      throw new Error('Too many synced conversations.');
+    const old = expected.map(portableMiraSession),
+      next = desired.map(portableMiraSession);
+    const entries = await withDatabase((database) => readAll<Envelope>(database, SESSION_STORE));
+    const envelopes = new Map(entries);
+    const current = await Promise.all(
+      entries.map(async ([id, envelope]) =>
+        validateSession(await unseal('session', id, envelope), id),
+      ),
+    );
+    const writes = conditionalRecordWrites(
+      old,
+      next,
+      current.map(portableMiraSession),
+      (row) => row.id,
+    );
+    const currentById = new Map(current.map((row) => [row.id, row]));
+    for (const write of writes)
+      if (currentById.get(write.key)?.pendingReplyId != null)
+        throw new LocalSyncConflictError(
+          'A Mira reply is in progress. Finish it before syncing this conversation.',
+        );
+    const sealed = await Promise.all(
+      writes.map(async (write) => ({
+        ...write,
+        envelope: write.after ? await seal('session', write.key, write.after) : null,
+      })),
+    );
+    if (!sealed.length) return;
+    await withDatabase(
+      (database) =>
+        new Promise<void>((resolve, reject) => {
+          const transaction = database.transaction([SESSION_STORE, RUN_STORE], 'readwrite');
+          const table = transaction.objectStore(SESSION_STORE);
+          let remaining = sealed.length * 2;
+          let failure: Error | undefined;
+          const checked = () => {
+            if (--remaining !== 0 || failure) return;
+            for (const write of sealed) {
+              if (write.envelope) table.put(write.envelope, write.key);
+              else table.delete(write.key);
+            }
+          };
+          for (const write of sealed) {
+            const session = table.get(write.key);
+            session.onsuccess = () => {
+              if (!sameEnvelope(session.result as Envelope | undefined, envelopes.get(write.key))) {
+                failure = new LocalSyncConflictError();
+                transaction.abort();
+                return;
+              }
+              checked();
+            };
+            const run = transaction.objectStore(RUN_STORE).get(write.key);
+            run.onsuccess = () => {
+              if (run.result) {
+                failure = new LocalSyncConflictError(
+                  'A device-local Mira practice is stored. Review it before replacing this conversation.',
+                );
+                transaction.abort();
+                return;
+              }
+              checked();
+            };
+          }
+          transaction.oncomplete = () => resolve();
+          transaction.onerror = transaction.onabort = () =>
+            reject(failure ?? transaction.error ?? new Error('Conversation sync failed.'));
+        }),
+    );
+  };
+
   return {
+    applySyncSessions: async (expected, desired) => {
+      await applySyncSessions(expected, desired);
+      notifyWorkspaceChanged({ origin: 'sync', topics: ['mira-sessions'] });
+    },
     load: async (id) => {
       const envelope = await withDatabase((database) =>
         read<Envelope>(database, SESSION_STORE, id),
@@ -123,6 +206,7 @@ export function createPrivateMiraStore(options: PrivateStoreOptions = {}): Priva
       const valid = validateSession(session, session.id);
       const envelope = await seal('session', valid.id, valid);
       await withDatabase((database) => put(database, SESSION_STORE, valid.id, envelope));
+      notifyWorkspaceChanged({ origin: 'local', topics: ['mira-sessions'] });
     },
     list: async () => {
       const entries = await withDatabase((database) => readAll<Envelope>(database, SESSION_STORE));
@@ -133,13 +217,15 @@ export function createPrivateMiraStore(options: PrivateStoreOptions = {}): Priva
       );
       return sessions.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
     },
-    remove: async (id) =>
-      withDatabase((database) =>
+    remove: async (id) => {
+      await withDatabase((database) =>
         writeMany(database, [SESSION_STORE, RUN_STORE], (transaction) => {
           transaction.objectStore(SESSION_STORE).delete(id);
           transaction.objectStore(RUN_STORE).delete(id);
         }),
-      ),
+      );
+      notifyWorkspaceChanged({ origin: 'local', topics: ['mira-sessions'] });
+    },
     loadSettings: async () => {
       const envelope = await withDatabase((database) =>
         read<Envelope>(database, SETTINGS_STORE, SETTINGS_ID),
@@ -233,7 +319,21 @@ export function validateSession(value: unknown, id: string): Session {
         string(message.id, 100) &&
         (message.role === 'user' || message.role === 'assistant') &&
         string(message.text, 30000) &&
-        string(message.createdAt, 40),
+        string(message.createdAt, 40) &&
+        (message.patternMentions === undefined ||
+          (message.role === 'user' &&
+            Array.isArray(message.patternMentions) &&
+            message.patternMentions.length <= 100 &&
+            message.patternMentions.every(
+              (mention) =>
+                isRecord(mention) &&
+                string(mention.sourceId, 120) &&
+                string(mention.entityId, 120) &&
+                string(mention.title, 1000),
+            ) &&
+            new Set(
+              message.patternMentions.map((mention) => `${mention.sourceId}:${mention.entityId}`),
+            ).size === message.patternMentions.length)),
     ) ||
     (value.activePattern !== null &&
       (!isRecord(value.activePattern) ||
@@ -246,12 +346,67 @@ export function validateSession(value: unknown, id: string): Session {
   return value as Session;
 }
 
+/** The shared allowlist for portable conversations. Never carry a device's pending request. */
+export function portableMiraSession(value: Session): Session {
+  const session = validateSession(value, value.id);
+  return {
+    id: session.id,
+    title: session.title,
+    modalityId: session.modalityId,
+    createdAt: session.createdAt,
+    updatedAt: session.updatedAt,
+    pendingReplyId: null,
+    activePattern: session.activePattern
+      ? {
+          sourceId: session.activePattern.sourceId,
+          entityId: session.activePattern.entityId,
+          ...(session.activePattern.revision === undefined
+            ? {}
+            : { revision: session.activePattern.revision }),
+        }
+      : null,
+    messages: session.messages.map((message) => ({
+      id: message.id,
+      role: message.role,
+      text: message.text,
+      createdAt: message.createdAt,
+      ...(message.patternMentions === undefined
+        ? {}
+        : {
+            patternMentions: message.patternMentions.map((mention) => ({
+              sourceId: mention.sourceId,
+              entityId: mention.entityId,
+              title: mention.title,
+            })),
+          }),
+    })),
+  };
+}
+
+function sameEnvelope(left: Envelope | undefined, right: Envelope | undefined): boolean {
+  if (!left || !right) return left === right;
+  const same = (a: ArrayBuffer, b: ArrayBuffer) => {
+    const leftBytes = new Uint8Array(a),
+      rightBytes = new Uint8Array(b);
+    return (
+      leftBytes.byteLength === rightBytes.byteLength &&
+      leftBytes.every((byte, index) => byte === rightBytes[index])
+    );
+  };
+  return (
+    left.version === right.version &&
+    same(left.iv, right.iv) &&
+    same(left.ciphertext, right.ciphertext)
+  );
+}
+
 function validateSettings(value: unknown): MiraSettings {
   if (
     !isRecord(value) ||
     !string(value.model, 300) ||
     !string(value.openRouterKey, 2000) ||
     (value.autoSpeak !== undefined && typeof value.autoSpeak !== 'boolean') ||
+    (value.preferredModalityId !== undefined && !string(value.preferredModalityId, 100)) ||
     (value.monthlyBudgetUsd !== undefined &&
       value.monthlyBudgetUsd !== null &&
       (typeof value.monthlyBudgetUsd !== 'number' ||

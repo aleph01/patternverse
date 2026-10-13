@@ -11,6 +11,7 @@ export type VoiceState = Readonly<{
   phase: 'off' | 'starting' | 'listening' | 'interpreting' | 'reading';
   heard: string;
   feedback: string;
+  interim?: string;
 }>;
 type Context = VoiceContext & { sessionId: string | null };
 type Ports = {
@@ -41,7 +42,7 @@ export function createVoiceController(ports: Ports) {
     interpretation?.abort();
     listener?.stop();
     listener = undefined;
-    publish({ phase: 'off', heard: '', feedback });
+    publish({ phase: 'off', heard: '', interim: '', feedback });
   };
   async function dispatch(text: string, version: number, sessionId: string | null) {
     if (version !== epoch || !text.trim()) return;
@@ -99,10 +100,21 @@ export function createVoiceController(ports: Ports) {
     try {
       const next = await ports.listen({
         onInterim: (heard) => {
-          if (version === epoch) publish({ heard });
+          if (version === epoch) {
+            const context = ports.context();
+            const command = parseVoiceCommand(heard, context);
+            publish({
+              heard,
+              interim:
+                !ports.speaking() && context.surface === 'chat' && command?.type === 'draft'
+                  ? heard
+                  : '',
+            });
+          }
         },
         onFinal: (text) => {
           if (version !== epoch) return;
+          publish({ interim: '' });
           if (parseVoiceCommand(text, ports.context())?.type === 'stop') {
             stop();
             return;

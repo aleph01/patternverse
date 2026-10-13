@@ -23,7 +23,12 @@ type SpeechWindow = Window & {
   webkitSpeechRecognition?: new () => Recognition;
 };
 
-export type VoiceListener = Readonly<{ stop: () => void }>;
+export type VoiceListener = Readonly<{
+  /** Cancel listening immediately and discard any unfinished utterance. */
+  stop: () => void;
+  /** Stop capture while allowing the current utterance to finish transcribing. */
+  finish?: () => Promise<void>;
+}>;
 export type VoiceListeningCallbacks = Readonly<{
   onFinal: (text: string) => void;
   onInterim: (text: string) => void;
