@@ -56,40 +56,46 @@ Resolution and backlinks are compiler responsibilities.
 
 ## Interactive Practices
 
-A Pattern may optionally contain one declarative Practice using the `patternverse-practice` fence.
-Standalone Practice entities can use the same representation. The definition is ordered steps, each
-containing ordered, uniquely identified blocks:
+A Pattern or standalone Practice can contain one `patternverse-language` fence.
+Its source is parsed and executed by the shared Rust Pattern Language engine, not
+a separate website interpreter. Articles keep their existing YAML frontmatter.
 
 ````markdown
-```patternverse-practice
-title: Reframe a problem
-introduction: Work through one situation in a few focused steps.
-steps:
-  - id: describe
-    title: Describe the situation
-    blocks:
-      - id: describe-guidance
-        type: markdown
-        content: Write down the current representation of the problem.
-      - id: situation
-        type: text-input
-        label: What is happening?
-        multiline: true
-        required: true
-      - id: reflection-timer
-        type: timer
-        label: Reflection time
-        defaultDurationSeconds: 300
-        userAdjustable: true
-        persistent: true
+```patternverse-language
+:language 1
+:title "Reframe a problem"
+situation = !form {
+  :title "Describe the situation"
+  !show {
+Write down the current representation of the problem.
+  }
+  !ask description {
+    :required true
+    :multiline true
+What is happening?
+  }
+  !ask note {
+    :required false
+    :multiline false
+Anything else?
+  }
+}
+!show {
+Your description: {{situation.description}}
+}
+-> end
 ```
 ````
 
-Supported block types are `markdown`, `text-input`, and `timer`. Step IDs must be unique; block IDs
-must be unique across the whole Practice. Timer durations are positive integral seconds with a
-24-hour maximum. An optional `persistent: true` keeps a timer above every step. Branching,
-conditions, scoring, scripts, and arbitrary JavaScript are not part of the format. See
-[Practices](./practices.md) for the complete model and privacy behavior.
+The corpus exposes `languagePracticeSource` separately from article content.
+Grouped forms use existing typed records, templates and timer contracts. Branching,
+choices, ratings, collections and other supported language statements can appear
+between forms. JavaScript and arbitrary HTML remain unsupported. See
+[Practices](practices.md) and the [language reference](pattern-markdown/README.md).
+
+Legacy `patternverse-practice` YAML remains readable for import. The shared converter
+preserves grouped steps and field settings; new editor saves write Pattern Language
+only. Malformed or ambiguous source is reported rather than silently replaced.
 
 ## Validation and compiled output
 
@@ -109,5 +115,5 @@ canonical authored representation.
 Public pages render headings, lists, blockquotes, links, images, tables, code, and emphasis through a
 Markdown AST pipeline. Wiki links are replaced only in ordinary Markdown text nodes, so code examples
 remain literal. Raw HTML is not passed through, unsafe URL schemes are removed during sanitization,
-and `patternverse-practice` YAML is kept out of the reading article. The parsed structured Practice
-remains available separately for the directly addressable Practice runner.
+and both executable language fences and legacy import fences are kept out of the
+reading article. Language source remains available separately to the shared runtime.
