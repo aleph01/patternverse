@@ -32,6 +32,43 @@ const createTestWorkspace = (
   });
 
 describe('IndexedDB personal workspace', () => {
+  it('persists a private workspace name without changing identity or ownership', async () => {
+    const indexedDB = new IDBFactory();
+    const workspace = createTestWorkspace(indexedDB);
+    const before = await workspace.getWorkspace();
+    await expect(workspace.renameWorkspace('  My ideas  ')).resolves.toEqual({
+      ...before,
+      name: 'My ideas',
+    });
+    await expect(workspace.renameWorkspace(' ')).rejects.toThrow('name');
+    workspace.close();
+    const restored = createTestWorkspace(indexedDB);
+    await expect(restored.getWorkspace()).resolves.toEqual({ ...before, name: 'My ideas' });
+    restored.close();
+  });
+
+  it('rolls back invalid batches and cleans only personal references on deletion', async () => {
+    const workspace = createTestWorkspace();
+    await workspace.createEntity(example);
+    const ref = { sourceId: 'personal', entityId: example.id };
+    const publicRef = { sourceId: 'commons', entityId: example.id };
+    await workspace.setFavorite(ref, true);
+    await workspace.setFavorite(publicRef, true);
+    await workspace.setUsefulness(ref, 1);
+    await expect(
+      workspace.mutateEntities((current) => [{ ...current[0]!, title: '' }]),
+    ).rejects.toThrow();
+    await expect(workspace.getEntity(example.id)).resolves.toMatchObject({ title: example.title });
+    await expect(
+      workspace.mutateEntities((current) => [{ ...current[0]!, id: 'different-id' }]),
+    ).rejects.toThrow('IDs');
+    await workspace.mutateEntities(() => []);
+    await expect(workspace.listEntities()).resolves.toEqual([]);
+    await expect(workspace.getFavorite(ref)).resolves.toBeUndefined();
+    await expect(workspace.getFavorite(publicRef)).resolves.toBeDefined();
+    await expect(workspace.getUsefulness(ref)).resolves.toBeNull();
+    workspace.close();
+  });
   it('creates Draft entities and supports read and list operations', async () => {
     const workspace = createTestWorkspace();
 
@@ -134,6 +171,7 @@ describe('unified Library calculation', () => {
       sourceId: 'personal',
       status: 'draft',
       aliases: ['bug shrinking'],
+      tags: ['debugging', 'assumptions'],
       verses: ['systems-thinking'],
     };
     const commons: LibrarySource = {
@@ -168,6 +206,7 @@ describe('unified Library calculation', () => {
           title: 'Creative Reframing',
           aliases: [],
           summary: 'Change how a problem is represented.',
+          tags: ['perspective-shift'],
           body: 'Generate another interpretation.',
           verseNames: ['Creativity'],
           collectionNames: ['Getting Unstuck'],
@@ -191,6 +230,12 @@ describe('unified Library calculation', () => {
     const search = createLibrarySearch(library);
 
     expect(search.search('refram').map((result) => result.id)).toEqual(['creative-reframing']);
+    expect(search.search('perspective-shift').map((result) => result.id)).toEqual([
+      'creative-reframing',
+    ]);
+    expect(
+      search.search('assumptions', { sourceId: 'personal' }).map((result) => result.id),
+    ).toEqual(['my-debugging-pattern']);
     expect(search.search('bug shrinking').map((result) => result.id)).toEqual([
       'my-debugging-pattern',
     ]);

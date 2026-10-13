@@ -5,8 +5,9 @@ import {
   type SyncPlan,
 } from '@patternverse/sync-domain';
 
-import { snapshotsHaveSameContent } from './apply.js';
+import { CorpusChangePreconditionError, snapshotsHaveSameContent } from './apply.js';
 import { executeSyncPlan } from './executor.js';
+import { syncConflictReviewToken } from './review.js';
 import type {
   RemoteCorpusError,
   SyncExecutionJournal,
@@ -42,7 +43,10 @@ export const synchronizeWorkspace = async (
     } catch (error) {
       return {
         type: 'local-error',
-        error: { type: 'local-unavailable', cause: error },
+        error:
+          error instanceof CorpusChangePreconditionError
+            ? { type: 'local-changed', details: error.message }
+            : { type: 'local-unavailable', cause: error },
         recoveryAvailable: recovered,
       };
     }
@@ -50,9 +54,18 @@ export const synchronizeWorkspace = async (
     const remoteResult = await input.remoteStore.readSnapshot(input.connection);
     if (!remoteResult.ok) return remoteFailure(remoteResult.error, recovered);
 
-    const plan = planCorpusSync({ base, local, remote: remoteResult.snapshot });
-    const resolvedPlan = resolvedPlanFor(plan, input);
-    if (!resolvedPlan) return { type: 'conflict', plan, recovered };
+    const versions = { base, local, remote: remoteResult.snapshot };
+    const plan = planCorpusSync(versions);
+    const reviewToken = await syncConflictReviewToken(versions);
+    if (attempt === 0 && input.reviewedConflictToken && input.reviewedConflictToken !== reviewToken)
+      return { type: 'review-outdated', plan, reviewToken, recovered };
+    // A choice authorizes the versions the user reviewed, not a newer remote edit.
+    // Revision retries must ask again if fresh content introduces a conflict.
+    const resolvedPlan = resolvedPlanFor(
+      plan,
+      attempt === 0 ? input : { ...input, conflictResolutions: undefined },
+    );
+    if (!resolvedPlan) return { type: 'conflict', plan, reviewToken, recovered };
 
     const timestamp = now();
     let journal: SyncExecutionJournal = {
@@ -101,7 +114,10 @@ export const synchronizeWorkspace = async (
     } catch (error) {
       return {
         type: 'local-error',
-        error: { type: 'local-unavailable', cause: error },
+        error:
+          error instanceof CorpusChangePreconditionError
+            ? { type: 'local-changed', details: error.message }
+            : { type: 'local-unavailable', cause: error },
         recoveryAvailable: true,
       };
     }

@@ -1,0 +1,67 @@
+/** The ten public CBT patterns, in curated order. Shared by the library and Mira picker. */
+export const THERAPY_LIBRARY = [
+  {
+    id: 'cbt.thought-record',
+    slug: 'cbt-thought-record',
+    title: 'Thought Record / Cognitive Restructuring',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  {
+    id: 'cbt.activation',
+    slug: 'cbt-activation',
+    title: 'Behavioral Activation',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  { id: 'cbt.exposure', slug: 'cbt-exposure', title: 'Exposure', modality: 'cbt', needsAi: false },
+  {
+    id: 'cbt.experiment',
+    slug: 'cbt-experiment',
+    title: 'Behavioral Experiment',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  {
+    id: 'cbt.problem-solving',
+    slug: 'cbt-problem-solving',
+    title: 'Problem Solving',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  {
+    id: 'cbt.thinking-patterns',
+    slug: 'cbt-thinking-patterns',
+    title: 'Identify Cognitive Distortions',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  {
+    id: 'cbt.downward-arrow',
+    slug: 'cbt-downward-arrow',
+    title: 'Downward Arrow',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  {
+    id: 'cbt.worry-time',
+    slug: 'cbt-worry-time',
+    title: 'Worry Time / Stimulus Control for Worry',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  {
+    id: 'cbt.activity-mood',
+    slug: 'cbt-activity-mood',
+    title: 'Activity–Mood Monitoring',
+    modality: 'cbt',
+    needsAi: false,
+  },
+  {
+    id: 'cbt.graded-task',
+    slug: 'cbt-graded-task',
+    title: 'Graded Task Assignment',
+    modality: 'cbt',
+    needsAi: false,
+  },
+] as const;

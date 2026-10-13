@@ -101,6 +101,13 @@ export type SynchronizeWorkspaceResult =
   | {
       readonly type: 'conflict';
       readonly plan: SyncPlan;
+      readonly reviewToken: string;
+      readonly recovered: boolean;
+    }
+  | {
+      readonly type: 'review-outdated';
+      readonly plan: SyncPlan;
+      readonly reviewToken: string;
       readonly recovered: boolean;
     }
   | {
@@ -120,6 +127,8 @@ export type SynchronizeWorkspaceInput = {
   readonly connection: RemoteConnection;
   readonly stateStore: SyncStateStore;
   readonly conflictResolutions?: SyncConflictResolutions;
+  /** UI callers must pass the token returned with the conflicts they reviewed. */
+  readonly reviewedConflictToken?: string;
   readonly maxRevisionRetries?: number;
   readonly now?: () => Date;
   readonly createJournalId?: () => string;

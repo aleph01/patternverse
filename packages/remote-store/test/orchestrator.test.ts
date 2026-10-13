@@ -45,6 +45,103 @@ const createDevice = (entries: Readonly<Record<string, string>> = {}) => ({
 });
 
 describe('synchronizeWorkspace', () => {
+  it.each(['local', 'remote', 'base'] as const)(
+    'binds conflict choices to the reviewed %s version before any writes',
+    async (side) => {
+      const base = snapshot({ 'patterns/focus.md': 'base' });
+      const device = createDevice({ 'patterns/focus.md': 'local' });
+      await device.stateStore.writeBase(base);
+      const remoteStore = createInMemoryRemoteCorpusStore({
+        initialSnapshot: snapshot({ 'patterns/focus.md': 'remote' }),
+      });
+      const connection = remoteStore.createConnection();
+      const reviewed = await synchronizeWorkspace({ ...device, remoteStore, connection });
+      if (reviewed.type !== 'conflict') throw new Error('Expected review');
+      if (side === 'local')
+        await replaceEntries(device.localStore, { 'patterns/focus.md': 'newer local' });
+      if (side === 'base')
+        await device.stateStore.writeBase(snapshot({ 'patterns/focus.md': 'newer base' }));
+      if (side === 'remote') {
+        const current = remoteStore.inspectSnapshot();
+        await remoteStore.applyChanges(connection, {
+          expectedRevision: current.revision,
+          changes: [
+            {
+              type: 'update',
+              path: 'patterns/focus.md',
+              previousHash: 'sha256:remote',
+              contentHash: 'sha256:newer remote',
+              content: encoder.encode('newer remote'),
+            },
+          ],
+        });
+      }
+      const localBefore = await device.localStore.readSnapshot(),
+        remoteBefore = remoteStore.inspectSnapshot();
+      const result = await synchronizeWorkspace({
+        ...device,
+        remoteStore,
+        connection,
+        reviewedConflictToken: reviewed.reviewToken,
+        conflictResolutions: { 'patterns/focus.md': { type: 'keep-remote' } },
+      });
+      expect(result).toMatchObject({ type: 'review-outdated' });
+      expect(await device.localStore.readSnapshot()).toEqual(localBefore);
+      expect(remoteStore.inspectSnapshot()).toEqual(remoteBefore);
+      expect(await device.stateStore.readJournal()).toBeNull();
+    },
+  );
+  it('requires review again even if changed data no longer produces conflicts', async () => {
+    const device = createDevice({ 'patterns/focus.md': 'local' });
+    const remoteStore = createInMemoryRemoteCorpusStore({
+      initialSnapshot: snapshot({ 'patterns/focus.md': 'remote' }),
+    });
+    const connection = remoteStore.createConnection();
+    const reviewed = await synchronizeWorkspace({ ...device, remoteStore, connection });
+    if (reviewed.type !== 'conflict') throw new Error('Expected review');
+    await replaceEntries(device.localStore, { 'patterns/focus.md': 'remote' });
+    expect(
+      await synchronizeWorkspace({
+        ...device,
+        remoteStore,
+        connection,
+        reviewedConflictToken: reviewed.reviewToken,
+        conflictResolutions: { 'patterns/focus.md': { type: 'keep-local' } },
+      }),
+    ).toMatchObject({ type: 'review-outdated', plan: { conflicts: [] } });
+    expect((await device.stateStore.readBase()).files).toHaveLength(0);
+  });
+  it('requires a fresh choice when a revision retry reveals new conflicting content', async () => {
+    const base = snapshot({ 'patterns/focus.md': 'base' });
+    const localStore = createInMemoryPersonalCorpusStore(
+      snapshot({ 'patterns/focus.md': 'local' }),
+    );
+    const stateStore = createInMemorySyncStateStore(base);
+    const remoteStore = createInMemoryRemoteCorpusStore({
+      initialSnapshot: snapshot({ 'patterns/focus.md': 'remote' }),
+    });
+    const connection = remoteStore.createConnection();
+    remoteStore.simulateConcurrentChangesOnNextApply([
+      {
+        type: 'update',
+        path: 'patterns/focus.md',
+        previousHash: 'sha256:remote',
+        contentHash: 'sha256:new-remote',
+        content: encoder.encode('new-remote'),
+      },
+    ]);
+    const result = await synchronizeWorkspace({
+      localStore,
+      stateStore,
+      remoteStore,
+      connection,
+      conflictResolutions: { 'patterns/focus.md': { type: 'keep-local' } },
+    });
+    expect(result).toMatchObject({ type: 'conflict' });
+    expect(entriesOf(remoteStore.inspectSnapshot())).toEqual({ 'patterns/focus.md': 'new-remote' });
+    expect(entriesOf(await localStore.readSnapshot())).toEqual({ 'patterns/focus.md': 'local' });
+    expect(entriesOf(await stateStore.readBase())).toEqual({ 'patterns/focus.md': 'base' });
+  });
   it('synchronizes a new entity from one simulated device to a second', async () => {
     const remoteStore = createInMemoryRemoteCorpusStore();
     const connectionA = remoteStore.createConnection('device-a');
