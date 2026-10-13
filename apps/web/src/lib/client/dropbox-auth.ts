@@ -91,6 +91,15 @@ export const exchangeDropboxAuthorizationCode = async ({
   });
   if (!tokenResponse.ok) throw new Error('Dropbox could not complete authorization.');
   const token = (await tokenResponse.json()) as DropboxTokenResponse;
+  if (
+    typeof token.access_token !== 'string' ||
+    !token.access_token ||
+    typeof token.account_id !== 'string' ||
+    !token.account_id ||
+    !Number.isFinite(token.expires_in) ||
+    token.expires_in <= 0
+  )
+    throw new Error('Dropbox returned an invalid authorization response.');
 
   const accountResponse = await fetcher('https://api.dropboxapi.com/2/users/get_current_account', {
     method: 'POST',
@@ -99,6 +108,8 @@ export const exchangeDropboxAuthorizationCode = async ({
   const account = accountResponse.ok
     ? ((await accountResponse.json()) as DropboxAccountResponse)
     : undefined;
+  if (account && account.account_id !== token.account_id)
+    throw new Error('Dropbox returned inconsistent account information. Please reconnect.');
 
   return {
     accessToken: token.access_token,
@@ -114,7 +125,15 @@ export const readDropboxConnection = (storage: Storage): DropboxConnection | und
   if (!raw) return undefined;
   try {
     const connection = JSON.parse(raw) as DropboxConnection;
-    if (!connection.accessToken || Date.parse(connection.expiresAt) <= Date.now()) {
+    if (
+      !connection ||
+      typeof connection.accessToken !== 'string' ||
+      !connection.accessToken ||
+      typeof connection.accountId !== 'string' ||
+      !connection.accountId.trim() ||
+      !Number.isFinite(Date.parse(connection.expiresAt)) ||
+      Date.parse(connection.expiresAt) <= Date.now()
+    ) {
       storage.removeItem(DROPBOX_CONNECTION_STORAGE_KEY);
       return undefined;
     }

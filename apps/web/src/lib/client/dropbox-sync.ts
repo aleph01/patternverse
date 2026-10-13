@@ -1,28 +1,33 @@
-import { rawEntitySchema, type RawEntity } from '@patternverse/schema';
 import type { CreatePersonalEntityInput, LocalWorkspace } from '@patternverse/workspace';
-import type { Session } from '@patternverse/companion-core';
-import { validateSession, type PrivateMiraStore } from '$lib/mira/private-store';
+import type { PrivateMiraStore } from '$lib/mira/private-store';
 import type { DropboxConnection } from './dropbox-auth';
+import { claimDropboxWorkspace } from './dropbox-account';
+import { parseLegacySyncSnapshot, type LegacySyncSnapshot } from './sync-snapshot';
+import {
+  deriveSyncKey,
+  MAX_SYNC_DOCUMENT_BYTES,
+  openSyncDocument,
+  randomSyncBytes as randomBytes,
+  sealSyncDocument,
+  syncBase64 as base64,
+  syncUnbase64 as unbase64,
+  type SyncEnvelope,
+} from './sync-envelope';
 
 const FILE_PATH = '/patternverse-sync-v1.json';
 const DATABASE = 'patternverse-cross-device-sync-v1';
-const MAX_FILE_BYTES = 8 * 1024 * 1024;
-const ITERATIONS = 600_000;
+const MAX_FILE_BYTES = MAX_SYNC_DOCUMENT_BYTES;
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
-export type SyncSnapshot = Readonly<{
-  version: 1;
-  entities: readonly RawEntity[];
-  sessions: readonly Session[];
-}>;
+export type SyncSnapshot = LegacySyncSnapshot;
 export type SyncConflict = Readonly<{ key: string; title: string }>;
 export type SyncChoice = 'local' | 'remote';
 export type SyncResult =
   | Readonly<{ type: 'complete'; entities: number; sessions: number }>
   | Readonly<{ type: 'conflicts'; conflicts: readonly SyncConflict[]; token: string }>;
 
-type Envelope = Readonly<{ version: 1; salt: string; iv: string; data: string }>;
+type Envelope = SyncEnvelope<1>;
 type RemoteDocument = Readonly<{ revision: string | null; envelope: Envelope | null }>;
 type StoredKey = Readonly<{ salt: string; key: CryptoKey }>;
 type SealedBase = Readonly<{ iv: string; data: string }>;
@@ -40,6 +45,7 @@ export async function syncWithDropbox(
   }>,
 ): Promise<SyncResult> {
   const { connection, workspace, mira } = input;
+  await claimDropboxWorkspace(connection.accountId);
   const remote = await readRemote(connection.accessToken, input.fetcher ?? fetch);
   const salt =
     remote.envelope?.salt ?? (await loadKey(connection.accountId))?.salt ?? base64(randomBytes(16));
@@ -76,6 +82,8 @@ export async function hasDropboxSyncKey(accountId: string): Promise<boolean> {
 }
 
 export async function forgetDropboxSyncKey(accountId: string): Promise<void> {
+  // Upgrade legacy ownership before erasing the only records identifying its account.
+  await claimDropboxWorkspace(accountId);
   await withDatabase((database) => write(database, 'keys', accountId, undefined));
   await withDatabase((database) => write(database, 'bases', accountId, undefined));
 }
@@ -136,8 +144,6 @@ async function snapshotToken(snapshot: SyncSnapshot, revision: string | null): P
   const bytes = encoder.encode(`${revision ?? 'new'}:${JSON.stringify(snapshot)}`);
   return base64(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)));
 }
-const randomBytes = (size: number): Uint8Array<ArrayBuffer> =>
-  crypto.getRandomValues(new Uint8Array(new ArrayBuffer(size)));
 
 async function localSnapshot(
   workspace: LocalWorkspace,
@@ -170,51 +176,18 @@ async function applySnapshot(
 }
 
 function validateSnapshot(value: unknown): SyncSnapshot {
-  if (
-    !isRecord(value) ||
-    value.version !== 1 ||
-    !Array.isArray(value.entities) ||
-    !Array.isArray(value.sessions)
-  )
-    throw new Error('The Dropbox sync file has an unsupported format.');
-  const entities = value.entities.map((entry) => rawEntitySchema.parse(entry));
-  if (entities.some((entry) => entry.sourceId !== 'personal'))
-    throw new Error('The Dropbox sync file contains an invalid personal library item.');
-  const sessions = value.sessions.map((entry) => {
-    if (!isRecord(entry) || typeof entry.id !== 'string')
-      throw new Error('Invalid synced session.');
-    return validateSession(entry, entry.id);
-  });
-  if (
-    new Set(entities.map((item) => item.id)).size !== entities.length ||
-    new Set(sessions.map((item) => item.id)).size !== sessions.length
-  )
-    throw new Error('The Dropbox sync file contains duplicate IDs.');
-  return { version: 1, entities: entities as RawEntity[], sessions };
-}
-
-async function deriveKey(phrase: string, salt: string): Promise<CryptoKey> {
-  if (phrase.length < 12) throw new Error('Use a sync phrase of at least 12 characters.');
-  const material = await crypto.subtle.importKey('raw', encoder.encode(phrase), 'PBKDF2', false, [
-    'deriveKey',
-  ]);
-  return crypto.subtle.deriveKey(
-    { name: 'PBKDF2', salt: unbase64(salt), iterations: ITERATIONS, hash: 'SHA-256' },
-    material,
-    { name: 'AES-GCM', length: 256 },
-    false,
-    ['encrypt', 'decrypt'],
-  );
+  return parseLegacySyncSnapshot(value);
 }
 
 async function unlockKey(accountId: string, salt: string, phrase?: string): Promise<CryptoKey> {
   const saved = await loadKey(accountId);
   if (saved?.salt === salt && !phrase) return saved.key;
   if (!phrase) throw new Error('Enter your sync phrase to link this device.');
-  return deriveKey(phrase, salt);
+  return deriveSyncKey(phrase, salt);
 }
 
-async function saveKey(accountId: string, salt: string, key: CryptoKey): Promise<void> {
+/** Shared device key cache for the legacy and workspace adapters, not a new credential store. */
+export async function saveKey(accountId: string, salt: string, key: CryptoKey): Promise<void> {
   await withDatabase((database) => write(database, 'keys', accountId, { salt, key }));
 }
 
@@ -223,28 +196,12 @@ async function sealSnapshot(
   key: CryptoKey,
   salt: string,
 ): Promise<Envelope> {
-  const iv = randomBytes(12);
-  const data = encoder.encode(JSON.stringify(snapshot));
-  if (data.byteLength > MAX_FILE_BYTES) throw new Error('The sync archive exceeds 8 MB.');
-  const ciphertext = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv, additionalData: encoder.encode('patternverse-sync-v1') },
-    key,
-    data,
-  );
-  return { version: 1, salt, iv: base64(iv), data: base64(new Uint8Array(ciphertext)) };
+  return sealSyncDocument(encoder.encode(JSON.stringify(snapshot)), key, salt, 1);
 }
 
 async function unsealSnapshot(envelope: Envelope, key: CryptoKey): Promise<SyncSnapshot> {
   try {
-    const plaintext = await crypto.subtle.decrypt(
-      {
-        name: 'AES-GCM',
-        iv: unbase64(envelope.iv),
-        additionalData: encoder.encode('patternverse-sync-v1'),
-      },
-      key,
-      unbase64(envelope.data),
-    );
+    const plaintext = await openSyncDocument(envelope, key);
     return validateSnapshot(JSON.parse(decoder.decode(plaintext)));
   } catch {
     throw new Error('The sync phrase did not unlock the Dropbox data, or the archive is damaged.');
@@ -310,11 +267,12 @@ function dropboxError(status: number): Error {
   );
 }
 
-async function loadKey(accountId: string): Promise<StoredKey | undefined> {
+export async function loadKey(accountId: string): Promise<StoredKey | undefined> {
   return withDatabase((database) => read<StoredKey>(database, 'keys', accountId));
 }
 
-async function loadBase(accountId: string, key: CryptoKey): Promise<SyncSnapshot | null> {
+/** Last successful v1 ancestor, reused during explicit archive upgrade. */
+export async function loadBase(accountId: string, key: CryptoKey): Promise<SyncSnapshot | null> {
   const sealed = await withDatabase((database) => read<SealedBase>(database, 'bases', accountId));
   if (!sealed) return null;
   const value = await crypto.subtle.decrypt(
@@ -340,30 +298,17 @@ async function saveBase(accountId: string, key: CryptoKey, snapshot: SyncSnapsho
   );
 }
 
-function base64(value: Uint8Array): string {
-  let binary = '';
-  for (let offset = 0; offset < value.length; offset += 8192)
-    binary += String.fromCharCode(...value.slice(offset, offset + 8192));
-  return btoa(binary);
-}
-
-function unbase64(value: string): Uint8Array<ArrayBuffer> {
-  const binary = atob(value);
-  const bytes = new Uint8Array(new ArrayBuffer(binary.length));
-  for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
-  return bytes;
-}
-
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DATABASE, 1);
+    const request = indexedDB.open(DATABASE, 2);
     request.onupgradeneeded = () => {
-      request.result.createObjectStore('keys');
-      request.result.createObjectStore('bases');
+      for (const store of ['keys', 'bases', 'metadata'])
+        if (!request.result.objectStoreNames.contains(store))
+          request.result.createObjectStore(store);
     };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
