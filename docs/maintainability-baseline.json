@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-13",
+  "browser": {
+    "command": "pnpm test:e2e",
+    "passed": 303,
+    "failed": 65,
+    "skipped": 4,
+    "failures": [
+      "[chromium] › tests/about.spec.ts:58:1 › introduces the pattern language on its own explainer page",
+      "[chromium] › tests/apps.spec.ts:3:1 › a CBT checklist and cached pattern page work offline ─────",
+      "[chromium] › tests/apps.spec.ts:78:1 › a library technique opens for review and runs with checklist choices without AI",
+      "[chromium] › tests/daily-patterns.spec.ts:8:1 › daily editorial trio is stable, uses native icons, and adapts to mobile",
+      "[chromium] › tests/daily-patterns.spec.ts:80:1 › an open page rolls over after midnight and updates when returning to the tab",
+      "[chromium] › tests/header.spec.ts:3:1 › keeps navigation typography and alignment consistent at desktop and phone widths",
+      "[chromium] › tests/header.spec.ts:49:1 › keeps the same header layout when navigating between Apps and other pages",
+      "[chromium] › tests/illustrations.spec.ts:3:1 › featured illustrations lead the cards in compact and non-wide layouts",
+      "[chromium] › tests/launch-security.spec.ts:27:1 › production CSP permits the app bootstrap but blocks injected inline scripts",
+      "[chromium] › tests/learning-content.spec.ts:3:1 › Learning exposes the collection, complete articles, related links, and search aliases",
+      "[chromium] › tests/library-create.spec.ts:3:1 › moves creation to workspace and finds the private pattern in the library",
+      "[chromium] › tests/local-workspace.spec.ts:3:1 › creates private local content, retains ownership on reload, and never publishes it",
+      "[chromium] › tests/local-workspace.spec.ts:90:1 › upgrades legacy local data in place and retains its stable workspace on subsequent opens",
+      "[chromium] › tests/mcp-widget.spec.ts:3:1 › shows a website fallback if the host blocks WebAssembly, without executing elsewhere",
+      "[chromium] › tests/mcp-widget.spec.ts:18:1 › executes the shared worksheet inline without leaking answers or persisting state",
+      "[chromium] › tests/nlp-content.spec.ts:3:1 › browses the NLP collection inside Therapy and reads patterns with optional practices",
+      "[chromium] › tests/offline.spec.ts:74:1 › refreshes cached pages while online without losing offline navigation",
+      "[chromium] › tests/offline.spec.ts:104:1 › keeps Commons search, reading, and personal editing available offline",
+      "[chromium] › tests/pattern-entry-points.spec.ts:28:1 › runs an NLP source as an appended worksheet without Mira or AI",
+      "[chromium] › tests/reading.spec.ts:113:1 › shows exactly the ten curated CBT patterns ──────────",
+      "[chromium] › tests/release-core.spec.ts:3:1 › keeps chat and local practice selectors available while hiding advanced Mira tools",
+      "[chromium] › tests/release-core.spec.ts:36:1 › hides Dropbox while preserving the personal workspace",
+      "[chromium] › tests/release-core.spec.ts:54:1 › keeps the CBT collection and its practices available without AI",
+      "[chromium] › tests/worksheet.spec.ts:85:1 › catalog workbooks preserve readiness and safety exits without route numbers",
+      "[chromium] › tests/worksheet.spec.ts:116:1 › the editor exports conditional tables and hides AI-dependent or ambiguous workbooks",
+      "[chromium] › tests/workspace.spec.ts:103:1 › creates, previews, validates, and edits a personal Markdown entity",
+      "[chromium] › tests/workspace.spec.ts:180:1 › searches personal and Commons knowledge together with source and type filters",
+      "[chromium] › tests/workspace.spec.ts:211:1 › edits collection references without manual ordering and blocks invalid saves",
+      "[chromium] › tests/workspace.spec.ts:258:1 › preserves the builder for an existing legacy Practice without forced conversion",
+      "[mobile-chromium] › tests/about.spec.ts:58:1 › introduces the pattern language on its own explainer page",
+      "[mobile-chromium] › tests/apps.spec.ts:3:1 › a CBT checklist and cached pattern page work offline",
+      "[mobile-chromium] › tests/apps.spec.ts:78:1 › a library technique opens for review and runs with checklist choices without AI",
+      "[mobile-chromium] › tests/daily-patterns.spec.ts:8:1 › daily editorial trio is stable, uses native icons, and adapts to mobile",
+      "[mobile-chromium] › tests/daily-patterns.spec.ts:80:1 › an open page rolls over after midnight and updates when returning to the tab",
+      "[mobile-chromium] › tests/entry-interactions.spec.ts:3:1 › Verse collections reuse library hover and keyboard-focus colors",
+      "[mobile-chromium] › tests/header.spec.ts:3:1 › keeps navigation typography and alignment consistent at desktop and phone widths",
+      "[mobile-chromium] › tests/header.spec.ts:49:1 › keeps the same header layout when navigating between Apps and other pages",
+      "[mobile-chromium] › tests/home.spec.ts:3:1 › introduces Patternverse and directs pattern browsing to the library",
+      "[mobile-chromium] › tests/illustrations.spec.ts:3:1 › featured illustrations lead the cards in compact and non-wide layouts",
+      "[mobile-chromium] › tests/launch-security.spec.ts:27:1 › production CSP permits the app bootstrap but blocks injected inline scripts",
+      "[mobile-chromium] › tests/learning-content.spec.ts:3:1 › Learning exposes the collection, complete articles, related links, and search aliases",
+      "[mobile-chromium] › tests/library-create.spec.ts:3:1 › moves creation to workspace and finds the private pattern in the library",
+      "[mobile-chromium] › tests/local-workspace.spec.ts:3:1 › creates private local content, retains ownership on reload, and never publishes it",
+      "[mobile-chromium] › tests/local-workspace.spec.ts:90:1 › upgrades legacy local data in place and retains its stable workspace on subsequent opens",
+      "[mobile-chromium] › tests/mcp-widget.spec.ts:3:1 › shows a website fallback if the host blocks WebAssembly, without executing elsewhere",
+      "[mobile-chromium] › tests/mcp-widget.spec.ts:18:1 › executes the shared worksheet inline without leaking answers or persisting state",
+      "[mobile-chromium] › tests/nlp-content.spec.ts:3:1 › browses the NLP collection inside Therapy and reads patterns with optional practices",
+      "[mobile-chromium] › tests/nlp-content.spec.ts:37:1 › discovers the collection and imported patterns through library search",
+      "[mobile-chromium] › tests/offline.spec.ts:74:1 › refreshes cached pages while online without losing offline navigation",
+      "[mobile-chromium] › tests/offline.spec.ts:104:1 › keeps Commons search, reading, and personal editing available offline",
+      "[mobile-chromium] › tests/pagination.spec.ts:48:1 › library paging retains filters and layout but resets when those filters change",
+      "[mobile-chromium] › tests/pattern-entry-points.spec.ts:28:1 › runs an NLP source as an appended worksheet without Mira or AI",
+      "[mobile-chromium] › tests/pattern-icons.spec.ts:6:1 › uses the same grid icon in cards, lists, search and article headers, with text-only mobile",
+      "[mobile-chromium] › tests/reading.spec.ts:113:1 › shows exactly the ten curated CBT patterns ───",
+      "[mobile-chromium] › tests/release-core.spec.ts:3:1 › keeps chat and local practice selectors available while hiding advanced Mira tools",
+      "[mobile-chromium] › tests/release-core.spec.ts:36:1 › hides Dropbox while preserving the personal workspace",
+      "[mobile-chromium] › tests/release-core.spec.ts:46:1 › keeps browsing and editing patterns available",
+      "[mobile-chromium] › tests/release-core.spec.ts:54:1 › keeps the CBT collection and its practices available without AI",
+      "[mobile-chromium] › tests/worksheet.spec.ts:85:1 › catalog workbooks preserve readiness and safety exits without route numbers",
+      "[mobile-chromium] › tests/worksheet.spec.ts:116:1 › the editor exports conditional tables and hides AI-dependent or ambiguous workbooks",
+      "[mobile-chromium] › tests/workspace-management.spec.ts:134:1 › settings persist and control library layout and pagination",
+      "[mobile-chromium] › tests/workspace.spec.ts:103:1 › creates, previews, validates, and edits a personal Markdown entity",
+      "[mobile-chromium] › tests/workspace.spec.ts:180:1 › searches personal and Commons knowledge together with source and type filters",
+      "[mobile-chromium] › tests/workspace.spec.ts:211:1 › edits collection references without manual ordering and blocks invalid saves",
+      "[mobile-chromium] › tests/workspace.spec.ts:258:1 › preserves the builder for an existing legacy Practice without forced conversion"
+    ]
+  },
+  "webUnits": {
+    "command": "pnpm --filter @patternverse/web test",
+    "passed": 1360,
+    "failed": 4,
+    "failures": [
+      "LibraryCollections.component.test.ts: shows unsaved items inside a saved collection and bookmarks them without closing the collection (saved count 1 versus expected 2)",
+      "PatternFeed.component.test.ts: excludes Commons and personal verses/concepts/practices from All, search and My library (duplicate Clear search controls)",
+      "PatternFeed.component.test.ts: shows Explore without a redundant clear action for an empty personal library (duplicate Explore controls)",
+      "PatternFeed.component.test.ts: filters actual verse membership and combines it with search on either layout (duplicate Clear search controls)"
+    ]
+  },
+  "mcp": {
+    "command": "pnpm mcp:test",
+    "passed": 20,
+    "failed": 1,
+    "failure": "stdio.test.ts: returns structured data and matching readable fallback content; assumes cbt-abc-diary is the first search result, received double-standard-technique"
+  },
+  "rustCore": {
+    "command": "cargo test --locked --manifest-path crates/pattern-core/Cargo.toml",
+    "failure": "function_docs::production_functions_have_documented_contracts: compiler/timer.rs sticky_default and is_sticky lack function docs"
+  },
+  "format": {
+    "command": "pnpm format:check",
+    "failures": [
+      "apps/web/src/lib/components/PatternverseGuide.svelte",
+      "apps/web/src/lib/mira/openrouter.ts",
+      "apps/web/tests/about.spec.ts",
+      "apps/web/tests/home.spec.ts"
+    ]
+  },
+  "environment": {
+    "wasmBuild": "wasm32-unknown-unknown target is not installed",
+    "sandboxTests": "Worker tests require localhost binding; pass outside restricted sandbox with WRANGLER_LOG_PATH=/tmp/patternverse-refactor-wrangler.log"
+  }
+}
