@@ -7,6 +7,8 @@ import {
   structureDependents,
   planStructureDeletion,
   assertVerseHome,
+  planVerseAddition,
+  planVerseRemoval,
   type PersonalStructure,
 } from './structure-management';
 
@@ -52,6 +54,52 @@ const parentCollection: RawEntity = {
 };
 
 describe('personal structure management', () => {
+  it('adds a member immutably, retaining ordered valid homes and removing obsolete ones', () => {
+    const member = { ...pattern, verses: ['missing', 'creativity', 'therapy', 'creativity'] };
+    const current = [verse, member, collection];
+    const before = structuredClone(current);
+    const next = planVerseAddition(current, verse.id, member.id, [
+      { id: 'creativity', type: 'verse', sourceId: 'commons' },
+    ]);
+    expect(next).toEqual([verse, { ...member, verses: ['creativity', 'therapy'] }, collection]);
+    expect(current).toEqual(before);
+    expect(next[0]).toBe(verse);
+    expect(next[2]).toBe(collection);
+    expect(() => planVerseAddition([member], verse.id, member.id, [])).toThrow('no longer exists');
+  });
+
+  it('does not resolve a public home through a private non-verse with the same ID', () => {
+    const shadow = { ...collection, id: 'creativity', verses: ['therapy'] };
+    const member = { ...pattern, verses: ['creativity'] };
+    const commons = [{ id: 'creativity', type: 'verse', sourceId: 'commons' }];
+    const next = planVerseAddition([verse, shadow, member], verse.id, member.id, commons);
+    expect(next[2]).toEqual({ ...member, verses: ['therapy'] });
+    expect(() =>
+      planVerseRemoval([verse, shadow, pattern], verse, pattern.id, commons, 'creativity'),
+    ).toThrow('Choose');
+  });
+
+  it('moves one member without mutating the input or removing other homes', () => {
+    const member = { ...pattern, verses: ['therapy', 'creativity'] };
+    const current = [verse, member, collection];
+    const commons = [{ id: 'creativity', type: 'verse', sourceId: 'commons' }];
+    expect(planVerseRemoval(current, verse, member.id, commons, 'creativity')).toEqual([
+      verse,
+      { ...member, verses: ['creativity'] },
+      collection,
+    ]);
+    expect(planVerseRemoval(current, verse, member.id, commons, '')).toEqual([
+      verse,
+      { ...member, verses: ['creativity'] },
+      collection,
+    ]);
+    expect(member.verses).toEqual(['therapy', 'creativity']);
+    expect(() => planVerseRemoval([verse, pattern], verse, pattern.id, [], '')).toThrow('Move');
+    expect(() => planVerseRemoval([verse, pattern], verse, pattern.id, [], 'missing')).toThrow(
+      'Choose',
+    );
+  });
+
   it('refuses to remove the last verse home', () => {
     expect(structureDependents([verse, pattern, parentCollection], verse)).toEqual([
       pattern,

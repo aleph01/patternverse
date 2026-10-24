@@ -10,14 +10,19 @@
   import type { EntitySummary } from '$lib/server/commons';
   import { getLocalWorkspace } from '$lib/client/workspace';
   import {
-    assertVerseHome,
     deletePersonalPattern,
     deletePersonalStructure,
-    removeStructureReference,
+    planVerseAddition,
+    planVerseRemoval,
     structureDependents,
-    validVerseIds,
     type PersonalStructure,
   } from '$lib/structure-management';
+  import WorkspaceStructurePanel from './WorkspaceStructurePanel.svelte';
+  import {
+    workspaceManagementView,
+    type WorkspaceContentTab,
+  } from '$lib/client/workspace-management-view';
+  import { emptyStructureDraft } from '$lib/client/structure-panel';
   import { verseAccentClass } from '$lib/verse-accent';
 
   let { commonsEntities }: { commonsEntities: readonly EntitySummary[] } = $props();
@@ -28,55 +33,29 @@
   let busy = $state(false);
   let message = $state('');
   let error = $state('');
-  let tab = $state<'verse' | 'collection' | 'pattern' | 'saved'>('verse');
+  let tab = $state<WorkspaceContentTab>('verse');
   let managingId = $state('');
-  let title = $state('');
-  let summary = $state('');
-  let destination = $state('');
-  let addingId = $state('');
+  let details = $state(emptyStructureDraft());
   let panel = $state<HTMLElement>();
 
-  const verseIds = $derived(validVerseIds(personal, commonsEntities));
-  const verses = $derived(
-    [
-      ...personal,
-      ...commonsEntities.filter((entry) => !personal.some((local) => local.id === entry.id)),
-    ].filter((entry) => entry.type === 'verse'),
-  );
-  const visible = $derived(
-    personal.filter((entry) =>
-      tab === 'pattern'
-        ? entry.type !== 'verse' && entry.type !== 'collection'
-        : entry.type === tab,
-    ),
-  );
-  const managing = $derived(
-    personal.find(
-      (entry): entry is PersonalStructure =>
-        entry.id === managingId && (entry.type === 'verse' || entry.type === 'collection'),
-    ),
-  );
-  const members = $derived(managing ? structureDependents(personal, managing) : []);
-  const unassigned = $derived(
-    personal.filter(
-      (entry) =>
-        (entry.type === 'pattern' || entry.type === 'collection') &&
-        (!entry.verses?.length || entry.verses.some((id) => !verseIds.has(id))),
-    ),
-  );
-  const available = $derived(
-    personal.filter(
-      (entry) => entry.type !== 'verse' && !members.some((member) => member.id === entry.id),
-    ),
-  );
-  const savedArticles = $derived(
-    savedEntries.map((savedEntry) => ({
-      savedEntry,
-      entity: (savedEntry.ref.sourceId === 'personal' ? personal : commonsEntities).find(
-        (entry) =>
-          entry.id === savedEntry.ref.entityId && entry.sourceId === savedEntry.ref.sourceId,
-      ),
-    })),
+  const {
+    verseIds,
+    verses,
+    visible,
+    managing,
+    members,
+    unassigned,
+    available,
+    savedArticles,
+    tabs,
+  } = $derived(
+    workspaceManagementView({
+      personal,
+      commons: commonsEntities,
+      saved: savedEntries,
+      tab,
+      managingId,
+    }),
   );
 
   let reload = async () => {};
@@ -116,25 +95,9 @@
       window.removeEventListener('focus', refresh);
     };
   });
-  async function action(work: () => Promise<void>) {
-    if (busy) return;
-    busy = true;
-    error = '';
-    message = '';
-    try {
-      await work();
-    } catch (cause) {
-      error = cause instanceof Error ? cause.message : 'Your change could not be saved.';
-    } finally {
-      busy = false;
-    }
-  }
   async function manage(entity: PersonalStructure) {
     managingId = entity.id;
-    title = entity.title;
-    summary = entity.summary ?? '';
-    destination = '';
-    addingId = '';
+    details = { ...emptyStructureDraft(), title: entity.title, summary: entity.summary ?? '' };
     error = '';
     message = '';
     await tick();
@@ -144,66 +107,32 @@
   async function saveDetails() {
     if (!workspace || !managing) return;
     const entity = managing;
-    if (!title.trim()) throw new Error('Enter a name before saving.');
+    if (!details.title.trim()) throw new Error('Enter a name before saving.');
     await workspace.updateEntity(entity.id, (current) => ({
       ...current,
-      title: title.trim(),
-      summary: summary.trim() || undefined,
+      title: details.title.trim(),
+      summary: details.summary.trim() || undefined,
     }));
     await reload();
     message = 'Name and description saved. The item stays private.';
   }
   async function addToVerse() {
-    if (!workspace || !managing || managing.type !== 'verse' || !addingId) return;
+    if (!workspace || !managing || managing.type !== 'verse' || !details.addingId) return;
     const verseId = managing.id;
-    await workspace.mutateEntities((current) => {
-      if (!current.some((entry) => entry.id === verseId && entry.type === 'verse'))
-        throw new Error('This verse no longer exists.');
-      return current.map((entry) => {
-        if (entry.id !== addingId || entry.type === 'verse') return entry;
-        const updated = {
-          ...entry,
-          verses: [
-            ...new Set([
-              ...(entry.verses ?? []).filter((id) =>
-                validVerseIds(current, commonsEntities).has(id),
-              ),
-              verseId,
-            ]),
-          ],
-        };
-        assertVerseHome(updated, current, commonsEntities);
-        return updated;
-      });
-    });
+    const addingId = details.addingId;
+    await workspace.mutateEntities((current) =>
+      planVerseAddition(current, verseId, addingId, commonsEntities),
+    );
     await reload();
-    addingId = '';
+    details.addingId = '';
     message = 'Added to this verse.';
   }
   async function removeFromVerse(entity: RawEntity) {
     if (!workspace || !managing || managing.type !== 'verse') return;
     const structure = managing;
+    const destination = details.destination;
     await workspace.mutateEntities((current) =>
-      current.map((entry) => {
-        if (entry.id !== entity.id || entry.type === 'verse') return entry;
-        const updated = destination
-          ? {
-              ...entry,
-              verses: [
-                ...new Set([
-                  ...(entry.verses ?? []).filter((id) => id !== structure.id),
-                  destination,
-                ]),
-              ],
-            }
-          : removeStructureReference(entry, structure);
-        assertVerseHome(
-          updated,
-          current.filter((record) => record.id !== structure.id),
-          commonsEntities,
-        );
-        return updated;
-      }),
+      planVerseRemoval(current, structure, entity.id, commonsEntities, destination),
     );
     await reload();
     message = destination
@@ -214,7 +143,7 @@
     if (!workspace) return;
     const dependentCount =
       entity.type === 'verse' ? structureDependents(personal, entity).length : 0;
-    if (dependentCount && !destination)
+    if (dependentCount && !details.destination)
       throw new Error('Choose a destination verse before deleting this verse.');
     const warning =
       entity.type === 'verse' && dependentCount
@@ -227,7 +156,12 @@
     )
       return;
     if (entity.type === 'verse' || entity.type === 'collection')
-      await deletePersonalStructure(workspace, entity, commonsEntities, destination || undefined);
+      await deletePersonalStructure(
+        workspace,
+        entity,
+        commonsEntities,
+        details.destination || undefined,
+      );
     else await deletePersonalPattern(workspace, entity);
     managingId = '';
     await reload();
@@ -247,6 +181,19 @@
     await setLibrarySaved(savedEntry.ref, false);
     await reload();
     message = 'Removed from my library. The public article is unchanged.';
+  }
+  async function action(work: () => Promise<void>) {
+    if (busy) return;
+    busy = true;
+    error = '';
+    message = '';
+    try {
+      await work();
+    } catch (cause) {
+      error = cause instanceof Error ? cause.message : 'Your change could not be saved.';
+    } finally {
+      busy = false;
+    }
   }
   function hasHome(entity: RawEntity) {
     return (
@@ -283,23 +230,14 @@
         >{/each}
     </div>{/if}
   <div class="content-tabs" aria-label="Workspace content">
-    {#each [{ id: 'verse', label: 'Verses' }, { id: 'collection', label: 'Collections' }, { id: 'pattern', label: 'Patterns' }, { id: 'saved', label: 'Saved from Explore' }] as entry (entry.id)}<button
+    {#each tabs as entry (entry.id)}<button
         type="button"
         aria-pressed={tab === entry.id}
         onclick={() => {
-          tab = entry.id as typeof tab;
+          tab = entry.id;
           managingId = '';
           void reload();
-        }}
-        >{entry.label}<span
-          >{entry.id === 'saved'
-            ? savedEntries.length
-            : personal.filter((entity) =>
-                entry.id === 'pattern'
-                  ? entity.type !== 'verse' && entity.type !== 'collection'
-                  : entity.type === entry.id,
-              ).length}</span
-        ></button
+        }}>{entry.label}<span>{entry.count}</span></button
       >{/each}
   </div>
   {#if !ready}<p class="empty">Loading your workspace…</p>
@@ -373,79 +311,25 @@
   {/if}
 
   {#if managing}
-    <section class="manage-panel" bind:this={panel} tabindex="-1" aria-labelledby="manage-title">
-      <header>
-        <h3 id="manage-title">Manage {managing.type}: {managing.title}</h3>
-        <button
-          onclick={() => {
-            managingId = '';
-            void reload();
-          }}
-          aria-label="Close management">×</button
-        >
-      </header>
-      <form
-        onsubmit={(event) => {
-          event.preventDefault();
-          void action(saveDetails);
-        }}
-      >
-        <fieldset disabled={busy}>
-          <label>Name<input bind:value={title} required /></label><label
-            >Description<textarea bind:value={summary} rows="2"></textarea></label
-          ><button type="submit">Save details</button><a
-            href={resolve(`/editor?id=${encodeURIComponent(managing.id)}`)}
-            >{managing.type === 'collection' ? 'Edit collection contents' : 'Open full editor'} →</a
-          >
-        </fieldset>
-      </form>
-      {#if managing.type === 'verse'}
-        <h4>Contents</h4>
-        <p>Patterns can live directly in a verse. Collections are optional.</p>
-        <div class="add-content">
-          <label
-            >Add your content<select bind:value={addingId}
-              ><option value="">Choose a pattern or collection</option
-              >{#each available as entity (entity.id)}<option value={entity.id}
-                  >{entity.title} · {entity.type}</option
-                >{/each}</select
-            ></label
-          ><button disabled={busy || !addingId} onclick={() => action(addToVerse)}
-            >Add to verse</button
-          >
-        </div>
-        <label
-          >Destination verse<select bind:value={destination}
-            ><option value="">Choose a verse to move contents to</option
-            >{#each verses.filter((entry) => entry.id !== managingId) as verse (verse.id)}<option
-                value={verse.id}
-                >{verse.title} · {verse.sourceId === 'personal' ? 'Mine' : 'commons'}</option
-              >{/each}</select
-          ></label
-        >
-        <ul>
-          {#each members as entity (entity.id)}<li>
-              <span>{entity.title}<small>{entity.type}</small></span><button
-                disabled={busy}
-                onclick={() => action(() => removeFromVerse(entity))}
-                >{destination ? 'Move' : 'Remove'}</button
-              >
-            </li>{/each}
-        </ul>
-        <p>
-          Removing the last verse home requires a destination. Deleting this verse moves all its
-          contents there first.
-        </p>
-      {:else}<p>
-          Adding or removing collection references happens in the editor. Deleting this collection
-          keeps its patterns and their verse homes.
-        </p>{/if}
-      <button
-        class="danger delete-structure"
-        disabled={busy || (managing.type === 'verse' && members.length > 0 && !destination)}
-        onclick={() => action(() => remove(managing!))}>Delete {managing.type}</button
-      >
-    </section>
+    <WorkspaceStructurePanel
+      {managing}
+      {members}
+      {available}
+      {verses}
+      {busy}
+      bind:draft={details}
+      bind:element={panel}
+      actions={{
+        close: () => {
+          managingId = '';
+          void reload();
+        },
+        save: () => action(saveDetails),
+        add: () => action(addToVerse),
+        remove: (entity) => action(() => removeFromVerse(entity)),
+        delete: () => action(() => remove(managing!)),
+      }}
+    />
   {/if}
   {#if tab === 'verse' || tab === 'collection'}
     <details class="commons-readonly">
@@ -654,73 +538,10 @@
     padding: 0.4rem 0;
     color: var(--ink);
   }
-  .manage-panel {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    border: 1px solid #cdd7ca;
-    border-radius: 10px;
-  }
-  .manage-panel header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .manage-panel h3 {
-    margin: 0;
-    font-size: 1.05rem;
-  }
-  .manage-panel h4 {
-    margin: 1.6rem 0 0.5rem;
-  }
-  .manage-panel p,
   .commons-readonly p {
     font-size: 0.8rem;
     line-height: 1.6;
     color: var(--muted);
-  }
-  fieldset {
-    padding: 0;
-    margin: 1rem 0;
-    border: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-  }
-  label {
-    display: grid;
-    width: 100%;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
-  input,
-  textarea,
-  select {
-    width: 100%;
-    min-width: 0;
-    min-height: 44px;
-    border: 1px solid #d5dad1;
-    border-radius: 5px;
-    padding: 0.6rem;
-    color: var(--ink);
-    background: white;
-    font: inherit;
-  }
-  .manage-panel a {
-    font-size: 0.8rem;
-    color: var(--green-dark);
-    font-weight: 700;
-  }
-  .add-content {
-    display: flex;
-    align-items: end;
-    gap: 0.6rem;
-    margin: 1rem 0;
-  }
-  .add-content button {
-    flex-shrink: 0;
   }
   ul {
     list-style: none;
@@ -735,11 +556,6 @@
     padding: 0.65rem 0;
     border-bottom: 1px solid #e5e8e0;
     font-size: 0.8rem;
-  }
-  li small {
-    display: block;
-    color: var(--muted);
-    margin-top: 0.3rem;
   }
   .danger {
     color: #a62b1f;
@@ -787,13 +603,6 @@
     .creation-actions a {
       padding-inline: 0.65rem;
       font-size: 0.74rem;
-    }
-    .manage-panel {
-      padding: 1rem;
-    }
-    .add-content {
-      flex-direction: column;
-      align-items: stretch;
     }
     .content-card {
       padding: 1.1rem;

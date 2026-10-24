@@ -15,31 +15,30 @@ export {
 
 export type PersonalStructure = Extract<RawEntity, { type: 'collection' | 'verse' }>;
 
-export const referencesStructure = (entity: RawEntity, structure: PersonalStructure): boolean =>
-  structure.type === 'verse'
-    ? entity.type !== 'verse' && (entity.verses ?? []).includes(structure.id)
-    : entity.type === 'collection' && entity.items.includes(structure.id);
-
-export const removeStructureReference = (
-  entity: RawEntity,
+export async function deletePersonalStructure(
+  workspace: LocalWorkspace,
   structure: PersonalStructure,
-): RawEntity => {
-  if (structure.type === 'verse' && entity.type !== 'verse') {
-    const verses = (entity.verses ?? []).filter((id) => id !== structure.id);
-    if (!verses.length) throw new Error('Move this item to another verse first.');
-    return { ...entity, verses };
-  }
-  if (structure.type === 'collection' && entity.type === 'collection') {
-    return { ...entity, items: entity.items.filter((id) => id !== structure.id) };
-  }
-  return entity;
-};
+  commons: VerseCatalog,
+  destination?: string,
+): Promise<void> {
+  await workspace.mutateEntities((current) =>
+    planStructureDeletion(current, structure, commons, destination),
+  );
+}
 
-export const structureDependents = (
-  entities: readonly RawEntity[],
-  structure: PersonalStructure,
-): readonly RawEntity[] =>
-  entities.filter((entity) => entity.id !== structure.id && referencesStructure(entity, structure));
+/** Removing a pattern also removes private references, never the public article. */
+export async function deletePersonalPattern(workspace: LocalWorkspace, entity: RawEntity) {
+  assertPersonal(entity);
+  await workspace.mutateEntities((current) =>
+    current
+      .filter((entry) => entry.id !== entity.id)
+      .map((entry) =>
+        entry.type === 'collection'
+          ? { ...entry, items: entry.items.filter((id) => id !== entity.id) }
+          : entry,
+      ),
+  );
+}
 
 export function planStructureDeletion(
   entities: readonly RawEntity[],
@@ -76,27 +75,76 @@ export function planStructureDeletion(
   });
 }
 
-export async function deletePersonalStructure(
-  workspace: LocalWorkspace,
-  structure: PersonalStructure,
+/** Plan against the transaction's current catalog, keeping valid existing homes in order. */
+export function planVerseAddition(
+  entities: readonly RawEntity[],
+  verseId: string,
+  memberId: string,
   commons: VerseCatalog,
-  destination?: string,
-): Promise<void> {
-  await workspace.mutateEntities((current) =>
-    planStructureDeletion(current, structure, commons, destination),
-  );
+): readonly RawEntity[] {
+  if (!entities.some((entry) => entry.id === verseId && entry.type === 'verse'))
+    throw new Error('This verse no longer exists.');
+  const homes = validVerseIds(entities, commons);
+  return entities.map((entry) => {
+    if (entry.id !== memberId || entry.type === 'verse') return entry;
+    const updated = {
+      ...entry,
+      verses: [...new Set([...(entry.verses ?? []).filter((id) => homes.has(id)), verseId])],
+    };
+    assertVerseHome(updated, entities, commons);
+    return updated;
+  });
 }
 
-/** Removing a pattern also removes private references, never the public article. */
-export async function deletePersonalPattern(workspace: LocalWorkspace, entity: RawEntity) {
-  assertPersonal(entity);
-  await workspace.mutateEntities((current) =>
-    current
-      .filter((entry) => entry.id !== entity.id)
-      .map((entry) =>
-        entry.type === 'collection'
-          ? { ...entry, items: entry.items.filter((id) => id !== entity.id) }
-          : entry,
-      ),
-  );
+/** Removing a last home still requires a valid destination; no records are mutated. */
+export function planVerseRemoval(
+  entities: readonly RawEntity[],
+  structure: PersonalStructure,
+  memberId: string,
+  commons: VerseCatalog,
+  destination: string,
+): readonly RawEntity[] {
+  return entities.map((entry) => {
+    if (entry.id !== memberId || entry.type === 'verse') return entry;
+    const updated = destination
+      ? {
+          ...entry,
+          verses: [
+            ...new Set([...(entry.verses ?? []).filter((id) => id !== structure.id), destination]),
+          ],
+        }
+      : removeStructureReference(entry, structure);
+    assertVerseHome(
+      updated,
+      entities.filter((record) => record.id !== structure.id),
+      commons,
+    );
+    return updated;
+  });
 }
+
+export const referencesStructure = (entity: RawEntity, structure: PersonalStructure): boolean =>
+  structure.type === 'verse'
+    ? entity.type !== 'verse' && (entity.verses ?? []).includes(structure.id)
+    : entity.type === 'collection' && entity.items.includes(structure.id);
+
+export const removeStructureReference = (
+  entity: RawEntity,
+  structure: PersonalStructure,
+): RawEntity => {
+  if (structure.type === 'verse' && entity.type !== 'verse') {
+    const verses = (entity.verses ?? []).filter((id) => id !== structure.id);
+    if (!verses.length) throw new Error('Move this item to another verse first.');
+    return { ...entity, verses };
+  }
+  if (structure.type === 'collection' && entity.type === 'collection') {
+    return { ...entity, items: entity.items.filter((id) => id !== structure.id) };
+  }
+  return entity;
+};
+
+export const structureDependents = (
+  entities: readonly RawEntity[],
+  structure: PersonalStructure,
+): readonly RawEntity[] =>
+  entities.filter((entity) => entity.id !== structure.id && referencesStructure(entity, structure));
