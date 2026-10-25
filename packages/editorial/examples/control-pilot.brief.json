@@ -1,0 +1,49 @@
+{
+  "scope": "Three-pattern pilot within the planned 12\u201315-pattern Control Systems Engineering collection. Prioritize three distinct mechanisms: Tune for Stability Before Speed, Add Hysteresis, and Filter the Measurement. Research and assess all seeds, but curate these three if evidence and distinctiveness support them. Use the two shared simulations when useful.",
+  "audience": "Curious technical readers, software engineers and makers; explain engineering vocabulary and avoid pretending an educational example is safe controller design.",
+  "collection_goal": "12\u201315 carefully curated patterns with two reusable educational simulations, rather than a separate application for each article.",
+  "candidate_seeds": [
+    {
+      "title": "Close the Loop",
+      "insight": "Measure actual outcomes and use feedback to correct deviations."
+    },
+    {
+      "title": "Tune for Stability Before Speed",
+      "insight": "Faster responses can come at the cost of oscillation or instability, depending on plant, delay and controller."
+    },
+    {
+      "title": "Add Hysteresis",
+      "insight": "Prevent repeated switching around a threshold."
+    },
+    {
+      "title": "Anticipate the Disturbance",
+      "insight": "Use feedforward when upcoming disturbances can be measured or predicted."
+    },
+    {
+      "title": "Respect Actuator Limits",
+      "insight": "Account for physical limits and saturation of the control mechanism."
+    },
+    {
+      "title": "Filter the Measurement",
+      "insight": "Reduce noise while accounting for added phase lag and response delay."
+    },
+    {
+      "title": "Identify the System First",
+      "insight": "Observe system dynamics before choosing a controller and parameters."
+    },
+    {
+      "title": "Separate Fast and Slow Loops",
+      "insight": "Handle processes with different timescales while examining coupling."
+    }
+  ],
+  "simulation_environments": ["control-thermostat", "control-signals"],
+  "notes": [
+    "Treat the eight seeds as candidates requiring credible research and differentiation.",
+    "Thermostat: target 21 C, initial 18 C, outdoors 5 C; gain, thermal inertia, sensor delay, relay hysteresis, actuator limit, optional feedforward and window disturbance are adjustable.",
+    "Signals: deterministic noisy step, sample interval and low-pass time constant; show raw truth, sampled measurements and filtered measurements with quantitative error/lag observations.",
+    "Use source-supported physics and explicit model equations; do not claim high proportional gain alone always causes overshoot in a first-order delay-free plant.",
+    "Shared simulations are local educational assets staged through the existing patternverse-widget format. Never publish automatically.",
+    "Pilot only: do not expand to 12\u201315 articles in this execution. The larger roadmap is planned separately."
+  ],
+  "background": null
+}

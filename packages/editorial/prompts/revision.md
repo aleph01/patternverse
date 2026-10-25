@@ -1,0 +1,3 @@
+Revise only the current pattern, addressing its critique, fact-check, and local validation failures. Retain accurate strong material. Correct or remove unsupported claims; do not mask them with polished prose. Use the supplied checked sources and corrections; remove claims that would require new evidence, keep the configured word range, and list meaningful changes. Return the complete article, no frontmatter. Another independent critique and fact-check follow this execution. No practice in the article.
+
+Do not add a bibliography or widget fence; the orchestrator adds source notes and approved widgets separately.

@@ -1,0 +1,3 @@
+Map the requested domain and scope before choosing patterns. Cover its concepts, recognizable problems, established techniques, important subdomains, and evidence gaps. Browse multiple credible sources, recording checked URLs, publisher, actual access date, concise paraphrased findings and limitations. Connect material claims to source IDs. Coverage should make omission and imbalance visible. Do not pretend a small requested collection covers the whole domain.
+
+Keep research bounded: normally 4–8 well-chosen sources are enough for the map. Prioritize authorities that cover several connected concepts. Stop once the major claims and subdomains are grounded; record gaps instead of pursuing an exhaustive bibliography.

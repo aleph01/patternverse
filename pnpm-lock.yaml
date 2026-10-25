@@ -274,6 +274,34 @@ importers:
         specifier: 4.1.10
         version: 4.1.10(@types/node@22.18.0)(jsdom@30.0.1)(vite@8.2.0(@types/node@22.18.0)(esbuild@0.28.1)(tsx@4.23.7)(yaml@2.9.0))
 
+  packages/editorial:
+    dependencies:
+      '@patternverse/compiler':
+        specifier: workspace:*
+        version: link:../compiler
+      '@patternverse/schema':
+        specifier: workspace:*
+        version: link:../schema
+      yaml:
+        specifier: 2.9.0
+        version: 2.9.0
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
+    devDependencies:
+      '@types/node':
+        specifier: 22.18.0
+        version: 22.18.0
+      tsx:
+        specifier: 4.23.7
+        version: 4.23.7
+      typescript:
+        specifier: 6.0.3
+        version: 6.0.3
+      vitest:
+        specifier: 4.1.10
+        version: 4.1.10(@types/node@22.18.0)(jsdom@30.0.1)(vite@8.2.0(@types/node@22.18.0)(esbuild@0.28.1)(tsx@4.23.7)(yaml@2.9.0))
+
   packages/guided-ai:
     devDependencies:
       typescript:
@@ -5226,7 +5254,6 @@ snapshots:
       esbuild: 0.28.1
     optionalDependencies:
       fsevents: 2.3.3
-    optional: true
 
   type-check@0.4.0:
     dependencies:
