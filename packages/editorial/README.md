@@ -317,3 +317,30 @@ into `content/`, changes published status, deploys the site, pushes a branch, or
 Official transport references: [non-interactive mode](https://developers.openai.com/codex/noninteractive)
 and [ChatGPT authentication](https://developers.openai.com/codex/auth). CLI flags and saved
 login reuse were also checked against the installed CLI during implementation.
+
+## Implementation validation record — 25 October 2026
+
+42 infrastructure, transport, recovery and simulation tests passed, along with 114 existing
+compiler tests, package type checking, lint and formatting. The final three-pattern photography
+mock exercised all 32 focused stages, compiled with zero unresolved references and exported
+three synthetic drafts without model usage.
+
+Live Control Systems Engineering planning generated 45 candidates, selected 12 patterns after
+two bounded design revisions, and passed independent collection review with no outstanding
+findings. The two shared simulation environments were exercised in the browser and their
+physical/numerical invariants are tested.
+
+**The live three-article pilot did not complete.** Discovery, design, collection review and
+one pattern's research succeeded, but that pattern's outline hit the ten-minute timeout on
+all three configured attempts, including a pinned-model attempt and a smaller-context attempt.
+The task is blocked at its attempt bound; no live article was accepted. A separate minimal
+low-reasoning CLI request returned valid structured output, so the cause of the article-task
+timeouts remains unresolved. Full live article production and editorial quality are therefore
+not validated by this demonstration. No review or retry gate was bypassed.
+
+See `examples/control-systems-demo-report.json` and `examples/photography-demo-report.json`.
+Full plans, source ledgers, exact prompts and execution logs remain under `.local/editorial/`.
+A subsequent operator can investigate the saved request, choose different model settings or
+explicitly grant another bounded attempt through `configure`; `resume --retry` alone does not
+bypass an exhausted attempt limit. None of these records was published or installed into the
+canonical content corpus.

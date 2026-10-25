@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-25",
+  "infrastructure": {
+    "language": "TypeScript",
+    "package": "@patternverse/editorial",
+    "branch": "codex/editorial-pipeline",
+    "unit_and_transport_tests_passed": 42,
+    "existing_compiler_tests_passed": 114,
+    "typecheck": "pass",
+    "lint": "pass",
+    "format": "pass"
+  },
+  "live_control_systems_roadmap": {
+    "status": "ready",
+    "candidate_count": 45,
+    "selected_count": 12,
+    "patterns": [
+      {
+        "id": "control-systems-roadmap-model-what-accumulates",
+        "title": "Model What Accumulates"
+      },
+      {
+        "id": "control-systems-roadmap-close-the-loop",
+        "title": "Close the Loop"
+      },
+      {
+        "id": "control-systems-roadmap-choose-the-sample-interval",
+        "title": "Choose the Sample Interval"
+      },
+      {
+        "id": "control-systems-roadmap-filter-the-measurement",
+        "title": "Filter the Measurement"
+      },
+      {
+        "id": "control-systems-roadmap-identify-system-dynamics",
+        "title": "Identify System Dynamics"
+      },
+      {
+        "id": "control-systems-roadmap-respect-actuator-limits",
+        "title": "Respect Actuator Limits"
+      },
+      {
+        "id": "control-systems-roadmap-tune-for-stability-before-speed",
+        "title": "Tune for Stability Before Speed"
+      },
+      {
+        "id": "control-systems-roadmap-remove-offset-with-integral-action",
+        "title": "Remove Offset with Integral Action"
+      },
+      {
+        "id": "control-systems-roadmap-prevent-integral-windup",
+        "title": "Prevent Integral Windup"
+      },
+      {
+        "id": "control-systems-roadmap-add-hysteresis",
+        "title": "Add Hysteresis"
+      },
+      {
+        "id": "control-systems-roadmap-anticipate-measured-disturbances",
+        "title": "Anticipate Measured Disturbances"
+      },
+      {
+        "id": "control-systems-roadmap-cascade-control",
+        "title": "Cascade Control"
+      }
+    ],
+    "review_verdict": "pass",
+    "review_scores": {
+      "usefulness": 4.5,
+      "reusability": 4.5,
+      "distinctiveness": 4.5,
+      "teachability": 4,
+      "grounding": 4,
+      "coverage": 4
+    },
+    "review_issues": [],
+    "design_revision_rounds": 2,
+    "cli_executions": 8,
+    "readable_plan": ".local/editorial/control-systems-roadmap/PLAN.md"
+  },
+  "live_three_pattern_pilot": {
+    "status": "needs-attention",
+    "reason": "Attempt bound reached: control-systems-pilot-tune-for-stability-before-speed.outline.r0",
+    "selected_patterns": [
+      "control-systems-pilot-tune-for-stability-before-speed",
+      "control-systems-pilot-add-hysteresis",
+      "control-systems-pilot-filter-the-measurement"
+    ],
+    "accepted_articles": 0,
+    "completed_pattern_research": 1,
+    "blocked_stage": "outline",
+    "outline_attempts": 3,
+    "timeout_seconds_per_attempt": 600,
+    "cli_executions": 7,
+    "state": ".local/editorial/control-systems-pilot/state.json"
+  },
+  "cli_diagnostic": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "request": "Return {ok:true}, no source context or tools",
+    "result": {
+      "ok": true
+    },
+    "conclusion": "Basic CLI structured output works. Cause of the article-specific outline timeouts remains unresolved."
+  },
+  "mock_photography_demonstration": {
+    "status": "complete",
+    "synthetic_patterns": 3,
+    "focused_executions": 32,
+    "model_usage": 0,
+    "export": ".local/editorial/photography-mock-final/exports/74885abb2ed6a55c",
+    "editorial_quality_demonstrated": false
+  },
+  "shared_simulations": ["control-thermostat", "control-signals"],
+  "remaining_limitations": [
+    "No live article was accepted; the full live article-production benchmark is incomplete.",
+    "Visual decisions other than approved shared simulations create briefs, not generated assets.",
+    "Model-assisted source verification and reviews do not replace expert editorial review.",
+    "Operational token/time budgets are checked between tasks; a running call can exceed the remaining budget."
+  ],
+  "publication": "No content was installed in content/, published, pushed or deployed."
+}
