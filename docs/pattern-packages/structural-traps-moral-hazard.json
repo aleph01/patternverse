@@ -1,0 +1,102 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Moral Hazard",
+  "metadata_mapping": "Existing article and responsive illustration conventions; provenance note only, no publication action.",
+  "patterns": [
+    {
+      "id": "moral-hazard",
+      "title": "Moral Hazard: Hidden Actions After Agreement",
+      "entity_type": "concept",
+      "domain": "Information, incentives, and commitment",
+      "article": "content/concepts/moral-hazard.md",
+      "status": "published",
+      "source_checked": "2026-11-02",
+      "sources": [
+        {
+          "title": "Bengt Holmström, Moral Hazard and Observability (1979)",
+          "url": "https://gwern.net/doc/economics/1979-holmstrom.pdf",
+          "supports": "Hidden actions affect outcome distributions; contracting trades incentive provision against risk sharing. Additional information is valuable under the stated model when it adds relevant information about action beyond the payoff.",
+          "read_method": "Original paper opened and read: introduction and model, printed pp. 74–76, and sufficient-statistic/informativeness discussion on printed p. 84.",
+          "boundary": "Conditional principal-agent analysis, not measured camera-packing behavior, a universal deductible prescription, or a guarantee that every monitor improves a contract. The camera scenario has separately stipulated qualitative preferences and participation conditions."
+        },
+        {
+          "title": "Willard G. Manning and colleagues, Health Insurance and the Demand for Medical Care: Evidence from a Randomized Experiment (1987)",
+          "url": "https://blogs.bu.edu/ellisrp/files/2012/01/ManningNewhouse_etal_AER_1987_Rand-HIE.pdf",
+          "supports": "RAND randomized insurance cost sharing and expenditure limits; lower cost sharing was associated with greater medical spending under the assigned plans.",
+          "read_method": "Original PDF opened but exposed no readable text through the available web extraction. Study design and direction of the spending result checked against Einav and Finkelstein’s authored review, RAND discussion on printed pp. 966–967; this entry does not claim an independent full-text review of Manning’s methods.",
+          "boundary": "Historical experiment in its study population and contract designs. Utilization responses do not establish neglect of prevention, dishonesty, that forgone care was wasteful, or the best contract for Tess. No experiment effect size is transferred."
+        },
+        {
+          "title": "Liran Einav and Amy Finkelstein, Moral Hazard in Health Insurance: What We Know and How We Know It (2018)",
+          "url": "https://web.stanford.edu/~leinav/pubs/JEEA2018.pdf",
+          "supports": "Distinction between hidden prevention behavior and the broader health-insurance use of moral hazard for healthcare spending responding to out-of-pocket prices; RAND assignment structure and spending direction; limits on extrapolation to unobserved contracts.",
+          "read_method": "Author-hosted full paper opened and read: abstract/introduction, terminology on printed pp. 959–960, RAND discussion on pp. 966–967, and out-of-sample interpretation on pp. 970–972.",
+          "boundary": "Specialist review, not a primary experiment for every summarized finding. Observable utilization is distinguished from the camera example’s hidden packing action. Lower spending alone does not establish welfare improvement; extrapolating contract effects requires additional assumptions."
+        }
+      ],
+      "use_when": [
+        "Post-agreement private actions can affect losses while the actor does not bear all their consequences.",
+        "A claim rate or damaged item is being treated as proof of carelessness without evidence about behavior or baseline risk."
+      ],
+      "goals": [
+        "Distinguish hidden action after agreement from private characteristics affecting entry.",
+        "Separate prevention incentives, uncontrollable damage, participation, risk bearing, and welfare.",
+        "Distinguish the camera benchmark from broader healthcare terminology and utilization evidence."
+      ],
+      "mechanisms": [
+        "Reconnect some preventable loss to the private choice where affordable and action-changing.",
+        "Use informative observation or make prevention easier.",
+        "Count the risk shifted to the renter and verify participation."
+      ],
+      "related_patterns": [
+        "the-principal-agent-problem",
+        "adverse-selection",
+        "trust-games"
+      ],
+      "example_structure": {
+        "scenario": "Tess privately chooses extra camera packing after accepting a full damage waiver. Care reduces damage probability, costs effort, and is not fully observed. One-rental own-material benchmark excludes future reputation.",
+        "changed_relationship": "A proposed deductible changes the private benefit of prevention; more care follows only when avoided private loss outweighs effort and Tess still prefers renting.",
+        "residual_constraints": "Good packing does not rule out damage. Tess may bear more risk and be worse off. If she cannot influence the risk, a deductible adds exposure without the intended prevention.",
+        "evidence": "Hypothetical choice and stipulated continuation, not a measured outcome. No illustrative calculation is required."
+      },
+      "visual": {
+        "type": "qualitative-burden-comparison",
+        "assets": [
+          "content/assets/structural-traps/moral-hazard-camera.svg",
+          "content/assets/structural-traps/moral-hazard-camera-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1036
+          },
+          "phone": {
+            "width": 360,
+            "height": 1600
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Under full financial protection, Tess bears packing effort but the pool pays the covered repair loss. Under the proposed deductible Tess still bears effort and also the initial part of a covered loss; the pool bears the remainder. Packing stays private and damage stays uncertain. More care is conditional on the private loss reduction outweighing effort. Change: Reconnect preventable loss to the decision, or reduce prevention effort directly. Limitation: More care is conditional on incentives and acceptable terms. Tess may bear more risk and be worse off.",
+        "caption": "Hypothetical illustration. Compare the same two burdens before and after the deductible. Effort never moves away from Tess; part of the financial loss moves toward her. This can change prevention incentives while increasing her risk, and good packing cannot rule out damage.",
+        "representation": {
+          "relationship_key": "Rows allocate effort and financial loss. Lower arrows show private action preceding an uncertain outcome.",
+          "changed_relationship": "A deductible moves an initial share of covered financial loss toward Tess while packing effort stays with her.",
+          "residual_constraints": "Action stays private and damage remains uncertain; incentive improvement does not establish a better overall contract."
+        }
+      },
+      "evidence_boundary": "A new provenance note for the existing article; no article, source claim, illustration, or publication status changed. Reading performed on 2 November 2026 is recorded precisely; unavailable original-paper text is distinguished from review-based corroboration.",
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Fill the missing standalone research-note record and preserve the distinction between hidden action, selection, noisy outcomes, and broader healthcare usage.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

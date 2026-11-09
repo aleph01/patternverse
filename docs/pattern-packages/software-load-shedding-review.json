@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "load-shedding",
+  "title": "Load Shedding",
+  "aliases": [],
+  "primary_collection": "software-reliability-failure-handling",
+  "primary_collection_title": "Reliability and Failure Handling",
+  "body_word_count": 1397,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary references: AWS establishes Load Shedding, early refusal, goodput, rejection cost and overload testing; Google SRE explains variable request cost, resource utilization, criticality, degraded responses and client-side throttling; Envoy distinguishes resource-pressure overload actions from upstream circuit breaking; RFC 9110 defines 503 temporary overload and optional Retry-After; RFC 6585 defines 429 rate refusal; Python documents the actual lock, event and owned-thread operations. Admission control is a mechanism and overload protection a broader goal, not exact aliases. Load balancing spreads requests while shedding refuses some; degraded responses are a separate way to reduce work. The ticket scenario, weighted policy, event-gated code and native figures are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["shedding.py", "demo.py"],
+      "stdout": ["heavy: rejected", "light: served", "held: finished", "heavy later: served"],
+      "verification": "Actual article fences run unchanged on Python 3.11+. Four-line output verifies held cost two, cost-two refusal, cost-one success and later reuse. Strict integer validation rejects Boolean/fractional/negative/zero inputs, and over-capacity cost is ValueError even at saturation; no invalid/refused callback runs or budget is claimed. Exact equality is admitted. Falsy results and ValueError/TimeoutError/cancellation-like BaseException preserve identity and return exactly the claimed cost; non-callable action failure also returns cost. Nested callback calls prove execution is outside the accounting lock. Ten simultaneous cost-two actions against five units admit exactly two held callbacks and refuse eight, leaving one unit for a light action at equality; execution occurs on caller threads. Refusal never adds waiters or changes occupied cost. Independent instances do not share budget. A real callback-owned TemporaryFile remains open through gated finally cleanup and budget remains occupied even when an observer stops waiting; closure precedes result observation and capacity reuse. All owned threads are released/joined and thread inventory returns to baseline. No hardware, rate, fairness, priority, deadline, cancellation, fleet quota, HTTP response or measured production goodput guarantee is inferred."
+    },
+    "content": "1297 entities validate including drafts; published-only compilation has 1150 entities without diagnostics. One new canonical article; no new collection or verse.",
+    "integration_tests": "Eight focused suites pass: Load Shedding, Backpressure, Queue-Based Load Leveling, Bulkhead, Circuit Breaker, Retry with Backoff and Jitter, Timeout and GoF. Across nine files, 49 checks pass and the pre-existing global authored-graphic coverage check fails for access-over-ownership; four other global graphic checks pass. Canonical title, no invented aliases, one primary home, Software Engineering membership, unchanged 23-member GoF collection, related links, exact copyable highlighted code, responsive assets/dimensions, metadata hash and search are verified. Earlier tests unchanged.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native generator, actual-code validator, new integration test, authoring JSON/documentation, concept registry and review record. Article/collection Markdown follow existing conventions.",
+    "collection": "The new load-shedding article is the seventh completed member of Reliability and Failure Handling, after Backpressure. All six prior members remain. No existing article, other collection, verse file, prior authoring record, historical Data Engineering import or GoF entry changes. No duplicate, new collection, future stub, practice or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-reliability-failure-handling.md"
+      ],
+      "other_existing_content_unchanged": 1295,
+      "new_content": ["content/patterns/load-shedding.md"],
+      "one_new_canonical_article_and_no_new_collection": true,
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_existing_articles_unchanged": true,
+      "all_other_collections_unchanged": true,
+      "existing_verses_unchanged": true,
+      "prior_six_primary_collection_members_preserved": true,
+      "historical_data_engineering_import_unchanged": true,
+      "earlier_article_integration_tests_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 66,
+      "prior_graphics_unchanged": 478,
+      "prior_dimensions_unchanged": 1698,
+      "new_dimensions": {
+        "software-engineering/load-shedding-admission.svg": {
+          "width": 720,
+          "height": 1024
+        },
+        "software-engineering/load-shedding-admission-mobile.svg": {
+          "width": 360,
+          "height": 1144
+        },
+        "software-engineering/load-shedding-budget.svg": {
+          "width": 720,
+          "height": 976
+        },
+        "software-engineering/load-shedding-budget-mobile.svg": {
+          "width": 360,
+          "height": 1240
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The unchanged standard public build succeeds in an isolated source snapshot with Public web build checks passed. Article, changed collection, authoring/docs, generator/validator, test, concept registry, manifest and four SVGs match staged sources. Gallery paths match the reviewed registry. Private environment files excluded and PUBLIC_DROPBOX_APP_KEY empty to disable local sync. Hash-verified native copy-on-write copies limit disk use only for this task’s identical asset snapshots and generated copies, with temporary clones outside scanned output. Source, shared output, earlier previews and build implementation remain unchanged. After success only this task’s redundant .svelte-kit/output compiler directory is removed; finished preview remains. No renderer/dependency changes.",
+    "illustrations": "Two editable native SVG figures and separately composed phone layouts. The admission figure shows cheap classification, a trusted cost/remaining-budget decision, fitting work claiming budget before invocation, and a refusal branch that never reaches the protected operation or an internal waiting queue. Accepted cost returns only after local cleanup, and rejection overhead/upstream costs remain visible. The phone refusal branch routes outside the accepted-work box so alternatives remain distinct. The budget comparison shows held cost two against capacity three, refusal of another cost two (four exceeds three), admission of a light cost one at equality, and later reuse after cleanup. Filled/outlined squares are labeled policy units, not CPU, thread or timed-rate reservation; fairness, priority and fleet scope are explicit limits. Fixed white, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained strokes, meaningful alt/captions. Four variants have zero measured outside labels, overlaps or outside rectangles. Concept mark shows an admission fork, protected work and a distinct refusal endpoint, fitting 96-by-96 with stroke. Native/embedded desktop and phone figures, labels, contrast, captions, code viewports and gallery visually inspected. Four new dimensions; all existing dimensions preserved.",
+    "browser": "Actual production article checked at 1440, 390 and 320 CSS pixels: eight exact H2s, two loaded responsive figures, two exact selectable syntax-highlighted Python blocks, distinct token colors, focusable code, keyboard horizontal scrolling on overflowing code at 320 pixels, no page overflow and four related routes returning 200. Existing collection route and Software Engineering gallery reach the canonical article with its correct primary breadcrumb and final concept paths. Pagination reaches the seventh member. Desktop/phone article tops, both embedded figures, code viewports and gallery visually inspected; no console/page errors.",
+    "built_assets": {
+      "build_root": ".local/software-load-shedding/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 40705
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 7,
+          "y": 7,
+          "width": 82,
+          "height": 82
+        },
+        {
+          "x": 46.5,
+          "y": 29.5,
+          "width": 35,
+          "height": 48
+        }
+      ]
+    },
+    "disk_space_management": {
+      "status": "passed",
+      "native_compaction": {
+        "status": "passed",
+        "files": 5696,
+        "logical_bytes_cloned": 1157570770,
+        "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+      },
+      "during_standard_build": {
+        "status": "passed",
+        "build_command": "node scripts/build-public-web.mjs",
+        "build_exit_code": 0,
+        "compaction_passes": [
+          {
+            "status": "passed",
+            "files": 3835,
+            "logical_bytes_cloned": 776409015,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3835,
+            "logical_bytes_cloned": 776409015,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3835,
+            "logical_bytes_cloned": 776409015,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3835,
+            "logical_bytes_cloned": 776409015,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3835,
+            "logical_bytes_cloned": 776409015,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5279,
+            "logical_bytes_cloned": 1153900013,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5696,
+            "logical_bytes_cloned": 1157570770,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          }
+        ],
+        "scope": "Only this task’s byte-identical asset copies, including while they are generated. Each native clone is hash-verified before atomic file replacement. Source, build implementation and other previews are unchanged."
+      },
+      "temporary_clones_outside_scanned_output": ".local/software-load-shedding/clone-temporaries",
+      "redundant_compiler_output_removed_after_successful_build": ".local/software-load-shedding/build-workspace/apps/web/.svelte-kit/output",
+      "finished_build_and_running_preview_preserved": true,
+      "source_shared_output_and_earlier_previews_unchanged": true
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "New canonical article using established Load Shedding title. Admission control is the possible mechanism and overload protection the broader goal, not exact aliases. Original ticket-service example uses a retained process-local LoadShedder with positive integer capacity and server-assigned integer request costs. A Lock atomically claims only fitting cost; callbacks execute on caller threads outside the lock and finally return exactly the claimed cost after local action/cleanup. Capacity three with one held cost-two action refuses a second cost-two operation without invocation, permits a cost-one action at equality, and later admits heavy work after owned release/join. Invalid or over-capacity costs are ValueError policy errors rather than transient Overloaded refusals. The event-gated experiment supplies no waiting queue, execution pool, hardware reservation, rate limiter, priority/fairness guarantee, fleet-wide accounting, deadline, cancellation, HTTP response, durable acceptance or remote rollback. Estimated cost is not measured CPU/memory, and callback work/cleanup must finish before return. Optional-recommendation criticality is a separate policy context; the fit rule does not implement it. Tests verify invalid policy versus temporary occupancy, cost equality, nested callback execution outside the lock, exact result/error propagation, ten real competing weighted actions, no invocation/claim on refusal, actual file cleanup before budget release, stopped observer waiting, independent instances, full reuse and owned thread joining. The work costs are trusted estimates; no hardware or actual production-goodput benchmark is inferred.",
+  "preview": "http://127.0.0.1:43051/pattern/load-shedding",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-load-shedding",
+  "browser_measurements": ".local/software-load-shedding/browser-checks.json",
+  "browser_check_script": ".local/software-load-shedding/check-browser.mjs",
+  "build_log": ".local/software-load-shedding/public-build-isolated.log",
+  "branch": "codex/software-load-shedding",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

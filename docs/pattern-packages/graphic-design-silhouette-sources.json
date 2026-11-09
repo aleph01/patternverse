@@ -1,0 +1,96 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/figure-ground-pitcher-cutout.png",
+      "generation_record": "graphic-design-figure-ground-sources.json",
+      "sha256": "3ecc57ffd075e64447f73dacf120eb607b2cdbed9f9d8a8038d4ee927b4735d3"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "generatedSources": [
+    {
+      "asset": "content/assets/graphic-design/silhouette-shears-cutout.png",
+      "generation_record": "graphic-design-silhouette-generation.json",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-276f5adb-72af-4812-a0c1-e952aa6f7e34.png",
+      "sha256": "1066e99f3ff8a0ea324c4a53133d56f7c51dfe463ce0de9c3d75523f7db63778",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": true
+    },
+    {
+      "asset": "content/assets/graphic-design/silhouette-maker-cutout.png",
+      "generation_record": "graphic-design-silhouette-generation.json",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-fcb92d9d-234c-41a0-854b-b59699d945b9.png",
+      "sha256": "d8b027e936e24005754ab7fa86215ea8e8f0e13dbeb24ae369829de0cd9e6d6e",
+      "width": 1145,
+      "height": 1374,
+      "has_alpha": true
+    }
+  ],
+  "pattern": "Use Silhouettes",
+  "date": "2026-10-28",
+  "mode": "Built-in image_gen produced two transparent photographic sources. Existing pitcher and paper stage reused. Original PNGs copied unchanged; native constant-RGB SVG composition preserves source alpha. Typography composed separately.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-silhouette-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-silhouette-layouts.json",
+    "sha256": "d731475ee82d95cc3e1313e0dea7c00e1fc4a4139892aedfd9d1c6aada4e5705",
+    "method": "Native SVG constant-RGB silhouette matrix preserves the input alpha channel. First pair applies it to an unchanged pitcher cutout; second preserves the shears silhouette while changing only its ground; third removes it to restore a portrait when internal detail matters. Every source, alpha, image fitting, pose, scale, placement, copy, typography and presentation stays fixed within each pair. No raster editing, automatic tracing or regenerated comparison variants."
+  },
+  "generation_record": "docs/pattern-packages/graphic-design-silhouette-generation.json",
+  "comparisonPolicy": "Pitcher tone filter none\u2192constant RGB; shears ground #687464\u2192#e7e3d8 with constant silhouette; maker tone filter constant RGB\u2192none. One declared attribute per pair. Source bytes, alpha, geometry/fitting, pose/size, wording/type and stage/lighting fixed. No independent before/after image generations.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "silhouette-pitcher-shelf",
+        "changedPixels": 60628,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "silhouette-shears-ground",
+        "changedPixels": 153600,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "silhouette-maker-detail",
+        "changedPixels": 59486,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared silhouette intervention regions differ.",
+    "scope": "DOM normalization permits only the declared object filter or background fill. Same exact source bytes, alpha, image fitting/pose/scale/placement, native copy/font settings and paper presentation. Pixel changes occur only inside declared image frames. Color-matrix alpha row is0/0/0/1/0; no threshold, dilation, outline redraw or alpha cleanup. Source antialias/shadow alpha is intentionally retained. Wide/narrow checks cover fonts, bounds, overflow and inline/image equivalence. All six final browser views visually inspected, including the clarified portrait caption. Native mark inspected at32/48/96 pixels. Direct mark validation confirms the new mark uses supported path attributes and retains its opening.",
+    "broaderIllustrationCoverage": "The broader pattern-graphics suite passed4/5 tests but its corpus-coverage test reports a missing authored mark for access-over-ownership, outside this article\u2019s changes. New silhouette-mark validation is covered directly in the article-specific test file."
+  },
+  "limitations": "Editorial decisions, not measured recognition or performance gains. Source alpha includes antialiased edges and pitcher shadow; final blended pixels can depend on ground. Generated tools/products/person/events are fictional; no model, condition, identity or specifications are verified. Native filters are not technical vector traces. No physical print proof or complete accessibility claim."
+}

@@ -1,0 +1,139 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Catch-22",
+  "metadata_mapping": "Existing concept schema and responsive SVG convention; existing publication status retained; local edits only.",
+  "patterns": [
+    {
+      "id": "catch-22",
+      "title": "Catch-22",
+      "entity_type": "concept",
+      "domain": "Dependency and feasibility traps",
+      "related_patterns": [
+        "reframing-remove-constraints",
+        "reframing-alternative-paths",
+        "map-the-loop"
+      ],
+      "article": "content/concepts/catch-22.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Joseph Heller, Catch-22 (1961), Simon & Schuster publisher page",
+          "url": "https://www.simonandschuster.net/books/Catch-22/Joseph-Heller/9781451621174",
+          "supports": "Literary origin and the exemption request that is treated as evidence of sanity.",
+          "boundary": "Publisher description of satire; not a clinical source or empirical study. No passage from the novel is reproduced."
+        },
+        {
+          "title": "Cambridge Dictionary, catch-22",
+          "url": "https://dictionary.cambridge.org/us/dictionary/english/catch-22",
+          "supports": "Common circular-prerequisite usage.",
+          "boundary": "Lexicographic usage, not a formal taxonomy; indexed definition read, direct page intermittently denied automated access."
+        },
+        {
+          "title": "Marco Berti and Ace Volkmann Simpson (2021), The Dark Side of Organizational Paradoxes: The Dynamics of Disempowerment",
+          "url": "https://bura.brunel.ac.uk/handle/2438/19254",
+          "full_text": "https://bura.brunel.ac.uk/bitstream/2438/19254/3/FullText.pdf",
+          "doi": "10.5465/amr.2017.0208",
+          "supports": "Restricted agency, power, Catch-22 situations, and limits on challenging contradictory demands; especially manuscript pages 21–22 and 32.",
+          "boundary": "Conceptual theory drawing on existing research; not a controlled evaluation of the proposed intervention families."
+        },
+        {
+          "title": "Sarah J. Tracy (2004), Dialectic, Contradiction, or Double Bind? Analyzing and Theorizing Employee Reactions to Organizational Tension",
+          "url": "https://www.sarahjtracy.com/wp-content/uploads/2013/08/Tracy-Dialectic-Contradiction-Double-Bind.pdf",
+          "doi": "10.1080/0090988042000210025",
+          "supports": "Distinguishing forms of organizational tension and the role of restricted discussion in pragmatic paradoxes.",
+          "boundary": "Qualitative data from two correctional facilities; not evidence that all contradictions are double binds or that discussion guarantees resolution."
+        },
+        {
+          "title": "HSBC UK, No Fixed Address service",
+          "url": "https://www.hsbc.co.uk/help/money-worries/no-fixed-address/",
+          "supports": "Selected-branch service, participating support organizations, caseworker-arranged appointment, and correspondence address.",
+          "boundary": "Service conditions as checked on 31 October 2026; no universal access or impact estimate."
+        },
+        {
+          "title": "Financial Conduct Authority (7 July 2026), Banks told to improve access to basic accounts",
+          "url": "https://www.fca.org.uk/news/press-releases/banks-told-improve-access-basic-accounts",
+          "supports": "Documented implementation barriers involving basic accounts, non-standard identification, and absence of a fixed address.",
+          "boundary": "Regulator's report of mystery-shopping findings; not an evaluation of the paid-entry intervention or a general Catch-22 escape method."
+        }
+      ],
+      "status": "published",
+      "short_description": "Recognize when the conditions for obtaining a remedy block that remedy, then identify which rule, evidence requirement, or route would have to change.",
+      "use_when": [
+        "Where can the first accepted experience come from?",
+        "Lea seeks a first design job. The employers considered accept only previous paid employment as qualifying experience; no such first role is initially available."
+      ],
+      "goals": [
+        "Recognize the familiar predicament before specialist terminology.",
+        "Explain the defining mechanism and distinguish neighboring concepts.",
+        "Broad everyday circular-prerequisite Catch-22; distinguish Heller’s narrower form where trying to qualify defeats eligibility. Alternative accepted experience would open a route.",
+        "Separate hypothetical behavior, model results, documented cases, and practical editorial proposals."
+      ],
+      "mechanisms": [
+        "A funded supervised entry assignment is expressly accepted as evidence for later consideration.",
+        "The employer must accept the evidence. Supervision costs resources; satisfactory work and a later vacancy are not guaranteed."
+      ],
+      "example_user_queries": [
+        "Where can the first accepted experience come from?"
+      ],
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Where can the first accepted experience come from?",
+        "assets": [
+          "content/assets/structural-traps/catch-22-repair-fund.svg",
+          "content/assets/structural-traps/catch-22-repair-fund-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 745,
+            "textBlocks": 19
+          },
+          "phone": {
+            "width": 360,
+            "height": 1447,
+            "textBlocks": 19
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Lea needs previous paid experience for a first paid role, while that role supplies accepted experience. A new paid supervised entry route supplies assessed work without demanding prior employment, making later consideration possible. Change: Accept a funded first-entry route instead of requiring prior employment for every start. Limitation: The employer must accept the evidence. Supervision costs resources; satisfactory work and a later vacancy are not guaranteed.",
+        "caption": "Hypothetical illustration. The familiar job–experience Catch-22 is a circular-prerequisite form. Green marks an accepted first opportunity, not a promise of employment. Paid supervision and a valid assessment are still needed; Heller’s narrower self-disqualifying rule is explained separately.",
+        "representation": {
+          "scenario": "Lea seeks a first design job. The employers considered accept only previous paid employment as qualifying experience; no such first role is initially available.",
+          "interpretation": "Hypothetical qualitative illustration. Lea needs previous paid experience for a first paid role, while that role supplies accepted experience. A new paid supervised entry route supplies assessed work without demanding prior employment, making later consideration possible. Change: Accept a funded first-entry route instead of requiring prior employment for every start. Limitation: The employer must accept the evidence. Supervision costs resources; satisfactory work and a later vacancy are not guaranteed.",
+          "relationship_key": "Upper arrows show qualifying dependencies, not effects over time. Lower arrows show an authorized entry sequence.",
+          "changed_relationship": "A funded supervised entry assignment is expressly accepted as evidence for later consideration.",
+          "residual_constraints": "The employer must accept the evidence. Supervision costs resources; satisfactory work and a later vacancy are not guaranteed.",
+          "phone_treatment": "Separate composition retains readable labels and the same alternatives, dependencies, causal links, or chronology."
+        }
+      },
+      "example_structure": {
+        "scenario": "Lea seeks a first design job. The employers considered accept only previous paid employment as qualifying experience; no such first role is initially available.",
+        "changed_relationship": "A funded supervised entry assignment is expressly accepted as evidence for later consideration.",
+        "required_assumptions": "Broad everyday circular-prerequisite Catch-22; distinguish Heller’s narrower form where trying to qualify defeats eligibility. Alternative accepted experience would open a route.",
+        "residual_constraints": "The employer must accept the evidence. Supervision costs resources; satisfactory work and a later vacancy are not guaranteed.",
+        "comparison": "Qualitative relationships only; no invented utility scores, numerical trajectories, or measured improvement claimed."
+      },
+      "evidence_boundary": "The central scenario and resulting behavior are hypothetical. Source-specific formal and empirical limits remain explicit. The expected recognizability of a classic example is editorial judgment, not a reader-study result.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "change": "Lea seeks a first design job. The employers considered accept only previous paid employment as qualifying experience; no such first role is initially available.",
+        "scope": "Article, two editable responsive SVGs, caption, alternative text, manifest dimensions, and current research notes. All forty retain separate identities and existing publication status.",
+        "source_handling": "Existing source identities and original source-check dates retained. Current examples are no longer the earlier workshop, booking, or dashboard scenarios. Research claims are not reclassified as measured outcomes.",
+        "verification": "Passed current content, semantic consistency, responsive browser, SVG bounds, and text-contrast checks; see verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

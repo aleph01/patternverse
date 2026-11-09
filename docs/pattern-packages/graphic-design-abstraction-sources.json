@@ -1,0 +1,84 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/figure-ground-pitcher-cutout.png",
+      "generation_record": "graphic-design-figure-ground-sources.json",
+      "sha256": "3ecc57ffd075e64447f73dacf120eb607b2cdbed9f9d8a8038d4ee927b4735d3"
+    },
+    {
+      "asset": "content/assets/graphic-design/meaning-enclosed-room-photo.jpg",
+      "generation_record": "graphic-design-image-meaning-sources.json",
+      "sha256": "33fba583a187116e75139cd49e6394e40bc11925fbacbaef68d339bd91497b68"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-seed-packing-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "487e04205d1aaecfd64e883a8def1adcd091fdf4430dd65001b9d772b5b7503b"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Simplify Through Abstraction",
+  "date": "2026-10-28",
+  "mode": "Existing generated photographic assets and paper stage reused unchanged. Original code-native vector interpretations composed separately; no image-generation call, raster editing, automatic vectorization or exact technical tracing.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-abstraction-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-abstraction-layouts.json",
+    "sha256": "c7bbde9f62e35cb1b7bd2daa9d24b8c0044de06df2338b8b609de9580083d662",
+    "method": "Two clipped representation layers exchange opacity1/0\u21920/1 inside a fixed480\u00d7320 frame. The photo file and its fitting remain unchanged; native models deliberately change representation, detail, viewpoint or relationships as required. All external copy, type settings, frame bounds, colors, layout and presentation are identical. No raster editing or new image generation."
+  },
+  "comparisonPolicy": "All three pairs exchange opacity1/0\u21920/1 between photo and original native model layers clipped to the same480\u00d7320 frame. Models intentionally change representational detail, viewpoint or relations. External copy, typography, frame geometry, surrounding palette/layout and paper/light stay fixed. Room diagram labels are part of the new representation; task order comes from the fixed written instructions.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "abstraction-pitcher-category",
+        "changedPixels": 64668,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "abstraction-room-arrangement",
+        "changedPixels": 153600,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "abstraction-seed-packing",
+        "changedPixels": 153600,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared representation intervention regions differ.",
+    "scope": "DOM normalization permits only the two complementary opacity attributes on fixed clipped photo/model layers. Photographic source bytes/fitting, external wording/font settings, frame and unrelated geometry remain identical. All pixel changes are inside the480\u00d7320 representation frame. Native model invariants retain pitcher features, exactly two chairs and ten seed marks with a two-arrow sequence. Wide/narrow browser checks verify fonts, bounds, overflow and inline/image equivalence. All six saved browser views visually inspected, including final unstroked room labels at20 layout units. The bounded concept mark was inspected at32/48/96 pixels. Native labels are part of the room representation, not new external offer copy."
+  },
+  "limitations": "Original editorial abstractions, not measured recognition or comprehension improvements. Pitcher drawing is not an exact product trace; room plan is conceptual and not to scale or a clearance/access plan. Sequence is authored from the written procedure and not inferred as photographed action. Simplified images do not replace appropriate material inspection, evidence, measurements or text alternatives. No physical print proof."
+}

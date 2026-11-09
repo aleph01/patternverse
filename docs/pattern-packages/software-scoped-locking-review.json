@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "scoped-locking",
+  "title": "Scoped Locking",
+  "aliases": ["Synchronized Block", "Guard"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1408,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary references: Douglas C. Schmidt’s original eight-page Scoped Locking idiom; the POSA Volume 2 author catalog; official Python threading and with-statement language documentation; Microsoft C++ scoped_lock documentation. Synchronized Block and Guard are historical aliases, with Guard distinguished from condition predicates and authorization checks. RAII is identified as a broader resource-management idiom rather than an exact alias. Scope-bound acquisition/release, named C++ guard lifetime, successful-entry precondition, supported return/exception cleanup and release-versus-rollback are explicit. C++17 scoped_lock’s multi-mutex acquisition algorithm is kept distinct from the general pattern and Python nested with blocks. Original paper and official documentation support the mechanism; the inventory scenario, immutable publication, code and diagrams are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["inventory.py", "demo.py"],
+      "stdout": [
+        "reserve 2: (3, 2)",
+        "rejected: Insufficient stock",
+        "after rejection: (3, 2)",
+        "next caller: (0, 5)"
+      ],
+      "verification": "Exact four-line demo output; invalid initial/request counts reject Boolean and malformed values before acquisition; zero stock, exact exhaustion and insufficient-stock boundaries preserve coherent state; one persistent real Lock per object and no object-created worker; real lock instrumentation verifies exactly paired entry/exit on return, snapshot, rejection and propagated ordinary/BaseException failures; failed-entry injection performs no body or unmatched release; a gated acquisition blocks a competing caller before check/publication; a gated post-release exit permits another caller to snapshot before the original return is delivered; faults before publication leave old state while faults after publication preserve changed coherent state, proving release is not rollback; four actual reservers make 240 attempts with exactly 120 unique successful states and 120 rejections while an additional reader observes 200 snapshots, with invariant checks at every release and no overlapping protected ownership; locks are independent between instances, a nonblocking recursive acquisition probe fails, every lock is available afterward, all caller threads join and thread inventory returns to baseline. Instrumentation wraps actual Lock and attribute-access seams without replacing article reservation/snapshot methods. No fairness, automatic rollback, general deadlock avoidance, acquisition deadline, async-task or cross-process guarantee is inferred."
+    },
+    "content": "1292 entities validate with drafts included; published-only compilation contains 1145 entities without diagnostics.",
+    "integration_tests": "All four focused article suites pass: Scoped Locking, Resource Pool, Monitor Object, and GoF. Combined run across five files reports 37 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Scoped Locking as its eighth completed member, preserving all seven earlier members and collection contents. Monitor Object, Resource Pool and Active Object retain canonical IDs and primary homes as related links. Exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1290,
+      "new_content": ["content/patterns/scoped-locking.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "seven_prior_concurrency_members_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 58,
+      "prior_graphics_unchanged": 470,
+      "prior_dimensions_unchanged": 1670,
+      "new_dimensions": {
+        "software-engineering/scoped-locking-scope.svg": {
+          "width": 720,
+          "height": 1216
+        },
+        "software-engineering/scoped-locking-scope-mobile.svg": {
+          "width": 360,
+          "height": 1336
+        },
+        "software-engineering/scoped-locking-inventory.svg": {
+          "width": 720,
+          "height": 1256
+        },
+        "software-engineering/scoped-locking-inventory-mobile.svg": {
+          "width": 360,
+          "height": 1416
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other existing collection, software verse, or GoF changes.",
+    "illustrations": "Two editable native SVG figures explain successful acquisition, a protected body, three mutually exclusive structured exits, one release boundary, and the worked inventory sequence. Both have separately composed phone variants, meaningful alternative text and captions, fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained strokes and explicit arrow meanings. The scope figure makes cleanup occur before continuing, delivering a return or propagating an exception; entry failure never runs the body and process termination/data rollback are excluded. The inventory figure shows (5,0) to (3,2) on reserving two, rejection of four with unchanged (3,2), and later reservation of three to (0,5). All state pairs are item counts; equal pairs mean no state change, and validation-before-publication rather than cleanup preserves the rejected state. The concept mark remains within its view box. Native and embedded desktop/phone versions were visually inspected for technical accuracy, label placement, contrast and readability; all four variants have zero measured outside labels, label overlaps or outside rectangles.",
+    "browser": "Actual production article verified at 1440, 390, and 320 CSS pixels: eight exact H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all three related routes returning 200. Concurrency and Resource Management has eight members; its route and Software Engineering verse gallery page two open Scoped Locking with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-scoped-locking/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 45093
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ synchronous Inventory with one persistent plain nonreentrant Lock per instance. Nonnegative integer initial stock and positive integer reservation requests reject Boolean values. A with scope protects both the available-count check and immutable available/reserved tuple publication, preserving nonnegative counts and initial total on expected paths. Success returns inside the block, insufficient stock raises before publication, and snapshot reads use the same lock. Cleanup releases before result delivery or exception observation; snapshot values are immutable point-in-time observations, not live state. The demo owns and joins one separate caller thread outside any lock scope. Tests verify exact output, validation boundaries, zero/exhausted stock, real contention, failed-entry behavior without unmatched release, return delivery after release, ordinary/BaseException cleanup, before/after-publication faults showing that release is not rollback, and 240 concurrent reservation attempts yielding 120 unique successes and 120 rejections alongside 200 extra reader snapshots, with invariant checks at every release. Independent object locks, nonrecursive acquisition probe, balanced acquisitions/releases, available locks after every case and all caller-thread joins are verified. Instrumented seams wrap real locks and attribute access without replacing reservation/snapshot methods. Callers must follow public locking protocol and keep the lock alive. No acquisition deadline, fairness, general lock-order/deadlock freedom, rollback, async-task lock behavior, cross-process atomicity or process-failure recovery is claimed. A stuck body can retain the lock; manually releasing the same acquisition or bypassing the protocol is unsupported.",
+  "preview": "http://127.0.0.1:43043/pattern/scoped-locking",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-scoped-locking",
+  "browser_measurements": ".local/software-scoped-locking/browser-checks.json",
+  "browser_check_script": ".local/software-scoped-locking/check-browser.mjs",
+  "build_log": ".local/software-scoped-locking/public-build-isolated.log",
+  "branch": "codex/software-scoped-locking",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "domain-service",
+  "title": "Domain Service",
+  "aliases": ["DDD Domain Service", "Domain Service Pattern"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1488,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Evans's original accessible DDD Reference, Services on printed page 14, establishes significant domain operations without a natural entity or value-object owner, standalone contracts, and domain-language naming. The article explains the original Services label while qualifying the overloaded term. Vernon's publisher sample is explicitly cited as the chapter overview on printed page xxv, supporting focused stateless domain services and integration uses; no access to the full Services chapter is claimed. Microsoft's tactical DDD documentation distinguishes domain decisions from application orchestration and deployed microservices. Randy Stafford's Service Layer catalog defines application boundaries and coordination. Fowler's Anemic Domain Model warns against extracting behavior that belongs on domain objects. Official Python sources support frozen fields and min key/default behavior. The room policy, code, diagrams, and booking scenario are original teaching material.",
+    "python_examples": "Both actual article Python blocks execute together and produce all five output lines exactly. Checks verify exact-seat eligibility, required-feature subsets, case-sensitive feature/ID semantics, smallest-capacity selection, deterministic room-ID ties, every permutation of the four demo offers, generator and list inputs, input preservation, empty/no-match outcomes, invalid request/candidate types, malformed counts and features, Boolean/fractional/zero/negative rejection, nonblank IDs, duplicate-ID rejection even for ineligible candidates, immutable snapshots, and large integer seat counts. Independent eligibility and no-better-candidate properties check 1280 candidate-subset/query cases and their reversed order. Repeated calls after empty and different candidate sets retain no prior decision. Two calls can select A from the same snapshots, while refreshed offers excluding A select B, explicitly demonstrating that selection does not reserve a room. The model imports only dataclasses and performs no I/O.",
+    "python_stdout": [
+      "selected: room-A",
+      "spare seats: 0",
+      "reordered: room-A",
+      "no match: None",
+      "still offered: 4"
+    ],
+    "article_tests": "66 article tests pass across Domain Service, Aggregate, Value Object, Entity, Domain Model, Functional Core Imperative Shell, Dependency Injection, Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and GoF. Tests cover canonical IDs and aliases without duplicates, one primary collection and prior members retained, related links, eight headings, exact highlighted code, accessible responsive illustrations and intrinsic dimensions, search, ten queries, revision hashes, and concept marks. Corpus-loading concurrency is bounded with maxWorkers=2.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. Global authored-graphic coverage retains the unrelated missing access-over-ownership graphic. Combined result: 70 passed and one unrelated failure across 16 test files.",
+    "content": "1244 entities validate with drafts included. The published-only corpus contains 1098 entities and reports no errors.",
+    "collection": "Reused Domain Modeling and Business Logic, appending Domain Service after Domain Model, Entity, Value Object, and Aggregate. No new collection or placeholder article. All four related patterns reuse their existing canonical IDs and memberships.",
+    "public_build": "Production build and public web build checks pass. Actual browser review uses the completed production build. No deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new SVG generator, executable validator, article integration test, and updated authoring metadata. The review report is separately formatted and checked.",
+    "visuals": "All four editable native SVG variants load. Browser geometry reports no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and independently composed phone versions were visually inspected for local compatibility versus cross-candidate comparison, application versus domain responsibilities, immutable inputs and result, seat-count units, deterministic ties, decision versus booking, the concurrent writer and explicit dashed paths, conflict/reload/reselection, white surfaces, regular Helvetica typography, exact palette, contrast, and readable labels. Numbers and labels carry essential meaning independently of color. The concept mark depicts several candidates feeding a focused operation and an explicit output.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 headings, both Python blocks preserved exactly in the DOM with colored tokens, selectable content preserving indentation, keyboard horizontal code scrolling at 320px, responsive phone assets loaded, and no page overflow. Browser selection normally omits the terminal newline. Actual desktop/phone article, figures, code, and collection gallery were visually inspected.",
+    "navigation_browser": "The collection direct route renders the correct title. Software Engineering's library filter opens the Domain Modeling and Business Logic gallery. Domain Service is its fifth article, on page two; the browser check follows Next page, opens its card, and verifies the correct breadcrumb. The initial review script's first-page assumption was corrected without product changes. Domain Model, Aggregate, Ports and Adapters, and Strategy routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. All prior software article files match actual pre-change file hashes. Application Architecture and the Software Engineering verse are byte-for-byte unchanged. All prior authoring records, concept marks, and asset dimensions remain unchanged; existing primary collection members are retained."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; unrelated file left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "A pure module-level function compares a finite supplied set of immutable room-offer snapshots. The teaching policy minimizes suitable seat count, then uses exact case-sensitive room-ID ordering; it establishes deterministic choice, not fairness. Candidate offers are assumed to be a consistent, authorized view for the requested time. The example contains no calendar, availability query, booking state, authorization mechanism, persistence, transaction, concurrency protection, or external-effect delivery. It does not claim that all domain services are pure, that stateless dependencies are thread safe, or that cross-aggregate operations share an atomic commit. Normal API immutability is not protection against deliberate runtime bypass. An availability-query failure must remain distinguishable from no suitable supplied candidate. The second diagram describes a conceptual booking-conflict protocol, not an implemented reservation store.",
+  "preview": "http://127.0.0.1:42998/pattern/domain-service",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-domain-service",
+  "browser_measurements": ".local/software-domain-service/browser-checks.json",
+  "browser_check_script": ".local/software-domain-service/check-browser.mjs",
+  "preservation_checks": ".local/software-domain-service/preservation-checks.json",
+  "build_log": ".local/software-domain-service/public-build.log",
+  "branch": "codex/software-domain-service",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

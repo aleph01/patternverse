@@ -14,7 +14,7 @@ saved version. A title or ordinal version number is not a unique pin.
 Call the imported Pattern using ordinary composition:
 
 ```pattern
-!use helper as result {
+result = !use helper {
     :with situation = situation
 }
 ```

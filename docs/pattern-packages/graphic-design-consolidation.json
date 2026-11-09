@@ -1,0 +1,2885 @@
+{
+  "date": "2026-10-28",
+  "status": "implemented-locally",
+  "audit": "docs/pattern-packages/graphic-design-editorial-audit.json",
+  "originals": "docs/pattern-packages/graphic-design-original-articles.json",
+  "core_patterns": 39,
+  "authored_core_patterns": 36,
+  "planned_core_patterns": 3,
+  "foundation_concepts": 1,
+  "retired_authored_patterns": 19,
+  "redirects": {
+    "graphic-design-establish-a-focal-point": {
+      "type": "pattern",
+      "id": "graphic-design-establish-visual-hierarchy"
+    },
+    "graphic-design-create-deliberate-contrast": {
+      "type": "concept",
+      "id": "graphic-design-foundations-contrast"
+    },
+    "graphic-design-differentiate-levels-of-importance": {
+      "type": "pattern",
+      "id": "graphic-design-establish-visual-hierarchy"
+    },
+    "graphic-design-use-scale-to-establish-importance": {
+      "type": "pattern",
+      "id": "graphic-design-establish-visual-hierarchy",
+      "fragment": "user-content-article-section-use-scale-to-establish-importanc"
+    },
+    "graphic-design-guide-the-eye": {
+      "type": "pattern",
+      "id": "graphic-design-establish-a-clear-reading-order",
+      "fragment": "user-content-article-section-guide-the-eye"
+    },
+    "graphic-design-use-negative-space": {
+      "type": "pattern",
+      "id": "graphic-design-use-spacing-to-express-relationships"
+    },
+    "graphic-design-establish-consistent-spacing": {
+      "type": "pattern",
+      "id": "graphic-design-use-spacing-to-express-relationships"
+    },
+    "graphic-design-use-proportional-relationships": {
+      "type": "pattern",
+      "id": "graphic-design-establish-a-grid",
+      "fragment": "user-content-article-section-use-proportional-relationships"
+    },
+    "graphic-design-frame-the-content": {
+      "type": "pattern",
+      "id": "graphic-design-group-elements-within-shared-boundaries",
+      "fragment": "user-content-article-section-frame-the-content"
+    },
+    "graphic-design-break-the-grid-deliberately": {
+      "type": "pattern",
+      "id": "graphic-design-establish-a-grid",
+      "fragment": "user-content-article-section-break-the-grid-deliberately"
+    },
+    "graphic-design-group-related-elements-through-proximity": {
+      "type": "pattern",
+      "id": "graphic-design-use-spacing-to-express-relationships"
+    },
+    "graphic-design-pair-complementary-typefaces": {
+      "type": "pattern",
+      "id": "graphic-design-match-typeface-to-context",
+      "fragment": "user-content-article-section-pair-complementary-typefaces"
+    },
+    "graphic-design-limit-the-palette": {
+      "type": "pattern",
+      "id": "graphic-design-build-a-purposeful-palette"
+    },
+    "graphic-design-assign-consistent-color-roles": {
+      "type": "pattern",
+      "id": "graphic-design-signal-relationships-through-similarity",
+      "fragment": "user-content-article-section-assign-consistent-color-roles"
+    },
+    "graphic-design-use-complementary-contrast": {
+      "type": "pattern",
+      "id": "graphic-design-build-a-purposeful-palette"
+    },
+    "graphic-design-build-analogous-harmony": {
+      "type": "pattern",
+      "id": "graphic-design-build-a-purposeful-palette"
+    },
+    "graphic-design-test-in-grayscale": {
+      "type": "pattern",
+      "id": "graphic-design-establish-value-contrast",
+      "fragment": "user-content-article-section-test-in-grayscale"
+    },
+    "graphic-design-control-the-background": {
+      "type": "pattern",
+      "id": "graphic-design-separate-figure-from-ground",
+      "fragment": "user-content-article-section-control-the-background"
+    },
+    "graphic-design-use-silhouettes": {
+      "type": "pattern",
+      "id": "graphic-design-simplify-through-abstraction",
+      "fragment": "user-content-article-section-use-silhouettes"
+    }
+  },
+  "comparison_ownership": {
+    "scale-event-poster-photographic": "graphic-design-establish-visual-hierarchy",
+    "scale-workshop-promotion-photographic": "graphic-design-establish-visual-hierarchy",
+    "scale-report-metrics-photographic": "graphic-design-establish-visual-hierarchy",
+    "core-message-repair-poster": "graphic-design-define-the-core-message",
+    "core-message-coffee-package": "graphic-design-define-the-core-message",
+    "core-message-library-report": "graphic-design-define-the-core-message",
+    "audience-pottery-poster": "graphic-design-design-for-the-audience",
+    "audience-museum-sign": "graphic-design-design-for-the-audience",
+    "audience-day-pass-phone": "graphic-design-design-for-the-audience",
+    "form-seed-procedure": "graphic-design-match-form-to-purpose",
+    "form-pass-comparison": "graphic-design-match-form-to-purpose",
+    "form-open-studios-tabs": "graphic-design-match-form-to-purpose",
+    "remove-cinema-poster": "graphic-design-remove-the-nonessential",
+    "remove-coffee-package": "graphic-design-remove-the-nonessential",
+    "remove-dispatch-report": "graphic-design-remove-the-nonessential",
+    "explicit-hire-enquiry": "graphic-design-make-meaning-explicit",
+    "explicit-completion-report": "graphic-design-make-meaning-explicit",
+    "explicit-tableware-card": "graphic-design-make-meaning-explicit",
+    "chunk-supper-invitation": "graphic-design-chunk-information",
+    "chunk-booking-records": "graphic-design-chunk-information",
+    "chunk-collection-reference": "graphic-design-chunk-information",
+    "sequence-informed-invitation": "graphic-design-sequence-the-message",
+    "sequence-artwork-handoff": "graphic-design-sequence-the-message",
+    "sequence-service-review": "graphic-design-sequence-the-message",
+    "focal-open-studios": "graphic-design-establish-visual-hierarchy",
+    "focal-pottery-price": "graphic-design-establish-visual-hierarchy",
+    "focal-booking-action": "graphic-design-establish-visual-hierarchy",
+    "contrast-evening-details": "graphic-design-foundations-contrast",
+    "contrast-session-series": "graphic-design-foundations-contrast",
+    "contrast-interview-voices": "graphic-design-foundations-contrast",
+    "levels-clay-course": "graphic-design-establish-visual-hierarchy",
+    "levels-booking-roles": "graphic-design-establish-visual-hierarchy",
+    "levels-day-pass-terms": "graphic-design-establish-visual-hierarchy",
+    "reading-seed-procedure": "graphic-design-establish-a-clear-reading-order",
+    "reading-editorial-thread": "graphic-design-establish-a-clear-reading-order",
+    "reading-visit-preparation": "graphic-design-establish-a-clear-reading-order",
+    "guide-maker-gaze": "graphic-design-establish-a-clear-reading-order",
+    "guide-repair-detail": "graphic-design-integrate-text-and-image",
+    "guide-booking-arrow": "graphic-design-establish-a-clear-reading-order",
+    "alignment-repair-poster": "graphic-design-align-to-common-edges",
+    "alignment-cost-sheet": "graphic-design-align-to-common-edges",
+    "alignment-workshop-card": "graphic-design-align-to-common-edges",
+    "grid-studio-program": "graphic-design-establish-a-grid",
+    "grid-editorial-spans": "graphic-design-establish-a-grid",
+    "grid-responsive-workshops": "graphic-design-establish-a-grid",
+    "balance-evening-invitation": "graphic-design-balance-visual-weight",
+    "balance-peer-workshops": "graphic-design-balance-visual-weight",
+    "balance-material-study": "graphic-design-balance-visual-weight",
+    "space-evening-invitation": "graphic-design-use-spacing-to-express-relationships",
+    "space-workshop-details": "graphic-design-use-spacing-to-express-relationships",
+    "space-product-card": "graphic-design-use-spacing-to-express-relationships",
+    "spacing-open-studio-program": "graphic-design-use-spacing-to-express-relationships",
+    "spacing-workshop-cards": "graphic-design-use-spacing-to-express-relationships",
+    "spacing-studio-notes": "graphic-design-use-spacing-to-express-relationships",
+    "proportion-workshop-guide": "graphic-design-establish-a-grid",
+    "proportion-night-garden": "graphic-design-establish-a-type-scale",
+    "proportion-material-study": "graphic-design-adjust-line-spacing",
+    "rhythm-studio-diary": "graphic-design-establish-visual-rhythm",
+    "rhythm-open-studio-program": "graphic-design-establish-visual-rhythm",
+    "rhythm-look-make-share": "graphic-design-establish-visual-rhythm",
+    "frame-workshop-offer": "graphic-design-group-elements-within-shared-boundaries",
+    "frame-open-studio": "graphic-design-separate-figure-from-ground",
+    "frame-product-details": "graphic-design-group-elements-within-shared-boundaries",
+    "break-grid-open-studio": "graphic-design-establish-a-grid",
+    "break-grid-material-study": "graphic-design-establish-a-grid",
+    "break-grid-workshop-booking": "graphic-design-establish-a-grid",
+    "proximity-material-captions": "graphic-design-use-spacing-to-express-relationships",
+    "proximity-studio-schedule": "graphic-design-use-spacing-to-express-relationships",
+    "proximity-product-prices": "graphic-design-use-spacing-to-express-relationships",
+    "similarity-studio-program": "graphic-design-signal-relationships-through-similarity",
+    "similarity-product-prices": "graphic-design-signal-relationships-through-similarity",
+    "similarity-booking-controls": "graphic-design-signal-relationships-through-similarity",
+    "continuity-open-studio": "graphic-design-establish-visual-continuity",
+    "continuity-visit-connections": "graphic-design-establish-visual-continuity",
+    "continuity-booking-gap": "graphic-design-establish-visual-continuity",
+    "figure-ground-open-evening": "graphic-design-separate-figure-from-ground",
+    "figure-ground-loop-pitcher": "graphic-design-separate-figure-from-ground",
+    "figure-ground-date-dialog": "graphic-design-separate-figure-from-ground",
+    "implied-workshop-frame": "graphic-design-use-implied-forms",
+    "implied-product-circle": "graphic-design-use-implied-forms",
+    "implied-print-file": "graphic-design-use-implied-forms",
+    "boundaries-session-records": "graphic-design-group-elements-within-shared-boundaries",
+    "boundaries-shared-delivery": "graphic-design-group-elements-within-shared-boundaries",
+    "boundaries-offer-membership": "graphic-design-group-elements-within-shared-boundaries",
+    "typeface-reading-cut": "graphic-design-match-typeface-to-context",
+    "typeface-event-tone": "graphic-design-match-typeface-to-context",
+    "typeface-reference-code": "graphic-design-match-typeface-to-context",
+    "pairing-supporting-voice": "graphic-design-match-typeface-to-context",
+    "pairing-distinct-roles": "graphic-design-match-typeface-to-context",
+    "pairing-consistent-assignments": "graphic-design-signal-relationships-through-similarity",
+    "type-scale-repeated-roles": "graphic-design-establish-a-type-scale",
+    "type-scale-distinct-levels": "graphic-design-establish-a-type-scale",
+    "type-scale-phone-roles": "graphic-design-establish-a-type-scale",
+    "line-length-visitor-guide": "graphic-design-control-line-length",
+    "line-length-care-note": "graphic-design-control-line-length",
+    "line-length-report-scope": "graphic-design-control-line-length",
+    "leading-journal": "graphic-design-adjust-line-spacing",
+    "leading-care-card": "graphic-design-adjust-line-spacing",
+    "leading-workshop-poster": "graphic-design-adjust-line-spacing",
+    "optical-quotation": "graphic-design-apply-optical-alignment",
+    "optical-invitation": "graphic-design-apply-optical-alignment",
+    "optical-shop-label": "graphic-design-apply-optical-alignment",
+    "letter-spacing-capitals": "graphic-design-adjust-letter-spacing",
+    "letter-spacing-headline": "graphic-design-adjust-letter-spacing",
+    "letter-spacing-pair": "graphic-design-adjust-letter-spacing",
+    "breaks-phrase-poster": "graphic-design-control-line-breaks",
+    "breaks-value-unit": "graphic-design-control-line-breaks",
+    "breaks-paragraph-ending": "graphic-design-control-line-breaks",
+    "type-image-rise": "graphic-design-use-type-as-image",
+    "type-image-clay": "graphic-design-use-type-as-image",
+    "type-image-mug": "graphic-design-use-type-as-image",
+    "palette-open-studios": "graphic-design-build-a-purposeful-palette",
+    "palette-monthly-report": "graphic-design-build-a-purposeful-palette",
+    "palette-booking-screen": "graphic-design-build-a-purposeful-palette",
+    "color-roles-primary-actions": "graphic-design-signal-relationships-through-similarity",
+    "color-roles-studio-report": "graphic-design-signal-relationships-through-similarity",
+    "color-roles-order-status": "graphic-design-signal-relationships-through-similarity",
+    "complement-entry-accent": "graphic-design-build-a-purposeful-palette",
+    "complement-studio-categories": "graphic-design-build-a-purposeful-palette",
+    "complement-product-legibility": "graphic-design-establish-value-contrast",
+    "analogous-workshop-family": "graphic-design-build-a-purposeful-palette",
+    "analogous-coffee-variation": "graphic-design-build-a-purposeful-palette",
+    "analogous-supper-legibility": "graphic-design-establish-value-contrast",
+    "value-cinema-details": "graphic-design-establish-value-contrast",
+    "value-guest-checkbox": "graphic-design-establish-value-contrast",
+    "value-report-masthead": "graphic-design-establish-value-contrast",
+    "grayscale-workshop-details": "graphic-design-establish-value-contrast",
+    "grayscale-studio-categories": "graphic-design-reinforce-meaning-beyond-color",
+    "grayscale-booking-link": "graphic-design-reinforce-meaning-beyond-color",
+    "beyond-color-session-status": "graphic-design-reinforce-meaning-beyond-color",
+    "beyond-color-actual-plan": "graphic-design-reinforce-meaning-beyond-color",
+    "beyond-color-email-error": "graphic-design-reinforce-meaning-beyond-color",
+    "image-meaning-handbuilding": "graphic-design-choose-images-for-meaning",
+    "image-meaning-enclosed-room": "graphic-design-choose-images-for-meaning",
+    "image-meaning-seed-library": "graphic-design-choose-images-for-meaning",
+    "crop-handbuilding-action": "graphic-design-crop-for-impact",
+    "crop-tableware-edge": "graphic-design-crop-for-impact",
+    "crop-room-context": "graphic-design-crop-for-impact",
+    "background-studio-invitation": "graphic-design-separate-figure-from-ground",
+    "background-pitcher-texture": "graphic-design-separate-figure-from-ground",
+    "background-booking-surface": "graphic-design-separate-figure-from-ground",
+    "integration-newsletter-captions": "graphic-design-integrate-text-and-image",
+    "integration-pitcher-labels": "graphic-design-integrate-text-and-image",
+    "integration-maker-poster": "graphic-design-integrate-text-and-image",
+    "abstraction-pitcher-category": "graphic-design-simplify-through-abstraction",
+    "abstraction-room-arrangement": "graphic-design-simplify-through-abstraction",
+    "abstraction-seed-packing": "graphic-design-simplify-through-abstraction",
+    "silhouette-pitcher-shelf": "graphic-design-simplify-through-abstraction",
+    "silhouette-shears-ground": "graphic-design-separate-figure-from-ground",
+    "silhouette-maker-detail": "graphic-design-simplify-through-abstraction",
+    "metaphor-book-growth": "graphic-design-use-visual-metaphors",
+    "metaphor-cord-anchor": "graphic-design-use-visual-metaphors",
+    "metaphor-peer-bridge": "graphic-design-use-visual-metaphors",
+    "symbols-information": "graphic-design-employ-recognizable-symbols",
+    "symbols-download": "graphic-design-employ-recognizable-symbols",
+    "symbols-audio-label": "graphic-design-employ-recognizable-symbols"
+  },
+  "original_visual_assets": [
+    {
+      "src": "graphic-design/scale-event-poster.svg",
+      "width": 1320,
+      "height": 850,
+      "creator": "Patternverse original vector illustration",
+      "sha256": "8d2db2823787243f4d2655115b175f321b227dd64cd8e5e79a7cb1b4ee0b4239"
+    },
+    {
+      "src": "graphic-design/scale-workshop-promotion.svg",
+      "width": 1320,
+      "height": 850,
+      "creator": "Patternverse original vector illustration",
+      "sha256": "da2f1b21e1154395eef0f1ded3da8f088e484c407eda9552bf7bfd4186a2a582"
+    },
+    {
+      "src": "graphic-design/scale-report-metrics.svg",
+      "width": 1320,
+      "height": 850,
+      "creator": "Patternverse original vector illustration",
+      "sha256": "deff62a2caca45cd4d8ca25363096ab7820f758b208238211e2cc7f297f72a50"
+    },
+    {
+      "src": "graphic-design/scale-event-poster-mobile.svg",
+      "width": 660,
+      "height": 1720,
+      "creator": "Patternverse original vector illustration, stacked mobile layout",
+      "sha256": "90a2ea6973f03edba247cbeb78ad5cb068d2b27ccfa31dd688298b3934fef2f7"
+    },
+    {
+      "src": "graphic-design/scale-workshop-promotion-mobile.svg",
+      "width": 660,
+      "height": 1720,
+      "creator": "Patternverse original vector illustration, stacked mobile layout",
+      "sha256": "2e5ba8139837b5aea0aa1bd3139b6cb732dbee9324fbc1ed3682b16795828b3f"
+    },
+    {
+      "src": "graphic-design/scale-report-metrics-mobile.svg",
+      "width": 660,
+      "height": 1720,
+      "creator": "Patternverse original vector illustration, stacked mobile layout",
+      "sha256": "30ef7651c4e9e8d4165c213c5112711b8ab529a9fc14ed6244ba86f354b603d9"
+    },
+    {
+      "src": "graphic-design/scale-event-poster-photographic.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse composition with shared generated photographic artwork",
+      "source_assets": [
+        "graphic-design/scale-print-stage-v2.jpg",
+        "graphic-design/scale-greenhouse-photo-v2.jpg"
+      ],
+      "sha256": "951c960746ba1ab638dc1d859eeaa912de37b5fa85f7715ec3cae40ca3d217bc"
+    },
+    {
+      "src": "graphic-design/scale-event-poster-photographic-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse composition with shared generated photographic artwork",
+      "source_assets": [
+        "graphic-design/scale-print-stage-v2.jpg",
+        "graphic-design/scale-greenhouse-photo-v2.jpg"
+      ],
+      "sha256": "4fa2875e579948879b6827f925ad4d72bfc7dad20c5681dbaa0d6257a30e8b12"
+    },
+    {
+      "src": "graphic-design/scale-workshop-promotion-photographic.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse composition with shared generated photographic artwork",
+      "source_assets": [
+        "graphic-design/scale-print-stage-v2.jpg",
+        "graphic-design/scale-workshop-photo-v2.jpg"
+      ],
+      "sha256": "7cefd047e84d5a94c02e61045b4f4cef86afb906b5018fce925e0256f32f2e27"
+    },
+    {
+      "src": "graphic-design/scale-workshop-promotion-photographic-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse composition with shared generated photographic artwork",
+      "source_assets": [
+        "graphic-design/scale-print-stage-v2.jpg",
+        "graphic-design/scale-workshop-photo-v2.jpg"
+      ],
+      "sha256": "9dc4035373aebcaa473bd5c54ced4e4e422c2ae108f7f9f9dd78407877d70cc2"
+    },
+    {
+      "src": "graphic-design/scale-report-metrics-photographic.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse composition with shared generated photographic artwork",
+      "source_assets": [
+        "graphic-design/scale-print-stage-v2.jpg",
+        "graphic-design/scale-delivery-photo-v2.jpg"
+      ],
+      "sha256": "28a43f404424cabcacfe6d05bf3ed8174f744355fe2d1dce55d04ec37b6d5c1f"
+    },
+    {
+      "src": "graphic-design/scale-report-metrics-photographic-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse composition with shared generated photographic artwork",
+      "source_assets": [
+        "graphic-design/scale-print-stage-v2.jpg",
+        "graphic-design/scale-delivery-photo-v2.jpg"
+      ],
+      "sha256": "9b55a3fd8facb254a08a1ec3da382baa6c4bfea5de31b2e05ebeab3a9df198f2"
+    },
+    {
+      "src": "graphic-design/scale-greenhouse-photo-v2.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "0f4e3efdc680eada7505fc4638b42b32cebf634083275dc565df3d2ce702aeed"
+    },
+    {
+      "src": "graphic-design/scale-workshop-photo-v2.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "src": "graphic-design/scale-delivery-photo-v2.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "9901929cb9bc436f822f59e2fa54310e9060cbb24b2c24ac513dca59eb44ab65"
+    },
+    {
+      "src": "graphic-design/scale-print-stage-v2.jpg",
+      "width": 1024,
+      "height": 1536,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "src": "graphic-design/core-message-repair-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "f5c4449de84c1cb2d5c6d4142830a8067ff21ce0367f80b059d55a16194e2b07"
+    },
+    {
+      "src": "graphic-design/core-message-coffee-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "a3ab6d3b61e0a3c33e85c50d3c2a2daebf64abb2f335948519c0e0fd91e0606e"
+    },
+    {
+      "src": "graphic-design/core-message-library-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "9a09beb4b55a5038e6d8e5aa0d790d0cbe18255bdbc1b8ce2b2b4523b7915cdf"
+    },
+    {
+      "src": "graphic-design/core-message-coffee-package-stage.jpg",
+      "width": 1024,
+      "height": 1536,
+      "creator": "Generated photographic illustration using built-in image_gen",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "71dd92a3961965ac46c392c8f3b1061519d82af72241c94bb20b77770ed747bb"
+    },
+    {
+      "src": "graphic-design/core-message-repair-poster.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse message-only composition with shared generated photographic artwork",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "68f000b25757d0d22ab8d82ac79123d9860c2d91ac060569d21efb01b9b77a7d"
+    },
+    {
+      "src": "graphic-design/core-message-repair-poster-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse message-only composition with shared generated photographic artwork",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "ec4a3dee937bda335d5d59c0e97f3428ad7c301c5e28e04d611d4141d5848b15"
+    },
+    {
+      "src": "graphic-design/core-message-coffee-package.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse message-only composition with shared generated photographic artwork",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "7d1a3911d25f5fdcd2c9ea0b3a30dab784df2d3d8b563931e53fc7ba581c71e7"
+    },
+    {
+      "src": "graphic-design/core-message-coffee-package-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse message-only composition with shared generated photographic artwork",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "861a76d4152a5c27cf3b79e3992f702e310651252e97d1b5a584fe0012e38a2c"
+    },
+    {
+      "src": "graphic-design/core-message-library-report.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse message-only composition with shared generated photographic artwork",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "925147f286eae348b754c6041739c0b8b74b5f5552d1b2444e7a06d765f2f92a"
+    },
+    {
+      "src": "graphic-design/core-message-library-report-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse message-only composition with shared generated photographic artwork",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "b7256bbc1bef670275c27cb9a943ce9f57bbca00a9fa7fa964e2f0ffc2515591"
+    },
+    {
+      "src": "graphic-design/audience-pottery-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "src": "graphic-design/audience-museum-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "f0cde6fcfd40dad264a8319de509bb3f8d49f15f842531995420d14186b405fb"
+    },
+    {
+      "src": "graphic-design/audience-workspace-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "src": "graphic-design/audience-phone-stage.jpg",
+      "width": 1024,
+      "height": 1536,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    },
+    {
+      "src": "graphic-design/audience-pottery-poster.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse audience adaptation with shared generated photography",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "986a125005772b5e2f1d54cf3dfa536553ae9291206132ae877ec2a04d0413d0"
+    },
+    {
+      "src": "graphic-design/audience-pottery-poster-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse audience adaptation with shared generated photography",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "cfd4a0912c006ec3dd8d80286f7c5110b2cc7b5790af7e202011c15ddada90e3"
+    },
+    {
+      "src": "graphic-design/audience-museum-sign.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse audience adaptation with shared generated photography",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "ce497f5ef491832fb919b845dd658a99eb6a70ee458cd84c2ceed12f98e0b352"
+    },
+    {
+      "src": "graphic-design/audience-museum-sign-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse audience adaptation with shared generated photography",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "629e9979b68a3924e2d601c3dd07bb038960bebde6e5380b77dd1461865e5057"
+    },
+    {
+      "src": "graphic-design/audience-day-pass-phone.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse audience adaptation with shared generated photography",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a99db5a544fdabecce3d8378d022bd933c8e7254dbe039ab5ea24e333ad828d4"
+    },
+    {
+      "src": "graphic-design/audience-day-pass-phone-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse audience adaptation with shared generated photography",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "19607eea5532780867680588ca6447ff588e085a969bf3bf10d0d813e280d089"
+    },
+    {
+      "src": "graphic-design/form-seed-packing-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "487e04205d1aaecfd64e883a8def1adcd091fdf4430dd65001b9d772b5b7503b"
+    },
+    {
+      "src": "graphic-design/form-open-studios-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "src": "graphic-design/form-seed-procedure.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse task-format composition with shared generated photography",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "6317ebe8e76c5d576c4348c05e451d48fd850b88474118197889de01c10dac07"
+    },
+    {
+      "src": "graphic-design/form-seed-procedure-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse task-format composition with shared generated photography",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "a255e8eca7eae54e2432ff5395a86f66ca8da2aa2928ed2e29b21d7a56b6f6a2"
+    },
+    {
+      "src": "graphic-design/form-pass-comparison.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse task-format composition with shared generated photography",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "677e67eeb18ca36db818b070e9fd9a247ae250f0ec9d5fba512470612b20e14a"
+    },
+    {
+      "src": "graphic-design/form-pass-comparison-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse task-format composition with shared generated photography",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b31e6190ee095410f316c4febbb698e2c57d234e7e0db84c153f4acc3801eb61"
+    },
+    {
+      "src": "graphic-design/form-open-studios-tabs.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse task-format composition with shared generated photography",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "1508d0e9b5e92d459af900e174c767d365db95934fd1c88a501c23e69fc19af0"
+    },
+    {
+      "src": "graphic-design/form-open-studios-tabs-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse task-format composition with shared generated photography",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "11d8a78cfe4f95e04cc991a3080ff2abd7f58c0cd4e61dd50e590cbf41b49da4"
+    },
+    {
+      "src": "graphic-design/remove-courtyard-cinema-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "4140f35208c0e9768402eda5f4c47d16d419f960b7722e6094aaf4821d6c778a"
+    },
+    {
+      "src": "graphic-design/remove-cinema-poster.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse deletion-only composition with shared generated photography",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "2b1d96643017a0339c4243e1b9f2aa23e06482b7fcf90bb87312b23e6340d31f"
+    },
+    {
+      "src": "graphic-design/remove-cinema-poster-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse deletion-only composition with shared generated photography",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "b0c7036da0065863d19e4ae8b2ff7f786a19f8a334fac254af3389b1caa5d53d"
+    },
+    {
+      "src": "graphic-design/remove-coffee-package.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse deletion-only composition with shared generated photography",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "ccb8835598840fb0feb26dbfa1966e792097f7c16f095c2bf4f16aa0ac157094"
+    },
+    {
+      "src": "graphic-design/remove-coffee-package-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse deletion-only composition with shared generated photography",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "376d97839e921c2f374fc2f8b59653d95ffd8c086adb9565fe14e1313fa76631"
+    },
+    {
+      "src": "graphic-design/remove-dispatch-report.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse deletion-only composition with shared generated photography",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "5d677081ad9f8dcb5b2f652c5aff0a4d5d30e34efe6c81af5f5aeabafdaf28a3"
+    },
+    {
+      "src": "graphic-design/remove-dispatch-report-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse deletion-only composition with shared generated photography",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "5da50f0a442cbbda60614837b3b6953a8df56a3a477f26f1e3f26b6768dedd0f"
+    },
+    {
+      "src": "graphic-design/explicit-tableware-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in generated photographic source",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "src": "graphic-design/explicit-hire-enquiry.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse clarification-only composition with shared generated photography",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "e09fc8477e6acd5e0daa7f8f81114b70fdacf1a9e2454aa1cb393b115cc67e77"
+    },
+    {
+      "src": "graphic-design/explicit-hire-enquiry-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Original Patternverse clarification-only composition with shared generated photography",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "d232d8d8995ff2304a7f2c3ac59f6d3480b174e3e0aa1b7696ce38350dfb6343"
+    },
+    {
+      "src": "graphic-design/explicit-completion-report.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse clarification-only composition with shared generated photography",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "2ac2c0de79cdb09c5a9688c0be5a92a320a4d48b71b6b9e8f9d465815a809310"
+    },
+    {
+      "src": "graphic-design/explicit-completion-report-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse clarification-only composition with shared generated photography",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "306901c6c92be6fade2cac73bbf0f008c999565a2cd2bc073026d2f79ce7d816"
+    },
+    {
+      "src": "graphic-design/explicit-tableware-card.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse clarification-only composition with shared generated photography",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "8bb46bf033008f0d4a457abd4879d8a4d6cc368db4446a36ff62b844f5f270d9"
+    },
+    {
+      "src": "graphic-design/explicit-tableware-card-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse clarification-only composition with shared generated photography",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "1cfabac870af11c848bb2bf983f8d0a01e51bdfb25c5b0c4e4a9f38b48e2ef21"
+    },
+    {
+      "src": "graphic-design/chunk-garden-supper-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Built-in image generation; fictional community garden supper",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "53328167015da4550cd4810094a20ba6502c627867119c646fc7a74bc937872f"
+    },
+    {
+      "src": "graphic-design/chunk-supper-invitation.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse grouping composition with shared generated photography",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "1fcb558488da4b2bece8cde57299b6eefcd146dcf28bce22c6f8370ca1d85247"
+    },
+    {
+      "src": "graphic-design/chunk-supper-invitation-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse grouping composition with shared generated photography",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "fa6562a553c0bed379d7e15fe9e3f5565a2b25760de0486ca8515281d54818d4"
+    },
+    {
+      "src": "graphic-design/chunk-booking-records.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse grouping composition with shared generated photography",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "619f992c64916b97d1c38c595d5fe64962a0ab8ff1d196aeb3aa86b04466a6f1"
+    },
+    {
+      "src": "graphic-design/chunk-booking-records-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Original Patternverse grouping composition with shared generated photography",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "71095ebadd8e64eec4bcb50595f8bd2bc2c4335c76ae29b979b89ce232ba307f"
+    },
+    {
+      "src": "graphic-design/chunk-collection-reference.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse grouping composition with shared generated photography",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "7151fd05c2ffcfcc90fb75982000c7d78be07896251572a6526e9fe511014333"
+    },
+    {
+      "src": "graphic-design/chunk-collection-reference-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse grouping composition with shared generated photography",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "40016dc96c87e4549da2e5260d6e7a649a05d49d12aca17c627854f599bf7f98"
+    },
+    {
+      "src": "graphic-design/sequence-informed-invitation.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse order-only composition with shared generated photography",
+      "generation_record": "graphic-design-sequence-sources.json",
+      "sha256": "687219f536a9520e89cdfd2fb15f8190b42220ce25bc8b1f1b065702cfc011fd"
+    },
+    {
+      "src": "graphic-design/sequence-informed-invitation-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Original Patternverse order-only composition with shared generated photography",
+      "generation_record": "graphic-design-sequence-sources.json",
+      "sha256": "888226d7a96e8095a2ccedd57e7762a020e335730f4d61458260a8cc87a2e481"
+    },
+    {
+      "src": "graphic-design/sequence-artwork-handoff.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse order-only composition with shared generated photography",
+      "generation_record": "graphic-design-sequence-sources.json",
+      "sha256": "6e7b9b09b23080b56c2157c65accfcc0f7cfc6f44520461be24b21ec0839d6b3"
+    },
+    {
+      "src": "graphic-design/sequence-artwork-handoff-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse order-only composition with shared generated photography",
+      "generation_record": "graphic-design-sequence-sources.json",
+      "sha256": "21a87123ca3e8134d281c1bc088ded118fddc862596efda51738ebe6affaa1c0"
+    },
+    {
+      "src": "graphic-design/sequence-service-review.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse order-only composition with shared generated photography",
+      "generation_record": "graphic-design-sequence-sources.json",
+      "sha256": "7432d48066fdf860475a73dc1e2362e2dfe1a760737ec816a828212bdf16fa07"
+    },
+    {
+      "src": "graphic-design/sequence-service-review-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse order-only composition with shared generated photography",
+      "generation_record": "graphic-design-sequence-sources.json",
+      "sha256": "4188df97ae2f5672f8fd0aa6796f0e7509f70eda9136916e6277018f18a5ab61"
+    },
+    {
+      "src": "graphic-design/focal-open-studios.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled focal-point composition with shared generated photography",
+      "generation_record": "graphic-design-focal-sources.json",
+      "sha256": "cc2b9977fcd70c54daa87d2e9a050991e81bea345c337f03c249ce067b5274b1"
+    },
+    {
+      "src": "graphic-design/focal-open-studios-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled focal-point composition with shared generated photography",
+      "generation_record": "graphic-design-focal-sources.json",
+      "sha256": "34c8e76363869def91128449a4e62eee2be2898dd4e7ab8ff9aa99255c78b7a6"
+    },
+    {
+      "src": "graphic-design/focal-pottery-price.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled focal-point composition with shared generated photography",
+      "generation_record": "graphic-design-focal-sources.json",
+      "sha256": "04c97e1677591437e2fecdfccdb34109d796efd848920350cb6ac86b31a9548c"
+    },
+    {
+      "src": "graphic-design/focal-pottery-price-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled focal-point composition with shared generated photography",
+      "generation_record": "graphic-design-focal-sources.json",
+      "sha256": "da5d71820b1f35ba2a68c6b72777da8e6a97e7af92cf454e75e234fc740ba317"
+    },
+    {
+      "src": "graphic-design/focal-booking-action.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled focal-point composition with shared generated photography",
+      "generation_record": "graphic-design-focal-sources.json",
+      "sha256": "f33d3a58c6a60da193a24a3df4374d6018c7fb78c6438ec46a82059eca15d9d8"
+    },
+    {
+      "src": "graphic-design/focal-booking-action-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Original Patternverse controlled focal-point composition with shared generated photography",
+      "generation_record": "graphic-design-focal-sources.json",
+      "sha256": "b7143089883898d16b833896455d9c0f9ed83ddc42872c7139efe22d79a12297"
+    },
+    {
+      "src": "graphic-design/contrast-evening-details.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled contrast composition with shared generated photography",
+      "generation_record": "graphic-design-contrast-sources.json",
+      "sha256": "124093ffb4f4ebee4ca394b3f4fb81782bc9890df34a6b771b405d57330c6e79"
+    },
+    {
+      "src": "graphic-design/contrast-evening-details-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled contrast composition with shared generated photography",
+      "generation_record": "graphic-design-contrast-sources.json",
+      "sha256": "12114f35eda5be7a1a66802a8f9b8c577390754bc2b2e521315c6c3d0edadb78"
+    },
+    {
+      "src": "graphic-design/contrast-session-series.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled contrast composition with shared generated photography",
+      "generation_record": "graphic-design-contrast-sources.json",
+      "sha256": "078cedddbd75c867db8f5eb9c3b7cc2fa28c6c48b46f758a5b26263bfdce896d"
+    },
+    {
+      "src": "graphic-design/contrast-session-series-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled contrast composition with shared generated photography",
+      "generation_record": "graphic-design-contrast-sources.json",
+      "sha256": "95e1c22cfc82282a367d33e97fa55e8faedce2641aaa89acc0d17cdb420e7ab8"
+    },
+    {
+      "src": "graphic-design/contrast-interview-voices.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled contrast composition with shared generated photography",
+      "generation_record": "graphic-design-contrast-sources.json",
+      "sha256": "219287b5bf2096ab8293b15525df448321c4c8c6e8da99bd189580c102900e67"
+    },
+    {
+      "src": "graphic-design/contrast-interview-voices-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled contrast composition with shared generated photography",
+      "generation_record": "graphic-design-contrast-sources.json",
+      "sha256": "bd11f87990539e2a2040a9dbd0070d0e8f80053fdc99091b3a43a8f5930fa3b4"
+    },
+    {
+      "src": "graphic-design/levels-clay-course.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled importance-level composition with shared generated photography",
+      "generation_record": "graphic-design-levels-sources.json",
+      "sha256": "66857d05d49f3dab406cb771276b30f5a3dc4e711de699c37756cf39b56e4cbe"
+    },
+    {
+      "src": "graphic-design/levels-clay-course-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled importance-level composition with shared generated photography",
+      "generation_record": "graphic-design-levels-sources.json",
+      "sha256": "9dd96c78f5907651563d64f7e275eea3918301fb1a4653f29f90335d307b729c"
+    },
+    {
+      "src": "graphic-design/levels-booking-roles.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled importance-level composition with shared generated photography",
+      "generation_record": "graphic-design-levels-sources.json",
+      "sha256": "dbc523f319a1ccc3bab17ded39ddfba1aa358c5bbf170b31ccab4e68550db257"
+    },
+    {
+      "src": "graphic-design/levels-booking-roles-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Original Patternverse controlled importance-level composition with shared generated photography",
+      "generation_record": "graphic-design-levels-sources.json",
+      "sha256": "15d76cd95e4fd3a814a42c94fc473014244d47b57edb7e9a18134a4207e571a8"
+    },
+    {
+      "src": "graphic-design/levels-day-pass-terms.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled importance-level composition with shared generated photography",
+      "generation_record": "graphic-design-levels-sources.json",
+      "sha256": "ba0e8fb807c457a02c62430033446518be4ad512b49f2f6a0af7e59f7dac3181"
+    },
+    {
+      "src": "graphic-design/levels-day-pass-terms-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled importance-level composition with shared generated photography",
+      "generation_record": "graphic-design-levels-sources.json",
+      "sha256": "bfdd92d1823a46100675e270bbada98334199b6aad9d59a657a6be514b0a81c6"
+    },
+    {
+      "src": "graphic-design/reading-seed-procedure.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled reading-order composition with shared generated photography",
+      "generation_record": "graphic-design-reading-sources.json",
+      "sha256": "ae68d4da67673977ecc4b24eacb5fe027ef21468ab0358820fff028bdbbf9ba4"
+    },
+    {
+      "src": "graphic-design/reading-seed-procedure-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled reading-order composition with shared generated photography",
+      "generation_record": "graphic-design-reading-sources.json",
+      "sha256": "87ca2d54a066bc8cfd8a0e4c1008609a3380cf0d29ee773efeaf3938d01076de"
+    },
+    {
+      "src": "graphic-design/reading-editorial-thread.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled reading-order composition with shared generated photography",
+      "generation_record": "graphic-design-reading-sources.json",
+      "sha256": "59861c21e11dad78c2af6db3016c752fef2cf385b1ed7f8c35e38ebc7081198b"
+    },
+    {
+      "src": "graphic-design/reading-editorial-thread-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse controlled reading-order composition with shared generated photography",
+      "generation_record": "graphic-design-reading-sources.json",
+      "sha256": "be6c02931a4d5ff2fb866e0008ef9e4a2e6c71299ce60b19f33d91dde4ce5128"
+    },
+    {
+      "src": "graphic-design/reading-visit-preparation.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse controlled reading-order composition with shared generated photography",
+      "generation_record": "graphic-design-reading-sources.json",
+      "sha256": "40268a7c44c7312a8805ba8456b9d36b1957e555f966dcafb3dcf41708fd96f8"
+    },
+    {
+      "src": "graphic-design/reading-visit-preparation-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Original Patternverse controlled reading-order composition with shared generated photography",
+      "generation_record": "graphic-design-reading-sources.json",
+      "sha256": "89189aa27a729c6d0e6979fe40a47002ea8b93b812e12a58264e01d31bf99a0a"
+    },
+    {
+      "src": "graphic-design/guide-maker-gaze.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original comparison using generated photographic artwork",
+      "sha256": "24f02a27a41dd1d24a3c773eb4e05c401dbfbbaacffa81af63790e867c3500a8"
+    },
+    {
+      "src": "graphic-design/guide-maker-gaze-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original comparison using generated photographic artwork",
+      "sha256": "1569876691eb8f8e40f9a27b32efa95a1164a84b63b2bc0937b50b6f4dbd6cf7"
+    },
+    {
+      "src": "graphic-design/guide-repair-detail.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original comparison using generated photographic artwork",
+      "sha256": "d1f1214134ca98d961c93de2572b202bd6cc19547e045dcce6691e3c74a4d016"
+    },
+    {
+      "src": "graphic-design/guide-repair-detail-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original comparison using generated photographic artwork",
+      "sha256": "1da2dc313016a9af6d5745ff16889aabc2b689a5b1a2b32d8cc3928fe6a8a22e"
+    },
+    {
+      "src": "graphic-design/guide-booking-arrow.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original comparison using generated photographic artwork",
+      "sha256": "768e394710a0c34f281d0179a7a1a72add74f5e0897ebf143bb7ade411f4660b"
+    },
+    {
+      "src": "graphic-design/guide-booking-arrow-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Patternverse original comparison using generated photographic artwork",
+      "sha256": "bfd58cbe95eeee426c15b34a31cf11863800c39ed132d6090a9880283f9d9a5b"
+    },
+    {
+      "src": "graphic-design/guide-maker-portrait.jpg",
+      "width": 1024,
+      "height": 1536,
+      "creator": "Built-in image generation; fictional ceramic artist",
+      "sha256": "6288a0209cd2bcdab369bd752593012c110c20e19b1565d2d38719c2e3e32146"
+    },
+    {
+      "src": "graphic-design/alignment-repair-poster.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original comparison using selected generated photographic artwork",
+      "sha256": "2fe6be08d387b8cd5f7e9ecf4693f19ab665e017540b0d0e36c65c3d24677803"
+    },
+    {
+      "src": "graphic-design/alignment-repair-poster-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original comparison using selected generated photographic artwork",
+      "sha256": "84b79a8aa4d135da9861c8219760758c2fb904ae5cde8d528ab54f2f2e7e89bc"
+    },
+    {
+      "src": "graphic-design/alignment-cost-sheet.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original comparison using selected generated photographic artwork",
+      "sha256": "a522d6595387188e1b7e58c6cb00d75cfe11ed7a745a0a8c60f8fcf6eef1ddf1"
+    },
+    {
+      "src": "graphic-design/alignment-cost-sheet-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original comparison using selected generated photographic artwork",
+      "sha256": "2728a627a8d758bbf2d554e4527c3ada7b2e79810d0fb3aec58cefbf01da409a"
+    },
+    {
+      "src": "graphic-design/alignment-workshop-card.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original comparison using selected generated photographic artwork",
+      "sha256": "3e832960d1b1ba2191076dd3195750c1c831b37e5a513317e395d7d31cd9add7"
+    },
+    {
+      "src": "graphic-design/alignment-workshop-card-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Patternverse original comparison using selected generated photographic artwork",
+      "sha256": "fb2dec2576d69e210db246811ab6ccd1da966246e36476e711e0643f3d8ea713"
+    },
+    {
+      "src": "graphic-design/grid-studio-program.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original grid comparison using selected generated photographic artwork",
+      "sha256": "46ee88a6fa19c27b1329189dff0431791b2a5a75eeae3865c2a175cf6a7b24af"
+    },
+    {
+      "src": "graphic-design/grid-studio-program-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original grid comparison using selected generated photographic artwork",
+      "sha256": "3523bc17ff7a0011f6380f8d7e78bda0527d2d571c02023b826759c2de825cb6"
+    },
+    {
+      "src": "graphic-design/grid-editorial-spans.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original grid comparison using selected generated photographic artwork",
+      "sha256": "9c1a446146142e0cf938f7a592d988932ad0c8c63661a7c16cec8058735f4380"
+    },
+    {
+      "src": "graphic-design/grid-editorial-spans-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original grid comparison using selected generated photographic artwork",
+      "sha256": "846ddd7127177475b1a3fd3371b49978d5f4eff1892c117988b20029e41e3c70"
+    },
+    {
+      "src": "graphic-design/grid-responsive-workshops.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original grid comparison using selected generated photographic artwork",
+      "sha256": "e17e3a38871b3f3bfa7a766debcf3b38606479514a3d2d004b10b5ed5e28bd05"
+    },
+    {
+      "src": "graphic-design/grid-responsive-workshops-mobile.svg",
+      "width": 480,
+      "height": 2070,
+      "creator": "Patternverse original grid comparison using selected generated photographic artwork",
+      "sha256": "23ba6b76856c173aee0922c91314a94b442f78ee0e85419dc3998cc91bb87a31"
+    },
+    {
+      "src": "graphic-design/grid-anatomy.svg",
+      "width": 600,
+      "height": 430,
+      "creator": "Patternverse original explanatory vector diagram",
+      "sha256": "f52528f6cd15de37b84aea9f4c1eaa59a45eff30042ad04e9fd00de505898232"
+    },
+    {
+      "src": "graphic-design/balance-evening-invitation.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original balance comparison using selected generated photographic artwork",
+      "sha256": "cb6747a5fb78d0a729f89ac430e9e4611b440be78755fc23ed9acc5105328031"
+    },
+    {
+      "src": "graphic-design/balance-evening-invitation-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original balance comparison using selected generated photographic artwork",
+      "sha256": "7191fa1285d5d746375eadab3eaba3fc312392eb04e0b5e0238f5e986dec2dec"
+    },
+    {
+      "src": "graphic-design/balance-peer-workshops.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original balance comparison using selected generated photographic artwork",
+      "sha256": "c71c79950cfea5c2eb7c3c8103485dfd63fa4e333d03d1ecab33dd2afbd5efac"
+    },
+    {
+      "src": "graphic-design/balance-peer-workshops-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original balance comparison using selected generated photographic artwork",
+      "sha256": "3b94c139e6cdf3ff71fa150336a55b24ec4b063e189ca30b8adc93b11ec9f43a"
+    },
+    {
+      "src": "graphic-design/balance-material-study.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original balance comparison using selected generated photographic artwork",
+      "sha256": "238ed4c6362e7d79f687387356f1a95164ae2d9d9b315646a4194ed84e6dc661"
+    },
+    {
+      "src": "graphic-design/balance-material-study-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original balance comparison using selected generated photographic artwork",
+      "sha256": "9982734abc7e07700e0223673aedd315280bcbadb03107d3e8a091096087536e"
+    },
+    {
+      "src": "graphic-design/space-evening-invitation.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original negative-space comparison using selected generated photographic artwork",
+      "sha256": "2187108eda1ab7836c9d50ca111522ad661dd53a7d1a42a3e484f5572dfcc7eb"
+    },
+    {
+      "src": "graphic-design/space-evening-invitation-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original negative-space comparison using selected generated photographic artwork",
+      "sha256": "570ca444f447c2fe19fc07d3de0698b6140cf46a8b82537574ec95c576b4823b"
+    },
+    {
+      "src": "graphic-design/space-workshop-details.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original negative-space comparison using selected generated photographic artwork",
+      "sha256": "201ddc870aa546ba410b28411fc0dd3b2e66b4f13fb808b3eb86cbe5c2ed8c9f"
+    },
+    {
+      "src": "graphic-design/space-workshop-details-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original negative-space comparison using selected generated photographic artwork",
+      "sha256": "98588415b87f1158c7f539806f00d496e5d5404f987850d36a016e8a334f80f7"
+    },
+    {
+      "src": "graphic-design/space-product-card.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original negative-space comparison using selected generated photographic artwork",
+      "sha256": "43f2c70b68a2da68467f9e9709c0571fa05c6cfb66b18a5e48846c8e53e77bc3"
+    },
+    {
+      "src": "graphic-design/space-product-card-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original negative-space comparison using selected generated photographic artwork",
+      "sha256": "c5d24503edca9a5a2813c79c890d94b84295a7444249cc7cb96fea8cd0bcfd04"
+    },
+    {
+      "src": "graphic-design/spacing-open-studio-program.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original consistent-spacing comparison using selected generated photographic artwork",
+      "sha256": "d41407a463a1cc3c42ac11e8bf2a2fad1cb7529e6eae468f785f22c4889b8b54"
+    },
+    {
+      "src": "graphic-design/spacing-open-studio-program-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original consistent-spacing comparison using selected generated photographic artwork",
+      "sha256": "017a5c869f0285da8e83449557055ca0a615239ab21253733a394904ff907367"
+    },
+    {
+      "src": "graphic-design/spacing-workshop-cards.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original consistent-spacing comparison using selected generated photographic artwork",
+      "sha256": "3498d3b29af0aa11c578a11a8073d9d109072e3c29318cd103295d33b43d58d9"
+    },
+    {
+      "src": "graphic-design/spacing-workshop-cards-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original consistent-spacing comparison using selected generated photographic artwork",
+      "sha256": "4a18b966f97cfc58970fb333f959aa5feb35695b057438894bf690cddc7cf179"
+    },
+    {
+      "src": "graphic-design/spacing-studio-notes.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original consistent-spacing comparison using selected generated photographic artwork",
+      "sha256": "0bc28c5351ecf9020cd4cdb22d83fed3984f03512ccb005c1b62aea2a11e4dc5"
+    },
+    {
+      "src": "graphic-design/spacing-studio-notes-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original consistent-spacing comparison using selected generated photographic artwork",
+      "sha256": "dd1bfb018b18387366511cdeca67da7b8b9640279f3f03bdb215cbca9f08c532"
+    },
+    {
+      "src": "graphic-design/proportion-workshop-guide.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original proportional-relationship comparison using selected generated photographic artwork",
+      "sha256": "ac1b9c90e9e61093fb668823fb23f0a00a52b63189211a1750f345d094906eba"
+    },
+    {
+      "src": "graphic-design/proportion-workshop-guide-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original proportional-relationship comparison using selected generated photographic artwork",
+      "sha256": "f669e4ff562c5ee73543c7ccc67a4e89e52b6c8467ee8950efe57632b51bbaa3"
+    },
+    {
+      "src": "graphic-design/proportion-night-garden.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original proportional-relationship comparison using selected generated photographic artwork",
+      "sha256": "8a863fd0e102422a1ca2b96311ea75d05c085809917a2f62f19e5d5af1d6f10c"
+    },
+    {
+      "src": "graphic-design/proportion-night-garden-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original proportional-relationship comparison using selected generated photographic artwork",
+      "sha256": "113cbe4b68db40ffc3a1f361a89119056e9fcd461870b0f026075700bb2acda2"
+    },
+    {
+      "src": "graphic-design/proportion-material-study.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original proportional-relationship comparison using selected generated photographic artwork",
+      "sha256": "0673b9cbb9e0e028b82423bd4a2fa5febf4cddb8507aab35247989d57da7a6bd"
+    },
+    {
+      "src": "graphic-design/proportion-material-study-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original proportional-relationship comparison using selected generated photographic artwork",
+      "sha256": "8740e1de7af0494ce88277fd199980e013131af118b80d427a9e0add8f67e84c"
+    },
+    {
+      "src": "graphic-design/rhythm-studio-diary.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original visual-rhythm comparison using selected generated photographic artwork",
+      "sha256": "748ce5bff3ccaf2a9f585fab0b39f1c48086e750fa1a88222b413c40932f242c"
+    },
+    {
+      "src": "graphic-design/rhythm-studio-diary-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original visual-rhythm comparison using selected generated photographic artwork",
+      "sha256": "84a3884f0b545d181d7fa6a5987a4c18af566413cd2d05b13961c3879f762287"
+    },
+    {
+      "src": "graphic-design/rhythm-open-studio-program.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original visual-rhythm comparison using selected generated photographic artwork",
+      "sha256": "b2c6e7bb683d9dc8750951d2faa8ba8837e3cef26bb7359d0bb42860777a6dc4"
+    },
+    {
+      "src": "graphic-design/rhythm-open-studio-program-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original visual-rhythm comparison using selected generated photographic artwork",
+      "sha256": "e2f3bdb353e6252b6c67c6acbf930285aa2cbdb3d5b3dde3681cc3a9feef4f3a"
+    },
+    {
+      "src": "graphic-design/rhythm-look-make-share.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original visual-rhythm comparison using selected generated photographic artwork",
+      "sha256": "442089f333b97987e88ec2677ab30911b8427d5a50598adadb281291c52774a7"
+    },
+    {
+      "src": "graphic-design/rhythm-look-make-share-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original visual-rhythm comparison using selected generated photographic artwork",
+      "sha256": "6c0a163475c2d15d14dd1aaf1405e6250fdf2a718e87726055fe0037a28c463f"
+    },
+    {
+      "src": "graphic-design/frame-workshop-offer.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original framing comparison using selected generated photographic artwork",
+      "sha256": "4c91abf9757871db11bd2e9fea8122a0b449616e921a11f6db85175af0cda6d4"
+    },
+    {
+      "src": "graphic-design/frame-workshop-offer-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original framing comparison using selected generated photographic artwork",
+      "sha256": "b547e3b768cd8abab46eb33de0f5f56348cf1fc3048c495f7251fba7b110c122"
+    },
+    {
+      "src": "graphic-design/frame-open-studio.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original framing comparison using selected generated photographic artwork",
+      "sha256": "a317d2a21f922767fcd59efa1885d75e6a38f718f8cdde136625d6dabc19939a"
+    },
+    {
+      "src": "graphic-design/frame-open-studio-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original framing comparison using selected generated photographic artwork",
+      "sha256": "f24889801cffa29f0c5b87332661fed35c21bf7008e05f28e761c90fdc125b52"
+    },
+    {
+      "src": "graphic-design/frame-product-details.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original framing comparison using selected generated photographic artwork",
+      "sha256": "3dfd51ea2595b2b85296b37d1c889bffa9fc1c7e48939e2faae960926ab49c3d"
+    },
+    {
+      "src": "graphic-design/frame-product-details-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original framing comparison using selected generated photographic artwork",
+      "sha256": "01f62709a8f9a4d57dd2420094a5a71b227fd63428c097673b5efea3b4468509"
+    },
+    {
+      "src": "graphic-design/break-grid-open-studio.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original grid-exception comparison or explanatory diagram; comparisons reuse selected generated photographic artwork",
+      "sha256": "a10375b6821e587964606102fe40180d30e76e9773c00db0a4e2ca5535f8fb4e"
+    },
+    {
+      "src": "graphic-design/break-grid-open-studio-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original grid-exception comparison or explanatory diagram; comparisons reuse selected generated photographic artwork",
+      "sha256": "bbfa769e0e6082cd3acd44888c5acd1387e44a50078f08a3ba7cc5ba23892d84"
+    },
+    {
+      "src": "graphic-design/break-grid-material-study.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original grid-exception comparison or explanatory diagram; comparisons reuse selected generated photographic artwork",
+      "sha256": "5ce4f5fd2757bba45f0ba2946ac255a8bd543c60874aac2d4e579c153fb0751f"
+    },
+    {
+      "src": "graphic-design/break-grid-material-study-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original grid-exception comparison or explanatory diagram; comparisons reuse selected generated photographic artwork",
+      "sha256": "8b9dbf8f29100d871a9f9e8eba4b561c02fa82eed1f7212ef80e4ecc1a81f8ce"
+    },
+    {
+      "src": "graphic-design/break-grid-workshop-booking.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original grid-exception comparison or explanatory diagram; comparisons reuse selected generated photographic artwork",
+      "sha256": "70d2095e92cd8fe93bf3dceae131ad8c6e5734ee9d9ff527a64fb3a6a2831a10"
+    },
+    {
+      "src": "graphic-design/break-grid-workshop-booking-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original grid-exception comparison or explanatory diagram; comparisons reuse selected generated photographic artwork",
+      "sha256": "35a3c720a1a84d55b9baa1919097d5471fbe0d86fd1a057cedbb24042d93e123"
+    },
+    {
+      "src": "graphic-design/break-grid-anatomy.svg",
+      "width": 660,
+      "height": 660,
+      "creator": "Patternverse original grid-exception comparison or explanatory diagram; comparisons reuse selected generated photographic artwork",
+      "sha256": "21da90e1ab91d8e77c4047a78eb7422f6884b9dc166c495e205530763325cb0a"
+    },
+    {
+      "src": "graphic-design/proximity-material-captions.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography.",
+      "sha256": "0a0918d70eeadd46cd3e964be01413387fa5d1ae217226e5b545514c809fae2b"
+    },
+    {
+      "src": "graphic-design/proximity-material-captions-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography.",
+      "sha256": "976e69e1c1609f0560dc2c76e00c28ae17135ddecd1467a8d24c478d888cfc2a"
+    },
+    {
+      "src": "graphic-design/proximity-studio-schedule.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography.",
+      "sha256": "96ded2fa37583ce54c9963a1f88743b81e86358fcdb892172b8bd083c54ef958"
+    },
+    {
+      "src": "graphic-design/proximity-studio-schedule-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography.",
+      "sha256": "2c2efa0abbcce8451e9efc07bc30e37437c0c49d7bb37bb781b9f27059e91184"
+    },
+    {
+      "src": "graphic-design/proximity-product-prices.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography.",
+      "sha256": "3859180116b6772760862828c2275fa653cec62744607ef06143277b144aa329"
+    },
+    {
+      "src": "graphic-design/proximity-product-prices-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography.",
+      "sha256": "a5a8f49e7c19578991e738e4baa23dca8b77aa028464c3fa517853dc2d61ce5a"
+    },
+    {
+      "src": "graphic-design/similarity-studio-program.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography and layout.",
+      "sha256": "d6cb60534468f4f0e0d71f697141bb5b27fbd93fed13bceaccc8b14ae6812733"
+    },
+    {
+      "src": "graphic-design/similarity-studio-program-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography and layout.",
+      "sha256": "c042c50c30c8f4cf0e031b161ffeff0bc1dd4ba882a9763aee690d5521a1d65b"
+    },
+    {
+      "src": "graphic-design/similarity-product-prices.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography and layout.",
+      "sha256": "53c2f7a0b3f68a505e25c5267668fa5ee3ffc7e45e70a123f8216cb48377d25b"
+    },
+    {
+      "src": "graphic-design/similarity-product-prices-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography and layout.",
+      "sha256": "e4fbf8343eee68e4ad15ae573d25f0b36833894b7e8ce6356357ced0783bf62e"
+    },
+    {
+      "src": "graphic-design/similarity-booking-controls.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography and layout.",
+      "sha256": "8b0b5c69677c9e484e7b4785e4f03f09399a3538d27c6bdbef123d75f02e4b01"
+    },
+    {
+      "src": "graphic-design/similarity-booking-controls-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs and separately authored typography and layout.",
+      "sha256": "1d3e8262e82b30bbf86b18d81db3bb182de9ee5e0cce6891855e1e4855913f8d"
+    },
+    {
+      "src": "graphic-design/continuity-open-studio.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs with separately authored typography and linework.",
+      "sha256": "5737cc5612ea620c42337b9b72aec37f9b932e89e0017252edf64a81e38259d7"
+    },
+    {
+      "src": "graphic-design/continuity-open-studio-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs with separately authored typography and linework.",
+      "sha256": "605fe762b72161c93175f017aeb676c3bb0e83bf7a736690f5a8d24642ce107d"
+    },
+    {
+      "src": "graphic-design/continuity-visit-connections.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs with separately authored typography and linework.",
+      "sha256": "b7f1d0df89c0d0790541548132755f12e046a88f943f8bab3c5288355d7eda53"
+    },
+    {
+      "src": "graphic-design/continuity-visit-connections-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs with separately authored typography and linework.",
+      "sha256": "16979b3c9b7511d61d39b4d719a2336bda35df6339932ed818a5cc62ec46a212"
+    },
+    {
+      "src": "graphic-design/continuity-booking-gap.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; selected generated photographs with separately authored typography and linework.",
+      "sha256": "94e1d29cb999a46cf24bc356970afcf8e8b0961e971105ee19996e8268c4abb5"
+    },
+    {
+      "src": "graphic-design/continuity-booking-gap-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; selected generated photographs with separately authored typography and linework.",
+      "sha256": "4c8693bb6473f22a408c8a63cf46368a6f86bfdb2ce56bfe66d28221cbefc5d3"
+    },
+    {
+      "src": "graphic-design/figure-ground-open-evening.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; generated photographs with separately authored typography, grounds and layout.",
+      "sha256": "8fdf8575aaf71c23872feb4740d45760b02118c13f860819e19daac274921171"
+    },
+    {
+      "src": "graphic-design/figure-ground-open-evening-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; generated photographs with separately authored typography, grounds and layout.",
+      "sha256": "0d5018198ac95e9736e11ed1ed4d4ff08d512152cf31d9a52cd55e3b5e6c768e"
+    },
+    {
+      "src": "graphic-design/figure-ground-loop-pitcher.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; generated photographs with separately authored typography, grounds and layout.",
+      "sha256": "a96c9f7c7b231dc48a8ee8caead9c1e97edf9cd5fa4483e15b2ce7425007235b"
+    },
+    {
+      "src": "graphic-design/figure-ground-loop-pitcher-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; generated photographs with separately authored typography, grounds and layout.",
+      "sha256": "0af676d91d4a29f055e783af4ba1d512453bfc29db5a9e6d36a5777c32ddf376"
+    },
+    {
+      "src": "graphic-design/figure-ground-date-dialog.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; generated photographs with separately authored typography, grounds and layout.",
+      "sha256": "3dd6dcf960646d4cf99f4afb066f7579b5ef721d3df5bfd34690378c85c430c9"
+    },
+    {
+      "src": "graphic-design/figure-ground-date-dialog-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; generated photographs with separately authored typography, grounds and layout.",
+      "sha256": "406c75f7c55ae9b4515ee0de31db54aa3f180b02140e0f054f55f315fb971602"
+    },
+    {
+      "src": "graphic-design/figure-ground-pitcher-cutout.png",
+      "width": 1312,
+      "height": 1199,
+      "creator": "AI-generated transparent product photograph, built-in image_gen; prompt and generation record: graphic-design-figure-ground-generation.json.",
+      "sha256": "3ecc57ffd075e64447f73dacf120eb607b2cdbed9f9d8a8038d4ee927b4735d3"
+    },
+    {
+      "src": "graphic-design/implied-workshop-frame.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; existing generated photographs with separately authored typography and vector graphics.",
+      "sha256": "7b61ceae3cafcd3c70a549716894507a3d08710b0ee884b03695376e407c617d"
+    },
+    {
+      "src": "graphic-design/implied-workshop-frame-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; existing generated photographs with separately authored typography and vector graphics.",
+      "sha256": "0bae0650a08fa00f7ddc0ff490bf3cc4b697e0f989bc6f8d7d1eb10eb6a0d841"
+    },
+    {
+      "src": "graphic-design/implied-product-circle.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; existing generated photographs with separately authored typography and vector graphics.",
+      "sha256": "a4b632a9e3ca49f3c559014d9467c82d301c94c3943755892dc85a59c7795064"
+    },
+    {
+      "src": "graphic-design/implied-product-circle-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; existing generated photographs with separately authored typography and vector graphics.",
+      "sha256": "9da5c42a576adf42e118572ee9760c96b33684568867fcc1844857b1cfc43790"
+    },
+    {
+      "src": "graphic-design/implied-print-file.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; existing generated photographs with separately authored typography and vector graphics.",
+      "sha256": "55092d29e71ed6610d78d91ec021ac92e0580141c9d9512ae5fc03024b8e4a0d"
+    },
+    {
+      "src": "graphic-design/implied-print-file-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; existing generated photographs with separately authored typography and vector graphics.",
+      "sha256": "3fc18bc493031f0a22bc3bdc9278416687a1cad55c45ad5d9c4842058c28c9ca"
+    },
+    {
+      "src": "graphic-design/boundaries-session-records.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and enclosure graphics.",
+      "sha256": "d46126aee19e42d56b7f4c1ad7416e8be536ac2dac9c5473c891428e03e12ed3"
+    },
+    {
+      "src": "graphic-design/boundaries-session-records-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and enclosure graphics.",
+      "sha256": "8587c2000ed460b8a04ce77e0ec3c5c4550679329c4ba93493449ebc94b9a849"
+    },
+    {
+      "src": "graphic-design/boundaries-shared-delivery.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and enclosure graphics.",
+      "sha256": "3dbdfa90258a591e5e2b14d8e9c821682815a56bfb411afc2b5b6e053ca58f9e"
+    },
+    {
+      "src": "graphic-design/boundaries-shared-delivery-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and enclosure graphics.",
+      "sha256": "f1b06b5bfc88d419b4602efc025314623f9364ad59ac1c20d20d89684b414637"
+    },
+    {
+      "src": "graphic-design/boundaries-offer-membership.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and enclosure graphics.",
+      "sha256": "0725755b214a9e918e9ef4b7b5786878686c24f5c49379f113ce81640488a511"
+    },
+    {
+      "src": "graphic-design/boundaries-offer-membership-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and enclosure graphics.",
+      "sha256": "840db138424f19d291db1b644cac03de5d494b407898b928a23d3117567f3dc9"
+    },
+    {
+      "src": "graphic-design/typeface-reading-cut.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separate typography and embedded licensed illustration font instances.",
+      "sha256": "079f8c38680aeac23c636023425b4f3e63e2909f54c328be736f1ab248fbfa8c"
+    },
+    {
+      "src": "graphic-design/typeface-reading-cut-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separate typography and embedded licensed illustration font instances.",
+      "sha256": "ab45451e56060885bcda1fb51d567ded5fff99053ff46ff0dec80a9769cccac0"
+    },
+    {
+      "src": "graphic-design/typeface-event-tone.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separate typography and embedded licensed illustration font instances.",
+      "sha256": "39f5e39cdccfb1c335c37d0417b61c5243cbdba15070630cd43d9b3000d01b37"
+    },
+    {
+      "src": "graphic-design/typeface-event-tone-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separate typography and embedded licensed illustration font instances.",
+      "sha256": "62d762acefb841a29351ab44277cfc71f8c41573dcc93822d41c0723a12a0873"
+    },
+    {
+      "src": "graphic-design/typeface-reference-code.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separate typography and embedded licensed illustration font instances.",
+      "sha256": "4464fa61f89e67beae1ba95d89b84e2220cb6becf5eee919ad98d30b72f439e7"
+    },
+    {
+      "src": "graphic-design/typeface-reference-code-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separate typography and embedded licensed illustration font instances.",
+      "sha256": "c50d5679bda2977e9806abbfffb350b0c54db6c506533802615ad52e0e9e3594"
+    },
+    {
+      "src": "graphic-design/pairing-supporting-voice.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and embedded licensed illustration font instances.",
+      "sha256": "5b649b91e3c6bd9a1e6a8e1385de8acb78d78ff4fef6db0ceba8073f5fa2c102"
+    },
+    {
+      "src": "graphic-design/pairing-supporting-voice-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and embedded licensed illustration font instances.",
+      "sha256": "b4a7df9ef6beb5d37cd03e3250e05fe42c87335c63dccd8de53a9ffbe9ef1200"
+    },
+    {
+      "src": "graphic-design/pairing-distinct-roles.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and embedded licensed illustration font instances.",
+      "sha256": "ee1a5989b90cba4b579706dca28a84dc82006b09a5cd34dc11da6fec7050c12b"
+    },
+    {
+      "src": "graphic-design/pairing-distinct-roles-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and embedded licensed illustration font instances.",
+      "sha256": "9ad730ea6ec70b46e0387aa0cf2fa8c629ff4631e1657e81d9086c5d653f5ed8"
+    },
+    {
+      "src": "graphic-design/pairing-consistent-assignments.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and embedded licensed illustration font instances.",
+      "sha256": "46a69458a83163e15d0212d9c968d955f0bcdc7320fc3a84cb9b34ec81b6e21d"
+    },
+    {
+      "src": "graphic-design/pairing-consistent-assignments-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately authored typography and embedded licensed illustration font instances.",
+      "sha256": "91b3c08e94ca21a50eb30edb88fa96020f32f29c2ca5c3351570d41c14c10c5b"
+    },
+    {
+      "src": "graphic-design/type-scale-repeated-roles.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled size-only revisions.",
+      "sha256": "eddeb229f1fb26ed3bc7581fd5f4701a10d8445aa30900b78982df3469276a08"
+    },
+    {
+      "src": "graphic-design/type-scale-repeated-roles-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled size-only revisions.",
+      "sha256": "ef3f71ca40f0afb5b5a3739727cc3901779b713129db556fa0219a43fa9c9f5f"
+    },
+    {
+      "src": "graphic-design/type-scale-distinct-levels.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled size-only revisions.",
+      "sha256": "08d97169832f5c42a8ae43e3d00685f43f9cd19c250dce2188128979984b1799"
+    },
+    {
+      "src": "graphic-design/type-scale-distinct-levels-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled size-only revisions.",
+      "sha256": "6210925c07ba997f8e03132fdced951fb233c5e8896e62df8f88fb4038bc8435"
+    },
+    {
+      "src": "graphic-design/type-scale-phone-roles.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled size-only revisions.",
+      "sha256": "d60b8ac038dc9102aeeb34763888d0587173b7df8ab953bafce2bae1d5c12b30"
+    },
+    {
+      "src": "graphic-design/type-scale-phone-roles-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled size-only revisions.",
+      "sha256": "d8776c7d20646e2b122262c615a6b461fff4f3ffe987775e7467f010dbb543c1"
+    },
+    {
+      "src": "graphic-design/line-length-visitor-guide.svg",
+      "width": 960,
+      "height": 1470,
+      "creator": "Patternverse original fictional example; reused generated photographs with fixed-font typography and measured width-only reflow.",
+      "sha256": "61afe39e287200d3637351e0bccc90690486260db3a3264fdcd33c0e6ce6c5e1"
+    },
+    {
+      "src": "graphic-design/line-length-visitor-guide-mobile.svg",
+      "width": 960,
+      "height": 1470,
+      "creator": "Patternverse original fictional example; reused generated photographs with fixed-font typography and measured width-only reflow.",
+      "sha256": "61afe39e287200d3637351e0bccc90690486260db3a3264fdcd33c0e6ce6c5e1"
+    },
+    {
+      "src": "graphic-design/line-length-care-note.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with fixed-font typography and measured width-only reflow.",
+      "sha256": "95c0f2a0c9d094335bed84bd26e18ebd722ce6b0bd9895b492b84fae5c3a81ba"
+    },
+    {
+      "src": "graphic-design/line-length-care-note-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with fixed-font typography and measured width-only reflow.",
+      "sha256": "4faf305b573e326ab9f145602ca016fc754fb6d686106b964c8423b2a010e716"
+    },
+    {
+      "src": "graphic-design/line-length-report-scope.svg",
+      "width": 960,
+      "height": 1470,
+      "creator": "Patternverse original fictional example; reused generated photographs with fixed-font typography and measured width-only reflow.",
+      "sha256": "2ad7e6a55146595da7640fc658c3c8948172d34bca1a34ee4409a912f202e985"
+    },
+    {
+      "src": "graphic-design/line-length-report-scope-mobile.svg",
+      "width": 960,
+      "height": 1470,
+      "creator": "Patternverse original fictional example; reused generated photographs with fixed-font typography and measured width-only reflow.",
+      "sha256": "2ad7e6a55146595da7640fc658c3c8948172d34bca1a34ee4409a912f202e985"
+    },
+    {
+      "src": "graphic-design/leading-journal.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled baseline spacing.",
+      "sha256": "2c4ce4db83b530f910c042187f3179f52180ddbce7dd7e5997859678f9c37ec8"
+    },
+    {
+      "src": "graphic-design/leading-journal-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled baseline spacing.",
+      "sha256": "f9dfd9bc34d328de3dfbfb580b4e26a9dc0258700408d574659974f969dbc32b"
+    },
+    {
+      "src": "graphic-design/leading-care-card.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled baseline spacing.",
+      "sha256": "6da8603dfe1b2c199964bb07f56e48935304b55ac1443cb4698bf0fe29733dbf"
+    },
+    {
+      "src": "graphic-design/leading-care-card-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled baseline spacing.",
+      "sha256": "2da876f83990c92912b0ebb6352a64a3b8a3d48fb8f95837ba0b98fb935260b8"
+    },
+    {
+      "src": "graphic-design/leading-workshop-poster.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled baseline spacing.",
+      "sha256": "0dcfa2a37efc9f1377013833441fa2310517561f9a36faeaffbbf4ab053d4cf6"
+    },
+    {
+      "src": "graphic-design/leading-workshop-poster-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed fixed-font typography and controlled baseline spacing.",
+      "sha256": "f312709e2e1b32c67ed3213ee8a0fae9374ed9449c61c1f6dd5e6fa80678ee62"
+    },
+    {
+      "src": "graphic-design/optical-quotation.svg",
+      "width": 1320,
+      "height": 1460,
+      "creator": "Patternverse original fictional example; reused generated photography with fixed-font typography, one declared optical translation and exact-artifact explanatory close-ups.",
+      "sha256": "1a9cdd5cb062bffe0445a02fd7a1355daaf2b1ec02a227c7d35fc5d4b144fe04"
+    },
+    {
+      "src": "graphic-design/optical-quotation-mobile.svg",
+      "width": 660,
+      "height": 2850,
+      "creator": "Patternverse original fictional example; reused generated photography with fixed-font typography, one declared optical translation and exact-artifact explanatory close-ups.",
+      "sha256": "05dafd91faf54d26625e5af1eb44834310067ebcbf50462f8a346d5f210d5888"
+    },
+    {
+      "src": "graphic-design/optical-invitation.svg",
+      "width": 1320,
+      "height": 1460,
+      "creator": "Patternverse original fictional example; reused generated photography with fixed-font typography, one declared optical translation and exact-artifact explanatory close-ups.",
+      "sha256": "a8a38e7fff4f6023b7877c93aa891ce9eff233847701941d3c57c769d947a217"
+    },
+    {
+      "src": "graphic-design/optical-invitation-mobile.svg",
+      "width": 660,
+      "height": 2850,
+      "creator": "Patternverse original fictional example; reused generated photography with fixed-font typography, one declared optical translation and exact-artifact explanatory close-ups.",
+      "sha256": "0483063208808d3746f974dc6c1ad40fde3016d959d616ebe9459edf6c6cd030"
+    },
+    {
+      "src": "graphic-design/optical-shop-label.svg",
+      "width": 1320,
+      "height": 1460,
+      "creator": "Patternverse original fictional example; reused generated photography with fixed-font typography, one declared optical translation and exact-artifact explanatory close-ups.",
+      "sha256": "3e405e82181ede7bed47457be5468d55de7f947eb62c01fdf603918f873c6afd"
+    },
+    {
+      "src": "graphic-design/optical-shop-label-mobile.svg",
+      "width": 660,
+      "height": 2850,
+      "creator": "Patternverse original fictional example; reused generated photography with fixed-font typography, one declared optical translation and exact-artifact explanatory close-ups.",
+      "sha256": "950ccc9f159157cf84684ad2bddaaede4bc39ad84e6c84f06aafdf0cd8c25069"
+    },
+    {
+      "src": "graphic-design/letter-spacing-capitals.svg",
+      "width": 1320,
+      "height": 1460,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font tracking or one measured pair adjustment and exact-artifact close-ups.",
+      "sha256": "525fb302a38a4143504c7d204eeb9f9cb9c61e107ad1274318e1ad750b8ac6ea"
+    },
+    {
+      "src": "graphic-design/letter-spacing-capitals-mobile.svg",
+      "width": 660,
+      "height": 2850,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font tracking or one measured pair adjustment and exact-artifact close-ups.",
+      "sha256": "bf2ad4c10d049a301e4e1a7421f53b8bfe95c63b7d1e67102b2c4df6bf72fbc0"
+    },
+    {
+      "src": "graphic-design/letter-spacing-headline.svg",
+      "width": 1320,
+      "height": 1460,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font tracking or one measured pair adjustment and exact-artifact close-ups.",
+      "sha256": "7a66a1eec5983c992c48ba50b4f8e122e0746e87a9259b90c5580a82cd1e1c78"
+    },
+    {
+      "src": "graphic-design/letter-spacing-headline-mobile.svg",
+      "width": 660,
+      "height": 2850,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font tracking or one measured pair adjustment and exact-artifact close-ups.",
+      "sha256": "7e12fe4e88379b5cd2ef9f00c1e5885b2ba17359dd7ea86f34c500e3723e3f35"
+    },
+    {
+      "src": "graphic-design/letter-spacing-pair.svg",
+      "width": 1320,
+      "height": 1460,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font tracking or one measured pair adjustment and exact-artifact close-ups.",
+      "sha256": "a8e59d934addc3d3857a8533612d5599b9366562c894371d43effa2ae8d07e5f"
+    },
+    {
+      "src": "graphic-design/letter-spacing-pair-mobile.svg",
+      "width": 660,
+      "height": 2850,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font tracking or one measured pair adjustment and exact-artifact close-ups.",
+      "sha256": "44b0f5b0818a45eb3aac9ba1bae84dcc2e1c7d775fb600acc8d772b232840d55"
+    },
+    {
+      "src": "graphic-design/breaks-phrase-poster.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font typography and word-allocation-only line-break changes.",
+      "sha256": "dd2bd3cb634457752e5e1c9454bc273d4ea741cf3b86644fdc32ae16a0e4a705"
+    },
+    {
+      "src": "graphic-design/breaks-phrase-poster-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font typography and word-allocation-only line-break changes.",
+      "sha256": "879b86e69af0499d5bfe773e8e024d9b8c5637cc287b4442124c6b8ebd00344c"
+    },
+    {
+      "src": "graphic-design/breaks-value-unit.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font typography and word-allocation-only line-break changes.",
+      "sha256": "fce5895cc386c5a838c06725f38c4ecdf8695fde9ba941e3a26a0bceeb320fb0"
+    },
+    {
+      "src": "graphic-design/breaks-value-unit-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font typography and word-allocation-only line-break changes.",
+      "sha256": "c78d917836b963cdd6ff665b688a544ca0772bebe7c59b185684d2d6ce2163c6"
+    },
+    {
+      "src": "graphic-design/breaks-paragraph-ending.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font typography and word-allocation-only line-break changes.",
+      "sha256": "f960055b0a622846ce0c8fbcf4af5b29c373bcda43224aaaf029dd394eff6a2d"
+    },
+    {
+      "src": "graphic-design/breaks-paragraph-ending-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with native fixed-font typography and word-allocation-only line-break changes.",
+      "sha256": "9b79a68263ab8534523ba22f28de9971f0821694f33d852dd43090ce697d0af5"
+    },
+    {
+      "src": "graphic-design/type-image-rise.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed native typography and controlled expressive letter treatment.",
+      "sha256": "ea8f94546fc3a7ec5ebea561595a666836a9f00aa3986181bcd0b15908086316"
+    },
+    {
+      "src": "graphic-design/type-image-rise-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed native typography and controlled expressive letter treatment.",
+      "sha256": "65feef87e7b6e9b7c25dc58b493132c7b0fc0eb698421c30920cca54954b081e"
+    },
+    {
+      "src": "graphic-design/type-image-clay.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed native typography and controlled expressive letter treatment.",
+      "sha256": "f3837deb4eae1f49c0bdbae37c5d79cdbf4b06bedfa9d5e8de09475bb6f52500"
+    },
+    {
+      "src": "graphic-design/type-image-clay-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed native typography and controlled expressive letter treatment.",
+      "sha256": "611e04d329ba28626bd8eba5c905c4a3f8b474532f7c13b9d16e07962b99f6e1"
+    },
+    {
+      "src": "graphic-design/type-image-mug.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed native typography and controlled expressive letter treatment.",
+      "sha256": "2574d65485de2e36f62a2e612efa668fbd22c9f2288f8d3474742788de2c951a"
+    },
+    {
+      "src": "graphic-design/type-image-mug-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs with separately composed native typography and controlled expressive letter treatment.",
+      "sha256": "10199c3c97d315e23d740c3ac97d752213a69e221c803f8ef73147c94d629fad"
+    },
+    {
+      "src": "graphic-design/palette-open-studios.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared fill colors.",
+      "sha256": "4651e8637199ff4cb19b224b328c9e20e75c2cc94f7a4a1683455b031def6d61"
+    },
+    {
+      "src": "graphic-design/palette-open-studios-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared fill colors.",
+      "sha256": "e0a541b622dfbfe65e00832f3c5eda43e65845d443c4cefd1fc0aaa48730901f"
+    },
+    {
+      "src": "graphic-design/palette-monthly-report.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared fill colors.",
+      "sha256": "3d20829314e08a81f9c051c2adbf28b2d5b884981a0f30e4e306f91ec7413b47"
+    },
+    {
+      "src": "graphic-design/palette-monthly-report-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared fill colors.",
+      "sha256": "0aacd812f278bbf6fdc5d7e4237a5e7b0a0323442e38a7a8a32833bcf0cd350b"
+    },
+    {
+      "src": "graphic-design/palette-booking-screen.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared fill colors.",
+      "sha256": "c576a0a7fdffec64d95aebeb6b81e5b32fcfe4c2fbf33acadbd33e229c6144e6"
+    },
+    {
+      "src": "graphic-design/palette-booking-screen-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared fill colors.",
+      "sha256": "1df9f99bdb7188e454be9b6daaf3d683f384f4ea3a5cb4be39f9349669a9dc6c"
+    },
+    {
+      "src": "graphic-design/color-roles-primary-actions.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photography with separately composed native typography and geometry, changing only existing color-role assignments.",
+      "sha256": "b37438ca0f1bc00fe448d003fa78cdb092e666d6820452823d07b865e8c0287b"
+    },
+    {
+      "src": "graphic-design/color-roles-primary-actions-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photography with separately composed native typography and geometry, changing only existing color-role assignments.",
+      "sha256": "c62a42e507bc8876e4db85eef3a5a5d872edb620aac6f21e6348a7243828f6fc"
+    },
+    {
+      "src": "graphic-design/color-roles-studio-report.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photography with separately composed native typography and geometry, changing only existing color-role assignments.",
+      "sha256": "0964715ee0630a18dc024861e1aa6a8ac83f1ecf063a4ab498f27daab0366d25"
+    },
+    {
+      "src": "graphic-design/color-roles-studio-report-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photography with separately composed native typography and geometry, changing only existing color-role assignments.",
+      "sha256": "aeb417afe0396738610cea6e5190b3c9eb8368e3944d018fc86114ecd91f27e4"
+    },
+    {
+      "src": "graphic-design/color-roles-order-status.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photography with separately composed native typography and geometry, changing only existing color-role assignments.",
+      "sha256": "d84d46182811018d7b90cb0dfdcd95965d93cec8eb61ad473f2e240b69f4fdf7"
+    },
+    {
+      "src": "graphic-design/color-roles-order-status-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photography with separately composed native typography and geometry, changing only existing color-role assignments.",
+      "sha256": "a14a14930cce862c5f81d6b6ad1b285976228add139a08556fe9ff303503c955"
+    },
+    {
+      "src": "graphic-design/complement-entry-accent.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared hue or panel value fills.",
+      "sha256": "e1ee94af4004fdf9057d81fbef0475696b550ebaea02c54340c5e05fc3dccd9f"
+    },
+    {
+      "src": "graphic-design/complement-entry-accent-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared hue or panel value fills.",
+      "sha256": "91ed008d113611dfbed14b82c032fec922825f49acbea074f7469d50c339302f"
+    },
+    {
+      "src": "graphic-design/complement-studio-categories.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared hue or panel value fills.",
+      "sha256": "e8efb5fab3fcaa89e18e39622a76243a939ce7f5dc3b3934aa1348fa6d42f4f1"
+    },
+    {
+      "src": "graphic-design/complement-studio-categories-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared hue or panel value fills.",
+      "sha256": "5821281cf909f5d02fb0c2493dcfd3f4d6b6972de8dfbade84db07c80d1a47b5"
+    },
+    {
+      "src": "graphic-design/complement-product-legibility.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared hue or panel value fills.",
+      "sha256": "81f3344e6341814588653c4da6721f18d67e601bfc560e74b751eb9c708d4fb1"
+    },
+    {
+      "src": "graphic-design/complement-product-legibility-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only declared hue or panel value fills.",
+      "sha256": "6ec31ad217dd9b1ab3afe648420f2849b90e60f45a5317a6be938a2621c45e76"
+    },
+    {
+      "src": "graphic-design/analogous-workshop-family.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only selected surface hues or practical-text lightness.",
+      "sha256": "c15cdd03786346584c4ee70d947018ef1a664fd7f58924626cf2e3d492237aa7"
+    },
+    {
+      "src": "graphic-design/analogous-workshop-family-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only selected surface hues or practical-text lightness.",
+      "sha256": "89275f94f0077c1bd3664812ed6d46e45da07cca23bc993cba1a31f646c40b99"
+    },
+    {
+      "src": "graphic-design/analogous-coffee-variation.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only selected surface hues or practical-text lightness.",
+      "sha256": "30524786060ea78db71d6b30e3ba309e45b86f15acfeb721d749e0be10ee6d24"
+    },
+    {
+      "src": "graphic-design/analogous-coffee-variation-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only selected surface hues or practical-text lightness.",
+      "sha256": "568397e4421e78cfe881b8e4b0924c8f73c5d1265346eeb69afc5b997e5b2b2a"
+    },
+    {
+      "src": "graphic-design/analogous-supper-legibility.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only selected surface hues or practical-text lightness.",
+      "sha256": "cffe588dcaada9ccb69751cf580c2396188466e273d73c51fdba174f554859b7"
+    },
+    {
+      "src": "graphic-design/analogous-supper-legibility-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographic artwork with separately composed fixed typography and geometry, changing only selected surface hues or practical-text lightness.",
+      "sha256": "12485dc0506fac89218ebeabe44e4edae4131e938c847f5237eaa5cb263a7d77"
+    },
+    {
+      "src": "graphic-design/value-cinema-details.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs and native fixed typography/geometry. Only declared text fills, checkbox stroke or masthead fills change.",
+      "sha256": "00da1d3055b487702865b118a5a9a6da264f9feec1382bf3450122097ffaf019"
+    },
+    {
+      "src": "graphic-design/value-cinema-details-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs and native fixed typography/geometry. Only declared text fills, checkbox stroke or masthead fills change.",
+      "sha256": "1ab2df64ff8848253df035787aafe5e77d38d4f6532998f47e60d2ab26d35b22"
+    },
+    {
+      "src": "graphic-design/value-guest-checkbox.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs and native fixed typography/geometry. Only declared text fills, checkbox stroke or masthead fills change.",
+      "sha256": "b8e32a6e48d00d62e38557b964c15f1d94e2a7abdf3123464d6f9ce15b3b8f0c"
+    },
+    {
+      "src": "graphic-design/value-guest-checkbox-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs and native fixed typography/geometry. Only declared text fills, checkbox stroke or masthead fills change.",
+      "sha256": "41e39bfdec19aff27b4697964f27ad85587516ae1493e83adbcd3cdff6d89552"
+    },
+    {
+      "src": "graphic-design/value-report-masthead.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs and native fixed typography/geometry. Only declared text fills, checkbox stroke or masthead fills change.",
+      "sha256": "f2c27caa89ebead5ebd90af377afc73832ab523563a575349da8e5b2a6966cb9"
+    },
+    {
+      "src": "graphic-design/value-report-masthead-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs and native fixed typography/geometry. Only declared text fills, checkbox stroke or masthead fills change.",
+      "sha256": "d0be4572ab52eaa9e359d4545ef7cc45366da0bf02b4787815e3eec6d5838b5d"
+    },
+    {
+      "src": "graphic-design/grayscale-workshop-details.svg",
+      "width": 1320,
+      "height": 2100,
+      "creator": "Patternverse original fictional four-view example; reused generated photos, native fixed typography/geometry and identical grayscale conversion. Only declared repairs change.",
+      "sha256": "6b00789568320b0ca2e85c0416f212793cf52eaa8bde8860eed17aa78b85d5db"
+    },
+    {
+      "src": "graphic-design/grayscale-workshop-details-mobile.svg",
+      "width": 660,
+      "height": 4140,
+      "creator": "Patternverse original fictional four-view example; reused generated photos, native fixed typography/geometry and identical grayscale conversion. Only declared repairs change.",
+      "sha256": "89d2438cc428204f16acaa8c137f4e94711b3d87aa437d7029e5647778b0d9a4"
+    },
+    {
+      "src": "graphic-design/grayscale-studio-categories.svg",
+      "width": 1320,
+      "height": 2100,
+      "creator": "Patternverse original fictional four-view example; reused generated photos, native fixed typography/geometry and identical grayscale conversion. Only declared repairs change.",
+      "sha256": "72bedc03ae5c7f3a11914a6c3b67066d3fa7dfb26ee3a23a868fa127dd61c4a8"
+    },
+    {
+      "src": "graphic-design/grayscale-studio-categories-mobile.svg",
+      "width": 660,
+      "height": 4140,
+      "creator": "Patternverse original fictional four-view example; reused generated photos, native fixed typography/geometry and identical grayscale conversion. Only declared repairs change.",
+      "sha256": "b8626ccc169914de7f95a2386279f464ce76a50efdea736551faf23e0ce6b9af"
+    },
+    {
+      "src": "graphic-design/grayscale-booking-link.svg",
+      "width": 1320,
+      "height": 2100,
+      "creator": "Patternverse original fictional four-view example; reused generated photos, native fixed typography/geometry and identical grayscale conversion. Only declared repairs change.",
+      "sha256": "0aa62f536ac1d2b30ad3daa21f01386069c2991f979120251fe72e2439f23029"
+    },
+    {
+      "src": "graphic-design/grayscale-booking-link-mobile.svg",
+      "width": 660,
+      "height": 4140,
+      "creator": "Patternverse original fictional four-view example; reused generated photos, native fixed typography/geometry and identical grayscale conversion. Only declared repairs change.",
+      "sha256": "adde11398cac89d468ea3690c6ca9d544d9f1aee2e24074c6abf6f9ee1bdb6c4"
+    },
+    {
+      "src": "graphic-design/beyond-color-session-status.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs and fixed native typography/geometry. Only local status labels, Plan dashes or inline error text change.",
+      "sha256": "86ec91a0ffeec19f17f09dc65423b0513a2102fc03b30444635fa093479edd2d"
+    },
+    {
+      "src": "graphic-design/beyond-color-session-status-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs and fixed native typography/geometry. Only local status labels, Plan dashes or inline error text change.",
+      "sha256": "b5fcc21e30ed0c8cac2df092246d0510413295bcc1e452d2f43153d0bde19027"
+    },
+    {
+      "src": "graphic-design/beyond-color-actual-plan.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs and fixed native typography/geometry. Only local status labels, Plan dashes or inline error text change.",
+      "sha256": "29f809abf3efa9e9140e551fe8af5f3e7455790f0385e7406e8768ebd2629bde"
+    },
+    {
+      "src": "graphic-design/beyond-color-actual-plan-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs and fixed native typography/geometry. Only local status labels, Plan dashes or inline error text change.",
+      "sha256": "069867568e7a210f5fd3158aae42700cc48c085a45feae076ab0cb5e31c14360"
+    },
+    {
+      "src": "graphic-design/beyond-color-email-error.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional example; reused generated photographs and fixed native typography/geometry. Only local status labels, Plan dashes or inline error text change.",
+      "sha256": "621e08cb6386ef7229cc9bc4392b8e2922d4a7772448648e7f34a7dac9f6c283"
+    },
+    {
+      "src": "graphic-design/beyond-color-email-error-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional example; reused generated photographs and fixed native typography/geometry. Only local status labels, Plan dashes or inline error text change.",
+      "sha256": "0a6e3e0ae543f53dc085c95979f09afa1c1b4adaa850b5e46106957a3f47dc0d"
+    },
+    {
+      "src": "graphic-design/image-meaning-handbuilding.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional image-selection comparison; generated photos composed with fixed native typography and paper presentation. Only the selected image source changes.",
+      "sha256": "7e899dc0d4ac85f05c13539aa75e9f667480fee2cd55626396825f4753fd110f"
+    },
+    {
+      "src": "graphic-design/image-meaning-handbuilding-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional image-selection comparison; generated photos composed with fixed native typography and paper presentation. Only the selected image source changes.",
+      "sha256": "03a501823c5902c7f920dd2cfeffee1cf7cabbeb34664685ffa3b1bc9e2e4d17"
+    },
+    {
+      "src": "graphic-design/image-meaning-enclosed-room.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional image-selection comparison; generated photos composed with fixed native typography and paper presentation. Only the selected image source changes.",
+      "sha256": "66da8410ec0fef8f8b653912756e9becc1ce7d6e4ad18aa02b4bdbf1f65e70c9"
+    },
+    {
+      "src": "graphic-design/image-meaning-enclosed-room-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional image-selection comparison; generated photos composed with fixed native typography and paper presentation. Only the selected image source changes.",
+      "sha256": "2434be470e3cabf3b9f9730080f159bb054f2bbf5ca141bf05eaf7991913e1c8"
+    },
+    {
+      "src": "graphic-design/image-meaning-seed-library.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional image-selection comparison; generated photos composed with fixed native typography and paper presentation. Only the selected image source changes.",
+      "sha256": "5716f5ca73a477ff7dcaa345826a3d5cf40784c86976b1342a4c5fc995106512"
+    },
+    {
+      "src": "graphic-design/image-meaning-seed-library-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional image-selection comparison; generated photos composed with fixed native typography and paper presentation. Only the selected image source changes.",
+      "sha256": "099fbaa2fce7f76a39cc4c9dcf75bad62d1b4906125f39aaa3617d777bd0841d"
+    },
+    {
+      "src": "graphic-design/meaning-handbuilding-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Patternverse original fictional illustrative photograph generated using built-in imagegen; no documentary claim.",
+      "sha256": "26676e6fb1dfcdca24725cc465e31d977d03f728bc974022d0ff5835dbc80d55"
+    },
+    {
+      "src": "graphic-design/meaning-enclosed-room-photo.jpg",
+      "width": 1536,
+      "height": 1024,
+      "creator": "Patternverse original fictional illustrative photograph generated using built-in imagegen; no documentary claim.",
+      "sha256": "33fba583a187116e75139cd49e6394e40bc11925fbacbaef68d339bd91497b68"
+    },
+    {
+      "src": "graphic-design/crop-handbuilding-action.svg",
+      "width": 1320,
+      "height": 1420,
+      "creator": "Patternverse original fictional crop comparison with exact source insets. Reused generated photograph and fixed native typography/presentation; only the source window changes.",
+      "sha256": "517108f60a9a04d6738ebcc5500cb46b3e935da5f5fbffc9e9c3c325ad503c23"
+    },
+    {
+      "src": "graphic-design/crop-handbuilding-action-mobile.svg",
+      "width": 660,
+      "height": 2480,
+      "creator": "Patternverse original fictional crop comparison with exact source insets. Reused generated photograph and fixed native typography/presentation; only the source window changes.",
+      "sha256": "2e366b012789eec58d81a1ca6364eac5ae292e841192b5a054fb0bdede8e78a1"
+    },
+    {
+      "src": "graphic-design/crop-tableware-edge.svg",
+      "width": 1320,
+      "height": 1420,
+      "creator": "Patternverse original fictional crop comparison with exact source insets. Reused generated photograph and fixed native typography/presentation; only the source window changes.",
+      "sha256": "ae8d3046f22ffd90d08c030f5f78d19c3257a91cdb486408b4ea135ee27e5afc"
+    },
+    {
+      "src": "graphic-design/crop-tableware-edge-mobile.svg",
+      "width": 660,
+      "height": 2480,
+      "creator": "Patternverse original fictional crop comparison with exact source insets. Reused generated photograph and fixed native typography/presentation; only the source window changes.",
+      "sha256": "c8aae1c3bc1b13b68a915066448fd0cdcc5332e151137fb1645d2bad564c89bd"
+    },
+    {
+      "src": "graphic-design/crop-room-context.svg",
+      "width": 1320,
+      "height": 1420,
+      "creator": "Patternverse original fictional crop comparison with exact source insets. Reused generated photograph and fixed native typography/presentation; only the source window changes.",
+      "sha256": "83e0df93ef32cc7269ac6c42ded87e8fb9a8ce2d252e034d5b43dd6e5c872fc1"
+    },
+    {
+      "src": "graphic-design/crop-room-context-mobile.svg",
+      "width": 660,
+      "height": 2480,
+      "creator": "Patternverse original fictional crop comparison with exact source insets. Reused generated photograph and fixed native typography/presentation; only the source window changes.",
+      "sha256": "0e964e1fb215f18fc6e6d5888957a1ecafd2acc6b79d824be6e093c78e3c271a"
+    },
+    {
+      "src": "graphic-design/background-studio-invitation.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional background-only comparison. Existing generated photographs/cutout and native typography/presentation; only one background opacity changes.",
+      "sha256": "1e6e6aa9bdbd0cfb0fd19260bfb3121dc802f49be875b1ca48ba981e1c911266"
+    },
+    {
+      "src": "graphic-design/background-studio-invitation-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional background-only comparison. Existing generated photographs/cutout and native typography/presentation; only one background opacity changes.",
+      "sha256": "de41cf51793129803b8ebc90fe4ce25face5f0aff8f4f2ab11f5becf1714bbf1"
+    },
+    {
+      "src": "graphic-design/background-pitcher-texture.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional background-only comparison. Existing generated photographs/cutout and native typography/presentation; only one background opacity changes.",
+      "sha256": "d6a99481504e24f3ce4b682f5c84eda15de6028a76fba6c3dc31e0a17a405326"
+    },
+    {
+      "src": "graphic-design/background-pitcher-texture-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional background-only comparison. Existing generated photographs/cutout and native typography/presentation; only one background opacity changes.",
+      "sha256": "60180c1baa7c6e1e4e83536477e6b678c88fb40107b8a87ff0ef279cf335768e"
+    },
+    {
+      "src": "graphic-design/background-booking-surface.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional background-only comparison. Existing generated photographs/cutout and native typography/presentation; only one background opacity changes.",
+      "sha256": "20dace526b4dc07cdf103cea48bf95db5c723ea9109421e6579739562723ccf1"
+    },
+    {
+      "src": "graphic-design/background-booking-surface-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional background-only comparison. Existing generated photographs/cutout and native typography/presentation; only one background opacity changes.",
+      "sha256": "c92b5ab7f8f86dabf63c3e63ab20020e1ab8ddc654722832d35f4c97e4fe3882"
+    },
+    {
+      "src": "graphic-design/integration-newsletter-captions.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional text–image integration comparison. Reused generated photographs/cutout and native typography. Only declared caption/title positions or leader visibility changes.",
+      "sha256": "c5221a86728016f0c0668cf929d28e9a7761e3a13040f31b4340d677f5a6d453"
+    },
+    {
+      "src": "graphic-design/integration-newsletter-captions-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional text–image integration comparison. Reused generated photographs/cutout and native typography. Only declared caption/title positions or leader visibility changes.",
+      "sha256": "83de9d2245ba4c4a87e7137058ce3e0162b0ab18b00be98d01f5a72a131a1c17"
+    },
+    {
+      "src": "graphic-design/integration-pitcher-labels.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional text–image integration comparison. Reused generated photographs/cutout and native typography. Only declared caption/title positions or leader visibility changes.",
+      "sha256": "d6b673c8992c4da0f93dec830f545857945c2d970e81ab7941963f88f4926b5b"
+    },
+    {
+      "src": "graphic-design/integration-pitcher-labels-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional text–image integration comparison. Reused generated photographs/cutout and native typography. Only declared caption/title positions or leader visibility changes.",
+      "sha256": "cf64a97ebec5a5572a94f9de48d8fabe71bd6de6ac862bcafcae7488514c82b6"
+    },
+    {
+      "src": "graphic-design/integration-maker-poster.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional text–image integration comparison. Reused generated photographs/cutout and native typography. Only declared caption/title positions or leader visibility changes.",
+      "sha256": "2724a27d3dd293e9fc9a2ae7f98d34122da46dd32594d64ce0c551117d78496f"
+    },
+    {
+      "src": "graphic-design/integration-maker-poster-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional text–image integration comparison. Reused generated photographs/cutout and native typography. Only declared caption/title positions or leader visibility changes.",
+      "sha256": "7f3123062e655a3ca52570a48a6b7ae7ab3afbc79d6232347ca4a2e875c50267"
+    },
+    {
+      "src": "graphic-design/abstraction-pitcher-category.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional abstraction comparison. Existing generated photographic source and authored native abstraction exchange within a fixed frame; external typography/layout/presentation remain identical.",
+      "sha256": "8d5265401930ad2aaa4de38de015e4dc7826273c50941f4889295e1a6f8135d6"
+    },
+    {
+      "src": "graphic-design/abstraction-pitcher-category-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional abstraction comparison. Existing generated photographic source and authored native abstraction exchange within a fixed frame; external typography/layout/presentation remain identical.",
+      "sha256": "6d782cb17b75adbd96538d8a9b4e9ba1df4d4623f02f1b290dbdd74f6f6ac90e"
+    },
+    {
+      "src": "graphic-design/abstraction-room-arrangement.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional abstraction comparison. Existing generated photographic source and authored native abstraction exchange within a fixed frame; external typography/layout/presentation remain identical.",
+      "sha256": "1dc7ffd7de96eb74f4dd2171b4f0268033438f41c5607e6b7bc1dd7cfd50ab18"
+    },
+    {
+      "src": "graphic-design/abstraction-room-arrangement-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional abstraction comparison. Existing generated photographic source and authored native abstraction exchange within a fixed frame; external typography/layout/presentation remain identical.",
+      "sha256": "0b896c9d257d3eb0d00e15c13625a024066a8ec937998dc4d79a0e5eb7ed4e2b"
+    },
+    {
+      "src": "graphic-design/abstraction-seed-packing.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional abstraction comparison. Existing generated photographic source and authored native abstraction exchange within a fixed frame; external typography/layout/presentation remain identical.",
+      "sha256": "6a78080802be4b27834709bf3a12e9e774a9e5223db2422b764be4e6c75d1398"
+    },
+    {
+      "src": "graphic-design/abstraction-seed-packing-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional abstraction comparison. Existing generated photographic source and authored native abstraction exchange within a fixed frame; external typography/layout/presentation remain identical.",
+      "sha256": "570a4241818b0ec73e9728bd9c6f9702dd5cb066eda3eaee9d97a7e7aee24c89"
+    },
+    {
+      "src": "graphic-design/silhouette-shears-cutout.png",
+      "width": 1536,
+      "height": 1024,
+      "creator": "AI-generated fictional transparent photographic cutout using built-in image_gen. Original PNG copied unchanged; source prompt and path retained.",
+      "sha256": "1066e99f3ff8a0ea324c4a53133d56f7c51dfe463ce0de9c3d75523f7db63778"
+    },
+    {
+      "src": "graphic-design/silhouette-maker-cutout.png",
+      "width": 1145,
+      "height": 1374,
+      "creator": "AI-generated fictional transparent photographic cutout using built-in image_gen. Original PNG copied unchanged; source prompt and path retained.",
+      "sha256": "d8b027e936e24005754ab7fa86215ea8e8f0e13dbeb24ae369829de0cd9e6d6e"
+    },
+    {
+      "src": "graphic-design/silhouette-pitcher-shelf.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional silhouette decision comparison. Fixed generated photographic cutout, alpha, native typography/layout and presentation; only declared tone filter or ground fill changes.",
+      "sha256": "b7685bf31157f003c9d94c10a10e2c6c38335f16ec9c601a693084f91d88b18b"
+    },
+    {
+      "src": "graphic-design/silhouette-pitcher-shelf-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional silhouette decision comparison. Fixed generated photographic cutout, alpha, native typography/layout and presentation; only declared tone filter or ground fill changes.",
+      "sha256": "002cebb0b43069e41c2164c2f6ac6b862850176a3dcaa62ed0d743aadfbfeed8"
+    },
+    {
+      "src": "graphic-design/silhouette-shears-ground.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional silhouette decision comparison. Fixed generated photographic cutout, alpha, native typography/layout and presentation; only declared tone filter or ground fill changes.",
+      "sha256": "ee4c0f7bb25b817adcfb5c7322709d8c9138bc0a0562ba98d09ea4f0e42f0d27"
+    },
+    {
+      "src": "graphic-design/silhouette-shears-ground-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional silhouette decision comparison. Fixed generated photographic cutout, alpha, native typography/layout and presentation; only declared tone filter or ground fill changes.",
+      "sha256": "cb87de561ad01667a9430d7bb74684053f70de803ce5d4a3d9fd01da9a3cc487"
+    },
+    {
+      "src": "graphic-design/silhouette-maker-detail.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional silhouette decision comparison. Fixed generated photographic cutout, alpha, native typography/layout and presentation; only declared tone filter or ground fill changes.",
+      "sha256": "63254969bc65011b7d07b5488f048ae2e84e011a77af0a8c0af0f8d34c7234c5"
+    },
+    {
+      "src": "graphic-design/silhouette-maker-detail-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional silhouette decision comparison. Fixed generated photographic cutout, alpha, native typography/layout and presentation; only declared tone filter or ground fill changes.",
+      "sha256": "c6a501f0e1f1ab84d66b2476545e05b6c29c251856fd64f198a9f595a3dc1d05"
+    },
+    {
+      "src": "graphic-design/metaphor-book-photo.png",
+      "width": 1536,
+      "height": 1024,
+      "creator": "AI-generated fictional photographic artwork using built-in image_gen. Original PNG copied unchanged; source prompt and original path retained.",
+      "sha256": "db62364b7779420c7ad8ccf68276ffc995722190fe79ac9b0aeb7b3eeca7fab1"
+    },
+    {
+      "src": "graphic-design/metaphor-seedling-cutout.png",
+      "width": 1145,
+      "height": 1374,
+      "creator": "AI-generated fictional photographic artwork using built-in image_gen. Original PNG copied unchanged; source prompt and original path retained.",
+      "sha256": "315271125436628c872c4a7cd517810521a5b9506335a29599297de9c284446c"
+    },
+    {
+      "src": "graphic-design/metaphor-cord-photo.png",
+      "width": 1536,
+      "height": 1024,
+      "creator": "AI-generated fictional photographic artwork using built-in image_gen. Original PNG copied unchanged; source prompt and original path retained.",
+      "sha256": "ed73123708252e9ed4abf838505e7f2928117717d9f5f8745d76611fc43789b1"
+    },
+    {
+      "src": "graphic-design/metaphor-ladder-cutout.png",
+      "width": 1536,
+      "height": 1024,
+      "creator": "AI-generated fictional photographic artwork using built-in image_gen. Original PNG copied unchanged; source prompt and original path retained.",
+      "sha256": "4311a4bf5a3947b061e80c5dcba14f32a179474f32c6d2220cced93c8b19a670"
+    },
+    {
+      "src": "graphic-design/metaphor-bridge-cutout.png",
+      "width": 1536,
+      "height": 1024,
+      "creator": "AI-generated fictional photographic artwork using built-in image_gen. Original PNG copied unchanged; source prompt and original path retained.",
+      "sha256": "c20e53d383ede1ee12edc5169cfb88269ef599bde11f3e4f07c8090d9601b0e5"
+    },
+    {
+      "src": "graphic-design/metaphor-book-growth.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional visual-metaphor comparison. Generated photographic artwork with fixed native typography/layout/presentation; only declared cue visibility, text or selected object changes.",
+      "sha256": "d856493f4effad46933c214a5d614c90969697d039a028991d2c1a10f1acb0b2"
+    },
+    {
+      "src": "graphic-design/metaphor-book-growth-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional visual-metaphor comparison. Generated photographic artwork with fixed native typography/layout/presentation; only declared cue visibility, text or selected object changes.",
+      "sha256": "08db2bab7eb40472f0fe6756254e578739de4fa1917cd472e379272892418a80"
+    },
+    {
+      "src": "graphic-design/metaphor-cord-anchor.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional visual-metaphor comparison. Generated photographic artwork with fixed native typography/layout/presentation; only declared cue visibility, text or selected object changes.",
+      "sha256": "3086f089a15dcce3925d4c610abf1f36b7db9305b88fe344af836b9bbe3c6964"
+    },
+    {
+      "src": "graphic-design/metaphor-cord-anchor-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional visual-metaphor comparison. Generated photographic artwork with fixed native typography/layout/presentation; only declared cue visibility, text or selected object changes.",
+      "sha256": "b115d219f075cbc3e0dee06158ec321bf872d04eac4801d54a8d48d8463c2a5d"
+    },
+    {
+      "src": "graphic-design/metaphor-peer-bridge.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Patternverse original fictional visual-metaphor comparison. Generated photographic artwork with fixed native typography/layout/presentation; only declared cue visibility, text or selected object changes.",
+      "sha256": "c6452089769f9c3b0f427e391ea786380d04701018d9b389ea246b2a62f26428"
+    },
+    {
+      "src": "graphic-design/metaphor-peer-bridge-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Patternverse original fictional visual-metaphor comparison. Generated photographic artwork with fixed native typography/layout/presentation; only declared cue visibility, text or selected object changes.",
+      "sha256": "1a620ed1fa19205fd948c5b175ac0f8fdec7f80be7ead48d6810f78057722af6"
+    },
+    {
+      "src": "graphic-design/symbols-information.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse native symbol comparison over reused AI-generated photographs. Only declared symbol selection or label visibility changes; all other content and presentation fixed.",
+      "sha256": "1b1930bc0f5087dd4bcc9d96fec9a8b40d7659e553972a5d5b82bfd0a4e21a27"
+    },
+    {
+      "src": "graphic-design/symbols-information-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse native symbol comparison over reused AI-generated photographs. Only declared symbol selection or label visibility changes; all other content and presentation fixed.",
+      "sha256": "ecd29c8bc120172a0de69cbc9bb6d4e0b26818622b914db01dc79f9dc6d25ec3"
+    },
+    {
+      "src": "graphic-design/symbols-download.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse native symbol comparison over reused AI-generated photographs. Only declared symbol selection or label visibility changes; all other content and presentation fixed.",
+      "sha256": "9c7e9382a45ebaadb1a5de8d22a3dbd20afde438f61eea1a48c2307ed3d9ec47"
+    },
+    {
+      "src": "graphic-design/symbols-download-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse native symbol comparison over reused AI-generated photographs. Only declared symbol selection or label visibility changes; all other content and presentation fixed.",
+      "sha256": "102be2398f64d464cf2cc6c8decee08ccbe10e709d1a361aefc4cfeaae75fe03"
+    },
+    {
+      "src": "graphic-design/symbols-audio-label.svg",
+      "width": 1320,
+      "height": 1060,
+      "creator": "Original Patternverse native symbol comparison over reused AI-generated photographs. Only declared symbol selection or label visibility changes; all other content and presentation fixed.",
+      "sha256": "306bd09b9a7e1be614044d5e4c076c4bbba6bb4cd28ee12cf8b03b78bf495f0f"
+    },
+    {
+      "src": "graphic-design/symbols-audio-label-mobile.svg",
+      "width": 660,
+      "height": 2070,
+      "creator": "Original Patternverse native symbol comparison over reused AI-generated photographs. Only declared symbol selection or label visibility changes; all other content and presentation fixed.",
+      "sha256": "b6acbfa0cb3f0f7817f9d0768b8fdf343c33e75a04f256ce6b72908f71dbcc8b"
+    }
+  ],
+  "preservation": "All348 registered assets remain unchanged. All156 controlled comparisons have one authored home and full-size/narrow access. Source articles and metadata are archived byte-for-byte as text.",
+  "validation": {
+    "comparison_suites": {
+      "files": 52,
+      "tests_passed": 565,
+      "scope": "Original geometry, copy, source-byte, crop, tone and scale checks retained; discovery contracts follow editorial ownership rather than requiring three inline images per source article."
+    },
+    "consolidation_tests": {
+      "tests_passed": 10,
+      "scope": "Core inventory, collections, metadata, search aliases, legacy queries and routes, actual anchors, draft isolation, original348 asset hashes,52 archived article hashes,36 current body hashes,156 comparison homes and three developed figures in each merged article."
+    },
+    "navigation_tests": {
+      "tests_passed": 4,
+      "include_drafts": true
+    },
+    "markdown_renderer": "13 tests passed in the regression run.",
+    "graphic_marks": "All36 active Graphic Design marks match the active pattern set and summaries; bounded geometry and portable rendering regression checks passed.",
+    "content": "Final validation passed for896 entities with drafts included in the observed shared workspace snapshot.",
+    "types": "svelte-check:0 errors,0 warnings.",
+    "lint": "Scoped ESLint passed.",
+    "format": "Scoped Prettier checks passed.",
+    "browser": {
+      "article_views": 74,
+      "articles": 37,
+      "widths": [1440, 390],
+      "live_legacy_redirects": 19,
+      "result": "No horizontal page overflow; correct responsive source selection for merged-article figures; legacy query strings and section fragments preserved; consolidated index checked.",
+      "method": "First20 articles at both widths completed before a development-navigation interruption; remaining17 resumed from that console checkpoint.",
+      "visual_spot_checks": "Three merged articles’ first figures at desktop and phone widths, plus the consolidated index, inspected. Source artwork unchanged.",
+      "evidence": "/Users/jeger-benninger/.codex/visualizations/2026/10/25/01a1750b-11de-7502-9e62-ba9ba6fa22d2/graphic-design-consolidation-browser.json"
+    },
+    "public_build": {
+      "status": "blocked-by-pre-existing-unrelated-content",
+      "reason": "Published urge-surfing references tracking-the-unfolding-experience, which is excluded as a draft in the public build. The same issue is recorded in the pre-existing GoF editorial review. Graphic Design draft-isolation tests pass."
+    },
+    "global_graphic_coverage": {
+      "status": "blocked-by-pre-existing-unrelated-coverage-gap",
+      "reason": "The existing global registry test reports Missing authored graphic for access-over-ownership. All36 Graphic Design marks were checked separately; no unrelated graphic was changed."
+    }
+  },
+  "compression": {
+    "before_article_text_words": 77664,
+    "after_article_text_words": 56008,
+    "reduction_percent": 27.9,
+    "method": "Whitespace word count after removing frontmatter, image Markdown including alt/caption syntax, and standalone full-size/stacked-view link lines. Counts active36 pattern bodies plus the contrast foundation; archived originals are excluded from the final reading count. Includes remaining source notes and supporting comparison-link text."
+  },
+  "planned_briefs": "docs/graphic-design-planned-core-briefs.md",
+  "current_authored_core_patterns": 39,
+  "current_planned_core_patterns": 0,
+  "subsequent_authorship": [
+    {
+      "id": "graphic-design-establish-a-shared-visual-language",
+      "date": "2026-10-28",
+      "new_assets": 6,
+      "new_comparisons": 3,
+      "source_record": "graphic-design-language-sources.json"
+    },
+    {
+      "id": "graphic-design-develop-distinctive-visual-cues",
+      "date": "2026-10-28",
+      "new_assets": 6,
+      "new_comparisons": 3,
+      "source_record": "graphic-design-distinctive-sources.json"
+    },
+    {
+      "id": "graphic-design-build-reusable-templates",
+      "date": "2026-10-28",
+      "new_assets": 6,
+      "new_comparisons": 3,
+      "source_record": "graphic-design-template-sources.json"
+    }
+  ],
+  "subsequent_reading_compression": {
+    "date": "2026-10-28",
+    "record": "graphic-design-reading-compression.json",
+    "articles": 39,
+    "captions": 120,
+    "visible_words_before": 64235,
+    "visible_words_after": 60519,
+    "words_removed": 3716,
+    "reduction_percent": 5.8,
+    "scope": "Caption, duplicate method-note and production-credit text only; original snapshots and detailed wording retained. Separate from the historical consolidation word counts."
+  }
+}

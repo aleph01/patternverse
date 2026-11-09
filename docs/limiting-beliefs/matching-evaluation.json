@@ -1,0 +1,63 @@
+[
+  {
+    "id": "food-guard-clarification",
+    "description": "I was eating chocolate and feeling guilty about it.",
+    "clarification": "Just that it is bad for me and I am letting my guard down, I guess.",
+    "acceptable": ["P0065"],
+    "rationale": "An exception plus letting the guard down should make standards-collapse eligible as a hypothesis. Broader collapse remains unconfirmed."
+  },
+  {
+    "id": "food-guard-combined",
+    "description": "I was eating chocolate and feeling guilty about it. What went through my mind was that it is bad for me and I am letting my guard down, I guess.",
+    "acceptable": ["P0065"],
+    "rationale": "The reported situation and meaning combined into one input; P0065 remains a hypothesis because broader collapse is not stated."
+  },
+  {
+    "id": "guard-down-paraphrase",
+    "description": "I enjoyed a treat but it feels like I am letting my guard down with my rules.",
+    "acceptable": ["P0065"],
+    "rationale": "Indirect idiomatic cue; no explicit statement that all standards will collapse is required for a hypothesis."
+  },
+  {
+    "id": "work-exception",
+    "description": "I want to stop checking one small task tonight, but giving myself that exception feels like the beginning of a slippery slope.",
+    "acceptable": ["P0065", "P0119", "P0040"],
+    "rationale": "A non-food exception/control case; several vigilance or standards hypotheses can be useful."
+  },
+  {
+    "id": "visible-effort",
+    "description": "I hide how much I prepare because people might call me a try-hard if they saw.",
+    "acceptable": ["P0214", "P0217"],
+    "rationale": "Recognition of socially risky visible effort, without inventing envy or childhood causes."
+  },
+  {
+    "id": "setback-progress",
+    "description": "One difficult afternoon makes the last month of progress feel like it never happened.",
+    "acceptable": ["P0208", "P0064"],
+    "rationale": "A contextual lapse can connect to invalidated progress."
+  },
+  {
+    "id": "worry-preparation",
+    "description": "Part of me thinks staying worried is how I keep myself ready for anything.",
+    "acceptable": ["P0106"],
+    "rationale": "An expressed instrumental belief about worry."
+  },
+  {
+    "id": "bounded-dietary-constraint",
+    "description": "I checked the ingredients because this food contains an allergen I have a confirmed allergy to. I enjoy other foods and I do not take this as a judgment about myself or my self-control.",
+    "acceptable": [],
+    "rationale": "A stated practical health constraint with explicit scope; do not manufacture a limiting rule."
+  },
+  {
+    "id": "bounded-skill-gap",
+    "description": "I have not learned this spreadsheet function yet, so I booked a lesson. I expect practice will help and this says nothing about my overall ability.",
+    "acceptable": [],
+    "rationale": "A bounded skill gap with an adaptive appraisal, not global incompetence."
+  },
+  {
+    "id": "feeling-only",
+    "description": "I feel a bit low today. I cannot identify a particular situation or thought.",
+    "acceptable": [],
+    "rationale": "An isolated feeling supplies no specific candidate bridge."
+  }
+]

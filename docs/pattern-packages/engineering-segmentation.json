@@ -1,0 +1,186 @@
+{
+  "title": "Engineering — Segmentation",
+  "edition": "Draft illustrated field-guide article",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples",
+    "Assumptions for correctness",
+    "When to use it",
+    "Tradeoffs and operating costs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "engineering-segmentation",
+      "taxonomy_id": "P001",
+      "title": "Segmentation",
+      "status": "draft",
+      "domain": "Engineering",
+      "family": "Function and Architecture",
+      "entry_type": "parent strategy",
+      "summary": "Divide equipment into independently manageable units so a local change can preserve the useful remainder.",
+      "collections": ["engineering-function-and-architecture"],
+      "identity_resolution": {
+        "decision": "New engineering parent-strategy article.",
+        "existing_catalog_checked": [
+          "arch-repairable-connections",
+          "arch-site-repair",
+          "repair-and-maintenance",
+          "modular-upgrade-revenue"
+        ],
+        "boundary": "Architecture Repairable Connections concerns repair access and connections in buildings; Business Repair and Maintenance and Modular Upgrade Revenue concern offerings and revenue. This article chooses independently manageable physical units for service, transport, manufacture, or change, without assuming standardized interfaces or predictable wear."
+      },
+      "use_when": [
+        "A localized intervention forces wholesale equipment handling or replacement.",
+        "Manufacturing, transport, inspection, or configuration tasks are easier at a smaller unit boundary.",
+        "Parts with different useful lives are trapped in an inseparable assembly."
+      ],
+      "goals": [
+        "Preserve useful equipment during local intervention",
+        "Choose workable physical unit boundaries",
+        "Expose costs and dependencies introduced by new interfaces"
+      ],
+      "mechanisms": [
+        "Intervention-aligned system boundaries",
+        "Releasable and restorable cross-boundary dependencies",
+        "Comparison of retained and exchanged scope"
+      ],
+      "not_ideal_when": [
+        "New joints introduce burdens unsupported by any plausible intervention.",
+        "Shared dependencies still prevent the intended removal.",
+        "Retained equipment is no longer fit for service."
+      ],
+      "related_patterns": [
+        {
+          "taxonomy_id": "P010",
+          "id": "engineering-standardized-module-interfaces",
+          "title": "Standardized Module Interfaces",
+          "relationship": "Direct specialization adding a preserved connection contract.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P124",
+          "id": "engineering-replaceable-wear-units",
+          "title": "Replaceable Wear Units",
+          "relationship": "Direct specialization locating predictable deterioration in renewable units.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P002",
+          "id": "engineering-functional-separation",
+          "title": "Functional Separation",
+          "relationship": "Neighbor assigning incompatible jobs to different elements; not the same boundary decision.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P003",
+          "id": "engineering-function-integration",
+          "title": "Function Integration",
+          "relationship": "Neighbor combining compatible jobs; can be applied within a segmented unit.",
+          "article_status": "draft"
+        }
+      ],
+      "example_user_queries": [
+        "One small failed part means we have to replace the whole machine assembly.",
+        "How should we decide where to split equipment into serviceable units?",
+        "Our filter media needs changing but the housing is still sound.",
+        "Can we replace one damaged conveyor section without dismantling the entire line?",
+        "Our machine cannot fit through the installation doorway in one piece.",
+        "When does modular construction add too many joints?",
+        "A removable component still needs the entire process shut down.",
+        "Does splitting a machine into parts make those parts interchangeable?",
+        "What dependencies should we check at a proposed module boundary?",
+        "We can unbolt the component but there is no route to take it out.",
+        "Should we isolate the wear surface or replace the whole component?",
+        "Would adding flanges help maintenance or just create more interfaces?"
+      ],
+      "worked_examples": [
+        {
+          "name": "Four-cartridge process filter",
+          "kind": "illustrative",
+          "baseline": "Permanently attached internals require exchanging a complete assembly.",
+          "intervention": "Removable cartridges with accessible closure and preserved seating/retention.",
+          "assumptions": {
+            "retained_housing_and_supports_kg": 24,
+            "cartridges": 4,
+            "cartridge_mass_kg": 1,
+            "cartridges_exchanged": 1
+          },
+          "computed": {
+            "complete_assembly_kg": 28,
+            "exchanged_cartridge_kg": 1,
+            "remaining_assembly_kg": 27
+          },
+          "limits": "Excludes closure consumables and other required cartridge renewals. Common housing is isolated and depressurized. No downtime, waste-reduction measurement, or actual installation is claimed."
+        },
+        {
+          "name": "Three conveyor service sections",
+          "kind": "illustrative",
+          "route_m": 9,
+          "nominal_sections": 3,
+          "nominal_section_m": 3,
+          "intervention": "Separate belt, drive, support, and releasable connections for each unit.",
+          "limits": "Two transfer boundaries need verification; coordinated shutdown remains. Not a Dorner configuration or buildable dimensioned specification."
+        },
+        {
+          "name": "Unjustified pressure-vessel split",
+          "kind": "illustrative",
+          "shell_sections": 4,
+          "added_circumferential_joints": 3,
+          "held_fixed": ["required pressure", "temperature", "process volume", "access duty"],
+          "limits": "No pressure-boundary sizing, leak-rate prediction, or current-code compliance assessment."
+        }
+      ],
+      "sources": [
+        "https://www.parker.com/content/dam/Parker-com/Literature/IGFG/PDF-Files/BAL_TI_8L_H_K_Series_Filters.pdf",
+        "https://www.dornerconveyors.com/wp-content/uploads/2018/10/851-873b-EU-EN.pdf",
+        "https://www.asme.org/topics-resources/content/new-guidelines-for-pressure-boundary"
+      ],
+      "source_notes": [
+        {
+          "source": "Parker Hannifin, Bulletin TI-8L, pp. 1–2",
+          "accessed": "2026-10-27",
+          "basis": "Read both pages: access to cover/cartridges, out-of-service and depressurization requirements, retention and sealing.",
+          "boundary": "Named product requirements only; no transfer of its maintenance times, operating ratings, or specified procedure to the fictional housing."
+        },
+        {
+          "source": "Dorner, 2200 Series Modular Belt Conveyors, 851-873-EU Rev. B, pp. 8–10",
+          "accessed": "2026-10-27",
+          "basis": "Read installation text for arranging and joining frame sections and separately installing the belt, plus maintenance/isolation and integration-hazard notes.",
+          "boundary": "Supports distinction between a sectional frame and an independently removable operating unit. The nine-metre, three-drive arrangement is original editorial synthesis."
+        },
+        {
+          "source": "ASME, New Guidelines for Pressure Boundary and Bolted Joint Assembly, 2010",
+          "accessed": "2026-10-27",
+          "basis": "Read discussion of joint leakage, assembly, gasket/fastener condition, and troubleshooting context.",
+          "boundary": "Historical explanatory article, not a current standard or a pressure-equipment design procedure. Full PCC-1 was not accessed."
+        },
+        {
+          "source": "University of Michigan Design Heuristics handout supplied as a research lead",
+          "accessed": "2026-10-27",
+          "basis": "Direct PDF fetch returned HTTP 403.",
+          "boundary": "Not used as evidentiary support or cited as read. The taxonomy is not presented as the official Design Heuristics card set."
+        }
+      ],
+      "graphics": {
+        "decision": "Three static mechanism-specific comparisons; no interactive widget.",
+        "reason": "Choosing and evaluating the replacement boundary is inspectable in the cutaway, displaced conveyor plan, and added-joint comparison. A slider would add no necessary validated computation.",
+        "style": "Approved fixed-white light editorial engineering SVGs.",
+        "generator": "scripts/engineering-segmentation-visuals.mjs",
+        "assets": [
+          "content/assets/engineering/segmentation-filter-bank.svg",
+          "content/assets/engineering/segmentation-filter-bank-mobile.svg",
+          "content/assets/engineering/segmentation-conveyor.svg",
+          "content/assets/engineering/segmentation-conveyor-mobile.svg",
+          "content/assets/engineering/segmentation-vessel-joints.svg",
+          "content/assets/engineering/segmentation-vessel-joints-mobile.svg"
+        ],
+        "provenance": "Original schematic geometry and labels, not traced manufacturer drawings. No external photographs or generated raster assets."
+      }
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "name": "selected-updates-2026-11-02",
+  "status": "prepared-and-verified; not published",
+  "baseline": "systems-bearings-2026-11-01",
+  "published": false,
+  "include": [
+    "Systems Thinking corrections",
+    "Explore What Feels Wrong",
+    "Library fixes",
+    "Build reuse",
+    "Pattern Language updates, documentation and syntax highlighting",
+    "Hide the update notice",
+    "Widgets panel in workspace settings, with compiler/runtime, persistence, backups and sync dependencies",
+    "Improved site search",
+    "Shift from Why to How and Make One Rumination Concrete in CBT",
+    "Remove redundant opening exit choices from five practices"
+  ],
+  "exclude": [
+    "Contribute team invitation and founder portrait",
+    "Unselected draft content",
+    "Private music/player studies",
+    "MCP or guided-AI service publication"
+  ],
+  "newEntries": [
+    "pattern:explore-what-feels-wrong",
+    "pattern:shift-from-why-to-how",
+    "practice:make-one-rumination-concrete"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "candidate": "/private/tmp/patternverse-selected-updates-2026-11-02",
+  "notes": [
+    "The user confirmed the rumination pattern and its companion practice are the two intended entries.",
+    "Preparation only; uploading has not been requested.",
+    "The team invitation is excluded in the candidate without removing its authoring files from the shared checkout."
+  ],
+  "expectedPublicEntries": 1308,
+  "verification": {
+    "content": {
+      "entries": 1308,
+      "diagnostics": 0
+    },
+    "candidateTypes": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "rustCore": {
+      "passed": 363
+    },
+    "rustHost": {
+      "passed": 24
+    },
+    "documentationTests": {
+      "passed": 131
+    },
+    "bannerAndSearchTests": {
+      "passed": 59
+    },
+    "deploymentSafeguards": {
+      "passed": 19
+    },
+    "browser": {
+      "passed": 80,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "notes": "Full selected-release checks against the refreshed artifact, including both The Work openings, the direct-start continuum form and Meta Model."
+    },
+    "publicScan": "passed",
+    "teamInvitation": "excluded and checked in static output and browsers",
+    "mcpBuild": "passed for bundled-widget compatibility; no service publication",
+    "githubWorkflow": "not run",
+    "practiceOpeningAudit": {
+      "currentDefinitions": 150,
+      "changedPractices": 5,
+      "remainingRedundantOpeningExits": 0,
+      "runtimeAndMigrationTests": 4,
+      "webRuntimeAndContentTests": 21,
+      "adapterTests": 30,
+      "browserEngine": "rebuilt; current DBT openings checked",
+      "savedRunCompatibility": "previous DBT source and receipts replay successfully",
+      "report": "/Users/jeger-benninger/Documents/patternverse/.local/practice-opening-audit-2026-11-02/report.json"
+    }
+  },
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-11-02/release-report.json",
+  "artifact": {
+    "directory": "/private/tmp/patternverse-selected-updates-2026-11-02/apps/web/build",
+    "files": 11264,
+    "bytes": 641391669,
+    "manifestSha256": "46607d03820d5bc76b637fc052940db3f999053b848a2f91d946b4d9734aa39e",
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-11-02/artifact-files.json"
+  },
+  "practiceInventory": "/Users/jeger-benninger/Documents/patternverse/.local/practice-opening-audit-2026-11-02/inventory.json"
+}

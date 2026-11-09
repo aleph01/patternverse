@@ -1,0 +1,84 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Exact fixed-font lines with only word allocation changed. Both variants preserve all logical text, column width, font metrics, tracking/kerning, baseline interval, first baseline and starting edge. The final example begins with measured greedy wrapping and moves two words from the penultimate line to the last.",
+  "examples": [
+    {
+      "name": "breaks-phrase-poster",
+      "source": "form-open-studios-photo.jpg",
+      "copy": "Make room for new ideas",
+      "before": ["Make room for", "new ideas"],
+      "after": ["Make room", "for new ideas"],
+      "widths": {
+        "before": [385.59991455078125, 267.0719299316406],
+        "after": [297.85595703125, 354.8158874511719]
+      },
+      "x": 65,
+      "y": 480,
+      "size": 64,
+      "measure": 480,
+      "leading": 72,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    },
+    {
+      "name": "breaks-value-unit",
+      "source": "explicit-tableware-photo.jpg",
+      "copy": "Each mug holds 320 ml. Dishwasher safe.",
+      "before": ["Each mug holds 320", "ml. Dishwasher safe."],
+      "after": ["Each mug holds", "320 ml. Dishwasher safe."],
+      "widths": {
+        "before": [232.7919158935547, 238.7278594970703],
+        "after": [185.4439239501953, 286.07586669921875]
+      },
+      "x": 65,
+      "y": 535,
+      "size": 28,
+      "measure": 300,
+      "leading": 40,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    },
+    {
+      "name": "breaks-paragraph-ending",
+      "source": "audience-workspace-photo.jpg",
+      "copy": "The studio gives independent makers a place to work, meet and share ideas. Each day pass includes a desk, Wi-Fi and coffee. Choose a day before you arrive, then bring your booking reference.",
+      "before": [
+        "The studio gives independent makers a place to",
+        "work, meet and share ideas. Each day pass",
+        "includes a desk, Wi-Fi and coffee. Choose a day",
+        "before you arrive, then bring your booking",
+        "reference."
+      ],
+      "after": [
+        "The studio gives independent makers a place to",
+        "work, meet and share ideas. Each day pass",
+        "includes a desk, Wi-Fi and coffee. Choose a day",
+        "before you arrive, then bring",
+        "your booking reference."
+      ],
+      "widths": {
+        "before": [
+          435.35760498046875, 389.6416931152344, 428.1856689453125, 386.1436767578125,
+          91.7178955078125
+        ],
+        "after": [
+          435.35760498046875, 389.6416931152344, 428.1856689453125, 260.1937561035156,
+          217.66781616210938
+        ]
+      },
+      "x": 65,
+      "y": 500,
+      "size": 22,
+      "measure": 460,
+      "leading": 31,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    }
+  ]
+}

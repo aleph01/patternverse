@@ -1,0 +1,505 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "feature-toggle",
+  "title": "Feature Toggle",
+  "aliases": ["Feature Flag", "Feature Toggles", "Feature Flags"],
+  "primary_collection": "software-evolution-delivery",
+  "primary_collection_title": "Evolution and Delivery",
+  "body_word_count": 1411,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43075/pattern/feature-toggle",
+  "validation": {
+    "research": "No canonical Feature Toggle or Feature Flag article existed. Fowler verifies established synonymous naming and exposure/delivery distinction; Hodgson is credited as author of the detailed catalog article. Official OpenFeature API/context specifications ground typed defaults and targeting. Release/experiment/operations/permissioning categories have distinct purposes and lifetimes. Permissioning flags are explicitly distinguished from required backend authorization. One existing primary collection reused.",
+    "sources": [
+      {
+        "title": "Feature Flag",
+        "author": "Martin Fowler",
+        "url": "https://martinfowler.com/bliki/FeatureFlag.html",
+        "supports": "Established toggle/flag synonyms; exposure and delivery separated; small feature slices or final entry-point release may be simpler; temporary flag retirement."
+      },
+      {
+        "title": "Feature Toggles (aka Feature Flags)",
+        "author": "Pete Hodgson (2017), published on martinfowler.com",
+        "url": "https://martinfowler.com/articles/feature-toggles.html",
+        "supports": "Release/experiment/operations/permissioning categories, different lifetimes, decision points separated from targeting logic, stable cohorts and managed complexity."
+      },
+      {
+        "title": "Flag Evaluation API",
+        "author": "OpenFeature specification",
+        "url": "https://openfeature.dev/specification/sections/flag-evaluation/",
+        "supports": "Typed values, explicit defaults and evaluation error handling; article model is not an SDK implementation."
+      },
+      {
+        "title": "Evaluation Context",
+        "author": "OpenFeature specification",
+        "url": "https://openfeature.dev/specification/sections/evaluation-context/",
+        "supports": "Subject targeting keys and ambient contextual evaluation; providers may need a targeting key for fractional evaluation."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "command": "python3 feature_toggle.py",
+      "output": ["A-17: detailed receipt", "A-17: standard receipt", "provider failure: fallback"],
+      "checks": [
+        "validated integer percent0..100; reject negative/101/float/Boolean/string/None",
+        "500 stable account keys: 0percent off, 100percent on, monotonic cohort growth at seven thresholds",
+        "known bucket12 acct-42 enabled and bucket97 acct-7 disabled at20percent",
+        "one policy snapshot load per evaluation",
+        "immutable prior decision survives changed policy; next request observes revisionv2",
+        "missing targeting key disabled even at100percent",
+        "unavailable/invalid/malformed policy returns explicit disabled fallback",
+        "rendering failures propagate without automatic replay",
+        "cohort assignment stable across three process hash seeds"
+      ],
+      "mutation_checks": [
+        {
+          "fault": "cohort selection reverses threshold",
+          "detected": true
+        },
+        {
+          "fault": "zero percent still exposes the feature",
+          "detected": true
+        },
+        {
+          "fault": "provider fallback silently enables new behavior",
+          "detected": true
+        }
+      ],
+      "limits": [
+        "In-memory model of one flag, not an OpenFeature SDK",
+        "Nonempty string identity and declared loader failure types are preconditions",
+        "No remote propagation, authentication, persistence, atomic cross-service update or telemetry export",
+        "Cohort percentage is approximate, not a population quota"
+      ]
+    },
+    "content": "All 1316 entities validate. Published compilation 1169 entities with zero diagnostics or unresolved references. Eight exact H2s, one complete Python3.9+ standard-library program, two figures/four responsive variants, four existing related IDs, ten distinct recommendation queries, and no practice.",
+    "published_compilation": {
+      "entities": 1169,
+      "bytes": 23702406,
+      "sha256": "9fb491186f9ab7dd6411fedcf23525807c572f81041475c11ff924fe4de14d5c",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "integration_tests": {
+      "passed": 40,
+      "unrelated_failures": 1,
+      "final_article_recheck": 3,
+      "details": "Feature Toggle 3, Branch by Abstraction 3, Expand–Migrate–Contract 3, Strangler Fig 3, GoF 24, and four graphic-integrity tests pass. Global coverage retains the pre-existing missing access-over-ownership artwork. Existing tests remain byte-identical to baseline. Final new-article tests pass after concept outline cleanup."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses unsupported exact in ByRoleOptions."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for the new integration test, SVG generator, actual-code validator, metadata sidecar, authoring documentation, concept registry and this review.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-evolution-delivery.md"],
+      "new_content": ["content/patterns/feature-toggle.md"],
+      "other_existing_content_unchanged": 1314,
+      "single_primary_home": "software-evolution-delivery",
+      "existing_collection_members_retained": true,
+      "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 86,
+      "prior_graphics_unchanged": 498,
+      "prior_dimensions_unchanged": 1773,
+      "new_dimensions": 4,
+      "all_other_protected_tests_renderer_dependencies_build_scripts_unchanged": true,
+      "authoring_documentation_preserved": true,
+      "both_isolated_workspaces_match_current_web_source_and_linked_content": true
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "content/assets/software-engineering/feature-toggle-decision-mobile.svg": "b7147df6eefe1a219e201d2851ddfbb66ba67998f29bc6cf2929433601ff507d",
+        "content/assets/software-engineering/feature-toggle-decision.svg": "c4471b7fc44fbbf837f09791bc5ce4c3ee541913e2da6c28bd47dcac646d8404",
+        "content/assets/software-engineering/feature-toggle-retirement-mobile.svg": "40dc9d06e0b5fe7a19cd5a01345503722f95173a32c5902ae158ec37846534ab",
+        "content/assets/software-engineering/feature-toggle-retirement.svg": "19659e66197c56e01f0d8a2a99845b6031310230827bfefe7ffe9b0af6a0662f"
+      }
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/feature-toggle-decision.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 848
+      },
+      {
+        "path": "/assets/software-engineering/feature-toggle-decision-mobile.svg",
+        "labels": 20,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1076
+      },
+      {
+        "path": "/assets/software-engineering/feature-toggle-retirement.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/feature-toggle-retirement-mobile.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 920
+      }
+    ],
+    "contrast": {
+      "status": "passed",
+      "normal_text_AA_4_5_minimum": true,
+      "pairs": [
+        {
+          "foreground": "#252c28",
+          "background": "#ffffff",
+          "contrast": 14.29
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#f1f2ef",
+          "contrast": 12.72
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#edf5f0",
+          "contrast": 12.87
+        },
+        {
+          "foreground": "#626962",
+          "background": "#ffffff",
+          "contrast": 5.65
+        },
+        {
+          "foreground": "#626962",
+          "background": "#f1f2ef",
+          "contrast": 5.03
+        },
+        {
+          "foreground": "#626962",
+          "background": "#edf5f0",
+          "contrast": 5.09
+        }
+      ]
+    },
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 7,
+          "y": 7,
+          "width": 82,
+          "height": 84
+        },
+        {
+          "x": 55,
+          "y": 55,
+          "width": 34,
+          "height": 36
+        }
+      ]
+    },
+    "static_browser": [
+      {
+        "path": "/assets/software-engineering/feature-toggle-decision.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 848
+      },
+      {
+        "path": "/assets/software-engineering/feature-toggle-decision-mobile.svg",
+        "labels": 20,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1076
+      },
+      {
+        "path": "/assets/software-engineering/feature-toggle-retirement.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/feature-toggle-retirement-mobile.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 920
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/feature-toggle-decision.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/feature-toggle-retirement.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 165,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 96, 67)",
+              "rgb(98, 105, 98)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/branch-by-abstraction",
+          "/pattern/strategy",
+          "/pattern/dependency-injection",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/feature-toggle-decision-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/feature-toggle-retirement-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 165,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 96, 67)",
+              "rgb(98, 105, 98)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/branch-by-abstraction",
+          "/pattern/strategy",
+          "/pattern/dependency-injection",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/feature-toggle-decision-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/feature-toggle-retirement-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 165,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 96, 67)",
+              "rgb(98, 105, 98)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/branch-by-abstraction",
+          "/pattern/strategy",
+          "/pattern/dependency-injection",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-evolution-delivery",
+        "article": "feature-toggle",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "static_assets": {
+      "status": "passed",
+      "mode": "actual local static public export; isolated source copy includes existing sibling application imports",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/PatternverseLogo.Cr_c3FgX.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LegalLinks.C1VwvvwC.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/0.LPYfGvVT.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/pattern-mark-presets.Dx3BoDxs.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LibraryViewSwitch.yR3Qs8SB.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/MarkdownRenderer.DDyfSN4x.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/WorksheetButton.Dsl9OpN0.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/3.DBGXFlWk.css",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/feature-toggle-decision-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/feature-toggle-decision.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/feature-toggle-retirement-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/feature-toggle-retirement.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/feature-toggle-decision.svg",
+          "status": 200,
+          "sha256": "c4471b7fc44fbbf837f09791bc5ce4c3ee541913e2da6c28bd47dcac646d8404",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/feature-toggle-decision-mobile.svg",
+          "status": 200,
+          "sha256": "b7147df6eefe1a219e201d2851ddfbb66ba67998f29bc6cf2929433601ff507d",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/feature-toggle-retirement.svg",
+          "status": 200,
+          "sha256": "19659e66197c56e01f0d8a2a99845b6031310230827bfefe7ffe9b0af6a0662f",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/feature-toggle-retirement-mobile.svg",
+          "status": 200,
+          "sha256": "40dc9d06e0b5fe7a19cd5a01345503722f95173a32c5902ae158ec37846534ab",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "Viewed all four native SVGs, final phone alternatives group and arrow, closed concept mark, actual desktop/phone article tops, phone decision figure/caption and highlighted phone code viewport. All measured labels fit with no text overlap or clipping. Fixed white surface, regular Helvetica Neue/Helvetica/Arial, approved palette and square boundaries. Actual static article checked 1440/390/320 widths for no page overflow, exact selectable code, syntax colors, focus and keyboard horizontal code scrolling, mobile asset selection, four related routes and primary collection/gallery/card/breadcrumb.",
+    "public_static_export": "PASSED repository build-public-web.mjs and public-build inspection in an isolated current-source workspace with existing sibling application imports linked. Final preview 43075 serves 14 local resource references with 200 responses; all four SVG bodies match source SHA256 and built concept paths match the registry. Rebuilt after phone selection-arrow and concept-outline refinements so the reviewed source and preview agree. No renderer, schema, build-system, dependency or existing-test changes."
+  },
+  "limitations": [
+    "Bounded one-flag model, not an OpenFeature SDK or remote platform. Nonempty string identity and declared loader behavior are preconditions. No authentication, persistent effects, remote propagation, atomic cross-service switch or telemetry export. Hash buckets yield approximate cohort proportions; changing the percentage affects future evaluations and does not undo in-flight work.",
+    "Pre-existing VerseSelector type error and access-over-ownership graphic-coverage failure remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-feature-toggle",
+    "local_uncommitted": true,
+    "unrelated_work": "preserved",
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

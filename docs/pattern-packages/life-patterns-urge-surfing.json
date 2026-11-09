@@ -1,0 +1,91 @@
+{
+  "format_version": 1,
+  "title": "Life Strategies — Urge Surfing",
+  "verse": "therapy",
+  "metadata_mapping": "Canonical frontmatter uses the existing entity schema. Richer recommendation metadata remains in this sidecar; the current search index does not automatically ingest these queries.",
+  "patterns": [
+    {
+      "id": "urge-surfing",
+      "title": "Urge Surfing",
+      "domain": "Life patterns, mindfulness, and craving management",
+      "short_description": "Notice an urge as a changing experience, allowing it to be present while choosing whether and how to respond.",
+      "collections": ["life-strategies", "cbt"],
+      "use_when": [
+        "A manageable impulse feels like an instruction to act immediately.",
+        "A person wants to notice craving without making its disappearance a prerequisite for a chosen response.",
+        "An established care plan includes mindfulness as one coping skill."
+      ],
+      "goals": [
+        "Distinguish having an urge from acting on it",
+        "Observe experience without requiring suppression",
+        "Choose an intentional response, including environmental changes or support"
+      ],
+      "mechanisms": [
+        "Describe sensations and thoughts rather than treating the impulse as a command",
+        "Attend to changes without requiring a particular trajectory",
+        "Allow present experience while maintaining behavioral intentions",
+        "Connect observation with practical response choices"
+      ],
+      "tags": ["mindfulness", "cravings", "response-choice", "life-patterns"],
+      "related_patterns": [
+        "tracking-the-unfolding-experience",
+        "separate-observation-meaning-and-action",
+        "five-minute-technique"
+      ],
+      "difficulty": "Begin with a manageable everyday impulse; clinical use may need guidance",
+      "estimated_practice_time": "About five minutes, with no required waiting time",
+      "not_ideal_when": [
+        "The exercise is being treated as addiction treatment or a withdrawal plan.",
+        "Inward attention is overwhelming or the person needs immediate practical support.",
+        "The person is deliberately provoking a craving or waiting for it to disappear before using support."
+      ],
+      "example_user_queries": [
+        "An urge feels like something I have to obey immediately.",
+        "Trying to force a craving away turns into an argument with myself.",
+        "Can I want something and still choose not to do it?",
+        "I reach for my phone before noticing I have decided to check it.",
+        "How can I pause without needing the impulse to disappear?",
+        "I tried being mindful and the urge was still there.",
+        "What does accepting a craving mean if I want to change my behavior?",
+        "Can I change my surroundings while allowing an urge to be present?",
+        "I want to notice an impulse before sending an angry reply.",
+        "My care plan includes coping with cravings and I want to understand the mindfulness part.",
+        "I want a different response to restlessness than acting automatically.",
+        "How do I observe an urge without turning it into another test of willpower?"
+      ],
+      "practice": {
+        "id": "notice-an-urge-without-following-it",
+        "estimated_minutes": 5,
+        "format": "Optional offline educational observation and response-choice practice",
+        "boundary": "Uses an already-present manageable impulse. No trigger exposure, substance use, diagnosis, withdrawal instructions, or required endurance. The person can stop or use existing support."
+      },
+      "visual": {
+        "article_decision": "none",
+        "reason": "A timed wave chart could imply that cravings follow a predictable curve or must disappear. Concrete examples better preserve the distinction between observation and chosen action.",
+        "concept_graphic": "An ink wave remains present above a separate accented route and decision point, showing that a response can be chosen while the urge remains.",
+        "registry": "apps/web/src/lib/illustrations/pattern-graphics.json"
+      },
+      "sources": [
+        {
+          "title": "VA MIRECC, Urge Surfing",
+          "url": "https://www.mirecc.va.gov/MIRECC/visn5/EBT/CBT-SUD/Urge-Surfing.asp",
+          "accessed": "2026-10-28",
+          "supports": "Observing craving sensations and their changes; the distinction between experiencing craving differently and trying to eliminate it."
+        },
+        {
+          "title": "Bowen et al., Relative efficacy of mindfulness-based relapse prevention, standard relapse prevention, and treatment as usual (2014)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24647726/",
+          "accessed": "2026-10-28",
+          "supports": "A randomized trial of an eight-week aftercare program, not a standalone test of urge surfing."
+        },
+        {
+          "title": "Cochrane, Mindfulness-based interventions for substance use disorders (2021)",
+          "url": "https://www.cochrane.org/evidence/CD011723_mindfulness-based-interventions-substance-use-disorders",
+          "accessed": "2026-10-28",
+          "supports": "Possible slight reduction in substance-use days compared with other treatments, with uncertainty concerning abstinence and craving; program-level evidence."
+        }
+      ],
+      "evidence_boundary": "Established clinical coping technique; trials and reviews cited concern broader mindfulness programs, not this exercise in isolation. Everyday impulse examples are illustrative extensions, not evidence of treatment efficacy. No promise of craving disappearance or addiction recovery."
+    }
+  ]
+}

@@ -1,0 +1,459 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "test-data-builder",
+  "title": "Test Data Builder",
+  "primary_collection": "software-testing-testability",
+  "body_word_count": 1435,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43066/pattern/test-data-builder",
+  "validation": {
+    "research": "Primary author implementation at npryce/make-it-easy and publisher catalog verify established mechanism and book chapter. Original blog could not be fetched; no claim to have read it. Official Python and Fowler sources support copy semantics and isolation. No exact existing article found; aliases not invented.",
+    "sources": [
+      {
+        "title": "Growing Object-Oriented Software, Guided by Tests, Chapter22: Constructing Complex Test Data",
+        "author": "Steve Freeman and Nat Pryce / Addison-Wesley",
+        "url": "https://www.informit.com/store/growing-object-oriented-software-guided-by-tests-9780321503626",
+        "supports": "Publisher catalog verifies authors and chapter22, Test Data Builders, similar objects, builder composition and communication-first organization. Do not claim full chapter text was accessible."
+      },
+      {
+        "title": "Make It Easy",
+        "author": "Nat Pryce",
+        "url": "https://github.com/npryce/make-it-easy",
+        "supports": "Pattern author’s primary implementation: defaults, explicit overrides, build of real objects, configuration variants with but(), and relation to the authors’ book."
+      },
+      {
+        "title": "Object Mother",
+        "author": "Martin Fowler",
+        "url": "https://martinfowler.com/bliki/ObjectMother.html",
+        "supports": "Named standard fixture factory approach, tweaking canned objects, and coupling to shared standard values. Neighboring approach rather than alias."
+      },
+      {
+        "title": "dataclasses — Data Classes",
+        "author": "Python documentation",
+        "url": "https://docs.python.org/3/library/dataclasses.html",
+        "supports": "Frozen instance field assignment, replace creates new instance and invokes init/post_init; annotations do not enforce runtime types and frozen does not imply deep immutability."
+      },
+      {
+        "title": "Eradicating Non-Determinism in Tests",
+        "author": "Martin Fowler",
+        "url": "https://martinfowler.com/articles/nonDeterminism.html",
+        "supports": "Separate starting state, test isolation, shared storage/time/resource ownership and cleanup."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "command": "python3 test_data_builder.py",
+      "output": [
+        "fees: [500, 0, 1200] USD cents",
+        "notes: ['fragile'] []",
+        "negative subtotal rejected"
+      ],
+      "fee_matrix_cases": 20,
+      "amount_boundaries_USD_cents": [0, 1, 4999, 5000, 5001],
+      "negative_amount_cases": [-1, -5000],
+      "checks": [
+        "real Order construction and real delivery_fee",
+        "fresh object identity and nested mutable notes lists",
+        "reused builder, derived express variant and chained notes remain independent",
+        "frozen configuration rejects field assignment",
+        "production constructor failure propagates",
+        "repeatable fixture IDs are not unique",
+        "annotations do not establish runtime type validation"
+      ],
+      "mutation_checks": [
+        {
+          "fault": "exclusive threshold",
+          "detected_by_published_assertions": true
+        },
+        {
+          "fault": "express loses precedence",
+          "detected_by_published_assertions": true
+        },
+        {
+          "fault": "invalid subtotal silently repaired",
+          "detected_by_published_assertions": true
+        }
+      ],
+      "limits": [
+        "No I/O, storage isolation or global uniqueness",
+        "Mutable orders are not thread-safe",
+        "Tuple-of-string notes avoid generic deep-copy claim"
+      ]
+    },
+    "content": "All1313 entities validate; published compilation1166 entities, zero diagnostics/unresolved links. Eight exact H2s, one runnable Python program, three canonical related links, two figures/four variants, ten queries, no practice. Existing testing collection retains TestDouble and adds only this article.",
+    "published_compilation": {
+      "entities": 1166,
+      "bytes": 23623889,
+      "sha256": "9d48e6dded64e84ec81fff207f7387ec825cc302c68a26cc645a73a6d846eaf3",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "integration_tests": {
+      "passed": 34,
+      "unrelated_failures": 1,
+      "details": "TestDataBuilder3, TestDouble3, GoF24 and four authored-graphic checks pass. Existing global missing access-over-ownership concept mark still fails."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "VerseSelector.component.test.ts:79 uses unsupported exact in ByRoleOptions."
+    },
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-testing-testability.md"],
+      "new_content": ["content/patterns/test-data-builder.md"],
+      "other_existing_content_unchanged": 1311,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "test_double_original_primary_membership_retained": true,
+      "prior_authoring_records_unchanged": 81,
+      "prior_graphics_unchanged": 493,
+      "all_prior_dimensions_unchanged": 1756,
+      "new_dimensions": 4,
+      "protected_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "preview_web_source_matches_current_source": true,
+      "preview_content_reads_actual_current_content": true
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/test-data-builder-scenario.svg",
+        "labels": 22,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 880
+      },
+      {
+        "path": "/assets/software-engineering/test-data-builder-scenario-mobile.svg",
+        "labels": 22,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1128
+      },
+      {
+        "path": "/assets/software-engineering/test-data-builder-isolation.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 848
+      },
+      {
+        "path": "/assets/software-engineering/test-data-builder-isolation-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1040
+      }
+    ],
+    "contrast": {
+      "status": "passed",
+      "normal_text_AA_4_5_minimum": true,
+      "pairs": [
+        {
+          "foreground": "#252c28",
+          "background": "#ffffff",
+          "contrast": 14.29
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#f1f2ef",
+          "contrast": 12.72
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#edf5f0",
+          "contrast": 12.87
+        },
+        {
+          "foreground": "#626962",
+          "background": "#ffffff",
+          "contrast": 5.65
+        },
+        {
+          "foreground": "#626962",
+          "background": "#f1f2ef",
+          "contrast": 5.03
+        },
+        {
+          "foreground": "#626962",
+          "background": "#edf5f0",
+          "contrast": 5.09
+        }
+      ]
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "test-data-builder-isolation-mobile.svg": "3587d1ad1929e6a6ae1b131a05385510cf3541f4e3fa82dc61d6a0fbcc985592",
+        "test-data-builder-isolation.svg": "a90bce4736e69f8339c2e6a88d70b2462049de910a847273426b109e28796dda",
+        "test-data-builder-scenario-mobile.svg": "70ac28bfb9c1e504cc1454b9b80806c7c7a022682160b6ae5c0dbe0d840c8e2c",
+        "test-data-builder-scenario.svg": "9bad1e5f974944f13c56d13833e87d4075a3f8b92caff2d02ccaa716f4aa1100"
+      }
+    },
+    "concept": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 3,
+          "width": 90,
+          "height": 90
+        },
+        {
+          "x": 29,
+          "y": 17,
+          "width": 58,
+          "height": 66
+        }
+      ]
+    },
+    "browser": [
+      {
+        "path": "/assets/software-engineering/test-data-builder-scenario.svg",
+        "labels": 22,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 880
+      },
+      {
+        "path": "/assets/software-engineering/test-data-builder-scenario-mobile.svg",
+        "labels": 22,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1128
+      },
+      {
+        "path": "/assets/software-engineering/test-data-builder-isolation.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 848
+      },
+      {
+        "path": "/assets/software-engineering/test-data-builder-isolation-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1040
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/test-data-builder-scenario.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/test-data-builder-isolation.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 148,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(72, 86, 76)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": ["/pattern/builder", "/pattern/test-double", "/pattern/prototype"],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/test-data-builder-scenario-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/test-data-builder-isolation-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 148,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(72, 86, 76)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": ["/pattern/builder", "/pattern/test-double", "/pattern/prototype"],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/test-data-builder-scenario-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/test-data-builder-isolation-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 148,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(72, 86, 76)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": ["/pattern/builder", "/pattern/test-double", "/pattern/prototype"],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-testing-testability",
+        "article": "test-data-builder",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "live_assets": {
+      "status": "passed",
+      "mode": "actual Vite development renderer with copied web source and current linked content; full static export not rerun because disk capacity is still exhausted",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/test-data-builder-scenario-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/test-data-builder-scenario.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/test-data-builder-isolation-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/test-data-builder-isolation.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/test-data-builder-scenario.svg",
+          "status": 200,
+          "sha256": "9bad1e5f974944f13c56d13833e87d4075a3f8b92caff2d02ccaa716f4aa1100",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/test-data-builder-scenario-mobile.svg",
+          "status": 200,
+          "sha256": "70ac28bfb9c1e504cc1454b9b80806c7c7a022682160b6ae5c0dbe0d840c8e2c",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/test-data-builder-isolation.svg",
+          "status": 200,
+          "sha256": "a90bce4736e69f8339c2e6a88d70b2462049de910a847273426b109e28796dda",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/test-data-builder-isolation-mobile.svg",
+          "status": 200,
+          "sha256": "3587d1ad1929e6a6ae1b131a05385510cf3541f4e3fa82dc61d6a0fbcc985592",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "Inspected native desktop and phone figures and concept mark, actual first figure at desktop/phone, second figure at phone, desktop/phone article tops and highlighted phone code viewport. No measured overlap, clipping, overflow or text contrast failure. Exact code selection/highlighting/keyboard scrolling checked at1440/390/320. Collection navigation checked in a fresh page to avoid a pending client route navigation interrupting next request.",
+    "lint_and_format": "Scoped ESLint passed. Changed generator/integration/validator/metadata files formatted with Prettier.",
+    "production_export": "Not rerun because volume remains full (about201MiB free); earlier full-site attempts failed ENOSPC. Current corpus compilation and actual Vite renderer verified."
+  },
+  "limitations": [
+    "In-memory builder demonstration; no database isolation, unique-ID or mutable-order thread-safety guarantee.",
+    "Existing type-check/global-graphic failures and disk-limited full static export remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-test-data-builder",
+    "local_uncommitted": true,
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

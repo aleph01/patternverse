@@ -1,0 +1,156 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Shifting the Burden",
+  "metadata_mapping": "Existing concept-draft schema, responsive editable SVG convention, and research sidecar. Only the requested article and necessary assets; no practices, navigation, or publication changes.",
+  "patterns": [
+    {
+      "id": "shifting-the-burden",
+      "title": "Shifting the Burden",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; symptomatic relief, displaced capability development, intervener dependence, and transition resources",
+      "article": "content/concepts/shifting-the-burden.md",
+      "status": "draft",
+      "short_description": "Identify when recurring relief displaces the capability needed for a durable response, then redesign support to preserve that capability through the transition.",
+      "use_when": [
+        "Successful rescue repeatedly replaces the opportunity to learn or improve.",
+        "A queue looks healthy while the ability to handle it without intervention declines.",
+        "Training or maintenance is cancelled whenever the immediate crisis passes.",
+        "A proposed remedy withdraws support before an alternative capability exists."
+      ],
+      "goals": [
+        "Distinguish dependence on a needed intervention from the particular erosion mechanism that constitutes the trap.",
+        "Explain immediate and delayed balancing responses plus reinforcing displacement of capability development.",
+        "Represent skills, documentation, and experience as accumulated resources whose growth must be demonstrated.",
+        "Account for specialist and local time during transition rather than assuming teaching is free.",
+        "Keep conditional resource comparisons distinct from a measured or predicted learning effect."
+      ],
+      "mechanisms": [
+        "Define which capability is worth retaining, with suitable scope, quality criteria, and escalation rules.",
+        "Change expert takeovers into guided joint work for suitable cases.",
+        "Protect specialist coaching and local participation time despite short-term symptom relief.",
+        "Assess transfer on comparable independent cases before reducing assistance.",
+        "Maintain an exception route and reconsider the scope when learning or resourcing proves infeasible."
+      ],
+      "related_patterns": [
+        "fixes-that-fail",
+        "policy-resistance",
+        "bottlenecks-and-capacity-constraints"
+      ],
+      "example_user_queries": [
+        "Our expert solves everything, but the rest of the team never learns.",
+        "We keep cancelling training because the immediate problem has gone away.",
+        "The queue is fine until the specialist takes a day off.",
+        "How can help make us less able to solve the next problem?",
+        "Should we stop doing things for people to make them independent?",
+        "Is outsourcing a mistake if we still need that skill ourselves?",
+        "The documentation exists, but nobody can use it on an unfamiliar case.",
+        "How do we turn a rescue into an opportunity to build capability?",
+        "How much extra time does joint troubleshooting actually require?",
+        "When is it safe to reduce expert coverage?",
+        "Training attendance is high, but have people learned to work independently?",
+        "The short-term fix keeps using up the time needed for long-term improvement."
+      ],
+      "visual": {
+        "type": "connected-capability-feedback-qualitative",
+        "question": "How can successful assistance weaken the capability that would reduce reliance?",
+        "assets": [
+          "content/assets/structural-traps/shifting-the-burden-guided-support.svg",
+          "content/assets/structural-traps/shifting-the-burden-guided-support-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1319,
+            "textBlocks": 23
+          },
+          "phone": {
+            "width": 360,
+            "height": 2087,
+            "textBlocks": 21
+          }
+        },
+        "representation": {
+          "mode": "connected-capability-feedback",
+          "question": "How can successful assistance weaken the capability that would reduce reliance?",
+          "interpretation": "Hypothetical qualitative feedback map. Unresolved faults prompt expert takeovers and guided local practice. Takeovers reduce current faults quickly but can displace practice. Practice builds usable capability over time; capability reduces unresolved faults. Turnover, disuse, and outdated procedures erode capability. Less practice slows gains; capability declines only when losses exceed gains. The connected return paths show fast balancing relief, delayed balancing capability development, and reinforcing reliance through displaced practice. Change: Make suitable repairs guided local work and protect practice through the learning delay. Limitation: Teaching initially costs time. Keep specialist support for urgent, complex, or high-consequence cases until local competence is demonstrated.",
+          "relationship_key": "Solid arrows are causal effects. Fast takeover relief and delayed capability development share unresolved faults. Displaced practice connects both routes; a separate loss driver explains erosion. No material-conservation claim is made about capability.",
+          "changed_relationship": "Make suitable repairs guided local work and protect practice through the learning delay.",
+          "residual_constraints": "Teaching initially costs time. Keep specialist support for urgent, complex, or high-consequence cases until local competence is demonstrated.",
+          "phone_treatment": "Connected paths are recomposed vertically; side returns retain both balancing routes and the reinforcing reliance path."
+        },
+        "alternative_text": "Hypothetical qualitative feedback map. Unresolved faults prompt expert takeovers and guided local practice. Takeovers reduce current faults quickly but can displace practice. Practice builds usable capability over time; capability reduces unresolved faults. Turnover, disuse, and outdated procedures erode capability. Less practice slows gains; capability declines only when losses exceed gains. The connected return paths show fast balancing relief, delayed balancing capability development, and reinforcing reliance through displaced practice. Change: Make suitable repairs guided local work and protect practice through the learning delay. Limitation: Teaching initially costs time. Keep specialist support for urgent, complex, or high-consequence cases until local competence is demonstrated.",
+        "caption": "Hypothetical illustration. The shared nodes connect fast repair, delayed capability development, and reliance through displaced practice. Turnover, disuse, and outdated procedures provide the erosion route: less practice alone means slower gains, while decline requires losses to exceed gains. Protect joint learning before reducing specialist coverage; urgent and high-consequence cases still need support.",
+        "style": "Fixed white including dark surroundings; regular Helvetica Neue with Helvetica and Arial fallbacks; ink and secondary text meet contrast on prescribed fills. Green identifies intervention geometry. Essential connections use ink; light construction lines remain contextual."
+      },
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "The Systems Thinker, Shifting the Burden: The ‘Helen Keller’ Loops (September 1990)",
+          "url": "https://thesystemsthinker.com/wp-content/uploads/pdfs/010402.pdf",
+          "web_text": "https://thesystemsthinker.com/shifting-the-burden-the-helen-keller-loops/",
+          "supports": "Early named archetype, two balancing routes and a reinforcing side-effect structure, intervener variant, and central-versus-local capability example.",
+          "read_method": "Full web text opened and read. Linked original two-page scan opened; both pages rendered and visually inspected to verify September 1990 date, template, central-support example, and discussion of local learning and capability. No byline visible in the scan, so none is invented.",
+          "boundary": "Practitioner conceptual explanation, not empirical proof or a claim of sole invention. The historical disability narrative and clinical addiction analogies are not adopted as evidence, diagnoses, or reasons to withhold assistance. Lin and Tomas are an original equipment-support adaptation, not a reported historical case."
+        },
+        {
+          "title": "Daniel H. Kim, Shifting the Burden: Moving Beyond a Reactive Orientation (June/July 1999)",
+          "url": "https://thesystemsthinker.com/shifting-the-burden-moving-beyond-a-reactive-orientation/",
+          "original_pdf": "https://thesystemsthinker.com/wp-content/uploads/pdfs/100502pk.pdf",
+          "supports": "Difference from Fixes That Fail, durable capability goals, symptom-driven crowding out of development, and distinction between prudent outsourcing and losing needed capability.",
+          "read_method": "Full web article and original two-page PDF opened and read. PDF verifies Kim's byline and June/July 1999 date. Capability, outsourcing, delayed effects, and response-design sections read directly.",
+          "boundary": "Conceptual/practical account rather than a controlled intervention study. The boiled-frog analogy is not used as a biological fact. A chosen service model determines which capability is fundamental; all outsourcing or specialization is not labeled harmful."
+        },
+        {
+          "title": "Donella H. Meadows, Thinking in Systems: A Primer (2008; linked UK edition 2009), edited by Diana Wright",
+          "url": "https://www.sustainable.soltechdesigns.com/meadows.pdf",
+          "supports": "Intervener dependence when help undermines self-maintaining capacity, and rebuilding capability before removing support.",
+          "read_method": "Chapter five's Shifting the Burden to the Intervenor section, printed pages 131–135 (PDF pages 147–151), opened and read, including trap and way-out statements. Publication/edition information was checked earlier in this collection's research.",
+          "boundary": "Conceptual framework and practical recommendations. Dated health, agriculture, disability, social-policy, and addiction examples are not imported as current empirical or clinical guidance. Rebuilding before withdrawing is presented as a conditional organizational design principle, not a universal mandate for local self-sufficiency."
+        },
+        {
+          "title": "Nelson P. Repenning and John D. Sterman, Nobody Ever Gets Credit for Fixing Problems that Never Happened: Creating and Sustaining Process Improvement (2001)",
+          "url": "https://web.mit.edu/nelsonr/www/Repenning%3DSterman_CMR_su01_.pdf",
+          "supports": "Field-informed capability-trap mechanism: production and improvement compete for resources; capability accumulates and erodes; apparent early gains can displace improvement; policy simulations and observed case histories have different evidential roles.",
+          "read_method": "Original published article opened and read: research approach with more than a dozen in-depth case studies, observations/interviews/archives/metrics, working harder versus improving capability, reinvestment and shortcut loops, simulation discussion, engineering-library example, and Du Pont maintenance transition. California Management Review volume 43 issue 4, pages 64–88, verified on the original scan.",
+          "boundary": "Qualitative/quantitative case research integrated with system dynamics models, not randomized evidence that any mentoring schedule works. No company effect sizes or simulation rates are asserted for Lin's operation. Improvement paths remain conditional on model assumptions; illustrative case accounting does not estimate a learning curve."
+        }
+      ],
+      "evidence_boundary": "The scenario and illustration are hypothetical. Qualitative formal comparisons depend on the stated players, actions, preferences, information, timing, and repetition assumptions. Empirical findings retain their source-specific limits. Practical interventions are editorial synthesis, not measured effects of this scenario.",
+      "verification": {
+        "status": "passed",
+        "content": "All forty remain separate drafts with nine sections and one responsive figure each. Only five articles received the authorized qualitative accumulation/timing clarifications; source links, frontmatter, and collection membership are unchanged. Schema and rendered Markdown checks passed.",
+        "visual": "Passed: content/schema validation (1451 entities), rendered Markdown checks for all forty drafts, and unchanged collection membership/source links. All ten revised SVG compositions checked at actual desktop and phone image widths in light and dark surroundings (20 layouts); no text overlap, clipping, card overflow, page overflow, or white-surface errors detected. All five affected articles checked live at 1440px and 390px with updated image dimensions, alternative text, captions, and responsive sources. Causal paths visually traced; no reader-comprehension study or measured scenario effect claimed.",
+        "editorial": "Storage capacity is distinct from actual queued work; capability losses are distinct from slower gains; commissioning delay and backlog recovery headroom are explicit. Admissions versus membership and finite catch-up demand are qualified. Captions, alt text, SVG descriptions, dimensions, and research representations agree."
+      },
+      "example_structure": {
+        "scenario": "Hypothetical narrative; no invented utility scores, numerical trajectory, or probability cutoff is required to follow the example.",
+        "changed_relationship": "Make suitable repairs guided local work and protect practice through the learning delay.",
+        "residual_constraints": "Teaching initially costs time. Keep specialist support for urgent, complex, or high-consequence cases until local competence is demonstrated."
+      },
+      "editorial_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the distinctness audit: preserve separate concepts, clarify scope and relationships, and retain plain-language examples.",
+        "source_handling": "Existing source links and evidence limits retained; no new empirical claim is introduced."
+      },
+      "example_consistency_revision": {
+        "date": "2026-11-01",
+        "purpose": "Update research-note descriptions to match the current qualitative article.",
+        "source_handling": "Original source links, source-check dates, and empirical qualifications preserved; no new empirical claim introduced.",
+        "verification": "Passed: corpus validation; all forty remain separate drafts outside the public corpus; collection and source links unchanged; prose, captions, alternative text and SVG descriptions agree. Four changed articles checked live at 1440px and 390px; six revised SVG compositions checked at measured article widths in light and dark surroundings, with no text overlap, clipping, card overflow or page overflow. Revised illustration text passes contrast checks."
+      },
+      "illustration_teaching_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the teaching-value audit while retaining every article and its qualitative worked example.",
+        "change": "Preserve the explanatory structure; improve contrast and the interpretive caption.",
+        "source_handling": "Article prose, external source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed."
+      },
+      "accumulation_feedback_time_revision": {
+        "date": "2026-11-01",
+        "change": "Connect the feedback paths and expose capability gains, erosion, and the learning delay.",
+        "source_handling": "Original sources, source-check dates, and empirical qualifications preserved. Qualitative scenario conditions clarified; no measured outcome added.",
+        "verification": "Passed: content/schema validation (1451 entities), rendered Markdown checks for all forty drafts, and unchanged collection membership/source links. All ten revised SVG compositions checked at actual desktop and phone image widths in light and dark surroundings (20 layouts); no text overlap, clipping, card overflow, page overflow, or white-surface errors detected. All five affected articles checked live at 1440px and 390px with updated image dimensions, alternative text, captions, and responsive sources. Causal paths visually traced; no reader-comprehension study or measured scenario effect claimed."
+      }
+    }
+  ]
+}

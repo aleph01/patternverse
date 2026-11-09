@@ -1,0 +1,468 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "data-consumer-driven-contract-tests",
+  "title": "Consumer-Driven Contract Tests",
+  "aliases": [
+    "Consumer-Driven Contract Test",
+    "Consumer Driven Contract Test",
+    "Consumer-Driven Contract Testing"
+  ],
+  "primary_collection": "software-testing-testability",
+  "body_word_count": 1353,
+  "figures": 2,
+  "illustration_variants": 4,
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43067/pattern/data-consumer-driven-contract-tests",
+  "validation": {
+    "research": "Existing canonical article reused with original ID/title/route and data-engineering context. Ian Robinson’s original service-evolution article and official Pact documentation verified. Singular/unhyphenated/process aliases added; broad contract testing not equated with consumer-driven mechanism. Sole primary home migrated to Testing and Testability while old Data collection crosslinks.",
+    "sources": [
+      {
+        "title": "Consumer-Driven Contracts: A Service Evolution Pattern",
+        "author": "Ian Robinson (2006)",
+        "url": "https://martinfowler.com/articles/consumerDrivenContracts.html",
+        "supports": "Original consumer-obligation/evolution pattern; consumers express relevant dependencies, not every provider detail. Article is by Robinson, not Fowler."
+      },
+      {
+        "title": "How Pact works",
+        "author": "Pact documentation",
+        "url": "https://docs.pact.io/getting_started/how_pact_works",
+        "supports": "Actual consumer request/interpretation test against controlled provider, transferable interaction contract and separate candidate provider verification."
+      },
+      {
+        "title": "Writing consumer tests",
+        "author": "Pact documentation",
+        "url": "https://docs.pact.io/consumer",
+        "supports": "Real API client tests, assertions tied to consumer needs, meaningful matcher specificity and distinction from provider functional testing."
+      },
+      {
+        "title": "Verifying Pacts",
+        "author": "Pact documentation",
+        "url": "https://docs.pact.io/provider",
+        "supports": "Local candidate provider verification with request extraction/validation and serialization retained; stubbing downstream rather than bypassing the relevant boundary."
+      },
+      {
+        "title": "Provider states",
+        "author": "Pact documentation",
+        "url": "https://docs.pact.io/getting_started/provider_states",
+        "supports": "Independent interaction preconditions, fresh state and no dependence on the outcome of earlier interactions."
+      },
+      {
+        "title": "Can I Deploy",
+        "author": "Pact documentation",
+        "url": "https://docs.pact.io/pact_broker/can_i_deploy",
+        "supports": "Consumer/provider version matrix plus recorded deployments/releases determines relevant known compatibility; missing evidence is unknown, not a passing result."
+      },
+      {
+        "title": "Event Driven Systems",
+        "author": "Pact documentation",
+        "url": "https://docs.pact.io/implementation_guides/javascript/docs/messages",
+        "supports": "Actual handler and producer message creation testing, message payload scope separated from broker protocol/delivery/ordering behavior."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "command": "python3 consumer_contract.py",
+      "output": [
+        "consumer: passed",
+        "original: compatible",
+        "added: compatible",
+        "renamed: incompatible"
+      ],
+      "actual_client_checked": true,
+      "consumer_artifact_requires_successful_request_and_interpretation": true,
+      "provider_path_calls": [
+        [
+          "GET",
+          "/stock/S17",
+          {
+            "S17": 7
+          }
+        ],
+        [
+          "GET",
+          "/stock/S17",
+          {
+            "S17": 7
+          }
+        ]
+      ],
+      "fresh_provider_state_each_verification": true,
+      "rejected_provider_responses": 11,
+      "boundary_cases": [
+        "zero quantity accepted",
+        "null/bool/float/string quantities rejected",
+        "missing required fields and wrong SKU/unit rejected",
+        "non200 status rejected",
+        "malformed JSON propagates",
+        "additional unused response fields tolerated",
+        "altered request/state/matcher fails"
+      ],
+      "explicit_limits": [
+        "integer rule alone permits negative quantities; not complete business validation",
+        "consumer version is metadata, not a deployment gate",
+        "No network, real Pact SDK, broker, persisted artifact or transport/auth verification"
+      ]
+    },
+    "content": "1313 entities validate;1166 published compile without diagnostics/unresolved references. Eight exact H2s, one executable Python model, two figures/four variants, four related existing IDs, ten queries and no practice.",
+    "published_compilation": {
+      "entities": 1166,
+      "bytes": 23630270,
+      "sha256": "c2e4b642444cb56275ddd240f0718e5f8f0cf739d7ad807c5ee24726e6eaf573",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "New contract integration3, TestDouble3, TestDataBuilder3, GoF24 and four graphic checks pass. Global authored-graphic coverage retains missing access-over-ownership failure."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "VerseSelector.component.test.ts:79 uses unsupported exact in ByRoleOptions."
+    },
+    "lint_and_format": "Scoped ESLint and changed-file Prettier formatting passed.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": [
+        "content/collections/data-engineering-contracts-evolution.md",
+        "content/collections/software-testing-testability.md",
+        "content/patterns/data-consumer-driven-contract-tests.md"
+      ],
+      "new_content": [],
+      "other_existing_content_unchanged": 1310,
+      "canonical_id_title_and_route_retained": true,
+      "prior_data_verse_and_tags_retained": true,
+      "single_primary_home": "software-testing-testability",
+      "former_data_home_retains13other_members_and_crosslink": true,
+      "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 82,
+      "prior_graphics_unchanged": 494,
+      "prior_dimensions_unchanged": 1759,
+      "revised_dimensions": ["data-engineering/consumer-driven-contract-tests.svg"],
+      "new_dimensions": 3,
+      "protected_tests_renderer_dependencies_build_scripts_historical_data_import_and_taxonomy_unchanged": true,
+      "authoring_documentation_preserved": true,
+      "preview_matches_current_web_source_and_linked_content": true
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "content/assets/data-engineering/consumer-driven-contract-tests.svg": "3addf45739307653b4b7a92951dc5869c03d4121c77e2765f171b4e4d23a3f78",
+        "content/assets/data-engineering/consumer-driven-contract-tests-mobile.svg": "f579f6ee1b4f719f8c1874f1e196146b912fe27f416560f047d27a8681029670",
+        "content/assets/software-engineering/consumer-driven-contract-evidence.svg": "435d2c080a4173ceac31da268c418e985695d5fc719c735eed963bd3db6bacfd",
+        "content/assets/software-engineering/consumer-driven-contract-evidence-mobile.svg": "213137d53bf557b802340d4fa162448df3ba2495a7a04cee5ccc98413d612043"
+      }
+    },
+    "native": [
+      {
+        "path": "/assets/data-engineering/consumer-driven-contract-tests.svg",
+        "labels": 26,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 896
+      },
+      {
+        "path": "/assets/data-engineering/consumer-driven-contract-tests-mobile.svg",
+        "labels": 27,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1320
+      },
+      {
+        "path": "/assets/software-engineering/consumer-driven-contract-evidence.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1000
+      },
+      {
+        "path": "/assets/software-engineering/consumer-driven-contract-evidence-mobile.svg",
+        "labels": 20,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1160
+      }
+    ],
+    "concept": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 19,
+          "width": 90,
+          "height": 46
+        },
+        {
+          "x": 15,
+          "y": 37,
+          "width": 66,
+          "height": 50
+        }
+      ]
+    },
+    "browser": [
+      {
+        "path": "/assets/data-engineering/consumer-driven-contract-tests.svg",
+        "labels": 26,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 896
+      },
+      {
+        "path": "/assets/data-engineering/consumer-driven-contract-tests-mobile.svg",
+        "labels": 27,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1320
+      },
+      {
+        "path": "/assets/software-engineering/consumer-driven-contract-evidence.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1000
+      },
+      {
+        "path": "/assets/software-engineering/consumer-driven-contract-evidence-mobile.svg",
+        "labels": 20,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1160
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/data-engineering/consumer-driven-contract-tests.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/consumer-driven-contract-evidence.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 208,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)",
+              "rgb(138, 59, 34)",
+              "rgb(98, 105, 98)",
+              "rgb(123, 66, 24)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/test-double",
+          "/pattern/data-explicit-data-contracts",
+          "/pattern/data-tolerant-readers",
+          "/pattern/data-compatibility-checks-in-delivery"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/data-engineering/consumer-driven-contract-tests-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/consumer-driven-contract-evidence-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 208,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)",
+              "rgb(138, 59, 34)",
+              "rgb(98, 105, 98)",
+              "rgb(123, 66, 24)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/test-double",
+          "/pattern/data-explicit-data-contracts",
+          "/pattern/data-tolerant-readers",
+          "/pattern/data-compatibility-checks-in-delivery"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/data-engineering/consumer-driven-contract-tests-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/consumer-driven-contract-evidence-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 208,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)",
+              "rgb(138, 59, 34)",
+              "rgb(98, 105, 98)",
+              "rgb(123, 66, 24)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/test-double",
+          "/pattern/data-explicit-data-contracts",
+          "/pattern/data-tolerant-readers",
+          "/pattern/data-compatibility-checks-in-delivery"
+        ],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-testing-testability",
+        "article": "data-consumer-driven-contract-tests",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "live_assets": {
+      "status": "passed",
+      "mode": "actual Vite development renderer with copied web source and current linked content; full static export not rerun because disk capacity is still exhausted",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/data-engineering/consumer-driven-contract-tests-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/data-engineering/consumer-driven-contract-tests.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/consumer-driven-contract-evidence-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/consumer-driven-contract-evidence.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/data-engineering/consumer-driven-contract-tests.svg",
+          "status": 200,
+          "sha256": "3addf45739307653b4b7a92951dc5869c03d4121c77e2765f171b4e4d23a3f78",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/data-engineering/consumer-driven-contract-tests-mobile.svg",
+          "status": 200,
+          "sha256": "f579f6ee1b4f719f8c1874f1e196146b912fe27f416560f047d27a8681029670",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/consumer-driven-contract-evidence.svg",
+          "status": 200,
+          "sha256": "435d2c080a4173ceac31da268c418e985695d5fc719c735eed963bd3db6bacfd",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/consumer-driven-contract-evidence-mobile.svg",
+          "status": 200,
+          "sha256": "213137d53bf557b802340d4fa162448df3ba2495a7a04cee5ccc98413d612043",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "Viewed all four native figures, actual article phone top, actual primary desktop figure and second phone figure; measured all variants and actual article at1440/390/320. Code selection/highlighting/focus/keyboard scrolling, all four related routes, testing collection/gallery/card and retained canonical URL verified.",
+    "production_export": "Full local public static export subsequently passed during Strangler Fig verification; canonical contract route is included in that build. Its own detailed browser/asset checks remain against the actual Vite renderer."
+  },
+  "limitations": [
+    "Bounded function-based stock simulation; no real Pact SDK, HTTP, auth, broker, deployment/version gate or persisted contract file. Explicit type matching cannot establish all semantic invariants.",
+    "Existing type-check and global-graphic failures remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-consumer-driven-contract-test",
+    "local_uncommitted": true,
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "microservices",
+  "title": "Microservices",
+  "aliases": ["Microservice Architecture", "Microservices Architecture"],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1441,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Lewis and Fowler's influential 2014 description establishes business capabilities, separate processes, independent deployment, and terminology without a universal service size. Richardson's architecture catalog supports the forces and distributed-operation tradeoffs; his Database per Service pattern distinguishes logical ownership from physical database hosting. Microsoft supports contract evolution, operational concerns, and conditional fault containment. Fowler supports deployment and monitoring prerequisites. Featonby's AWS article supports ambiguous timeouts, stable caller identities, equivalent responses, and atomic durable recording of identities with effects. The shop scenario, simulation, and illustrations are original teaching material.",
+    "python_examples": "All three actual article blocks run together and print pending 2, confirmed 2, confirmed 2 on separate lines. Checks pass for no cross-service implementation imports, JSON request and response values, uncertainty after a lost reply, pending state after a lost request, explicit retry and stable identities without repeated stock deduction, shortage and exact-stock boundaries, rejected-result replay after replenishment, invalid identities and units, conflicting identity reuse, response-copy isolation, terminal order states without extra calls, and surfaced malformed responses without false confirmation. An additive response field preserves caller behavior. A fresh subprocess verifies the same output after changing Inventory's private result representation while Orders and the demo remain byte-for-byte unchanged.",
+    "article_tests": "45 tests pass across Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. The new three-test integration suite also passes after tightening both alias-ID uniqueness assertions. Coverage includes canonical aliases, one primary collection, resolved related patterns, eight headings, exact highlighted code, responsive figures, asset dimensions, search, ten queries, revision hash, and concept marks.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check has the unrelated existing failure listed below. Combined article and graphics results: 49 passed, one unrelated failure.",
+    "content": "1224 entities validate with drafts included. The published-only corpus contains 1078 entities and reports no errors.",
+    "public_build": "Production build passes, including public web build checks. Browser review uses that production build. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new generator, executable example validator, article integration test, and updated authoring metadata. The review report is formatted and checked separately.",
+    "visuals": "All four editable native SVG variants load. Browser measurements find no overlapping or out-of-bounds labels and no out-of-canvas rectangles. Desktop and separately composed phone figures were visually inspected for release and data ownership, meaningful network-request arrows, accurate remote-success/lost-response chronology, stock units and retry identity, readable labels, fixed white surfaces, regular typography, and palette compliance. Color is supplemented by labels, boundaries, dashed loss lines, and a loss marker.",
+    "article_browser": "Actual production article checked at 1440, 390, and 320 pixels: all eight headings, all three code blocks preserved exactly in the DOM with colored tokens, selectable code preserving indentation and content, keyboard code scrolling at 320px, both responsive images loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article, code, and figure screenshots were inspected.",
+    "navigation_browser": "Application Architecture opens Microservices with the correct breadcrumb. Related Modular Monolith, Bounded Contexts, Ports and Adapters, and Transactional Outbox routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. All prior authoring records, concept marks, and asset dimensions remain unchanged. Existing canonical related-pattern IDs and collection membership were reused."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "A bounded serial in-memory simulation with a JSON transport test double, one caller and one product, manually repeated calls, and process-local remembered outcomes. It runs no network servers or independently deployed services. It implements no durable crash recovery, concurrent reservation, scoped authentication, automatic retry budget, cancellation, retention policy, cross-order ordering, global transaction, or exactly-once transport. Durable and concurrency-safe recording, caller-scoped identities, bounded retry policies, and reconciliation are explicit production responsibilities.",
+  "preview": "http://127.0.0.1:42991/pattern/microservices",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-microservices",
+  "browser_measurements": ".local/software-microservices/browser-checks.json",
+  "browser_check_script": ".local/software-microservices/check-browser.mjs",
+  "preservation_checks": ".local/software-microservices/preservation-checks.json",
+  "build_log": ".local/software-microservices/public-build.log",
+  "branch": "codex/software-microservices",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

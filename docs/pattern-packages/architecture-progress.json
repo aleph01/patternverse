@@ -1,0 +1,460 @@
+{
+  "started": "2026-10-27",
+  "branch": "codex/architecture-verse",
+  "status": "complete",
+  "target_patterns": 36,
+  "target_visuals": "108 editorial diagrams plus one or two photographic examples per article",
+  "pilot": [
+    "arch-courtyards-which-live",
+    "arch-light-on-two-sides",
+    "arch-reuse-before-replacement"
+  ],
+  "checklist": [
+    "800–1500 words of substantive article prose",
+    "recognizable situation and mechanism",
+    "two concrete examples; built precedents verified where named",
+    "application, tradeoffs and professional limits",
+    "correct provenance with independently written text",
+    "8–15 natural-language queries",
+    "3 distinct explanatory visuals with captions and alt text",
+    "photo creator/source/license verified; gaps recorded",
+    "canonical links and collections validate",
+    "desktop/mobile rendering reviewed"
+  ],
+  "batches": [
+    {
+      "id": "pilot",
+      "patterns": 3,
+      "checks": "prose review, metadata/assets validation, nine diagrams rendered; clipped-label check passed",
+      "status": "accepted"
+    },
+    {
+      "id": "place-1",
+      "patterns": 4,
+      "checks": "article length, queries, identities, captions, source/asset records and diagram files",
+      "status": "accepted"
+    },
+    {
+      "id": "place-2",
+      "patterns": 4,
+      "checks": "same acceptance checks; short drafts expanded before acceptance",
+      "status": "accepted"
+    },
+    {
+      "id": "organization",
+      "patterns": 4,
+      "checks": "same acceptance checks; common-space prose revised after count excluded captions",
+      "status": "accepted"
+    },
+    {
+      "id": "circulation",
+      "patterns": 4,
+      "checks": "same acceptance checks; inclusive-access and historical limitations reviewed",
+      "status": "accepted"
+    },
+    {
+      "id": "human-scale",
+      "patterns": 4,
+      "status": "accepted",
+      "checks": "article and assets validated; full-size diagram montage reviewed"
+    },
+    {
+      "id": "climate-comfort",
+      "patterns": 4,
+      "status": "accepted",
+      "checks": "technical limits, environmental mechanisms and metadata validated"
+    },
+    {
+      "id": "fabric-adaptability",
+      "patterns": 4,
+      "status": "accepted",
+      "checks": "repair/disassembly relationships and established Shearing Layers attribution reviewed"
+    },
+    {
+      "id": "design-process",
+      "patterns": 5,
+      "status": "accepted",
+      "checks": "existing general reasoning patterns cross-linked; process diagrams and separate practices validated"
+    }
+  ],
+  "research_gaps": [
+    "WBDG resource pages respond but their article bodies were not extractable in this research session. They remain supplementary references; technical explanations also cite retrieved DOE, PHI, EPA, RIBA and Building Science Corporation material.",
+    "Four primary URLs restricted the final automated URL check; primary text was available through web research. Raw results and qualifications are retained in architecture-evidence/link-audit.json.",
+    "Ching and Brand publisher material was consulted; their full books and copyrighted drawings were not accessed or reproduced."
+  ],
+  "asset_gaps": [
+    {
+      "pattern": "arch-window-place",
+      "brief": "A real photograph of a Phillips Exeter Academy library window carrel, showing seated eye level, desk and adjacent glazing. Credit Louis I. Kahn and the actual photographer.",
+      "status": "Fulfilled: a licensed direct carrel photograph now shows desks, chairs, side screens and adjacent glazing. The central-hall view remains contextual."
+    },
+    {
+      "patterns": ["arch-drained-ventilated-rainscreen", "arch-continuous-thermal-envelope"],
+      "brief": "An installation photograph showing a named project’s window head, cavity drainage and continuity layers, with contractor permission and specialist review.",
+      "status": "Partially enriched: licensed construction-stage photographs expose facade and insulation layers. Project-specific window-head drainage, continuity and fire details still require professionally reviewed drawings and site records."
+    },
+    {
+      "scope": "Measured precedent plans",
+      "brief": "Licensed measured plans or sections of the named precedents, with dimensions and drawing authorship verified.",
+      "status": "Not reproduced. All supplied SVG plans and sections are original, generic schematics and are explicitly labeled accordingly."
+    }
+  ],
+  "patterns": {
+    "arch-site-repair": {
+      "status": "locally-validated",
+      "article_words": 912,
+      "figures": 5,
+      "article_sha256": "541caa8e69ce3f1d3456f7e6dd88396f1aeb1e87ea1f63b6de5e8047a13efad5"
+    },
+    "arch-south-facing-outdoors": {
+      "status": "locally-validated",
+      "article_words": 888,
+      "figures": 4,
+      "article_sha256": "4d4ce38ce330e5a770e44c869a9819b5a056ad01027ee5293371737de45ac934"
+    },
+    "arch-water-sensitive-landscape": {
+      "status": "locally-validated",
+      "article_words": 932,
+      "figures": 5,
+      "article_sha256": "3c651f626c64451caa4b291a25357701f53defe1b10db3f075b37a0e6afaa9c1"
+    },
+    "arch-positive-outdoor-space": {
+      "status": "locally-validated",
+      "article_words": 916,
+      "figures": 5,
+      "article_sha256": "de6dbf088e5564f9a3ede90cf4d873dab87f5525848465264a6a8a13092c76a0"
+    },
+    "arch-arcades": {
+      "status": "locally-validated",
+      "article_words": 897,
+      "figures": 5,
+      "article_sha256": "6169d25a565633f79e3c84e0c068ba9f17ded9934cd7e3f9d8dc8050fbeb400e"
+    },
+    "arch-entrance-transition": {
+      "status": "locally-validated",
+      "article_words": 941,
+      "figures": 5,
+      "article_sha256": "3dc533679482e54ea4e8d1da42ba4740963e6608813d7af420d678fbb3952bb8"
+    },
+    "arch-building-edge": {
+      "status": "locally-validated",
+      "article_words": 949,
+      "figures": 5,
+      "article_sha256": "f0fe8ebc5a5074d19c8bac0d1b78da639fd27f5fa65ed1ff9c26048b52c775de"
+    },
+    "arch-wings-of-light": {
+      "status": "locally-validated",
+      "article_words": 976,
+      "figures": 5,
+      "article_sha256": "fd71da90345b034bdb2bc94377cc831c7edb4a398c6fa6ff769dbc0d9ff13795"
+    },
+    "arch-courtyards-which-live": {
+      "status": "locally-validated",
+      "article_words": 998,
+      "figures": 5,
+      "article_sha256": "ecb55a027e54cd1ac7cb115841b5405781806ff4b94d8657dde9c4b93c6fa145"
+    },
+    "arch-compact-building-form": {
+      "status": "locally-validated",
+      "article_words": 952,
+      "figures": 5,
+      "article_sha256": "34b780b5bd47889fb1af185e9b0f996697c0688e611e3ee7b9ab0a99ca14dbf1"
+    },
+    "arch-intimacy-gradient": {
+      "status": "locally-validated",
+      "article_words": 973,
+      "figures": 4,
+      "article_sha256": "be3fcb1337cf93e4828137a1b69e207e08df9278ffa9a29487e7e33b6ffe53dd"
+    },
+    "arch-common-areas-at-the-heart": {
+      "status": "locally-validated",
+      "article_words": 897,
+      "figures": 5,
+      "article_sha256": "960dce97ddefbe9c2994333c57c918f134fe459dfc876d61868b1f356ebcd4cf"
+    },
+    "arch-flexibly-linked-rooms": {
+      "status": "locally-validated",
+      "article_words": 980,
+      "figures": 4,
+      "article_sha256": "63668b93f308a491a34c031b2f52039de299a6071f4056ee0f2b996a38367375"
+    },
+    "arch-circulation-as-orientation": {
+      "status": "locally-validated",
+      "article_words": 890,
+      "figures": 5,
+      "article_sha256": "91da8b296cbad81cac778ed1a6fbd52e5ee9b8e71081bb15d1e5aa9039bcf5c4"
+    },
+    "arch-main-entrance": {
+      "status": "locally-validated",
+      "article_words": 912,
+      "figures": 4,
+      "article_sha256": "bb18f3537516be49c12e6d245c5a63a525e004704af308c954b21a762bd19027"
+    },
+    "arch-inclusive-arrival": {
+      "status": "locally-validated",
+      "article_words": 944,
+      "figures": 5,
+      "article_sha256": "47a67ae8497d8495dc42ad2580733c1559ce0282b23cee3f2eac82e9380fa514"
+    },
+    "arch-staircase-as-a-stage": {
+      "status": "locally-validated",
+      "article_words": 963,
+      "figures": 5,
+      "article_sha256": "ea65029dcfb19f74b9fa536a42fac1cbc4723ae2ce045c19155c148568c57e0c"
+    },
+    "arch-window-place": {
+      "status": "locally-validated",
+      "article_words": 862,
+      "figures": 5,
+      "article_sha256": "ccbed19df3735badf5f5142f6d073df279a137fab8cd7616b9bd812f882ee230"
+    },
+    "arch-alcoves": {
+      "status": "locally-validated",
+      "article_words": 996,
+      "figures": 5,
+      "article_sha256": "dc465d12743afa5de651bed6602aacbd82931f3788d9c23cc92ed9214087c73c"
+    },
+    "arch-ceiling-height-variety": {
+      "status": "locally-validated",
+      "article_words": 989,
+      "figures": 5,
+      "article_sha256": "b13ad666f2271a8af70d8f2f65f1a52dc360a0cefbaa34eb31e29f7ca3df93b3"
+    },
+    "arch-prospect": {
+      "status": "locally-validated",
+      "article_words": 990,
+      "figures": 4,
+      "article_sha256": "81e5ea945d9e43262184be13f760755456c99eb11d944b5b0ae272694bb982c0"
+    },
+    "arch-refuge": {
+      "status": "locally-validated",
+      "article_words": 1013,
+      "figures": 5,
+      "article_sha256": "a98db6cddd3ce80f4b6466c374a89708dec52a55373a9fa42c15ead7ec5b4ed8"
+    },
+    "arch-light-on-two-sides": {
+      "status": "locally-validated",
+      "article_words": 976,
+      "figures": 5,
+      "article_sha256": "0a5205064bbd026ecb5890a80f78d594fee9a492c3e77dc392824eefb3000897"
+    },
+    "arch-external-solar-shading": {
+      "status": "locally-validated",
+      "article_words": 997,
+      "figures": 4,
+      "article_sha256": "c93c67a5e4f31e27f75dc7a624e622cce64432fb499d25c66c980dc186b8136b"
+    },
+    "arch-cross-ventilation": {
+      "status": "locally-validated",
+      "article_words": 1207,
+      "figures": 5,
+      "article_sha256": "175958188d04d680324ef2ce9f9abb6d4e04418024a4fc3bab0b7ba9432ba462"
+    },
+    "arch-continuous-thermal-envelope": {
+      "status": "locally-validated",
+      "article_words": 1240,
+      "figures": 4,
+      "article_sha256": "5937029ae62b96640fc449c2300d29ce2c93e85bcd1d7cc3310cab8d052410bb"
+    },
+    "arch-structural-bay-rhythm": {
+      "status": "locally-validated",
+      "article_words": 972,
+      "figures": 5,
+      "article_sha256": "03073179c4a5074422ba202318aeb2d8435e0e7c78238cd6890fd537b32593df"
+    },
+    "arch-drained-ventilated-rainscreen": {
+      "status": "locally-validated",
+      "article_words": 1000,
+      "figures": 4,
+      "article_sha256": "1eb0157a478c7a4e7a1dcdc4609d9747f20b50d4ef63a4660281f6dd057f9723"
+    },
+    "arch-repairable-connections": {
+      "status": "locally-validated",
+      "article_words": 989,
+      "figures": 5,
+      "article_sha256": "5d88a5db2f46b8a99e3814d873d701405a320606889af8ff64c40b813938ea98"
+    },
+    "arch-reuse-before-replacement": {
+      "status": "locally-validated",
+      "article_words": 956,
+      "figures": 5,
+      "article_sha256": "99f65935db688a141d3ee5854c6e39d440df25a00ad6bde1b6d9cd0bd9a61c30"
+    },
+    "arch-loose-fit-layers": {
+      "status": "locally-validated",
+      "article_words": 958,
+      "figures": 4,
+      "article_sha256": "24d789a5fe9aacdca5cea83652edaadf26fd1c272a0be2ea3e16237688fb2e56"
+    },
+    "arch-design-for-disassembly": {
+      "status": "locally-validated",
+      "article_words": 1191,
+      "figures": 4,
+      "article_sha256": "a06f98c21fc02ff9efb152485d18e053b47f84084ddbc38257edb2a046d14d64"
+    },
+    "arch-observe-before-briefing": {
+      "status": "locally-validated",
+      "article_words": 982,
+      "figures": 4,
+      "article_sha256": "0259306a94aa87ab6db85aa81fcbe2da3e8cf18947fe3d2f13dcc1acf8768cf9"
+    },
+    "arch-compare-spatial-alternatives": {
+      "status": "locally-validated",
+      "article_words": 988,
+      "figures": 5,
+      "article_sha256": "b614bc4972007604896b26f9709d84e39c9d1f8dddc55f6c8c1915fb2cb07183"
+    },
+    "arch-test-at-full-scale": {
+      "status": "locally-validated",
+      "article_words": 1028,
+      "figures": 5,
+      "article_sha256": "117c5a4a16dc97ed25edebfa2821895d09b738a088b21ee10c488715cb2923aa"
+    },
+    "arch-post-occupancy-evaluation": {
+      "status": "locally-validated",
+      "article_words": 956,
+      "figures": 5,
+      "article_sha256": "b89687cf4f38d5aae289cf102b4806f7b43a259a93cff3514a80476436773f03"
+    }
+  },
+  "local_validation": {
+    "checked": "2026-10-27",
+    "mode": "complete",
+    "patterns": 36,
+    "article_words": 35210,
+    "figure_placements": 169,
+    "distinct_visuals": 155,
+    "errors": []
+  },
+  "verification": {
+    "corpus": "910 entities validated by content CLI; published-only corpus has one unrelated Therapy-to-draft reference error",
+    "unit_checks": "38 compiler checks and 38 article-rendering checks pass; one compiler global-corpus assertion blocked by unrelated Therapy reference",
+    "type_checks": "Svelte check: zero errors and zero warnings",
+    "browser": "Six scoped desktop/phone checks passed for all three new cases; headings, case evidence text, images and ten-section outline render correctly without horizontal overflow.",
+    "visual_review": "All 108 original diagrams and 108 compact companions reviewed in light and dark at desktop and phone sizes; 48 contact sheets; zero clipped or overlapping text labels; all 28 new photographs reviewed in contact sheets and representative article contexts checked on desktop/phone",
+    "lint": "Scoped ESLint and Prettier checks passed",
+    "build": "Production build blocked by the same published-to-draft Therapy reference. Development preview includes drafts using the existing server convention.",
+    "prose_words": 35210,
+    "canonical_patterns": 36,
+    "distinct_visuals": 155,
+    "photograph_placements": 61,
+    "distinct_photographs": 47
+  },
+  "completed": "2026-10-27",
+  "editorial_revision": {
+    "completed": "2026-10-27",
+    "scope": "All 36 canonical Architecture articles",
+    "outline": "Ten shared H2 sections, with practical How it works explanations and case-specific H3 headings",
+    "example_subheadings": 87,
+    "preservation": "All original prose, figures, credits, recommendation situations and sources retained; per-article token and source-section checks passed",
+    "review": "architecture-outline-review.json"
+  },
+  "illustration_pilot": {
+    "status": "approved-and-extended",
+    "patterns": ["arch-site-repair", "arch-courtyards-which-live", "arch-window-place"],
+    "drawings": 9,
+    "compact_companions": 9,
+    "report": "architecture-illustration-pilot.json",
+    "verification": {
+      "article_rendering": "38 tests passed",
+      "browser": "10 desktop/phone tests passed against the final production build",
+      "visual_review": "All nine original drawings and compact companions reviewed in light and dark; no clipped SVG text labels. Article previews reviewed at desktop and phone sizes.",
+      "lint": "Scoped ESLint and Prettier checks passed",
+      "build": "Production public build passed; all 18 built pilot image files match their sources byte-for-byte."
+    }
+  },
+  "illustration_style": {
+    "status": "complete",
+    "direction": "Approved light editorial cutaways, precision plans and explanatory sections",
+    "articles": 36,
+    "original_drawings": 108,
+    "compact_companions": 108,
+    "spatial_drawings": 17,
+    "report": "architecture-illustration-style.json",
+    "verification": {
+      "unit_checks": "39 compiler Architecture tests and 88 web Architecture/Filmmaking rendering, search and asset tests passed.",
+      "content": "Architecture acceptance passed for all 36 articles; complete corpus validation passed for 791 entities.",
+      "browser": "Six representative article checks at 1440px desktop and 390px phone widths: Site Repair, Arcades, Window Place and Shearing Layers. All selected images loaded; no horizontal page overflow.",
+      "visual_review": "All 108 originals and 108 phone companions rendered and reviewed on 18 contact sheets, plus representative article views. Zero clipped or overlapping text labels.",
+      "lint": "Scoped ESLint and Prettier checks passed.",
+      "build": "Production public build passed. All 216 SVGs and 46 licensed photographs match their built copies byte-for-byte."
+    }
+  },
+  "guided_practices": {
+    "count": 0,
+    "policy": "Architecture contains field-guide articles only; do not add guided practices.",
+    "removed": "2026-10-27",
+    "removed_entities": 3,
+    "verification": "No practices in verse membership, search, article links or published routes."
+  },
+  "photo_expansion": {
+    "status": "complete",
+    "patterns": 36,
+    "new_photo_placements": 42,
+    "photo_placements": 60,
+    "distinct_photographs": 46,
+    "new_assets": 28,
+    "evidence": "architecture-evidence/photo-expansion/article-placements.json",
+    "report": "architecture-evidence/photo-expansion/review.json",
+    "verification": {
+      "content": "36 articles; one or two photographic examples each; 168 captioned figures; 154 distinct visuals; no validation errors",
+      "corpus": "787 entities validated across the shared workspace",
+      "tests": "39 compiler and 38 article rendering/search/asset tests passed",
+      "build": "Production public build and its built-in checks passed",
+      "browser": "10 desktop/phone tests passed; every article image loaded; no horizontal page overflow",
+      "visual_review": "All 28 new optimized images inspected in contact sheets. Exeter carrels, planted street drainage, exposed facade layers and a historic full-scale mock-up reviewed in context at desktop and phone sizes after decoding.",
+      "lint": "Scoped ESLint passed; changed structured authoring files formatted"
+    }
+  },
+  "readability_revision": {
+    "status": "complete",
+    "audience": "Curious beginners with no architectural training",
+    "articles": 36,
+    "pilot": ["arch-site-repair", "arch-drained-ventilated-rainscreen", "arch-test-at-full-scale"],
+    "report": "architecture-readability-review.json",
+    "paragraph_revisions": 181,
+    "photograph_captions": 60,
+    "diagram_captions": 108,
+    "article_words": 34551,
+    "word_range": [862, 1028],
+    "verification": {
+      "architecture_acceptance": "36 articles, 34,551 prose words, 168 captioned figures, 154 distinct visuals; zero errors",
+      "article_length_range": [862, 1028],
+      "corpus": "793 entities validated across the shared workspace",
+      "tests": "39 compiler integration tests and 38 final article rendering/search/asset tests passed",
+      "type_check": "Svelte check: zero errors and zero warnings",
+      "preservation": "All 262 local asset files, article frontmatter, source sections, related links, recommendation queries, photograph creator/license text and source/license URLs preserved; metadata changes limited to photograph captions",
+      "build": "Final production public build and built-in checks passed",
+      "browser": "10 final desktop/phone browser tests passed; every article and figure loaded, no horizontal overflow, contents and search work, no Architecture practice links and retired practice routes return 404",
+      "visual_review": "Revised Site Repair, Drained and Ventilated Rainscreen and Test at Full Scale inspected in the browser; phone screenshots of Site Repair and Courtyards Which Live inspected for paragraph flow, headings, diagram captions and reading width.",
+      "preview": "http://127.0.0.1:4291/pattern/arch-site-repair#user-content-article-section-the-core-idea"
+    }
+  },
+  "case_study_revision": {
+    "status": "complete; unrelated production build blocker recorded",
+    "date": "2026-10-28",
+    "scope": [
+      "arch-cross-ventilation",
+      "arch-continuous-thermal-envelope",
+      "arch-design-for-disassembly"
+    ],
+    "projects": [
+      "Brock Environmental Center",
+      "Reform Cottage",
+      "Temporary Amsterdam Courthouse, reassembled at Kennispark Twente"
+    ],
+    "primary_sources_added": 6,
+    "new_photographs": 1,
+    "report": "architecture-evidence/case-studies/review.json",
+    "verification": {
+      "acceptance": "36 articles; 169 captioned figures; 155 distinct visuals; zero Architecture acceptance errors",
+      "article_rendering": "38 tests passed",
+      "compiler_integration": "38 Architecture integration tests passed. One global-corpus assertion fails because published urge-surfing links to draft tracking-the-unfolding-experience; no unrelated content modified.",
+      "content_cli": "Validated 910 entities",
+      "build": "Production build blocked by the same published-to-draft Therapy reference. Development preview includes drafts using the existing server convention.",
+      "preview": "http://127.0.0.1:4292/pattern/arch-cross-ventilation#user-content-article-section-architectural-examples",
+      "browser": "Six scoped desktop/phone checks passed for all three new cases; headings, case evidence text, images and ten-section outline render correctly without horizontal overflow.",
+      "visual_review": "Desktop case paragraphs, phone Reform Cottage layout and Brock project photograph/caption reviewed from browser screenshots."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "specification",
+  "title": "Specification",
+  "aliases": ["Domain Specification", "Specification Pattern"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1411,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Evans and Fowler's original 19-page Specifications paper establishes separation of matching requirements from candidates and selection code, selection/validation/build-to-order uses, and hard-coded, parameterized, and composite variants. Composite Specification is treated as a variant rather than a duplicate canonical pattern. Official Ardalis documentation supplies the IsSatisfiedBy candidate-to-Boolean validation contract. Microsoft documents query specifications with data-shaping capabilities; those are not attributed to the callable-backed example. Python supports short-circuit semantics, non-Boolean operand returns from and/or, and frozen-field limits. PostgreSQL supports the distinct three-valued SQL semantics and evaluation-order caution. The print-job policy, code, and native illustrations are original teaching material.",
+    "python_examples": "Both actual article blocks execute and produce all five stated lines exactly. Checks verify inclusive page limits, positive integer counts and parameters, strict Boolean candidate flags and predicate results, nonblank IDs, candidate and operand type checks, malformed predicate rejection, propagated dependency errors, AND/OR/NOT truth tables, operand preservation, new objects on composition, and left-to-right short-circuit traces. All 120 combinations of three flags, five page counts, and three limits match an independent approval-pair oracle. Proof-copy exceptions cannot bypass either the page limit or cancellation. Selection and validation use the same object; filtering preserves input order and an empty input remains empty. Frozen candidates and wrapper references reject normal field assignment. An explicit mutable closure example demonstrates why a frozen wrapper does not freeze external dependencies. No SQL translation, database, authorization, job release, or I/O is implemented.",
+    "python_stdout": [
+      "selected: ['A', 'C']",
+      "validate C: True",
+      "exact limit: True",
+      "over limit: False",
+      "cancelled: False"
+    ],
+    "article_tests": "72 article tests pass across Specification and the existing software/GoF suites. Coverage includes canonical ID and aliases without duplicates, one primary home with all prior members retained, eight sections, exact copyable highlighted code, accessible responsive figures and intrinsic dimensions, resolved related links, search, ten queries, revision hashes, and concept marks. The run uses maxWorkers=2, testTimeout=20000, and hookTimeout=60000 to bound corpus-loading concurrency and allow the existing large search corpus.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined results: 76 passed and one unrelated failure across 18 test files.",
+    "content": "1248 entities validate with drafts included. The published-only corpus contains 1102 entities and reports no errors.",
+    "collection": "Reused Domain Modeling and Business Logic and appended Specification after its six existing articles. Strategy, Composite, Domain Service, and Aggregate retain their existing IDs and homes. No collection, duplicate variant article, or candidate stub was added.",
+    "public_build": "Production build and public web build checks pass. Actual browser review uses the completed build. No deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new generator, executable validator, article integration test, and updated authoring metadata. The clarified logical-condition label and review report are separately checked.",
+    "visuals": "All four native editable SVG variants load. Browser measurements report no overlapping or out-of-bounds labels and no out-of-canvas rectangles. Desktop and independently composed phone variants were inspected for shared criterion versus candidate/callers, input versus result arrows, explicit OR grouping under mandatory AND conditions, exact 40-page and 41-page cases, proof exception, absence of approval, cancellation, and all True/False outcomes. The diagram says all groups must hold rather than implying every predicate must execute, preserving short-circuit semantics. Fixed white surfaces, regular Helvetica typography, exact palette, contrast, label placement, and readability were checked. Labels and structure convey results independently of color.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 headings, both Python blocks preserved exactly in the DOM with colored syntax tokens, selectable text retaining indentation, keyboard horizontal code scrolling at 320px, responsive phone SVGs loaded, and no page overflow. Browser selection normally omits the terminal newline. Actual desktop/phone article, code, figure, and gallery screenshots were visually inspected.",
+    "navigation_browser": "The collection direct route renders its correct title. Software Engineering opens the Domain Modeling and Business Logic gallery; Next page exposes Specification as the seventh article, and its card opens with the correct breadcrumb. Strategy, Composite, Domain Service, and Aggregate routes return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. All prior software article files match actual pre-change hashes. Software Engineering verse and Application Architecture are byte-for-byte unchanged. All prior authoring records, concept marks, and asset dimensions are unchanged, and prior primary collection members remain."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; unrelated file left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Two-valued in-memory evaluation of complete immutable PrintJob snapshots. The original policy is (approved OR proof_copy) AND pages <= 40 AND NOT cancelled; all counts are positive integers. Specification stores a trusted callable and composes callbacks rather than building an inspectable expression tree. It implements no SQL translator, serialization, query optimizer, explain-all-failures diagnostic, ranking, release operation, authorization mechanism, lock, persistence, or concurrency control. Arbitrary predicates can capture mutable state, perform effects, or fail; the wrapper does not enforce purity or deep-freeze closures. Short-circuiting can skip predicates, errors propagate, and deeply nested expressions can exhaust recursion limits. A query adapter must deliberately align units, null handling, comparisons, and evaluation assumptions with its target system. Passing a snapshot criterion is not durable acceptance of a later state transition.",
+  "preview": "http://127.0.0.1:43000/pattern/specification",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-specification",
+  "browser_measurements": ".local/software-specification/browser-checks.json",
+  "browser_check_script": ".local/software-specification/check-browser.mjs",
+  "preservation_checks": ".local/software-specification/preservation-checks.json",
+  "build_log": ".local/software-specification/public-build.log",
+  "branch": "codex/software-specification",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

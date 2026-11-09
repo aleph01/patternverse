@@ -28,7 +28,7 @@ Current source capabilities (not a guarantee that every release enables every fe
   sign-in-only builds support device-local automatic sync settings
 - Mira conversation/session coordination over a shared core and separate encrypted device storage
 - read-only public MCP access and a deliberately limited inline worksheet prototype
-- installed-PWA offline caching and explicit update acceptance
+- installed-PWA offline caching and background application updates
 - content checks, type checks, linting, unit/property tests, and desktop/mobile browser tests
 
 Articles remain Markdown with YAML metadata. Executable practices use
@@ -39,6 +39,10 @@ boundary. Public content is not edited by private saves or backup restore.
 Accounts, shared workspaces, collaborative execution, and authenticated cross-host practice
 continuation are not implemented. Feature flags and deployment configuration determine which
 optional integrations a build exposes.
+
+Selected early features share a [preview mode](docs/preview-mode.md): open a page with
+`?preview=1` to enable them in the current tab. Bearings is currently in preview.
+This controls visibility, not private access.
 
 ## Requirements
 
@@ -64,9 +68,48 @@ unencrypted and exclude Mira history and credentials. Optional Dropbox sync is a
 feature-flagged integration; see the [sync guide](docs/sync/README.md) for its protection modes.
 
 After the first successful online load, the production build can be installed and used offline.
-Patternverse caches all current Commons text and search data as one versioned snapshot. When a new
-snapshot is ready, the application offers an explicit update action rather than replacing the open
-version during an editing session.
+Installation saves a small standalone offline starting page. Browsing saves visited pages and their
+loaded resources; open the library, editor, or Mira online before using those screens offline.
+Choose **Download library for offline use** in **My workspace → Settings → Offline access** to save the full current Commons text,
+search data, and application resources. This optional download uses two requests at a time, can be
+paused, and resumes without downloading already cached resources again. A failed request pauses it;
+there is no automatic full-library download or retry loop. Browser storage limits or clearing site
+data can remove offline content. After a release, download the new library snapshot again.
+Updates activate automatically without reloading open tabs. Old snapshots are retained while tabs
+may still need their immutable assets. Once those windows close or reload, the next page visit/status
+check cleans up retired snapshots.
+
+The library initially loads browsing summaries, membership, and labels. Focusing its search field
+or restoring a nonempty search loads the full-text corpus once, from an immutable URL identified
+by the accepted page data. The browser verifies its bytes before use, and the service worker checks
+the release fingerprint when serving or caching it. Index
+construction is deferred until a query needs it; ordinary browsing does not download the corpus
+or construct the full-text index. Personal documents and queries remain on the device.
+
+While the full corpus is loading or unavailable, search is explicitly limited to public titles,
+summaries and labels, plus full-text personal content. A failed download requires an explicit retry.
+Successfully loaded search data is cached for offline use, and the Settings library download also
+includes it without requiring a prior search. Old tabs retain their matching search snapshot under
+the existing update policy. Browser storage eviction can still remove cached data.
+
+See [library loading measurements](docs/performance/library-loading.md) for the implementation,
+local before/after results, validation, and reproduction commands.
+
+Prerendered documents and page data are pinned to the accepted application release. Repeat visits
+use matching cached responses immediately; they do not wait for the network. On a cache miss, the
+worker checks the response against a fingerprint generated from that release's static files before
+saving or displaying it. Query filters and SvelteKit invalidation flags can reuse these static
+responses; browser-side filters and private IndexedDB reads still run normally. Unknown routes,
+authentication, explicit no-store requests, and sensitive responses bypass navigation caching.
+
+A background deployment check runs at most once every five minutes, with simultaneous checks
+deduplicated. Changed content on a cache miss also requests an update. Workers activate automatically;
+open tabs retain their certified older page data and unsaved work until they reload. New visits can
+load the current deployment directly. Tabs opened before this navigation policy existed must reload
+to certify their release. An older tab needs to reload before downloading the newer library;
+download completion notices apply only to the matching release.
+Static hosting may compress responses, but must preserve the generated HTML/JSON bytes; rewriting
+them invalidates their fingerprints. Installation still downloads only the standalone offline page.
 
 ## Commands
 

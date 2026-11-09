@@ -1,37 +1,37 @@
-# AI Usage import
+# AI Usage collection
 
-The six supplied articles form **Thinking with Language Models** in the new **AI Usage** verse. Five are new records. “Expose the Decisive Unknown” is reconciled with `look-for-the-decisive-unknown`: its canonical title, URL, Decision Making membership, original prose, and six-step practice remain intact. The supplied AI-focused article becomes a section within that record, with its original subsection headings moved down one level. The supplied title is retained as an alias.
+**Thinking with Language Models** contains eight patterns in the **AI Usage** verse. The six original articles have been rewritten around a shared field-guide structure. **Draft the Prompt Together** and **Work in Inspectable Steps** cover prompt co-writing and staged collaboration. **Attack, Then Repair** now includes focused audit passes for factual support, completeness, and usability, alongside adversarial review of proposals.
 
-## Mapping and preservation
+## Shared article structure
 
-- Titles, kebab-case IDs, summaries, tags, and verse membership use existing frontmatter fields.
-- The collection uses the existing `items` model; no new schema or loader is introduced.
-- Full supplied prose, examples, prompts, and limitations are preserved. Source article headings become the application’s existing page titles, rather than duplicate headings in the body.
-- Editorial “Visual decision” notes become six captioned, accessible local SVG diagrams, inserted near the opening conceptual explanation. The notes are retained in the metadata package, not displayed as public editorial instructions.
-- Related patterns use existing wiki links with actual canonical IDs and short relationship explanations.
-- `ai-usage.json` preserves the supplied article bodies and source titles, hashes, authoring metadata, diagram descriptions, and 48 newly authored recommendation queries. It is a metadata sidecar, not a second content import.
-- The existing full-text library indexes the articles, verse, collection, and title alias. There is no dedicated recommendation engine; the queries are preserved for future use, not presented as connected recommendations.
-- No practices are added. The existing Decisive Unknown practice is preserved rather than removed or duplicated.
+Each article has an unheaded opening situation, followed by:
 
-## Visuals
+1. The core idea
+2. Why it works
+3. How to use it
+4. A worked example
+5. When it helps—and where it falls short
+6. Related patterns
 
-The diagrams use restrained white/ink/mint/green colors and the application’s Inter/system font stack. Straight connectors and simple surfaces express the source’s six visual decisions. They reuse the established safe Markdown figure presentation: captions, descriptive alternative text, readable 720px native sizing, keyboard-focusable horizontal scrolling on small screens, and self-contained dark-preference styles. SVGs remain isolated image documents, with per-pattern IDs, so repeated diagrams cannot collide.
+The explanation of why a pattern works distinguishes changes in the immediate model task from opportunities for human inspection and steering. It does not claim that clearer prompts, more steps, or repeated self-review establish correctness. Worked examples include remaining errors, tradeoffs, or checks rather than presenting the pattern as a guarantee.
 
-The five new feed marks use meaningful families from the existing minimal grammar. Existing mobile feed rules continue to hide decorative marks to preserve reading space. The private illustration studio stays private and automatically includes the new records in its catalogue.
+## Content and metadata
 
-## Validation
+- Canonical IDs, URLs, existing summaries, and title aliases remain stable. Collection items and pattern links use the existing content schema.
+- `ai-usage.json` is a metadata sidecar, not a second content import. It contains the current article prose without diagrams, related-pattern sections, or worksheets; corresponding hashes and word counts; authoring metadata; diagram descriptions; and eight recommendation queries per article.
+- The sidecar's `editorial_revision` records the shared structure and the previous six article hashes. `source_sha256` and the reconciliation body hashes remain historical provenance for the original import and practice migration; they are not hashes of the rewritten prose.
+- “Look for the Decisive Unknown” remains the existing record in both Decision Making and AI Usage, with “Expose the Decisive Unknown” retained as an alias. Its original prose and AI supplement have been integrated into one article. Its existing practice instructions and six-form Pattern Language worksheet are preserved unchanged.
+- No additional practices are introduced. Short prompt examples explain the patterns within the articles; they are not separate executable exercises.
+- Recommendation queries remain metadata for future use. The existing full-text library indexes the articles, collection, verse, and aliases; no separate recommendation engine is added.
 
-Compiler tests verify collection/verse membership, unique records, complete article hashes, real related links, eight queries per article, and diagram accessibility. Reconciliation tests compare the original Decisive Unknown body and practice against hashes captured before editing. Web tests cover existing article rendering, diagrams, resolved routes, title-alias search, domain/collection discovery, and icon families.
+## Visuals and evidence
 
-Completed checks:
+The six existing article diagrams are retained. The two new articles have explanatory process diagrams using the same accessible 720 × 470 SVG treatment, local image paths, descriptive alternative text, captions, dark-mode styling, and isolated IDs. Both new patterns also have explicit authored concept marks in the existing registry.
 
-- Content validation: 96 entities, no diagnostics or unresolved references.
-- All workspace tests: 369 pass; three additional public-build guard tests pass.
-- Workspace type checks: pass; Svelte reports zero errors and zero warnings.
-- Production build and public-build credential/file checks: pass.
-- Changed code: lint and formatting checks pass.
-- Browser review: the verse contains six patterns; collection filtering and the reconciled title alias work in the library. All six diagrams load. Desktop feed marks are visible; mobile marks are hidden. Article and collection pages stay within 390px and 320px widths, and diagrams remain separately scrollable. The original Decisive Unknown practice action still points to its existing route. No browser console errors were observed.
+The new prompt-writing article links to Anthropic's prompt-generator announcement. The staged-work article links to its prompt-chaining workflow description. The audit article links to Self-Refine and research on intrinsic reasoning self-correction, presenting their findings with task and model limitations rather than generalizing them to every current model.
 
-Repository-wide lint still reports four pre-existing, unrelated errors: unused `busy` in `apps/web/src/lib/mira/native-voice-listener.ts`, unused `resolve` in `apps/web/src/routes/my/+page.svelte`, and undeclared `AudioWorkletProcessor` / `registerProcessor` globals in `apps/web/static/voice-capture.js`. Those files were not changed here.
+## Validation scope
 
-This is a local content integration, not a publication or deployment.
+The compiler integration tests check all eight records, ordered collection membership, verse membership, the shared article structure, sidecar/body agreement, related links, recommendation queries, safe diagrams, and the unchanged executable worksheet hash. Web integration tests check established article rendering and discovery through titles, aliases, the collection, and the verse. Authored concept-mark coverage and geometry are checked by the existing registry tests.
+
+This is a local editorial revision. Publication and deployment are separate actions.

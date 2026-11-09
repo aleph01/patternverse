@@ -1,0 +1,92 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 as native alias PVSymbolSans. Original source and OFL retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-museum-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "f0cde6fcfd40dad264a8319de509bb3f8d49f15f842531995420d14186b405fb"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-library-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "9a09beb4b55a5038e6d8e5aa0d790d0cbe18255bdbc1b8ce2b2b4523b7915cdf"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Employ Recognizable Symbols",
+  "date": "2026-10-28",
+  "mode": "No new image generation. Existing AI-generated photographic assets embedded byte-for-byte; native SVG symbols and typography composed separately.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-symbol-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-symbol-layouts.json",
+    "sha256": "64b375b69b99c4bf03272c7a200704cb4186ad61115b4d92eb3560f0ce31d243",
+    "method": "Original native vector symbols and unchanged embedded photographic sources; only two selected symbol hrefs and one label opacity change. No photographic regeneration, retouching, font scale, crop, position, color or unrelated copy changes."
+  },
+  "symbolArtwork": "Original native rosette, circled i, upload/download arrows with receiving tray and headphones. Familiar forms drawn for this article; no claim of reproducing a certified or standardized sign.",
+  "comparisonPolicy": "Information: only service-symbol href rosette\u2192information. Download: only action-symbol href upload\u2192download; tray geometry retained. Audio: only label opacity0\u21921. Texts, crop/frame, fonts/sizes/weights/positions, color and paper/device presentation stay fixed except the declared label visibility. No regeneration or raster retouching.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "symbols-information",
+        "changedPixels": 2498,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "symbols-download",
+        "changedPixels": 132,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "symbols-audio-label",
+        "changedPixels": 1666,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared symbol intervention regions differ.",
+    "visualInspection": "All three wide and three stacked saved browser comparisons inspected. Embedded font loaded, text within paper/phone surfaces, no narrow overflow, wide inline/image renders equivalent.",
+    "scopedTests": "24 article/comparison tests passed across the symbol and metaphor suites. Bounded mark geometry passed (one test, four unrelated tests skipped). Content validated879 entities; production compilation658 excludes this draft. All52 article body hashes and348 asset hashes/dimensions checked, plus reused image, font and layout provenance. Scoped lint and formatting passed.",
+    "conceptMark": "Information-with-label mark inspected at32,48 and96 pixels."
+  },
+  "limitations": "Editorial repairs informed by cited guidance and conventions, not tested recognition or task-speed effects. Static mockup, not a working download. No full accessibility-conformance or physical print/signage-distance claim. Fictional publication, institution, address, service and URLs."
+}

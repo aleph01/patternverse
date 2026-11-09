@@ -1,0 +1,482 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "data-incremental-replacement",
+  "title": "Strangler Fig",
+  "aliases": ["Strangler Fig Application", "Strangler Application", "Incremental Replacement"],
+  "primary_collection": "software-evolution-delivery",
+  "body_word_count": 1348,
+  "figures": 2,
+  "illustration_variants": 4,
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43069/pattern/data-incremental-replacement",
+  "validation": {
+    "research": "Original/current Fowler, Microsoft/AWS guidance and Uber/Stripe primary implementation accounts verified. Existing ID/route reused; former Incremental Replacement title retained as alias. Data context remains; sole primary home moved to Evolution and Delivery.",
+    "sources": [
+      {
+        "title": "Strangler Fig",
+        "author": "Martin Fowler",
+        "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+        "supports": "Established gradual legacy modernization, original Strangler Application/Strangler Fig Application names, useful seams, transitional architecture and nontrivial organizational costs."
+      },
+      {
+        "title": "Original Strangler Fig Application",
+        "author": "Martin Fowler",
+        "url": "https://martinfowler.com/bliki/OriginalStranglerFigApplication.html",
+        "supports": "Original publication linked by the updated author catalog; progressive behavior migration around existing software."
+      },
+      {
+        "title": "Strangler Fig pattern",
+        "author": "Microsoft Azure Architecture Center",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig",
+        "supports": "Facade routing/coexistence, interceptable integration points, resource/dependency concerns, possible facade retention and explicit data migration/rollback limits."
+      },
+      {
+        "title": "Strangler fig pattern",
+        "author": "AWS Prescriptive Guidance",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/strangler-fig.html",
+        "supports": "Gradual feature extraction, proxy/adapter transitional mechanism, boundary discovery, bottleneck/single-point-of-failure and state considerations."
+      },
+      {
+        "title": "How Uber Migrated from Hive to Spark SQL for ETL Workloads",
+        "author": "Uber engineering",
+        "url": "https://www.uber.com/us/en/blog/how-uber-migrated-from-hive-to-spark-sql-for-etl-workloads/",
+        "supports": "Workflow shadow comparisons, dynamic translation of ready workflows and eventual submitted source updates; compatibility concerns beyond simple row equality."
+      },
+      {
+        "title": "Online migrations at scale",
+        "author": "Stripe engineering",
+        "url": "https://stripe.com/blog/online-migrations",
+        "supports": "Subscription representation migration with staged duplicate writes, historical backfill, read comparison and read/write transitions; not claimed every schema migration is a Strangler application."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "command": "python3 strangler_fig.py",
+      "output": [
+        "before: ['old catalog', 'old invoices']",
+        "during: ['new catalog', 'old invoices']",
+        "failure: no implicit fallback",
+        "after: ['new catalog', 'new invoices']"
+      ],
+      "checks": [
+        "constructor copies caller routing map",
+        "catalog handover preserves invoice route and public response shape/resource ID",
+        "handover publishes a new routing map rather than mutating a captured map",
+        "unknown capability and noncallable replacement cannot change routes",
+        "selected failure propagates without legacy fallback; unmigrated invoice remains callable",
+        "both capabilities can move independently",
+        "explicit restoration is a control action, not automatic rollback",
+        "captured legacy handler still callable after handover; no fencing or retirement claim"
+      ],
+      "mutation_checks": [
+        {
+          "fault": "handover does nothing",
+          "detected": true
+        },
+        {
+          "fault": "replacement failure silently falls back",
+          "detected": true
+        },
+        {
+          "fault": "handover moves unrelated capability",
+          "detected": true
+        }
+      ],
+      "limits": [
+        "No live network, data sync, distributed atomicity, auth or resource shutdown",
+        "Read-only canned endpoint fixtures, not production handlers",
+        "Stateful cohort diagram specifies requirements not implemented by the dispatcher"
+      ]
+    },
+    "content": "1314 entities validate;1167 published compile with no diagnostics/unresolved references. Eight sections, four existing related links, no practice.",
+    "compiled_content": {
+      "entities": 1167,
+      "bytes": 23639471,
+      "sha256": "45457a7beb55c02161a1fbbfabf86dcb111742db65b209917a1142d3d526b93a",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "Strangler3, Contract3, TestDataBuilder3, GoF24 and four graphic checks pass; global missing access-over-ownership graphic remains."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "VerseSelector.component.test.ts:79 unsupported exact in ByRoleOptions."
+    },
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": [
+        "content/collections/data-engineering-contracts-evolution.md",
+        "content/patterns/data-incremental-replacement.md",
+        "content/verses/software-engineering.md"
+      ],
+      "new_content": ["content/collections/software-evolution-delivery.md"],
+      "other_existing_content_unchanged": 1310,
+      "canonical_id_route_retained_and_old_title_aliased": true,
+      "prior_data_verse_and_tags_retained": true,
+      "single_primary_home": "software-evolution-delivery",
+      "former_data_home_retains12other_members_and_crosslink": true,
+      "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 83,
+      "prior_graphics_unchanged": 495,
+      "prior_dimensions_unchanged": 1762,
+      "revised_dimensions": ["data-engineering/incremental-replacement.svg"],
+      "new_dimensions": 3,
+      "protected_tests_renderer_dependencies_build_scripts_historical_data_import_and_taxonomy_unchanged": true,
+      "authoring_documentation_preserved": true,
+      "both_isolated_workspaces_match_current_web_source_and_linked_content": true
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "content/assets/software-engineering/strangler-fig-routing.svg": "07152929bc8e749b1659cd09d5b7639d0b7172d6611c15731d0a8ea6cb2a873e",
+        "content/assets/software-engineering/strangler-fig-routing-mobile.svg": "1717504d338722be5fab421e7891de95b98900cb23765f81e05e9062569a061c",
+        "content/assets/data-engineering/incremental-replacement.svg": "27832983a8c24d251c38835ae0b68172e23c272f0e90a508f1861bb1fbca0199",
+        "content/assets/data-engineering/incremental-replacement-mobile.svg": "27e4d3cd6130bc5577230bdc697536400502cbdcc3c765217c88df2229b24095"
+      }
+    },
+    "native": [
+      {
+        "path": "/assets/software-engineering/strangler-fig-routing.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 752
+      },
+      {
+        "path": "/assets/software-engineering/strangler-fig-routing-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 968
+      },
+      {
+        "path": "/assets/data-engineering/incremental-replacement.svg",
+        "labels": 27,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 936
+      },
+      {
+        "path": "/assets/data-engineering/incremental-replacement-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1090
+      }
+    ],
+    "concept": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 3,
+          "width": 90,
+          "height": 90
+        },
+        {
+          "x": 21,
+          "y": 21,
+          "width": 66,
+          "height": 58
+        }
+      ]
+    },
+    "static_browser": [
+      {
+        "path": "/assets/software-engineering/strangler-fig-routing.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 752
+      },
+      {
+        "path": "/assets/software-engineering/strangler-fig-routing-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 968
+      },
+      {
+        "path": "/assets/data-engineering/incremental-replacement.svg",
+        "labels": 27,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 936
+      },
+      {
+        "path": "/assets/data-engineering/incremental-replacement-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1090
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/strangler-fig-routing.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/data-engineering/incremental-replacement.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 158,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)",
+              "rgb(138, 59, 34)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/data-expand-migrate-contract",
+          "/pattern/data-shadow-pipelines",
+          "/pattern/data-parallel-run-comparison",
+          "/pattern/facade"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/strangler-fig-routing-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/data-engineering/incremental-replacement-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 158,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)",
+              "rgb(138, 59, 34)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/data-expand-migrate-contract",
+          "/pattern/data-shadow-pipelines",
+          "/pattern/data-parallel-run-comparison",
+          "/pattern/facade"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/strangler-fig-routing-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/data-engineering/incremental-replacement-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 158,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)",
+              "rgb(138, 59, 34)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/data-expand-migrate-contract",
+          "/pattern/data-shadow-pipelines",
+          "/pattern/data-parallel-run-comparison",
+          "/pattern/facade"
+        ],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-evolution-delivery",
+        "article": "data-incremental-replacement",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "static_assets": {
+      "status": "passed",
+      "mode": "actual local static public export verified after disk capacity recovered; isolated source copy includes existing sibling application imports",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/PatternverseLogo.Cr_c3FgX.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LegalLinks.C1VwvvwC.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/0.LPYfGvVT.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/pattern-mark-presets.Dx3BoDxs.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LibraryViewSwitch.yR3Qs8SB.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/MarkdownRenderer.DDyfSN4x.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/WorksheetButton.Dsl9OpN0.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/3.DBGXFlWk.css",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/strangler-fig-routing-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/strangler-fig-routing.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/data-engineering/incremental-replacement-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/data-engineering/incremental-replacement.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/strangler-fig-routing.svg",
+          "status": 200,
+          "sha256": "07152929bc8e749b1659cd09d5b7639d0b7172d6611c15731d0a8ea6cb2a873e",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/strangler-fig-routing-mobile.svg",
+          "status": 200,
+          "sha256": "1717504d338722be5fab421e7891de95b98900cb23765f81e05e9062569a061c",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/data-engineering/incremental-replacement.svg",
+          "status": 200,
+          "sha256": "27832983a8c24d251c38835ae0b68172e23c272f0e90a508f1861bb1fbca0199",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/data-engineering/incremental-replacement-mobile.svg",
+          "status": 200,
+          "sha256": "27e4d3cd6130bc5577230bdc697536400502cbdcc3c765217c88df2229b24095",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "All four native figures/concept mark inspected, plus actual desktop/phone article tops and first phone figure. Actual renderer/static export checked at1440/390/320 for eight sections, responsive assets, exact selected/highlighted code, keyboard code scrolling, four related routes, Evolution collection/gallery/card and breadcrumb.",
+    "public_static_export": "PASSED repository build-public-web.mjs and inspectPublicBuild in isolated source copy after disk recovered. Initial copy lacked sibling application source imports; linking existing siblings fixed isolation setup without repository code changes. Built static article browser/asset checks passed on43069.",
+    "lint_and_format": "Scoped ESLint and Prettier pass."
+  },
+  "limitations": [
+    "Bounded read-only routing simulation; state catch-up, write fencing, distributed configuration, authentication, operational retirement and production rollback are not implemented.",
+    "Existing unrelated type-check and global-graphic coverage failures remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-strangler-fig",
+    "local_uncommitted": true,
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

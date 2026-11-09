@@ -1,0 +1,97 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/remove-courtyard-cinema-photo.jpg",
+      "generation_record": "graphic-design-remove-sources.json",
+      "sha256": "4140f35208c0e9768402eda5f4c47d16d419f960b7722e6094aaf4821d6c778a"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "pattern": "Establish Value Contrast",
+  "date": "2026-10-28",
+  "mode": "Previously generated photographic artwork and paper/device presentation reused unchanged. Native SVG typography and geometry composed separately. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-value-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-value-layouts.json",
+    "sha256": "66d11595a126423ec29fc2337733cd10aee2e259bf00adc104698598372bfeed",
+    "method": "Declared color-only changes isolate value contrast: four text lightness changes, one empty-checkbox stroke lightness change and a two-fill masthead treatment. Hue/saturation inputs stay fixed within each role; all geometry, typography and photographic sources remain identical."
+  },
+  "comparisonPolicy": "Only four cinema text fills, one empty-checkbox stroke and two masthead fills change. Nominal HSL hue/saturation inputs remain fixed within each role; lightness changes. Words, font settings, positions, dimensions, image bytes/crops and presentation stay identical. Checkbox remains empty; report values sum to238.",
+  "calculatedContrastRatios": {
+    "cinemaBefore": 2.324143123143245,
+    "cinemaAfter": 10.394549756359414,
+    "controlBefore": 1.5980028880006074,
+    "controlAfter": 5.44822130450689,
+    "mastheadBefore": 9.264326364878391,
+    "mastheadAfter": 8.19176675121867
+  },
+  "verification": {
+    "comparisons": [
+      {
+        "name": "value-cinema-details",
+        "changedPixels": 7479,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "value-guest-checkbox",
+        "changedPixels": 192,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "value-report-masthead",
+        "changedPixels": 38400,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared value-contrast intervention regions differ.",
+    "scope": "Exact DOM normalization permits only declared fill/stroke attributes. All other artifact nodes and embedded image/font bytes remain identical. Wide/stacked browser checks cover text bounds, loaded fonts, horizontal overflow, image/inline SVG equality and pixels outside declared intervention regions."
+  },
+  "limitations": "Specified digital color-pair calculations, not measured reading speed or attention. Tonal-field emphasis is editorial interpretation. HSL lightness is not perceptual lightness. Static checkbox is not an implemented accessible form. Non-text criterion applies to visual information required to identify controls/states, not every decorative boundary. No physical print proof or full accessibility conformance is claimed."
+}

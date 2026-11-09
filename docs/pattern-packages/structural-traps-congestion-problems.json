@@ -1,0 +1,109 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Congestion Problems",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "congestion-problems",
+      "title": "Congestion Problems",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; shared-load costs, congestion externalities, and efficient allocation",
+      "article": "content/concepts/congestion-problems.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Rosenthal, A Class of Games Possessing Pure-Strategy Nash Equilibria (1973)",
+          "url": "https://ranger.uta.edu/~weems/NOTES6319/PAPERSONE/rosenthal1973.pdf",
+          "doi": "10.1007/BF01737559",
+          "supports": "Finite congestion-game definition: finite players and strategies selecting resource subsets, additive costs, common resource-cost functions of user counts; pure equilibrium existence.",
+          "read_method": "Full original three-page paper read, including definition, road-network example, theorem, proof, and caveat about potential minimization.",
+          "boundary": "Existence is not efficiency, uniqueness, or a behavioral convergence forecast. The article makes no universal existence claim for weighted, dynamic, nonseparable, or user-specific congestion models."
+        },
+        {
+          "title": "Frank Kelly, The Mathematics of Traffic in Networks",
+          "url": "https://www.statslab.cam.ac.uk/~frank/PAPERS/PRINCETON/pcm0052.pdf",
+          "supports": "Wardrop’s 1952 equilibrium tradition, continuous-flow versus individual-user considerations, total network delay, and congestion-pricing principles.",
+          "read_method": "Author-hosted Princeton Companion to Mathematics chapter proof retrieved and read locally, especially routing, Wardrop equilibrium, and total-delay/pricing sections. Web fetching timed out, but local retrieval succeeded.",
+          "boundary": "The chapter’s divisible-flow calculus pricing formula is not copied into the four-player model. An earlier numerical consistency check derived a discrete fee from the delay imposed on other users; that derivation is historical, not part of the current qualitative article. The current example states the incentive conditions for the proposed charge without specifying a formula. Wardrop’s original 1952 paper was identified but not obtained; the historical account is sourced through Kelly."
+        },
+        {
+          "title": "City of Stockholm, Facts and Results from the Stockholm Trial, Final Version December 2006",
+          "url": "https://www.planetizen.com/files/Final%20Report_The%20Stockholm%20Trial.pdf",
+          "supports": "Original evaluation of traffic counts, travel times, public transport, comparison difficulties, and distributional effects during the 2006 congestion-charge trial.",
+          "read_method": "Report’s authorship, methodological caveats, and traffic-results sections read, including printed pages 3–9.",
+          "boundary": "Before/during evaluation of a real policy bundle, with seasonal measurement issues, fuel-price changes, transit changes, and uneven route effects. Article transfers no numerical city effect to the commuter model and makes no randomization or universal causal effect-size claim."
+        }
+      ],
+      "related_patterns": [
+        "bottlenecks-and-capacity-constraints",
+        "the-commons-dilemma",
+        "cold-starts-and-critical-mass"
+      ],
+      "status": "published",
+      "short_description": "Recognize when individually attractive choices crowd a shared resource, then distinguish the cost a user experiences from the additional delay imposed on others.",
+      "use_when": [
+        "Which delay does the switching commuter leave to others?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Attach imposed delay to the route choice, or allocate access through a feasible alternative.",
+        "Measurement, collection, differing means, access, and diversion matter. No road capacity is added."
+      ],
+      "example_structure": {
+        "scenario": "Small group of commuters chooses shortcut or detour for a fixed departure window; own effects are noticeable. Private saving from a switch is smaller than combined imposed delay by assumption. Finite-user game separated from negligible-user Wardrop model. Hypothetical load-dependent charge needs measurement, collection, common time valuation, and stability of the proposed allocation. Fixed-demand mechanism distinguished from induced demand.",
+        "changed_relationship": "Attach imposed delay to the route choice, or allocate access through a feasible alternative.",
+        "residual_constraints": "Measurement, collection, differing means, access, and diversion matter. No road capacity is added.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Which delay does the switching commuter leave to others?",
+        "assets": [
+          "content/assets/structural-traps/congestion-courier-routes.svg",
+          "content/assets/structural-traps/congestion-courier-routes-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 772,
+            "textBlocks": 16
+          },
+          "phone": {
+            "width": 360,
+            "height": 1390,
+            "textBlocks": 16
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. A commuter switching to the shortcut saves personal time while existing shortcut users together incur more added delay. A load-dependent charge can attach that external cost to the decision. Roads, travelers, and the departure window stay fixed in the illustration. Change: Attach imposed delay to the route choice, or allocate access through a feasible alternative. Limitation: Measurement, collection, differing means, access, and diversion matter. No road capacity is added.",
+        "caption": "Hypothetical illustration. The two upper cards compare the switcher’s saving with others’ combined delay without inventing travel times. A charge changes private decision cost rather than capacity. It requires defensible measurement and the example’s common valuation of time; longer-term induced demand is a separate mechanism.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. A commuter switching to the shortcut saves personal time while existing shortcut users together incur more added delay. A load-dependent charge can attach that external cost to the decision. Roads, travelers, and the departure window stay fixed in the illustration. Change: Attach imposed delay to the route choice, or allocate access through a feasible alternative. Limitation: Measurement, collection, differing means, access, and diversion matter. No road capacity is added.",
+          "relationship_key": "Upper cards compare consequences of one switch, not successive trips. Lower arrows show the proposed change to decision costs. No card size represents elapsed time.",
+          "changed_relationship": "Attach imposed delay to the route choice, or allocate access through a feasible alternative.",
+          "residual_constraints": "Measurement, collection, differing means, access, and diversion matter. No road capacity is added.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Small group of commuters chooses shortcut or detour for a fixed departure window; own effects are noticeable. Private saving from a switch is smaller than combined imposed delay by assumption. Finite-user game separated from negligible-user Wardrop model. Hypothetical load-dependent charge needs measurement, collection, common time valuation, and stability of the proposed allocation. Fixed-demand mechanism distinguished from induced demand.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

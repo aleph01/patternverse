@@ -1,0 +1,308 @@
+{
+  "title": "Engineering — Function Transfer",
+  "edition": "Draft illustrated field-guide article",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples",
+    "Assumptions for correctness",
+    "When to use it",
+    "Tradeoffs and operating costs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "engineering-function-transfer",
+      "taxonomy_id": "P004",
+      "title": "Function Transfer",
+      "status": "draft",
+      "domain": "Engineering",
+      "family": "Function and Architecture",
+      "entry_type": "terminal pattern",
+      "parent": {
+        "taxonomy_id": "P003",
+        "id": "engineering-function-integration",
+        "title": "Function Integration"
+      },
+      "collections": ["engineering-function-and-architecture"],
+      "summary": "Reassign a dedicated part’s retained job to a suitable existing part, then remove the dedicated provider.",
+      "identity_resolution": {
+        "decision": "New terminal specialization of Function Integration, with an identifiable former provider, existing receiver, and removed part.",
+        "existing_catalog_checked": [
+          "engineering-function-integration",
+          "engineering-functional-separation",
+          "vertical-integration",
+          "arch-continuous-thermal-envelope"
+        ],
+        "boundary": "More specific than general compatible-role integration; differs from organizational vertical integration and continuity of building insulation. Thermal management is the main example, not the whole definition. The new drive adaptation still performs a retained auxiliary job; pumping is not eliminated."
+      },
+      "use_when": [
+        "A dedicated element supplies a job an existing element can fully take over.",
+        "The receiver has suitable combined-load capacity and availability.",
+        "Added connections and coupling are preferable to retaining the dedicated provider."
+      ],
+      "goals": [
+        "Remove an unnecessary dedicated provider",
+        "Preserve the complete useful service",
+        "Respect the receiver’s existing responsibilities"
+      ],
+      "mechanisms": [
+        "Identify job, former provider, existing receiver, and removable part",
+        "Connect the receiver to the retained job",
+        "Evaluate combined loading and operating availability",
+        "Remove the former provider only after the full service is established"
+      ],
+      "not_ideal_when": [
+        "The receiver can transport a burden but cannot discharge it at the required boundary.",
+        "The new job needs timing or availability independent of the receiver.",
+        "Added coupling or adaptation outweighs removal of the original provider."
+      ],
+      "example_user_queries": [
+        "Could the chassis take over cooling so we can remove the separate heat sink?",
+        "The metal enclosure gets hot after we remove the dedicated cooling part.",
+        "How can we tell whether an existing part has capacity for another job?",
+        "We have a good thermal contact but the device is still too hot.",
+        "Our machine already moves; can that motion drive the lubrication pump?",
+        "The auxiliary pump needs to work while the main machine is stopped.",
+        "We removed the actuator but still need the pumping mechanism.",
+        "Is transferring a job different from getting rid of the need for it?",
+        "The chassis already handles heat from other components.",
+        "Can fewer parts be useful even if the device runs a little warmer?",
+        "What must we verify before an existing element takes over another part’s job?",
+        "A trial worked at one speed but lubrication delivery changes with machine speed."
+      ],
+      "related_patterns": [
+        {
+          "taxonomy_id": "P003",
+          "id": "engineering-function-integration",
+          "title": "Function Integration",
+          "relationship": "Direct parent. Transfer adds a before/after provider substitution and removal of the dedicated part.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P005",
+          "id": "engineering-eliminate-a-supporting-task",
+          "title": "Eliminate a Supporting Task",
+          "relationship": "Removes the reason for the job; transfer preserves the job and reassigns its provider.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P006",
+          "title": "Shared Infrastructure",
+          "relationship": "Provides a common service with capacity and isolation. Sharing need not remove a former dedicated provider; a transfer may join shared service.",
+          "article_status": "planned"
+        }
+      ],
+      "worked_examples": [
+        {
+          "name": "Qualified chassis takes over the complete heat-sink job",
+          "kind": "illustrative",
+          "former_provider": "Separate heat sink",
+          "existing_receiver": "Structural/electrical enclosure chassis",
+          "retained_job": "Accept, spread, and reject the device heat through a suitable mounting and ambient path.",
+          "removed_part": "Separate dedicated heat sink",
+          "held_fixed": [
+            "Device and its 12 W dissipation",
+            "8 W other chassis heating",
+            "35°C ambient",
+            "local package and mounting resistances",
+            "2 K/W chassis path before and after transfer"
+          ],
+          "fixture": {
+            "ambient_C": 35,
+            "device_heat_W": 12,
+            "other_chassis_heat_W": 8,
+            "junction_to_case_K_per_W": 1.5,
+            "mount_interface_K_per_W": 0.5,
+            "separate_sink_to_ambient_K_per_W": 3,
+            "qualified_chassis_to_ambient_K_per_W": 2,
+            "poor_chassis_to_ambient_K_per_W": 4,
+            "teaching_junction_criterion_C": 110
+          },
+          "computed": {
+            "local_resistance_K_per_W": 2,
+            "device_to_receiver_temperature_rise_K": 24,
+            "before_junction_C": 95,
+            "before_chassis_C": 51,
+            "combined_chassis_heat_after_W": 20,
+            "after_chassis_C": 75,
+            "after_junction_C": 99,
+            "meets_teaching_junction_criterion": true
+          },
+          "limits": "All resistances and powers assumed. Uniform lumped nodes, steady state, full device heat in selected path and independent sink/chassis ambient paths before transfer. No transient storage, local hot spots, air recirculation, product rating, touch limit, or performance measurement. Existing-user and surface-temperature requirements still need qualification."
+        },
+        {
+          "name": "Main machine motion drives lubrication pump",
+          "kind": "illustrative",
+          "former_provider": "Dedicated pump actuator",
+          "existing_receiver": "Machine shaft already driving the main process",
+          "retained_job": "Provide the required pump strokes and driving work at suitable timing.",
+          "removed_part": "Dedicated actuator",
+          "held_fixed": ["Pump and lubricant circuit", "required delivery", "main machine duty"],
+          "fixture": {
+            "effective_delivery_mm3_per_completed_stroke": 20,
+            "completed_pump_strokes_per_shaft_revolution": 1,
+            "shaft_revolutions_per_minute": 30,
+            "comparison_dedicated_actuator_strokes_per_minute": 30
+          },
+          "computed": {
+            "delivery_mm3_per_minute": 600,
+            "delivery_mL_per_minute": 0.6,
+            "delivery_at_standstill_mL_per_minute": 0
+          },
+          "limits": "Effective delivery assumed at required conditions, not inferred from drawn piston size. No actual pump rating, pressure, efficiency, leakage, drive torque, or cycle-life claim. Prelubrication and pumping during standstill are unavailable from this shaft alone. Added eccentric/follower and loaded shaft remain."
+        },
+        {
+          "name": "Inadequate chassis rejection defeats removal",
+          "kind": "illustrative failure comparison",
+          "former_provider": "Same separate 3 K/W heat sink",
+          "existing_receiver": "Poorly rejecting 4 K/W chassis, held fixed before and after removal",
+          "retained_job": "Same 12 W device thermal service plus original 8 W chassis burden",
+          "removed_part": "Dedicated heat sink in failed after-case",
+          "held_fixed": [
+            "12 W device heat",
+            "8 W other chassis heat",
+            "35°C ambient",
+            "2 K/W local thermal path",
+            "4 K/W chassis-to-ambient resistance",
+            "110°C teaching junction criterion"
+          ],
+          "computed": {
+            "before_junction_C": 95,
+            "before_chassis_C": 67,
+            "after_chassis_C": 115,
+            "after_junction_C": 139,
+            "meets_teaching_junction_criterion": false,
+            "maximum_chassis_resistance_for_junction_criterion_K_per_W": 2.55,
+            "ideal_zero_local_resistance_lower_bound_junction_C": 115
+          },
+          "equations": [
+            "T_j_before = T_a + P_device (R_local + R_sink)",
+            "T_chassis_before = T_a + P_other R_chassis",
+            "T_chassis_after = T_a + (P_device + P_other) R_chassis",
+            "T_j_after = T_chassis_after + P_device R_local",
+            "R_chassis_max = (T_j_criterion - T_a - P_device R_local) / (P_device + P_other)"
+          ],
+          "limits": "The poor chassis resistance is fixed within its own before/after comparison. This is a second fixture, not evidence that the qualified receiver becomes poor when the sink is removed. Contact improvement alone cannot meet this fixture’s target. No CFD or time-to-overheat prediction."
+        }
+      ],
+      "sources": [
+        "https://www.ti.com/lit/an/slva118a/slva118a.pdf",
+        "https://www.infineon.com/dgdl/Infineon-Recommendations_for_Board_Assembly_TO-AP-v02_00-EN.pdf?fileId=db3a3043183a955501189e662ae34052",
+        "https://www.bijurdelimon.com/default/lubrication-products/pumps/mechanical.html"
+      ],
+      "source_notes": [
+        {
+          "source": "Texas Instruments, Linear Regulator Design Guide for LDOs, SLVA118A, pages 9–10",
+          "url": "https://www.ti.com/lit/an/slva118a/slva118a.pdf",
+          "accessed": "2026-10-28",
+          "basis": "Read steady-state thermal equivalent model, junction/case/interface/sink definitions, and thermal-resistance budgeting.",
+          "boundary": "Only the method supports the original fixture. No regulator value, manufacturer drawing, interface recommendation, or product rating is adopted."
+        },
+        {
+          "source": "Infineon, Recommendations for Assembly of Infineon TO Packages, revision 2.0, section 1.2",
+          "url": "https://www.infineon.com/dgdl/Infineon-Recommendations_for_Board_Assembly_TO-AP-v02_00-EN.pdf?fileId=db3a3043183a955501189e662ae34052",
+          "accessed": "2026-10-28",
+          "basis": "Read thermal path, nonzero mounting-interface resistance, and additional thermal resistance from electrical isolation.",
+          "boundary": "No assembly procedure, torque, package specification, grease performance, or material is transferred to the fictional mounting."
+        },
+        {
+          "source": "Bijur Delimon, Mechanical Pumps",
+          "url": "https://www.bijurdelimon.com/default/lubrication-products/pumps/mechanical.html",
+          "accessed": "2026-10-28",
+          "basis": "Read machine-driven connecting-rod/eccentric mechanism, cyclic lubricant delivery, and spring-return/refill description.",
+          "boundary": "The before/after drive substitution and numerical stroke fixture are original. No specific Bijur model, output, speed, pressure, or service interval is asserted."
+        }
+      ],
+      "research_lead_status": [
+        {
+          "lead": "University of Michigan Design Heuristics handout",
+          "status": "Context lead only. Direct fetch returned HTTP 403 during earlier research in this chat. This taxonomy is not presented as its official card set."
+        },
+        {
+          "lead": "J. E. Gordon, Structures: Or Why Things Don’t Fall Down",
+          "status": "No specific passage consulted for this article; no statement or illustration is attributed to the book."
+        },
+        {
+          "lead": "Toshiba, Hints and Tips for Thermal Design, Part 3, chassis-heatsink section",
+          "status": "Search surfaced relevant manufacturer content, but two direct PDF routes were inaccessible/cache-miss through the web tool. Not used as evidentiary support or numerical input."
+        },
+        {
+          "lead": "Bijur DJ45 operator manual",
+          "status": "Opened manufacturer PDF; text extraction was insufficient to read the mechanism/limits. No model-specific claim is made from it. The accessible manufacturer Mechanical Pumps page supports the general machine-driven mechanism."
+        }
+      ],
+      "graphics": {
+        "decision": "Three static original SVG figures and three phone companions; no widget.",
+        "reason": "The provider substitution, retained pump, and explicit thermal network expose the design decision with fixed, independently checkable cases. No transient or material model is supplied to justify a simulation.",
+        "style": "Approved fixed-white editorial engineering drawings with regular Helvetica Neue, fine neutral lines, and restrained green.",
+        "generator": "scripts/engineering-function-transfer-visuals.mjs",
+        "figures": [
+          {
+            "asset": "content/assets/engineering/function-transfer-thermal-paths.svg",
+            "phone_asset": "content/assets/engineering/function-transfer-thermal-paths-mobile.svg",
+            "learning_question": "Who performs the complete thermal job before and after removal of the dedicated sink?",
+            "held_fixed": [
+              "12 W device dissipation",
+              "8 W existing chassis heating",
+              "35°C ambient",
+              "2 K/W device-and-mount resistance",
+              "3 K/W former sink-to-ambient resistance",
+              "2 K/W qualified chassis resistance"
+            ],
+            "changed": "Device heat is connected to the existing chassis and the separate heat sink is removed.",
+            "arrow_meaning": "Heat flow; temperatures are calculated lumped-node outputs, not temperature fields.",
+            "phone_composition": "Matched sections remain stacked; labels grow and the interval before the second arrangement increases.",
+            "alt": "Matched open-chassis sections show a device rejecting heat through a separate finned sink before transfer and through the existing chassis afterward. The other 8 W heat source remains. Calculated junction temperatures are 95°C and 99°C.",
+            "caption": "Original schematic sections with calculated node temperatures from the declared steady-state model. The device dissipates 12 W, other chassis equipment 8 W, and ambient is 35°C. Arrows mean heat flow. The qualified chassis rejects the combined 20 W; removing the sink does not remove the heat. No temperature field, mounting specification, or product rating is shown."
+          },
+          {
+            "asset": "content/assets/engineering/function-transfer-lubrication-drive.svg",
+            "phone_asset": "content/assets/engineering/function-transfer-lubrication-drive-mobile.svg",
+            "learning_question": "What takes over the pump drive, and which parts remain?",
+            "held_fixed": [
+              "Pump and lubricant circuit",
+              "required effective delivery",
+              "main machine duty"
+            ],
+            "changed": "Dedicated actuator removed; an eccentric and follower couple the pump to the existing machine shaft.",
+            "arrow_meaning": "Rotary and reciprocating drive motion. Fluid connections have no flow arrows.",
+            "phone_composition": "Matched mechanisms remain stacked; larger labels and greater vertical separation preserve the motion path.",
+            "alt": "Matched lubrication arrangements retain a pump and machine shaft. The upper arrangement strokes the pump with a separate actuator; below, an eccentric on the existing shaft drives a follower connected to the pump. The actuator is removed.",
+            "caption": "Original mechanism schematics, not to scale. Green arrows indicate reciprocating drive motion; the rotating shaft and eccentric are drawn at one illustrative phase. The pump and lubrication circuit remain. The new shaft coupling still consumes work, adds load, and requires suitable stroke and timing. The drawing is not a manufacturer pump design."
+          },
+          {
+            "asset": "content/assets/engineering/function-transfer-rejection-limit.svg",
+            "phone_asset": "content/assets/engineering/function-transfer-rejection-limit-mobile.svg",
+            "learning_question": "Why is good device contact insufficient when chassis heat rejection is inadequate?",
+            "held_fixed": [
+              "12 W device heat",
+              "8 W other heat",
+              "35°C ambient",
+              "2 K/W local thermal path",
+              "4 K/W chassis resistance before and after transfer",
+              "110°C teaching junction criterion"
+            ],
+            "changed": "Removing the independent sink routes all 20 W through the existing poor chassis.",
+            "arrow_meaning": "Heat flow in a lumped thermal-resistance network; 12 W in the local path and 20 W in the chassis rejection path.",
+            "phone_composition": "The vertical network is retained with larger labels and increased top/footnote spacing.",
+            "alt": "A thermal-resistance network shows 12 W from the device joining 8 W at the chassis node. The combined 20 W crosses a 4 K/W chassis-to-ambient resistance, producing a 115°C chassis and a 139°C junction at 35°C ambient.",
+            "caption": "Computed failure fixture using the same poor chassis before and after transfer. Before removal, the independent 3 K/W sink keeps the junction at 95°C. Afterward, 12 W plus 8 W share the chassis rejection path. The 2 K/W device-and-mount path carries only the device 12 W. This is a lumped thermal network, not CFD or a transient simulation."
+          }
+        ],
+        "assets": [
+          "content/assets/engineering/function-transfer-thermal-paths.svg",
+          "content/assets/engineering/function-transfer-thermal-paths-mobile.svg",
+          "content/assets/engineering/function-transfer-lubrication-drive.svg",
+          "content/assets/engineering/function-transfer-lubrication-drive-mobile.svg",
+          "content/assets/engineering/function-transfer-rejection-limit.svg",
+          "content/assets/engineering/function-transfer-rejection-limit-mobile.svg"
+        ],
+        "provenance": "Original editable schematic geometry and algebraically evaluated node temperatures. No traced manufacturer/book drawings, external photographs, generated rasters, or fabricated temperature fields."
+      }
+    }
+  ]
+}

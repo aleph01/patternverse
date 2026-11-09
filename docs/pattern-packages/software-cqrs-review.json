@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "cqrs",
+  "title": "CQRS",
+  "aliases": [
+    "Command Query Responsibility Segregation",
+    "Command and Query Responsibility Segregation",
+    "Command-Query Responsibility Segregation"
+  ],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1471,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Greg Young’s CQRS Documents (printed pages 17–23), Martin Fowler’s CQRS and Command Query Separation entries, Microsoft’s CQRS documentation, SQLite Transactions, and Python sqlite3 documentation. Canonical CQRS and long-form aliases are preserved. The article distinguishes method-level CQS from model-level segregation, shared-store from separate-store choices, Event Sourcing from CQRS, fresh shared-store statements from retained old DTOs, and observation versions from checked command preconditions.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["cqrs.py", "demo.py"],
+      "stdout": [
+        "before: 2 available 0",
+        "kept DTO: 2 0",
+        "rejected: Insufficient seats",
+        "fresh: 0 sold out 1"
+      ],
+      "verification": "Exact demo output; query projection bypasses SeatPool without mutating store; frozen old DTO and frozen value-based command model; normal command completion returns None after commit; fresh read sees version 1 while kept DTO stays at version 0; sold-out rejection leaves count/version unchanged; unrelated show isolation; read-only URI write rejection; reopened read consistency; exact 1/1000-seat and 64/65-character boundaries; invalid quantity/ID and missing-show rejection without mutation; concurrent writers cannot overbook; forced update-error rollback of count and version; abrupt pre-commit process exit recovery; busy-BEGIN and failed-COMMIT rollback with later successful retry; parameterized title data; repeated successful commands intentionally are not deduplicated. No asynchronous projection, event log, authentication, or booking lifecycle is inferred."
+    },
+    "content": "1278 entities validate with drafts included; published-only compilation contains 1131 entities without diagnostics.",
+    "integration_tests": "All twelve focused article suites pass: CQRS, Database per Service, the existing eight Persistence and Transactions articles, Domain Model, and GoF. Combined run across thirteen files reports 61 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, code validator, integration test, authoring metadata, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Persistence and Transactions, preserving nine existing members and appending CQRS tenth with an explanatory paragraph. Domain Model, Materialized Views, Database per Service, and Transactional Outbox retain their existing canonical IDs and supply related links. The new article has one primary collection and Software Engineering verse membership. No new collection, duplicate article, practice, or worksheet.",
+    "preservation": {
+      "status": "passed-for-task-scope",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-persistence-transactions.md"
+      ],
+      "other_existing_content_unchanged": 1268,
+      "new_content": ["content/patterns/cqrs.md"],
+      "unrelated_concurrent_content_changes": [
+        "content/patterns/songwriting-pitch-and-intervals.md",
+        "content/patterns/songwriting-build-a-scale.md",
+        "content/patterns/songwriting-circle-of-fifths.md",
+        "content/patterns/songwriting-interlock-the-groove.md",
+        "content/collections/songwriting-glossary.md",
+        "content/collections/songwriting-part-3.md",
+        "content/collections/songwriting-reading-the-examples.md",
+        "content/collections/songwriting-course.md"
+      ],
+      "unrelated_concurrent_concept_graphic_changes": ["songwriting-pitch-and-intervals"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "related_data_engineering_articles_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 44,
+      "prior_graphics_unchanged": 455,
+      "prior_dimensions_unchanged": 1616,
+      "new_dimensions": {
+        "software-engineering/cqrs-models.svg": {
+          "width": 720,
+          "height": 960
+        },
+        "software-engineering/cqrs-models-mobile.svg": {
+          "width": 360,
+          "height": 1320
+        },
+        "software-engineering/cqrs-freshness.svg": {
+          "width": 720,
+          "height": 1000
+        },
+        "software-engineering/cqrs-freshness-mobile.svg": {
+          "width": 360,
+          "height": 1224
+        }
+      },
+      "staged_task_sources_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Task article, primary collection, authoring metadata, and CQRS concept mark match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and earlier staging directories were untouched. No renderer, build implementation, or project dependency changes. Concurrent songwriting edits and a songwriting concept-mark title change were left untouched; the preview represents its isolated copy of surrounding content.",
+    "illustrations": "Two editable native SVG figures explain different command/query responsibilities over one shared store and stale returned DTOs versus authoritative command checks. Both have separately composed phone variants, meaningful alternatives and captions, approved fixed white surface/regular Helvetica Neue palette/square geometry, and explicit arrow meanings. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for technical accuracy, placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all four related routes returning 200. Persistence and Transactions shows ten members over three pages; CQRS on page three opens with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-cqrs/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 48040
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original standard-library Python 3.11+ SQLite example of shared-storage model separation. SeatPool validates 1–1000 physical seats; the query builds a separate frozen Availability DTO directly from SQL. BEGIN IMMEDIATE serializes writers before reading current capacity; a dedicated idle write connection owns one command transaction. Count/version commit or roll back together. Read-only URI prevents accidental writes but supplies no full authentication/process security boundary. Returned DTOs remain immutable snapshots, fresh autocommit queries see committed state, and stored versions are observations rather than expected-version checks. Normal public command completion returns None after commit. No individual booking records, payment, authentication, event log, asynchronous read store, projection worker, cancellation lifecycle, retry deduplication, or network effects. Concurrent writers, forced statement and commit failures, busy BEGIN, abrupt pre-commit process exit, reopened connections, and invalid boundaries are verified; no production power-loss or distributed recovery claim.",
+  "preview": "http://127.0.0.1:43029/pattern/cqrs",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-cqrs",
+  "browser_measurements": ".local/software-cqrs/browser-checks.json",
+  "browser_check_script": ".local/software-cqrs/check-browser.mjs",
+  "build_log": ".local/software-cqrs/public-build-isolated.log",
+  "branch": "codex/software-cqrs",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

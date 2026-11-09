@@ -1,0 +1,137 @@
+{
+  "title": "The Meta Model",
+  "domain": ["communication", "self-reflection"],
+  "status": "published",
+  "short_description": "Use focused questions to recover missing detail, examine the scope of a rule, and check inferred relationships or meanings.",
+  "use_when": [
+    "A statement is too vague to connect to a concrete response.",
+    "An absolute rule or assumed requirement closes off possible actions.",
+    "An interpretation is being treated as established fact.",
+    "People use the same abstract word for different behaviors or criteria."
+  ],
+  "goals": [
+    "Improve shared understanding",
+    "Make assumptions explicit",
+    "Clarify real constraints",
+    "Find a proportionate next step"
+  ],
+  "mechanisms": ["specificity", "scope examination", "evidence checking", "process clarification"],
+  "tags": ["nlp", "method:nlp", "meta-model", "communication", "questioning", "assumptions"],
+  "related_patterns": [
+    "chunk-down",
+    "look-for-the-exception",
+    "inspect-how-you-know",
+    "redefine-the-terms"
+  ],
+  "difficulty": "moderate",
+  "estimated_practice_time": "8–12 minutes",
+  "prerequisites": [
+    "A manageable everyday situation",
+    "Willingness to leave a conclusion unchanged when the evidence supports it"
+  ],
+  "not_ideal_when": [
+    "Someone needs immediate support, protection, or practical action.",
+    "Questions would pressure someone to justify a boundary or disclose unwanted details.",
+    "Further specificity would not change understanding or the next step."
+  ],
+  "example_user_queries": [
+    "Someone says our communication is bad, but I don't know what to change.",
+    "I keep saying I can't do something and want to understand what actually blocks me.",
+    "How do I ask for specifics without sounding like I'm interrogating someone?",
+    "I assume people are judging me and want to check what I really know.",
+    "Our team agrees that quality matters but means different things by quality.",
+    "I feel like every meeting goes badly. How do I understand the pattern?",
+    "How can I tell whether a deadline is impossible or whether part of the work can proceed?",
+    "Someone's question contains an assumption I don't agree with.",
+    "I keep treating disagreement as proof that someone doesn't respect me.",
+    "I feel I have to reply immediately, but I don't know where that rule comes from.",
+    "How can I turn a broad complaint into a clear request?",
+    "I want to distinguish what happened from what I think it means."
+  ],
+  "components": {
+    "article": "content/patterns/meta-model.md",
+    "practice": "Embedded self-guided Pattern Language exercise",
+    "graphics": [
+      "meta-model/question-openings.svg",
+      "meta-model/three-categories.svg",
+      "meta-model/observation-and-inference.svg",
+      "meta-model/clarify-a-concern.svg"
+    ]
+  },
+  "editorial_note": "The approved illustrated guide is adapted to native Markdown, local SVG figures, and a self-guided Pattern Language practice. The thirteen teaching distinctions are not a universal taxonomy.",
+  "categories": [
+    {
+      "title": "Deletions",
+      "focus": "Recover missing detail",
+      "question_types": [1, 2, 3, 4]
+    },
+    {
+      "title": "Generalizations",
+      "focus": "Examine rules and limits",
+      "question_types": [5, 6, 7]
+    },
+    {
+      "title": "Distortions",
+      "focus": "Examine inferred relationships and meanings",
+      "question_types": [8, 9, 10, 11, 12, 13]
+    }
+  ],
+  "id": "meta-model",
+  "collection_id": "neuro-linguistic-programming",
+  "article_sha256": "88e3820f0cb4d3604a3010b9a533c2d729db2759d38ff75475a5b5cc60f0dc9e",
+  "article_word_count": 3443,
+  "visuals": [
+    {
+      "file": "meta-model/question-openings.svg",
+      "alt_text": "They never listen contains a missing referent, a universal claim, and an undefined action. Ask who, in which situations, and what listening would look like.",
+      "caption": "Figure 1. Missing people and actions are deletions; “never” is a generalization. Choose one useful opening."
+    },
+    {
+      "file": "meta-model/three-categories.svg",
+      "alt_text": "The Meta Model branches into deletions, generalizations, and distortions. Four question types recover missing detail; three examine rules and limits; six examine inferred relationships and meanings. The thirteen distinctions are the teaching organization used in this article.",
+      "caption": "Figure 2. The three families and the thirteen teaching distinctions used in this article. Numbering matches the detailed sections and quick reference; manuals vary in grouping."
+    },
+    {
+      "file": "meta-model/observation-and-inference.svg",
+      "alt_text": "A manager asked for a rewrite. One interpretation is that the manager thinks the author is incompetent. A further meaning is that the author's role is at risk. Each transition needs its own evidence.",
+      "caption": "Figure 3. Distinguishing these layers helps you ask where the evidence changes."
+    },
+    {
+      "file": "meta-model/clarify-a-concern.svg",
+      "alt_text": "Broad verdict: they never take my ideas seriously. Incident: one suggestion was passed over. Desired response: a question or an explanation. Possible request: agree how suggestions receive a response in the weekly meeting.",
+      "caption": "Figure 4. Each clarification earns its place by changing the understanding or the possible next step."
+    }
+  ],
+  "attribution": "Richard Bandler and John Grinder; original Patternverse prose, examples, diagrams and practice adaptation.",
+  "sources": [
+    {
+      "label": "ANLP workshop source",
+      "url": "https://anlp.org/media/Resources/Workshop%20Resources/Using%20NLP%20Skills%20for%20Navigating%20Change%20.pdf?_t=1657089016"
+    },
+    {
+      "label": "Hoag’s pattern inventory",
+      "url": "https://nlpls.com/articles/NLPmetaModel.php"
+    },
+    {
+      "label": "INLPTA overview",
+      "url": "https://www.inlpta.org/english/nlp-best-practice-theory/metamodel-of-language/"
+    },
+    {
+      "label": "Lewis, 2012",
+      "url": "https://www.crownhouse.co.uk/assets/look-inside/9781845908034.pdf"
+    },
+    {
+      "label": "Richardson’s teaching map",
+      "url": "https://www.eviltester.com/downloads/nlp/talk/nlptalkslides.pdf"
+    },
+    {
+      "label": "Hoag on presuppositions",
+      "url": "https://nlpls.com/articles/presuppositions.php"
+    },
+    {
+      "label": "Sturt et al., 2012",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3481516/"
+    }
+  ],
+  "practice_sha256": "bc563ebe4e64bd73f1ec260e605fb3545ae20b926b73f884fa2eb80005dbbd4a"
+}

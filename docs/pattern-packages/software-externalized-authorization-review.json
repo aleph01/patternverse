@@ -1,0 +1,501 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "externalized-authorization",
+  "title": "Externalized Authorization",
+  "aliases": [],
+  "primary_collection": "software-security-access-boundaries",
+  "primary_collection_title": "Security and Access Boundaries",
+  "body_word_count": 1494,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary sources verified. OpenID Foundation AuthZEN explicitly names externalized authorization and the PDP/PEP family. Final OASIS XACML3.0 Standard22January2013 defines the roles and section7.2.2 deny-biased obligation handling; candidate/working drafts were not used as the article authority. OPA documents policy decision/enforcement separation. AWS documents centralized, distributed and library-based PDP models. Versioned Envoy documentation establishes explicit failure_mode_allow behavior. No existing exact canonical article found. External authorization is an integration term; RBAC/ABAC/ReBAC are policy models, and Policy as Code concerns rule representation/governance. No unsupported alias invented; existing data-policy-as-code preserved and related.",
+    "sources": [
+      {
+        "title": "AuthZEN Working Group",
+        "author": "OpenID Foundation",
+        "url": "https://openid.net/wg/authzen/",
+        "supports": "Explicit externalized-authorization terminology, PIP/PDP/PEP architecture family, distinction from embedded token entitlements and interoperability across existing policy technologies."
+      },
+      {
+        "title": "XACML3.0 OASIS Standard,22January2013",
+        "author": "OASIS",
+        "url": "https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html",
+        "supports": "Final standard rather than candidate/working draft: PDP/PEP/PAP/PIP role definitions, requests and decision results, deny-biased enforcement section7.2.2 and mandatory understood/discharged obligations."
+      },
+      {
+        "title": "Open Policy Agent introduction",
+        "author": "OPA project",
+        "url": "https://www.openpolicyagent.org/docs",
+        "supports": "Decoupled policy decision-making/enforcement; structured input evaluated against rules and policy data; the application acts on the result."
+      },
+      {
+        "title": "Design models for OPA",
+        "author": "AWS Prescriptive Guidance",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-api-access-authorization/using-opa.html",
+        "supports": "Centralized, distributed and library-based PDP arrangements with application PEPs, including latency and local distribution tradeoffs. Externalized decisions do not require a remote call."
+      },
+      {
+        "title": "External authorization configuration,v1.38.6",
+        "author": "Envoy project",
+        "url": "https://www.envoyproxy.io/docs/envoy/v1.38.6/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto",
+        "supports": "Documented failure_mode_allow can admit traffic on authorization-service communication/5xx failure; false rejects and is the documented default. Article identifies a configurable risk, not a universal behavior of the pattern."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "output": ["own north totals", "cross denied", "revoked denied", "offline unavailable"],
+      "service_matrix_cases": 9,
+      "permitted_matrix_cases": 1,
+      "denied_matrix_cases": 8,
+      "malformed_input_cases": 14,
+      "rejected_response_cases": 46,
+      "shared_policy_enforcement_points": 2,
+      "checks": [
+        "exact four outcomes and P1/P2 decisions",
+        "trusted report tenant supplied by handler and fixed read action",
+        "unknown/malformed requests stop before decision or body retrieval",
+        "strict response schema, query binding, Boolean permit and positive integer version",
+        "unsupported or malformed obligations block access",
+        "all denials and unusable replies leave bodies unread",
+        "one policy update affects two independent handlers",
+        "timeouts and other decision failures propagate without retries or bypass",
+        "metadata and body faults cannot manufacture success",
+        "old matching permits can replay in this bounded model; no freshness guarantee",
+        "matching forged callback response can pass; no network authentication or security-kernel claim"
+      ]
+    },
+    "content": "All1309 entities validate. Published-only compilation contains1162 entities without diagnostics. Eight exact H2s, two complete Python3 files, two figures/four responsive assets, four existing canonical related IDs, ten distinct recommendation queries and no practice/worksheet. Reuses existing Security and Access Boundaries collection, retaining Reference Monitor, Gatekeeper and Federated Identity in order. No new collection or future stub.",
+    "published_compilation": {
+      "status": "passed",
+      "published_entities": 1162,
+      "bytes": 23536330,
+      "sha256": "5669abc97472ef2509f83e6a59dc15be6b430e64ec56a9b783be4aeb575c2936",
+      "compiler_log": ".local/software-externalized-authorization/published-compilation.log",
+      "temporary_output_removed_after_verification": true
+    },
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "Externalized Authorization3, Federated Identity3, Reference Monitor3, GoF24 and four authored-graphic checks pass. Existing global graphic coverage fails because access-over-ownership lacks a graphic. New tests verify title/no unsupported alias, search, single primary home, collection/verse link, all23GoF members, four resolved related IDs, both exact selectable highlighted code blocks, accessible responsive figures/dimensions, metadata hash and ten queries."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses exact in ByRoleOptions, which does not define that property."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-code validator, integration test, authoring JSON/documentation, illustration registry, asset manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-security-access-boundaries.md"],
+      "other_existing_content_unchanged": 1307,
+      "new_content": ["content/patterns/externalized-authorization.md"],
+      "three_existing_primary_collection_members_retained_in_order": true,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 78,
+      "prior_graphics_unchanged": 490,
+      "all_prior_dimensions_unchanged": 1744,
+      "new_dimensions": {
+        "software-engineering/externalized-authorization-boundary.svg": {
+          "width": 720,
+          "height": 1064
+        },
+        "software-engineering/externalized-authorization-boundary-mobile.svg": {
+          "width": 360,
+          "height": 1296
+        },
+        "software-engineering/externalized-authorization-decisions.svg": {
+          "width": 720,
+          "height": 792
+        },
+        "software-engineering/externalized-authorization-decisions-mobile.svg": {
+          "width": 360,
+          "height": 1032
+        }
+      },
+      "prior_integration_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "preview_web_source_matches_current_source": true,
+      "preview_content_reads_actual_current_content": true
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/externalized-authorization-boundary.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1064
+      },
+      {
+        "path": "/assets/software-engineering/externalized-authorization-boundary-mobile.svg",
+        "labels": 28,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1296
+      },
+      {
+        "path": "/assets/software-engineering/externalized-authorization-decisions.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 792
+      },
+      {
+        "path": "/assets/software-engineering/externalized-authorization-decisions-mobile.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1032
+      }
+    ],
+    "native_generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "assets": {
+        "content/assets/software-engineering/externalized-authorization-decisions.svg": "eef028235b9b19873771473b69a2b829413f4aecf4321e521ef1b51c0f271272",
+        "content/assets/software-engineering/externalized-authorization-decisions-mobile.svg": "c2d8eadf185a2e0e27c69d4987595d4c3563a4bd45723e283969e6b63cbff1f1",
+        "content/assets/software-engineering/externalized-authorization-boundary-mobile.svg": "af270e49bc02e696d7cee556d95f1a272afb8643d110ea332ba1b07364de7a10",
+        "content/assets/software-engineering/externalized-authorization-boundary.svg": "d311ef0b262aea478710c01694edf74164411b8a6f5570769b5b19389630ea79"
+      }
+    },
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 7,
+          "width": 90,
+          "height": 82
+        },
+        {
+          "x": 35,
+          "y": 24,
+          "width": 22,
+          "height": 58
+        }
+      ]
+    },
+    "visual_review": "All four native SVGs and final concept mark inspected. Actual desktop/phone article tops, both figures and captions at1440and390px, both Python code viewports at390px and the four-card collection gallery inspected. Fixed white, regular Helvetica Neue/Helvetica/Arial, requested palette, square geometry, readable labels and no clipped/overlapping text/outside shapes. Arrows distinguish decision request, response and guarded read; repeated handler steps are the same PEP. Phone versions have independently placed labels and a stacked outcome-card composition. Final phone heading Require a usable permit avoids implying the decision object performs the read. Concept shows a PDP roundtrip and separate PEP-to-resource path, with no PDP-to-resource arrow.",
+    "browser": {
+      "status": "passed",
+      "mode": "Actual Vite application renderer with copied web source and current linked content; not a completed production export.",
+      "widths": [1440, 390, 320],
+      "details": [
+        {
+          "path": "/assets/software-engineering/externalized-authorization-boundary.svg",
+          "labels": 19,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 1064
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-boundary-mobile.svg",
+          "labels": 28,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1296
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-decisions.svg",
+          "labels": 23,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 792
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-decisions-mobile.svg",
+          "labels": 21,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1032
+        },
+        {
+          "viewport": 1440,
+          "pageWidth": 1440,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/externalized-authorization-boundary.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/externalized-authorization-decisions.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 43,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            },
+            {
+              "focusable": true,
+              "tokens": 155,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/data-policy-as-code",
+            "/pattern/reference-monitor",
+            "/pattern/federated-identity",
+            "/pattern/gatekeeper"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 390,
+          "pageWidth": 390,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/externalized-authorization-boundary-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/externalized-authorization-decisions-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 43,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            },
+            {
+              "focusable": true,
+              "tokens": 155,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/data-policy-as-code",
+            "/pattern/reference-monitor",
+            "/pattern/federated-identity",
+            "/pattern/gatekeeper"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 320,
+          "pageWidth": 320,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/externalized-authorization-boundary-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/externalized-authorization-decisions-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 43,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            },
+            {
+              "focusable": true,
+              "tokens": 155,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/data-policy-as-code",
+            "/pattern/reference-monitor",
+            "/pattern/federated-identity",
+            "/pattern/gatekeeper"
+          ],
+          "copyable": true,
+          "keyboard_code_scroll": true
+        },
+        {
+          "collection": "software-security-access-boundaries",
+          "article": "externalized-authorization",
+          "navigation": "collection route and verse gallery to article passed",
+          "related_routes": "all returned 200"
+        }
+      ],
+      "checks": [
+        "eight exact H2s",
+        "four native SVG variants load with zero label overlaps/outside shapes",
+        "correct phone assets selected",
+        "both exact code texts and browser selections",
+        "multiple highlighting colors and focusable code blocks",
+        "keyboard horizontal code scrolling at320px",
+        "no page overflow",
+        "four related article routes return200",
+        "collection route, Software Engineering gallery, authored concept and article breadcrumb work",
+        "no page or console errors"
+      ]
+    },
+    "live_resources": {
+      "status": "passed",
+      "mode": "actual Vite development renderer with copied web source and current linked content; full static export not rerun because disk capacity is still exhausted",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-boundary-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-boundary.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-decisions-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-decisions.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/externalized-authorization-boundary.svg",
+          "status": 200,
+          "sha256": "d311ef0b262aea478710c01694edf74164411b8a6f5570769b5b19389630ea79",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-boundary-mobile.svg",
+          "status": 200,
+          "sha256": "af270e49bc02e696d7cee556d95f1a272afb8643d110ea332ba1b07364de7a10",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-decisions.svg",
+          "status": 200,
+          "sha256": "eef028235b9b19873771473b69a2b829413f4aecf4321e521ef1b51c0f271272",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/externalized-authorization-decisions-mobile.svg",
+          "status": 200,
+          "sha256": "c2d8eadf185a2e0e27c69d4987595d4c3563a4bd45723e283969e6b63cbff1f1",
+          "matches_source": true
+        }
+      ]
+    },
+    "production_export": {
+      "status": "not-rerun-disk-capacity",
+      "reason": "Earlier Reference Monitor full-site export attempts failed twice with ENOSPC during prerendering. The volume remains100%used. This session verified the actual application live renderer rather than repeating the known full-site disk failure.",
+      "completed_export_claimed": false,
+      "repository_build_scripts_renderer_and_dependencies_modified": false,
+      "scope": "Task-owned runtime copies web source with native copy-on-write and links current content/packages/scripts/dependencies; private environment files excluded. Other previews and previous work retained. Only this task temporary published corpus was removed after recording its successful count, size and SHA-256."
+    }
+  },
+  "example_limits": "Sequential in-process two-module responsibility model, not a deployed policy service/security kernel or protocol implementation. Authenticated subject, report metadata, grants and callback are trusted preconditions. No real timeout timer, service/network authentication, cryptographic response proof, durable policy distribution, cache or concurrent check/use protection. A matching old permit can be replayed in the model after revocation, and a forged callback can manufacture a permit; negative scope tests explicitly demonstrate these missing freshness/authenticity guarantees. Direct calls to the trusted current engine do observe P2 revocation in two handlers. Real adapters must protect the decision path, bind actual operations/facts, interpret obligations, coordinate policy/data versions and cache lifetime, and guard all alternate access paths.",
+  "preview_url": "http://127.0.0.1:43063/pattern/externalized-authorization",
+  "version_control": {
+    "tool": "GitButler",
+    "branch": "codex/software-externalized-authorization",
+    "committed": false,
+    "pushed": false,
+    "pull_request_created": false
+  },
+  "evidence_directory": ".local/software-externalized-authorization",
+  "externally_published": false,
+  "deployed": false
+}

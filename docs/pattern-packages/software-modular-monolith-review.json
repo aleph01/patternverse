@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "modular-monolith",
+  "title": "Modular Monolith",
+  "aliases": ["Modular Monolithic Architecture", "Modular Monolith Architecture"],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1373,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Shopify's first-hand account supports explicit component APIs, data ownership, and modularizing an existing monolith. Official Spring Modulith fundamentals and verification documentation illustrate public interfaces, internal implementation, dependency restrictions, and cycle checks without making the framework synonymous with the pattern. Microsoft supports deployment as one unit and replication of the complete application. Fowler supports evolving boundaries without requiring later service extraction. Python documentation supports the limits of underscore privacy. The support-ticket example and illustrations are original teaching material.",
+    "python_examples": "All four actual article blocks run as nested packages and produce 1 | Ada | Cannot sign in. Checks pass for public imports, rejected private imports and a cyclic capability dependency, missing and inactive customers, blank subjects, failure without ticket creation or identifier consumption, subject normalization, subsequent identifiers, frozen values, creation-time name snapshots, and independent instance state. A fresh isolated subprocess changes the private customer schema from name to full_name inside Customers while Tickets and main remain byte-for-byte unchanged and the output stays the same. The static import policy is scoped to this example, not a general Python access-control mechanism.",
+    "article_tests": "42 tests pass across Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical aliases, eight headings, one primary collection, resolved neighbors, exact highlighted code text, accessible responsive figures, dimensions, search, ten recommendation queries, article revision hash, and concept marks.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check has the unrelated existing failure listed below.",
+    "content": "1222 entities validate with drafts included. The published-only corpus contains 1076 entities and reports no errors.",
+    "public_build": "Production build was attempted and stopped during prerendering because the unrelated Strategic Guardrails article links to missing /assets/organizational-design/strategic-guardrails.svg. Build success is not claimed. Actual article browser review used the local development preview instead, with service workers disabled for deterministic browser checks. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new source files and updated authoring metadata. The review report is also formatted and checked.",
+    "visuals": "All four editable SVG variants load. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and phone compositions were visually inspected for accurate module and deployment boundaries, public local calls versus startup wiring, whole-application replication, fixed white surfaces, regular typography, contrast, and label placement. Separate phone compositions preserve readable labels.",
+    "article_browser": "Actual article checked at 1440, 390, and 320 pixels: all eight headings, all four code blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard code scrolling at 320px, both responsive images loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article, code, and figure screenshots were inspected.",
+    "navigation_browser": "Application Architecture opens Modular Monolith with the correct collection breadcrumb. Related Layers, Ports and Adapters, Facade, and Microkernel routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and the GoF collection match pre-change SHA-256 checksums byte for byte. All prior authoring records, concept marks, and asset dimensions remain unchanged."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    },
+    {
+      "check": "pnpm --filter @patternverse/web build",
+      "detail": "Prerendering fails on missing /assets/organizational-design/strategic-guardrails.svg linked from /pattern/strategic-guardrails. Unrelated article and asset left untouched; local development rendering verified instead."
+    }
+  ],
+  "example_limits": "Serial, in-memory code with a static customer directory, instance-local ticket identifiers, immutable string/integer DTO fields, and creation-time name snapshots. No durability, shared replica storage, concurrent eligibility guarantee, cross-module transaction, fault isolation, or security isolation is implemented. The replica figure explains a deployment arrangement; the example does not run a replicated service.",
+  "preview": "http://127.0.0.1:42990/pattern/modular-monolith",
+  "preview_mode": "development",
+  "evidence_directory": ".local/software-modular-monolith",
+  "browser_measurements": ".local/software-modular-monolith/browser-checks.json",
+  "browser_check_script": ".local/software-modular-monolith/check-browser.mjs",
+  "preservation_checks": ".local/software-modular-monolith/preservation-checks.json",
+  "build_log": ".local/software-modular-monolith/public-build.log",
+  "branch": "codex/software-modular-monolith",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

@@ -1,0 +1,89 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/meaning-handbuilding-photo.jpg",
+      "generation_record": "graphic-design-image-meaning-sources.json",
+      "sha256": "26676e6fb1dfcdca24725cc465e31d977d03f728bc974022d0ff5835dbc80d55"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/figure-ground-pitcher-cutout.png",
+      "generation_record": "graphic-design-figure-ground-sources.json",
+      "sha256": "3ecc57ffd075e64447f73dacf120eb607b2cdbed9f9d8a8038d4ee927b4735d3"
+    },
+    {
+      "asset": "content/assets/graphic-design/guide-maker-portrait.jpg",
+      "generation_record": "graphic-design-guide-sources.json",
+      "sha256": "6288a0209cd2bcdab369bd752593012c110c20e19b1565d2d38719c2e3e32146"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Integrate Text and Image",
+  "date": "2026-10-28",
+  "mode": "Reused existing generated photographs, transparent product cutout, fictional portrait and print stage. Native captions, leaders and title panel; no photographic editing or new generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-integration-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-integration-layouts.json",
+    "sha256": "9baae7dce5c2bf9398af59fbde9a7d0ac67cabe2dc4ce9c594670ef22fc68168",
+    "method": "Only caption-group positions, feature-leader opacity or title-panel position changes. Photographic source bytes, crops, frames, native copy, font settings, palette, unrelated geometry and presentation remain identical. No raster editing or new image generation."
+  },
+  "comparisonPolicy": "Newsletter: only two offer groups rise300 layout units in fixed columns. Product detail sheet: only fixed feature-leader opacity0\u21921. Portrait poster: only unchanged title-panel transform y320\u2192590. Photographic bytes/crops, font sizes/weights, wording/colors, stage/lighting and all unrelated positions remain fixed.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "integration-newsletter-captions",
+        "changedPixels": 13846,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "integration-pitcher-labels",
+        "changedPixels": 1115,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "integration-maker-poster",
+        "changedPixels": 136400,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared text-image intervention regions differ.",
+    "scope": "DOM normalization permits only declared caption transforms, leader opacity or title-panel transform. All source image/font/stage bytes, photograph crops/frames, native wording/font settings and unrelated geometry remain identical. Pixel differences occur only at old/new caption/title extents or leader bounds. Wide/narrow checks verify fonts, text bounds, overflow and image/inline equivalence. All photographs and cutout alpha are reused unchanged. All six saved browser PNGs visually inspected, including the final newsletter booking/order wording. Bounded mark inspected at32/48/96 pixels."
+  },
+  "limitations": "Editorial examples, not measured comprehension, attention or sales improvements. Educational spatial-contiguity evidence is not directly generalized as a performance claim. Fictional imagery is not documentation of real people/products/events. Static examples do not implement responsive source order or complete accessibility. No physical print proof."
+}

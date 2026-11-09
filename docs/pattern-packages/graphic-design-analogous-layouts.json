@@ -1,0 +1,164 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Declared fill-only changes within three controlled photographic examples. The first two preserve color count and approximately match saturation/relative luminance while changing hue span; the third retains hue/saturation and intentionally changes only text lightness.",
+  "model": "Digital HSL. Local hue arcs are specimen choices, not universal definitions or equal perceptual steps.",
+  "colors": {
+    "ink": "#20332f",
+    "programmeBefore": ["#e2cbb3", "#aad6df", "#dec6ea"],
+    "programmeAfter": ["#9fdad0", "#aad6df", "#bcd1e6"],
+    "coffeeBefore": ["#dcbd96", "#dbbd94", "#dbbe93"],
+    "coffeeAfter": ["#e3b9ac", "#dbbd94", "#cdc56a"],
+    "supperPanel": "#e8eedd",
+    "supperInk": "#33532d",
+    "supperBefore": "#81bb94",
+    "supperAfter": "#274932"
+  },
+  "nominalHues": {
+    "programmeBefore": [30, 190, 280],
+    "programmeAfter": [170, 190, 210],
+    "coffeeBefore": [34, 35, 36],
+    "coffeeAfter": [15, 35, 55],
+    "supper": [80, 110, 140]
+  },
+  "supperHsl": {
+    "before": [140, 0.3, 0.62],
+    "after": [140, 0.3, 0.22]
+  },
+  "textContrast": {
+    "supperBefore": 1.8697574068838247,
+    "supperAfter": 8.490245050932884
+  },
+  "examples": [
+    {
+      "name": "analogous-workshop-family",
+      "source": "audience-pottery-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only two session surface colors change; the central cyan remains fixed. Three widely separated HSL hues30/190/280 become neighboring170/190/210. Saturation and relative luminance are approximately held. Three surfaces remain three; all labels, prices, type, geometry and photography stay fixed.",
+      "declaredFills": [
+        [
+          {
+            "element": "session-0",
+            "fill": "#e2cbb3"
+          },
+          {
+            "element": "session-1",
+            "fill": "#aad6df"
+          },
+          {
+            "element": "session-2",
+            "fill": "#dec6ea"
+          }
+        ],
+        [
+          {
+            "element": "session-0",
+            "fill": "#9fdad0"
+          },
+          {
+            "element": "session-1",
+            "fill": "#aad6df"
+          },
+          {
+            "element": "session-2",
+            "fill": "#bcd1e6"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "analogous-coffee-variation",
+      "source": "core-message-coffee-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only House and Night surface fills change. The hue span widens from HSL34/35/36 to15/35/55 while the central blend color remains fixed. Approximate relative luminance and saturation remain stable. Three shades remain three. All names, tasting notes, weights, prices and photographs stay fixed.",
+      "declaredFills": [
+        [
+          {
+            "element": "blend-0",
+            "fill": "#dcbd96"
+          },
+          {
+            "element": "blend-1",
+            "fill": "#dbbd94"
+          },
+          {
+            "element": "blend-2",
+            "fill": "#dbbe93"
+          }
+        ],
+        [
+          {
+            "element": "blend-0",
+            "fill": "#e3b9ac"
+          },
+          {
+            "element": "blend-1",
+            "fill": "#dbbd94"
+          },
+          {
+            "element": "blend-2",
+            "fill": "#cdc56a"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "analogous-supper-legibility",
+      "source": "chunk-garden-supper-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only four practical text fills darken at nominal HSL hue140 and saturation30%; lightness62% becomes22%. The pale yellow-green panel at hue80 and olive title at110 remain fixed. Words, font sizes, positions, photograph and presentation stay identical.",
+      "declaredFills": [
+        [
+          {
+            "element": "detail-0",
+            "fill": "#81bb94"
+          },
+          {
+            "element": "detail-1",
+            "fill": "#81bb94"
+          },
+          {
+            "element": "detail-2",
+            "fill": "#81bb94"
+          },
+          {
+            "element": "detail-3",
+            "fill": "#81bb94"
+          }
+        ],
+        [
+          {
+            "element": "detail-0",
+            "fill": "#274932"
+          },
+          {
+            "element": "detail-1",
+            "fill": "#274932"
+          },
+          {
+            "element": "detail-2",
+            "fill": "#274932"
+          },
+          {
+            "element": "detail-3",
+            "fill": "#274932"
+          }
+        ]
+      ]
+    }
+  ]
+}

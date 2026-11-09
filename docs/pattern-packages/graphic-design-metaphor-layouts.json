@@ -1,0 +1,147 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Each comparison changes one declared cue: seedling visibility over an unchanged book; one explanatory text node beside an unchanged cord photo; or the selected ladder/bridge source object within the same frame. Surrounding typography, layout, copy except the declared anchor line, paper and presentation remain fixed. The third case intentionally changes source-object geometry/material appearance; other cases reuse identical photographic bytes/crops.",
+  "examples": [
+    {
+      "name": "metaphor-book-growth",
+      "sources": [
+        {
+          "id": "book",
+          "file": "metaphor-book-photo.png",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "seedling",
+          "file": "metaphor-seedling-cutout.png",
+          "width": 1145,
+          "height": 1374
+        }
+      ],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only seedling-cue opacity changes0→1. The identical book photograph and fixed source window stay untouched; a separately generated transparent seedling appears at fixed x217/y221/166.667×200, with its stem ending at the book gutter. Copy, typography, all other geometry, palette, paper and presentation remain fixed. This is an explicitly fictional photographic composite, not a documented plant growing in a real book.",
+      "masks": [[217, 221, 167, 200]],
+      "copy": [
+        ["brand", 65, 104, "COMMON / LIBRARY EVENINGS", 20],
+        ["headline", 65, 170, "Ideas take root", 46],
+        ["purpose", 65, 608, "Reading + discussion evenings", 27],
+        ["date", 65, 655, "Tue 17 Nov · 18:30 · Free entry", 23],
+        ["action", 65, 704, "Bring a book and a question.", 23],
+        ["url", 65, 820, "common.example/library", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "seedling-cue",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "seedling-cue",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "metaphor-cord-anchor",
+      "sources": [
+        {
+          "id": "photo",
+          "file": "metaphor-cord-photo.png",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only anchor-copy textContent changes from Make room for something new. to Plan the next steps of your project. The tangled-to-straight cord photograph, source bytes/crop, image box, all other copy, font family/size/weight/color/anchors, paper and lighting remain identical. New wording supplies the intended target of the comparison without changing its photographic source.",
+      "masks": [[65, 575, 480, 50]],
+      "copy": [
+        ["brand", 65, 104, "YARD / EVENING SESSIONS", 20],
+        ["headline", 65, 170, "Find your thread", 46],
+        ["anchor-copy", 65, 608, "Make room for something new.", 24],
+        ["date", 65, 655, "Thu 26 Nov · 18:30–20:30 · £18", 23],
+        ["action", 65, 704, "Bring one unfinished idea.", 23],
+        ["url", 65, 820, "yard.example/thread", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "anchor-copy",
+            "attribute": "textContent",
+            "value": "Make room for something new."
+          }
+        ],
+        [
+          {
+            "element": "anchor-copy",
+            "attribute": "textContent",
+            "value": "Plan the next steps of your project."
+          }
+        ]
+      ]
+    },
+    {
+      "name": "metaphor-peer-bridge",
+      "sources": [
+        {
+          "id": "ladder",
+          "file": "metaphor-ladder-cutout.png",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "bridge",
+          "file": "metaphor-bridge-cutout.png",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only metaphor-object href changes#ladder→#bridge inside the fixed480×320 frame and unchanged1536×1024 source coordinate system. Two separately generated pale-wood model cutouts deliberately change the pictured source object and its geometry. All wording, native type, frame, fitting rule, neutral ground, layout, paper and presentation stay identical. Object-specific geometry/texture/lighting differ as part of source selection; no claim of an identical object or reshoot.",
+      "masks": [[65, 220, 480, 320]],
+      "copy": [
+        ["brand", 65, 104, "COMMON / SHARED PRACTICE", 20],
+        ["headline", 65, 170, "Learn together", 46],
+        ["purpose", 65, 608, "Peer skill-sharing circle", 27],
+        ["action", 65, 655, "Bring a question; share a method.", 23],
+        ["date", 65, 704, "Wed 25 Nov · 18:30 · Free entry", 23],
+        ["url", 65, 820, "common.example/peer-circle", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "metaphor-object",
+            "attribute": "href",
+            "value": "#ladder"
+          }
+        ],
+        [
+          {
+            "element": "metaphor-object",
+            "attribute": "href",
+            "value": "#bridge"
+          }
+        ]
+      ]
+    }
+  ]
+}

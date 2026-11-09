@@ -1,0 +1,35 @@
+{
+  "note": "Fictional teaching datasets. Forecast distributions are stated assumptions, not fitted models.",
+  "pairing": {
+    "workers": ["A", "B", "C", "D"],
+    "before": [10, 20, 30, 40],
+    "after": [8, 19, 27, 38],
+    "t_critical_df3": 3.182446305284263
+  },
+  "censoring": {
+    "customers": ["A", "B", "C", "D", "E", "F"],
+    "months": [2, 3, 4, 5, 6, 6],
+    "event": [true, false, true, false, true, false]
+  },
+  "forecast": {
+    "mean": [100, 102, 104, 106, 108, 110],
+    "sd": [20, 22, 24, 26, 28, 30],
+    "observed": [125, 96, 112, 145, 85, 132],
+    "z80": 1.2815515655446004,
+    "z95": 1.959963984540054
+  },
+  "synthesis": {
+    "studies": ["A", "B", "C"],
+    "effect": [4, 6, 5],
+    "se": [1, 4, 2],
+    "z95": 1.959963984540054
+  },
+  "causal": {
+    "strata": ["Novice", "Experienced"],
+    "trained_n": [20, 80],
+    "trained_passed": [8, 64],
+    "comparison_n": [80, 20],
+    "comparison_passed": [24, 14],
+    "target_weights": [0.5, 0.5]
+  }
+}

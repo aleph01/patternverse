@@ -1,0 +1,75 @@
+{
+  "pattern": "Separate Figure from Ground",
+  "date": "2026-10-27",
+  "mode": "Selected existing generated photo/stage artwork; generated one transparent pitcher with built-in image_gen. Typography, grounds and layouts composed separately.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-figure-ground-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "generatedSources": [
+    {
+      "asset": "content/assets/graphic-design/figure-ground-pitcher-cutout.png",
+      "generation_record": "graphic-design-figure-ground-generation.json",
+      "sha256": "3ecc57ffd075e64447f73dacf120eb607b2cdbed9f9d8a8038d4ee927b4735d3",
+      "width": 1312,
+      "height": 1199
+    }
+  ],
+  "comparisonPolicy": "Poster: only shade opacity changes from 0 to 1, with transparent-to-black gradient fixed. Product: only the backdrop fill changes from #292b2b to #e7e3d8; the identical unretouched RGBA cutout, geometry and fitting rule are reused. Dialog: only screen-clipped underlay opacity changes from 0 to 0.48, below an identical opaque foreground. All copy, type, other geometry, source image/crops, paper/device and lighting stay fixed.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "figure-ground-open-evening",
+        "changedPixels": 285197,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "figure-ground-loop-pitcher",
+        "changedPixels": 163200,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "figure-ground-date-dialog",
+        "changedPixels": 167111,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared figure-ground intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "All six final browser PNGs visually inspected, including corrected screen-top dimmer coverage and final confirmation wording. Text fits the paper/phone surface and no horizontal overflow occurs. Pixel masks isolate declared ground-change regions; two opaque dialog-interior regions are explicitly excluded from permissible changes and remain identical. DOM comparisons preserve copy, typography, positions, image data/crops and unrelated attributes. Product invariants concern its identical RGBA source and placement, not every final composited pixel.",
+    "textContrastBound": "For the four light text lines inside the stable 0.76 black-shade region, a white source pixel gives a conservative maximum background. The declared foreground/background bound exceeds 4.5:1. This checks those specified lines, not overall artifact accessibility."
+  },
+  "alpha_validation": {
+    "hasAlpha": true,
+    "minAlpha": 0,
+    "maxAlpha": 255,
+    "representativeInteriorAlpha": 253,
+    "note": "The generated cutout has near-opaque interior alpha as well as transparent edges and shadow; changing the ground can slightly affect composited tones. The source RGBA file is identical and unretouched in both variants."
+  },
+  "limitations": "No audience study, measured recognition/reading/task benefit, physical print trial, assistive-technology audit, implemented modal behavior, whole-artifact accessibility conformance or full production-route result. Product name, capacity and price are fictional example copy, not verified specifications."
+}

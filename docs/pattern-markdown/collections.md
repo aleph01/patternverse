@@ -10,14 +10,14 @@ therapy techniques or real-model evaluations.
 ## Open collection
 
 ```pattern
-!collect ideas {
+ideas = !collect {
     :min 1
     :max 3
 
-    !ask idea {
+    idea = !ask {
         What is one small idea?
     }
-    !rate interest 0..10 {
+    interest = !rate 0..10 {
         How interested are you in {{idea}}?
     }
 }
@@ -40,12 +40,12 @@ are lifecycle controls, not a successful early record completion.
 ## Mapped collection
 
 ```pattern
-!collect plans {
+plans = !collect {
     :from ideas
     :as item
 
-    = idea item.idea
-    !ask next_step {
+    idea = item.idea
+    next_step = !ask {
         What would be a first step for {{item.idea}}?
     }
 }

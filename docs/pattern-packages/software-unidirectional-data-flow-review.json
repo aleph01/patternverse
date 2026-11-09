@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "unidirectional-data-flow",
+  "title": "Unidirectional Data Flow",
+  "aliases": ["UDF", "One-way Data Flow"],
+  "primary_collection": "software-presentation-ui-state",
+  "primary_collection_title": "Presentation and UI State",
+  "body_word_count": 1494,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: official Redux concepts/data flow, Elm Architecture, Android UI layer, Redux side effects, Redux Toolkit request-ID examples, and Python frozen dataclasses. The article presents recurring ownership and direction without claiming a sole inventor, one required framework, a compulsory global store, or reducer purity as the universal definition. The current-request and pending guard is explicit application policy, not an inherent cancellation or ordering guarantee.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["search.py", "demo.py"],
+      "stdout": [
+        "Loading ca [1]",
+        "Loading cat [2]",
+        "cat, caterpillar",
+        "cat, caterpillar",
+        "Loading dog [3]",
+        "Search unavailable",
+        "Type a query"
+      ],
+      "verification": "Out-of-order permutations, stale failure, duplicate terminal events, retry, cleared-query invalidation, empty results, query/ID/payload boundaries, immutable snapshots, isolated owners, and deterministic replay checks passed."
+    },
+    "content": "1267 entities validate with drafts included. Published-only compilation contains 1120 entities and no diagnostics.",
+    "integration_tests": "Unidirectional Data Flow, Template View, Front Controller, Presentation Model, MVP, MVC, and GoF article integration suites pass. The combined run reports 46 passed checks and one unrelated global authored-graphic coverage failure across eight files. Four other graphics geometry, safety, fallback, and export checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, validator, integration test, authoring sidecar, concept registry, and authoring documentation. The article follows repository Markdown conventions.",
+    "collection": "Reuses Presentation and UI State, preserving its first five members and adding Unidirectional Data Flow sixth. No new collection or future-pattern stub was created.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-presentation-ui-state.md"],
+      "other_existing_content_unchanged": 1265,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 32,
+      "prior_graphics_unchanged": 444,
+      "prior_dimensions_unchanged": 1570,
+      "new_dimensions": {
+        "software-engineering/unidirectional-data-flow-cycle.svg": {
+          "width": 720,
+          "height": 1080
+        },
+        "software-engineering/unidirectional-data-flow-cycle-mobile.svg": {
+          "width": 360,
+          "height": 1376
+        },
+        "software-engineering/unidirectional-data-flow-stale.svg": {
+          "width": 720,
+          "height": 1168
+        },
+        "software-engineering/unidirectional-data-flow-stale-mobile.svg": {
+          "width": 360,
+          "height": 1256
+        }
+      }
+    },
+    "production_build": "The standard public build script succeeds in an isolated source copy, with Public web build checks passed. Isolation avoids modifying shared generated output or another session’s staging directory. Private environment files were excluded; an empty PUBLIC_DROPBOX_APP_KEY supplies the disabled local sync integration. No credentials were copied, and no renderer or build implementation was changed.",
+    "illustrations": "Two editable native SVG figures explain the event/state/view cycle and stale-completion rejection, each with a separately composed phone variant. The cycle explicitly keeps the effect adapter outside the pure update and sends completion events back to the owner. Fixed white, regular Helvetica Neue/Helvetica/Arial, the approved palette, square boundaries, and restrained strokes are preserved. All four variants have zero measured label collisions, outside labels, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for technical accuracy, labels, arrows, contrast, spacing, and captions.",
+    "browser": "Actual production article checked at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive diagrams, two exact selectable Python source blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. All four related routes return 200. The existing verse redirect leads to the filtered library; its collection gallery shows six members over two pages; the UDF card opens the article with the correct primary-collection breadcrumb. Desktop/phone article tops, code viewport, gallery, and both embedded figures at both widths were visually inspected. No browser console or page errors were recorded.",
+    "built_assets": {
+      "build_root": ".local/software-unidirectional-data-flow/build-workspace/apps/web/build",
+      "local_file_references": 73,
+      "missing": [],
+      "navigation_data_bytes": 45197
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. The check reports one error and zero warnings. The file remains unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic. Four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential in-memory search-state simulation. Search intents create a new screen-local request ID, trim query text to at most 80 Unicode code points, and clear previous results/errors; an empty query invalidates older work without starting retrieval. A pure update accepts matching pending Loaded/Failed completions, ignores stale or duplicate terminal completions, validates IDs and current payload shapes, and returns frozen dataclass state containing immutable values. A pure text view reads the state. The composition owns assignment and manually supplies messages, including an older result arriving last. A real adapter would perform retrieval outside update and dispatch completion to the correct owner. Failed carries a prepared public display message. There is no network adapter, subscription/store framework, task cancellation, screen disposal implementation, cross-process IDs, concurrency synchronization, persistence, authorization, durable action history, or event-sourcing implementation. The settings-form second context is explanatory only.",
+  "preview": "http://127.0.0.1:43017/pattern/unidirectional-data-flow",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-unidirectional-data-flow",
+  "browser_measurements": ".local/software-unidirectional-data-flow/browser-checks.json",
+  "browser_check_script": ".local/software-unidirectional-data-flow/check-browser.mjs",
+  "build_log": ".local/software-unidirectional-data-flow/public-build-isolated.log",
+  "branch": "codex/software-unidirectional-data-flow",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

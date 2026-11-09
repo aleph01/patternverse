@@ -1,0 +1,150 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Zero-Sum Conflict",
+  "metadata_mapping": "Existing concept draft, responsive SVG and source sidecar conventions. Brackets in the requested title treated as template delimiters. No practices or navigation added.",
+  "patterns": [
+    {
+      "id": "zero-sum-conflict",
+      "title": "Zero-Sum Conflict",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; fixed opposing payoffs, minimax, and perceived versus actual scarcity",
+      "article": "content/concepts/zero-sum-conflict.md",
+      "status": "draft",
+      "short_description": "Distinguish genuinely offsetting payoffs from perceived opposition, protect against predictability, and identify when mutual benefit requires different objectives or boundaries.",
+      "use_when": [
+        "Improving one participant’s modeled payoff necessarily worsens another’s.",
+        "A promise of mutual benefit obscures an unavoidable distributive loss.",
+        "A predictable choice can be exploited by an opponent."
+      ],
+      "goals": [
+        "Specify a two-player zero-sum game and its information assumptions.",
+        "Explain randomized protection without promising a realized outcome.",
+        "Separate a fixed resource total from constant-sum utilities.",
+        "Distinguish strategy within a game from changing its objectives."
+      ],
+      "mechanisms": [
+        "Use private mixed strategies when the payoff table supports them.",
+        "Choose an accepted allocation procedure while acknowledging distributive losses.",
+        "Test whether actual scarcity justifies zero-sum beliefs.",
+        "Add genuine benefits or reduce waste only with explicit boundary changes."
+      ],
+      "related_patterns": [
+        "the-prisoners-dilemma",
+        "battle-of-the-sexes",
+        "congestion-problems"
+      ],
+      "example_user_queries": [
+        "Can both sides benefit if every extra point for me costs the other side a point?",
+        "The other person can exploit my choices because I always do the same thing.",
+        "Does having a fixed budget mean the whole negotiation is zero-sum?",
+        "Someone keeps saying win-win without identifying any new benefit.",
+        "How do I tell genuine conflicting interests from a fixed-pie assumption?",
+        "Why would randomizing help in a competitive situation?",
+        "Is a fair lottery the same as improving both people’s outcomes?",
+        "Can repeated interaction remove a truly fixed payoff conflict?",
+        "The other side sees my decision before making theirs.",
+        "What does minimax actually guarantee for one attempt?",
+        "We can cooperate on training but still want opposite match results.",
+        "How can we agree on an allocation when someone necessarily receives less?"
+      ],
+      "visual": {
+        "type": "qualitative-opposed-outcome-matrix-qualitative",
+        "question": "Why can no predictable direction satisfy both objectives?",
+        "assets": [
+          "content/assets/structural-traps/zero-sum-penalty.svg",
+          "content/assets/structural-traps/zero-sum-penalty-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1002,
+            "textBlocks": 19
+          },
+          "phone": {
+            "width": 360,
+            "height": 1286,
+            "textBlocks": 16
+          }
+        },
+        "representation": {
+          "mode": "qualitative-opposed-outcome-matrix",
+          "question": "Why can no predictable direction satisfy both objectives?",
+          "interpretation": "Hypothetical qualitative illustration. Lena’s shot and Marco’s dive each have Left and Right choices. Matching directions favor a save; different directions favor a goal. Marco wants to match while Lena wants to avoid a match. Physical execution is uncertain, so cells describe relative chances rather than certain results. The comparisons show alternative choices, not successive moves; neither participant observes the other’s current choice. Change: Keep choices privately unpredictable while recognizing the opposed objectives. Limitation: No strategy guarantees this kick. Unequal directional effectiveness changes suitable mixing.",
+          "relationship_key": "Rows are Lena’s shot; columns are Marco’s dive. Cells compare chances, not utility scores or certain outcomes.",
+          "changed_relationship": "Keep choices privately unpredictable while recognizing the opposed objectives.",
+          "residual_constraints": "No strategy guarantees this kick. Unequal directional effectiveness changes suitable mixing.",
+          "phone_treatment": "Stacked conditional comparisons hold the other participant’s action fixed; arrows compare alternatives rather than sequential moves. The phone-specific legend identifies whose alternatives are compared without changing the simultaneous-choice assumptions.",
+          "phone_reading_key": "Each group fixes one possible dive by Marco and compares Lena’s shots. These are alternative cases, not successive moves: neither player observes the other’s current choice. The cards compare chances, not utility scores or certain outcomes."
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Lena’s shot and Marco’s dive each have Left and Right choices. Matching directions favor a save; different directions favor a goal. Marco wants to match while Lena wants to avoid a match. Physical execution is uncertain, so cells describe relative chances rather than certain results. The comparisons show alternative choices, not successive moves; neither participant observes the other’s current choice. Change: Keep choices privately unpredictable while recognizing the opposed objectives. Limitation: No strategy guarantees this kick. Unequal directional effectiveness changes suitable mixing.",
+        "caption": "Hypothetical illustration. Compare the same choice pair from both perspectives: Marco favors a match and Lena a mismatch. This choice comparison describes opposed objectives without promising a goal or save. Balanced private randomization fits only the stipulated symmetric case.",
+        "style": "Fixed white including dark surroundings; regular Helvetica Neue with Helvetica and Arial fallbacks; ink and secondary text meet contrast on prescribed fills. Green identifies intervention geometry. Essential connections use ink; light construction lines remain contextual."
+      },
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Felix Fischer, Non-Cooperative Games, lecture 9",
+          "url": "https://webspace.maths.qmul.ac.uk/felix.fischer/teaching/opt/notes/notes9.pdf",
+          "supports": "Definitions of bimatrix, zero-sum, and constant-sum games; mixed strategies, security levels, minimax theorem, and equilibrium characterization.",
+          "read_method": "All four pages of the university-hosted lecture notes opened and read, including definitions and theorem assumptions.",
+          "boundary": "A mathematical teaching source. Its general results do not establish how people behave or establish measured goal probabilities for the hypothetical penalty kick."
+        },
+        {
+          "title": "Bernhard von Stengel, Zero-Sum Games and Linear Programming Duality (2024; arXiv v6 2023)",
+          "url": "https://arxiv.org/html/2205.11196v6",
+          "doi": "10.1287/moor.2022.0149",
+          "supports": "Historical attribution of the minimax theorem to von Neumann in 1928 and its mathematical context.",
+          "read_method": "Original research paper opened in full HTML; introduction and historical/mathematical framing read.",
+          "boundary": "The 1928 original was not obtained. The article explicitly attributes its history through this modern account; no claim to an independent reading of the original proof."
+        },
+        {
+          "title": "Daniel V. Meegan, Zero-Sum Bias: Perceived Competition Despite Unlimited Resources (2010)",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2010.00191/full",
+          "doi": "10.3389/fpsyg.2010.00191",
+          "supports": "University grade-prediction experiments: high preceding grades increased low-grade predictions in a non-quota setting; explicit policy information reduced low-grade predictions.",
+          "read_method": "Original publisher-hosted article opened and read, including introduction and methods/results for all three experiments. PMC retrieval encountered a browser challenge; publisher full text succeeded.",
+          "boundary": "One university student judgment task, not direct evidence that real resource competition is absent or that information reliably removes all zero-sum beliefs. No evolutionary explanation adopted as established fact."
+        }
+      ],
+      "evidence_boundary": "The scenario and illustration are hypothetical. Qualitative formal comparisons depend on the stated players, actions, preferences, information, timing, and repetition assumptions. Empirical findings retain their source-specific limits. Practical interventions are editorial synthesis, not measured effects of this scenario.",
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "example_structure": {
+        "scenario": "Hypothetical narrative; no invented utility scores, numerical trajectory, or probability cutoff is required to follow the example.",
+        "changed_relationship": "Change how a choice is revealed, while recognizing the opposed objectives.",
+        "residual_constraints": "Balanced randomization fits only the symmetric illustration. No strategy guarantees this kick."
+      },
+      "editorial_revision": {
+        "date": "2026-11-01",
+        "purpose": "Explain the general principle through concrete choices, relationships, and consequences; remove illustrative calculation as a reading requirement.",
+        "source_handling": "Existing attributable research and source links retained where still relevant; source_checked remains the original research date."
+      },
+      "illustration_teaching_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the teaching-value audit while retaining every article and its qualitative worked example.",
+        "change": "Replace or clarify the representation around its specific mechanism.",
+        "source_handling": "Article prose, external source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed."
+      },
+      "reader_comprehension_revision": {
+        "date": "2026-11-01",
+        "change": "Replace the phone row/column legend with group/card instructions and distinguish alternative cases from chronology; make the shared caption layout-neutral.",
+        "evidence_boundary": "Editorial clarification and rendering verification, not a reader study or evidence of improved comprehension. No participants, comprehension scores, or measured intervention effects claimed.",
+        "source_handling": "Original source identities, source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: schema validation (1454 entities) and rendered Markdown checks confirm all forty separate illustrated drafts retain nine sections, unchanged collection membership and external source links, and exclusion from the public corpus. Six affected articles checked live at 1440px and 390px (12 article layouts). Three figure pairs checked at actual desktop and phone image widths of 718px and approximately 364.6px in light and dark surroundings (12 illustration layouts), with no text overlap, clipping, card overflow, page overflow, or white-surface errors. Responsive sources, image dimensions, captions and alternative text match. Phone comparison instructions and the revised prose visually inspected. Desktop geometry and choice arrows preserved. These are editorial and rendering checks, not a reader-comprehension study."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

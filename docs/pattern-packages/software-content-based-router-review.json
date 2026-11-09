@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "content-based-router",
+  "title": "Content-Based Router",
+  "aliases": ["Content Based Router", "Content-Based Routing", "CBR"],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1477,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary sources: Hohpe and Woolf’s Content-Based Router, Recipient List, and Message Filter catalogs; Apache Camel 4.22.x Choice documentation; RabbitMQ consumer acknowledgment and publisher-confirm documentation. The article distinguishes content-based selection from routing generally, single selected output from multiple intended recipients, and one-output filtering from choosing a destination. First-match is explicit policy supported by the Camel example, not a universal guarantee. Camel Choice is described as an implementation construct rather than a general alias.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["routing.py", "demo.py"],
+      "stdout": [
+        "A41 priority-fulfillment express-physical orders-v1",
+        "A42 manual-review high-value orders-v1",
+        "A43 digital-delivery digital orders-v1",
+        "A44 standard-fulfillment physical orders-v1",
+        "A45 unclassified-review otherwise orders-v1",
+        "A46 invalid-messages fields orders-v1"
+      ],
+      "verification": "Twenty-four valid kind/express/amount combinations, first-match overlap, exact 99999/100000 boundary, high-value digital/unknown kinds, valid unknown fallback, strict schema shape/version, missing/extra fields, Boolean-versus-integer validation, invalid numeric and string fields, exact kind comparison, immutable decisions, repeat determinism, and input nonmutation passed. No delivery or deduplication guarantee is inferred."
+    },
+    "content": "1271 entities validate with drafts included; published-only compilation contains 1124 entities without diagnostics.",
+    "integration_tests": "Content-Based Router, Correlation Identifier, Request-Reply, Publish-Subscribe, and GoF integration suites pass. The combined run reports 40 passed checks and one unrelated global authored-graphic coverage failure across six files. Four other graphics checks pass. After narrowing the alias metadata, all three Content-Based Router tests were rerun and pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, validator, integration test, authoring sidecar, concept registry, authoring documentation, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Messaging and Integration, preserving its first three members and appending Content-Based Router fourth with an explanatory paragraph. No new collection or future stub.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1269,
+      "new_content": ["content/patterns/content-based-router.md"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 36,
+      "prior_graphics_unchanged": 448,
+      "prior_dimensions_unchanged": 1585,
+      "new_dimensions": {
+        "software-engineering/content-based-router-precedence.svg": {
+          "width": 720,
+          "height": 1008
+        },
+        "software-engineering/content-based-router-precedence-mobile.svg": {
+          "width": 360,
+          "height": 1200
+        },
+        "software-engineering/content-based-router-boundaries.svg": {
+          "width": 720,
+          "height": 944
+        },
+        "software-engineering/content-based-router-boundaries-mobile.svg": {
+          "width": 360,
+          "height": 1208
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. The final article source and authoring metadata agree with the staged copy used for the final build. Private environment files were excluded, and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and other session staging directories were untouched. No renderer or build implementation changes.",
+    "illustrations": "Two editable native SVG figures explain rule precedence at the 99999/100000 cent boundary and valid-unmatched versus malformed-input outcomes, alongside selection/handoff/completion boundaries. Each has a separately composed phone version. Fixed white, regular Helvetica Neue/Helvetica/Arial, approved palette, square geometry, generous spacing, readable labels, precise arrows, contrast, and captions verified. Four variants have zero measured label collisions, outside labels, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected.",
+    "browser": "Actual final production article verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python source blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. Three related routes return 200. Collection route and software verse gallery show four members; the article card opens with the correct primary breadcrumb. Desktop/phone article tops, code viewports, collection gallery, and embedded figures visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-content-based-router/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 43933
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic; four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original pure sequential order classifier. Input is an already-decoded exact five-field dictionary with integer schema 1, nonblank order ID and kind, Boolean express, and nonnegative integer US dollar cents. Kind matching is exact and case-sensitive. High-value review at 100000 cents precedes digital, express physical, standard physical, and otherwise classification review. Malformed shape or values select invalid-messages before business rules. A frozen Decision records one allowed logical channel, rule, and orders-v1. No enqueue, broker, parser, input-size enforcement, fulfillment, charging, business review, acknowledgment, retry, synchronization, or live policy updates. A policy version records selection; it does not pin replay execution or prevent duplicates. Production input parsing/size limits, stable message identity, authorization, handoff safety, bounded buffering, and repeated-effect handling remain implementation responsibilities. Camel header routing is an explanatory second context only.",
+  "preview": "http://127.0.0.1:43021/pattern/content-based-router",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-content-based-router",
+  "browser_measurements": ".local/software-content-based-router/browser-checks.json",
+  "browser_check_script": ".local/software-content-based-router/check-browser.mjs",
+  "build_log": ".local/software-content-based-router/public-build-isolated.log",
+  "branch": "codex/software-content-based-router",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

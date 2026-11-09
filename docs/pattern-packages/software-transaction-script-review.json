@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "transaction-script",
+  "title": "Transaction Script",
+  "aliases": ["Transaction Scripts", "Transaction Script Pattern"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1446,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six authoritative source notes. Fowler’s Transaction Script catalog in Patterns of Enterprise Application Architecture establishes request-oriented procedures, direct data access or thin wrappers, and reusable subtasks. Domain Model and Table Module establish alternative organizations of logic. Stafford’s Service Layer defines the separate application boundary. Official SQLite and Python documentation support the chosen local transaction mechanism. The warehouse scenario, executable code, and native SVGs are original teaching material. No Table Module article or other candidate stub was created.",
+    "python_examples": "Both actual article fences execute as transactions.py and demo.py and produce all six stated lines exactly. Checks cover positive whole units, exact remainder, empty stock, unknown SKU, malformed IDs and quantities, corrupt stock records, duplicate movement failure after the first update with complete rollback, duplicate IDs across SKUs, unchanged other SKUs, opaque IDs with quotes and surrounding spaces, rejection of nested or non-explicit transactions without altering caller work, caller-owned connection lifetime, two-connection write contention, and committed cross-connection visibility. The business rules remain directly in the request procedure with no domain classes.",
+    "python_stdout": [
+      "remaining: 2",
+      "duplicate: rolled back",
+      "after duplicate: 2",
+      "exact remainder: 0",
+      "empty: Insufficient stock",
+      "movement rows: 2"
+    ],
+    "article_tests": "81 article tests pass across Transaction Script and the prior software/GoF suites. Coverage includes canonical ID and searchable aliases without duplicates, one primary home with nine previous members retained, exact eight-section outline, both copyable highlighted Python blocks, accessible responsive figures and manifest dimensions, resolved related links, ten queries, revision hash, and concept mark. The run uses two workers, a 20-second test timeout, and a 60-second corpus hook timeout.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined results: 85 passed and one unrelated failure across 21 files.",
+    "content": "1251 entities validate with drafts included. Published-only corpus contains 1104 entities and no errors.",
+    "collection": "Reused Domain Modeling and Business Logic, appending Transaction Script after all nine prior members. Domain Model, Service Layer, and Command retain their canonical IDs and primary homes. No new collection, duplicate alias article, or practice was added.",
+    "public_build": "Production build and public web build checks pass. Browser verification used the completed build; no deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, executable validator, article integration test, authoring sidecar, concept registry, and authoring documentation. The generator was checked again after clarifying its procedure boundary; the review report is formatted separately.",
+    "visuals": "All four editable native SVG variants load. Native and production-browser measurements show no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. All four native renders and actual desktop/phone article figures were visually inspected. The organization figure encloses validation, data reading, the availability decision, calculation, and both writes inside the named procedure. The outcome figure distinguishes provisional stock subtraction from committed state and shows the duplicate movement restoring stock while retaining the original movement quantity. Exact palette, fixed white surface, regular Helvetica typography, square geometry, contrast, arrow meanings, captions, label placement, and readability were checked. The concept mark appears in the article and gallery.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 headings, both Python blocks preserved exactly in DOM text, colored syntax tokens, selectable code retaining indentation, focusable code blocks, keyboard horizontal code scrolling for transactions.py at 320px, both phone SVG variants loaded, and no page overflow. Normal browser selection omits the terminal newline. Actual desktop/phone article tops, code, figures, captions, and collection gallery screenshots were visually inspected.",
+    "navigation_browser": "Domain Model, Service Layer, and Command routes return HTTP 200. The primary collection direct route renders its title. Software Engineering opens a ten-pattern gallery; page three exposes Transaction Script as the tenth article, and its card opens the canonical route with the Domain Modeling and Business Logic breadcrumb.",
+    "preservation": "All 23 GoF articles and their collection match actual pre-change SHA-256 hashes. All eighteen earlier software articles and authoring records are unchanged. All 430 previous concept marks and 1514 asset-dimension records are unchanged. Software Engineering verse and Application Architecture collection are byte-for-byte unchanged. All nine previous primary collection members remain."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ and standard-library SQLite. One SKU per request, with whole-unit counts and exact opaque identifiers. The caller owns an idle explicit-transaction connection and its closing; the procedure owns the local transaction and its rules. The demo database is in memory. No physical dispatch, authentication, reservations, cancellation, durable idempotency outcome protocol, automatic contention retry, or cross-database coordination is implemented. Duplicate IDs reject rather than return the original outcome. Remaining units are the committed result of this operation, not a promise about later availability. BEGIN IMMEDIATE supplies the demonstrated concurrency mechanism; the pattern name does not create atomicity or locking.",
+  "preview": "http://127.0.0.1:43003/pattern/transaction-script",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-transaction-script",
+  "browser_measurements": ".local/software-transaction-script/browser-checks.json",
+  "browser_check_script": ".local/software-transaction-script/check-browser.mjs",
+  "preservation_checks": ".local/software-transaction-script/preservation.json",
+  "build_log": ".local/software-transaction-script/public-build.log",
+  "branch": "codex/software-transaction-script",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

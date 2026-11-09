@@ -1,0 +1,87 @@
+{
+  "format_version": 1,
+  "title": "Cognitive Continuum",
+  "verse": "therapy",
+  "metadata_mapping": "Canonical metadata uses the existing content schema. Richer recommendation metadata stays in this sidecar; the current search index does not automatically ingest these queries.",
+  "patterns": [
+    {
+      "id": "cognitive-continuum",
+      "title": "Cognitive Continuum",
+      "domain": "Cognitive behavioral therapy and everyday self-reflection",
+      "collections": ["cbt"],
+      "short_description": "Replace a polarised judgment with a defined range and use concrete evidence to locate a specific situation on it.",
+      "use_when": [
+        "A single flaw makes an entire effort feel worthless.",
+        "A judgment allows only perfect success or complete failure.",
+        "Someone wants a specific account of performance rather than a global label."
+      ],
+      "goals": [
+        "Notice relevant differences between extremes",
+        "Describe a specific situation using evidence",
+        "Preserve responsibility while identifying a workable response"
+      ],
+      "mechanisms": [
+        "Make a vague evaluative label explicit through behavioural criteria",
+        "Define intermediate examples along one consistent dimension",
+        "Consider observations overlooked by an all-or-nothing judgment",
+        "Translate an approximate placement into a believable description"
+      ],
+      "tags": ["CBT", "black-and-white-thinking", "perfectionism", "cognitive-restructuring"],
+      "related_patterns": ["cbt-thought-record", "double-standard-technique", "cbt-experiment"],
+      "difficulty": "Beginner; use a manageable everyday situation",
+      "estimated_practice_time": "10–15 minutes",
+      "prerequisites": ["A bounded situation and one quality that can meaningfully vary by degree"],
+      "not_ideal_when": [
+        "An immediate threat or required safety threshold needs action.",
+        "The scale is being used to excuse harm or assess someone's human worth.",
+        "Repeated scoring is becoming reassurance seeking or compulsive checking.",
+        "The main question concerns another person's unobserved thoughts."
+      ],
+      "example_user_queries": [
+        "If I make one mistake, the whole thing feels like a failure.",
+        "I can only see my work as perfect or worthless.",
+        "One bad moment makes me write off the whole day.",
+        "How can I recognise progress when I still get things wrong?",
+        "I missed one commitment and now I think I am unreliable.",
+        "Anything below my highest standard feels like doing nothing.",
+        "I know there are shades of grey but cannot find them in my own situation.",
+        "How can I acknowledge a mistake without condemning myself?",
+        "I want a realistic assessment rather than another positive affirmation.",
+        "My presentation had a rough moment and I cannot see anything else.",
+        "Does recognising what went well mean making excuses for the problem?",
+        "I keep turning performance ratings into another demand to be perfect."
+      ],
+      "practice": {
+        "id": "find-the-shades-of-grey",
+        "estimated_minutes": 12,
+        "format": "Standalone self-guided Pattern Language practice using forms, ratings, and participant-selected branches",
+        "boundary": "No AI, diagnosis, automatic interpretation, required improvement, or required final number. Initial and final placements may remain open, and the reader may keep their initial assessment."
+      },
+      "visual": {
+        "article_decision": "comparison",
+        "reason": "A five-row anchor table makes the intermediate distinctions readable on narrow screens. The practice uses the existing numeric rating control with the participant's own criteria; no additional illustration or dependency is needed."
+      },
+      "sources": [
+        {
+          "title": "NHS London: Perfectionism",
+          "url": "https://london.hee.nhs.uk/professional-development/psu-coaching-service/perfectionism",
+          "accessed": "2026-10-29",
+          "supports": "Continuum work as a CBT approach to polarised standards and a link to a practical worksheet."
+        },
+        {
+          "title": "Think CBT: Continuum Exercises",
+          "url": "https://thinkcbt.com/images/Downloads/Other_CBT_Resources/THINK_CBT_EXERCISE_14_-_CBT_CONTINUUM_V10.pdf",
+          "accessed": "2026-10-29",
+          "supports": "Define endpoint criteria, use comparison examples, reconsider a position, and write a revised belief."
+        },
+        {
+          "title": "Centre for Clinical Interventions: Changing Perfectionism, Module 4",
+          "url": "https://www.cci.health.wa.gov.au/-/media/CCI/Consumer-Modules/Perfectionism-in-Perspective/Perfectionism-in-Perspective---04---Changing-Perfectionism.pdf",
+          "accessed": "2026-10-29",
+          "supports": "Viewing standards on a continuum and retaining reasonable high standards while loosening unrelenting ones."
+        }
+      ],
+      "evidence_boundary": "An established CBT technique documented in professional educational resources. The sources do not validate this particular digital sequence or establish standalone clinical efficacy. All worked situations and scale anchors are original illustrations."
+    }
+  ]
+}

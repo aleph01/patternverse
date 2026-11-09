@@ -1,0 +1,112 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — The Commons Dilemma",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "the-commons-dilemma",
+      "title": "The Commons Dilemma",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems combined with shared-resource stocks, inflow, and depletion",
+      "article": "content/concepts/the-commons-dilemma.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Garrett Hardin (1968), The Tragedy of the Commons",
+          "url": "https://www.garretthardinsociety.org/articles/art_tragedy_of_the_commons.html",
+          "doi": "10.1126/science.162.3859.1243",
+          "supports": "Original essay text read, especially the open-pasture mechanism and its explicit attribution to William Forster Lloyd’s 1833 discussion.",
+          "boundary": "Only the private-benefit/shared-cost mechanism and historical attribution are used. No inevitability theorem for governed commons or claim from the essay’s broader population arguments is adopted."
+        },
+        {
+          "title": "Elinor Ostrom, James Walker, Roy Gardner (1992), Covenants With and Without a Sword: Self-Governance is Possible",
+          "url": "https://www.wtf.tw/ref/ostrom_1992.pdf",
+          "supports": "Final published scan inspected by OCR, printed pp. 404 and 414, with relevant notes on 415: common-pool definition; experimental communication/sanction treatments; conditional ability to form effective agreements without external enforcement.",
+          "boundary": "Original final-paper text, not only an abstract snippet. The readable 1991 conference version was also consulted but its differing title and unpublished status are not substituted for the final citation. No experiment’s effect size is transferred to the hypothetical lake and no claim of inevitable cooperation is made."
+        },
+        {
+          "title": "Elinor Ostrom (2009), Beyond Markets and States: Polycentric Governance of Complex Economic Systems",
+          "url": "https://faculty.sites.iastate.edu/tesfatsi/archive/tesfatsi/BeyondMarketsAndStates.NobelLecture.EOstrom2009.pdf",
+          "supports": "Resource classification and distinction between a common-pool resource and its property regime, including government, private, community, or unowned arrangements; context-dependent institutional organization.",
+          "boundary": "University-hosted facsimile read, including printed pp. 412–413 and 419–422. No universal public, private, or community governance winner is inferred."
+        },
+        {
+          "title": "Michael Cox, Gwen Arnold, Sergio Villamayor Tomás (2010), A Review of Design Principles for Community-based Natural Resource Management",
+          "url": "https://dlc.dlib.indiana.edu/dlcrest/api/core/bitstreams/fe453645-ec0f-4a71-91ad-19abd9634dbc/content",
+          "supports": "Primary review of 91 studies; methods and coding, monitoring of users and resource condition, accountable monitors, and need to combine institutional principles with diagnosis.",
+          "boundary": "Mixed observational/case/theoretical literature and coded associations. No causal effect size, universal success guarantee, or prediction for a particular fishery catch limit follows from the review."
+        }
+      ],
+      "related_patterns": [
+        "the-public-goods-dilemma",
+        "the-prisoners-dilemma",
+        "bottlenecks-and-capacity-constraints"
+      ],
+      "status": "published",
+      "short_description": "Recognize when private gains from withdrawing a shared resource distribute depletion costs across others, then align access, use, and monitoring with the resource's changing condition.",
+      "use_when": [
+        "What links private take to a falling common stock?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Join withdrawal rights to a revisable shared limit, monitoring, and changing ecological conditions.",
+        "Monitoring costs resources; fishers lose some current take. A catch limit guarantees neither renewal nor recovery."
+      ],
+      "example_structure": {
+        "scenario": "Shared lake; private catch benefit and dispersed depletion cost. Living biomass stock has reproduction/growth inputs and harvest/natural-death outputs. Positive net natural addition in the figure already subtracts natural losses; no fixed renewal rate or sustainable yield is inferred. One-period own-benefit benchmark separated from dynamic resource state. Governed commons distinguished from open access; no collapse or resource damage required.",
+        "changed_relationship": "Join withdrawal rights to a revisable shared limit, monitoring, and changing ecological conditions.",
+        "residual_constraints": "Monitoring costs resources; fishers lose some current take. A catch limit guarantees neither renewal nor recovery.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "What links private take to a falling common stock?",
+        "assets": [
+          "content/assets/structural-traps/commons-cistern-budget.svg",
+          "content/assets/structural-traps/commons-cistern-budget-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 915,
+            "textBlocks": 20
+          },
+          "phone": {
+            "width": 360,
+            "height": 1641,
+            "textBlocks": 20
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Net natural production adds living biomass to the shared fish stock in this case. One fisher and other fishers take catches from that same stock. Combined harvesting exceeds net natural addition. A proposed assessment and shared catch limit change withdrawal rights, not the certainty of renewal. Change: Join withdrawal rights to a revisable shared limit, monitoring, and changing ecological conditions. Limitation: Monitoring costs resources; fishers lose some current take. A catch limit guarantees neither renewal nor recovery.",
+        "caption": "Hypothetical illustration. The physical branches share one living resource; a private catch leaves less for others. Governance links permitted catches to uncertain stock and renewal information. Lower catches can cost food or income, and outsider use or habitat loss can defeat the local arrangement.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Net natural production adds living biomass to the shared fish stock in this case. One fisher and other fishers take catches from that same stock. Combined harvesting exceeds net natural addition. A proposed assessment and shared catch limit change withdrawal rights, not the certainty of renewal. Change: Join withdrawal rights to a revisable shared limit, monitoring, and changing ecological conditions. Limitation: Monitoring costs resources; fishers lose some current take. A catch limit guarantees neither renewal nor recovery.",
+          "relationship_key": "Upper arrows transfer fish biomass; net addition already accounts for natural losses. Lower arrows show governance steps, not fish flows. No width represents a catch quantity.",
+          "changed_relationship": "Join withdrawal rights to a revisable shared limit, monitoring, and changing ecological conditions.",
+          "residual_constraints": "Monitoring costs resources; fishers lose some current take. A catch limit guarantees neither renewal nor recovery.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Shared lake; private catch benefit and dispersed depletion cost. Living biomass stock has reproduction/growth inputs and harvest/natural-death outputs. Positive net natural addition in the figure already subtracts natural losses; no fixed renewal rate or sustainable yield is inferred. One-period own-benefit benchmark separated from dynamic resource state. Governed commons distinguished from open access; no collapse or resource damage required.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

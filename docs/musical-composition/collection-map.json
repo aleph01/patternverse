@@ -1,0 +1,3275 @@
+{
+  "version": 1,
+  "title": "Musical Composition Collection Map and Coverage Review",
+  "date": "2026-10-29",
+  "status": "working editorial proposal",
+  "scope": "Baseline reconciliation of 15 proposed collections and 60 candidates with 49 songwriting sources. Coverage counts refer to 29 October 2026. Dated integration annotations record later curriculum and player work without silently treating formal-model explanations as new dedicated pattern articles. See curriculum_integration_review for the current implementation.",
+  "source_manifest": "docs/songwriting-course/chapters.json",
+  "coverage_definitions": {
+    "dedicated": "An existing pattern has the same central creative situation and reusable move. Domain framing or demonstrations may still need work.",
+    "embedded": "An explicit developed passage or concrete seed exists within a broader article; this is not a dedicated pattern.",
+    "gap": "No developed treatment of this candidate exists; incidental mentions and related foundations are recorded without counting as coverage."
+  },
+  "musical_levels": [
+    {
+      "key": "sound",
+      "title": "Sound"
+    },
+    {
+      "key": "figure",
+      "title": "Figure"
+    },
+    {
+      "key": "phrase",
+      "title": "Phrase"
+    },
+    {
+      "key": "section",
+      "title": "Section"
+    },
+    {
+      "key": "piece",
+      "title": "Whole piece"
+    }
+  ],
+  "process_scope": "Methods can have process scope instead of being forced into the sound-to-piece hierarchy. Musical levels express the material acted upon, not technical difficulty, musical pitch-scale type, or workflow duration.",
+  "families": [
+    {
+      "key": "materials",
+      "title": "Musical Materials",
+      "question": "What can I shape?"
+    },
+    {
+      "key": "relationships",
+      "title": "Musical Relationships and Development",
+      "question": "How can material interact and grow?"
+    },
+    {
+      "key": "methods",
+      "title": "Creative Methods and Approaches",
+      "question": "How can I discover, develop, and finish an approach?"
+    }
+  ],
+  "collections": [
+    {
+      "key": "melody-phrasing",
+      "number": 1,
+      "title": "Melody & Phrasing",
+      "family": "materials",
+      "use_when": "A line lacks direction, punctuation, or a recognizable focal feature.",
+      "boundary": "Shape the identity and articulation of a single musical line.",
+      "preferred_view": "piano-roll",
+      "default_player_work": "new-example-data",
+      "candidate_keys": [
+        "melodic-contour",
+        "phrase-breathing",
+        "question-and-answer",
+        "melodic-hook"
+      ],
+      "existing_source_ids": [
+        "songwriting-pitch-and-intervals",
+        "songwriting-contour-and-register",
+        "songwriting-phrases-and-breathing",
+        "songwriting-write-a-hook"
+      ],
+      "coverage_counts": {
+        "dedicated": 3,
+        "embedded": 1
+      },
+      "existing_article_count": 4
+    },
+    {
+      "key": "harmony-tonality",
+      "number": 2,
+      "title": "Harmony & Tonality",
+      "family": "materials",
+      "use_when": "Pitches and chords need a clear relationship, color, or destination.",
+      "boundary": "Organize pitch collections, centers, simultaneous notes, and harmonic movement.",
+      "preferred_view": "piano-roll",
+      "default_player_work": "new-example-data",
+      "candidate_keys": [
+        "establish-a-tonal-home",
+        "functional-harmonic-motion",
+        "harmonic-rhythm-variation",
+        "arpeggiation",
+        "pedal-point",
+        "borrow-a-chord"
+      ],
+      "existing_source_ids": [
+        "songwriting-build-a-scale",
+        "songwriting-scales-and-tonal-home",
+        "songwriting-build-and-hear-chords",
+        "songwriting-chord-families-and-numbers",
+        "songwriting-circle-of-fifths",
+        "songwriting-progressions-and-arrival",
+        "songwriting-melody-and-harmony",
+        "songwriting-inversions-and-voice-leading",
+        "songwriting-sevenths-added-notes-suspensions",
+        "songwriting-borrow-a-chord",
+        "songwriting-point-to-a-temporary-home",
+        "songwriting-modes-drones-and-key-changes"
+      ],
+      "coverage_counts": {
+        "dedicated": 3,
+        "embedded": 3
+      },
+      "existing_article_count": 12
+    },
+    {
+      "key": "rhythm-groove",
+      "number": 3,
+      "title": "Rhythm & Groove",
+      "family": "materials",
+      "use_when": "A recurring pulse or the events around it need more purposeful movement.",
+      "boundary": "Shape pulse, grouping, subdivision, timing, and rhythmic reference.",
+      "preferred_view": "beat-grid",
+      "default_player_work": "new-view-and-example-data",
+      "candidate_keys": [
+        "rhythmic-ostinato",
+        "strategic-silence",
+        "syncopation",
+        "swing",
+        "polyrhythms"
+      ],
+      "existing_source_ids": [
+        "songwriting-pulse-and-tempo",
+        "songwriting-beats-bars-and-meter",
+        "songwriting-subdivision-and-rests",
+        "songwriting-syncopation-and-anticipation",
+        "songwriting-swing-and-timing"
+      ],
+      "coverage_counts": {
+        "embedded": 1,
+        "dedicated": 3,
+        "gap": 1
+      },
+      "existing_article_count": 5
+    },
+    {
+      "key": "timbre-sound-design",
+      "number": 4,
+      "title": "Timbre & Sound Design",
+      "family": "materials",
+      "use_when": "The character of the sounds should become compositional material.",
+      "boundary": "Choose and transform the identity of sounds, including sources beyond pitched instruments.",
+      "preferred_view": "sound-comparison",
+      "default_player_work": "new-audio-controls-or-clips",
+      "candidate_keys": [
+        "sonic-palette",
+        "timbral-transformation",
+        "instrument-transformation",
+        "blend-noise-and-pitch"
+      ],
+      "existing_source_ids": ["songwriting-choose-a-sonic-setting"],
+      "coverage_counts": {
+        "dedicated": 1,
+        "gap": 3
+      },
+      "existing_article_count": 1
+    },
+    {
+      "key": "texture-layering",
+      "number": 5,
+      "title": "Texture & Layering",
+      "family": "materials",
+      "use_when": "Simultaneous parts compete, obscure one another, or need complementary roles.",
+      "boundary": "Organize which layers coexist and what each contributes.",
+      "preferred_view": "layer-timeline",
+      "default_player_work": "new-view-and-example-data",
+      "candidate_keys": [
+        "foreground-and-background",
+        "register-separation",
+        "interlocking-layers",
+        "textural-subtraction"
+      ],
+      "existing_source_ids": [
+        "songwriting-interlock-the-groove",
+        "songwriting-write-a-bass-line",
+        "songwriting-give-each-part-a-job"
+      ],
+      "coverage_counts": {
+        "dedicated": 2,
+        "embedded": 2
+      },
+      "existing_article_count": 3
+    },
+    {
+      "key": "space-atmosphere",
+      "number": 6,
+      "title": "Space & Atmosphere",
+      "family": "materials",
+      "use_when": "The apparent distance, placement, or acoustic continuity of sounds should shape the music.",
+      "boundary": "Compose perceived depth, spatial position, motion, and reverberant relationships.",
+      "preferred_view": "spatial-comparison",
+      "default_player_work": "new-audio-controls-or-clips",
+      "candidate_keys": [
+        "depth-layering",
+        "spatial-contrast",
+        "spatial-movement",
+        "connect-sounds-with-reverberation"
+      ],
+      "existing_source_ids": [],
+      "coverage_counts": {
+        "embedded": 2,
+        "gap": 2
+      },
+      "existing_article_count": 0
+    },
+    {
+      "key": "dynamics-gesture",
+      "number": 7,
+      "title": "Dynamics & Gesture",
+      "family": "materials",
+      "use_when": "A sound or phrase needs a more purposeful attack, continuation, release, or emphasis.",
+      "boundary": "Shape the physical and temporal behavior of sounds and gestures.",
+      "preferred_view": "gesture-envelope",
+      "default_player_work": "new-audio-controls-or-clips",
+      "candidate_keys": ["envelope-shaping", "dynamic-contrast", "articulation-contrast"],
+      "existing_source_ids": [],
+      "coverage_counts": {
+        "gap": 1,
+        "embedded": 2
+      },
+      "existing_article_count": 0
+    },
+    {
+      "key": "motifs-development",
+      "number": 8,
+      "title": "Motifs & Thematic Development",
+      "family": "relationships",
+      "use_when": "An idea needs recognizable continuation, variation, or transformation.",
+      "boundary": "Develop relationships within and between recognizable units of material.",
+      "preferred_view": "piano-roll",
+      "default_player_work": "new-example-data",
+      "candidate_keys": [
+        "strategic-repetition",
+        "motivic-sequence",
+        "fragmentation",
+        "developing-variation"
+      ],
+      "existing_source_ids": [
+        "songwriting-repetition-variation-surprise",
+        "songwriting-start-with-a-motif",
+        "songwriting-develop-without-losing-the-idea"
+      ],
+      "coverage_counts": {
+        "dedicated": 1,
+        "embedded": 3
+      },
+      "existing_article_count": 3
+    },
+    {
+      "key": "counterpoint-voices",
+      "number": 9,
+      "title": "Counterpoint & Voice Interaction",
+      "family": "relationships",
+      "use_when": "A second line needs its own musical identity while belonging with the first.",
+      "boundary": "Combine independently meaningful melodic lines; distinguish this from chord voicing.",
+      "preferred_view": "two-voice-roll",
+      "default_player_work": "new-view-and-example-data",
+      "candidate_keys": ["countermelody", "contrary-motion", "imitation"],
+      "existing_source_ids": [],
+      "coverage_counts": {
+        "gap": 3
+      },
+      "existing_article_count": 0
+    },
+    {
+      "key": "tension-drama",
+      "number": 10,
+      "title": "Tension, Release & Musical Drama",
+      "family": "relationships",
+      "use_when": "A passage needs expectation, a consequential arrival, or a convincing trajectory.",
+      "boundary": "Plan the experience of preparation, intensification, withholding, and release.",
+      "preferred_view": "layer-timeline",
+      "default_player_work": "new-view-and-example-data",
+      "candidate_keys": ["gradual-accumulation", "delayed-resolution", "reserve-the-peak"],
+      "existing_source_ids": ["songwriting-shape-energy-over-time"],
+      "coverage_counts": {
+        "embedded": 3
+      },
+      "existing_article_count": 1
+    },
+    {
+      "key": "form-structure",
+      "number": 11,
+      "title": "Musical Form & Structure",
+      "family": "relationships",
+      "use_when": "Strong local ideas need a convincing larger relationship of return and change.",
+      "boundary": "Organize larger spans and the overall experience of a piece.",
+      "preferred_view": "section-map",
+      "default_player_work": "new-view-and-longer-examples",
+      "candidate_keys": [
+        "sectional-contrast",
+        "ternary-form-aba",
+        "theme-and-variations",
+        "continuous-evolution"
+      ],
+      "existing_source_ids": [
+        "songwriting-jobs-of-song-sections",
+        "songwriting-earn-the-bridge",
+        "songwriting-choose-a-song-form"
+      ],
+      "coverage_counts": {
+        "dedicated": 1,
+        "gap": 2,
+        "embedded": 1
+      },
+      "existing_article_count": 3
+    },
+    {
+      "key": "transitions-endings",
+      "number": 12,
+      "title": "Transitions & Endings",
+      "family": "relationships",
+      "use_when": "A boundary feels pasted together or an ending does not complete the intended experience.",
+      "boundary": "Shape entrances, joins, departures, and final gestures.",
+      "preferred_view": "boundary-timeline",
+      "default_player_work": "new-view-and-example-data",
+      "candidate_keys": ["transitional-motif", "break-and-return", "overlap-sections", "coda"],
+      "existing_source_ids": ["songwriting-pacing-transitions-endings"],
+      "coverage_counts": {
+        "embedded": 4
+      },
+      "existing_article_count": 1
+    },
+    {
+      "key": "sampling-manipulation",
+      "number": 13,
+      "title": "Sampling & Sound Manipulation",
+      "family": "methods",
+      "use_when": "Existing audio should become new compositional material through reuse or transformation.",
+      "boundary": "Work with recorded audio as material, including loops and resampling.",
+      "preferred_view": "audio-loop-lanes",
+      "default_player_work": "new-audio-controls-or-clips",
+      "candidate_keys": [
+        "sampling-and-recontextualization",
+        "loop-transformation",
+        "creative-resampling"
+      ],
+      "existing_source_ids": [],
+      "coverage_counts": {
+        "gap": 3
+      },
+      "existing_article_count": 0
+    },
+    {
+      "key": "creative-process",
+      "number": 14,
+      "title": "Creative Processes & Constraints",
+      "family": "methods",
+      "use_when": "A habitual starting point, stalled process, or unfinished draft prevents progress.",
+      "boundary": "Choose generative methods, constraints, revision moves, and ways to finish.",
+      "preferred_view": "process-comparison",
+      "default_player_work": "pattern-specific",
+      "candidate_keys": [
+        "change-the-starting-point",
+        "compose-from-a-single-sound",
+        "phase-a-repeating-figure",
+        "finish-a-miniature",
+        "revise-the-weakest-moment"
+      ],
+      "existing_source_ids": [
+        "songwriting-what-makes-a-song",
+        "songwriting-five-ways-to-begin",
+        "songwriting-listen-like-a-songwriter",
+        "songwriting-capture-musical-seeds",
+        "songwriting-finish-a-tiny-song",
+        "songwriting-revise-the-weakest-moment",
+        "songwriting-finish-and-learn"
+      ],
+      "coverage_counts": {
+        "dedicated": 3,
+        "gap": 2
+      },
+      "existing_article_count": 7
+    },
+    {
+      "key": "songwriting-text",
+      "number": 15,
+      "title": "Songwriting & Music–Text Relationships",
+      "family": "methods",
+      "use_when": "Words, speaker, musical emphasis, and sectional meaning need to work together.",
+      "boundary": "Compose the relationship between language and music, preserving song-specific craft.",
+      "preferred_view": "phrase-and-text",
+      "default_player_work": "new-view-and-example-data",
+      "candidate_keys": [
+        "find-the-central-idea",
+        "prosodic-alignment",
+        "develop-the-lyric",
+        "chorus-lift"
+      ],
+      "existing_source_ids": [
+        "songwriting-find-the-central-idea",
+        "songwriting-choose-the-speaker",
+        "songwriting-write-through-images",
+        "songwriting-rhyme-and-lyric-sound",
+        "songwriting-words-against-music",
+        "songwriting-make-the-lyric-develop",
+        "songwriting-make-the-chorus-arrive",
+        "songwriting-make-the-second-verse-count",
+        "songwriting-vocal-delivery-and-harmonies"
+      ],
+      "coverage_counts": {
+        "dedicated": 4
+      },
+      "existing_article_count": 9
+    }
+  ],
+  "candidates": [
+    {
+      "key": "melodic-contour",
+      "title": "Melodic Contour",
+      "canonical_collection": "melody-phrasing",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-contour-and-register"],
+      "evidence": [
+        {
+          "source_id": "songwriting-contour-and-register",
+          "heading": "Give the high point a job"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "A tune has motion but no clear destination.",
+      "move": "Reserve a rise, fall, or register peak for a consequential moment.",
+      "coverage_observation": "The contour/register pattern gives original phrase and vocal-range comparisons; broadening beyond singers is an adaptation.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep rhythm fixed and compare a level contour with an arch aimed at the final note.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data-first",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "phrase-breathing",
+      "title": "Phrase Breathing",
+      "canonical_collection": "melody-phrasing",
+      "rank": 2,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-phrases-and-breathing"],
+      "evidence": [
+        {
+          "source_id": "songwriting-phrases-and-breathing",
+          "heading": "Compare an open phrase and a reply"
+        }
+      ],
+      "levels": ["phrase"],
+      "scope_kind": "musical",
+      "use_when": "A phrase crowds its next entrance or is uncomfortable to perform.",
+      "move": "Treat sounding time and silence as parts of the same counted phrase.",
+      "coverage_observation": "The breathing pattern already compares filled versus open endings and different phrase lengths.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep the next entrance fixed and compare a filled last beat with a rest.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "question-and-answer",
+      "title": "Question and Answer",
+      "canonical_collection": "melody-phrasing",
+      "rank": 3,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-phrases-and-breathing", "songwriting-start-with-a-motif"],
+      "evidence": [
+        {
+          "source_id": "songwriting-phrases-and-breathing",
+          "heading": "Compare an open phrase and a reply"
+        },
+        {
+          "source_id": "songwriting-start-with-a-motif",
+          "heading": "Build a four-bar phrase"
+        }
+      ],
+      "levels": ["phrase"],
+      "scope_kind": "musical",
+      "use_when": "Successive phrases feel disconnected or equally final.",
+      "move": "Give one phrase an open relationship and make the reply answer it.",
+      "coverage_observation": "An original open-phrase/reply comparison exists inside breathing, with further motif replies; there is no dedicated pattern.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare two equally settled phrases with an open first phrase and a replying second phrase.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "melodic-hook",
+      "title": "Melodic Hook",
+      "canonical_collection": "melody-phrasing",
+      "rank": 4,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-write-a-hook"],
+      "evidence": [
+        {
+          "source_id": "songwriting-write-a-hook",
+          "heading": "Compare three kinds of hook"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "The listener has no compact musical feature to recognize on return.",
+      "move": "Give a short identity room to register and a reason to return.",
+      "coverage_observation": "Write a Hook explicitly compares melodic, rhythmic, and lyrical hooks; retain that breadth and use a melodic facet.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Play the hook with competing accompaniment, then with space around its entrance.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "establish-a-tonal-home",
+      "title": "Establish a Tonal Home",
+      "canonical_collection": "harmony-tonality",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-scales-and-tonal-home"],
+      "evidence": [
+        {
+          "source_id": "songwriting-scales-and-tonal-home",
+          "heading": "Compare two homes with the same opening"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A familiar note collection has no convincing point of rest.",
+      "move": "Use a bass reference, repeated emphasis, and endings to orient the music.",
+      "coverage_observation": "The focused tonal-home pattern and C/A original comparisons are already present.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Compare the fixed opening with C-centered versus A-centered bass references and endings.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "functional-harmonic-motion",
+      "title": "Functional Harmonic Motion",
+      "canonical_collection": "harmony-tonality",
+      "rank": 2,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-progressions-and-arrival"],
+      "evidence": [
+        {
+          "source_id": "songwriting-progressions-and-arrival",
+          "heading": "Give movement a context"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A progression circles without arriving or closes a thought too firmly.",
+      "move": "Coordinate chord order, change rate, and phrase ending to choose a destination.",
+      "coverage_observation": "Decide Where the Harmony Arrives covers this decision and also acknowledges nonfunctional loops; retain the practical title.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep the melody fixed while comparing settled, open, and continuing harmonic endings.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "harmonic-rhythm-variation",
+      "title": "Harmonic Rhythm Variation",
+      "canonical_collection": "harmony-tonality",
+      "rank": 3,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-progressions-and-arrival"],
+      "evidence": [
+        {
+          "source_id": "songwriting-progressions-and-arrival",
+          "heading": "Change how long a chord stays"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A useful progression feels too slow, hurried, or mechanically regular.",
+      "move": "Change when chords change while preserving their order.",
+      "coverage_observation": "Change how long a chord stays develops this inside the arrival pattern; the editor already permits varied durations.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Use the same chord order with even durations and with an accelerated approach to arrival.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data-first",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "arpeggiation",
+      "title": "Arpeggiation",
+      "canonical_collection": "harmony-tonality",
+      "rank": 4,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-build-and-hear-chords"],
+      "evidence": [
+        {
+          "source_id": "songwriting-build-and-hear-chords",
+          "heading": "Hear an arpeggio and a block chord as related"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "Block chords feel static or occupy too much space.",
+      "move": "Distribute a chord's notes through time to create a moving accompaniment.",
+      "coverage_observation": "The arpeggio/block distinction and C-major/minor listening comparison exist; a reusable accompaniment figure through changing chords does not.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Keep harmony fixed and compare block chords with an up-and-down broken-chord figure.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data-first",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "pedal-point",
+      "title": "Pedal Point",
+      "canonical_collection": "harmony-tonality",
+      "rank": 5,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-modes-drones-and-key-changes", "songwriting-write-a-bass-line"],
+      "evidence": [
+        {
+          "source_id": "songwriting-modes-drones-and-key-changes",
+          "heading": "Hold a reference beneath movement"
+        },
+        {
+          "source_id": "songwriting-write-a-bass-line",
+          "heading": "Let a stable bass support change elsewhere"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Moving upper material needs a persistent pitch reference.",
+      "move": "Keep a pitch sounding or returning while the harmony or upper lines change.",
+      "coverage_observation": "The tonal-world pattern explains drones and pedals; the bass pattern provides a stable reference. Neither is a dedicated pedal pattern.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Hold a low reference while changing upper harmony, then compare a bass that follows every root.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "borrow-a-chord",
+      "title": "Borrow a Chord",
+      "canonical_collection": "harmony-tonality",
+      "rank": 6,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-borrow-a-chord"],
+      "evidence": [
+        {
+          "source_id": "songwriting-borrow-a-chord",
+          "heading": "Follow the changed note"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A particular harmonic moment needs a color beyond its starting palette.",
+      "move": "Choose a chord from a parallel palette and check the altered notes against the melody.",
+      "coverage_observation": "The existing pattern has F–Fm–C, exact moving notes, and melody checks. The editor cannot currently insert Fm into a C-major sketch.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Compare matched F–C and F–Fm–C returns while highlighting A–A-flat–G.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "rhythmic-ostinato",
+      "title": "Rhythmic Ostinato",
+      "canonical_collection": "rhythm-groove",
+      "rank": 1,
+      "coverage": "embedded",
+      "source_ids": [
+        "songwriting-interlock-the-groove",
+        "songwriting-start-with-a-motif",
+        "songwriting-repetition-variation-surprise"
+      ],
+      "evidence": [
+        {
+          "source_id": "songwriting-interlock-the-groove",
+          "heading": "Identify the anchor"
+        },
+        {
+          "source_id": "songwriting-start-with-a-motif",
+          "heading": "Hear the seed as a combination of features"
+        },
+        {
+          "source_id": "songwriting-repetition-variation-surprise",
+          "heading": "Establish something the listener can recognize"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A passage needs an anchor against which other material can develop.",
+      "move": "Repeat a distinctive rhythmic unit while giving surrounding events different jobs.",
+      "coverage_observation": "The motif, repetition, and groove articles develop recurring anchors; ostinato is not given a separate decision and boundary.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Loop a fixed cell while adding a contrasting part, then vary the anchor too and compare the loss of reference.",
+        "view": "beat-grid",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "strategic-silence",
+      "title": "Strategic Silence",
+      "canonical_collection": "rhythm-groove",
+      "rank": 2,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-subdivision-and-rests"],
+      "evidence": [
+        {
+          "source_id": "songwriting-subdivision-and-rests",
+          "heading": "The move"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "Continuous activity obscures a phrase or weakens the next entrance.",
+      "move": "Place and count rests as deliberately as sounding events.",
+      "coverage_observation": "Make Space Part of the Rhythm provides the practical home; avoid a duplicate Negative Space article for the same move.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep a bar's duration fixed while removing selected attacks and preserving counted rests.",
+        "view": "beat-grid",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "syncopation",
+      "title": "Syncopation",
+      "canonical_collection": "rhythm-groove",
+      "rank": 3,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-syncopation-and-anticipation"],
+      "evidence": [
+        {
+          "source_id": "songwriting-syncopation-and-anticipation",
+          "heading": "Establish the expectation first"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "A phrase enters squarely or lacks a deliberate push against the beat.",
+      "move": "Move an accent or sustained entrance against an audible metric reference.",
+      "coverage_observation": "The existing entrance pattern develops anticipation and contextual syncopation. Its broader offbeat-accent variants need a focused demonstration.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep the pulse fixed and move one entrance from the downbeat to the preceding offbeat.",
+        "view": "beat-grid",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "swing",
+      "title": "Swing",
+      "canonical_collection": "rhythm-groove",
+      "rank": 4,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-swing-and-timing"],
+      "evidence": [
+        {
+          "source_id": "songwriting-swing-and-timing",
+          "heading": "The move"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "Even subdivisions do not provide the intended recurring feel.",
+      "move": "Choose a repeatable long–short subdivision relationship and distinguish it from shifting a whole part.",
+      "coverage_observation": "The existing timing pattern distinguishes swing, part placement, and drift; it has no chapter-bound original swing comparison.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Compare straight paired subdivisions, uneven pairs, and an equally spaced part shifted late.",
+        "view": "beat-grid",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "polyrhythms",
+      "title": "Polyrhythms",
+      "canonical_collection": "rhythm-groove",
+      "rank": 5,
+      "coverage": "gap",
+      "source_ids": [],
+      "evidence": [],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Two parts could create movement by dividing a shared span differently.",
+      "move": "Layer contrasting regular divisions, beginning with three attacks against two over one common duration.",
+      "coverage_observation": "No dedicated polyrhythm treatment or original comparison exists. Interlocking attacks alone do not establish polyrhythm.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Play the two and three layers separately, together, and against a shared cycle marker.",
+        "view": "beat-grid",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "sonic-palette",
+      "title": "Sonic Palette",
+      "canonical_collection": "timbre-sound-design",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-choose-a-sonic-setting"],
+      "evidence": [
+        {
+          "source_id": "songwriting-choose-a-sonic-setting",
+          "heading": "Decide what remains in front"
+        }
+      ],
+      "levels": ["sound", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "Available sounds pull a piece toward incompatible identities.",
+      "move": "Choose a coherent set of sounds around a focal relationship.",
+      "coverage_observation": "Choose the World Around the Song already selects acoustic, band, and electronic settings. Extend the entry to sound-led composition.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep notes and timing fixed across three restrained sound palettes.",
+        "view": "sound-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "timbral-transformation",
+      "title": "Timbral Transformation",
+      "canonical_collection": "timbre-sound-design",
+      "rank": 2,
+      "coverage": "gap",
+      "source_ids": ["songwriting-choose-a-sonic-setting"],
+      "evidence": [
+        {
+          "source_id": "songwriting-choose-a-sonic-setting",
+          "heading": "Decide what remains in front"
+        }
+      ],
+      "levels": ["sound", "figure", "phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A sound should develop while its pitch material remains recognizable.",
+      "move": "Change a sound's spectral or textural character over time as a compositional event.",
+      "coverage_observation": "Instrumentation comparisons are present, but no pattern teaches a controlled evolving timbre or follows its trajectory.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Hold one pitch and rhythm while a sound changes from a dull sustained tone to a brighter evolving tone.",
+        "view": "sound-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "instrument-transformation",
+      "title": "Instrument Transformation",
+      "canonical_collection": "timbre-sound-design",
+      "rank": 3,
+      "coverage": "gap",
+      "source_ids": ["songwriting-choose-a-sonic-setting"],
+      "evidence": [
+        {
+          "source_id": "songwriting-choose-a-sonic-setting",
+          "heading": "Decide what remains in front"
+        }
+      ],
+      "levels": ["sound", "figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "A familiar source needs to suggest new material or a less familiar identity.",
+      "move": "Transform a source's sound and compose from what the transformation reveals.",
+      "coverage_observation": "Replacing a guitar with a synthesizer is orchestration; there is no developed transformed-source method.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Compare an original plucked source with a transformed version while preserving an audible identifying feature.",
+        "view": "sound-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "blend-noise-and-pitch",
+      "title": "Blend Noise and Pitch",
+      "canonical_collection": "timbre-sound-design",
+      "rank": 4,
+      "coverage": "gap",
+      "source_ids": [],
+      "evidence": [],
+      "levels": ["sound", "figure", "section"],
+      "scope_kind": "musical",
+      "use_when": "A pitched sound needs a contrasting edge, body, or evolving texture.",
+      "move": "Combine pitched and noise material with deliberate balances and envelopes.",
+      "coverage_observation": "No noise-source composition pattern or playable noise comparison is present.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Keep pitch and duration fixed and add a controlled noise component.",
+        "view": "sound-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "foreground-and-background",
+      "title": "Foreground and Background",
+      "canonical_collection": "texture-layering",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-give-each-part-a-job"],
+      "evidence": [
+        {
+          "source_id": "songwriting-give-each-part-a-job",
+          "heading": "Name the contribution"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Several parts compete for the same attention.",
+      "move": "Name each layer's contribution and make the intended foreground perceptible.",
+      "coverage_observation": "Give Each Part a Job has a role map, supporting/answering parts, and removal decisions; preserve that canonical entry.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep the lead fixed while reducing or relocating a competing background part.",
+        "view": "layer-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "register-separation",
+      "title": "Register Separation",
+      "canonical_collection": "texture-layering",
+      "rank": 2,
+      "coverage": "embedded",
+      "source_ids": [
+        "songwriting-give-each-part-a-job",
+        "songwriting-inversions-and-voice-leading",
+        "songwriting-contour-and-register"
+      ],
+      "evidence": [
+        {
+          "source_id": "songwriting-give-each-part-a-job",
+          "heading": "Separate rhythm, register, and duration"
+        },
+        {
+          "source_id": "songwriting-inversions-and-voice-leading",
+          "heading": "Follow three voices"
+        },
+        {
+          "source_id": "songwriting-contour-and-register",
+          "heading": "Give the high point a job"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Different parts remain hard to distinguish despite different rhythms.",
+      "move": "Separate their useful pitch regions without changing their intended roles.",
+      "coverage_observation": "The part-role article directly compares register and duration; the melodic-register article has a different single-line purpose.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Keep the notes' relationships and timing while moving one accompaniment layer into another register.",
+        "view": "layer-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "interlocking-layers",
+      "title": "Interlocking Layers",
+      "canonical_collection": "texture-layering",
+      "rank": 3,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-interlock-the-groove"],
+      "evidence": [
+        {
+          "source_id": "songwriting-interlock-the-groove",
+          "heading": "Compare support, response, and competition"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Added layers obscure the combined pattern or occupy every gap.",
+      "move": "Coordinate complementary attacks, sustains, and spaces around a shared reference.",
+      "coverage_observation": "Interlock the Groove already teaches the decision. Its mounted bass clip alone does not demonstrate the interaction between layers.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Play each layer alone, then compare doubled attacks with complementary entrances.",
+        "view": "layer-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "textural-subtraction",
+      "title": "Textural Subtraction",
+      "canonical_collection": "texture-layering",
+      "rank": 4,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-give-each-part-a-job", "songwriting-shape-energy-over-time"],
+      "evidence": [
+        {
+          "source_id": "songwriting-give-each-part-a-job",
+          "heading": "Arrange by removal as well as addition"
+        },
+        {
+          "source_id": "songwriting-shape-energy-over-time",
+          "heading": "Separate dimensions of energy"
+        }
+      ],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "Density hides an important line or a return has no remaining contrast.",
+      "move": "Remove a layer at a purposeful moment and hear what the remaining texture reveals.",
+      "coverage_observation": "Arrange by removal as well as addition and the energy pattern develop this within broader articles.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Keep the passage unchanged and remove one sustained layer at the focal entrance.",
+        "view": "layer-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "depth-layering",
+      "title": "Depth Layering",
+      "canonical_collection": "space-atmosphere",
+      "rank": 1,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-choose-a-sonic-setting"],
+      "evidence": [
+        {
+          "source_id": "songwriting-choose-a-sonic-setting",
+          "heading": "Decide what remains in front"
+        }
+      ],
+      "levels": ["sound", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Everything appears equally close or the focal sound loses presence.",
+      "move": "Place foreground and background at different perceived distances.",
+      "coverage_observation": "The sonic-setting article describes dry/close and reverberant voices, but lacks a developed depth-layering example.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Keep a foreground sound close while placing a background layer farther away; match loudness carefully.",
+        "view": "spatial-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "spatial-contrast",
+      "title": "Spatial Contrast",
+      "canonical_collection": "space-atmosphere",
+      "rank": 2,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-choose-a-sonic-setting"],
+      "evidence": [
+        {
+          "source_id": "songwriting-choose-a-sonic-setting",
+          "heading": "Decide what remains in front"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A section change needs a different sense of acoustic space.",
+      "move": "Change the apparent spatial setting at a meaningful boundary.",
+      "coverage_observation": "Dry/reverberant settings supply a seed comparison, not a dedicated spatial-composition pattern.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Use the same phrase in a close, narrow setting and a more diffuse setting while keeping the musical material fixed.",
+        "view": "spatial-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "spatial-movement",
+      "title": "Spatial Movement",
+      "canonical_collection": "space-atmosphere",
+      "rank": 3,
+      "coverage": "gap",
+      "source_ids": [],
+      "evidence": [],
+      "levels": ["sound", "figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A sustained or recurring source could develop through position.",
+      "move": "Move an audible source through space with timing that supports the phrase.",
+      "coverage_observation": "No spatial-motion pattern or stereo position control exists in the music tools.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Keep source and rhythm fixed while comparing a stationary sound with a timed left-to-right movement.",
+        "view": "spatial-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "connect-sounds-with-reverberation",
+      "title": "Connect Sounds with Reverberation",
+      "canonical_collection": "space-atmosphere",
+      "rank": 4,
+      "coverage": "gap",
+      "source_ids": [],
+      "evidence": [],
+      "levels": ["sound", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Separate events need continuity through an acoustic tail.",
+      "move": "Let a decay bridge events while preserving the intended clarity.",
+      "coverage_observation": "Held notes and transitions are covered, but a reverberant bridge is not developed or playable.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Compare separated dry events with the same events joined by a controlled reverberant tail.",
+        "view": "spatial-comparison",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "envelope-shaping",
+      "title": "Envelope Shaping",
+      "canonical_collection": "dynamics-gesture",
+      "rank": 1,
+      "coverage": "gap",
+      "source_ids": ["songwriting-vocal-delivery-and-harmonies"],
+      "evidence": [
+        {
+          "source_id": "songwriting-vocal-delivery-and-harmonies",
+          "heading": "Locate the center of a sung event"
+        }
+      ],
+      "levels": ["sound", "figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "The onset, sustain, or release gives a sound the wrong compositional role.",
+      "move": "Shape how a sound begins, continues, and ends while keeping pitch material fixed.",
+      "coverage_observation": "Vocal attack and release are mentioned; synthesized envelopes are fixed internally. There is no educational envelope pattern or control.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Play a fixed pitch with a short attack/release and a slow swelling envelope at matched reference level.",
+        "view": "gesture-envelope",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "dynamic-contrast",
+      "title": "Dynamic Contrast",
+      "canonical_collection": "dynamics-gesture",
+      "rank": 2,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-shape-energy-over-time", "songwriting-make-the-chorus-arrive"],
+      "evidence": [
+        {
+          "source_id": "songwriting-shape-energy-over-time",
+          "heading": "Reserve contrast"
+        },
+        {
+          "source_id": "songwriting-make-the-chorus-arrive",
+          "heading": "Working choice"
+        }
+      ],
+      "levels": ["figure", "phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A phrase or section needs an audible difference in intensity.",
+      "move": "Choose a controlled loudness relationship and hear it in its musical context.",
+      "coverage_observation": "Energy is explicitly separated from loudness; dynamic contrast is one bundled dimension rather than a dedicated pattern.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Keep notes, timbre, and activity fixed while comparing an even level with a purposeful dynamic change.",
+        "view": "gesture-envelope",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "articulation-contrast",
+      "title": "Articulation Contrast",
+      "canonical_collection": "dynamics-gesture",
+      "rank": 3,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-vocal-delivery-and-harmonies"],
+      "evidence": [
+        {
+          "source_id": "songwriting-vocal-delivery-and-harmonies",
+          "heading": "Locate the center of a sung event"
+        }
+      ],
+      "levels": ["sound", "figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "Identical pitches and rhythms need different kinds of gesture.",
+      "move": "Change connection, separation, or attack while preserving the written idea.",
+      "coverage_observation": "The vocal-delivery pattern supplies early/late releases and soft attacks; instrumental and electronic articulation need broader treatment.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare a connected phrase with a detached phrase using the same notes and onset rhythm.",
+        "view": "gesture-envelope",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "strategic-repetition",
+      "title": "Strategic Repetition",
+      "canonical_collection": "motifs-development",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-repetition-variation-surprise"],
+      "evidence": [
+        {
+          "source_id": "songwriting-repetition-variation-surprise",
+          "heading": "Use the pattern at the right scale"
+        }
+      ],
+      "levels": ["figure", "phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A recognizable idea either disappears too early or returns without purpose.",
+      "move": "Preserve a useful reference and vary a consequential relationship when the music needs it.",
+      "coverage_observation": "Repeat with a Reason already discusses repetition at several musical levels, including texture around a stable figure.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep a motif fixed and change its surroundings, then compare changing the motif itself.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data-first",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "motivic-sequence",
+      "title": "Motivic Sequence",
+      "canonical_collection": "motifs-development",
+      "rank": 2,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-develop-without-losing-the-idea"],
+      "evidence": [
+        {
+          "source_id": "songwriting-develop-without-losing-the-idea",
+          "heading": "Make a sequence precise"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "A motif needs continuation at another pitch level.",
+      "move": "Move the motif by a defined interval or by scale steps and preserve the intended identity.",
+      "coverage_observation": "Make a sequence precise spells exact and diatonic versions; there is no dedicated sequence entry or mounted transformation comparison.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare the seed, an exact transposition, and a diatonic sequence under stated harmony.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "fragmentation",
+      "title": "Fragmentation",
+      "canonical_collection": "motifs-development",
+      "rank": 3,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-develop-without-losing-the-idea"],
+      "evidence": [
+        {
+          "source_id": "songwriting-develop-without-losing-the-idea",
+          "heading": "Fragment and extend"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A complete motif is too long or familiar to serve the next passage.",
+      "move": "Develop a smaller recognizable fragment and decide whether its missing completion returns.",
+      "coverage_observation": "Fragment and extend contains an exact two-note fragment and rhythmic alternatives.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare the full seed with its first two notes repeating before the complete idea returns.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data-first",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "developing-variation",
+      "title": "Developing Variation",
+      "canonical_collection": "motifs-development",
+      "rank": 4,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-develop-without-losing-the-idea"],
+      "evidence": [
+        {
+          "source_id": "songwriting-develop-without-losing-the-idea",
+          "heading": "Keep variation subordinate to purpose"
+        }
+      ],
+      "levels": ["figure", "phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "Successive ideas need to grow from earlier material while remaining connected.",
+      "move": "Derive further material by selective transformations rather than merely replaying a reference.",
+      "coverage_observation": "The existing article teaches selective variation. The historically specific term developing variation needs a provenance review before it becomes an exact synonym.",
+      "decision": "review-definition",
+      "next_action": "Check the historical definition before deciding whether the existing broad variation pattern is sufficient or a distinct technique is needed.",
+      "demonstration": {
+        "comparison": "Follow a short chain of related transformations and identify the feature linking each stage.",
+        "view": "piano-roll",
+        "work_needed": "new-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "countermelody",
+      "title": "Countermelody",
+      "canonical_collection": "counterpoint-voices",
+      "rank": 1,
+      "coverage": "gap",
+      "source_ids": [
+        "songwriting-write-a-hook",
+        "songwriting-give-each-part-a-job",
+        "songwriting-write-a-bass-line"
+      ],
+      "evidence": [
+        {
+          "source_id": "songwriting-write-a-hook",
+          "heading": "Compare three kinds of hook"
+        },
+        {
+          "source_id": "songwriting-give-each-part-a-job",
+          "heading": "Separate rhythm, register, and duration"
+        },
+        {
+          "source_id": "songwriting-write-a-bass-line",
+          "heading": "Let a stable bass support change elsewhere"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A second line needs identity without obscuring the lead.",
+      "move": "Write a complementary line that is meaningful alone and coherent against the first.",
+      "coverage_observation": "A countermelody is mentioned and bass/response roles are developed, but no two independent lines are constructed and checked together.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Solo two lines, then compare a doubling with a rhythmically and melodically independent second line.",
+        "view": "two-voice-roll",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "contrary-motion",
+      "title": "Contrary Motion",
+      "canonical_collection": "counterpoint-voices",
+      "rank": 2,
+      "coverage": "gap",
+      "source_ids": ["songwriting-inversions-and-voice-leading"],
+      "evidence": [
+        {
+          "source_id": "songwriting-inversions-and-voice-leading",
+          "heading": "Follow three voices"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "Two lines move together so consistently that their independence is unclear.",
+      "move": "Let one line rise while another falls where the combined notes suit the passage.",
+      "coverage_observation": "Smooth chord voice leading and held common tones are present; they do not supply a dedicated contrary-motion or counterpoint lesson.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Compare parallel-direction and opposite-direction versions of two short lines with their intervals visible.",
+        "view": "two-voice-roll",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "imitation",
+      "title": "Imitation",
+      "canonical_collection": "counterpoint-voices",
+      "rank": 3,
+      "coverage": "gap",
+      "source_ids": ["songwriting-start-with-a-motif"],
+      "evidence": [
+        {
+          "source_id": "songwriting-start-with-a-motif",
+          "heading": "Find motifs outside pitched melody"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Related voices need a clear connection without identical simultaneous doubling.",
+      "move": "Let a recognizable idea enter in another voice after a deliberate delay.",
+      "coverage_observation": "Motivic identity and borrowed timing are covered, but staggered imitation between voices is not developed.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Play a figure, introduce it later in another line, and vary the entry delay.",
+        "view": "two-voice-roll",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "gradual-accumulation",
+      "title": "Gradual Accumulation",
+      "canonical_collection": "tension-drama",
+      "rank": 1,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-shape-energy-over-time"],
+      "evidence": [
+        {
+          "source_id": "songwriting-shape-energy-over-time",
+          "heading": "Says: intensity grows around a persistent figure"
+        }
+      ],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A persistent idea needs development through an increasing number of contributions.",
+      "move": "Introduce layers or events in a deliberate order while retaining an audible reference.",
+      "coverage_observation": "The energy pattern develops this with Platform Three and Says, but no standalone pattern or authored accumulating playback exists.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Keep the reference figure fixed while successive layers enter on a labeled timeline.",
+        "view": "layer-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "delayed-resolution",
+      "title": "Delayed Resolution",
+      "canonical_collection": "tension-drama",
+      "rank": 2,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-progressions-and-arrival", "songwriting-melody-and-harmony"],
+      "evidence": [
+        {
+          "source_id": "songwriting-progressions-and-arrival",
+          "heading": "Change how long a chord stays"
+        },
+        {
+          "source_id": "songwriting-melody-and-harmony",
+          "heading": "The move"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "An arrival settles before its anticipation has become meaningful.",
+      "move": "Sustain an unresolved relationship and choose when its resolution earns its place.",
+      "coverage_observation": "Harmonic endings and melody/harmony tension are treated, but delayed resolution remains a local technique within them.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare immediate and delayed resolutions with the preparation and final target kept comparable.",
+        "view": "layer-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "reserve-the-peak",
+      "title": "Reserve the Peak",
+      "canonical_collection": "tension-drama",
+      "rank": 3,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-contour-and-register", "songwriting-shape-energy-over-time"],
+      "evidence": [
+        {
+          "source_id": "songwriting-contour-and-register",
+          "heading": "Give the high point a job"
+        },
+        {
+          "source_id": "songwriting-shape-energy-over-time",
+          "heading": "Reserve contrast"
+        }
+      ],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "Early maximum intensity leaves later moments with little contrast.",
+      "move": "Save a consequential register, density, or exposure change for its intended destination.",
+      "coverage_observation": "The contour and energy patterns already teach reserving contrast. Treat this as a facet of those patterns initially, rather than adding a synonymous article.",
+      "decision": "retain-as-facet",
+      "next_action": "Keep as a named facet of contour and energy planning initially; do not commission a duplicate article.",
+      "demonstration": {
+        "comparison": "Keep the final event fixed and compare versions that reveal or reserve its defining feature earlier.",
+        "view": "layer-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "sectional-contrast",
+      "title": "Sectional Contrast",
+      "canonical_collection": "form-structure",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": [
+        "songwriting-jobs-of-song-sections",
+        "songwriting-earn-the-bridge",
+        "songwriting-choose-a-song-form"
+      ],
+      "evidence": [
+        {
+          "source_id": "songwriting-jobs-of-song-sections",
+          "heading": "Distinguish verse and chorus by relationship"
+        },
+        {
+          "source_id": "songwriting-earn-the-bridge",
+          "heading": "Find related musical contrast"
+        },
+        {
+          "source_id": "songwriting-choose-a-song-form",
+          "heading": "Consider forms without a recurring chorus"
+        }
+      ],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "Sections have different names but make the same musical contribution.",
+      "move": "Give adjacent spans distinct functions and choose a meaningful relationship between them.",
+      "coverage_observation": "Section purpose, the bridge decision, and whole-song form provide dedicated reusable coverage; broaden examples beyond vocal song forms.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Compare two section sequences with and without a clear change of role or material.",
+        "view": "section-map",
+        "work_needed": "new-view-and-longer-examples",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "ternary-form-aba",
+      "title": "Ternary Form / ABA",
+      "canonical_collection": "form-structure",
+      "rank": 2,
+      "coverage": "gap",
+      "source_ids": ["songwriting-choose-a-song-form", "songwriting-finish-a-tiny-song"],
+      "evidence": [
+        {
+          "source_id": "songwriting-choose-a-song-form",
+          "heading": "Read letters and names carefully"
+        },
+        {
+          "source_id": "songwriting-finish-a-tiny-song",
+          "heading": "Working choice"
+        }
+      ],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A contrasting middle needs a recognizable return to an established world.",
+      "move": "Establish A, depart into B, then decide what returning to A accomplishes.",
+      "coverage_observation": "AABA is explained and the miniature has contrast/return, but ABA has no dedicated treatment. AABA must not be counted as ABA coverage.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Hear A, B, and the returning A in context, with a clearly labeled section map.",
+        "view": "section-map",
+        "work_needed": "new-view-and-longer-examples",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      },
+      "integration_review": {
+        "date": "2026-10-30",
+        "role": "formal-model",
+        "home": "songwriting-choose-a-song-form",
+        "decision": "Explain within the canonical form-choice article and connect to development/return techniques. A separate technique article is not justified by a formal label alone. Full model-specific guided demonstration remains future work."
+      }
+    },
+    {
+      "key": "theme-and-variations",
+      "title": "Theme and Variations",
+      "canonical_collection": "form-structure",
+      "rank": 3,
+      "coverage": "gap",
+      "source_ids": [
+        "songwriting-develop-without-losing-the-idea",
+        "songwriting-choose-a-song-form"
+      ],
+      "evidence": [
+        {
+          "source_id": "songwriting-develop-without-losing-the-idea",
+          "heading": "Fragment and extend"
+        },
+        {
+          "source_id": "songwriting-choose-a-song-form",
+          "heading": "Consider forms without a recurring chorus"
+        }
+      ],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A complete piece could grow from successive presentations of one theme.",
+      "move": "Plan a series of variations with a clear relationship to a reference theme.",
+      "coverage_observation": "Local motivic variation is developed; a whole-piece theme-and-variations design is not.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Compare several complete presentations of one theme and track what remains versus changes.",
+        "view": "section-map",
+        "work_needed": "new-view-and-longer-examples",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      },
+      "integration_review": {
+        "date": "2026-10-30",
+        "role": "formal-model",
+        "home": "songwriting-choose-a-song-form",
+        "decision": "Explain within the canonical form-choice article and connect to development/return techniques. A separate technique article is not justified by a formal label alone. Full model-specific guided demonstration remains future work."
+      }
+    },
+    {
+      "key": "continuous-evolution",
+      "title": "Continuous Evolution",
+      "canonical_collection": "form-structure",
+      "rank": 4,
+      "coverage": "embedded",
+      "source_ids": [
+        "songwriting-choose-a-song-form",
+        "songwriting-modes-drones-and-key-changes",
+        "songwriting-shape-energy-over-time"
+      ],
+      "evidence": [
+        {
+          "source_id": "songwriting-choose-a-song-form",
+          "heading": "Consider forms without a recurring chorus"
+        },
+        {
+          "source_id": "songwriting-modes-drones-and-key-changes",
+          "heading": "Choose a relationship that fits the song"
+        },
+        {
+          "source_id": "songwriting-shape-energy-over-time",
+          "heading": "Separate dimensions of energy"
+        }
+      ],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A piece needs a larger arc without recurring song sections.",
+      "move": "Develop material through a planned sequence of continuous changes.",
+      "coverage_observation": "Continuously developing form and stable-center growth are discussed, but no complete worked sound-led evolution is authored.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Follow an original sustained world through a small number of labeled changes without imposing verse/chorus labels.",
+        "view": "section-map",
+        "work_needed": "new-view-and-longer-examples",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "transitional-motif",
+      "title": "Transitional Motif",
+      "canonical_collection": "transitions-endings",
+      "rank": 1,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-pacing-transitions-endings", "songwriting-start-with-a-motif"],
+      "evidence": [
+        {
+          "source_id": "songwriting-pacing-transitions-endings",
+          "heading": "Connect sections through a specific event"
+        },
+        {
+          "source_id": "songwriting-start-with-a-motif",
+          "heading": "Find motifs outside pitched melody"
+        }
+      ],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A join needs continuity between otherwise different passages.",
+      "move": "Carry a recognizable figure through the boundary while other features change.",
+      "coverage_observation": "A continuing instrumental figure at a boundary is described, but not developed as a separate motif-transition pattern.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Keep two sections fixed and compare an abrupt join with a figure carried across the boundary.",
+        "view": "boundary-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "break-and-return",
+      "title": "Break and Return",
+      "canonical_collection": "transitions-endings",
+      "rank": 2,
+      "coverage": "embedded",
+      "source_ids": [
+        "songwriting-pacing-transitions-endings",
+        "songwriting-shape-energy-over-time"
+      ],
+      "evidence": [
+        {
+          "source_id": "songwriting-pacing-transitions-endings",
+          "heading": "Connect sections through a specific event"
+        },
+        {
+          "source_id": "songwriting-shape-energy-over-time",
+          "heading": "Reserve contrast"
+        }
+      ],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A return lacks impact or the texture needs a deliberate interruption.",
+      "move": "Prepare a break and coordinate the next entrance against the established reference.",
+      "coverage_observation": "Counted gaps, thinned textures, and returns are developed inside pacing and energy patterns.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare a continuous groove with a counted break and coordinated return.",
+        "view": "boundary-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "overlap-sections",
+      "title": "Overlap Sections",
+      "canonical_collection": "transitions-endings",
+      "rank": 3,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-pacing-transitions-endings"],
+      "evidence": [
+        {
+          "source_id": "songwriting-pacing-transitions-endings",
+          "heading": "Connect sections through a specific event"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "A boundary feels mechanically separated.",
+      "move": "Let an element from one span continue into the next while the new material begins.",
+      "coverage_observation": "The transition section explicitly describes a sustained vocal or repeating figure crossing a boundary.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare a clean cut with a shared sounding element crossing the same boundary.",
+        "view": "boundary-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "coda",
+      "title": "Coda",
+      "canonical_collection": "transitions-endings",
+      "rank": 4,
+      "coverage": "embedded",
+      "source_ids": ["songwriting-pacing-transitions-endings", "songwriting-choose-a-song-form"],
+      "evidence": [
+        {
+          "source_id": "songwriting-pacing-transitions-endings",
+          "heading": "Choose how to finish"
+        },
+        {
+          "source_id": "songwriting-choose-a-song-form",
+          "heading": "Bohemian Rhapsody: a route without a recurring pop chorus"
+        }
+      ],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "The main return is complete but a separate final passage could give it perspective.",
+      "move": "Give a closing passage a distinct concluding role rather than extending by default.",
+      "coverage_observation": "An original outro and a named reflective coda appear, but a dedicated coda construction is absent; an outro is not automatically a coda.",
+      "decision": "develop-existing-seed",
+      "next_action": "Develop the bounded technique from the existing passage; decide whether it needs its own article or a named variant.",
+      "demonstration": {
+        "comparison": "Compare stopping after the main return with an original short closing passage that changes the final perspective.",
+        "view": "boundary-timeline",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "sampling-and-recontextualization",
+      "title": "Sampling and Recontextualization",
+      "canonical_collection": "sampling-manipulation",
+      "rank": 1,
+      "coverage": "gap",
+      "source_ids": ["songwriting-give-each-part-a-job"],
+      "evidence": [
+        {
+          "source_id": "songwriting-give-each-part-a-job",
+          "heading": "Separate rhythm, register, and duration"
+        }
+      ],
+      "levels": ["sound", "figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "Existing audio could serve a new role or acquire a new context.",
+      "move": "Select and place recorded material so its new relationship becomes compositional material.",
+      "coverage_observation": "A sampled voice is discussed as an instrumental role; no pattern develops sample selection, context, or a controlled before/after.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Place the same original recorded fragment in two contrasting rhythmic or harmonic contexts.",
+        "view": "audio-loop-lanes",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "loop-transformation",
+      "title": "Loop Transformation",
+      "canonical_collection": "sampling-manipulation",
+      "rank": 2,
+      "coverage": "gap",
+      "source_ids": ["songwriting-repetition-variation-surprise"],
+      "evidence": [
+        {
+          "source_id": "songwriting-repetition-variation-surprise",
+          "heading": "Use the pattern at the right scale"
+        }
+      ],
+      "levels": ["figure", "phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A recorded loop needs development beyond unchanged repetition.",
+      "move": "Alter its boundaries, order, timing, or processing while tracking a recognizable relationship.",
+      "coverage_observation": "Repeat with a Reason changes a motif or its surroundings; it does not teach recorded-loop editing.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Compare an original recorded loop with one deliberate boundary or ordering change.",
+        "view": "audio-loop-lanes",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "creative-resampling",
+      "title": "Creative Resampling",
+      "canonical_collection": "sampling-manipulation",
+      "rank": 3,
+      "coverage": "gap",
+      "source_ids": [],
+      "evidence": [],
+      "levels": ["sound", "figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "An existing transformation suggests material that can be transformed again.",
+      "move": "Record the result of a sound process and reuse that result as new material.",
+      "coverage_observation": "No resampling workflow or audio-material comparison exists in the course.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Hear the source, a first transformation, and a second stage made from the recorded result.",
+        "view": "audio-loop-lanes",
+        "work_needed": "new-audio-controls-or-clips",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "change-the-starting-point",
+      "title": "Change the Starting Point",
+      "canonical_collection": "creative-process",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-five-ways-to-begin"],
+      "evidence": [
+        {
+          "source_id": "songwriting-five-ways-to-begin",
+          "heading": "Start from sound"
+        }
+      ],
+      "levels": [],
+      "scope_kind": "process",
+      "use_when": "A habitual entry method stops generating useful ideas.",
+      "move": "Begin with the material that currently suggests a next move.",
+      "coverage_observation": "Begin with What You Have covers words, chords, melody, rhythm, and sound; its vocabulary can be broadened for composition.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Offer short original starts in several dimensions and explain a different next move for each.",
+        "view": "process-comparison",
+        "work_needed": "pattern-specific",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "compose-from-a-single-sound",
+      "title": "Compose from a Single Sound",
+      "canonical_collection": "creative-process",
+      "rank": 2,
+      "coverage": "gap",
+      "source_ids": ["songwriting-five-ways-to-begin", "songwriting-choose-a-sonic-setting"],
+      "evidence": [
+        {
+          "source_id": "songwriting-five-ways-to-begin",
+          "heading": "Working choice"
+        },
+        {
+          "source_id": "songwriting-choose-a-sonic-setting",
+          "heading": "Decide what remains in front"
+        }
+      ],
+      "levels": [],
+      "scope_kind": "process",
+      "use_when": "Too many available materials prevent a clear compositional question.",
+      "move": "Restrict the starting source and develop its possible behaviors and contexts.",
+      "coverage_observation": "Starting from sound and choosing a palette are present, but a sustained single-source constraint is not developed.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Follow one original source through a few transformations into a short piece.",
+        "view": "process-comparison",
+        "work_needed": "pattern-specific",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "phase-a-repeating-figure",
+      "title": "Phase a Repeating Figure",
+      "canonical_collection": "creative-process",
+      "rank": 3,
+      "coverage": "gap",
+      "source_ids": [],
+      "evidence": [],
+      "levels": ["figure", "phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A repeated figure could develop through changing alignment with a copy.",
+      "move": "Shift the relative timing of repeated copies and hear the changing composite relationships.",
+      "coverage_observation": "No phasing pattern or original relative-alignment comparison exists.",
+      "decision": "new-pattern",
+      "next_action": "Commission a distinct pattern and an original demonstration after the scope and example brief are agreed.",
+      "demonstration": {
+        "comparison": "Keep a reference loop fixed while a copy moves through controlled relative positions; distinguish stepped displacement from continuous phasing.",
+        "view": "process-comparison",
+        "work_needed": "new-relative-timing-control-and-loop-view",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "finish-a-miniature",
+      "title": "Finish a Miniature",
+      "canonical_collection": "creative-process",
+      "rank": 4,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-finish-a-tiny-song"],
+      "evidence": [
+        {
+          "source_id": "songwriting-finish-a-tiny-song",
+          "heading": "Working choice"
+        }
+      ],
+      "levels": [],
+      "scope_kind": "process",
+      "use_when": "Fragments accumulate without a complete musical arc.",
+      "move": "Finish a small beginning, departure, return, and ending before increasing the scale.",
+      "coverage_observation": "Finish a Tiny Song supplies a complete sixteen-bar miniature; keep that source and broaden its framing when needed.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Compare the seed alone with a completed miniature and inspect the role of each span.",
+        "view": "process-comparison",
+        "work_needed": "pattern-specific",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "revise-the-weakest-moment",
+      "title": "Revise the Weakest Moment",
+      "canonical_collection": "creative-process",
+      "rank": 5,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-revise-the-weakest-moment"],
+      "evidence": [
+        {
+          "source_id": "songwriting-revise-the-weakest-moment",
+          "heading": "Working choice"
+        }
+      ],
+      "levels": [],
+      "scope_kind": "process",
+      "use_when": "Repeated revision changes everything without solving the listening problem.",
+      "move": "Locate one consequential weakness and compare a focused revision against the intended experience.",
+      "coverage_observation": "The existing revision pattern provides the canonical process and a two-version external listening study.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Use a bounded original draft with one named listening problem and compare one focused revision.",
+        "view": "process-comparison",
+        "work_needed": "pattern-specific",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "find-the-central-idea",
+      "title": "Find the Central Idea",
+      "canonical_collection": "songwriting-text",
+      "rank": 1,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-find-the-central-idea"],
+      "evidence": [
+        {
+          "source_id": "songwriting-find-the-central-idea",
+          "heading": "Working choice"
+        }
+      ],
+      "levels": [],
+      "scope_kind": "process",
+      "use_when": "A lyric has attractive lines but no developing situation or central relationship.",
+      "move": "Choose the particular situation and relationship the song should make clear.",
+      "coverage_observation": "The existing lyric pattern directly supplies the decision; retain it as a song-specific path entry.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Compare the same musical setting with two original lyric premises and identify what later verses must develop.",
+        "view": "process-comparison",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "prosodic-alignment",
+      "title": "Prosodic Alignment",
+      "canonical_collection": "songwriting-text",
+      "rank": 2,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-words-against-music"],
+      "evidence": [
+        {
+          "source_id": "songwriting-words-against-music",
+          "heading": "The move"
+        }
+      ],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "use_when": "Musical emphasis contradicts the intended speech or meaning.",
+      "move": "Coordinate syllable stress, duration, pitch, and placement with the intended sentence.",
+      "coverage_observation": "Make Speech and Melody Agree directly develops these relationships with counted original words and pitches.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep the words fixed and compare two stress settings with syllables aligned to the phrase.",
+        "view": "phrase-and-text",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "develop-the-lyric",
+      "title": "Develop the Lyric",
+      "canonical_collection": "songwriting-text",
+      "rank": 3,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-make-the-lyric-develop"],
+      "evidence": [
+        {
+          "source_id": "songwriting-make-the-lyric-develop",
+          "heading": "Working choice"
+        }
+      ],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "use_when": "A returning section adds words without changing what the listener understands.",
+      "move": "Let new information change the meaning of a later return.",
+      "coverage_observation": "Make the Lyric Develop is the dedicated existing home; second-verse work is a related application.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Compare two verses that restate a situation with a second verse that changes how the chorus is heard.",
+        "view": "phrase-and-text",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    },
+    {
+      "key": "chorus-lift",
+      "title": "Chorus Lift",
+      "canonical_collection": "songwriting-text",
+      "rank": 4,
+      "coverage": "dedicated",
+      "source_ids": ["songwriting-make-the-chorus-arrive"],
+      "evidence": [
+        {
+          "source_id": "songwriting-make-the-chorus-arrive",
+          "heading": "Working choice"
+        }
+      ],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "use_when": "The chorus arrives without a consequential change of relationship.",
+      "move": "Choose which dimension marks its arrival and prepare that contrast.",
+      "coverage_observation": "Make the Chorus Arrive already treats several musical dimensions rather than equating lift with loudness.",
+      "decision": "reuse",
+      "next_action": "Reuse the existing pattern and review its composition-wide framing.",
+      "demonstration": {
+        "comparison": "Keep the song material fixed and compare one prepared register, rhythmic, or textural arrival.",
+        "view": "phrase-and-text",
+        "work_needed": "new-view-and-example-data",
+        "example_selection": "Original comparison brief only; no new repertoire or audio selected in this review."
+      }
+    }
+  ],
+  "existing_patterns": [
+    {
+      "source_id": "songwriting-what-makes-a-song",
+      "source_title": "Protect the Song's Identity",
+      "source_path": "content/patterns/songwriting-what-makes-a-song.md",
+      "source_number": 1,
+      "source_status": "draft",
+      "source_sha256": "397f61001f3a346ec9d7b569a945b54227cd99740e8b956a6b218e127156e936",
+      "canonical_collection": "creative-process",
+      "secondary_collections": ["motifs-development"],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Broaden the framing from song identity to compositional identity while preserving groove and sound identities.",
+      "current_player_default": "seed",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-five-ways-to-begin",
+      "source_title": "Begin with What You Have",
+      "source_path": "content/patterns/songwriting-five-ways-to-begin.md",
+      "source_number": 2,
+      "source_status": "draft",
+      "source_sha256": "41e467592e2ef9dbf20a3329f8f8985222424718b52fdbeb7157c35de70ffc36",
+      "canonical_collection": "creative-process",
+      "secondary_collections": ["timbre-sound-design", "songwriting-text"],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-repetition-variation-surprise",
+      "source_title": "Repeat with a Reason",
+      "source_path": "content/patterns/songwriting-repetition-variation-surprise.md",
+      "source_number": 3,
+      "source_status": "draft",
+      "source_sha256": "94a34dbead2b7d499f9d1767f01916e694307de88e74071dbf5d989dda945250",
+      "canonical_collection": "motifs-development",
+      "secondary_collections": ["rhythm-groove", "texture-layering", "tension-drama"],
+      "levels": ["figure", "phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": "two-thousand-and-seventeen"
+    },
+    {
+      "source_id": "songwriting-listen-like-a-songwriter",
+      "source_title": "Listen Like a Songwriter",
+      "source_path": "content/patterns/songwriting-listen-like-a-songwriter.md",
+      "source_number": 4,
+      "source_status": "draft",
+      "source_sha256": "909c0518c5e646ee821060e05e041d92f04c4f3c1d4a81736d2aeefd3c752ae7",
+      "canonical_collection": "creative-process",
+      "secondary_collections": [],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-capture-musical-seeds",
+      "source_title": "Capture Musical Seeds",
+      "source_path": "content/patterns/songwriting-capture-musical-seeds.md",
+      "source_number": 5,
+      "source_status": "draft",
+      "source_sha256": "fb18d8078dfdfcf351e45cc2536bbfaa46207aea6fede13f183b0e855d7bd754",
+      "canonical_collection": "creative-process",
+      "secondary_collections": [],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-finish-a-tiny-song",
+      "source_title": "Finish a Tiny Song",
+      "source_path": "content/patterns/songwriting-finish-a-tiny-song.md",
+      "source_number": 6,
+      "source_status": "draft",
+      "source_sha256": "0472fa6418c70dcaed263722c20b173e8b352b274069d0283fc498466913112e",
+      "canonical_collection": "creative-process",
+      "secondary_collections": ["form-structure"],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Retain the complete miniature; its scale is a process constraint rather than a sixth musical level.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-pulse-and-tempo",
+      "source_title": "Set the Pace for the Phrase",
+      "source_path": "content/patterns/songwriting-pulse-and-tempo.md",
+      "source_number": 7,
+      "source_status": "draft",
+      "source_sha256": "238d1bd2bf895fea798248a11c5a5fa7ee58c17db5fe7afd4d8ec57f93b4b049",
+      "canonical_collection": "rhythm-groove",
+      "secondary_collections": ["melody-phrasing"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": "seed",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-beats-bars-and-meter",
+      "source_title": "Group the Beat Around the Phrase",
+      "source_path": "content/patterns/songwriting-beats-bars-and-meter.md",
+      "source_number": 8,
+      "source_status": "draft",
+      "source_sha256": "f1f33ff0f82bbb039c7cafe14ef3ed1f8bf05ef517c0403dfe9998d7829724fb",
+      "canonical_collection": "rhythm-groove",
+      "secondary_collections": [],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-subdivision-and-rests",
+      "source_title": "Make Space Part of the Rhythm",
+      "source_path": "content/patterns/songwriting-subdivision-and-rests.md",
+      "source_number": 9,
+      "source_status": "draft",
+      "source_sha256": "e333001709e2c948eb7fdf7b72e5b04033cb6aeee5e5c11310a5a99a35ca7b43",
+      "canonical_collection": "rhythm-groove",
+      "secondary_collections": ["texture-layering"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-syncopation-and-anticipation",
+      "source_title": "Pull an Entrance Across the Beat",
+      "source_path": "content/patterns/songwriting-syncopation-and-anticipation.md",
+      "source_number": 10,
+      "source_status": "draft",
+      "source_sha256": "7693c4aacc785f6e7911f4fb45ced1884d5fc35feb975eca533e5c4d2106d0c8",
+      "canonical_collection": "rhythm-groove",
+      "secondary_collections": ["transitions-endings"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-swing-and-timing",
+      "source_title": "Give the Groove a Consistent Feel",
+      "source_path": "content/patterns/songwriting-swing-and-timing.md",
+      "source_number": 11,
+      "source_status": "draft",
+      "source_sha256": "eb361f710566f071ed9925f52c9697f136232f457ec6f61768846121ed0c2b7a",
+      "canonical_collection": "rhythm-groove",
+      "secondary_collections": ["dynamics-gesture"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-interlock-the-groove",
+      "source_title": "Interlock the Groove",
+      "source_path": "content/patterns/songwriting-interlock-the-groove.md",
+      "source_number": 12,
+      "source_status": "draft",
+      "source_sha256": "e05cb4c13ddece634f5d66679e8e72177987abd9cd548ea7fd5e88240170e0e7",
+      "canonical_collection": "texture-layering",
+      "secondary_collections": ["rhythm-groove"],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Interlocking Layers is the domain-facing concept; retain the current article and expose rhythm as a cross-reference.",
+      "current_player_default": "bass",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-pitch-and-intervals",
+      "source_title": "Preserve the Distances in a Melody",
+      "source_path": "content/patterns/songwriting-pitch-and-intervals.md",
+      "source_number": 13,
+      "source_status": "draft",
+      "source_sha256": "b3713e2e2259937b92f6626fb675d83d41f91c8395661397d09d5d8de5691ba5",
+      "canonical_collection": "melody-phrasing",
+      "secondary_collections": ["harmony-tonality"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Keep in the optional beginner foundation route; do not require interval nomenclature before sound-led composition.",
+      "current_player_default": "foundation-intervals",
+      "current_chord_editor": false,
+      "current_external_study": "lean-on-me"
+    },
+    {
+      "source_id": "songwriting-build-a-scale",
+      "source_title": "Build a Scale from Steps",
+      "source_path": "content/patterns/songwriting-build-a-scale.md",
+      "source_number": 14,
+      "source_status": "draft",
+      "source_sha256": "17958b8ed72225a255d25694317cc25cd388e4f16ab58784eb54581430a01699",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["melody-phrasing"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Retain the new foundation pattern and C/D scale comparison; musical level is unrelated to pitch-scale type.",
+      "current_player_default": "foundation-major-scales",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-scales-and-tonal-home",
+      "source_title": "Establish a Tonal Home",
+      "source_path": "content/patterns/songwriting-scales-and-tonal-home.md",
+      "source_number": 15,
+      "source_status": "draft",
+      "source_sha256": "a69e071350a36b9675afa4e0dbb4eaf4d8f7e97297fae8a23cbe7300e1872c66",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": [],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": "foundation-home-c",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-build-and-hear-chords",
+      "source_title": "Choose Chords by Their Notes",
+      "source_path": "content/patterns/songwriting-build-and-hear-chords.md",
+      "source_number": 16,
+      "source_status": "draft",
+      "source_sha256": "4a1fbffadeb191431aa3165113c122d699541f59c5be7752d7e804379a5bc033",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["melody-phrasing"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Arpeggiation has a concrete seed here, but accompaniment design through a progression remains embedded.",
+      "current_player_default": "foundation-chord-notes",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-chord-families-and-numbers",
+      "source_title": "Think in Chord Numbers",
+      "source_path": "content/patterns/songwriting-chord-families-and-numbers.md",
+      "source_number": 17,
+      "source_status": "draft",
+      "source_sha256": "a8f13fd8bfb2debf96d7fba1c4ddc1b8440c5eec80476ac75053d238e47e348d",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": [],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": true,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-circle-of-fifths",
+      "source_title": "Transpose the Song to Fit the Voice",
+      "source_path": "content/patterns/songwriting-circle-of-fifths.md",
+      "source_number": 18,
+      "source_status": "draft",
+      "source_sha256": "5cb753165c670ad26a4e2007df2985ea42f3a03840b6d0b0a5828e32fe9f79c7",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["melody-phrasing"],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "handling": "The circle of fifths remains a linked map supporting transposition; a live circle interaction is not present.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-progressions-and-arrival",
+      "source_title": "Decide Where the Harmony Arrives",
+      "source_path": "content/patterns/songwriting-progressions-and-arrival.md",
+      "source_number": 19,
+      "source_status": "draft",
+      "source_sha256": "e3a1634fdf9632c7ba81f2e88d9e07ba3a1daa8d4842caa403e7ade3d9a41a78",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["tension-drama"],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Separate whole-pattern arrival decisions from the embedded harmonic-rhythm and delayed-resolution techniques.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-start-with-a-motif",
+      "source_title": "Start with a Motif",
+      "source_path": "content/patterns/songwriting-start-with-a-motif.md",
+      "source_number": 20,
+      "source_status": "draft",
+      "source_sha256": "775a62ff3aa7e54a55140968f16c2ca57d9f726a2b66af90300c704a47e02463",
+      "canonical_collection": "motifs-development",
+      "secondary_collections": ["melody-phrasing", "rhythm-groove"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": "seed",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-contour-and-register",
+      "source_title": "Give the Melody a Destination",
+      "source_path": "content/patterns/songwriting-contour-and-register.md",
+      "source_number": 21,
+      "source_status": "draft",
+      "source_sha256": "3a38f4ccd1da1bbecd39eed83e90229fffbc8f5915266f77a6acc433a112ff0e",
+      "canonical_collection": "melody-phrasing",
+      "secondary_collections": ["texture-layering", "tension-drama"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Contour and single-line register belong here; simultaneous register separation belongs in Texture & Layering.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-melody-and-harmony",
+      "source_title": "Support or Challenge the Melody Note",
+      "source_path": "content/patterns/songwriting-melody-and-harmony.md",
+      "source_number": 22,
+      "source_status": "draft",
+      "source_sha256": "03b2b7d6dbd34ed8fd167e5a74a84433ef8c55cf08f52e4b370ca96db9ecb70c",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["melody-phrasing", "tension-drama"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": "verse",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-phrases-and-breathing",
+      "source_title": "Let the Phrase Breathe",
+      "source_path": "content/patterns/songwriting-phrases-and-breathing.md",
+      "source_number": 23,
+      "source_status": "draft",
+      "source_sha256": "acb80162d38133eeb028c14b20d7c571fda308acce89d3c6cc9c299fe2f5d1f3",
+      "canonical_collection": "melody-phrasing",
+      "secondary_collections": ["songwriting-text"],
+      "levels": ["phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-write-a-hook",
+      "source_title": "Write a Hook",
+      "source_path": "content/patterns/songwriting-write-a-hook.md",
+      "source_number": 24,
+      "source_status": "draft",
+      "source_sha256": "e9ba851135ae4b9891d6b2a8f441f8cbf6029fe77476caf03f9d6caf71dff919",
+      "canonical_collection": "melody-phrasing",
+      "secondary_collections": ["rhythm-groove", "songwriting-text"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Keep melodic, rhythmic, and lyrical hook variants together initially; link song-specific uses to collection 15.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-develop-without-losing-the-idea",
+      "source_title": "Develop Without Losing the Idea",
+      "source_path": "content/patterns/songwriting-develop-without-losing-the-idea.md",
+      "source_number": 25,
+      "source_status": "draft",
+      "source_sha256": "6da1639c5183f3c6cdd2e1cbe02146dd69a60a9ac90e11633dbc1dbd556e969f",
+      "canonical_collection": "motifs-development",
+      "secondary_collections": ["harmony-tonality"],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Sequence and fragmentation are exact embedded examples; review developing variation terminology before extracting.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-find-the-central-idea",
+      "source_title": "Find the Central Idea",
+      "source_path": "content/patterns/songwriting-find-the-central-idea.md",
+      "source_number": 26,
+      "source_status": "draft",
+      "source_sha256": "dd759a58686335f2215acc796b6dab91bf60b04b8ddcd19ccafc116477360da1",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": ["creative-process"],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-choose-the-speaker",
+      "source_title": "Choose the Speaker",
+      "source_path": "content/patterns/songwriting-choose-the-speaker.md",
+      "source_number": 27,
+      "source_status": "draft",
+      "source_sha256": "0a2b4eeb96e04f9ba2d761d13e1b5ee296ee3bd0aef5d10306387cf92990acff",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": [],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-write-through-images",
+      "source_title": "Write Through Images",
+      "source_path": "content/patterns/songwriting-write-through-images.md",
+      "source_number": 28,
+      "source_status": "draft",
+      "source_sha256": "f25beb0dc744cf26314627091372ddbaa1fae47858731df8f074458411ee27a0",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": [],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-rhyme-and-lyric-sound",
+      "source_title": "Let Sound Support the Lyric",
+      "source_path": "content/patterns/songwriting-rhyme-and-lyric-sound.md",
+      "source_number": 29,
+      "source_status": "draft",
+      "source_sha256": "4bdbc7aa8553f37ce1f4fb8bfd76f5935d2110c41e8ce4bcbb00990257e79c9c",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": [],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-words-against-music",
+      "source_title": "Make Speech and Melody Agree",
+      "source_path": "content/patterns/songwriting-words-against-music.md",
+      "source_number": 30,
+      "source_status": "draft",
+      "source_sha256": "4ade44f273c17c491491f86d322ef235d48737a5778b63b48b11080b422c1059",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": ["melody-phrasing", "rhythm-groove"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-make-the-lyric-develop",
+      "source_title": "Make the Lyric Develop",
+      "source_path": "content/patterns/songwriting-make-the-lyric-develop.md",
+      "source_number": 31,
+      "source_status": "draft",
+      "source_sha256": "a6ab4c2f8f52587767725a8b5f5a50fafe2ce0df762ce7056495b796e523222b",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": ["form-structure"],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-inversions-and-voice-leading",
+      "source_title": "Connect Chords with Small Moves",
+      "source_path": "content/patterns/songwriting-inversions-and-voice-leading.md",
+      "source_number": 32,
+      "source_status": "draft",
+      "source_sha256": "08b6eb9e9dab36b69b4d5d0bbb68ffda4d724a5004edfe7c5501c10eab4fd226",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["texture-layering", "counterpoint-voices"],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Smooth harmonic voice leading is useful counterpoint background, not dedicated counterpoint coverage.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-write-a-bass-line",
+      "source_title": "Write a Bass Line",
+      "source_path": "content/patterns/songwriting-write-a-bass-line.md",
+      "source_number": 33,
+      "source_status": "draft",
+      "source_sha256": "b972c706358f9f0a4834271cb928d11be011bf4547a711e25a8a992456495b53",
+      "canonical_collection": "texture-layering",
+      "secondary_collections": ["melody-phrasing", "harmony-tonality", "rhythm-groove"],
+      "levels": ["figure", "phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Keep a bass line as a part with rhythmic, harmonic, and melodic roles; do not count every bass line as countermelody.",
+      "current_player_default": "bass",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-sevenths-added-notes-suspensions",
+      "source_title": "Add Color to a Working Chord",
+      "source_path": "content/patterns/songwriting-sevenths-added-notes-suspensions.md",
+      "source_number": 34,
+      "source_status": "draft",
+      "source_sha256": "eede1b5071accc463f550708f8e78511cebf00266cbb652b914055358bbc4dd4",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": [],
+      "levels": ["figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-borrow-a-chord",
+      "source_title": "Borrow a Chord",
+      "source_path": "content/patterns/songwriting-borrow-a-chord.md",
+      "source_number": 35,
+      "source_status": "draft",
+      "source_sha256": "be271075a589134ec6b0da3b3df7020144e0108416dc34f2b72f0a15211659e7",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["tension-drama"],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-point-to-a-temporary-home",
+      "source_title": "Point to a Temporary Home",
+      "source_path": "content/patterns/songwriting-point-to-a-temporary-home.md",
+      "source_number": 36,
+      "source_status": "draft",
+      "source_sha256": "77849c3ec38695b0687999ec6ff148e8e79b9049e8db27f19696f69dfd404a50",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["tension-drama"],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-modes-drones-and-key-changes",
+      "source_title": "Change the Tonal World Deliberately",
+      "source_path": "content/patterns/songwriting-modes-drones-and-key-changes.md",
+      "source_number": 37,
+      "source_status": "draft",
+      "source_sha256": "7084f6504caa3c7eeec45efe6d2b4e3f3f3ac648ab268314b89a3b96663536e9",
+      "canonical_collection": "harmony-tonality",
+      "secondary_collections": ["texture-layering", "form-structure"],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Bundled modes, drones/pedals, and modulation need an editorial scope decision before extraction.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-jobs-of-song-sections",
+      "source_title": "Give Each Section a Purpose",
+      "source_path": "content/patterns/songwriting-jobs-of-song-sections.md",
+      "source_number": 38,
+      "source_status": "draft",
+      "source_sha256": "5353e09b2010936a16df25aacb666554c3ec70667547857dfda15d857bfa5f3f",
+      "canonical_collection": "form-structure",
+      "secondary_collections": ["songwriting-text"],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-make-the-chorus-arrive",
+      "source_title": "Make the Chorus Arrive",
+      "source_path": "content/patterns/songwriting-make-the-chorus-arrive.md",
+      "source_number": 39,
+      "source_status": "draft",
+      "source_sha256": "4d7f9e2c4f93457bb017445d8750733ac1a1e79284c78a0d7f637a70e3086500",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": ["tension-drama", "form-structure"],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": "chorus",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-make-the-second-verse-count",
+      "source_title": "Make the Second Verse Count",
+      "source_path": "content/patterns/songwriting-make-the-second-verse-count.md",
+      "source_number": 40,
+      "source_status": "draft",
+      "source_sha256": "8c530d063fa18af5db63e77b0335ff2adde0934723fc4ff30a410852bca8a2b3",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": ["motifs-development", "form-structure"],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-earn-the-bridge",
+      "source_title": "Earn the Bridge",
+      "source_path": "content/patterns/songwriting-earn-the-bridge.md",
+      "source_number": 41,
+      "source_status": "draft",
+      "source_sha256": "e4c8c7d81ea1551bbf972bc4d9b01e0f3cb2995bda573dd3950be3d3dbe56b12",
+      "canonical_collection": "form-structure",
+      "secondary_collections": ["songwriting-text"],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": "bridge",
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-choose-a-song-form",
+      "source_title": "Choose a Form That Serves the Song",
+      "source_path": "content/patterns/songwriting-choose-a-song-form.md",
+      "source_number": 42,
+      "source_status": "draft",
+      "source_sha256": "0f0be2c1323e2c08e115fbb83d9554ccf09a8a8df802ab6d3c7646ec4a47921b",
+      "canonical_collection": "form-structure",
+      "secondary_collections": [],
+      "levels": ["section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-pacing-transitions-endings",
+      "source_title": "Shape the Approach and the Ending",
+      "source_path": "content/patterns/songwriting-pacing-transitions-endings.md",
+      "source_number": 43,
+      "source_status": "draft",
+      "source_sha256": "cd8ac6276907b44bf381db6508770fcdc9f8b742e39174c7cd920cf6ad3dc855",
+      "canonical_collection": "transitions-endings",
+      "secondary_collections": ["tension-drama", "form-structure"],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Bundled pacing, joins, and endings supply several seeds; preserve the umbrella and extract only distinct decisions.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-choose-a-sonic-setting",
+      "source_title": "Choose the World Around the Song",
+      "source_path": "content/patterns/songwriting-choose-a-sonic-setting.md",
+      "source_number": 44,
+      "source_status": "draft",
+      "source_sha256": "6edef47da2ee397679615a6d3858bef12a11a1710cc469f8f3f61905705e8a99",
+      "canonical_collection": "timbre-sound-design",
+      "secondary_collections": ["texture-layering", "space-atmosphere"],
+      "levels": ["sound", "section", "piece"],
+      "scope_kind": "musical",
+      "handling": "The sonic-setting decision is reusable, but sound-source transformation and spatial control are not thereby covered.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-give-each-part-a-job",
+      "source_title": "Give Each Part a Job",
+      "source_path": "content/patterns/songwriting-give-each-part-a-job.md",
+      "source_number": 45,
+      "source_status": "draft",
+      "source_sha256": "cdd96f42abfae90aed2a98a198303d714924650ac40117d4c54b1b40b0822062",
+      "canonical_collection": "texture-layering",
+      "secondary_collections": ["rhythm-groove", "space-atmosphere"],
+      "levels": ["phrase", "section"],
+      "scope_kind": "musical",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-shape-energy-over-time",
+      "source_title": "Shape Energy over Time",
+      "source_path": "content/patterns/songwriting-shape-energy-over-time.md",
+      "source_number": 46,
+      "source_status": "draft",
+      "source_sha256": "720d0945d716baf6fbcbf089db9c10ab64cf70eb7ddd3ad7c721143b2c37897d",
+      "canonical_collection": "tension-drama",
+      "secondary_collections": ["texture-layering", "dynamics-gesture", "form-structure"],
+      "levels": ["phrase", "section", "piece"],
+      "scope_kind": "musical",
+      "handling": "Accumulation, dynamics, reserved contrast, and subtraction are embedded; avoid several articles with the same purpose.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-vocal-delivery-and-harmonies",
+      "source_title": "Let the Voice Carry the Meaning",
+      "source_path": "content/patterns/songwriting-vocal-delivery-and-harmonies.md",
+      "source_number": 47,
+      "source_status": "draft",
+      "source_sha256": "d3da15c404882623f4ab0f58f01fabb6aa9f3518fab3f328647a288dbfaceca3",
+      "canonical_collection": "songwriting-text",
+      "secondary_collections": ["dynamics-gesture", "counterpoint-voices"],
+      "levels": ["sound", "figure", "phrase"],
+      "scope_kind": "musical",
+      "handling": "Vocal delivery includes gesture and harmony, but remains primarily a music–text/performance decision.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    },
+    {
+      "source_id": "songwriting-revise-the-weakest-moment",
+      "source_title": "Revise the Weakest Moment",
+      "source_path": "content/patterns/songwriting-revise-the-weakest-moment.md",
+      "source_number": 48,
+      "source_status": "draft",
+      "source_sha256": "40adae7e2977ff9f71fce41d0c6ee5ee74793effb9b595da789b355be6a92e70",
+      "canonical_collection": "creative-process",
+      "secondary_collections": [],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Reuse the existing source and title; add domain context through navigation and related-pattern links.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": "true-love-waits"
+    },
+    {
+      "source_id": "songwriting-finish-and-learn",
+      "source_title": "Finish and Learn",
+      "source_path": "content/patterns/songwriting-finish-and-learn.md",
+      "source_number": 49,
+      "source_status": "draft",
+      "source_sha256": "7bf51d30e42c85c5df67978ef6c89098287ec5b587f6ddf80fd49855b8bb6675",
+      "canonical_collection": "creative-process",
+      "secondary_collections": [],
+      "levels": [],
+      "scope_kind": "process",
+      "handling": "Keep feedback and carrying a lesson into the next composition as part of finishing the process.",
+      "current_player_default": null,
+      "current_chord_editor": false,
+      "current_external_study": null
+    }
+  ],
+  "overlap_decisions": [
+    {
+      "subjects": ["Strategic Silence", "Negative Space"],
+      "decision": "Keep the timed-silence move in Rhythm & Groove. Acoustic spaciousness belongs in Space & Atmosphere only when perceived depth or spatial relationships, rather than rests, are the mechanism."
+    },
+    {
+      "subjects": ["Layered Entry", "Gradual Accumulation"],
+      "decision": "Treat layered entry as one implementation of accumulation unless a separate problem and boundary justify a pattern. Foreground/background and interlocking layers retain their distinct simultaneous-role decisions."
+    },
+    {
+      "subjects": ["Textural Subtraction", "Release Through Subtraction"],
+      "decision": "Use one canonical Textural Subtraction entry in Texture & Layering; link its dramatic release uses to Musical Drama."
+    },
+    {
+      "subjects": ["Reserve the Peak", "Give the Melody a Destination", "Shape Energy over Time"],
+      "decision": "Keep Reserve the Peak as a named facet initially. Single-line contour stays in Melody; whole-piece contrast planning stays in Musical Drama."
+    },
+    {
+      "subjects": [
+        "Motivic Sequence",
+        "Fragmentation",
+        "Developing Variation",
+        "Develop Without Losing the Idea"
+      ],
+      "decision": "Reuse the existing exact sequence and fragment examples. Separate a technique only if it needs a genuinely distinct article. Check the historical developing-variation term before equating it with any selective variation."
+    },
+    {
+      "subjects": ["Voice leading", "Counterpoint", "Bass line"],
+      "decision": "Map smooth chord voice leading to Harmony, bass roles to Texture, and independent melodic-line construction to Counterpoint. Related material is preparation, not complete counterpoint coverage."
+    },
+    {
+      "subjects": ["Arpeggiation", "Chord construction"],
+      "decision": "Keep the introductory arpeggio/block example in the chord foundation. A moving accompaniment through a progression is a distinct compositional application with one canonical home in Harmony."
+    },
+    {
+      "subjects": [
+        "Sonic Palette",
+        "Instrument Transformation",
+        "Sampling and Recontextualization"
+      ],
+      "decision": "Selecting a sound world is existing palette coverage. Altering source identity and reusing recorded material need their own decisions; changing an instrument preset does not cover all three."
+    },
+    {
+      "subjects": ["Rhythmic Ostinato", "Strategic Repetition", "Phase a Repeating Figure"],
+      "decision": "An ostinato is the recurring anchor, strategic repetition chooses the role of returns, and phasing changes relative alignment. Do not count a loop switch as all three techniques."
+    },
+    {
+      "subjects": ["Coda", "Outro", "ABA", "AABA"],
+      "decision": "An ending passage can supply a coda seed, but the label alone does not teach its function. AABA coverage does not satisfy the proposed ABA pattern."
+    },
+    {
+      "subjects": ["Continuous Evolution", "Through-composed form"],
+      "decision": "Define the shared collection by musical continuity and change. A continuous timbral process does not necessarily introduce new thematic sections in the same way as a through-composed song."
+    },
+    {
+      "subjects": ["One canonical home", "Several musical levels"],
+      "decision": "Store one canonical collection per pattern and several meaningful musical levels when appropriate. Learning paths and secondary cross-references may point to it without duplicating the article."
+    }
+  ],
+  "playback_inventory": {
+    "original_selectable_examples": 11,
+    "original_player_pattern_bindings": 12,
+    "chord_editor_pattern_bindings": 1,
+    "external_studies": 3,
+    "external_recording_versions": 4,
+    "written_study_articles": 49,
+    "binding_limits": "A mounted clip is not proof that the article-specific compositional contrast is audible; several chapters open the same seed or a single bass part. External studies and original examples are separate."
+  },
+  "interaction_views": [
+    {
+      "key": "piano-roll",
+      "already_available": "Pitch and duration blocks, playhead, loop, restart, bar paging, part on/off, and three synthesized instrument presets.",
+      "missing": "Direct note editing, aligned A/B comparison, pattern-specific filtering, and a musical-level zoom.",
+      "first_step": "Author a small comparison pair with one variable changed; keep a listen-for cue visible."
+    },
+    {
+      "key": "beat-grid",
+      "already_available": "The scheduler accepts fractional note starts and durations; ordinary playback can carry fixed rhythmic examples.",
+      "missing": "A beat grid, accent editing, rhythm-specific controls, neutral percussion roles, and meter-aware presentation. The current display assumes 4/4.",
+      "first_step": "Use a shared beat reference and fixed straight/syncopated/swing/3:2 pairs before adding editing."
+    },
+    {
+      "key": "two-voice-roll",
+      "already_available": "Multiple note parts and part isolation can play two authored lines.",
+      "missing": "Neutral Voice 1/Voice 2 labels, interval/entry comparisons, and independent-line editing. A Bass button is not a counterpoint interface.",
+      "first_step": "Show two singable lines, isolate either, and compare doubling with independence."
+    },
+    {
+      "key": "layer-timeline",
+      "already_available": "Three fixed part categories can be enabled or disabled.",
+      "missing": "Arbitrary layers, timed entry/exit comparison, density overview, and longer-form context.",
+      "first_step": "Author one reference figure with a few timed entrances and a subtraction alternative.",
+      "integration_2026_10_30": "Shared-player Structure view now uses arbitrary tracks, sounding spans and note onsets per bar, hidden behind a disclosure. A timed layered-entry original comparison is available."
+    },
+    {
+      "key": "sound-comparison",
+      "already_available": "Three fixed synthesized instrument presets have internal harmonic, filter, and envelope settings.",
+      "missing": "Exposed educational envelope/filter trajectories, noise material, source transformation, and audio-clip comparison. Internal implementation parameters are not existing user controls.",
+      "first_step": "Use one sustained source and one clearly bounded timbre or envelope change."
+    },
+    {
+      "key": "spatial-comparison",
+      "already_available": "The shared transport coordinates playback; no composition-specific spatial demonstration is authored.",
+      "missing": "Spatial processing, controlled reverberation, panning, stereo comparison, and matching perceived level across versions.",
+      "first_step": "Compare a close foreground with a distant background; retain a clear center and label headphone-dependent effects."
+    },
+    {
+      "key": "audio-loop-lanes",
+      "already_available": "Whole-example looping of synthesized note events. External YouTube studies have their own bounded player.",
+      "missing": "Local audio-buffer material, loop slicing/boundaries, resampling, processed-source variants, and relative loop phase controls. Whole-example looping is not recorded-loop manipulation.",
+      "first_step": "Use an original recorded fragment and a single explicit edit, preserving the unchanged source."
+    },
+    {
+      "key": "section-map",
+      "already_available": "Written section tables, SVG maps, and a paged note display for existing clips.",
+      "missing": "A playable whole-piece map, selectable sections, musical-level zoom, and original long-form arrangements.",
+      "first_step": "Keep one example identity and position while changing the view from a figure to its phrase and larger section.",
+      "integration_2026_10_30": "Shared-player proportional whole-piece timeline seeks through existing sections using the existing transport; layers and activity are optional."
+    },
+    {
+      "key": "phrase-and-text",
+      "already_available": "Counted original lyric/pitch examples and melody/chord playback without a sung voice.",
+      "missing": "Syllable-aligned playback presentation and original performed vocal examples.",
+      "first_step": "Align syllables with beats and emphasis; use synthesized playback only to demonstrate pitch/rhythm, not vocal delivery."
+    },
+    {
+      "key": "process-comparison",
+      "already_available": "Substantial prose, original miniature, and revision studies.",
+      "missing": "A reusable way to show successive decisions; not every process benefits from an audio parameter.",
+      "first_step": "Use a compact before/after or a few named stages; keep workflow distinct from musical timescale."
+    },
+    {
+      "key": "gesture-envelope",
+      "already_available": "Fixed synthesized envelopes and note durations provide a source for authored contrasts.",
+      "missing": "A labeled attack/continuation/release view and a bounded educational envelope control.",
+      "first_step": "Use a sound-comparison view with an envelope overlay; keep pitch and onset rhythm fixed."
+    },
+    {
+      "key": "boundary-timeline",
+      "already_available": "Counted transition examples and the note scheduler can place events across a bar boundary.",
+      "missing": "A focused before/after boundary view and authored comparisons that include preparation and arrival.",
+      "first_step": "Use the layer-timeline view at a short boundary span, comparing a cut, overlap, or counted break."
+    }
+  ],
+  "learning_journey": [
+    {
+      "phase": 1,
+      "title": "Discover musical possibilities",
+      "focus": "Introduce sound, rhythm, melody, texture, space, process, and language as legitimate starting points.",
+      "guides": ["Music as Sound in Time", "Eight Ways to Start a Composition"],
+      "notes": "These guide titles are proposals, not newly authored patterns or a replacement for existing introductory articles."
+    },
+    {
+      "phase": 2,
+      "title": "Create a first idea",
+      "candidate_keys": [
+        "sonic-palette",
+        "rhythmic-ostinato",
+        "melodic-contour",
+        "foreground-and-background",
+        "establish-a-tonal-home"
+      ],
+      "notes": "Offer a sound-led route and the existing five-pattern note foundation as equal optional entrances; do not require a theory course first."
+    },
+    {
+      "phase": 3,
+      "title": "Develop the idea",
+      "candidate_keys": [
+        "question-and-answer",
+        "motivic-sequence",
+        "fragmentation",
+        "timbral-transformation",
+        "loop-transformation",
+        "harmonic-rhythm-variation"
+      ]
+    },
+    {
+      "phase": 4,
+      "title": "Combine material",
+      "candidate_keys": [
+        "interlocking-layers",
+        "countermelody",
+        "register-separation",
+        "depth-layering",
+        "textural-subtraction"
+      ]
+    },
+    {
+      "phase": 5,
+      "title": "Shape movement and drama",
+      "candidate_keys": [
+        "gradual-accumulation",
+        "dynamic-contrast",
+        "delayed-resolution",
+        "envelope-shaping",
+        "break-and-return"
+      ]
+    },
+    {
+      "phase": 6,
+      "title": "Complete the piece",
+      "candidate_keys": [
+        "ternary-form-aba",
+        "theme-and-variations",
+        "continuous-evolution",
+        "transitional-motif",
+        "coda",
+        "finish-a-miniature",
+        "revise-the-weakest-moment"
+      ],
+      "notes": "Completing a miniature is also an early option; phase order is guidance rather than a prerequisite gate."
+    }
+  ],
+  "first_development_shortlist": [
+    {
+      "rank": 1,
+      "candidate_key": "envelope-shaping",
+      "reason": "Give sound-led beginners a concrete attack/sustain/release relationship before adding many synthesis controls."
+    },
+    {
+      "rank": 2,
+      "candidate_key": "timbral-transformation",
+      "reason": "Make evolving sound an equal compositional starting point alongside the existing note foundations."
+    },
+    {
+      "rank": 3,
+      "candidate_key": "depth-layering",
+      "reason": "Open the otherwise unrepresented space collection with a small, audible distance comparison."
+    },
+    {
+      "rank": 4,
+      "candidate_key": "loop-transformation",
+      "reason": "Establish recorded material as something a composer can develop, beyond a repeating note figure."
+    },
+    {
+      "rank": 5,
+      "candidate_key": "polyrhythms",
+      "reason": "Add the clearest missing technique from the user shortlist and distinguish it from ordinary interlocking."
+    },
+    {
+      "rank": 6,
+      "candidate_key": "countermelody",
+      "reason": "Create the first explicit two-independent-line pattern before teaching stricter counterpoint methods."
+    },
+    {
+      "rank": 7,
+      "candidate_key": "arpeggiation",
+      "reason": "Extend the existing chord comparison into a useful moving-accompaniment decision."
+    },
+    {
+      "rank": 8,
+      "candidate_key": "fragmentation",
+      "reason": "Expose an already precise transformation that can be demonstrated with the existing note scheduler."
+    }
+  ],
+  "example_brief_fields": [
+    "creative_question",
+    "target_musical_level",
+    "original_source_or_repertoire_reference",
+    "reference_version",
+    "changed_version",
+    "what_stays_fixed",
+    "what_changes",
+    "audible_cue",
+    "view_and_controls",
+    "context_needed",
+    "source_and_rights"
+  ],
+  "summary": {
+    "existing_patterns": 49,
+    "proposed_collections": 15,
+    "core_candidates": 60,
+    "coverage_counts": {
+      "dedicated": 21,
+      "embedded": 22,
+      "gap": 17
+    },
+    "collections_without_dedicated_mapped_articles": [
+      "space-atmosphere",
+      "dynamics-gesture",
+      "counterpoint-voices",
+      "sampling-manipulation"
+    ]
+  },
+  "review_method": "Inventory all 49 current chapter titles, situations, responses, boundaries, and section headings; inspect relevant manuscript passages for candidate coverage and overlap decisions. Check exact source-heading references and inspect current player/editor code and bindings. Coverage judgments, musical levels, and proposed homes are editorial inferences. This review does not audition recordings or select new repertoire.",
+  "handoff_reconciliation": [
+    {
+      "idea": "Layered Entry",
+      "disposition": "Variant to define",
+      "related_candidate_key": "gradual-accumulation",
+      "decision": "A layer entrance can support accumulation or replace another role. Keep it as an application until a distinct creative problem justifies a separate pattern.",
+      "integration_review": {
+        "date": "2026-10-30",
+        "disposition": "Named technique and original A/B implemented within Shape Energy over Time; retain one canonical home.",
+        "example_id": "form-layered-entry"
+      }
+    },
+    {
+      "idea": "Negative Space",
+      "disposition": "Boundary to clarify",
+      "related_candidate_key": "strategic-silence",
+      "decision": "Timed rests and empty attacks belong with Strategic Silence. Perceived spatial openness belongs with Space & Atmosphere only when acoustic placement or depth is the mechanism."
+    },
+    {
+      "idea": "Sudden Contrast",
+      "disposition": "Variant",
+      "related_candidate_key": "dynamic-contrast",
+      "decision": "An abrupt dynamic change is a gesture variant; a change of sectional role links to Sectional Contrast. Do not add a generic duplicate contrast entry."
+    },
+    {
+      "idea": "Remove Your Default Instrument",
+      "disposition": "Constraint variant",
+      "related_candidate_key": "change-the-starting-point",
+      "decision": "Keep as a concrete creative-process constraint rather than requiring a separate article with the same starting-point decision."
+    },
+    {
+      "idea": "Rhythmic Pickup",
+      "disposition": "Related application",
+      "related_candidate_key": "syncopation",
+      "decision": "The existing entrance pattern already covers pickups and anticipation. Preserve their distinctions: a pickup is not automatically the same thing as syncopation."
+    },
+    {
+      "idea": "Release Through Subtraction",
+      "disposition": "Cross-reference",
+      "related_candidate_key": "textural-subtraction",
+      "decision": "Use one canonical subtraction pattern and link its release function to Musical Drama."
+    },
+    {
+      "idea": "Transformed Return",
+      "disposition": "Cross-reference",
+      "related_candidate_key": "strategic-repetition",
+      "decision": "Connect selective variation to the existing energy pattern’s changed successive returns. Keep the returning section in its whole-piece context."
+    },
+    {
+      "idea": "Sentence Structure",
+      "disposition": "Deferred gap",
+      "related_candidate_key": null,
+      "decision": "The formal compositional technique is not developed by calling a phrase a musical sentence. Keep as an optional Form & Structure candidate at phrase level, outside the current 60-candidate shortlist."
+    }
+  ],
+  "deferred_candidates": [
+    {
+      "key": "sentence-structure",
+      "title": "Sentence Structure",
+      "canonical_collection": "form-structure",
+      "levels": ["phrase"],
+      "coverage": "gap",
+      "included_in_core_counts": false,
+      "next_action": "Define the formal compositional technique and its beginner usefulness before adding it to the core shortlist."
+    }
+  ],
+  "curriculum_integration_review": "docs/musical-composition/curriculum-integration.md"
+}

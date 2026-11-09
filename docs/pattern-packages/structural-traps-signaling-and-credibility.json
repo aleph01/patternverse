@@ -1,0 +1,116 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Signaling and Credibility",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "signaling-and-credibility",
+      "title": "Signaling and Credibility",
+      "entity_type": "concept",
+      "domain": "Information, incentive, and commitment problems; strategic communication, private types, signaling costs, receiver beliefs, and verification",
+      "article": "content/concepts/signaling-and-credibility.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Michael Spence, Job Market Signaling (1973)",
+          "url": "https://gamef21.classes.ryansafner.com/readings/Spence-1973.pdf",
+          "doi": "10.2307/1882010",
+          "supports": "Foundational economic signaling account; type-dependent costs, self-confirming beliefs, separating and pooling possibilities, and the resource costs of informative or uninformative credentials.",
+          "read_method": "Original paper opened and read in full-text web extraction: introduction and definitions, critical cost assumption, numerical separating conditions, welfare/resource discussion, and alternative equilibria. University-hosted scan also opened for publication metadata.",
+          "boundary": "A formal model with stated assumptions, not evidence that actual education has no productive value. Mara’s fixed-payment hiring scenario and qualitative preference assumptions are original editorial synthesis rather than Spence’s wage model.",
+          "current_example_check": {
+            "date": "2026-11-02",
+            "read": "Reopened foundational text: employer uncertainty, observable education, and signaling-cost discussion, printed pp. 357–358.",
+            "boundary": "Current teaching example is a qualitative editorial translation, not an observed intervention outcome."
+          }
+        },
+        {
+          "title": "Vincent P. Crawford and Joel Sobel, Strategic Information Transmission (1982)",
+          "url": "https://www.haverford.edu/sites/default/files/CrawfordSobel1982.pdf",
+          "doi": "10.2307/1913390",
+          "supports": "Strategic sender–receiver communication can be partly informative without exogenous differential signaling costs; alignment and equilibrium selection matter under additional restrictions.",
+          "read_method": "Original paper opened and read in web extraction: abstract, introduction, formal model, common-knowledge assumptions, Bayesian solution concept, and the distinction from exogenously costly signaling.",
+          "boundary": "Conditional theoretical results for the paper’s preferences and information structure. No claim that all cheap talk is informative, that communication is always truthful, or that greater alignment universally resolves credibility."
+        },
+        {
+          "title": "Ginger Zhe Jin and Phillip Leslie, The Effect of Information on Product Quality: Evidence from Restaurant Hygiene Grade Cards (2003; linked prepublication manuscript)",
+          "url": "https://drum.lib.umd.edu/bitstreams/1fce72fc-166b-49ba-8167-fc69cd0b13a6/download",
+          "publication_record": "https://drum.lib.umd.edu/items/955a3ab0-22a6-4aa1-9c89-fa35a8867993",
+          "supports": "Documented introduction of public inspection grades and reported responsiveness of restaurant demand to disclosed hygiene quality.",
+          "read_method": "University repository metadata and original manuscript opened and read: abstract, introduction, potential disclosure mechanisms, sample construction, policy chronology, and implementation variation. Manuscript is November 2002/prepublication text; repository identifies May 2003 QJE publication.",
+          "boundary": "Administrative-data policy evaluation, not a randomized signaling game. No effect sizes or hospitalization findings are used in the article. Identifying assumptions, implementation comparisons, and indirect inference about demand from revenue limit the evidence. This illustrates official assessment/disclosure rather than arbitrary expenditure as a quality signal."
+        }
+      ],
+      "related_patterns": [
+        "adverse-selection",
+        "the-principal-agent-problem",
+        "trust-games"
+      ],
+      "status": "published",
+      "short_description": "Examine who would choose an observable signal, what imitation would cost them, and whether the receiver's response makes that information credible.",
+      "use_when": [
+        "Why would different abilities produce different observed credentials?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Check imitation incentives and access, or obtain direct relevant evidence instead.",
+        "Expense alone proves little. Changed rewards, subsidies, unequal access, or other equilibria can undo separation."
+      ],
+      "example_structure": {
+        "scenario": "Employer cannot directly observe applicants’ job ability; authentic educational qualification is observed. Hypothetical separating incentives depend on type-specific costs relative to the hiring benefit and consistent employer response. Ability labels belong to the reader, not the employer. Pure-signal comparison holds productivity fixed; real education can also build skill. Unequal finances and access can exclude capable applicants; no actual qualification is claimed to separate types.",
+        "changed_relationship": "Check imitation incentives and access, or obtain direct relevant evidence instead.",
+        "residual_constraints": "Expense alone proves little. Changed rewards, subsidies, unequal access, or other equilibria can undo separation.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Why would different abilities produce different observed credentials?",
+        "assets": [
+          "content/assets/structural-traps/signaling-qualification.svg",
+          "content/assets/structural-traps/signaling-qualification-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 828,
+            "textBlocks": 21
+          },
+          "phone": {
+            "width": 360,
+            "height": 1830,
+            "textBlocks": 21
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. In the proposed separating profile, a capable applicant finds an authentic educational qualification worthwhile if hired, while a less-capable applicant finds imitation too costly. Mara observes qualification rather than private ability and responds consistently with those choices. Change: Check imitation incentives and access, or obtain direct relevant evidence instead. Limitation: Expense alone proves little. Changed rewards, subsidies, unequal access, or other equilibria can undo separation.",
+        "caption": "Hypothetical illustration. The private labels explain the model; Mara does not see them. Different incentives make the credential informative under stated beliefs and access assumptions. Education can also teach skills, and financing barriers can exclude capable applicants.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. In the proposed separating profile, a capable applicant finds an authentic educational qualification worthwhile if hired, while a less-capable applicant finds imitation too costly. Mara observes qualification rather than private ability and responds consistently with those choices. Change: Check imitation incentives and access, or obtain direct relevant evidence instead. Limitation: Expense alone proves little. Changed rewards, subsidies, unequal access, or other equilibria can undo separation.",
+          "relationship_key": "Arrows show private type, chosen observable action, then employer response. They are not a claim about an actual qualification or a ranking of people’s overall worth.",
+          "changed_relationship": "Check imitation incentives and access, or obtain direct relevant evidence instead.",
+          "residual_constraints": "Expense alone proves little. Changed rewards, subsidies, unequal access, or other equilibria can undo separation.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Employer cannot directly observe applicants’ job ability; authentic educational qualification is observed. Hypothetical separating incentives depend on type-specific costs relative to the hiring benefit and consistent employer response. Ability labels belong to the reader, not the employer. Pure-signal comparison holds productivity fixed; real education can also build skill. Unequal finances and access can exclude capable applicants; no actual qualification is claimed to separate types.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

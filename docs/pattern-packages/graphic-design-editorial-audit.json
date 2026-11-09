@@ -1,0 +1,2699 @@
+{
+  "format_version": 1,
+  "title": "Graphic Design editorial consolidation audit",
+  "date": "2026-10-28",
+  "status": "implemented-locally",
+  "scope": "Historical editorial audit of58 candidates before implementation. The consolidation record describes current authored content; baseline hashes below intentionally describe the pre-consolidation source.",
+  "baseline": {
+    "package_path": "docs/pattern-packages/graphic-design.json",
+    "package_sha256": "71f4f49e65202297fd27448ac6be6eee70084b66315c2323ca04f0e8c61484d5",
+    "candidates": 58,
+    "authored_drafts": 52,
+    "planned": 6,
+    "registered_assets": 348
+  },
+  "method": {
+    "questions": [
+      "Can the reader make one distinct design decision?",
+      "Is there an observable failure rather than a preferred style?",
+      "Can the repair be distinguished from neighboring repairs?",
+      "Does the material earn a separate article rather than a technique, diagnostic or foundation?"
+    ],
+    "review_depth": "Reviewed all52 authored openings/core interventions and worked-example structures, relevant specific-change passages, package descriptions and mechanisms, and additional overlap passages. This is an editorial structure/intervention review, not a line-by-line copy edit, source revalidation or renewed visual QA. Six unexpanded candidates are provisional title-level judgments.",
+    "rule": "Passing the first three questions does not automatically justify a full article. Keep an independently diagnosable intervention; nest a method that mainly executes another decision. Do not merge merely because two variables interact or share an aesthetic goal.",
+    "numerical_target": "No quota used. The39-core result follows the individual judgments; it is not evidence that39 is an objectively optimal count."
+  },
+  "summary": {
+    "source_verdict_counts": {
+      "retain": 36,
+      "merge": 8,
+      "foundation": 1,
+      "technique": 10,
+      "redistribute": 2,
+      "check": 1
+    },
+    "proposed_core_patterns": 39,
+    "cores_based_on_authored_material": 36,
+    "provisional_planned_cores": 3,
+    "supporting_technique_entries": 10,
+    "diagnostic_entries": 1,
+    "foundation_entries": 1,
+    "redistributed_articles": 2
+  },
+  "core_catalog": [
+    {
+      "id": "graphic-design-define-the-core-message",
+      "title": "Define the Core Message",
+      "family": "Visual Communication",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-define-the-core-message"],
+      "editorial_contract": {
+        "reader_problem": "A broad theme leaves the actual offer or finding unidentified.",
+        "intervention": "Choose the takeaway this encounter must establish."
+      }
+    },
+    {
+      "id": "graphic-design-design-for-the-audience",
+      "title": "Design for the Audience",
+      "family": "Visual Communication",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-design-for-the-audience"],
+      "editorial_contract": {
+        "reader_problem": "Insider language, viewing distance or organizational priorities obstruct the intended reader.",
+        "intervention": "Adapt to the reader’s knowledge, task and viewing conditions."
+      }
+    },
+    {
+      "id": "graphic-design-match-form-to-purpose",
+      "title": "Match Form to Purpose",
+      "family": "Visual Communication",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-match-form-to-purpose"],
+      "editorial_contract": {
+        "reader_problem": "A paragraph explains a procedure but is awkward to follow during work.",
+        "intervention": "Choose the information structure and usable format."
+      }
+    },
+    {
+      "id": "graphic-design-remove-the-nonessential",
+      "title": "Remove the Nonessential",
+      "family": "Visual Communication",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-remove-the-nonessential"],
+      "editorial_contract": {
+        "reader_problem": "A repeated badge or irrelevant detail competes with necessary content.",
+        "intervention": "Decide which material earns its presence."
+      }
+    },
+    {
+      "id": "graphic-design-make-meaning-explicit",
+      "title": "Make Meaning Explicit",
+      "family": "Visual Communication",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-make-meaning-explicit"],
+      "editorial_contract": {
+        "reader_problem": "Continue does not reveal whether the next action books, requests or advances.",
+        "intervention": "Resolve an unstated relationship, scope or consequence."
+      }
+    },
+    {
+      "id": "graphic-design-chunk-information",
+      "title": "Chunk Information",
+      "family": "Visual Communication",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-chunk-information"],
+      "editorial_contract": {
+        "reader_problem": "Arrival, booking and preparation facts form one undifferentiated list.",
+        "intervention": "Choose useful units of understanding or retrieval."
+      }
+    },
+    {
+      "id": "graphic-design-sequence-the-message",
+      "title": "Sequence the Message",
+      "family": "Visual Communication",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-sequence-the-message"],
+      "editorial_contract": {
+        "reader_problem": "A request appears before the information needed to evaluate it.",
+        "intervention": "Choose the order of ideas and dependencies."
+      }
+    },
+    {
+      "id": "graphic-design-establish-visual-hierarchy",
+      "title": "Establish Visual Hierarchy",
+      "family": "Visual Hierarchy & Attention",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-establish-a-focal-point",
+        "graphic-design-differentiate-levels-of-importance",
+        "graphic-design-use-scale-to-establish-importance"
+      ],
+      "editorial_contract": {
+        "reader_problem": "Several plausible introductions compete without a useful starting point.",
+        "intervention": "Choose the leading element or coherent group."
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-clear-reading-order",
+      "title": "Establish a Clear Reading Order",
+      "family": "Visual Hierarchy & Attention",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-establish-a-clear-reading-order",
+        "graphic-design-guide-the-eye"
+      ],
+      "editorial_contract": {
+        "reader_problem": "A story continuation resembles a side route or a narrow layout changes the intended order.",
+        "intervention": "Make the next visual move apparent."
+      }
+    },
+    {
+      "id": "graphic-design-align-to-common-edges",
+      "title": "Align to Common Edges",
+      "family": "Composition & Layout",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-align-to-common-edges"],
+      "editorial_contract": {
+        "reader_problem": "Text starts drift, comparable numbers have inconsistent ends, or content misses its container edge.",
+        "intervention": "Give related elements a shared reference edge."
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-grid",
+      "title": "Establish a Grid",
+      "family": "Composition & Layout",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-establish-a-grid",
+        "graphic-design-use-proportional-relationships",
+        "graphic-design-break-the-grid-deliberately",
+        "graphic-design-create-modular-layout-systems"
+      ],
+      "editorial_contract": {
+        "reader_problem": "Repeated modules lack a framework for extension or responsive rearrangement.",
+        "intervention": "Define reusable margins, tracks, gutters and spans."
+      }
+    },
+    {
+      "id": "graphic-design-balance-visual-weight",
+      "title": "Balance Visual Weight",
+      "family": "Composition & Layout",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-balance-visual-weight"],
+      "editorial_contract": {
+        "reader_problem": "One side or panel pulls the composition away from the intended overall character.",
+        "intervention": "Distribute prominence across the whole field."
+      }
+    },
+    {
+      "id": "graphic-design-use-spacing-to-express-relationships",
+      "title": "Use Spacing to Express Relationships",
+      "family": "Composition & Layout",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-use-negative-space",
+        "graphic-design-establish-consistent-spacing",
+        "graphic-design-group-related-elements-through-proximity"
+      ],
+      "editorial_contract": {
+        "reader_problem": "An image crowds an introduction while unused space sits elsewhere.",
+        "intervention": "Allocate open areas where they support relationships and pauses."
+      }
+    },
+    {
+      "id": "graphic-design-establish-visual-rhythm",
+      "title": "Establish Visual Rhythm",
+      "family": "Composition & Layout",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-establish-visual-rhythm"],
+      "editorial_contract": {
+        "reader_problem": "One unexplained side switch or accent interrupts the cadence of a sequence.",
+        "intervention": "Coordinate recurring units, variation and pauses."
+      }
+    },
+    {
+      "id": "graphic-design-group-elements-within-shared-boundaries",
+      "title": "Group Elements Within Shared Boundaries",
+      "family": "Perceptual Organization",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-frame-the-content",
+        "graphic-design-group-elements-within-shared-boundaries"
+      ],
+      "editorial_contract": {
+        "reader_problem": "A shared delivery condition is enclosed within only one offer.",
+        "intervention": "Use inside/outside to express membership and scope."
+      }
+    },
+    {
+      "id": "graphic-design-signal-relationships-through-similarity",
+      "title": "Signal Relationships Through Similarity",
+      "family": "Perceptual Organization",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-signal-relationships-through-similarity",
+        "graphic-design-assign-consistent-color-roles"
+      ],
+      "editorial_contract": {
+        "reader_problem": "One category gets several treatments or a status looks like an action.",
+        "intervention": "Give recurring visual features dependable meanings."
+      }
+    },
+    {
+      "id": "graphic-design-establish-visual-continuity",
+      "title": "Establish Visual Continuity",
+      "family": "Perceptual Organization",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-establish-visual-continuity"],
+      "editorial_contract": {
+        "reader_problem": "Crossing connectors invite the wrong pairing or a path misaligns across a gap.",
+        "intervention": "Make segments support the intended continuing contour."
+      }
+    },
+    {
+      "id": "graphic-design-separate-figure-from-ground",
+      "title": "Separate Figure from Ground",
+      "family": "Perceptual Organization",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-separate-figure-from-ground",
+        "graphic-design-control-the-background"
+      ],
+      "editorial_contract": {
+        "reader_problem": "Photo details interrupt letters, a product contour disappears, or a dialog merges with the page.",
+        "intervention": "Make the intended object or layer distinguishable from its ground."
+      }
+    },
+    {
+      "id": "graphic-design-use-implied-forms",
+      "title": "Use Implied Forms",
+      "family": "Perceptual Organization",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-use-implied-forms"],
+      "editorial_contract": {
+        "reader_problem": "A complete motif obscures an object, or excessive omission destroys a recognizable whole.",
+        "intervention": "Choose which contour evidence may remain incomplete."
+      }
+    },
+    {
+      "id": "graphic-design-match-typeface-to-context",
+      "title": "Match Typeface to Context",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-match-typeface-to-context",
+        "graphic-design-pair-complementary-typefaces"
+      ],
+      "editorial_contract": {
+        "reader_problem": "A display cut weakens prose or reference characters are easily confused.",
+        "intervention": "Choose letterforms suited to task, voice, characters and medium."
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-type-scale",
+      "title": "Establish a Type Scale",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-establish-a-type-scale"],
+      "editorial_contract": {
+        "reader_problem": "Equivalent titles and metadata accumulate arbitrary size differences.",
+        "intervention": "Build a reusable size vocabulary for recurring text roles."
+      }
+    },
+    {
+      "id": "graphic-design-control-line-length",
+      "title": "Control Line Length",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-control-line-length"],
+      "editorial_contract": {
+        "reader_problem": "Lines are too long to return across comfortably or too narrow to retain phrases.",
+        "intervention": "Set the horizontal measure of prose."
+      }
+    },
+    {
+      "id": "graphic-design-adjust-line-spacing",
+      "title": "Adjust Line Spacing",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-adjust-line-spacing"],
+      "editorial_contract": {
+        "reader_problem": "Dense lines interfere or overly loose lines fragment a paragraph.",
+        "intervention": "Set baseline intervals for connected text."
+      }
+    },
+    {
+      "id": "graphic-design-apply-optical-alignment",
+      "title": "Apply Optical Alignment",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-apply-optical-alignment"],
+      "editorial_contract": {
+        "reader_problem": "Quotation marks create an apparent indent or punctuation pulls apparent centering.",
+        "intervention": "Correct perceived edges or centers when geometry is misleading."
+      }
+    },
+    {
+      "id": "graphic-design-adjust-letter-spacing",
+      "title": "Adjust Letter Spacing",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-adjust-letter-spacing"],
+      "editorial_contract": {
+        "reader_problem": "A headline inherits loose tracking or one pair creates a conspicuous gap.",
+        "intervention": "Repair intervals within a text run or a particular pair."
+      }
+    },
+    {
+      "id": "graphic-design-control-line-breaks",
+      "title": "Control Line Breaks",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-control-line-breaks"],
+      "editorial_contract": {
+        "reader_problem": "A value separates from its unit or a headline breaks at an awkward phrase boundary.",
+        "intervention": "Place line boundaries to support phrasing and meaningful expressions."
+      }
+    },
+    {
+      "id": "graphic-design-use-type-as-image",
+      "title": "Use Type as Image",
+      "family": "Typography",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-use-type-as-image"],
+      "editorial_contract": {
+        "reader_problem": "A visual idea replaces a necessary letter or an expressive brief remains a plain label.",
+        "intervention": "Give letterforms a relevant visual job while preserving reading."
+      }
+    },
+    {
+      "id": "graphic-design-build-a-purposeful-palette",
+      "title": "Build a Purposeful Palette",
+      "family": "Color & Tone",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-limit-the-palette",
+        "graphic-design-use-complementary-contrast",
+        "graphic-design-build-analogous-harmony"
+      ],
+      "editorial_contract": {
+        "reader_problem": "Arbitrary hues suggest categories that the content does not contain.",
+        "intervention": "Choose which colors earn places in the working set."
+      }
+    },
+    {
+      "id": "graphic-design-establish-value-contrast",
+      "title": "Establish Value Contrast",
+      "family": "Color & Tone",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-establish-value-contrast",
+        "graphic-design-test-in-grayscale"
+      ],
+      "editorial_contract": {
+        "reader_problem": "Text, an empty checkbox or a priority field has the wrong tonal relationship.",
+        "intervention": "Set useful light–dark separation."
+      }
+    },
+    {
+      "id": "graphic-design-reinforce-meaning-beyond-color",
+      "title": "Reinforce Meaning Beyond Color",
+      "family": "Color & Tone",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-reinforce-meaning-beyond-color"],
+      "editorial_contract": {
+        "reader_problem": "A reader cannot map a color-coded status or chart series to its meaning.",
+        "intervention": "Make identifying hue unnecessary for necessary meaning."
+      }
+    },
+    {
+      "id": "graphic-design-choose-images-for-meaning",
+      "title": "Choose Images for Meaning",
+      "family": "Imagery & Visual Form",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-choose-images-for-meaning"],
+      "editorial_contract": {
+        "reader_problem": "A finished product illustrates a making class without showing the activity.",
+        "intervention": "Choose which image contributes the needed information or association."
+      }
+    },
+    {
+      "id": "graphic-design-crop-for-impact",
+      "title": "Crop for Impact",
+      "family": "Imagery & Visual Form",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-crop-for-impact"],
+      "editorial_contract": {
+        "reader_problem": "A handle is cut off or context needed to judge a room is excluded.",
+        "intervention": "Choose the visible window within an existing image."
+      }
+    },
+    {
+      "id": "graphic-design-integrate-text-and-image",
+      "title": "Integrate Text and Image",
+      "family": "Imagery & Visual Form",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-integrate-text-and-image"],
+      "editorial_contract": {
+        "reader_problem": "An offer sits away from its photograph or labels cannot identify exact features.",
+        "intervention": "Coordinate what words and pictures contribute and refer to."
+      }
+    },
+    {
+      "id": "graphic-design-simplify-through-abstraction",
+      "title": "Simplify Through Abstraction",
+      "family": "Imagery & Visual Form",
+      "state": "based on authored material",
+      "contributors": [
+        "graphic-design-simplify-through-abstraction",
+        "graphic-design-use-silhouettes"
+      ],
+      "editorial_contract": {
+        "reader_problem": "Incidental surface or atmosphere obscures a category, arrangement or task model.",
+        "intervention": "Choose which features and relationships a representation must preserve."
+      }
+    },
+    {
+      "id": "graphic-design-use-visual-metaphors",
+      "title": "Use Visual Metaphors",
+      "family": "Imagery & Visual Form",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-use-visual-metaphors"],
+      "editorial_contract": {
+        "reader_problem": "A comparison lacks a target or imports implications that conflict with the brief.",
+        "intervention": "Borrow a relationship from one subject to communicate another."
+      }
+    },
+    {
+      "id": "graphic-design-employ-recognizable-symbols",
+      "title": "Employ Recognizable Symbols",
+      "family": "Imagery & Visual Form",
+      "state": "based on authored material",
+      "contributors": ["graphic-design-employ-recognizable-symbols"],
+      "editorial_contract": {
+        "reader_problem": "A familiar object leaves the service unclear or an upload icon contradicts Download.",
+        "intervention": "Choose an established cue that matches the service or action."
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-shared-visual-language",
+      "title": "Establish a Shared Visual Language",
+      "family": "Unity & Visual Systems",
+      "state": "provisional planned core",
+      "contributors": [
+        "graphic-design-repeat-visual-motifs",
+        "graphic-design-establish-a-shared-visual-language",
+        "graphic-design-introduce-controlled-variation"
+      ],
+      "editorial_contract": {
+        "reader_problem": "Related artifacts use incompatible role assignments or appear unrelated.",
+        "intervention": "Define stable cross-artifact visual roles and permitted variation."
+      }
+    },
+    {
+      "id": "graphic-design-develop-distinctive-visual-cues",
+      "title": "Develop Distinctive Visual Cues",
+      "family": "Unity & Visual Systems",
+      "state": "provisional planned core",
+      "contributors": ["graphic-design-develop-distinctive-visual-cues"],
+      "editorial_contract": {
+        "reader_problem": "An internally consistent identity remains confusable with another organization.",
+        "intervention": "Help people distinguish this identity from plausible alternatives."
+      }
+    },
+    {
+      "id": "graphic-design-build-reusable-templates",
+      "title": "Build Reusable Templates",
+      "family": "Unity & Visual Systems",
+      "state": "provisional planned core",
+      "contributors": ["graphic-design-build-reusable-templates"],
+      "editorial_contract": {
+        "reader_problem": "Recurring documents need repeated manual assembly or omit required content.",
+        "intervention": "Make repeated production reliable without rebuilding each artifact."
+      }
+    }
+  ],
+  "entries": [
+    {
+      "id": "graphic-design-define-the-core-message",
+      "title": "Define the Core Message",
+      "family": "Visual Communication",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose the takeaway this encounter must establish.",
+        "recognizable_failure": "A broad theme leaves the actual offer or finding unidentified.",
+        "repair": "State a bounded takeaway and subordinate supporting intentions.",
+        "scope_judgment": "Message selection precedes layout and is not resolved by changing emphasis."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-define-the-core-message",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-define-the-core-message.md",
+        "sha256": "55376262c93dd2f3bf454a5c1226f6f5b8236493dfe6d4cffe21000a4ab5d27f",
+        "example_sections": [
+          "Example 1: turn a broad theme into a particular invitation",
+          "Example 2: choose the information a shopper is deciding on",
+          "Example 3: turn a report topic into a bounded finding"
+        ],
+        "visual_assets": [
+          "graphic-design/core-message-coffee-package.svg",
+          "graphic-design/core-message-library-report.svg",
+          "graphic-design/core-message-repair-poster.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-design-for-the-audience",
+      "title": "Design for the Audience",
+      "family": "Visual Communication",
+      "verdict": "retain",
+      "test": {
+        "decision": "Adapt to the reader’s knowledge, task and viewing conditions.",
+        "recognizable_failure": "Insider language, viewing distance or organizational priorities obstruct the intended reader.",
+        "repair": "Change terminology, content priority or presentation for the actual encounter.",
+        "scope_judgment": "This changes the basis of the brief; the same message can require different treatments for different readers."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-design-for-the-audience",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-design-for-the-audience.md",
+        "sha256": "f5101a21a5714a3d8fc178f41f620a9aefde73fdb079589bdc701a7c0bc11ce2",
+        "example_sections": [
+          "Example 1: give a newcomer a way into the subject",
+          "Example 2: design for the place where reading happens",
+          "Example 3: put the visitor's decision ahead of the organization's inventory"
+        ],
+        "visual_assets": [
+          "graphic-design/audience-day-pass-phone.svg",
+          "graphic-design/audience-museum-sign.svg",
+          "graphic-design/audience-pottery-poster.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-match-form-to-purpose",
+      "title": "Match Form to Purpose",
+      "family": "Visual Communication",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose the information structure and usable format.",
+        "recognizable_failure": "A paragraph explains a procedure but is awkward to follow during work.",
+        "repair": "Use a procedure, comparison, reference card or other task-appropriate form.",
+        "scope_judgment": "Changing the kind of artifact differs from editing its message, grouping or appearance."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-match-form-to-purpose",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-match-form-to-purpose.md",
+        "sha256": "087f1d3c8d5bcacbcbc52ba9bcbbcdf1c355900082ba36831583a61ddef514a5",
+        "example_sections": [
+          "Example 1: turn an explanation into a working procedure",
+          "Example 2: turn separate descriptions into a comparison",
+          "Example 3: turn a contact band into something worth keeping"
+        ],
+        "visual_assets": [
+          "graphic-design/form-open-studios-tabs.svg",
+          "graphic-design/form-pass-comparison.svg",
+          "graphic-design/form-seed-procedure.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-remove-the-nonessential",
+      "title": "Remove the Nonessential",
+      "family": "Visual Communication",
+      "verdict": "retain",
+      "test": {
+        "decision": "Decide which material earns its presence.",
+        "recognizable_failure": "A repeated badge or irrelevant detail competes with necessary content.",
+        "repair": "Remove the redundant element while preserving required meaning and identity.",
+        "scope_judgment": "Subtraction is an independent intervention; simplify representation concerns what remains inside a representation."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-remove-the-nonessential",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-remove-the-nonessential.md",
+        "sha256": "73e0330cc04d3d6c64ac8c272830546b91fdfd770b81a454014e58e8746a1dcd",
+        "example_sections": [
+          "Example 1: remove a repeated announcement",
+          "Example 2: remove ornamental treatments without erasing the brand",
+          "Example 3: remove information that belongs to a different question"
+        ],
+        "visual_assets": [
+          "graphic-design/remove-cinema-poster.svg",
+          "graphic-design/remove-coffee-package.svg",
+          "graphic-design/remove-dispatch-report.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-make-meaning-explicit",
+      "title": "Make Meaning Explicit",
+      "family": "Visual Communication",
+      "verdict": "retain",
+      "test": {
+        "decision": "Resolve an unstated relationship, scope or consequence.",
+        "recognizable_failure": "Continue does not reveal whether the next action books, requests or advances.",
+        "repair": "Name the outcome, definition or inclusion explicitly.",
+        "scope_judgment": "Legible and prominent information can still be semantically incomplete."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-make-meaning-explicit",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-make-meaning-explicit.md",
+        "sha256": "2bc24df361f1645f2a4e0062bb5f9c179b8f09b30fbbad08b4c0ea01cc0eac6e",
+        "example_sections": [
+          "Example 1: distinguish sending a request from making a booking",
+          "Example 2: define what a percentage counts",
+          "Example 3: separate the item for sale from its setting"
+        ],
+        "visual_assets": [
+          "graphic-design/explicit-completion-report.svg",
+          "graphic-design/explicit-hire-enquiry.svg",
+          "graphic-design/explicit-tableware-card.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-chunk-information",
+      "title": "Chunk Information",
+      "family": "Visual Communication",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose useful units of understanding or retrieval.",
+        "recognizable_failure": "Arrival, booking and preparation facts form one undifferentiated list.",
+        "repair": "Create meaningful topic groups or complete records.",
+        "scope_judgment": "Retain the semantic decision about membership; spacing and enclosure express it afterward."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-chunk-information",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-chunk-information.md",
+        "sha256": "76264e3e78c9465cc947aa5a1388bbbf54f520005edd0cb737d7e23f7faea423",
+        "example_sections": [
+          "Example 1: group practical details by the reader's questions",
+          "Example 2: keep each booking's facts together",
+          "Example 3: segment a reference without changing it"
+        ],
+        "visual_assets": [
+          "graphic-design/chunk-booking-records.svg",
+          "graphic-design/chunk-collection-reference.svg",
+          "graphic-design/chunk-supper-invitation.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-sequence-the-message",
+      "title": "Sequence the Message",
+      "family": "Visual Communication",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose the order of ideas and dependencies.",
+        "recognizable_failure": "A request appears before the information needed to evaluate it.",
+        "repair": "Put context, prerequisites and supporting detail in a task-appropriate sequence.",
+        "scope_judgment": "Meaningful sequence can be wrong even when the visual reading path is obvious."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-sequence-the-message",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-sequence-the-message.md",
+        "sha256": "88c275da18d16fe0e28588f16fc748a643ecb06f0fc1a3508d7b7919a0a0333a",
+        "example_sections": [
+          "Example 1: let someone understand the invitation before asking them to book",
+          "Example 2: turn a reference order into a workflow",
+          "Example 3: lead a short review with the finding, without losing its limits"
+        ],
+        "visual_assets": [
+          "graphic-design/sequence-artwork-handoff.svg",
+          "graphic-design/sequence-informed-invitation.svg",
+          "graphic-design/sequence-service-review.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-focal-point",
+      "title": "Establish a Focal Point",
+      "family": "Visual Hierarchy & Attention",
+      "verdict": "merge",
+      "test": {
+        "decision": "Choose the leading element or coherent group.",
+        "recognizable_failure": "Several plausible introductions compete without a useful starting point.",
+        "repair": "Choose what leads and reduce or distinguish its competitors.",
+        "scope_judgment": "A valuable first decision within hierarchy; the current full article repeats the surrounding ranking problem."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-visual-hierarchy",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-a-focal-point.md",
+        "sha256": "a12d4c412b4ea2522c03cf0f426b7ef24d4a3b792fdecfabb7f0304bbb85c9ae",
+        "example_sections": [
+          "Example 1: let the event identity lead the poster",
+          "Example 2: isolate a pricing group without enlarging it",
+          "Example 3: reduce competing action emphasis"
+        ],
+        "visual_assets": [
+          "graphic-design/focal-booking-action.svg",
+          "graphic-design/focal-open-studios.svg",
+          "graphic-design/focal-pottery-price.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-create-deliberate-contrast",
+      "title": "Create Deliberate Contrast",
+      "family": "Visual Hierarchy & Attention",
+      "verdict": "foundation",
+      "test": {
+        "decision": "Make a meaningful difference visible.",
+        "recognizable_failure": "Text, categories or voices lack a necessary visible distinction.",
+        "repair": "Use value, pattern, type, scale or another attribute suited to the distinction.",
+        "scope_judgment": "The examples instantiate several other patterns rather than one bounded repair. Retain as a short foundation guide routing to the appropriate intervention."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-foundations-contrast",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-create-deliberate-contrast.md",
+        "sha256": "dc5ff6b2ec5d76cff883fbdecf48b35528bbad573a516b319a7406d3aad20133",
+        "example_sections": [
+          "Example 1: give practical information enough separation from its panel",
+          "Example 2: distinguish peer categories through line pattern",
+          "Example 3: distinguish voices without changing their size"
+        ],
+        "visual_assets": [
+          "graphic-design/contrast-evening-details.svg",
+          "graphic-design/contrast-interview-voices.svg",
+          "graphic-design/contrast-session-series.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-differentiate-levels-of-importance",
+      "title": "Differentiate Levels of Importance",
+      "family": "Visual Hierarchy & Attention",
+      "verdict": "merge",
+      "test": {
+        "decision": "Assign dependable levels of importance to content roles.",
+        "recognizable_failure": "Event identity, attendance facts and reference information receive undifferentiated treatment.",
+        "repair": "Define levels and give each a repeatable treatment.",
+        "scope_judgment": "Use this article as the backbone of the combined hierarchy pattern, including the focal-point decision."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-visual-hierarchy",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-differentiate-levels-of-importance.md",
+        "sha256": "5dd6b286a4404891ddf693eb91842ab528b1cbe65fdcabc900945780efcdd5d1",
+        "example_sections": [
+          "Example 1: separate the course, the attendance facts, and the program context",
+          "Example 2: keep the same roles at the same level across records",
+          "Example 3: promote a condition that determines whether an offer is useful"
+        ],
+        "visual_assets": [
+          "graphic-design/levels-booking-roles.svg",
+          "graphic-design/levels-clay-course.svg",
+          "graphic-design/levels-day-pass-terms.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-clear-reading-order",
+      "title": "Establish a Clear Reading Order",
+      "family": "Visual Hierarchy & Attention",
+      "verdict": "retain",
+      "test": {
+        "decision": "Make the next visual move apparent.",
+        "recognizable_failure": "A story continuation resembles a side route or a narrow layout changes the intended order.",
+        "repair": "Repair visible sequence cues and preserve meaningful order across layouts.",
+        "scope_judgment": "This concerns traversing an existing sequence rather than selecting the sequence or ranking importance."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-clear-reading-order",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-a-clear-reading-order.md",
+        "sha256": "1823282a8d0b7609048fa9c1e89af186bfa605dd2c486bc1fa18efd6f11a64c2",
+        "example_sections": [
+          "Example 1: distinguish an ordered procedure from a set of topics",
+          "Example 2: keep a continuation with its story",
+          "Example 3: preserve the route when the layout becomes narrow"
+        ],
+        "visual_assets": [
+          "graphic-design/reading-editorial-thread.svg",
+          "graphic-design/reading-seed-procedure.svg",
+          "graphic-design/reading-visit-preparation.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-scale-to-establish-importance",
+      "title": "Use Scale to Establish Importance",
+      "family": "Visual Hierarchy & Attention",
+      "verdict": "technique",
+      "test": {
+        "decision": "Use relative size to express an intended rank.",
+        "recognizable_failure": "Similar sizes obscure the chosen priority, or decoration becomes the largest element.",
+        "repair": "Adjust selected relative sizes while preserving supporting legibility.",
+        "scope_judgment": "Scale is a lever for hierarchy, with no separate goal beyond that hierarchy. Keep its controlled comparisons as a technique module."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-visual-hierarchy",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-scale-to-establish-importance.md",
+        "sha256": "ed2e9dca046a4d1bee1273e6ca70f71138669823a397187a5542d883d00023c0",
+        "example_sections": [
+          "Give the event a clear introduction",
+          "Reduce decoration that competes with the message",
+          "Give a report a lead finding"
+        ],
+        "visual_assets": [
+          "graphic-design/scale-event-poster-photographic-mobile.svg",
+          "graphic-design/scale-event-poster-photographic.svg",
+          "graphic-design/scale-report-metrics-photographic-mobile.svg",
+          "graphic-design/scale-report-metrics-photographic.svg",
+          "graphic-design/scale-workshop-promotion-photographic-mobile.svg",
+          "graphic-design/scale-workshop-promotion-photographic.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-guide-the-eye",
+      "title": "Guide the Eye",
+      "family": "Visual Hierarchy & Attention",
+      "verdict": "redistribute",
+      "test": {
+        "decision": "Make directional cues connect to useful destinations.",
+        "recognizable_failure": "A gaze faces away, a leader lacks a precise referent, or an arrow ends at the wrong place.",
+        "repair": "Orient or terminate the cue at the intended content.",
+        "scope_judgment": "The article combines reading-flow cues with image annotations. Put gaze/flow in reading order and exact-feature leaders in text–image integration."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-clear-reading-order",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-integrate-text-and-image",
+          "role": "secondary",
+          "note": "Exact-feature leader and annotation material; examples 2 and the relevant endpoint guidance."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-guide-the-eye.md",
+        "sha256": "ce64082e8a4508678281d30a7ffa95d206aa39f37491b4bbb702940602b152d9",
+        "example_sections": [
+          "Example 1: let a portrait face the invitation",
+          "Example 2: connect a caption to a photographed detail",
+          "Example 3: give an arrow an actual destination"
+        ],
+        "visual_assets": [
+          "graphic-design/guide-booking-arrow-mobile.svg",
+          "graphic-design/guide-booking-arrow.svg",
+          "graphic-design/guide-maker-gaze-mobile.svg",
+          "graphic-design/guide-maker-gaze.svg",
+          "graphic-design/guide-repair-detail-mobile.svg",
+          "graphic-design/guide-repair-detail.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-align-to-common-edges",
+      "title": "Align to Common Edges",
+      "family": "Composition & Layout",
+      "verdict": "retain",
+      "test": {
+        "decision": "Give related elements a shared reference edge.",
+        "recognizable_failure": "Text starts drift, comparable numbers have inconsistent ends, or content misses its container edge.",
+        "repair": "Align the affected elements to a meaningful edge.",
+        "scope_judgment": "The examples include local edge repairs that require no reusable grid. This reverses the earlier tentative recommendation to merge alignment into grids."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-align-to-common-edges",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-align-to-common-edges.md",
+        "sha256": "372f49d7b690574bde1882248f380a20156eeb3f69cb43675b0ddd4f8970d3f4",
+        "example_sections": [
+          "Example 1: consolidate competing left edges",
+          "Example 2: align comparable amounts to the right",
+          "Example 3: choose the content edge inside a container"
+        ],
+        "visual_assets": [
+          "graphic-design/alignment-cost-sheet-mobile.svg",
+          "graphic-design/alignment-cost-sheet.svg",
+          "graphic-design/alignment-repair-poster-mobile.svg",
+          "graphic-design/alignment-repair-poster.svg",
+          "graphic-design/alignment-workshop-card-mobile.svg",
+          "graphic-design/alignment-workshop-card.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-grid",
+      "title": "Establish a Grid",
+      "family": "Composition & Layout",
+      "verdict": "retain",
+      "test": {
+        "decision": "Define reusable margins, tracks, gutters and spans.",
+        "recognizable_failure": "Repeated modules lack a framework for extension or responsive rearrangement.",
+        "repair": "Create a content-responsive system of allowed regions and spans.",
+        "scope_judgment": "A reusable allocation system reaches beyond correcting individual alignments."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-grid",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-a-grid.md",
+        "sha256": "d296ae4e4a2ff008a54ee84273b538c1ab9e58b4e150a57c0a853568c4e7a91e",
+        "example_sections": [
+          "Example 1: coordinate repeated modules",
+          "Example 2: allow useful spans within the grid",
+          "Example 3: change the grid when the available width changes"
+        ],
+        "visual_assets": [
+          "graphic-design/grid-anatomy.svg",
+          "graphic-design/grid-editorial-spans-mobile.svg",
+          "graphic-design/grid-editorial-spans.svg",
+          "graphic-design/grid-responsive-workshops-mobile.svg",
+          "graphic-design/grid-responsive-workshops.svg",
+          "graphic-design/grid-studio-program-mobile.svg",
+          "graphic-design/grid-studio-program.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-balance-visual-weight",
+      "title": "Balance Visual Weight",
+      "family": "Composition & Layout",
+      "verdict": "retain",
+      "test": {
+        "decision": "Distribute prominence across the whole field.",
+        "recognizable_failure": "One side or panel pulls the composition away from the intended overall character.",
+        "repair": "Redistribute existing elements or adjust the strength of a counterweight.",
+        "scope_judgment": "A composition can have clear hierarchy and still need a different distribution of weight."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-balance-visual-weight",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-balance-visual-weight.md",
+        "sha256": "9f46ee7a43a91e543c154e2c8b975296e34af982218913400041a7469cd086ab",
+        "example_sections": [
+          "Example 1: redistribute an existing element",
+          "Example 2: reduce an unnecessarily heavy panel",
+          "Example 3: strengthen a compact counterweight"
+        ],
+        "visual_assets": [
+          "graphic-design/balance-evening-invitation-mobile.svg",
+          "graphic-design/balance-evening-invitation.svg",
+          "graphic-design/balance-material-study-mobile.svg",
+          "graphic-design/balance-material-study.svg",
+          "graphic-design/balance-peer-workshops-mobile.svg",
+          "graphic-design/balance-peer-workshops.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-negative-space",
+      "title": "Use Negative Space",
+      "family": "Composition & Layout",
+      "verdict": "merge",
+      "test": {
+        "decision": "Allocate open areas where they support relationships and pauses.",
+        "recognizable_failure": "An image crowds an introduction while unused space sits elsewhere.",
+        "repair": "Transfer or reshape gaps without removing necessary content.",
+        "scope_judgment": "Join allocation, relative proximity and repeated intervals in one spatial decision rather than three recurring explanations of gaps."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-use-spacing-to-express-relationships",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-negative-space.md",
+        "sha256": "f0511ea7f2f5b16ca97c7ad505468fd8980f2df996873d52f7b1ee0427ecaace",
+        "example_sections": [
+          "Example 1: give an invitation's message a pause",
+          "Example 2: stop headings from floating between sections",
+          "Example 3: make a card's inner space intentional"
+        ],
+        "visual_assets": [
+          "graphic-design/space-evening-invitation-mobile.svg",
+          "graphic-design/space-evening-invitation.svg",
+          "graphic-design/space-product-card-mobile.svg",
+          "graphic-design/space-product-card.svg",
+          "graphic-design/space-workshop-details-mobile.svg",
+          "graphic-design/space-workshop-details.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-consistent-spacing",
+      "title": "Establish Consistent Spacing",
+      "family": "Composition & Layout",
+      "verdict": "merge",
+      "test": {
+        "decision": "Give equivalent relationships repeatable distances.",
+        "recognizable_failure": "Peer entries or matching cards have unexplained differences in gaps or insets.",
+        "repair": "Define role-specific spacing and repeat it across equivalent relationships.",
+        "scope_judgment": "This is the repeatability part of the proposed spacing pattern; retain exceptions and avoid an equal-gap rule."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-use-spacing-to-express-relationships",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-consistent-spacing.md",
+        "sha256": "ed5b7422caf45a91e77774bae7688a75e332572a050c5aec3fb8acbf46f8a0f6",
+        "example_sections": [
+          "Example 1: regular intervals between peer entries",
+          "Example 2: matching cards need a shared inset",
+          "Example 3: one rule after headings of different lengths"
+        ],
+        "visual_assets": [
+          "graphic-design/spacing-open-studio-program-mobile.svg",
+          "graphic-design/spacing-open-studio-program.svg",
+          "graphic-design/spacing-studio-notes-mobile.svg",
+          "graphic-design/spacing-studio-notes.svg",
+          "graphic-design/spacing-workshop-cards-mobile.svg",
+          "graphic-design/spacing-workshop-cards.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-proportional-relationships",
+      "title": "Use Proportional Relationships",
+      "family": "Composition & Layout",
+      "verdict": "technique",
+      "test": {
+        "decision": "Make selected dimensions depend on one another.",
+        "recognizable_failure": "Equal column shares underserve prose, or related text dimensions drift independently.",
+        "repair": "Use content-informed ratios for widths, sizes or leading.",
+        "scope_judgment": "Its three examples belong to grid allocation, type scale and line spacing. Ratios are a shared method, not one distinct failure class."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-grid",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-establish-a-type-scale",
+          "role": "secondary",
+          "note": "Type-size relationships; example 2."
+        },
+        {
+          "id": "graphic-design-adjust-line-spacing",
+          "role": "secondary",
+          "note": "Leading relative to size; example 3."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-proportional-relationships.md",
+        "sha256": "75263b01f0a7897afc6413f365e135240d971bf804f97c2d917c057664e6551f",
+        "example_sections": [
+          "Example 1: allocate width according to the content",
+          "Example 2: coordinate a type hierarchy through related steps",
+          "Example 3: relate line spacing to type size"
+        ],
+        "visual_assets": [
+          "graphic-design/proportion-material-study-mobile.svg",
+          "graphic-design/proportion-material-study.svg",
+          "graphic-design/proportion-night-garden-mobile.svg",
+          "graphic-design/proportion-night-garden.svg",
+          "graphic-design/proportion-workshop-guide-mobile.svg",
+          "graphic-design/proportion-workshop-guide.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-visual-rhythm",
+      "title": "Establish Visual Rhythm",
+      "family": "Composition & Layout",
+      "verdict": "retain",
+      "test": {
+        "decision": "Coordinate recurring units, variation and pauses.",
+        "recognizable_failure": "One unexplained side switch or accent interrupts the cadence of a sequence.",
+        "repair": "Establish a deliberate recurrence and a meaningful interruption.",
+        "scope_judgment": "Keep because rhythm concerns recurrence across a sequence; consistent spacing alone does not determine alternation or crescendo."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-visual-rhythm",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-visual-rhythm.md",
+        "sha256": "331bd559ef787fa976b9502708e8b9c85863405776b0b2cddfbcd2699f662219",
+        "example_sections": [
+          "Example 1: turn a stray switch into an alternation",
+          "Example 2: keep the beat and add a meaningful pause",
+          "Example 3: build a three-beat typographic crescendo"
+        ],
+        "visual_assets": [
+          "graphic-design/rhythm-look-make-share-mobile.svg",
+          "graphic-design/rhythm-look-make-share.svg",
+          "graphic-design/rhythm-open-studio-program-mobile.svg",
+          "graphic-design/rhythm-open-studio-program.svg",
+          "graphic-design/rhythm-studio-diary-mobile.svg",
+          "graphic-design/rhythm-studio-diary.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-frame-the-content",
+      "title": "Frame the Content",
+      "family": "Composition & Layout",
+      "verdict": "redistribute",
+      "test": {
+        "decision": "Define an enclosure or supporting field.",
+        "recognizable_failure": "A price box excludes inclusions; elsewhere a photograph interferes with text.",
+        "repair": "Correct membership boundaries or add a stable supporting surface.",
+        "scope_judgment": "The examples expose two different interventions: send examples 1 and 3 to enclosure, and example 2 to figure–ground/background treatment."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-group-elements-within-shared-boundaries",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-separate-figure-from-ground",
+          "role": "secondary",
+          "note": "The opaque field behind photographic text; example 2."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-frame-the-content.md",
+        "sha256": "c0e30095182b6687a437f98fa5179935c046a2eb0c4bbc8f2eaeff807e1bba83",
+        "example_sections": [
+          "Example 1: frame the price with what it includes",
+          "Example 2: give text a quiet field inside a photograph",
+          "Example 3: frame the meaningful unit, not every line"
+        ],
+        "visual_assets": [
+          "graphic-design/frame-open-studio-mobile.svg",
+          "graphic-design/frame-open-studio.svg",
+          "graphic-design/frame-product-details-mobile.svg",
+          "graphic-design/frame-product-details.svg",
+          "graphic-design/frame-workshop-offer-mobile.svg",
+          "graphic-design/frame-workshop-offer.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-break-the-grid-deliberately",
+      "title": "Break the Grid Deliberately",
+      "family": "Composition & Layout",
+      "verdict": "technique",
+      "test": {
+        "decision": "Choose a useful exception to a stated layout rule.",
+        "recognizable_failure": "An expressive photo outset spreads into inconsistent booking placements.",
+        "repair": "Keep the purposeful exception and restore the shared rule elsewhere.",
+        "scope_judgment": "The parent grid and its exception policy should be explained together. Retain the comparisons as an advanced section, not a universal instruction to disrupt."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-grid",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-break-the-grid-deliberately.md",
+        "sha256": "c9409b30ae1957a9a25f27def0c30cbf9b04e88eebd36b301f311327a1997450",
+        "example_sections": [
+          "Example 1: let a headline depart from the content edge",
+          "Example 2: bridge a gutter without detaching the caption",
+          "Example 3: keep the photo exception and restore the booking inset"
+        ],
+        "visual_assets": [
+          "graphic-design/break-grid-anatomy.svg",
+          "graphic-design/break-grid-material-study-mobile.svg",
+          "graphic-design/break-grid-material-study.svg",
+          "graphic-design/break-grid-open-studio-mobile.svg",
+          "graphic-design/break-grid-open-studio.svg",
+          "graphic-design/break-grid-workshop-booking-mobile.svg",
+          "graphic-design/break-grid-workshop-booking.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-group-related-elements-through-proximity",
+      "title": "Group Related Elements Through Proximity",
+      "family": "Perceptual Organization",
+      "verdict": "merge",
+      "test": {
+        "decision": "Make distance express intended belonging.",
+        "recognizable_failure": "A price or caption sits as close to competing material as to its own subject.",
+        "repair": "Reduce the internal gap relative to the separation between groups.",
+        "scope_judgment": "Use proximity as the membership component of the combined spacing pattern; keep semantic grouping in Chunk Information."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-use-spacing-to-express-relationships",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-group-related-elements-through-proximity.md",
+        "sha256": "8e67127d7ab1c438e2b1d41c78100edeb405a0347b6b7842e93da9f9173d8252",
+        "example_sections": [
+          "Example 1: keep a caption with its photograph",
+          "Example 2: pair each session with its details",
+          "Example 3: bring prices back to their products"
+        ],
+        "visual_assets": [
+          "graphic-design/proximity-material-captions-mobile.svg",
+          "graphic-design/proximity-material-captions.svg",
+          "graphic-design/proximity-product-prices-mobile.svg",
+          "graphic-design/proximity-product-prices.svg",
+          "graphic-design/proximity-studio-schedule-mobile.svg",
+          "graphic-design/proximity-studio-schedule.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-signal-relationships-through-similarity",
+      "title": "Signal Relationships Through Similarity",
+      "family": "Perceptual Organization",
+      "verdict": "retain",
+      "test": {
+        "decision": "Give recurring visual features dependable meanings.",
+        "recognizable_failure": "One category gets several treatments or a status looks like an action.",
+        "repair": "Map category, role or behavior to a stable visual treatment.",
+        "scope_judgment": "This connects separated items through appearance, unlike grouping through physical distance or enclosure."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-signal-relationships-through-similarity",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-signal-relationships-through-similarity.md",
+        "sha256": "a6d4feef2d6b51bbee909a1924491c0ef779f2f145c683cfda17f5e92bef6ac7",
+        "example_sections": [
+          "Example 1: connect categories across a program",
+          "Example 2: give prices a common typographic role",
+          "Example 3: stop a status message resembling a button"
+        ],
+        "visual_assets": [
+          "graphic-design/similarity-booking-controls-mobile.svg",
+          "graphic-design/similarity-booking-controls.svg",
+          "graphic-design/similarity-product-prices-mobile.svg",
+          "graphic-design/similarity-product-prices.svg",
+          "graphic-design/similarity-studio-program-mobile.svg",
+          "graphic-design/similarity-studio-program.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-visual-continuity",
+      "title": "Establish Visual Continuity",
+      "family": "Perceptual Organization",
+      "verdict": "retain",
+      "test": {
+        "decision": "Make segments support the intended continuing contour.",
+        "recognizable_failure": "Crossing connectors invite the wrong pairing or a path misaligns across a gap.",
+        "repair": "Repair tangency, trajectory or separation of the actual contour.",
+        "scope_judgment": "The connector-crossing examples require contour reasoning even without any reading sequence. Keep separate from Guide the Eye and reading order."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-visual-continuity",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-visual-continuity.md",
+        "sha256": "d4a2f5d0727e40518e8e0ec13502b5db499cc839d803e240f43a88eb6952e2ae",
+        "example_sections": [
+          "Example 1: continue a line behind a title panel",
+          "Example 2: distinguish paths at a crossing",
+          "Example 3: preserve the gap in a report"
+        ],
+        "visual_assets": [
+          "graphic-design/continuity-booking-gap-mobile.svg",
+          "graphic-design/continuity-booking-gap.svg",
+          "graphic-design/continuity-open-studio-mobile.svg",
+          "graphic-design/continuity-open-studio.svg",
+          "graphic-design/continuity-visit-connections-mobile.svg",
+          "graphic-design/continuity-visit-connections.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-separate-figure-from-ground",
+      "title": "Separate Figure from Ground",
+      "family": "Perceptual Organization",
+      "verdict": "retain",
+      "test": {
+        "decision": "Make the intended object or layer distinguishable from its ground.",
+        "recognizable_failure": "Photo details interrupt letters, a product contour disappears, or a dialog merges with the page.",
+        "repair": "Repair the boundary or reduce competing ground information.",
+        "scope_judgment": "Use as the main destination for background-treatment techniques, with value contrast retained as a separate measurable relationship."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-separate-figure-from-ground",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-separate-figure-from-ground.md",
+        "sha256": "3fbc174f5098023c7db70842137a72dd751cb5267c99498d5427e52bd61291df",
+        "example_sections": [
+          "Example 1: let the photograph recede beneath lettering",
+          "Example 2: reveal a product's contour through its ground",
+          "Example 3: distinguish a dialog from the page behind it"
+        ],
+        "visual_assets": [
+          "graphic-design/figure-ground-date-dialog-mobile.svg",
+          "graphic-design/figure-ground-date-dialog.svg",
+          "graphic-design/figure-ground-loop-pitcher-mobile.svg",
+          "graphic-design/figure-ground-loop-pitcher.svg",
+          "graphic-design/figure-ground-open-evening-mobile.svg",
+          "graphic-design/figure-ground-open-evening.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-implied-forms",
+      "title": "Use Implied Forms",
+      "family": "Perceptual Organization",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose which contour evidence may remain incomplete.",
+        "recognizable_failure": "A complete motif obscures an object, or excessive omission destroys a recognizable whole.",
+        "repair": "Hide or omit only portions whose remaining evidence supports the whole.",
+        "scope_judgment": "Retain because inferring one partly hidden form differs from replacing a subject with a simplified model. The current occluded-circle example establishes the distinction."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-use-implied-forms",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-implied-forms.md",
+        "sha256": "dc415ce322a8c7f8a3e9935b16a22f502a91963aca46740a3d4fc202bf449d54",
+        "example_sections": [
+          "Example 1: suggest a field without drawing its entire border",
+          "Example 2: let an object hide part of a circle",
+          "Example 3: restore the feature that identifies an incomplete icon"
+        ],
+        "visual_assets": [
+          "graphic-design/implied-print-file-mobile.svg",
+          "graphic-design/implied-print-file.svg",
+          "graphic-design/implied-product-circle-mobile.svg",
+          "graphic-design/implied-product-circle.svg",
+          "graphic-design/implied-workshop-frame-mobile.svg",
+          "graphic-design/implied-workshop-frame.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-group-elements-within-shared-boundaries",
+      "title": "Group Elements Within Shared Boundaries",
+      "family": "Perceptual Organization",
+      "verdict": "retain",
+      "test": {
+        "decision": "Use inside/outside to express membership and scope.",
+        "recognizable_failure": "A shared delivery condition is enclosed within only one offer.",
+        "repair": "Resize or reorganize enclosures around the actual units.",
+        "scope_judgment": "An enclosing region can establish membership without moving its contents closer. Absorb the relevant framing examples."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-group-elements-within-shared-boundaries",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-group-elements-within-shared-boundaries.md",
+        "sha256": "1229452889ff3fa93542c199e897ca709aa1197cda4c5c5a9de035cf7fd6f2dc",
+        "example_sections": [
+          "Example 1: Make each session a complete record",
+          "Example 2: Release a shared condition from one offer",
+          "Example 3: Group the thing the reader must choose"
+        ],
+        "visual_assets": [
+          "graphic-design/boundaries-offer-membership-mobile.svg",
+          "graphic-design/boundaries-offer-membership.svg",
+          "graphic-design/boundaries-session-records-mobile.svg",
+          "graphic-design/boundaries-session-records.svg",
+          "graphic-design/boundaries-shared-delivery-mobile.svg",
+          "graphic-design/boundaries-shared-delivery.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-match-typeface-to-context",
+      "title": "Match Typeface to Context",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose letterforms suited to task, voice, characters and medium.",
+        "recognizable_failure": "A display cut weakens prose or reference characters are easily confused.",
+        "repair": "Select the appropriate family, cut or role for those conditions.",
+        "scope_judgment": "Use as the parent for the optional pairing technique; retain character coverage and actual-size inspection."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-match-typeface-to-context",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-match-typeface-to-context.md",
+        "sha256": "3f25302cedd0efc7a51536a32c7a48e84be26cbf02efeb24051cbd4440e4c322",
+        "example_sections": [
+          "Example 1: Give body copy a text cut",
+          "Example 2: Make the headline support the invitation",
+          "Example 3: Select for characters that must be distinguished"
+        ],
+        "visual_assets": [
+          "graphic-design/typeface-event-tone-mobile.svg",
+          "graphic-design/typeface-event-tone.svg",
+          "graphic-design/typeface-reading-cut-mobile.svg",
+          "graphic-design/typeface-reading-cut.svg",
+          "graphic-design/typeface-reference-code-mobile.svg",
+          "graphic-design/typeface-reference-code.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-pair-complementary-typefaces",
+      "title": "Pair Complementary Typefaces",
+      "family": "Typography",
+      "verdict": "technique",
+      "test": {
+        "decision": "Choose and allocate multiple faces to useful roles.",
+        "recognizable_failure": "Two faces add little distinction or swap roles without a content reason.",
+        "repair": "Choose a useful division of labor and apply it consistently.",
+        "scope_judgment": "Pairing is one selection strategy, not a required outcome. Keep the first two examples under type selection and cross-reference stable visual roles for the third."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-match-typeface-to-context",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-signal-relationships-through-similarity",
+          "role": "secondary",
+          "note": "Stable title/logistics assignments; example 3."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-pair-complementary-typefaces.md",
+        "sha256": "f0061266f8e3f5a03e6b277bf50f40d9e100b1a66ff0b0f1552775a4e372a062",
+        "example_sections": [
+          "Example 1: Give an expressive title a supporting partner",
+          "Example 2: Make the second face earn a distinct role",
+          "Example 3: Let the same pair keep its jobs"
+        ],
+        "visual_assets": [
+          "graphic-design/pairing-consistent-assignments-mobile.svg",
+          "graphic-design/pairing-consistent-assignments.svg",
+          "graphic-design/pairing-distinct-roles-mobile.svg",
+          "graphic-design/pairing-distinct-roles.svg",
+          "graphic-design/pairing-supporting-voice-mobile.svg",
+          "graphic-design/pairing-supporting-voice.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-type-scale",
+      "title": "Establish a Type Scale",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Build a reusable size vocabulary for recurring text roles.",
+        "recognizable_failure": "Equivalent titles and metadata accumulate arbitrary size differences.",
+        "repair": "Assign a limited set of role sizes and adapt it across formats.",
+        "scope_judgment": "Unlike enlarging one priority, this creates a reusable typographic system; keep independently findable."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-type-scale",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-a-type-scale.md",
+        "sha256": "8b51f35320a56274882ad8e709f2107de875c2ddb12d3502d94c06ea5a5093a1",
+        "example_sections": [
+          "Example 1: Consolidate sizes that drift by item",
+          "Example 2: Separate levels that are almost equal",
+          "Example 3: Adapt the upper steps without shrinking everything"
+        ],
+        "visual_assets": [
+          "graphic-design/type-scale-distinct-levels-mobile.svg",
+          "graphic-design/type-scale-distinct-levels.svg",
+          "graphic-design/type-scale-phone-roles-mobile.svg",
+          "graphic-design/type-scale-phone-roles.svg",
+          "graphic-design/type-scale-repeated-roles-mobile.svg",
+          "graphic-design/type-scale-repeated-roles.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-control-line-length",
+      "title": "Control Line Length",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Set the horizontal measure of prose.",
+        "recognizable_failure": "Lines are too long to return across comfortably or too narrow to retain phrases.",
+        "repair": "Narrow, widen or cap the prose component while keeping readable type.",
+        "scope_judgment": "The measure can be repaired while leading, size and semantic break choices stay fixed."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-control-line-length",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-control-line-length.md",
+        "sha256": "0ef70e2a88f39329f8578ce6f7319d5e30b13c775d962763801c8343922d08e1",
+        "example_sections": [
+          "Example 1: Shorten a wide visitor-guide paragraph",
+          "Example 2: Widen prose trapped in a narrow span",
+          "Example 3: Limit the prose without narrowing the table"
+        ],
+        "visual_assets": [
+          "graphic-design/line-length-care-note-mobile.svg",
+          "graphic-design/line-length-care-note.svg",
+          "graphic-design/line-length-report-scope-mobile.svg",
+          "graphic-design/line-length-report-scope.svg",
+          "graphic-design/line-length-visitor-guide-mobile.svg",
+          "graphic-design/line-length-visitor-guide.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-adjust-line-spacing",
+      "title": "Adjust Line Spacing",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Set baseline intervals for connected text.",
+        "recognizable_failure": "Dense lines interfere or overly loose lines fragment a paragraph.",
+        "repair": "Adjust leading for the letterforms, measure and role.",
+        "scope_judgment": "This vertical intervention has distinct failures and tradeoffs; it should be concise but not buried in a broad typesetting article."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-adjust-line-spacing",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-adjust-line-spacing.md",
+        "sha256": "d4fbcbe8f6adea477d80595151d84d8276431fc98ad2e39e1ab28c4aad36c628",
+        "example_sections": [
+          "Example 1: Open up crowded journal prose",
+          "Example 2: Bring overly loose care instructions together",
+          "Example 3: Give a short headline its own spacing"
+        ],
+        "visual_assets": [
+          "graphic-design/leading-care-card-mobile.svg",
+          "graphic-design/leading-care-card.svg",
+          "graphic-design/leading-journal-mobile.svg",
+          "graphic-design/leading-journal.svg",
+          "graphic-design/leading-workshop-poster-mobile.svg",
+          "graphic-design/leading-workshop-poster.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-apply-optical-alignment",
+      "title": "Apply Optical Alignment",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Correct perceived edges or centers when geometry is misleading.",
+        "recognizable_failure": "Quotation marks create an apparent indent or punctuation pulls apparent centering.",
+        "repair": "Make limited shape-aware positional corrections around the reference.",
+        "scope_judgment": "Shared geometric edges can be correct while the visible result remains uneven; keep separate from ordinary alignment."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-apply-optical-alignment",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-apply-optical-alignment.md",
+        "sha256": "9965bacfc3a742724d3b6ebec8242f417e3d3b2e3186507d1075bf9b276ef371",
+        "example_sections": [
+          "Example 1: Let the opening quotation mark hang",
+          "Example 2: Center a headline with light terminal punctuation",
+          "Example 3: Center capitals by the visible letter region"
+        ],
+        "visual_assets": [
+          "graphic-design/optical-invitation-mobile.svg",
+          "graphic-design/optical-invitation.svg",
+          "graphic-design/optical-quotation-mobile.svg",
+          "graphic-design/optical-quotation.svg",
+          "graphic-design/optical-shop-label-mobile.svg",
+          "graphic-design/optical-shop-label.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-adjust-letter-spacing",
+      "title": "Adjust Letter Spacing",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Repair intervals within a text run or a particular pair.",
+        "recognizable_failure": "A headline inherits loose tracking or one pair creates a conspicuous gap.",
+        "repair": "Adjust tracking or local kerning while preserving word boundaries.",
+        "scope_judgment": "Letter intervals are independent of column width, leading and line boundaries. Nest tracking and kerning inside this pattern rather than splitting them further."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-adjust-letter-spacing",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-adjust-letter-spacing.md",
+        "sha256": "9dc19b5a784efcd8c2d2e88525ded735c193d2a5bbec8f9bfcb7ca025d4be733",
+        "example_sections": [
+          "Example 1: Give a short capitals label more room",
+          "Example 2: Remove inherited tracking from a mixed-case headline",
+          "Example 3: Repair one pair without tightening the name"
+        ],
+        "visual_assets": [
+          "graphic-design/letter-spacing-capitals-mobile.svg",
+          "graphic-design/letter-spacing-capitals.svg",
+          "graphic-design/letter-spacing-headline-mobile.svg",
+          "graphic-design/letter-spacing-headline.svg",
+          "graphic-design/letter-spacing-pair-mobile.svg",
+          "graphic-design/letter-spacing-pair.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-control-line-breaks",
+      "title": "Control Line Breaks",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Place line boundaries to support phrasing and meaningful expressions.",
+        "recognizable_failure": "A value separates from its unit or a headline breaks at an awkward phrase boundary.",
+        "repair": "Change the break while preserving wording and suitable reflow.",
+        "scope_judgment": "Its examples repair phrasing at a fixed width and size, which a measure-only pattern does not teach."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-control-line-breaks",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-control-line-breaks.md",
+        "sha256": "822581d3b1e8728c05e574693300b060a7984b75ef2c1f20233f058eaa7fd4d8",
+        "example_sections": [
+          "Example 1: Break a headline around its phrasing",
+          "Example 2: Keep a value with its unit",
+          "Example 3: Recompose an awkward paragraph ending"
+        ],
+        "visual_assets": [
+          "graphic-design/breaks-paragraph-ending-mobile.svg",
+          "graphic-design/breaks-paragraph-ending.svg",
+          "graphic-design/breaks-phrase-poster-mobile.svg",
+          "graphic-design/breaks-phrase-poster.svg",
+          "graphic-design/breaks-value-unit-mobile.svg",
+          "graphic-design/breaks-value-unit.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-type-as-image",
+      "title": "Use Type as Image",
+      "family": "Typography",
+      "verdict": "retain",
+      "test": {
+        "decision": "Give letterforms a relevant visual job while preserving reading.",
+        "recognizable_failure": "A visual idea replaces a necessary letter or an expressive brief remains a plain label.",
+        "repair": "Use arrangement, material or counterforms without losing the required reading route.",
+        "scope_judgment": "The medium of letterforms introduces distinct constraints; it can be metaphorical, material or spatial."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-use-type-as-image",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-type-as-image.md",
+        "sha256": "5a472104a3b0cd07e28223af19642150d5e50e305c9e6962f73d419c5c64ebe6",
+        "example_sections": [
+          "Example 1: Make the word enact its meaning",
+          "Example 2: Use the word as a window onto its material",
+          "Example 3: Preserve the letter before adding the object cue"
+        ],
+        "visual_assets": [
+          "graphic-design/type-image-clay-mobile.svg",
+          "graphic-design/type-image-clay.svg",
+          "graphic-design/type-image-mug-mobile.svg",
+          "graphic-design/type-image-mug.svg",
+          "graphic-design/type-image-rise-mobile.svg",
+          "graphic-design/type-image-rise.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-limit-the-palette",
+      "title": "Limit the Palette",
+      "family": "Color & Tone",
+      "verdict": "merge",
+      "test": {
+        "decision": "Choose which colors earn places in the working set.",
+        "recognizable_failure": "Arbitrary hues suggest categories that the content does not contain.",
+        "repair": "Consolidate unneeded colors while retaining useful distinctions.",
+        "scope_judgment": "Use as the entry to a palette-construction article, with related and opposing hues presented as options for different jobs."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-build-a-purposeful-palette",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-limit-the-palette.md",
+        "sha256": "cdc17bd3d360c271354702426aec791afcfd7374141a95ca20293a1c1899c553",
+        "example_sections": [
+          "Example 1: Stop giving every event detail its own color",
+          "Example 2: Give one measure one bar color",
+          "Example 3: Keep useful status colors"
+        ],
+        "visual_assets": [
+          "graphic-design/palette-booking-screen-mobile.svg",
+          "graphic-design/palette-booking-screen.svg",
+          "graphic-design/palette-monthly-report-mobile.svg",
+          "graphic-design/palette-monthly-report.svg",
+          "graphic-design/palette-open-studios-mobile.svg",
+          "graphic-design/palette-open-studios.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-assign-consistent-color-roles",
+      "title": "Assign Consistent Color Roles",
+      "family": "Color & Tone",
+      "verdict": "technique",
+      "test": {
+        "decision": "Keep a hue’s category, state or action assignment stable.",
+        "recognizable_failure": "A category changes color across panels or a price resembles an action through hue.",
+        "repair": "Restore the color-to-role mapping throughout the defined scope.",
+        "scope_judgment": "This is a specific channel for the same visual-role mapping already taught by Similarity. Preserve chart/state examples as an application module."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-signal-relationships-through-similarity",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-establish-a-shared-visual-language",
+          "role": "secondary",
+          "note": "Cross-artifact policy and token ownership; avoid duplicating the color-role lesson."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-assign-consistent-color-roles.md",
+        "sha256": "a9d6474b96a35313aff4300cf107c0b49fe55ebe24d8ceb46a7e8aaf0429e965",
+        "example_sections": [
+          "Example 1: Make equivalent booking actions look equivalent",
+          "Example 2: Keep a category’s color across a report",
+          "Example 3: Give different problems the same attention role"
+        ],
+        "visual_assets": [
+          "graphic-design/color-roles-order-status-mobile.svg",
+          "graphic-design/color-roles-order-status.svg",
+          "graphic-design/color-roles-primary-actions-mobile.svg",
+          "graphic-design/color-roles-primary-actions.svg",
+          "graphic-design/color-roles-studio-report-mobile.svg",
+          "graphic-design/color-roles-studio-report.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-complementary-contrast",
+      "title": "Use Complementary Contrast",
+      "family": "Color & Tone",
+      "verdict": "merge",
+      "test": {
+        "decision": "Choose opposing hue families for useful distinction.",
+        "recognizable_failure": "An intended accent does not differ sufficiently in hue from its neighbors.",
+        "repair": "Select an opposing relationship and tune its lightness, saturation and area.",
+        "scope_judgment": "A palette strategy whose desirability depends on the brief. Merge with palette construction; send its legibility repair to value contrast rather than repeating it."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-build-a-purposeful-palette",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-establish-value-contrast",
+          "role": "secondary",
+          "note": "Reading-surface repair; example 3."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-complementary-contrast.md",
+        "sha256": "6a1ac4392dc8d9f7ae14e1a3bce004d691fb20857e1a2bdf718e4ed9fc98d493",
+        "example_sections": [
+          "Example 1: Let one accent differ from the blue family",
+          "Example 2: Distinguish peers without making one larger",
+          "Example 3: Keep the hue relationship and repair the reading surface"
+        ],
+        "visual_assets": [
+          "graphic-design/complement-entry-accent-mobile.svg",
+          "graphic-design/complement-entry-accent.svg",
+          "graphic-design/complement-product-legibility-mobile.svg",
+          "graphic-design/complement-product-legibility.svg",
+          "graphic-design/complement-studio-categories-mobile.svg",
+          "graphic-design/complement-studio-categories.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-build-analogous-harmony",
+      "title": "Build Analogous Harmony",
+      "family": "Color & Tone",
+      "verdict": "merge",
+      "test": {
+        "decision": "Choose nearby hue families for a related color character.",
+        "recognizable_failure": "A related programme lacks a shared color character, or overly similar variants collapse together.",
+        "repair": "Choose a local hue neighborhood and retain purposeful variation.",
+        "scope_judgment": "Present beside opposing hues as a choice with different consequences, not as a separate universal improvement rule."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-build-a-purposeful-palette",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-establish-value-contrast",
+          "role": "secondary",
+          "note": "Reading-surface repair; example 3."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-build-analogous-harmony.md",
+        "sha256": "a7bcae65337446401a59c96e2a82d6b2fe9e9c56f8df2134ccc1d7f64a896bcf",
+        "example_sections": [
+          "Example 1: Make three activities feel like one programme",
+          "Example 2: Give a related range enough individual character",
+          "Example 3: Keep the family and strengthen the information"
+        ],
+        "visual_assets": [
+          "graphic-design/analogous-coffee-variation-mobile.svg",
+          "graphic-design/analogous-coffee-variation.svg",
+          "graphic-design/analogous-supper-legibility-mobile.svg",
+          "graphic-design/analogous-supper-legibility.svg",
+          "graphic-design/analogous-workshop-family-mobile.svg",
+          "graphic-design/analogous-workshop-family.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-establish-value-contrast",
+      "title": "Establish Value Contrast",
+      "family": "Color & Tone",
+      "verdict": "retain",
+      "test": {
+        "decision": "Set useful light–dark separation.",
+        "recognizable_failure": "Text, an empty checkbox or a priority field has the wrong tonal relationship.",
+        "repair": "Adjust value while judging readability and prominence in context.",
+        "scope_judgment": "Value can be adjusted independently of hue and background detail; retain its concrete diagnostics and limits."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-value-contrast",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-establish-value-contrast.md",
+        "sha256": "368d38a155d174ed833188e3ebf6dd0a418fb433a0461a6d58bb4881396f03e0",
+        "example_sections": [
+          "Example 1: Lighten necessary text on a dark panel",
+          "Example 2: Make an empty checkbox visible",
+          "Example 3: Reduce a competing field without making its label faint"
+        ],
+        "visual_assets": [
+          "graphic-design/value-cinema-details-mobile.svg",
+          "graphic-design/value-cinema-details.svg",
+          "graphic-design/value-guest-checkbox-mobile.svg",
+          "graphic-design/value-guest-checkbox.svg",
+          "graphic-design/value-report-masthead-mobile.svg",
+          "graphic-design/value-report-masthead.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-test-in-grayscale",
+      "title": "Test in Grayscale",
+      "family": "Color & Tone",
+      "verdict": "check",
+      "test": {
+        "decision": "Inspect what survives temporarily removing hue.",
+        "recognizable_failure": "A monochrome preview reveals lost distinctions or weak action cues.",
+        "repair": "Inspect, repair the original using the appropriate pattern and compare both views.",
+        "scope_judgment": "It diagnoses multiple failures and prescribes no single repair. Keep as a reusable check linked from value contrast and meaning beyond color."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-value-contrast",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-reinforce-meaning-beyond-color",
+          "role": "secondary",
+          "note": "Category labels and action-cue checks."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-test-in-grayscale.md",
+        "sha256": "fcab7ebedd1e11da427a6fe5b9f2fed938cc39fa5c90863b64376f3e9a5ef6cc",
+        "example_sections": [
+          "Example 1: Expose faint workshop details",
+          "Example 2: Keep the palette; label the categories",
+          "Example 3: Preserve an action cue without recoloring"
+        ],
+        "visual_assets": [
+          "graphic-design/grayscale-booking-link-mobile.svg",
+          "graphic-design/grayscale-booking-link.svg",
+          "graphic-design/grayscale-studio-categories-mobile.svg",
+          "graphic-design/grayscale-studio-categories.svg",
+          "graphic-design/grayscale-workshop-details-mobile.svg",
+          "graphic-design/grayscale-workshop-details.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-reinforce-meaning-beyond-color",
+      "title": "Reinforce Meaning Beyond Color",
+      "family": "Color & Tone",
+      "verdict": "retain",
+      "test": {
+        "decision": "Make identifying hue unnecessary for necessary meaning.",
+        "recognizable_failure": "A reader cannot map a color-coded status or chart series to its meaning.",
+        "repair": "Add words, shape, pattern or another independently interpretable cue.",
+        "scope_judgment": "Two colors can have strong contrast yet still need redundant meaning. Retain separately from palette and value decisions."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-reinforce-meaning-beyond-color",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-reinforce-meaning-beyond-color.md",
+        "sha256": "96f3b109abda91f111027168b5be30786b4e1f51c3fb569b26cd125d1e0d9386",
+        "example_sections": [
+          "Example 1: Name the status beside each session",
+          "Example 2: Give a chart series a matching line pattern",
+          "Example 3: Explain the error beside the field"
+        ],
+        "visual_assets": [
+          "graphic-design/beyond-color-actual-plan-mobile.svg",
+          "graphic-design/beyond-color-actual-plan.svg",
+          "graphic-design/beyond-color-email-error-mobile.svg",
+          "graphic-design/beyond-color-email-error.svg",
+          "graphic-design/beyond-color-session-status-mobile.svg",
+          "graphic-design/beyond-color-session-status.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-choose-images-for-meaning",
+      "title": "Choose Images for Meaning",
+      "family": "Imagery & Visual Form",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose which image contributes the needed information or association.",
+        "recognizable_failure": "A finished product illustrates a making class without showing the activity.",
+        "repair": "Select a source image whose visible content supports the actual claim.",
+        "scope_judgment": "Replacing the source differs from changing the crop or coordinating it with words."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-choose-images-for-meaning",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-choose-images-for-meaning.md",
+        "sha256": "5aff46a45f92405ba7d53d2d8ad6d9e96dab3789c8e8ba9301dfa70a5d3c679b",
+        "example_sections": [
+          "Example 1: Show the advertised activity",
+          "Example 2: Show the feature the booking depends on",
+          "Example 3: Illustrate the subject, not just a keyword"
+        ],
+        "visual_assets": [
+          "graphic-design/image-meaning-enclosed-room-mobile.svg",
+          "graphic-design/image-meaning-enclosed-room.svg",
+          "graphic-design/image-meaning-handbuilding-mobile.svg",
+          "graphic-design/image-meaning-handbuilding.svg",
+          "graphic-design/image-meaning-seed-library-mobile.svg",
+          "graphic-design/image-meaning-seed-library.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-crop-for-impact",
+      "title": "Crop for Impact",
+      "family": "Imagery & Visual Form",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose the visible window within an existing image.",
+        "recognizable_failure": "A handle is cut off or context needed to judge a room is excluded.",
+        "repair": "Tighten, pan or widen the crop while preserving the truthful context required.",
+        "scope_judgment": "Source selection can be correct while its retained window is wrong."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-crop-for-impact",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-crop-for-impact.md",
+        "sha256": "4ad11e7b3af6ae09269cdd29d4e43bd18208722ef5a787f277942ddc05305ca2",
+        "example_sections": [
+          "Example 1: Tighten around the making action",
+          "Example 2: Shift the crop without zooming",
+          "Example 3: Widen to restore the context"
+        ],
+        "visual_assets": [
+          "graphic-design/crop-handbuilding-action-mobile.svg",
+          "graphic-design/crop-handbuilding-action.svg",
+          "graphic-design/crop-room-context-mobile.svg",
+          "graphic-design/crop-room-context.svg",
+          "graphic-design/crop-tableware-edge-mobile.svg",
+          "graphic-design/crop-tableware-edge.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-control-the-background",
+      "title": "Control the Background",
+      "family": "Imagery & Visual Form",
+      "verdict": "technique",
+      "test": {
+        "decision": "Adjust the supporting layer behind required content.",
+        "recognizable_failure": "Photo edges, a pattern or transparency compete with text or an object.",
+        "repair": "Change local backing, ground detail or opacity while preserving useful context.",
+        "scope_judgment": "The three repairs are methods for figure–ground separation. Preserve a clearly named background-treatment section rather than another full explanation of separation."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-separate-figure-from-ground",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-control-the-background.md",
+        "sha256": "479baef50e4b3848eacf84134002ac4088f12207b1402736bfeaf672a90855ae",
+        "example_sections": [
+          "Example 1: Protect the invitation locally",
+          "Example 2: Let the product carry the detail",
+          "Example 3: Stop the photograph showing through the facts"
+        ],
+        "visual_assets": [
+          "graphic-design/background-booking-surface-mobile.svg",
+          "graphic-design/background-booking-surface.svg",
+          "graphic-design/background-pitcher-texture-mobile.svg",
+          "graphic-design/background-pitcher-texture.svg",
+          "graphic-design/background-studio-invitation-mobile.svg",
+          "graphic-design/background-studio-invitation.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-integrate-text-and-image",
+      "title": "Integrate Text and Image",
+      "family": "Imagery & Visual Form",
+      "verdict": "retain",
+      "test": {
+        "decision": "Coordinate what words and pictures contribute and refer to.",
+        "recognizable_failure": "An offer sits away from its photograph or labels cannot identify exact features.",
+        "repair": "Place corresponding content together or connect explicit referents.",
+        "scope_judgment": "Semantic reference and contribution extend beyond visual reading flow. Absorb exact-feature leader material from Guide the Eye."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-integrate-text-and-image",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-integrate-text-and-image.md",
+        "sha256": "51b9fab268abd444fea41feb89ae80b82f8ce371d7ec515b81c1c66851d500e2",
+        "example_sections": [
+          "Example 1: Keep each offer beside its photograph",
+          "Example 2: Connect names to exact features",
+          "Example 3: Preserve the portrait’s contribution"
+        ],
+        "visual_assets": [
+          "graphic-design/integration-maker-poster-mobile.svg",
+          "graphic-design/integration-maker-poster.svg",
+          "graphic-design/integration-newsletter-captions-mobile.svg",
+          "graphic-design/integration-newsletter-captions.svg",
+          "graphic-design/integration-pitcher-labels-mobile.svg",
+          "graphic-design/integration-pitcher-labels.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-simplify-through-abstraction",
+      "title": "Simplify Through Abstraction",
+      "family": "Imagery & Visual Form",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose which features and relationships a representation must preserve.",
+        "recognizable_failure": "Incidental surface or atmosphere obscures a category, arrangement or task model.",
+        "repair": "Replace incidental appearance with a task-appropriate representation.",
+        "scope_judgment": "Use as the parent for silhouettes; preserve the distinction between simplification and removing whole message elements."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-simplify-through-abstraction",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-simplify-through-abstraction.md",
+        "sha256": "cb53d892b5c21ee175d532c73023c1ce4fcb829fa83ea9c3eed926175a9bebc1",
+        "example_sections": [
+          "Example 1: Preserve the features that identify a category",
+          "Example 2: Replace atmosphere with an arrangement",
+          "Example 3: Turn materials into a task model"
+        ],
+        "visual_assets": [
+          "graphic-design/abstraction-pitcher-category-mobile.svg",
+          "graphic-design/abstraction-pitcher-category.svg",
+          "graphic-design/abstraction-room-arrangement-mobile.svg",
+          "graphic-design/abstraction-room-arrangement.svg",
+          "graphic-design/abstraction-seed-packing-mobile.svg",
+          "graphic-design/abstraction-seed-packing.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-silhouettes",
+      "title": "Use Silhouettes",
+      "family": "Imagery & Visual Form",
+      "verdict": "technique",
+      "test": {
+        "decision": "Let contour and meaningful openings carry the representation.",
+        "recognizable_failure": "Surface detail describes one finish when a category cue is needed.",
+        "repair": "Use a solid figure only when the contour preserves the required identity.",
+        "scope_judgment": "A specific representation choice within abstraction. Keep the portrait reversal and ground repair as limits and cross-references."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-simplify-through-abstraction",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        },
+        {
+          "id": "graphic-design-separate-figure-from-ground",
+          "role": "secondary",
+          "note": "Keep the ground-repair example as a cross-reference or supplementary comparison."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-silhouettes.md",
+        "sha256": "2b7b10645d104f9966c791274a3c3fdfd96104dcb3f649eae7289c10562e753d",
+        "example_sections": [
+          "Example 1: Make the shelf cue about form",
+          "Example 2: Protect the shape against its ground",
+          "Example 3: Restore detail when the brief needs a portrait"
+        ],
+        "visual_assets": [
+          "graphic-design/silhouette-maker-detail-mobile.svg",
+          "graphic-design/silhouette-maker-detail.svg",
+          "graphic-design/silhouette-pitcher-shelf-mobile.svg",
+          "graphic-design/silhouette-pitcher-shelf.svg",
+          "graphic-design/silhouette-shears-ground-mobile.svg",
+          "graphic-design/silhouette-shears-ground.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-use-visual-metaphors",
+      "title": "Use Visual Metaphors",
+      "family": "Imagery & Visual Form",
+      "verdict": "retain",
+      "test": {
+        "decision": "Borrow a relationship from one subject to communicate another.",
+        "recognizable_failure": "A comparison lacks a target or imports implications that conflict with the brief.",
+        "repair": "Make the mapping clear, anchor its subject or replace the source comparison.",
+        "scope_judgment": "This is a conceptual transfer with audience-dependent inference, distinct from literal image choice or conventional symbols."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-use-visual-metaphors",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-use-visual-metaphors.md",
+        "sha256": "28bbf055c5cdaa24d73c64ba80a1f93efdc36249356c1be75ba3e5e65d2b59fb",
+        "example_sections": [
+          "Example 1: Make the borrowed relationship visible",
+          "Example 2: Name what the picture is explaining",
+          "Example 3: Replace an implication that conflicts with the brief"
+        ],
+        "visual_assets": [
+          "graphic-design/metaphor-book-growth-mobile.svg",
+          "graphic-design/metaphor-book-growth.svg",
+          "graphic-design/metaphor-cord-anchor-mobile.svg",
+          "graphic-design/metaphor-cord-anchor.svg",
+          "graphic-design/metaphor-peer-bridge-mobile.svg",
+          "graphic-design/metaphor-peer-bridge.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-employ-recognizable-symbols",
+      "title": "Employ Recognizable Symbols",
+      "family": "Imagery & Visual Form",
+      "verdict": "retain",
+      "test": {
+        "decision": "Choose an established cue that matches the service or action.",
+        "recognizable_failure": "A familiar object leaves the service unclear or an upload icon contradicts Download.",
+        "repair": "Use the appropriate convention and label uncertain meanings.",
+        "scope_judgment": "Learned association has different selection and testing requirements from constructing a fresh metaphor."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-employ-recognizable-symbols",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "draft",
+        "confidence": "high",
+        "path": "content/patterns/graphic-design-employ-recognizable-symbols.md",
+        "sha256": "89e7f0b69080ff4c8ed7a5eeb3eb8cd4bda6a164375375d8899d800276793036",
+        "example_sections": [
+          "Example 1: Give a service its own recognizable cue",
+          "Example 2: Make the symbol agree with the action",
+          "Example 3: Name the service behind a familiar object"
+        ],
+        "visual_assets": [
+          "graphic-design/symbols-audio-label-mobile.svg",
+          "graphic-design/symbols-audio-label.svg",
+          "graphic-design/symbols-download-mobile.svg",
+          "graphic-design/symbols-download.svg",
+          "graphic-design/symbols-information-mobile.svg",
+          "graphic-design/symbols-information.svg"
+        ]
+      }
+    },
+    {
+      "id": "graphic-design-repeat-visual-motifs",
+      "title": "Repeat Visual Motifs",
+      "family": "Unity & Visual Systems",
+      "verdict": "technique",
+      "test": {
+        "decision": "Repeat selected identifying features across artifacts.",
+        "recognizable_failure": "Related outputs lack recurring cues or repetition carries no defined job.",
+        "repair": "Choose motifs and repeat them within a shared rule set.",
+        "scope_judgment": "Provisional: likely one implementation method for shared language, not a separate reader problem. No article or worked examples exist yet."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-shared-visual-language",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "planned",
+        "confidence": "provisional",
+        "path": null,
+        "sha256": null,
+        "example_sections": [],
+        "visual_assets": []
+      }
+    },
+    {
+      "id": "graphic-design-establish-a-shared-visual-language",
+      "title": "Establish a Shared Visual Language",
+      "family": "Unity & Visual Systems",
+      "verdict": "retain",
+      "test": {
+        "decision": "Define stable cross-artifact visual roles and permitted variation.",
+        "recognizable_failure": "Related artifacts use incompatible role assignments or appear unrelated.",
+        "repair": "Specify a small coherent vocabulary and its scope of application.",
+        "scope_judgment": "Provisional core: a system-wide governance decision beyond a local similarity repair. Needs a brief that does not repeat every component pattern."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-shared-visual-language",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "planned",
+        "confidence": "provisional",
+        "path": null,
+        "sha256": null,
+        "example_sections": [],
+        "visual_assets": []
+      }
+    },
+    {
+      "id": "graphic-design-introduce-controlled-variation",
+      "title": "Introduce Controlled Variation",
+      "family": "Unity & Visual Systems",
+      "verdict": "technique",
+      "test": {
+        "decision": "Choose where a shared system permits meaningful difference.",
+        "recognizable_failure": "Outputs become mechanically identical or arbitrary exceptions destroy family resemblance.",
+        "repair": "Define invariant features and variation tied to actual content.",
+        "scope_judgment": "Provisional: teach as the exception policy of shared language, alongside repetition. No article exists to establish a more independent intervention."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-shared-visual-language",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "planned",
+        "confidence": "provisional",
+        "path": null,
+        "sha256": null,
+        "example_sections": [],
+        "visual_assets": []
+      }
+    },
+    {
+      "id": "graphic-design-develop-distinctive-visual-cues",
+      "title": "Develop Distinctive Visual Cues",
+      "family": "Unity & Visual Systems",
+      "verdict": "retain",
+      "test": {
+        "decision": "Help people distinguish this identity from plausible alternatives.",
+        "recognizable_failure": "An internally consistent identity remains confusable with another organization.",
+        "repair": "Choose recognizable distinguishing features and test them among alternatives.",
+        "scope_judgment": "Provisional core only if its brief addresses external recognition and discrimination, not merely internal consistency or decoration."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-develop-distinctive-visual-cues",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "planned",
+        "confidence": "provisional",
+        "path": null,
+        "sha256": null,
+        "example_sections": [],
+        "visual_assets": []
+      }
+    },
+    {
+      "id": "graphic-design-build-reusable-templates",
+      "title": "Build Reusable Templates",
+      "family": "Unity & Visual Systems",
+      "verdict": "retain",
+      "test": {
+        "decision": "Make repeated production reliable without rebuilding each artifact.",
+        "recognizable_failure": "Recurring documents need repeated manual assembly or omit required content.",
+        "repair": "Provide reusable role slots, variable content, rules and useful exceptions.",
+        "scope_judgment": "Provisional core: workflow reuse and required-content structure exceed the geometric concerns of a grid. Requires variable-content examples."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-build-reusable-templates",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "planned",
+        "confidence": "provisional",
+        "path": null,
+        "sha256": null,
+        "example_sections": [],
+        "visual_assets": []
+      }
+    },
+    {
+      "id": "graphic-design-create-modular-layout-systems",
+      "title": "Create Modular Layout Systems",
+      "family": "Unity & Visual Systems",
+      "verdict": "technique",
+      "test": {
+        "decision": "Compose repeatable units within a reusable placement framework.",
+        "recognizable_failure": "A layout cannot absorb an additional module or adapt its spans.",
+        "repair": "Define modular regions, spans and adaptation rules.",
+        "scope_judgment": "Provisional: the existing grid article already teaches repeated modules, spans and width adaptation. Do not draft another near-duplicate article."
+      },
+      "destinations": [
+        {
+          "id": "graphic-design-establish-a-grid",
+          "role": "primary",
+          "note": "Main home of the reviewed decision or its supporting material."
+        }
+      ],
+      "evidence": {
+        "state": "planned",
+        "confidence": "provisional",
+        "path": null,
+        "sha256": null,
+        "example_sections": [],
+        "visual_assets": []
+      }
+    }
+  ],
+  "migration_policy": [
+    "Keep the canonical corpus unchanged until the consolidated articles are actually rewritten and reviewed.",
+    "Preserve all348 registered visual assets, source attribution, prompts, font licenses and comparison limits. Select primary examples; do not concatenate all source articles or discard the unused comparisons.",
+    "Preserve every old title and query as retrieval language. Decide supported redirects or alias behavior before retiring any route; no redirects are implemented by this audit.",
+    "Keep paired comparisons intact. Moving an example must preserve its caption, alternative text, fixed-variable claims, provenance and narrow-screen/full-size variants.",
+    "Use one main home for each lesson; secondary destinations should link or use a bounded excerpt rather than repeat whole explanations.",
+    "Keep three planned core briefs provisional until worked examples establish their promised boundaries."
+  ],
+  "priority_order": [
+    "Combine hierarchy, spacing and palette construction first.",
+    "Redistribute Frame the Content and Guide the Eye into their actual reader problems.",
+    "Nest background treatment, silhouettes, type pairing, proportions, scale and grid exceptions; retain distinct typographic and perceptual repairs.",
+    "Replace the generic contrast article with a short foundation guide; attach the grayscale diagnostic to its repair destinations.",
+    "Write narrow briefs for shared visual language, external identity distinction and reusable templates; absorb the other three planned candidates as techniques."
+  ],
+  "validation": {
+    "coverage": "58 unique source entries match the58-candidate baseline exactly.",
+    "destinations": "All primary and secondary destinations resolve to one of39 proposed core patterns or the contrast foundation.",
+    "authored_snapshots": "All52 recorded article SHA-256 snapshots match current canonical files.",
+    "visual_references": "Every visual asset referenced by the reviewed articles exists. No visual asset was deleted or modified by the audit.",
+    "baseline": "Package SHA-256 unchanged;348 registered assets remain in the package.",
+    "scope": "Documentation-only consistency checks. No canonical rewrites, navigation changes, content build, reader test or new visual QA performed."
+  },
+  "implementation_record": "docs/pattern-packages/graphic-design-consolidation.json"
+}

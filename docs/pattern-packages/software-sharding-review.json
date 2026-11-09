@@ -1,0 +1,227 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "data-horizontal-sharding",
+  "title": "Sharding",
+  "aliases": ["Horizontal Sharding"],
+  "primary_collection": "software-performance-scalability",
+  "primary_collection_title": "Performance and Scalability",
+  "body_word_count": 1414,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six official primary references from Microsoft, MongoDB, Citus and Vitess. Sharding is established horizontal distribution of different row subsets across owning storage groups, potentially replicated internally. Distinguishes same-host partitioning, vertical column separation and full-data replication; preserves former Horizontal Sharding title as alias. Capacity is the central design problem, so Performance and Scalability is the single primary home. Key placement, virtual buckets, targeted/scatter-gather requests, tenant co-location, cardinality/frequency/monotonicity, hot keys, migration and shard-local versus cross-shard guarantees are addressed. Existing useful order/tenant7/bucket6/mapv12/B and telemetry/resharding context retained.",
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "before 12 B 6 paid",
+        "stale route rejected",
+        "after 13 D 6 paid",
+        "old copy False"
+      ],
+      "records_preserved": 120,
+      "moved_records": 10,
+      "checks": [
+        "invalid tenant and bucket boundaries",
+        "stable twelve-bucket classification",
+        "tenant-scoped identity",
+        "all records preserved and readable after selected-bucket move",
+        "unaffected placement and records retained",
+        "stale reads and writes rejected without effects",
+        "fresh wrong-owner operations rejected",
+        "immutable catalog snapshots",
+        "global version invalidates unrelated cached routes",
+        "fresh writes reach new owner",
+        "missing row is not an empty success",
+        "invalid and no-op moves retain state",
+        "destination conflicts refused before mutation",
+        "empty bucket ownership and return move"
+      ]
+    },
+    "content": "All 1301 entities validate; published-only compilation contains1154 without diagnostics. Eight exact H2s, one complete Python3 fence, two figures with responsive counterparts, ten distinct recommendation queries, no practice or worksheet. Revised existing ID without adding an entity.",
+    "integration_tests": "Sharding3, Materialized View3, Memoization3 and GoF24 pass. Four global graphic checks pass; the one pre-existing authored-coverage check fails for missing access-over-ownership. Total37 passed,1 unrelated failure. Tests cover canonical title/alias/search, both verses, one primary membership, former cross-link/fourteen members, all23GoF members, related targets, exact highlighted/selectable code, alts/captions/mobile sources/dimensions and authoring hash. Previous Materialized View collection-count assertion updated15→14 to reflect this move; no test behavior weakened.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-program validator, new and adjusted integration tests, authoring JSON/documentation, graphics registry, manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": [
+        "content/patterns/data-horizontal-sharding.md",
+        "content/collections/software-performance-scalability.md",
+        "content/collections/data-engineering-storage-access.md"
+      ],
+      "other_existing_content_unchanged": 1298,
+      "new_content": [],
+      "canonical_id_route_and_summary_preserved": true,
+      "existing_data_engineering_tags_verse_attribution_retained": true,
+      "primary_home_performance_and_scalability_fourth_member": true,
+      "former_collection_retains_crosslink_and_fourteen_other_members": true,
+      "all_other_articles_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 71,
+      "prior_graphics_unchanged": 483,
+      "prior_dimensions_unchanged": 1716,
+      "updated_dimensions": {
+        "data-engineering/horizontal-sharding.svg": {
+          "width": 720,
+          "height": 720
+        }
+      },
+      "new_dimensions": {
+        "data-engineering/horizontal-sharding-mobile.svg": {
+          "width": 360,
+          "height": 1012
+        },
+        "data-engineering/sharding-handoff.svg": {
+          "width": 720,
+          "height": 952
+        },
+        "data-engineering/sharding-handoff-mobile.svg": {
+          "width": 360,
+          "height": 1072
+        }
+      },
+      "historical_import_unchanged": true,
+      "prior_integration_test_change": "Only Storage & access membership count15→14 after this move.",
+      "unrelated_dependencies_renderer_build_scripts_and_prior_example_scripts_unchanged": true,
+      "staged_sources_and_assets_match": true,
+      "archived_original_article_and_primary_asset": true
+    },
+    "illustrations": "Two editable native SVG figures, each separately composed for phone. Routing diagram: tenant7→bucket6→mapv12→B, A0–3/B4–7/C8–11, same schema/different rows and replication distinction. Handoff: requests paused, copy bucket6B→D, publish ownerD/version13, clean oldB rows, resume and reject stalev12B write while freshv13D read returns paid. Diagram labels match the executed program. Fixed white, Helvetica Neue/Helvetica/Arial regular400, exact approved palette, square boundaries, generous spacing and restrained strokes. One initial phone subtitle overflow was corrected. All four variants have zero measured outside labels, overlapping labels or outside rectangles; native/embedded desktop and phone figures/captions visually inspected.",
+    "native_figure_measurements": [
+      {
+        "path": "/assets/data-engineering/horizontal-sharding.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 720
+      },
+      {
+        "path": "/assets/data-engineering/horizontal-sharding-mobile.svg",
+        "labels": 20,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1012
+      },
+      {
+        "path": "/assets/data-engineering/sharding-handoff.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 952
+      },
+      {
+        "path": "/assets/data-engineering/sharding-handoff-mobile.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1072
+      }
+    ],
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 4,
+          "y": 7,
+          "width": 88,
+          "height": 82
+        },
+        {
+          "x": 26,
+          "y": 40,
+          "width": 35,
+          "height": 16
+        }
+      ]
+    },
+    "production_build": "The unchanged repository public build command exits zero and Public web build checks passed in an isolated source snapshot. Disk pressure required a temporary NODE_OPTIONS filesystem-copy helper: only this task’s generated prerender pages/dependencies/data copies into its own navigation-cache and finished build use native macOS copy-on-write clones; every source/destination SHA256 matches. Other copies forward unchanged. No renderer, repository build-script or dependency edits. One unsuccessful disk-space attempt is retained in local evidence; native copying was extended to generated navigation-cache for the successful retry. Only task-owned failed/redundant generated output was removed. Finished build and running preview remain, earlier previews/source unchanged. Staged inputs match source; private environment excluded and PUBLIC_DROPBOX_APP_KEY empty.",
+    "disk_space_management": {
+      "status": "passed",
+      "failed_attempt": "First attempt exhausted disk during generated navigation-cache copying; log public-build-attempt-1.log. Only own failed output removed.",
+      "successful_command": "node scripts/build-public-web.mjs",
+      "successful_exit_code": 0,
+      "background_hash_verified_compaction_passes": 46,
+      "native_copy_results": [
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 5357,
+          "logical_bytes": 525400252,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 2470,
+          "logical_bytes": 49198521,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/build",
+          "files": 5357,
+          "logical_bytes": 525400252,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/build",
+          "files": 2470,
+          "logical_bytes": 49198521,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        }
+      ],
+      "temporary_runtime_helper": ".local/software-sharding/clone-generated-assets.mjs",
+      "native_helper": ".local/software-sharding/clone-asset-tree.py",
+      "redundant_generated_output_removed_after_browser_success": [
+        ".local/software-sharding/build-workspace/apps/web/.svelte-kit/output"
+      ],
+      "finished_preview_and_earlier_previews_preserved": true
+    },
+    "browser": "Actual production article inspected at1440,390,320CSS pixels. Exact eight H2s, four loaded responsive assets, exact code text and selection, multiple syntax colors, focusable code with keyboard horizontal scrolling at320, no page overflow, all four related routes200. Former collection cross-link resolves canonical route with new primary breadcrumb; Performance and Scalability route/gallery show fourth member with authored concept and Software/DataEngineering badges. Native and embedded figures/captions, desktop/phone article tops, code viewport and gallery visually inspected. No browser console/page errors.",
+    "browser_measurements": {
+      "records": 9,
+      "widths": [1440, 390, 320],
+      "related_routes": 4,
+      "errors": []
+    },
+    "built_assets": {
+      "build_root": ".local/software-sharding/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 46317
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not accept it. One error, zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership has no authored concept graphic; four other graphic checks pass."
+    }
+  ],
+  "example_limits": "Existing canonical data-horizontal-sharding revised in place as Sharding with former title Horizontal Sharding as alias. Preserve ID/route, exact summary, attribution, old tags/Data Engineering membership and primary figure path. One primary home moves from Storage & access to Performance and Scalability; former collection retains cross-link and fourteen other members. Retain order, tenant7/bucket6/mapv12/B, tenant co-location, telemetry hotspots and safe movement context. Original Python sequential in-memory directory uses twelve fixed logical buckets and four groups, with D initially empty. Positive numeric tenant classifier (tenant-1)%12 is deliberately illustrative, not a production hash. Tenant7/orderO71/paid moves from B at version12 to D at13 while calls are paused; the old write is rejected before row mutation and fresh read returns paid, old B copy absent. Global-version authoritative validation is coarse and invalidates unrelated cached routes; physical copies during quiescence do not grant two active writers. Immutable strings and tuple tenant/order keys. No online/concurrent migration, durability, crash recovery, network, authentication, replication or distributed transaction protocol. Original scenarios, program and diagrams are teaching material.",
+  "preview": "http://127.0.0.1:43056/pattern/data-horizontal-sharding",
+  "preview_mode": "isolated-static-production-build-with-byte-verified-native-copies",
+  "evidence_directory": ".local/software-sharding",
+  "browser_check_script": ".local/software-sharding/check-browser.mjs",
+  "build_log": ".local/software-sharding/public-build-isolated.log",
+  "branch": "codex/software-sharding",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

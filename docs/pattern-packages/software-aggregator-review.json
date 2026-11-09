@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "aggregator",
+  "title": "Aggregator",
+  "aliases": ["Message Aggregator"],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1389,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Hohpe and Woolf’s Aggregator catalog entry; Spring Integration Aggregator documentation; Apache Camel Aggregate 4.22 documentation; RabbitMQ acknowledgments/publisher confirms; and Martin Fowler’s Event Aggregator and DDD Aggregate articles. The messaging pattern is defined through correlation, completeness, and combination. Message Aggregator is a descriptive search alias; DDD Aggregate and subscription-indirection Event Aggregator are explicitly distinct. Framework-specific defaults are not presented as universal guarantees. Messaging and Integration is the sole primary home.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["aggregator.py", "demo.py"],
+      "stdout": [
+        "first: None",
+        "duplicate: None",
+        "E901 complete 3",
+        "after closure: None",
+        "E902 timed_out missing: ('L2',)"
+      ],
+      "verification": "Six arrival permutations with repeated members and a zero-unit report; exact complete fixture and order-independent sum; conflicting open-group duplicate rejection without replacement; before/at/after deadline fixtures; no-input polling and zero deadline; sorted missing members and no misleading partial total; retained frozen terminal outcomes and no second local release; copied expected membership; 1/100-member boundaries and 0/101/duplicate-member rejection; 0/1000-unit bounds and malformed/Boolean/range rejection; operation/member isolation and identifier grammar/length; invalid clock rejection without state mutation; independent instances explicitly have no persistent deduplication history."
+    },
+    "content": "1275 entities validate with drafts included; published-only compilation contains 1128 entities without diagnostics.",
+    "integration_tests": "All nine focused article suites pass: Aggregator, the previous seven Messaging and Integration articles, and GoF. Combined run across ten files reports 52 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, code validator, integration test, JSON authoring metadata, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Messaging and Integration, preserving seven members and appending Aggregator eighth with an explanatory paragraph. Existing Splitter, Correlation Identifier, Idempotent Writes, and Aggregate canonical IDs supply all related links. The DDD Aggregate article remains intact. No new collection, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1273,
+      "new_content": ["content/patterns/aggregator.md"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "ddd_aggregate_unchanged": true,
+      "related_data_engineering_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 40,
+      "prior_graphics_unchanged": 452,
+      "prior_dimensions_unchanged": 1601,
+      "new_dimensions": {
+        "software-engineering/aggregator-members.svg": {
+          "width": 720,
+          "height": 1072
+        },
+        "software-engineering/aggregator-members-mobile.svg": {
+          "width": 360,
+          "height": 1120
+        },
+        "software-engineering/aggregator-lifecycle.svg": {
+          "width": 720,
+          "height": 1000
+        },
+        "software-engineering/aggregator-lifecycle-mobile.svg": {
+          "width": 360,
+          "height": 1232
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, authoring metadata, concept registry, and collection agree with staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer or build implementation changes.",
+    "illustrations": "Two editable native SVG diagrams explain distinct-member accounting under reordered and duplicate reports, and alternative complete/timed-out terminal paths at the exact deadline. Both have separately composed phone versions, meaningful alternatives and captions, the approved fixed white/regular Helvetica Neue palette and square-boundary style, and explicit arrow meanings. Four variants have zero measured outside labels, label overlaps, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected; label placement, contrast, and readability pass.",
+    "browser": "Actual production article verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal code scrolling at 320 pixels, no page overflow, and four related routes returning 200. The collection route and software verse gallery show eight members across two pages. The Aggregator card on page two opens with the correct primary breadcrumb. Desktop/phone article tops, code, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-aggregator/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 47801
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original one-group packing-result simulation. One operation ID has a fixed copied set of 1..100 distinct expected line IDs; ASCII identifiers are 1..64 characters. Authorized input reports 0..1000 packed physical units; complete means every expected member reported, not order fulfillment. Calls are sequential on a nondecreasing integer monotonic millisecond clock starting at zero. Identical open-group duplicates do not advance membership; conflicting open-group duplicates are rejected. The commutative sum is arrival-order independent. A fixed absolute deadline expires at now_ms >= deadline_ms; timeout records sorted missing members with total_units None. Each instance releases at most one frozen outcome and retains it, never reopening for valid late messages. The caller schedules polling and preserves state/configuration through the API. Empty work is handled upstream. No broker, durable state, restart recovery, global active-group bound, source authentication, concurrency control, automatic timer, cancellation, reliable output handoff, or exactly-once effect guarantee.",
+  "preview": "http://127.0.0.1:43025/pattern/aggregator",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-aggregator",
+  "browser_measurements": ".local/software-aggregator/browser-checks.json",
+  "browser_check_script": ".local/software-aggregator/check-browser.mjs",
+  "build_log": ".local/software-aggregator/public-build-isolated.log",
+  "branch": "codex/software-aggregator",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

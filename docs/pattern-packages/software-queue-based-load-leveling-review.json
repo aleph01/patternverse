@@ -1,0 +1,180 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "queue-based-load-leveling",
+  "title": "Queue-Based Load Leveling",
+  "aliases": ["Queue-Based Load Levelling", "Queue Based Load Leveling"],
+  "primary_collection": "software-reliability-failure-handling",
+  "primary_collection_title": "Reliability and Failure Handling",
+  "body_word_count": 1454,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Eight primary references: Microsoft catalogs Queue-Based Load Leveling; AWS documents backlog debt, recovery and message-age monitoring; RabbitMQ separates publisher confirms from consumer acknowledgment and documents prefetch scope; SQS visibility and at-least-once documents establish pending deletion, redelivery and duplicates; RFC 9110 defines acceptance before completion and status monitoring; Python documents deque operations; AWS Elastic Load Balancing documentation distinguishes distribution across targets from buffering through time. British load levelling and the unhyphenated spelling are search aliases. No existing article is equivalent: Producer-Consumer describes the participants; Backpressure regulates admission feedback; Bulkhead isolates capacity allowances; Idempotent Receiver handles repeated effects. The report scenario, chosen capacities, discrete phase convention, trace, code and diagrams are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["leveling.py", "demo.py"],
+      "stdout": [
+        "tick in accepted rejected done waiting",
+        "1 6 6 0 2 4",
+        "2 2 2 0 2 4",
+        "3 0 0 0 2 2",
+        "4 0 0 0 2 0"
+      ],
+      "illustration_trace_matches_execution": true,
+      "verification": "Actual article fences run unchanged on Python 3.11+. Exact header/four rows match every illustrated value. Strict tuple/integer validation rejects Boolean, fractional, negative and malformed inputs. Empty/idle input, admission-before-drain phase, explicit capacity refusal, trillion-count burst with only two retained identities, zero-service outage, finite horizon/residual work and appended idle recovery are checked. The sustained (4,4,4,4) case rejects four and leaves four waiting. Observation wraps the actual deque without replacing simulation logic: retained jobs remain FIFO, no maxlen eviction occurs, waiting stays within capacity, and removals match counted completions. 7500 finite traces verify independent per-phase and total conservation, bounded waiting, admission and service budget. This is a unit-cost virtual-time model, not a live limiter or broker; persistence, concurrent execution, retries, acknowledgments, byte accounting, duplicate-safe effects and actual external success are not simulated."
+    },
+    "content": "1296 entities validate including drafts; published-only compilation has 1149 entities without diagnostics. Exactly one new canonical article; no new collection or verse.",
+    "integration_tests": "Six focused suites pass: Queue-Based Load Leveling, Bulkhead, Circuit Breaker, Retry with Backoff and Jitter, Timeout and GoF. Across seven files, 43 checks pass and the pre-existing global authored-graphic coverage check fails for access-over-ownership; four other global graphic checks pass. Canonical title and aliases, one primary home, Software Engineering membership, unchanged 23-member GoF collection, exact copyable highlighted Python fences, responsive figures/dimensions, related links, metadata hash and alias search are verified. Earlier integration tests are unchanged.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native generator, actual-code validator, new integration test, authoring JSON/documentation, concept registry and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Queue-Based Load Leveling is the fifth completed member of Reliability and Failure Handling, after Bulkhead. Reuses the existing collection; all four prior items remain. One new canonical article, no duplicate, future stub, practice or worksheet. All existing articles, other collections, verse files, prior authoring records, historical Data Engineering import and GoF entries are unchanged.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-reliability-failure-handling.md"
+      ],
+      "other_existing_content_unchanged": 1294,
+      "new_content": ["content/patterns/queue-based-load-leveling.md"],
+      "one_new_canonical_article_and_no_new_collection": true,
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_existing_articles_unchanged": true,
+      "all_other_collections_unchanged": true,
+      "existing_verses_unchanged": true,
+      "prior_four_primary_collection_members_preserved": true,
+      "historical_data_engineering_import_unchanged": true,
+      "earlier_article_integration_tests_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 64,
+      "prior_graphics_unchanged": 476,
+      "prior_dimensions_unchanged": 1691,
+      "new_dimensions": {
+        "software-engineering/queue-based-load-leveling-flow.svg": {
+          "width": 720,
+          "height": 1080
+        },
+        "software-engineering/queue-based-load-leveling-flow-mobile.svg": {
+          "width": 360,
+          "height": 1128
+        },
+        "software-engineering/queue-based-load-leveling-trace.svg": {
+          "width": 720,
+          "height": 736
+        },
+        "software-engineering/queue-based-load-leveling-trace-mobile.svg": {
+          "width": 360,
+          "height": 1144
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The standard public build succeeds in an isolated source snapshot with Public web build checks passed. New article, changed collection, authoring/docs, generator/validator, test, registry, manifest and four SVG variants match staged sources. Actual gallery-card paths match the reviewed registry. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty to disable local sync. Initial disk-full asset-copy attempts were resolved with hash-verified native copy-on-write clones of only this task’s byte-identical asset snapshots and generated copies while running the unchanged standard build command. Temporary clones stay outside scanned output directories; intermediate helper races were corrected before the successful build. After success only its redundant .svelte-kit/output compiler directory was removed; the finished preview remains. Shared output, source assets and earlier previews remain untouched. No renderer, build implementation or dependency changes.",
+    "illustrations": "Two editable native SVG figures, each with a separately composed phone layout. The flow figure distinguishes bursty arrivals, a six-job waiting capacity, a controlled aggregate two-job/one-second-tick model budget and the protected target. Arrows are work transfer; confirmed enqueue is distinct from completion. Phone arrows are routed to the right of labels, with separate byte-accounting and model-limit text. The trace shows four ticks: arrivals 6/2/0/0, accepts 6/2/0/0, rejects 0/0/0/0, completions 2/2/2/2 and end-of-tick waiting 4/4/2/0. Every row matches actual article execution. Phone cards preserve every count and phase/units convention. Fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained strokes, meaningful alt text/captions. Four variants have zero measured outside labels, overlaps or outside rectangles; concept paths fit 96-by-96 including stroke. The mark shows a bounded backlog and controlled exit, without claiming automatic capacity or successful effects. Native/embedded desktop and phone figures, labels, contrast, captions, code viewports and gallery visually inspected. Four new dimensions; all existing dimensions preserved.",
+    "browser": "Actual production article checked at 1440, 390 and 320 CSS pixels: eight exact H2s, two loaded responsive figures, two exact selectable syntax-highlighted Python blocks, distinct token colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow and all four related routes returning 200. Existing collection route and Software Engineering verse gallery reach the article with its correct primary breadcrumb and final authored concept paths. Pagination is exercised to reach the fifth collection member. Desktop/phone article tops, both embedded figures, code viewports and gallery visually inspected; no browser console/page errors.",
+    "built_assets": {
+      "build_root": ".local/software-queue-based-load-leveling/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 38936
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 7,
+          "y": 15,
+          "width": 82,
+          "height": 72
+        },
+        {
+          "x": 38.5,
+          "y": 2.5,
+          "width": 19,
+          "height": 72
+        }
+      ]
+    },
+    "disk_space_recovery": {
+      "status": "passed",
+      "final_native_compaction": {
+        "status": "passed",
+        "files": 5675,
+        "logical_bytes_cloned": 1157488432,
+        "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+      },
+      "during_standard_build": {
+        "status": "passed",
+        "build_command": "node scripts/build-public-web.mjs",
+        "build_exit_code": 0,
+        "compaction_passes": [
+          {
+            "status": "passed",
+            "files": 5675,
+            "logical_bytes_cloned": 1157488432,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5675,
+            "logical_bytes_cloned": 1157488432,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5675,
+            "logical_bytes_cloned": 1157488432,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5675,
+            "logical_bytes_cloned": 1157488432,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5675,
+            "logical_bytes_cloned": 1157488432,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5675,
+            "logical_bytes_cloned": 1157488432,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          }
+        ],
+        "scope": "Only this task’s byte-identical asset copies, including while they are generated. Each native clone is hash-verified before atomic file replacement. Source, build implementation and other previews are unchanged."
+      },
+      "temporary_clones_outside_scanned_output": ".local/software-queue-based-load-leveling/clone-temporaries",
+      "intermediate_disk_copy_and_helper_failures_resolved": true,
+      "stale_interrupted_route_copy_removed_only_in_this_task_stage": true,
+      "redundant_compiler_output_removed_after_successful_build": ".local/software-queue-based-load-leveling/build-workspace/apps/web/.svelte-kit/output",
+      "finished_build_and_running_preview_preserved": true,
+      "source_and_earlier_previews_unchanged": true
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original report-generation scenario and finite Python 3.11+ virtual-time FIFO simulation. One tick is one second: validate the finite tuple and integer budgets, admit up to the waiting capacity at tick start, explicitly count rejected arrivals, complete up to a unit-job service budget, and sample waiting at tick end. The (6,2,0,0) trace accepts eight, completes two per tick and finishes empty. The (4,4,4,4) overload trace rejects four and leaves four waiting. A zero budget models no service over the supplied horizon. No execution spans ticks. The deque holds only accepted job identities; a finite input tuple and returned trace use additional memory. No durable broker, real timer or rate-limiter implementation, concurrent workers, acknowledgments, retries, payload bytes or external effects are simulated. Real production rate/concurrency control, durable confirmation, duplicate-safe effects, retained input/status ownership and shutdown must be supplied separately. Established Queue-Based Load Leveling title; British spelling alias and unhyphenated search alias. New canonical article; existing Producer-Consumer, Backpressure, Bulkhead and Idempotent Receiver remain intact. Tests independently verify conservation, strict validation, explicit refusal, FIFO removal, budget and waiting bounds over 7500 finite traces. The zero-service case models an outage, not a running worker or broker failure. Simulation completion assumes unit-cost success; no real-time pacing, durability, concurrent acknowledgment, retry or business effect is inferred.",
+  "preview": "http://127.0.0.1:43049/pattern/queue-based-load-leveling",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-queue-based-load-leveling",
+  "browser_measurements": ".local/software-queue-based-load-leveling/browser-checks.json",
+  "browser_check_script": ".local/software-queue-based-load-leveling/check-browser.mjs",
+  "build_log": ".local/software-queue-based-load-leveling/public-build-isolated.log",
+  "branch": "codex/software-queue-based-load-leveling",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

@@ -1,0 +1,1081 @@
+{
+  "date": "2026-10-27",
+  "status": "complete",
+  "audience": "Curious beginners with no architectural training",
+  "scope": 36,
+  "recurring_findings": [
+    "Concrete openings and everyday scenarios are a strength; preserve them.",
+    "Qualifications are repeated across examples, captions, design considerations and limits. Keep each necessary qualification close to the decision it affects.",
+    "Unexplained vocabulary includes massing, envelope, conditioned space, bay, section, commissioning and brief. Define terms using the thing a reader can see or do.",
+    "Abstract nouns and editorial framing slow the explanation: occupation, legibility, affordances, real comparison and transferable observation.",
+    "Photo captions often defend against unsupported claims before explaining the visible mechanism. Lead with what to notice, preserving necessary distinctions and all credits.",
+    "Some photo additions disrupted ordinal references such as second example; one image-only comparison heading needs a connecting paragraph.",
+    "Long sentences often combine an instruction, several conditions and a caution. Give the main relationship its own sentence.",
+    "Repeated boilerplate occupies limited word count. Replace it with useful definitions, clearer contrasts between options and practical consequences."
+  ],
+  "editorial_rules": [
+    "Preserve all ten H2 sections, identities, links, source blocks, recommendation queries and all approved image files.",
+    "Maintain 800–1500 substantive words without padding.",
+    "Keep cultural, accessibility, technical and evidence limits where they alter interpretation or action.",
+    "Keep established names and provenance. No new performance claims or guidance thresholds.",
+    "Keep one or two photographic examples per article and no guided practices.",
+    "Use counts only to find passages for judgment; do not optimize to a readability score."
+  ],
+  "pilot": ["arch-site-repair", "arch-drained-ventilated-rainscreen", "arch-test-at-full-scale"],
+  "articles": [
+    {
+      "id": "arch-site-repair",
+      "finding": "Explain footprint and specialist terms; replace repeated general cautions with concrete site questions.",
+      "before_sha256": "01ea2798eaabe4733be2256d4cf013f80635b59cd54d45329bad426ccaef2ad7",
+      "before": {
+        "prose_words": 878,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "541caa8e69ce3f1d3456f7e6dd88396f1aeb1e87ea1f63b6de5e8047a13efad5",
+      "after": {
+        "prose_words": 912,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 6
+    },
+    {
+      "id": "arch-south-facing-outdoors",
+      "finding": "Explain sun height and microclimate; remove editorial instructions about preserving the pattern name.",
+      "before_sha256": "30c39a95d4ded3c07884be03077484a882bb8c5246078be23908d8a55ced97cb",
+      "before": {
+        "prose_words": 886,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "4d4ce38ce330e5a770e44c869a9819b5a056ad01027ee5293371737de45ac934",
+      "after": {
+        "prose_words": 888,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-water-sensitive-landscape",
+      "finding": "Define bioswale, runoff and infiltration; separate storage, drainage and overflow in plain language.",
+      "before_sha256": "22b278306b63f46f5d05c453e317051efcfb4f366b5365cec2e849da9114586a",
+      "before": {
+        "prose_words": 921,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "3c651f626c64451caa4b291a25357701f53defe1b10db3f075b37a0e6afaa9c1",
+      "after": {
+        "prose_words": 932,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-positive-outdoor-space",
+      "finding": "Explain positive shape and figure-ground drawing; simplify abstract talk of legibility.",
+      "before_sha256": "eae3c5fb4649870f21477364e8c3395ec79f41473c9882558546179bab64a0d5",
+      "before": {
+        "prose_words": 914,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "de6dbf088e5564f9a3ede90cf4d873dab87f5525848465264a6a8a13092c76a0",
+      "after": {
+        "prose_words": 916,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-arcades",
+      "finding": "Define portico and structural bay; consolidate the historical-access qualification.",
+      "before_sha256": "70126303ead23d7665caa68f534d3c059c860073141dcc2cf9e38532fb6fb4cc",
+      "before": {
+        "prose_words": 872,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "6169d25a565633f79e3c84e0c068ba9f17ded9934cd7e3f9d8dc8050fbeb400e",
+      "after": {
+        "prose_words": 897,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-entrance-transition",
+      "finding": "Define vestibule and wall return; correct second-example wording after photo additions.",
+      "before_sha256": "eaf60513d1b4fad3ab2bfb5e2a16cc1aa47f98984539f6f03b3127ad96e6c29b",
+      "before": {
+        "prose_words": 918,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "3dc533679482e54ea4e8d1da42ba4740963e6608813d7af420d678fbb3952bb8",
+      "after": {
+        "prose_words": 940,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 6
+    },
+    {
+      "id": "arch-building-edge",
+      "finding": "Replace affordances and governance jargon; give the Royal Crescent comparison explanatory prose.",
+      "before_sha256": "e59cb0f07b5593224ee0930d7261affb2bd1edf0e0bf2fe2894c24d884fffce8",
+      "before": {
+        "prose_words": 897,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "f0fe8ebc5a5074d19c8bac0d1b78da639fd27f5fa65ed1ff9c26048b52c775de",
+      "after": {
+        "prose_words": 949,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-wings-of-light",
+      "finding": "Define wing, massing and accommodation; connect shallow rooms to the outdoor gaps they create.",
+      "before_sha256": "e37665c44841c2b4db3970358635ef6e450071b2d05103a86584cb781f9bb368",
+      "before": {
+        "prose_words": 949,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "fd71da90345b034bdb2bc94377cc831c7edb4a398c6fa6ff769dbc0d9ff13795",
+      "after": {
+        "prose_words": 976,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-courtyards-which-live",
+      "finding": "Explain polyvalent rooms and section; consolidate historic and performance cautions.",
+      "before_sha256": "0604644cd8f6149195e026b2092ca13c21b843fc3804af34effbb7ef098dbcd3",
+      "before": {
+        "prose_words": 986,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "ecb55a027e54cd1ac7cb115841b5405781806ff4b94d8657dde9c4b93c6fa145",
+      "after": {
+        "prose_words": 998,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 7
+    },
+    {
+      "id": "arch-compact-building-form",
+      "finding": "Define envelope, conditioned space and shared walls; make equal-area comparison easier to follow.",
+      "before_sha256": "ad6b8e427a2c901b4c15945d4ed5b13feb10d236a369f43e913f7d8875c96805",
+      "before": {
+        "prose_words": 925,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 2
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "34b780b5bd47889fb1af185e9b0f996697c0688e611e3ee7b9ab0a99ca14dbf1",
+      "after": {
+        "prose_words": 952,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 6
+    },
+    {
+      "id": "arch-intimacy-gradient",
+      "finding": "Explain gradient and types of privacy; replace agency and hierarchy abstractions with everyday choices.",
+      "before_sha256": "a5323c727982bdef52c3804fc9b5e11ef6704081a1276c862284e48f628416fa",
+      "before": {
+        "prose_words": 944,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "be3fcb1337cf93e4828137a1b69e207e08df9278ffa9a29487e7e33b6ffe53dd",
+      "after": {
+        "prose_words": 973,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-common-areas-at-the-heart",
+      "finding": "Explain rotunda and adjacency; simplify social claims without losing choice and access.",
+      "before_sha256": "3e8cb285a9953509d8eb3c24e584318e11c2c62ab07ad5515d80f4f0f2b153a6",
+      "before": {
+        "prose_words": 899,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "960dce97ddefbe9c2994333c57c918f134fe459dfc876d61868b1f356ebcd4cf",
+      "after": {
+        "prose_words": 897,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-flexibly-linked-rooms",
+      "finding": "Explain independent room operation; distinguish a screen from sound isolation concretely.",
+      "before_sha256": "8150761a7e970b99e4c5298451c0c7e837dab960781787f110d48edabe16559e",
+      "before": {
+        "prose_words": 942,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "63668b93f308a491a34c031b2f52039de299a6071f4056ee0f2b996a38367375",
+      "after": {
+        "prose_words": 980,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-circulation-as-orientation",
+      "finding": "Define circulation and wayfinding; show how cues work before a junction.",
+      "before_sha256": "7d1d8cd26b62074aec86b153d9eeb32488e46e5c68bbcd6447c5630762e6050e",
+      "before": {
+        "prose_words": 891,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "91da8b296cbad81cac778ed1a6fbd52e5ee9b8e71081bb15d1e5aa9039bcf5c4",
+      "after": {
+        "prose_words": 890,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-main-entrance",
+      "finding": "Replace elevation and legibility jargon; clarify the whole journey rather than the door alone.",
+      "before_sha256": "0f508f1e41b9be26aaa31b5812697df96cf08955f2eb4820203934c7ff5fc30b",
+      "before": {
+        "prose_words": 882,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "bb18f3537516be49c12e6d245c5a63a525e004704af308c954b21a762bd19027",
+      "after": {
+        "prose_words": 912,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-inclusive-arrival",
+      "finding": "Make sensory and operating needs concrete; shorten photograph-as-certification disclaimers.",
+      "before_sha256": "413db93c302fe2db84079066a75f253ddfe7e6210114ea560041a430916345a2",
+      "before": {
+        "prose_words": 943,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "47a67ae8497d8495dc42ad2580733c1559ce0282b23cee3f2eac82e9380fa514",
+      "after": {
+        "prose_words": 944,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-staircase-as-a-stage",
+      "finding": "Explain treads, landings and guards; consolidate repeated inclusive-route cautions.",
+      "before_sha256": "4ce5848d10b94f300196d53e3e084214570bce367631d195726889f97f1f62f4",
+      "before": {
+        "prose_words": 957,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "ea65029dcfb19f74b9fa536a42fac1cbc4723ae2ce045c19155c148568c57e0c",
+      "after": {
+        "prose_words": 963,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-window-place",
+      "finding": "Define carrel and glazing; replace abstract occupation language with sitting, reading and working.",
+      "before_sha256": "a85ac85d1d462237c97d07baf5c22a6a84d6041359404693b4b85ef949ad3bd8",
+      "before": {
+        "prose_words": 847,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "ccbed19df3735badf5f5142f6d073df279a137fab8cd7616b9bd812f882ee230",
+      "after": {
+        "prose_words": 862,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-alcoves",
+      "finding": "Define alcove and return wall; distinguish enclosure, sound privacy and sensory respite.",
+      "before_sha256": "c769551f350d0fbeb50d1bbd331e9459d41b7865fe31bf67b5f15deb1df47bf0",
+      "before": {
+        "prose_words": 957,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "dc465d12743afa5de651bed6602aacbd82931f3788d9c23cc92ed9214087c73c",
+      "after": {
+        "prose_words": 996,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-ceiling-height-variety",
+      "finding": "Explain section, oculus, coffering and stratification; keep perceived scale separate from acoustics.",
+      "before_sha256": "4a7913b987078accb763349ae0cdf82317bfafdc2b2aeda1c8c8fd963ac055d3",
+      "before": {
+        "prose_words": 962,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "b13ad666f2271a8af70d8f2f65f1a52dc360a0cefbaa34eb31e29f7ca3df93b3",
+      "after": {
+        "prose_words": 988,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 6
+    },
+    {
+      "id": "arch-prospect",
+      "finding": "Explain biophilic and outlook plainly; keep one clear statement about evidence and individual preference.",
+      "before_sha256": "f215c826f0e4fd2863ca17aca0a82c81cd4870e7833911ddbea62452935217fc",
+      "before": {
+        "prose_words": 967,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "81e5ea945d9e43262184be13f760755456c99eb11d944b5b0ae272694bb982c0",
+      "after": {
+        "prose_words": 990,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-refuge",
+      "finding": "Clarify what protection means; reduce repeated clinical disclaimers while retaining user choice.",
+      "before_sha256": "891750922c8595d0676f0d9f060a5a98e9651a5f82ed2ad6fb68ebe610961e6e",
+      "before": {
+        "prose_words": 986,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "a98db6cddd3ce80f4b6466c374a89708dec52a55373a9fa42c15ead7ec5b4ed8",
+      "after": {
+        "prose_words": 1013,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-light-on-two-sides",
+      "finding": "Explain reflectance and borrowed light; streamline the repeated Kimbell comparison qualification.",
+      "before_sha256": "6d5c2be5583ddb8c5a4b4c0c92008258c61d5337f8cebd261046320143cfe204",
+      "before": {
+        "prose_words": 960,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 2
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "0a5205064bbd026ecb5890a80f78d594fee9a492c3e77dc392824eefb3000897",
+      "after": {
+        "prose_words": 976,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-external-solar-shading",
+      "finding": "Explain overhang, fin and solar gain; shorten dense geometric and operating descriptions.",
+      "before_sha256": "a2c9a99a6d3bf7cd923c026cac6a901820235c8efee7dbd87cc8cebcb33986ba",
+      "before": {
+        "prose_words": 973,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "c93c67a5e4f31e27f75dc7a624e622cce64432fb499d25c66c980dc186b8136b",
+      "after": {
+        "prose_words": 997,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-cross-ventilation",
+      "finding": "Define pressure difference, louvre and commissioning; distinguish cooling, airflow and air quality.",
+      "before_sha256": "9c86c9c792e0d07f3c29c8175ca40066c8db09642f0fce761ba99f6c43ea758d",
+      "before": {
+        "prose_words": 972,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "5cf561331d99005bf619d2e63a0df344cc5b4a98ca01f258d1f12e40cabf3288",
+      "after": {
+        "prose_words": 991,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 6
+    },
+    {
+      "id": "arch-continuous-thermal-envelope",
+      "finding": "Define envelope, conditioned space, reveal and thermal bridge; separate layer functions clearly.",
+      "before_sha256": "fc21a8287d4dd567415226611e4a363a4075f36747d69fc7e2b3bcf32c32863d",
+      "before": {
+        "prose_words": 955,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "416830a280088ced0d823d3491636c7530e091e1b79914a59bde593cd249845c",
+      "after": {
+        "prose_words": 1013,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 7
+    },
+    {
+      "id": "arch-structural-bay-rhythm",
+      "finding": "Define bay, grid, span and module; distinguish visible facade order from structural evidence.",
+      "before_sha256": "b42a8d168cc8d4a238f331cf87e3ad49014b8e03788964c52c040877871521f7",
+      "before": {
+        "prose_words": 938,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "03073179c4a5074422ba202318aeb2d8435e0e7c78238cd6890fd537b32593df",
+      "after": {
+        "prose_words": 971,
+        "sentences_over_30_words": 3,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-drained-ventilated-rainscreen",
+      "finding": "Define cladding, cavity, drainage and ventilation; group fire and moisture qualifications by decision.",
+      "before_sha256": "c214527c5d97b07aa7d4cba365ab908019b14220369627aa8bf691529975a474",
+      "before": {
+        "prose_words": 958,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "1eb0157a478c7a4e7a1dcdc4609d9747f20b50d4ef63a4660281f6dd057f9723",
+      "after": {
+        "prose_words": 1000,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 8
+    },
+    {
+      "id": "arch-repairable-connections",
+      "finding": "Explain fixing, as-built records and replacement sequence; focus the Salk comparison.",
+      "before_sha256": "0e7a9f47394b0e3e24e663d2ac24f2df742104416ac5cf6d69e03efd72562301",
+      "before": {
+        "prose_words": 968,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "5d88a5db2f46b8a99e3814d873d701405a320606889af8ff64c40b813938ea98",
+      "after": {
+        "prose_words": 989,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-reuse-before-replacement",
+      "finding": "Define brief and whole-life comparison; shorten repeated disclaimers about historic precedents.",
+      "before_sha256": "f46cc3ca84f9a6c916c05ebf809b0644575c24254c6b0526e74c65209fcec579",
+      "before": {
+        "prose_words": 921,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "99f65935db688a141d3ee5854c6e39d440df25a00ad6bde1b6d9cd0bd9a61c30",
+      "after": {
+        "prose_words": 956,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-loose-fit-layers",
+      "finding": "Keep established Shearing Layers authorship; explain skin, services and space plan once.",
+      "before_sha256": "834aa50b579d6583873c53a9307603d856fb88e2a471302bbb713a8c3cb744b2",
+      "before": {
+        "prose_words": 922,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "24d789a5fe9aacdca5cea83652edaadf26fd1c272a0be2ea3e16237688fb2e56",
+      "after": {
+        "prose_words": 957,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-design-for-disassembly",
+      "finding": "Explain recovery, demountable and material passport; make the distinction from recycling concrete.",
+      "before_sha256": "296a7afe0e00f7f3dcb6abbab122c0ddf889bd6c139e0176a13ea68c3bc7b4b0",
+      "before": {
+        "prose_words": 962,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "0d3357b5305e1b6c764c83b50f8d41980eb9a6636545b549836f09dbfb276996",
+      "after": {
+        "prose_words": 975,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 5
+    },
+    {
+      "id": "arch-observe-before-briefing",
+      "finding": "Define brief and accommodation schedule; consolidate reminders that observation needs interpretation.",
+      "before_sha256": "c66c0f7a8db34bdc0658b23638de3237b61b54c3fd99f57ae7a46374514a3de0",
+      "before": {
+        "prose_words": 951,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "0259306a94aa87ab6db85aa81fcbe2da3e8cf18947fe3d2f13dcc1acf8768cf9",
+      "after": {
+        "prose_words": 978,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-compare-spatial-alternatives",
+      "finding": "Explain brief, option appraisal and assumptions; preserve fair comparison without repeated framing.",
+      "before_sha256": "af57c08c88fdeede7ba1db21154c11b970430ea2e19f19cb7360f3d1659bbe17",
+      "before": {
+        "prose_words": 965,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "b614bc4972007604896b26f9709d84e39c9d1f8dddc55f6c8c1915fb2cb07183",
+      "after": {
+        "prose_words": 988,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    },
+    {
+      "id": "arch-test-at-full-scale",
+      "finding": "Define mock-up and fidelity; distinguish an informal layout trial from a specialist performance test.",
+      "before_sha256": "1fad3ae09fd424a55632324827a84964bd71c7f734bc3f882a7d08cc10c5ce70",
+      "before": {
+        "prose_words": 972,
+        "sentences_over_30_words": 1,
+        "photo_captions_with_limitation": 1
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "117c5a4a16dc97ed25edebfa2821895d09b738a088b21ee10c488715cb2923aa",
+      "after": {
+        "prose_words": 1027,
+        "sentences_over_30_words": 0,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 7
+    },
+    {
+      "id": "arch-post-occupancy-evaluation",
+      "finding": "Translate occupied performance and handover; make the feedback-and-action sequence direct.",
+      "before_sha256": "9eb17b70a9fa257cf61028d425568ffdf8a547874ce0dd92fe5651505182f797",
+      "before": {
+        "prose_words": 912,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "status": "revised; preservation verified",
+      "after_sha256": "b89687cf4f38d5aae289cf102b4806f7b43a259a93cff3514a80476436773f03",
+      "after": {
+        "prose_words": 955,
+        "sentences_over_30_words": 2,
+        "photo_captions_with_limitation": 0
+      },
+      "preservation": {
+        "frontmatter_unchanged": true,
+        "source_section_unchanged": true,
+        "wiki_links_unchanged": true,
+        "image_files_and_alt_text_unchanged": true,
+        "photograph_creator_license_text_unchanged": true,
+        "source_and_license_urls_unchanged": true,
+        "recommendation_queries_unchanged": true,
+        "article_outline_unchanged": true
+      },
+      "substantive_paragraph_revisions": 4
+    }
+  ],
+  "pilot_review": {
+    "status": "passed editorial review, corpus checks and all 38 rendering tests before continuing",
+    "principles_confirmed": [
+      "Keep strong opening situations.",
+      "Define an unfamiliar term beside its first use.",
+      "Make examples describe the visible relationship before discussing transfer or limits.",
+      "Lead captions with what to notice; preserve creator and license text exactly.",
+      "Keep specialist performance and safety qualifications tied to the relevant decision."
+    ],
+    "paragraphs_revised": 21,
+    "pilot_words": {
+      "site-repair": 908,
+      "drained-ventilated-rainscreen": 1006,
+      "test-at-full-scale": 1028
+    }
+  },
+  "summary": {
+    "articles_revised": 36,
+    "explicit_paragraph_revisions": 181,
+    "photo_captions_revised": 60,
+    "diagram_captions_shortened": 108,
+    "unchanged_asset_files": 262,
+    "sentences_over_30_words_before": 51,
+    "sentences_over_30_words_after": 40,
+    "photo_captions_matching_limitation_phrases_before": 23,
+    "photo_captions_matching_limitation_phrases_after": 0,
+    "diagnostic_note": "Sentence lengths and phrase matches identify passages for editorial judgment; they are not a readability grade."
+  },
+  "remaining_concerns": [
+    "Construction and performance topics still need some technical terms; these are now explained locally and remain educational rather than project-specific instructions.",
+    "Beginner readability was assessed editorially; no comprehension study with external readers was conducted."
+  ],
+  "preservation_errors": [],
+  "verification": {
+    "architecture_acceptance": "36 articles, 34,551 prose words, 168 captioned figures, 154 distinct visuals; zero errors",
+    "article_length_range": [862, 1028],
+    "corpus": "793 entities validated across the shared workspace",
+    "tests": "39 compiler integration tests and 38 final article rendering/search/asset tests passed",
+    "type_check": "Svelte check: zero errors and zero warnings",
+    "preservation": "All 262 local asset files, article frontmatter, source sections, related links, recommendation queries, photograph creator/license text and source/license URLs preserved; metadata changes limited to photograph captions",
+    "build": "Final production public build and built-in checks passed",
+    "browser": "10 final desktop/phone browser tests passed; every article and figure loaded, no horizontal overflow, contents and search work, no Architecture practice links and retired practice routes return 404",
+    "visual_review": "Revised Site Repair, Drained and Ventilated Rainscreen and Test at Full Scale inspected in the browser; phone screenshots of Site Repair and Courtyards Which Live inspected for paragraph flow, headings, diagram captions and reading width.",
+    "preview": "http://127.0.0.1:4291/pattern/arch-site-repair#user-content-article-section-the-core-idea"
+  },
+  "completed": "2026-10-27"
+}

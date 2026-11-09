@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "request-reply",
+  "title": "Request-Reply",
+  "aliases": ["Request-Response", "Request/Reply"],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1455,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Hohpe and Woolf’s Request-Reply, Return Address, and Correlation Identifier catalogs; RabbitMQ RPC tutorial; NATS request-reply documentation; and AWS timeout/retry guidance. The article distinguishes logical request/reply paths from physical connections, blocking from callback handling, return routing from correlation, application results from receipt acknowledgments, local timeout from remote cancellation, and correlation from server-side idempotency. Request-Response and Request/Reply are aliases; no duplicate entry was found.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["conversation.py", "demo.py"],
+      "stdout": [
+        "answer: ('shoe', 'ok', 8)",
+        "duplicate: (None, 'ignored', None)",
+        "answer: ('book', 'ok', 3)",
+        "expired: ('desk:3',)",
+        "late: (None, 'ignored', None)",
+        "pending: 0"
+      ],
+      "verification": "Both reply order permutations, duplicate/unknown correlation, exact deadline before/at/after, expiration and released capacity, ID nonreuse, explicit return routing, isolated session contexts, unknown SKU business outcome, immutable envelopes, validation, and nondecreasing clock checks passed."
+    },
+    "content": "1269 entities validate with drafts included; published-only compilation contains 1122 entities without diagnostics.",
+    "integration_tests": "Request-Reply, existing Publish-Subscribe, and GoF integration suites pass. The combined run reports 34 passed checks and one unrelated global authored-graphic coverage failure across four files. Four other graphics checks pass. After refining the example to retain product context, all three Request-Reply integration tests were rerun and pass.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, validator, integration test, authoring sidecar, concept registry, authoring documentation, and review record. Article Markdown follows existing conventions.",
+    "collection": "Reused Messaging and Integration. Preserved the canonical Publish-Subscribe entry as the first member and appended Request-Reply second, with an explanatory paragraph. No new collection, future stub, or GoF categorization was created.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1267,
+      "new_content": ["content/patterns/request-reply.md"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 34,
+      "prior_graphics_unchanged": 446,
+      "prior_dimensions_unchanged": 1577,
+      "new_dimensions": {
+        "software-engineering/request-reply-correlation.svg": {
+          "width": 720,
+          "height": 1040
+        },
+        "software-engineering/request-reply-correlation-mobile.svg": {
+          "width": 360,
+          "height": 1232
+        },
+        "software-engineering/request-reply-deadline.svg": {
+          "width": 720,
+          "height": 1024
+        },
+        "software-engineering/request-reply-deadline-mobile.svg": {
+          "width": 360,
+          "height": 1168
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article source, metadata, generator, and assets were copied into that staging directory before the final build. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. No renderer or build implementation changes; no shared generated output or another session’s staging directory was modified.",
+    "illustrations": "Two editable native SVG figures explain out-of-order correlation with return-address routing and alternative reply/deadline outcomes. Each has a separately composed phone variant. White surface, regular Helvetica Neue/Helvetica/Arial, approved palette, square geometry, readable labels, directional arrows, alternative-branch labels, and captions verified. Four variants have zero measured label collisions, outside labels, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected; a desktop label was moved away from its sequence arrow.",
+    "browser": "Actual final production article verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive diagrams, two exact selectable highlighted Python source blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. All three related routes return 200. Collection route and software verse gallery show the two members; the Request-Reply card opens with the correct primary breadcrumb. Desktop/phone article tops, code viewports, gallery, and embedded figures were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-request-reply/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 45425
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic; four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential trusted-envelope inventory conversation using a dictionary of reply inboxes and manual message delivery. Stock counts are units observed from a fixed teaching inventory, not reservations. Requestor owns up to two pending product/deadline contexts, generates session-prefixed sequence IDs, accepts matching replies strictly before a local deadline, returns the original product context, ignores unmatched or duplicate replies, and removes expired entries explicitly. Time uses nonnegative nondecreasing integer milliseconds. Session freshness across delayed replies/restarts is a stated assumption. Expiration neither cancels nor rolls back remote work. No broker, network, untrusted payload validator, persistence, retry, business idempotency, synchronization, durable continuation, lifecycle scheduler, authentication, or restart recovery; transport queues are not bounded by the pending limit. NATS is an explanatory second context only.",
+  "preview": "http://127.0.0.1:43019/pattern/request-reply",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-request-reply",
+  "browser_measurements": ".local/software-request-reply/browser-checks.json",
+  "browser_check_script": ".local/software-request-reply/check-browser.mjs",
+  "build_log": ".local/software-request-reply/public-build-isolated.log",
+  "branch": "codex/software-request-reply",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "service-layer",
+  "title": "Service Layer",
+  "aliases": ["Application Service Layer", "Application Services"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1420,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary-source notes. Randy Stafford’s Service Layer entry in Patterns of Enterprise Application Architecture establishes the application boundary, operations, coordination, and transaction responsibility. Percival and Gregory demonstrate interface-independent orchestration and distinguish application services from domain services. Fowler supports the separate choice of Transaction Script and the anemic-model caution. Official Python and SQLite documentation support the explicit local transaction mechanism. Workshop code and native diagrams are original teaching material.",
+    "python_examples": "All three actual article fences execute as model.py, application.py, and demo.py, producing five stated lines exactly. Checks cover positive whole-seat requests, nonnegative availability, exact final-seat booking, immutable model snapshots, duplicate primary-key failure after the capacity update with complete rollback, unknown workshops, invalid inputs, opaque IDs including quotes and surrounding spaces, rejection of non-explicit or nested transactions without altering caller work, caller-owned connection lifetime, trace ordering, two-connection write contention, and committed cross-connection visibility. BEGIN IMMEDIATE lock failure produces no successful booking. The duplicate attempt restores capacity and allows the other caller to take the final seat.",
+    "python_stdout": [
+      "web seats left: 1",
+      "duplicate: rolled back",
+      "after duplicate: 1",
+      "CLI seats left: 0",
+      "booking rows: 2"
+    ],
+    "article_tests": "78 article tests pass across Service Layer and the prior software/GoF suites. Coverage includes canonical ID and searchable aliases without duplicates, one primary home with eight previous members retained, exact eight-section outline, all three copyable highlighted Python blocks, two accessible responsive figures with four manifest dimensions, resolved related links, ten queries, revision hash, and concept mark. Two workers, a 20-second test timeout, and a 60-second corpus hook timeout bound load on the large corpus.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage test retains the unrelated missing access-over-ownership graphic. Combined run: 82 passed and one unrelated failure across 20 files.",
+    "content": "1250 entities validate with drafts included. Published-only corpus contains 1103 entities and no errors.",
+    "collection": "Reused Domain Modeling and Business Logic and appended service-layer after its eight existing members. No new collection, candidate stub, duplicate alias article, or GoF membership change. Related patterns retain their existing IDs and primary homes.",
+    "public_build": "Production build and public web build checks pass. The browser used the completed build; no deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, executable validator, integration test, authoring metadata, concept registry, and authoring documentation. Review report formatted separately.",
+    "visuals": "All four editable SVG variants load and pass native and production-browser measurements: no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. All native renders and actual desktop/phone article figures were visually inspected for responsibility ownership, distinct callers sharing one operation, model versus database calls, update-before-insert sequence, commit after both writes, and rollback of the first write when the insert fails. Exact light palette, fixed white surface, regular Helvetica typography, square geometry, contrast, arrow meaning, captions, and label placement were checked. The concept mark appears on the article and collection card.",
+    "article_browser": "Production article verified at 1440, 390, and 320 pixels: eight exact H2 headings, all three Python blocks preserved exactly in DOM text, colored syntax tokens, selectable text preserving indentation, focusable code blocks, keyboard horizontal code scrolling for application.py at 320px, phone SVG variants loaded, and no page overflow. Browser text selection normally omits the final newline. Actual article tops, code, figures, captions, and gallery screenshots were visually inspected.",
+    "navigation_browser": "Domain Service, Domain Model, Layers, and Facade routes return HTTP 200. The primary collection direct route renders its title. The Software Engineering gallery shows nine patterns; navigating to page three exposes Service Layer, whose card opens the canonical article with the Domain Modeling and Business Logic breadcrumb.",
+    "preservation": "All 23 GoF article files and their collection match actual pre-change SHA-256 hashes. All seventeen earlier software articles and authoring records are unchanged. All 429 pre-existing concept marks and 1510 asset-dimension records are unchanged. Software Engineering verse and Application Architecture collection are byte-for-byte unchanged. All eight prior primary collection members remain."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ with standard-library SQLite. The caller supplies an idle connection configured for explicit SQL transaction control and owns closing it. The original local operation demonstrates capacity validation, two writes, commit, and rollback. The in-memory demo has no web server or CLI parser; its labels represent two callers. It implements no authentication, notifications, waitlist, cancellation, durable retry/idempotency outcome protocol, distributed transaction, or automatic contention retry. Duplicate booking IDs are rejected rather than returning an earlier outcome. Remaining seats describe the result immediately after this operation, not future availability. SQLite’s write transaction supplies the shown concurrency protection; a Service Layer name does not create it.",
+  "preview": "http://127.0.0.1:43002/pattern/service-layer",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-service-layer",
+  "browser_measurements": ".local/software-service-layer/browser-checks.json",
+  "browser_check_script": ".local/software-service-layer/check-browser.mjs",
+  "preservation_checks": ".local/software-service-layer/preservation.json",
+  "build_log": ".local/software-service-layer/public-build.log",
+  "branch": "codex/software-service-layer",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

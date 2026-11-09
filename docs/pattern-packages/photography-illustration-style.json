@@ -1,0 +1,64 @@
+{
+  "status": "complete",
+  "direction": "Light editorial photographic comparisons, annotations and conceptual plans",
+  "reviewed": "2026-10-31",
+  "branch": "codex/photography-light-editorial",
+  "scope": {
+    "primary_svg_layouts": 22,
+    "mobile_companions": 7,
+    "raster_sources_preserved": 30,
+    "article_prose_changed": false,
+    "captions_and_placements_changed": false,
+    "card_graphics_changed": false
+  },
+  "typography": "Helvetica Neue regular; Helvetica and Arial fallbacks",
+  "surface": "Fixed white in light and dark browser appearances",
+  "palette": {
+    "ink": "#252c28",
+    "line": "#a6aca3",
+    "panel": "#f1f2ef",
+    "mint": "#edf5f0",
+    "accent": "#00855b"
+  },
+  "regenerate": "node scripts/build-photography-visuals.mjs",
+  "reproduction": "All photography assets reproduced byte-for-byte in an isolated copy",
+  "preservation": {
+    "embedded_image_elements_unchanged": true,
+    "image_filters_unchanged": true,
+    "canvas_dimensions_unchanged": true,
+    "photography_manifest_entries_unchanged": true,
+    "license_text_unchanged": true,
+    "provenance_checksums_verified": 59
+  },
+  "verification": {
+    "focused_tests_passed": 48,
+    "eslint": "passed",
+    "prettier": "passed",
+    "production_build": "passed; full release profile",
+    "public_build_guard": "passed",
+    "svg_visual_reviews": 29,
+    "contact_sheets": 5,
+    "clipped_labels": 0,
+    "overlapping_labels": 0,
+    "article_figures_captured_in_each_appearance": 26,
+    "static_page_checks_passed": 117,
+    "viewport_widths": [1440, 390, 320],
+    "asset_requests_passed": 59,
+    "license_check": "passed",
+    "static_page_check_mode": "App scripts disabled to isolate visual rendering from the independently reproduced app startup error",
+    "interactive_browser_suite": {
+      "passed": 62,
+      "failed": 0,
+      "startup_verified": "Article controls become enabled before responsive-image checks",
+      "navigation": "Scoped photography library with collection links on desktop and accordion controls on phone",
+      "previous_startup_error": "Resolved by isolating production-generated files from development/test synchronization",
+      "followup_branch": "codex/app-startup-data",
+      "build_guard_regression_tests_passed": 9,
+      "concurrent_sync_during_clean_build": "passed",
+      "artifacts": ".local/app-startup-verification/"
+    }
+  },
+  "review_artifacts": "/tmp/photography-light-editorial-20261031/",
+  "published": false,
+  "committed": false
+}

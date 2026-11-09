@@ -1,0 +1,495 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "deployment-pipeline",
+  "title": "Deployment Pipeline",
+  "primary_collection": "software-evolution-delivery",
+  "body_word_count": 1446,
+  "body_word_count_includes_code": true,
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43083/pattern/deployment-pipeline",
+  "sources": [
+    {
+      "title": "Deployment Pipeline patterns",
+      "author": "Jez Humble",
+      "url": "https://continuousdelivery.com/implementing/patterns/",
+      "supports": "Established pattern, fast commit stage, build packages once, same deployment procedure and smoke tests."
+    },
+    {
+      "title": "Deployment Pipeline",
+      "author": "Martin Fowler (2013)",
+      "url": "https://martinfowler.com/bliki/DeploymentPipeline.html",
+      "supports": "Staged feedback, parallel validation, manual decisions, collaboration and audit trail."
+    },
+    {
+      "title": "Deployment automation",
+      "author": "DORA",
+      "url": "https://dora.dev/capabilities/deployment-automation/",
+      "supports": "Reusable packages, separate configuration, deployment tests, repeatability and recovery."
+    },
+    {
+      "title": "Deployments and environments",
+      "author": "GitHub documentation",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments",
+      "supports": "Protection rules, reviewers and environment-secret access after approval."
+    }
+  ],
+  "illustrations": {
+    "figures": 2,
+    "native_svg_variants": 4,
+    "concept_marks": 1,
+    "style": "light-editorial"
+  },
+  "validation": {
+    "research": "Verified Humble’s first-hand account, Fowler’s catalog, DORA guidance and official GitHub environment protections. No canonical Deployment Pipeline article existed; Pipes and Filters and generic workflow organization distinguished. Transient connected-web failure recovered before implementation. Initial direct-fetch approval review could not complete and that command never executed; normal connected research and later branch/build/browser approval reviews succeeded.",
+    "code": {
+      "status": "passed",
+      "output": ["production: build-42; tested bytes preserved", "changed artifact blocked"],
+      "checks": [
+        "actual JSON unit and acceptance checks",
+        "bad JSON, wrong currency, negative/Boolean fee and wrong total rejected",
+        "changed bytes with same name cannot borrow evidence",
+        "incomplete evidence and missing approval preserve previous deployment",
+        "successful promotion preserves exact bytes; repeated promotion is stable"
+      ],
+      "mutation_checks": [
+        {
+          "fault": "identity check removed",
+          "guard_absence_detected": true
+        },
+        {
+          "fault": "required checks ignored",
+          "guard_absence_detected": true
+        },
+        {
+          "fault": "approval ignored",
+          "guard_absence_detected": true
+        }
+      ],
+      "limits": [
+        "In-memory configuration model only",
+        "Hash equality does not authenticate artifact or evidence",
+        "Boolean approval is not authorization; no remote deployment, concurrency or state repair"
+      ]
+    },
+    "published_compilation": {
+      "entities": 1171,
+      "bytes": 23768312,
+      "sha256": "61dc58fcd2a27a6f23f15d67d724a4c1d2f5c9ab24dba0d528c6d9f081561e8e",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "content": "All 1318 entities validate; eight exact H2s, one complete Python example, four resolved related patterns, ten distinct queries and no practice.",
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "New Pipeline3, Canary3, Blue-Green3, GoF24 and four graphic-integrity checks pass. Existing global coverage fails only for missing access-over-ownership artwork."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "VerseSelector.component.test.ts:79 uses unsupported exact in ByRoleOptions."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-evolution-delivery.md"],
+      "new_content": ["content/patterns/deployment-pipeline.md"],
+      "other_existing_content_unchanged": 1316,
+      "single_primary_home": "software-evolution-delivery",
+      "existing_collection_members_retained": true,
+      "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 89,
+      "prior_graphics_unchanged": 501,
+      "prior_dimensions_unchanged": 1785,
+      "new_dimensions": 4,
+      "all_other_protected_tests_renderer_dependencies_build_scripts_unchanged": true,
+      "authoring_documentation_preserved": true,
+      "both_isolated_workspaces_match_current_web_source_and_linked_content": true
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "content/assets/software-engineering/deployment-pipeline-identity-mobile.svg": "4add0f747e791fca0ce70e8860d822712251b0af9ee65cc070062a0d73413781",
+        "content/assets/software-engineering/deployment-pipeline-identity.svg": "8aaf9f2e59756ae49d271eb003e769561495ec94595f5f845a365a3289d58cbb",
+        "content/assets/software-engineering/deployment-pipeline-stages-mobile.svg": "9604643cd2ccfc3864aee6c8de25e8008bddb5e8419e75a26dbea6d165602988",
+        "content/assets/software-engineering/deployment-pipeline-stages.svg": "e00b9b94021e3ad92b97037ff3a265dcca4ee6dd7cd6cd6ada31322ced5f0ff7"
+      }
+    },
+    "native": [
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-stages.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-stages-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 932
+      },
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-identity.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-identity-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 932
+      }
+    ],
+    "contrast": {
+      "status": "passed",
+      "normal_text_AA_4_5_minimum": true,
+      "pairs": [
+        {
+          "foreground": "#252c28",
+          "background": "#ffffff",
+          "contrast": 14.29
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#f1f2ef",
+          "contrast": 12.72
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#edf5f0",
+          "contrast": 12.87
+        },
+        {
+          "foreground": "#626962",
+          "background": "#ffffff",
+          "contrast": 5.65
+        },
+        {
+          "foreground": "#626962",
+          "background": "#f1f2ef",
+          "contrast": 5.03
+        },
+        {
+          "foreground": "#626962",
+          "background": "#edf5f0",
+          "contrast": 5.09
+        }
+      ]
+    },
+    "concept": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 23,
+          "y": 3,
+          "width": 50,
+          "height": 90
+        },
+        {
+          "x": 23,
+          "y": 51,
+          "width": 50,
+          "height": 26
+        }
+      ]
+    },
+    "browser": [
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-stages.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-stages-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 932
+      },
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-identity.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/deployment-pipeline-identity-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 932
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/deployment-pipeline-stages.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/deployment-pipeline-identity.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 136,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/pipes-and-filters",
+          "/pattern/blue-green-deployment",
+          "/pattern/ml-canary-rollout-with-rollback",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/deployment-pipeline-stages-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/deployment-pipeline-identity-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 136,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/pipes-and-filters",
+          "/pattern/blue-green-deployment",
+          "/pattern/ml-canary-rollout-with-rollback",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/deployment-pipeline-stages-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/deployment-pipeline-identity-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 136,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/pipes-and-filters",
+          "/pattern/blue-green-deployment",
+          "/pattern/ml-canary-rollout-with-rollback",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-evolution-delivery",
+        "article": "deployment-pipeline",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "assets": {
+      "status": "passed",
+      "mode": "actual local static public export; isolated source copy includes existing sibling application imports",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/PatternverseLogo.Cr_c3FgX.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LegalLinks.C1VwvvwC.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/0.LPYfGvVT.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/pattern-mark-presets.Dx3BoDxs.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LibraryViewSwitch.yR3Qs8SB.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/MarkdownRenderer.DDyfSN4x.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/WorksheetButton.Dsl9OpN0.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/3.DBGXFlWk.css",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-stages-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-stages.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-identity-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-identity.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-stages.svg",
+          "status": 200,
+          "sha256": "e00b9b94021e3ad92b97037ff3a265dcca4ee6dd7cd6cd6ada31322ced5f0ff7",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-stages-mobile.svg",
+          "status": 200,
+          "sha256": "9604643cd2ccfc3864aee6c8de25e8008bddb5e8419e75a26dbea6d165602988",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-identity.svg",
+          "status": 200,
+          "sha256": "8aaf9f2e59756ae49d271eb003e769561495ec94595f5f845a365a3289d58cbb",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/deployment-pipeline-identity-mobile.svg",
+          "status": 200,
+          "sha256": "4add0f747e791fca0ce70e8860d822712251b0af9ee65cc070062a0d73413781",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "Viewed all four native SVGs and concept mark before building, then actual desktop/phone article tops, phone figure/caption and highlighted code. No measured label clipping/overlap or article overflow. Fixed white surface, regular Helvetica Neue/Helvetica/Arial, approved palette and square geometry. Actual static article checked at1440/390/320 for exact code selection, highlighting, focus, keyboard horizontal code scrolling, mobile images, related routes, collection/gallery/card and breadcrumb.",
+    "public_build": "Repository build-public-web.mjs and public export inspection passed in an isolated current-source workspace. No deployment or publication."
+  },
+  "limitations": [
+    "The program models one configuration artifact and an in-memory target. It does not package or remotely deploy application code, authenticate evidence/approvals, implement concurrent release control or recover partial external effects. Hash equality establishes byte identity only.",
+    "Existing VerseSelector type error and access-over-ownership graphic coverage failure remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-deployment-pipeline",
+    "uncommitted": true,
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false,
+    "unrelated_work_preserved": true
+  }
+}

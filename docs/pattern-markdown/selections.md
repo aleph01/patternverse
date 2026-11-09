@@ -6,7 +6,7 @@ This does not add Pattern execution to the separately hosted PWA.
 ## Single and multiple choices
 
 ```pattern
-!choose thinking_styles [multi, min=0, max=3, prefer=checklist] {
+thinking_styles = !choose [multi, min=0, max=3, prefer=checklist] {
     Which descriptions, if any, seem to fit your experience?
 
     - all_or_nothing: "All-or-nothing thinking"
@@ -43,7 +43,7 @@ In new bullet-option blocks, escape the initial hyphen to display a literal opti
 ## Ranking all offered items
 
 ```pattern
-!rank priorities {
+priorities = !rank {
     Put these in the order that matters to you right now.
 
     - connection: "Connection"
@@ -57,7 +57,7 @@ ID exactly once. There are no ties, tiers, partial rankings or automatic model
 rankings. To rank a subset, first use `!choose [multi]`, then:
 
 ```pattern
-!rank ordered [from=thinking_styles] {
+ordered = !rank [from=thinking_styles] {
     Which would you like to explore first?
 }
 ```
@@ -70,16 +70,16 @@ empty list. `prefer=reorder` is optional; selection bounds do not apply to ranki
 ## Ranking participant-created entries
 
 ```pattern
-!collect steps {
+steps = !collect {
     :max 3
-    !ask description {
+    description = !ask {
         What is one possible small step?
     }
-    !rate effort 0..10 {
+    effort = !rate 0..10 {
         How much effort might {{description}} take?
     }
 }
-!rank ordered_steps [from=steps, label=description] {
+ordered_steps = !rank [from=steps, label=description] {
     Arrange these in the order you would like to consider them.
 }
 ```

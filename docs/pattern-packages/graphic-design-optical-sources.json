@@ -1,0 +1,83 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "The existing renamed Source Sans 3 Regular instance is reused unchanged with source and OFL notice retained. The same static font, optical design and weight400 are used in both variants.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Apply Optical Alignment",
+  "date": "2026-10-28",
+  "mode": "Existing generated photographic artwork and paper presentation reused unchanged; exact-font native SVG positioning. Insets repeat complete artifact content with matched crop/scale and explanatory guides. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-optical-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-optical-layouts.json",
+    "sha256": "50110c34824aebf0f1bbc03bbe27166644e8c905fc6618a643bbbe47fe604310",
+    "method": "Exact fixed-font metrics supply starting offsets; editorial review judges visible relationships. Only one declared translation changes per artifact. Detail viewports repeat the same artifact with identical crop/scale and explanatory guides."
+  },
+  "comparisonPolicy": "Only one declared transform changes in each artifact: first quote line \u221218.744 on x; complete headline +9.462 on x; OPEN +6.12 on y. The latter starts from the measured lowercase-x height reference and moves to measured visible-capital centering, subject to editorial review. No glyph editing, internal kerning/tracking, font/size/weight, copy, line-break, imagery/crop, frame or other position changes. Close-up overlays are explanatory only and identical across comparison variants.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "optical-quotation",
+        "changedPixels": 5105,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "optical-invitation",
+        "changedPixels": 7403,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "optical-shop-label",
+        "changedPixels": 3407,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared optical-alignment intervention regions differ."
+  },
+  "limitations": "Static English-language editorial specimens; no universal nudge values, empirically established perceptual centers, reader-performance study, physical print trial, implemented responsive behavior or full accessibility evaluation. The before designs remain legible and may suit other purposes."
+}

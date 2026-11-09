@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "identity-map",
+  "title": "Identity Map",
+  "aliases": ["Identity Map Pattern"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1342,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six authoritative source notes. Fowler’s Identity Map catalog entry in Patterns of Enterprise Application Architecture establishes identity-key lookup and object reuse within a business operation. Official SQLAlchemy documentation supports identity namespaces, query-result caching distinctions, retention choices, sequential session ownership, and separate expiration/refresh behavior. Python documentation supports the demonstration’s SQLite connection configuration. The article distinguishes identity reuse from persistence, database freshness, isolation, change tracking, and authorization. The contact scenario, code, and native diagrams are original teaching material.",
+    "python_examples": "Both actual article fences execute as contacts.py and demo.py and produce seven stated lines exactly. Checks cover shared object references, one SELECT per successfully loaded ID, visible local mutation without persistence, positive integer ID and printable-name boundaries, read-only public identity, missing rows without negative caching, a row appearing after an earlier miss, separate objects for distinct IDs with the same name, invalid hydration without registration, repair and successful retry, single-use lifecycle, cleared registries on normal/exceptional exit, strong-reference retention and release, surviving external references, caller-owned connection and transaction, independent database namespaces, closed-connection storage failure, actual external updates/deletion through a second SQLite connection, stale hits, and new instances across scopes. No automatic persistence, refresh, concurrency coordination, or cross-scope object reuse is claimed.",
+    "python_stdout": [
+      "same object: True",
+      "other path: Ada Lovelace",
+      "stored: Ada",
+      "same scope: Ada Lovelace",
+      "missing: None",
+      "new scope: Augusta",
+      "different object: True"
+    ],
+    "content": "1257 entities validate with drafts included. Published-only corpus contains 1110 entities and no errors.",
+    "collection": "Reused Persistence and Transactions, appending Identity Map after Repository, Data Mapper, Active Record, and Unit of Work. Prior members and body are retained. No new collection, duplicate alias article, or practice was added.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the visual generator, executable validator, integration test, authoring sidecar, concept registry, and authoring documentation. Article and primary collection also pass formatting. The final review report is formatted separately.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 hashes. All twenty-three earlier software articles and authoring records are unchanged. All 435 previous concept marks and 1534 asset-dimension entries are unchanged. The Software Engineering verse, Application Architecture collection, and Domain Modeling and Business Logic collection are byte-for-byte unchanged. Persistence and Transactions retains its four earlier members and body, adding only Identity Map membership and introduction.",
+    "article_tests": "96 article integration tests pass across Identity Map and all previous software/GoF suites. Checks cover canonical identity and alias without duplicate articles, one primary home retaining previous members, verse navigation, eight exact H2 sections, both copyable highlighted Python blocks, accessible responsive figures and manifest dimensions, four resolved related links, search, ten recommendation queries, revision hash, and concept mark. Two workers, 20-second test timeout, and 60-second corpus hook timeout bound load on the large corpus.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 100 passed and one unrelated failure across 26 files.",
+    "test_startup_notice": "The integration run logged a transient missing generated Svelte type file while the independent type-check command regenerated it. All 96 article checks completed successfully; the final production build runs after both commands finish.",
+    "public_build": "Production build and public web build checks pass. Actual browser verification used the completed build; no deployment.",
+    "visuals": "All four editable native SVG variants load. Native and production-browser measurements report no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. All native renders and actual desktop/phone article figures were visually inspected. The lookup figure makes two lookup paths converge on one map entry referencing one Contact object; misses select and register while hits reuse without SQL. The scope figure distinguishes locally edited object state from a directly updated database row, map cleanup, surviving external references, and a new object loaded in a later scope. It qualifies observations with database isolation. Exact light palette, fixed white surface, regular Helvetica typography, square geometry, arrow meanings, label placement, contrast, captions, and phone readability were reviewed. The abstract concept mark appears in the article and gallery.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: eight exact H2 headings, both Python blocks preserved in DOM text, colored syntax tokens, text selection retaining indentation, focusable code blocks, keyboard horizontal code scrolling at 320px, both phone SVG variants loaded, and no page overflow. Article tops, code, all figures, captions, and gallery screenshots were visually inspected. Browser selection normally omits the final newline. A tall code-element screenshot includes the existing sticky navigation overlay; DOM and selection checks verify the complete copyable code.",
+    "navigation_browser": "Entity, Data Mapper, Unit of Work, and Repository routes return HTTP 200. Persistence and Transactions renders its direct route and five-pattern Software Engineering gallery. The Identity Map card on page two opens the canonical route with the correct primary breadcrumb and 5/5 article indicator."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ and standard-library SQLite. One connection and one mapped Contact type make the identity namespace implicit; keys are positive integer IDs, excluding booleans. Names are 1–80 printable nonblank characters. A primary-key miss selects, validates, constructs, and registers; a hit returns the identical object without SQL. Missing rows are not cached. Strong references last until context exit, then the single-use scope clears its map. Outside references can survive. Caller owns connection and transactions; the map issues no save, commit, rollback, or close. Sequential use is required. No query-result API, relationship-cycle hydration, dirty tracking, writes, refresh/expiration, authorization, expected versions, automatic retry, concurrent check/load synchronization, or distributed cache is supplied. New-scope observations still depend on database isolation.",
+  "preview": "http://127.0.0.1:43008/pattern/identity-map",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-identity-map",
+  "browser_measurements": ".local/software-identity-map/browser-checks.json",
+  "browser_check_script": ".local/software-identity-map/check-browser.mjs",
+  "preservation_checks": ".local/software-identity-map/preservation.json",
+  "build_log": ".local/software-identity-map/public-build.log",
+  "branch": "codex/software-identity-map",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "lazy-load",
+  "title": "Lazy Load",
+  "aliases": ["Lazy Loading", "Lazy Load Pattern"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1486,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six authoritative source notes. Fowler’s Lazy Load catalog entry in Patterns of Enterprise Application Architecture establishes partially loaded objects and four implementation variants: lazy initialization, virtual proxy, value holder, and ghost. Official SQLAlchemy documentation supports omitted columns, on-demand loading, N+1 query risks, eager strategies and unwanted-load guards, session lifetime, detached-instance failure, and thread/task ownership. Python documentation supports the demonstration’s explicit SQLite configuration. The article distinguishes deferred retrieval from successful-result retention, freshness, identity management, and authorization. The document scenario, manual reader, code, and native illustrations are original teaching material.",
+    "python_examples": "Both actual article fences execute as documents.py and demo.py and produce seven stated lines exactly. Checks cover omitted body payload in the initial SELECT, no body read before access, retained first success and callback release, empty text and NULL as loaded values, strict positive integer IDs, missing headers and invalid stored titles, failed body validation without publishing a value, repair and later success, missing rows at deferred access, propagated transient and storage failures without failure caching, independent wrappers and body caches, rejection after reader exit before SQL, loaded values after exit and connection closing, single-use lifecycle, caller-owned transaction and connection, and real cross-connection updates. The latter explicitly demonstrates an earlier header combined with a later body, and a retained body becoming stale. The counter measures body SELECTs, not all database queries. Sequential, non-reentrant access is required; no concurrency coordination or performance benchmark is claimed.",
+    "python_stdout": [
+      "title: Quarterly summary",
+      "body SELECTs before access: 0",
+      "first body: Revised detail",
+      "again: Revised detail",
+      "body SELECTs after access: 1",
+      "loaded after exit: Revised detail",
+      "unloaded after exit: rejected"
+    ],
+    "content": "1258 entities validate with drafts included. Published-only corpus contains 1111 entities and no errors.",
+    "collection": "Reused Persistence and Transactions, appending Lazy Load after Repository, Data Mapper, Active Record, Unit of Work, and Identity Map. Prior members and body are retained. No new collection, duplicate alias article, or practice was added.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the visual generator, executable validator, integration test, article, primary collection, authoring sidecar, concept registry, and authoring documentation. The final review report is formatted separately.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 hashes. All twenty-four earlier software articles and authoring records remain unchanged. All 436 prior concept marks and 1538 asset-dimension entries are unchanged. The Software Engineering verse, Application Architecture collection, and Domain Modeling and Business Logic collection are byte-for-byte unchanged. Persistence and Transactions retains its five prior members and body, adding only Lazy Load membership and introduction.",
+    "article_tests": "99 article integration tests pass across Lazy Load and all previous software/GoF suites. Coverage includes canonical ID and aliases without duplicates, one primary home preserving previous members, verse navigation, eight exact H2 headings, both copyable highlighted Python blocks, accessible responsive figures and manifest dimensions, four resolved related links, canonical/alias/collection search, ten queries, revision hash, and concept mark. Two workers, 20-second test timeout, and 60-second corpus hook timeout bound load on the large corpus. The run began after type-check synchronization completed.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 103 passed and one unrelated failure across 27 files.",
+    "public_build": "Production build and public web build checks pass. Actual browser verification used the completed build; no deployment.",
+    "visuals": "All four editable native SVG variants load. Native and production-browser measurements report no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. Every native render and actual desktop/phone article figure was visually inspected. The access diagram separates header retrieval, title-only use, first body SELECT, stored success including empty/NULL values, and subsequent reads without body SQL. The lifecycle figure distinguishes successful publication and callback release from a failed read retaining the unloaded marker, then contrasts loaded and unloaded access after reader exit. The phone layout separates alternative outcomes into labeled groups rather than implying serial execution. Exact approved palette, fixed white surface, regular Helvetica typography, square boundaries, arrow meanings, label placement, contrast, captions, and phone readability were reviewed. The abstract concept mark appears in the article and gallery.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: eight exact H2 headings, both Python blocks preserved in DOM text, colored syntax tokens, text selection retaining indentation, focusable code blocks, keyboard horizontal code scrolling at 320px, both phone SVG variants loaded, and no page overflow. Article tops, normal code viewports, all figures, captions, and collection gallery screenshots were visually inspected. Browser selection normally omits the final newline. Normal viewport code captures supplement tall element captures, which can include the existing sticky navigation overlay.",
+    "navigation_browser": "Proxy, Data Mapper, Identity Map, and Unit of Work routes return HTTP 200. Persistence and Transactions renders its direct route and six-pattern Software Engineering gallery. The Lazy Load card on page two opens the canonical route with the correct primary breadcrumb and 6/6 article indicator."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ and standard-library SQLite. Positive integer document IDs exclude booleans. Header titles must be text; body data may be text, empty text, or NULL. The reader selects only ID and title and captures the original ID in the body callback. A unique sentinel marks unloaded state. First success retains its value and releases the callback; failures propagate with the sentinel and callback intact, allowing another attempt while active but no automatic retry loop. The caller owns connection and transaction lifetime. Reader exit blocks new body reads before SQL, while loaded values remain usable. Unused wrappers retain callbacks and should not become long-lived reader handles. Separate wrappers have independent caches. There is no write API, identity map, refresh/invalidation, authorization, shared-thread/task coordination, recursive-loader protection, graph loader, or consistency/version protocol. Header and body observations need not be one snapshot, and retained data can become stale.",
+  "preview": "http://127.0.0.1:43009/pattern/lazy-load",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-lazy-load",
+  "browser_measurements": ".local/software-lazy-load/browser-checks.json",
+  "browser_check_script": ".local/software-lazy-load/check-browser.mjs",
+  "preservation_checks": ".local/software-lazy-load/preservation.json",
+  "build_log": ".local/software-lazy-load/public-build.log",
+  "branch": "codex/software-lazy-load",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

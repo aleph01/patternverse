@@ -1,0 +1,87 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Exact fixed-font metrics supply starting offsets; editorial review judges visible relationships. Only one declared translation changes per artifact. Detail viewports repeat the same artifact with identical crop/scale and explanatory guides.",
+  "examples": [
+    {
+      "name": "optical-quotation",
+      "source": "audience-workspace-photo.jpg",
+      "kind": "quote",
+      "size": 44,
+      "before": [0, 0],
+      "after": [-18.744, 0],
+      "metrics": {
+        "mark": {
+          "width": 18.743988037109375,
+          "left": -2.507999897003174,
+          "right": 16.01599884033203,
+          "ascent": 30.9320011138916,
+          "descent": -19.139999389648438
+        }
+      },
+      "detailRegion": [35, 460, 420, 180],
+      "dimensions": {
+        "wide": [1320, 1460],
+        "stacked": [660, 2850]
+      }
+    },
+    {
+      "name": "optical-invitation",
+      "source": "form-open-studios-photo.jpg",
+      "kind": "period",
+      "size": 76,
+      "before": [0, 0],
+      "after": [9.462, 0],
+      "metrics": {
+        "whole": {
+          "width": 279.67999267578125,
+          "left": -3.952000141143799,
+          "right": 274.739990234375,
+          "ascent": 52.74399948120117,
+          "descent": 0.9120025634765625
+        },
+        "words": {
+          "width": 260.7559814453125,
+          "left": -3.952000141143799,
+          "right": 254.97998046875,
+          "ascent": 52.74399948120117,
+          "descent": 0.9120025634765625
+        }
+      },
+      "detailRegion": [105, 410, 400, 155],
+      "dimensions": {
+        "wide": [1320, 1460],
+        "stacked": [660, 2850]
+      }
+    },
+    {
+      "name": "optical-shop-label",
+      "source": "explicit-tableware-photo.jpg",
+      "kind": "capitals",
+      "size": 72,
+      "before": [0, 0],
+      "after": [0, 6.12],
+      "baseline": 557.496,
+      "metrics": {
+        "caps": {
+          "width": 173.08799743652344,
+          "left": -3.74399995803833,
+          "right": 166.60800170898438,
+          "ascent": 48.09600067138672,
+          "descent": 0.8640022277832031
+        },
+        "lowercase": {
+          "width": 32.11199951171875,
+          "left": -1.0080000162124634,
+          "right": 31.104000091552734,
+          "ascent": 34.992000579833984,
+          "descent": 0
+        }
+      },
+      "detailRegion": [150, 470, 310, 140],
+      "dimensions": {
+        "wide": [1320, 1460],
+        "stacked": [660, 2850]
+      }
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "data-event-sourcing",
+  "title": "Event Sourcing",
+  "aliases": ["Event-Sourced Persistence"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1449,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Martin Fowler’s Event Sourcing author catalog article, Microsoft’s Event Sourcing architecture guidance, EventSourcingDB Writing Events, Axon Snapshots, SQLite Transactions, and Python sqlite3. Canonical Event Sourcing is retained; event-sourced persistence is described as shorthand. Event-driven integration, an audit trail, CQRS, and authoritative event persistence are explicitly distinguished. Conditional append, schema compatibility, deterministic replay, external effects, projection lag, checkpoints, correction semantics, and operating costs are treated separately. The article does not infer automatic throughput gains, universal global ordering, or automatic deduplication from append-only storage.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["event_store.py", "demo.py"],
+      "stdout": ["revision 2 available: 17", "stale append rejected", "reopened: 3 18 2"],
+      "verification": "Exact demo output; reconstruction at revisions two and three; retained earlier prefix unchanged; repeated pure replay with file/database I/O forbidden; no history mutation; close/reopen recovery from authoritative events alone; expected-revision rejection adds nothing; insufficient-capacity and reservation-aware over-release rejection; stream isolation; application update/delete trigger rejection; unknown schema/type, broken order, and invalid fixed-v1 facts fail visibly; exact 1/1000-seat and 64/65-character ID boundaries; invalid inputs leave no event; two concurrent revision-one writers yield one append and one conflict, with losing command re-evaluated against capacity; forced after-insert failure rolls back; busy-BEGIN and failed-COMMIT propagate with rollback and later retry; abrupt process exit before commit preserves earlier stream; newly versioned retries intentionally are not deduplicated. No authentication, external notification, asynchronous projection, schema migration, or production power-loss guarantee is inferred."
+    },
+    "content": "1278 entities validate with drafts included; published-only compilation contains 1131 entities without diagnostics.",
+    "integration_tests": "All six focused article suites pass: Event Sourcing, CQRS, Database per Service, Domain Event, Optimistic Offline Lock, and GoF. Combined run across seven files reports 43 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused existing data-event-sourcing ID and route, established title and summary, original primary diagram path, Data Engineering tags and verse membership, and the twenty-seat reservation-aware scenario. Persistence and Transactions becomes the sole primary collection as its eleventh member. Time & history keeps an explanatory cross-reference and changes its curated count from sixteen to fifteen. Existing CQRS, Domain Event, Optimistic Offline Lock, and Bitemporal Records retain their canonical IDs and provide related links. No duplicate article, new collection, practice, or worksheet.",
+    "preservation": {
+      "status": "passed-for-task-scope",
+      "existing_content_changed_by_this_task": [
+        "content/patterns/data-event-sourcing.md",
+        "content/collections/software-persistence-transactions.md",
+        "content/collections/data-engineering-time-history.md"
+      ],
+      "other_existing_content_unchanged": 1275,
+      "new_content_by_this_task": [],
+      "unrelated_concurrent_content_changes": [],
+      "unrelated_new_content": [],
+      "unrelated_concept_graphic_changes": [],
+      "canonical_id_and_route_preserved": "data-event-sourcing",
+      "prior_summary_and_data_engineering_membership_preserved": true,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 45,
+      "prior_graphics_unchanged": 457,
+      "prior_dimensions_unchanged": 1619,
+      "revised_original_dimensions": {
+        "data-engineering/event-sourcing.svg": {
+          "width": 720,
+          "height": 920
+        }
+      },
+      "new_dimensions": {
+        "data-engineering/event-sourcing-mobile.svg": {
+          "width": 360,
+          "height": 1080
+        },
+        "software-engineering/event-sourcing-append.svg": {
+          "width": 720,
+          "height": 960
+        },
+        "software-engineering/event-sourcing-append-mobile.svg": {
+          "width": 360,
+          "height": 1024
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, both collections, authoring metadata, concept mark, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and earlier staging directories were untouched. No renderer, build implementation, project dependency, or earlier Software Engineering/GoF article changes.",
+    "illustrations": "Two editable native SVGs explain an authoritative three-fact stream with prefix reconstruction and atomic expected-revision rejection. The existing data-engineering/event-sourcing.svg is revised in place; three responsive assets are added. Both figures have separately composed phone variants, meaningful alternatives and captions, approved fixed white surface/regular Helvetica Neue palette/square geometry, and explicit arrow meanings. Replay labels were moved clear of their arrows before final rendering. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for technical accuracy, placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all four related routes returning 200. Persistence and Transactions shows eleven members over three pages; the existing article appears on page three and opens with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-event-sourcing/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 56714
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original two-file Python 3.11+ standard-library SQLite example. One event per command and full fixed-v1 replay validate the reservation-aware twenty-seat history. Stream positions start at one and the pool/revision pair supplies local event identity. BEGIN IMMEDIATE serializes SQLite writers before the expected-revision check; INSERT and check are in one transaction, and acknowledgment returns after commit. Replay interprets retained facts without I/O and does not create notifications. Application triggers prevent accidental UPDATE/DELETE but are not an administrator security or tamper-resistance boundary. No authentication, request deduplication, outbox, asynchronous projection, snapshot, event migration, encryption, backup/restore workflow, cross-stream atomicity, or production power-loss guarantee. A retry with a new expected revision can append a second legitimate-looking reservation. Independent concurrent writers, statement and commit failures, busy BEGIN, abrupt pre-commit process exit, invalid histories, over-release/capacity boundaries, and reopen reconstruction are verified.",
+  "preview": "http://127.0.0.1:43030/pattern/data-event-sourcing",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-event-sourcing",
+  "browser_measurements": ".local/software-event-sourcing/browser-checks.json",
+  "browser_check_script": ".local/software-event-sourcing/check-browser.mjs",
+  "build_log": ".local/software-event-sourcing/public-build-isolated.log",
+  "branch": "codex/software-event-sourcing",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

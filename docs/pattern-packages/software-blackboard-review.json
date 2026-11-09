@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "blackboard",
+  "title": "Blackboard",
+  "aliases": ["Blackboard Architecture", "Blackboard System"],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1449,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Corkill's author-hosted Blackboard Systems establishes the three-part model, knowledge-source activations, opportunistic control, and the distinction from a shared database alone. Relevant framework and control sections of the original 1980 Hearsay-II paper support partial interpretation and heuristic scheduling. The accessible POSA preview establishes architectural catalog placement; no inaccessible full book chapter is claimed as consulted. Official Python documentation supports mapping-proxy behavior and its shallow limitation.",
+    "python_examples": "All three actual article blocks execute as separate modules. Checks pass for stated output, control without specialist imports, changing eligibility from initial evidence, independence from source-list order, retained partial facts, unsuccessful evidence combinations, solved/stalled/budget outcomes, exact budget boundaries, zero budget and pre-satisfied goals, invalid budgets, deterministic priority ties, duplicate identities, avoiding unneeded low-priority work, stable read-only snapshots, rejected empty or overwriting patches, unchanged initial input, and propagated failures without rollback of external effects.",
+    "article_tests": "39 tests pass across Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical aliases, eight headings, one primary collection, resolved neighbors, exact highlighted code text, responsive figures and dimensions, search, recommendation metadata, article revision hash, and concept marks.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass, including the new mark. The global coverage check has an unrelated existing failure listed below.",
+    "content": "1217 entities validate with drafts included. The published-only corpus contains 1071 entities and reports no errors.",
+    "public_build": "Production build passes, including the public web build checks. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new source files and updated authoring metadata.",
+    "visuals": "All four editable SVG variants load from the production preview. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and phone compositions were visually inspected for mechanism, state and commit ownership, priority/eligibility accuracy, fixed white surfaces, regular typography, contrast, and label placement. Solid data/contribution arrows and dashed selection arrows are also distinguished by labels and structure.",
+    "article_browser": "Production article checked at 1440, 390, and 320 pixels: all eight headings, all three code blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard code scrolling at 320px, both responsive images loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article and figure screenshots were inspected.",
+    "navigation_browser": "Application Architecture opens Blackboard with the correct collection breadcrumb. Related Pipes and Filters, Mediator, Observer, and Strategy routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and the GoF collection match pre-change SHA-256 checksums byte for byte. All prior authoring records, concept marks, and asset dimensions remain unchanged."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "A bounded serial simulation with one activation per source, immutable fact values, and append-only keys. Read-only snapshots are shallow. The toy goal is not a validated classification or calibrated confidence measure. No learned recognition, OCR, durable board, concurrent updates, external-effect rollback, or wall-clock interruption is implemented.",
+  "preview": "http://127.0.0.1:42989/pattern/blackboard",
+  "evidence_directory": ".local/software-blackboard",
+  "browser_measurements": ".local/software-blackboard/browser-checks.json",
+  "browser_check_script": ".local/software-blackboard/check-browser.mjs",
+  "preservation_checks": ".local/software-blackboard/preservation-checks.json",
+  "branch": "codex/software-blackboard",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

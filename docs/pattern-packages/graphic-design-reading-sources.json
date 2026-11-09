@@ -1,0 +1,91 @@
+{
+  "pattern": "Establish a Clear Reading Order",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographs and composed new controlled SVG comparisons and a small responsive HTML verification prototype. No new photograph was generated for this article.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-reading-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-seed-packing-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "487e04205d1aaecfd64e883a8def1adcd091fdf4430dd65001b9d772b5b7503b"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-repair-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "f5c4449de84c1cb2d5c6d4142830a8067ff21ce0367f80b059d55a16194e2b07"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "comparisonPolicy": "Procedure adds only four numbers. Editorial moves only the intact continuation horizontally from x335 to x65. Preparation view exchanges only complete steps 2 and 3 vertical slots while retaining source order 1,2,3. All original copy, font sizes/weights, colors, unrelated positions, photographs/crops, paper/phone and lighting remain fixed.",
+  "verificationFixture": {
+    "path": "docs/pattern-packages/graphic-design-reading-responsive-proof.html",
+    "sha256": "0f9595faee2c2076611d53ac15bc11e21b3bebb80bc71f83c9c8009c19c88227",
+    "scope": "Original fictional HTML model with no booking interactions. At 960 pixels both layouts are 1,2,3; at 396 the original visual order is 1,3,2 and the corrected order 1,2,3. Both source lists remain 1,2,3."
+  },
+  "verification": {
+    "photographic": {
+      "comparisons": [
+        {
+          "name": "reading-seed-procedure",
+          "changedPixels": 378,
+          "changedOutsideDeclaredRegions": 0
+        },
+        {
+          "name": "reading-editorial-thread",
+          "changedPixels": 6910,
+          "changedOutsideDeclaredRegions": 0
+        },
+        {
+          "name": "reading-visit-preparation",
+          "changedPixels": 10784,
+          "changedOutsideDeclaredRegions": 0
+        }
+      ],
+      "desktopAndMobileBrowserChecks": "passed",
+      "textBounds": "within paper or phone display",
+      "pixelCheck": "Only added step-number or moved continuation/step regions differ."
+    },
+    "responsive": [
+      {
+        "width": 960,
+        "variant": "before",
+        "source": [1, 2, 3],
+        "visual": [1, 2, 3]
+      },
+      {
+        "width": 960,
+        "variant": "after",
+        "source": [1, 2, 3],
+        "visual": [1, 2, 3]
+      },
+      {
+        "width": 396,
+        "variant": "before",
+        "source": [1, 2, 3],
+        "visual": [1, 3, 2]
+      },
+      {
+        "width": 396,
+        "variant": "after",
+        "source": [1, 2, 3],
+        "visual": [1, 2, 3]
+      }
+    ],
+    "limits": "Layout and source-order checks only. No assistive-technology, keyboard-interaction, reading-performance or real-service validation."
+  }
+}

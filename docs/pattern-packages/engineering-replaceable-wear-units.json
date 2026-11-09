@@ -1,0 +1,242 @@
+{
+  "title": "Engineering — Replaceable Wear Units",
+  "edition": "Draft illustrated field-guide article",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples",
+    "Assumptions for correctness",
+    "When to use it",
+    "Tradeoffs and operating costs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "engineering-replaceable-wear-units",
+      "taxonomy_id": "P124",
+      "title": "Replaceable Wear Units",
+      "status": "draft",
+      "domain": "Engineering",
+      "family": "Function and Architecture",
+      "entry_type": "terminal pattern",
+      "parent": {
+        "taxonomy_id": "P001",
+        "id": "engineering-segmentation",
+        "title": "Segmentation"
+      },
+      "topical_cross_listing": "Assembly, Maintenance, and Renewal; not a second parent or definition.",
+      "collections": ["engineering-function-and-architecture"],
+      "summary": "Put predictable wear in separately renewable parts so useful supporting equipment can remain after renewal.",
+      "identity_resolution": {
+        "decision": "New engineering specialization of Segmentation.",
+        "existing_catalog_checked": [
+          "engineering-segmentation",
+          "engineering-standardized-module-interfaces",
+          "arch-repairable-connections",
+          "repair-and-maintenance"
+        ],
+        "boundary": "This entry places a predictable wear location in a separately renewable element. Segmentation chooses manageable units generally; Standardized Module Interfaces preserves substitution contracts; Architecture Repairable Connections addresses access and connections in buildings; Business Repair and Maintenance concerns an offering and revenue."
+      },
+      "use_when": [
+        "Recurring wear is concentrated in a contact surface or limited region.",
+        "Renewing the worn region would otherwise involve replacing a useful supporting structure or shaft.",
+        "A complete access, retention, and replacement route can be designed for a liner, sleeve, shoe, or bushing."
+      ],
+      "goals": [
+        "Retain useful supporting equipment",
+        "Make the wear boundary renewable",
+        "Expose the full service task and interfaces"
+      ],
+      "mechanisms": [
+        "Separate renewable contact element from retained support",
+        "Suitable wear surface and usable allowance",
+        "Stable support and retention through the permitted condition",
+        "Inspectable renewal criterion",
+        "Complete extraction and restoration route"
+      ],
+      "not_ideal_when": [
+        "Damage bypasses the insert into the retained component.",
+        "The underlying structure or shaft is no longer suitable.",
+        "The new interfaces, obstruction, or service work outweigh the achievable benefit."
+      ],
+      "example_user_queries": [
+        "Our chute wears through in one spot but most of the structure is still sound.",
+        "Can we replace the rubbing surface instead of the whole shaft?",
+        "The wear insert is bolted in but there is no way to take it out.",
+        "How should we choose the boundary of a renewable wear part?",
+        "We keep rebuilding the chute floor after local abrasion.",
+        "Should we use a coating or a separately replaceable liner?",
+        "The average liner thickness looks fine but one small region is worn out.",
+        "How do we protect a pump shaft from packing-contact damage?",
+        "Our replaceable liner needs major dismantling before it can be reached.",
+        "Does adding a wear sleeve guarantee shorter maintenance downtime?",
+        "The new liner wears rapidly again after every replacement.",
+        "What must remain intact when a wear unit is renewed?"
+      ],
+      "related_patterns": [
+        {
+          "taxonomy_id": "P001",
+          "id": "engineering-segmentation",
+          "title": "Segmentation",
+          "relationship": "Direct parent. This child defines a unit around predictable wear rather than another handling or change requirement.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P047",
+          "title": "Functional Surfaces",
+          "relationship": "Can complement a wear unit through treatment or coating; does not necessarily create a separately replaceable element.",
+          "article_status": "planned"
+        },
+        {
+          "taxonomy_id": "P126",
+          "title": "Reversible Joining",
+          "relationship": "Supports release and restoration but does not choose a wear location or guarantee a complete removal route.",
+          "article_status": "planned"
+        },
+        {
+          "taxonomy_id": "P127",
+          "title": "Condition-Based Maintenance",
+          "relationship": "Chooses service timing from evidence; a renewable wear unit can also use another suitable maintenance plan.",
+          "article_status": "planned"
+        }
+      ],
+      "complementary_authored_pattern": {
+        "taxonomy_id": "P010",
+        "id": "engineering-standardized-module-interfaces",
+        "relationship": "Preserves required replacement fit and boundary behavior."
+      },
+      "worked_examples": [
+        {
+          "name": "Six-panel conveyor transfer chute",
+          "kind": "illustrative",
+          "baseline": "Material contacts the structural floor directly, so local wear involves structural work.",
+          "intervention": "Six individually retained liners place the contact wear in renewable panels while retaining a suitable shell.",
+          "held_fixed": [
+            "conveyed material and duty",
+            "required structural role",
+            "one selected panel's inspection locations"
+          ],
+          "inspection_fixture": {
+            "initial_thickness_mm": 12,
+            "renew_if_any_designated_reading_at_or_below_mm": 6,
+            "readings_mm": {
+              "A": 9.2,
+              "B": 7.5,
+              "C": 5.8,
+              "D": 8.4
+            }
+          },
+          "computed": {
+            "minimum_mm": 5.8,
+            "mean_mm": 7.725,
+            "display_mean_mm": 7.7,
+            "renew_under_fixture_rule": true
+          },
+          "limits": "The readings and 6 mm criterion are invented. They are not a recommended thickness, measured installation, load rating, wear rate, or remaining-life prediction. Retained shell and attachments still require assessment."
+        },
+        {
+          "name": "Packed-gland pump shaft sleeve",
+          "kind": "illustrative",
+          "intervention": "A rotating sleeve provides the contact surface for stationary packing, allowing renewal while retaining a suitable shaft.",
+          "preserve": [
+            "working diameter and finish",
+            "concentricity and fit",
+            "sealing and retention",
+            "packing and shaft condition"
+          ],
+          "limits": "Not a universal mechanical-seal arrangement, numerical wear limit, or executable dismantling procedure. No service-time or leakage improvement is claimed."
+        },
+        {
+          "name": "Wear insert trapped behind access opening",
+          "kind": "illustrative",
+          "held_fixed": [
+            "rigid insert",
+            "straight withdrawal enforced by retained guides",
+            "wear duty"
+          ],
+          "dimensions_mm": {
+            "insert_width": 180,
+            "original_opening_width": 120,
+            "revised_opening_width": 220
+          },
+          "computed": {
+            "original_width_deficit_mm": 60,
+            "revised_total_nominal_clearance_mm": 40
+          },
+          "limits": "One-dimensional geometry only. Rotation is explicitly unavailable. Does not establish adequate handling or tool space, or the structural and sealing acceptability of a changed opening. Major dismantling can defeat local service while material-retention benefits may still remain."
+        }
+      ],
+      "sources": [
+        "https://www.metso.com/products-and-services/parts/wear-lining-solutions/impact-plates-for-transfer-chutes/",
+        "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/shaft-protecting-sleeve-1118812",
+        "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/shaft-seal-1116516",
+        "https://www.pumpworks.com/wp-content/uploads/2026/01/Installation_Operation_and_Maintenance_Manual_-Rev.2-1.pdf",
+        "https://static.martin-eng.com/www.martin-eng.fr/resources/L3803.pdf"
+      ],
+      "source_notes": [
+        {
+          "source": "Metso, Wear lining impact plates for transfer chutes",
+          "accessed": "2026-10-27",
+          "basis": "Read discussion of transfer-chute impact and sliding abrasion and bolted Rockbox liner arrangements.",
+          "boundary": "No advertised wear-life gain is transferred to the original fictional flat-panel design; no manufacturer geometry is traced."
+        },
+        {
+          "source": "KSB, Shaft protecting sleeve",
+          "accessed": "2026-10-27",
+          "basis": "Read protection against seal-related mechanical damage and responsibilities for retention, axial allowance, and leakage paths.",
+          "boundary": "No fit, sleeve material, life, or capacity is selected from the source."
+        },
+        {
+          "source": "KSB, Shaft seal, gland-packing discussion",
+          "accessed": "2026-10-27",
+          "basis": "Read explanation of stationary packing acting on shaft-protecting sleeves and the role of friction/cooling conditions.",
+          "boundary": "The example is specifically a packed gland. Product operating limits and numerical leakage rates are not reused."
+        },
+        {
+          "source": "PumpWorks PWA-IL installation/operation/maintenance manual, MAINT-10 (PDF page 41)",
+          "accessed": "2026-10-27",
+          "basis": "Read Inspection and Replacement: sleeve surface in the stuffing-box area must be smooth and free from grooves; replacement criterion is stated for that equipment.",
+          "boundary": "Not a universal wear threshold or instruction to replace every shaft-seal sleeve. The full dismantling procedure is not reproduced."
+        },
+        {
+          "source": "Martin Engineering, External Wear Liner Retrofit Kit, L3803-03/19",
+          "accessed": "2026-10-27",
+          "basis": "Read mounting outside the existing skirtboard without interfering with supports and the stated external service access.",
+          "boundary": "A product-specific example of deliberate access, not a claim that all liners can be serviced externally or without shutdown."
+        }
+      ],
+      "research_lead_status": [
+        {
+          "lead": "University of Michigan Design Heuristics handout",
+          "status": "Not used as evidence. The direct PDF fetch returned HTTP 403 during earlier research in this chat; this taxonomy is not presented as its official card set."
+        },
+        {
+          "lead": "J. E. Gordon, Structures: Or Why Things Don't Fall Down",
+          "status": "Contextual reading lead only. No specific book passage, illustration, numerical wear criterion, or service-life claim is attributed without reading it."
+        },
+        {
+          "lead": "Goulds Model 3420 manual",
+          "status": "Direct open was inaccessible through the web tool; accessible primary KSB and PumpWorks sources supplied the sleeve mechanism and model-specific inspection evidence instead."
+        }
+      ],
+      "graphics": {
+        "decision": "Three static explanatory SVG figures and phone companions; no widget.",
+        "reason": "The renewal boundary, shaft/sleeve contact, and blocked/clear removal route are inspectable in fixed drawings. The supplied thickness readings are a decision fixture rather than a wear simulation.",
+        "style": "Approved fixed-white editorial engineering drawings with regular Helvetica Neue, fine neutral lines, and restrained green.",
+        "generator": "scripts/engineering-wear-units-visuals.mjs",
+        "assets": [
+          "content/assets/engineering/wear-units-chute-liners.svg",
+          "content/assets/engineering/wear-units-chute-liners-mobile.svg",
+          "content/assets/engineering/wear-units-shaft-sleeve.svg",
+          "content/assets/engineering/wear-units-shaft-sleeve-mobile.svg",
+          "content/assets/engineering/wear-units-removal-route.svg",
+          "content/assets/engineering/wear-units-removal-route-mobile.svg"
+        ],
+        "provenance": "Original schematic geometry and labels. No manufacturer drawings or book figures traced, no external photographs, no generated raster illustrations."
+      }
+    }
+  ]
+}

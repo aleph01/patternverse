@@ -1,0 +1,117 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Incompatible Constraints",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "incompatible-constraints",
+      "title": "Incompatible Constraints",
+      "entity_type": "concept",
+      "domain": "Dependency and feasibility traps: jointly unsatisfiable requirements",
+      "article": "content/concepts/incompatible-constraints.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization: author-hosted teaching slides",
+          "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf",
+          "supports": "Sections 4.2–4.6 (PDF pages 89–93 zero-based): objective, feasible versus optimal points, explicit and implicit constraints, feasibility problems.",
+          "boundary": "The author-hosted slides were opened and read. The full textbook PDF request timed out; no unread theorem or historical first-inventor claim is attributed. The current travel example establishes conditional event ordering qualitatively: the last qualifying train leaves before the earliest permitted departure. No integer-model verification is retained in this note or claimed for that example."
+        },
+        {
+          "title": "Gurobi, How do I determine why my model is infeasible?",
+          "url": "https://support.gurobi.com/hc/en-us/articles/360029969391-How-do-I-determine-why-my-model-is-infeasible",
+          "supports": "Definition of IIS; removing any included constraint or bound makes that subsystem feasible; multiple IISs; irreducible versus minimum cardinality; distinction between diagnosis and repair.",
+          "boundary": "Official diagnostic documentation, not proof that a particular returned conflict is the only issue or the fairest requirement to relax."
+        },
+        {
+          "title": "Gurobi Optimizer Reference Manual, Infeasibility Analysis",
+          "url": "https://docs.gurobi.com/projects/optimizer/en/current/features/infeasibility.html",
+          "supports": "Choosing relaxable bounds and constraints, different measures of relaxation cost, and individual penalties.",
+          "boundary": "Descriptions of model transformations. User-supplied permissions and penalties encode priorities; no claim that an automatically minimized relaxation is socially desirable or authorized."
+        },
+        {
+          "title": "Google OR-Tools, CP-SAT Solver",
+          "url": "https://developers.google.com/optimization/cp/cp_solver#cp-sat_return_values",
+          "supports": "FEASIBLE, OPTIMAL, INFEASIBLE, MODEL_INVALID, and UNKNOWN statuses; UNKNOWN may follow a time, memory, or user limit.",
+          "boundary": "The article distinguishes a proof about a supplied valid model from lack of a found solution. No solver was invoked for the travel example. Its conditional incompatibility follows from the stated event order and exclusion of other permitted routes; no arithmetic or enumeration check of the superseded example is claimed as current evidence."
+        }
+      ],
+      "related_patterns": [
+        "make-trade-offs-explicit",
+        "reframing-remove-constraints",
+        "resource-deadlock"
+      ],
+      "status": "published",
+      "short_description": "Establish which requirements cannot be satisfied together, then change an authorized requirement, resource limit, or assumption instead of searching endlessly within an empty feasible set.",
+      "use_when": [
+        "Which requirement has to change for a valid journey?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Authorize a covered earlier finish, or explicitly change another requirement.",
+        "Coverage has a cost. A feasible timetable is not a guarantee of punctual arrival."
+      ],
+      "example_structure": {
+        "scenario": "Last train meeting the arrival requirement leaves before earliest permitted departure from work. Other permitted affordable routes excluded. Authorized covered early finish changes one requirement; punctual operation remains uncertain. No numerical timetable or claim of a measured event.",
+        "changed_relationship": "Authorize a covered earlier finish, or explicitly change another requirement.",
+        "residual_constraints": "Coverage has a cost. A feasible timetable is not a guarantee of punctual arrival.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/incompatible-constraints-booklets.svg",
+          "content/assets/structural-traps/incompatible-constraints-booklets-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 727,
+            "textBlocks": 18
+          },
+          "phone": {
+            "width": 360,
+            "height": 1483,
+            "textBlocks": 18
+          }
+        },
+        "question": "Which requirement has to change for a valid journey?",
+        "alternative_text": "Hypothetical qualitative illustration. Originally the last train meeting the arrival requirement leaves before Mara is allowed to leave work. The revised authorization moves her permitted departure before the same train, with work covered. The train and performance time do not change. Change: Authorize a covered earlier finish, or explicitly change another requirement. Limitation: Coverage has a cost. A feasible timetable is not a guarantee of punctual arrival.",
+        "caption": "Hypothetical illustration. Read each row as event order, not elapsed time. Authorized early departure makes the same train usable, while preserving the arrival requirement. A colleague covers work and punctual transport remains uncertain.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Originally the last train meeting the arrival requirement leaves before Mara is allowed to leave work. The revised authorization moves her permitted departure before the same train, with work covered. The train and performance time do not change. Change: Authorize a covered earlier finish, or explicitly change another requirement. Limitation: Coverage has a cost. A feasible timetable is not a guarantee of punctual arrival.",
+          "relationship_key": "Arrows show chronology only. Different rows are alternative authorizations, not consecutive attempts; spacing is not a time scale.",
+          "changed_relationship": "Authorize a covered earlier finish, or explicitly change another requirement.",
+          "residual_constraints": "Coverage has a cost. A feasible timetable is not a guarantee of punctual arrival.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Last train meeting the arrival requirement leaves before earliest permitted departure from work. Other permitted affordable routes excluded. Authorized covered early finish changes one requirement; punctual operation remains uncertain. No numerical timetable or claim of a measured event.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

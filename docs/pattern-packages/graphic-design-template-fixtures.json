@@ -1,0 +1,69 @@
+{
+  "notices": [
+    {
+      "id": "short-notice",
+      "label": "SHORT TITLE INPUT",
+      "titleLines": ["Clay bowl"],
+      "date": "Sat 14 Nov · 10:00–12:00",
+      "price": "€45 · Clay, tools + firing",
+      "venue": "Yard Studios · 8 Mill Lane",
+      "url": "common.example/clay"
+    },
+    {
+      "id": "long-notice",
+      "label": "LONG TITLE INPUT",
+      "titleLines": ["Hand-building a", "serving bowl with", "a folded rim"],
+      "date": "Sat 21 Nov · 10:00–13:00",
+      "price": "€65 · Clay, tools + firing",
+      "venue": "Yard Studios · 8 Mill Lane",
+      "url": "common.example/bowl"
+    }
+  ],
+  "offers": [
+    {
+      "id": "standard-offer",
+      "label": "STANDARD PRICE INPUT",
+      "kind": "standard",
+      "price": "€45 · Standard place",
+      "conditionLines": []
+    },
+    {
+      "id": "reduced-offer",
+      "label": "CONDITIONAL PRICE INPUT",
+      "kind": "reduced",
+      "price": "€18 · Reduced place",
+      "conditionLines": ["Students with current ID only.", "Bring ID to the session."]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "october-review",
+      "label": "PHOTO + SHORT NOTE INPUT",
+      "title": "October 2026",
+      "image": "studio",
+      "workshops": "12",
+      "places": "84 / 96",
+      "noteLines": ["Bookings counted at month end."],
+      "reference": "Programme log · 31 Oct 2026"
+    },
+    {
+      "id": "november-review",
+      "label": "NO PHOTO + LONG NOTE INPUT",
+      "title": "November 2026",
+      "image": null,
+      "workshops": "10",
+      "places": "68 / 80",
+      "noteLines": [
+        "Counts exclude drop-in sessions.",
+        "Attendance totals are provisional;",
+        "late entries close on 4 December."
+      ],
+      "reference": "Programme log · 30 Nov 2026"
+    }
+  ],
+  "rules": {
+    "notice": "Approved title line breaks, one to three lines at 38 units. Two-line minimum title band; additional line adds 44 units and moves the image/details together. Longer titles require review; no automatic shrinking or truncation.",
+    "offer": "A reduced offer requires supplied eligibility text. Up to two lines at 20 units. Keep eligibility beside its price, then place the booking address below. Never infer eligibility from price.",
+    "review": "Use only the current supplied image. If none is supplied, choose the shorter text-only card. Notes allow one to three lines at 22 units; preserve every qualification. Unknown values must not inherit prior-month data."
+  }
+}

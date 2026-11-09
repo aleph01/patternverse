@@ -1,0 +1,1169 @@
+{
+  "date": "2026-10-30",
+  "status": "archived; superseded as the working curriculum",
+  "scope": "Existing Musical Composition/songwriting curriculum, examples, planning documents and music-player source snapshot.",
+  "entity_count": 64,
+  "files": [
+    {
+      "path": "apps/web/music-demo.vite.config.ts",
+      "sha256": "3da97c9d95a9f2e94975ad26366d314ae886fcdbe07730c85dc8b7aa1ce63c4a",
+      "bytes": 1299
+    },
+    {
+      "path": "apps/web/playwright.music-demo.config.ts",
+      "sha256": "add98a17aec21517faa9f60c86df0f29a563818ab84fdab95ca5744925fb4699",
+      "bytes": 654
+    },
+    {
+      "path": "apps/web/playwright.music-lessons.config.ts",
+      "sha256": "a32931b74f6046baf562ddacd210cebee07aba204c6fa0947600ea5142f7ef26",
+      "bytes": 646
+    },
+    {
+      "path": "apps/web/playwright.music-player.config.ts",
+      "sha256": "7f0f156af43a61f5c48d44232f21ee6392d7844150088a1bc8456142d990d9b1",
+      "bytes": 721
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/Demo.svelte",
+      "sha256": "9f129a54fa72a6d8f51dadbf9256074190d161d16413951b1ad79053f6dd2f8e",
+      "bytes": 12915
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/catalog.ts",
+      "sha256": "3c58fea93adf5baec9a13238c1f09bbba99da3ea56fcd42e353c7138557d7522",
+      "bytes": 59243
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/chord-studies.ts",
+      "sha256": "4e7d25a24d5ace6152cfc750f07c9edb0f900125b94b3d49f6a44e3680b8b39e",
+      "bytes": 3647
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/demo-server.ts",
+      "sha256": "03a40dd3a4499f3d03bf0900083ae801cb627445e3ffeef921fdc92102b3ea46",
+      "bytes": 2600
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/excerpt.test.ts",
+      "sha256": "621215f0e826993082b3d09487af76d8793edc5ef50986e542862c07bef241af",
+      "bytes": 12866
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/excerpt.ts",
+      "sha256": "36426dfe8888363c36c608922063275e271faad1657c93fb87fce5241961c8ad",
+      "bytes": 3680
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/index.html",
+      "sha256": "cb9910da8a0e424c2bc6c39783ba7a478b7ec6fb6d637c7ee4854bcea122d0b4",
+      "bytes": 322
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/main.ts",
+      "sha256": "3bf9bd2dd492125ad3557c274c3dc2ca6bbaf2a064ff7382611eb94b14844e82",
+      "bytes": 241
+    },
+    {
+      "path": "apps/web/src/internal/music-demo/paths.ts",
+      "sha256": "f050f4997355ccdaf3e6a3e427b604c86e3a951b1798f2d9c84eaf854a15879f",
+      "bytes": 135
+    },
+    {
+      "path": "apps/web/src/lib/music/BeatGrid.svelte",
+      "sha256": "46bd156ecc8408b15401d2fe1901e04e422858b1511f11dd0019d1601db18a8a",
+      "bytes": 4574
+    },
+    {
+      "path": "apps/web/src/lib/music/ChordEditor.svelte",
+      "sha256": "7d4e7ca48a613bb8b75f1f6fab111874b6b808eed70c8e0f6b786259f564d6d1",
+      "bytes": 22380
+    },
+    {
+      "path": "apps/web/src/lib/music/ChordLane.svelte",
+      "sha256": "1b403eb91e8f1192ee4c0db41d32b5c2b4eb3e1db63204124e699a4dc8b8f80b",
+      "bytes": 7232
+    },
+    {
+      "path": "apps/web/src/lib/music/ChordTimeline.svelte",
+      "sha256": "d36dda1d11a6188783bab22f4d52ef0d4787325514bddeabacde0277b9af0128",
+      "bytes": 2212
+    },
+    {
+      "path": "apps/web/src/lib/music/FormTimeline.svelte",
+      "sha256": "5dcb5943b7ad4de57c9ff01402dacc22f3a161a87fbd61b82a2f69bfd6de9408",
+      "bytes": 6198
+    },
+    {
+      "path": "apps/web/src/lib/music/GuidedMusicLesson.svelte",
+      "sha256": "eb25e8fbc91a66e8746e0433141518f5d7e6c084211ca3914aec607b82b8d8d7",
+      "bytes": 4924
+    },
+    {
+      "path": "apps/web/src/lib/music/ListeningExample.svelte",
+      "sha256": "302070f7e564a8ed0c9e79b6bdd22b5884174e5046bb0680e8f8e89f349f8aca",
+      "bytes": 10567
+    },
+    {
+      "path": "apps/web/src/lib/music/ListeningStudies.svelte",
+      "sha256": "58d15a052d995733f550f0d9dd9565fda30d95d29259c2f44eccf149bd2663e1",
+      "bytes": 922
+    },
+    {
+      "path": "apps/web/src/lib/music/MusicConcept.svelte",
+      "sha256": "26f65250a713223bba5c53f7a90b61ad00896e9576954f8e21baf8b2d8e027d1",
+      "bytes": 9603
+    },
+    {
+      "path": "apps/web/src/lib/music/MusicNotation.svelte",
+      "sha256": "d55ce3e67e6a347eb678299120a31ea5027650aa94e25aebd04b0c7cbd170521",
+      "bytes": 3245
+    },
+    {
+      "path": "apps/web/src/lib/music/MusicPlayer.svelte",
+      "sha256": "dec3bb489525e9d0c2737b137df4f1b1e5015bd40de1e1e250b0642fefdb61c2",
+      "bytes": 23030
+    },
+    {
+      "path": "apps/web/src/lib/music/PianoRoll.svelte",
+      "sha256": "37700ed180a7fbdca3ddf656193f5ba36f0748d34def8e73b9b24a436205f942",
+      "bytes": 8014
+    },
+    {
+      "path": "apps/web/src/lib/music/chord-display.test.ts",
+      "sha256": "45dd01209ab0e10a4e956996d77163044ebecc17e16e7116668fc54f0b54d91b",
+      "bytes": 4856
+    },
+    {
+      "path": "apps/web/src/lib/music/chord-display.ts",
+      "sha256": "dff3696e2d7025990c9d96df10f2e5f4795fe7375f71e0c30f55e9fd31428521",
+      "bytes": 9026
+    },
+    {
+      "path": "apps/web/src/lib/music/composition-examples.ts",
+      "sha256": "a3aa317db41dbc46bc6afd96a31a268f0f12e9f00860b77f1e16137ba745a49f",
+      "bytes": 5360
+    },
+    {
+      "path": "apps/web/src/lib/music/composition.test.ts",
+      "sha256": "1143483bdddb8c32e6ef66fa511dc5bbb40afff9ac7dcf7c5496405557c62f3d",
+      "bytes": 4028
+    },
+    {
+      "path": "apps/web/src/lib/music/concepts.ts",
+      "sha256": "e7926ff1c44cd0022d8145872b2d0a9d3b27b4ce5ba41aca3d34393fcf016cd5",
+      "bytes": 5892
+    },
+    {
+      "path": "apps/web/src/lib/music/examples.ts",
+      "sha256": "d02c94d187e0ae282c61306d0aed7c0440338ef804260f7cc594adfd356a2fc6",
+      "bytes": 8294
+    },
+    {
+      "path": "apps/web/src/lib/music/form-examples.ts",
+      "sha256": "768cd9c9b6d0705e3a49fb5f0509e75d16468ba941bac72bd31e3bafd6e00c64",
+      "bytes": 3218
+    },
+    {
+      "path": "apps/web/src/lib/music/form.test.ts",
+      "sha256": "8af19228eb60861e430de05c9e13bbc79f7a830a50723cb38f0d57a6b9a89c4c",
+      "bytes": 3238
+    },
+    {
+      "path": "apps/web/src/lib/music/form.ts",
+      "sha256": "df0175068363dcef63332b8abe66396277bfbe06097c5ddbd9c2249dd23903f7",
+      "bytes": 1525
+    },
+    {
+      "path": "apps/web/src/lib/music/foundations.test.ts",
+      "sha256": "ccd5828a59e02b652cd42ee9b14e8262a37701401ea57695640396d6ba95415c",
+      "bytes": 3718
+    },
+    {
+      "path": "apps/web/src/lib/music/harmony.test.ts",
+      "sha256": "0ab0e156b1a920404bb7d97e3e18551f4998bf5fcefbc9bb7283834493f0fb1a",
+      "bytes": 4475
+    },
+    {
+      "path": "apps/web/src/lib/music/harmony.ts",
+      "sha256": "9a26d9b98500a5d3a43775bb805c34eae07413b75e821b74cd82f50a671b1fef",
+      "bytes": 5806
+    },
+    {
+      "path": "apps/web/src/lib/music/instruments.ts",
+      "sha256": "e31c1ec6a2f7b98a6df3070e2dd2d800827abf9fa7affe318477a1df2588bf29",
+      "bytes": 3033
+    },
+    {
+      "path": "apps/web/src/lib/music/lesson-pilot.test.ts",
+      "sha256": "f73131b7c9378a26892e4ea29059c7f139ff4124eebd6db498d9a2bf17652b94",
+      "bytes": 4588
+    },
+    {
+      "path": "apps/web/src/lib/music/lesson-pilot.ts",
+      "sha256": "bf2aed51bebc8bea2d1295fcfd3d6a5e64e05f2b0a6d499556bd43e649c10a17",
+      "bytes": 17803
+    },
+    {
+      "path": "apps/web/src/lib/music/listening-player.ts",
+      "sha256": "ec36bdd8f6be84a14ab5c8aef618d465abeec7c7b4d5d2cc017fa8e8d5015648",
+      "bytes": 964
+    },
+    {
+      "path": "apps/web/src/lib/music/listening.test.ts",
+      "sha256": "28400cddc2efbe755224382f70ad4c90f032235704a00d43eef5f0e8fd89407e",
+      "bytes": 4617
+    },
+    {
+      "path": "apps/web/src/lib/music/listening.ts",
+      "sha256": "e6c7f7341b5c8c6d6e9f8ea85d3c09855ea28111f0777e6c41a3dd716a431fba",
+      "bytes": 2229
+    },
+    {
+      "path": "apps/web/src/lib/music/midi.test.ts",
+      "sha256": "f5244388f086b82d27eb60e9c77b62325dac5868d64c3d3c376d2bbf99522645",
+      "bytes": 3728
+    },
+    {
+      "path": "apps/web/src/lib/music/midi.ts",
+      "sha256": "b1e599361f24d7e8fdcfd9ef861ba99746a075f180ab2f2dd1077bf8049cc268",
+      "bytes": 7104
+    },
+    {
+      "path": "apps/web/src/lib/music/model.ts",
+      "sha256": "b61ebf1cabfe4d2287978f7183a8a9f74d8c532f66af9946fd045417495a4a02",
+      "bytes": 2945
+    },
+    {
+      "path": "apps/web/src/lib/music/notation.ts",
+      "sha256": "871e9afc325d3419de373a0fe32e4877cba9360466db0f28d365700e7d9755df",
+      "bytes": 8555
+    },
+    {
+      "path": "apps/web/src/lib/music/percussion.ts",
+      "sha256": "362bc21460a8c43683955f0b965bfa434302dd87e0c8940becfaca19ed1eca2d",
+      "bytes": 1684
+    },
+    {
+      "path": "apps/web/src/lib/music/piano.test.ts",
+      "sha256": "84ced258fdd47b511f65482120728d38a72e1d32b49f41b63943abab8bb15229",
+      "bytes": 3526
+    },
+    {
+      "path": "apps/web/src/lib/music/piano.ts",
+      "sha256": "a4fb5ecaf95e3ff005611fadd5e270c2d132a966c542f3c3c8f91c7dd05d6c34",
+      "bytes": 3687
+    },
+    {
+      "path": "apps/web/src/lib/music/playback-focus.ts",
+      "sha256": "dd955887d940a3d33b2fb49b7bb6beaa0a429d6f78642a6771b5aa3c4201f568",
+      "bytes": 419
+    },
+    {
+      "path": "apps/web/src/lib/music/score.ts",
+      "sha256": "fc1a4b1acb77171e0274e8acbff24b421b7ba179d09aa3af36bad881594c272a",
+      "bytes": 5090
+    },
+    {
+      "path": "apps/web/src/lib/music/timing.ts",
+      "sha256": "d47c375a4ccb61f7a4eaac10f6e79b239e75de9f2150ab622480abb86bcf3e5d",
+      "bytes": 2751
+    },
+    {
+      "path": "apps/web/src/lib/music/transport.test.ts",
+      "sha256": "8c4db89a1bc9d538b7b4fa3fb83d76d0740a3eec48032da5524bf3d390a21c74",
+      "bytes": 10130
+    },
+    {
+      "path": "apps/web/src/lib/music/transport.ts",
+      "sha256": "5820712ca17ec8cf9aec21b46272236432b52b946f31d3e01b5d0200ce95549d",
+      "bytes": 7442
+    },
+    {
+      "path": "apps/web/src/lib/server/guided-music-lessons.test.ts",
+      "sha256": "b8354423f71fcee14b200afdaa7483f1b5d6818e27950edc93fbf25f9a5efce1",
+      "bytes": 1593
+    },
+    {
+      "path": "apps/web/src/lib/server/guided-music-lessons.ts",
+      "sha256": "db48e303c7e9b3afa0402b1dc550a1dcc9ff5dc9600d24dfee8f2991b33f6ab6",
+      "bytes": 1092
+    },
+    {
+      "path": "apps/web/src/lib/server/songwriting-content.test.ts",
+      "sha256": "01b814e33adbba998e58dbfc8463135f0cd29733437d41c75350939c135bd73a",
+      "bytes": 15036
+    },
+    {
+      "path": "apps/web/src/routes/[type=entityType]/[id]/+page.svelte",
+      "sha256": "f0b7472806c762d3d51475c7886991d3bdee9150a43505ce58467138232521aa",
+      "bytes": 17036
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/arrangement-map.svg",
+      "sha256": "4f7c61a4ea0dcde0f136b194e2ae6682578a3b30f6dd10619496a0aee20024fc",
+      "bytes": 6471
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/borrowed-chord.svg",
+      "sha256": "b2524c686995f4c4df6adc5e64440e549ea33a708b5f5e1d94e0722a9fd34f11",
+      "bytes": 2625
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/chord-family.svg",
+      "sha256": "eaae308ed3ba679753f5193ee116c1df39869a139969a27e1f61973d81c61c1a",
+      "bytes": 3594
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/circle-of-fifths.svg",
+      "sha256": "2730d082b78c68a74bb83844b39f7b1f435050909adc35ad0322c3d556923645",
+      "bytes": 4327
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/energy-arc.svg",
+      "sha256": "2d07eef0bcaf7f5e404e6187a514a43cc3b82c9f71ae4d5cc3013422a19e0ce4",
+      "bytes": 2905
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/keyboard-and-intervals.svg",
+      "sha256": "da2870508c462c0838634c58ff6ddab866433bf7bc499468f1d604140a0de511",
+      "bytes": 3875
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/lyric-development.svg",
+      "sha256": "0e6a2a76c667484128a1fb45511d9be5f85e082dca12316764851c5722e9b856",
+      "bytes": 2579
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/lyric-stress.svg",
+      "sha256": "4746bfcd532c80dc323a4ff2efed222a903d2824816d29ec25abaa01d2feed47",
+      "bytes": 3976
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/melodic-contour.svg",
+      "sha256": "61a00421d25e3f2c34541856dd7f02bd2173e4146af11c0432b561a6333d479a",
+      "bytes": 2983
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/meter-groups.svg",
+      "sha256": "8e1d2c847b805b407c6ceb2af16f99d2232493d37b08516e0e6a454d83c01510",
+      "bytes": 3167
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/motif-variation.svg",
+      "sha256": "51b26d43348e7d4d28eea15f22d0737b6cdbbb7cd28b7beb483eb5279f90760f",
+      "bytes": 3450
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/phrase-map.svg",
+      "sha256": "4d8d66275bd236b214d5f1897d9b789d13370b7de7bbe7b95d8ec31e8e9443e1",
+      "bytes": 4172
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/rhythm-grid.svg",
+      "sha256": "53efabbeb7bb5b31c7cd8ba9f17a229d474b61b3af4b3c53f97375f695b6999a",
+      "bytes": 3705
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/scale-steps.svg",
+      "sha256": "b807be408468b6aabca78c8c3d56023d242b8ef7c167b9fe6ea69928834ae171",
+      "bytes": 5757
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/song-forms.svg",
+      "sha256": "504ba464eabeedcf40de90c6b6a4ebc6729bf80c4070cccfbd335cc47f415a57",
+      "bytes": 4031
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/temporary-home.svg",
+      "sha256": "99bd018f82d389d7855daed9f24de73edfcbb7e258302448f4172e29b4730d3b",
+      "bytes": 2268
+    },
+    {
+      "path": "apps/web/static/diagrams/songwriting/voice-leading.svg",
+      "sha256": "a6a97ed5a1d8670a7aa0d691c09bca6c1573ceb4fbed7d0de0388832a9fab425",
+      "bytes": 2244
+    },
+    {
+      "path": "apps/web/tests/music-chord-display.spec.ts",
+      "sha256": "114360654469f24a662764980a9dabd7171a70752826bd177f96825cec06c1ee",
+      "bytes": 7247
+    },
+    {
+      "path": "apps/web/tests/music-form.spec.ts",
+      "sha256": "14c8c44ab2245bd49ac00b47a6f32d51ade7a117459eafcee230836a06efe8ca",
+      "bytes": 4071
+    },
+    {
+      "path": "apps/web/tests/music-player-lab.spec.ts",
+      "sha256": "91e6d538acd52c15f796b641ea8afc7255ab7b7778b36f391fa30cdb394343fd",
+      "bytes": 8189
+    },
+    {
+      "path": "apps/web/tests/music-repertoire-demo.spec.ts",
+      "sha256": "000cc7b331c01950ad6dc69d15b05ca920614a77a10f40aa9105d3338f032a53",
+      "bytes": 13563
+    },
+    {
+      "path": "apps/web/tests/songwriting-chords.spec.ts",
+      "sha256": "7d438ca28d2a3f3e22b852f17255f40935d932c4f468a51ce568860d8e80cd9b",
+      "bytes": 14007
+    },
+    {
+      "path": "apps/web/tests/songwriting-course.spec.ts",
+      "sha256": "4d05ffd9ec47790d238b0f331ae52f0232c162f414c38bce83fe24752a93d6ec",
+      "bytes": 10749
+    },
+    {
+      "path": "apps/web/tests/songwriting-listening-articles.spec.ts",
+      "sha256": "d8c74b23f56a50fbd7e398ddb7b2008f66b07d6f77dc1c7f7c604f8846287023",
+      "bytes": 3123
+    },
+    {
+      "path": "apps/web/tests/songwriting-listening.spec.ts",
+      "sha256": "feca11015a9f3d339f51efce0286d3722fc28ca259b81be849e37a99373319a5",
+      "bytes": 11673
+    },
+    {
+      "path": "apps/web/tests/songwriting-player.spec.ts",
+      "sha256": "dc901b893e3fa90d56edd7c4971e94231b1946cb3e0e0aac48e6da7e39d73e1c",
+      "bytes": 10144
+    },
+    {
+      "path": "content/collections/songwriting-course.md",
+      "sha256": "3d8ba1589ecc800e001107f3be93c8b9d0270391649a5ffbde4e1fc213c71d87",
+      "bytes": 14182
+    },
+    {
+      "path": "content/collections/songwriting-example-songbook.md",
+      "sha256": "12636cd4b307d6b615adf8a1b1804dd2d65c4bf83288712a0ae462536b9cf7c1",
+      "bytes": 11391
+    },
+    {
+      "path": "content/collections/songwriting-glossary.md",
+      "sha256": "72adad40516bb7275e8cf0078ad031078fdd95734ae638fd6fff510f19b8b298",
+      "bytes": 19449
+    },
+    {
+      "path": "content/collections/songwriting-listening-guide.md",
+      "sha256": "44b1180037408ca5d452bdf57a6730054bb0836f494ddbf5fd229d381be0b9ab",
+      "bytes": 12687
+    },
+    {
+      "path": "content/collections/songwriting-part-1.md",
+      "sha256": "649eceb3f0abc5b3c617d5bf07768ac3f0339692fefad1de4865aadc4a66b194",
+      "bytes": 2239
+    },
+    {
+      "path": "content/collections/songwriting-part-2.md",
+      "sha256": "db61f3bc82b4c07ef881e0da5b1e7e20f873c9cd3a66431951cfe11d20c2d150",
+      "bytes": 2454
+    },
+    {
+      "path": "content/collections/songwriting-part-3.md",
+      "sha256": "6cb41a45b779d546b5156b75aed5cf3e9a84225d96384ff0c8f118ab97d3c946",
+      "bytes": 4092
+    },
+    {
+      "path": "content/collections/songwriting-part-4.md",
+      "sha256": "2e138d4521826cd91dd43b7fcd8bc57d7b86087cc1432740fb4b4f75ef388431",
+      "bytes": 2359
+    },
+    {
+      "path": "content/collections/songwriting-part-5.md",
+      "sha256": "d55d01d8d3a2865eea46b8f21f5e2a74d56e93dbf828c862e5c1603f4f3b6a2c",
+      "bytes": 2419
+    },
+    {
+      "path": "content/collections/songwriting-part-6.md",
+      "sha256": "b7781d81da16707eb8ac01e116dc61591cbd484c5574798afce7e701041dca82",
+      "bytes": 2480
+    },
+    {
+      "path": "content/collections/songwriting-part-7.md",
+      "sha256": "0419ac543dc69cc4fb6540c4a61067d480a723886f605b1f290777ab28d55b02",
+      "bytes": 3368
+    },
+    {
+      "path": "content/collections/songwriting-part-8.md",
+      "sha256": "469faa27dd0a5da133cc408af472626bb1cac043242ea6c46a23e88d919bc092",
+      "bytes": 2448
+    },
+    {
+      "path": "content/collections/songwriting-reading-the-examples.md",
+      "sha256": "b5583a13818348440ec053e0f4f8e385b3dfecc290f920456175359d6de6d343",
+      "bytes": 5493
+    },
+    {
+      "path": "content/collections/songwriting-troubleshooting.md",
+      "sha256": "907c110d9f8b5a62e044cc1f491fd6048423f3296b89d1ccc213328ba74f4f1d",
+      "bytes": 5683
+    },
+    {
+      "path": "content/patterns/songwriting-beats-bars-and-meter.md",
+      "sha256": "f1f33ff0f82bbb039c7cafe14ef3ed1f8bf05ef517c0403dfe9998d7829724fb",
+      "bytes": 7019
+    },
+    {
+      "path": "content/patterns/songwriting-borrow-a-chord.md",
+      "sha256": "a9636ed2aaeaf86f7f12edd959b7e4fbcd0376ce955e46db7b0a7baa0e5179fd",
+      "bytes": 8598
+    },
+    {
+      "path": "content/patterns/songwriting-build-a-scale.md",
+      "sha256": "c656477c279ae422124ca49f315e505ec7ca1c26d7ecaaa2aef029a36ed17cdc",
+      "bytes": 7228
+    },
+    {
+      "path": "content/patterns/songwriting-build-and-hear-chords.md",
+      "sha256": "4a1fbffadeb191431aa3165113c122d699541f59c5be7752d7e804379a5bc033",
+      "bytes": 8800
+    },
+    {
+      "path": "content/patterns/songwriting-capture-musical-seeds.md",
+      "sha256": "fb18d8078dfdfcf351e45cc2536bbfaa46207aea6fede13f183b0e855d7bd754",
+      "bytes": 7626
+    },
+    {
+      "path": "content/patterns/songwriting-choose-a-song-form.md",
+      "sha256": "1eace696786560b639a05c1298653fa43314d2e3c9752b06ae52f64293d3aa0b",
+      "bytes": 12509
+    },
+    {
+      "path": "content/patterns/songwriting-choose-a-sonic-setting.md",
+      "sha256": "6edef47da2ee397679615a6d3858bef12a11a1710cc469f8f3f61905705e8a99",
+      "bytes": 6762
+    },
+    {
+      "path": "content/patterns/songwriting-choose-the-speaker.md",
+      "sha256": "0a2b4eeb96e04f9ba2d761d13e1b5ee296ee3bd0aef5d10306387cf92990acff",
+      "bytes": 7556
+    },
+    {
+      "path": "content/patterns/songwriting-chord-families-and-numbers.md",
+      "sha256": "a8f13fd8bfb2debf96d7fba1c4ddc1b8440c5eec80476ac75053d238e47e348d",
+      "bytes": 8853
+    },
+    {
+      "path": "content/patterns/songwriting-circle-of-fifths.md",
+      "sha256": "40108fee591a19daee5436642bbe0a0d06c7c965030bfde9e23b1d8c5140af28",
+      "bytes": 8774
+    },
+    {
+      "path": "content/patterns/songwriting-contour-and-register.md",
+      "sha256": "3a38f4ccd1da1bbecd39eed83e90229fffbc8f5915266f77a6acc433a112ff0e",
+      "bytes": 7388
+    },
+    {
+      "path": "content/patterns/songwriting-develop-without-losing-the-idea.md",
+      "sha256": "e3a127d49de628a3c07bad3db920211813ec4445a2ff3eb3c7ea4211381266fa",
+      "bytes": 7772
+    },
+    {
+      "path": "content/patterns/songwriting-earn-the-bridge.md",
+      "sha256": "e4c8c7d81ea1551bbf972bc4d9b01e0f3cb2995bda573dd3950be3d3dbe56b12",
+      "bytes": 7333
+    },
+    {
+      "path": "content/patterns/songwriting-find-the-central-idea.md",
+      "sha256": "dd759a58686335f2215acc796b6dab91bf60b04b8ddcd19ccafc116477360da1",
+      "bytes": 7370
+    },
+    {
+      "path": "content/patterns/songwriting-finish-a-tiny-song.md",
+      "sha256": "0472fa6418c70dcaed263722c20b173e8b352b274069d0283fc498466913112e",
+      "bytes": 7397
+    },
+    {
+      "path": "content/patterns/songwriting-finish-and-learn.md",
+      "sha256": "7bf51d30e42c85c5df67978ef6c89098287ec5b587f6ddf80fd49855b8bb6675",
+      "bytes": 7940
+    },
+    {
+      "path": "content/patterns/songwriting-five-ways-to-begin.md",
+      "sha256": "41e467592e2ef9dbf20a3329f8f8985222424718b52fdbeb7157c35de70ffc36",
+      "bytes": 7409
+    },
+    {
+      "path": "content/patterns/songwriting-give-each-part-a-job.md",
+      "sha256": "ee282ce4d9f9f8cd001dfe685cbbb9494a059225e5e8e7947883634b712843f6",
+      "bytes": 8354
+    },
+    {
+      "path": "content/patterns/songwriting-interlock-the-groove.md",
+      "sha256": "c1c4f9f05b40e1d11269c197e73dabb9a6cf9a8a7ff1be328151a5d5fef00ea8",
+      "bytes": 7483
+    },
+    {
+      "path": "content/patterns/songwriting-inversions-and-voice-leading.md",
+      "sha256": "08b6eb9e9dab36b69b4d5d0bbb68ffda4d724a5004edfe7c5501c10eab4fd226",
+      "bytes": 7143
+    },
+    {
+      "path": "content/patterns/songwriting-jobs-of-song-sections.md",
+      "sha256": "5353e09b2010936a16df25aacb666554c3ec70667547857dfda15d857bfa5f3f",
+      "bytes": 7482
+    },
+    {
+      "path": "content/patterns/songwriting-listen-like-a-songwriter.md",
+      "sha256": "909c0518c5e646ee821060e05e041d92f04c4f3c1d4a81736d2aeefd3c752ae7",
+      "bytes": 7997
+    },
+    {
+      "path": "content/patterns/songwriting-make-the-chorus-arrive.md",
+      "sha256": "4d7f9e2c4f93457bb017445d8750733ac1a1e79284c78a0d7f637a70e3086500",
+      "bytes": 7407
+    },
+    {
+      "path": "content/patterns/songwriting-make-the-lyric-develop.md",
+      "sha256": "a6ab4c2f8f52587767725a8b5f5a50fafe2ce0df762ce7056495b796e523222b",
+      "bytes": 7478
+    },
+    {
+      "path": "content/patterns/songwriting-make-the-second-verse-count.md",
+      "sha256": "8c530d063fa18af5db63e77b0335ff2adde0934723fc4ff30a410852bca8a2b3",
+      "bytes": 7467
+    },
+    {
+      "path": "content/patterns/songwriting-melody-and-harmony.md",
+      "sha256": "03b2b7d6dbd34ed8fd167e5a74a84433ef8c55cf08f52e4b370ca96db9ecb70c",
+      "bytes": 7125
+    },
+    {
+      "path": "content/patterns/songwriting-modes-drones-and-key-changes.md",
+      "sha256": "7084f6504caa3c7eeec45efe6d2b4e3f3f3ac648ab268314b89a3b96663536e9",
+      "bytes": 7556
+    },
+    {
+      "path": "content/patterns/songwriting-pacing-transitions-endings.md",
+      "sha256": "cd8ac6276907b44bf381db6508770fcdc9f8b742e39174c7cd920cf6ad3dc855",
+      "bytes": 7566
+    },
+    {
+      "path": "content/patterns/songwriting-phrases-and-breathing.md",
+      "sha256": "acb80162d38133eeb028c14b20d7c571fda308acce89d3c6cc9c299fe2f5d1f3",
+      "bytes": 7476
+    },
+    {
+      "path": "content/patterns/songwriting-pitch-and-intervals.md",
+      "sha256": "56b544a2a469e39efe03dbbd5dced8daa8b997a3d785e8aa94e33c54cc0312c1",
+      "bytes": 8303
+    },
+    {
+      "path": "content/patterns/songwriting-point-to-a-temporary-home.md",
+      "sha256": "77849c3ec38695b0687999ec6ff148e8e79b9049e8db27f19696f69dfd404a50",
+      "bytes": 7226
+    },
+    {
+      "path": "content/patterns/songwriting-progressions-and-arrival.md",
+      "sha256": "e3a1634fdf9632c7ba81f2e88d9e07ba3a1daa8d4842caa403e7ade3d9a41a78",
+      "bytes": 6995
+    },
+    {
+      "path": "content/patterns/songwriting-pulse-and-tempo.md",
+      "sha256": "238d1bd2bf895fea798248a11c5a5fa7ee58c17db5fe7afd4d8ec57f93b4b049",
+      "bytes": 7312
+    },
+    {
+      "path": "content/patterns/songwriting-repetition-variation-surprise.md",
+      "sha256": "94a34dbead2b7d499f9d1767f01916e694307de88e74071dbf5d989dda945250",
+      "bytes": 7510
+    },
+    {
+      "path": "content/patterns/songwriting-revise-the-weakest-moment.md",
+      "sha256": "40adae7e2977ff9f71fce41d0c6ee5ee74793effb9b595da789b355be6a92e70",
+      "bytes": 7429
+    },
+    {
+      "path": "content/patterns/songwriting-rhyme-and-lyric-sound.md",
+      "sha256": "4bdbc7aa8553f37ce1f4fb8bfd76f5935d2110c41e8ce4bcbb00990257e79c9c",
+      "bytes": 7240
+    },
+    {
+      "path": "content/patterns/songwriting-scales-and-tonal-home.md",
+      "sha256": "a69e071350a36b9675afa4e0dbb4eaf4d8f7e97297fae8a23cbe7300e1872c66",
+      "bytes": 8229
+    },
+    {
+      "path": "content/patterns/songwriting-sevenths-added-notes-suspensions.md",
+      "sha256": "eede1b5071accc463f550708f8e78511cebf00266cbb652b914055358bbc4dd4",
+      "bytes": 7921
+    },
+    {
+      "path": "content/patterns/songwriting-shape-energy-over-time.md",
+      "sha256": "a8cafba0f402ca523c878451498cb0b375e5e0f62a5e01bccd3634f32a125624",
+      "bytes": 9246
+    },
+    {
+      "path": "content/patterns/songwriting-start-with-a-motif.md",
+      "sha256": "775a62ff3aa7e54a55140968f16c2ca57d9f726a2b66af90300c704a47e02463",
+      "bytes": 7343
+    },
+    {
+      "path": "content/patterns/songwriting-subdivision-and-rests.md",
+      "sha256": "e333001709e2c948eb7fdf7b72e5b04033cb6aeee5e5c11310a5a99a35ca7b43",
+      "bytes": 7058
+    },
+    {
+      "path": "content/patterns/songwriting-swing-and-timing.md",
+      "sha256": "eb361f710566f071ed9925f52c9697f136232f457ec6f61768846121ed0c2b7a",
+      "bytes": 7347
+    },
+    {
+      "path": "content/patterns/songwriting-syncopation-and-anticipation.md",
+      "sha256": "494834d56325ffc81cad6ecfebbfe1ec463c481168c7a1a1a9223a3a44d2869d",
+      "bytes": 8635
+    },
+    {
+      "path": "content/patterns/songwriting-vocal-delivery-and-harmonies.md",
+      "sha256": "d3da15c404882623f4ab0f58f01fabb6aa9f3518fab3f328647a288dbfaceca3",
+      "bytes": 7549
+    },
+    {
+      "path": "content/patterns/songwriting-what-makes-a-song.md",
+      "sha256": "397f61001f3a346ec9d7b569a945b54227cd99740e8b956a6b218e127156e936",
+      "bytes": 7298
+    },
+    {
+      "path": "content/patterns/songwriting-words-against-music.md",
+      "sha256": "4ade44f273c17c491491f86d322ef235d48737a5778b63b48b11080b422c1059",
+      "bytes": 7589
+    },
+    {
+      "path": "content/patterns/songwriting-write-a-bass-line.md",
+      "sha256": "b972c706358f9f0a4834271cb928d11be011bf4547a711e25a8a992456495b53",
+      "bytes": 7059
+    },
+    {
+      "path": "content/patterns/songwriting-write-a-hook.md",
+      "sha256": "e9ba851135ae4b9891d6b2a8f441f8cbf6029fe77476caf03f9d6caf71dff919",
+      "bytes": 7439
+    },
+    {
+      "path": "content/patterns/songwriting-write-through-images.md",
+      "sha256": "f25beb0dc744cf26314627091372ddbaa1fae47858731df8f074458411ee27a0",
+      "bytes": 8133
+    },
+    {
+      "path": "content/verses/music.md",
+      "sha256": "36680c63494e5558a04cacbbc84319a831a6f0ef996085fdab052ce58e3c4f21",
+      "bytes": 1538
+    },
+    {
+      "path": "docs/musical-composition/batch-2-preview/new-passages-desktop.png",
+      "sha256": "a78ec7c08b6eaa8ab4e46bf070d651769d9b32e6c0a7c5fe929b4218324b5889",
+      "bytes": 80723
+    },
+    {
+      "path": "docs/musical-composition/batch-2-preview/new-passages-phone.png",
+      "sha256": "52a574ba60aca08df2bfe0c9aac296d8ae3a6c48dda7c9d148da272bf877563d",
+      "bytes": 251155
+    },
+    {
+      "path": "docs/musical-composition/batch-3-preview/around-the-world-desktop.png",
+      "sha256": "041586025c5c1797baf9d68f87813e6bcd26918ecb8fb745bab00b52d18171c5",
+      "bytes": 76961
+    },
+    {
+      "path": "docs/musical-composition/batch-3-preview/around-the-world-phone.png",
+      "sha256": "75caf88e597c072deecdb81b5e6a887ddb88aa9c0da8ce909d158ba1585b036a",
+      "bytes": 234201
+    },
+    {
+      "path": "docs/musical-composition/build-lesson-pilot.mjs",
+      "sha256": "ec27e567aa9a664162ea443236f9e996f31753de98ab89758bb50b913344b610",
+      "bytes": 2928
+    },
+    {
+      "path": "docs/musical-composition/candidate-review.md",
+      "sha256": "f7371002ae5acbdfafa3711b1cf51fabe3140711eda64ff947e88d94c47ff763",
+      "bytes": 44936
+    },
+    {
+      "path": "docs/musical-composition/chord-player.md",
+      "sha256": "ed9a3e48adf9434cbd28372d0508197803b35bd20975c5bdd8755e428a0a1d45",
+      "bytes": 3264
+    },
+    {
+      "path": "docs/musical-composition/collection-map.json",
+      "sha256": "fab8df29820a27ebfa5c883a344a371448021f42586f5ba9985af2b922f89488",
+      "bytes": 152678
+    },
+    {
+      "path": "docs/musical-composition/coverage-review.md",
+      "sha256": "161f6678846b0706fb805a38fa73c82552ea7dbb3bf06c4a53811489e6985fb5",
+      "bytes": 41760
+    },
+    {
+      "path": "docs/musical-composition/curriculum-integration.md",
+      "sha256": "44af1d69ac8d8df4e099bed0bb8c4c51240c1e6af764208fcaf98a96ee9bb700",
+      "bytes": 13936
+    },
+    {
+      "path": "docs/musical-composition/example-map.json",
+      "sha256": "9f15008f65fc10fdc0a59c76431d91df39244edee52ed238a127b0db353df466",
+      "bytes": 235414
+    },
+    {
+      "path": "docs/musical-composition/example-map.md",
+      "sha256": "21f1a3c2338821d36a60148fca0cf9bf8479f9883ea607ed181db990f95b9d81",
+      "bytes": 111128
+    },
+    {
+      "path": "docs/musical-composition/guided-lesson-pilot.md",
+      "sha256": "1d0c16ba4284a2339edd15d390b3672083946e6e3bd4afa7c87f9a6232b882d2",
+      "bytes": 7386
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/guided-lesson-preview.png",
+      "sha256": "8ac1741ad49e91b367aa8ffc6956e2875618c1a81025ce54973ce13ebac6c40a",
+      "bytes": 42587
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-borrow-a-chord-concept-desktop.png",
+      "sha256": "542c3929693ddb480e7c231f349b6f2afba884e361a5920720e8d758913d11c0",
+      "bytes": 86097
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-borrow-a-chord-concept-phone.png",
+      "sha256": "0e58f28b16eaec4702e7f8871a2e9137240867025115fae0a8cf246129e39696",
+      "bytes": 218459
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-borrow-a-chord-desktop.png",
+      "sha256": "7f5579b5416cfa89fdc7fe0160ad0f88cfe82cf55affb02140b83c1f344aaf98",
+      "bytes": 154929
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-borrow-a-chord-phone.png",
+      "sha256": "0c4bbc799b168a3466734a68c744942c6e0966b82cebb8f5ac1855be846d105d",
+      "bytes": 495783
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-pitch-and-intervals-concept-desktop.png",
+      "sha256": "e606759e4930207a79b6c52cc45a235e3b4ffe88bc2f2eb85c883cd00a0fd552",
+      "bytes": 78489
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-pitch-and-intervals-concept-phone.png",
+      "sha256": "487763c52773240a3d5cf66e8483d07ff3b4c5ec09f727e3ad0a2cb391443bc3",
+      "bytes": 207649
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-pitch-and-intervals-desktop.png",
+      "sha256": "5194c1c86d92788c870316bc7ceca9ac6feea3be8939a20755069861d73c2874",
+      "bytes": 148713
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-pitch-and-intervals-phone.png",
+      "sha256": "c3ce147ffaded64a7b908c078ddd06817899517284d549d7abf7fb2c2fec5e5f",
+      "bytes": 480714
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-syncopation-and-anticipation-concept-desktop.png",
+      "sha256": "fb40b98fb91949912fcb9312cbbc72325f32dc62802de37c7f89e373e1243518",
+      "bytes": 74622
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-syncopation-and-anticipation-concept-phone.png",
+      "sha256": "8736cd5c90ec694ee9a02b494719a88ab7a8582455d07b20b1305c4eb600a675",
+      "bytes": 187499
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-syncopation-and-anticipation-desktop.png",
+      "sha256": "066c4cba7972cba034f69068f6c00eb46b41972cde5defce853399f0d02f669a",
+      "bytes": 141552
+    },
+    {
+      "path": "docs/musical-composition/lesson-pilot/songwriting-syncopation-and-anticipation-phone.png",
+      "sha256": "5b03f308d0f2cecdb956031f8308b78868046eb63528a3daa4fb1f7f0b5b6674",
+      "bytes": 509808
+    },
+    {
+      "path": "docs/musical-composition/midi-research/README.md",
+      "sha256": "f3178f104b5fc0ad677aa71c738bf64dc4983c490a3b6d17d4f314e37ba41410",
+      "bytes": 2990
+    },
+    {
+      "path": "docs/musical-composition/midi-research/bach-invention-1.mid",
+      "sha256": "9b9a6213941932d5171d9102d85912c3c1c61f8176ce02005cd2198881823c2d",
+      "bytes": 3929
+    },
+    {
+      "path": "docs/musical-composition/midi-research/bach-prelude-c.mid",
+      "sha256": "874e07d0479542971bfceaf420d6117da8d602d89d26eea4610e7dd1ef58bf26",
+      "bytes": 4676
+    },
+    {
+      "path": "docs/musical-composition/midi-research/chopin-fantaisie-impromptu.mid",
+      "sha256": "b29f6add7473b6e931c2e66349e860bf0e884cf68e19e90420a4870aae689f96",
+      "bytes": 30982
+    },
+    {
+      "path": "docs/musical-composition/midi-research/debussy-clair-de-lune.mid",
+      "sha256": "4eee9a1546ffde1ff74cb9824ba0e57cbc821185a15185bfea9faed97820bf8c",
+      "bytes": 12476
+    },
+    {
+      "path": "docs/musical-composition/midi-research/joplin-entertainer.mid",
+      "sha256": "33e4e81ee64ffb2edf90d1c6a1ddee7276507296bfb915c2bb775231a467f066",
+      "bytes": 22084
+    },
+    {
+      "path": "docs/musical-composition/midi-research/mozart-k545-1.mid",
+      "sha256": "54e510ba1e5865aeedc4e96bf70b83c93ecddf5b66660033ef98a5a8204ab02d",
+      "bytes": 11580
+    },
+    {
+      "path": "docs/musical-composition/midi-source-review.json",
+      "sha256": "0bb00425aa723b65e9239008cfd443dfd2b4751726bc41e68eb3e64aa679f00e",
+      "bytes": 20791
+    },
+    {
+      "path": "docs/musical-composition/player-implementation.md",
+      "sha256": "68b0b54a4f2e73222fff696aa250552c3a845156498645b0ebe427ce7c515c34",
+      "bytes": 6738
+    },
+    {
+      "path": "docs/musical-composition/player-requirements-from-examples.md",
+      "sha256": "e26093eee3e49f5d4f9a993b59c14c5292a9a751e02906eb661636a29eff1d14",
+      "bytes": 16728
+    },
+    {
+      "path": "docs/musical-composition/repertoire-batch-2.json",
+      "sha256": "de0afb07f9b8f5b5297aae47aa6f07febdd84a10380c2c0f31cb51018acc183d",
+      "bytes": 19151
+    },
+    {
+      "path": "docs/musical-composition/repertoire-batch-2.md",
+      "sha256": "86a5d3f45af7622243697371cca014f058e2ff69730b116bb5d3734629a039d1",
+      "bytes": 8654
+    },
+    {
+      "path": "docs/musical-composition/repertoire-batch-3.json",
+      "sha256": "5ce9424873d320354d714b8c9b4dc332976fc941a5515251ed71b3da37e6b3d8",
+      "bytes": 18040
+    },
+    {
+      "path": "docs/musical-composition/repertoire-batch-4.json",
+      "sha256": "0670dd5a214dbd3269fc4c6c1f4d120fd7a266ec479c88a866fd156c9cdcf48a",
+      "bytes": 93346
+    },
+    {
+      "path": "docs/musical-composition/repertoire-demo-phone.png",
+      "sha256": "f3e79ad4ebb95edd5d6544399fd9987b86bbad4338597d0e0046caf0cdaaa08f",
+      "bytes": 441329
+    },
+    {
+      "path": "docs/musical-composition/repertoire-demo-preview.png",
+      "sha256": "3ad770c99abfb096825827ebc2320c15289f0045e42ff7af1c9b3677c9afa7a8",
+      "bytes": 153114
+    },
+    {
+      "path": "docs/musical-composition/repertoire-demo.md",
+      "sha256": "6cdab5a5cd8e18345a629a268b1e19690f730a130f6e44af30baf61bd359678b",
+      "bytes": 5484
+    },
+    {
+      "path": "docs/musical-composition/repertoire-library.json",
+      "sha256": "31cd6d2283eea99227bb8ae89cdeb27330c6582833d228adfb168191f473887d",
+      "bytes": 89657
+    },
+    {
+      "path": "docs/musical-composition/repertoire-library.md",
+      "sha256": "e948973b027928a034c1e543dc81e8a4fab8c42bddef5e5913fcb78a7f6db73f",
+      "bytes": 28890
+    },
+    {
+      "path": "docs/musical-composition/repertoire-shortlist.json",
+      "sha256": "8e277b643b636cd8e9f068d4718ae00a8979a8b249f7bd0896ffdf6e55a4d6f3",
+      "bytes": 230062
+    },
+    {
+      "path": "docs/musical-composition/repertoire-shortlist.md",
+      "sha256": "f7adb17c3e5a23a0e410942861c9bff03f9da929dc53d95f21a315e30c61837a",
+      "bytes": 59035
+    },
+    {
+      "path": "docs/songwriting-course/article-example-context-preview.png",
+      "sha256": "ab14dba600663c64e3ebdd2fbb846505f244f7ede3c5115413a36dec5e83a1b5",
+      "bytes": 166771
+    },
+    {
+      "path": "docs/songwriting-course/blueprint.md",
+      "sha256": "478389d1e40fc47631ffc750176af21fd92e848c67937464f61822fcd850b7be",
+      "bytes": 9919
+    },
+    {
+      "path": "docs/songwriting-course/card-graphics.json",
+      "sha256": "7dd431653467044d3cd1d4ed7a20639bb0b07d042d8118c436a1f88cac2eb249",
+      "bytes": 43602
+    },
+    {
+      "path": "docs/songwriting-course/chapters.json",
+      "sha256": "61167a85cbf9eab3805eca769ca2c3c7c06b375946569445eb8f0a82db80f713",
+      "bytes": 122039
+    },
+    {
+      "path": "docs/songwriting-course/chord-card-controls-preview.png",
+      "sha256": "4111333f62670c3210b80699a2b79862ca8f5b1fffd21b8cc2a0de94551f40c4",
+      "bytes": 66866
+    },
+    {
+      "path": "docs/songwriting-course/chord-editor-preview.png",
+      "sha256": "5f582c72899d85d04e7e15ad7d89a38e2105b8e109c87416dc9762495e0ecbb2",
+      "bytes": 70321
+    },
+    {
+      "path": "docs/songwriting-course/example-audit.json",
+      "sha256": "001b1f2f7e45a58e722ac649c079a95e9a682582dde54fe31346ac00af796918",
+      "bytes": 56634
+    },
+    {
+      "path": "docs/songwriting-course/example-audit.md",
+      "sha256": "c6b8f454e464c9c1f86a547bef90368076afd3d827e98221c4a45b266169cdc9",
+      "bytes": 36205
+    },
+    {
+      "path": "docs/songwriting-course/examples.json",
+      "sha256": "941448819bddce486f34eeddc29c1079fda027be064460e5e94aae4eac6dff73",
+      "bytes": 8030
+    },
+    {
+      "path": "docs/songwriting-course/listening-candidates.json",
+      "sha256": "5291bed1e89b7d4544e858ba429f819dbc3c2cdf041e6805a0f5a14bbfb9fa17",
+      "bytes": 129964
+    },
+    {
+      "path": "docs/songwriting-course/listening-candidates.md",
+      "sha256": "b65e7f2e732e19aea165134db996cbbfad78a8f6e5a3fdca7ad1f0cd920d6fb9",
+      "bytes": 65545
+    },
+    {
+      "path": "docs/songwriting-course/listening-integration-desktop.png",
+      "sha256": "2b833a27af1fc23731ceb0e536ebb8d43d322a49771b344bdc5812e3e7b2cd22",
+      "bytes": 162189
+    },
+    {
+      "path": "docs/songwriting-course/listening-integration-phone.png",
+      "sha256": "7b9f849412d2672cbb7719e80987aaa78a53499cb7857b45e18056c16876c5cd",
+      "bytes": 212019
+    },
+    {
+      "path": "docs/songwriting-course/listening-integration.json",
+      "sha256": "607832723069a584c385a95648f82c3de1a8767e16c245040f8c6f69d33c5db0",
+      "bytes": 29465
+    },
+    {
+      "path": "docs/songwriting-course/listening-integration.md",
+      "sha256": "933eac37e615c262206fbfeece1db7327c0089f17798fdf2033e8afa4478f3c6",
+      "bytes": 2614
+    },
+    {
+      "path": "docs/songwriting-course/listening-pilot-preview.png",
+      "sha256": "3a7282ffb18a12508df97d267361019e1d7d1ca11876ac628fe8d16ae796cbed",
+      "bytes": 47820
+    },
+    {
+      "path": "docs/songwriting-course/listening-pilot-review.md",
+      "sha256": "6d8e9724e38205f20be1d296fdb4cf5026d6d2845883c657c6855ea50fefef01",
+      "bytes": 9060
+    },
+    {
+      "path": "docs/songwriting-course/listening-pilot.json",
+      "sha256": "4d79df1c2d855551b5e1c2ec3d69899eccf43fc150d1fded7e983c1dffdbedca",
+      "bytes": 7085
+    },
+    {
+      "path": "docs/songwriting-course/map/course-map-360.png",
+      "sha256": "e6068318f031a6ddcce62b0fa829c3e0fc59b5a2658d7cdbfe8f118022c800dd",
+      "bytes": 132237
+    },
+    {
+      "path": "docs/songwriting-course/map/course-map-736.png",
+      "sha256": "1111a6fccdfc3843f389f61bdd23943d29febbe1cdcba3b55e4cfe0b1302cd35",
+      "bytes": 125775
+    },
+    {
+      "path": "docs/songwriting-course/map/course-map.json",
+      "sha256": "9493cc5eac1c94e7f4af7594ebbe0b4ce69c88b1c183da8f0ede0e22c197e904",
+      "bytes": 50266
+    },
+    {
+      "path": "docs/songwriting-course/map/course-map.md",
+      "sha256": "1c04d28c10b42ebf1aa06acff8c05558f1e82514174d5fb67e1c46e14b2eedbb",
+      "bytes": 47731
+    },
+    {
+      "path": "docs/songwriting-course/map/example-feasibility.json",
+      "sha256": "815cef20205c6a72359ac466997adc278a7260581b31f2e8262a004741336c0a",
+      "bytes": 183015
+    },
+    {
+      "path": "docs/songwriting-course/map/example-feasibility.md",
+      "sha256": "84632a8bb6538d82d6d8bf8bbfcc483c39d33be7986b8c24d2abf8d1f0f4a974",
+      "bytes": 35824
+    },
+    {
+      "path": "docs/songwriting-course/pattern-routes-preview.png",
+      "sha256": "cc0a476e8a8b0a2bca3ee21d3ef6973e74993d71c21571da6d0de277ce241d58",
+      "bytes": 75621
+    },
+    {
+      "path": "docs/songwriting-course/pattern-structure-preview.png",
+      "sha256": "454c81b00828015eb3b1592d6f34a6d287c33a9af55acd70094e28d2f7ece8b3",
+      "bytes": 69132
+    },
+    {
+      "path": "docs/songwriting-course/player-design.md",
+      "sha256": "5b1f2b8d8d5d1c82bfa5b1204a8071b37abb0ddaf094468223d160d27bdc9dff",
+      "bytes": 12075
+    },
+    {
+      "path": "docs/songwriting-course/player-instruments-preview.png",
+      "sha256": "7fa3882a0f671538b58cc9b53ec625b635aced288bc7264e9fb244e087d2e7f0",
+      "bytes": 66837
+    },
+    {
+      "path": "docs/songwriting-course/player-preview.png",
+      "sha256": "c9387d761e1920b32c722d61086050480e5ac91803dfc77d25f14b40ba88a541",
+      "bytes": 43594
+    },
+    {
+      "path": "docs/songwriting-course/player-simple-controls-preview.png",
+      "sha256": "5d8659b437b946b6dea06ce68ba07b129ab58a3812088d29454942758f67367d",
+      "bytes": 50048
+    },
+    {
+      "path": "docs/songwriting-course/preview.mjs",
+      "sha256": "c4dbfdfb46f9f031684f779709add360d0983a712dc01fdf636d9c3860ca9c5f",
+      "bytes": 4194
+    },
+    {
+      "path": "docs/songwriting-course/progress.md",
+      "sha256": "28e7aa11a97de4bc27a54c1f59a64073d2a3320124de991582c01a6e7588e41e",
+      "bytes": 41718
+    },
+    {
+      "path": "docs/songwriting-course/render-diagrams.py",
+      "sha256": "1746520fa33bc2dab09bb2333b7982768680c23972a1b29e0837a40897d969b8",
+      "bytes": 14721
+    },
+    {
+      "path": "docs/songwriting-course/review-preview.png",
+      "sha256": "84fd46f3f888d8e14b246b0340a3080724a1e76a6478aca0dcb6762c2892de4b",
+      "bytes": 71233
+    },
+    {
+      "path": "docs/songwriting-course/sources.json",
+      "sha256": "fba9b63e68a2dd250ccec7ee9504333b0d009471d58b7d2c27ce2b083aa6896d",
+      "bytes": 49487
+    },
+    {
+      "path": "docs/songwriting-course/youtube-listening-preview.png",
+      "sha256": "9771c138e6fc8c9b555dc019c5dd9b270c8d25c743e0fd7c4bf42307936db44a",
+      "bytes": 61794
+    }
+  ],
+  "archive_sha256": "3078a4944fc35e08266f2254da4f8338f42265a88bf9bcdaad575831daeda011"
+}

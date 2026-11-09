@@ -1,0 +1,183 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Accidental Adversaries",
+  "metadata_mapping": "Existing concept-draft schema, responsive editable SVG convention, and research sidecar. Only the requested article and necessary assets; no practices, navigation, or publication changes.",
+  "patterns": [
+    {
+      "id": "accidental-adversaries",
+      "title": "Accidental Adversaries",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; potentially beneficial partnerships, unintended cross-effects, local safeguards, and shared commitment processes",
+      "article": "content/concepts/accidental-adversaries.md",
+      "status": "draft",
+      "short_description": "Trace how partners' protective measures obstruct one another, then redesign the shared process so that improving one side's results supports the other's success.",
+      "use_when": [
+        "Partners with a shared benefit repeatedly protect themselves in ways that make the other's work harder.",
+        "One team's safeguard creates the conditions for the other team's next safeguard.",
+        "Information withheld to avoid unrealistic commitments encourages unverified commitments elsewhere.",
+        "Calls for trust or goodwill leave the working interface and resource conflict unchanged."
+      ],
+      "goals": [
+        "Preserve the distinction between useful cooperation and unintended obstruction of a partner.",
+        "Explain locally corrective responses and the reinforcing defensive return path.",
+        "Represent useful information exchanges separately from hypothesized causal effects.",
+        "Verify workload and backlog consequences under stated assumptions without claiming to estimate the behavioral loop.",
+        "Keep responsibility, genuine incompatibility, customer losses, and limits of the accidental label visible."
+      ],
+      "mechanisms": [
+        "Trace particular commitments, missing information, changed work, and cross-effects using records and each participant's account.",
+        "Replace one-sided safeguards with a shared interface that still meets each partner's legitimate need.",
+        "Confirm capacity before promising dates and provide provisional information early enough to support negotiation.",
+        "Make the displaced commitment, responsible decision-maker, and scope/cost/timing trade-off explicit for urgent changes.",
+        "Assess useful delivered work, customer acceptance, reliability, and restart effort rather than a single local metric."
+      ],
+      "related_patterns": [
+        "escalation",
+        "fixes-that-fail",
+        "bottlenecks-and-capacity-constraints"
+      ],
+      "example_user_queries": [
+        "We need each other to succeed, but our safeguards keep making things worse.",
+        "Clients get promises that delivery cannot confirm, so delivery shares even less information.",
+        "Every time we protect our team, we create a new problem for our partner.",
+        "Nobody intended to undermine the alliance, but now everyone feels betrayed.",
+        "How do we fix the process instead of asking people to trust each other more?",
+        "Our stricter approval process makes the other side bypass us.",
+        "What legitimate need is the other team's difficult behaviour trying to protect?",
+        "Can a shared queue help us make commitments without disrupting everyone else?",
+        "How can we tell a harmful interaction from deliberate misconduct?",
+        "Restoring goodwill will not give us more hours, so what must change?",
+        "Are fewer interruptions improving delivery or just excluding useful customer requests?",
+        "We agree on the goal but keep working at cross-purposes."
+      ],
+      "visual": {
+        "type": "coupled-feedback-qualitative",
+        "question": "How can local safeguards damage a partnership that benefits both sides?",
+        "assets": [
+          "content/assets/structural-traps/accidental-adversaries-shared-queue.svg",
+          "content/assets/structural-traps/accidental-adversaries-shared-queue-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1188,
+            "textBlocks": 26
+          },
+          "phone": {
+            "width": 360,
+            "height": 2176,
+            "textBlocks": 26
+          }
+        },
+        "representation": {
+          "title": "Local safeguards can undermine a beneficial partnership",
+          "panels": [
+            [
+              "The partnership worth preserving · reinforcing",
+              [
+                [
+                  "Mira’s credible client plans",
+                  "Feasible promises help Owen schedule work."
+                ],
+                [
+                  "Owen’s reliable delivery",
+                  "Completed work supports credible future plans."
+                ]
+              ],
+              [
+                "support reliable delivery",
+                "reliable delivery supports credible plans"
+              ]
+            ],
+            [
+              "The damaging cross-effects · reinforcing",
+              [
+                [
+                  "Mira’s unchecked promises",
+                  "Dates are given without a capacity check."
+                ],
+                [
+                  "Owen’s delivery disruption",
+                  "Restarts displace agreed commitments."
+                ],
+                [
+                  "Dates withheld until late",
+                  "Owen protects the schedule."
+                ],
+                [
+                  "Mira’s negotiation pressure",
+                  "Few credible options remain for clients."
+                ]
+              ],
+              [
+                "increase disruption",
+                "encourages withholding",
+                "increases pressure",
+                "prompts unchecked promises"
+              ]
+            ]
+          ],
+          "change": "Share provisional options early, confirm capacity before promising, and name what changes displace.",
+          "limit": "Joint understanding creates no extra hours. Genuine excess demand still requires changes to staffing, scope, timing, or commitments.",
+          "alt": "A hypothetical beneficial loop links Mira’s credible client plans with Owen’s reliable delivery. A separate harmful loop links unchecked promises to delivery disruption, withheld dates, negotiation pressure, and further unchecked promises. Local safeguards damage a partnership that could help both sides; neither needs to seek superiority. Shared provisional options and capacity checks address the harmful cross-effects.",
+          "caption": "The upper loop shows why the partners benefit from working together; the lower loop shows how protecting each role can obstruct the other. This distinguishes Accidental Adversaries from rivalry alone. The causal links require evidence, and repairing the relationship does not create missing capacity."
+        },
+        "alternative_text": "A hypothetical beneficial loop links Mira’s credible client plans with Owen’s reliable delivery. A separate harmful loop links unchecked promises to delivery disruption, withheld dates, negotiation pressure, and further unchecked promises. Local safeguards damage a partnership that could help both sides; neither needs to seek superiority. Shared provisional options and capacity checks address the harmful cross-effects.",
+        "caption": "Hypothetical illustration. The upper loop shows the partnership’s benefit; the lower loop shows the defensive cross-effects that undermine it. Shared provisional information and capacity checks address those links without creating extra hours or removing real customer trade-offs.",
+        "style": "Fixed white including dark surroundings; regular Helvetica Neue with Helvetica and Arial fallbacks; ink and secondary text meet contrast on prescribed fills. Green identifies intervention geometry. Essential connections use ink; light construction lines remain contextual."
+      },
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Jennifer Kemeny, ‘Accidental Adversaries’: When Friends Become Foes (February 1994)",
+          "url": "https://thesystemsthinker.com/wp-content/uploads/pdfs/050102p.pdf",
+          "web_text": "https://thesystemsthinker.com/accidental-adversaries-when-friends-become-foes/",
+          "supports": "Foundational named-archetype description, beneficial alliance loop undermined by local corrections, reported P&G–Walmart origins/case, and interventions directed at partners' constraints.",
+          "read_method": "Full web article and original two-page PDF opened and read: template, illustrative manufacturer/supplier opening, account of promotions and retailer stocking up, alliance-maintenance discussion, byline, February 1994 imprint, and forthcoming Fifth Discipline Fieldbook note.",
+          "boundary": "Primary practitioner account, not controlled empirical evidence or a sole-invention claim established by an independent historical audit. The article's broad claims about later P&G promotion policies are not repeated as current corporate facts. No reported commercial effect sizes or pricing advice are imported. Mira and Owen are original fictional teaching actors, not a reconstruction of the historical case."
+        },
+        {
+          "title": "Philip Ramsey and Rachel Wells, How Am I Supposed to Work with Her?: The ‘Accidental Adversaries’ Storyline (October 2000)",
+          "url": "https://thesystemsthinker.com/how-am-i-supposed-to-work-with-her-the-accidental-adversaries-storyline/",
+          "original_pdf": "https://thesystemsthinker.com/wp-content/uploads/pdfs/110902pk.pdf",
+          "supports": "How safeguards can reciprocally obstruct partners and how blame and binary judgments can hide the return path and the positive contributions that remain.",
+          "read_method": "Full web article and first page of the original combined three-page PDF opened and read. Original page verifies both authors, October 2000 date, protective-behavior mechanism, discussion of blame, and interpretive limitations. The combined file also contains a later companion piece; the cited article is kept distinct.",
+          "boundary": "Accessible practitioner interpretation and suggested conversational responses, not an experiment establishing rates of relationship breakdown or proof that selflessness cures incentive conflicts. General claims about worsening marriage/team relationships are not treated as current measured trends."
+        },
+        {
+          "title": "William E. Novak and Linda Levine, Success in Acquisition: Using Archetypes to Beat the Odds (September 2010), CMU/SEI-2010-TR-016",
+          "url": "https://sei.cmu.edu/library/success-in-acquisition-using-archetypes-to-beat-the-odds/",
+          "full_text": "https://www.sei.cmu.edu/documents/835/2010_005_001_15242.pdf",
+          "doi": "10.1184/R1/6584444.v1",
+          "supports": "Official technical application to software partnerships, Accidental Adversaries description, documented program-office/contractor hostility narrative, and explicit limits of causal-loop diagrams in quantification and motive inference.",
+          "read_method": "Official record and full ninety-four-page PDF opened. Read title/publication metadata, section 3.3 (printed pages 13–14), section 3.11 (pages 26–27) on qualitative limits, rate-to-level issues and motives, and section 5.5 (pages 45–47) on partner hostility; also reviewed the misaligned-goals discussion. Initial insights-host PDF request timed out; the institution's www.sei.cmu.edu copy succeeded.",
+          "boundary": "Technical synthesis informed by program experience and case narratives, not randomized proof of a shared-queue intervention. No quoted program outcomes, effect sizes, or model coefficients are transferred to the fictional service. The article does not adopt all general claims about rational self-interest or treat a causal diagram as a formal dynamic simulation."
+        }
+      ],
+      "evidence_boundary": "The scenario and illustration are hypothetical. Qualitative formal comparisons depend on the stated players, actions, preferences, information, timing, and repetition assumptions. Empirical findings retain their source-specific limits. Practical interventions are editorial synthesis, not measured effects of this scenario.",
+      "verification": {
+        "status": "passed",
+        "content": "All forty remain separate drafts with nine required sections and one responsive figure; collection unchanged. Corpus/schema and rendered Markdown checks passed; public corpus excludes the drafts. Non-figure article text and external source links are unchanged from the illustration-revision baseline.",
+        "visual": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed.",
+        "editorial": "Existing explanatory geometry retained with contrast and caption improvements. Examples remain qualitative and hypothetical. Caption and alternative text explain the mechanism, changed relationship, and residual limitations. Green text replaced with ink; essential connections strengthened. Source records and source-check dates preserved."
+      },
+      "example_structure": {
+        "scenario": "Hypothetical narrative; no invented utility scores, numerical trajectory, or probability cutoff is required to follow the example.",
+        "changed_relationship": "Share provisional options early, confirm capacity before promising, and name what changes displace.",
+        "residual_constraints": "Joint understanding creates no extra hours. Genuine excess demand still requires changes to staffing, scope, timing, or commitments."
+      },
+      "editorial_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the distinctness audit: preserve separate concepts, clarify scope and relationships, and retain plain-language examples.",
+        "source_handling": "Existing source links and evidence limits retained; no new empirical claim is introduced."
+      },
+      "illustration_teaching_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the teaching-value audit while retaining every article and its qualitative worked example.",
+        "change": "Preserve the explanatory structure; improve contrast and the interpretive caption.",
+        "source_handling": "Article prose, external source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed."
+      }
+    }
+  ]
+}

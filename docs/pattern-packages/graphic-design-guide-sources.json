@@ -1,0 +1,62 @@
+{
+  "pattern": "Guide the Eye",
+  "date": "2026-10-27",
+  "mode": "One new built-in generated photographic portrait, selected existing generated photographs and presentation surfaces, and controlled authored SVG comparisons.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-guide-examples.mjs",
+  "generatedSources": [
+    {
+      "asset": "content/assets/graphic-design/guide-maker-portrait.jpg",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-a33063b4-bb53-4a3b-94db-896ce04ae3f0.png",
+      "prompt": "Use case: photorealistic editorial portrait. Create a single portrait-format photographic source image, not a poster or layout. A fictional adult woman ceramic artist in a quiet contemporary pottery studio, head and upper torso in clear side profile facing RIGHT, eyes visibly looking horizontally toward the right edge of the photograph, relaxed natural expression, gaze level approximately halfway down the frame. Profile nose and eye direction must be unmistakable. Warm neutral linen work shirt, dark hair tied back, muted sage and warm ivory studio background softly out of focus with indistinct ceramic shelves. Subject centered horizontally so a fixed portrait crop works in either horizontal reflection; head fully inside frame, generous margin around face. Realistic skin, natural diffuse window light, understated commissioned cultural portrait, documentary photographic texture, credible anatomy. No text, letters, logos, tattoos, asymmetrical jewelry, tools in hands, signs, labels, directional arrows, graphics, poster, mockup or border. Portrait 2:3, ideally 1024 by 1536. This source will be reused identically and horizontally reflected for a teaching comparison about gaze direction. No recognizable real person.",
+      "derivation": "JPEG encoding of the generated PNG. Horizontal reflection is applied only within the SVG portrait frame; the text is never reflected.",
+      "sha256": "6288a0209cd2bcdab369bd752593012c110c20e19b1565d2d38719c2e3e32146"
+    }
+  ],
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/core-message-repair-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "f5c4449de84c1cb2d5c6d4142830a8067ff21ce0367f80b059d55a16194e2b07"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "comparisonPolicy": "Portrait: only photographic orientation changes; identical source bytes and fixed frame/crop extent. Repair: only leader path and endpoint change, with fixed line treatment. Booking: only arrow shaft and arrowhead geometries change. Copy, fonts, sizes, weights, colors, unrelated positions and shared presentation remain fixed. Reflection intentionally changes the spatial arrangement of all photographic details inside the portrait frame.",
+  "limitations": "No eye-tracking, reading-speed or conversion experiment. No working booking interface, assistive-technology test or complete production article route test. Directional design claims are editorial predictions, distinguished from cited laboratory results.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "guide-maker-gaze",
+        "changedPixels": 89857,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "guide-repair-detail",
+        "changedPixels": 1660,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "guide-booking-arrow",
+        "changedPixels": 873,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within paper",
+    "pixelCheck": "Only intended declared cue regions differ."
+  }
+}

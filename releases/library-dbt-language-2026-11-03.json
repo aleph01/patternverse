@@ -1,0 +1,121 @@
+{
+  "name": "library-dbt-language-2026-11-03",
+  "status": "published and verified live",
+  "published": true,
+  "publishedAt": "2026-11-03T17:46:48.933Z",
+  "parentRelease": "nlp-title-2026-11-03",
+  "productionUrl": "https://patternverse.org",
+  "deploymentUrl": "https://007c4174.patternverse.pages.dev",
+  "version": "1793727560232",
+  "include": [
+    "My Library populated areas and verses",
+    "Desktop collection cards link directly to collection pages",
+    "Twelve DBT educational articles with self-guided practices and graphics",
+    "Pattern Language mapping-pipe syntax, compiler/runtime, editor and documentation"
+  ],
+  "exclude": [
+    "New Bearings changes",
+    "149 draft entries",
+    "Contribute team invitation and founder portrait",
+    "Private music/player studies and unrelated songwriting graphics/assets",
+    "MCP or guided-AI service publication"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "expectedPublicEntries": 1375,
+  "newEntries": [
+    "collection:dbt",
+    "pattern:dbt-behavior-chain",
+    "pattern:dbt-check-the-facts",
+    "pattern:dbt-cope-ahead",
+    "pattern:dbt-dear-man",
+    "pattern:dbt-identify-describe-emotions",
+    "pattern:dbt-opposite-action",
+    "pattern:dbt-pros-and-cons",
+    "pattern:dbt-radical-acceptance",
+    "pattern:dbt-self-soothe",
+    "pattern:dbt-stop",
+    "pattern:dbt-validation",
+    "pattern:dbt-wise-mind"
+  ],
+  "artifact": {
+    "directory": "/private/tmp/patternverse-library-dbt-language-2026-11-03/apps/web/build",
+    "files": 11870,
+    "bytes": 657443415,
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/library-dbt-language-2026-11-03/artifact-files.json",
+    "manifestSha256": "a8289f467a198722e54e117a12cb7d6c98e1e5c9e3cfe4c782e610356506bede"
+  },
+  "verification": {
+    "content": {
+      "entries": 1375,
+      "diagnostics": 0,
+      "newDBTPatterns": 12,
+      "newCollections": 1
+    },
+    "publicScan": "passed",
+    "shippedRuntime": {
+      "path": "_app/immutable/assets/pattern_wasm_bg.DTwY4_sF.wasm",
+      "sha256": "032d6ecb9ae8e41d3ded41b79977883ef6cc522a191096ed6fee37930773a14e",
+      "rebuiltFromSelectedSource": true
+    },
+    "rustCore": {
+      "passed": 374
+    },
+    "rustHost": {
+      "passed": 24
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "sourceScope": {
+      "baselineAppPreserved": true,
+      "baselinePrivateWorkspacePreserved": true,
+      "unselectedBearingsChanges": false,
+      "registryOnlyAddsDBT": true
+    },
+    "runtimeBuild": {
+      "nativeWasmCompilation": "passed",
+      "bindings": "wasm-bindgen 0.2.129, installed binary",
+      "optimization": "wasm-opt -O, installed binary",
+      "binaryVerifiedInArtifact": true
+    },
+    "browser": {
+      "passed": 44,
+      "unexpected": 0,
+      "skipped": 4,
+      "desktop": true,
+      "phone": true
+    },
+    "docs-browser": {
+      "passed": 8,
+      "unexpected": 0,
+      "skipped": 0,
+      "desktop": true,
+      "phone": true
+    },
+    "webTests": {
+      "passed": 542,
+      "files": 28
+    },
+    "liveHttp": {
+      "passed": true,
+      "resources": 21,
+      "version": "1793727560232",
+      "exactArtifactHashes": true
+    },
+    "liveBrowsers": {
+      "passed": 34,
+      "skipped": 4,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true
+    }
+  },
+  "sourceDelta": "/Users/jeger-benninger/Documents/patternverse/.local/releases/library-dbt-language-2026-11-03/source-delta.tar.gz",
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/library-dbt-language-2026-11-03/release-report.json"
+}

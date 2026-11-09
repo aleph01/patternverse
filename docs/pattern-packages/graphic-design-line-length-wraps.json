@@ -1,0 +1,124 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Greedy whole-word wrapping measured by Chromium canvas with the exact embedded static font, kerning normal, no hyphenation; text, font size and baseline interval fixed.",
+  "examples": [
+    {
+      "name": "line-length-visitor-guide",
+      "landscape": true,
+      "copy": "The studio gives independent makers a place to work, meet and share ideas. Each day pass includes a desk, Wi-Fi and coffee, with access from 09:00 to 18:00. Choose a day before you arrive and bring your booking reference to the welcome desk. If you need a quiet room, ask the team about availability before booking.",
+      "x": 95,
+      "y": 340,
+      "size": 20,
+      "leading": 28,
+      "before": {
+        "measure": 725,
+        "lines": [
+          "The studio gives independent makers a place to work, meet and share ideas. Each day",
+          "pass includes a desk, Wi-Fi and coffee, with access from 09:00 to 18:00. Choose a day",
+          "before you arrive and bring your booking reference to the welcome desk. If you need a",
+          "quiet room, ask the team about availability before booking."
+        ],
+        "pixelWidths": [
+          712.3394165039062, 697.7994995117188, 712.8995361328125, 492.61968994140625
+        ],
+        "characters": [83, 85, 85, 59]
+      },
+      "after": {
+        "measure": 480,
+        "lines": [
+          "The studio gives independent makers a place to work,",
+          "meet and share ideas. Each day pass includes a desk,",
+          "Wi-Fi and coffee, with access from 09:00 to 18:00. Choose",
+          "a day before you arrive and bring your booking reference",
+          "to the welcome desk. If you need a quiet room, ask the",
+          "team about availability before booking."
+        ],
+        "pixelWidths": [
+          446.99969482421875, 439.9796142578125, 470.55963134765625, 470.6796875, 452.0997314453125,
+          327.33978271484375
+        ],
+        "characters": [52, 52, 57, 56, 54, 39]
+      },
+      "dimensions": {
+        "wide": [960, 1470],
+        "stacked": [960, 1470]
+      }
+    },
+    {
+      "name": "line-length-care-note",
+      "landscape": false,
+      "copy": "Wash with warm water and a soft cloth. Dry before storing. Avoid sudden changes in temperature. Keep this care note for future reference.",
+      "x": 65,
+      "y": 535,
+      "size": 22,
+      "leading": 30,
+      "before": {
+        "measure": 180,
+        "lines": [
+          "Wash with warm",
+          "water and a soft",
+          "cloth. Dry before",
+          "storing. Avoid",
+          "sudden changes in",
+          "temperature. Keep",
+          "this care note for",
+          "future reference."
+        ],
+        "pixelWidths": [
+          151.20587158203125, 145.837890625, 152.34986877441406, 125.39988708496094,
+          170.82986450195312, 171.51182556152344, 153.84585571289062, 152.2398223876953
+        ],
+        "characters": [14, 16, 17, 14, 17, 17, 18, 17]
+      },
+      "after": {
+        "measure": 390,
+        "lines": [
+          "Wash with warm water and a soft cloth.",
+          "Dry before storing. Avoid sudden changes",
+          "in temperature. Keep this care note for",
+          "future reference."
+        ],
+        "pixelWidths": [357.917724609375, 379.0596923828125, 351.60369873046875, 152.2398223876953],
+        "characters": [38, 40, 39, 17]
+      },
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    },
+    {
+      "name": "line-length-report-scope",
+      "landscape": true,
+      "copy": "This year, 24 workshops offered 180 places across clay and print sessions. The table records places offered, not unique visitors. Some people attended more than one session. Figures cover January to December 2026.",
+      "x": 95,
+      "y": 255,
+      "size": 20,
+      "leading": 28,
+      "before": {
+        "measure": 725,
+        "lines": [
+          "This year, 24 workshops offered 180 places across clay and print sessions. The table",
+          "records places offered, not unique visitors. Some people attended more than one",
+          "session. Figures cover January to December 2026."
+        ],
+        "pixelWidths": [690.0394287109375, 672.49951171875, 412.85968017578125],
+        "characters": [84, 79, 48]
+      },
+      "after": {
+        "measure": 480,
+        "lines": [
+          "This year, 24 workshops offered 180 places across clay",
+          "and print sessions. The table records places offered, not",
+          "unique visitors. Some people attended more than one",
+          "session. Figures cover January to December 2026."
+        ],
+        "pixelWidths": [448.11962890625, 462.6196594238281, 447.7997131347656, 412.85968017578125],
+        "characters": [54, 57, 51, 48]
+      },
+      "dimensions": {
+        "wide": [960, 1470],
+        "stacked": [960, 1470]
+      }
+    }
+  ]
+}

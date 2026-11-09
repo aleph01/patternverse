@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "pessimistic-offline-lock",
+  "title": "Pessimistic Offline Lock",
+  "aliases": ["Pessimistic Offline Locking"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1442,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "implemented_with": ["optimistic-offline-lock", "pessimistic-offline-lock"],
+  "validation": {
+    "research": "Six primary source notes. David Rice is credited for Pessimistic Offline Lock in Fowler’s catalog and Patterns of Enterprise Application Architecture. PostgreSQL supports the distinction from transaction/session locks and the cost of long human-input transactions. SQLite supports targeted uniqueness handling and short write transactions; Python supports affected rows and random UUID acquisition identifiers. Logical ownership, ordinary read access, participation requirements, and abandoned-lock policy are explicit. The example and diagrams are original.",
+    "python_examples": "Actual checkout.py and demo.py fences execute with seven stated output lines exactly. Checks cover durable unique acquisition, competing refusal, fresh immutable acquisition handles, guarded save and release, stale cancel preserving a later token, revoked owners, release-failure rollback preserving title and reservation, title/ID limits, missing/corrupt-row acquisition rollback, missing protected data, connection-close abandonment and deliberate recovery, caller-owned transaction rejection, closed/default connections, and physical contention distinct from Busy. A direct SQL writer demonstrates the cooperative-protocol limit.",
+    "python_stdout": [
+      "alice acquired: Draft",
+      "bob: busy",
+      "transactions open: False False",
+      "old handle: rejected",
+      "bob still owns: True",
+      "bob cancel: True",
+      "stored: Launch plan"
+    ],
+    "content": "1260 entities validate with drafts included. Published-only corpus contains 1113 entities and no errors.",
+    "collection": "Reused Persistence and Transactions, retaining its six previous members and appending Optimistic Offline Lock followed by Pessimistic Offline Lock. The two new articles cross-link, and no duplicate alias article, practice, collection, or neighboring stub was created.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for both generators, executable validators, integration tests, articles, primary collection, authoring metadata, concept registry, and authoring documentation. Review reports are formatted separately.",
+    "preservation": "All 23 GoF articles and their collection match pre-change hashes. All 25 earlier software articles and authoring records remain unchanged. All 437 prior concept marks and 1542 asset-dimension entries are unchanged. The Software Engineering verse and Application Architecture and Domain Modeling collections are byte-for-byte unchanged. Persistence and Transactions preserves its six earlier members and body, adding only the two completed articles and introductions.",
+    "article_tests": "105 article integration checks pass across the two new articles and all earlier software/GoF suites. Coverage includes canonical IDs and aliases, primary membership retaining earlier articles, resolved cross-links, exact eight sections, two copyable highlighted Python blocks per article, responsive figures and dimensions, library search, ten queries, revision hashes, and concept marks. The pessimistic article’s three integration checks also pass in a focused rerun after the final completion-outcome clarification.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 109 passed and one unrelated failure across 29 files.",
+    "public_build": "Production build and public web build checks pass. Both article browser reviews used the completed build; no deployment.",
+    "visuals": "All four native SVG variants for this article load. Native and production-browser measurements show no overlapping/out-of-bounds labels or out-of-canvas rectangles. Every native render and actual desktop/phone figure was visually inspected. The reservation diagram distinguishes a committed logical write lock from the short physical database transactions around acquisition and completion, allowing ordinary readers. The ownership diagram shows a new token B surviving late token-A save and release requests. Separate phone compositions retain these distinctions. Exact light editorial palette, fixed white surface, regular Helvetica typography, square geometry, arrow meanings, label placement, contrast, captions, and phone readability were reviewed. The concept mark appears in the header and collection card.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 headings, two Python fences preserved as DOM text, colored syntax tokens, text selection retaining indentation, focusable code, keyboard horizontal scrolling at 320px, responsive phone figures, and no page overflow. Article tops, normal code viewports, all figures/captions, and gallery cards were visually inspected. Browser text selection normally omits the final newline. Normal viewport code captures supplement tall element captures that may include existing sticky navigation.",
+    "navigation_browser": "All four related routes return HTTP 200, including the companion Offline Lock article. Persistence and Transactions renders directly and in its eight-pattern verse gallery. The card on page two opens the canonical route with the correct primary breadcrumb and 8/8 article indicator."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four global graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Original note checkout uses a unique persistent lock row and a fresh UUID token per acquisition. Short acquire/save/cancel transactions are committed between editing requests. Acquisition atomically reserves and reads a title; competing acquisition raises Busy. Save checks the note/token predicate, writes, and removes ownership in one local transaction; cancellation removes only matching ownership. Stale handles cannot save through or release a later token. Read-only queries remain allowed. A reservation survives connection closing and requires explicit trusted recovery after abandonment. No lease/expiry/renewal, fairness queue, multi-resource protocol, authentication, external-resource fencing, or bypass-writer protection is implemented. Unknown-commit reconciliation is not implemented.",
+  "preview": "http://127.0.0.1:43010/pattern/pessimistic-offline-lock",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-pessimistic-offline-lock",
+  "browser_measurements": ".local/software-pessimistic-offline-lock/browser-checks.json",
+  "browser_check_script": ".local/software-pessimistic-offline-lock/check-browser.mjs",
+  "preservation_checks": ".local/software-optimistic-offline-lock/preservation.json",
+  "shared_check_logs": ".local/software-optimistic-offline-lock",
+  "build_log": ".local/software-optimistic-offline-lock/public-build.log",
+  "branch": "codex/software-optimistic-offline-lock",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

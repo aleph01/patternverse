@@ -1,0 +1,58 @@
+{
+  "pattern": "Use Negative Space",
+  "date": "2026-10-27",
+  "mode": "Selected existing generated photographs and composed precise typography separately. No new photograph generated.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-negative-space-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/scale-greenhouse-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "0f4e3efdc680eada7505fc4638b42b32cebf634083275dc565df3d2ce702aeed"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Invitation: only photo y changes by 80. Workshop: only three heading y positions change by 15. Product: only complete panel-copy transform changes by 22 right and 22 down. Identical image bytes, crops, copy, styles, other positions and presentation in each pair.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "space-evening-invitation",
+        "changedPixels": 148797,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "space-workshop-details",
+        "changedPixels": 5249,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "space-product-card",
+        "changedPixels": 18379,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within paper or phone content surface, including nested group transforms",
+    "pixelCheck": "Only intended declared position intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "Saved standalone comparisons inspected at desktop and narrow widths; all six PNGs reviewed. Bounds and changed pixels verify controlled edits, not reader performance."
+  },
+  "limitations": "No user study, measured performance improvement, physical print proof, assistive-technology test or complete production route verification. Spacing values are illustrative layout units."
+}

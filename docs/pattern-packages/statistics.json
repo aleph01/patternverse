@@ -1,0 +1,1742 @@
+{
+  "title": "Statistics Field Guide",
+  "edition": "First edition",
+  "audience": "Both curious beginners and analysts; introductory and advanced paths",
+  "scope": "42 original problem-first articles across 22 subject collections, with an additional curated traps collection, grouped browsing, and two reading paths.",
+  "patterns": [
+    {
+      "id": "stats-define-target",
+      "title": "Define the Quantity You Want to Estimate",
+      "summary": "Turn a broad question into an explicit population, outcome, time horizon, and comparison.",
+      "example_user_queries": [
+        "What exactly should I measure?",
+        "We disagree about what success means.",
+        "Which population should this estimate describe?",
+        "I have a vague research question.",
+        "What difference would actually matter?",
+        "Should I report an average or a percentile?",
+        "Our retention metrics contradict each other.",
+        "Which question should I settle before choosing a test?"
+      ],
+      "sources": [
+        "https://www.theeffectbook.net/index.html",
+        "https://content.sph.harvard.edu/wwwhsph/sites/1268/2024/04/hernanrobins_WhatIf_26apr24.pdf"
+      ],
+      "related_patterns": ["stats-sample-target", "stats-report-uncertainty"],
+      "article_words": 1100,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["What exactly should I measure?", "We disagree about what success means."],
+      "collections": ["statistics-framing", "statistics-measurement"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/defined-target.svg",
+        "reason": "Show how changing the outcome, horizon, or post-assignment population changes the estimated contrast."
+      }
+    },
+    {
+      "id": "stats-sample-target",
+      "title": "Sample from the Population You Care About",
+      "summary": "Trace selection into the dataset and align sampling or adjustment with the intended population.",
+      "example_user_queries": [
+        "My survey has lots of responses but might be biased.",
+        "Can I generalize from volunteers?",
+        "Some groups hardly answered our survey.",
+        "Do I need sampling weights?",
+        "Our sample differs from the population.",
+        "Is a huge sample automatically representative?",
+        "We only have data from current customers.",
+        "Does a randomized experiment represent everyone?"
+      ],
+      "sources": ["https://mc-stan.org/docs/stan-users-guide/poststratification.html"],
+      "related_patterns": ["stats-define-target", "stats-missingness"],
+      "article_words": 991,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "My survey has lots of responses but might be biased.",
+        "Can I generalize from volunteers?"
+      ],
+      "collections": ["statistics-sampling"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/sampling-composition.svg",
+        "reason": "Trace population, invitations, responses, and a transparent weighted average."
+      }
+    },
+    {
+      "id": "stats-measurement-error",
+      "title": "Carry Measurement Uncertainty into the Analysis",
+      "summary": "Separate the quantity of interest from its imperfect measurement and propagate consequential uncertainty.",
+      "example_user_queries": [
+        "My measurements are noisy.",
+        "Could instrument error explain this difference?",
+        "How do I account for rounding?",
+        "Two sensors disagree consistently.",
+        "Can repeated measurements fix calibration bias?",
+        "My predictor is measured with error.",
+        "How should I combine uncertainty sources?",
+        "The reported precision seems unrealistic."
+      ],
+      "sources": [
+        "https://mc-stan.org/docs/stan-users-guide/measurement-error.html",
+        "https://www.itl.nist.gov/div898/handbook/mpc/mpc.htm",
+        "https://www.itl.nist.gov/div898/handbook/mpc/section5/mpc55.htm"
+      ],
+      "related_patterns": ["stats-define-target", "stats-report-uncertainty"],
+      "article_words": 1027,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["My measurements are noisy.", "Could instrument error explain this difference?"],
+      "collections": ["statistics-measurement", "statistics-structure"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/measurement-processes.svg",
+        "reason": "Distinguish stable bias, repeatability, noise, and drift, then propagate calibration uncertainty."
+      }
+    },
+    {
+      "id": "stats-randomize-blocks",
+      "title": "Randomize Within Blocks",
+      "summary": "Create comparable experimental groups while accounting for important baseline sources of variation.",
+      "example_user_queries": [
+        "How can I compare two treatments fairly?",
+        "Day-to-day differences might overwhelm the experiment.",
+        "Should I randomize people or whole teams?",
+        "What does blocking accomplish?",
+        "Our treatment groups have different baseline characteristics.",
+        "Some participants did not follow their assignment.",
+        "Can I compare only people who used the feature?",
+        "How should I organize an experiment across batches?"
+      ],
+      "sources": ["https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm"],
+      "related_patterns": ["stats-factorial-interactions", "stats-separate-within-between"],
+      "article_words": 1134,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "How can I compare two treatments fairly?",
+        "Day-to-day differences might overwhelm the experiment."
+      ],
+      "collections": ["statistics-design", "statistics-causal-designs"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/blocked-assignment.svg",
+        "reason": "Show within-batch randomized positions and the numerical comparison across matched material conditions."
+      }
+    },
+    {
+      "id": "stats-factorial-interactions",
+      "title": "Vary Factors Together to Reveal Interactions",
+      "summary": "Use a joint experimental design when the effect of one factor may depend on another.",
+      "example_user_queries": [
+        "Two changes might work only in combination.",
+        "Should I change one variable at a time?",
+        "What is an interaction effect?",
+        "The average treatment effect hides opposite responses.",
+        "How do I test two features together?",
+        "There are too many experimental combinations.",
+        "Can a fractional factorial design help?",
+        "Why does the effect depend on the baseline?"
+      ],
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/pri/section2/pri212.htm",
+        "https://www.itl.nist.gov/div898/handbook/pri/section5/pri594.htm"
+      ],
+      "related_patterns": ["stats-randomize-blocks", "stats-account-for-search"],
+      "article_words": 685,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Two changes might work only in combination.",
+        "Should I change one variable at a time?"
+      ],
+      "collections": ["statistics-design"],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-factorial.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-factorial-preview.svg"
+      }
+    },
+    {
+      "id": "stats-missingness",
+      "title": "Make Missingness Assumptions Explicit",
+      "summary": "Choose a response to missing values based on how observations become unavailable and test consequential assumptions.",
+      "example_user_queries": [
+        "Should I delete rows with missing values?",
+        "Can I replace missing values with the mean?",
+        "People dropped out before the final measurement.",
+        "Our sensor misses extreme readings.",
+        "How do I know whether missingness is random?",
+        "Would the conclusion change if missing outcomes were worse?",
+        "Do imputed values count as real observations?",
+        "Our analysis excludes a lot of participants."
+      ],
+      "sources": [
+        "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-10"
+      ],
+      "related_patterns": [
+        "stats-sample-target",
+        "stats-challenge-causal-effect",
+        "stats-measurement-validity"
+      ],
+      "article_words": 992,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Should I delete rows with missing values?",
+        "Can I replace missing values with the mean?"
+      ],
+      "collections": ["statistics-sampling", "statistics-missing-data", "statistics-causal-checks"],
+      "practice": null,
+      "visual": {
+        "type": "sensitivity",
+        "asset": "statistics/missingness-sensitivity.svg",
+        "reason": "Show the unobserved-mean tipping point and bounded-outcome extremes."
+      }
+    },
+    {
+      "id": "stats-investigate-extremes",
+      "title": "Separate Recording Errors from Genuine Extremes",
+      "summary": "Trace unusual observations, preserve legitimate variation, and examine influence before choosing a response.",
+      "example_user_queries": [
+        "Should I remove this outlier?",
+        "One observation changes the whole result.",
+        "My data are strongly skewed.",
+        "The mean and median tell different stories.",
+        "Can I winsorize extreme values?",
+        "How do I distinguish a typo from a real extreme?",
+        "A cleaning script removed important cases.",
+        "Will robust statistics fix this problem?"
+      ],
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm",
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm"
+      ],
+      "related_patterns": ["stats-show-distribution", "stats-report-uncertainty"],
+      "article_words": 1129,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["Should I remove this outlier?", "One observation changes the whole result."],
+      "collections": ["statistics-missing-data", "statistics-distributions"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/extremes-influence.svg",
+        "reason": "Show a large order’s influence and distinguish keeping, omitting, and correcting records."
+      }
+    },
+    {
+      "id": "stats-show-distribution",
+      "title": "Show the Distribution Behind the Average",
+      "summary": "Inspect shape, spread, subgroups, and relevant tails before treating one summary as the whole story.",
+      "example_user_queries": [
+        "The averages are identical but the experiences differ.",
+        "My average does not describe most observations.",
+        "Which plot should I use to inspect the data?",
+        "Should I report the median or the mean?",
+        "Could this distribution contain different populations?",
+        "I need to understand the slowest cases.",
+        "Is a narrow confidence interval the same as low variability?",
+        "A few extreme values dominate the chart."
+      ],
+      "sources": ["https://www.itl.nist.gov/div898/handbook/eda/eda.htm"],
+      "related_patterns": ["stats-investigate-extremes", "stats-communicate-effects"],
+      "article_words": 763,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "The averages are identical but the experiences differ.",
+        "My average does not describe most observations."
+      ],
+      "collections": ["statistics-distributions", "statistics-communication"],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-distribution.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-distribution-preview.svg"
+      }
+    },
+    {
+      "id": "stats-base-rates",
+      "title": "Count Expected Cases Before Interpreting a Positive",
+      "summary": "Combine prevalence, sensitivity, and false-positive rates instead of confusing a detector result with the probability of the underlying condition.",
+      "example_user_queries": [
+        "Our detector is accurate but most alerts are false.",
+        "What does a positive result actually mean?",
+        "Why does prevalence matter?",
+        "Is sensitivity the chance that a positive is correct?",
+        "How do I apply Bayes rule without getting lost?",
+        "The same test works differently in another population.",
+        "How can a rare event create so many false alarms?",
+        "Can I combine two related detector results?"
+      ],
+      "sources": ["https://www.statisticsdonewrong.com/p-value.html"],
+      "related_patterns": ["stats-sample-target", "stats-choose-consequences"],
+      "article_words": 676,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Our detector is accurate but most alerts are false.",
+        "What does a positive result actually mean?"
+      ],
+      "collections": ["statistics-probability", "statistics-decisions", "statistics-sparse"],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-base-rates.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-base-rates-preview.svg"
+      }
+    },
+    {
+      "id": "stats-report-uncertainty",
+      "title": "Report the Effect with Its Uncertainty",
+      "summary": "Interpret magnitude and precision together, using a relevant interval and a practical threshold.",
+      "example_user_queries": [
+        "Does not significant mean no effect?",
+        "How precise is my estimate?",
+        "A tiny effect has a very small p value.",
+        "What does this confidence interval tell me?",
+        "Can I conclude the groups are equivalent?",
+        "Is a prediction interval different from a confidence interval?",
+        "How should I report an uncertain difference?",
+        "Could the data still allow a useful improvement?"
+      ],
+      "sources": [
+        "https://www.amstat.org/docs/default-source/amstat-documents/p-valuestatement.pdf",
+        "https://itl.nist.gov/div898/handbook/prc/section2/prc241.htm"
+      ],
+      "related_patterns": ["stats-bound-rare-events", "stats-communicate-effects"],
+      "article_words": 735,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["Does not significant mean no effect?", "How precise is my estimate?"],
+      "collections": [
+        "statistics-framing",
+        "statistics-probability",
+        "statistics-estimation",
+        "statistics-synthesis",
+        "statistics-communication"
+      ],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-interval.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-interval-preview.svg"
+      }
+    },
+    {
+      "id": "stats-paired-comparisons",
+      "title": "Preserve the Pairing",
+      "summary": "Compare linked observations through their differences and retain the pairing when calculating uncertainty.",
+      "example_user_queries": [
+        "The same people were measured twice.",
+        "Should this be a paired test?",
+        "My before and after measurements are correlated.",
+        "How do I compare instruments on the same samples?",
+        "Some people have no follow-up measurement.",
+        "Can a before-after improvement establish causality?",
+        "Should I bootstrap whole pairs?",
+        "Matching produced pairs with very different baselines."
+      ],
+      "sources": ["https://www.itl.nist.gov/div898/handbook/prc/section3/prc311.htm"],
+      "related_patterns": ["stats-separate-within-between", "stats-difference-in-differences"],
+      "article_words": 950,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["The same people were measured twice.", "Should this be a paired test?"],
+      "collections": ["statistics-estimation", "statistics-dependence"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/paired-changes.svg",
+        "reason": "Connect each worker’s before and after measurements and show their changes."
+      }
+    },
+    {
+      "id": "stats-match-outcome",
+      "title": "Match the Outcome Model to What Can Happen",
+      "summary": "Choose a model whose support, mean structure, and variability make sense for the outcome and question.",
+      "example_user_queries": [
+        "My model predicts impossible values.",
+        "Should I use logistic regression?",
+        "How do I analyze counts?",
+        "The groups have different exposure times.",
+        "My count data have more variation than expected.",
+        "Are rating categories equally spaced?",
+        "What does an odds ratio mean in everyday terms?",
+        "Do many zeros require a special model?"
+      ],
+      "sources": [
+        "https://online.stat.psu.edu/stat504/Lesson09",
+        "https://online.stat.psu.edu/statprogram/stat504",
+        "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html",
+        "https://mc-stan.org/docs/functions-reference/unbounded_continuous_distributions.html#normal-distribution"
+      ],
+      "related_patterns": ["stats-regularize", "stats-test-simulation"],
+      "article_words": 1182,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["My model predicts impossible values.", "Should I use logistic regression?"],
+      "collections": ["statistics-models", "statistics-computation"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/outcome-support.svg",
+        "reason": "Distinguish binary probabilities, count masses, continuous densities, and transaction exposure."
+      }
+    },
+    {
+      "id": "stats-regularize",
+      "title": "Constrain Unstable Estimates",
+      "summary": "Use defensible shrinkage when sparse information or excessive flexibility makes fitted relationships unstable.",
+      "example_user_queries": [
+        "My coefficients change when I remove one observation.",
+        "The model fits training data but predicts badly.",
+        "Two predictors measure almost the same thing.",
+        "What does regularization solve?",
+        "My logistic coefficient becomes enormous.",
+        "How should I choose shrinkage strength?",
+        "Does feature selection identify the real causes?",
+        "Can a strong prior hide an important effect?"
+      ],
+      "sources": [
+        "https://mc-stan.org/docs/stan-users-guide/regression.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html",
+        "https://online.stat.psu.edu/stat508/Lesson06.html"
+      ],
+      "related_patterns": ["stats-partial-pooling", "stats-validate-forward"],
+      "article_words": 1232,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "My coefficients change when I remove one observation.",
+        "The model fits training data but predicts badly."
+      ],
+      "collections": [
+        "statistics-probability",
+        "statistics-models",
+        "statistics-computation",
+        "statistics-sparse"
+      ],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/regularization-tradeoff.svg",
+        "reason": "Show coefficient shrinkage and training-versus-validation error under an explicit ridge loss."
+      }
+    },
+    {
+      "id": "stats-partial-pooling",
+      "title": "Stabilize Small-Group Estimates with Partial Pooling",
+      "summary": "Estimate related groups jointly so sparse groups can borrow information while retaining genuine differences.",
+      "example_user_queries": [
+        "Small branches dominate both ends of our ranking.",
+        "How reliable is nine successes out of ten?",
+        "Can related groups share information?",
+        "Should I pool all groups or estimate them separately?",
+        "What is partial pooling?",
+        "My subgroup estimates are extremely noisy.",
+        "Will shrinkage erase real differences?",
+        "How certain are we about which group is best?"
+      ],
+      "sources": ["https://mc-stan.org/learn-stan/case-studies/pool-binary-trials.html"],
+      "related_patterns": ["stats-regularize", "stats-separate-within-between"],
+      "article_words": 856,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Small branches dominate both ends of our ranking.",
+        "How reliable is nine successes out of ten?"
+      ],
+      "collections": ["statistics-dependence", "statistics-sparse"],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-pooling.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-pooling-preview.svg"
+      }
+    },
+    {
+      "id": "stats-separate-within-between",
+      "title": "Separate Within-Group from Between-Group Relationships",
+      "summary": "Identify the level of comparison before interpreting a relationship in grouped or repeated data.",
+      "example_user_queries": [
+        "The overall trend reverses within subgroups.",
+        "Can I infer individual behavior from city averages?",
+        "Within-person and between-person results disagree.",
+        "What is Simpson paradox?",
+        "How do I compare groups with different case mixes?",
+        "Does clustering change the meaning of my coefficient?",
+        "Should I use group fixed effects?",
+        "My predictor barely changes within each group."
+      ],
+      "sources": [
+        "https://dagitty.net/learn/index.html",
+        "https://www.theeffectbook.net/index.html"
+      ],
+      "related_patterns": ["stats-draw-causal-model", "stats-partial-pooling"],
+      "article_words": 826,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "The overall trend reverses within subgroups.",
+        "Can I infer individual behavior from city averages?"
+      ],
+      "collections": [
+        "statistics-distributions",
+        "statistics-dependence",
+        "statistics-causal-traps"
+      ],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-composition.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-composition-preview.svg"
+      }
+    },
+    {
+      "id": "stats-validate-forward",
+      "title": "Validate Under the Conditions of Use",
+      "summary": "Construct evaluation splits that reflect future times, new people, or new groups and keep evaluation information out of training.",
+      "example_user_queries": [
+        "My model performs well in testing but fails in production.",
+        "Can I randomly split time series data?",
+        "The same person appears in training and test sets.",
+        "How do I test predictions for a new site?",
+        "Could preprocessing leak information?",
+        "We keep tuning against the test set.",
+        "Which forecast horizon should I evaluate?",
+        "What baseline should my model beat?"
+      ],
+      "sources": [
+        "https://otexts.com/fpp3/toolbox.html",
+        "https://mc-stan.org/docs/stan-users-guide/cross-validation.html"
+      ],
+      "related_patterns": [
+        "stats-regularize",
+        "stats-forecast-intervals",
+        "stats-check-model",
+        "stats-plan-precision"
+      ],
+      "article_words": 978,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "My model performs well in testing but fails in production.",
+        "Can I randomly split time series data?"
+      ],
+      "collections": ["statistics-models", "statistics-time"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/validation-boundaries.svg",
+        "reason": "Compare random-row, forward-time, and held-out-worker information boundaries."
+      }
+    },
+    {
+      "id": "stats-forecast-intervals",
+      "title": "Report a Forecast Distribution",
+      "summary": "Represent uncertainty about future observations and check whether forecast ranges behave as intended.",
+      "example_user_queries": [
+        "How uncertain is tomorrow forecast?",
+        "Can I use a confidence interval as a delivery promise?",
+        "Our forecast misses demand peaks.",
+        "How do I check a prediction interval?",
+        "A wide interval covers everything but is useless.",
+        "What should staffing use instead of the average forecast?",
+        "Why do forecast errors grow at busy times?",
+        "Does the forecast include uncertainty about future conditions?"
+      ],
+      "sources": ["https://otexts.com/fpp3/toolbox.html"],
+      "related_patterns": ["stats-validate-forward", "stats-choose-consequences"],
+      "article_words": 1012,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "How uncertain is tomorrow forecast?",
+        "Can I use a confidence interval as a delivery promise?"
+      ],
+      "collections": ["statistics-time", "statistics-decisions"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/forecast-bands.svg",
+        "reason": "Show nested predictive intervals and observations recorded after forecasting."
+      }
+    },
+    {
+      "id": "stats-handle-censoring",
+      "title": "Keep the Information in Unfinished Follow-Up",
+      "summary": "Use observed event-free time without pretending the event happened at the end of observation.",
+      "example_user_queries": [
+        "Some participants have not experienced the event yet.",
+        "Should I average only observed failure times?",
+        "Customers are still subscribed when the study ends.",
+        "What is right censoring?",
+        "People enter follow-up at different times.",
+        "Can I treat a competing event as missing data?",
+        "The median survival time has not been reached.",
+        "Is a hazard ratio a risk ratio?"
+      ],
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/apr/section2/apr215.htm",
+        "https://mc-stan.org/docs/stan-users-guide/survival.html"
+      ],
+      "related_patterns": ["stats-missingness", "stats-align-time-zero"],
+      "article_words": 948,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Some participants have not experienced the event yet.",
+        "Should I average only observed failure times?"
+      ],
+      "collections": ["statistics-missing-data", "statistics-events"],
+      "practice": null,
+      "visual": {
+        "type": "timeline",
+        "asset": "statistics/censored-follow-up.svg",
+        "reason": "Connect individual event and censoring times to the Kaplan-Meier risk sets."
+      }
+    },
+    {
+      "id": "stats-draw-causal-model",
+      "title": "Choose Adjustments from a Causal Model",
+      "summary": "Make causal assumptions explicit before deciding which variables to condition on.",
+      "example_user_queries": [
+        "Which variables should I control for?",
+        "Can adding controls introduce bias?",
+        "Is this variable a confounder or a mediator?",
+        "What is collider bias?",
+        "The association changes after adjustment.",
+        "Can every regression coefficient be interpreted causally?",
+        "How do I make my causal assumptions explicit?",
+        "My data cannot distinguish several causal explanations."
+      ],
+      "sources": [
+        "https://catalogofbias.org/biases/collider-bias/",
+        "https://dagitty.net/learn/index.html"
+      ],
+      "related_patterns": ["stats-check-overlap", "stats-align-time-zero"],
+      "article_words": 1121,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["Which variables should I control for?", "Can adding controls introduce bias?"],
+      "collections": ["statistics-causal-traps"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/causal-roles.svg",
+        "reason": "Distinguish a common cause, mediator, and collider before choosing adjustments.",
+        "interactive_asset": "stats-composition.html",
+        "preview_asset": "statistics/stats-composition-preview.svg"
+      }
+    },
+    {
+      "id": "stats-align-time-zero",
+      "title": "Align Eligibility, Assignment, and Follow-Up",
+      "summary": "Specify the target experiment and synchronize its starting conditions before comparing outcomes.",
+      "example_user_queries": [
+        "Our treatment group is defined by future behavior.",
+        "Could there be immortal time bias?",
+        "When should follow-up start?",
+        "How do I emulate a randomized trial with existing records?",
+        "Training completion may depend on staying employed.",
+        "Eligibility and treatment happen on different dates.",
+        "Treatment changes over time.",
+        "Earlier treatment affects later confounders."
+      ],
+      "sources": [
+        "https://content.sph.harvard.edu/wwwhsph/sites/1268/2024/04/hernanrobins_WhatIf_26apr24.pdf",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5124536/"
+      ],
+      "related_patterns": ["stats-handle-censoring", "stats-draw-causal-model"],
+      "article_words": 1024,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Our treatment group is defined by future behavior.",
+        "Could there be immortal time bias?"
+      ],
+      "collections": ["statistics-events", "statistics-causal-traps"],
+      "practice": null,
+      "visual": {
+        "type": "timeline",
+        "asset": "statistics/aligned-time-zero.svg",
+        "reason": "Show the future-label guarantee and recalculate cancellation among the aligned month-six population."
+      }
+    },
+    {
+      "id": "stats-check-overlap",
+      "title": "Check for Comparable Counterparts",
+      "summary": "Inspect whether the target comparison is supported by observations before relying on adjustment or extrapolation.",
+      "example_user_queries": [
+        "The treatment and control groups barely overlap.",
+        "My propensity weights are enormous.",
+        "Can regression fix a missing comparison group?",
+        "Matching discards many participants.",
+        "Should I trim extreme weights?",
+        "No one in this subgroup received treatment.",
+        "Which population does my matched analysis describe?",
+        "The model predicts well but might extrapolate causal effects."
+      ],
+      "sources": [
+        "https://content.sph.harvard.edu/wwwhsph/sites/1268/2024/04/hernanrobins_WhatIf_26apr24.pdf",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2943670/"
+      ],
+      "related_patterns": ["stats-draw-causal-model", "stats-regression-discontinuity"],
+      "article_words": 982,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "The treatment and control groups barely overlap.",
+        "My propensity weights are enormous."
+      ],
+      "collections": [
+        "statistics-sampling",
+        "statistics-causal-designs",
+        "statistics-causal-checks"
+      ],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/comparable-support.svg",
+        "reason": "Show absent treatment counterparts and the changed population behind a supported contrast."
+      }
+    },
+    {
+      "id": "stats-difference-in-differences",
+      "title": "Compare Changes Against an Untreated Group",
+      "summary": "Estimate a treatment contrast by comparing changes when a credible counterfactual trend is available.",
+      "example_user_queries": [
+        "Outcomes improved after our intervention but everything else changed too.",
+        "How do I calculate difference in differences?",
+        "Do groups need identical baseline levels?",
+        "Can parallel pre-trends prove validity?",
+        "Treatment started at different times across groups.",
+        "Could spillovers invalidate my control group?",
+        "We have many people but only a few treated sites.",
+        "Should I compare level changes or proportional changes?"
+      ],
+      "sources": ["https://www.theeffectbook.net/ch-DifferenceinDifference.html"],
+      "related_patterns": ["stats-align-time-zero", "stats-challenge-causal-effect"],
+      "article_words": 660,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Outcomes improved after our intervention but everything else changed too.",
+        "How do I calculate difference in differences?"
+      ],
+      "collections": ["statistics-causal-designs"],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-did.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-did-preview.svg"
+      }
+    },
+    {
+      "id": "stats-regression-discontinuity",
+      "title": "Compare Just Across the Threshold",
+      "summary": "Use a credible discontinuity in treatment assignment to investigate a local causal effect.",
+      "example_user_queries": [
+        "Treatment is determined by a score cutoff.",
+        "Can I compare applicants just above and below eligibility?",
+        "People might manipulate their scores.",
+        "Other benefits start at the same threshold.",
+        "How local is a regression discontinuity estimate?",
+        "Treatment receipt does not perfectly follow eligibility.",
+        "Which bandwidth should I use?",
+        "Can I invent a cutoff in a continuous variable?"
+      ],
+      "sources": [
+        "https://www.theeffectbook.net/ch-RegressionDiscontinuity.html",
+        "https://rdpackages.github.io/references/Cattaneo-Titiunik_2022_ARE.pdf",
+        "https://mdcattaneo.github.io/books/Cattaneo-Idrobo-Titiunik_2020_CUP.pdf"
+      ],
+      "related_patterns": ["stats-check-overlap", "stats-challenge-causal-effect"],
+      "article_words": 1144,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Treatment is determined by a score cutoff.",
+        "Can I compare applicants just above and below eligibility?"
+      ],
+      "collections": ["statistics-causal-designs"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/threshold-comparison.svg",
+        "reason": "Distinguish a fitted cutoff jump from differences between observations at different scores."
+      }
+    },
+    {
+      "id": "stats-challenge-causal-effect",
+      "title": "Challenge the Assumptions Behind a Causal Effect",
+      "summary": "Use targeted falsification, sensitivity analyses, and bounds to expose what a causal conclusion depends on.",
+      "example_user_queries": [
+        "How strong would an unmeasured confounder need to be?",
+        "Can I test my causal assumptions?",
+        "What is a placebo test in a policy study?",
+        "What can negative controls reveal?",
+        "Robustness checks all give the same answer but I remain unsure.",
+        "The causal effect is not point identified.",
+        "Could missing outcomes reverse the conclusion?",
+        "Does passing diagnostics prove causality?"
+      ],
+      "sources": [
+        "https://www.theeffectbook.net/ch-DifferenceinDifference.html",
+        "https://content.sph.harvard.edu/wwwhsph/sites/1268/2024/04/hernanrobins_WhatIf_26apr24.pdf",
+        "https://escholarship.org/uc/item/0pg6471b"
+      ],
+      "related_patterns": ["stats-missingness", "stats-draw-causal-model"],
+      "article_words": 1180,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "How strong would an unmeasured confounder need to be?",
+        "Can I test my causal assumptions?"
+      ],
+      "collections": ["statistics-causal-checks"],
+      "practice": null,
+      "visual": {
+        "type": "sensitivity",
+        "asset": "statistics/causal-sensitivity.svg",
+        "reason": "Connect an interpretable additive-bias scenario to point-estimate and conditional-interval tipping points."
+      }
+    },
+    {
+      "id": "stats-account-for-search",
+      "title": "Account for the Search That Produced the Finding",
+      "summary": "Interpret selected results in light of multiple comparisons, repeated looks, and analytical choices.",
+      "example_user_queries": [
+        "We tested many outcomes and found one significant result.",
+        "Should I correct for multiple comparisons?",
+        "Can I stop an experiment when the result becomes significant?",
+        "What is a false discovery rate?",
+        "We tried many model specifications.",
+        "Does a p value account for all the tests we ran?",
+        "Our dashboard checks experiments every day.",
+        "What is the chance of at least one false positive?"
+      ],
+      "sources": [
+        "https://www.statisticsdonewrong.com/p-value.html",
+        "https://www.statisticsdonewrong.com/regression.html"
+      ],
+      "related_patterns": ["stats-confirm-fresh", "stats-report-uncertainty"],
+      "article_words": 693,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "We tested many outcomes and found one significant result.",
+        "Should I correct for multiple comparisons?"
+      ],
+      "collections": ["statistics-time", "statistics-discovery"],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-search.html",
+        "reason": "Compare the theoretical familywise probability with a simulated estimate only after experiments have run.",
+        "preview_asset": "statistics/stats-search-preview.svg"
+      }
+    },
+    {
+      "id": "stats-confirm-fresh",
+      "title": "Confirm Discoveries on Fresh Evidence",
+      "summary": "Preserve exploration while reserving independent information for evaluating the resulting claim.",
+      "example_user_queries": [
+        "We discovered an interesting subgroup after looking at the results.",
+        "Can we confirm a finding using the same data?",
+        "Our held-out set has been used repeatedly.",
+        "What should be preregistered?",
+        "Does reproducing the code validate the conclusion?",
+        "The replication has a different p value.",
+        "How do I document changes from the analysis plan?",
+        "Can internal validation include feature selection?"
+      ],
+      "sources": [
+        "https://www.statisticsdonewrong.com/",
+        "https://www.amstat.org/docs/default-source/amstat-documents/p-valuestatement.pdf",
+        "https://www.pnas.org/doi/10.1073/pnas.1708274114"
+      ],
+      "related_patterns": ["stats-account-for-search", "stats-combine-studies"],
+      "article_words": 1076,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "We discovered an interesting subgroup after looking at the results.",
+        "Can we confirm a finding using the same data?"
+      ],
+      "collections": ["statistics-discovery", "statistics-synthesis", "statistics-structure"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/fresh-confirmation.svg",
+        "reason": "Separate candidate search, a locked claim, and fresh estimates with the practical threshold visible."
+      }
+    },
+    {
+      "id": "stats-combine-studies",
+      "title": "Combine Comparable Effects While Preserving Differences",
+      "summary": "Synthesize compatible estimates with attention to precision, heterogeneity, study bias, and missing evidence.",
+      "example_user_queries": [
+        "Some studies are positive and some are not.",
+        "Should I count significant studies?",
+        "Can I combine these effect estimates?",
+        "What does heterogeneity mean in a meta-analysis?",
+        "A pooled confidence interval is narrow despite very different effects.",
+        "One study drives the combined result.",
+        "Could unpublished findings change the conclusion?",
+        "Several estimates use overlapping participants."
+      ],
+      "sources": [
+        "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-10",
+        "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-13"
+      ],
+      "related_patterns": ["stats-confirm-fresh", "stats-report-uncertainty"],
+      "article_words": 1026,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Some studies are positive and some are not.",
+        "Should I count significant studies?"
+      ],
+      "collections": ["statistics-synthesis"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/evidence-forest.svg",
+        "reason": "Show individual estimates, uncertainty, inverse-variance weights, and a pooled interval."
+      }
+    },
+    {
+      "id": "stats-choose-consequences",
+      "title": "Compare Actions by Their Consequences",
+      "summary": "Connect uncertain outcomes to the benefits, losses, and constraints of the actions available.",
+      "example_user_queries": [
+        "Is this evidence strong enough to act?",
+        "Should a p value determine our decision?",
+        "False positives and false negatives have different costs.",
+        "The change is reversible but waiting is expensive.",
+        "Would another study be worth the cost?",
+        "How do I choose a probability threshold?",
+        "Stakeholders disagree about the consequences.",
+        "Does high predicted risk mean high treatment benefit?"
+      ],
+      "sources": ["https://mc-stan.org/docs/stan-users-guide/decision-analysis.html"],
+      "related_patterns": ["stats-base-rates", "stats-forecast-intervals"],
+      "article_words": 1178,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Is this evidence strong enough to act?",
+        "Should a p value determine our decision?"
+      ],
+      "collections": ["statistics-framing", "statistics-decisions"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/decision-consequences.svg",
+        "reason": "Connect utility assumptions to action thresholds and the conditional value of imperfect information."
+      }
+    },
+    {
+      "id": "stats-communicate-effects",
+      "title": "Show Absolute Effects and the Uncertainty That Matters",
+      "summary": "Explain a result using its baseline, magnitude, population, and relevant form of uncertainty.",
+      "example_user_queries": [
+        "A relative increase sounds huge but the baseline is tiny.",
+        "What is the difference between percent and percentage points?",
+        "How should I explain an odds ratio?",
+        "Does this interval describe individual outcomes?",
+        "The average hides very different experiences.",
+        "How many decimal places should I report?",
+        "Can I call this association an effect?",
+        "What should a short statistical summary include?"
+      ],
+      "sources": [
+        "https://www.amstat.org/docs/default-source/amstat-documents/p-valuestatement.pdf",
+        "https://www.itl.nist.gov/div898/handbook/prc/section2/prc26.htm",
+        "https://www.statsmodels.org/stable/generated/statsmodels.stats.proportion.confint_proportions_2indep.html"
+      ],
+      "related_patterns": ["stats-report-uncertainty", "stats-show-distribution"],
+      "article_words": 1093,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "A relative increase sounds huge but the baseline is tiny.",
+        "What is the difference between percent and percentage points?"
+      ],
+      "collections": ["statistics-communication"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/absolute-effects.svg",
+        "reason": "Display a shared denominator, absolute and relative changes, and the interval for the rate difference."
+      }
+    },
+    {
+      "id": "stats-hidden-structure",
+      "title": "Explore Shared Structure Before Naming It",
+      "summary": "Use dimension reduction, latent-variable models, or clustering for distinct exploratory questions and check stability before interpretation.",
+      "example_user_queries": [
+        "I have too many correlated variables.",
+        "Should I use PCA or factor analysis?",
+        "Do my customer clusters represent real groups?",
+        "How many factors should I retain?",
+        "The clusters change when I scale the variables.",
+        "Can a two-dimensional plot prove that groups exist?",
+        "How do I validate an exploratory representation?",
+        "Does the largest component explain the outcome?"
+      ],
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/pmc/section5/pmc55.htm",
+        "https://stats.oarc.ucla.edu/sas/output/factor-analysis/",
+        "https://scikit-learn.org/stable/modules/clustering",
+        "https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html"
+      ],
+      "related_patterns": [
+        "stats-measurement-error",
+        "stats-confirm-fresh",
+        "stats-measurement-validity",
+        "stats-resample-units"
+      ],
+      "article_words": 998,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["I have too many correlated variables.", "Should I use PCA or factor analysis?"],
+      "collections": ["statistics-measurement", "statistics-structure"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/structure-scaling.svg",
+        "reason": "Compare PCA variance shares before and after standardization with a tied-eigenvalue example."
+      }
+    },
+    {
+      "id": "stats-test-simulation",
+      "title": "Test the Analysis on Data with Known Answers",
+      "summary": "Use simulation to investigate a procedure and distinguish statistical uncertainty from computational failure.",
+      "example_user_queries": [
+        "How can I check whether my estimator works?",
+        "Can I simulate the study before collecting data?",
+        "My sampler has warnings but returns estimates.",
+        "What is the difference between Monte Carlo error and statistical uncertainty?",
+        "How many simulation replications do I need?",
+        "Does a fixed random seed prove reproducibility?",
+        "What does simulation based calibration check?",
+        "A model passes computational checks but fits the data badly."
+      ],
+      "sources": [
+        "https://mc-stan.org/docs/stan-users-guide/simulation-based-calibration.html",
+        "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+        "https://arxiv.org/abs/1712.03198"
+      ],
+      "related_patterns": [
+        "stats-randomize-blocks",
+        "stats-report-uncertainty",
+        "stats-regularize",
+        "stats-resample-units"
+      ],
+      "article_words": 1053,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "How can I check whether my estimator works?",
+        "Can I simulate the study before collecting data?"
+      ],
+      "collections": [
+        "statistics-design",
+        "statistics-models",
+        "statistics-discovery",
+        "statistics-computation"
+      ],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/simulation-coverage.svg",
+        "reason": "Compare correct and deliberately narrow interval coverage with Monte Carlo uncertainty."
+      }
+    },
+    {
+      "id": "stats-bound-rare-events",
+      "title": "Bound the Rate When No Events Are Observed",
+      "summary": "Express what zero observed events can rule out under a stated sampling model instead of concluding the event is impossible.",
+      "example_user_queries": [
+        "We observed zero failures.",
+        "Does no event mean the risk is zero?",
+        "How many event-free trials are enough?",
+        "What is the rule of three?",
+        "Can I use a normal interval near zero?",
+        "The same component was tested repeatedly.",
+        "Does short follow-up justify a reliability claim?",
+        "How does a Bayesian bound differ from a confidence bound?"
+      ],
+      "sources": [
+        "https://itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+        "https://www.nist.gov/publications/estimating-instrument-performance-confidence-intervals-and-confidence-bounds"
+      ],
+      "related_patterns": [
+        "stats-report-uncertainty",
+        "stats-handle-censoring",
+        "stats-partial-pooling"
+      ],
+      "article_words": 663,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": ["We observed zero failures.", "Does no event mean the risk is zero?"],
+      "collections": ["statistics-estimation", "statistics-events", "statistics-sparse"],
+      "practice": null,
+      "visual": {
+        "type": "interactive-html",
+        "asset": "stats-zero-events.html",
+        "reason": "An interactive comparison makes the mechanism visible.",
+        "preview_asset": "statistics/stats-zero-events-preview.svg"
+      }
+    },
+    {
+      "id": "stats-synthetic-control",
+      "title": "Build a Synthetic Comparison",
+      "summary": "Combine suitable untreated units to construct a transparent counterfactual for a treated unit.",
+      "example_user_queries": [
+        "No single control region resembles the treated one.",
+        "Can I combine several comparison markets?",
+        "What is a synthetic control?",
+        "The synthetic comparison relies on one donor.",
+        "Is a good pre-treatment fit enough?",
+        "Can treatment spill over to donor units?",
+        "How should I interpret placebo gaps?",
+        "The treated unit is outside the donor pool range."
+      ],
+      "sources": [
+        "https://matheusfacure.github.io/python-causality-handbook/15-Synthetic-Control.html",
+        "https://economics.mit.edu/sites/default/files/publications/jel.20191450.pdf"
+      ],
+      "related_patterns": ["stats-difference-in-differences", "stats-challenge-causal-effect"],
+      "article_words": 1042,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "No single control region resembles the treated one.",
+        "Can I combine several comparison markets?"
+      ],
+      "collections": ["statistics-causal-designs", "statistics-causal-checks"],
+      "practice": null,
+      "visual": {
+        "type": "timeline",
+        "asset": "statistics/synthetic-trajectory.svg",
+        "reason": "Show pre-period-only donor weights, observed and synthetic trajectories, and a separate gap plot."
+      }
+    },
+    {
+      "id": "stats-instrumental-variables",
+      "title": "Use an Instrument Under Defensible Assumptions",
+      "summary": "Investigate treatment variation induced by a credible external source when ordinary adjustment cannot resolve confounding.",
+      "example_user_queries": [
+        "Participation is confounded by motivation.",
+        "We randomized invitations but people did not all attend.",
+        "What makes a valid instrumental variable?",
+        "The instrument might affect the outcome directly.",
+        "My instrument barely changes treatment receipt.",
+        "Who does a local average treatment effect apply to?",
+        "Does a strong first stage prove validity?",
+        "Why does the IV estimate differ from ordinary regression?"
+      ],
+      "sources": [
+        "https://www.theeffectbook.net/ch-InstrumentalVariables.html",
+        "https://www.nber.org/papers/t0284",
+        "https://www.nber.org/papers/t0118"
+      ],
+      "related_patterns": ["stats-draw-causal-model", "stats-check-overlap"],
+      "article_words": 1158,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Participation is confounded by motivation.",
+        "We randomized invitations but people did not all attend."
+      ],
+      "collections": ["statistics-causal-designs"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/instrument-pathways.svg",
+        "reason": "Show identification pathways, the exclusion threat, and the invitation-to-attendance Wald ratio."
+      }
+    },
+    {
+      "id": "stats-update-beliefs",
+      "title": "Update Beliefs with Evidence",
+      "summary": "Combine an explicit prior and observation model with new evidence, then examine how the assumptions influence the posterior.",
+      "example_user_queries": [
+        "How much should ten observations change my belief?",
+        "Our pilot is small but the result looks promising.",
+        "How do earlier results affect the next experiment?",
+        "Two analysts get different conclusions from the same evidence.",
+        "How do I choose a prior without hiding assumptions?",
+        "Can I use last month’s posterior as this month’s prior?",
+        "Am I counting the same study twice?",
+        "What is the chance the next user succeeds?",
+        "How sensitive is this conclusion to my starting assumptions?",
+        "Our success rate may have changed since the last pilot."
+      ],
+      "sources": [
+        "https://statproofbook.github.io/P/bin-post",
+        "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html"
+      ],
+      "related_patterns": [
+        "stats-base-rates",
+        "stats-check-model",
+        "stats-partial-pooling",
+        "stats-choose-consequences"
+      ],
+      "article_words": 986,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "How much should ten observations change my belief?",
+        "Our pilot is small but the result looks promising.",
+        "How do earlier results affect the next experiment?"
+      ],
+      "collections": ["statistics-probability"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/belief-update.svg",
+        "reason": "Show how two stated priors update under identical observations."
+      }
+    },
+    {
+      "id": "stats-plan-precision",
+      "title": "Plan for Useful Precision",
+      "summary": "Choose a study size and recruitment plan from the uncertainty, outcome variation, and comparison the decision actually requires.",
+      "example_user_queries": [
+        "How many people should we recruit?",
+        "Will this sample give a useful answer?",
+        "What does doubling the study budget buy us?",
+        "How precise does our estimate need to be?",
+        "Our pilot standard deviation might be too optimistic.",
+        "How should I allow for dropout?",
+        "Can I use a sample-size formula for a different comparison?",
+        "We need to rule out a difference that matters.",
+        "We have many rows but only a few teams.",
+        "Does this confidence-width target mean the study has enough power?"
+      ],
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm",
+        "https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm"
+      ],
+      "related_patterns": [
+        "stats-define-target",
+        "stats-practical-equivalence",
+        "stats-randomize-blocks",
+        "stats-test-simulation"
+      ],
+      "article_words": 953,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "How many people should we recruit?",
+        "Will this sample give a useful answer?",
+        "What does doubling the study budget buy us?"
+      ],
+      "collections": ["statistics-design"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/precision-plan.svg",
+        "reason": "Connect desired interval width with complete observations and recruitment assumptions."
+      }
+    },
+    {
+      "id": "stats-check-model",
+      "title": "Check What the Model Misses",
+      "summary": "Compare predictions and replicated data with observations to find consequential structure a fitted model fails to represent.",
+      "example_user_queries": [
+        "The model converged but its predictions look wrong.",
+        "Is a high fit score enough to trust this model?",
+        "My residuals have a curve.",
+        "The predicted average is right but the tails are wrong.",
+        "How do I check whether a model reproduces my data?",
+        "There are many more zeros than the model predicts.",
+        "The model fits training perfectly.",
+        "Should I add another parameter after a bad fit?",
+        "How do model checks differ from a held-out test?",
+        "Can a reliable calculation still answer the wrong question?"
+      ],
+      "sources": [
+        "https://itl.nist.gov/div898/handbook/pmd/section4/pmd44.htm",
+        "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html"
+      ],
+      "related_patterns": [
+        "stats-match-outcome",
+        "stats-regularize",
+        "stats-validate-forward",
+        "stats-test-simulation"
+      ],
+      "article_words": 945,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "The model converged but its predictions look wrong.",
+        "Is a high fit score enough to trust this model?",
+        "My residuals have a curve."
+      ],
+      "collections": ["statistics-models", "statistics-computation"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/model-mismatch.svg",
+        "reason": "Expose a missing curve through matched observed-fit and residual plots."
+      }
+    },
+    {
+      "id": "stats-practical-equivalence",
+      "title": "Test for Practical Equivalence",
+      "summary": "Define meaningful difference bounds in advance and assess whether the evidence rules out differences beyond them.",
+      "example_user_queries": [
+        "Can I call two processes equivalent because the difference is not significant?",
+        "We want to switch to a cheaper process without a meaningful quality loss.",
+        "How small a difference can we rule out?",
+        "Does this wide interval establish no useful effect?",
+        "How do I choose an equivalence margin?",
+        "Why does an equivalence test use a different confidence level?",
+        "The difference is real but too small to matter.",
+        "Do equivalent averages mean the instruments agree for each person?",
+        "Is our study precise enough to establish similarity?",
+        "Is noninferiority the same question as two-sided equivalence?"
+      ],
+      "sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5502906/",
+        "https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm"
+      ],
+      "related_patterns": [
+        "stats-report-uncertainty",
+        "stats-plan-precision",
+        "stats-paired-comparisons",
+        "stats-choose-consequences"
+      ],
+      "article_words": 962,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Can I call two processes equivalent because the difference is not significant?",
+        "We want to switch to a cheaper process without a meaningful quality loss.",
+        "How small a difference can we rule out?"
+      ],
+      "collections": ["statistics-estimation", "statistics-decisions"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/equivalence-bounds.svg",
+        "reason": "Compare equivalent, inconclusive, and beyond-margin 90% intervals."
+      }
+    },
+    {
+      "id": "stats-measurement-validity",
+      "title": "Check That the Measure Matches the Claim",
+      "summary": "Support the intended interpretation of a score with evidence about what it includes, omits, and confounds.",
+      "example_user_queries": [
+        "Our training scores improved but people still struggle with unfamiliar tasks.",
+        "How do I know whether this questionnaire measures what we claim?",
+        "The score is consistent, but is it useful for this decision?",
+        "Can we compare these scores after changing the questions?",
+        "Our dashboard metric is easy to count but misses what matters.",
+        "Does a high correlation with another test establish what this score means?",
+        "How should we weight recall and application in an assessment?",
+        "Could reading difficulty explain the group difference in this test?",
+        "We want to reuse a measure with a different population.",
+        "What evidence supports interpreting this score as readiness for work?"
+      ],
+      "sources": [
+        "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+        "https://www.ets.org/research/policy_research_reports/publications/report/1990/ihmy.html"
+      ],
+      "related_patterns": [
+        "stats-define-target",
+        "stats-measurement-error",
+        "stats-hidden-structure"
+      ],
+      "article_words": 941,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Our training scores improved but people still struggle with unfamiliar tasks.",
+        "How do I know whether this questionnaire measures what we claim?",
+        "The score is consistent, but is it useful for this decision?"
+      ],
+      "collections": ["statistics-measurement"],
+      "practice": null,
+      "visual": {
+        "type": "comparison",
+        "asset": "statistics/measure-claim.svg",
+        "reason": "Show how the same component scores yield different composites without establishing transfer."
+      }
+    },
+    {
+      "id": "stats-resample-units",
+      "title": "Resample Whole Units",
+      "summary": "Match resampling to the units, pairing, strata, and dependence that generated the observations.",
+      "example_user_queries": [
+        "I have repeated observations from the same people; how should I estimate uncertainty?",
+        "My bootstrap intervals look suspiciously narrow.",
+        "Should I resample rows or whole customers?",
+        "Can I bootstrap paired before-and-after measurements?",
+        "Our data have only a few sites but thousands of records.",
+        "How do I preserve strata when creating resampled datasets?",
+        "Does running more bootstrap draws solve a small sample?",
+        "Can I shuffle dates in a time series to estimate precision?",
+        "Do I need to repeat model selection inside each resample?",
+        "How does weighting unequal groups change the bootstrap target?"
+      ],
+      "sources": [
+        "https://stat.ethz.ch/R-manual/R-devel/library/boot/html/boot.html",
+        "https://stat.ethz.ch/R-manual/R-devel/library/boot/html/tsboot.html",
+        "https://www.econ.ucdavis.edu/faculty/cameron/research/Cameron_Miller_JHR_2015_February.pdf"
+      ],
+      "related_patterns": [
+        "stats-paired-comparisons",
+        "stats-separate-within-between",
+        "stats-test-simulation",
+        "stats-choose-assignment-unit"
+      ],
+      "article_words": 928,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "I have repeated observations from the same people; how should I estimate uncertainty?",
+        "My bootstrap intervals look suspiciously narrow.",
+        "Should I resample rows or whole customers?"
+      ],
+      "collections": ["statistics-estimation", "statistics-dependence", "statistics-computation"],
+      "practice": null,
+      "visual": {
+        "type": "distribution",
+        "asset": "statistics/resample-units.svg",
+        "reason": "Preserve whole workers and compare exact bootstrap uncertainty with independent-row resampling."
+      }
+    },
+    {
+      "id": "stats-monitor-baseline",
+      "title": "Monitor Against a Stable Baseline",
+      "summary": "Define a credible baseline and a prospective signal rule before interpreting changes in a running process.",
+      "example_user_queries": [
+        "Our dashboard reacts to every small weekly change.",
+        "How do we tell ordinary process variation from a signal?",
+        "Should the limits move whenever a new point arrives?",
+        "What baseline should we use before monitoring a process?",
+        "Why are limits for averages narrower than limits for individual readings?",
+        "Does staying within control limits mean we meet customer requirements?",
+        "How many false alarms should an ongoing dashboard produce?",
+        "The number of jobs changes each week; can we use fixed proportion limits?",
+        "When should we establish a new baseline after a process change?",
+        "What should we investigate when a chart signals?"
+      ],
+      "sources": [
+        "https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc31.htm",
+        "https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc32.htm",
+        "https://www.itl.nist.gov/div898/handbook/pmc/pmc.htm"
+      ],
+      "related_patterns": [
+        "stats-validate-forward",
+        "stats-forecast-intervals",
+        "stats-account-for-search",
+        "stats-measurement-error"
+      ],
+      "article_words": 958,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "Our dashboard reacts to every small weekly change.",
+        "How do we tell ordinary process variation from a signal?",
+        "Should the limits move whenever a new point arrives?"
+      ],
+      "collections": ["statistics-time"],
+      "practice": null,
+      "visual": {
+        "type": "timeline",
+        "asset": "statistics/stable-baseline.svg",
+        "reason": "Show prospective subgroup means and prespecified three-sigma limits."
+      }
+    },
+    {
+      "id": "stats-choose-assignment-unit",
+      "title": "Choose the Unit of Assignment",
+      "summary": "Align treatment assignment, spillover boundaries, outcome measurement, and analysis before running an experiment.",
+      "example_user_queries": [
+        "We have hundreds of employees but only a few branches receiving treatment.",
+        "Should we assign the intervention to people or whole teams?",
+        "Will participants sharing a classroom contaminate the comparison?",
+        "Is recruiting more people at the same site enough to increase power?",
+        "What counts as an independent replicate in this experiment?",
+        "Can we compare one treatment branch with one control branch?",
+        "How does correlation within a branch change sample-size planning?",
+        "Do we want the average branch effect or the average employee effect?",
+        "How should our analysis reflect randomization within matched pairs of sites?",
+        "What if the intervention spreads between the groups we randomized?"
+      ],
+      "sources": [
+        "https://www.bmj.com/content/328/7441/702",
+        "https://www.bmj.com/content/bmj/345/bmj.e5661.full.pdf",
+        "https://www.econ.ucdavis.edu/faculty/cameron/research/Cameron_Miller_JHR_2015_February.pdf"
+      ],
+      "related_patterns": [
+        "stats-randomize-blocks",
+        "stats-plan-precision",
+        "stats-resample-units",
+        "stats-test-simulation"
+      ],
+      "article_words": 1005,
+      "difficulty": "introductory explanation with advanced notes",
+      "use_when": [
+        "We have hundreds of employees but only a few branches receiving treatment.",
+        "Should we assign the intervention to people or whole teams?",
+        "Will participants sharing a classroom contaminate the comparison?"
+      ],
+      "collections": ["statistics-design", "statistics-dependence"],
+      "practice": null,
+      "visual": {
+        "type": "diagram",
+        "asset": "statistics/assignment-units.svg",
+        "reason": "Distinguish branch assignments from employee observations and compare clustering costs."
+      }
+    }
+  ],
+  "collections": [
+    {
+      "id": "statistics-framing",
+      "title": "Framing Statistical Questions",
+      "problem": "Define the population, quantity, comparison, and practical purpose before choosing an analysis.",
+      "items": ["stats-define-target", "stats-choose-consequences", "stats-report-uncertainty"]
+    },
+    {
+      "id": "statistics-sampling",
+      "title": "Sampling and Representativeness",
+      "problem": "Trace who can enter the data and justify claims about the population the result is meant to describe.",
+      "items": ["stats-sample-target", "stats-missingness", "stats-check-overlap"]
+    },
+    {
+      "id": "statistics-measurement",
+      "title": "Measurement and Operational Definitions",
+      "problem": "Separate the intended quantity from imperfect instruments, proxies, and constructed scores.",
+      "items": [
+        "stats-measurement-error",
+        "stats-hidden-structure",
+        "stats-define-target",
+        "stats-measurement-validity"
+      ]
+    },
+    {
+      "id": "statistics-design",
+      "title": "Designing Informative Studies",
+      "problem": "Create useful comparisons through assignment, blocking, joint-factor designs, and prospective simulation.",
+      "items": [
+        "stats-plan-precision",
+        "stats-randomize-blocks",
+        "stats-factorial-interactions",
+        "stats-test-simulation",
+        "stats-choose-assignment-unit"
+      ]
+    },
+    {
+      "id": "statistics-missing-data",
+      "title": "Missing, Unusual, and Incomplete Data",
+      "problem": "Distinguish missing observations, genuine extremes, and unfinished follow-up before selecting a response.",
+      "items": ["stats-missingness", "stats-investigate-extremes", "stats-handle-censoring"]
+    },
+    {
+      "id": "statistics-distributions",
+      "title": "Distributions, Summaries, and Visualization",
+      "problem": "Inspect variation, shape, composition, and tails instead of asking one average to describe everything.",
+      "items": [
+        "stats-show-distribution",
+        "stats-investigate-extremes",
+        "stats-separate-within-between"
+      ]
+    },
+    {
+      "id": "statistics-probability",
+      "title": "Probability and Updating Beliefs",
+      "problem": "Keep conditional probabilities, prior assumptions, and uncertainty statements connected to their actual meaning.",
+      "items": [
+        "stats-base-rates",
+        "stats-update-beliefs",
+        "stats-report-uncertainty",
+        "stats-regularize"
+      ]
+    },
+    {
+      "id": "statistics-estimation",
+      "title": "Estimation and Comparisons",
+      "problem": "Estimate relevant differences, preserve linked observations, and distinguish inconclusive evidence from practical equivalence.",
+      "items": [
+        "stats-report-uncertainty",
+        "stats-practical-equivalence",
+        "stats-paired-comparisons",
+        "stats-bound-rare-events",
+        "stats-resample-units"
+      ]
+    },
+    {
+      "id": "statistics-models",
+      "title": "Building and Checking Models",
+      "problem": "Choose outcome models, constrain weakly supported flexibility, and evaluate the whole procedure.",
+      "items": [
+        "stats-match-outcome",
+        "stats-check-model",
+        "stats-regularize",
+        "stats-validate-forward",
+        "stats-test-simulation"
+      ]
+    },
+    {
+      "id": "statistics-dependence",
+      "title": "Groups, Repeated Measures, and Dependence",
+      "problem": "Preserve information about shared units and distinguish local evidence from between-group variation.",
+      "items": [
+        "stats-paired-comparisons",
+        "stats-separate-within-between",
+        "stats-partial-pooling",
+        "stats-resample-units",
+        "stats-choose-assignment-unit"
+      ]
+    },
+    {
+      "id": "statistics-time",
+      "title": "Time, Forecasting, and Monitoring",
+      "problem": "Evaluate future predictions using past information and connect predictive ranges to subsequent observations.",
+      "items": [
+        "stats-validate-forward",
+        "stats-forecast-intervals",
+        "stats-account-for-search",
+        "stats-monitor-baseline"
+      ]
+    },
+    {
+      "id": "statistics-events",
+      "title": "Time to Events and Reliability",
+      "problem": "Use event-free observation time, respect the follow-up process, and express what rare failures can establish.",
+      "items": ["stats-handle-censoring", "stats-align-time-zero", "stats-bound-rare-events"]
+    },
+    {
+      "id": "statistics-causal-traps",
+      "title": "Causal Questions and Traps",
+      "problem": "Specify the causal question, make assumptions visible, and avoid adjustment or timing that creates misleading comparisons.",
+      "items": ["stats-draw-causal-model", "stats-align-time-zero", "stats-separate-within-between"]
+    },
+    {
+      "id": "statistics-causal-designs",
+      "title": "Finding Credible Causal Comparisons",
+      "problem": "Select a comparison design from the assignment mechanism, available support, and defensible assumptions.",
+      "items": [
+        "stats-check-overlap",
+        "stats-randomize-blocks",
+        "stats-difference-in-differences",
+        "stats-regression-discontinuity",
+        "stats-synthetic-control",
+        "stats-instrumental-variables"
+      ]
+    },
+    {
+      "id": "statistics-causal-checks",
+      "title": "Challenging Causal Conclusions",
+      "problem": "Probe consequential assumptions through targeted checks, sensitivity analysis, and bounds.",
+      "items": [
+        "stats-challenge-causal-effect",
+        "stats-check-overlap",
+        "stats-missingness",
+        "stats-synthetic-control"
+      ]
+    },
+    {
+      "id": "statistics-discovery",
+      "title": "False Discoveries and Reproducibility",
+      "problem": "Retain the search history, plan monitoring, and reserve independent information for confirmation.",
+      "items": ["stats-account-for-search", "stats-confirm-fresh", "stats-test-simulation"]
+    },
+    {
+      "id": "statistics-synthesis",
+      "title": "Combining Evidence Across Studies",
+      "problem": "Compare compatible estimates, preserve heterogeneity, and investigate evidence that may be missing.",
+      "items": ["stats-combine-studies", "stats-confirm-fresh", "stats-report-uncertainty"]
+    },
+    {
+      "id": "statistics-decisions",
+      "title": "Decisions under Uncertainty",
+      "problem": "Connect evidence to actions, unequal consequences, and the value of further information.",
+      "items": [
+        "stats-choose-consequences",
+        "stats-practical-equivalence",
+        "stats-base-rates",
+        "stats-forecast-intervals"
+      ]
+    },
+    {
+      "id": "statistics-communication",
+      "title": "Communicating Statistical Results",
+      "problem": "Explain baselines, absolute and relative effects, uncertainty, populations, and the limits of a claim.",
+      "items": ["stats-communicate-effects", "stats-report-uncertainty", "stats-show-distribution"]
+    },
+    {
+      "id": "statistics-structure",
+      "title": "Discovering Hidden Structure",
+      "problem": "Distinguish compression, latent constructs, and exploratory grouping, then assess the resulting representation.",
+      "items": ["stats-hidden-structure", "stats-measurement-error", "stats-confirm-fresh"]
+    },
+    {
+      "id": "statistics-computation",
+      "title": "Simulation and Computational Reliability",
+      "problem": "Check estimators and implementations against known cases while separating numerical accuracy from model adequacy.",
+      "items": [
+        "stats-test-simulation",
+        "stats-check-model",
+        "stats-regularize",
+        "stats-match-outcome",
+        "stats-resample-units"
+      ]
+    },
+    {
+      "id": "statistics-sparse",
+      "title": "Sparse Data and Rare Events",
+      "problem": "Respond to few events, weak local information, and unstable estimates with suitable bounds or defensible sharing.",
+      "items": [
+        "stats-bound-rare-events",
+        "stats-partial-pooling",
+        "stats-regularize",
+        "stats-base-rates"
+      ]
+    }
+  ],
+  "interactive_examples": [
+    {
+      "id": "stats-base-rates",
+      "asset": "content/assets/widgets/stats-base-rates.html",
+      "title": "Base rates and positive results",
+      "scope": "At 1% prevalence, 90% sensitivity, and 95% specificity, 10,000 submissions yield expected counts of 90 true positives and 495 false positives: about 15.4% of flags are true positives."
+    },
+    {
+      "id": "stats-interval",
+      "asset": "content/assets/widgets/stats-interval.html",
+      "title": "Binomial uncertainty explorer",
+      "scope": "For 10 observed events in 100 independent trials, the 95% Wilson interval is approximately 5.52% to 17.44%. It is not a prediction interval or a universal procedure for dependent data."
+    },
+    {
+      "id": "stats-zero-events",
+      "asset": "content/assets/widgets/stats-zero-events.html",
+      "title": "Zero-event upper bound",
+      "scope": "With zero events in 100 independent, fully observed trials, the one-sided 95% exact binomial upper bound is about 2.95%, under the fixed-sample model."
+    },
+    {
+      "id": "stats-pooling",
+      "asset": "content/assets/widgets/stats-pooling.html",
+      "title": "Partial pooling explorer",
+      "scope": "With observation SD 5, population mean 0, population SD 2, and observed mean 6, the fixed normal-means example gives a pooled mean about 0.83 at n=1 and 5.65 at n=100."
+    },
+    {
+      "id": "stats-distribution",
+      "asset": "content/assets/widgets/stats-distribution.html",
+      "title": "Mean and median explorer",
+      "scope": "One genuine extreme value can move the mean much more than the median. The appropriate summary depends on the question; numerical influence does not prove a recording error."
+    },
+    {
+      "id": "stats-composition",
+      "asset": "content/assets/widgets/stats-composition.html",
+      "title": "Group composition explorer",
+      "scope": "A succeeds more often within each fictional subgroup, but B has the higher raw aggregate because it receives more easy cases. Standardizing both to a common mix changes the comparison."
+    },
+    {
+      "id": "stats-did",
+      "asset": "content/assets/widgets/stats-did.html",
+      "title": "Difference-in-differences explorer",
+      "scope": "A treated index changing from 40 to 55 and an untreated index changing from 20 to 28 gives (55-40)-(28-20)=7. The arithmetic alone does not establish causality."
+    },
+    {
+      "id": "stats-factorial",
+      "asset": "content/assets/widgets/stats-factorial.html",
+      "title": "Factorial interaction explorer",
+      "scope": "Temperature changes yield by 2 units with the old recipe and 17 with the new recipe, giving an additive interaction contrast of 15 units in the fictional example."
+    },
+    {
+      "id": "stats-search",
+      "asset": "content/assets/widgets/stats-search.html",
+      "title": "Multiple-testing explorer",
+      "scope": "With 20 independent true-null tests, each with false-positive probability 0.05, the probability of at least one false positive is 1-0.95^20, about 64.2%."
+    }
+  ],
+  "limitations": [
+    "A broad first edition, not an exhaustive catalog of every estimator or specialized field.",
+    "Reading paths are curated collections; advanced notes do not create a new difficulty-filter feature.",
+    "Recommendation queries are package metadata, not a new retrieval service.",
+    "Widgets are fixed-assumption teaching examples, not general statistical analysis tools."
+  ]
+}

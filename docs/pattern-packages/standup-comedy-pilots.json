@@ -1,0 +1,180 @@
+{
+  "format_version": 1,
+  "title": "Stand-up Comedy — Pilot Articles",
+  "reviewed_on": "2026-10-25",
+  "status": "draft",
+  "verse": "standup-comedy",
+  "collection": "standup-comedy-pilots",
+  "research_notes": "docs/standup-comedy-pilots.md",
+  "verification": "Official uploader identities and timestamped captions checked in the browser. No independent acoustic timing or gesture audit. Clip timestamps are approximate locators; mechanism interpretations are editorial analysis.",
+  "patterns": [
+    {
+      "id": "standup-misdirection",
+      "title": "Misdirection",
+      "conventional_method": "Misdirection; broken assumption",
+      "primary_collection_label": "Constructing the Joke",
+      "pattern_type": "comic device",
+      "use_when": [
+        "The audience can predict the obvious ending.",
+        "An observation contains a plausible second interpretation.",
+        "The draft explains the joke before the audience can discover it."
+      ],
+      "goals": ["Create a clear turn", "Use audience inference", "Shorten an explanatory draft"],
+      "mechanisms": ["Expectation", "Inference", "Reinterpretation"],
+      "examples": ["hedberg-past-habit", "delaney-fortune-teller"],
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=ax0MGlIVjiY&t=97s",
+          "title": "Mitch Hedberg — The Reason We Can't Find Big Foot",
+          "role": "official performance captions",
+          "locator": "1:37–1:46"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=_z68gMp5Yxw&t=123s",
+          "title": "Gary Delaney's Outrageous One-Liners!",
+          "role": "official performance captions",
+          "locator": "2:03–2:25"
+        },
+        {
+          "url": "https://creativestandup.com/wp-content/uploads/manual/joke-structure-guide.pdf",
+          "title": "Jared Volle — Joke-Structure Guide",
+          "role": "practitioner terminology"
+        }
+      ],
+      "editorial_decision": "New stand-up-specific draft; no existing same-title article found in the corpus.",
+      "distinction": "Focuses on a listener's initial inference and revised reading; reversal is a related outcome structure.",
+      "practice": { "status": "omitted", "reason": "Article-only pilot commission." },
+      "visual": {
+        "type": "comparison",
+        "implementation": "Markdown table contrasting initial reading with the information that changes it.",
+        "rationale": "The interpretive relationship is clearer than a decorative illustration."
+      },
+      "related_patterns": ["standup-add-tags", "standup-let-the-audience-finish"],
+      "example_user_queries": [
+        "People can see my punchline coming.",
+        "My joke surprises people but the ending feels random.",
+        "How do I make an audience assume the wrong thing?",
+        "My setup gives away the funny part too early.",
+        "I have an observation but it reads like an explanation.",
+        "How can one sentence mean something different after the next line?",
+        "The reveal needs too much explanation to make sense.",
+        "I want a twist that fits what I already told the audience."
+      ]
+    },
+    {
+      "id": "standup-add-tags",
+      "title": "Add Tags",
+      "conventional_method": "Tags; tag lines",
+      "primary_collection_label": "Developing the Bit",
+      "pattern_type": "writing technique",
+      "use_when": [
+        "One punchline works but the passage ends immediately afterward.",
+        "An act-out establishes a relationship with unexplored comic possibilities.",
+        "Follow-up lines explain rather than develop the original joke."
+      ],
+      "goals": ["Find additional payoffs", "Reuse established context", "Improve a bit's ending"],
+      "mechanisms": ["Shared context", "Consequence", "Perspective", "Reclassification"],
+      "examples": ["hedberg-doughnut", "tomlinson-kevin"],
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=Z_XbtYfrNYI&t=250s",
+          "title": "Mitch Hedberg — I Wish They Made Fajita Cologne",
+          "role": "official performance captions",
+          "locator": "4:10–4:40"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=xuue-s8qM8w&t=82s",
+          "title": "Taylor Tomlinson's PSA on Arm Floaties",
+          "role": "official performance captions",
+          "locator": "1:22–1:43; setup earlier in the clip"
+        },
+        {
+          "url": "https://www.nzcomedyschool.com/blog/writingworkbook",
+          "title": "Neil Thornton — Comedy Writing Workbook",
+          "role": "practitioner writing and revision reference"
+        }
+      ],
+      "editorial_decision": "New draft using one compact receipt passage and one metaphor-based act-out; versions are not combined.",
+      "distinction": "A tag supplies another payoff using established context; heightening increases scale or stakes, and a new scene may require another setup.",
+      "practice": { "status": "omitted", "reason": "Article-only pilot commission." },
+      "visual": {
+        "type": "comparison",
+        "implementation": "Labeled original setup, punchline, weak continuation, and two candidate tags.",
+        "rationale": "A compact worked score demonstrates the difference between explanation and another payoff."
+      },
+      "related_patterns": ["standup-misdirection", "standup-let-the-audience-finish"],
+      "example_user_queries": [
+        "I have one good punchline and then nothing else.",
+        "How do I get more material out of a joke that already works?",
+        "My follow-up line just explains why the joke is funny.",
+        "I keep starting over with a new setup after every laugh.",
+        "There is more in this character interaction but I cannot find it.",
+        "How do I know when an extra line makes a bit weaker?",
+        "I want to extend an act-out without repeating the same idea.",
+        "Are these extra lines still part of the joke or a new scene?"
+      ]
+    },
+    {
+      "id": "standup-let-the-audience-finish",
+      "title": "Let the Audience Finish",
+      "conventional_method": "Omitted punchline; implied punchline",
+      "primary_collection_label": "Delivery and Timing",
+      "pattern_type": "performance technique",
+      "use_when": [
+        "An established sequence makes the next implication sufficiently clear.",
+        "The final spoken line seems to explain what the audience already understood.",
+        "A performer's response to an implication may carry more than stating it."
+      ],
+      "goals": [
+        "Let listeners infer a payoff",
+        "Remove redundant explanation",
+        "Distinguish omission from delayed completion"
+      ],
+      "mechanisms": ["Anticipation", "Inference", "Shared context", "Deliberate withholding"],
+      "examples": ["izzard-advertising", "hedberg-blackjack"],
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=9ffRXfVOb1k&t=58s",
+          "title": "Eddie Izzard — On Advertising, from Unrepeatable",
+          "role": "official performance captions",
+          "locator": "0:58–1:24"
+        },
+        {
+          "url": "https://www.eddieizzard.com/en/standup",
+          "title": "Eddie Izzard — official stand-up archive",
+          "role": "show identity and venue"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=ax0MGlIVjiY&t=114s",
+          "title": "Mitch Hedberg — The Reason We Can't Find Big Foot",
+          "role": "official performance captions; boundary case",
+          "locator": "1:54–2:19"
+        },
+        {
+          "url": "https://creativestandup.com/wp-content/uploads/manual/joke-structure-guide.pdf",
+          "title": "Jared Volle — Joke-Structure Guide",
+          "role": "practitioner terminology and Izzard example"
+        }
+      ],
+      "editorial_decision": "New draft distinguishes a genuinely unspoken implication from a later spoken completion; no unverified gesture descriptions added.",
+      "distinction": "A gap carries an inferable conclusion; an ordinary suspense pause still needs its final words, while a tag should add another payoff.",
+      "practice": { "status": "omitted", "reason": "Article-only pilot commission." },
+      "visual": {
+        "type": "process/flow",
+        "implementation": "Markdown table mapping established rule, revealing case, and deliberate gap to what remains unstated.",
+        "rationale": "Shows the informational sequence without inventing a universal timing prescription."
+      },
+      "related_patterns": ["standup-misdirection", "standup-add-tags"],
+      "example_user_queries": [
+        "People laugh before I finish the sentence.",
+        "The last line makes the joke feel overexplained.",
+        "How can a look or a silence do the work of a punchline?",
+        "My pause looks like I forgot what to say.",
+        "I want the audience to work out the implication themselves.",
+        "When should I leave the ending of a joke unspoken?",
+        "Does the audience need to guess the exact word I left out?",
+        "Should I say the punchline after people have already understood it?"
+      ]
+    }
+  ]
+}

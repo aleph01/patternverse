@@ -181,11 +181,12 @@ blindly uploading the old plan again.
 ### Review UI and rollout boundary
 
 `SyncAndBackup.svelte` can opt in using `workspaceSync={true}`. The workspace page
-passes this only when both Dropbox sync is enabled and the build explicitly sets
-`VITE_WORKSPACE_DROPBOX_SYNC=true`. It is off by default, including full and desktop
-profiles; the ordinary production build remains unchanged. Controlled previews set
-`VITE_FEATURE_DROPBOX_SYNC=true` and `VITE_WORKSPACE_DROPBOX_SYNC=true` together.
-Neither sign-in nor sync starts automatically. Each preview origin needs its exact
+passes this when Dropbox sync is enabled and the build setting
+`VITE_WORKSPACE_DROPBOX_SYNC` is not `false`. Dropbox and encrypted full-workspace
+sync now default to enabled in public, full and desktop profiles. Set
+`VITE_FEATURE_DROPBOX_SYNC=false` to hide Dropbox, or `VITE_WORKSPACE_DROPBOX_SYNC=false`
+to retain the legacy adapter. Sign-in-only storage still requires its explicit opt-in.
+Neither sign-in nor encrypted sync starts automatically. Each published origin needs its exact
 `/auth/dropbox/callback` URI registered in the Dropbox App Console. A stable preview
 branch alias avoids registering a new URI for every deployment; workspace browser
 storage remains separate from other preview origins and the production site.

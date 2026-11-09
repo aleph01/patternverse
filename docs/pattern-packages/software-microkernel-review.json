@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "microkernel",
+  "title": "Microkernel",
+  "aliases": ["Microkernel Architecture", "Plug-in Architecture", "Plugin Architecture"],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1356,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "The accessible POSA chapter preview establishes Microkernel's architectural catalog placement. Richards and Ford's chapter preview establishes the application core–plug-in topology and alias; Richards' public report supports registries and contracts. Official Eclipse architecture and registry documentation support the real-world ecosystem example. Python and PyPA support typing and discovery details; seL4's FAQ distinguishes the OS concept. No inaccessible full book chapter is claimed as consulted.",
+    "python_examples": "The three actual article blocks execute as separate modules. Checks pass for the useful base core without importing extensions; both optional analyzers; stated output; repeated requests; CR/LF normalization and empty documents; non-string input; duplicate and invalid identities; incompatible versions; configuration sealing; registration order and identical normalized input; invalid count results; and request-aborting failures that leave earlier effects visible, skip later extensions, and keep the registry sealed.",
+    "article_tests": "33 tests pass across Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical aliases, eight headings, one primary collection, resolved neighbors, exact highlighted code text, responsive figures and dimensions, search, recommendation metadata, article revision hash, and concept marks.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass, including the new mark. The global coverage check has an unrelated existing failure listed below.",
+    "content": "1208 entities validate with drafts included. The published-only corpus contains 1062 entities and reports no errors.",
+    "public_build": "Production build passes, including the public web build checks. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new source files and updated authoring metadata.",
+    "visuals": "All four native SVG variants load from the production preview. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and phone compositions were visually inspected for mechanism, arrow meanings, white surfaces, regular typography, contrast, and label placement. Actual article screenshots include both separately composed phone variants with their captions.",
+    "article_browser": "Production article checked at 1440, 390, and 320 pixels: eight headings, all three code blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard code scrolling at 320px, both responsive images loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact.",
+    "navigation_browser": "Application Architecture opens Microkernel with the correct collection breadcrumb. Related Ports and Adapters, Strategy, Adapter, and Layers routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and the GoF collection match pre-change SHA-256 checksums byte for byte. All prior authoring records, concept marks, and asset dimensions remain unchanged."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Trusted synchronous in-process analyzers, explicitly registered at startup. No package loading, live unloading, dependency resolution, thread-safety guarantee, resource lifecycle hooks, or fault isolation. Exceptions abort a request without returning a partial report or rolling back earlier effects.",
+  "preview": "http://127.0.0.1:42987/pattern/microkernel",
+  "evidence_directory": ".local/software-microkernel",
+  "browser_measurements": ".local/software-microkernel/browser-checks.json",
+  "browser_check_script": ".local/software-microkernel/check-browser.mjs",
+  "preservation_checks": ".local/software-microkernel/preservation-checks.json",
+  "branch": "codex/software-microkernel",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

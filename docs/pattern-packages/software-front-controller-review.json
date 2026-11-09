@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "front-controller",
+  "title": "Front Controller",
+  "aliases": ["FrontController"],
+  "primary_collection": "software-presentation-ui-state",
+  "primary_collection_title": "Presentation and UI State",
+  "body_word_count": 1427,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary sources: Fowler’s Front Controller catalog, the Core J2EE Patterns catalog hosted by Oracle, official Spring DispatcherServlet and Processing documentation, and RFC 9110 method-error semantics. Presentation-tier placement, delegated request work, logical versus physical centralization, configured request scope, and the 405 Allow requirement are supported. The article distinguishes a router, page-specific controllers, framework implementations, and external gateways without creating duplicate pattern records.",
+    "python_examples": {
+      "status": "passed",
+      "code_files": ["dispatch.py", "demo.py"],
+      "stdout": [
+        "200 | Bienvenue | -",
+        "200 | Orders [en] | -",
+        "404 | Not found | -",
+        "405 | Method not allowed | GET",
+        "500 | Internal error | -",
+        "[('r1', 200), ('r2', 200), ('r3', 404), ('r4', 405), ('r5', 500)]"
+      ],
+      "verification": "Exact dispatch, rejected-handler exclusion, Allow methods, isolated frozen context, locale fallback, copied routes, generic failures, completion, and failed-audit/no-rollback checks passed."
+    },
+    "content": "1265 entities validate with drafts included. Published-only compilation has 1118 entities and no diagnostics.",
+    "integration_tests": "Front Controller, Presentation Model, MVC, MVP, and GoF article integration suites pass. The combined run reports 40 passed checks and one unrelated global authored-graphic coverage failure across six files. The other four graphics geometry, safety, fallback, and export checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, validator, integration test, authoring sidecar, concept registry, and authoring documentation. Markdown follows existing content conventions.",
+    "collection": "Reuses Presentation and UI State, preserving MVC, MVP, and Presentation Model as its earlier members and adding Front Controller as the fourth. No collection or future-pattern stub was created.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-presentation-ui-state.md"],
+      "other_existing_content_unchanged": 1263,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "existing_mvc_mvp_presentation_model_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 30,
+      "prior_graphics_unchanged": 442,
+      "prior_dimensions_unchanged": 1562,
+      "new_dimensions": {
+        "software-engineering/front-controller-dispatch.svg": {
+          "width": 720,
+          "height": 1040
+        },
+        "software-engineering/front-controller-dispatch-mobile.svg": {
+          "width": 360,
+          "height": 1184
+        },
+        "software-engineering/front-controller-outcomes.svg": {
+          "width": 720,
+          "height": 936
+        },
+        "software-engineering/front-controller-outcomes-mobile.svg": {
+          "width": 360,
+          "height": 1104
+        }
+      }
+    },
+    "production_build": "The standard public build script succeeds in an isolated source copy, with Public web build checks passed. Isolation avoids modifying shared generated output or another session’s staging directory. Private environment files were excluded; an empty PUBLIC_DROPBOX_APP_KEY supplies the disabled local sync integration. No credentials were copied, and no application renderer or build implementation was changed.",
+    "illustrations": "Two editable native SVG figures explain delegated request processing and distinct failure outcomes, each with an independent phone composition. Fixed white, regular Helvetica Neue/Helvetica/Arial, the approved palette, square boundaries, and restrained strokes are preserved. Four variants have zero measured label collisions, outside labels, or outside rectangles. Native and actual embedded figures were visually inspected at desktop and phone sizes. The dispatch drawing explicitly includes the 404/405 bypass to common completion, and the selection label clears its arrows.",
+    "browser": "Actual production article checked at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive diagrams, exact selectable Python source, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. The local verification fixture waits for responsive source selection to settle after resizing. All four related routes return 200. The existing verse redirect leads to the filtered library; the collection button opens the four-member gallery; its Front Controller card opens the article with the correct primary-collection breadcrumb. Desktop/phone article tops, code viewport, collection gallery, and both embedded figures at both widths were visually inspected. No browser console or page errors were recorded.",
+    "built_assets": {
+      "build_root": ".local/software-front-controller/build-workspace/apps/web/build",
+      "local_file_references": 73,
+      "missing": [],
+      "navigation_data_bytes": 45550
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. The check reports one error and zero warnings. The file remains unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic. Four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential request-dispatch simulation for an illustrative booking site. Inputs are already parsed exact paths and recognized GET/POST methods; language fr selects French while other values fall back to English. The controller copies allowlisted route configuration, creates a new frozen context per request, delegates callables returning Response, distinguishes 404 from 405 with Allow, translates handler exceptions or invalid response contracts into a generic 500, records exception class and local request ID internally, and appends a final audit status. In-memory sinks are assumed working. Local counters, lists, plain-text bodies, and exact route matching are teaching choices. No HTTP listener, URL canonicalization, authentication/authorization, template escaping, HEAD/OPTIONS synthesis, persistence, cross-process IDs, durable audit, transaction rollback, or concurrency guarantee is implemented. Spring is a sourced second context, not reproduced framework code.",
+  "preview": "http://127.0.0.1:43015/pattern/front-controller",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-front-controller",
+  "browser_measurements": ".local/software-front-controller/browser-checks.json",
+  "build_log": ".local/software-front-controller/public-build-isolated.log",
+  "branch": "codex/software-front-controller",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request.",
+  "browser_check_script": ".local/software-front-controller/check-browser.mjs"
+}

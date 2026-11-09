@@ -1,0 +1,130 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Chicken: The Cost of Refusing to Yield",
+  "metadata_mapping": "Existing concept schema and responsive SVG convention; existing publication status retained; local edits only.",
+  "patterns": [
+    {
+      "id": "chicken",
+      "title": "Chicken: The Cost of Refusing to Yield",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; anti-coordination, concession, brinkmanship, and allocation authority",
+      "article": "content/concepts/chicken.md",
+      "related_patterns": [
+        "the-prisoners-dilemma",
+        "battle-of-the-sexes",
+        "the-stag-hunt"
+      ],
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "University game-theory notes, section 3.3, Chicken",
+          "url": "https://subversion.american.edu/aisaac/notes/games.pdf",
+          "supports": "Preference ordering, anti-coordination best replies, pure equilibria, and Russell’s 1959 use of the driving analogy for brinkmanship.",
+          "read_method": "Chicken section and reproduced historical quotation read.",
+          "boundary": "Teaching explanation and historical quotation, not an empirical risk estimate. Article uses none of the notes’ broader claims about resource classifications, and no numerical payoffs are transferred."
+        },
+        {
+          "title": "Rapoport and Chammah, The Game of Chicken (1966)",
+          "url": "https://journals.sagepub.com/doi/10.1177/000276426601000303",
+          "doi": "10.1177/000276426601000303",
+          "supports": "Early formal and experimental treatment of Chicken.",
+          "read_method": "Publisher bibliographic record and abstract read.",
+          "boundary": "Full text was not available through the accessed publisher page. No detailed result, sample, or effect estimate is attributed to unread text; the historical claim is limited to the verified early publication."
+        },
+        {
+          "title": "Duffy and Feltovich, Do Actions Speak Louder Than Words?",
+          "url": "https://sites.socsci.uci.edu/~duffy/papers/action20.pdf",
+          "doi": "10.1006/game.2001.0892",
+          "supports": "Comparison of cheap talk, prior-action observation, and control across Chicken, Stag Hunt, and prisoner’s dilemma; relative informativeness depends on game structure.",
+          "read_method": "October 2000 author draft read, including game tables, round-robin procedures, and conclusions. Author publication page verifies 2002 Games and Economic Behavior 39, 1–27. Article and source annotation label the linked version explicitly.",
+          "boundary": "Primarily Pittsburgh undergraduates; 20 subjects per session, 10 rounds of each of three games, round-robin matching so each row player faced each column player once per game. Prior action was taken against another participant, not a binding current choice. Some differences between information treatments were not always significant; no quantitative effect or validation of the bridge-entry intervention claimed."
+        },
+        {
+          "title": "University of Florida, The Hawk–Dove Game",
+          "url": "https://cmp.phys.ufl.edu/PHZ4710/files/unit8/hawk-dove.html",
+          "supports": "Biological Hawk–Dove payoff structure and anti-coordination when fighting cost C exceeds resource value V.",
+          "read_method": "Teaching account of payoff matrix, C > V > 0, and fitness/population interpretation read.",
+          "boundary": "The 1973 foundational Nature paper was located but its scan was not text-readable in the web interface; no claim to having read it or new empirical claim is made. Article cites the readable university explanation, not an unread primary scan."
+        }
+      ],
+      "status": "published",
+      "short_description": "Recognize when each side hopes the other will concede while mutual refusal produces the worst outcome, then distinguish selecting who yields from changing the leverage created by refusal.",
+      "use_when": [
+        "Why can shared fear encourage mutual refusal?",
+        "Ada and Karim face a hypothetical narrow-bridge concession game: press ahead or yield."
+      ],
+      "goals": [
+        "Recognize the familiar predicament before specialist terminology.",
+        "Explain the defining mechanism and distinguish neighboring concepts.",
+        "Stipulated ordering: pass while other yields, mutual caution, yield alone, mutual pressing with collision risk. Two asymmetric equilibria; mutual pressing least preferred after accounting for risk; no quantified collision risk, actual road rule, or complete engineering specification.",
+        "Separate hypothetical behavior, model results, documented cases, and practical editorial proposals."
+      ],
+      "mechanisms": [
+        "An authorized entry procedure admits one direction at a time, changing decision rights and available actions.",
+        "Control and usable waiting space are assumed. Equipment can fail; the diagram is not a traffic-engineering specification."
+      ],
+      "example_user_queries": [
+        "Why can shared fear encourage mutual refusal?"
+      ],
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Why can shared fear encourage mutual refusal?",
+        "assets": [
+          "content/assets/structural-traps/chicken-hall-booking.svg",
+          "content/assets/structural-traps/chicken-hall-booking-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1025,
+            "textBlocks": 19
+          },
+          "phone": {
+            "width": 360,
+            "height": 1280,
+            "textBlocks": 16
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Ada and Karim choose press ahead or yield. One pressing while the other yields gives the presser priority; both pressing creates collision risk and is stipulated to be the least-preferred combination for both. Both yielding represents mutual caution under the stipulated middle ranking. Double outlines mark the two asymmetric equilibria. Controlled entry changes the available actions. Change: Replace unrestricted competing entry with authorized, reliable priority control. Limitation: Control and usable waiting space are assumed. Equipment can fail; the diagram is not a traffic-engineering specification.",
+        "caption": "Hypothetical illustration. The bridge is a classic hypothetical strategic illustration, not driving guidance. Each prefers pressing against yielding and yielding against pressing. Mutual pressing is stipulated to be least preferred, taking its risk into account; fear of a collision alone would not establish that ranking. Controlled entry changes decision rights; it does not make mutual yielding stable under the original incentives.",
+        "representation": {
+          "scenario": "Ada and Karim face a hypothetical narrow-bridge concession game: press ahead or yield.",
+          "interpretation": "Hypothetical qualitative illustration. Ada and Karim choose press ahead or yield. One pressing while the other yields gives the presser priority; both pressing creates collision risk and is stipulated to be the least-preferred combination for both. Both yielding represents mutual caution under the stipulated middle ranking. Double outlines mark the two asymmetric equilibria. Controlled entry changes the available actions. Change: Replace unrestricted competing entry with authorized, reliable priority control. Limitation: Control and usable waiting space are assumed. Equipment can fail; the diagram is not a traffic-engineering specification.",
+          "relationship_key": "Cells or cards compare alternative simultaneous choices, not vehicle movements. Double outlines mark the original asymmetric equilibria. Collision risk is not quantified.",
+          "changed_relationship": "An authorized entry procedure admits one direction at a time, changing decision rights and available actions.",
+          "residual_constraints": "Control and usable waiting space are assumed. Equipment can fail; the diagram is not a traffic-engineering specification.",
+          "phone_treatment": "Separate composition retains readable labels and the same alternatives, dependencies, causal links, or chronology."
+        }
+      },
+      "example_structure": {
+        "scenario": "Ada and Karim face a hypothetical narrow-bridge concession game: press ahead or yield.",
+        "changed_relationship": "An authorized entry procedure admits one direction at a time, changing decision rights and available actions.",
+        "required_assumptions": "Stipulated ordering: pass while other yields, mutual caution, yield alone, mutual pressing with collision risk. Two asymmetric equilibria; mutual pressing least preferred after accounting for risk; no quantified collision risk, actual road rule, or complete engineering specification.",
+        "residual_constraints": "Control and usable waiting space are assumed. Equipment can fail; the diagram is not a traffic-engineering specification.",
+        "comparison": "Qualitative relationships only; no invented utility scores, numerical trajectories, or measured improvement claimed."
+      },
+      "evidence_boundary": "The central scenario and resulting behavior are hypothetical. Source-specific formal and empirical limits remain explicit. The expected recognizability of a classic example is editorial judgment, not a reader-study result.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "change": "Ada and Karim face a hypothetical narrow-bridge concession game: press ahead or yield.",
+        "scope": "Article, two editable responsive SVGs, caption, alternative text, manifest dimensions, and current research notes. All forty retain separate identities and existing publication status.",
+        "source_handling": "Existing source identities and original source-check dates retained. Current examples are no longer the earlier workshop, booking, or dashboard scenarios. Research claims are not reclassified as measured outcomes.",
+        "verification": "Passed current content, semantic consistency, responsive browser, SVG bounds, and text-contrast checks; see verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Distinguish collision risk from a certain crash; mutual pressing must be least preferred after accounting for that risk. Align prose, both SVGs, caption, and alternative text.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

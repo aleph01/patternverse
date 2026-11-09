@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "batching",
+  "title": "Batching",
+  "aliases": [],
+  "primary_collection": "software-performance-scalability",
+  "primary_collection_title": "Performance and Scalability",
+  "body_word_count": 1499,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Four official primary references: Microsoft Azure SQL establishes the general fixed-overhead and bounded-buffer technique; Google Pub/Sub exposes count/byte/latency batching settings; Microsoft Graph documents independent member identity/status and response ordering; AWS DynamoDB BatchWriteItem documents per-item versus whole-batch atomicity and selective unprocessed-item retries. Batching is the established general name, with no invented aliases. Existing data-microbatch-processing and ml-batch-serving are preserved specialized architectures, not duplicates of a generic collector. Performance and Scalability is the sole primary home because shared overhead is the central mechanism. Formation versus transport/business completion, pending versus outstanding ownership, age progress, serialized size, authorization compatibility, ordering, partial success and uncertain outcomes are explicit. The cost calculation is original hypothetical additive service work, not measured response-time improvement.",
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "8 count ['a', 'bb', 'c'] 4",
+        "13 size ['dddd'] 4",
+        "23 age ['eee'] 3",
+        "26 close ['f', 'g'] 2"
+      ],
+      "batch_member_counts": [3, 1, 1, 2],
+      "batch_payload_bytes": [4, 4, 3, 2],
+      "individual_service_ms": 42,
+      "batched_service_ms": 27,
+      "saved_service_ms": 15,
+      "scheduled_interleavings": 12,
+      "items_per_schedule": 80,
+      "checks": [
+        "positive typed limits",
+        "invalid/oversized payload leaves state and clock intact",
+        "invalid or decreasing time leaves state intact",
+        "oldest age not reset by later arrivals",
+        "exact age precedes new admission",
+        "idle emission and late-progress limitation",
+        "count and byte equality",
+        "count wins simultaneous equality",
+        "pre-admission byte overflow emits previous group",
+        "one arrival can emit two groups in order",
+        "immutable independent handoff snapshots",
+        "residual and empty shutdown",
+        "closed collector rejects future work",
+        "randomized order/multiplicity conservation and pending bounds",
+        "explicit service-cost arithmetic"
+      ]
+    },
+    "content": "All1303 entities validate; published-only compilation1156 without diagnostics. Eight exact H2s, one complete runnable Python3 program, two figures/four responsive assets, four existing related targets, ten distinct queries and no practice/worksheet. One new complete canonical article; no duplicate or future stub. Existing specialized articles unchanged.",
+    "integration_tests": "Batching3, Sharding3, Competing Consumers3 and GoF24 pass. Four global graphic checks pass; pre-existing authored-coverage failure remains missing access-over-ownership. Total37 passed,1 unrelated failure. New checks verify title/empty aliases/search, Software Engineering verse, one primary home, all23GoF members, four related IDs, exact selectable highlighted code, image alts/captions/mobile sources/dimensions, metadata hash and ten queries. No earlier integration test modified.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-code validator, new integration test, authoring JSON/documentation, graphics registry, manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-performance-scalability.md"],
+      "other_existing_content_unchanged": 1301,
+      "new_content": ["content/patterns/batching.md"],
+      "one_primary_home_performance_and_scalability": true,
+      "four_existing_collection_members_preserved_in_order": true,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 73,
+      "prior_graphics_unchanged": 485,
+      "all_prior_dimensions_unchanged": 1724,
+      "new_dimensions": {
+        "software-engineering/batching-cost.svg": {
+          "width": 720,
+          "height": 872
+        },
+        "software-engineering/batching-cost-mobile.svg": {
+          "width": 360,
+          "height": 1136
+        },
+        "software-engineering/batching-triggers.svg": {
+          "width": 720,
+          "height": 1056
+        },
+        "software-engineering/batching-triggers-mobile.svg": {
+          "width": 360,
+          "height": 1136
+        }
+      },
+      "previous_integration_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "staged_sources_and_assets_match": true
+    },
+    "illustrations": "Two editable native SVG figures with separate phone compositions. Cost comparison retains seven logical items a/bb/c/dddd/eee/f/g and groups them3/1/1/2 exactly as the program emits. Under explicit5ms fixed/call+1ms/item assumptions, individual7×6=42ms versus batch8+6+6+7=27ms saves15ms of modeled service work only; waiting is excluded. Trigger timeline matches count@8[a,bb,c]/4bytes; size@13[dddd]/4bytes before eee admission because4+3>6; idle advance@23 emits eee/3bytes at age10; close@26 drains f/g/2bytes. Arrows label intervening arrivals/progress/close, not member success or transport acknowledgment. Age requires progress and is not a delivery deadline. Fixed white, Helvetica Neue/Helvetica/Arial regular400, exact approved palette, square boundaries, restrained strokes and readable labels. Allfour variants have zero outside/overlapping labels or outside rectangles. Native/embedded desktop and phone figures/captions, article tops, code viewport and gallery visually inspected. Concept bounds include strokes within96×96.",
+    "native_figure_measurements": [
+      {
+        "path": "/assets/software-engineering/batching-cost.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 872
+      },
+      {
+        "path": "/assets/software-engineering/batching-cost-mobile.svg",
+        "labels": 31,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1136
+      },
+      {
+        "path": "/assets/software-engineering/batching-triggers.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1056
+      },
+      {
+        "path": "/assets/software-engineering/batching-triggers-mobile.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1136
+      }
+    ],
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 5,
+          "y": 7,
+          "width": 86,
+          "height": 82
+        },
+        {
+          "x": 29,
+          "y": 16,
+          "width": 26,
+          "height": 64
+        }
+      ]
+    },
+    "production_build": "The unchanged repository public build command exits zero and Public web build checks passed in an isolated source snapshot. Temporary NODE_OPTIONS filesystem-copy helper uses macOS native copy-on-write clones only for this task generated prerendered pages/dependencies/data copies into its own navigation-cache and finished build; every source/destination SHA256 is verified. Other copy calls forward unchanged. Background generated-asset cloning also uses hashes. No renderer, dependency or repository build-script edits. No failed build attempts in this task. Private environment excluded and PUBLIC_DROPBOX_APP_KEY empty. Source article, collection, authoring/docs, generator/validator/test, registry, manifest and assets match staged inputs. Only own redundant generated output removed after browser success; finished preview and earlier previews remain.",
+    "disk_space_management": {
+      "status": "passed",
+      "successful_command": "node scripts/build-public-web.mjs",
+      "successful_exit_code": 0,
+      "failed_attempts": 0,
+      "background_hash_verified_compaction_passes": 44,
+      "native_copy_results": [
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 5371,
+          "logical_bytes": 525813149,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 2474,
+          "logical_bytes": 49354250,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/build",
+          "files": 5371,
+          "logical_bytes": 525813149,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/build",
+          "files": 2474,
+          "logical_bytes": 49354250,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        }
+      ],
+      "temporary_runtime_helper": ".local/software-batching/clone-generated-assets.mjs",
+      "native_helper": ".local/software-batching/clone-asset-tree.py",
+      "redundant_generated_output_removed_after_browser_success": [
+        ".local/software-batching/build-workspace/apps/web/.svelte-kit/output"
+      ],
+      "finished_preview_source_and_earlier_previews_preserved": true
+    },
+    "browser": "Actual production article checked at1440,390,320CSS pixels: exact eight H2s, two responsive figures/allfour assets loaded, exact code text and selection, multiple syntax colors, focusable code with keyboard horizontal scrolling at320, no page overflow, allfour related routes200. Performance and Scalability route and Software Engineering gallery navigate to the new fifth member with reviewed concept paths and correct primary breadcrumb. Native/embedded figures/captions, desktop/phone article tops, code viewport and gallery visually inspected. No console/page errors.",
+    "browser_measurements": {
+      "records": 8,
+      "widths": [1440, 390, 320],
+      "related_routes": 4,
+      "errors": []
+    },
+    "built_assets": {
+      "build_root": ".local/software-batching/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 44769
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not accept it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other graphic checks pass."
+    }
+  ],
+  "example_limits": "New canonical batching article. Established general technique verified with four official references, distinct from preserved specialized data-microbatch-processing and ml-batch-serving IDs. Single primary home Performance and Scalability as fifth member. Original telemetry scenario and single-caller Python3 batch-formation model: immutable nonempty byte strings, supplied nondecreasing nonnegative integer simulated milliseconds, positive integer limits3items/6payloadbytes/10ms oldest age. Inputs a@0,bb@4,c@8 emit count@8/4bytes; dddd@12 plus would-be eee@13 exceeds6 so dddd emits size@13/4bytes before eee is admitted; advance23 emits eee age@23/3bytes; f@24,g@25 close26 emits close@26/2bytes. Outputs hand immutable tuples to caller, not actual sends/acks. Age checked before new admission, equality emits prior group, count wins simultaneous count/byte equality; invalid payload rejected before clock/buffer mutation. Empty groups not emitted; oversized payload rejected. No network, real timer, concurrency, durability, retry, transaction or completion tracker. Pending bounds exclude envelope framing, emitted snapshots and demo accumulation. Hypothetical additive service model5ms fixed call+1ms/item:7individual calls42ms versus4batches sizes3/1/1/2 costing8/6/6/7ms total27ms, saving15ms of service work only, excluding collection/queueing/overlap/real destination costs. DynamoDB partial-outcome context is separate from collector execution. All scenarios, program, cost assumptions and diagrams are teaching material.",
+  "preview": "http://127.0.0.1:43058/pattern/batching",
+  "preview_mode": "isolated-static-production-build-with-byte-verified-native-copies",
+  "evidence_directory": ".local/software-batching",
+  "browser_check_script": ".local/software-batching/check-browser.mjs",
+  "build_log": ".local/software-batching/public-build-isolated.log",
+  "branch": "codex/software-batching",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

@@ -1,0 +1,144 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Two clipped representation layers exchange opacity1/0→0/1 inside a fixed480×320 frame. The photo file and its fitting remain unchanged; native models deliberately change representation, detail, viewpoint or relationships as required. All external copy, type settings, frame bounds, colors, layout and presentation are identical. No raster editing or new image generation.",
+  "examples": [
+    {
+      "name": "abstraction-pitcher-category",
+      "source": "figure-ground-pitcher-cutout.png",
+      "sourceDimensions": [1312, 1199],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only the representation inside the fixed480×320 frame changes from an existing photographic cutout to an original native drawing. The drawing retains the lip, body, handle opening, rim and base while omitting material texture and shadow. It is an editorial interpretation, not an exact tracing. Copy, typography, frame, surrounding colors, layout, paper and lighting stay fixed.",
+      "copy": [
+        ["brand", 65, 104, "FIELD / TABLEWARE GUIDE", 20],
+        ["headline", 65, 170, "Pitchers", 46],
+        ["meaning", 65, 608, "Recognize the form.", 28],
+        ["feature", 65, 656, "Pouring lip · Body · Loop handle", 23],
+        ["purpose", 65, 704, "Category cue, not a product specification", 21],
+        ["url", 65, 820, "field.example/tableware", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "photographic-representation",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "abstract-representation",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "photographic-representation",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "abstract-representation",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "abstraction-room-arrangement",
+      "source": "meaning-enclosed-room-photo.jpg",
+      "sourceDimensions": [1536, 1024],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only the representation inside the fixed480×320 frame changes from an existing generated room photograph to an original conceptual plan. The plan retains one table, exactly two chairs, a left window and right door; it omits decor and surface appearance. It is not measured, a route map or an accessibility clearance plan. All copy, type, frame, surroundings, paper and lighting stay fixed.",
+      "copy": [
+        ["brand", 65, 104, "COMMON / ROOM GUIDE", 20],
+        ["headline", 65, 170, "Room for two", 46],
+        ["meaning", 65, 608, "2 chairs · 1 table · Door on right", 25],
+        ["qualification", 65, 655, "Concept arrangement · Not to scale", 22],
+        ["offer", 65, 704, "Up to 2 people · £12 per hour", 23],
+        ["url", 65, 820, "common.example/rooms", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "photographic-representation",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "abstract-representation",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "photographic-representation",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "abstract-representation",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "abstraction-seed-packing",
+      "source": "form-seed-packing-photo.jpg",
+      "sourceDimensions": [1536, 1024],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only the representation inside the fixed480×320 frame changes from a generated seed-packing still life to an original schematic sequence. Exactly ten seed marks, one labeled-envelope symbol and one tray symbol are joined by two directional arrows. Fixed external text supplies count, action and order. Original photo remains unchanged in the before layer; no photographic editing. All copy, fonts, frame, surrounding layout, paper and lighting stay fixed.",
+      "copy": [
+        ["brand", 65, 104, "COMMON / SEED LIBRARY", 20],
+        ["headline", 65, 170, "Pack a seed envelope", 42],
+        ["step-1", 65, 608, "1  Count 10 seeds.", 25],
+        ["step-2", 65, 655, "2  Label envelope: name + year.", 25],
+        ["step-3", 65, 704, "3  Place in the return tray.", 25],
+        ["url", 65, 820, "common.example/seed-library", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "photographic-representation",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "abstract-representation",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "photographic-representation",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "abstract-representation",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    }
+  ]
+}

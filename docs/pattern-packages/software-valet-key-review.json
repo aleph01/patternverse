@@ -1,0 +1,469 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "valet-key",
+  "title": "Valet Key",
+  "aliases": [],
+  "primary_collection": "software-security-access-boundaries",
+  "primary_collection_title": "Security and Access Boundaries",
+  "body_word_count": 1498,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Four primary sources verified. Microsoft Azure Architecture Center establishes Valet Key as restricted direct-resource delegation with the application authorizing issuance and leaving the transfer path. Azure Storage documents SAS scope/lifetime and different ad hoc/service-policy forms. S3 documents key/method/expiry restrictions, reuse, credential expiry, request-time expiry with ongoing download continuation and later retry failure, plus replacement by presigned uploads. Google Cloud Storage explicitly documents possession-based signed-URL access. No existing exact canonical article found. Signed URLs/SAS are concrete implementations, not universal aliases; no unsupported alias added. Security and Access Boundaries is the primary home because narrowly delegated access is the central mechanism, with performance as a consequence.",
+    "sources": [
+      {
+        "title": "Valet Key pattern",
+        "author": "Microsoft Azure Architecture Center",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/valet-key",
+        "supports": "Established scoped direct-resource delegation pattern, separate grant issuance/data transfer, permission/resource/time constraints, secure delivery, upload validation and suitability limits."
+      },
+      {
+        "title": "Shared access signatures overview",
+        "author": "Azure Storage documentation",
+        "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview",
+        "supports": "Resource/permission/lifetime delegation, distinct SAS forms, ad hoc grants and stored access policies supported for service SAS but not user-delegation/account SAS. Revocation capability depends on grant type."
+      },
+      {
+        "title": "Download and upload objects with presigned URLs",
+        "author": "Amazon S3 documentation",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
+        "supports": "Exact bucket/key/method/expiry inputs, reuse, signer permission and credential lifetime, request-time expiry with existing download continuation/retry failure, and overwrite of existing keys by presigned uploads."
+      },
+      {
+        "title": "Signed URLs",
+        "author": "Google Cloud Storage documentation",
+        "url": "https://docs.cloud.google.com/storage/docs/access-control/signed-urls",
+        "supports": "Anyone possessing an active signed URL can use it, required signing authority, limited resource/actions/time, and direct transfer without client storage credentials. Article uses bearer semantics without claiming a universal provider wire format."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "download archive E7",
+        "other denied",
+        "write denied",
+        "reuse archive E7",
+        "before-expiry archive E7",
+        "expired denied"
+      ],
+      "issuance_cases": 9,
+      "authorized_issuance_cases": 2,
+      "denied_issuance_cases": 7,
+      "scope_time_matrix_cases": 60,
+      "allowed_matrix_cases": 2,
+      "denied_matrix_cases": 58,
+      "malformed_client_field_cases": 21,
+      "time_boundaries_seconds": [99, 100, 159, 160, 161],
+      "checks": [
+        "issuer authorizes owner and chooses exact key without reading bytes",
+        "storage enforces GET/exact-key/server-clock window before body retrieval",
+        "unknown/modified tickets and malformed fields deny without body reads",
+        "repeated possession-based use is allowed",
+        "expiry excludes second160 and leaves prior delivered bytes unchanged",
+        "issuer ownership change blocks new grants but does not revoke an old ticket",
+        "key-bound grant can read later replacement bytes; no immutable-version claim",
+        "invalid grant inputs and token collisions cannot add or alter grants",
+        "clock/metadata/body failures do not manufacture success",
+        "tokens are not printed",
+        "administrative issuance and same-process objects are not an authentication/isolation boundary",
+        "no expired-ledger cleanup, streaming, live cloud signing or individual revocation claim"
+      ]
+    },
+    "content": "All1310 entities validate. Published-only compilation contains1163 entities without diagnostics. Eight exact H2s, one complete Python3 program, two figures/four responsive assets, four existing related IDs, ten distinct recommendation queries and no practice/worksheet. Existing Security and Access Boundaries collection retains its four earlier members and adds only the completed Valet Key article. No new collection or future stub.",
+    "published_compilation": {
+      "status": "passed",
+      "published_entities": 1163,
+      "bytes": 23565421,
+      "sha256": "f93b9f80bad37266a94a073cb978aa0f5c2802a8b72ec78a67d9b35ad82528a0",
+      "compiler_log": ".local/software-valet-key/published-compilation.log",
+      "temporary_output_removed_after_verification": true
+    },
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "Valet Key3, Externalized Authorization3, Gatekeeper3, GoF24 and four authored-graphic checks pass. Existing global coverage fails because access-over-ownership lacks a graphic. New checks verify canonical title/no invented alias, search and single primary home, collection/verse link, all23GoF members, four related IDs, exact selectable highlighted code, alt/caption/mobile/dimensions, metadata hash and ten queries."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses exact in ByRoleOptions, which does not define that property."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-code validator, integration test, authoring JSON/documentation, illustration registry, asset manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-security-access-boundaries.md"],
+      "other_existing_content_unchanged": 1308,
+      "new_content": ["content/patterns/valet-key.md"],
+      "four_existing_primary_collection_members_retained_in_order": true,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 79,
+      "prior_graphics_unchanged": 491,
+      "all_prior_dimensions_unchanged": 1748,
+      "new_dimensions": {
+        "software-engineering/valet-key-delegation.svg": {
+          "width": 720,
+          "height": 912
+        },
+        "software-engineering/valet-key-delegation-mobile.svg": {
+          "width": 360,
+          "height": 1240
+        },
+        "software-engineering/valet-key-scope.svg": {
+          "width": 720,
+          "height": 1056
+        },
+        "software-engineering/valet-key-scope-mobile.svg": {
+          "width": 360,
+          "height": 1392
+        }
+      },
+      "prior_integration_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "preview_web_source_matches_current_source": true,
+      "preview_content_reads_actual_current_content": true
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/valet-key-delegation.svg",
+        "labels": 27,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 912
+      },
+      {
+        "path": "/assets/software-engineering/valet-key-delegation-mobile.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1240
+      },
+      {
+        "path": "/assets/software-engineering/valet-key-scope.svg",
+        "labels": 31,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1056
+      },
+      {
+        "path": "/assets/software-engineering/valet-key-scope-mobile.svg",
+        "labels": 28,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1392
+      }
+    ],
+    "native_generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "assets": {
+        "content/assets/software-engineering/valet-key-scope-mobile.svg": "21c1c45b756545f5351b8484b2593161f0bd9ae9f36aef50bf0a08835c43ff78",
+        "content/assets/software-engineering/valet-key-delegation.svg": "9c45a616e58209d98ef21540ed356ed412e59df23977a0057378996a0eca5f7b",
+        "content/assets/software-engineering/valet-key-scope.svg": "d20b8b0edf265475436fdf453246ad24e1a3ed85fb07ac81fb30ae5faf18b913",
+        "content/assets/software-engineering/valet-key-delegation-mobile.svg": "7926b818c1cce75b144c94330ac15b1259aa5335566a7c014523a52564c54677"
+      }
+    },
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 3,
+          "width": 90,
+          "height": 90
+        },
+        {
+          "x": 29,
+          "y": 11,
+          "width": 28,
+          "height": 78
+        }
+      ]
+    },
+    "visual_review": "All four native SVGs and concept mark inspected. Actual desktop/phone article tops, both figures/captions at1440and390px, phone code viewport and collection page2of2 inspected. Fixed white surfaces, regular Helvetica Neue/Helvetica/Arial, requested palette, square geometry and readable labels without overlaps/clipping/outside shapes. Desktop collaboration separates issuer request/grant arrows from direct client/storage GET/byte arrows; phone composition uses separately arranged phases. Scope table becomes six phone cards, with explicit GET/E7/100..159 permission and denial at160. Reuse and retained bytes are explicit. The client label No standing storage access avoids confusing a user identity with an Azure Storage account. Concept shows two distinct bidirectional paths, with no issuer byte relay.",
+    "browser": {
+      "status": "passed",
+      "mode": "Actual Vite application renderer with copied web source and current linked content; not a completed production export.",
+      "widths": [1440, 390, 320],
+      "details": [
+        {
+          "path": "/assets/software-engineering/valet-key-delegation.svg",
+          "labels": 27,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 912
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-delegation-mobile.svg",
+          "labels": 23,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1240
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-scope.svg",
+          "labels": 31,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 1056
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-scope-mobile.svg",
+          "labels": 28,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1392
+        },
+        {
+          "viewport": 1440,
+          "pageWidth": 1440,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/valet-key-delegation.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/valet-key-scope.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 196,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/gatekeeper",
+            "/pattern/externalized-authorization",
+            "/pattern/reference-monitor",
+            "/pattern/proxy"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 390,
+          "pageWidth": 390,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/valet-key-delegation-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/valet-key-scope-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 196,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/gatekeeper",
+            "/pattern/externalized-authorization",
+            "/pattern/reference-monitor",
+            "/pattern/proxy"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 320,
+          "pageWidth": 320,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/valet-key-delegation-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/valet-key-scope-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 196,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/gatekeeper",
+            "/pattern/externalized-authorization",
+            "/pattern/reference-monitor",
+            "/pattern/proxy"
+          ],
+          "copyable": true,
+          "keyboard_code_scroll": true
+        },
+        {
+          "collection": "software-security-access-boundaries",
+          "article": "valet-key",
+          "navigation": "collection route and verse gallery to article passed",
+          "related_routes": "all returned 200"
+        }
+      ],
+      "checks": [
+        "eight exact H2s",
+        "four SVG variants load with zero label overlaps/outside shapes",
+        "correct phone assets selected",
+        "exact code text and browser selection",
+        "multiple highlighting colors and focusable code",
+        "keyboard horizontal code scrolling at320px",
+        "no page overflow",
+        "four related article routes return200",
+        "collection route, Software Engineering gallery pagination, authored concept and article breadcrumb work",
+        "no page or console errors"
+      ]
+    },
+    "live_resources": {
+      "status": "passed",
+      "mode": "actual Vite development renderer with copied web source and current linked content; full static export not rerun because disk capacity is still exhausted",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-delegation-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-delegation.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-scope-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-scope.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/valet-key-delegation.svg",
+          "status": 200,
+          "sha256": "9c45a616e58209d98ef21540ed356ed412e59df23977a0057378996a0eca5f7b",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-delegation-mobile.svg",
+          "status": 200,
+          "sha256": "7926b818c1cce75b144c94330ac15b1259aa5335566a7c014523a52564c54677",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-scope.svg",
+          "status": 200,
+          "sha256": "d20b8b0edf265475436fdf453246ad24e1a3ed85fb07ac81fb30ae5faf18b913",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/valet-key-scope-mobile.svg",
+          "status": 200,
+          "sha256": "21c1c45b756545f5351b8484b2593161f0bd9ae9f36aef50bf0a08835c43ff78",
+          "matches_source": true
+        }
+      ]
+    },
+    "production_export": {
+      "status": "not-rerun-disk-capacity",
+      "reason": "Earlier Reference Monitor full-site export attempts failed twice with ENOSPC during prerendering. The volume remains100%used. This session verified the actual application live renderer instead of repeating the known full-site disk failure.",
+      "completed_export_claimed": false,
+      "repository_build_scripts_renderer_and_dependencies_modified": false,
+      "scope": "Task-owned runtime copies web source using native copy-on-write and links current content/packages/scripts/dependencies; private environment files excluded. Other previews and previous work retained. Only this task temporary published corpus was removed after its successful result, size and SHA-256 were recorded."
+    }
+  },
+  "example_limits": "Sequential in-memory opaque-ticket ledger model, not cloud signing, a provider SDK, live storage integration, TLS/authentication/process isolation, a durable grant service, streaming or concurrent authorization. Trusted Broker ownership and authenticated-subject placeholders control issuance; Storage.grant_download is a privileged administrative fixture operation, not a public endpoint. Storage uses its own trusted virtual clock to enforce GET/exact-key/start<=time<end before body retrieval. Reuse is permitted. Expired ledger rows are not cleaned up. Negative lifecycle witnesses show that changed issuer ownership does not revoke an old ticket and key-bound access can return later replacement bytes. Provider credential expiry/revocation, signed-header constraints, immutable versions, upload validation/publication and direct-transfer auditing remain real deployment responsibilities. Expiry does not recall already returned information or claim to interrupt a live stream.",
+  "preview_url": "http://127.0.0.1:43064/pattern/valet-key",
+  "version_control": {
+    "tool": "GitButler",
+    "branch": "codex/software-valet-key",
+    "committed": false,
+    "pushed": false,
+    "pull_request_created": false
+  },
+  "evidence_directory": ".local/software-valet-key",
+  "externally_published": false,
+  "deployed": false
+}

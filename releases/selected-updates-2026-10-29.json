@@ -1,0 +1,54 @@
+{
+  "name": "selected-updates-2026-10-29",
+  "status": "published-and-verified",
+  "deployment": {
+    "id": "8545410d-e6eb-44a0-b8c4-67591d96043e",
+    "url": "https://8545410d.patternverse.pages.dev",
+    "production": "https://patternverse.org",
+    "previousId": "3abcab21-f67e-4deb-a968-063c18a6320f"
+  },
+  "scope": {
+    "publicEntries": 1074,
+    "newEntries": 86,
+    "changedExistingEntries": 240,
+    "unchangedExistingEntries": 748
+  },
+  "summary": [
+    "Font settings, desktop collection expansion, sans-serif wordmark, simplified Verse action and reader navigation.",
+    "Shorter Graphic Design articles and removed Statistics worksheets.",
+    "Expanded Bounded Context and Explicit Decision Rights retain their existing URLs.",
+    "181 Data Engineering descriptions, including 180 replacements and one retained description.",
+    "Data Visualization in Science & Technology, Organizational Design, Cognitive Continuum and its CBT practice."
+  ],
+  "artifact": {
+    "directory": "/private/tmp/patternverse-selected-2026-10-29/apps/web/build",
+    "files": 7406,
+    "bytes": 550539034,
+    "sha256": "a8889059bbcc2aac02651fe86f05c9e6d74375126a7144f294956b741e2bc8ba"
+  },
+  "productionVerification": {
+    "checked": 7605,
+    "passed": 7605,
+    "failures": 0,
+    "report": "/Users/jeger-benninger/Documents/Codex/2026-10-29/find-x20/outputs/production-verification-2026-10-29.json",
+    "largeAssetsVerified": 27
+  },
+  "liveBrowserVerification": {
+    "passed": 12,
+    "viewportSpecificSkips": 1,
+    "desktop": true,
+    "phone": true,
+    "notes": [
+      "A desktop article-load timeout passed on retry with a larger test budget. The tablet assertion waits for hydration before checking its list layout. No application change or second deployment was required."
+    ]
+  },
+  "sourceArchive": {
+    "path": "/Users/jeger-benninger/Documents/Codex/2026-10-29/find-x20/work/selected-release-source.tar.gz",
+    "sha256": "306a2961a73dc4d07c3410e9929a4128288ae49b7b90279a449e52c3ff8b4739",
+    "bytes": 346723627
+  },
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-10-29/release-report.json",
+  "gitPush": false,
+  "pullRequest": false,
+  "backendDeployment": false
+}

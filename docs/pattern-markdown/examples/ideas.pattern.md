@@ -4,29 +4,29 @@
 :output ideas
 :output plans
 
-!collect ideas {
+ideas = !collect {
     :min 1
     :max 3
 
-    !ask idea {
+    idea = !ask {
         What is one small idea for {{topic}}?
     }
-    !rate interest 0..10 {
+    interest = !rate 0..10 {
         How interested are you in {{idea}}?
     }
 }
 
-!collect plans {
+plans = !collect {
     :from ideas
     :as item
 
-    = idea item.idea
-    !ask next_step {
+    idea = item.idea
+    next_step = !ask {
         What would be a first step for {{item.idea}}?
     }
 }
 
-= idea_count count(ideas)
+idea_count = count(ideas)
 !show {
     You explored {{idea_count}} ideas.
 }

@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-02",
+  "live": true,
+  "method": "Normal connected OpenRouter UI; fictional inputs; no credentials inspected and no runs saved.",
+  "model": null,
+  "modelNote": "The selected model identifier was not exposed in the practice view.",
+  "sourceRevision": "m4-v3:27e29060b17ba6f12c848dc229700952a22f9cb73a2d0039adeea9c9f5e34c20",
+  "sourceSha256": "28ccb229e291a4d45f19d1ad535a61b68d515092d8a34c07bf8f7a425f579fbd",
+  "resourceSha256": "2d8623c6dd4192cae392411bbe1937b984a8de12bedd4b9dbad39d7297a1781d",
+  "cases": [
+    {
+      "id": "limited-experience",
+      "description": "Fictional example: I feel boring because I have not traveled much.",
+      "candidates": [
+        {
+          "entry": "S0041-E02",
+          "statement": "Not having traveled much makes me feel boring."
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "slightly-messy-home",
+      "description": "Fictional example: My housekeeping is slightly messy and I feel a little embarrassed about it. I am not saying I am an inadequate person.",
+      "candidates": [
+        {
+          "entry": "S0050-E02",
+          "statement": "My home is slightly messy, and I feel embarrassed about it."
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "parents-manners",
+      "description": "Fictional example: I feel embarrassed by my parents' manners at the table. I do not feel guilty about having that embarrassment.",
+      "candidates": [
+        {
+          "entry": "S0008-E02",
+          "statement": "I feel embarrassed by my parents’ manners."
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "shame-about-parents-embarrassment",
+      "description": "Fictional example: I feel like a bad child for being embarrassed by my parents. It is my own embarrassment that I am judging.",
+      "candidates": [
+        {
+          "entry": "S0008-E06",
+          "statement": "I feel bad about myself for being embarrassed by my parents."
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "practical-limitation",
+      "description": "Fictional example: I have not learned to cook yet, so I asked a friend to show me. This is a practical skill gap and I do not feel bad about myself for it.",
+      "candidates": [],
+      "passed": true,
+      "initialCandidates": [],
+      "clarificationQuestion": "Do you attach any negative judgment to yourself for having not learned to cook yet, or does it feel purely like a practical skill gap?",
+      "clarificationAnswer": "",
+      "finalCandidates": []
+    }
+  ],
+  "passed": 5,
+  "total": 5,
+  "limits": "Selected smoke cases only; not an evaluation of every example or a guarantee of later model responses."
+}

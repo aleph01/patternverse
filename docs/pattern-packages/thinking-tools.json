@@ -1,0 +1,1788 @@
+{
+  "format_version": 1,
+  "title": "Thinking Tools Field Guide",
+  "reviewed_on": "2026-10-21",
+  "coverage_source": "https://untools.co/",
+  "patterns": [
+    {
+      "id": "six-thinking-hats",
+      "title": "Six Thinking Hats",
+      "conventional_method": "Six Thinking Hats",
+      "verses": ["decision-making", "collaboration"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "Edward de Bono; Six Thinking Hats (1985).",
+      "sources": [
+        {
+          "url": "https://www.debonogroup.com/services/core-programs/six-thinking-hats/",
+          "title": "de Bono Group's program overview",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["try-another-model-of-the-world"],
+      "editorial_decision": "new article",
+      "distinction": "A sequence of thinking modes, rather than a sequence of imagined people.",
+      "practice": {
+        "title": "Six Lenses, One Decision",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Decision context; information, feelings, benefits, risks, alternatives; next step and review trigger.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{decision: context, information: facts, feelings: feelings, benefits: benefits, caution: risks, alternatives: possibilities, next: process}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The sequence concerns modes of attention; the varied prompts are clearer than a decorative set of colored hats."
+      },
+      "example_user_queries": [
+        "Our meeting mixes objections and new ideas before either gets heard.",
+        "How can we examine the same proposal from several thinking modes?",
+        "I want facts and feelings both considered without confusing them.",
+        "Help our group separate brainstorming from risk review.",
+        "We keep assigning one person the pessimist role.",
+        "How do I make room for an intuition that I cannot yet explain?",
+        "We discussed risks but never considered the possible benefits.",
+        "I need a structured solo review of a proposal."
+      ],
+      "article_words": 861,
+      "use_when": [
+        "Our meeting mixes objections and new ideas before either gets heard.",
+        "How can we examine the same proposal from several thinking modes?",
+        "I want facts and feelings both considered without confusing them."
+      ],
+      "related_patterns": [
+        {
+          "id": "try-another-model-of-the-world",
+          "title": "Try Another Model of the World"
+        },
+        {
+          "id": "separate-exploration-from-selection",
+          "title": "Separate Exploration from Selection"
+        },
+        {
+          "id": "run-a-premortem",
+          "title": "Run a Premortem"
+        }
+      ]
+    },
+    {
+      "id": "ishikawa-diagram",
+      "title": "Ishikawa Diagram",
+      "conventional_method": "Ishikawa Diagram",
+      "verses": ["problem-solving"],
+      "collections": ["structure-a-problem"],
+      "originator_or_source": "Kaoru Ishikawa; cause-and-effect diagram tradition described by the American Society for Quality.",
+      "sources": [
+        {
+          "url": "https://asq.org/quality-resources/fishbone",
+          "title": "fishbone diagram reference",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-find-hidden-influence"],
+      "editorial_decision": "new article",
+      "distinction": "A structured hypothesis inventory across categories, rather than one omitted influence.",
+      "practice": {
+        "title": "Build a Cause Inventory",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Observed effect; categorized cause hypotheses, evidence choices and checks; priority investigation.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{effect: context, hypotheses: causes, investigation: review}",
+        "collection_limits": [
+          {
+            "binding": "causes",
+            "min": 1,
+            "max": 6
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/ishikawa-diagram.svg",
+        "alt_text": "Possible contributors from materials, methods, measurement, and environment point toward an observed effect. Investigate the links rather than accepting the layout as proof.",
+        "caption": "A cause inventory is not a causal verdict. Possible contributors from materials, methods, measurement, and environment point toward an observed effect. Investigate the links rather than accepting the layout as proof.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "Several explanations could account for a recurring defect.",
+        "How can I organize possible causes without blaming a person?",
+        "I need a fishbone analysis that distinguishes hypotheses from evidence.",
+        "Our output changed and we do not know which process factor matters.",
+        "Help me investigate a specific effect across different cause categories.",
+        "What should we test after listing possible causes?",
+        "We keep treating the first plausible explanation as proven.",
+        "How do I compare material, equipment, and coordination explanations?"
+      ],
+      "article_words": 905,
+      "use_when": [
+        "Several explanations could account for a recurring defect.",
+        "How can I organize possible causes without blaming a person?",
+        "I need a fishbone analysis that distinguishes hypotheses from evidence."
+      ],
+      "related_patterns": [
+        {
+          "id": "reframing-find-hidden-influence",
+          "title": "Find Hidden Influences"
+        },
+        {
+          "id": "issue-trees",
+          "title": "Issue Trees"
+        },
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown"
+        }
+      ]
+    },
+    {
+      "id": "eisenhower-matrix",
+      "title": "Eisenhower Matrix",
+      "conventional_method": "Eisenhower Matrix",
+      "verses": ["decision-making"],
+      "collections": ["prioritize-your-work"],
+      "originator_or_source": "Urgency–importance distinction associated with Dwight D. Eisenhower; four-quadrant time-management framework popularized by Stephen R. Covey.",
+      "sources": [
+        {
+          "url": "https://www.franklincovey.com/courses/the-7-habits/habit-3/",
+          "title": "Habit 3 reference",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["define-the-decision-before-comparing-options"],
+      "editorial_decision": "new article",
+      "distinction": "Classifies work by urgency and contribution, rather than comparing decision alternatives.",
+      "practice": {
+        "title": "Protect the Important Work",
+        "duration_minutes": 12,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Outcomes and horizon; task urgency, importance, basis and treatment; protected work and agreements.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{purpose: purpose, tasks: tasks, plan: plan}",
+        "collection_limits": [
+          {
+            "binding": "tasks",
+            "min": 1,
+            "max": 7
+          }
+        ]
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The article explains urgency and importance with a worked example; semantic task categories in the practice remain visible without a rigid quadrant picture."
+      },
+      "example_user_queries": [
+        "Urgent requests keep displacing work that matters.",
+        "How do I distinguish a real deadline from a loud request?",
+        "I need to protect time for important work without an immediate deadline.",
+        "Which tasks could I renegotiate rather than do automatically?",
+        "My day is full but the important outcome is not moving.",
+        "Help me sort work by urgency and contribution.",
+        "I want to reduce low-value demands without ignoring obligations.",
+        "How do I plan when importance and urgency are both uncertain?"
+      ],
+      "article_words": 861,
+      "use_when": [
+        "Urgent requests keep displacing work that matters.",
+        "How do I distinguish a real deadline from a loud request?",
+        "I need to protect time for important work without an immediate deadline."
+      ],
+      "related_patterns": [
+        {
+          "id": "define-the-decision-before-comparing-options",
+          "title": "Define the Decision Before Comparing Options"
+        },
+        {
+          "id": "impact-effort-matrix",
+          "title": "Impact–Effort Matrix"
+        },
+        {
+          "id": "reduce-the-first-step",
+          "title": "Reduce the First Step"
+        }
+      ]
+    },
+    {
+      "id": "second-order-thinking",
+      "title": "Second-order Thinking",
+      "conventional_method": "Second-order Thinking",
+      "verses": ["decision-making"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "A general reasoning practice with no sole originator asserted; Howard Marks popularizes related second-level thinking in investing, which is not identical to consequence mapping.",
+      "sources": [
+        {
+          "url": "https://www.oaktreecapital.com/insights/memo/i-beg-to-differ",
+          "title": "I Beg to Differ",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["follow-the-consequences"],
+      "editorial_decision": "new article",
+      "distinction": "Maps consequences of proposed actions across people and time; the existing article examines beliefs in use.",
+      "practice": {
+        "title": "Follow the Next Consequence",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Proposed action; consequence chains, affected people, evidence and conditions; revised action and signal.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{action: context, chains: chains, decision: review}",
+        "collection_limits": [
+          {
+            "binding": "chains",
+            "min": 1,
+            "max": 4
+          }
+        ]
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The structured consequence records preserve mechanism and uncertainty without implying a single inevitable causal path."
+      },
+      "example_user_queries": [
+        "This policy looks helpful immediately, but what happens after that?",
+        "How might people respond to the incentives our change creates?",
+        "I want to trace beneficial and harmful consequences over time.",
+        "Our solution could move the burden onto someone else.",
+        "Help me explain the mechanism between an action and a later effect.",
+        "How can I test an unintended-consequence story?",
+        "What might a successful first effect change next?",
+        "I need to examine a proposed rule beyond its immediate result."
+      ],
+      "article_words": 914,
+      "use_when": [
+        "This policy looks helpful immediately, but what happens after that?",
+        "How might people respond to the incentives our change creates?",
+        "I want to trace beneficial and harmful consequences over time."
+      ],
+      "related_patterns": [
+        {
+          "id": "follow-the-consequences",
+          "title": "Follow the Consequences"
+        },
+        {
+          "id": "run-a-premortem",
+          "title": "Run a Premortem"
+        },
+        {
+          "id": "connection-circles",
+          "title": "Connection Circles"
+        }
+      ]
+    },
+    {
+      "id": "iceberg-model",
+      "title": "Iceberg Model",
+      "conventional_method": "Iceberg Model",
+      "verses": ["systems-thinking"],
+      "collections": ["understand-systems"],
+      "originator_or_source": "A systems-thinking teaching heuristic; no single originator asserted. Related foundations in Donella Meadows’s systems work.",
+      "sources": [
+        {
+          "url": "https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/",
+          "title": "Leverage Points: Places to Intervene in a System",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-find-hidden-influence"],
+      "editorial_decision": "new article",
+      "distinction": "Separates four levels of inquiry and their evidence, rather than proposing one hidden cause.",
+      "practice": {
+        "title": "Look Beneath a Recurring Event",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Event; recurrence and evidence; possible structures; sustaining assumptions; immediate response and test.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{event: event, recurrence: pattern, structures: structure, assumptions: assumptions, response: test}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/iceberg-model.svg",
+        "alt_text": "A visible event leads to questions about recurrence, arrangements, and sustaining assumptions. Each level needs evidence.",
+        "caption": "Four levels of inquiry. A visible event leads to questions about recurrence, arrangements, and sustaining assumptions. Each level needs evidence.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "The same incident keeps returning despite quick fixes.",
+        "How do I move from an event to the arrangements behind it?",
+        "I want to separate a recurring pattern from my explanation of it.",
+        "Which assumptions might sustain the way this situation works?",
+        "Help me investigate structures without inventing hidden motives.",
+        "What evidence would support an iceberg explanation?",
+        "We fix individual shortages but the timing problem remains.",
+        "How do I choose a structural change while addressing an immediate need?"
+      ],
+      "article_words": 899,
+      "use_when": [
+        "The same incident keeps returning despite quick fixes.",
+        "How do I move from an event to the arrangements behind it?",
+        "I want to separate a recurring pattern from my explanation of it."
+      ],
+      "related_patterns": [
+        {
+          "id": "reframing-expand-time-window",
+          "title": "Expand the Time Window"
+        },
+        {
+          "id": "ishikawa-diagram",
+          "title": "Ishikawa Diagram"
+        },
+        {
+          "id": "balancing-feedback-loops",
+          "title": "Balancing Feedback Loops"
+        },
+        {
+          "id": "reinforcing-feedback-loops",
+          "title": "Reinforcing Feedback Loops"
+        }
+      ]
+    },
+    {
+      "id": "abstraction-laddering",
+      "title": "Abstraction Laddering",
+      "conventional_method": "Abstraction Laddering",
+      "verses": ["creativity"],
+      "collections": ["getting-unstuck"],
+      "originator_or_source": "Established design-framing method documented by LUMA Institute; no claim that LUMA invented the underlying reasoning.",
+      "sources": [
+        {
+          "url": "https://www.luma-institute.com/abstraction-laddering/",
+          "title": "LUMA Institute's abstraction laddering reference",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-surface-higher-goals"],
+      "editorial_decision": "new article",
+      "distinction": "Returns from a broader purpose through alternative means, instead of stopping at the higher goal.",
+      "practice": {
+        "title": "Climb and Return",
+        "duration_minutes": 12,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Initial request and constraints; purposes; alternative routes; chosen frame and check.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{initial: start, purpose: up, alternatives: down, next: review}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/assets/creativity/abstraction-laddering.svg",
+        "alt_text": "The room-booking website leads to the purpose of reliable access to suitable rooms. That purpose also leads to clearer descriptions, standing allocations, and drop-in space.",
+        "caption": "Ask what booking makes possible, then return through other ways to provide suitable space. The alternatives still need to meet the same requirements.",
+        "rationale": "The branches make the move from one implementation to a purpose and back through alternative implementations visible."
+      },
+      "example_user_queries": [
+        "We are arguing about a requested solution before its purpose is clear.",
+        "How can I ask why without becoming too abstract to act?",
+        "I want different concrete ways to achieve the same purpose.",
+        "Help me climb from a feature request to the underlying goal.",
+        "Our problem statement rules out too many alternatives.",
+        "How do I return from a broad goal to a testable option?",
+        "I know what I want to build but not what it should enable.",
+        "Which level of framing gives us useful room to invent?"
+      ],
+      "article_words": 912,
+      "use_when": [
+        "We are arguing about a requested solution before its purpose is clear.",
+        "How can I ask why without becoming too abstract to act?",
+        "I want different concrete ways to achieve the same purpose."
+      ],
+      "related_patterns": [
+        {
+          "id": "reframing-surface-higher-goals",
+          "title": "Surface Higher-Level Goals"
+        },
+        {
+          "id": "reframing-alternative-paths",
+          "title": "Find Alternative Paths"
+        },
+        {
+          "id": "reframing-detect-baked-solution",
+          "title": "Detect a Baked-In Solution"
+        }
+      ]
+    },
+    {
+      "id": "decision-matrix",
+      "title": "Decision Matrix",
+      "conventional_method": "Decision Matrix",
+      "verses": ["decision-making"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "Weighted multi-criteria comparison is a broad decision-analysis tradition; ASQ documents this form. Not all weighted matrices are Pugh datum matrices.",
+      "sources": [
+        {
+          "url": "https://asq.org/quality-resources/decision-matrix",
+          "title": "decision matrix reference",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["make-trade-offs-explicit"],
+      "editorial_decision": "new article",
+      "distinction": "Adds explicit weights, computed comparisons, and sensitivity review without replacing judgment.",
+      "practice": {
+        "title": "Compare Two Options on Three Criteria",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Viable options and criteria; numeric weights and scores; calculated totals; revised weights and totals; judgment.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{context: context, weights: weights, scores_a: scores_a, scores_b: scores_b, baseline: {a: total_a, b: total_b}, revised_weights: revised_weights, sensitivity: {a: revised_a, b: revised_b}, judgment: judgment}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/decision-matrix.svg",
+        "alt_text": "The choir software example scores A at 34 and B at 32. Raising the second criterion weight from four to five produces a 37–37 tie.",
+        "caption": "A result depends on the weights. The choir software example scores A at 34 and B at 32. Raising the second criterion weight from four to five produces a 37–37 tie.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "I need to compare viable options on several explicit criteria.",
+        "How much does our preferred option depend on the weights?",
+        "Help me calculate weighted scores without treating them as objective truth.",
+        "Two options have different strengths and we need an inspectable comparison.",
+        "How should mandatory requirements differ from weighted preferences?",
+        "What happens if we change a plausible criterion weight?",
+        "We have a close score and need to inspect uncertainty.",
+        "I want to compare two options on three criteria and review a possible tie."
+      ],
+      "article_words": 880,
+      "use_when": [
+        "I need to compare viable options on several explicit criteria.",
+        "How much does our preferred option depend on the weights?",
+        "Help me calculate weighted scores without treating them as objective truth."
+      ],
+      "related_patterns": [
+        {
+          "id": "define-the-decision-before-comparing-options",
+          "title": "Define the Decision Before Comparing Options"
+        },
+        {
+          "id": "make-trade-offs-explicit",
+          "title": "Make Trade-offs Explicit"
+        },
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown"
+        }
+      ]
+    },
+    {
+      "id": "impact-effort-matrix",
+      "title": "Impact–Effort Matrix",
+      "conventional_method": "Impact–Effort Matrix",
+      "verses": ["decision-making"],
+      "collections": ["prioritize-your-work"],
+      "originator_or_source": "Common prioritization heuristic; no sole inventor asserted. Practitioner source: Sarah Gibbons, Nielsen Norman Group.",
+      "sources": [
+        {
+          "url": "https://www.nngroup.com/articles/prioritization-matrices/",
+          "title": "prioritization matrices at Nielsen Norman Group",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["prefer-the-smallest-useful-experiment"],
+      "editorial_decision": "new article",
+      "distinction": "Compares several initiatives before choosing what to pursue or test.",
+      "practice": {
+        "title": "Map Possible Initiatives",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Scale anchors; initiatives with numeric impact and effort, evidence and dependencies; ranked whole records; next action.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{purpose: purpose, initiatives: initiatives, priorities: priorities, next: next}",
+        "collection_limits": [
+          {
+            "binding": "initiatives",
+            "min": 1,
+            "max": 6
+          }
+        ]
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The practice renders the participant’s actual numeric map; a static invented scatterplot would add little."
+      },
+      "example_user_queries": [
+        "We have several initiatives and cannot do them all.",
+        "How do I map expected contribution against required effort?",
+        "Our quick wins may depend on larger prerequisite work.",
+        "Help me compare projects while preserving uncertain estimates.",
+        "I want to choose a first slice rather than commit to a giant project.",
+        "Which initiative should we test before prioritizing it?",
+        "How do I include maintenance and coordination in effort?",
+        "I need to inspect an impact–effort map and arrange my own priorities."
+      ],
+      "article_words": 857,
+      "use_when": [
+        "We have several initiatives and cannot do them all.",
+        "How do I map expected contribution against required effort?",
+        "Our quick wins may depend on larger prerequisite work."
+      ],
+      "related_patterns": [
+        {
+          "id": "eisenhower-matrix",
+          "title": "Eisenhower Matrix"
+        },
+        {
+          "id": "prefer-the-smallest-useful-experiment",
+          "title": "Prefer the Smallest Useful Experiment"
+        },
+        {
+          "id": "make-trade-offs-explicit",
+          "title": "Make Trade-offs Explicit"
+        }
+      ]
+    },
+    {
+      "id": "connection-circles",
+      "title": "Connection Circles",
+      "conventional_method": "Connection Circles",
+      "verses": ["systems-thinking", "learning"],
+      "collections": ["understand-systems"],
+      "originator_or_source": "Julia Hendrix conceived the connection circle; Alan Ticotsky and Rob Quaden refined it, with Debra Lyneis. Source: Janice Molloy’s adaptation of The Shape of Change.",
+      "sources": [
+        {
+          "url": "https://thesystemsthinker.com/learning-about-connection-circles/",
+          "title": "Learning About Connection Circles",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["choose-the-representation-before-solving"],
+      "editorial_decision": "new article",
+      "distinction": "Builds causal links among changing variables, rather than choosing a representation in general.",
+      "practice": {
+        "title": "Trace a Possible Feedback Loop",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Open collections are bounded for a focused first pass. Participant-entered relationship or parent names require manual checking.",
+        "useful_outputs": "Changing variables; directed-link statements with semantic direction/evidence choices and delays; manual loop review.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{context: context, variables: variables, relationships: relationships, review: review}",
+        "collection_limits": [
+          {
+            "binding": "variables",
+            "min": 1,
+            "max": 8
+          },
+          {
+            "binding": "relationships",
+            "min": 1,
+            "max": 10
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/connection-circles.svg",
+        "alt_text": "More experienced volunteers may improve repair success, which may support recommendations and recruitment. Every return link needs evidence.",
+        "caption": "A proposed path must return. More experienced volunteers may improve repair success, which may support recommendations and recruitment. Every return link needs evidence.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "Several changing factors seem to influence one another.",
+        "How can I identify a closed causal path rather than a loose list?",
+        "Help me record variables that can increase and decrease.",
+        "I want to distinguish same-direction links from opposite-direction links.",
+        "Our causal map looks convincing but its links need evidence.",
+        "How do delays affect the relationships in our proposed loop?",
+        "Which weak connection should we investigate first?",
+        "I need a structured record of causal hypotheses without automatic diagnosis."
+      ],
+      "article_words": 894,
+      "use_when": [
+        "Several changing factors seem to influence one another.",
+        "How can I identify a closed causal path rather than a loose list?",
+        "Help me record variables that can increase and decrease."
+      ],
+      "related_patterns": [
+        {
+          "id": "reinforcing-feedback-loops",
+          "title": "Reinforcing Feedback Loops"
+        },
+        {
+          "id": "balancing-feedback-loops",
+          "title": "Balancing Feedback Loops"
+        },
+        {
+          "id": "concept-mapping",
+          "title": "Concept Mapping"
+        },
+        {
+          "id": "reframing-find-hidden-influence",
+          "title": "Find Hidden Influences"
+        }
+      ]
+    },
+    {
+      "id": "ladder-of-inference",
+      "title": "Ladder of Inference",
+      "conventional_method": "Ladder of Inference",
+      "verses": ["decision-making", "collaboration"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "Chris Argyris developed the ladder of inference; later organizational-learning presentations vary in their rung labels.",
+      "sources": [
+        {
+          "url": "https://thesystemsthinker.com/the-ladder-of-inference/",
+          "title": "Ladder of Inference",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["inspect-how-you-know"],
+      "editorial_decision": "new article",
+      "distinction": "Makes data selection and the return from belief to attention explicit in an action-oriented reasoning chain.",
+      "practice": {
+        "title": "Rebuild the Reasoning",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Initial conclusion and action; observations, selection, meaning and assumptions; alternative account; revised response.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{starting: start, reasoning: trace, alternative: alternative, revised: rebuild}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/ladder-of-inference.svg",
+        "alt_text": "Observed information is selected, interpreted, and connected to a conclusion and action. Beliefs also shape what receives attention next.",
+        "caption": "Expose the steps in an interpretation. Observed information is selected, interpreted, and connected to a conclusion and action. Beliefs also shape what receives attention next.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "I may be acting on a conclusion drawn from selective observations.",
+        "How did I get from what happened to what I think it means?",
+        "Help me separate a colleague’s behavior from my interpretation.",
+        "I want another explanation that fits the same evidence.",
+        "Our belief may determine which information we notice next.",
+        "What question could test the assumption behind my response?",
+        "I need to rebuild a conclusion after inspecting its evidence.",
+        "How can I discuss an inference without presenting it as a fact?"
+      ],
+      "article_words": 905,
+      "use_when": [
+        "I may be acting on a conclusion drawn from selective observations.",
+        "How did I get from what happened to what I think it means?",
+        "Help me separate a colleague’s behavior from my interpretation."
+      ],
+      "related_patterns": [
+        {
+          "id": "inspect-how-you-know",
+          "title": "Inspect How You Know"
+        },
+        {
+          "id": "reframing-verify-statement",
+          "title": "Verify the Statement"
+        },
+        {
+          "id": "situation-behavior-impact",
+          "title": "Situation–Behavior–Impact"
+        }
+      ]
+    },
+    {
+      "id": "conflict-resolution-diagram",
+      "title": "Conflict Resolution Diagram",
+      "conventional_method": "Conflict Resolution Diagram",
+      "verses": ["collaboration"],
+      "collections": ["communicate-clearly"],
+      "originator_or_source": "Eliyahu M. Goldratt’s Theory of Constraints thinking processes; also called the Evaporating Cloud.",
+      "sources": [
+        {
+          "url": "https://www.toc-goldratt.com/en/toc-application/evaporating-cloud",
+          "title": "Goldratt’s Theory of Constraints: Evaporating Cloud",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-break-tradeoff"],
+      "editorial_decision": "new article",
+      "distinction": "Uses an explicit objective–needs–proposals structure and examines the assumptions on each connection.",
+      "practice": {
+        "title": "Examine the Conflict’s Assumptions",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Objective, needs and proposals; assumptions grouped by connection with evidence; candidate and consent/boundary check.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{conflict: context, assumptions: assumptions, proposal: review}",
+        "collection_limits": [
+          {
+            "binding": "assumptions",
+            "min": 1,
+            "max": 6
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/conflict-resolution-diagram.svg",
+        "alt_text": "A shared objective connects to two needs, each linked to a proposal. Test the assumptions on those connections before treating proposals as necessary.",
+        "caption": "Examine the connections. A shared objective connects to two needs, each linked to a proposal. Test the assumptions on those connections before treating proposals as necessary.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "We keep returning to two incompatible proposals.",
+        "How can we separate underlying needs from preferred actions?",
+        "I want to examine the assumptions creating an either-or conflict.",
+        "Help me build an Evaporating Cloud without pretending every conflict disappears.",
+        "What shared objective could both sides honestly endorse?",
+        "How do I test whether a proposal is necessary for a need?",
+        "Our disagreement may involve a genuine resource limit.",
+        "I need a proposal to discuss with the other person, not a guess about their motives."
+      ],
+      "article_words": 932,
+      "use_when": [
+        "We keep returning to two incompatible proposals.",
+        "How can we separate underlying needs from preferred actions?",
+        "I want to examine the assumptions creating an either-or conflict."
+      ],
+      "related_patterns": [
+        {
+          "id": "reframing-break-tradeoff",
+          "title": "Break a False Trade-Off"
+        },
+        {
+          "id": "find-the-positive-intention",
+          "title": "Find the Positive Intention"
+        }
+      ]
+    },
+    {
+      "id": "situation-behavior-impact",
+      "title": "Situation–Behavior–Impact",
+      "conventional_method": "Situation–Behavior–Impact",
+      "verses": ["collaboration"],
+      "collections": ["communicate-clearly"],
+      "originator_or_source": "Situation–Behavior–Impact (SBI) is a Center for Creative Leadership framework; inquiry about intent extends the conversation.",
+      "sources": [
+        {
+          "url": "https://www.ccl.org/articles/leading-effectively-articles/closing-the-gap-between-intent-vs-impact-sbii/",
+          "title": "Center for Creative Leadership: closing the gap between intent and impact",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-verify-statement"],
+      "editorial_decision": "new article",
+      "distinction": "Produces a usable feedback message, rather than only checking an interpretation.",
+      "practice": {
+        "title": "Draft Feedback That Can Be Discussed",
+        "duration_minutes": 12,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Situation, behavior and actual impact; inference review and optional inquiry; prepared message, setting and next discussion.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{observations: draft, review: review, message: message}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "A complete spoken example is more instructive than a three-box abbreviation."
+      },
+      "example_user_queries": [
+        "I need to give feedback without making a character judgment.",
+        "How do I describe an interruption and its actual impact?",
+        "Help me write a specific SBI feedback message.",
+        "I want to ask about intent rather than assume it.",
+        "How can positive feedback identify a behavior worth repeating?",
+        "My draft says always and disrespectful; how can I make it discussable?",
+        "I know how an event affected me but not what someone intended.",
+        "Help me choose a setting where the person can respond to feedback."
+      ],
+      "article_words": 908,
+      "use_when": [
+        "I need to give feedback without making a character judgment.",
+        "How do I describe an interruption and its actual impact?",
+        "Help me write a specific SBI feedback message."
+      ],
+      "related_patterns": [
+        {
+          "id": "reframing-verify-statement",
+          "title": "Verify the Statement"
+        },
+        {
+          "id": "ladder-of-inference",
+          "title": "Ladder of Inference"
+        }
+      ]
+    },
+    {
+      "id": "hard-choice-model",
+      "title": "Hard Choice Model",
+      "conventional_method": "Hard Choice Model",
+      "verses": ["decision-making"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "Impact–comparability heuristic presented by Wes O’Haire in Mental models for designers; not a formal proof of decision quality.",
+      "sources": [
+        {
+          "url": "https://medium.com/dropbox-design/mental-models-for-designers-7c03d5e4a092",
+          "title": "Wes O’Haire: Mental models for designers",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["separate-reversible-from-irreversible-decisions"],
+      "editorial_decision": "new article",
+      "distinction": "Comparability and stakes differ from reversibility; the methods supply complementary checks.",
+      "practice": {
+        "title": "Choose How to Decide",
+        "duration_minutes": 10,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Choice and affected people; semantic stakes/comparability assessments; reversibility; participant-selected decision process.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{choice: context, assessment: assessment, process: plan}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The prose and process selection preserve judgment; a fixed quadrant could imply a diagnostic rule."
+      },
+      "example_user_queries": [
+        "We spend too long on small decisions and rush important ones.",
+        "How should stakes and comparability change the way we decide?",
+        "I cannot tell whether more analysis will resolve this choice.",
+        "Our alternatives reflect conflicting values rather than missing data.",
+        "Help me choose between a simple rule, investigation, trial, and deliberation.",
+        "A choice is reversible but could still harm someone.",
+        "How do I check whether a decision is low stakes for everyone affected?",
+        "I want a proportionate decision process before evaluating options."
+      ],
+      "article_words": 869,
+      "use_when": [
+        "We spend too long on small decisions and rush important ones.",
+        "How should stakes and comparability change the way we decide?",
+        "I cannot tell whether more analysis will resolve this choice."
+      ],
+      "related_patterns": [
+        {
+          "id": "decision-matrix",
+          "title": "Decision Matrix"
+        },
+        {
+          "id": "separate-reversible-from-irreversible-decisions",
+          "title": "Separate Reversible from Irreversible Decisions"
+        },
+        {
+          "id": "define-the-decision-before-comparing-options",
+          "title": "Define the Decision Before Comparing Options"
+        },
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown"
+        }
+      ]
+    },
+    {
+      "id": "zwicky-box",
+      "title": "Zwicky Box",
+      "conventional_method": "Zwicky Box",
+      "verses": ["creativity"],
+      "collections": ["getting-unstuck"],
+      "originator_or_source": "Fritz Zwicky developed morphological analysis; Tom Ritchey and the Swedish Morphological Society document later general morphological analysis.",
+      "sources": [
+        {
+          "url": "https://www.swemorph.com/ma.html",
+          "title": "Tom Ritchey and the Swedish Morphological Society: General Morphological Analysis",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-generate-real-options"],
+      "editorial_decision": "new article",
+      "distinction": "Systematically recombines dimensions and checks compatibility instead of relying on unstructured alternatives.",
+      "practice": {
+        "title": "Build Three Unfamiliar Combinations",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Design brief; three dimensions with two alternatives each; three combinations using semantic option choices; compatibility and development.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{brief: context, dimensions: dimensions, alternatives: alternatives, combinations: {first: first, second: second, third: third}, development: develop}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/assets/creativity/zwicky-box.svg",
+        "alt_text": "Three dimensions each offer two choices: setting, encounter, and contribution. Walking route, audio excerpts, and remembered places combine into a listening trail; the kitchen-table combination becomes a conversation pack.",
+        "caption": "Choose one alternative from each dimension, then describe and check the combination. The listening trail and conversation pack differ in their underlying arrangement.",
+        "rationale": "Aligned alternatives and complete combinations make recombination concrete without pretending to enumerate every possible design."
+      },
+      "example_user_queries": [
+        "Every new idea has the same underlying structure.",
+        "How can I combine alternatives across independent design dimensions?",
+        "Help me create a small morphological box.",
+        "I want three unfamiliar combinations and a compatibility check.",
+        "Which dimensions would change this experience meaningfully?",
+        "We need to distinguish genuine incompatibility from unfamiliarity.",
+        "How do I keep nonnegotiable requirements visible during recombination?",
+        "I want to develop a promising combination into a testable candidate."
+      ],
+      "article_words": 894,
+      "use_when": [
+        "Every new idea has the same underlying structure.",
+        "How can I combine alternatives across independent design dimensions?",
+        "Help me create a small morphological box."
+      ],
+      "related_patterns": [
+        {
+          "id": "reframing-generate-real-options",
+          "title": "Generate Real Options"
+        },
+        {
+          "id": "separate-exploration-from-selection",
+          "title": "Separate Exploration from Selection"
+        },
+        {
+          "id": "prefer-the-smallest-useful-experiment",
+          "title": "Prefer the Smallest Useful Experiment"
+        }
+      ]
+    },
+    {
+      "id": "ooda-loop",
+      "title": "OODA Loop",
+      "conventional_method": "OODA Loop",
+      "verses": ["decision-making"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "John R. Boyd, The Essence of Winning and Losing; orientation shapes observation, decision, and action.",
+      "sources": [
+        {
+          "url": "https://ooda.de/media/john_boyd_-_the_essence_of_winning_and_losing.pdf",
+          "title": "John R. Boyd: The Essence of Winning and Losing",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["keep-a-decision-journal"],
+      "editorial_decision": "new article",
+      "distinction": "Connects observations, orientation, hypothesis, and action across an explicit review cycle.",
+      "practice": {
+        "title": "Orient, Act, and Revisit",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Optional actual review of a prior cycle; observations; orientation; action, limit, expected feedback and revisit conditions.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{previous_review: prior, observations: observe, orientation: orient, action: act}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/ooda-loop.svg",
+        "alt_text": "Observation informs orientation. Decisions and actions produce feedback that can revise orientation as well as the next action.",
+        "caption": "Orientation changes the loop. Observation informs orientation. Decisions and actions produce feedback that can revise orientation as well as the next action.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "The situation keeps changing while we act.",
+        "How do I examine the orientation guiding our response?",
+        "Help me connect an action with expected feedback and a later review.",
+        "We are moving quickly but may be repeating the same interpretation.",
+        "I want to compare a previous cycle’s prediction with what happened.",
+        "What observation would make us change our working model?",
+        "How can I choose a bounded action with a fallback?",
+        "I need an OODA practice that does more than list four boxes."
+      ],
+      "article_words": 834,
+      "use_when": [
+        "The situation keeps changing while we act.",
+        "How do I examine the orientation guiding our response?",
+        "Help me connect an action with expected feedback and a later review."
+      ],
+      "related_patterns": [
+        {
+          "id": "keep-a-decision-journal",
+          "title": "Keep a Decision Journal"
+        },
+        {
+          "id": "prefer-the-smallest-useful-experiment",
+          "title": "Prefer the Smallest Useful Experiment"
+        },
+        {
+          "id": "ladder-of-inference",
+          "title": "Ladder of Inference"
+        }
+      ]
+    },
+    {
+      "id": "minto-pyramid",
+      "title": "Minto Pyramid",
+      "conventional_method": "Minto Pyramid",
+      "verses": ["collaboration"],
+      "collections": ["communicate-clearly"],
+      "originator_or_source": "Barbara Minto, The Minto Pyramid Principle; original explanatory examples and practice.",
+      "sources": [
+        {
+          "url": "https://www.barbaraminto.com/concept",
+          "title": "Barbara Minto: The Minto Pyramid Principle",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["feynman-technique"],
+      "editorial_decision": "new article",
+      "distinction": "Structures a reader-facing argument rather than testing the author’s understanding through explanation.",
+      "practice": {
+        "title": "Build an Answer and Its Support",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Audience, question and answer; reason records with evidence and qualifications; argument review; revised opening, support and request.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{context: context, supporting_reasons: reasons, review: review, message: message}",
+        "collection_limits": [
+          {
+            "binding": "reasons",
+            "min": 1,
+            "max": 4
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/minto-pyramid.svg",
+        "alt_text": "One answer is supported by two distinct reasons. Evidence supports each reason; weak joins require revision.",
+        "caption": "An answer with inspectable support. One answer is supported by two distinct reasons. Evidence supports each reason; weak joins require revision.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "My proposal reaches the recommendation too late.",
+        "How do I organize an answer around supporting reasons and evidence?",
+        "Help me identify the question my audience needs answered.",
+        "My headings are topics rather than claims.",
+        "I want to inspect weak joins in a written argument.",
+        "How do I lead with uncertainty without burying the answer?",
+        "We have overlapping reasons and missing support.",
+        "Help me write a clear opening and a specific request for the reader."
+      ],
+      "article_words": 867,
+      "use_when": [
+        "My proposal reaches the recommendation too late.",
+        "How do I organize an answer around supporting reasons and evidence?",
+        "Help me identify the question my audience needs answered."
+      ],
+      "related_patterns": [
+        {
+          "id": "feynman-technique",
+          "title": "Feynman Technique"
+        },
+        {
+          "id": "issue-trees",
+          "title": "Issue Trees"
+        }
+      ]
+    },
+    {
+      "id": "concept-mapping",
+      "title": "Concept Mapping",
+      "conventional_method": "Concept Mapping",
+      "verses": ["learning", "systems-thinking"],
+      "collections": ["learning-how-to-learn"],
+      "originator_or_source": "Joseph D. Novak developed concept mapping; Joseph D. Novak and Alberto J. Cañas document its theory and construction.",
+      "sources": [
+        {
+          "url": "https://cmap.ihmc.us/docs/theory-of-concept-maps",
+          "title": "Joseph D. Novak and Alberto J. Cañas: The Theory Underlying Concept Maps and How to Construct and Use Them",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reconstruct-the-map"],
+      "editorial_decision": "new article",
+      "distinction": "Develops a source-informed map with labeled relationships; retrieval from memory is a distinct neighboring practice.",
+      "practice": {
+        "title": "Connect Concepts With Meaning",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Open collections are bounded for a focused first pass. Participant-entered relationship or parent names require manual checking.",
+        "useful_outputs": "Focus question and construction mode; concept definitions; labeled propositions with support; explanation, gap and check.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{context: context, concepts: concepts, relationships: relationships, review: review}",
+        "collection_limits": [
+          {
+            "binding": "concepts",
+            "min": 1,
+            "max": 8
+          },
+          {
+            "binding": "relationships",
+            "min": 1,
+            "max": 10
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/concept-mapping.svg",
+        "alt_text": "Condensation produces liquid water. Nearby air cooling can enable condensation. Read each labeled connection as a statement, then check it.",
+        "caption": "Links form propositions. Condensation produces liquid water. Nearby air cooling can enable condensation. Read each labeled connection as a statement, then check it.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "I know the terms but cannot explain how they connect.",
+        "How do I turn related words into meaningful propositions?",
+        "Help me build a concept map around a focus question.",
+        "I want to find unsupported links in my explanation.",
+        "What cross-link would connect two branches of this subject?",
+        "How can I distinguish a conceptual relationship from a causal claim?",
+        "I need to compare a memory map with reliable sources.",
+        "Help me explain a process using labeled relationships."
+      ],
+      "article_words": 857,
+      "use_when": [
+        "I know the terms but cannot explain how they connect.",
+        "How do I turn related words into meaningful propositions?",
+        "Help me build a concept map around a focus question."
+      ],
+      "related_patterns": [
+        {
+          "id": "issue-trees",
+          "title": "Issue Tree"
+        },
+        {
+          "id": "reconstruct-the-map",
+          "title": "Reconstruct the Map"
+        },
+        {
+          "id": "re-encode-the-idea",
+          "title": "Re-Encode the Idea"
+        }
+      ]
+    },
+    {
+      "id": "cynefin-framework",
+      "title": "Cynefin Framework",
+      "conventional_method": "Cynefin Framework",
+      "verses": ["decision-making"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "Dave Snowden developed Cynefin; current framing and domain distinctions are maintained by the Cynefin community.",
+      "sources": [
+        {
+          "url": "https://cynefin.io/wiki/Cynefin",
+          "title": "Cynefin community: Cynefin",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["prefer-the-smallest-useful-experiment"],
+      "editorial_decision": "new article",
+      "distinction": "Examines the applicability of routine, analysis, probing, and stabilization; it is not a certainty score.",
+      "practice": {
+        "title": "Choose a Provisional Response",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Concrete observations and competing interpretations; inquiry across response types; participant-selected approach, basis, action and challenge.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{situation: context, inquiry: sensemaking, provisional_response: response}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "Avoids presenting context-dependent domains as Cartesian quadrants; the prose distinguishes responses without a diagnostic picture."
+      },
+      "example_user_queries": [
+        "We use the same problem-solving approach for very different situations.",
+        "How do I distinguish routine work, expert analysis, and bounded probing?",
+        "I want to examine context without taking a simplistic domain quiz.",
+        "Our situation may have clear and complex parts at the same time.",
+        "When is stabilizing the situation more urgent than investigating it?",
+        "What observations would challenge our current response approach?",
+        "We keep demanding a forecast for outcomes shaped by interactions.",
+        "Help us discuss differing interpretations before choosing how to act."
+      ],
+      "article_words": 861,
+      "use_when": [
+        "We use the same problem-solving approach for very different situations.",
+        "How do I distinguish routine work, expert analysis, and bounded probing?",
+        "I want to examine context without taking a simplistic domain quiz."
+      ],
+      "related_patterns": [
+        {
+          "id": "prefer-the-smallest-useful-experiment",
+          "title": "Prefer the Smallest Useful Experiment"
+        },
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown"
+        }
+      ]
+    },
+    {
+      "id": "productive-thinking-model",
+      "title": "Productive Thinking Model",
+      "conventional_method": "Productive Thinking Model",
+      "verses": ["creativity"],
+      "collections": ["getting-unstuck"],
+      "originator_or_source": "Tim Hurson, Think Better: An Innovator’s Guide to Productive Thinking (2007). Original introductory application, not an official program.",
+      "sources": [
+        {
+          "url": "https://www.timhurson.com/think-better/",
+          "title": "Tim Hurson: Think Better",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["creative-reframing"],
+      "editorial_decision": "connecting overview",
+      "distinction": "A connecting overview coordinates distinct thinking jobs and explicit handoffs between them.",
+      "practice": {
+        "title": "Develop a Possibility Into a Plan",
+        "duration_minutes": 30,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Situation, success criteria and generative question; options and ranked whole records; developed solution; resource and review plan.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{situation: situation, success: success, question: question, options: options, priorities: priorities, solution: develop, resource_plan: resources}",
+        "collection_limits": [
+          {
+            "binding": "options",
+            "min": 1,
+            "max": 5
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/assets/creativity/productive-thinking-model.svg",
+        "alt_text": "Six thinking jobs connect the courtyard concern to a trial: understand use, describe success, frame a question, generate options, develop a proposal, and align resources. A dashed return from the storage question reopens development.",
+        "caption": "The courtyard proposal moves through six different thinking jobs. If storage is unavailable, return to development instead of treating the plan as settled.",
+        "rationale": "The figure distinguishes thinking jobs and makes the return from a resource discovery to solution development explicit."
+      },
+      "example_user_queries": [
+        "We jump from a vague concern to our first solution.",
+        "How can I connect framing, idea generation, evaluation, and resources?",
+        "I want a complete first pass from problem to action plan.",
+        "Help me define success before defending an idea.",
+        "Our creative session produced possibilities but no workable commitment.",
+        "How do I develop a candidate instead of merely scoring it?",
+        "What should happen when a later constraint changes the original question?",
+        "I need a connecting process with explicit handoffs between thinking tasks."
+      ],
+      "article_words": 1071,
+      "use_when": [
+        "We jump from a vague concern to our first solution.",
+        "How can I connect framing, idea generation, evaluation, and resources?",
+        "I want a complete first pass from problem to action plan."
+      ],
+      "related_patterns": [
+        {
+          "id": "iceberg-model",
+          "title": "Iceberg Model"
+        },
+        {
+          "id": "abstraction-laddering",
+          "title": "Abstraction Laddering"
+        },
+        {
+          "id": "zwicky-box",
+          "title": "Zwicky Box"
+        },
+        {
+          "id": "reframing-generate-real-options",
+          "title": "Generate Real Options"
+        },
+        {
+          "id": "decision-matrix",
+          "title": "Decision Matrix"
+        }
+      ]
+    },
+    {
+      "id": "inversion",
+      "title": "Inversion",
+      "conventional_method": "Inversion",
+      "verses": ["decision-making"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "A general mathematical and practical reasoning tradition, not a technique with one established inventor. Related application: Gary Klein’s project premortem.",
+      "sources": [
+        {
+          "url": "https://hbr.org/2007/09/performing-a-project-premortem",
+          "title": "Gary Klein: Performing a Project Premortem",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["run-a-premortem"],
+      "editorial_decision": "new article",
+      "distinction": "Includes bad-design construction and negative requirements; a premortem assumes a favored plan has already failed.",
+      "practice": {
+        "title": "Design the Failure, Then Remove Its Causes",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Desired and unwanted outcomes; possible failure mechanisms, evidence and countermeasures; safeguards and positive-design check.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{aim: context, failure_mechanisms: mechanisms, design: review}",
+        "collection_limits": [
+          {
+            "binding": "mechanisms",
+            "min": 1,
+            "max": 6
+          }
+        ]
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The worked negative-to-positive reasoning makes the move explicit without a decorative opposite-arrow image."
+      },
+      "example_user_queries": [
+        "How could we reliably create the outcome we want to avoid?",
+        "I want safeguards before a detailed plan exists.",
+        "Help me turn bad design conditions into useful requirements.",
+        "We repeat obvious improvements and may be missing failure mechanisms.",
+        "How is inversion different from running a premortem?",
+        "Our safeguards avoid failure but do not produce a good experience.",
+        "I want to distinguish plausible failure paths from vivid speculation.",
+        "Help me choose prevention, detection, or recovery for an important risk."
+      ],
+      "article_words": 883,
+      "use_when": [
+        "How could we reliably create the outcome we want to avoid?",
+        "I want safeguards before a detailed plan exists.",
+        "Help me turn bad design conditions into useful requirements."
+      ],
+      "related_patterns": [
+        {
+          "id": "run-a-premortem",
+          "title": "Run a Premortem"
+        },
+        {
+          "id": "second-order-thinking",
+          "title": "Second-order Thinking"
+        }
+      ]
+    },
+    {
+      "id": "match-investment-to-evidence",
+      "title": "Match Investment to Evidence",
+      "conventional_method": "Confidence Determines Speed vs. Quality",
+      "verses": ["decision-making"],
+      "collections": ["decision-making-patterns"],
+      "originator_or_source": "Adapted from Brandon Chu’s Confidence determines Speed vs. Quality in Product Management Mental Models for Everyone; the minimum-quality safeguards here are an explicit Patternverse qualification.",
+      "sources": [
+        {
+          "url": "https://blackboxofpm.substack.com/p/product-management-mental-models-for-everyone-31e7828cb50b",
+          "title": "Brandon Chu: Product Management Mental Models for Everyone",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["look-for-the-decisive-unknown"],
+      "editorial_decision": "new article",
+      "distinction": "Separates problem and solution evidence to choose an investment stage, rather than identifying only one unknown.",
+      "practice": {
+        "title": "Choose the Next Investment",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Separate problem/solution claims and evidence; quality floor; semantic investment-stage choice, scope and decision rule.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{claims: claims, problem_evidence: problem_evidence, solution_evidence: solution_evidence, investment: investment}",
+        "collection_limits": []
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The evidence review and commitment choices avoid implying that self-reported confidence is a numerical investment rule."
+      },
+      "example_user_queries": [
+        "We know the problem is real but not whether this solution works.",
+        "How much should we invest before validating the problem?",
+        "Help me separate problem evidence from solution evidence.",
+        "Should we inquire, test, or invest in reliable delivery next?",
+        "I want speed without sacrificing the minimum quality of a fair test.",
+        "Our prototype was popular but the evidence may not transfer.",
+        "How do I set a resource limit and a condition for more investment?",
+        "I need to change the solution without denying that the problem matters."
+      ],
+      "article_words": 899,
+      "use_when": [
+        "We know the problem is real but not whether this solution works.",
+        "How much should we invest before validating the problem?",
+        "Help me separate problem evidence from solution evidence."
+      ],
+      "related_patterns": [
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown"
+        },
+        {
+          "id": "prefer-the-smallest-useful-experiment",
+          "title": "Prefer the Smallest Useful Experiment"
+        },
+        {
+          "id": "impact-effort-matrix",
+          "title": "Impact–Effort Matrix"
+        }
+      ]
+    },
+    {
+      "id": "first-principles-thinking",
+      "title": "First-principles Thinking",
+      "conventional_method": "First-principles Thinking",
+      "verses": ["problem-solving"],
+      "collections": ["structure-a-problem"],
+      "originator_or_source": "Long philosophical and scientific tradition, including Aristotle’s Physics, Book I. No modern sole inventor asserted.",
+      "sources": [
+        {
+          "url": "https://classics.mit.edu/Aristotle/physics.1.i.html",
+          "title": "Aristotle: Physics, Book I",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-remove-constraints"],
+      "editorial_decision": "new article",
+      "distinction": "Requires a constructive solution grounded in retained facts, rather than only challenging assumptions.",
+      "practice": {
+        "title": "Rebuild From What Must Be True",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Participant-led judgments and plans; no external action, diagnosis, or scheduled follow-up.",
+        "useful_outputs": "Function; foundational claims classified as requirements, constraints, conventions or uncertainty; reconstruction and test.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{context: context, foundational_claims: claims, reconstruction: rebuild}",
+        "collection_limits": [
+          {
+            "binding": "claims",
+            "min": 1,
+            "max": 7
+          }
+        ]
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The retained requirements and reconstructed design are clearer in the worked examples than in a generic foundations icon."
+      },
+      "example_user_queries": [
+        "We are optimizing an inherited arrangement that may not be necessary.",
+        "How can I distinguish actual requirements from conventions?",
+        "Help me rebuild a solution after challenging its assumptions.",
+        "Which constraints are supported and which need investigation?",
+        "I want to preserve access and obligations while changing the implementation.",
+        "How do I check why an existing practice was adopted?",
+        "Our first-principles discussion questions everything but constructs nothing.",
+        "Help me compare a reconstructed design with the current arrangement."
+      ],
+      "article_words": 863,
+      "use_when": [
+        "We are optimizing an inherited arrangement that may not be necessary.",
+        "How can I distinguish actual requirements from conventions?",
+        "Help me rebuild a solution after challenging its assumptions."
+      ],
+      "related_patterns": [
+        {
+          "id": "reframing-remove-constraints",
+          "title": "Remove Constraints"
+        },
+        {
+          "id": "abstraction-laddering",
+          "title": "Abstraction Laddering"
+        },
+        {
+          "id": "issue-trees",
+          "title": "Issue Trees"
+        }
+      ]
+    },
+    {
+      "id": "issue-trees",
+      "title": "Issue Trees",
+      "conventional_method": "Issue Trees",
+      "verses": ["problem-solving"],
+      "collections": ["structure-a-problem"],
+      "originator_or_source": "Logic-tree tradition in structured problem solving; documented by Charles Conn and Hugo Sarrazin in McKinsey’s problem-solving discussion. No sole inventor asserted.",
+      "sources": [
+        {
+          "url": "https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/how-to-master-the-seven-step-problem-solving-process",
+          "title": "Charles Conn and Hugo Sarrazin: How to master the seven-step problem-solving process",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["chunk-down"],
+      "editorial_decision": "new article",
+      "distinction": "Builds an explicit investigation structure with coverage checks and prioritized leaves.",
+      "practice": {
+        "title": "Build an Investigation Tree",
+        "duration_minutes": 20,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Open collections are bounded for a focused first pass. Participant-entered relationship or parent names require manual checking.",
+        "useful_outputs": "Bounded root question; first-level branches and parent-labeled leaves; evidence, coverage/overlap review and prioritized investigation.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{root: root, branches: branches, leaves: leaves, review: review}",
+        "collection_limits": [
+          {
+            "binding": "branches",
+            "min": 1,
+            "max": 5
+          },
+          {
+            "binding": "leaves",
+            "min": 1,
+            "max": 10
+          }
+        ]
+      },
+      "visual": {
+        "type": "none",
+        "rationale": "The article works through a concrete decomposition and the practice preserves branches and leaves; a static exhaustive-looking tree could overstate coverage."
+      },
+      "example_user_queries": [
+        "Several explanations compete and we need an investigation plan.",
+        "How do I decompose a broad question into answerable subquestions?",
+        "Help me check overlap and omissions in an issue tree.",
+        "Our branches follow departments rather than explain the outcome.",
+        "Which leaf should we investigate first given importance and cost?",
+        "How do I attach evidence sources to a problem-solving tree?",
+        "We are mixing causes, symptoms, and solutions in one structure.",
+        "I want a bounded two-level investigation and a concrete next check."
+      ],
+      "article_words": 849,
+      "use_when": [
+        "Several explanations compete and we need an investigation plan.",
+        "How do I decompose a broad question into answerable subquestions?",
+        "Help me check overlap and omissions in an issue tree."
+      ],
+      "related_patterns": [
+        {
+          "id": "ishikawa-diagram",
+          "title": "Ishikawa Diagram"
+        },
+        {
+          "id": "connection-circles",
+          "title": "Connection Circles"
+        },
+        {
+          "id": "chunk-down",
+          "title": "Chunk Down"
+        },
+        {
+          "id": "look-for-the-decisive-unknown",
+          "title": "Look for the Decisive Unknown"
+        }
+      ]
+    },
+    {
+      "id": "balancing-feedback-loops",
+      "title": "Balancing Feedback Loops",
+      "conventional_method": "Balancing Feedback Loops",
+      "verses": ["systems-thinking"],
+      "collections": ["understand-systems"],
+      "originator_or_source": "System dynamics tradition associated with Jay W. Forrester and Donella Meadows; no sole inventor of negative feedback asserted.",
+      "sources": [
+        {
+          "url": "https://thesystemsthinker.com/reinforcing-and-balancing-loops-building-blocks-of-dynamic-systems/",
+          "title": "The Systems Thinker: Reinforcing and Balancing Loops",
+          "role": "intellectual or practitioner source"
+        },
+        {
+          "url": "https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/",
+          "title": "Donella Meadows: Leverage Points",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["reframing-find-hidden-influence"],
+      "editorial_decision": "new article",
+      "distinction": "Examines a closed corrective mechanism over time rather than a static omitted factor.",
+      "practice": {
+        "title": "Inspect a Corrective Response",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Open collections are bounded for a focused first pass. Participant-entered relationship or parent names require manual checking.",
+        "useful_outputs": "Observed change; target/gap/pressure and correction; directed-link records with delays/evidence; manual polarity/limits review and test.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{context: context, mechanism: response, links: links, review: review}",
+        "collection_limits": [
+          {
+            "binding": "links",
+            "min": 1,
+            "max": 6
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/feedback-loops.svg",
+        "alt_text": "A balancing loop counteracts a change; a reinforcing loop amplifies it. Both can contain delays and operate alongside other loops.",
+        "caption": "Correction and amplification. A balancing loop counteracts a change; a reinforcing loop amplifies it. Both can contain delays and operate alongside other loops.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "Our corrective action works briefly and the problem returns.",
+        "How do I identify a response that counteracts a change?",
+        "We may be overcorrecting because the effect is delayed.",
+        "Help me find the target or pressure behind a balancing loop.",
+        "A stable outcome may be transferring costs to other people.",
+        "How can I distinguish a corrective loop from a chain of effects?",
+        "I want to inspect delays, overshoot, and competing feedback.",
+        "What observation would challenge our negative-feedback explanation?"
+      ],
+      "article_words": 869,
+      "use_when": [
+        "Our corrective action works briefly and the problem returns.",
+        "How do I identify a response that counteracts a change?",
+        "We may be overcorrecting because the effect is delayed."
+      ],
+      "related_patterns": [
+        {
+          "id": "connection-circles",
+          "title": "Connection Circles"
+        },
+        {
+          "id": "iceberg-model",
+          "title": "Iceberg Model"
+        },
+        {
+          "id": "reinforcing-feedback-loops",
+          "title": "Reinforcing Feedback Loops"
+        }
+      ]
+    },
+    {
+      "id": "reinforcing-feedback-loops",
+      "title": "Reinforcing Feedback Loops",
+      "conventional_method": "Reinforcing Feedback Loops",
+      "verses": ["systems-thinking"],
+      "collections": ["understand-systems"],
+      "originator_or_source": "System dynamics tradition associated with Jay W. Forrester and Donella Meadows; no sole inventor of positive feedback asserted.",
+      "sources": [
+        {
+          "url": "https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/",
+          "title": "Donella Meadows: Leverage Points",
+          "role": "intellectual or practitioner source"
+        },
+        {
+          "url": "https://thesystemsthinker.com/reinforcing-and-balancing-loops-building-blocks-of-dynamic-systems/",
+          "title": "The Systems Thinker: Reinforcing and Balancing Loops",
+          "role": "intellectual or practitioner source"
+        }
+      ],
+      "existing_overlap": ["follow-the-consequences"],
+      "editorial_decision": "new article",
+      "distinction": "Requires a closed amplifying path and limiting conditions, rather than a chain of consequences alone.",
+      "practice": {
+        "title": "Find the Amplifying Connection",
+        "duration_minutes": 15,
+        "status": "implemented",
+        "outputs": ["result"],
+        "interface": "No external input required; result is a typed record of context, method-specific records, review, and next commitment.",
+        "limits": "Open collections are bounded for a focused first pass. Participant-entered relationship or parent names require manual checking.",
+        "useful_outputs": "Observed change; amplification and enabling condition; directed-link records with delays/evidence; manual polarity/limits review and test.",
+        "declared_output": "result",
+        "output_kind": "record; nested fields inferred and checked by the Pattern Language compiler",
+        "result_expression": "{context: context, mechanism: response, links: links, review: review}",
+        "collection_limits": [
+          {
+            "binding": "links",
+            "min": 1,
+            "max": 6
+          }
+        ]
+      },
+      "visual": {
+        "type": "native-svg",
+        "public_path": "/diagrams/thinking-tools/feedback-loops.svg",
+        "alt_text": "A balancing loop counteracts a change; a reinforcing loop amplifies it. Both can contain delays and operate alongside other loops.",
+        "caption": "Correction and amplification. A balancing loop counteracts a change; a reinforcing loop amplifies it. Both can contain delays and operate alongside other loops.",
+        "rationale": "Shows the method’s structure and the distinction discussed in the article."
+      },
+      "example_user_queries": [
+        "Participation seems to create more participation.",
+        "How can a decline feed back to deepen itself?",
+        "Help me find the return link in an amplifying process.",
+        "Our growth story ignores capacity limits and competing loops.",
+        "I want to distinguish positive feedback from a desirable outcome.",
+        "Which enabling condition keeps this reinforcing loop operating?",
+        "How do I test whether recommendations actually lead to recruitment?",
+        "I need to strengthen a useful loop without assuming unlimited growth."
+      ],
+      "article_words": 903,
+      "use_when": [
+        "Participation seems to create more participation.",
+        "How can a decline feed back to deepen itself?",
+        "Help me find the return link in an amplifying process."
+      ],
+      "related_patterns": [
+        {
+          "id": "second-order-thinking",
+          "title": "Second-order Thinking"
+        },
+        {
+          "id": "connection-circles",
+          "title": "Connection Circles"
+        },
+        {
+          "id": "balancing-feedback-loops",
+          "title": "Balancing Feedback Loops"
+        }
+      ]
+    }
+  ]
+}

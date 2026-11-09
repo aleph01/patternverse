@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "repository",
+  "title": "Repository",
+  "aliases": ["Repository Pattern", "Domain Repository"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1395,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six authoritative source notes. Edward Hieatt and Rob Mee’s Repository entry in Patterns of Enterprise Application Architecture establishes collection-like domain-object access between domain and mapping layers. Evans’s DDD Reference, printed page 17, supplies aggregate-root access guidance. Percival and Gregory explain small repository contracts, test implementations, and duck typing. Fowler’s Data Mapper entry establishes the representation-transfer distinction. Official SQLite and Python sources support targeted identity conflicts, parameterized queries, transaction ownership, and connection lifetime. The workshop contract, code, and native SVGs are original teaching material.",
+    "python_examples": "All three actual article fences execute as model.py, repositories.py, and demo.py with the five exact stated output lines. Both adapters pass the same contract checks for empty and missing results, immutable Workshop objects, exact-ID retrieval, inclusive seat filtering, deterministic ASCII ID ordering, case and whitespace preservation, quoted IDs, duplicate rejection without replacing existing state, invalid IDs/counts/object types, and domain capacity checks. Real storage tests verify old snapshots remain unchanged after a stored update, unrelated constraint and operational failures propagate, add does not commit, pending additions are invisible through another connection, caller rollback removes additions, caller commit makes them visible, and several additions roll back together. The caller retains connection ownership. Memory behavior is explicitly not claimed to model SQL transactions or concurrency.",
+    "python_stdout": [
+      "memory: ('A', 'B')",
+      "sqlite: ('A', 'B')",
+      "missing: None",
+      "A fits four: False",
+      "duplicate: Workshop exists"
+    ],
+    "article_tests": "84 article integration tests pass across Repository and all prior software/GoF suites. Coverage includes canonical ID and aliases without duplicate articles, one primary collection, the new collection’s only member and verse link, exact eight-section outline, all three copyable highlighted Python blocks, accessible responsive figures and intrinsic dimensions, four resolved related links, search, ten queries, revision hash, and concept mark. Two workers, 20-second test timeout, and 60-second corpus hook timeout bound load on the large corpus.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 88 passed and one unrelated failure across 22 files.",
+    "content": "1253 entities validate with drafts included. Published-only corpus contains 1106 entities and no errors.",
+    "collection": "Created Persistence and Transactions only for this completed article, with repository as its sole member. Appended its introduction and link to the Software Engineering verse while preserving the prior verse text exactly. Application Architecture, Domain Modeling and Business Logic, and GoF membership remain unchanged. No neighboring candidate stub, duplicate alias article, or practice was added.",
+    "public_build": "Production build and public web build checks pass. Browser verification used the completed build; no deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the native visual generator, executable code validator, integration test, authoring sidecar, concept registry, and authoring documentation. Review report formatted separately.",
+    "visuals": "All four editable SVG variants load. Native and production-browser measurements report no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. All native renders and actual desktop/phone article figures were visually inspected. The boundary figure distinguishes calls to alternative adapters from returned domain objects and hides row mapping behind one contract. Labels that crossed call arrows were removed before final checks. The snapshot figure distinguishes retained old state from a possible new read, qualifies read consistency, and does not present selection as a reservation. Exact light palette, fixed white surface, regular Helvetica typography, square geometry, contrast, arrow meanings, label placement, captions, and readability were checked. The concept mark appears in the article and collection gallery.",
+    "article_browser": "Actual production article checked at 1440, 390, and 320 pixels: exact eight H2 headings, all three Python blocks preserved exactly in DOM text, colored syntax tokens, selectable text preserving indentation, focusable code blocks, keyboard horizontal code scrolling for repositories.py at 320px, both phone SVG variants loaded, and no page overflow. Normal browser selection omits the final newline. Actual article tops, code, figure, caption, and gallery screenshots were visually inspected.",
+    "navigation_browser": "Domain Model, Aggregate, Service Layer, and Specification routes return HTTP 200. The new collection direct route renders Persistence and Transactions. Software Engineering opens its one-pattern gallery; the Repository card opens the canonical route with the correct primary breadcrumb and 1/1 article indicator.",
+    "preservation": "All 23 GoF article files and their collection match actual pre-change SHA-256 hashes. All nineteen earlier software articles and authoring records remain unchanged. All 431 previous concept marks and 1518 prior asset-dimension records are unchanged. Application Architecture and Domain Modeling and Business Logic collections are byte-for-byte unchanged. The Software Engineering verse retains every previous byte followed only by the new collection introduction and link."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ with SQLite 3.24+. The contract supports new additions, exact-ID retrieval, and one domain query over immutable Workshop snapshots. It deliberately supplies no update/removal API, dirty tracking, identity map, authorization, pagination, reservation, or concurrency protocol. IDs are nonblank ASCII text with exact case and whitespace; seat counts are whole units. The SQL caller owns commit/rollback and closing. The memory adapter does not implement rollback, durability, or database isolation. A returned capacity snapshot is not a booking guarantee, and a new read’s visibility depends on storage and surrounding transaction semantics. Arbitrary in-memory predicates are not automatically translated to SQL.",
+  "preview": "http://127.0.0.1:43004/pattern/repository",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-repository",
+  "browser_measurements": ".local/software-repository/browser-checks.json",
+  "browser_check_script": ".local/software-repository/check-browser.mjs",
+  "preservation_checks": ".local/software-repository/preservation.json",
+  "build_log": ".local/software-repository/public-build.log",
+  "branch": "codex/software-repository",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

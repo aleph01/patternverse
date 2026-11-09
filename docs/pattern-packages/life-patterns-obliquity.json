@@ -1,0 +1,91 @@
+{
+  "format_version": 1,
+  "title": "Life Strategies — Obliquity",
+  "verse": "decision-making",
+  "metadata_mapping": "Canonical frontmatter uses the existing entity schema. Richer recommendation metadata is recorded here; the current search index does not automatically ingest these queries.",
+  "patterns": [
+    {
+      "id": "obliquity",
+      "title": "Obliquity",
+      "domain": "Life patterns and decision making",
+      "short_description": "Pursue complex goals through meaningful activities, learning what matters as you go.",
+      "collections": ["life-strategies", "decision-making-patterns"],
+      "use_when": [
+        "A broad aspiration is difficult to define precisely or translate into a reliable plan.",
+        "Constantly checking whether an activity produces the desired outcome seems to burden participation.",
+        "Other people's independent responses help determine the outcome.",
+        "Experience could change the understanding of the goal itself."
+      ],
+      "goals": [
+        "Participate in activities that have value in their own right",
+        "Learn what an aspiration means through involvement",
+        "Retain direction while allowing purposes and methods to change"
+      ],
+      "mechanisms": [
+        "Translate a broad purpose into meaningful concrete participation",
+        "Respect the role of other people's independent responses",
+        "Use experience to revise both means and ends",
+        "Keep feedback broader than an easily counted proxy"
+      ],
+      "tags": ["decision-making", "life-patterns", "goals", "uncertainty", "relationships"],
+      "related_patterns": [
+        "reframing-surface-higher-goals",
+        "reframing-rethink-goal",
+        "prefer-the-smallest-useful-experiment"
+      ],
+      "not_ideal_when": [
+        "The task has a clear objective and a reliable direct action.",
+        "An indirect activity would postpone a necessary conversation or concrete requirement.",
+        "The activity has no plausible connection to the aspiration and little value of its own.",
+        "The idea is being used to ignore consequences or continue an unsatisfying commitment indefinitely."
+      ],
+      "example_user_queries": [
+        "I keep checking whether I am happy and it is taking over what I do.",
+        "Our dates feel like tests of whether our relationship is good enough.",
+        "How can I build a social life without treating every encounter as a friendship audition?",
+        "I want meaningful work but I don't know exactly what that would look like.",
+        "My creative work is becoming all about the response it gets online.",
+        "I am so focused on the result that I barely engage with the activity anymore.",
+        "Can doing something help me discover what I actually want?",
+        "How do I pursue a fulfilling life when I cannot define it precisely?",
+        "When does an indirect approach make sense, and when am I just avoiding a decision?",
+        "I want more connection, but trying to make every conversation meaningful feels forced.",
+        "How can I keep a direction while allowing experience to change my goals?",
+        "I want to enjoy making photographs again instead of judging every image by likes."
+      ],
+      "practice": {
+        "id": "explore-an-oblique-route",
+        "estimated_minutes": 10,
+        "format": "Optional individual reflection in the existing Pattern Language renderer",
+        "boundary": "Plans an activity and a later review; it does not observe participation, predict outcomes, or schedule a reminder."
+      },
+      "visual": {
+        "article_decision": "none",
+        "reason": "The worked examples explain reciprocal relationships and changing purposes without suggesting a guaranteed causal chain. No numerical simulation is warranted.",
+        "concept_graphic": "An ink path visits two concrete activity nodes before reaching a purple open-ended purpose mark. A gray direct line ends early. The composition illustrates indirect pursuit without modeling an outcome probability.",
+        "registry": "apps/web/src/lib/illustrations/pattern-graphics.json"
+      },
+      "sources": [
+        {
+          "title": "John Kay, Obliquity",
+          "url": "https://www.johnkay.com/2004/01/17/obliquity/",
+          "accessed": "2026-10-28",
+          "supports": "Indirect pursuit of complex objectives, incomplete knowledge, instrumental relationships, and the boundary of direct approaches."
+        },
+        {
+          "title": "John Kay, Business Purpose, Instrumentality, and Obliquity",
+          "url": "https://www.johnkay.com/2005/05/16/business-purpose-instrumentality-and-obliquity/",
+          "accessed": "2026-10-28",
+          "supports": "Plural purposes, uncertainty, and the difficulty of specifying tradeoffs."
+        },
+        {
+          "title": "John Kay, Obliquity",
+          "url": "https://www.johnkay.com/2010/02/18/obliquity-2/",
+          "accessed": "2026-10-28",
+          "supports": "Distinction between complex changing environments and clear objectives suited to direct action."
+        }
+      ],
+      "evidence_boundary": "A conceptual strategy informed by Kay's essays. The couple, choir, photographer, and volunteer are original illustrative scenarios. No controlled outcome, general causal law, or guarantee of happiness, friendship, or career success is claimed."
+    }
+  ]
+}

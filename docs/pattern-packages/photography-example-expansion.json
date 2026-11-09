@@ -1,0 +1,108 @@
+{
+  "format_version": 1,
+  "created": "2026-10-25",
+  "scope": "Eight article examples and three foundations illustrations, preserving all previous visuals.",
+  "generation_tool": "Built-in image_gen",
+  "optical_example_policy": "Everyday focus, exposure and depth examples are explicitly generated illustrations, accompanied by the retained real technical comparisons. No measured optics, EXIF or capture settings are invented.",
+  "examples": [
+    {
+      "entity_id": "find-a-relationship",
+      "entity_type": "pattern",
+      "section": "An echo across a street",
+      "file": "photography/relationship-umbrella-comparison.svg",
+      "alt_text": "A yellow umbrella carried past three yellow umbrellas in a shop window, followed by a crop showing only the passerby.",
+      "caption": "Generated illustration with an exact crop of the same source. Above, the window umbrellas and carried umbrella create an echo. Below, the person survives but the window does not: the crop changes what the photograph can be about.",
+      "teaching_reason": "Shows the relationship described in the street example and the consequence of excluding one side."
+    },
+    {
+      "entity_id": "focus-on-what-matters",
+      "entity_type": "pattern",
+      "section": "Photograph through an obstruction",
+      "file": "photography/focus-garden-comparison.webp",
+      "alt_text": "Illustrated garden alternatives: sharp foreground fence wire with a soft flower above, then a sharp flower with softer wire below.",
+      "caption": "Generated teaching illustration. Top: the nearby wire has readable detail while the intended flower is soft. Bottom: the flower becomes readable and the wire recedes. These are illustrative alternatives, not real matched captures or a measured focus test. Compare the real focus-distance photographs earlier in the article.",
+      "teaching_reason": "Connects deliberate focus placement to an everyday subject beyond an obstruction."
+    },
+    {
+      "entity_id": "expose-for-what-matters",
+      "entity_type": "pattern",
+      "section": "A face beside a bright window",
+      "file": "photography/window-exposure-comparison.webp",
+      "alt_text": "Illustrated window portrait alternatives with a readable face and pale view above, then a darker face and detailed garden outside below.",
+      "caption": "Generated teaching illustration of the window tradeoff. Top prioritizes a readable face and gives up much outside detail. Bottom prioritizes the outside view and leaves the face dark. These are illustrative tonal alternatives, not a real exposure bracket or evidence of particular settings; the real theatre bracket above provides a captured comparison.",
+      "teaching_reason": "Makes the portrait exposure priority and its tradeoff visible."
+    },
+    {
+      "entity_id": "select-the-strongest-frame",
+      "entity_type": "pattern",
+      "section": "Compare similar images together",
+      "file": "photography/selection-candidates.svg",
+      "alt_text": "Enlarged archival frames 11, 14 and 15 show a turned quiet face, an unobstructed speaking face and a hand near the face.",
+      "caption": "Real public-domain photographs: Tom Fitz-Patrick, White House Photographic Office, contact sheet A2966; excerpt by Svajcr. Crops enlarge frames 11, 14 and 15 without retouching. For the stated purpose of an unobstructed conversational portrait, 14 is the editorial choice here; 15 supports a more reflective reading. The archive does not designate this selection.",
+      "teaching_reason": "Enlarges three candidates and states a purpose so expression and gesture can actually be compared on mobile."
+    },
+    {
+      "entity_id": "work-the-scene",
+      "entity_type": "pattern",
+      "section": "Develop a small object photograph",
+      "file": "photography/work-cup-variations.svg",
+      "alt_text": "Six labeled illustrative cup views compare wide context, low viewpoint, overhead shape, a turned handle, handle detail and open space.",
+      "caption": "Generated illustrative set, rearranged into labeled views. Follow the labels: wide context, low view, overhead shape, turning the cup, a handle detail and more empty space. Each asks a different question. This is a set of possible choices, not a record of a controlled shoot; framing, viewpoint and object orientation all vary.",
+      "teaching_reason": "Offers an accessible everyday counterpart to the archival contact sheet."
+    },
+    {
+      "entity_id": "review-one-thing-at-a-time",
+      "entity_type": "pattern",
+      "section": "Review focus before blaming the camera",
+      "file": "photography/review-focus-next-attempt.svg",
+      "alt_text": "Annotated garden examples mark a soft intended flower and a sharp foreground wire, then a clearer flower in a proposed next attempt.",
+      "caption": "Generated focus illustration with added review boxes. Green marks the intended flower; white marks the near wire to inspect. Observation: flower detail is soft while wire detail is readable. Proposed experiment: select the flower and check again. The second view illustrates the desired result, not proof that one control caused it. The boxes are teaching annotations, not captured autofocus indicators.",
+      "teaching_reason": "Models observation, a plausible next experiment and a clearer alternative without claiming certainty about cause."
+    },
+    {
+      "entity_id": "use-a-creative-constraint",
+      "entity_type": "pattern",
+      "section": "Limit color while varying subject",
+      "file": "photography/constraint-color-series-source.webp",
+      "alt_text": "Four illustrative pictures link terracotta brick, oranges, rust-colored fabric and an orange bicycle through one warm color family.",
+      "caption": "Generated illustrative series under one constraint: look for warm orange and terracotta. Read left to right, top to bottom: brick, fruit, fabric, bicycle. Subject, texture, scale and context vary while the color family connects the set. This illustrates a possible exercise, not a documented walk.",
+      "teaching_reason": "Shows one color constraint producing varied subjects rather than repeating the existing location constraint."
+    },
+    {
+      "entity_id": "choose-your-depth-of-field",
+      "entity_type": "pattern",
+      "section": "A portrait that keeps its setting",
+      "file": "photography/garden-portrait-depth-comparison.webp",
+      "alt_text": "Illustrated gardener portraits keep the person clear while the greenhouse behind is softer above and more recognizable below.",
+      "caption": "Generated teaching illustration. Top emphasizes the gardener against a softer greenhouse; bottom retains more readable structure and plants. Ask whether the setting contributes to the portrait. These are illustrative alternatives, not real matched captures or proof of a particular aperture; the sourced ruler photographs earlier show a real aperture comparison.",
+      "teaching_reason": "Shows the difference between isolating a person and keeping the setting informative."
+    },
+    {
+      "entity_id": "photography-foundations",
+      "entity_type": "concept",
+      "section": "Focus and depth of field",
+      "file": "photography/foundations-focus-range.svg",
+      "alt_text": "Three distance diagrams distinguish moving the focus distance from widening the surrounding range of acceptable sharpness.",
+      "caption": "Conceptual diagram. The dark vertical line marks the selected focus distance; the green band suggests the surrounding acceptable range. The first two rows keep focus in place and change range width. The third moves focus farther away. Faded edges remind you that sharpness changes gradually; the band is not a calculated near/far limit.",
+      "teaching_reason": "Separates two easily confused terms without requiring a camera settings experiment."
+    },
+    {
+      "entity_id": "photography-foundations",
+      "entity_type": "concept",
+      "section": "Perspective and camera position",
+      "file": "photography/foundations-move-versus-zoom.svg",
+      "alt_text": "Three ideal perspective drawings compare a near circle and distant doorway in a wide view, a zoomed view and a closer camera view.",
+      "caption": "Ideal perspective illustration. Start with the near green circle and far doorway. Zooming from the same position enlarges both in proportion. Moving closer with the original lens enlarges the near circle more than the far doorway. These are projected abstract shapes, not photographs or a lens-distortion test; the viewpoint change is what changes their size relationship.",
+      "teaching_reason": "Makes the distinction between changing framing and changing perspective visible."
+    },
+    {
+      "entity_id": "photography-foundations",
+      "entity_type": "concept",
+      "section": "White balance and color temperature",
+      "file": "photography/foundations-white-balance.svg",
+      "alt_text": "The same generated cup crop appears with a warmer color treatment, its unchanged source color and a cooler treatment.",
+      "caption": "Color-rendering illustration using one exact crop of a generated cup image. Warm and cool alternatives apply explicit channel adjustments to the same pixels. The middle keeps the source rendering; it is not a measured neutral reference. Compare the pale ceramic and gray cloth. No illumination change, camera Kelvin setting or calibrated white-balance accuracy is claimed.",
+      "teaching_reason": "Provides a concrete warm/source/cool comparison while preserving the distinction between source illumination and image rendering."
+    }
+  ]
+}

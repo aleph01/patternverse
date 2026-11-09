@@ -1,0 +1,111 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — The Hold-Up Problem",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "the-hold-up-problem",
+      "title": "The Hold-Up Problem",
+      "entity_type": "concept",
+      "domain": "Information, incentive, and commitment problems; relationship-specific investment, incomplete contracts, outside options, and sequential bargaining",
+      "article": "content/concepts/the-hold-up-problem.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Benjamin Klein, Robert G. Crawford, and Armen A. Alchian, Vertical Integration, Appropriable Rents, and the Competitive Contracting Process (1978)",
+          "url": "https://ios23.classes.ryansafner.com/files/readings/Klein-Crawford-Alchian-1978.pdf",
+          "doi": "10.1086/466922",
+          "supports": "Foundational asset specificity, specialized appropriable returns, contracting costs, integration, and long-term enforcement discussion.",
+          "read_method": "University course-hosted original paper opened and read in full-text extraction: introduction and earlier intellectual lineage, definitions and printing-press example, specificity versus ordinary monopoly rents, integration costs, and long-term explicit/implicit contracting sections.",
+          "boundary": "Foundational theoretical and institutional account, not an empirical test of Lina’s shop-fit-out scenario. The article does not reproduce the contested Fisher Body historical narrative or claim a single inventor of all hold-up theory. Quasi-rents are distinguished from profit; no numerical quasi-rent estimate is attributed to the paper."
+        },
+        {
+          "title": "Sanford J. Grossman and Oliver D. Hart, The Costs and Benefits of Ownership: A Theory of Vertical and Lateral Integration (1986)",
+          "url": "https://faculty.washington.edu/mfan/is582/articles/GH1986.pdf",
+          "supports": "Residual control allocation under incomplete contracts affects ex-ante investment incentives; integration may help one side while weakening the other.",
+          "read_method": "University-hosted original paper opened and read: abstract, introductory critique of automatic integration remedies, definition of ownership, and two-period model framing separating contractibility, renegotiation, and investment incentives.",
+          "boundary": "Conditional formal model, not a universal theorem that ownership removes hold-up or an empirical merger recommendation. Lina’s one-sided offer game is a separate original teaching example."
+        },
+        {
+          "title": "Nathan Nunn, Relationship-Specificity, Incomplete Contracts, and the Pattern of Trade (2007; accessible 2005 working paper consulted)",
+          "url": "https://dash.harvard.edu/entities/publication/73120378-8537-6bd4-e053-0100007fdf3b",
+          "doi": "10.1162/qjec.122.2.569",
+          "working_paper": "https://conference.nber.org/confer/2005/itos05/nunn.pdf",
+          "supports": "Reported relationship between contract enforcement and specialization in industries requiring relationship-specific inputs. The early full text explains industry proxies, judicial-quality measures, cross-country comparisons, and identification concerns.",
+          "read_method": "Published Harvard repository metadata/abstract and publisher abstract opened and read. Final-paper downloads failed on author/repository hosts. Original NBER-hosted March 29, 2005 draft opened and read: introduction, model setup, data section, input specificity construction using exchange/reference pricing, subjective rule-of-law measure, and discussion of robustness/endogeneity. Version difference is explicit in the article and bibliography.",
+          "boundary": "No effect size or causal policy forecast is repeated. The draft’s detailed methods are not silently attributed as a full review of the final publication. Cross-country institutional evidence is not direct observation of all firm-level renegotiation or a proof that integration is best. Proxy and identification assumptions constrain inference."
+        }
+      ],
+      "related_patterns": [
+        "bargaining-problems",
+        "credible-commitment",
+        "the-principal-agent-problem"
+      ],
+      "status": "published",
+      "short_description": "Recognize when a relationship-specific investment weakens later bargaining alternatives, then protect investment incentives through credible terms, portability, or control rights.",
+      "use_when": [
+        "What survives if Lina rejects renewal terms?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Protect usable outside value or secure credible terms before committing specific investment.",
+        "Portability costs more; some fit-out stays sunk. Real alternatives and sufficient returns remain necessary."
+      ],
+      "example_structure": {
+        "scenario": "Tenant considers specific shop fit-out before unprotected renewal after the initial lease expires. Initial term insufficient alone to recover investment; initial lease is honored. Later strong take-it-or-leave-it offer is a teaching assumption, not tenancy law. Portable fittings cost more but improve a real moving option; some work remains sunk. Anticipation can deter investment without any observed demand; market-wide rent change alone is not appropriation.",
+        "changed_relationship": "Protect usable outside value or secure credible terms before committing specific investment.",
+        "residual_constraints": "Portability costs more; some fit-out stays sunk. Real alternatives and sufficient returns remain necessary.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "What survives if Lina rejects renewal terms?",
+        "assets": [
+          "content/assets/structural-traps/hold-up-tooling.svg",
+          "content/assets/structural-traps/hold-up-tooling-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1016,
+            "textBlocks": 21
+          },
+          "phone": {
+            "width": 360,
+            "height": 1677,
+            "textBlocks": 21
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. After location-specific fit-out, the initial lease expires and Orion proposes renewal. Lina can accept or leave with weak outside value for dedicated fixtures. A more costly portable design can preserve a stronger moving option if real premises and affordable relocation exist. Change: Protect usable outside value or secure credible terms before committing specific investment. Limitation: Portability costs more; some fit-out stays sunk. Real alternatives and sufficient returns remain necessary.",
+        "caption": "Hypothetical illustration. The rejection branch exposes the investment-dependent outside option. Accepting later can be sensible even when the original investment would not repay itself. Portable fittings change the fallback before spending; existing lease obligations remain honored.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. After location-specific fit-out, the initial lease expires and Orion proposes renewal. Lina can accept or leave with weak outside value for dedicated fixtures. A more costly portable design can preserve a stronger moving option if real premises and affordable relocation exist. Change: Protect usable outside value or secure credible terms before committing specific investment. Limitation: Portability costs more; some fit-out stays sunk. Real alternatives and sufficient returns remain necessary.",
+          "relationship_key": "Upper arrows show investment and later renewal timing; the fork shows accept or reject. Lower arrows compare a different design, not an automatic third option after spending.",
+          "changed_relationship": "Protect usable outside value or secure credible terms before committing specific investment.",
+          "residual_constraints": "Portability costs more; some fit-out stays sunk. Real alternatives and sufficient returns remain necessary.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Tenant considers specific shop fit-out before unprotected renewal after the initial lease expires. Initial term insufficient alone to recover investment; initial lease is honored. Later strong take-it-or-leave-it offer is a teaching assumption, not tenancy law. Portable fittings cost more but improve a real moving option; some work remains sunk. Anticipation can deter investment without any observed demand; market-wide rent change alone is not appropriation.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

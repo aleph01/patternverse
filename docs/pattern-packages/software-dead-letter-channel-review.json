@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "data-dead-letter-queues",
+  "title": "Dead Letter Channel",
+  "aliases": [
+    "Dead-Letter Queues",
+    "Dead Letter Queues",
+    "Dead Letter Queue",
+    "DLQ",
+    "Dead Message Queue"
+  ],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1416,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Seven primary sources: Hohpe and Woolf’s Dead Letter Channel and Invalid Message Channel catalog entries; RabbitMQ Dead Letter Exchanges documentation; Amazon SQS dead-letter queue and redrive documentation; SQLite Transactions; and Python sqlite3 transaction/connection documentation. The established Dead Letter Channel name and DLQ/dead message queue aliases are explained. The original messaging-system undeliverability concern is distinguished from receiver-side invalid messages and modern product processing-failure facilities. Product-specific count, transfer safety, retention, ordering, and redrive transport-ID behavior are not generalized. The exact existing article was found and reused rather than duplicated.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["channel.py", "demo.py"],
+      "stdout": [
+        "retry",
+        "parked",
+        "already_parked",
+        "('E901', b'pack order O42', 3)",
+        "retained D902: Failure channel full"
+      ],
+      "verification": "Exact demo output; 1/2 versus 3/1000 authoritative-failure-count boundaries; byte-exact original BLOB and complete expected failure metadata; unchanged retry state; reopening and already-parked status without rewriting evidence; full destination retaining source; forced error after failure insertion before deletion with full rollback; simultaneous same-receipt transfer once; two different receipts contending for one slot with no loss; abrupt subprocess exit between insertion and deletion; busy-BEGIN and failed-COMMIT propagation/rollback; invalid IDs/classification/counts/timestamps and missing-receipt handling without mutation; exact enqueue-time and signed-64-bit limits; 64/65-character receipt ID and 4096/4097-byte BLOB limits. No broker, handler, redrive, or power-loss guarantee is inferred."
+    },
+    "content": "1276 entities validate with drafts included; published-only compilation contains 1129 entities without diagnostics. Counts are unchanged because the existing canonical article is revised.",
+    "integration_tests": "All eleven focused article suites pass: Dead Letter Channel, the previous nine Messaging and Integration articles, and GoF. Combined run across twelve files reports 58 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass. A subsequent three-test focused run verifies every declared alias, including DLQ and the former Dead-Letter Queues title, after broadening its search assertion.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, code validator, integration test, JSON authoring metadata, authoring documentation, concept registry, and review record. The expanded alias test was checked again. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused canonical ID data-dead-letter-queues, existing route /pattern/data-dead-letter-queues, and primary asset /assets/data-engineering/dead-letter-queues.svg. Former title is retained as an alias, with existing Data Engineering tags and verse membership. Messaging and Integration becomes the sole primary collection, with Dead Letter Channel tenth. Execution & recovery removes it from curated items, adjusts its count from 16 to 15, and retains an explanatory canonical cross-reference. No duplicate article, new collection, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": [
+        "content/patterns/data-dead-letter-queues.md",
+        "content/collections/software-messaging-integration.md",
+        "content/collections/data-engineering-execution-recovery.md"
+      ],
+      "other_existing_content_unchanged": 1273,
+      "new_content": [],
+      "canonical_id_preserved": "data-dead-letter-queues",
+      "existing_route_and_primary_asset_path_preserved": true,
+      "prior_title_preserved_as_alias": true,
+      "data_engineering_verse_membership_and_tags_preserved": true,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "other_data_engineering_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 42,
+      "prior_graphics_unchanged": 454,
+      "prior_dimensions_unchanged": 1608,
+      "revised_dimensions": {
+        "data-engineering/dead-letter-queues.svg": {
+          "before": {
+            "width": 720,
+            "height": 560
+          },
+          "after": {
+            "width": 720,
+            "height": 1072
+          }
+        }
+      },
+      "new_dimensions": {
+        "data-engineering/dead-letter-queues-mobile.svg": {
+          "width": 360,
+          "height": 1352
+        },
+        "software-engineering/dead-letter-channel-transfer.svg": {
+          "width": 720,
+          "height": 1024
+        },
+        "software-engineering/dead-letter-channel-transfer-mobile.svg": {
+          "width": 360,
+          "height": 1288
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, two collections, authoring metadata, and concept registry agree with staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and previous task staging directories were untouched. No renderer or build implementation changes.",
+    "illustrations": "The primary existing SVG path is revised in place to show normal retry versus safe failure disposition, retained evidence, ownership, and controlled recovery. A second SVG explains local atomic insert/delete transfer and source retention under full-destination or write failure. Both have separately composed phone versions, meaningful alternatives/captions, approved fixed white regular-font palette and square geometry, and labeled arrow meanings. Four variants have zero measured outside labels, label overlaps, or outside rectangles. Native and actual embedded desktop/phone diagrams were visually inspected for mechanism accuracy, placement, contrast, and readability. The original article and diagram remain in ignored local review evidence.",
+    "browser": "Actual production article verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal code scrolling at 320 pixels, no page overflow, and all four related routes returning 200. Messaging and Integration shows ten members across three pages; the canonical card on page three opens with the correct primary breadcrumb. The former Execution & recovery route returns 200 and includes the preserved canonical cross-reference. Desktop/phone article tops, code viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-dead-letter-channel/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 51582
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Revision of the existing Dead-Letter Queues article, preserving canonical ID data-dead-letter-queues, its original asset path, Data Engineering verse membership and tags, and the recovery/ownership perspective. No duplicate Dead Letter Channel article is created. Original bounded file-backed SQLite disposition simulation: trusted caller supplies a classified DEPENDENCY_UNAVAILABLE failure count; fewer than 3 failures leave pending work untouched. At 3 or more, BEGIN IMMEDIATE coordinates an insert of original bytes/identity/timestamps/failure metadata and source deletion in one transaction. A one-record failure channel exposes capacity failure without losing the source. Receipt IDs are immutable and unique for the store lifetime; event IDs preserve business intent independently. Counts are 1..1000, source bodies are BLOBs up to 4096 bytes, and failure timestamps are nonnegative signed-64-bit integer milliseconds not preceding enqueue. Reopening recognizes already parked receipt IDs without rewriting evidence. This is not a handler, counter, scheduler, broker, remote handoff, redrive implementation, external-effect rollback, authentication, or power-loss test. Existing exact-pattern article is reused; primary collection moves to Messaging and Integration while its former Data Engineering collection retains a cross-reference.",
+  "preview": "http://127.0.0.1:43027/pattern/data-dead-letter-queues",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-dead-letter-channel",
+  "browser_measurements": ".local/software-dead-letter-channel/browser-checks.json",
+  "browser_check_script": ".local/software-dead-letter-channel/check-browser.mjs",
+  "build_log": ".local/software-dead-letter-channel/public-build-isolated.log",
+  "branch": "codex/software-dead-letter-channel",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

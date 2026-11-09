@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "thread-pool",
+  "title": "Thread Pool",
+  "aliases": ["ThreadPool"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1485,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Oracle ThreadPoolExecutor and Microsoft managed-thread-pool documentation; Brian Quinlan’s original PEP 3148; official Python concurrent.futures and threading documentation; original CPython 3.11 thread-executor source. Worker reuse, management of execution resources, fixed/adaptive ceilings, lazy creation, queue/rejection policy, shared state, thread-local cleanup, futures, outcome observation, dependency deadlock and shutdown are explicit. CPython 3.11 uses an unbounded SimpleQueue, so max_workers is not presented as a backlog limit. ThreadPool is a spelling alias; Executor and Worker Pool are broader terms, not exact aliases. Example and visual assignments are original teaching material rather than source quotations or a scheduling guarantee.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["file_pool.py", "demo.py"],
+      "stdout": ["0 3 bytes", "1 4 bytes", "2 error ValueError", "3 error FileNotFoundError"],
+      "verification": "Exact four-line demo output on real filesystem I/O; input/window shape errors precede executor or file allocation; empty batch and 0/8/9/10000-byte files verify bounded nine-byte reads, oversized rejection and closed handles; missing/directory paths become FileNotFoundError/IsADirectoryError outcomes; real ThreadPoolExecutor instrumentation gates two waves and proves the same two worker identities are reused, at most two tasks execute, exactly four submitted-uncollected slots fill, and task code runs outside the coordinator; running cancellation fails and zero-time result wait does not cancel or finish running work; completed but uncollected futures retain all four slots while the coordinator is paused; an early held job does not block collection of a later result or refill through FIRST_COMPLETED, and final report remains index-sorted; unexpected coordinator failure enters shutdown and waits for held work before propagating, with handles closed and real workers joined; 256 further indexed file inspections across windows 1/2/4/7 verify admission bounds, worker ceilings, exact outcomes, one-thread reuse at window one, and no loss; post-shutdown submission rejects, temporary files are removed only after all owned handles/workers finish, and thread inventory returns to baseline. Instrumentation wraps actual executor, wait, file-open and task seams without replacing article scheduling. No benchmark, forced interruption, general resource-failure recovery, deadline, durable delivery or CPU speedup guarantee is inferred."
+    },
+    "content": "1290 entities validate with drafts included; published-only compilation contains 1143 entities without diagnostics.",
+    "integration_tests": "All four focused article suites pass: Thread Pool, Producer-Consumer, Active Object, and GoF. Combined run across five files reports 37 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Thread Pool as its sixth completed member, preserving Reactor, Proactor, Active Object, Monitor Object, Producer-Consumer, and prior collection contents. Producer-Consumer, Active Object, and Reactor retain canonical IDs and primary homes as related links. Exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1288,
+      "new_content": ["content/patterns/thread-pool.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "reactor_proactor_active_object_monitor_object_producer_consumer_members_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 56,
+      "prior_graphics_unchanged": 468,
+      "prior_dimensions_unchanged": 1662,
+      "new_dimensions": {
+        "software-engineering/thread-pool-workers.svg": {
+          "width": 720,
+          "height": 1216
+        },
+        "software-engineering/thread-pool-workers-mobile.svg": {
+          "width": 360,
+          "height": 1312
+        },
+        "software-engineering/thread-pool-lifecycle.svg": {
+          "width": 720,
+          "height": 1296
+        },
+        "software-engineering/thread-pool-lifecycle-mobile.svg": {
+          "width": 360,
+          "height": 1336
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other existing collection, software verse, or GoF changes.",
+    "illustrations": "Two editable native SVG figures explain separate worker/admission limits and task-versus-worker lifetimes. Both have separately composed phone variants, meaningful alternative text and captions, fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained strokes, and explicit arrow meanings. The first shows one possible full four-job snapshot with two executing and two queued jobs, plus a separate reminder that finished uncollected futures retain admission places. It does not imply the worker ceiling bounds the executor backlog. The second shows two tasks per reused thread, separate result/exception futures, interleaved collection, owner shutdown and joined workers before temporary-file removal. Assignments are illustrative, not ordering or affinity guarantees. All four variants have zero measured outside labels, overlaps, or outside rectangles; native and embedded desktop/phone versions were visually inspected for label placement, contrast, readability, and technical accuracy.",
+    "browser": "Actual production article verified at 1440, 390, and 320 CSS pixels: eight exact H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all three related routes returning 200. Concurrency and Resource Management has six members; its route and Software Engineering verse gallery page two open Thread Pool with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-thread-pool/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 44295
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ real ThreadPoolExecutor inspector for a finite tuple of trusted Path values. Two lazily created reusable workers execute independent file reads; each task owns and closes its handle, retains at most nine sampled content bytes and rejects files longer than eight bytes. A positive coordinator window bounds submitted jobs awaiting collection, including terminal uncollected futures; FIRST_COMPLETED permits later results to free admission while an earlier job remains active. OSError/ValueError outcomes are reported per index and final sorting does not serialize execution. The finite input and report remain extra memory; the window is not a total-process memory bound. The pool context waits for submitted tasks and joins workers before returning, including on unexpected coordinator failure, so the demo removes its temporary directory afterward. Tests verify actual worker identity reuse, two-task execution ceiling, four-job window, completed-uncollected retention, running cancellation rejection, wait-timeout without cancellation, bounded sample sizes, empty/oversized/missing/directory paths, closed handles, all worker joins, and 256 additional inspections across windows one/two/four/seven. Assumes finite trusted input, stable file contents and operations that eventually return. No deadline, cancellation API, forced interruption, retry, durable jobs, general resource-failure recovery, task security isolation, rollback, filesystem snapshot, task affinity, fairness, completion ordering, or CPU-parallel speedup guarantee. A stuck task may hold shutdown open indefinitely, and shared-object mutation still needs synchronization.",
+  "preview": "http://127.0.0.1:43041/pattern/thread-pool",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-thread-pool",
+  "browser_measurements": ".local/software-thread-pool/browser-checks.json",
+  "browser_check_script": ".local/software-thread-pool/check-browser.mjs",
+  "build_log": ".local/software-thread-pool/public-build-isolated.log",
+  "branch": "codex/software-thread-pool",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

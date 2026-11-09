@@ -1,0 +1,70 @@
+{
+  "note": "Original fictional teaching cases. The simulation is regenerated with Python random.Random; other calculations are exact for their stated examples.",
+  "validity": {
+    "recall_items": 8,
+    "application_items": 2,
+    "before": [60, 50],
+    "after": [90, 55]
+  },
+  "resampling": {
+    "units": {
+      "A": [10, 12],
+      "B": [20, 22],
+      "C": [30, 32]
+    },
+    "replicate": ["A", "A", "C"]
+  },
+  "monitoring": {
+    "baseline_mean": 100,
+    "individual_sigma": 4,
+    "subgroup_n": 4,
+    "means": [99, 101, 100, 98, 102, 101, 100, 99, 101, 103, 107, 108],
+    "single_false_alarm_probability": 0.002699796063260207
+  },
+  "assignment": {
+    "clusters": 20,
+    "members": 25,
+    "icc": 0.08,
+    "alternatives": [
+      [10, 50],
+      [40, 12.5]
+    ]
+  },
+  "missingness": {
+    "enrolled": 100,
+    "observed": 60,
+    "observed_mean": 80,
+    "benchmark": 70,
+    "missing_means": [80, 65, 55, 40]
+  },
+  "structure": {
+    "x": [-100, -100, 100, 100],
+    "y": [-1, 1, -1, 1]
+  },
+  "simulation": {
+    "seed": 20261025,
+    "replications": 2000,
+    "n": 16,
+    "true_mean": 10,
+    "sigma": 4,
+    "z95": 1.959963984540054,
+    "narrow_factor": 0.5,
+    "results": {
+      "Correct SE": {
+        "covered": 1892,
+        "coverage": 0.946,
+        "mcse": 0.005053909377897473
+      },
+      "Half SE": {
+        "covered": 1347,
+        "coverage": 0.6735,
+        "mcse": 0.010485650909695592
+      }
+    },
+    "mean_estimate": 10.014513345545161,
+    "first_estimates": [
+      11.288574337598439, 11.455445397832449, 10.281838354453166, 9.957724050274432,
+      10.41906466362346, 9.878550608484716, 10.069842911964916, 10.086198990027356
+    ]
+  }
+}

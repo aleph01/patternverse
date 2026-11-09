@@ -1,0 +1,164 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/SourceSerif4%5Bopsz%2Cwght%5D.ttf",
+      "sha256": "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/OFL.txt",
+      "sha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    },
+    {
+      "file": "reading-display.woff2",
+      "family": "PV Reading Display",
+      "source": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "axes": {
+        "wght": 400,
+        "opsz": 60
+      },
+      "sha256": "89fdc50eab02abe8fb62ca9b0cd7f57168207f0da89ee384288afb1a350a4712",
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/reading-display.woff2"
+    }
+  ],
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-seed-packing-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "487e04205d1aaecfd64e883a8def1adcd091fdf4430dd65001b9d772b5b7503b"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-coffee-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "a3ab6d3b61e0a3c33e85c50d3c2a2daebf64abb2f335948519c0e0fd91e0606e"
+    }
+  ],
+  "pattern": "Establish a Shared Visual Language",
+  "date": "2026-10-28",
+  "fictional": true,
+  "mode": "No new image generation. Existing photographic JPEGs embedded byte-for-byte. Flat artwork surfaces, motifs and typography composed natively in SVG.",
+  "fontLicensePolicy": "Original sources and OFL notices retained. Source Sans3 Regular and Source Serif4 Display (weight400, optical-size60 instance) embedded unchanged as PVLanguageBody/PVLanguageTitle.",
+  "composition_builder": "scripts/build-graphic-design-language-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-language-layouts.json",
+    "sha256": "4f4aafa63832ad4d51aab78e97e975b4042e986fb89b74f4c34dbc17122b8ccc",
+    "method": "Controlled native artwork sets. Every artifact is preserved between the wide and interleaved narrow presentations. Only four font roles, four extra-motif opacities or three selected image hrefs change within the respective comparison."
+  },
+  "comparisonPolicy": "Four font-family assignments; four redundant-motif opacity changes; or three selected-photo href changes. Every artifact\u2019s copy, sizes, weights, anchors, layout, colors and flat surface are fixed within its pair except the declared properties. Image-selection case intentionally changes photographic subjects. Wide and narrow presentations preserve identical artifact groups while interleaving before/after by artifact on narrow screens.",
+  "verification": {
+    "artifacts": [
+      {
+        "name": "language-cross-format-roles",
+        "artifact": "poster",
+        "changedPixels": 0,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-cross-format-roles",
+        "artifact": "ticket",
+        "changedPixels": 7967,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-cross-format-roles",
+        "artifact": "reminder",
+        "changedPixels": 6629,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-motif-function",
+        "artifact": "poster",
+        "changedPixels": 480,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-motif-function",
+        "artifact": "ticket",
+        "changedPixels": 240,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-motif-function",
+        "artifact": "reminder",
+        "changedPixels": 240,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-controlled-image-variation",
+        "artifact": "clay-card",
+        "changedPixels": 32340,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-controlled-image-variation",
+        "artifact": "seed-card",
+        "changedPixels": 32340,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "language-controlled-image-variation",
+        "artifact": "coffee-card",
+        "changedPixels": 32340,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "savedComparisons": 6,
+    "desktopAndNarrow": "passed",
+    "bounds": "all native text within surface",
+    "inlineImageEquivalence": "passed",
+    "visualInspection": "All three saved wide comparisons and all three interleaved narrow comparisons inspected. Pattern mark inspected at 32, 48 and 96 pixels.",
+    "liveArticle": "Passed at 1440px and 390px: three loaded illustrations, descriptive alternatives, visible captions, correct responsive image sources and no horizontal page overflow.",
+    "validation": {
+      "comparisonAndConsolidationTests": "22 passed",
+      "boundedMarkGeometry": "1 passed; 4 unrelated tests skipped",
+      "content": "907 entities validated in the shared workspace snapshot",
+      "webCheck": "0 errors, 0 warnings",
+      "scopedLint": "passed",
+      "integrity": "37 article body hashes and 354 asset hashes/dimensions verified; source, font and layout provenance checked; exact 37-mark coverage; two briefs remain planned"
+    }
+  },
+  "limitations": "Original fictional flat artwork. No working email/reservation, physical print proof, measured recognition/task-speed effect or claim of external identity distinctiveness. Separately selected photographic subjects differ; no semantic-isolation measurement.",
+  "sources": [
+    {
+      "url": "https://www.gov.uk/guidance/government-design-principles#be-consistent-not-uniform",
+      "supports": "GOV.UK principle9 recommends consistent language/patterns with flexibility for circumstances and changing user needs. Design guidance, not a test of these materials."
+    },
+    {
+      "url": "https://www.carbondesignsystem.com/building-blocks/foundations/color/overview",
+      "supports": "Carbon separates role-based color tokens from the values supplied by themes. This is a concrete digital implementation; the broader graphic-design application is editorial interpretation."
+    }
+  ]
+}

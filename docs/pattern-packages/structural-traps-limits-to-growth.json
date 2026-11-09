@@ -1,0 +1,135 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Limits to Growth",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "limits-to-growth",
+      "title": "Limits to Growth",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; reinforcing growth, recurring obligations, balancing constraints, usable capacity, and delayed intervention",
+      "article": "content/concepts/limits-to-growth.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "author": "Peter M. Senge",
+          "year": 1990,
+          "title": "The Fifth Discipline: The Art and Practice of the Learning Organization",
+          "url": "https://www.bookdio.org/_files/ugd/ef8af1_5169a4238fd3412dba674fd8dbd81be6.pdf",
+          "read_method": "Opened book and read Chapter 6 Limits to Growth definition, structure, examples, intervention guidance, and further-limit caveat, especially PDF pages 81–90. Scan identifies original 1990 publication.",
+          "supports": "Named archetype: reinforcing expansion creates secondary balancing effects that slow growth; changing limiting conditions and testing hypotheses.",
+          "boundary": "Qualitative structural account, not proof of a particular growth curve, numerical rate, optimal size, inevitable collapse, or the restaurant’s empirical behavior."
+        },
+        {
+          "author": "Daniel H. Kim / The Systems Thinker",
+          "year": "1990–1991",
+          "title": "Limits to Success: When the Best of Times Becomes the Worst of Times",
+          "url": "https://thesystemsthinker.com/limits-to-success-when-the-best-of-times-becomes-the-worst-of-times/",
+          "collection": "Systems Archetypes I, Daniel H. Kim, 1992/2000",
+          "read_method": "Opened and read full web account and the author’s compiled archetype collection. The later planning PDF identifies original account as December 1990/January 1991.",
+          "supports": "Limits to Success terminology, growth-engine versus limiting-process distinction, and prospective use of the archetype.",
+          "boundary": "Practitioner account. Its diet/medical claims, broad airline attribution, and historical case interpretations are not used as empirical evidence."
+        },
+        {
+          "author": "Daniel H. Kim",
+          "year": 1993,
+          "title": "Using Limits to Success as a Planning Tool",
+          "url": "https://thesystemsthinker.com/using-limits-to-success-as-a-planning-tool/",
+          "reprint_pdf": "https://thesystemsthinker.com/wp-content/uploads/pdfs/230111pk.pdf",
+          "read_method": "Opened full web article and three-page February 2012 reprint. Final PDF page identifies original publication as The Systems Thinker V4N2, March 1993.",
+          "supports": "Reinforcing growth loops rather than isolated growth factors, potential limiting resources, capacity-building lead times, balancing growth, and reconsidering the strategy.",
+          "boundary": "Practical qualitative planning guidance, not a validated universal intervention effect or reason to assume all limits can be removed."
+        },
+        {
+          "author": "AWS Builders’ Library / David",
+          "year": 2019,
+          "title": "Using load shedding to avoid overload",
+          "url": "https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/",
+          "resolved_url": "https://builder.aws.com/content/3Eun1EEyX6p2e3VYNyRLSJzLuMV/using-load-shedding-to-avoid-overload",
+          "read_method": "Opened and read the primary operational account, especially overload anatomy, contention/timeouts, positive retry feedback, testing, and load-shedding trade-offs. Current official rendering identifies author as David and original publication December 5, 2019.",
+          "supports": "Documented engineering experience of declining useful output under excess concurrency and early rejection preserving useful work while denying requests.",
+          "boundary": "Operational parallel with different mechanisms, not a randomized effect estimate, universal growth law, numerical calibration for the restaurant, or claim that every service behaves identically. Technical scalability-law details and product-specific current recommendations are not imported."
+        },
+        {
+          "author": "Donella H. Meadows, Dennis L. Meadows, Jørgen Randers, and William W. Behrens III",
+          "year": 1972,
+          "title": "The Limits to Growth",
+          "url": "https://collections.dartmouth.edu/archive/text/meadows/diplomatic/meadows_ltg-diplomatic.html",
+          "read_method": "Opened Dartmouth’s original-book transcription; read introduction, stated modeling scope, world-model purpose, and explicit behavioral-tendency versus exact-prediction qualifications at printed pages 93–95 and 122.",
+          "supports": "Distinct broader global modeling study with interacting population, capital/production, resources, food, and pollution; scenarios were not presented as exact values for particular future years.",
+          "boundary": "No attempt to assess current global trajectories, validate all report findings, claim exact forecasts, or equate the global model with the local archetype."
+        }
+      ],
+      "related_patterns": [
+        "bottlenecks-and-capacity-constraints",
+        "success-to-the-successful",
+        "drift-to-low-performance"
+      ],
+      "status": "published",
+      "short_description": "Identify how expanding activity strengthens its own constraint, then adjust growth, capacity, or the operating model before the limiting feedback overwhelms further gains.",
+      "use_when": [
+        "How can more restaurant demand weaken further growth?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Control accepted load while building the capability or revising the service growth requires.",
+        "Some customers cannot book; investment costs and delay remain. Another constraint can replace the kitchen."
+      ],
+      "example_structure": {
+        "scenario": "Satisfied regular-customer base supports recommendations and acquisition; growth raises peak load, overload can worsen service, and fewer additions or more departures restrain the base. Customer base is a stock; visits are flows. Queue and trained capability have distinct boundaries. Reservation limits and prepared kitchen capability have costs; no particular trajectory or collapse asserted.",
+        "changed_relationship": "Control accepted load while building the capability or revising the service growth requires.",
+        "residual_constraints": "Some customers cannot book; investment costs and delay remain. Another constraint can replace the kitchen.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/limits-to-growth-editor-time.svg",
+          "content/assets/structural-traps/limits-to-growth-editor-time-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1065,
+            "textBlocks": 27
+          },
+          "phone": {
+            "width": 360,
+            "height": 2178,
+            "textBlocks": 27
+          }
+        },
+        "question": "How can more restaurant demand weaken further growth?",
+        "alternative_text": "Hypothetical qualitative illustration. Satisfied regulars recommend the restaurant and new satisfied visitors add to its customer base. More peak demand can overload the kitchen, worsen service, and weaken return visits and recommendations. Reservation limits and usable kitchen capability address the restraint rather than promoting harder. Change: Control accepted load while building the capability or revising the service growth requires. Limitation: Some customers cannot book; investment costs and delay remain. Another constraint can replace the kitchen.",
+        "caption": "Hypothetical illustration. The reinforcing loop needs satisfied newcomers, while the lower return path can restrain it through service overload. These are hypotheses, not a growth forecast. Customer-base change depends on additions and departures; investment takes time and a later limit may emerge.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Satisfied regulars recommend the restaurant and new satisfied visitors add to its customer base. More peak demand can overload the kitchen, worsen service, and weaken return visits and recommendations. Reservation limits and usable kitchen capability address the restraint rather than promoting harder. Change: Control accepted load while building the capability or revising the service growth requires. Limitation: Some customers cannot book; investment costs and delay remain. Another constraint can replace the kitchen.",
+          "relationship_key": "Arrows show hypothesized causal effects. The written return closes the limiting loop. Customer base is a stock; visits are a flow. No lengths show growth rates.",
+          "changed_relationship": "Control accepted load while building the capability or revising the service growth requires.",
+          "residual_constraints": "Some customers cannot book; investment costs and delay remain. Another constraint can replace the kitchen.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Satisfied regular-customer base supports recommendations and acquisition; growth raises peak load, overload can worsen service, and fewer additions or more departures restrain the base. Customer base is a stock; visits are flows. Queue and trained capability have distinct boundaries. Reservation limits and prepared kitchen capability have costs; no particular trajectory or collapse asserted.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Fourteen articles, twenty-eight editable SVGs, fourteen current research notes, and necessary asset dimensions updated.",
+        "visual": "All fourteen live articles checked in the browser at 1440px desktop and 390px phone viewports (28 layouts), with loaded expected sources and no page overflow. All twenty-eight SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (56 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

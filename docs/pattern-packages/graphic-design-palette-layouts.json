@@ -1,0 +1,221 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Fill-only consolidation. Source images, typography and geometry fixed. Replacement hues approximately match relative luminance to keep the intervention distinct from repairing weak text/background contrast.",
+  "colors": {
+    "ink": "#17352f",
+    "blue": "#225c91",
+    "terra": "#9e3e25",
+    "darkHues": ["#1c3147", "#462052", "#303213", "#512028"],
+    "barHues": ["#225c91", "#803b98", "#864934", "#4c6025"],
+    "buttonBefore": "#864934"
+  },
+  "luminances": {
+    "ink": {
+      "hex": "#17352f",
+      "value": 0.02933600395723526
+    },
+    "blue": {
+      "hex": "#225c91",
+      "value": 0.10038707427860977
+    },
+    "terra": {
+      "hex": "#9e3e25",
+      "value": 0.10847921131592166
+    },
+    "darkHues0": {
+      "hex": "#1c3147",
+      "value": 0.028984341557609303
+    },
+    "darkHues1": {
+      "hex": "#462052",
+      "value": 0.029443110543054835
+    },
+    "darkHues2": {
+      "hex": "#303213",
+      "value": 0.02956599881052132
+    },
+    "darkHues3": {
+      "hex": "#512028",
+      "value": 0.02935555302487147
+    },
+    "barHues0": {
+      "hex": "#225c91",
+      "value": 0.10038707427860977
+    },
+    "barHues1": {
+      "hex": "#803b98",
+      "value": 0.0998412203545292
+    },
+    "barHues2": {
+      "hex": "#864934",
+      "value": 0.10081352956210204
+    },
+    "barHues3": {
+      "hex": "#4c6025",
+      "value": 0.10035813292921665
+    },
+    "buttonBefore": {
+      "hex": "#864934",
+      "value": 0.10081352956210204
+    }
+  },
+  "values": [42, 56, 48, 64],
+  "months": ["Feb", "Mar", "Apr", "May"],
+  "examples": [
+    {
+      "name": "palette-open-studios",
+      "source": "audience-pottery-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only four supporting text fills change to existing dark green. Title terracotta and all other design attributes stay fixed. Six assigned ink colors become two; photographs and paper colors are excluded from this count.",
+      "declaredFills": [
+        [
+          {
+            "element": "invitation",
+            "fill": "#1c3147"
+          },
+          {
+            "element": "date",
+            "fill": "#462052"
+          },
+          {
+            "element": "entry",
+            "fill": "#303213"
+          },
+          {
+            "element": "address",
+            "fill": "#512028"
+          }
+        ],
+        [
+          {
+            "element": "invitation",
+            "fill": "#17352f"
+          },
+          {
+            "element": "date",
+            "fill": "#17352f"
+          },
+          {
+            "element": "entry",
+            "fill": "#17352f"
+          },
+          {
+            "element": "address",
+            "fill": "#17352f"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "palette-monthly-report",
+      "source": "form-open-studios-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only three of four bar fills change to the existing blue. Every value, bar position, height, width, label, axis and other element remains fixed. Four series-fill hues become one. Values are 42, 56, 48 and 64 bookings.",
+      "declaredFills": [
+        [
+          {
+            "element": "bar-0",
+            "fill": "#225c91"
+          },
+          {
+            "element": "bar-1",
+            "fill": "#803b98"
+          },
+          {
+            "element": "bar-2",
+            "fill": "#864934"
+          },
+          {
+            "element": "bar-3",
+            "fill": "#4c6025"
+          }
+        ],
+        [
+          {
+            "element": "bar-0",
+            "fill": "#225c91"
+          },
+          {
+            "element": "bar-1",
+            "fill": "#225c91"
+          },
+          {
+            "element": "bar-2",
+            "fill": "#225c91"
+          },
+          {
+            "element": "bar-3",
+            "fill": "#225c91"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "palette-booking-screen",
+      "source": "audience-workspace-photo.jpg",
+      "stage": "audience-phone-stage.jpg",
+      "phone": true,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only four ordinary text fills and the main button fill change. Dark green and blue form the ordinary UI ink set. Green Confirmed and yellow Action needed surfaces, their explicit labels, photo, content and device remain fixed. Static fictional interface mockup.",
+      "declaredFills": [
+        [
+          {
+            "element": "brand",
+            "fill": "#803b98"
+          },
+          {
+            "element": "headline",
+            "fill": "#512028"
+          },
+          {
+            "element": "section",
+            "fill": "#303213"
+          },
+          {
+            "element": "booking-title",
+            "fill": "#1c3147"
+          },
+          {
+            "element": "button",
+            "fill": "#864934"
+          }
+        ],
+        [
+          {
+            "element": "brand",
+            "fill": "#225c91"
+          },
+          {
+            "element": "headline",
+            "fill": "#17352f"
+          },
+          {
+            "element": "section",
+            "fill": "#17352f"
+          },
+          {
+            "element": "booking-title",
+            "fill": "#17352f"
+          },
+          {
+            "element": "button",
+            "fill": "#225c91"
+          }
+        ]
+      ]
+    }
+  ]
+}

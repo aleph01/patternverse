@@ -1,0 +1,63 @@
+{
+  "pattern": "Use Implied Forms",
+  "date": "2026-10-27",
+  "mode": "Selected existing generated photos, transparent product image and stage artwork. Typography and vector graphics composed separately. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-implied-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/figure-ground-pitcher-cutout.png",
+      "generation_record": "graphic-design-figure-ground-generation.json",
+      "sha256": "3ecc57ffd075e64447f73dacf120eb607b2cdbed9f9d8a8038d4ee927b4735d3"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-workshop-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "comparisonPolicy": "Invitation: only the four middle edge segments switch opacity 1 to 0; fixed corner fragments retain overall extent and styling. Product: identical circle instances sharing one definition switch opacity so exactly one is visible, first above and then below the unchanged RGBA pitcher. Download: only the icon upper-corner path d and internal fold opacity change; extent and all other fragments remain fixed. Copy, typography, images/crops, fitting rules, all unrelated geometry, colors and presentation stay fixed.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "implied-workshop-frame",
+        "changedPixels": 3600,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "implied-product-circle",
+        "changedPixels": 2097,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "implied-print-file",
+        "changedPixels": 332,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared implied-form intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "All six saved browser PNGs visually inspected. Text fits each paper/phone surface and no horizontal overflow occurs. Pixel masks isolate the declared frame, circle and icon regions. DOM comparisons preserve every unrelated attribute, all copy and image bytes. Semantic checks retain the frame extent, show exactly one shared circle in its selected layer, and preserve icon extent while restoring a folded-corner cue. Standalone artwork and article-renderer markup are checked separately."
+  },
+  "limitations": "No audience study, measured recognition or communication benefit, physical print trial, implemented download interface, assistive-technology audit, whole-artifact accessibility conformance or full production-route result. The reused pitcher contains fractional alpha, so the behind-circle can leave faint compositing traces at translucent pixels. Icon interpretation is a prediction requiring user testing; the full border and overprinted circle remain valid under other briefs."
+}

@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-28",
+  "mode": "built-in image_gen",
+  "fictional": true,
+  "outputs": [
+    {
+      "prompt_key": "metaphor_book",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-f6f7da89-428c-46f1-baa9-8023790a6c58.png",
+      "workspace_asset": "content/assets/graphic-design/metaphor-book-photo.png",
+      "sha256": "db62364b7779420c7ad8ccf68276ffc995722190fe79ac9b0aeb7b3eeca7fab1",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": false,
+      "transparent_background": false,
+      "preparation": "Byte-for-byte PNG copy, original retained. No raster retouching, resizing, crop or color correction. Native composition and fitting happen only in SVG."
+    },
+    {
+      "prompt_key": "metaphor_seedling",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-be71ffa3-818e-488e-8a1d-68f9e464e5c7.png",
+      "workspace_asset": "content/assets/graphic-design/metaphor-seedling-cutout.png",
+      "sha256": "315271125436628c872c4a7cd517810521a5b9506335a29599297de9c284446c",
+      "width": 1145,
+      "height": 1374,
+      "has_alpha": true,
+      "transparent_background": true,
+      "preparation": "Byte-for-byte PNG copy, original retained. No raster retouching, resizing, crop or color correction. Native composition and fitting happen only in SVG."
+    },
+    {
+      "prompt_key": "metaphor_cord",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-e69bc1a8-1148-45bd-b6dd-2beca16314be.png",
+      "workspace_asset": "content/assets/graphic-design/metaphor-cord-photo.png",
+      "sha256": "ed73123708252e9ed4abf838505e7f2928117717d9f5f8745d76611fc43789b1",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": false,
+      "transparent_background": false,
+      "preparation": "Byte-for-byte PNG copy, original retained. No raster retouching, resizing, crop or color correction. Native composition and fitting happen only in SVG."
+    },
+    {
+      "prompt_key": "metaphor_ladder",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-7dd84a46-626e-4f84-96c0-afdc1059bb22.png",
+      "workspace_asset": "content/assets/graphic-design/metaphor-ladder-cutout.png",
+      "sha256": "4311a4bf5a3947b061e80c5dcba14f32a179474f32c6d2220cced93c8b19a670",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": true,
+      "transparent_background": true,
+      "preparation": "Byte-for-byte PNG copy, original retained. No raster retouching, resizing, crop or color correction. Native composition and fitting happen only in SVG."
+    },
+    {
+      "prompt_key": "metaphor_bridge",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-de88fc52-54c6-4672-a476-09b91ab4c4df.png",
+      "workspace_asset": "content/assets/graphic-design/metaphor-bridge-cutout.png",
+      "sha256": "c20e53d383ede1ee12edc5169cfb88269ef599bde11f3e4f07c8090d9601b0e5",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": true,
+      "transparent_background": true,
+      "preparation": "Byte-for-byte PNG copy, original retained. No raster retouching, resizing, crop or color correction. Native composition and fitting happen only in SVG."
+    }
+  ],
+  "prompts": [
+    {
+      "key": "metaphor_book",
+      "prompt": "Use case: product-mockup. Asset type: photographic artwork for a fictional library campaign teaching visual metaphor, no layout or text. A single open unmarked cream-paper hardback book on a matte warm ivory studio tabletop. Horizontal 3:2 composition, soft neutral daylight from upper left, realistic fine paper texture and very restrained shadows. Camera above and slightly in front so both blank pages and deep central gutter are clearly visible, book centered in lower half of image and occupies roughly 80 percent image width. Gutter/spine junction at bottom center of open page spread around x=768,y=740 in a1536x1024 composition, with a clear shallow valley extending upward toward the back edge around y=470. Entire book visible, no cropping, no writing, no print, no words, no bookmark, no plant, no other props. Upper half of composition is quiet uninterrupted warm ivory background. Natural commissioned editorial product photography, not illustration or render. This empty space is intentional for a separately composited seedling."
+    },
+    {
+      "key": "metaphor_seedling",
+      "prompt": "Use case: product-mockup. Asset type: transparent photographic cutout for compositing into the central gutter of an open book in a fictional visual metaphor. One small healthy green seedling, thin upright green stem, four or five distinct modest leaves on two short side branches, asymmetrical natural growth, photographed from slightly above/front with soft neutral light from upper left. Stem continues straight down to a clean end near the bottom of the cutout; no roots, soil, pot, ground, water, seed or other props. Entire seedling and all leaf tips visible with generous transparent margins. Real plant photography with delicate veins and soft natural edges. Genuine transparency including gaps between leaves and stem. No cast drop shadow, no text, graphic, frame or backdrop."
+    },
+    {
+      "key": "metaphor_cord",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic conceptual still life for a fictional project-planning workshop. Single continuous length of natural unbleached cotton cord on matte warm ivory paper tabletop, shot nearly overhead, horizontal3:2 image. Left half: a compact believable tangle of overlapping loops with a visible continuous tail escaping toward the right half. Right half: that same tail settles into one clear nearly straight horizontal line ending before the frame edge. Soft daylight from upper left and subtle shadows. Restrained editorial conceptual photography, cord crisp and tactile, ample margins, no hands, scissors, tools, arrows, text, marks, letters or diagram overlays. The contrast between a tangled section and a clear line should be visible without exaggeration or impossible knots. Warm neutral palette."
+    },
+    {
+      "key": "metaphor_ladder",
+      "prompt": "Use case: product-mockup. Asset type: transparent photographic cutout of one scale-model object for a fictional peer-learning campaign's visual metaphor. A simple well-made small wooden leaning ladder, six rungs, warm pale unpainted beech wood, no objects or people on it. Upright with a slight natural diagonal lean, entire ladder visible uncropped, centered in a landscape1536x1024 transparent canvas, occupies about75 percent canvas height and35 percent width. Photographed as a real tabletop architectural model from a modest three-quarter angle; realistic wood grain, soft neutral studio light from upper left. Genuine transparency behind and between rails and rungs. No floor, wall, scenery, ground, cast external shadow, hands, text, markings, labels, graphics or frame. Not a toy with bright colors, not a 3D illustration. Clean restrained commissioned still life."
+    },
+    {
+      "key": "metaphor_bridge",
+      "prompt": "Use case: product-mockup. Asset type: transparent photographic cutout of one scale-model object for a fictional peer-learning campaign's visual metaphor. A simple small wooden footbridge made from warm pale unpainted beech wood, clear single shallow arch and a horizontal plank walking deck with two low side rails, spanning an open gap between two short rectangular wooden abutment blocks that are part of this model. No figures, vehicles, decorations or scenery. Entire model uncropped centered in landscape1536x1024 transparent canvas, occupies about75 percent canvas width and50 percent height. Photographed as a real tabletop architectural model from a modest three-quarter angle so deck, rails and open space beneath the bridge are visible; realistic wood grain, soft neutral studio light from upper left. Genuine transparency around model and under its arch. No tabletop, ground, wall, environment, external cast shadow, hands, text, labels, graphics or frame. Restrained commissioned product photography, not a 3D illustration."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "note": "Original fictional arithmetic cases. These small, constructed datasets illustrate design mechanisms and do not establish causal effects or interval precision.",
+  "timing": {
+    "start_n": 100,
+    "landmark_month": 6,
+    "end_month": 12,
+    "early_cancellations": 40,
+    "badge_n": 20,
+    "badge_late_cancellations": 4,
+    "no_badge_survivors": 40,
+    "no_badge_late_cancellations": 8
+  },
+  "overlap": {
+    "tiers": ["Small", "Medium", "Large"],
+    "treated_n": [0, 20, 20],
+    "control_n": [40, 20, 0],
+    "treated_retained": [0, 16, 18],
+    "control_retained": [12, 12, 0],
+    "supported_tier": 1
+  },
+  "threshold": {
+    "cutoff": 80,
+    "display_bandwidth": 3,
+    "scores": [76, 77, 78, 79, 80, 81, 82, 83],
+    "outcomes": [52, 54, 56, 58, 66, 68, 70, 72],
+    "note": "Noiseless constructed outcomes. Separate local straight lines show the arithmetic; bandwidth is for teaching, not selected for inference."
+  },
+  "synthetic": {
+    "periods": [1, 2, 3, 4, 5, 6],
+    "pre_periods": 4,
+    "treated": [100, 104, 106, 110, 120, 124],
+    "donors": { "A": [90, 94, 96, 100, 102, 104], "B": [115, 119, 121, 125, 127, 129] },
+    "weights": [0.6, 0.4]
+  }
+}

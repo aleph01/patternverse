@@ -1,0 +1,117 @@
+{
+  "name": "communication-relationships-2026-11-02",
+  "status": "published and verified live",
+  "published": true,
+  "publishedAt": "2026-11-02T20:22:28.471Z",
+  "parentRelease": "selected-updates-2026-11-02",
+  "productionUrl": "https://patternverse.org",
+  "deploymentUrl": "https://f8bd9cbd.patternverse.pages.dev",
+  "version": "1793650646629",
+  "include": [
+    "Systems Thinking corrections",
+    "Explore What Feels Wrong",
+    "Library fixes",
+    "Build reuse",
+    "Pattern Language updates, documentation and syntax highlighting",
+    "Hide the update notice",
+    "Widgets panel in workspace settings, with compiler/runtime, persistence, backups and sync dependencies",
+    "Improved site search",
+    "Shift from Why to How and Make One Rumination Concrete in CBT",
+    "Remove redundant opening exit choices from five practices",
+    "Communication & Relationships verse in Life & Wellbeing, with Transactional Analysis and Games People Play collection homes"
+  ],
+  "exclude": [
+    "Contribute team invitation and founder portrait",
+    "Unselected draft content",
+    "Private music/player studies",
+    "MCP or guided-AI service publication"
+  ],
+  "newEntries": [
+    "pattern:explore-what-feels-wrong",
+    "pattern:shift-from-why-to-how",
+    "practice:make-one-rumination-concrete",
+    "verse:communication-and-relationships",
+    "collection:transactional-analysis",
+    "collection:games-people-play"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "expectedPublicEntries": 1311,
+  "artifact": {
+    "directory": "/private/tmp/patternverse-communication-release-2026-11-02/apps/web/build",
+    "files": 11275,
+    "bytes": 642201632,
+    "manifestSha256": "b0c761e83249647fdd7096f99514d9d84ecf72ef2668d95cba07aca773ae2c18",
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/communication-relationships-2026-11-02/artifact-files.json"
+  },
+  "verification": {
+    "content": {
+      "entries": 1311,
+      "diagnostics": 0
+    },
+    "browser": {
+      "passed": 84,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/communication-relationships-2026-11-02/browser-results.json"
+    },
+    "liveBrowsers": {
+      "passed": 4,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "normalRefresh": "passed"
+    },
+    "publicScan": "passed",
+    "live": {
+      "origin": "https://patternverse.org",
+      "version": "1793650646629",
+      "checkedAt": "2026-11-02T20:22:28.471Z",
+      "passed": true,
+      "checks": [
+        {
+          "path": "/_app/version.json",
+          "status": 200,
+          "passed": true,
+          "cache": "DYNAMIC"
+        },
+        {
+          "path": "/library",
+          "status": 200,
+          "passed": true,
+          "cache": "DYNAMIC"
+        },
+        {
+          "path": "/collection/transactional-analysis",
+          "status": 200,
+          "passed": true,
+          "cache": "DYNAMIC"
+        },
+        {
+          "path": "/collection/games-people-play",
+          "status": 200,
+          "passed": true,
+          "cache": "DYNAMIC"
+        },
+        {
+          "path": "/service-worker.js",
+          "status": 200,
+          "passed": true,
+          "cache": "EXPIRED"
+        }
+      ]
+    }
+  },
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/communication-relationships-2026-11-02/release-report.json",
+  "notes": [
+    "Includes the prepared selected-updates-2026-11-02 release and the new Communication & Relationships structure.",
+    "The Contribute team invitation remains excluded.",
+    "The Transactional Analysis and Games People Play collections are homes for articles being prepared in another chat.",
+    "Website published directly from the verified artifact; no Git push or service publication."
+  ]
+}

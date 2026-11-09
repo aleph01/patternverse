@@ -1,0 +1,610 @@
+{
+  "auditedArticles": 175,
+  "findingsApplied": 85,
+  "necessaryApplied": 41,
+  "optionalApplied": 44,
+  "passedArticlesPreserved": 90,
+  "pilotArticlesAndFiguresPreserved": 6,
+  "originalAuditDraftsAndFiguresPreserved": 175,
+  "citationSetsRetained": 175,
+  "allArticlesInLengthRange": 181,
+  "arithmeticAndSemanticChecks": "passed",
+  "revisedFigureClippingAndOverlap": "none",
+  "applied": [
+    {
+      "id": "model-around-business-processes",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "bounded-contexts",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "shared-business-vocabulary",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "separate-entities-from-events",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "separate-definitions-from-instances",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "separate-source-facts-from-derived-interpretations",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "model-lifecycle-states-explicitly",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "controlled-vocabularies",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "shared-metric-definitions",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "natural-keys",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "surrogate-keys",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "namespace-identifiers",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "identity-crosswalks",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "entity-resolution",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "normalized-relations",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "associative-entities",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "party-role-modeling",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": false
+    },
+    {
+      "id": "adjacency-lists",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "materialized-paths",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "document-aggregates",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "star-schema",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "snowflake-schema",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "factless-fact-tables",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "conformed-dimensions",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "degenerate-dimensions",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "junk-dimensions",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "aggregate-fact-tables",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "store-additive-components",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "drill-across",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "retain-original-values-scd-type-0",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "version-dimension-rows-scd-type-2",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "keep-previous-values-scd-type-3",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "mini-dimensions",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "effective-dated-records",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "periodic-snapshots",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "accumulating-snapshots",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "event-sourcing",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "as-of-joins",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "historical-restatement",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "full-snapshot-extraction",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "cursor-based-incremental-extraction",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "log-based-change-data-capture",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "chunked-snapshotting",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "overlapping-extraction-windows",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "manifest-based-file-ingestion",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "preserve-raw-inputs",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "reusable-intermediate-models",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "deterministic-transformations",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "incremental-transformations",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "lookback-recalculation",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "reshape-at-boundaries",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "metadata-driven-pipelines",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "event-time-processing",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "tumbling-windows",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "stream-table-enrichment",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "per-key-ordering",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "transactional-inbox",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "replayable-backfills",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "exponential-backoff-with-jitter",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "dead-letter-queues",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "workload-isolation",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "compensating-actions",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "partition-by-access-pattern",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "cluster-related-records",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "columnar-storage",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "secondary-access-paths",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "covering-indexes",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": false
+    },
+    {
+      "id": "co-located-joins",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "skew-splitting",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "small-file-compaction",
+      "priority": "optional",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "quarantine-invalid-records",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "volume-monitoring",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "representative-test-fixtures",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "versioned-dataset-interface",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": false
+    },
+    {
+      "id": "published-deprecation-windows",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "shadow-pipelines",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "parallel-run-comparison",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "version-transformation-logic",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "named-dataset-stewardship",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "self-service-data-discovery",
+      "priority": "optional",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "federated-governance",
+      "priority": "necessary",
+      "prose": true,
+      "svg": false,
+      "png": false
+    },
+    {
+      "id": "row-and-column-level-access",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "location-aware-placement",
+      "priority": "optional",
+      "prose": false,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "quality-gates",
+      "priority": "necessary",
+      "prose": true,
+      "svg": true,
+      "png": true
+    },
+    {
+      "id": "representative-text-fixtures",
+      "priority": "necessary",
+      "prose": false,
+      "svg": true,
+      "png": true
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "layers",
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1344,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "POSA's accessible publisher preview establishes the canonical name and architectural context. Microsoft's official guide and Mark Richards' authored treatment support the dependency policies, deployment distinction, and tradeoffs. Scenarios, code, and figures are original teaching material.",
+    "python_examples": "The four actual article blocks run as separate modules. Downward imports, 6.00 EUR and 25.00 EUR output, quantities around the ten-item fee threshold, invalid quantities before lookup, parsing errors, missing products, and replacement storage all pass.",
+    "focused_tests": "27 tests pass across Layers and the existing GoF article suite. Layers coverage includes its eight sections, collection membership, aliases, resolved links, exact highlighted code text, responsive figures and dimensions, search, recommendation metadata, and concept mark.",
+    "content": "1200 entities validate with drafts included. The published-only corpus contains 1054 entities and reports no errors.",
+    "public_build": "Production build passes, including the public web build checks. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new source files and authoring metadata.",
+    "visuals": "All four SVG variants load. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and phone figures were visually inspected for the mechanism, typography, arrows, and label placement.",
+    "article_browser": "Production article checked at 1440, 390, and 320 pixels: eight headings, all four code blocks preserved exactly with colored syntax tokens and focusable scrolling, both responsive images loaded, related links present, and no page overflow. Collection-to-article navigation and desktop collection breadcrumb pass.",
+    "gof_collection": "All 23 existing GoF members remain in their existing collection. No GoF articles changed."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no concept graphic. The other four graphic checks, including shape validity for Layers, pass; unrelated coverage left untouched."
+    }
+  ],
+  "preview": "http://127.0.0.1:42985/pattern/layers",
+  "evidence_directory": ".local/software-layers",
+  "browser_measurements": ".local/software-layers/browser-checks.json",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

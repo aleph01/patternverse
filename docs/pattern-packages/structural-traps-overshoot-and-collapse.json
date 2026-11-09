@@ -1,0 +1,202 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Overshoot and Collapse",
+  "metadata_mapping": "Existing concept-draft schema, responsive editable SVG convention, and research sidecar. Only this requested article and necessary assets; no practices, navigation or publication changes.",
+  "patterns": [
+    {
+      "id": "overshoot-and-collapse",
+      "title": "Overshoot and Collapse",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; overshoot, reserve depletion, changing support capacity, regeneration damage, delayed restraint and recovery",
+      "article": "content/concepts/overshoot-and-collapse.md",
+      "status": "draft",
+      "short_description": "Recognize when activity draws down essential support faster than it renews and can damage that renewal, making a later return to the former operating rate insufficient.",
+      "use_when": [
+        "Output remains strong while the supporting reserve is declining.",
+        "Growth commitments continue after removal rates exceed renewal.",
+        "The former extraction or production rate no longer appears supportable after damage.",
+        "Waiting for an unmistakable shortage may make recovery much harder.",
+        "A proposal confuses remaining stock with sustainable replenishment."
+      ],
+      "goals": [
+        "Distinguish overshoot, collapse, ordinary constraint pressure and planned reserve use.",
+        "Separate supporting stocks, renewal flows, removal flows and demand commitments.",
+        "Identify whether depletion also damages the ability to regenerate.",
+        "Make delays, uncertain thresholds and feasible early action explicit.",
+        "Expose the short-term losses and unresolved needs created by restraint.",
+        "Separate conditional simulations, observational research and real resource diagnosis."
+      ],
+      "mechanisms": [
+        "Track resource condition, reserve trends, renewal and total removals rather than output alone.",
+        "Project the resource consequences of commitments before they are difficult to change.",
+        "Reduce total pressure with enough margin and lead time for uncertain renewal and implementation.",
+        "Support a feasible transition for those who lose income, access or capacity.",
+        "Protect or restore the supporting resource without assuming immediate recovery.",
+        "Change activity scale, requirements or resource use where the former service cannot be supported, including pressures transferred outside the local boundary."
+      ],
+      "related_patterns": [
+        "limits-to-growth",
+        "delayed-feedback-and-oscillation",
+        "the-commons-dilemma"
+      ],
+      "example_user_queries": [
+        "We are still producing plenty, but the resource that supports us keeps shrinking.",
+        "The old operating rate is no longer safe even after we stopped growing.",
+        "How can a healthy-looking reserve hide unsustainable use?",
+        "We waited for a visible shortage and now recovery seems much harder.",
+        "Our current harvest is high but next season’s regrowth is getting weaker.",
+        "Can stopping expansion be too little if existing demand already exceeds renewal?",
+        "What would show that we are damaging capacity rather than just using a buffer?",
+        "We need to act before contracts and investments lock in more demand.",
+        "Reducing use now would cost income even if it protects the resource later.",
+        "Can a renewable resource become difficult to renew after overuse?",
+        "Does a sudden decline prove that we overshot a limit?",
+        "How do we distinguish ordinary seasonal drawdown from a dangerous depletion path?"
+      ],
+      "visual": {
+        "type": "coupled-feedback-qualitative",
+        "question": "How can reserve depletion also damage future renewal?",
+        "assets": [
+          "content/assets/structural-traps/overshoot-pasture-reserve.svg",
+          "content/assets/structural-traps/overshoot-pasture-reserve-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1273,
+            "textBlocks": 29
+          },
+          "phone": {
+            "width": 360,
+            "height": 2659,
+            "textBlocks": 29
+          }
+        },
+        "representation": {
+          "title": "Withdrawals can exhaust support and damage its renewal",
+          "panels": [
+            [
+              "Forage transfers · stock and flows",
+              [
+                [
+                  "Regrowth · inflow",
+                  "New forage enters the reserve."
+                ],
+                [
+                  "Forage reserve · stock",
+                  "Accumulated support for Rosa’s herd."
+                ],
+                [
+                  "Grazing · outflow",
+                  "The herd removes forage from the reserve."
+                ]
+              ],
+              [
+                "adds",
+                "takes"
+              ]
+            ],
+            [
+              "Damage to renewal · reinforcing causal loop",
+              [
+                [
+                  "Forage reserve",
+                  "Stored vegetation supports cover."
+                ],
+                [
+                  "Protective cover",
+                  "Remaining cover supports renewal."
+                ],
+                [
+                  "Regrowth capacity",
+                  "The pasture’s ability to renew forage."
+                ]
+              ],
+              [
+                "supports cover",
+                "supports renewal",
+                "regrowth replenishes the reserve"
+              ]
+            ]
+          ],
+          "pressure": [
+            "Growing commitments increase grazing pressure",
+            "Rosa expands the herd after successful seasons. When grazing exceeds regrowth, the reserve supplies the gap; stopping expansion can leave that deficit in place."
+          ],
+          "outcome": [
+            "When support is exhausted or damaged",
+            "Insufficient forage can force a severe reduction in the herd or its output: collapse. Renewal damage can make the former herd size unsupportable even after grazing is reduced."
+          ],
+          "change": "Limit new commitments before damage, monitor renewal, and fund any needed reduction or restoration.",
+          "limit": "Reserve use can be sustainable when later replenishment restores it. Damage is an explicit hypothesis here; collapse and irreversible loss are not inevitable.",
+          "alt": "Hypothetical stock-and-flow and causal comparison. Regrowth adds to the forage reserve; grazing removes it. Rosa’s growing herd commitments increase grazing pressure. When grazing exceeds regrowth, the reserve supplies the difference. A reinforcing damage loop links lower reserve, reduced protective cover, weakened regrowth capacity, and less replenishment. Exhausted or damaged support can force a severe reduction in herd or output. Early limits on commitments can preserve renewal, with lower short-term production.",
+          "caption": "The first arrows show forage transfers into and out of a stock; the second loop shows hypothesized effects on renewal. Overshoot is pressure beyond sustainable support, not reserve use alone. Severe contraction is collapse. Early restraint sacrifices output, and reducing grazing after damage may not quickly restore former capacity."
+        },
+        "alternative_text": "Hypothetical stock-and-flow and causal comparison. Regrowth adds to the forage reserve; grazing removes it. Rosa’s growing herd commitments increase grazing pressure. When grazing exceeds regrowth, the reserve supplies the difference. A reinforcing damage loop links lower reserve, reduced protective cover, weakened regrowth capacity, and less replenishment. Exhausted or damaged support can force a severe reduction in herd or output. Early limits on commitments can preserve renewal, with lower short-term production.",
+        "caption": "Hypothetical illustration. The first arrows transfer forage into and out of a stock; the second loop describes hypothesized damage to renewal. Pressure beyond sustainable support can force severe contraction. Reserve use alone is not overshoot, and neither collapse nor irreversible damage is inevitable.",
+        "style": "Fixed white including dark surroundings; regular Helvetica Neue with Helvetica and Arial fallbacks; ink and secondary text meet contrast on prescribed fills. Green identifies intervention geometry. Essential connections use ink; light construction lines remain contextual."
+      },
+      "source_checked": "2026-11-01",
+      "sources": [
+        {
+          "author": "Donella H. Meadows, Dennis L. Meadows, Jørgen Randers and William W. Behrens III",
+          "year": 1972,
+          "title": "The Limits to Growth",
+          "url": "https://collections.dartmouth.edu/archive/text/meadows/diplomatic/meadows_ltg-diplomatic.html",
+          "read_method": "Opened the Dartmouth-hosted original report and read the world-model behavior and overshoot discussions, especially printed pages 123–126 and 142–144, plus statements about conditional assumptions and non-exact forecasts.",
+          "supports": "Foundational system dynamics treatment of overshoot/collapse as a modeled behavior mode, interaction of growth/resource dependence/delays, and limits on interpreting aggregated scenarios.",
+          "boundary": "Conditional global simulations are not precise dated forecasts or empirical proof that every growing system must collapse. The article does not claim this report originated all population–resource ecology or transfer its parameters into the pasture."
+        },
+        {
+          "author": "Donella H. Meadows",
+          "year": 2008,
+          "title": "Thinking in Systems: A Primer",
+          "url": "https://www.sustainable.soltechdesigns.com/meadows.pdf",
+          "read_method": "Opened and read the renewable-resource examples, printed pages 69–72 (PDF pages 85–88), contrasting adjustment, oscillation and collapse and discussing damaged regeneration during severe depletion.",
+          "supports": "Renewable resources are flow-limited; stock condition, regeneration and the strength/timing of corrective feedback affect possible behavior.",
+          "boundary": "Conceptual and numerical teaching models, not a universal ecological threshold. Specific historical claims about fish or forests are not imported as independently verified facts. The pasture’s withdrawal–renewal relationship and damage mechanism are original hypothetical assumptions, not measured rates or an established damage threshold."
+        },
+        {
+          "author": "Jeffrey A. Hutchings and John D. Reynolds",
+          "year": 2004,
+          "title": "Marine Fish Population Collapses: Consequences for Recovery and Extinction Risk",
+          "url": "https://www.cbd.int/doc/articles/2004/A-00162.pdf",
+          "journal": "BioScience 54(4), 297–309",
+          "read_method": "Opened the full thirteen-page paper and read population-data/decline-recovery analyses and the discussion of fishing, management, habitat and proposed recovery mechanisms, especially printed pages 297–303.",
+          "supports": "Observed slow and variable recovery following severe population declines; reduced fishing often necessary but not by itself a guarantee of rapid recovery; distinctions among empirical associations and proposed mechanisms.",
+          "boundary": "Observational stock assessments and synthesis, not randomized evidence for a single causal threshold. Reported patterns are historical, not claims about current fishery status. Continuing exploitation, life history, habitat and other influences remain relevant. No fish recovery rate is transferred to pasture dynamics, and reduced fishing is not described as futile."
+        }
+      ],
+      "evidence_boundary": "The scenario and illustration are hypothetical. Qualitative formal comparisons depend on the stated players, actions, preferences, information, timing, and repetition assumptions. Empirical findings retain their source-specific limits. Practical interventions are editorial synthesis, not measured effects of this scenario.",
+      "verification": {
+        "status": "passed",
+        "content": "All forty remain separate drafts with nine required sections and one responsive figure; collection unchanged. Corpus/schema and rendered Markdown checks passed; public corpus excludes the drafts. Non-figure article text and external source links are unchanged from the illustration-revision baseline.",
+        "visual": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed.",
+        "editorial": "Existing explanatory geometry retained with contrast and caption improvements. Examples remain qualitative and hypothetical. Caption and alternative text explain the mechanism, changed relationship, and residual limitations. Green text replaced with ink; essential connections strengthened. Source records and source-check dates preserved."
+      },
+      "example_structure": {
+        "scenario": "Hypothetical narrative; no invented utility scores, numerical trajectory, or probability cutoff is required to follow the example.",
+        "changed_relationship": "Limit new commitments before damage, monitor renewal, and fund any needed reduction or restoration.",
+        "residual_constraints": "Reserve use can be sustainable when later replenishment restores it. Damage is an explicit hypothesis here; collapse and irreversible loss are not inevitable."
+      },
+      "editorial_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the distinctness audit: preserve separate concepts, clarify scope and relationships, and retain plain-language examples.",
+        "source_handling": "Existing source links and evidence limits retained; no new empirical claim is introduced."
+      },
+      "example_consistency_revision": {
+        "date": "2026-11-01",
+        "purpose": "Update research-note descriptions to match the current qualitative article.",
+        "source_handling": "Original source links, source-check dates, and empirical qualifications preserved; no new empirical claim introduced.",
+        "verification": "Passed: corpus validation; all forty remain separate drafts outside the public corpus; collection and source links unchanged; prose, captions, alternative text and SVG descriptions agree. Four changed articles checked live at 1440px and 390px; six revised SVG compositions checked at measured article widths in light and dark surroundings, with no text overlap, clipping, card overflow or page overflow. Revised illustration text passes contrast checks."
+      },
+      "illustration_teaching_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the teaching-value audit while retaining every article and its qualitative worked example.",
+        "change": "Preserve the explanatory structure; improve contrast and the interpretive caption.",
+        "source_handling": "Article prose, external source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed."
+      }
+    }
+  ]
+}

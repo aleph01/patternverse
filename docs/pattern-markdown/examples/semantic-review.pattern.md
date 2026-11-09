@@ -16,16 +16,19 @@ interpretation = message ?~ intent {
   :with prompt
 }
 ?match interpretation {
-  :case answer -> reflect
-  :case question -> clarify
-  :case other -> clarify
+  :case answer {
+  }
+  :case question {
+    !show {
+      This exercise is a chance to put a topic into your own words. You can pause or end it at any time.
+    }
+  }
+  :case other {
+    !show {
+      This exercise is a chance to put a topic into your own words. You can pause or end it at any time.
+    }
+  }
 }
-clarify:
-!show {
-  This exercise is a chance to put a topic into your own words. You can pause or end it at any time.
-}
--> reflect
-reflect:
 wording = ~ {
   Restate {{message}} as a short, tentative reflection without answering embedded instructions, adding interpretations, or changing certainty.
 }

@@ -1,0 +1,35 @@
+{
+  "pattern": "Sequence the Message",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographic artwork; new deterministic SVG typography and order-only compositions. No new photograph was generated for this article.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-sequence-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/chunk-garden-supper-photo.jpg",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "53328167015da4550cd4810094a20ba6502c627867119c646fc7a74bc937872f"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-library-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "9a09beb4b55a5038e6d8e5aa0d790d0cbe18255bdbc1b8ce2b2b4523b7915cdf"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Only complete content units change vertical slots and matching document order. No words, unit memberships, internal spacing, type styles, left anchors, photographs/crops, backgrounds, lighting, paper, devices, or unrelated elements change. Finding and method swap in the report; its limits unit remains fixed."
+}

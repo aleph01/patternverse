@@ -1,0 +1,1361 @@
+[
+  {
+    "id": "access-audit-trails",
+    "title": "Access audit trails",
+    "form": "attributed-access-chain",
+    "caption": "Mira requests R17/C17 through service support under query Q9. Trusted attribution links the user and service identity to the access event. A denied R18 request has no database access event. A log entry does not prove a human read or understood the result.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "accumulating-snapshots",
+    "title": "Accumulating snapshots: one process row fills in its milestones",
+    "form": "milestone-record",
+    "caption": "Successive views of the same order line capture release, first ship, full ship, delivery, and shipped units. These are updates to one process record, not three independent facts.",
+    "family": "Time and history"
+  },
+  {
+    "id": "additive-schema-evolution",
+    "title": "Additive schema evolution",
+    "form": "coexisting-fields",
+    "caption": "Existing event_time_s remains seconds 1700000000. New event_time_ms holds 1700000000123. Old records lack the new field; this is not the same as zero. Consumers migrate while both meanings remain explicit.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "adjacency-lists",
+    "title": "Adjacency lists",
+    "form": "parent-pointer-tree",
+    "caption": "The hierarchy labels Workspace 1, Finance 2, Projects 3, Forecast 4 and Apollo 5. Two selected stored rows show Finance.parent_id=1 and Forecast.parent_id=2. Moving Finance changes its parent pointer, not Forecast\u2019s pointer.",
+    "family": "Modeling"
+  },
+  {
+    "id": "aggregate-fact-tables",
+    "title": "Aggregate fact tables",
+    "form": "detail-to-summary",
+    "caption": "Four sale lines roll up to two day-store rows. October1 has 3 units and USD62; October2 has 4 units and USD85. Totals remain 7 units and USD147.",
+    "family": "Modeling"
+  },
+  {
+    "id": "allowed-lateness",
+    "title": "Allowed lateness",
+    "form": "event-time-retention",
+    "caption": "For window [10:00,10:05) with ten minutes of allowed lateness, an event arriving at watermark 10:09 updates 100 to 120. At watermark 10:16, a further event goes to a separate correction route.",
+    "family": "Streaming"
+  },
+  {
+    "id": "as-of-joins",
+    "title": "As-of joins: latest eligible historical context for each observation",
+    "form": "backward-time-selection",
+    "caption": "A backward as-of join selects the latest calibration no later than a device reading. A reading before the first calibration remains unmatched.",
+    "family": "Time and history"
+  },
+  {
+    "id": "associative-entities",
+    "title": "Associative entities give relationships their own records",
+    "form": "relationship-records",
+    "caption": "Three enrollment records connect two students and two offerings. Each enrollment has a student, an offering and a grade.",
+    "family": "Modeling"
+  },
+  {
+    "id": "atomic-publication",
+    "title": "Atomic publication",
+    "form": "pointer-switch",
+    "caption": "Readers pin current R17 while immutable R18 files and its manifest are prepared. Validation completes before a conditional pointer switch exposes R18. Readers of R17 can finish against that release.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "backpressure",
+    "title": "Backpressure",
+    "form": "rate-and-buffer",
+    "caption": "Input at 5000 records/s and output at 2000 records/s grows the queue by 3000 records/s. With room for 6000 records the queue fills in two seconds. Feedback reduces admitted rate; it does not increase capacity.",
+    "family": "Streaming"
+  },
+  {
+    "id": "bitemporal-records",
+    "title": "Bitemporal records preserve successive business timelines",
+    "form": "two-time-plane",
+    "caption": "The upper knowledge slice records East indefinitely. After the July 5 correction, East ends July 1 and West begins. July 3 has two answers depending on knowledge time.",
+    "family": "Time and history"
+  },
+  {
+    "id": "bounded-contexts",
+    "title": "Bounded contexts: one company, three useful models",
+    "form": "relationship-map",
+    "caption": "Commercial account, payer accounts and service workspace have different identities and states; mappings connect the contexts.",
+    "family": "Modeling"
+  },
+  {
+    "id": "bounded-retries",
+    "title": "Bounded retries",
+    "form": "deadline-budget",
+    "caption": "The operation has at most four attempts, a ten-second total deadline, and a three-second per-attempt timeout. Attempts use 0\u20133,3.5\u20136.5,7.5\u201310 seconds. The deadline prevents attempt four and shortens attempt three.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "bounded-stream-stream-joins",
+    "title": "Bounded stream-stream joins",
+    "form": "join-time-band",
+    "caption": "Order O42 at 10:00 joins shipments of O42 from 10:00 through 14:00 inclusive. Shipments at 10:30 and 13:50 match, while one at 14:10 does not. Multiple eligible matches produce multiple outputs.",
+    "family": "Streaming"
+  },
+  {
+    "id": "bridge-tables",
+    "title": "Bridge tables",
+    "form": "weighted-relationship",
+    "caption": "Sale S1 USD120 links to Ada at 75% and Ben at 25%; S2 USD80 links to Ben at 100%. Allocated totals are Ada USD90 and Ben USD110, summing to USD200.",
+    "family": "Modeling",
+    "sources": [
+      {
+        "title": "Kimball Group: Multivalued Dimensions and Bridge Tables",
+        "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/multivalued-dimension-bridge-table/"
+      },
+      {
+        "title": "Kimball Group: Potential Bridge Table Detours",
+        "url": "https://www.kimballgroup.com/2014/05/design-tip-166-potential-bridge-table-detours/"
+      },
+      {
+        "title": "Microsoft Power BI: Many-to-many relationship guidance",
+        "url": "https://learn.microsoft.com/en-us/power-bi/guidance/relationships-many-to-many"
+      }
+    ]
+  },
+  {
+    "id": "broadcast-small-inputs",
+    "title": "Broadcast small inputs",
+    "form": "replicated-reference",
+    "caption": "A complete reference v17 mapping country to region is broadcast to three workers. Each enriches its local large input without repartitioning it. The reference must fit worker memory and have the intended version.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "business-invariant-checks",
+    "title": "Business invariant checks",
+    "form": "conservation-check",
+    "caption": "For an order of ten units, shipped six plus cancelled two plus open two reconciles to ten. A candidate with seven shipped plus two cancelled plus two open violates the rule and is held.",
+    "family": "Data quality"
+  },
+  {
+    "id": "calendar-dimensions",
+    "title": "Calendar Dimensions",
+    "form": "calendar-membership",
+    "caption": "A date dimension has one row per day. December 31, 2026 and January 1, 2027 have different calendar years but share ISO week 2026-W53 and, in an illustrative July-start fiscal calendar named by its ending year, fiscal year FY2027. Facts of 60 and 40 join by date key and sum to 100 in that ISO week. Calendar attributes are explicitly maintained rather than inferred from the year embedded in the date key.",
+    "family": "Modeling",
+    "sources": [
+      {
+        "title": "Kimball Group: Calendar Date Dimensions",
+        "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/calendar-date-dimension/"
+      },
+      {
+        "title": "PostgreSQL: Date/Time Functions",
+        "url": "https://www.postgresql.org/docs/current/functions-datetime.html"
+      },
+      {
+        "title": "Microsoft: Date table design guidance",
+        "url": "https://learn.microsoft.com/en-us/power-bi/guidance/model-date-tables"
+      }
+    ]
+  },
+  {
+    "id": "canonical-mapping",
+    "title": "Canonical mapping",
+    "form": "value-mapping",
+    "caption": "Web P means paid, ERP P means pending, and ERP S means settled, mapped to paid. Equal source codes do not necessarily share meaning.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "capture-lineage-at-transformation",
+    "title": "Capture Lineage at Transformation",
+    "form": "planned-recorded-lineage",
+    "caption": "Planned dependencies connect Captures and Refunds to Net sales without proving a particular execution. Recorded run R42 binds captures snapshot S52 and refunds snapshot F33 to logic L8 and output release R108, with a separate confirmed publication receipt. A later refund snapshot F34 is not substituted into R42\u2019s historical record. Version bindings, run identity, and publication evidence support investigation; the existence of lineage does not establish data correctness or complete capture coverage.",
+    "family": "Data quality",
+    "sources": [
+      {
+        "title": "OpenLineage: Object Model",
+        "url": "https://openlineage.io/docs/spec/object-model/"
+      },
+      {
+        "title": "Apache Airflow: Supported OpenLineage extraction",
+        "url": "https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/supported_classes.html"
+      }
+    ]
+  },
+  {
+    "id": "checkpoint-and-resume",
+    "title": "Checkpoint and resume",
+    "form": "coordinated-recovery",
+    "caption": "Checkpoint C17 stores next offset 104 and state 100. Processing offsets 104 plus 20 and 105 plus 30 reaches 150, but a crash restores C17 and replays both. Sink effects must be coordinated or idempotent.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "chunked-snapshotting",
+    "title": "Chunked snapshotting",
+    "form": "range-completion",
+    "caption": "A snapshot scope over integer keys 0\u2013999 is split into four half-open ranges; range width does not imply row count. Chunk 3 is retried independently; publication waits for a complete set under the selected consistency protocol.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "circuit-breakers",
+    "title": "Circuit breakers",
+    "form": "state-machine",
+    "caption": "Failures open the circuit. Requests are rejected while open. After a cooldown, limited half-open probes determine whether to close or reopen; the breaker does not buffer all requests for later.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "claim-check",
+    "title": "Claim Check",
+    "form": "reference-indirection",
+    "caption": "A 20 MB payload is stored as P17 version 3. Event E17 carries its immutable reference. The consumer retrieves that exact version under the required authorization and retention policy.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "classification-based-retention",
+    "title": "Classification-based retention",
+    "form": "clock-and-hold",
+    "caption": "A ticket closes January1,2027 with a90-day retention period, due April1. A hold from March20 to April15 prevents disposal. On release, re-evaluate the original due date rather than restarting the ninety-day clock.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "closure-tables",
+    "title": "Closure tables",
+    "form": "transitive-closure-tree",
+    "caption": "A five-folder tree labels Workspace 1, Finance 2, Projects 3, Forecast 4 and Apollo 5. Two selected closure rows show Workspace reaching Forecast in two hops and Forecast reaching itself in zero hops. The complete closure table contains eleven rows including five self rows.",
+    "family": "Modeling"
+  },
+  {
+    "id": "cluster-related-records",
+    "title": "Cluster related records",
+    "form": "block-locality",
+    "caption": "Tenant 7 occurs in every block before clustering. After sorting, tenant 7 is concentrated in blocks 1 and 2; block 2 also contains tenant 8 and requires residual filtering. Clustering is not a uniqueness constraint.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "co-located-joins",
+    "title": "Co-located joins",
+    "form": "partition-alignment",
+    "caption": "Orders and payments are both routed by the same tenant-key mapping. Tenant 7 is local on worker A, 8 on B, 9 on C. Each local join uses tenant and order ID, avoiding movement of its inputs for the join, though the result may still travel.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "columnar-storage",
+    "title": "Columnar storage",
+    "form": "column-selection",
+    "caption": "For SUM(amount) WHERE tenant=7, read tenant and amount columns, not ID or payload. Matching positions 1, 3, 4 hold amounts 20, 30, 10 and sum to 60. Physical skipping depends on the storage engine.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "compatibility-checks-in-delivery",
+    "title": "Compatibility checks in delivery",
+    "form": "compatibility-matrix",
+    "caption": "Writer W8 is compatible with reader R8 but not deployed reader R7. Writer W7 works with both. A delivery check must cover live combinations and relevant retained data, not only the newest pair.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "compensating-actions",
+    "title": "Compensating actions",
+    "form": "forward-correction",
+    "caption": "Capacity starts at 100. R42 reserves 10 and R43 reserves 5, leaving 85. After cancelling external job X42 and confirming termination, releasing only R42 returns capacity to 95. R43 remains reserved; release R42 is idempotent.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "composite-keys",
+    "title": "Composite keys require a matching combination",
+    "form": "tuple-membership",
+    "caption": "Projects include NORTH 7, SOUTH 7 and SOUTH 8. The attempted foreign key NORTH 8 is invalid even though both separate values exist.",
+    "family": "Modeling"
+  },
+  {
+    "id": "conformed-dimensions",
+    "title": "Conformed dimensions",
+    "form": "aligned-independent-summaries",
+    "caption": "Sales and returns are summarized independently by the same month and canonical product before being aligned. Adapter sales USD 75 and returns USD 20; Case sales USD 12 and no return summary.",
+    "family": "Modeling"
+  },
+  {
+    "id": "conformed-facts",
+    "title": "Conformed facts",
+    "form": "value-mapping",
+    "caption": "Source A subtracts USD20 tax and source B subtracts USD10 discount. Both become net invoiced amount after discount and excluding tax and shipping.",
+    "family": "Modeling"
+  },
+  {
+    "id": "consistent-snapshot-reads",
+    "title": "Consistent snapshot reads",
+    "form": "read-boundary",
+    "caption": "A transfer of 20 changes A=60, B=40 into A=40, B=60. A mixed read of old A and new B invents a balance of 120. Each coherent snapshot totals 100.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "consumer-driven-contract-tests",
+    "title": "Consumer-driven contract tests",
+    "form": "consumer-provider-loop",
+    "caption": "A consumer example requires available as an integer. Its generated contract is verified against the provider. Adding unused zone passes; renaming available fails. The contract is grounded in consumer execution, not an independently invented provider fixture.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "controlled-vocabularies",
+    "title": "Controlled vocabularies",
+    "form": "value-mapping",
+    "caption": "Known email spelling variants map to CH-01. The ambiguous source label web stays unresolved until its meaning is established.",
+    "family": "Modeling"
+  },
+  {
+    "id": "covering-indexes",
+    "title": "Covering indexes",
+    "form": "index-coverage",
+    "caption": "Three illustrative entries from a latest-100-readings query for device 42 can read time and value from a covering index instead of following each locator to a table row. Some engines still require visibility checks in the base table.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "cursor-based-incremental-extraction",
+    "title": "Cursor-based incremental extraction",
+    "form": "commit-before-cursor",
+    "caption": "Cursor C17 fetches records 41 and 72 and returns C18. Data becomes durable before C18 is committed. A crash before cursor advancement replays the page safely.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "data-aware-dependencies",
+    "title": "Data-aware dependencies",
+    "form": "matching-input-readiness",
+    "caption": "October 25 orders v8 are ready but the successful returns job only provides October 24. Processing waits until October 25 returns v4 is ready, then pins both versions.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "data-minimization",
+    "title": "Data minimization",
+    "form": "purpose-limited-summary",
+    "caption": "For twenty deliveries,19 have known outcomes, including3 late, and1 is unknown. The reported late rate is3/19. Names, email, and precise GPS are unnecessary for this metric; any operational detail has its own bounded retention.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "dataset-deprecation-and-retirement",
+    "title": "Dataset deprecation and retirement",
+    "form": "state-sequence",
+    "caption": "A dataset progresses from supported to deprecated to retired after consumers and producers have been addressed. Retiring service and disposing retained data are distinct decisions governed by their own policies.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "dead-letter-queues",
+    "title": "Dead-letter queues",
+    "form": "failure-route",
+    "caption": "A message that cannot be processed is durably transferred with its identity, payload, failure context, and owner to a dead-letter queue. After repair it is redriven through the original deduplication path.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "declare-the-grain",
+    "title": "Declare the grain: receipt and receipt line",
+    "form": "grain-and-allocation",
+    "caption": "Receipt R104 has EUR 8 and EUR 4 merchandise lines and one EUR 3 delivery fee. Repeating the fee gives EUR 6. Allocation in proportion to merchandise value assigns EUR 2 and EUR 1, preserving EUR 3; retaining the fee once at receipt grain is another option.",
+    "family": "Modeling"
+  },
+  {
+    "id": "deduplicate-explicit-winner",
+    "title": "Deduplicate with an explicit winner",
+    "form": "ranked-whole-row",
+    "caption": "Customer C17 has rows R1 v7 received 09:03, R2 v8 received 09:02, and R3 v8 received 09:05. Highest version then earliest receipt chooses R2; a stable row ID breaks any remaining tie.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "degenerate-dimensions",
+    "title": "Degenerate dimensions",
+    "form": "identifier-on-facts",
+    "caption": "Invoice-line facts retain source and invoice number. Grouping ERP-A INV17 yields USD62 from two lines, and INV18 yields USD25 from one; no separate invoice dimension is required.",
+    "family": "Modeling"
+  },
+  {
+    "id": "deletion-propagation",
+    "title": "Deletion propagation",
+    "form": "deletion-progress",
+    "caption": "Deletion D52 is applied in the warehouse, requires a retry in search, and awaits physical cleanup in the lake. Applied and verified are separate milestones. Backfills and restores must check applicable deletion records before publication.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "deletion-tombstones",
+    "title": "Deletion tombstones prevent stale updates from restoring deleted data",
+    "form": "version-barrier",
+    "caption": "Customer C17 version 40 exists, version 42 deletes it, and a delayed version 41 update is rejected. The tombstone must survive the possible replay horizon.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "deterministic-transformations",
+    "title": "Deterministic transformations",
+    "form": "pinned-inputs",
+    "caption": "Batch B42, reference v7, logic v3, config C7, business date October 1, and UTC are pinned. Both executions select the same customer record R2 with identical logical content; ambient time or unpinned references would break the guarantee.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "distinguish-missing-unknown-inapplicable",
+    "title": "Distinguish missing, unknown, and inapplicable",
+    "form": "absence-classification",
+    "caption": "A missing transit duration can mean unknown physical transit, inapplicable digital fulfillment, or unexplained source omission. These require different handling.",
+    "family": "Modeling"
+  },
+  {
+    "id": "distribution-monitoring",
+    "title": "Distribution monitoring",
+    "form": "distribution-comparison",
+    "caption": "Both datasets contain 1000 values with mean 30. Reference values are all 30. Current values are 500 tens and 500 fifties, so half exceed 40 despite the unchanged mean. This deliberately simple example demonstrates a distribution shift.",
+    "family": "Data quality"
+  },
+  {
+    "id": "document-aggregates",
+    "title": "Document aggregates",
+    "form": "nested-document",
+    "caption": "Order O17 contains a delivery-address snapshot and its two lines, with subtotal 6200 USD cents. Customer and catalog identities remain outside the document.",
+    "family": "Modeling"
+  },
+  {
+    "id": "domain-owned-data-products",
+    "title": "Domain-owned data products",
+    "form": "ownership-dependencies",
+    "caption": "Payments owns capture and refund facts. Finance owns net collections derived from those products. A shared platform provides infrastructure, while each domain owns its semantics, quality, and consumer-facing commitments.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "drill-across",
+    "title": "Drill across",
+    "form": "aligned-independent-summaries",
+    "caption": "Independent sales and returns summaries align by October and canonical product, preserving missing summaries. Detail-to-detail Adapter joins would produce six pairs.",
+    "family": "Modeling"
+  },
+  {
+    "id": "dynamic-masking",
+    "title": "Dynamic masking",
+    "form": "branching-derivation",
+    "caption": "The same stored phone value is displayed in full to authorized support, partially to operations, and as NULL to analytics. Masking changes presentation; source access and inference risks still require controls.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "early-results-with-corrections",
+    "title": "Early results with corrections",
+    "form": "revision-order",
+    "caption": "A result evolves from revision 1 value 60 to revision 2 value 100 to revision 3 value 95. Delivery order 1,3,2, retry 3 must leave revision 3 value 95 at the sink through an atomic revision check.",
+    "family": "Streaming"
+  },
+  {
+    "id": "effective-dated-records",
+    "title": "Effective-dated records: stored now, effective on schedule",
+    "form": "time-intervals",
+    "caption": "Effective dates schedule three prices. The July price can already be stored on June 10 without being active.",
+    "family": "Time and history"
+  },
+  {
+    "id": "end-to-end-canary-records",
+    "title": "End-to-end canary records",
+    "form": "end-to-end-trace",
+    "caption": "Canary C742 enters at 12:00. It reaches broker after two seconds, transform after eight, publication after eleven, but the target consumer still lacks it at the one-minute deadline. Expected amount is three times 1200 equals 3600.",
+    "family": "Data quality"
+  },
+  {
+    "id": "entity-resolution",
+    "title": "Entity resolution weighs evidence before linking",
+    "form": "candidate-decision-fan",
+    "caption": "Comparable records generate candidate pairs. Cluster validation must pass before accepting a pair; alternatives are evidence review or leaving the pair unlinked.",
+    "family": "Modeling"
+  },
+  {
+    "id": "event-sourcing",
+    "title": "Event sourcing: append accepted facts and rebuild state",
+    "form": "event-fold",
+    "caption": "Revisions 1\u20133 use the same one-based positions as the article. A seat aggregate starts with capacity 20. Reserve 3 then release 1 produces 18 available seats. Replay rebuilds state without repeating external effects.",
+    "family": "Time and history"
+  },
+  {
+    "id": "event-time-processing",
+    "title": "Event-time processing",
+    "form": "two-clock-placement",
+    "caption": "Events of 30 and 70 are processed promptly in the 10:00\u201310:05 event-time window. A 20 event with timestamp 10:03 is processed at 10:09 and corrects the same window from 100 to 120 under the chosen late-data policy.",
+    "family": "Streaming"
+  },
+  {
+    "id": "expand-migrate-contract",
+    "title": "Expand\u2013Migrate\u2013Contract",
+    "form": "state-sequence",
+    "caption": "Add the new representation, bridge writes and backfill it, validate and migrate consumers, then retire the old representation after readiness is established. Deletion is a separate deliberate step.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "explicit-data-contracts",
+    "title": "Explicit data contracts",
+    "form": "branching-derivation",
+    "caption": "An integer 1250 and a USD currency field pass the same structural schema but differ one hundredfold if one party means cents and the other dollars. The contract declares units, grain, meaning, and operational expectations.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "exponential-backoff-with-jitter",
+    "title": "Exponential backoff with jitter",
+    "form": "retry-dispersion",
+    "caption": "Four synchronized clients retry at cumulative times 1, 3, 7 seconds without jitter. Full jitter draws an independent wait from zero to each exponential cap of 1, 2, 4 seconds. Times shown are illustrative draws.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "factless-fact-tables",
+    "title": "Factless fact tables",
+    "form": "coverage-difference",
+    "caption": "Five expected student-session pairs and three attendance records leave Cora S1 and Ben S2 unrecorded, assuming closed sessions and complete capture.",
+    "family": "Modeling"
+  },
+  {
+    "id": "federated-governance",
+    "title": "Federated governance",
+    "form": "shared-rules-local-decisions",
+    "caption": "Domains choose their own models within shared interoperability and policy rules. Platform checks enforce computable requirements. Feedback and explicit exceptions connect local experience to changes in common rules.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "freshness-monitoring",
+    "title": "Freshness monitoring",
+    "form": "stage-lag",
+    "caption": "At noon the source is at 12:00 and landing at 11:59:50, but the published dataset is only current through 11:43. A job succeeding at noon does not repair the seventeen-minute data lag against a five-minute objective.",
+    "family": "Data quality"
+  },
+  {
+    "id": "full-snapshot-extraction",
+    "title": "Full snapshot extraction",
+    "form": "value-mapping",
+    "caption": "A complete comparable snapshot updates A, retains C, adds D, and removes B. Partial extracts cannot establish deletion.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "golden-records",
+    "title": "Golden records select trusted values with provenance",
+    "form": "field-provenance",
+    "caption": "The linked organization ORG731 takes its legal name and invoice address from Finance, its trading name from CRM and its delivery address from the portal, preserving provenance.",
+    "family": "Modeling"
+  },
+  {
+    "id": "graph-relationships",
+    "title": "Graph relationships",
+    "form": "typed-lineage-graph",
+    "caption": "Orders and Customers feed Build Sales, which produces Sales. Sales feeds Daily Report and Partner Export, combining inputs and branching consumers.",
+    "family": "Modeling"
+  },
+  {
+    "id": "half-open-time-intervals",
+    "title": "Half-open time intervals",
+    "form": "boundary-ownership",
+    "caption": "July is [July 1, August 1); August is [August 1, September 1). A boundary event belongs to exactly one interval.",
+    "family": "Time and history"
+  },
+  {
+    "id": "historical-restatement",
+    "title": "Historical restatement",
+    "form": "release-comparison",
+    "caption": "March revenue was released as USD 1000 on April 1. A late March 31 event for 200 arrives April 5. A new release reports 1200 while the original remains reproducible.",
+    "family": "Time and history"
+  },
+  {
+    "id": "horizontal-sharding",
+    "title": "Horizontal sharding",
+    "form": "routing-map",
+    "caption": "Tenant 7 maps to logical bucket 6 under mapping v12. Buckets 0\u20133 belong to shard A,4\u20137 to B, and 8\u201311 to C. All shards hold the same table structure with different rows.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "hot-cold-tiering",
+    "title": "Hot-cold tiering",
+    "form": "access-temperature",
+    "caption": "Data younger than seven days is hot. From seven to under ninety days it remains directly queryable in a colder tier. At ninety days it is archived and must be restored before use; archive absence is not an empty query result.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "hybrid-slowly-changing-dimensions",
+    "title": "Hybrid Slowly Changing Dimensions",
+    "form": "historical-current-comparison",
+    "caption": "An illustrative Type 6 hybrid combines Type 2 historical region and Type 1 current region for customer A42. Version 107 is East during [January 1, July 1), version 208 is West from July 1. After the change, current region is overwritten to West on both rows. June sale 100 references key 107, July sale 200 references 208. Historical grouping returns East 100 and West 200; grouping by current region returns West 300. The stored fact keys do not change.",
+    "family": "Time and history",
+    "sources": [
+      {
+        "title": "Kimball Group: Type 5 \u2014 Add Mini-Dimension and Type 1 Outrigger",
+        "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/type-5/"
+      },
+      {
+        "title": "Kimball Group: Type 6 \u2014 Add Type 1 Attributes to Type 2 Dimension",
+        "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/type-6/"
+      },
+      {
+        "title": "Kimball Group: Type 7 \u2014 Dual Type 1 and Type 2 Dimensions",
+        "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/type-7/"
+      }
+    ]
+  },
+  {
+    "id": "idempotent-writes",
+    "title": "Idempotent writes",
+    "form": "transaction-boundary",
+    "caption": "The destination atomically records operation E901 and applies stock plus 40. If acknowledgement is lost, retry finds the identity and does not add another 40.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "identity-crosswalks",
+    "title": "Identity crosswalks retain confirmed mappings",
+    "form": "value-mapping",
+    "caption": "Confirmed evidence links CRM 17 and Billing 882 to ORG-731. Support 17 is a different organization ORG-905.",
+    "family": "Modeling"
+  },
+  {
+    "id": "incremental-replacement",
+    "title": "Incremental replacement",
+    "form": "cohort-handover",
+    "caption": "Cohorts A, B, C start on the old system. A then B then C move to the new system. Each cohort has exactly one authoritative publisher at every stage; rollback changes that ownership deliberately.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "incremental-transformations",
+    "title": "Incremental Transformation",
+    "form": "dependency-impact",
+    "caption": "E2 changes from 70 on day 1 to 50 on day 2. Both old and new groups must be updated: day 1 falls from 100 to 30, day 2 becomes 50, while an unrelated total 500 is unchanged.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "inferred-dimension-members",
+    "title": "Inferred dimension members",
+    "form": "stable-placeholder",
+    "caption": "Sale S880 references customer web/C418 before its descriptive data arrives. An inferred member reserves key 2041. Later detail completes the same row; the fact retains key 2041 and amount120.",
+    "family": "Time and history"
+  },
+  {
+    "id": "junk-dimensions",
+    "title": "Junk dimensions",
+    "form": "combination-lookup",
+    "caption": "Order Profile 41 means gift wrapped, standard service and web. Profile 42 means not wrapped, express and phone. Two order lines reuse profile 41.",
+    "family": "Modeling"
+  },
+  {
+    "id": "keep-previous-values-scd-type-3",
+    "title": "Keep previous values: SCD Type 3",
+    "form": "state-sequence",
+    "caption": "Each pair is current region / previous region on key 107. The October overwrite drops East; this is not an as-of history.",
+    "family": "Time and history"
+  },
+  {
+    "id": "keyset-pagination",
+    "title": "Keyset pagination",
+    "form": "ordered-boundary",
+    "caption": "Rows 101,102,103 share the same timestamp. The cursor includes timestamp and ID so row 103 is not skipped after page 1. The source still needs a defined consistency policy.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "leases-with-fencing-tokens",
+    "title": "Leases with fencing tokens",
+    "form": "monotone-authority",
+    "caption": "Worker A pauses with token 41. After lease expiry worker B acquires token 42 and writes. The durable resource records fence 42 and rejects a later write from A using token 41.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "location-aware-placement",
+    "title": "Location-aware placement",
+    "form": "allowed-location-map",
+    "caption": "Tenant T17 permits regions A and B. Its primary is in A and recovery copy in B; region C is excluded. Workers, logs, replicas, and supporting copies are part of the placement boundary. Allowed placement does not itself authorize access.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "log-based-change-data-capture",
+    "title": "Log-based change data capture",
+    "form": "ordered-change-log",
+    "caption": "Committed log positions L1, L2, and L3 record an insert, update, and delete of product P7. The consumer applies source ordering and persists a restart position.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "lookback-recalculation",
+    "title": "Lookback recalculation",
+    "form": "rolling-recompute-scope",
+    "caption": "The October 26 run recomputes days 23\u201325; the October 27 run recomputes 24\u201326. A late October 24 change revises EUR 100 to EUR 120, while October 10 requires a separate backfill.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "make-units-explicit",
+    "title": "Make units explicit before calculating",
+    "form": "value-mapping",
+    "caption": "Two request durations normalize to 250 and 500 milliseconds. Their mean is 375 milliseconds, with source units preserved.",
+    "family": "Modeling"
+  },
+  {
+    "id": "manifest-based-file-ingestion",
+    "title": "Manifest-based file ingestion",
+    "form": "manifest-membership",
+    "caption": "Manifest B42 lists three files with 400,350,250 rows. Their validated total is 1000. Unlisted backup files do not belong to this batch; the manifest is published after the referenced files are ready.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "materialized-paths",
+    "title": "Materialized paths",
+    "form": "path-labelled-tree",
+    "caption": "Workspace 1 carries /1/, Finance 2 /1/2/, Projects 3 /1/3/, Forecast 4 /1/2/4/, and Apollo 5 /1/3/5/. Moving Finance under Projects rewrites the Finance and Forecast prefixes while IDs remain stable.",
+    "family": "Modeling"
+  },
+  {
+    "id": "materialized-views",
+    "title": "Materialized views",
+    "form": "maintained-derived-state",
+    "caption": "Shop A has three sales totaling 100. A new sale of 10 makes the source total 110 across four rows, while the materialized result remains 100 until incremental or full maintenance completes.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "merge-and-upsert",
+    "title": "Merge and upsert",
+    "form": "versioned-merge",
+    "caption": "C17 updates from v4 North to v5 South. A stale v1 update cannot replace C18 v2 East. C19 v1 West is inserted. Merge requires explicit identity, ordering, and conflict rules.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "metadata-driven-pipelines",
+    "title": "Metadata-driven pipelines",
+    "form": "configuration-state-separation",
+    "caption": "Configuration v12 and template v4 declare extraction and publication separately. Countries use full snapshot / complete replacement; Events use cursor incremental / append with retry protection. Cursor 100 advances to 120 only after publication.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "microbatch-processing",
+    "title": "Microbatch processing",
+    "form": "bounded-offset-ranges",
+    "caption": "Offsets 100\u2013102,103\u2013105,106\u2013108 form batches 41,42,43. A failed or uncertain batch 42 is replayed with the same bounded input and an idempotent or coordinated publication protocol.",
+    "family": "Streaming"
+  },
+  {
+    "id": "mini-dimensions",
+    "title": "Mini-dimensions: reusable profiles, historical fact assignments",
+    "form": "profile-links",
+    "caption": "Customer 107 has profile 11 at a January sale and profile 13 at a March sale. Profile 12 can exist without any fact recording its use.",
+    "family": "Time and history"
+  },
+  {
+    "id": "model-around-business-processes",
+    "title": "Model around business processes",
+    "form": "process-grains",
+    "caption": "One order line for ten units becomes two shipment lines for four and six units and one invoice line for ten. Shared context connects the processes without equating their rows.",
+    "family": "Modeling"
+  },
+  {
+    "id": "model-lifecycle-states-explicitly",
+    "title": "Model lifecycle states explicitly",
+    "form": "state-machine",
+    "caption": "Draft moves to review, then approved and published. Requested changes or edits withdraw approval and return the item to draft.",
+    "family": "Modeling"
+  },
+  {
+    "id": "named-dataset-stewardship",
+    "title": "Named dataset stewardship",
+    "form": "accountability-route",
+    "caption": "The daily balance dataset names Priya as steward, Mateo as deputy, and a monitored team escalation route. Stewardship covers business meaning and quality coordination; engineering responsibilities are separately named.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "namespace-identifiers",
+    "title": "Namespaced Identifiers",
+    "form": "value-mapping",
+    "caption": "The CRM API and lake export both retain the qualified pair (crm-prod/customer, 17). Billing uses (billing-prod/customer, 17). The assigning namespace includes environment and entity scope; transport paths do not change it.",
+    "family": "Modeling"
+  },
+  {
+    "id": "natural-keys",
+    "title": "Natural keys need their scope",
+    "form": "value-mapping",
+    "caption": "Two issuers both issue invoice 0042. The issuer plus invoice number identifies one invoice; 0042 alone does not.",
+    "family": "Modeling"
+  },
+  {
+    "id": "normalized-relations",
+    "title": "Normalized relations separate dependent facts",
+    "form": "relation-decomposition",
+    "caption": "Employees E17 and E28 both reference department D4. The name Operations is maintained in Department rather than repeated in each employee row.",
+    "family": "Modeling"
+  },
+  {
+    "id": "operational-service-objectives",
+    "title": "Operational service objectives",
+    "form": "error-budget",
+    "caption": "The objective is 99.9% of eligible records available within 120 seconds over twenty-eight days. Of one million records,999250 arrive on time and 750 miss. Success is 99.925%; the 1000-record miss budget is 75% spent. Missing records count as misses.",
+    "family": "Data quality"
+  },
+  {
+    "id": "overlapping-extraction-windows",
+    "title": "Overlapping extraction windows",
+    "form": "overlapping-time-ranges",
+    "caption": "The first extraction covers 09:45\u201310:00. The next covers 09:50\u201310:05. Event E201 has timestamp 09:58 but appears at 10:02, so the overlap recovers it. Merging by event identity prevents duplicates.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "overwrite-attributes-scd-type-1",
+    "title": "Overwrite attributes: SCD Type 1",
+    "form": "state-sequence",
+    "caption": "Customer key 107 is unchanged. Overwriting East with West makes all historical facts report under West.",
+    "family": "Time and history"
+  },
+  {
+    "id": "parallel-run-comparison",
+    "title": "Parallel-run comparison",
+    "form": "keyed-difference",
+    "caption": "Two pipelines run on source S52. Old produces A10000, B6000; new produces A10100, B5900. Both total 16000, but per-key differences reveal plus 100 and minus 100.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "partition-by-access-pattern",
+    "title": "Partition by access pattern",
+    "form": "pruning-comparison",
+    "caption": "A query for October 25 can prune three of four daily partitions. Hash partitions contain dates from all days, requiring all four to be considered for the same date filter. The tradeoff depends on actual queries.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "partition-replacement",
+    "title": "Partition replacement",
+    "form": "bounded-replacement",
+    "caption": "Day 20 is replaced from two rows totaling 100 to three rows totaling 100. Days 19 and 21 stay unchanged. The candidate is complete for day 20 and becomes visible atomically.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "party-role-modeling",
+    "title": "Party-role modeling",
+    "form": "relationship-map",
+    "caption": "North Supplies is supplier and customer of Harbor and supplier to Atlas, with separate dated role assignments. Dates are omitted from this schematic; party identity stays shared.",
+    "family": "Modeling"
+  },
+  {
+    "id": "per-key-ordering",
+    "title": "Per-key ordering",
+    "form": "parallel-key-lanes",
+    "caption": "Interleaved input A1, B1, A2, B2, A3 is routed into ordered key lanes. A progresses created, paid, shipped; B progresses created, cancelled. Cross-key order is not defined.",
+    "family": "Streaming"
+  },
+  {
+    "id": "periodic-snapshots",
+    "title": "Periodic snapshots: sum locations at a common cutoff, choose balances across time",
+    "form": "snapshot-series",
+    "caption": "One item has six underlying observations: one per warehouse and closing day. Warehouses A and B are pivoted into columns here. Daily totals 20, 16, 25 cannot be added to obtain closing inventory; the latest total is25.",
+    "family": "Time and history"
+  },
+  {
+    "id": "policy-as-code",
+    "title": "Policy as code",
+    "form": "evidence-binding",
+    "caption": "Policy P12 evaluates candidate R108. Evidence from R107 is not evidence about R108, so the decision is HOLD. Current R107 remains public until a candidate has matching valid evidence.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "predicate-projection-pushdown",
+    "title": "Predicate and projection pushdown",
+    "form": "boundary-reduction",
+    "caption": "A query for tenant 7 needs only ID and amount. Source-side filtering selects E1 amount 20 and E3 amount 30; only these two projected records cross the execution boundary. Tenant is needed for filtering but need not be returned.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "preserve-raw-inputs",
+    "title": "Preserve raw inputs",
+    "form": "branching-derivation",
+    "caption": "Original event E17 contains amount_minor=1299 and currency=EUR. Parser v1 wrongly reads it as1299 EUR. Corrected parser v2 reads 12.99 EUR from the same retained evidence.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "progressive-refinement",
+    "title": "Progressive refinement",
+    "form": "record-refinement",
+    "caption": "Raw events E1=30, E2=70, a duplicate E2, and invalid E3 become two unique valid enriched events. Daily revenue is 100. Duplicate and quarantine routes remain visible.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "property-based-data-tests",
+    "title": "Property-based data tests",
+    "form": "invariant-under-transformation",
+    "caption": "An average should not change when input is repartitioned. Partition A contains 0,0 and B contains 6. Averaging partial means gives 3, but combining sum 6 and count 3 gives 2. Generated partitions expose this bug.",
+    "family": "Data quality"
+  },
+  {
+    "id": "publication-quality-gates",
+    "title": "Publication quality gates",
+    "form": "publication-barrier",
+    "caption": "R108 pins orders O91, refunds F33, customers C410, and policy 12. A refund-key failure keeps R107 current. Repair R109 must be checked before the conditional publication switch.",
+    "family": "Data quality"
+  },
+  {
+    "id": "publish-subscribe-distribution",
+    "title": "Publish-subscribe distribution",
+    "form": "fan-out",
+    "caption": "Event E901 fans out to fulfillment, analytics, and notifications. Two fulfillment workers share that subscription; they do not each create a separate copy of the business action.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "published-deprecation-windows",
+    "title": "Published deprecation windows",
+    "form": "migration-calendar",
+    "caption": "Notice is published January 12 with a usable replacement. A February 26 checkpoint and April 5 readiness check precede April 12,2027 at 00:00 UTC retirement. Historical decoding and retention have separate policies; announcing a date alone does not establish migration readiness.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "quality-gates",
+    "title": "Quality gates",
+    "form": "transition-decision",
+    "caption": "Orders B42 fails uniqueness, so dependent balance processing is held. Corrected B43 passes all required checks and may start processing. Model M9 fails a required segment check and is held from promotion. Permission applies only to the named candidate and transition.",
+    "family": "Data quality"
+  },
+  {
+    "id": "quarantine-invalid-records",
+    "title": "Quarantine invalid records",
+    "form": "split-and-repair",
+    "caption": "Valid E1 quantity 3 and E3 quantity 2 proceed. E2 text quantity 3 is quarantined with original bytes, source position, and failure reason. A corrected record is revalidated before re-entry.",
+    "family": "Data quality"
+  },
+  {
+    "id": "read-replicas",
+    "title": "Read replicas",
+    "form": "replica-progress",
+    "caption": "The primary has committed position 102 and status paid. Replica A has applied 102 and returns paid; B is at 101 and returns open. Read-your-writes requires waiting for the relevant commit and starting a fresh query snapshot.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "recorded-time-history",
+    "title": "Recorded-time history preserves what the warehouse had accepted",
+    "form": "knowledge-time-interval",
+    "caption": "East was known until July 5 at 09:00 UTC. West was recorded then, although its business effective date was July 1. Queries for knowledge on July 3 and July 6 return East and West respectively.",
+    "family": "Time and history"
+  },
+  {
+    "id": "reference-data-enrichment",
+    "title": "Reference-data enrichment",
+    "form": "value-mapping",
+    "caption": "Reference version 7 maps STD and EXP but not ZZ. Preserve all input rows and route or label unmatched codes; do not silently drop them.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "referential-integrity-checks",
+    "title": "Referential integrity checks",
+    "form": "scoped-reference-check",
+    "caption": "A/17 has a parent. A/29 does not, even though B/29 exists. The reference key includes its namespace. Null is permitted only where the relationship is explicitly optional and checks use an agreed source boundary.",
+    "family": "Data quality"
+  },
+  {
+    "id": "relationships-with-attributes",
+    "title": "Relationships with attributes",
+    "form": "edge-attributes",
+    "caption": "Maya P17 has assignment A302 to Harbor as Lead at 60 percent and A303 to Atlas as Reviewer at 20 percent. Both assignments have explicit validity dates.",
+    "family": "Modeling"
+  },
+  {
+    "id": "replayable-backfills",
+    "title": "Replayable backfills",
+    "form": "bounded-replay",
+    "caption": "A backfill covers [October 1, October 3), UTC: October 1 and 2, using source batches 438 and 91, logic v8, and reference v12. It replaces the bounded output after validation rather than appending another copy.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "representative-test-fixtures",
+    "title": "Representative Test Fixtures",
+    "form": "ordered-fixture-sequence",
+    "caption": "A deliberately ordered fixture tests a latest-version-per-event contract within one source and a retained state horizon. E1 v1 amount40 is accepted; its retry leaves total40. E2 v1 amount40 is a distinct event, bringing total80. E1 v2 amount35 replaces its earlier value, bringing total75. A stale E1 v1 is ignored, leaving75. The expected sequence is40,40,80,75,75. Representative fixtures preserve consequential relationships, boundaries, prior state, and arrival order; they are not statistically representative samples.",
+    "family": "Data quality",
+    "sources": [
+      {
+        "title": "dbt: Unit test data formats",
+        "url": "https://docs.getdbt.com/reference/resource-properties/data-formats"
+      },
+      {
+        "title": "Apache Beam: Testing unbounded pipelines",
+        "url": "https://beam.apache.org/blog/test-stream/"
+      }
+    ]
+  },
+  {
+    "id": "representative-text-fixtures",
+    "title": "Representative text fixtures",
+    "form": "syntax-fixtures",
+    "caption": "A CSV field contains a comma or newline inside quotes; Unicode strings can look equal while having distinct original code points; a Markdown heading marker within a fenced block is code. Fixtures preserve both source bytes and expected interpretation.",
+    "family": "Data quality"
+  },
+  {
+    "id": "reshape-at-boundaries",
+    "title": "Reshape at boundaries",
+    "form": "grain-preserving-reshape",
+    "caption": "Order O42 contains two lines, 30 and 70, plus one order shipping fee of 5. Relational staging separates the header and lines. A nested API or flat report must preserve the fee grain.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "result-caching",
+    "title": "Result caching",
+    "form": "versioned-cache-key",
+    "caption": "The cache key includes tenant 7, date October 25, metric logic m2, access scope p3, and snapshot v42. Snapshot v43 uses a new key for result 110, so an old v42 fill of 100 cannot replace it.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "retain-original-values-scd-type-0",
+    "title": "Retain original values: SCD Type 0",
+    "form": "fixed-vs-changing-attribute",
+    "caption": "The original plan remains Basic while the current plan becomes Pro in March and Enterprise in June. All revenue is grouped by original plan Basic.",
+    "family": "Time and history"
+  },
+  {
+    "id": "reusable-intermediate-models",
+    "title": "Reusable intermediate models",
+    "form": "grain-safe-composition",
+    "caption": "Order O42 has payments 60+40 and shipment costs EUR 5+7+8. Each is summarized independently before a one-order intermediate is reused. Joining raw child rows would multiply both totals.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "role-playing-dimensions",
+    "title": "Role-playing dimensions",
+    "form": "dimension-roles",
+    "caption": "Order line L1 references the shared date dimension as Order Oct30, Due Nov2 and Ship Nov3. Each role can be filtered independently.",
+    "family": "Modeling"
+  },
+  {
+    "id": "row-and-column-level-access",
+    "title": "Row- and column-level access",
+    "form": "authorized-slice",
+    "caption": "The underlying orders include A/O1/1000, A/O2/500, and B/O3/900. The tenant-A analyst query returns only O1/1000 and O2/500; B\u2019s row is excluded. Email is not selectable under this policy. Source context and permitted result are separate.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "run-ledgers",
+    "title": "Run ledgers",
+    "form": "attempt-and-commit-evidence",
+    "caption": "Run R42 attempt A1 fails. A2 publishes release 119 but loses its acknowledgement. The ledger records an uncertain outcome until the durable commit receipt confirms release 119, avoiding a duplicate publication.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "schema-registries",
+    "title": "Schema registries",
+    "form": "writer-schema-resolution",
+    "caption": "Retained Avro records written with schema ID 41 are decoded using that writer schema. Reader schema ID 58 adds a nullable coupon with default null. Resolving old writer data against the reader supplies the default; changing the registry does not rewrite the old bytes.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "schema-validation-boundaries",
+    "title": "Schema validation at boundaries",
+    "form": "contract-check",
+    "caption": "Schema requires an integer quantity and an explicit unit. E1 quantity 3 EA passes; E2 string 3 and E3 missing unit fail. Structural validation does not prove the business quantity is correct.",
+    "family": "Data quality"
+  },
+  {
+    "id": "secondary-access-paths",
+    "title": "Secondary access paths for live data",
+    "form": "index-recheck",
+    "caption": "A native index reflects O72 open v5. An asynchronous projection still says O71 open v18 although the source is shipped v19. Rechecking can remove stale positives but cannot recover matches missing from the projection.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "segmented-quality-checks",
+    "title": "Segmented quality checks reveal a hidden source failure",
+    "form": "segment-masking",
+    "caption": "One million orders have 2990 missing values, yielding 99.701% completeness and passing a 99.5% threshold. Web is 99.9% complete, while a 10000-order partner segment is only 80% complete.",
+    "family": "Data quality"
+  },
+  {
+    "id": "self-service-data-discovery",
+    "title": "Self-Service Data Discovery",
+    "form": "dataset-fit-comparison",
+    "caption": "A consumer asks for net collections by day. Catalog results distinguish Orders at order-line grain with booked amounts, Payment events at event grain requiring aggregation, and Net collections at day-by-merchant-by-currency grain with settled captures minus refunds. The last is the candidate suited to this illustrative question. Its entry identifies Payments as the owner and reports daily data through October 27. Discoverable metadata helps evaluate fit and find an access route; it does not itself grant permission to read the data.",
+    "family": "Contracts and governance",
+    "sources": [
+      {
+        "title": "DataHub: Search",
+        "url": "https://docs.datahub.com/docs/how/search"
+      },
+      {
+        "title": "Data.gov: User Guide",
+        "url": "https://data.gov/user-guide/"
+      }
+    ]
+  },
+  {
+    "id": "sensitive-data-segregation",
+    "title": "Sensitive-data segregation",
+    "form": "access-boundary",
+    "caption": "Contact data is stored in a restricted area while analytics uses a limited reference. An authorized notification workflow crosses the boundary for its defined purpose. General analytics readers do not get contact access.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "separate-backfill-from-live-processing",
+    "title": "Separate backfill from live processing",
+    "form": "isolated-work-lanes",
+    "caption": "Live and backfill executions have independent checkpoints and budgets. Backfill builds a private candidate and validates it. A version-aware overlap policy and atomic publication prevent older recovery work from overwriting newer live results.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "separate-cleaning-business-logic",
+    "title": "Separate cleaning from business logic",
+    "form": "branching-derivation",
+    "caption": "Cleaning preserves both a 100 purchase and a minus 20 refund. Distinct business rules then compute purchases or net activity.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "separate-definitions-from-instances",
+    "title": "Separate definitions from instances",
+    "form": "relationship-map",
+    "caption": "Three individually identified drill units reference specification D18 version 1 while keeping separate lifecycle states.",
+    "family": "Modeling"
+  },
+  {
+    "id": "separate-entities-from-events",
+    "title": "Separate entities from events",
+    "form": "entity-and-event-track",
+    "caption": "Ticket T902 has one continuing identity and four events: opened, resolved, reopened, resolved again. Two resolution events do not imply two tickets.",
+    "family": "Modeling"
+  },
+  {
+    "id": "separate-source-facts-from-derived-interpretations",
+    "title": "Separate source facts from derived interpretations",
+    "form": "branching-derivation",
+    "caption": "The same shipment scan at 12:08 and promise at 12:00 produce different interpretations under two versioned rules.",
+    "family": "Modeling"
+  },
+  {
+    "id": "session-windows",
+    "title": "Session windows",
+    "form": "gap-bridging",
+    "caption": "With a 30-minute inactivity gap, 09:00 and 09:10 form one session while 09:50 starts another. A late 09:30 event bridges both gaps if the state and lateness policy still allow merging.",
+    "family": "Streaming"
+  },
+  {
+    "id": "shadow-pipelines",
+    "title": "Shadow pipelines",
+    "form": "private-parallel-route",
+    "caption": "Production and candidate both use source S52. Only production publishes. The candidate writes privately and compares matched outputs; equal totals do not justify exposing the candidate without deeper checks.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "shared-business-vocabulary",
+    "title": "Shared business vocabulary connects meaning to implementation",
+    "form": "semantic-thread",
+    "caption": "Monthly purchasing accounts means distinct non-test accounts with a positive capture during a UTC calendar month. The same meaning guides implementation, reports and tests.",
+    "family": "Modeling"
+  },
+  {
+    "id": "shared-metric-definitions",
+    "title": "Shared metric definitions",
+    "form": "shared-calculation",
+    "caption": "Net captures v1 selects posted, non-test events and adds USD 100 captures to signed refunds of minus USD 20. The same definition, period, scope and cutoff produce USD 80 in the dashboard, notebook and report.",
+    "family": "Modeling"
+  },
+  {
+    "id": "skew-splitting",
+    "title": "Skew splitting",
+    "form": "partial-aggregation",
+    "caption": "Six hot-merchant records with amounts 10, 20, 30, 40, 50, 60 are spread over three processing lanes. Partial sum/count pairs 50/2, 70/2, 90/2 merge to 210/6. The final stage must remove the temporary split key.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "sliding-windows",
+    "title": "Sliding windows",
+    "form": "window-membership",
+    "caption": "Ten-minute windows start every five minutes. Events 30 at 03,70 at 07, and 20 at 12 produce window sums 100,90,20. Their sum 210 is not the distinct-event total 120.",
+    "family": "Streaming"
+  },
+  {
+    "id": "small-file-compaction",
+    "title": "Small-file compaction",
+    "form": "file-set-replacement",
+    "caption": "Snapshot v41 has f1\u2013f4. Compaction writes g1 containing the same E1\u2013E4. Concurrent ingestion adds f5 with E5 in v42. Validated v43 references g1 plus f5; the append must not be lost and old readers retain old files.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "snapshot-then-stream",
+    "title": "Snapshot then stream",
+    "form": "snapshot-log-handoff",
+    "caption": "A consistent baseline at C100 contains P7=10. Changes captured during copying are applied after the baseline: C101 sets P7=7, C102 creates Q2=4, and C103 deletes P7. Final state has only Q2=4.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "snowflake-schema",
+    "title": "Snowflake schema",
+    "form": "normalized-dimension-chain",
+    "caption": "Sale lines reference Products, which reference Subcategories, which reference Category. Adapter and Case roll up to Accessories without multiplying sale rows.",
+    "family": "Modeling"
+  },
+  {
+    "id": "source-to-target-reconciliation",
+    "title": "Source-to-target reconciliation",
+    "form": "identity-reconciliation",
+    "caption": "Source has P1=100, P2=50, P3=50. Target has P1=100, P2=50, P2=50. Both count three rows and total 200, but P3 is missing and P2 is duplicated.",
+    "family": "Data quality"
+  },
+  {
+    "id": "stable-logical-interfaces",
+    "title": "Stable logical interfaces",
+    "form": "logical-physical-separation",
+    "caption": "analytics.orders continues to expose one order per row and amount in cents. Backend build42 can change from a stored header to a header-line aggregation only if the same observable meaning and constraints are preserved.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "standardize-at-staging",
+    "title": "Standardize at staging",
+    "form": "value-mapping",
+    "caption": "Source-specific staging preserves the string identifier and translates documented source units and status codes. It does not apply cross-domain business policy.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "star-schema",
+    "title": "Star schema",
+    "form": "relationship-map",
+    "caption": "One posted sale-line fact carries quantity and net sales, and references unique Date, Product, Store and Customer dimension keys. Each dimension is lookup context; joins preserve the fact rows.",
+    "family": "Modeling"
+  },
+  {
+    "id": "state-expiration",
+    "title": "State expiration",
+    "form": "state-retention-boundary",
+    "caption": "For window [10:00,10:05) with ten minutes of allowed lateness, state exists at watermark 10:12 and is expired after the cleanup boundary at watermark 10:16. Physical reclamation and result retention are separate concerns.",
+    "family": "Streaming"
+  },
+  {
+    "id": "stateful-stream-deduplication",
+    "title": "Stateful stream deduplication",
+    "form": "identity-state",
+    "caption": "A/E901 appears twice, but A/E902 and B/E901 are distinct events despite equal amounts. Deduplication on source plus event ID yields three accepted events totaling 120 while state is retained.",
+    "family": "Streaming"
+  },
+  {
+    "id": "store-additive-components",
+    "title": "Store additive components",
+    "form": "weighted-components",
+    "caption": "Shard A has one failure in100 requests; B has five in10. Combined rate is6/110=5.45%, while averaging the two percentages gives 25.5%.",
+    "family": "Modeling"
+  },
+  {
+    "id": "stream-table-enrichment",
+    "title": "Stream-table enrichment",
+    "form": "branching-derivation",
+    "caption": "Customer C17 changes North to South at 10:00. Event E901 happened at 09:58 and is processed at 10:03. Current-table enrichment returns South; historical event-time enrichment returns North.",
+    "family": "Streaming"
+  },
+  {
+    "id": "supertype-subtype-modeling",
+    "title": "Supertype-subtype modeling",
+    "form": "relationship-map",
+    "caption": "Person and Organization subtype rows reuse their parent Party identity. The illustrative domain requires exactly one subtype for each party.",
+    "family": "Modeling"
+  },
+  {
+    "id": "surrogate-keys",
+    "title": "Surrogate keys distinguish entity and version",
+    "form": "version-reference",
+    "caption": "Customer identity 731 has Bronze version 8101 before June and Gold version 8102 from June. April and August sales reference the appropriate versions.",
+    "family": "Modeling"
+  },
+  {
+    "id": "tokenization",
+    "title": "Tokenization",
+    "form": "value-mapping",
+    "caption": "A vault-based tokenization service replaces a customer identifier with a stable token for analytics. The protected vault stores the mapping. Only a separately authorized workflow can recover the original. Different token scopes can prevent direct token-based joins across studies.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "tolerant-readers",
+    "title": "Tolerant readers",
+    "form": "known-field-validation",
+    "caption": "A reader requires an integer quantity and unit EA. An added zone A3 is harmless. Missing unit or quantity as text fails its contract. A relay may need to preserve fields that it does not interpret.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "transaction-fact-tables",
+    "title": "Transaction fact tables",
+    "form": "event-grain-table",
+    "caption": "Order O17 line 1 ships in S41 line 1 for four units and S42 line 1 for six units. The shipment identity, not the order line, defines the fact grain.",
+    "family": "Modeling",
+    "sources": [
+      {
+        "title": "Kimball Group: Transaction Fact Tables",
+        "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/transaction-fact-table/"
+      },
+      {
+        "title": "Microsoft: AdventureWorks data warehouse schema",
+        "url": "https://github.com/microsoft/sql-server-samples/blob/master/samples/databases/adventure-works/data-warehouse-install-script/instawdbdw.sql"
+      }
+    ]
+  },
+  {
+    "id": "transactional-consume-process-publish",
+    "title": "Transactional consume-process-publish",
+    "form": "transaction-boundary",
+    "caption": "Processing input offset 104 adds 20 to state 100. One supported transaction commits the output, state or changelog 120, and next offset 105, or aborts all. External effects outside the transaction are excluded.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "transactional-inbox",
+    "title": "Transactional inbox",
+    "form": "transaction-boundary",
+    "caption": "A destination transaction records M701 as handled and changes available stock from 10 to 7. Only after commit is the incoming message acknowledged.",
+    "family": "Reliable execution"
+  },
+  {
+    "id": "transactional-outbox",
+    "title": "Transactional outbox",
+    "form": "transaction-boundary",
+    "caption": "Order O42 and outgoing event E901 commit atomically in one source transaction. After commit a relay sends E901 to the broker. If the relay crashes after acceptance but before recording dispatch, it can send E901 again; the order transaction is not repeated. Consumers must handle duplicates.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "transformation-unit-tests",
+    "title": "Transformation Unit Tests",
+    "form": "fixture-actual-comparison",
+    "caption": "Small static fixtures give order O42 two payments of 60 and 40 and two shipments of 4 and 6 units. The independently specified expectation is one row with paid 100 and shipped units 10. An unfixed transformation joins both detail relations before aggregation, creating four pairs and returning paid 200 and units 20. Comparing the actual row with the expected row exposes the multiplication. The test executes the production transformation, not a separately reimplemented copy.",
+    "family": "Data quality",
+    "sources": [
+      {
+        "title": "dbt: Unit tests",
+        "url": "https://docs.getdbt.com/docs/build/unit-tests"
+      },
+      {
+        "title": "Apache Beam: Test Your Pipeline",
+        "url": "https://beam.apache.org/documentation/pipelines/test-your-pipeline/"
+      }
+    ]
+  },
+  {
+    "id": "trigger-based-change-capture",
+    "title": "Trigger-based change capture",
+    "form": "transaction-boundary",
+    "caption": "Updating customer C418 from North to South also inserts change E901 through a database trigger. Commit makes both durable; rollback makes neither visible. A worker delivers asynchronously.",
+    "family": "Extraction and transformation"
+  },
+  {
+    "id": "tumbling-windows",
+    "title": "Tumbling windows",
+    "form": "window-membership",
+    "caption": "Five-minute UTC windows assign events at 10:01 and 10:04:59 to [10:00, 10:05), events at 10:05 and 10:08 to [10:05, 10:10), and an event at 10:12 to [10:10, 10:15). Processing delay does not move membership.",
+    "family": "Streaming"
+  },
+  {
+    "id": "version-dimension-rows-scd-type-2",
+    "title": "Version dimension rows: SCD Type 2",
+    "form": "time-intervals",
+    "caption": "Two surrogate rows preserve the region history. A late-arriving June event still joins to key 107.",
+    "family": "Time and history"
+  },
+  {
+    "id": "version-transformation-logic",
+    "title": "Version transformation logic",
+    "form": "controlled-logic-comparison",
+    "caption": "On source S52, logic L17 produces 1000 and L18 produces 800. On source S53, L18 produces 750. Reference R8 and environment E4 are pinned. Holding inputs fixed separates logic change from source change.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "versioned-dataset-interface",
+    "title": "Versioned Dataset Interfaces",
+    "form": "contract-vs-release",
+    "caption": "Interface v1 exposes one order per row in releases R501 and R502 with ten and eleven rows. Interface v2 exposes order lines with twenty-four and twenty-seven rows. Releases change data; interface versions declare the grain change.",
+    "family": "Contracts and governance"
+  },
+  {
+    "id": "vertical-partitioning",
+    "title": "Vertical partitioning for live processing",
+    "form": "column-separation",
+    "caption": "Event E901 version 12 has a narrow control record and a separate large payload. The control record references the exact payload version; readers requiring the body fetch it explicitly.",
+    "family": "Storage and access"
+  },
+  {
+    "id": "volume-monitoring",
+    "title": "Volume monitoring",
+    "form": "component-volume",
+    "caption": "Expected volume is 1000 from A600, B300, C100. Actual remains 1000 because A600, B0, C400 offset one another. Component checks expose the missing B feed and unexpected C increase.",
+    "family": "Data quality"
+  },
+  {
+    "id": "watermarks",
+    "title": "Watermarks",
+    "form": "event-time-frontier",
+    "caption": "Two active inputs supply event-time watermarks. West reports 10:12 and East reports 10:06. A downstream operator taking their minimum uses 10:06, so a window from 10:05 to 10:10 is still waiting for event-time progress past its end. When East advances to 10:11 while West remains at 10:12, the combined watermark advances to 10:11 and an end-of-window trigger can fire. Watermark progress does not prove that no late event can arrive.",
+    "family": "Streaming"
+  },
+  {
+    "id": "workload-isolation",
+    "title": "Workload isolation",
+    "form": "resource-lanes",
+    "caption": "Live processing has twelve permits, backfill four, and exploration four. Each has an independent queue and enforced admission. Shared downstream database limits still require coordination.",
+    "family": "Reliable execution"
+  }
+]

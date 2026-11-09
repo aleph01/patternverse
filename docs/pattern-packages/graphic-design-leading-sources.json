@@ -1,0 +1,83 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "The existing renamed Source Sans 3 Regular instance is reused unchanged with source and OFL notice retained. The same static font, optical design and weight400 are used in both variants.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Adjust Line Spacing",
+  "date": "2026-10-28",
+  "mode": "Previously generated photographic sources and paper presentation reused unchanged; precise typography authored separately with fixed line breaks. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-leading-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-leading-layouts.json",
+    "sha256": "a3eceeaf0f1ddcf1adf9995b1e1d8afffde51cc8f05be66c05bd64141c0f3112",
+    "method": "Exact-font whole-word wrapping computed once and preserved in both variants. Only the declared baseline interval and consequent tspan y coordinates vary; first baseline fixed."
+  },
+  "comparisonPolicy": "Only the declared baseline interval and consequent line positions vary. Journal size22/leading23\u219233, six lines; care size22/leading48\u219233, four lines; poster title size52/leading91\u219258, two lines. First baseline, left anchor, every word/line break, font/size/weight, image bytes/crops, unrelated typography, paper and lighting remain fixed. Block heights necessarily change.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "leading-journal",
+        "changedPixels": 27774,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "leading-care-card",
+        "changedPixels": 16129,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "leading-workshop-poster",
+        "changedPixels": 9546,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared line-spacing intervention regions differ."
+  },
+  "limitations": "Static English-language illustrations; no reader study, measured performance improvement, physical print proof, implemented responsive behavior or full accessibility evaluation. Other purposes or individual reader preferences may favor the before settings."
+}

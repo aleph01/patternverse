@@ -10,17 +10,17 @@
     It does not mean the prediction is true or that any lasting change has occurred.
 }
 
-!refine[rounds=3, renewable] prediction = initial_prediction {
+prediction = !refine[rounds=3, renewable] initial_prediction {
     :as current
 
-    !ask evidence_or_qualification {
+    evidence_or_qualification = !ask {
         What real experience challenges this expectation, or what makes that
         experience feel like it does not count?
 
         > {{current}}
     }
 
-    !agent revised {
+    revised = !agent {
         :returns text
 
         Return a concise, tentative wording of the prediction under examination.

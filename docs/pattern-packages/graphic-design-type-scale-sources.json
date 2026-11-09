@@ -1,0 +1,103 @@
+{
+  "pattern": "Establish a Type Scale",
+  "date": "2026-10-27",
+  "mode": "Reused existing generated photo and presentation sources; composed one fixed embedded font separately with size-only changes. No new image generation or new font preparation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-type-scale-examples.mjs",
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "The existing renamed Source Sans 3 Regular illustration instance is reused unchanged with original source and OFL notice retained. Optical sizing is disabled and the exact same static font file and weight400 are used throughout.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "roleScales": {
+    "units": "artwork layout units, not physical points or recommended CSS sizes",
+    "print": {
+      "title": 40,
+      "section": 28,
+      "body": 22,
+      "meta": 20
+    },
+    "phone": {
+      "title": 36,
+      "section": 24,
+      "body": 22,
+      "meta": 20
+    }
+  },
+  "comparisonPolicy": "Programme: eleven size values change to consolidate eight distinct values into four roles. Review: title31 to40 and section headings30/29 to28; body22/meta20 untouched. Phone: title52 to36 and section30 to24, with body22/meta20 untouched. No variable other than declared font-size attributes changes inside the artifacts. Copy, fixed line breaks, fonts, optical cut, requested weights, anchors, baselines, alignment, colors, photo bytes/crops, paper/device and lighting are identical.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "type-scale-repeated-roles",
+        "changedPixels": 18565,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "type-scale-distinct-levels",
+        "changedPixels": 7817,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "type-scale-phone-roles",
+        "changedPixels": 6542,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared type-scale intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "All six saved desktop/stacked PNGs visually inspected. The one embedded font loads and full-size SVG img rendering equals inline rendering byte for byte. Browser pixel checks find no changes outside declared text regions. Copy fits the paper/phone surfaces and narrow views have no horizontal overflow. Exact DOM checks allow only declared font-size attributes and preserve copy, anchors, baselines, line breaks, weights, font/optical design, all image bytes/crops and non-text geometry. Semantic checks validate role sizes, eight-to-four consolidation, the shared print scale and unchanged phone body/metadata. Article-renderer markup is checked separately."
+  },
+  "limitations": "No audience study, numerical performance benefit, physical proof, implemented responsive booking behavior, complete accessibility evaluation or production-route result. Frozen anchors isolate size selection and do not demonstrate reflow or content moving upward. Original examples may be appropriate for equal-status panels or promotional use. Ratios and chosen values are editorial choices, not a universally optimal scale."
+}

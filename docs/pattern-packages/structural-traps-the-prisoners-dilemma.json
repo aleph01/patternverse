@@ -1,0 +1,112 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — The Prisoner's Dilemma",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "the-prisoners-dilemma",
+      "title": "The Prisoner's Dilemma",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; cooperation, incentives, and commitment",
+      "article": "content/concepts/the-prisoners-dilemma.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia of Philosophy, Prisoner’s Dilemma, substantive revision 2025",
+          "url": "https://plato.stanford.edu/entries/prisoner-dilemma/",
+          "supports": "Historical Flood/Dresher attribution and Tucker’s prisoner story; strict symmetric payoff ordering; dominance, equilibrium, and contrast with assurance games.",
+          "boundary": "Specialist reference read directly. No claim that Tucker was the first person to print the exact title, which this revision qualifies. The article now leads with the classic stylized suspect story and distinguishes it from actual legal procedure. It provides no legal advice."
+        },
+        {
+          "title": "Merrill M. Flood (1952), Some Experimental Games",
+          "url": "https://www.rand.org/pubs/research_memoranda/RM789-1.html",
+          "supports": "Original RAND report catalogue verifies authorship, date, report number, and subject of early experimental games.",
+          "boundary": "Catalogue text read; scanned PDF opened but not text-extractable. Historical interpretation is attributed to the separately read Stanford reference, not to unread detailed passages or claimed reproduction of the experiments."
+        },
+        {
+          "title": "Ben Polak, Open Yale Courses ECON 159, Lecture 21: Repeated Games",
+          "url": "https://oyc.yale.edu/economics/econ-159/lecture-21",
+          "supports": "Original instructor transcript on finite-horizon backward induction, strategies contingent on observed histories, grim trigger, and indefinite continuation.",
+          "boundary": "The suspect story and the separate workshop application have explicitly stipulated qualitative preferences; neither is a measured outcome. The lecture’s classroom demonstrations are not treated as controlled evidence or a universal recommendation for permanent punishment."
+        },
+        {
+          "title": "Pedro Dal Bó and Guillaume R. Fréchette (2011), The Evolution of Cooperation in Infinitely Repeated Games: Experimental Evidence",
+          "url": "https://gfrechette.com/print/Dal_Bo_2011a.pdf",
+          "doi": "10.1257/aer.101.1.411",
+          "supports": "Final published author-hosted paper read: introduction, experimental design, theoretical conditions, and results. Anonymous computer-mediated games with random continuation; cooperation can remain low even when equilibrium-supported.",
+          "boundary": "Controlled monetary laboratory setting with undergraduates; no effect size is transferred to either teaching scenario, and no universal cooperation probability is asserted. The earlier 2009 conference draft was located but the article cites the final 2011 text."
+        }
+      ],
+      "related_patterns": [
+        "cold-starts-and-critical-mass",
+        "make-trade-offs-explicit",
+        "the-public-goods-dilemma"
+      ],
+      "status": "published",
+      "short_description": "Recognize when each participant has an individual incentive to defect despite mutual gains from cooperation, and distinguish repeated-game strategies from interventions that change the incentives.",
+      "use_when": [
+        "Why does the individually attractive action defeat mutual benefit?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "An enforceable consequence or future interaction would change the game; a promise alone does not.",
+        "The original one-shot rankings stay decisive. No practical intervention in an actual investigation is prescribed."
+      ],
+      "example_structure": {
+        "scenario": "Stylized suspects choose silence or implication without observing the other choice. Complete information, one decision, no enforcement or future consequences. For both, implication strictly dominates; mutual silence preferred to mutual implication. No sentencing numbers or description of actual legal procedure. Separate workshop redesign explicitly changes incentives.",
+        "changed_relationship": "An enforceable consequence or future interaction would change the game; a promise alone does not.",
+        "residual_constraints": "The original one-shot rankings stay decisive. No practical intervention in an actual investigation is prescribed.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/prisoners-dilemma-cleanup.svg",
+          "content/assets/structural-traps/prisoners-dilemma-cleanup-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1048,
+            "textBlocks": 19
+          },
+          "phone": {
+            "width": 360,
+            "height": 1341,
+            "textBlocks": 16
+          }
+        },
+        "question": "Why does the individually attractive action defeat mutual benefit?",
+        "alternative_text": "Hypothetical qualitative illustration. Noor and Leo each choose silence or implication without seeing the other’s choice. Each prefers implicating against silence and against implication. Both implicating is the double-outlined equilibrium although both prefer mutual silence. No sentence lengths are invented. Change: An enforceable consequence or future interaction would change the game; a promise alone does not. Limitation: The original one-shot rankings stay decisive. No practical intervention in an actual investigation is prescribed.",
+        "caption": "Hypothetical illustration. Compare one suspect’s alternatives while holding the other’s action fixed. Mutual implication is stable under the stipulated rankings; mutual silence is better for both but unstable. This stylized story is not legal procedure. Cooperation requires a changed assumption.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Noor and Leo each choose silence or implication without seeing the other’s choice. Each prefers implicating against silence and against implication. Both implicating is the double-outlined equilibrium although both prefer mutual silence. No sentence lengths are invented. Change: An enforceable consequence or future interaction would change the game; a promise alone does not. Limitation: The original one-shot rankings stay decisive. No practical intervention in an actual investigation is prescribed.",
+          "relationship_key": "Cells compare simultaneous alternatives, not a sequence. Double outline marks Nash equilibrium. “Best” and “worst” refer only to the stated personal rankings.",
+          "changed_relationship": "An enforceable consequence or future interaction would change the game; a promise alone does not.",
+          "residual_constraints": "The original one-shot rankings stay decisive. No practical intervention in an actual investigation is prescribed.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Stylized suspects choose silence or implication without observing the other choice. Complete information, one decision, no enforcement or future consequences. For both, implication strictly dominates; mutual silence preferred to mutual implication. No sentencing numbers or description of actual legal procedure. Separate workshop redesign explicitly changes incentives.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Fourteen articles, twenty-eight editable SVGs, fourteen current research notes, and necessary asset dimensions updated.",
+        "visual": "All fourteen live articles checked in the browser at 1440px desktop and 390px phone viewports (28 layouts), with loaded expected sources and no page overflow. All twenty-eight SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (56 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "data-materialized-views",
+  "title": "Materialized View",
+  "aliases": ["Materialized Views"],
+  "primary_collection": "software-performance-scalability",
+  "primary_collection_title": "Performance and Scalability",
+  "body_word_count": 1460,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Ten primary documentation references: Microsoft defines the broad architectural projection; PostgreSQL documents persisted query results and non-incremental concurrent refresh requirements; ClickHouse documents inserted-block/partial-state/right-side-join behavior and full-refresh replacement; BigQuery documents query rewriting, combining stored/new data, eligibility/fallback and staleness; SQLite documents connection isolation, serialized writers and trigger abort; Python sqlite3 documents explicit transactions, rollback and separate connection cleanup. Materialized View is the established singular title, former Materialized Views an alias. Architectural maintenance is distinguished from native database objects, ordinary views, query-result caching and CQRS. Existing useful sales100->110, correction/deletion, grain/currency, additive state, backfill, lag/completeness and three-engine contexts are retained. The runnable application-maintained SQLite example is not claimed to implement native PostgreSQL/ClickHouse/BigQuery behavior.",
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "initial (1, 3, 10000)",
+        "stale (1, 3, 10000)",
+        "refreshed (2, 4, 11000)",
+        "failed (2, 4, 11000)",
+        "recovered (3, 3, 7000)"
+      ],
+      "initial": [1, 3, 10000],
+      "stale": [1, 3, 10000],
+      "refreshed": [2, 4, 11000],
+      "failed": [2, 4, 11000],
+      "recovered": [3, 3, 7000],
+      "checks": [
+        "uninitialized and failed first publication",
+        "report never reads source",
+        "source-read failure rollback",
+        "full refresh retry is non-additive",
+        "correction and deletion",
+        "atomic summary and generation rollback",
+        "shop/currency grouping",
+        "zero versus absent group",
+        "invalid cents and duplicate identity",
+        "caller transaction ownership",
+        "empty refresh removes old groups",
+        "independent WAL reader sees old result during refresh",
+        "existing read snapshot versus fresh statement",
+        "competing writer exclusion",
+        "read-only consumer and owned connection/file cleanup"
+      ]
+    },
+    "content": "1301 entities validate including drafts; published-only compilation has 1154 entities without diagnostics. Existing canonical article revised in place; no entity count increase. Exactly eight required H2s, one complete Python program, ten recommendation queries and no practice/worksheet.",
+    "integration_tests": "Four focused article suites pass: Materialized View (3), Memoization (3), Cache-Aside (3) and GoF (24). Four global graphic checks pass; the pre-existing authored-coverage check still fails for missing access-over-ownership. Five-file run: 37 passing tests and one unrelated failure. Earlier tests/timeout settings unchanged. New checks verify canonical ID, singular title/plural alias/search, both verses, one primary home, former collection cross-link/fifteen members, no duplicate singular-ID article, exact selectable highlighted code, two responsive figures/four dimensions/alts/captions, four related links, metadata hash and ten queries.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-code validator, new integration test, authoring metadata/documentation, registry, manifest and review record.",
+    "collection": "Existing data-materialized-views moves from Storage & access to Performance and Scalability as its third completed member. Exact summary, old Data Engineering tags/verse, canonical ID/route, attribution and primary figure path remain. Software Engineering membership added. Former collection retains a cross-link and fifteen other members. Previous primary members, other articles/collections/verses, prior authoring records, GoF content and historical import remain unchanged. Original article/figure archived locally; one old asset dimension updated and three dimensions added.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/patterns/data-materialized-views.md",
+        "content/collections/software-performance-scalability.md",
+        "content/collections/data-engineering-storage-access.md"
+      ],
+      "other_existing_content_unchanged": 1298,
+      "new_content": [],
+      "canonical_article_revised_without_duplicate": true,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_other_articles_and_collections_and_verses_unchanged": true,
+      "existing_id_route_summary_data_tags_and_verse_preserved": true,
+      "prior_two_performance_collection_members_preserved": true,
+      "former_collection_retains_crosslink_and_fifteen_other_members": true,
+      "historical_data_engineering_import_unchanged": true,
+      "previous_integration_tests_dependencies_and_materialized_paths_asset_unchanged": true,
+      "original_article_and_primary_figure_archived_locally": true,
+      "prior_software_authoring_unchanged": 70,
+      "prior_graphics_unchanged": 482,
+      "prior_dimensions_unchanged": 1713,
+      "updated_primary_dimension": {
+        "data-engineering/materialized-views.svg": {
+          "width": 720,
+          "height": 880
+        }
+      },
+      "new_dimensions": {
+        "data-engineering/materialized-views-mobile.svg": {
+          "width": 360,
+          "height": 1056
+        },
+        "data-engineering/materialized-view-refresh.svg": {
+          "width": 720,
+          "height": 1000
+        },
+        "data-engineering/materialized-view-refresh-mobile.svg": {
+          "width": 360,
+          "height": 1264
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The repository standard public build command exits zero and Public web build checks passed in an isolated source snapshot. Local disk exhaustion required a temporary NODE_OPTIONS helper for output copying: prerendered export trees are copied using macOS native copy-on-write clones with SHA-256 equality verified for every file; ordinary copy calls outside that mapping are unchanged. This runtime copy helper does not edit repository build scripts, dependencies, renderer or source. Generated-asset clones also use hash checks and tracked inode signatures. Five unsuccessful disk/recovery/runtime-copy attempts and the final success are recorded in local evidence. Only task-owned failed output and one stale task route staging directory were removed during recovery. After browser success only this task redundant compiler output is removed; finished preview retained. Source/shared output/earlier previews remain untouched. Article, changed collections, authoring/docs, generator/validator/test, registry, manifest and four assets match staged inputs. Private environment excluded and PUBLIC_DROPBOX_APP_KEY empty.",
+    "illustrations": "Two editable native figures, each with a separate phone layout. Primary original materialized-views.svg path is retained and redesigned: three sales10000 cents; source append1000 gives four/11000 while stored generation1 remains three/10000; refresh publishes generation2/four/11000. The recovery figure shows originalG2/four/11000, uncommittedG3/three/7000, aborted refresh restoringG2, and retry committingG3/three/7000. Transitions explicitly label source commit, refresh commit, candidate build, abort/rollback and retry/commit. Units are USD cents; generation is qualified as publication identity, not source watermark/deadline. All figure values match actual program execution. Fixed white, regular Helvetica Neue/Helvetica/Arial, exact approved palette, square geometry, ample spacing, restrained strokes and meaningful alt/captions. Four variants have no measured outside labels, label overlaps or outside rectangles. Two phone labels were shortened after visual inspection. Concept bounds include stroke inside 96 by96. Native/embedded desktop and phone figures, captions, article tops, code viewports and gallery inspected.",
+    "browser": "Actual production article verified at 1440,390,320 CSS pixels: exact eight H2s, two loaded responsive figures, exact selectable highlighted Python program, distinct syntax colors, focusable code, keyboard horizontal scrolling at narrow width, no page overflow and four related routes returning200. Former Storage & access cross-link opens the same canonical route with the new primary breadcrumb. Performance and Scalability route and Software Engineering gallery show the third member with both verse badges and reviewed concept paths. No page/console errors.",
+    "built_assets": {
+      "build_root": ".local/software-materialized-view/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 45004
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 5,
+          "y": 9,
+          "width": 86,
+          "height": 78
+        },
+        {
+          "x": 31,
+          "y": 40,
+          "width": 27,
+          "height": 16
+        }
+      ]
+    },
+    "disk_space_management": {
+      "status": "passed",
+      "staging": "Isolated source snapshot with native copy-on-write content assets, copied source and symlinked dependencies; private environment excluded.",
+      "attempts_before_success": [
+        {
+          "attempt": 1,
+          "reason": "Disk space exhausted while ordinary generated-asset copies raced background clone replacement."
+        },
+        {
+          "attempt": 2,
+          "reason": "Standard driver refused a stale task-owned route staging directory left by interruption; only that directory removed."
+        },
+        {
+          "attempt": 3,
+          "reason": "Static adapter asset copying exhausted local disk despite incremental clone recovery."
+        },
+        {
+          "attempt": 4,
+          "reason": "This Node runtime lacks forced native reflink copying (ENOSYS); macOS native clonefile was used instead."
+        },
+        {
+          "attempt": 5,
+          "reason": "Asset-only cloning was insufficient because export also duplicates route data; native copying was expanded to prerendered export trees."
+        }
+      ],
+      "successful_command": "node scripts/build-public-web.mjs",
+      "successful_exit_code": 0,
+      "background_hash_verified_compaction_passes": 45,
+      "runtime_copy_helper": ".local/software-materialized-view/clone-generated-assets.mjs",
+      "native_helper": ".local/software-materialized-view/clone-asset-tree.py",
+      "runtime_copy_scope": "Temporary NODE_OPTIONS preload changes only fs.copyFileSync calls from this snapshot prerendered pages/dependencies/data into its finished build. Native macOS clonefile copies the requested tree; every source/destination SHA-256 is checked. Ordinary file-copy calls outside this mapping are forwarded unchanged. No repository build script or dependency edits.",
+      "native_copy_results": [
+        {
+          "status": "passed",
+          "tree": "pages",
+          "files": 5354,
+          "logical_bytes": 525349590,
+          "scope": "Only this isolated adapter export tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "files": 2470,
+          "logical_bytes": 49180813,
+          "scope": "Only this isolated adapter export tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        }
+      ],
+      "temporary_clones_outside_scanned_output": ".local/software-materialized-view/clone-temporaries",
+      "redundant_compiler_output_removed_after_successful_build": ".local/software-materialized-view/build-workspace/apps/web/.svelte-kit/output",
+      "finished_build_and_running_preview_preserved": true,
+      "source_shared_output_and_earlier_previews_unchanged": true
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Revised existing canonical data-materialized-views in place. Singular Materialized View becomes title; plural former title is an alias. Existing summary, Data Engineering tags/verse, canonical ID/route and primary figure path preserved. One primary home moves from Storage & access to Performance and Scalability; former collection retains a cross-link and fifteen other members. Original historical import metadata remains untouched; old article and figure archived locally. Retains sales100->110, currency/grain, correction50->40, backfill boundary, aggregate-state, PostgreSQL/ClickHouse/BigQuery and refresh/completeness teaching context. Original Python 3.11+ application-maintained SQLite projection, not a native SQLite materialized-view object. Positive/zero integer cents grouped by shop/currency; three USD sales5000+3000+2000 create generation1/count3/10000. Appended1000 leaves staleG1 until refreshG2/count4/11000. Correction5000->4000 and deletion3000 make source3/7000. An AFTER UPDATE publication trigger raises ABORT after candidate update; connection context rolls back deleted/rebuilt rows and generation toG2/count4/11000. Removing trigger and retrying publishesG3/count3/7000 without additive replay. Generation is a publication identity, not time/source watermark; zero generation is unavailable and an empty refreshed group is valid zero. BEGIN IMMEDIATE with idle explicit-transaction connection serializes SQLite writers; target and metadata change in one transaction; connection owner closes it. Actual separate-connection WAL tests verify old reads during refresh, reader snapshot lifetime and writer exclusion. No production database-native refresh implementation, incremental updater, scheduler, change stream, authorization, source watermark, cross-store snapshot or freshness deadline is supplied.",
+  "preview": "http://127.0.0.1:43055/pattern/data-materialized-views",
+  "preview_mode": "isolated-static-production-build-with-byte-verified-native-export-copies",
+  "evidence_directory": ".local/software-materialized-view",
+  "browser_measurements": ".local/software-materialized-view/browser-checks.json",
+  "browser_check_script": ".local/software-materialized-view/check-browser.mjs",
+  "build_log": ".local/software-materialized-view/public-build-isolated.log",
+  "branch": "codex/software-materialized-view",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

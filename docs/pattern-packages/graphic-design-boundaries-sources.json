@@ -1,0 +1,58 @@
+{
+  "pattern": "Group Elements Within Shared Boundaries",
+  "date": "2026-10-27",
+  "mode": "Reused existing generated photographs and paper-stage artwork; composed precise typography and enclosure graphics separately. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-boundaries-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Sessions: only the two-outline group opacity switches 0 to 1. Delivery: only the left offer outline height changes 285 to 140. Day passes: only the outline path d changes five horizontal regions to two vertical regions. All words, positions, fonts, sizes, weights, colors, image bytes/crops, paper and lighting stay fixed.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "boundaries-session-records",
+        "changedPixels": 4920,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "boundaries-shared-delivery",
+        "changedPixels": 1472,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "boundaries-offer-membership",
+        "changedPixels": 8812,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared common-region intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "All six saved browser PNGs visually inspected. Text remains within the paper surface and no horizontal overflow occurs. Same-origin pixel comparisons isolate declared enclosure regions; DOM checks preserve every unrelated attribute, all copy and source image bytes. Structural checks ensure complete session membership, shared terms outside both offers and five horizontal regions replaced by two vertical regions. Article renderer is checked separately."
+  },
+  "limitations": "No audience study, measured improvement, physical print trial, implemented booking interface, assistive-technology audit, whole-artifact accessibility conformance or full production-route result. The session layout may not need boxes. Attribute grouping may better suit an audit task. The tableware hero does not depict both complete sets, and the shared note retains some proximity to the left column."
+}

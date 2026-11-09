@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "idempotent-receiver",
+  "title": "Idempotent Receiver",
+  "aliases": ["Idempotent Consumer"],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1426,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Seven primary sources: Hohpe and Woolf’s Idempotent Receiver catalog entry; Chris Richardson’s Idempotent Consumer catalog entry; SQLite Transactions and UPSERT documentation; current Python sqlite3 documentation including connection context and explicit transaction control; RabbitMQ acknowledgments/publisher confirms; and Spring Integration Idempotent Receiver advice documentation. Both naturally repeatable message semantics and explicit deduplication are explained. Idempotent Consumer is an established alias. Receiver/source/logical-event scope, conflicting reuse, concurrency, acknowledgment after commit, retention, and external-effect limits are explicit. Existing Idempotent Writes remains a broader destination-focused pattern, preserving its canonical ID and Data Engineering collection; the new article focuses on the endpoint behavior and acknowledgment contract.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["receiver.py", "demo.py"],
+      "stdout": [
+        "before lost acknowledgment: 40",
+        "duplicate 40",
+        "applied 80",
+        "conflict: Identity reused with different payload",
+        "final stock: 80"
+      ],
+      "verification": "Exact demo output; committed-state replay after connection reopening; legitimate new event and source scopes; conflicting SKU/quantity reuse with unchanged state; stock-constraint rollback of ledger and inventory followed by a successful retry; two simultaneous independent SQLite connections applying one effect; abrupt subprocess exit before commit with clean recovery; busy BEGIN and commit-failure propagation/rollback followed by retry; 1/1000-unit boundaries and malformed/Boolean/range rejection; ASCII identifier grammar and 64/65-character limits; idle-connection precondition without rolling back a caller-owned transaction. No broker, external-effect, or power-loss guarantee is inferred."
+    },
+    "content": "1276 entities validate with drafts included; published-only compilation contains 1129 entities without diagnostics.",
+    "integration_tests": "All ten focused article suites pass: Idempotent Receiver, the previous eight Messaging and Integration articles, and GoF. Combined run across eleven files reports 55 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, code validator, integration test, JSON authoring metadata, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Messaging and Integration, preserving eight members and appending Idempotent Receiver ninth with an explanatory paragraph. Existing canonical IDs for Idempotent Writes, Transactional Outbox, Correlation Identifier, and Aggregator supply the four related links. No new collection, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1274,
+      "new_content": ["content/patterns/idempotent-receiver.md"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "existing_idempotent_writes_and_related_data_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 41,
+      "prior_graphics_unchanged": 453,
+      "prior_dimensions_unchanged": 1605,
+      "new_dimensions": {
+        "software-engineering/idempotent-receiver-replay.svg": {
+          "width": 720,
+          "height": 1048
+        },
+        "software-engineering/idempotent-receiver-replay-mobile.svg": {
+          "width": 360,
+          "height": 1096
+        },
+        "software-engineering/idempotent-receiver-boundary.svg": {
+          "width": 720,
+          "height": 1024
+        },
+        "software-engineering/idempotent-receiver-boundary-mobile.svg": {
+          "width": 360,
+          "height": 1256
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, authoring metadata, concept registry, and collection agree with staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer or build implementation changes.",
+    "illustrations": "Two editable native SVGs explain replay after a lost acknowledgment, the distinction between same payload and same intent, the shared transaction for processed identity and inventory, rollback versus post-commit redelivery, and external effects outside that boundary. Both have separately composed phone versions and meaningful alternatives and captions. Approved fixed white surface, regular Helvetica Neue/Helvetica/Arial, palette, square geometry, labels, and arrow meanings are preserved. Four variants have zero measured outside labels, label overlaps, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for accuracy, placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python source blocks, distinct syntax colors, focusable code, keyboard horizontal code scrolling at 320 pixels, no page overflow, and all four related routes returning 200. The collection route and software verse gallery show nine members across three pages. The Idempotent Receiver card on page three opens with the correct primary breadcrumb. Desktop/phone article tops, code, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-idempotent-receiver/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 45101
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original file-backed SQLite stock receipt endpoint. A stable stock-receipts consumer, authorized source, and logical event ID form the processed key; stored SKU and units detect conflicting reuse. ASCII identifiers are 1..64 characters; each receipt carries 1..1000 physical units and stock has a 1000000-unit per-SKU constraint. BEGIN IMMEDIATE serializes writers before lookup. Processed identity/payload and stock increment share one transaction; return statuses occur only after commit. Caller owns initially idle dedicated connections and closes them; initialization failure closes before propagation. Reopening demonstrates replay after lost acknowledgment, and E902 remains distinct from E901 despite identical contents. The incrementing UPSERT alone is not idempotent. No broker, external effects, source authentication, ledger cleanup, multi-destination atomicity, automatic retry, or power-loss testing. The temporary demo directory is removed at the end. Existing Idempotent Writes remains a broader destination-focused article and is linked, not duplicated or rehomed.",
+  "preview": "http://127.0.0.1:43026/pattern/idempotent-receiver",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-idempotent-receiver",
+  "browser_measurements": ".local/software-idempotent-receiver/browser-checks.json",
+  "browser_check_script": ".local/software-idempotent-receiver/check-browser.mjs",
+  "build_log": ".local/software-idempotent-receiver/public-build-isolated.log",
+  "branch": "codex/software-idempotent-receiver",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

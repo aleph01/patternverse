@@ -1,0 +1,139 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "One selected-photo href changes in each pair. Both complete 3:2 sources use the same full-image 480×320 frame with meet fitting. All other artifact DOM, words, font settings, colors, positioning, source paper and lighting are identical. Selection necessarily changes subject and image-internal appearance; these are editorial demonstrations, not isolated reader-performance experiments.",
+  "examples": [
+    {
+      "name": "image-meaning-handbuilding",
+      "beforeSource": "explicit-tableware-photo.jpg",
+      "afterSource": "meaning-handbuilding-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "imageWindow": {
+        "x": 65,
+        "y": 155,
+        "width": 480,
+        "height": 320,
+        "viewBox": "0 0 1536 1024",
+        "preserveAspectRatio": "xMidYMid meet"
+      },
+      "description": "Only the selected image source changes: finished glazed cup and saucer become hands building an unfinished clay bowl. Identical full 3:2 image window, copy, font settings, colors, positions, paper and lighting.",
+      "copy": [
+        ["brand", 65, 104, "YARD / EVENING WORKSHOPS", 20],
+        ["headline", 65, 541, "Clay after work", 48],
+        ["purpose", 65, 595, "Make a small bowl by hand.", 28],
+        ["date", 65, 646, "Wed 18 Nov · 18:30–20:30", 23],
+        ["conditions", 65, 689, "£28 · Clay, tools and firing included", 23],
+        ["action", 65, 736, "yard.example/clay", 23],
+        ["footer", 65, 820, "Illustrative image · No experience needed", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "selected-photo",
+            "attribute": "href",
+            "value": "#photo-before"
+          }
+        ],
+        [
+          {
+            "element": "selected-photo",
+            "attribute": "href",
+            "value": "#photo-after"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "image-meaning-enclosed-room",
+      "beforeSource": "audience-workspace-photo.jpg",
+      "afterSource": "meaning-enclosed-room-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "imageWindow": {
+        "x": 65,
+        "y": 155,
+        "width": 480,
+        "height": 320,
+        "viewBox": "0 0 1536 1024",
+        "preserveAspectRatio": "xMidYMid meet"
+      },
+      "description": "Only the selected image source changes: an open shared workspace becomes an enclosed two-chair room with a closed door. Identical full 3:2 image window, service copy, typography, positioning, colors and presentation. Illustrative fictional property, not evidence of a real room or sound isolation.",
+      "copy": [
+        ["brand", 65, 104, "COMMON / ROOMS", 20],
+        ["headline", 65, 541, "Room for two", 48],
+        ["purpose", 65, 595, "Book an enclosed room.", 28],
+        ["price", 65, 646, "Up to 2 people · £12 per hour", 23],
+        ["hours", 65, 689, "Mon–Fri · 09:00–18:00", 23],
+        ["action", 65, 736, "common.example/rooms", 23],
+        ["footer", 65, 820, "Illustrative image · Check availability", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "selected-photo",
+            "attribute": "href",
+            "value": "#photo-before"
+          }
+        ],
+        [
+          {
+            "element": "selected-photo",
+            "attribute": "href",
+            "value": "#photo-after"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "image-meaning-seed-library",
+      "beforeSource": "core-message-library-photo.jpg",
+      "afterSource": "form-seed-packing-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "imageWindow": {
+        "x": 65,
+        "y": 155,
+        "width": 480,
+        "height": 320,
+        "viewBox": "0 0 1536 1024",
+        "preserveAspectRatio": "xMidYMid meet"
+      },
+      "description": "Only the selected image source changes: a book-library interior becomes seeds and blank seed envelopes on a potting bench. Identical full 3:2 window, article title, copy, font settings, positions, colors and paper presentation. Both images are explicitly illustrative.",
+      "copy": [
+        ["brand", 65, 104, "YARD / NEIGHBORHOOD NOTES", 20],
+        ["headline", 65, 541, "Inside the seed library", 42],
+        ["purpose", 65, 593, "Seeds to share, not books to borrow.", 25],
+        ["body-0", 65, 641, "Take a packet. Grow a few plants.", 23],
+        ["body-1", 65, 681, "Save spare seed for the next season.", 23],
+        ["scope", 65, 722, "Available varieties change through the year.", 21],
+        ["action", 65, 767, "yard.example/seeds", 21],
+        ["footer", 65, 820, "Illustrative image · Ask the library team", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "selected-photo",
+            "attribute": "href",
+            "value": "#photo-before"
+          }
+        ],
+        [
+          {
+            "element": "selected-photo",
+            "attribute": "href",
+            "value": "#photo-after"
+          }
+        ]
+      ]
+    }
+  ]
+}

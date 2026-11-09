@@ -9,9 +9,12 @@ Patternverse has two independent extension points:
 
 ## Current source behavior
 
-Dropbox integration is feature-flagged. Each user authorizes their own App Folder
-through PKCE; credentials and automatic-sync preferences stay on the device.
-This guide describes source capabilities, not which flags a deployed build enables.
+Encrypted Dropbox workspace sync is enabled by default in public, full and desktop
+builds. Each user authorizes their own App Folder through PKCE; credentials stay on
+the device and users choose **Sync now** to transfer saved work. Explicit build
+switches can disable Dropbox or select the legacy adapter. Sign-in-only storage and
+automatic sync remain opt-in. Deployment requires the public app identifier and a
+registered callback URL; this guide does not establish the live deployment's settings.
 
 - The older **v1** adapter retains its encrypted personal-article/Mira-session payload.
 - **Workspace v2** uses the provider-neutral planner, orchestrator, journal and

@@ -1,0 +1,119 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "generatedSources": [
+    {
+      "asset": "content/assets/graphic-design/metaphor-book-photo.png",
+      "generation_record": "graphic-design-metaphor-generation.json",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-f6f7da89-428c-46f1-baa9-8023790a6c58.png",
+      "sha256": "db62364b7779420c7ad8ccf68276ffc995722190fe79ac9b0aeb7b3eeca7fab1",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": false
+    },
+    {
+      "asset": "content/assets/graphic-design/metaphor-seedling-cutout.png",
+      "generation_record": "graphic-design-metaphor-generation.json",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-be71ffa3-818e-488e-8a1d-68f9e464e5c7.png",
+      "sha256": "315271125436628c872c4a7cd517810521a5b9506335a29599297de9c284446c",
+      "width": 1145,
+      "height": 1374,
+      "has_alpha": true
+    },
+    {
+      "asset": "content/assets/graphic-design/metaphor-cord-photo.png",
+      "generation_record": "graphic-design-metaphor-generation.json",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-e69bc1a8-1148-45bd-b6dd-2beca16314be.png",
+      "sha256": "ed73123708252e9ed4abf838505e7f2928117717d9f5f8745d76611fc43789b1",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": false
+    },
+    {
+      "asset": "content/assets/graphic-design/metaphor-ladder-cutout.png",
+      "generation_record": "graphic-design-metaphor-generation.json",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-7dd84a46-626e-4f84-96c0-afdc1059bb22.png",
+      "sha256": "4311a4bf5a3947b061e80c5dcba14f32a179474f32c6d2220cced93c8b19a670",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": true
+    },
+    {
+      "asset": "content/assets/graphic-design/metaphor-bridge-cutout.png",
+      "generation_record": "graphic-design-metaphor-generation.json",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-de88fc52-54c6-4672-a476-09b91ab4c4df.png",
+      "sha256": "c20e53d383ede1ee12edc5169cfb88269ef599bde11f3e4f07c8090d9601b0e5",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": true
+    }
+  ],
+  "pattern": "Use Visual Metaphors",
+  "date": "2026-10-28",
+  "mode": "Built-in image_gen produced five photographic source assets, including three transparent cutouts. Original PNGs copied unchanged. Native SVG composition/fitting, plant visibility, wording and object selection; typography composed separately.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-metaphor-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-metaphor-layouts.json",
+    "sha256": "ef11434b5dc5b4e548c7dcdedd5bde772c580f4d7b82cdfc034b5dae69dc692d",
+    "method": "Each comparison changes one declared cue: seedling visibility over an unchanged book; one explanatory text node beside an unchanged cord photo; or the selected ladder/bridge source object within the same frame. Surrounding typography, layout, copy except the declared anchor line, paper and presentation remain fixed. The third case intentionally changes source-object geometry/material appearance; other cases reuse identical photographic bytes/crops."
+  },
+  "generation_record": "docs/pattern-packages/graphic-design-metaphor-generation.json",
+  "comparisonPolicy": "Book: only seedling cue opacity0\u21921, fixed book source/crop and fixed plant placement. Cord: only one explanatory textContent changes with all style and geometry fixed. Peer circle: only selected object href ladder\u2192bridge within the same frame/fitting, with copy/type/ground/paper presentation fixed. Different object geometries, textures and object-specific light are declared parts of source replacement. No independent poster generations or measured isolation of semantic effects.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "metaphor-book-growth",
+        "changedPixels": 4481,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "metaphor-cord-anchor",
+        "changedPixels": 3515,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "metaphor-peer-bridge",
+        "changedPixels": 61538,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared metaphor intervention regions differ.",
+    "scope": "DOM normalization permits only seedling opacity, one text node\u2019s textContent or selected-object href. Source bytes are fixed and embedded identically; the third pair selects a different declared object. Pixel changes stay within the plant bounds, anchor-line region or image frame. Fonts, bounds, overflow and inline/image equivalence checked wide/narrow. The seedling is a native photographic composite; the ladder/bridge comparison intentionally changes object-specific geometry/texture/lighting.",
+    "visualInspection": "All three wide and three stacked saved browser comparisons inspected; the book/growth mark inspected at 32, 48 and 96 pixels.",
+    "scopedTests": "24 article/comparison tests passed across the new metaphor suite and silhouette neighbor suite. Bounded mark geometry passed (one test; four unrelated tests skipped). Content validated878 entities; production compilation658 excludes this draft. All51 article hashes and342 registered asset hashes/dimensions checked. Scoped lint and formatting passed."
+  },
+  "limitations": "Editorial intended readings and plausible alternatives, not tested comprehension/recall/attendance improvements. Word\u2013image comparisons include multimodal metaphor. All events/offers/artwork are fictional. Book/seedling composite is conceptual, not documentary evidence. Ladder/bridge cutouts are not matched images of one object and cannot isolate semantic effects from shape/material appearance. No physical print proof or real-world structural claim."
+}

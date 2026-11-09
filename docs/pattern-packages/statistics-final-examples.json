@@ -1,0 +1,45 @@
+{
+  "note": "Original fictional teaching cases. Intervals use stated known-SE Normal approximations. Sensitivity and decision parameters are assumptions; instrumental-variable ratios need the identification conditions in the article.",
+  "target": {
+    "assigned": [1000, 1000],
+    "active_day7": [700, 800],
+    "paid_day90": [600, 650],
+    "new_openers": 500,
+    "new_openers_paid90": 400
+  },
+  "extremes": {
+    "orders": [20, 22, 24, 26, 28, 30, 32, 34, 36, 280],
+    "corrected_last_if_verified": 28
+  },
+  "sensitivity": {
+    "estimate": 7,
+    "known_se": 1,
+    "z95": 1.959963984540054,
+    "outcome_difference_u": 10,
+    "control_u_prevalence": 0.1,
+    "prevalence_differences": [0, 0.2, 0.5, 0.7, 0.9]
+  },
+  "confirmation": {
+    "searches": 20,
+    "alpha": 0.05,
+    "discovery": { "estimate": 8, "known_se": 3 },
+    "fresh": { "estimate": 3, "known_se": 2 },
+    "meaningful_effect": 2,
+    "z95": 1.959963984540054
+  },
+  "decision": {
+    "probability": 0.3,
+    "benefit_if_present": 50,
+    "action_cost": 10,
+    "alternative_action_cost": 20,
+    "test_sensitivity": 0.8,
+    "test_specificity": 0.9,
+    "test_cost": 2
+  },
+  "instrument": {
+    "group_n": [100, 100],
+    "attended": [20, 60],
+    "outcome_mean": [50, 54],
+    "hypothetical_weak_first_stage": 0.02
+  }
+}

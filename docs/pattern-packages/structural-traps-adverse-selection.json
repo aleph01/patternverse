@@ -1,0 +1,149 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Adverse Selection",
+  "metadata_mapping": "Existing concept-draft schema, responsive editable SVG convention, and research sidecar. Only requested article and necessary assets; no practices, navigation, or publication changes.",
+  "patterns": [
+    {
+      "id": "adverse-selection",
+      "title": "Adverse Selection: Hidden Information Before Agreement",
+      "entity_type": "concept",
+      "domain": "Information, incentive, and commitment problems; hidden types, endogenous participation, credible verification, signaling, and screening",
+      "article": "content/concepts/adverse-selection.md",
+      "status": "draft",
+      "short_description": "Distinguish population quality from the pool accepting offered terms, then evaluate credible information and participation changes without assuming market collapse.",
+      "use_when": [
+        "The people or goods accepting an offer differ systematically from the wider population.",
+        "A pooled price excludes higher-quality owners despite possible gains from trade.",
+        "An information remedy is proposed without checking credibility, imitation, cost, or participation."
+      ],
+      "goals": [
+        "Define hidden information before agreement and distinguish hidden actions afterward.",
+        "Show why a population-average candidate price is inconsistent with its offered pool.",
+        "Specify a competitive market benchmark and a separating verification outcome.",
+        "Distinguish conditional market comparisons from measured data and dynamic forecasts."
+      ],
+      "mechanisms": [
+        "Make relevant quality verifiable before agreement.",
+        "Support claims with enforceable warranties, returns, or reputation.",
+        "Use screening and credible signaling while checking type-dependent incentives.",
+        "Alter eligibility or pooling with explicit administrative and distributional trade-offs."
+      ],
+      "related_patterns": [
+        "the-principal-agent-problem",
+        "trust-games",
+        "bargaining-problems"
+      ],
+      "example_user_queries": [
+        "The best suppliers decline the price that attracts everyone else.",
+        "Our applicants do not look like the population we used to set our terms.",
+        "Why does lowering the offer leave us with worse options?",
+        "A high price attracts low-quality sellers too.",
+        "How do we tell a credible quality signal from a label anyone can claim?",
+        "Would an independent inspection restore trades that are currently missing?",
+        "The certificate costs more than the gain from trading.",
+        "Is this hidden information before a contract or hidden effort afterward?",
+        "Does asymmetric information mean the entire market must collapse?",
+        "A warranty is offered but the seller may not be able to honor it.",
+        "Can a menu of contracts help different types identify themselves?",
+        "Our price estimate ignores who will actually accept it."
+      ],
+      "visual": {
+        "type": "participation-filter-qualitative",
+        "question": "Why is the offered pool different from the potential population?",
+        "assets": [
+          "content/assets/structural-traps/adverse-selection-laptops.svg",
+          "content/assets/structural-traps/adverse-selection-laptops-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1052,
+            "textBlocks": 21
+          },
+          "phone": {
+            "width": 360,
+            "height": 1708,
+            "textBlocks": 21
+          }
+        },
+        "representation": {
+          "mode": "participation-filter",
+          "question": "Why is the offered pool different from the potential population?",
+          "interpretation": "The same unverified offer reaches owners of dependable and worn machines. Dependable owners keep their machines while worn-machine owners find selling attractive. Only the accepting branch feeds the offered pool. A reliable pre-sale inspection can change what Rina knows before acceptance, without changing machine quality.",
+          "relationship_key": "Upper branches: owners’ participation responses to one offer. The continuing arrow feeds the offered pool. Lower arrows: the proposed information process.",
+          "changed_relationship": "Make condition credibly distinguishable before agreement.",
+          "residual_constraints": "Reports must be accurate, unforgeable, and affordable. Information does not improve the machines.",
+          "phone_treatment": "Separate composition preserves the causal, dependency, comparison, or choice relationships with regular legible text; it is not a scaled desktop image."
+        },
+        "alternative_text": "Hypothetical qualitative illustration. The same unverified offer reaches owners of dependable and worn machines. Dependable owners keep their machines while worn-machine owners find selling attractive. Only the accepting branch feeds the offered pool. A reliable pre-sale inspection can change what Rina knows before acceptance, without changing machine quality. Change: Make condition credibly distinguishable before agreement. Limitation: Reports must be accurate, unforgeable, and affordable. Information does not improve the machines.",
+        "caption": "Hypothetical illustration. Trace the accepting branch into the offered pool; rejected machines are not part of that pool. Type labels explain the selection for the reader, rather than information Rina can directly observe. Reliable inspection can support separate offers when its cost is worthwhile.",
+        "style": "Fixed white including dark surroundings; regular Helvetica Neue with Helvetica and Arial fallbacks; ink and secondary text meet contrast on prescribed fills. Green identifies intervention geometry. Essential connections use ink; light construction lines remain contextual."
+      },
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "George A. Akerlof, The Market for “Lemons”: Quality Uncertainty and the Market Mechanism (1970)",
+          "url": "https://web.pdx.edu/~nwallace/EHP/AkerlofLemons.pdf",
+          "doi": "10.2307/1879431",
+          "supports": "Private seller information, price-dependent average supplied quality, possible loss of gains from trade, and counteracting institutions including guarantees, brands, and certification.",
+          "read_method": "University-hosted original paper opened and downloaded. Introduction, automobile mechanism, symmetry comparison, and counteracting-institutions section read in original web extraction and local full text.",
+          "boundary": "Foundational theoretical account, not measured laptop prices or a universal prediction of collapse. Historical illustrations are not presented as current insurance facts or laws."
+        },
+        {
+          "title": "Igal Hendel and Alessandro Lizzeri, Adverse Selection in Durable Goods Markets (1997 working paper; published 1999)",
+          "url": "https://www.nber.org/system/files/working_papers/w6194/w6194.pdf",
+          "doi": "10.1257/aer.89.5.1097",
+          "supports": "Dynamic interaction of new and used markets with endogenous ownership; within the model the used market does not shut down and trade can remain substantial despite asymmetric information.",
+          "read_method": "NBER original working paper downloaded after web fetch returned 403. First four scanned pages rendered and OCR read, covering title/date, abstract, and introduction explaining the ownership and new-market extension. Publication metadata cross-checked against the AEA record.",
+          "boundary": "A conditional result for the authors’ model, not an empirical general law or the hypothetical laptop scenario used in this article. Working-paper text is identified separately from the 1999 publication."
+        },
+        {
+          "title": "David Genesove, Adverse Selection in the Wholesale Used Car Market (1993)",
+          "url": "https://www.journals.uchicago.edu/doi/abs/10.1086/261891",
+          "doi": "10.1086/261891",
+          "supports": "The published abstract reports a dealer survey and wholesale-auction price study with weak evidence of adverse selection in that setting.",
+          "read_method": "Publisher’s abstract opened and read; authorship, year, journal, pages, data description, and stated weak-evidence conclusion checked. Full-text methods and estimates were not independently reviewed.",
+          "boundary": "The article explicitly limits this empirical reference to the abstract’s report. It makes no effect-size, causal-identification, methodological robustness, or cross-market absence claim."
+        }
+      ],
+      "evidence_boundary": "The scenario and illustration are hypothetical. Qualitative formal comparisons depend on the stated players, actions, preferences, information, timing, and repetition assumptions. Empirical findings retain their source-specific limits. Practical interventions are editorial synthesis, not measured effects of this scenario.",
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "example_structure": {
+        "scenario": "Hypothetical narrative; no invented utility scores, numerical trajectory, or probability cutoff is required to follow the example.",
+        "changed_relationship": "Distinguish quality before agreement instead of raising every unverified offer.",
+        "residual_constraints": "Requires accurate, unforgeable, affordable reports. Information changes; machine quality does not."
+      },
+      "editorial_revision": {
+        "date": "2026-11-01",
+        "purpose": "Explain the general principle through concrete choices, relationships, and consequences; remove illustrative calculation as a reading requirement.",
+        "source_handling": "Existing attributable research and source links retained where still relevant; source_checked remains the original research date."
+      },
+      "example_consistency_revision": {
+        "date": "2026-11-01",
+        "purpose": "Update research-note descriptions to match the current qualitative article.",
+        "source_handling": "Original source links, source-check dates, and empirical qualifications preserved; no new empirical claim introduced.",
+        "verification": "Passed: corpus validation; all forty remain separate drafts outside the public corpus; collection and source links unchanged; prose, captions, alternative text and SVG descriptions agree. Four changed articles checked live at 1440px and 390px; six revised SVG compositions checked at measured article widths in light and dark surroundings, with no text overlap, clipping, card overflow or page overflow. Revised illustration text passes contrast checks."
+      },
+      "illustration_teaching_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the teaching-value audit while retaining every article and its qualitative worked example.",
+        "change": "Replace or clarify the representation around its specific mechanism.",
+        "source_handling": "Article prose, external source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Update the agency comparison to delegated estate-agent advice and information limits; adverse selection requires hidden characteristics to affect participation.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

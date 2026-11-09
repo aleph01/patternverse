@@ -1,0 +1,62 @@
+{
+  "pattern": "Align to Common Edges",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographs and composed controlled SVG alignment comparisons. No new photograph was generated.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-alignment-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/core-message-repair-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "f5c4449de84c1cb2d5c6d4142830a8067ff21ce0367f80b059d55a16194e2b07"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-workshop-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "comparisonPolicy": "Poster changes only horizontal group translations for deck, practical details and URL. Costs change only the numeric-column horizontal origin and text anchor from centered to end-aligned, including its header. Card changes only its intact copy-group horizontal translation to the existing image/button inset. All copy, values, fonts, sizes, weights, vertical positions, internal vertical spacing, photographs/crops and presentation remain fixed.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "alignment-repair-poster",
+        "changedPixels": 13993,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "alignment-cost-sheet",
+        "changedPixels": 6839,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "alignment-workshop-card",
+        "changedPixels": 7273,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within paper or phone content surface, including nested group transforms",
+    "pixelCheck": "Only intended declared alignment regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "Saved standalone comparisons. Text bounds include nested transforms and are checked within paper or phone content surface. No complete production route, working booking interface, physical print trial, assistive-technology test or measured reading/comparison improvement is claimed."
+  }
+}

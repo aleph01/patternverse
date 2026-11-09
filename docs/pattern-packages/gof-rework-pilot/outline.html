@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Software pattern article outline — GoF editorial pilot</title><style>:root{color-scheme:only light;color:#252c28;background:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0}a{color:#007d55;text-underline-offset:3px}header{border-bottom:1px solid #e2e5df;padding:20px max(22px,calc((100vw - 1040px)/2))}nav{display:flex;flex-wrap:wrap;gap:18px;font-size:14px}nav a{color:#626962}nav a[aria-current=page]{color:#007d55}main{max-width:776px;margin:54px auto 90px;padding:0 28px}main.wide{max-width:1080px}.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#626962;margin-bottom:12px}h1{font-weight:550;font-size:46px;line-height:1.1;letter-spacing:-.035em;margin:0 0 18px}h2{font-weight:560;font-size:27px;line-height:1.25;margin:44px 0 18px;letter-spacing:-.02em}h3{font-size:20px;line-height:1.35;font-weight:560;margin:28px 0 12px}p,li{font-size:17px;line-height:1.8}p{margin:17px 0}.summary{font-size:20px;line-height:1.55;color:#626962;margin-bottom:34px}figure{margin:30px -1px}picture,img{display:block;width:100%;height:auto}figcaption{font-size:14px;line-height:1.6;color:#626962;margin-top:14px}pre{font-size:14px;line-height:1.65;background:#f4f5f2;padding:22px;overflow-x:auto;border:1px solid #e2e5df}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}table{border-collapse:collapse;width:100%;margin:24px 0;font-size:15px;line-height:1.6}th,td{text-align:left;vertical-align:top;padding:13px 12px;border-bottom:1px solid #dfe4dd}th{font-weight:550;background:#f1f2ef}td:first-child{width:22%}.table-scroll{overflow-x:auto}.collection{list-style:none;padding:0}.collection li{padding:20px 0;border-bottom:1px solid #e2e5df}.collection a{font-size:22px;text-decoration:none}.collection p{margin:5px 0 0;color:#626962;font-size:16px}footer{font-size:13px;color:#626962;margin-top:50px;padding-top:20px;border-top:1px solid #e2e5df}@media(max-width:580px){header{padding:17px 22px}main{margin:34px auto 60px;padding:0 22px}h1{font-size:38px}h2{font-size:25px;margin-top:36px}.summary{font-size:18px}p,li{font-size:16px;line-height:1.75}figure{margin:24px 0}pre{padding:15px;font-size:12px}th,td{min-width:145px}td:last-child{min-width:240px}}pre[data-language]::before{content:attr(data-language);display:block;font:500 12px system-ui,sans-serif;color:#626962;margin-bottom:14px}pre:focus-visible{outline:2px solid #00855b;outline-offset:3px}.syntax-kwd{color:#7a2d89}.syntax-str,.syntax-esc{color:#176043}.syntax-func{color:#174a8b}.syntax-class,.syntax-type{color:#7b4218}.syntax-num,.syntax-bool{color:#8a3b22}.syntax-cmnt{color:#626962}.syntax-oper{color:#48564c}.syntax-var{color:#174a8b}</style></head><body><header><nav aria-label="Review pages"><a href="index.html">Strategy pilot</a><a href="outline.html" aria-current="page">Shared outline</a><a href="collection.html">One GoF collection</a></nav></header><main class="wide"><div class="eyebrow">GoF Design Patterns · Review draft</div><h1>Software pattern article outline</h1><p class="summary">A shared article structure, one GoF collection, and the current editorial illustration style.</p><p>Use one shared reading structure for the GoF rework and later software engineering patterns. Start with a problem the reader can recognize, explain the mechanism, then show the decision and its consequences. Preserve established pattern names and technical distinctions while making the articles useful without prior knowledge of a taxonomy.</p>
+<h2>Proposed article structure</h2>
+<div class="table-scroll" role="region" aria-label="Article outline" tabindex="0"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What the reader should learn</th>
+<th>Editorial requirements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purpose and problem</td>
+<td>What situation calls for this pattern, and what becomes difficult?</td>
+<td>Begin with a concrete situation. Name the conflicting requirements: what must remain stable, what must vary, or which guarantees compete.</td>
+</tr>
+<tr>
+<td>Core idea</td>
+<td>What is the essential design move?</td>
+<td>Give a compact explanation and a useful mental model. Place an explanatory illustration here when it makes the change easier to understand.</td>
+</tr>
+<tr>
+<td>How it works</td>
+<td>Which parts collaborate, and who owns each decision?</td>
+<td>Explain responsibilities, interactions, and assumptions. Describe execution as well as structure. Use familiar names before introducing canonical participant terminology.</td>
+</tr>
+<tr>
+<td>Worked example</td>
+<td>What changes in a specific implementation?</td>
+<td>Develop one example through problem → design change → result. Include a small, complete code example when code teaches the mechanism. Add a second context when it reveals a different decision.</td>
+</tr>
+<tr>
+<td>When to use it</td>
+<td>What evidence makes this a worthwhile choice?</td>
+<td>Describe concrete signals. Include the simpler alternative and the conditions where it is sufficient.</td>
+</tr>
+<tr>
+<td>Tradeoffs and common mistakes</td>
+<td>What does this cost, and how can it go wrong?</td>
+<td>Explain consequential costs, incorrect assumptions, and at least one tempting misuse. Keep correctness conditions beside the behavior they qualify.</td>
+</tr>
+<tr>
+<td>Related patterns</td>
+<td>How does this differ from nearby designs?</td>
+<td>Explain two to four relevant relationships. Prefer useful comparisons to a bare list of names. Link only to existing entries.</td>
+</tr>
+<tr>
+<td>Sources</td>
+<td>Where does the established pattern come from?</td>
+<td>Attribute the original pattern and any additional factual claims. Identify teaching examples as original examples.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use these H2 headings consistently for the pilot. Pattern-specific H3 headings may add detail. Aim for roughly 800–1,500 words when the material supports it. Avoid padding sections to achieve uniform lengths. Keep the summary to a single sentence describing the design move.</p>
+<p>Declare the language on every code fence and render examples with syntax highlighting. Keep code selectable and preserve its whitespace. Use readable contrast and keyboard-accessible horizontal scrolling on narrow screens.</p>
+<p>For architectural or distributed patterns, “How it works” must explain boundaries, failure behavior, consistency, and ordering where relevant. For concurrency patterns, include ownership and synchronization. For GoF patterns, explain objects or functions, responsibilities, collaboration, and the dimension of change. These are content requirements within the shared outline, not extra mandatory headings.</p>
+<h2>Why this structure</h2>
+<p>The outline combines the practical concerns common to established pattern literature: situation, problem, solution, mechanism, examples, applicability, consequences, and relationships. It is a proposed Patternverse editorial structure, not a claim that every source uses identical headings.</p>
+<p>The <a href="https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610">GoF publisher description</a> emphasizes applicability, constraints, consequences, examples, and code. The <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/Introduction.html">Enterprise Integration Patterns introduction</a> explicitly distinguishes context, problem, forces, solution, sketch, results, next patterns, and examples. The <a href="https://www.dre.vanderbilt.edu/~schmidt/POSA/">POSA series</a> spans architectural patterns, design patterns, and idioms. The shared outline accommodates those different scales without treating every pattern as a class diagram.</p>
+<h2>One GoF collection</h2>
+<p>The intended collection is <strong>GoF Design Patterns</strong>, containing all 23 canonical entries. Remove the separate Creational, Structural, and Behavioral collections and the category-based browse section in the main collection. Remove category tags and the repeated category labels in the articles. Keep the individual pattern IDs and article URLs.</p>
+<p>Present the patterns alphabetically so the order does not silently reproduce the old category split:</p>
+<p>Abstract Factory, Adapter, Bridge, Builder, Chain of Responsibility, Command, Composite, Decorator, Facade, Factory Method, Flyweight, Interpreter, Iterator, Mediator, Memento, Observer, Prototype, Proxy, Singleton, State, Strategy, Template Method, Visitor.</p>
+<p>The collection introduction should explain the common purpose and link to all 23 patterns. Explain comparisons between neighboring patterns inside the articles. The collection is a reading reference, not a required learning sequence.</p>
+<p>During the eventual rollout, update the metadata sidecar, category-dependent compiler and search tests, and import documentation together. Replace legacy import-preservation checks with checks of the revised article content and relationships. Retain provenance for the original import. Handle the three retired collection URLs explicitly with redirects to the main collection so existing links still have a destination.</p>
+<h2>Article illustration standard</h2>
+<p>Use the current light editorial article style established in Architecture, Filmmaking, and Machine Learning. This is distinct from the small concept marks used in cards and headers.</p>
+<ul>
+<li>Fixed white surface, including dark browser appearance.</li>
+<li>Regular Helvetica Neue, with Helvetica and Arial fallbacks.</li>
+<li>Ink <code>#252c28</code>; secondary text <code>#626962</code>; context fill <code>#f1f2ef</code>; construction lines <code>#a6aca3</code>; mechanism accent <code>#00855b</code>; light accent <code>#edf5f0</code>.</li>
+<li>Simple editable SVG geometry, square boundaries, ample space, and restrained line weights. Use green to identify the consequential relationship or intervention.</li>
+<li>Labels and line styles must carry the meaning independently of color. Arrows must distinguish calling, choosing, implementing a contract, and returning a result.</li>
+<li>Prefer comparisons, collaboration diagrams, and execution sequences. Add UML only when its notation teaches something necessary. Avoid decorative class boxes and metaphor illustrations.</li>
+<li>Use a second illustration when it answers a different question. Do not require an arbitrary illustration count.</li>
+<li>Compose a separate stacked phone version when shrinking the desktop layout would make labels hard to read. Include an accessible description and an explanatory caption for each figure.</li>
+</ul>
+<p>Local style references: <a href="../machine-learning-illustration-style.json">Machine Learning</a>, <a href="../film-illustration-review.json">Filmmaking</a>, and <a href="../architecture-illustration-style.json">Architecture</a>.</p>
+<h2>Strategy pilot</h2>
+<p>The accompanying Strategy draft follows the eight sections. It uses delivery pricing as the main example, includes executable Python, and adds search ranking as a second context. Two figures explain different questions: which responsibility moves out of the workflow, and who selects the strategy before it is called. Each figure has a separate phone composition.</p>
+<p>This package is a review draft. The collection migration and the other 22 article rewrites belong to the rollout after review of the outline and pilot.</p><footer>Editorial pilot · 28 October 2026 · Prepared for review before the collection rollout.</footer></main></body></html>

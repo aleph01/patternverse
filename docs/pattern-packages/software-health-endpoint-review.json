@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "health-endpoint",
+  "title": "Health Endpoint",
+  "aliases": ["Health Check API", "Health Endpoint Monitoring"],
+  "primary_collection": "software-reliability-failure-handling",
+  "primary_collection_title": "Reliability and Failure Handling",
+  "body_word_count": 1413,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Seven primary references: Chris Richardson catalogs Health Check API; Microsoft describes Health Endpoint Monitoring and its external observer, depth, cost, staleness and security; Kubernetes defines startup/liveness/readiness decisions and startup gating; Spring Boot documents dependency-selection risks, main versus management paths and lifecycle health state; AWS ALB documents all-unhealthy fail-open routing; Python documents WSGI/reference-server limits; RFC 9111 defines no-store. Health Check API is the interface catalog name and Health Endpoint Monitoring describes the endpoint/observer collaboration. These are searchable names for the pattern family, with scope explained. Original order-service situation, injected Boolean policy, loopback HTTP experiment and native figures.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["health.py", "demo.py"],
+      "stdout": [
+        "starting 200 503 503",
+        "ready 200 200 200",
+        "dependency down 200 200 503",
+        "recovered 200 200 200",
+        "draining 200 200 503"
+      ],
+      "illustration_trace_matches_actual_http": true,
+      "verification": "Actual article fences run unchanged on Python 3.11+. Real ephemeral loopback HTTP requests produce all five exact output rows and match every lifecycle figure value. WSGI validation middleware verifies the app/server boundary. All eight Boolean state combinations are tested over GET and HEAD: liveness never reads the dependency snapshot, startup tracks initialization, readiness requires initialization plus dependency and excludes draining, and stateful requests read one snapshot. HEAD has empty body with matching content-length semantics. Unsupported methods return 405/Allow without consulting state, unknown paths return 404, query strings do not echo private values, and ordinary responses use minimal fixed bodies and no-store. A broken provider propagates its exact error through the app and becomes HTTP 500 at the server, without a green fallback or diagnostic disclosure; shallow liveness remains independent. Responses close, listeners close and server threads are shut down/joined with inventory returning to baseline. No real dependency verification, freshness enforcement, business handler, production server, authentication/TLS, observer/controller, routing removal, restart action or complete deadline is inferred."
+    },
+    "content": "1298 entities validate including drafts; published-only compilation has 1151 entities without diagnostics. One new canonical article; no new collection or verse.",
+    "integration_tests": "Nine focused article suites pass across the batched run and isolated rerun: Health Endpoint, Load Shedding, Backpressure, Queue-Based Load Leveling, Bulkhead, Circuit Breaker, Retry with Backoff and Jitter, Timeout and GoF. The initial ten-file batch passed 49 checks, failed the pre-existing global authored-graphic coverage check for access-over-ownership, and skipped three Bulkhead checks after its setup hook exceeded ten seconds under concurrent corpus compilation. The unchanged Bulkhead suite passes all three checks in isolation, yielding 52 passing checks and one existing graphic-coverage failure overall. No timeout or existing test source was changed. Canonical title and catalog aliases, one primary home, Software Engineering membership, unchanged GoF collection, exact selectable highlighted code, related links, responsive assets/dimensions, metadata hash and alias search are verified.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native generator, actual-code validator, new integration test, authoring JSON/documentation, registry and review record. Article/collection Markdown follow existing conventions.",
+    "collection": "New health-endpoint is the eighth completed member of Reliability and Failure Handling, after Load Shedding. All seven prior members remain. All existing articles, other collections, verse files, prior authoring records, historical Data Engineering import and GoF entries are unchanged. No duplicate, new collection, future stub, practice or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-reliability-failure-handling.md"
+      ],
+      "other_existing_content_unchanged": 1296,
+      "new_content": ["content/patterns/health-endpoint.md"],
+      "one_new_canonical_article_and_no_new_collection": true,
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_existing_articles_unchanged": true,
+      "all_other_collections_unchanged": true,
+      "existing_verses_unchanged": true,
+      "prior_seven_primary_collection_members_preserved": true,
+      "historical_data_engineering_import_unchanged": true,
+      "earlier_article_integration_tests_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 67,
+      "prior_graphics_unchanged": 479,
+      "prior_dimensions_unchanged": 1702,
+      "new_dimensions": {
+        "software-engineering/health-endpoint-contract.svg": {
+          "width": 720,
+          "height": 1072
+        },
+        "software-engineering/health-endpoint-contract-mobile.svg": {
+          "width": 360,
+          "height": 1264
+        },
+        "software-engineering/health-endpoint-lifecycle.svg": {
+          "width": 720,
+          "height": 848
+        },
+        "software-engineering/health-endpoint-lifecycle-mobile.svg": {
+          "width": 360,
+          "height": 1300
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The unchanged standard public build succeeds in an isolated source snapshot with Public web build checks passed. Article, changed collection, authoring/docs, generator/validator, test, concept registry, manifest and four SVGs match staged sources. Gallery paths match the reviewed registry. Private environment files excluded and PUBLIC_DROPBOX_APP_KEY empty to disable local sync. Hash-verified native copy-on-write files limit disk use only for this task’s identical asset snapshots/generated copies; temporary clones stay outside scanned output. Source, shared output, earlier previews and build implementation unchanged. After success only this task’s redundant .svelte-kit/output compiler directory is removed; the finished preview remains. No renderer/dependency changes.",
+    "illustrations": "Two editable native figures with separate phone compositions. The collaboration figure separates an external observer, small health handler, local lifecycle/dependency evidence and observer-owned policy. Labeled arrows distinguish health request, returned status/timing, evidence reads and observer control. Phone request text is positioned between request/response arrows. The lifecycle figure shows starting 200/503/503, ready 200/200/200, dependency-down 200/200/503, recovered 200/200/200 and draining 200/200/503. All values match actual HTTP execution. Labels state that the demo directly calls all paths, startup-gated probes normally wait, independent requests may straddle changes and unready is not a restart instruction. Fixed white, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained strokes, meaningful alt/captions. Four variants have zero measured outside labels, overlaps or outside rectangles. Concept mark separates observer, endpoint and policy action and fits 96-by-96 with stroke. Native/embedded desktop and phone figures, labels, contrast, captions, code viewports and gallery visually inspected. Four new dimensions; prior dimensions preserved.",
+    "browser": "Actual production article checked at 1440, 390 and 320 CSS pixels: eight exact H2s, two loaded responsive figures, two exact selectable syntax-highlighted Python blocks, distinct token colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow and four related routes returning 200. Existing collection route and Software Engineering gallery reach the canonical article with its correct primary breadcrumb and final concept paths. Pagination reaches the eighth member. Desktop/phone article tops, both embedded figures, code viewports and gallery visually inspected; no console/page errors.",
+    "built_assets": {
+      "build_root": ".local/software-health-endpoint/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 47751
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 7,
+          "y": 11,
+          "width": 82,
+          "height": 76
+        },
+        {
+          "x": 13.5,
+          "y": 37.5,
+          "width": 13,
+          "height": 24
+        }
+      ]
+    },
+    "disk_space_management": {
+      "status": "passed",
+      "native_compaction": {
+        "status": "passed",
+        "files": 5708,
+        "logical_bytes_cloned": 1157618968,
+        "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+      },
+      "during_standard_build": {
+        "status": "passed",
+        "build_command": "node scripts/build-public-web.mjs",
+        "build_exit_code": 0,
+        "compaction_passes": [
+          {
+            "status": "passed",
+            "files": 3843,
+            "logical_bytes_cloned": 776441284,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3843,
+            "logical_bytes_cloned": 776441284,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3843,
+            "logical_bytes_cloned": 776441284,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3843,
+            "logical_bytes_cloned": 776441284,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3843,
+            "logical_bytes_cloned": 776441284,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5708,
+            "logical_bytes_cloned": 1157618968,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5708,
+            "logical_bytes_cloned": 1157618968,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          }
+        ],
+        "scope": "Only this task’s byte-identical asset copies, including while they are generated. Each native clone is hash-verified before atomic file replacement. Source, build implementation and other previews are unchanged."
+      },
+      "temporary_clones_outside_scanned_output": ".local/software-health-endpoint/clone-temporaries",
+      "redundant_compiler_output_removed_after_successful_build": ".local/software-health-endpoint/build-workspace/apps/web/.svelte-kit/output",
+      "finished_build_and_running_preview_preserved": true,
+      "source_shared_output_and_earlier_previews_unchanged": true
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "New canonical Health Endpoint article. Health Check API is Richardson’s interface catalog name; Health Endpoint Monitoring names endpoint plus observer in Microsoft’s catalog. These are searchable names for the pattern family. Original order-service situation and Python 3.11+ WSGI application plus real loopback HTTP experiment. The trusted snapshot callback atomically returns initialized/dependency_ok/draining Boolean state without remote I/O. Live returns 200 only when this request loop can answer and does not read dependency state; startup reflects initialization; readiness requires initialization, the selected required dependency and not draining. GET/HEAD are supported, other methods return 405 with Allow, unknown paths return 404, and minimal responses carry no-store. Five stable phases produce 200/503/503, 200/200/200, 200/200/503, 200/200/200 and 200/200/503. All routes are called directly in the demo; startup-gated observers normally suppress other probes until startup succeeds. The server binds an ephemeral loopback port, bypasses proxies, closes each response, and is shut down/joined/closed by its owner. No real dependency checker, aged-state enforcement, business handler, controller, routing/restart action, TLS, authentication, complete deadline or production HTTP server is supplied. Independent requests may straddle changes, and readiness loss is not a universal no-traffic guarantee. Actual HTTP tests cover every Boolean state combination, one snapshot per stateful request, no liveness dependency access, GET/HEAD parity, unsupported-method and route failures, no-store/minimal bodies, provider failure becoming HTTP 500 and complete owned cleanup. The snapshot is trusted injected evidence, not a dependency check or stale-state control. No business path, route controller, restart controller or universal traffic-removal guarantee is implemented.",
+  "preview": "http://127.0.0.1:43052/pattern/health-endpoint",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-health-endpoint",
+  "browser_measurements": ".local/software-health-endpoint/browser-checks.json",
+  "browser_check_script": ".local/software-health-endpoint/check-browser.mjs",
+  "build_log": ".local/software-health-endpoint/public-build-isolated.log",
+  "branch": "codex/software-health-endpoint",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

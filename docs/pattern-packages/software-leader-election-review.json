@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "leader-election",
+  "title": "Leader Election",
+  "aliases": [],
+  "primary_collection": "software-distributed-data-coordination",
+  "primary_collection_title": "Distributed Data and Coordination",
+  "body_word_count": 1476,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Microsoft Leader Election guidance, Ongaro and Ousterhout’s Raft paper, official ZooKeeper recipes, etcd concurrency API, Kubernetes Leases documentation, and Kleppmann’s fencing discussion. Leader Election is the established name. Election, consensus, leases, mutexes, and destination fencing are distinguished. Fixed membership, retained one-vote-per-term state, full-group majorities, minority unavailability, liveness assumptions, and safe membership change are explicit. Raft additionally requires log freshness, replication, persistence, and other protocol rules; the example is not Raft. A new election neither kills an old process nor automatically fences an independent resource.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["election.py", "demo.py"],
+      "stdout": [
+        "isolated C elected: False",
+        "elected: A 1 ('A', 'B')",
+        "replacement: B 2 ('B', 'C')",
+        "stale A rejected",
+        "stored: manifest-B"
+      ],
+      "verification": "Exact five-line demo output; isolated C cannot win; A wins A/B in term one, competing same-term B fails, and B later wins B/C in term two while A’s immutable historical result survives; newer election alone leaves old A eligible at the independent register until explicit handover; uninstalled newer claims, stale writes, stale installs, and conflicting same-term owners are rejected without mutating the register; duplicate install of current authority preserves value and repeated same-term writes remain eligible, distinguishing fencing from deduplication; lower-term vote rejection and one retained candidate per term; duplicate reachable identities count once; full-membership quorum formula for cohorts 1–7 including even sizes; 384 exhaustive three-member traces cover every candidate order and self-containing reachable subset, with at most one winner per term; split vote stalls until a later successful term; invalid membership, candidate, term, and reachability inputs preserve state; independent model instances do not share voting state. Sequential trusted same-scope model only: no real network, clocks, persistence, safe membership change, process roles, Raft log replication/freshness, authentication, or crash recovery is inferred."
+    },
+    "content": "1282 entities validate with drafts included; published-only compilation contains 1135 entities without diagnostics.",
+    "integration_tests": "All six focused article suites pass: Leader Election, Saga, API Composition, Pessimistic Offline Lock, Idempotent Receiver, and GoF. Combined run across seven files reports 43 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Distributed Data and Coordination and appended Leader Election as its third completed member, preserving Saga, API Composition, and prior collection contents. Leases with Fencing Tokens, Pessimistic Offline Lock, Idempotent Receiver, and Saga retain their canonical IDs and supply related links. One primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-distributed-data-coordination.md"
+      ],
+      "other_existing_content_unchanged": 1280,
+      "new_content": ["content/patterns/leader-election.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "saga_and_api_composition_members_preserved": true,
+      "existing_leases_with_fencing_tokens_article_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 49,
+      "prior_graphics_unchanged": 461,
+      "prior_dimensions_unchanged": 1634,
+      "new_dimensions": {
+        "software-engineering/leader-election-votes.svg": {
+          "width": 720,
+          "height": 944
+        },
+        "software-engineering/leader-election-votes-mobile.svg": {
+          "width": 360,
+          "height": 1112
+        },
+        "software-engineering/leader-election-handover.svg": {
+          "width": 720,
+          "height": 1008
+        },
+        "software-engineering/leader-election-handover-mobile.svg": {
+          "width": 360,
+          "height": 1072
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier software article, or GoF changes.",
+    "illustrations": "Two editable native SVGs explain the fixed three-member quorum and election-to-destination handover. Both have separately composed phone variants, meaningful alternatives/captions, the approved fixed white surface, regular Helvetica Neue palette, square geometry, and explicit arrow meanings. C’s isolated vote does not shrink the membership or contribute to A’s winning set. The second figure routes old A’s delayed write directly to rejection after B’s destination install, rather than depicting A installing B. It distinguishes election from write revocation and does not claim that A stops or that a term proves data correctness. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and embedded desktop/phone figures were visually inspected for accuracy, label placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all four related routes returning 200. Distributed Data and Coordination contains Saga, API Composition, and Leader Election; its route and Software Engineering verse gallery open the new article with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-leader-election/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 46314
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ deterministic sequential in-memory simulation. One election scope has 1–7 distinct trusted member identities and positive integer terms. Each voter and register call models an atomic operation. Full-membership majorities and retained one-vote-per-term records prevent different winners within one term under these assumptions. Immutable results are historical observations, not permanent write permission. The independent publication register rejects obsolete writes only after explicit installation of newer authority; election alone does not update it. Production installation must authenticate trusted same-scope authority, and checks plus writes must be atomic with durable monotonic state surviving restore. Same-term writes remain eligible, so fencing does not deduplicate work or establish publication correctness. No real network, process roles, clocks, persistence, Raft log replication/freshness, authentication, safe membership change, crash recovery, or formal protocol verification is inferred. Exhaustive tests cover 384 bounded three-member campaign traces, not all network interleavings.",
+  "preview": "http://127.0.0.1:43034/pattern/leader-election",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-leader-election",
+  "browser_measurements": ".local/software-leader-election/browser-checks.json",
+  "browser_check_script": ".local/software-leader-election/check-browser.mjs",
+  "build_log": ".local/software-leader-election/public-build-isolated.log",
+  "branch": "codex/software-leader-election",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "optimistic-offline-lock",
+  "title": "Optimistic Offline Lock",
+  "aliases": ["Optimistic Offline Locking"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1411,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "implemented_with": ["optimistic-offline-lock", "pessimistic-offline-lock"],
+  "validation": {
+    "research": "Six primary source notes. David Rice is credited for Optimistic Offline Lock in Fowler’s catalog and Patterns of Enterprise Application Architecture. Microsoft and SQLAlchemy support version predicates and explicit conflict resolution; SQLite and Python support atomic short transactions and affected-row checks. RFC 9110 supports the second HTTP context with strong ETag/If-Match semantics. Broader optimistic concurrency terminology is distinguished from the offline business-operation lifetime. The example and diagrams are original.",
+    "python_examples": "Actual notes.py and demo.py fences execute with six stated output lines exactly. Checks cover two independent connection snapshots, conditional version advance, ordered UPDATE/log INSERT/COMMIT, stale and deleted/missing rows, immutable input snapshots, title/ID/version boundaries and exhaustion, later log failure rolling back the title/version, same-title version advance, caller-owned transaction rejection, closed/default connections, and physical contention remaining a storage error. Deliberate unversioned-writer and independent-row read-set cases demonstrate limits.",
+    "python_stdout": [
+      "read versions: 1 1",
+      "alice saved: 2",
+      "bob: reload and review",
+      "stored: Launch plan 2",
+      "reviewed save: 3",
+      "edit-log rows: 2"
+    ],
+    "content": "1260 entities validate with drafts included. Published-only corpus contains 1113 entities and no errors.",
+    "collection": "Reused Persistence and Transactions, retaining its six previous members and appending Optimistic Offline Lock followed by Pessimistic Offline Lock. The two new articles cross-link, and no duplicate alias article, practice, collection, or neighboring stub was created.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for both generators, executable validators, integration tests, articles, primary collection, authoring metadata, concept registry, and authoring documentation. Review reports are formatted separately.",
+    "preservation": "All 23 GoF articles and their collection match pre-change hashes. All 25 earlier software articles and authoring records remain unchanged. All 437 prior concept marks and 1542 asset-dimension entries are unchanged. The Software Engineering verse and Application Architecture and Domain Modeling collections are byte-for-byte unchanged. Persistence and Transactions preserves its six earlier members and body, adding only the two completed articles and introductions.",
+    "article_tests": "105 article integration checks pass across the two new articles and all earlier software/GoF suites. Coverage includes canonical IDs and aliases, primary membership retaining earlier articles, resolved cross-links, exact eight sections, two copyable highlighted Python blocks per article, responsive figures and dimensions, library search, ten queries, revision hashes, and concept marks. The pessimistic article’s three integration checks also pass in a focused rerun after the final completion-outcome clarification.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 109 passed and one unrelated failure across 29 files.",
+    "public_build": "Production build and public web build checks pass. Both article browser reviews used the completed build; no deployment.",
+    "visuals": "All four native SVG variants for this article load. Native and production-browser measurements show no overlapping/out-of-bounds labels or out-of-canvas rectangles. Every native render and actual desktop/phone figure was visually inspected. The conflict diagram follows two original version-1 snapshots through the first accepted version-2 write and the stale second save. The save diagram encloses the conditional update, version advance, edit-log insertion, and commit in one short transaction, distinguishing provisional writes from returned success. Exact light editorial palette, fixed white surface, regular Helvetica typography, square geometry, arrow meanings, label placement, contrast, captions, and phone readability were reviewed. The concept mark appears in the header and collection card.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 headings, two Python fences preserved as DOM text, colored syntax tokens, text selection retaining indentation, focusable code, keyboard horizontal scrolling at 320px, responsive phone figures, and no page overflow. Article tops, normal code viewports, all figures/captions, and gallery cards were visually inspected. Browser text selection normally omits the final newline. Normal viewport code captures supplement tall element captures that may include existing sticky navigation.",
+    "navigation_browser": "All four related routes return HTTP 200, including the companion Offline Lock article. Persistence and Transactions renders directly and in its eight-pattern verse gallery. The card on page two opens the canonical route with the correct primary breadcrumb and 7/8 article indicator."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four global graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Original immutable Note snapshots and parameterized conditional UPDATE by ID and original version. A successful short SQLite transaction changes title, advances the bounded positive integer version, inserts a local edit-log row, and commits before returning a new snapshot. A stale or deleted row produces Conflict; later log failures roll back all save writes. Two real connections deterministically demonstrate version 1 proposals, version 2 success, stale rejection, and an explicitly reviewed version 3 proposal. No automatic merge/retry, authorization, cross-row read-set validation, token-reset protection, external-effect coordination, or uncertain-commit recovery is implemented.",
+  "preview": "http://127.0.0.1:43010/pattern/optimistic-offline-lock",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-optimistic-offline-lock",
+  "browser_measurements": ".local/software-optimistic-offline-lock/browser-checks.json",
+  "browser_check_script": ".local/software-optimistic-offline-lock/check-browser.mjs",
+  "preservation_checks": ".local/software-optimistic-offline-lock/preservation.json",
+  "shared_check_logs": ".local/software-optimistic-offline-lock",
+  "build_log": ".local/software-optimistic-offline-lock/public-build.log",
+  "branch": "codex/software-optimistic-offline-lock",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

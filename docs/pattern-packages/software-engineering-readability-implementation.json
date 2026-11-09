@@ -1,0 +1,329 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "audit": "docs/pattern-packages/software-engineering-readability-audit.md",
+  "articles": [
+    {
+      "id": "data-bounded-contexts",
+      "title": "Bounded Context",
+      "source": "content/patterns/data-bounded-contexts.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "c796d8112298a2935a515a3b7a53ce35e7413656f441ff5ff3a13bfeb424d806"
+    },
+    {
+      "id": "repository",
+      "title": "Repository",
+      "source": "content/patterns/repository.md",
+      "findings": ["R1"],
+      "status": "implemented-and-verified",
+      "article_sha256": "feed1cc706d9c7b138697fa09da88e41ffc638a5f3c27e0a7ee200ab062c6471"
+    },
+    {
+      "id": "data-mapper",
+      "title": "Data Mapper",
+      "source": "content/patterns/data-mapper.md",
+      "findings": ["R6", "R7"],
+      "status": "implemented-and-verified",
+      "article_sha256": "28cc9ad43501cea71aaa55fe5111de52c3fe83329105bdf7e9fc2d4dede67f01"
+    },
+    {
+      "id": "active-record",
+      "title": "Active Record",
+      "source": "content/patterns/active-record.md",
+      "findings": ["R7"],
+      "status": "implemented-and-verified",
+      "article_sha256": "a08997d613586059df1d5b86839385fb1e3a53e7a68f67e9d8bf3811604153ee"
+    },
+    {
+      "id": "unit-of-work",
+      "title": "Unit of Work",
+      "source": "content/patterns/unit-of-work.md",
+      "findings": ["R1"],
+      "status": "implemented-and-verified",
+      "article_sha256": "9babfd9f9201c942a1c3a57db5bb5576bb7c45f68f14f74d1dabac6d00d7e89e"
+    },
+    {
+      "id": "presentation-model",
+      "title": "Presentation Model",
+      "source": "content/patterns/presentation-model.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "cf2e52e42dfebd1e745188d558863e05797a030d633366fb458a8badb3fb1574"
+    },
+    {
+      "id": "template-view",
+      "title": "Template View",
+      "source": "content/patterns/template-view.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "830bd617772716544f77a447cab84b56f5112418761aeb2a818616ce856e2c3a"
+    },
+    {
+      "id": "unidirectional-data-flow",
+      "title": "Unidirectional Data Flow",
+      "source": "content/patterns/unidirectional-data-flow.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "a5677994e7822593944759382281e9f5ababcaa98c83537e4d32ee7ca9284447"
+    },
+    {
+      "id": "data-publish-subscribe-distribution",
+      "title": "Publish-Subscribe",
+      "source": "content/patterns/data-publish-subscribe-distribution.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "02d7f4558c43edfb7e3c0446788fce470e716d454fa5a5f0538a611df665c63b"
+    },
+    {
+      "id": "cqrs",
+      "title": "CQRS",
+      "source": "content/patterns/cqrs.md",
+      "findings": ["R1"],
+      "status": "implemented-and-verified",
+      "article_sha256": "be05f8ccab7fd26aa3d82a19b8f41e4c9aa0dfda6a9a8ade008ae0c5228a08f1"
+    },
+    {
+      "id": "data-event-sourcing",
+      "title": "Event Sourcing",
+      "source": "content/patterns/data-event-sourcing.md",
+      "findings": ["R1"],
+      "status": "implemented-and-verified",
+      "article_sha256": "e43d47965789e0bacd21e5195e9f0d1ccaaa83ac5aeaee3ebbfb1bf845ad55c5"
+    },
+    {
+      "id": "data-transactional-outbox",
+      "title": "Transactional Outbox",
+      "source": "content/patterns/data-transactional-outbox.md",
+      "findings": ["R1"],
+      "status": "implemented-and-verified",
+      "article_sha256": "ecfd41db0f853ac0ab5a4f30eb6fc79ee99d2e081269120a6e36156ce0b0d5e9"
+    },
+    {
+      "id": "saga",
+      "title": "Saga",
+      "source": "content/patterns/saga.md",
+      "findings": ["R1"],
+      "status": "implemented-and-verified",
+      "article_sha256": "cf0d76547803e1d30c3c28de4b8f4439a61384c16b68ceb9b895a7d30a85e690"
+    },
+    {
+      "id": "api-composition",
+      "title": "API Composition",
+      "source": "content/patterns/api-composition.md",
+      "findings": ["R6"],
+      "status": "implemented-and-verified",
+      "article_sha256": "270f606061c360df9d5a848eb10edc58300da0da19011b62063dc537698f42f8"
+    },
+    {
+      "id": "leader-election",
+      "title": "Leader Election",
+      "source": "content/patterns/leader-election.md",
+      "findings": ["R4"],
+      "status": "implemented-and-verified",
+      "article_sha256": "385f97fac95f0cfea1acd0486bb6a507303ac0fe423f6956891ddd8dfbee4588"
+    },
+    {
+      "id": "reactor",
+      "title": "Reactor",
+      "source": "content/patterns/reactor.md",
+      "findings": ["R4"],
+      "status": "implemented-and-verified",
+      "article_sha256": "4e9976fd2fba89a2d873cb49c93cc498cd62e6523e8859246f4bfe4cdfd9c348"
+    },
+    {
+      "id": "proactor",
+      "title": "Proactor",
+      "source": "content/patterns/proactor.md",
+      "findings": ["R3"],
+      "status": "implemented-and-verified",
+      "article_sha256": "ea5220490f3d080846481e60dc7f1a660feb11dd104d404229fd04dc8ddbaac1"
+    },
+    {
+      "id": "data-workload-isolation",
+      "title": "Bulkhead",
+      "source": "content/patterns/data-workload-isolation.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "92392d4a4e965b198ba7901430c86ff8af2e317fbae4158013522e64fafba780"
+    },
+    {
+      "id": "memoization",
+      "title": "Memoization",
+      "source": "content/patterns/memoization.md",
+      "findings": ["R3"],
+      "status": "implemented-and-verified",
+      "article_sha256": "72e9aaa639e1f4404b9b78738b27c4610781e561378d6ddeb14ac0731e9858f1"
+    },
+    {
+      "id": "data-horizontal-sharding",
+      "title": "Sharding",
+      "source": "content/patterns/data-horizontal-sharding.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "6b616fb50000e373eb467444f35eba3d2d57a21011db0c5cfd6c3f87b030750c"
+    },
+    {
+      "id": "test-data-builder",
+      "title": "Test Data Builder",
+      "source": "content/patterns/test-data-builder.md",
+      "findings": ["R8"],
+      "status": "implemented-and-verified",
+      "article_sha256": "6504f6245732e599220fa91fe3b200a06169ef3f3a61cf54824ca29270fa0ea3"
+    },
+    {
+      "id": "data-incremental-replacement",
+      "title": "Strangler Fig",
+      "source": "content/patterns/data-incremental-replacement.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "cb7de8e500e8365bd0e399c3675c6dd8705e563eedf72efb5f8a9700e8f20cc6"
+    },
+    {
+      "id": "ml-canary-rollout-with-rollback",
+      "title": "Canary Release",
+      "source": "content/patterns/ml-canary-rollout-with-rollback.md",
+      "findings": ["R2"],
+      "status": "implemented-and-verified",
+      "article_sha256": "984a973180bcfe23d6d2a58020dfd6fc5892992f28bade968cb4e343e102d2b8"
+    },
+    {
+      "id": "ml-shadow-deployment",
+      "title": "Shadow Traffic",
+      "source": "content/patterns/ml-shadow-deployment.md",
+      "findings": ["R5"],
+      "status": "implemented-and-verified",
+      "article_sha256": "0c6347267a9fe1f983222ab8ddbf4f313d0d3922807889efa8c5a648fa990c8d"
+    }
+  ],
+  "findings": {
+    "R1": {
+      "status": "implemented",
+      "change": "Added result-first traces to six examples; Repository and Unit of Work now present the unchanged caller file first, with matching code_files metadata. Complete implementations, preconditions and failure paths remain."
+    },
+    "R2": {
+      "status": "implemented",
+      "change": "Canary Release leads with its 0/10 then 3/25 decision and a compact three-column comparison, before deterministic fixture mechanics. Gate policies and code are unchanged."
+    },
+    "R3": {
+      "status": "implemented",
+      "change": "Proactor uses a three-column completion table preserving owner, bytes, data, final result and requested cancellation. Memoization prints named minutes, cache misses and cache-clear results; its validator checks the new labels and unchanged calculations."
+    },
+    "R4": {
+      "status": "implemented",
+      "change": "Leader Election defines example terms and destination-side fencing; Reactor introduces the selector’s concrete job before the formal role name."
+    },
+    "R5": {
+      "status": "implemented",
+      "change": "Removed canonical-ID, previous-title and search-index maintenance narration from nine explanations; aliases and canonical identities remain in metadata."
+    },
+    "R6": {
+      "status": "implemented",
+      "change": "Expanded DTO and ETL in Data Mapper and translated response records and per-service version numbers in API Composition, retaining upstream validation and authorization assumptions."
+    },
+    "R7": {
+      "status": "implemented",
+      "change": "Wrapped SQL declarations, calls and compound conditions in Active Record, Data Mapper and Unit of Work. Python syntax trees match after normalizing CREATE TABLE whitespace; existing SQL behavior suites pass."
+    },
+    "R8": {
+      "status": "implemented",
+      "change": "Test Data Builder uses Order A rather than left order in article alternative text, sidecar metadata and both native SVG descriptions."
+    }
+  },
+  "additional_alignment": [
+    "Bounded Context’s existing sidecar summary and concept-mark brief were aligned to its unchanged published summary; concept geometry and all other entries remain unchanged.",
+    "Sharding’s desktop footer gained six pixels of separation between its close labels; wording, dimensions and phone composition remain unchanged."
+  ],
+  "verification": {
+    "article_example_suites": {
+      "passed": 24,
+      "detail": "23 existing validators plus the unchanged Shadow Traffic program and published assertions."
+    },
+    "content_rendering_tests": {
+      "passed": 108,
+      "detail": "107 checks passed in the 25-file run. The single failure exposed existing Bounded Context metadata drift; its three-test suite passed after both briefs were aligned. The six Canary/Proactor checks passed again after the final table refinement. Counts are unique checks, not summed reruns."
+    },
+    "web_types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "content_entities_validated": 1322,
+    "browser_cases": 48,
+    "browser_widths_px": [1440, 390],
+    "exact_displayed_code": "passed, including Template View HTML",
+    "responsive_svg_checks": 94,
+    "svg_labels_outside_or_overlapping": 0,
+    "page_wide_overflow": 0,
+    "public_build": "passed in isolated local workspace",
+    "scoped_eslint": "passed",
+    "formatting": "passed",
+    "phone_code_scroll_widths": {
+      "active-record": {
+        "before_px": 1508,
+        "after_px": 737,
+        "visible_width_px": 365
+      },
+      "data-mapper": {
+        "before_px": 1322,
+        "after_px": 879,
+        "visible_width_px": 365
+      },
+      "unit-of-work": {
+        "before_px": 1083,
+        "after_px": 808,
+        "visible_width_px": 365
+      }
+    },
+    "preservation": {
+      "status": "passed",
+      "articles_changed": 24,
+      "frontmatter_sources_related_links": "unchanged in all 24",
+      "non_target_metadata_records_unchanged": 71,
+      "code_checks": "Python syntax trees unchanged apart from CREATE TABLE whitespace; Memoization definitions unchanged and only output labels revised",
+      "article_code_comparisons": [
+        "data-incremental-replacement",
+        "reactor",
+        "proactor",
+        "unit-of-work",
+        "presentation-model",
+        "cqrs",
+        "data-workload-isolation",
+        "data-transactional-outbox",
+        "ml-shadow-deployment",
+        "leader-election",
+        "data-horizontal-sharding",
+        "memoization",
+        "test-data-builder",
+        "api-composition",
+        "unidirectional-data-flow",
+        "data-bounded-contexts",
+        "saga",
+        "ml-canary-rollout-with-rollback",
+        "data-event-sourcing",
+        "data-mapper",
+        "active-record",
+        "repository",
+        "template-view",
+        "data-publish-subscribe-distribution"
+      ],
+      "unrelated_article_fingerprints": "unchanged",
+      "asset_dimensions_manifest": "unchanged"
+    }
+  },
+  "metadata_preserved": [
+    "Canonical IDs, titles, summaries, frontmatter, primary collections and aliases",
+    "All related-pattern links and external source URLs",
+    "All recommendation queries and non-target authoring records",
+    "All GoF articles and collection membership",
+    "Unrelated article fingerprints and asset dimensions manifest"
+  ],
+  "limits": [
+    "Phone review uses browser emulation, not a physical device.",
+    "Embedded explorer controls were not exhaustively exercised; the existing Canary example validator and unchanged Shadow program passed.",
+    "Horizontal scrolling remains available for code that exceeds the phone column.",
+    "Repository-wide tests unrelated to these articles were not rerun."
+  ],
+  "preview": "http://127.0.0.1:43093",
+  "evidence_directory": ".local/software-readability-implementation",
+  "remote_actions": false
+}

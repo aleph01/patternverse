@@ -3,7 +3,7 @@
 :input situation text
 :output theme
 
-!agent themes {
+themes = !agent {
     :returns choices
     :min 3
     :max 5
@@ -15,7 +15,7 @@
     Generate several short, distinct themes.
 }
 
-!choose theme {
+theme = !choose {
     :from themes
 
     Which feels closest?

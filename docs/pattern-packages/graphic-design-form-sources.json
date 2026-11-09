@@ -1,0 +1,35 @@
+{
+  "pattern": "Match Form to Purpose",
+  "mode": "Built-in image generation for photographic sources; deterministic SVG typography and layout composition.",
+  "date": "2026-10-27",
+  "fictional": true,
+  "sources": [
+    {
+      "name": "form-seed-packing-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic banner for a believable printed volunteer seed-packing instruction sheet. Primary request: an ordinary community greenhouse potting bench with a small shallow dish of dry runner-bean seeds, several small blank kraft paper seed envelopes, one closed envelope and a plain wooden collection tray. A graphite pencil rests nearby. Natural wood, muted sage and clay textures, soft window daylight, practical and welcoming, used but tidy. No people or hands. No readable writing, lettering, logos, plant labels or watermarks. Edge-to-edge editorial photograph only, no page, poster, layout, arrows or infographic. Landscape 3:2 composition that retains seeds, envelope and tray in a shallow wide banner crop.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-2e2b702e-c354-4a36-9cb0-8455ab090b76.png",
+      "asset": "content/assets/graphic-design/form-seed-packing-photo.jpg",
+      "sha256": "487e04205d1aaecfd64e883a8def1adcd091fdf4430dd65001b9d772b5b7503b"
+    },
+    {
+      "name": "form-open-studios-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic banner for an open-studios event poster. Primary request: quiet editorial photograph of an independent artists' shared studio, simple easels with abstract unfinished canvases without lettering, worktables with paintbrushes, restrained pottery on a shelf, tall industrial windows, warm ordinary materials and gentle daylight. Believable small local art venue, thoughtful and inviting, no staged luxury. No people, no readable text, logos, watermarks or signs. Edge-to-edge photograph only, no poster or graphic layout. Landscape 3:2 framing suitable for a shallow wide photo band.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-3c21e085-9e68-47b0-83ec-0bea17eb7aa8.png",
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    }
+  ],
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Shared headline, brand, photo bytes/crop, paper, palette, lighting and fixed conditions in every pair. Only the marked body-form group changes: continuous instructions to numbered procedure, descriptions to comparison table, single address to five repeatable take-away tabs with cut guides. Physical cutting and handling are not simulated."
+}

@@ -1,0 +1,89 @@
+{
+  "name": "nvc-articles-2026-11-03",
+  "status": "published and verified live",
+  "published": true,
+  "publishedAt": "2026-11-03T07:44:37.358Z",
+  "parentRelease": "bowen-articles-2026-11-03",
+  "productionUrl": "https://patternverse.org",
+  "deploymentUrl": "https://45180791.patternverse.pages.dev",
+  "version": "1793691443318",
+  "include": [
+    "Preserve the last verified Bowen and Games People Play release",
+    "Eight complete NVC articles from Find patterns in nonviolent dialogue",
+    "Nonviolent Communication collection within Communication & Relationships, with linked related articles"
+  ],
+  "exclude": [
+    "Contribute team invitation and founder portrait",
+    "Unselected draft content",
+    "Private music/player studies",
+    "MCP or guided-AI service publication"
+  ],
+  "newEntries": [
+    "collection:nonviolent-communication",
+    "pattern:nvc-separate-observation-from-interpretation",
+    "pattern:nvc-distinguish-feelings-from-conclusions",
+    "pattern:nvc-separate-needs-from-strategies",
+    "pattern:nvc-make-the-request-concrete",
+    "pattern:nvc-leave-room-for-no",
+    "pattern:nvc-understand-before-solving",
+    "pattern:nvc-give-yourself-empathy-first",
+    "pattern:nvc-make-appreciation-specific"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "expectedPublicEntries": 1363,
+  "artifact": {
+    "directory": "/private/tmp/patternverse-nvc-release-2026-11-03/apps/web/build",
+    "files": 11714,
+    "bytes": 653402669,
+    "manifestSha256": "3f46919f2e8e6ca279741372adce9d23a586a25cae92278a446581023b96d916",
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/nvc-articles-2026-11-03/artifact-files.json"
+  },
+  "verification": {
+    "content": {
+      "entries": 1363,
+      "diagnostics": 0,
+      "completeNvcArticles": 8,
+      "preservedBowenArticles": 6,
+      "preservedGamesPeoplePlayArticles": 36
+    },
+    "unitTests": {
+      "passed": 9,
+      "originalChapterTextPreserved": true
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "browsers": {
+      "passed": 20,
+      "desktop": true,
+      "phone": true,
+      "relatedArticleNavigation": true,
+      "normalRefresh": true
+    },
+    "publicScan": "passed",
+    "liveHttp": {
+      "passed": true,
+      "resources": 130,
+      "version": "1793691443318",
+      "exactArtifactHashes": true
+    },
+    "liveBrowsers": {
+      "passed": 20,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "relatedArticleNavigation": true,
+      "normalRefresh": true
+    }
+  },
+  "sourceChat": "Find patterns in nonviolent dialogue",
+  "sourceThreadId": "01a17253-cc8e-7753-b377-37fdf5c1283b",
+  "sourceSnapshot": "/Users/jeger-benninger/Documents/patternverse/.local/releases/nvc-articles-2026-11-03/source-snapshot.tar.gz",
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/nvc-articles-2026-11-03/release-report.json"
+}

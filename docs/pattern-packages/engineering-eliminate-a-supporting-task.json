@@ -1,0 +1,290 @@
+{
+  "title": "Engineering — Eliminate a Supporting Task",
+  "edition": "Draft illustrated field-guide article",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples",
+    "Assumptions for correctness",
+    "When to use it",
+    "Tradeoffs and operating costs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "engineering-eliminate-a-supporting-task",
+      "taxonomy_id": "P005",
+      "title": "Eliminate a Supporting Task",
+      "status": "draft",
+      "domain": "Engineering",
+      "family": "Function and Architecture",
+      "entry_type": "terminal pattern",
+      "parent": null,
+      "collections": ["engineering-function-and-architecture"],
+      "summary": "Remove the feature causing a supporting task while preserving the useful function it served.",
+      "identity_resolution": {
+        "decision": "New independent engineering terminal pattern with no parent in this taxonomy.",
+        "existing_catalog_checked": [
+          "engineering-function-transfer",
+          "engineering-function-integration",
+          "engineering-functional-separation",
+          "arch-repairable-connections"
+        ],
+        "boundary": "Task elimination is defined at a precise physical need: rotating-penetration sealing or rubbing-pin lubricant replenishment. Containment and guidance remain. Provider transfer, compatible-role integration, separation, and repair access preserve different requirements. Contactless and compliant mechanisms can enable the examples without becoming parents or universal prerequisites."
+      },
+      "use_when": [
+        "A recurring supporting operation can be traced to a removable design feature.",
+        "An alternative preserves the useful function without the specific triggering condition.",
+        "The remaining and newly introduced obligations can be evaluated explicitly."
+      ],
+      "goals": [
+        "Remove a supporting requirement at its physical cause",
+        "Preserve the required useful behavior",
+        "Keep the eliminated scope and remaining work explicit"
+      ],
+      "mechanisms": [
+        "Identify feature-to-task dependency",
+        "Change architecture to remove the triggering condition",
+        "Trace useful function through the replacement",
+        "Check remaining duties and new failure modes"
+      ],
+      "not_ideal_when": [
+        "The useful function depends on the feature and no adequate replacement is available.",
+        "The task is simply hidden, automated, reassigned, or left undone.",
+        "New constraints or lifecycle burden outweigh the specific removed task."
+      ],
+      "example_user_queries": [
+        "Could we remove the shaft penetration so there is no rotating process seal to service?",
+        "We keep maintaining a feature that might not need to exist.",
+        "Can a small flexure guide remove this pin joint’s lubrication requirement?",
+        "Someone else now does the lubrication, but the joint still needs the same oil.",
+        "Does an automatic lubricator actually eliminate the need for joint lubrication?",
+        "Our magnetic-drive pump still has stationary gaskets and bearings to inspect.",
+        "How do we show that a supporting operation is truly unnecessary after redesign?",
+        "We want to remove a maintenance task without leaving a required job undone.",
+        "The mechanism only moves a fraction of a millimetre and its pivots need servicing.",
+        "Can we remove the cause of the task instead of assigning it to another component?",
+        "The new guide needs no lubricant, but what happens to fatigue and travel limits?",
+        "A part was removed, but I think its old supporting job still exists elsewhere."
+      ],
+      "related_patterns": [
+        {
+          "taxonomy_id": "P039",
+          "title": "Contactless Interaction",
+          "relationship_type": "enabled_by",
+          "relationship": "Field-based torque transmission enables removal of the pump’s moving penetration. Contactless action need not eliminate a supporting need. Not a parent.",
+          "article_status": "planned"
+        },
+        {
+          "taxonomy_id": "P004",
+          "id": "engineering-function-transfer",
+          "title": "Function Transfer",
+          "relationship": "Neighbor keeps a job and changes its provider; the precisely named supporting requirement disappears here.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P054",
+          "title": "Compliant Motion",
+          "relationship": "Elastic deformation enables the flexure example. It can be chosen for other purposes and is not a parent.",
+          "article_status": "planned"
+        }
+      ],
+      "worked_examples": [
+        {
+          "name": "Magnetic-drive pump removes primary rotating process penetration",
+          "kind": "illustrative",
+          "useful_function_retained": "Pump fluid under required hydraulic and containment duties.",
+          "trigger_removed": "Shaft rotating through the selected process boundary.",
+          "supporting_task_eliminated": "Seal that moving process-boundary crossing.",
+          "held_fixed": [
+            "Required hydraulic duty",
+            "fluid-containment requirement",
+            "adequate torque/speed/temperature envelope"
+          ],
+          "fixture": {
+            "selected_moving_penetrations_before": 1,
+            "selected_moving_penetrations_after": 0
+          },
+          "evidence": "Independent internal and external shafts stop on their own sides of the continuous stationary wall. Static joints and bearing supports remain.",
+          "limits": "Original axial-face coupling schematic, not a selected pump arrangement. No pressure, torque, leakage, reliability, thermal or maintenance saving is calculated. Optional secondary seals and bearing/containment duties can remain."
+        },
+        {
+          "name": "Parallel flexure guide removes pin-contact lubrication",
+          "kind": "illustrative",
+          "useful_function_retained": "Guide the specified small motion and meet payload requirements.",
+          "trigger_removed": "Rubbing pin contacts requiring lubricant replenishment in the baseline design.",
+          "supporting_task_eliminated": "Lubricant replenishment at those pin contacts.",
+          "held_fixed": ["Required small motion", "payload requirement", "guidance function"],
+          "fixture": {
+            "leaf_length_mm": 30,
+            "leaf_thickness_mm": 0.2,
+            "guided_displacement_extremes_mm": [-0.3, 0.3],
+            "uniform_leaves": 2,
+            "drawing_displacement_magnification": 20
+          },
+          "equations": [
+            "u = x/L",
+            "w(x) = delta (3u^2 - 2u^3)",
+            "dw/dx = (delta/L) (6u - 6u^2)",
+            "d2w/dx2 = (delta/L^2) (6 - 12u)",
+            "epsilon_peak = (t/2) max|d2w/dx2| = 3t|delta|/L^2"
+          ],
+          "computed": {
+            "full_requested_travel_mm": 0.6,
+            "peak_nominal_bending_strain_fraction": 0.0002,
+            "peak_nominal_bending_strain_percent": 0.02,
+            "delta_over_L": 0.01,
+            "max_slope_radians": 0.015
+          },
+          "boundary_conditions": ["w(0)=0", "w(L)=delta", "w_prime(0)=0", "w_prime(L)=0"],
+          "limits": "Ideal fixed-guided, linear elastic small-deflection bending with uniform leaves and no initial stress. Omits root concentrations, shear, second-order geometry/axial effects, temperature and fatigue. No material, allowable strain, force, payload rating, actual accuracy, or life is selected. Both leaves have the same imposed strain; it is not divided by two."
+        },
+        {
+          "name": "Reassigned or automatic lubrication retains the requirement",
+          "kind": "illustrative boundary comparison",
+          "held_fixed": [
+            "Original pin contact",
+            "specified lubricant requirement",
+            "operating duty",
+            "required contact condition"
+          ],
+          "comparisons": [
+            {
+              "change": "Different technician",
+              "result": "Same joint-lubrication task remains."
+            },
+            {
+              "change": "Automatic supply to the same pins",
+              "result": "Manual pumping may disappear, but lubricant delivery at the same contact remains."
+            },
+            {
+              "change": "Replace rubbing contact with suitable flexure",
+              "result": "That contact’s replenishment requirement can disappear after guidance/load qualification."
+            }
+          ],
+          "limits": "No service interval, dose, failure probability, or whole-machine maintenance saving is invented. Analysis holds the joint-lubrication job definition fixed rather than switching to manual labor as the definition."
+        }
+      ],
+      "sources": [
+        "https://www.hmdkontro.com/think-sealless/sealless-system/",
+        "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/magnetic-coupling-1116620",
+        "https://www.hmdkontro.com/2022/01/28/secondary-control-containment-options/",
+        "https://www.pi-usa.us/fileadmin/user_upload/physik_instrumente/files/TEC/PI-TEC76-Drive-Train-Elements.pdf",
+        "https://www.precisionmechatronicslab.com/wp-content/uploads/2018/01/J17k.pdf"
+      ],
+      "source_notes": [
+        {
+          "source": "HMD Kontro, Think Sealless System",
+          "url": "https://www.hmdkontro.com/think-sealless/sealless-system/",
+          "accessed": "2026-10-28",
+          "basis": "Read dynamic process-seal replacement by static containment and magnetic transmission to the liquid end.",
+          "boundary": "Only the mechanism supports the original drawing. No source geometry, thickness, life-cycle saving, emission rate, or universal zero-leakage/product-reliability claim is reused."
+        },
+        {
+          "source": "KSB, Magnetic coupling",
+          "url": "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/magnetic-coupling-1116620",
+          "accessed": "2026-10-28",
+          "basis": "Read independent drive/impeller rotor arrangement, stationary partition, synchronism, and decoupling-torque limit.",
+          "boundary": "No torque rating, loss, speed limit, field calculation, or manufacturer section is adopted. The axial-face arrangement is an original schematic."
+        },
+        {
+          "source": "HMD Kontro, Secondary Control / Containment Options",
+          "url": "https://www.hmdkontro.com/2022/01/28/secondary-control-containment-options/",
+          "accessed": "2026-10-28",
+          "basis": "Read remaining primary containment boundary and optional secondary protection using additional sealing devices.",
+          "boundary": "Supports the boundary of the elimination claim, not a selected protection design or assertion that all mag-drive pumps have the same secondary system."
+        },
+        {
+          "source": "PI, TEC76 Drive Train Elements, 10/2017, Flexure Guides",
+          "url": "https://www.pi-usa.us/fileadmin/user_upload/physik_instrumente/files/TEC/PI-TEC76-Drive-Train-Elements.pdf",
+          "accessed": "2026-10-28",
+          "basis": "Read elastic solid deformation replacing rolling/sliding guide contact and need for guide lubricants.",
+          "boundary": "No universal lifetime, wear, load, accuracy, vacuum, or maintenance-free claim is adopted; the passive-leaf geometry is original."
+        },
+        {
+          "source": "Fleming and Yong, An Ultrathin Monolithic XY Nanopositioning Stage Constructed From a Single Sheet of Piezoelectric Material, IEEE/ASME Transactions on Mechatronics 22(6), 2017, section III",
+          "url": "https://www.precisionmechatronicslab.com/wp-content/uploads/2018/01/J17k.pdf",
+          "accessed": "2026-10-28",
+          "basis": "Read fixed-guided endpoint moment/displacement relations and normalized cubic beam shape, equations 5 and 11–12.",
+          "boundary": "The fixture uses original passive uniform leaves and reversed coordinate origin for the same normalized shape. Curvature and surface bending strain are derived from that shape. No paper dimensions, material properties, device performance, or experimental result is transferred."
+        }
+      ],
+      "research_lead_status": [
+        {
+          "lead": "University of Michigan Design Heuristics handout",
+          "status": "Context lead only. Direct fetch returned HTTP 403 earlier in this chat. This taxonomy is not presented as its official card set."
+        },
+        {
+          "lead": "J. E. Gordon, Structures: Or Why Things Don’t Fall Down",
+          "status": "No specific book passage consulted for this article; no statement or figure attributed to the book."
+        },
+        {
+          "lead": "PI Guiding Systems and Force Transmission page",
+          "status": "Read selection context naming travel, precision, load, lifetime and environment; detailed flexure mechanism is supported by the accessible manufacturer TEC76 document."
+        }
+      ],
+      "graphics": {
+        "decision": "Three static original SVG drawings and three phone companions; no widget.",
+        "reason": "The missing shaft crossing, computed fixed-guided beam shape, and retained lubrication interface answer concrete questions with fixed comparisons. No coupling-field, fatigue-life, or full motion model is available to justify a simulation.",
+        "style": "Approved fixed-white editorial engineering drawings with regular Helvetica Neue, fine neutral strokes and restrained green.",
+        "generator": "scripts/engineering-eliminate-supporting-task-visuals.mjs",
+        "figures": [
+          {
+            "asset": "content/assets/engineering/eliminate-task-magnetic-pump.svg",
+            "phone_asset": "content/assets/engineering/eliminate-task-magnetic-pump-mobile.svg",
+            "learning_question": "Which boundary crossing disappears, and what containment duties remain?",
+            "held_fixed": [
+              "Hydraulic duty",
+              "fluid-containment requirement",
+              "required torque, speed, and temperature envelope"
+            ],
+            "changed": "One continuous shaft and dynamic process seal become independent wet/dry shafts across a stationary wall.",
+            "arrow_meaning": "Curved arrows mean rotation. Dashed marks indicate magnetic coupling, not field strength or fluid flow.",
+            "phone_composition": "Both drive-end sections stay stacked; larger labels and greater interval separate the before/after details.",
+            "alt": "Matched pump drive sections compare a continuous shaft crossing a dynamic seal with separate internal and external rotors across a stationary containment shell. The after arrangement has no rotating shaft passing through the highlighted wall.",
+            "caption": "Original longitudinal drive sections, not to scale. The selected process boundary changes from one moving shaft penetration to none. Separate shafts remain on opposite sides of a stationary containment shell; curved arrows indicate rotation, not fluid flow or magnetic-field strength. Static joints, internal supports, and containment duties remain. No torque, pressure, leakage, or reliability rating is calculated."
+          },
+          {
+            "asset": "content/assets/engineering/eliminate-task-flexure-guide.svg",
+            "phone_asset": "content/assets/engineering/eliminate-task-flexure-guide-mobile.svg",
+            "learning_question": "How can a guide retain small motion while losing lubricated pin contacts?",
+            "held_fixed": ["Required small motion", "payload requirement", "guidance function"],
+            "changed": "Jointed parallel links replaced by two uniform elastic leaves with ideal fixed-guided motion in the teaching model.",
+            "arrow_meaning": "Double arrow means guided displacement, not force; deflected leaf curves are computed and magnified.",
+            "phone_composition": "Stacked guide comparison retained; larger labels and increased space before the flexure layout. Displacement magnification is explicitly labeled.",
+            "alt": "A pinned parallel-link guide is compared with a two-leaf flexure guide. The flexure's neutral and displaced shapes identify its fixed and guided ends; labels give leaf length 30 mm, thickness 0.20 mm, and displacement 0.30 mm.",
+            "caption": "Original guide schematics and an evaluated small-deflection beam shape. Displacement and thickness are exaggerated for legibility. The numerical fixture uses uniform leaves with ideal fixed-guided conditions; it gives peak nominal bending strain of 0.020% at 0.30 mm displacement. No material, payload capacity, fatigue life, or actual stage accuracy is selected or established."
+          },
+          {
+            "asset": "content/assets/engineering/eliminate-task-task-boundary.svg",
+            "phone_asset": "content/assets/engineering/eliminate-task-task-boundary-mobile.svg",
+            "learning_question": "Does a new technician or automatic supply remove the physical lubricant requirement?",
+            "held_fixed": [
+              "The original pin contact",
+              "lubricant need",
+              "operating duty",
+              "required contact condition"
+            ],
+            "changed": "Task owner or delivery method changes in the first two panels. The third panel changes the contact to a flexure.",
+            "arrow_meaning": "Arrows in the first two arrangements show lubricant delivery. The flexure has no delivery arrow or pin lubrication port.",
+            "phone_composition": "Three mechanisms remain stacked, with larger labels and increased row spacing.",
+            "alt": "The same lubricated pin joint appears first with a manual oil supply and then with an automatic supply connected to the same lubrication passage. A separate flexure detail has no pin contact. Labels distinguish the retained lubrication job from removal of its cause.",
+            "caption": "The two pin-joint arrangements hold contact, lubricant need, and operating duty fixed; changing ownership or delivery method retains joint lubrication. The flexure changes the motion interface and removes that particular rubbing-contact task. Arrows indicate lubricant delivery in the first two arrangements. No service interval, lubricant quantity, or whole-machine maintenance saving is claimed."
+          }
+        ],
+        "assets": [
+          "content/assets/engineering/eliminate-task-magnetic-pump.svg",
+          "content/assets/engineering/eliminate-task-magnetic-pump-mobile.svg",
+          "content/assets/engineering/eliminate-task-flexure-guide.svg",
+          "content/assets/engineering/eliminate-task-flexure-guide-mobile.svg",
+          "content/assets/engineering/eliminate-task-task-boundary.svg",
+          "content/assets/engineering/eliminate-task-task-boundary-mobile.svg"
+        ],
+        "provenance": "Original editable schematic geometry and numerically evaluated beam curves. No traced manufacturer/book figures, external photographs, generated raster illustrations, or fabricated magnetic/stress fields."
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "monitor-object",
+  "title": "Monitor Object",
+  "aliases": ["Thread-safe Passive Object"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1350,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary sources: Douglas C. Schmidt’s original Monitor Object paper, the authors’ POSA Volume 2 catalog, official Python Condition and queue documentation, and official Java Object.wait/notification documentation. Thread-safe Passive Object is preserved as the established alias. Caller-thread execution, monitor lock, synchronized methods, condition predicates, release/reacquire, notification without immediate lock handoff, invariants before waiting, and runtime-specific semantics are explicit. The inbox, byte limits, closing policy, code, and diagrams are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["monitor_inbox.py", "demo.py"],
+      "stdout": ["received: [b'red', b'blue']", "after close: rejected", "drained: closed"],
+      "verification": "Exact three-line demo output; the monitor creates no worker and methods execute on real caller threads; positive integer capacities reject Boolean/invalid values, immutable 0/8-byte and binary payloads pass, and invalid items leave protected state unchanged; actual Condition instrumentation proves waiting releases the shared lock, notification while holding it does not transfer ownership, wait returns with the lock reacquired, and extra notifications cause both empty-get and full-put while loops to wait again; space creation unblocks a producer, and preexisting data works without a stored notification; closure wakes all three blocked consumers and all three blocked producers, rejects late puts and preserves accepted buffered data for FIFO drain; twelve close/put races preserve exactly accepted data; three producers and three consumers transfer 90 distinct items at each of capacities one and two, with actual deque instrumentation proving protected mutations, no overlapping mutation, exact accepted/removal FIFO order, capacity bounds, and caller-thread execution without assuming processing order or fairness; repeated close, independent monitors, final empty buffers and all caller-thread joins are verified. Instrumentation wraps real Condition/deque seams and leaves the article methods intact. No deadlines, cancellation, durable delivery, acknowledgment, general rollback, cross-monitor atomicity, or recovery after consumer failure is inferred."
+    },
+    "content": "1288 entities validate with drafts included; published-only compilation contains 1141 entities without diagnostics.",
+    "integration_tests": "All four focused article suites pass: Monitor Object, Active Object, Reactor, and GoF. Combined run across five files reports 37 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Monitor Object as its fourth completed member, preserving Reactor, Proactor, Active Object, and prior collection contents. Active Object, Reactor, and Observer retain canonical IDs and primary homes as related links. Monitor Object has exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1286,
+      "new_content": ["content/patterns/monitor-object.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "reactor_proactor_and_active_object_members_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 54,
+      "prior_graphics_unchanged": 466,
+      "prior_dimensions_unchanged": 1654,
+      "new_dimensions": {
+        "software-engineering/monitor-object-boundary.svg": {
+          "width": 720,
+          "height": 1296
+        },
+        "software-engineering/monitor-object-boundary-mobile.svg": {
+          "width": 360,
+          "height": 1104
+        },
+        "software-engineering/monitor-object-wait.svg": {
+          "width": 720,
+          "height": 1176
+        },
+        "software-engineering/monitor-object-wait-mobile.svg": {
+          "width": 360,
+          "height": 1256
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Only this new authoring record’s review date was updated after midnight, to 2026-10-30, and copied to the snapshot; no runtime source changed after building. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other existing collection, software verse, or GoF changes.",
+    "illustrations": "Two editable native SVGs explain the shared-state boundary and an ownership trace through empty-consumer wait, producer insertion/notification, producer release, consumer reacquisition, and predicate recheck. Both have separately composed phone variants, meaningful alternatives/captions, the approved fixed white surface, regular Helvetica Neue palette, square geometry, restrained strokes, and precise arrow meanings. The first separates job data from queued method invocations and keeps condition waiting conditional. The second states that notification retains the notifier’s lock, does not reserve an item, and is not a fairness or immediate-handoff guarantee. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and embedded desktop/phone figures were visually inspected for accuracy, label placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all three related routes returning 200. Concurrency and Resource Management contains Reactor, Proactor, Active Object, and Monitor Object; its route and Software Engineering verse gallery open Monitor Object with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-monitor-object/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 43376
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ synchronous bounded inbox with real caller threads and no monitor-owned worker. One Condition with one plain nonreentrant Lock protects a deque and closed flag. Capacity is a positive integer item count; payloads are immutable bytes of length 0–8. Predicate checks and mutations share the lock, while loops recheck after wait, and notify_all serves both waiter classes and closure. Close rejects later puts, wakes blocked callers, and preserves accepted items for FIFO removal before Closed. The demonstration creates and joins its own non-daemon consumer; closing the monitor does not join clients or acknowledge outside job processing. Tests verify actual lock release/reacquisition, no notification-time ownership transfer, extra-wakeup loops, blocked full/empty callers, invalid input, close races, independent monitors, and 180 concurrent transferred items across capacities one and two. Removal FIFO is distinct from processing order and waiter fairness. No timeout/deadline, cancellation, durable delivery, acknowledgment, consumer-failure recovery, general rollback, cross-monitor atomicity, or starvation guarantee. Slow work and callbacks belong outside the protected region.",
+  "preview": "http://127.0.0.1:43039/pattern/monitor-object",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-monitor-object",
+  "browser_measurements": ".local/software-monitor-object/browser-checks.json",
+  "browser_check_script": ".local/software-monitor-object/check-browser.mjs",
+  "build_log": ".local/software-monitor-object/public-build-isolated.log",
+  "branch": "codex/software-monitor-object",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

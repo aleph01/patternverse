@@ -1,0 +1,121 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Declared fill-only changes distinguish complementary hue from value contrast. Hue angles use the digital HSL wheel. Hue replacements approximately match relative luminance; the final example intentionally changes only panel lightness at nominal fixed hue/saturation.",
+  "colors": {
+    "ink": "#143352",
+    "blue": "#2b6bab",
+    "badgeBlue": "#85b3e0",
+    "badgeOrange": "#cea881",
+    "categoryBefore": "#5061bb",
+    "categoryOrange": "#8a5f35",
+    "productOrange": "#eb9137"
+  },
+  "hslInputs": {
+    "blue": [210, 0.6, 0.42],
+    "ink": [210, 0.6, 0.2],
+    "productOrange": [30, 0.82, 0.57]
+  },
+  "relativeLuminance": {
+    "ink": 0.031255715730797155,
+    "blue": 0.1396925569569374,
+    "badgeBlue": 0.42608562958214313,
+    "badgeOrange": 0.4271205428774732,
+    "categoryBefore": 0.13842717973951557,
+    "categoryOrange": 0.13844732954976186
+  },
+  "textContrast": {
+    "productBefore": 2.2767788969445433,
+    "productAfter": 5.315170836939829,
+    "badgeBefore": 5.859103268001853,
+    "badgeAfter": 5.871839766425653
+  },
+  "values": [
+    [42, 28],
+    [48, 36]
+  ],
+  "examples": [
+    {
+      "name": "complement-entry-accent",
+      "source": "audience-pottery-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only the Free entry badge fill changes from pale blue to an orange at approximately the same relative luminance. Main blue HSL hue210 and orange hue30 form the complementary relation. Copy, badge area, type, imagery and presentation stay fixed.",
+      "declaredFills": [
+        [
+          {
+            "element": "entry-badge",
+            "fill": "#85b3e0"
+          }
+        ],
+        [
+          {
+            "element": "entry-badge",
+            "fill": "#cea881"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "complement-studio-categories",
+      "source": "form-open-studios-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only the two Hill bar fills change from neighboring blue hue230 to orange hue30 opposite Riverside hue210. Relative luminance is approximately matched across all bar colors. Values42/28 and48/36, direct labels, geometry and presentation remain fixed.",
+      "declaredFills": [
+        [
+          {
+            "element": "bar-0-1",
+            "fill": "#5061bb"
+          },
+          {
+            "element": "bar-1-1",
+            "fill": "#5061bb"
+          }
+        ],
+        [
+          {
+            "element": "bar-0-1",
+            "fill": "#8a5f35"
+          },
+          {
+            "element": "bar-1-1",
+            "fill": "#8a5f35"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "complement-product-legibility",
+      "source": "explicit-tableware-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only the product-panel background darkens from HSL210/60/42 to210/60/20. Orange product text remains HSL30/82/57. Hue relation and nominal blue saturation remain unchanged. Every word, type setting, position, photo/crop and print presentation stays fixed.",
+      "declaredFills": [
+        [
+          {
+            "element": "product-panel",
+            "fill": "#2b6bab"
+          }
+        ],
+        [
+          {
+            "element": "product-panel",
+            "fill": "#143352"
+          }
+        ]
+      ]
+    }
+  ]
+}

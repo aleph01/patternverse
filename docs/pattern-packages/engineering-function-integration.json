@@ -1,0 +1,269 @@
+{
+  "title": "Engineering — Function Integration",
+  "edition": "Draft illustrated field-guide article",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples",
+    "Assumptions for correctness",
+    "When to use it",
+    "Tradeoffs and operating costs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "engineering-function-integration",
+      "taxonomy_id": "P003",
+      "title": "Function Integration",
+      "status": "draft",
+      "domain": "Engineering",
+      "family": "Function and Architecture",
+      "entry_type": "parent strategy",
+      "parent": null,
+      "children": [
+        {
+          "taxonomy_id": "P004",
+          "id": "engineering-function-transfer",
+          "title": "Function Transfer",
+          "article_status": "draft",
+          "selection_condition": "An existing part takes over a useful job from a dedicated part that can then be removed."
+        }
+      ],
+      "collections": ["engineering-function-and-architecture"],
+      "summary": "Combine compatible functions in one component while preserving the conditions each job needs.",
+      "identity_resolution": {
+        "decision": "New engineering parent strategy. Function Transfer is its one direct specialization; the family is navigation, not a parent.",
+        "existing_catalog_checked": [
+          "engineering-functional-separation",
+          "engineering-segmentation",
+          "engineering-replaceable-wear-units",
+          "arch-external-solar-shading"
+        ],
+        "boundary": "Compatibility-based allocation of multiple roles to one component. Physical segmentation and independent renewal are different decisions. Architecture shading discusses its own envelope consequences, not a general function-integration strategy. The supplied substitutions also instantiate the narrower Function Transfer case; this article teaches parent-level compatibility and tradeoffs rather than authoring a separate child article."
+      },
+      "use_when": [
+        "Nearby components perform compatible jobs but add fastening or alignment work.",
+        "An existing housing or casting can take on another suitable role.",
+        "A proposed part reduction can be checked against manufacturing, operating, and renewal requirements."
+      ],
+      "goals": [
+        "Reduce unnecessary part and assembly interfaces",
+        "Preserve every required function",
+        "Make shared material, load, and service conditions explicit"
+      ],
+      "mechanisms": [
+        "Allocate compatible functions to one component",
+        "Use local geometry to fulfill distinct roles",
+        "Remove unnecessary attachments and dedicated parts where justified",
+        "Check manufacturing and renewal consequences"
+      ],
+      "not_ideal_when": [
+        "Functions require incompatible conditions or materials.",
+        "A wear feature needs independent renewal.",
+        "Extra tooling, access, or failure consequences outweigh the removed interfaces."
+      ],
+      "example_user_queries": [
+        "We use a separate clamp even though the enclosure wall is right beside the cable.",
+        "Can we remove some small fastening operations from this instrument assembly?",
+        "Should this housing also provide the mounting support?",
+        "Our parts count is lower but the mold has become much more complicated.",
+        "A worn cable clip makes us replace an otherwise sound enclosure.",
+        "How do we know whether two jobs can share the same part?",
+        "The enclosure needs to be stiff but the retaining arm needs to flex.",
+        "Could the pump casting replace the bracket attached beneath it?",
+        "We want fewer parts without making repair more expensive.",
+        "Does getting rid of the clamp also get rid of the cable-retention job?",
+        "How should we choose between an integral clip and a replaceable insert?",
+        "One insertion works but the clip must survive repeated cable changes."
+      ],
+      "related_patterns": [
+        {
+          "taxonomy_id": "P002",
+          "id": "engineering-functional-separation",
+          "title": "Functional Separation",
+          "relationship": "Neighbor assigns incompatible functions to distinct elements; can coexist with integration at another boundary.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P004",
+          "id": "engineering-function-transfer",
+          "title": "Function Transfer",
+          "relationship": "Direct child for an existing part assuming a retained job from a removed dedicated part.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P005",
+          "id": "engineering-eliminate-a-supporting-task",
+          "title": "Eliminate a Supporting Task",
+          "relationship": "Removes the reason for the job; integration can retain the job while changing who performs it.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P124",
+          "id": "engineering-replaceable-wear-units",
+          "title": "Replaceable Wear Units",
+          "relationship": "Provides a separate renewable wear element when local deterioration makes whole-component renewal unsuitable. Not a child of integration.",
+          "article_status": "draft"
+        }
+      ],
+      "worked_examples": [
+        {
+          "name": "Instrument enclosure with molded cable-retaining arms",
+          "kind": "illustrative",
+          "baseline": "Enclosure, separate clamp, and two screws retain an internal cable on its route.",
+          "intervention": "Two molded arms continuous with the wall provide cable retention.",
+          "held_fixed": [
+            "Cable route and diameter",
+            "enclosure envelope",
+            "routing retention duty"
+          ],
+          "fixture": {
+            "nominal_cable_diameter_mm": 6,
+            "nominal_throat_width_mm": 5,
+            "baseline_selected_subassembly_pieces": 4,
+            "integrated_selected_subassembly_pieces": 1
+          },
+          "computed": {
+            "minimum_throat_widening_for_rigid_circular_cable_mm": 1,
+            "per_arm_movement_if_symmetric_mm": 0.5,
+            "selected_piece_reduction": 3
+          },
+          "selection_note": "Also a Function Transfer case: the wall takes over the removed clamp’s retained job.",
+          "limits": "Nominal geometric fixture only. Excludes cable and unrelated components from both inventories. No tolerances, jacket compression, arm strain, insertion force, durability, axial strain relief, sealing, time saving, or tool-cost prediction."
+        },
+        {
+          "name": "Pump casing with integral supporting foot",
+          "kind": "illustrative",
+          "baseline": "Separate mounting bracket attached to a fluid-containing housing.",
+          "intervention": "Cast the supporting role into the housing and remove the bracket-to-housing interface.",
+          "held_fixed": ["Hydraulic duty", "mounting position", "required support loads"],
+          "evidence": "Continuous casting and qualitative supporting load paths are visible; base fasteners remain.",
+          "selection_note": "Also a Function Transfer case; parent discussion focuses on compatibility of containment and support.",
+          "limits": "No casting dimensions, stress field, pressure rating, load capacity, mass or cost saving. Integration does not permit arbitrary nozzle or pipe loads."
+        },
+        {
+          "name": "Worn integral clip compared with renewable insert",
+          "kind": "illustrative failure comparison",
+          "baseline": "Local lip wear defeats required retention while enclosure remains otherwise sound; assumed service policy has no local repair.",
+          "intervention": "Provide a separately supported and retained service insert with a usable withdrawal route.",
+          "held_fixed": [
+            "Cable",
+            "routing duty",
+            "external enclosure envelope",
+            "required retention condition"
+          ],
+          "evidence": "Renewal scope changes from whole enclosure to insert, with an explicit extra service interface.",
+          "limits": "Wear is schematic and enlarged; no measured wear, failure cycle, renewal threshold, service interval, cost, or maintenance time. An insert is a design candidate, not a universal repair; integrated durability may be acceptable in another duty."
+        }
+      ],
+      "sources": [
+        "https://www.covestro.cn/-/media/covestro/solution-center/brands/downloads/imported/1556890495.pdf?hash=66F8C2EB6AD2DAF7CBC2A94AE4D0D8B2&rev=6035fb2043ef4fd8b536fdb54abf6939",
+        "https://productdesignonline.com/wp-content/uploads/2019/08/Snap-Fit-Design-Manual.pdf",
+        "https://mbondpumps.co.za/wp-content/uploads/2022/02/ksb-etanorm-installation-operating-manual.pdf"
+      ],
+      "source_notes": [
+        {
+          "source": "Covestro, Engineering Polymers: Joining Techniques, page 24",
+          "url": "https://www.covestro.cn/-/media/covestro/solution-center/brands/downloads/imported/1556890495.pdf?hash=66F8C2EB6AD2DAF7CBC2A94AE4D0D8B2&rev=6035fb2043ef4fd8b536fdb54abf6939",
+          "basis": "Read molded snap-fit mechanism, reduction of separate fasteners, and repeated-assembly strain considerations.",
+          "boundary": "No resin choice, allowable strain, equation-based clip rating, measured saving, or supplier geometry is transferred.",
+          "accessed": "2026-10-28"
+        },
+        {
+          "source": "BASF, Snap-Fit Design Manual, Parts I and VI; archived manufacturer document hosted by Product Design Online",
+          "url": "https://productdesignonline.com/wp-content/uploads/2019/08/Snap-Fit-Design-Manual.pdf",
+          "basis": "Read molding access/slide discussion and stress concentration, stress relaxation, and fatigue sections.",
+          "boundary": "No source figure is copied; local contact wear is an original hypothetical failure. No cycle life, root radius, material specification, force, or dimension is adopted from the manual.",
+          "accessed": "2026-10-28"
+        },
+        {
+          "source": "KSB, Etanorm Installation/Operating Manual, 2018, pages 20 and 25–27; manufacturer document hosted by M Bond Pumps",
+          "url": "https://mbondpumps.co.za/wp-content/uploads/2022/02/ksb-etanorm-installation-operating-manual.pdf",
+          "basis": "Read description of integral cast feet and installation/nozzle-load limits.",
+          "boundary": "Documents this arrangement for Etanorm. The original support drawing is a generic teaching section, with no manufacturer geometry, force value, pressure rating, or service procedure reproduced.",
+          "accessed": "2026-10-28"
+        }
+      ],
+      "research_lead_status": [
+        {
+          "lead": "University of Michigan Design Heuristics handout",
+          "status": "Context lead only. Direct fetch returned HTTP 403 during earlier research in this chat. This taxonomy is not presented as its official card set."
+        },
+        {
+          "lead": "J. E. Gordon, Structures: Or Why Things Don’t Fall Down",
+          "status": "No specific passage consulted for this article; no statement or figure is attributed to the book."
+        },
+        {
+          "lead": "KSB official deep-link pump installation PDF",
+          "status": "Direct fetch timed out. Accessible distributor-hosted KSB Etanorm manufacturer manual supplies the integral-foot and installation evidence instead."
+        },
+        {
+          "lead": "Covestro Snap-Fit Joints download listing",
+          "status": "Listing deep-link timed out; the accessible manufacturer Joining Techniques guide supplies relevant mechanism and repeat-assembly evidence."
+        }
+      ],
+      "graphics": {
+        "decision": "Three static original SVG diagrams and three phone companions; no widget.",
+        "reason": "Matched component boundaries, one continuous casting, and a renewal-scope comparison make the decisions inspectable without a simulation. The numerical fixture is elementary passage geometry, not a material model suitable for arbitrary sliders.",
+        "style": "Approved fixed-white editorial engineering drawings with regular Helvetica Neue, fine neutral lines, and restrained green.",
+        "generator": "scripts/engineering-function-integration-visuals.mjs",
+        "figures": [
+          {
+            "asset": "content/assets/engineering/function-integration-cable-clip.svg",
+            "phone_asset": "content/assets/engineering/function-integration-cable-clip-mobile.svg",
+            "learning_question": "What parts and assembly tasks can be removed when the wall also retains the cable?",
+            "held_fixed": [
+              "Cable route and diameter",
+              "enclosure envelope",
+              "routing retention duty"
+            ],
+            "changed": "Separate clamp and two screws replaced by molded arms continuous with the enclosure wall.",
+            "arrow_meaning": "No motion or force arrows; thin ticked lines mark nominal throat width.",
+            "phone_composition": "Matched sections remain stacked, with larger labels and greater spacing before the second detail.",
+            "alt": "Matched enclosure sections compare a separate clamp secured with two screws against retaining arms molded into the wall. The same cable is shown in both; the integral detail labels a 5 mm throat and a 6 mm cable diameter.",
+            "caption": "Original schematic sections with illustrative nominal dimensions. The selected subassembly changes from enclosure, clamp, and two screws to one enclosure. A rigid 6 mm circular cable section requires the 5 mm throat to widen by at least 1 mm for passage; equal arm movement would be 0.5 mm each. This geometry does not establish insertion force, strain, durability, or axial strain relief."
+          },
+          {
+            "asset": "content/assets/engineering/function-integration-pump-support.svg",
+            "phone_asset": "content/assets/engineering/function-integration-pump-support-mobile.svg",
+            "learning_question": "How can one casting provide both containment and support?",
+            "held_fixed": ["Hydraulic duty", "mounting position", "required support loads"],
+            "changed": "An integral supporting foot removes a dedicated bracket and its housing attachment; base fasteners remain.",
+            "arrow_meaning": "Qualitative load-transfer paths, not a free-body force balance or computed stress.",
+            "phone_composition": "One full-width section retained; labels below the drawing are spaced farther apart vertically.",
+            "alt": "Section through a hollow pump housing shows its lower wall continuing into an integral supporting foot bolted to a base. Green arrows trace the qualitative transfer of housing loads through the continuous casting to its mounting foot.",
+            "caption": "Original schematic, not to scale. The housing now provides fluid containment and support through one casting. Arrows indicate qualitative load-transfer paths, not calculated forces or a stress field. Base fasteners remain. No pressure rating, support capacity, or casting dimensions are established."
+          },
+          {
+            "asset": "content/assets/engineering/function-integration-renewal.svg",
+            "phone_asset": "content/assets/engineering/function-integration-renewal-mobile.svg",
+            "learning_question": "Which element must be renewed after local clip wear?",
+            "held_fixed": [
+              "Cable",
+              "routing duty",
+              "external enclosure envelope",
+              "required retention condition"
+            ],
+            "changed": "Whole-enclosure renewal under the assumed no-local-repair policy compared with a separately renewable retaining insert.",
+            "arrow_meaning": "Upward arrow means insert withdrawal after release; green identifies the renewed element.",
+            "phone_composition": "Both sections stay stacked; larger labels and a larger interval separate the two renewal arrangements.",
+            "alt": "Stacked enclosure sections compare a worn integral retaining lip, whose renewal includes the enclosure, with a separate retaining insert lifted from its supported seat. Green identifies the element renewed in each arrangement.",
+            "caption": "Illustrative renewal-scope comparison. In the upper case, an assumed service policy provides no local repair for the worn integral feature. Below, the insert is a separately retained service part; the arrow shows withdrawal motion after release. Wear is schematic and enlarged. No wear rate, service interval, or maintenance-time gain is predicted."
+          }
+        ],
+        "assets": [
+          "content/assets/engineering/function-integration-cable-clip.svg",
+          "content/assets/engineering/function-integration-cable-clip-mobile.svg",
+          "content/assets/engineering/function-integration-pump-support.svg",
+          "content/assets/engineering/function-integration-pump-support-mobile.svg",
+          "content/assets/engineering/function-integration-renewal.svg",
+          "content/assets/engineering/function-integration-renewal-mobile.svg"
+        ],
+        "provenance": "Original editable schematic geometry. No traced manufacturer/book illustrations, external photographs, generated raster imagery, or computed-looking stress fields."
+      }
+    }
+  ]
+}

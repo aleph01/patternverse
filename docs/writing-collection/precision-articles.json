@@ -1,0 +1,188 @@
+{
+  "purpose": "Editorial recommendation metadata and inspected-source provenance for P07, P09, and P10. Together with the earlier P08 draft, these complete the precision and economy family. Fields remain outside strict Commons frontmatter.",
+  "articles": [
+    {
+      "id": "writing-choose-the-specific-word",
+      "index_ref": "P07",
+      "title": "Choose the Specific Word",
+      "use_when": [
+        "A broad label leaves the relevant condition or distinction unnamed.",
+        "A forceful synonym changes the claim or imports an unsupported cause.",
+        "More detailed wording may be unnecessary for the passage's purpose or viewpoint."
+      ],
+      "goals": ["Accurate distinctions", "Appropriate specificity", "Faithful tone and judgment"],
+      "mechanisms": [
+        "Naming the property relevant to the reader's purpose",
+        "Separating observation from inference",
+        "Comparing the implications of near synonyms"
+      ],
+      "not_ideal_when": [
+        "The evidence supports only a broad or qualified description.",
+        "A narrow classification would distract from the purpose or exceed the viewpoint's knowledge."
+      ],
+      "related_patterns": [
+        "writing-let-the-verb-do-the-work",
+        "writing-choose-terms-the-reader-can-use",
+        "writing-make-references-unambiguous"
+      ],
+      "example_user_queries": [
+        "My editor says the wording is vague but I do not know what to change.",
+        "I have said something is damaged without explaining what is wrong with it.",
+        "How specific should a description be?",
+        "The stronger word sounds better but may claim more than I know.",
+        "I keep choosing synonyms that subtly change the tone.",
+        "Do I need the exact species or material name in every description?",
+        "How can I distinguish what I observed from what I think caused it?",
+        "My description tells readers that something is bad but not why.",
+        "A character label seems to settle a feeling I want to leave open.",
+        "Can a longer phrase be more precise than a single vivid word?"
+      ],
+      "sources": [
+        {
+          "author": "UNC Writing Center, University of North Carolina at Chapel Hill",
+          "title": "Word Choice",
+          "url": "https://writingcenter.unc.edu/tips-and-tools/word-choice/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The sections on inaccurate word meanings, unwanted connotations and broad or loaded wording, plus the strategies cautioning that thesaurus synonyms have different shades of meaning.",
+          "supports": "Selecting wording for its actual meaning and connotations rather than treating near synonyms as interchangeable or assuming a broader label explains the intended distinction.",
+          "limits": "The bookshop and farewell-party situations are original. The observation/inference boundary, purpose-dependent specificity, and distinction from selecting a revealing detail are editorial development; no source exercise, full book passage, or empirical effect is claimed."
+        }
+      ],
+      "source_path": "content/patterns/writing-choose-the-specific-word.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons expose the meaningful differences in wording and interpretation. No separate table, diagram, illustration, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-cut-redundancy",
+      "index_ref": "P09",
+      "title": "Cut Redundancy",
+      "use_when": [
+        "Several sentences rephrase the same point without developing it.",
+        "Merged drafts duplicate explanations or background.",
+        "Cutting risks losing a qualification or useful repetition along with excess wording."
+      ],
+      "goals": ["Economy with preserved meaning", "Visible development", "Purposeful repetition"],
+      "mechanisms": [
+        "Comparing the work performed by phrases and passages",
+        "Retaining distinctions and claim boundaries during compression",
+        "Judging recurrence by its function rather than its surface wording"
+      ],
+      "not_ideal_when": [
+        "Recurrence provides needed orientation, emphasis, rhythm, or emotional development.",
+        "A proposed deletion would remove evidence, a material limit, or the actual meaning of the claim."
+      ],
+      "related_patterns": [
+        "writing-let-the-verb-do-the-work",
+        "writing-give-each-paragraph-a-main-job",
+        "writing-make-references-unambiguous"
+      ],
+      "example_user_queries": [
+        "My paragraph says the same thing in several different ways.",
+        "How can I shorten this without losing the nuance?",
+        "I combined drafts and now the background appears twice.",
+        "My argument feels long but never seems to move forward.",
+        "Should I remove every repeated word?",
+        "A shorter rewrite sounds more certain than the original.",
+        "I cannot tell whether this sentence develops the point or just repeats it.",
+        "My story repeats an action and I am unsure whether the repetition earns its place.",
+        "How do I keep useful reminders without explaining everything again?",
+        "I cut the qualifications and now the claim seems too broad."
+      ],
+      "sources": [
+        {
+          "author": "Purdue OWL, Purdue University",
+          "title": "Concision",
+          "url": "https://owl.purdue.edu/owl/general_writing/academic_writing/conciseness/index.html",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The opening distinction between effective wording and the fewest words, and section 2 on checking each word for a useful contribution.",
+          "supports": "Evaluating economy by the work wording performs rather than minimizing word count alone.",
+          "limits": "No Purdue exercise is reproduced or adopted as a claim of exact semantic equivalence. Rehearsal-space, project-trial, and narrative examples are original; no measured readability effect is asserted."
+        },
+        {
+          "author": "UNC Writing Center, University of North Carolina at Chapel Hill",
+          "title": "Word Choice",
+          "url": "https://writingcenter.unc.edu/tips-and-tools/word-choice/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The section Selecting and using key terms, specifically Repetition vs. redundancy.",
+          "supports": "Distinguishing useful repetition of stable key terms from repeatedly restating an undeveloped point.",
+          "limits": "The scale distinctions, qualification-preserving comparisons, and emotional narrative example are editorial development rather than reproduced source passages."
+        }
+      ],
+      "source_path": "content/patterns/writing-cut-redundancy.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons expose the meaningful differences in wording and interpretation. No separate table, diagram, illustration, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-choose-terms-the-reader-can-use",
+      "index_ref": "P10",
+      "title": "Choose Terms the Reader Can Use",
+      "use_when": [
+        "Unexplained terms or local shorthand prevent the intended reader from acting.",
+        "Expanding an abbreviation still leaves its concept or consequence unclear.",
+        "Simplification would erase a technical distinction the audience needs."
+      ],
+      "goals": ["Shared vocabulary", "Usable explanations", "Preserved conceptual distinctions"],
+      "mechanisms": [
+        "Matching vocabulary to audience and task",
+        "Connecting a necessary term to an example, contrast, or consequence",
+        "Introducing and then consistently reusing a useful label"
+      ],
+      "not_ideal_when": [
+        "The audience already knows the term and an explanation would interrupt its task.",
+        "A substituted ordinary word would collapse a distinction essential to the instruction."
+      ],
+      "related_patterns": [
+        "writing-choose-the-specific-word",
+        "writing-make-references-unambiguous",
+        "writing-cut-redundancy"
+      ],
+      "example_user_queries": [
+        "My instructions are accurate but newcomers do not know what to do.",
+        "How much jargon can I keep for a mixed audience?",
+        "I expanded the acronym and readers still do not understand the sentence.",
+        "Replacing a technical term with a simple word seems to lose an important distinction.",
+        "Should I explain this term here or put it in a glossary?",
+        "I cannot tell which words my readers already know.",
+        "Our team uses ordinary words with meanings that outsiders do not recognize.",
+        "I want readers to learn the term because they will encounter it again.",
+        "Does plain language mean explaining every abbreviation?",
+        "How can I check whether a definition actually helps someone complete the task?"
+      ],
+      "sources": [
+        {
+          "author": "Australian Government Style Manual",
+          "title": "Plain language and word choice",
+          "url": "https://www.stylemanual.gov.au/writing-and-designing-content/clear-language-and-writing-style/plain-language-and-word-choice",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The sections Learn about the words people use and Keep words and phrases with special meaning to a minimum, including audience research, specialist vocabulary, explanations, and selective shortened forms.",
+          "supports": "Choosing vocabulary in relation to audience knowledge and explaining or retaining specialist terms according to actual reader need.",
+          "limits": "No claim about a statutory accessibility threshold is made. Studio and workplace processes are invented and locally defined; they are not universal technical procedures."
+        },
+        {
+          "author": "Centers for Disease Control and Prevention, Clear Communication Index",
+          "title": "Does the material always use words the primary audience uses?",
+          "url": "https://www.cdc.gov/ccindex/tool/page-7.html",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The guidance on audience vocabulary, explaining unfamiliar terms at the point of use, testing understanding, and selective explanation of abbreviations.",
+          "supports": "Explaining unfamiliar language where it becomes necessary and checking what the intended audience actually understands.",
+          "limits": "The source supports communication guidance only. No health recommendation, health example, quantified processing effect, or validated result for the invented explanations is claimed."
+        }
+      ],
+      "source_path": "content/patterns/writing-choose-terms-the-reader-can-use.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons expose the meaningful differences in wording and interpretation. No separate table, diagram, illustration, or interactive practice is needed."
+      }
+    }
+  ]
+}

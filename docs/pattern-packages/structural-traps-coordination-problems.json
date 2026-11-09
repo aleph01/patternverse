@@ -1,0 +1,111 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Coordination Problems",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "coordination-problems",
+      "title": "Coordination Problems",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; equilibrium selection, expectations, and conventions",
+      "article": "content/concepts/coordination-problems.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Schelling, The Strategy of Conflict, chapter 3 (1960)",
+          "url": "https://gamef21.classes.ryansafner.com/readings/Schelling-1960-Ch3.pdf",
+          "supports": "Tacit coordination of expectations, mutually recognized clues, focal points, and limits of salience.",
+          "read_method": "Original chapter pages 54–57 read from local scans and OCR; book-cover scan identifies a later edition with new preface. Original work dated 1960.",
+          "boundary": "Illustrative respondent samples, described by Schelling as unscientific, do not establish universal coordination rates or effects of a modern acknowledgment procedure."
+        },
+        {
+          "title": "Van Huyck, Battalio, and Beil, Tacit Coordination Games, Strategic Uncertainty, and Coordination Failure (1990)",
+          "url": "https://econweb.ucsd.edu/~jandreoni/Econ264/papers/Van%20Huyck%20et%20al%20AER%201990.pdf",
+          "supports": "Strategic uncertainty, multiple strict ranked equilibria, distinction between disequilibrium and inferior equilibrium, repeated minimum-effort experiments.",
+          "read_method": "Published scanned article: introduction, game definition and equilibrium analysis, monitoring treatment, and conclusions read via local OCR.",
+          "boundary": "Specific laboratory minimum-effort game; not evidence that all repeated or large-group coordination fails. Monitoring improves individual best responses without necessarily selecting the collectively best equilibrium in that setting."
+        },
+        {
+          "title": "Crawford, Gneezy, and Rottenstreich, The Power of Focal Points Is Limited (2008)",
+          "url": "https://econweb.ucsd.edu/~vcrawfor/CrawfordGneezyRottenstreichAER08.pdf",
+          "doi": "10.1257/aer.98.4.1443",
+          "supports": "One-shot focal-point experiments with symmetric and asymmetric matching rewards; salient labels can lose effectiveness when payoffs favor different outcomes by role.",
+          "read_method": "Published PDF introduction, pilot and paid X-Y design, treatment payoffs, and results read.",
+          "boundary": "Pilot used hypothetical payoffs; subsequent treatments paid subjects. Article explicitly refers to paid experiments and makes no numerical rate claim or estimate of acknowledgment effects."
+        }
+      ],
+      "related_patterns": [
+        "the-stag-hunt",
+        "battle-of-the-sexes",
+        "the-prisoners-dilemma",
+        "cold-starts-and-critical-mass",
+        "threshold-contribution-problems"
+      ],
+      "status": "published",
+      "short_description": "Recognize when mutually beneficial action depends on compatible expectations, then distinguish selecting a shared plan from changing incentives, capabilities, or the costs of mismatch.",
+      "use_when": [
+        "Which choices put Mina and Owen together?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Name one usable entrance and time, acknowledge it, and coordinate revisions.",
+        "Communication, access, and follow-through remain necessary. Recovery takes additional time or resources."
+      ],
+      "example_structure": {
+        "scenario": "One meeting; North and South entrances equally feasible and equally preferred; choices before observing the other, no recovery in the first-choice benchmark. Both matching outcomes are equilibria. Acknowledged communication selects an existing outcome; adding recovery changes the model.",
+        "changed_relationship": "Name one usable entrance and time, acknowledge it, and coordinate revisions.",
+        "residual_constraints": "Communication, access, and follow-through remain necessary. Recovery takes additional time or resources.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/coordination-courtyards.svg",
+          "content/assets/structural-traps/coordination-courtyards-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 927,
+            "textBlocks": 18
+          },
+          "phone": {
+            "width": 360,
+            "height": 1100,
+            "textBlocks": 15
+          }
+        },
+        "question": "Which choices put Mina and Owen together?",
+        "alternative_text": "Hypothetical qualitative illustration. Mina and Owen can each choose North or South entrance. Both North and both South are double-outlined equilibria; split choices miss the meeting. Neither has an intrinsic preference for an entrance. Naming and acknowledging North selects one existing matching outcome. Change: Name one usable entrance and time, acknowledge it, and coordinate revisions. Limitation: Communication, access, and follow-through remain necessary. Recovery takes additional time or resources.",
+        "caption": "Hypothetical illustration. The two matching cells are equally acceptable equilibria. An acknowledged entrance and time select one without changing preferences. An unread message, closed entrance, or unconfirmed revision can still defeat the plan.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Mina and Owen can each choose North or South entrance. Both North and both South are double-outlined equilibria; split choices miss the meeting. Neither has an intrinsic preference for an entrance. Naming and acknowledging North selects one existing matching outcome. Change: Name one usable entrance and time, acknowledge it, and coordinate revisions. Limitation: Communication, access, and follow-through remain necessary. Recovery takes additional time or resources.",
+          "relationship_key": "Cells compare choices before observing the other’s current decision, not movements between entrances. Double outlines mark equilibria.",
+          "changed_relationship": "Name one usable entrance and time, acknowledge it, and coordinate revisions.",
+          "residual_constraints": "Communication, access, and follow-through remain necessary. Recovery takes additional time or resources.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "One meeting; North and South entrances equally feasible and equally preferred; choices before observing the other, no recovery in the first-choice benchmark. Both matching outcomes are equilibria. Acknowledged communication selects an existing outcome; adding recovery changes the model.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Fourteen articles, twenty-eight editable SVGs, fourteen current research notes, and necessary asset dimensions updated.",
+        "visual": "All fourteen live articles checked in the browser at 1440px desktop and 390px phone viewports (28 layouts), with loaded expected sources and no page overflow. All twenty-eight SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (56 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

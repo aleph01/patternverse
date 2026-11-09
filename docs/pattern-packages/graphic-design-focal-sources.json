@@ -1,0 +1,35 @@
+{
+  "pattern": "Establish a Focal Point",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographs and composed new controlled SVG examples. No new photograph was generated for this article.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-focal-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "comparisonPolicy": "Poster changes only Open studios font-weight from 400 to 700. Product card translates the intact price/scope/exclusion group horizontally by 295 SVG units while preserving baselines, internal spacing and styling. Booking screen changes only the fills and label colors of the two secondary actions; primary action and all outlines stay fixed. All font sizes, copy, unrelated positions, photographs/crops, paper/phone, colors elsewhere and lighting remain identical. No attention, first-fixation or performance result is claimed."
+}

@@ -1,0 +1,96 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    },
+    {
+      "file": "SourceSans3[wght].ttf",
+      "family": "Source Sans 3",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 800
+      },
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "embedding": "Unmodified original variable TTF. CSS selects fixed weight 800 in both variants; no derivative or renamed bold instance was created.",
+      "license": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt"
+    }
+  ],
+  "fontLicensePolicy": "The existing renamed Source Sans 3 Regular instance is reused unchanged for supporting text. Display text embeds the unmodified original variable Source Sans 3 file with weight 800 selected identically in both variants. Original sources and OFL notice are retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Use Type as Image",
+  "date": "2026-10-28",
+  "mode": "Existing generated photographic artwork and paper presentation reused unchanged; native vector typography composed separately. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-type-image-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-type-image-layouts.json",
+    "sha256": "e94f694fdd60f7de81f39210e18901f5bbca169c3cea44e9cc6d374d526f30d8",
+    "method": "Native SVG expressive transformations with one predeclared intervention per specimen: baseline placement, photographic glyph fill, and restoration of a recognizable glyph in place of a symbol. All other nodes and image source bytes remain fixed."
+  },
+  "comparisonPolicy": "RISE: only I/S/E baselines rise 36/72/108 units, preserving horizontal starts, size124 and weight800. CLAY: only solid fill changes to a photographic pattern at fixed size156 and weight800; banner and pattern crops remain fixed in both source files. MUG: only the cup body and native U visibility toggle at fixed size132 and weight800; M/G, small handle, positions and literal product name stay fixed. All copy, photos/crops, font sources, other nodes, paper and lighting are identical across each pair.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "type-image-rise",
+        "changedPixels": 14465,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "type-image-clay",
+        "changedPixels": 17666,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "type-image-mug",
+        "changedPixels": 2656,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared expressive-type intervention regions differ.",
+    "scope": "Exact DOM normalization permits only declared transforms, word fill or paired visibility attributes. All other artifact nodes, both embedded fonts and source image bytes remain identical. Fixed weight 800 loaded in browser; all text fits; narrow surfaces have no horizontal overflow; SVG image and inline rendering match."
+  },
+  "limitations": "Static English-language fictional examples. Expressive fit and recognition are editorial interpretations, not measured reader speed, recall or engagement. Not a physical print proof, responsive website implementation or full accessibility evaluation. Solid/plain before designs may be appropriate for other briefs or small formats."
+}

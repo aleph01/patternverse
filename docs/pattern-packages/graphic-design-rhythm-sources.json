@@ -1,0 +1,63 @@
+{
+  "pattern": "Establish Visual Rhythm",
+  "date": "2026-10-27",
+  "mode": "Selected existing generated photographic artwork and composed typography and layout separately. No new photograph generated.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-rhythm-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-workshop-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Diary: only image x coordinates and whole-copy-group x positions in rows 2–4 change. Program: only the complete afternoon block translates down by 50. Poster: only three font sizes change from 44,56,40 to 32,48,64. All source photos, crops, dimensions, words, other typography, paper and lighting remain identical within pairs.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "rhythm-studio-diary",
+        "changedPixels": 114518,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "rhythm-open-studio-program",
+        "changedPixels": 12452,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "rhythm-look-make-share",
+        "changedPixels": 8144,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within paper surface, including nested copy-block transforms",
+    "pixelCheck": "Only intended declared rhythm intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "All six saved desktop/stacked browser PNGs inspected. Text fits the paper, with nested group transforms included; no horizontal overflow. Pixel differences establish controlled interventions, not viewer outcomes."
+  },
+  "limitations": "No fixed gaze path, reading tempo, audience outcome, attention improvement, responsive product implementation, physical print trial, assistive-technology audit or full production article-route result is claimed."
+}

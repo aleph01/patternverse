@@ -1,0 +1,63 @@
+{
+  "pattern": "Balance Visual Weight",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographs and composed controlled print-design comparisons. No new photograph was generated.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-balance-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/scale-greenhouse-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "0f4e3efdc680eada7505fc4638b42b32cebf634083275dc565df3d2ce702aeed"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-workshop-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Invitation: only the image x coordinate changes; frame size, crop and all text remain fixed. Peer cards: only the left panel fill and inherited text fill change; the right panel and both photos are untouched. Material study: only the identifier group font-weight changes from 400 to 700; size, family, anchors, baselines and line breaks remain fixed. Shared image bytes, paper and lighting remain identical.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "balance-evening-invitation",
+        "changedPixels": 127200,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "balance-peer-workshops",
+        "changedPixels": 75796,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "balance-material-study",
+        "changedPixels": 2009,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within paper or phone content surface, including nested group transforms",
+    "pixelCheck": "Only intended declared declared balance intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "Saved standalone comparisons at desktop and narrow widths, with text within the paper. Pixel differences verify controlled edits, not perceived balance."
+  },
+  "limitations": "Proposed balance is contextual editorial interpretation. No calibrated visual-weight score, viewer preference, measured attention/task improvement, physical print trial, assistive-technology test or complete production article route result."
+}

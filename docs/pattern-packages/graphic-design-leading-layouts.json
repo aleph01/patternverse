@@ -1,0 +1,72 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Exact-font whole-word wrapping computed once and preserved in both variants. Only the declared baseline interval and consequent tspan y coordinates vary; first baseline fixed.",
+  "examples": [
+    {
+      "name": "leading-journal",
+      "source": "audience-workspace-photo.jpg",
+      "copy": "The studio opens its doors to independent makers each morning. Shared tables give small projects room to grow, while quiet corners offer a place to plan. Members bring their own tools and leave the benches ready for the next person. It is a working space shaped by the people who use it.",
+      "lines": [
+        "The studio opens its doors to independent makers",
+        "each morning. Shared tables give small projects",
+        "room to grow, while quiet corners offer a place to",
+        "plan. Members bring their own tools and leave the",
+        "benches ready for the next person. It is a working",
+        "space shaped by the people who use it."
+      ],
+      "pixelWidths": [
+        459.029541015625, 436.74359130859375, 447.589599609375, 457.841552734375, 446.99560546875,
+        357.82965087890625
+      ],
+      "x": 65,
+      "y": 500,
+      "size": 22,
+      "measure": 480,
+      "before": 23,
+      "after": 33,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    },
+    {
+      "name": "leading-care-card",
+      "source": "explicit-tableware-photo.jpg",
+      "copy": "Wash with warm water and a soft cloth. Dry before storing the mug. Avoid sudden changes in temperature, and keep it away from direct heat. Keep this care note for future reference.",
+      "lines": [
+        "Wash with warm water and a soft cloth. Dry before",
+        "storing the mug. Avoid sudden changes in",
+        "temperature, and keep it away from direct heat.",
+        "Keep this care note for future reference."
+      ],
+      "pixelWidths": [458.1936340332031, 381.0396728515625, 435.66558837890625, 361.5036315917969],
+      "x": 65,
+      "y": 520,
+      "size": 22,
+      "measure": 480,
+      "before": 48,
+      "after": 33,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    },
+    {
+      "name": "leading-workshop-poster",
+      "source": "form-open-studios-photo.jpg",
+      "copy": "Make something with your hands.",
+      "lines": ["Make something", "with your hands."],
+      "pixelWidths": [356.66790771484375, 361.971923828125],
+      "x": 65,
+      "y": 470,
+      "size": 52,
+      "measure": 480,
+      "before": 91,
+      "after": 58,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    }
+  ]
+}

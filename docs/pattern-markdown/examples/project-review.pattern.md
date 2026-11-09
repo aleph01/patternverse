@@ -2,7 +2,7 @@
 :title "Project review"
 :input topic text
 :output plan
-!use project.step as plan {
+plan = !use project.step {
     :with topic
 }
 !show {

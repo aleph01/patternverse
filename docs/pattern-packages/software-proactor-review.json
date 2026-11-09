@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "proactor",
+  "title": "Proactor",
+  "aliases": [],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1477,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: the original Pyarali/Harrison/Schmidt/Jordan Proactor paper, Boost.Asio’s Proactor model, Microsoft I/O completion ports, synchronous/asynchronous I/O and CancelIoEx documentation, and Python asyncio platform support. Initiation, operation processing, queued completion, matching handler dispatch, request identity, transferred-byte counts, partial transfers, borrowed buffer lifetime, immediate/submission outcomes, cancellation races, dispatcher concurrency, completion order and admission bounds are explicit. Completion dispatcher is a participant rather than an invented alias. A portable async keyword is not treated as proof of native completion I/O; the Python example is explicitly a deterministic simulation.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["proactor.py", "demo.py"],
+      "stdout": [
+        "retained requests: 2",
+        "B 2 b'ok' None False",
+        "A 3 b'hel' None True",
+        "C 0 b'' cancelled True",
+        "D 0 b'' None False",
+        "remaining: 0"
+      ],
+      "verification": "Exact six-line demo output; submission and backend completion do not invoke handlers inline; B can finish before A and each result retains its own request identity; queued results and cancellation requests retain pending state and both admission slots; all six event orders of two finishes and a cancellation distinguish requested cancellation from terminal status; cancellation can end in success, cancellation, or read failure; 1/8-byte request bounds, full/short/zero-byte and arbitrary binary results, exact unpadded byte counts, immutable independent completion snapshots, and distinct request buffers; duplicate terminal results and unknown/retired IDs reject without mutation; invalid request size, owner, handler, completed count, payload type and terminal status preserve state; slot release before callbacks permits continuation under the two-request cap; handler exceptions propagate without retrying that callback or dropping another queued completion; same owner labels remain distinct requests; all queues drain and separate model instances remain independent. Deterministic in-memory model only: no real I/O, OS handles, kernel-borrowed buffers, threads, timers, native API calls, guaranteed cancellation effectiveness, persistent effects, or native performance claim."
+    },
+    "content": "1286 entities validate with drafts included; published-only compilation contains 1139 entities without diagnostics.",
+    "integration_tests": "All three focused article suites pass: Proactor, Reactor, and GoF. Combined run across four files reports 34 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Proactor as its second completed member, preserving Reactor and prior collection contents. Reactor, Command, and Observer retain their canonical IDs and primary homes as related links. Proactor has exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1284,
+      "new_content": ["content/patterns/proactor.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "reactor_collection_member_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 52,
+      "prior_graphics_unchanged": 464,
+      "prior_dimensions_unchanged": 1646,
+      "new_dimensions": {
+        "software-engineering/proactor-completion.svg": {
+          "width": 720,
+          "height": 1104
+        },
+        "software-engineering/proactor-completion-mobile.svg": {
+          "width": 360,
+          "height": 1256
+        },
+        "software-engineering/proactor-lifetime.svg": {
+          "width": 720,
+          "height": 1176
+        },
+        "software-engineering/proactor-lifetime-mobile.svg": {
+          "width": 360,
+          "height": 1240
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other existing collection, software verse, or GoF changes.",
+    "illustrations": "Two editable native SVGs explain initiation/operation/completion/handler result flow and request retention through cancellation and dispatch. Both have separately composed phone variants, meaningful alternatives/captions, the approved fixed white surface, regular Helvetica Neue palette, square geometry, restrained strokes, and labeled arrow meanings. The first distinguishes completed operation results from readiness and from a whole-transfer guarantee; its completed-result label is spaced away from the arrow path. The second shows two retained slots, B’s queued completion, A’s requested cancellation, A’s successful three-byte result, and dispatch reducing retained slots to zero. Slot retention through dispatch and the chosen completion order are explicitly model policies rather than universal native API guarantees. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and embedded desktop/phone figures were visually inspected for accuracy, label placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all three related routes returning 200. Concurrency and Resource Management contains Reactor and Proactor; its route and Software Engineering verse gallery open Proactor with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-proactor/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 42254
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ deterministic single-thread in-memory simulation. read initiates a request, complete is the manually controlled test-backend terminal-result hook, and dispatch_one consumes a queued result and invokes the matching handler. At most two outstanding requests ask for 1–8 bytes each, including completed requests waiting for dispatch. Each has a separate ordinary bytearray and callback; IDs are scoped correlation values rather than security credentials. Requesting cancellation retains state and can precede a successful, canceled, or failed result. Error results contain no data in this model; zero-byte success models stream EOF, and short reads do not imply a complete business record. Duplicate results are rejected. Dispatch copies bytes, releases pending admission state before invoking the callback, and propagates handler failure without retrying it or discarding other ready results. Callbacks are serialized and all harness queues drain. Slot retention, result/status restrictions, dispatch ordering and accounting are explicit model choices, not native API promises. No real I/O, OS handles, kernel-borrowed buffers, threads, timers, native Windows API execution, durability, effective cancellation mechanism, or native performance claim is inferred.",
+  "preview": "http://127.0.0.1:43037/pattern/proactor",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-proactor",
+  "browser_measurements": ".local/software-proactor/browser-checks.json",
+  "browser_check_script": ".local/software-proactor/check-browser.mjs",
+  "build_log": ".local/software-proactor/public-build-isolated.log",
+  "branch": "codex/software-proactor",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

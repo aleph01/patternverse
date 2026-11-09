@@ -4,6 +4,13 @@ Once configured, every push to `main` runs the existing CI checks, then publishe
 the website to Cloudflare Pages. Pull requests never publish to production. You
 can also run the CI workflow manually from GitHub Actions on `main`.
 
+CI builds each feature profile once. The full-profile regression tests serve the
+existing full build. CI then builds the core production website, tests those static
+files, and passes `apps/web/build` to the production job as a revision-named artifact
+(including hidden public files). The production job scans and uploads that artifact
+without rebuilding packages, recompiling content, or changing the release profile.
+The production environment approval and the existing deployment queue still apply.
+
 This does not watch local file saves or automatically commit/push your work.
 Publish-ready updates must first be pushed to `main`. Failed checks leave the
 live website unchanged. Desktop DMG updates are separate from website publishing.
@@ -49,12 +56,22 @@ pnpm deploy:web --build-only
 
 # Explicitly publish current local source after Wrangler login:
 pnpm deploy:web
+
+# CI: scan and publish a previously built and tested production artifact:
+pnpm deploy:web --prebuilt
 ```
 
 The publishing script validates content, excludes drafts, builds the production
 site, checks the output for private files/recognizable credentials, and uploads
 only `apps/web/build`. It stops on any failure. Cloudflare publishing credentials
 are removed from the build environment and supplied only to the upload command.
+The explicit `--prebuilt` option skips source validation and compilation, so use it
+only with an already-verified production build. It still scans the public output
+before uploading; missing output or a failed scan stops publication.
+
+Production web builds stage the public routes and omit the unpublished Tender Wilds
+route and its game bundles. The editable game remains available in local development.
+The public-output check rejects accidental inclusion of its route or bundled code.
 
 The manual publish command deploys the current local source, including uncommitted
 changes; use it only when those changes are ready to be public. Routine releases

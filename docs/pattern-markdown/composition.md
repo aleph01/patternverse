@@ -10,7 +10,7 @@ Tests ensure the bundle contains the exact canonical `.pattern.md` source bytes.
 ## Explicit composition
 
 ```pattern
-!use project.step as plan {
+plan = !use project.step {
     :with topic
 }
 !show {

@@ -1,0 +1,433 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "reference-monitor",
+  "title": "Reference Monitor",
+  "aliases": ["Reference Monitor Concept"],
+  "primary_collection": "software-security-access-boundaries",
+  "primary_collection_title": "Security and Access Boundaries",
+  "body_word_count": 1434,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary sources: Anderson 1972 Volume II section 4.1.1 printed pages 22\u201323, visually read from scanned PDF pages 30\u201331; three NIST glossary entries distinguish reference monitor, reference monitor concept and security kernel; official PostgreSQL row-security documentation establishes privileged exceptions. Complete mediation, tamper protection and verifiability are requirements, not properties proven by this Python simulator. Authentication, authorization, exact object/action binding, revocation scope, policy evidence failure, trusted administrators, protected audit and logical versus physical boundary are explicit. Monitor Object is a distinct concurrency pattern. No existing exact canonical article found.",
+    "sources": [
+      "https://seclab.cs.ucdavis.edu/projects/history/papers/ande72.pdf",
+      "https://csrc.nist.gov/glossary/term/reference_monitor",
+      "https://csrc.nist.gov/glossary/term/reference_monitor_concept",
+      "https://csrc.nist.gov/glossary/term/security_kernel",
+      "https://www.postgresql.org/docs/current/ddl-rowsecurity.html"
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "read A totals",
+        "export A totals",
+        "reader-export denied",
+        "cross-tenant denied",
+        "revoked denied",
+        "unavailable denied"
+      ],
+      "normalized_policy_matrix_cases": 27,
+      "permitted_matrix_cases": 2,
+      "denied_matrix_cases": 25,
+      "checks": [
+        "exact six modeled outcomes and policy versions",
+        "subject/action/resource separation and default deny",
+        "no protected-body retrieval on denied requests",
+        "malformed input and unknown operations rejected",
+        "immutable result and audit snapshots",
+        "revocation on next operation without recalling old data",
+        "policy unavailable denies and recovery preserves revocation",
+        "policy/metadata/audit faults stop before body retrieval",
+        "body errors propagate and lock releases",
+        "decision log does not imply operation completion",
+        "real event-gated mutex contention orders check/use and revocation",
+        "same-process access explicitly demonstrates missing isolation"
+      ]
+    },
+    "content": "All 1306 entities validate. Published-only compilation contains 1159 entities without diagnostics. Eight exact H2s, one complete Python program, two figures with four responsive variants, four existing related IDs and ten distinct recommendation queries. No practice or worksheet. One new canonical article and one primary collection containing only the completed article.",
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "Reference Monitor 3, Monitor Object 3, Request Coalescing 3, GoF 24 and four graphic checks pass. Existing global authored-graphic coverage fails for access-over-ownership. New integration tests verify alias/search, single primary home, new collection/verse link, 23 GoF members, related IDs, exact focusable highlighted code, alt text/captions/phone sources/dimensions, metadata hash and queries."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses exact in ByRoleOptions, which does not define that property."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for the new generator, actual-code validator, integration test and the updated authoring JSON/documentation, illustration registry, asset manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/verses/software-engineering.md"],
+      "other_existing_content_unchanged": 1303,
+      "new_content": [
+        "content/collections/software-security-access-boundaries.md",
+        "content/patterns/reference-monitor.md"
+      ],
+      "new_primary_collection_security_and_access_boundaries_contains_only_completed_article": true,
+      "software_engineering_verse_only_appends_collection_link": true,
+      "all_existing_articles_collections_other_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 75,
+      "prior_graphics_unchanged": 487,
+      "all_prior_dimensions_unchanged": 1732,
+      "new_dimensions": {
+        "software-engineering/reference-monitor-boundary.svg": {
+          "width": 720,
+          "height": 1008
+        },
+        "software-engineering/reference-monitor-boundary-mobile.svg": {
+          "width": 360,
+          "height": 1120
+        },
+        "software-engineering/reference-monitor-revocation.svg": {
+          "width": 720,
+          "height": 960
+        },
+        "software-engineering/reference-monitor-revocation-mobile.svg": {
+          "width": 360,
+          "height": 968
+        }
+      },
+      "previous_integration_tests_renderer_dependencies_historical_import_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "staged_sources_and_assets_match": true
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/reference-monitor-boundary.svg",
+        "labels": 27,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1008
+      },
+      {
+        "path": "/assets/software-engineering/reference-monitor-boundary-mobile.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1120
+      },
+      {
+        "path": "/assets/software-engineering/reference-monitor-revocation.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 960
+      },
+      {
+        "path": "/assets/software-engineering/reference-monitor-revocation-mobile.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 968
+      }
+    ],
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 7,
+          "width": 90,
+          "height": 82
+        },
+        {
+          "x": 21,
+          "y": 23,
+          "width": 50,
+          "height": 50
+        }
+      ]
+    },
+    "visual_review": "Actual article, top navigation and summary inspected at desktop and phone widths; both figures inspected in article at 1440 and 390 pixels, including phone captions. Code viewport and primary collection gallery inspected. Fixed white surfaces, regular Helvetica Neue with fallbacks, requested palette, square geometry, labeled arrows, readable text and no clipped or overlapping labels. Desktop incoming enforcement arrows were corrected before final review. Card/header concept matches reviewed registry paths.",
+    "browser": {
+      "status": "passed",
+      "mode": "Actual application Vite development renderer in isolated source snapshot; not a completed production static export.",
+      "widths": [1440, 390, 320],
+      "details": [
+        {
+          "path": "/assets/software-engineering/reference-monitor-boundary.svg",
+          "labels": 27,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 1008
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-boundary-mobile.svg",
+          "labels": 21,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1120
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-revocation.svg",
+          "labels": 17,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 960
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-revocation-mobile.svg",
+          "labels": 17,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 968
+        },
+        {
+          "viewport": 1440,
+          "pageWidth": 1440,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/reference-monitor-boundary.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/reference-monitor-revocation.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 194,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/proxy",
+            "/pattern/data-policy-as-code",
+            "/pattern/data-row-and-column-level-access",
+            "/pattern/monitor-object"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 390,
+          "pageWidth": 390,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/reference-monitor-boundary-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/reference-monitor-revocation-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 194,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/proxy",
+            "/pattern/data-policy-as-code",
+            "/pattern/data-row-and-column-level-access",
+            "/pattern/monitor-object"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 320,
+          "pageWidth": 320,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/reference-monitor-boundary-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/reference-monitor-revocation-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 194,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 74, 139)",
+                "rgb(72, 86, 76)",
+                "rgb(23, 96, 67)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/proxy",
+            "/pattern/data-policy-as-code",
+            "/pattern/data-row-and-column-level-access",
+            "/pattern/monitor-object"
+          ],
+          "copyable": true,
+          "keyboard_code_scroll": true
+        },
+        {
+          "collection": "software-security-access-boundaries",
+          "article": "reference-monitor",
+          "navigation": "collection route and verse gallery to article passed",
+          "related_routes": "all returned 200"
+        }
+      ],
+      "checks": [
+        "exact eight H2s",
+        "all four SVG variants load and stay inside viewBox",
+        "responsive phone assets selected",
+        "highlighting with six computed token colors",
+        "exact code text and browser selection",
+        "focusable code with keyboard horizontal scrolling at 320 pixels",
+        "no page overflow",
+        "four related article routes return 200",
+        "new collection route, Software Engineering gallery, card concept and article breadcrumb work",
+        "no browser page or console errors"
+      ]
+    },
+    "production_build": {
+      "status": "blocked-by-disk-capacity",
+      "command": "node scripts/build-public-web.mjs",
+      "attempts": 2,
+      "exit_code": 1,
+      "error": "ENOSPC during SvelteKit prerender writeFileSync. Both attempts compiled client/server before failing to finish the full-site export.",
+      "limitations": "No completed production export or passing static-build assertion is claimed. Article rendering verified through the unchanged live application renderer instead.",
+      "isolation": "Source snapshot excludes private environment files and symlinks existing dependencies. Repository build scripts, renderer and dependencies unchanged. Temporary native copy-on-write helpers only operate on this task snapshot/generated files, with byte comparisons. No other preview/source was removed.",
+      "recovery": "Only this task failed generated output and clone cache were removed after each build attempt. Two attempt logs retained. The source snapshot remains for the live preview."
+    },
+    "live_resources": {
+      "status": "passed",
+      "mode": "actual Vite development renderer in isolated source snapshot; production static export blocked by ENOSPC",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-boundary-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-boundary.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-revocation-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-revocation.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/reference-monitor-boundary.svg",
+          "status": 200,
+          "sha256": "c83befe34b90735f0299742b1f76fb9491ba42e6e64b76a8d9d4ef456202c0a0",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-boundary-mobile.svg",
+          "status": 200,
+          "sha256": "0949e5659a62e605d5d3cd23ae43bc3b4ee7b8afcb040542941705b5a9abfd22",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-revocation.svg",
+          "status": 200,
+          "sha256": "6fb8a50322d8853d3e01fbb32493638222eb45e18fde67a7952c74c4eb61c19c",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/reference-monitor-revocation-mobile.svg",
+          "status": 200,
+          "sha256": "170623ea1e88e9961c524d3c3225d6a68f2b59a1a22d03aaee8eab4120da8e26",
+          "matches_source": true
+        }
+      ]
+    }
+  },
+  "example_limits": "Closed-world behavioral simulator with trusted normalized identities, administrators, immutable string bodies and one process-local mutex. It demonstrates permit/deny and policy transitions, not hostile-code isolation, authentication, tamper protection, durable audit, distributed policy consistency, or a security proof. A negative scope test shows direct Python state access remains possible. PostgreSQL behavior is documented context, not a live database experiment.",
+  "preview_url": "http://127.0.0.1:43060/pattern/reference-monitor",
+  "version_control": {
+    "tool": "GitButler",
+    "branch": "codex/software-reference-monitor",
+    "committed": false,
+    "pushed": false,
+    "pull_request_created": false
+  },
+  "evidence_directory": ".local/software-reference-monitor",
+  "published": false,
+  "deployed": false
+}

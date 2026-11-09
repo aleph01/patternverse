@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "model-view-controller",
+  "title": "Model-View-Controller",
+  "aliases": ["MVC", "Model View Controller"],
+  "primary_collection": "software-presentation-ui-state",
+  "primary_collection_title": "Presentation and UI State",
+  "body_word_count": 1398,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary source notes: Reenskaug’s 2003 author retrospective, Krasner and Pope’s 1988 Smalltalk-80 publication, Fowler’s GUI Architectures, official Rails controller/view guides, and Python dataclass documentation. Original 1979-note URLs were unavailable, so the accessible author retrospective and historical primary publication establish the meaning without linking dead original-note URLs. The article distinguishes classic observer synchronization, explicit refresh, request/response MVC, and neighboring MVP/MVVM names. The code is original teaching material, not a Smalltalk or Rails reproduction.",
+    "python_examples": "Both actual article fences execute as seats.py and demo.py and produce eight stated lines exactly. Checks cover independent model validation, positive whole seat counts excluding booleans, capacity and cancellation limits, unchanged state after invalid operations, one-to-six ASCII digit parsing, malformed/oversized input and leading zeros, unknown actions, frozen/stale snapshots and their remaining-seat query, pure paired renderers, explicit refresh, headless command dispatch, independent model instances, propagated unexpected errors, and presentation failure without model rollback. Remaining-seat calculation belongs to the model snapshot; views format values only.",
+    "python_stdout": [
+      "Reserved: 0/3 | Free: 3",
+      "reserve 2: Updated",
+      "Reserved: 2/3 | Free: 1",
+      "reserve 2: Not enough seats",
+      "Reserved: 2/3 | Free: 1",
+      "reserve many: Enter 1–6 ASCII digits",
+      "cancel 1: Updated",
+      "Reserved: 1/3 | Free: 2"
+    ],
+    "article_tests": "108 article integration checks pass across MVC and all earlier software/GoF suites. Coverage includes canonical ID and aliases without duplicates, one primary home, new collection and verse navigation, exact eight H2 headings, two copyable highlighted Python blocks, accessible responsive figures and dimensions, three resolved related links, search, ten queries, article hash, and concept mark. A focused three-test MVC rerun also passes after moving the remaining-seat query onto the model snapshot. Two workers and bounded timeouts limit load.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The existing access-over-ownership authored-coverage failure remains. Combined run: 112 passed and one unrelated failure across 30 files.",
+    "content": "1262 entities validate with drafts included. Published-only corpus has 1115 entities and no errors.",
+    "collection": "Created Presentation and UI State for the completed MVC article only, with one initial member, and appended its introduction to Software Engineering. No future-pattern stubs or other taxonomy collections were created.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, validator, integration test, article, collection, verse, sidecar, concept registry, and authoring documentation. Updated validator/article/metadata pass again after the final refinement. The review report is formatted separately.",
+    "preservation": "All 23 GoF articles and their collection match pre-change hashes. All 27 earlier software articles and authoring records are unchanged. All 439 prior concept marks and 1550 asset-dimension entries are unchanged. Application Architecture, Domain Modeling and Business Logic, and Persistence and Transactions are byte-for-byte unchanged. The verse retains its entire previous body and appends only the new home introduction.",
+    "production_build": "Public production build succeeds and Public web build checks pass.",
+    "illustrations": "Two editable native SVG figures, each with an independently composed phone variant, use the approved fixed white surface, light editorial palette, square boundaries, regular Helvetica Neue with Helvetica/Arial fallbacks, and labeled calls/state flow. Browser geometry measurements find no text collisions, out-of-canvas labels, or out-of-canvas rectangles across all four SVGs. The actual embedded desktop and phone figures were visually inspected for readability, label placement, caption accuracy, contrast, and mechanism accuracy.",
+    "browser": "Actual production article checked at 1440, 390, and 320 CSS pixels: eight H2 sections, both responsive images decoded, exact Python code text and selectable whitespace, multicolor syntax highlighting, focusable horizontally scrollable code, keyboard scrolling at 320 pixels, and no page overflow. Desktop/phone article tops, code viewport, both figures at both widths, and the collection gallery were visually inspected. All three related article routes return 200. The collection route renders its title. The existing verse redirect opens the filtered library; its collection button opens the one-member gallery; the MVC card opens the article with the correct primary-collection breadcrumb. Browser console/page error collection is empty.",
+    "preview": "The normal preview failed on generated asset files. Verification uses an isolated local copy of the complete successful static production build, including its generated navigation data: 7806 files copied, none missing; 54 HTML asset references resolved. The local server mirrors extensionless HTML routing, query-specific library pages, and the existing verse-to-filtered-library redirect. This preview setup changes no application source and publishes nothing."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. Unrelated file untouched."
+    },
+    {
+      "check": "Web type check",
+      "detail": "music/notation.ts:37 passes HTMLElement to VexFlow Renderer, whose type requires string, HTMLDivElement, or HTMLCanvasElement. Unrelated file untouched. The combined check reports two errors and zero warnings."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored concept graphic; the other four graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential in-memory seat counter. Model methods enforce positive whole seat counts, capacity, and cancellation bounds independently of UI parsing. A controller accepts one to six ASCII digits and maps reserve/cancel actions to model operations, returning local status messages. The model snapshot supplies the remaining-seat query. Two pure text views format the same frozen model snapshot; outer composition explicitly refreshes them. Failed rules reject before mutation. No observer subscription, widget event loop, database, shared booking service, authorization, HTML output, transaction rollback, or cross-process concurrency guarantee is supplied.",
+  "preview": "http://127.0.0.1:43012/pattern/model-view-controller",
+  "preview_mode": "static-production-snapshot",
+  "evidence_directory": ".local/software-model-view-controller",
+  "browser_measurements": ".local/software-model-view-controller/browser-checks.json",
+  "browser_check_script": ".local/software-model-view-controller/check-browser.mjs",
+  "preservation_checks": ".local/software-model-view-controller/preservation.json",
+  "build_log": ".local/software-model-view-controller/public-build.log",
+  "branch": "codex/software-model-view-controller",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

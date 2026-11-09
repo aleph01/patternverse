@@ -1,0 +1,306 @@
+{
+  "status": "complete",
+  "reviewed": "2026-10-27",
+  "audience": "Readers with basic machine learning knowledge",
+  "scope": {
+    "articles": 33,
+    "illustration_variants": 66,
+    "explorers": 31
+  },
+  "sequence": [
+    "Shared editorial standard and ML explorer presentation",
+    "Hashed Feature, Self-Supervised Pretraining, Differentially Private Training pilots",
+    "Remaining substantial revisions",
+    "Targeted prose, captions, controls and numerical traces",
+    "Guide navigation and integrated-neighbor links",
+    "Numerical, integration, desktop and phone verification"
+  ],
+  "preserved": [
+    "Exact ten level-two headings",
+    "Article identifiers, frontmatter, collection order and recommendation queries",
+    "Every original article source URL",
+    "Fictional/computed/published evidence distinctions",
+    "Meaningful conditions and limitations",
+    "Widget numerical algorithms and example inputs",
+    "Light editorial drawing style and responsive companions",
+    "Sandbox allow-scripts boundary and existing permission restrictions"
+  ],
+  "shared_changes": [
+    "ML explorer height follows content, including opening and closing optional detail",
+    "Static preview no longer repeats above a running ML example",
+    "Reader-facing terms replace simulator vocabulary",
+    "Captions explain visible relationships",
+    "Real level-three example headings appear in Contents",
+    "Navigation groups articles by reader problem"
+  ],
+  "verification": {
+    "eight_numerical_traces": "passed, including exact three-node least-squares stationarity",
+    "article_structure": "33 of 33 match",
+    "original_source_urls": "preserved in all 33",
+    "word_range": [1278, 1497],
+    "unit": "190/190 ML checks passed; focused 12/12 Hashed Feature and Hierarchical checks repeated after final prose/spacing corrections",
+    "type_check": "0 errors, 0 warnings",
+    "build": "Production web build and public-build checks passed; all 66 built SVGs match source assets",
+    "desktop_phone": {
+      "result": "207 passed, 1 intentional skip",
+      "desktop_viewport": "1440 × 1000 CSS pixels",
+      "phone": "Pixel 7 emulation, 412 × 839 CSS pixels",
+      "skipped": "Duplicate phone invocation of illustration-style inventory; that inventory checks both SVG layouts on desktop, and all 33 article phone selections are checked separately",
+      "coverage": "33 articles, 66 responsive figures, 31 running explorers; controls, resets, overflow, source isolation, offline statistics regression and ML detail-panel resizing",
+      "final_capture_suite": "68/68 passed after visible-frame capture refinement; no production behavior changed during that refinement",
+      "offscreen_measurement": "Sizing checks scroll the sandbox into view first because browsers may suspend requestAnimationFrame in off-screen frames."
+    },
+    "visual_review": {
+      "status": "complete",
+      "figures_and_captions": "33 articles × desktop and phone = 66 captures reviewed",
+      "explorers": "31 explorers × desktop and phone = 62 full captures, plus 62 normal viewport captures",
+      "method": "Reviewed paired contact sheets and selected full-size/normal viewport captures. Figure/caption and explorer screenshots are separate so diagrams and controls can be inspected at useful size.",
+      "capture_layout": "Full explorer captures temporarily extend viewport height at the same desktop/phone width to avoid blank off-screen nested-frame captures; normal viewport captures retain 1440 × 1000 / Pixel 7 dimensions.",
+      "capture_completeness": "66 figure/caption, 62 full-explorer and 62 viewport images present, with no blank images",
+      "observed_corrections": [
+        "Hashed Feature caption no longer assumes left/right positioning on the stacked phone illustration.",
+        "Hashed Feature three-name bucket spacing adjusted so its last label clears the boundary."
+      ],
+      "evidence_directory": "/private/tmp/patternverse-ml-readability-captures",
+      "contact_sheets": "/private/tmp/ml-readability-final-review"
+    },
+    "lint_format": "Changed app code, tests, generators, metadata, all 33 articles and 31 widget sources checked",
+    "boundaries": [
+      "Responsive checks use emulated phone viewports, not physical phones.",
+      "Editorial review and rendering checks do not measure learning gains with readers."
+    ]
+  },
+  "patterns": [
+    {
+      "id": "ml-hashed-feature",
+      "title": "Hashed Feature",
+      "revision": "targeted",
+      "notes": "Worked remainder calculation; signed hashing after concrete examples; less duplicate collision commentary.",
+      "article_words": 1490
+    },
+    {
+      "id": "ml-active-learning",
+      "title": "Active Learning",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1444
+    },
+    {
+      "id": "ml-weak-supervision",
+      "title": "Weak Supervision",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1346
+    },
+    {
+      "id": "ml-label-preserving-augmentation",
+      "title": "Label-Preserving Augmentation",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1313
+    },
+    {
+      "id": "ml-self-supervised-pretraining",
+      "title": "Self-Supervised Pretraining",
+      "revision": "substantial",
+      "notes": "Encoder/head handoff from raw-word targets to reviewer-supplied intent labels; count model explicitly secondary.",
+      "article_words": 1497
+    },
+    {
+      "id": "ml-knowledge-distillation",
+      "title": "Knowledge Distillation",
+      "revision": "substantial",
+      "notes": "Plain-language two-loss mechanism, softmax and combined-loss arithmetic, then optional exact objective.",
+      "article_words": 1375
+    },
+    {
+      "id": "ml-decision-focused-learning",
+      "title": "Decision-Focused Learning",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1418
+    },
+    {
+      "id": "ml-leakage-safe-evaluation",
+      "title": "Leakage-Safe Evaluation",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1390
+    },
+    {
+      "id": "ml-behavioral-testing",
+      "title": "Behavioral Testing",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1333
+    },
+    {
+      "id": "ml-slice-based-evaluation",
+      "title": "Slice-Based Evaluation",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1318
+    },
+    {
+      "id": "ml-probability-calibration",
+      "title": "Probability Calibration",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1375
+    },
+    {
+      "id": "ml-conformal-prediction",
+      "title": "Conformal Prediction",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1403
+    },
+    {
+      "id": "ml-selective-prediction",
+      "title": "Selective Prediction",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1400
+    },
+    {
+      "id": "ml-schema-based-data-validation",
+      "title": "Schema-Based Data Validation",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1435
+    },
+    {
+      "id": "ml-point-in-time-feature-retrieval",
+      "title": "Point-in-Time Feature Retrieval",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1404
+    },
+    {
+      "id": "ml-shadow-deployment",
+      "title": "Shadow Deployment",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1454
+    },
+    {
+      "id": "ml-canary-rollout-with-rollback",
+      "title": "Canary Rollout with Rollback",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1278
+    },
+    {
+      "id": "ml-controlled-exploration-with-propensity-logging",
+      "title": "Controlled Exploration with Propensity Logging",
+      "revision": "substantial",
+      "notes": "Delivered-action and delayed-outcome examples before optional estimator variants.",
+      "article_words": 1491
+    },
+    {
+      "id": "ml-off-policy-evaluation",
+      "title": "Off-Policy Evaluation",
+      "revision": "substantial",
+      "notes": "Trace individual residuals; distinguish one log, full-information synthetic reference, and expectation over collection.",
+      "article_words": 1494
+    },
+    {
+      "id": "ml-federated-learning",
+      "title": "Federated Learning",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1406
+    },
+    {
+      "id": "ml-differentially-private-training",
+      "title": "Differentially Private Training",
+      "revision": "substantial",
+      "notes": "Separate update and accounting explanations; vector-length calculation; local symbol definitions; formal bound optional.",
+      "article_words": 1490
+    },
+    {
+      "id": "ml-model-cards",
+      "title": "Model Cards",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1377
+    },
+    {
+      "id": "ml-datasheets-for-datasets",
+      "title": "Datasheets for Datasets",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1386
+    },
+    {
+      "id": "ml-few-shot-in-context-learning",
+      "title": "Few-Shot In-Context Learning",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1415
+    },
+    {
+      "id": "ml-retrieval-augmented-generation",
+      "title": "Retrieval Augmented Generation",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1369
+    },
+    {
+      "id": "ml-tool-augmented-interaction",
+      "title": "Tool-Augmented Interaction",
+      "revision": "caption and navigation polish",
+      "notes": "Preserved strong explanation; refined causal caption, semantic example headings and related links where applicable.",
+      "article_words": 1379
+    },
+    {
+      "id": "ml-constrained-decoding",
+      "title": "Constrained Decoding",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1412
+    },
+    {
+      "id": "ml-worst-group-optimization",
+      "title": "Worst-Group Optimization",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1411
+    },
+    {
+      "id": "ml-domain-invariant-representation-learning",
+      "title": "Domain-Invariant Representation Learning",
+      "revision": "substantial",
+      "notes": "One adversarial mechanism first; define encoder and alignment weight; later covariance alternative and stress case.",
+      "article_words": 1455
+    },
+    {
+      "id": "ml-adversarial-training",
+      "title": "Adversarial Training",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1396
+    },
+    {
+      "id": "ml-replay-based-continual-learning",
+      "title": "Replay-Based Continual Learning",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1437
+    },
+    {
+      "id": "ml-quantize-for-deployment",
+      "title": "Quantize for Deployment",
+      "revision": "targeted",
+      "notes": "Clarified worked calculation or terminology, caption and preview; linked integrated neighbors.",
+      "article_words": 1403
+    },
+    {
+      "id": "ml-hierarchical-forecast-reconciliation",
+      "title": "Hierarchical Forecast Reconciliation",
+      "revision": "substantial",
+      "notes": "Three-node least-squares adjustment before seven-series example and optional matrices; rounded node labels retain precise tables.",
+      "article_words": 1459
+    }
+  ]
+}

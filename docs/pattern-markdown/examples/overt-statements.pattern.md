@@ -9,16 +9,16 @@
     You can keep it, change any word, pause, or finish without accepting it.
 }
 
-!refine[rounds=4, renewable] statement = initial_statement {
+statement = !refine[rounds=4, renewable] initial_statement {
     :as current
 
-    !ask correction {
+    correction = !ask {
         As you try this wording, what would you change to make it more your own?
 
         > {{current}}
     }
 
-    !agent revised {
+    revised = !agent {
         :returns text
 
         Offer only a short revised first-person statement.

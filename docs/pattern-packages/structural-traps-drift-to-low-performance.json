@@ -1,0 +1,133 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Drift to Low Performance",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "drift-to-low-performance",
+      "title": "Drift to Low Performance",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; eroding goals, adaptive standards, corrective effort, and operating capability",
+      "article": "content/concepts/drift-to-low-performance.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "author": "Peter M. Senge",
+          "year": 1990,
+          "title": "The Fifth Discipline: The Art and Practice of the Learning Organization",
+          "url": "https://www.bookdio.org/_files/ugd/ef8af1_5169a4238fd3412dba674fd8dbd81be6.pdf",
+          "read_method": "Opened the book text; read the eroding-goals discussion at PDF pages 94–95 and the Appendix 2 entry at PDF page 357. The scan identifies original 1990 copyright and 1994 paperback introduction.",
+          "supports": "Foundational terminology, two routes to reduce a gap, and eroding goals as a shifting-the-burden structure.",
+          "boundary": "Practical qualitative archetype, not a universal empirical law or proof that goal revisions are always wrong."
+        },
+        {
+          "author": "Donella H. Meadows",
+          "year": 2008,
+          "title": "Thinking in Systems: A Primer",
+          "url": "https://www.sustainable.soltechdesigns.com/meadows.pdf",
+          "read_method": "Opened and read printed pages 121–123, PDF pages 137–139.",
+          "supports": "Title Drift to Low Performance; reinforcing erosion, perceived versus actual state, negative perception bias, and standard anchoring.",
+          "boundary": "Qualitative structural account. The article qualifies rigid and best-ever standards using feasibility and resource constraints. The frog anecdote is not used as factual evidence."
+        },
+        {
+          "author": "Virginia Anderson",
+          "year": 1999,
+          "title": "Introducing the Systems Archetypes: Drifting Goals",
+          "url": "https://thesystemsthinker.com/introducing-the-systems-archetypes-drifting-goals/",
+          "read_method": "Opened and read full practitioner article; PDF edition dated October 1999. Adapted from Kim and Anderson, Systems Archetype Basics (1998).",
+          "supports": "Corrective action delay, goal adjustment, and explicit distinction between legitimate adaptation and erosion.",
+          "boundary": "Practitioner explanation; its Tato Bits narrative is not treated as empirical evidence."
+        },
+        {
+          "author": "Daniel H. Kim",
+          "year": 1999,
+          "title": "Drifting Goals: The Challenge of Conflicting Priorities",
+          "url": "https://thesystemsthinker.com/drifting-goals-the-challenge-of-conflicting-priorities/",
+          "read_method": "Opened the article and PDF edition; read quality/schedule conflicts and interdependent-goal discussion. PDF edition dated November 1999.",
+          "supports": "Rigid deadlines without needed resources can shift degradation to quality; multiple interdependent requirements must be considered.",
+          "boundary": "Practical qualitative analysis, not an estimated policy effect."
+        },
+        {
+          "author": "Rogelio Oliva and John D. Sterman",
+          "year": 2010,
+          "title": "Death Spirals and Virtuous Cycles: Human Resource Dynamics in Knowledge-Based Services",
+          "url": "https://www.researchgate.net/publication/226538976_Death_Spirals_and_Virtuous_Cycles_Human_Resource_Dynamics_in_Knowledge-Based_Services",
+          "doi": "10.1007/978-1-4419-1628-0_15",
+          "read_method": "Opened author-uploaded chapter; read model introduction, work-pressure/effort response, Erosion of service standards, and discussion of capacity and simulated policy behavior.",
+          "supports": "Field-informed modeling of service norms and asymmetric adjustment, explicitly referring to their 2001 UK bank study.",
+          "boundary": "Field-based calibration and simulation are distinguished. No coefficient or staffing-effect estimate is transferred to the hypothetical support service. This chapter is a primary authored account of their modeling work, not a controlled general-population test."
+        }
+      ],
+      "related_patterns": [
+        "shifting-the-burden",
+        "bottlenecks-and-capacity-constraints",
+        "reframing-rethink-goal"
+      ],
+      "status": "published",
+      "short_description": "Identify when disappointing results are lowering the standard used to judge them, then reconnect the standard to its purpose and fund a feasible path toward it.",
+      "use_when": [
+        "Did service improve, or did the standard move?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Separate forecasts from the justified service promise and resource a feasible recovery.",
+        "A target adds no capacity. Training, backlogs, changing needs, and unaffordable promises require explicit decisions."
+      ],
+      "example_structure": {
+        "scenario": "Support response standard is relaxed after misses; unchanged waiting looks more acceptable, recovery loses priority, waiting worsens, and further relaxation follows. Forecasts and justified service promises have different roles. Actual waits and target history must be tracked independently. Real coverage, backlog, demand, training, and legitimate scope revision remain material; no numerical trajectory or inevitable decline asserted.",
+        "changed_relationship": "Separate forecasts from the justified service promise and resource a feasible recovery.",
+        "residual_constraints": "A target adds no capacity. Training, backlogs, changing needs, and unaffordable promises require explicit decisions.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Did service improve, or did the standard move?",
+        "assets": [
+          "content/assets/structural-traps/drift-to-low-performance-moving-standard.svg",
+          "content/assets/structural-traps/drift-to-low-performance-moving-standard-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 857,
+            "textBlocks": 19
+          },
+          "phone": {
+            "width": 360,
+            "height": 1741,
+            "textBlocks": 19
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. The same actual waiting time misses an original promise but appears more acceptable under a relaxed one. Accepted delay can reduce recovery priority, worsen actual waiting, and invite another relaxation. Restoring a justified reference and usable coverage changes that response. Change: Separate forecasts from the justified service promise and resource a feasible recovery. Limitation: A target adds no capacity. Training, backlogs, changing needs, and unaffordable promises require explicit decisions.",
+        "caption": "Hypothetical illustration. Upper cards hold actual performance fixed while changing the comparison. The lower route is a hypothesis about repeated erosion, not a claim that honest forecasting is wrong. A justified service standard still requires resources and can be legitimately revised.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. The same actual waiting time misses an original promise but appears more acceptable under a relaxed one. Accepted delay can reduce recovery priority, worsen actual waiting, and invite another relaxation. Restoring a justified reference and usable coverage changes that response. Change: Separate forecasts from the justified service promise and resource a feasible recovery. Limitation: A target adds no capacity. Training, backlogs, changing needs, and unaffordable promises require explicit decisions.",
+          "relationship_key": "Upper cards are alternative comparisons, not later waiting measurements. Lower arrows show a hypothesized causal path; its final step feeds further standard revision.",
+          "changed_relationship": "Separate forecasts from the justified service promise and resource a feasible recovery.",
+          "residual_constraints": "A target adds no capacity. Training, backlogs, changing needs, and unaffordable promises require explicit decisions.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Support response standard is relaxed after misses; unchanged waiting looks more acceptable, recovery loses priority, waiting worsens, and further relaxation follows. Forecasts and justified service promises have different roles. Actual waits and target history must be tracked independently. Real coverage, backlog, demand, training, and legitimate scope revision remain material; no numerical trajectory or inevitable decline asserted.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

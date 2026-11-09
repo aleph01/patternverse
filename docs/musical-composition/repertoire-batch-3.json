@@ -1,0 +1,416 @@
+{
+  "date": "2026-10-29",
+  "scope": "Remaining four acquisition targets. Three unchanged MIDI sources fetched and added to the private demo; exact Bonnaroo performance remains unverified and uncounted.",
+  "selected": [
+    {
+      "id": "wonder-isnt-she-lovely",
+      "file": "wonder-isnt-she-lovely.mid",
+      "title": "Stevie Wonder · Isn't She Lovely · chord color",
+      "focus": "Sevenths and ninths over a moving bass",
+      "cue": "Listen to four bars of melody, keyboard voicings and bass. In bar 1, B and D-sharp add a seventh and ninth above C-sharp; the bass then moves to F-sharp, B and E.",
+      "start": 64,
+      "beats": 16,
+      "passage": "Community source bars 17–20 · 4/4",
+      "key": "E major",
+      "source": "https://bitmidi.com/isnt-she-lovely-1-mid",
+      "credit": "Community MIDI via BitMidi; original transcriber not identified",
+      "terms": "Private local review; public-app reuse permission not established; file is not bundled with the application",
+      "private": true,
+      "parts": [
+        {
+          "source": "midi-5",
+          "id": "melody",
+          "label": "Melody on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-1",
+          "id": "accompaniment",
+          "label": "Keyboard voicings",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-2",
+          "id": "bass",
+          "label": "Bass",
+          "instrument": "bass-guitar"
+        }
+      ],
+      "note": "A 3:45 community arrangement was obtained; this is a four-bar reduction. The opening keyboard notes E/G-sharp/B/D-sharp sit over C-sharp bass, giving C-sharp minor ninth color. The following F-sharp bass supports A-sharp/E/G-sharp in the keyboard. The melody-guide horn plays on sampled piano. Other synth, guitar, string, harmonica and percussion parts are omitted, including two non-GM percussion lanes encoded as pitched notes. The original timing is retained; fine swing and expressive placements may require the piano-roll view. This is not an approved transcription of the album recording.",
+      "lessons": [
+        {
+          "id": "songwriting-sevenths-added-notes-suspensions",
+          "title": "Add Color to a Working Chord"
+        },
+        {
+          "id": "songwriting-melody-and-harmony",
+          "title": "Support or Challenge the Melody Note"
+        }
+      ],
+      "patterns": [],
+      "download": "https://bitmidi.com/uploads/61341.mid",
+      "sha256": "4d90d01f0d2f00e27415b4af9d28db8de20e508729405fdbcaa271d649d1cec8",
+      "bytes": 95503,
+      "sourceSeconds": 224.54757083333334,
+      "sourceNotes": 7699,
+      "sourceBeats": 445.3541666666667,
+      "excerptNotes": 46,
+      "excerptParts": {
+        "melody": 12,
+        "accompaniment": 13,
+        "bass": 21
+      },
+      "sourceNotesCheck": "Unchanged source bytes. Selected part identities, bounds, pitches and stated chord/layer/tempo relationships checked in MIDI data. Score engraving probed for every selected bar. Full recording fidelity remains unapproved.",
+      "assetLocation": ".local/music-repertoire/wonder-isnt-she-lovely.mid",
+      "publicationReady": false
+    },
+    {
+      "id": "daft-punk-around-the-world",
+      "file": "daft-punk-around-the-world.mid",
+      "title": "Daft Punk · Around the World · building layers",
+      "focus": "Repeated parts enter at different moments",
+      "cue": "Follow the bass and high repeating figure. A second figure enters in excerpt bar 3, a new middle part in bar 13, and the vocal line in bar 21. The parts keep their individual rhythms as the texture grows.",
+      "start": 48,
+      "beats": 96,
+      "passage": "Community source bars 13–36 · 4/4",
+      "source": "https://www.albinoblacksheep.com/audio/midi/?src=Daft_Punk_-_Around_The_World",
+      "credit": "Kevin Hall, credited in the MIDI; hosted by Albino Blacksheep",
+      "terms": "Private local review; public-app reuse permission not established; file is not bundled with the application",
+      "private": true,
+      "parts": [
+        {
+          "source": "midi-0",
+          "id": "bass",
+          "label": "Bass ostinato",
+          "instrument": "bass-guitar"
+        },
+        {
+          "source": "midi-1",
+          "id": "high",
+          "label": "High repeating figure on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-2",
+          "id": "second",
+          "label": "Second repeating figure on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-4",
+          "id": "middle",
+          "label": "Middle repeating part on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-5",
+          "id": "melody",
+          "label": "Vocal line on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-6-drum-36",
+          "id": "kick",
+          "label": "Kick"
+        },
+        {
+          "source": "midi-6-drum-38",
+          "id": "snare",
+          "label": "Snare"
+        },
+        {
+          "source": "midi-6-drum-42",
+          "id": "hat",
+          "label": "Closed hi-hat"
+        }
+      ],
+      "notationParts": ["bass", "high", "second", "middle", "melody"],
+      "note": "A seven-minute, 10,605-note community arrangement was obtained; this is a 24-bar reduction. The selected new lanes start at source beats 56, 96 and 129.5. Synth and vocal pitches play on piano, and the bass uses the bass sound; original filtering, timbres and production are not reproduced. Noise effects, later synth lanes and extra percussion are omitted. The source C-major metadata is not treated as an approved key analysis.",
+      "lessons": [
+        {
+          "id": "songwriting-write-a-bass-line",
+          "title": "Write a Bass Line"
+        },
+        {
+          "id": "songwriting-interlock-the-groove",
+          "title": "Interlock the Groove"
+        },
+        {
+          "id": "songwriting-give-each-part-a-job",
+          "title": "Give Each Part a Job"
+        },
+        {
+          "id": "songwriting-shape-energy-over-time",
+          "title": "Shape Energy over Time"
+        }
+      ],
+      "patterns": ["rhythmic-ostinato", "interlocking-layers"],
+      "download": "https://www.albinoblacksheep.com/audio/midi/Daft_Punk_-_Around_The_World.mid",
+      "sha256": "68648a61ecc9f561bef9789b0f91ac166446cca3629802b6572595d8a60aa7b1",
+      "bytes": 73648,
+      "sourceSeconds": 420.4721410000001,
+      "sourceNotes": 10605,
+      "sourceBeats": 865,
+      "excerptNotes": 699,
+      "excerptParts": {
+        "bass": 133,
+        "high": 118,
+        "second": 77,
+        "middle": 48,
+        "melody": 19,
+        "kick": 192,
+        "snare": 16,
+        "hat": 96
+      },
+      "sourceNotesCheck": "Unchanged source bytes. Selected part identities, bounds, pitches and stated chord/layer/tempo relationships checked in MIDI data. Score engraving probed for every selected bar. Full recording fidelity remains unapproved.",
+      "assetLocation": ".local/music-repertoire/daft-punk-around-the-world.mid",
+      "publicationReady": false,
+      "key": "Repertoire excerpt"
+    },
+    {
+      "id": "queen-bohemian-rhapsody",
+      "file": "queen-bohemian-rhapsody.mid",
+      "title": "Queen · Bohemian Rhapsody · section transition",
+      "focus": "A contrasting passage changes the pace and texture",
+      "cue": "Hear the choral passage give way to a faster guitar-led setting near excerpt bar 8. The tempo changes from about 124 to 176 bpm, while new guitar parts replace the previous texture. This passage shows one boundary within the larger form.",
+      "start": 355,
+      "beats": 64,
+      "passage": "Community source beats 355–419 · 16 bars in 4/4",
+      "source": "https://bitmidi.com/bohemian-rhapsody-1-mid",
+      "credit": "Community MIDI via BitMidi; original transcriber not identified",
+      "terms": "Private local review; public-app reuse permission not established; file is not bundled with the application",
+      "private": true,
+      "parts": [
+        {
+          "source": "midi-4",
+          "id": "choir",
+          "label": "Choral harmony on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-6",
+          "id": "melody",
+          "label": "Lead vocal on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-0",
+          "id": "accompaniment",
+          "label": "Piano"
+        },
+        {
+          "source": "midi-2",
+          "id": "bass",
+          "label": "Bass",
+          "instrument": "bass-guitar"
+        },
+        {
+          "source": "midi-22",
+          "id": "guitar-chords",
+          "label": "Guitar chords on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-24",
+          "id": "guitar-riff",
+          "label": "Guitar line on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-16-drum-36",
+          "id": "kick",
+          "label": "Kick"
+        },
+        {
+          "source": "midi-16-drum-38",
+          "id": "snare",
+          "label": "Snare"
+        },
+        {
+          "source": "midi-16-drum-42",
+          "id": "hat",
+          "label": "Closed hi-hat"
+        }
+      ],
+      "notationParts": ["choir", "melody", "accompaniment", "bass", "guitar-chords", "guitar-riff"],
+      "note": "A long community arrangement with tempo and meter changes was obtained. It lasts about 7:22 and is not certified as a faithful full-song transcription. This selected passage preserves the source tempo change at beat 385.5 (excerpt beat 30.5) and the new guitar-chord entrance at beat 385.02. Choral and guitar notes use piano for clarity; doubled guitar, other choir lanes, effects and extra percussion are omitted. This 16-bar boundary study does not establish the complete song form. A full section map and recording alignment remain to be reviewed. Expressive subdivisions may require the piano-roll view.",
+      "lessons": [
+        {
+          "id": "songwriting-pacing-transitions-endings",
+          "title": "Shape the Approach and the Ending"
+        },
+        {
+          "id": "songwriting-jobs-of-song-sections",
+          "title": "Give Each Section a Purpose"
+        }
+      ],
+      "patterns": ["sectional-contrast"],
+      "download": "https://bitmidi.com/uploads/18908.mid",
+      "sha256": "8fc2a6121fea58c4a9bb9c00053017161bc855e8a39f04dbd79fd2ac4281a4f1",
+      "bytes": 54386,
+      "sourceSeconds": 441.57212666666663,
+      "sourceNotes": 4955,
+      "sourceBeats": 692.3333333333334,
+      "excerptNotes": 460,
+      "excerptParts": {
+        "choir": 112,
+        "melody": 12,
+        "accompaniment": 112,
+        "bass": 90,
+        "guitar-chords": 26,
+        "guitar-riff": 38,
+        "kick": 38,
+        "snare": 13,
+        "hat": 19
+      },
+      "sourceNotesCheck": "Unchanged source bytes. Selected part identities, bounds, pitches and stated chord/layer/tempo relationships checked in MIDI data. Score engraving probed for every selected bar. Full recording fidelity remains unapproved.",
+      "assetLocation": ".local/music-repertoire/queen-bohemian-rhapsody.mid",
+      "publicationReady": false
+    }
+  ],
+  "candidates": [
+    {
+      "id": "lovely-provider",
+      "page": "https://www.mididb.com/stevie-wonder/isnt-she-lovely-midi/",
+      "url": "https://www.mididb.com/midi-download/AUD_MMP2325.mid",
+      "file": "lovely-provider.mid",
+      "bytes": 14164,
+      "sha256": "00f085a8e2b10a40f8968832bb844c5513c8f85eeec01e28ef6a09118f4406f4",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "lovely-community",
+      "page": "https://bitmidi.com/stevie-wonder-isnt-she-lovely-mid",
+      "url": "https://bitmidi.com/uploads/97094.mid",
+      "file": "lovely-community.mid",
+      "bytes": 33141,
+      "sha256": "f356c56eaf92a2c13d9f239a2d7173bcbaecb7d69f4e0d64ced7a23e31d1ea7a",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "around-community",
+      "page": "https://bitmidi.com/daft-punk-around-the-world-mid",
+      "url": "https://bitmidi.com/uploads/37335.mid",
+      "file": "around-community.mid",
+      "bytes": 1763,
+      "sha256": "b1c1d7bfd63657402b2ccf6a20a4000f6c06e13caa08e8ba2fe68ef18440d0e5",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "bohemian-community",
+      "page": "https://bitmidi.com/queen-bohemian-rhapsody-mid",
+      "url": "https://bitmidi.com/uploads/87216.mid",
+      "file": "bohemian-community.mid",
+      "bytes": 51221,
+      "sha256": "5e468ed7b8f4f31b87fca059e60617b8089960a1b7dad1d406c1982320bd961a",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "bohemian-1",
+      "page": "https://bitmidi.com/bohemian-rhapsody-1-mid",
+      "url": "https://bitmidi.com/uploads/18908.mid",
+      "file": "bohemian-1.mid",
+      "bytes": 54386,
+      "sha256": "8fc2a6121fea58c4a9bb9c00053017161bc855e8a39f04dbd79fd2ac4281a4f1",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "videotape-bonnaroo-page",
+      "page": "https://supersimpledrum.com/songs/videotape-bonnaroo-version-radiohead",
+      "status": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "around-albino",
+      "page": "https://www.albinoblacksheep.com/audio/midi/Daft_Punk_-_Around_The_World.mid",
+      "url": "https://www.albinoblacksheep.com/audio/midi/Daft_Punk_-_Around_The_World.mid",
+      "file": "around-albino.mid",
+      "bytes": 73648,
+      "sha256": "68648a61ecc9f561bef9789b0f91ac166446cca3629802b6572595d8a60aa7b1",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "around-partners",
+      "page": "https://www.partnersinrhyme.com/midi/midiartists/daftpunk.shtml",
+      "status": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "around-midifind",
+      "page": "https://midifind.com/files/d/daft_punk/daft_punk_around_the_world/791-1-0-22560",
+      "status": "page saved",
+      "midi_links": [],
+      "score_links": []
+    },
+    {
+      "id": "videotape-musescore-list",
+      "page": "https://musescore.com/user/33547845/scores/9506296",
+      "status": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "lovely-1",
+      "page": "https://bitmidi.com/isnt-she-lovely-1-mid",
+      "url": "https://bitmidi.com/uploads/61341.mid",
+      "file": "lovely-1.mid",
+      "bytes": 95503,
+      "sha256": "4d90d01f0d2f00e27415b4af9d28db8de20e508729405fdbcaa271d649d1cec8",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "lovely-2",
+      "page": "https://bitmidi.com/isnt-she-lovely-2-mid",
+      "url": "https://bitmidi.com/uploads/61342.mid",
+      "file": "lovely-2.mid",
+      "bytes": 83466,
+      "sha256": "18fbb75cdb26de04878c0a46aac608a93ec7fc198fe9630cce93b2d00dc7699e",
+      "status": "downloaded for private review"
+    },
+    {
+      "id": "lovely-3",
+      "page": "https://bitmidi.com/isnt-she-lovely-3-mid",
+      "url": "https://bitmidi.com/uploads/61343.mid",
+      "file": "lovely-3.mid",
+      "bytes": 53244,
+      "sha256": "4d5dd7656ad8fce3cc23014dbeeaa82f8eecfce6624b67adb23a1dfadc74eb7a",
+      "status": "downloaded for private review"
+    }
+  ],
+  "rejectedOrLimited": [
+    {
+      "id": "lovely-provider",
+      "reason": "Valid 45-second provider demo; longer valid community file chosen."
+    },
+    {
+      "id": "lovely-community",
+      "reason": "About 92 seconds and 1,579 zero-duration notes across several lanes; fails importer. Source not repaired."
+    },
+    {
+      "id": "lovely-2",
+      "reason": "Two zero-duration bass notes in each doubled bass lane; fails importer. Source not repaired."
+    },
+    {
+      "id": "lovely-3",
+      "reason": "Valid alternative, but melody-guide part is less explicitly labeled; chose lovely-1 with MELODY lane."
+    },
+    {
+      "id": "around-community",
+      "reason": "Valid 24-second, three-part fragment; insufficient for the planned layer-development study."
+    },
+    {
+      "id": "bohemian-community",
+      "reason": "Three zero-duration drum notes fail importer; chose valid bohemian-1. Source not repaired."
+    }
+  ],
+  "checks": {
+    "lovely": "At source beat 64, keyboard E/G-sharp/B/D-sharp above C-sharp bass gives a C-sharp minor ninth. At 68, keyboard A-sharp/E/G-sharp above F-sharp bass preserves third, seventh and ninth. Selected melody guide, keyboard and bass retain timing.",
+    "around": "Selected lanes first enter at 56 (second figure), 96 (middle part), 129.5 (vocal); excerpt starts 48. All three entries occur in the selected 96 beats. Basic drums retained; noise and later extra synths excluded.",
+    "queen": "Excerpt starts 355 and ends 419 in 4/4. Tempo changes at 385.5 from approximately 124 to 176 bpm. Selected guitar-chord lane enters 385.020833. This demonstrates one section boundary, not the whole work form."
+  },
+  "notation": "Every bar of the three selected pitched-part scores passed the existing score rhythm subdivision checks. Around the World and Queen retain drums in playback/grid while their notation shows the pitched parts.",
+  "remaining": {
+    "work": "Radiohead — Videotape, Bonnaroo 17 June 2006",
+    "status": "Not fetched or verified; excluded from playable count",
+    "lead": "https://supersimpledrum.com/songs/videotape-bonnaroo-version-radiohead",
+    "observed": "Indexed drum chart advertises MIDI/MusicXML, 71 bars, 70 BPM; direct fetch returns 403 and browser shows security verification. MuseScore related scores mention a Bonnaroo ensemble arrangement, but the source page is also inaccessible to this session.",
+    "needed": "Accessible exact-performance piano-plus-reference score/MIDI and a musical alignment check. A drum-only chart or generic studio MIDI cannot fulfill this relationship."
+  },
+  "permission": "These are private review copies, not original artist recordings. Public-app reuse permission remains unestablished; no purchases or redistribution."
+}

@@ -1,0 +1,43 @@
+{
+  "fonts": {
+    "regular": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+    "display": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+    "displayWeight": 800
+  },
+  "method": "Native SVG expressive transformations with one predeclared intervention per specimen: baseline placement, photographic glyph fill, and restoration of a recognizable glyph in place of a symbol. All other nodes and image source bytes remain fixed.",
+  "examples": [
+    {
+      "name": "type-image-rise",
+      "source": "audience-workspace-photo.jpg",
+      "kind": "placement",
+      "word": "RISE",
+      "xPositions": [65, 156.072, 208.329, 291.741],
+      "beforeBaselines": [590, 590, 590, 590],
+      "afterBaselines": [590, 554, 518, 482],
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    },
+    {
+      "name": "type-image-clay",
+      "source": "audience-pottery-photo.jpg",
+      "kind": "fill",
+      "word": "CLAY",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    },
+    {
+      "name": "type-image-mug",
+      "source": "explicit-tableware-photo.jpg",
+      "kind": "substitution",
+      "word": "MUG",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      }
+    }
+  ]
+}

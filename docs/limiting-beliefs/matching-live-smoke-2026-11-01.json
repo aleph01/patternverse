@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-01",
+  "live": true,
+  "transport": "Practice UI using the existing OpenRouter integration",
+  "provider": "Existing selected OpenRouter connection; model ID not exposed on the practice screen",
+  "compiledRevision": "m4-v3:ae5ced56606e3e787702335827560a2d7a91e95683241ee1aef9585088fc1335",
+  "sourceSha256": "a1adfb1f61c4afe0edbc742137a7dbec9da65edcb96fd2804c89c81156088c64",
+  "resourceSha256": "c7859c9e5bd834286e4db965f615207edc127d1fdc4fa90b5924c623eb5d7abc",
+  "notes": [
+    "Live responses read from the rendered practice UI; assumption arrays are flattened in the display.",
+    "Four selected acceptance probes, not the entire ten-case CLI suite. The dietary case tested both the initial empty result and an empty retry after a blank clarification.",
+    "An earlier probe ran an older cached definition; it is excluded from these results.",
+    "These are point-in-time retrieval checks, not evidence of clinical validity or reliable performance across models."
+  ],
+  "cases": [
+    {
+      "id": "guard-down-paraphrase",
+      "description": "I enjoyed a treat but it feels like I am letting my guard down with my rules.",
+      "passed": true,
+      "checks": {
+        "retrievedAcceptableCandidate": true,
+        "quotedActualInput": true,
+        "connectionShown": true,
+        "hypothesisPremiseVisible": true
+      },
+      "candidates": [
+        {
+          "belief": "P0065",
+          "statement": "If I relax one standard, all my standards will collapse.",
+          "basis": "hypothesis",
+          "evidence": "it feels like I am letting my guard down with my rules",
+          "connection": "Treating yourself might be experienced as an exception that risks causing your entire system of self-imposed rules to unravel.",
+          "unconfirmedAssumptionsDisplay": "The participant fears that relaxing a single dietary or lifestyle rule will cause all their standards to collapse., 'Rules' refers to rigid personal standards rather than flexible habits."
+        },
+        {
+          "belief": "P0206",
+          "statement": "If I allow myself to feel good, something bad will follow.",
+          "basis": "hypothesis",
+          "evidence": "I enjoyed a treat but it feels like I am letting my guard down",
+          "connection": "Enjoying a simple treat could feel uneasy if you anticipate that allowing yourself to feel good invites a negative outcome or loss of control.",
+          "unconfirmedAssumptionsDisplay": "Enjoyment itself is viewed as unsafe or likely to be followed by negative consequences., The tension arises from permitting positive feelings rather than strictly adhering to behavioral rules."
+        },
+        {
+          "belief": "P0040",
+          "statement": "If I stop watching for danger, something bad will happen.",
+          "basis": "hypothesis",
+          "evidence": "it feels like I am letting my guard down with my rules",
+          "connection": "Describing the experience as 'letting my guard down' suggests a belief that pausing constant vigilance over your behavior invites harm or failure.",
+          "unconfirmedAssumptionsDisplay": "The participant equates maintaining strict adherence to rules with continuous threat vigilance., Dropping this vigilance is expected to result in an adverse event."
+        }
+      ]
+    },
+    {
+      "id": "food-guard-combined",
+      "description": "I was eating chocolate and feeling guilty about it. What went through my mind was that it is bad for me and I am letting my guard down, I guess.",
+      "passed": true,
+      "checks": {
+        "retrievedAcceptableCandidate": true,
+        "quotedActualInput": true,
+        "connectionShown": true,
+        "hypothesisPremiseVisible": true
+      },
+      "candidates": [
+        {
+          "belief": "P0040",
+          "statement": "If I stop watching for danger, something bad will happen.",
+          "basis": "hypothesis",
+          "evidence": "I am letting my guard down",
+          "connection": "The thought that eating chocolate means letting one's guard down could reflect an underlying sense that relaxing constant vigilance invites bad consequences.",
+          "unconfirmedAssumptionsDisplay": "The participant believes that letting one's guard down inevitably leads to bad outcomes, extending beyond this specific food context to general vigilance."
+        },
+        {
+          "belief": "P0140",
+          "statement": "Feeling guilty means I have done something morally wrong.",
+          "basis": "hypothesis",
+          "evidence": "feeling guilty about it",
+          "connection": "Feeling guilty about having a treat might connect to viewing that guilty sensation as direct evidence that an act was morally improper.",
+          "unconfirmedAssumptionsDisplay": "The participant interprets the feeling of guilt as a sign of moral wrongdoing rather than an emotional reaction to breaking a personal dietary standard."
+        },
+        {
+          "belief": "P0065",
+          "statement": "If I relax one standard, all my standards will collapse.",
+          "basis": "hypothesis",
+          "evidence": "What went through my mind was that it is bad for me and I am letting my guard down",
+          "connection": "Treating eating chocolate as an impermissible lapse of vigilance could be rooted in a concern that allowing a single exception will lead one's broader standards to unravel.",
+          "unconfirmedAssumptionsDisplay": "The participant views eating chocolate as an exception that threatens their overall discipline or adherence to standards."
+        }
+      ]
+    },
+    {
+      "id": "visible-effort",
+      "description": "I hide how much I prepare because people might call me a try-hard if they saw.",
+      "passed": true,
+      "checks": {
+        "retrievedAcceptableCandidate": true,
+        "quotedActualInput": true,
+        "connectionShown": true,
+        "hypothesisPremiseVisible": true
+      },
+      "candidates": [
+        {
+          "belief": "P0214",
+          "statement": "If people see me trying hard, they will dismiss me as a try-hard.",
+          "basis": "expressed",
+          "evidence": "people might call me a try-hard if they saw",
+          "connection": "Your concern about being called a try-hard if others saw how much you prepare closely mirrors this expectation of social dismissal for visible effort.",
+          "unconfirmedAssumptionsDisplay": "—"
+        },
+        {
+          "belief": "P0217",
+          "statement": "To remain accepted, I must hide how hard I am trying.",
+          "basis": "hypothesis",
+          "evidence": "I hide how much I prepare because people might call me a try-hard if they saw",
+          "connection": "Concealing your preparation out of concern about being labeled a try-hard suggests you might view hiding your effort as necessary to preserve social acceptance.",
+          "unconfirmedAssumptionsDisplay": "The risk of being labeled a try-hard threatens broader social acceptance., Hiding effort functions as an overarching requirement rather than a localized preference for privacy."
+        }
+      ]
+    },
+    {
+      "id": "bounded-dietary-constraint",
+      "description": "I checked the ingredients because this food contains an allergen I have a confirmed allergy to. I enjoy other foods and I do not take this as a judgment about myself or my self-control.",
+      "passed": true,
+      "checks": {
+        "retrievedAcceptableCandidate": true,
+        "quotedActualInput": true,
+        "connectionShown": true,
+        "hypothesisPremiseVisible": true
+      },
+      "candidates": [],
+      "initialEmpty": true,
+      "retryEmpty": true
+    }
+  ],
+  "passed": 4,
+  "total": 4
+}

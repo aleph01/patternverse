@@ -1,0 +1,89 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "pattern": "Limit the Palette",
+  "date": "2026-10-28",
+  "mode": "Previously generated photographic artwork and print/device presentations reused unchanged. Native text and chart geometry composed separately. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-palette-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-palette-layouts.json",
+    "sha256": "0bf609b0e9eafdda46cad7daddabc70b63641bf4ca4fed987649e3f2dfdf8678",
+    "method": "Fill-only consolidation. Source images, typography and geometry fixed. Replacement hues approximately match relative luminance to keep the intervention distinct from repairing weak text/background contrast."
+  },
+  "comparisonPolicy": "Only assigned fills change: four poster text colors become existing green; three monthly bar fills become existing blue; four ordinary UI text fills and a button fill are consolidated while status surfaces and labels remain identical. Replacements approximately match relative luminance. Every word, size, weight, font, position, bar value/geometry, photo byte/crop, paper/device and lighting stays fixed.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "palette-open-studios",
+        "changedPixels": 8944,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "palette-monthly-report",
+        "changedPixels": 32256,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "palette-booking-screen",
+        "changedPixels": 20382,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared palette intervention regions differ.",
+    "scope": "Exact DOM normalization permits only declared fill attributes. All other nodes, typography, text, source bytes, photo crops and geometry remain identical. Wide/stacked surfaces, font loading, fitting text, horizontal overflow and image/inline SVG equality checked. Pixel differences are restricted to declared regions."
+  },
+  "limitations": "Editorial fictional examples, not measured comprehension or engagement. Color-count scopes exclude photographic/paper colors and preserve required functional states. Relative-luminance matching is approximate after 8-bit RGB quantization and does not establish equal perceived lightness. Static booking mockup, not an implemented service, physical print proof or full accessibility evaluation."
+}

@@ -1,0 +1,112 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Bottlenecks and Capacity Constraints",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "bottlenecks-and-capacity-constraints",
+      "title": "Bottlenecks and Capacity Constraints",
+      "entity_type": "concept",
+      "domain": "Dependency and feasibility traps, with stock-and-flow accumulation and feedback hypotheses",
+      "article": "content/concepts/bottlenecks-and-capacity-constraints.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Goldratt Research Labs, Introduction to Theory of Constraints",
+          "url": "https://www.goldrattresearchlabs.com/introduction-to-toc",
+          "supports": "Goldratt’s early-1980s development of TOC; Five Focusing Steps: identify, exploit, subordinate, elevate, and reassess.",
+          "boundary": "Practitioner exposition of the framework. Universal weakest-link rhetoric is not adopted as a theorem about every network. No success-rate estimate or financial-throughput claim is taken from this page."
+        },
+        {
+          "title": "John D. C. Little (1961), A Proof for the Queuing Formula: L = λW",
+          "url": "https://fisherp.scripts.mit.edu/wordpress/wp-content/uploads/2015/11/ContentServer.pdf",
+          "doi": "10.1287/opre.9.3.383",
+          "supports": "Original theorem connecting mean number in the system, mean time, and arrival rate with explicit stationarity, finite-mean, and arrival-process assumptions.",
+          "boundary": "Original scan opened and read, including theorem assumptions and discussion. It does not estimate a growing café backlog or prove that discarding work creates processing capacity."
+        },
+        {
+          "title": "Cathy Wu, MIT 1.041/1.200, Queuing Models, Spring 2026",
+          "url": "https://web.mit.edu/1.041/www/lectures/L8-queuing-models-2026sp.pdf",
+          "supports": "Service rates, queue storage versus service capacity, stationary analysis, M/M/1 assumptions and mean-wait formula.",
+          "boundary": "Official teaching material. No airport example, survey statistic, or universal utilization target is imported into the café scenario."
+        },
+        {
+          "title": "AWS Builders’ Library, Avoiding Insurmountable Queue Backlogs",
+          "url": "https://aws.amazon.com/builders-library/avoiding-insurmountable-queue-backlogs/",
+          "supports": "First-person Amazon engineering account of backlog accumulation, long recovery, and admission/backpressure controls.",
+          "boundary": "Operational specialist experience in asynchronous software systems, not a controlled study or measured effect size for staffing a physical café."
+        }
+      ],
+      "related_patterns": [
+        "teamwork-work-the-bottleneck",
+        "teamwork-limit-work-in-progress",
+        "queue-based-load-leveling"
+      ],
+      "status": "published",
+      "short_description": "Identify which required activity limits completed output, match incoming work to sustainable capacity, and reassess the whole workflow after changing the constraint.",
+      "use_when": [
+        "What must change to increase completed drinks?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Increase usable preparation capacity or change accepted load, then reassess the whole process.",
+        "Staff and equipment cost money. Same machine access may prevent parallel work; quality and handover capacity remain."
+      ],
+      "example_structure": {
+        "scenario": "Every accepted drink order requires payment, preparation, and handover. Preparation is currently limiting. Local waiting queue loses work at preparation start; whole-process unfinished work ends at handover. Independently usable parallel preparation assumed; backlog shrinks only while completions exceed accepted arrivals.",
+        "changed_relationship": "Increase usable preparation capacity or change accepted load, then reassess the whole process.",
+        "residual_constraints": "Staff and equipment cost money. Same machine access may prevent parallel work; quality and handover capacity remain.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/bottlenecks-tool-kits.svg",
+          "content/assets/structural-traps/bottlenecks-tool-kits-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 847,
+            "textBlocks": 22
+          },
+          "phone": {
+            "width": 360,
+            "height": 1876,
+            "textBlocks": 22
+          }
+        },
+        "question": "What must change to increase completed drinks?",
+        "alternative_text": "Hypothetical qualitative illustration. Paid orders queue before a limiting preparation station. More ticket storage cannot prepare drinks. An independently equipped trained barista can expand preparation, after which handover may become the next limit. The local queue and whole-process unfinished orders have different exit boundaries. Change: Increase usable preparation capacity or change accepted load, then reassess the whole process. Limitation: Staff and equipment cost money. Same machine access may prevent parallel work; quality and handover capacity remain.",
+        "caption": "Hypothetical illustration. Process arrows carry orders between required stages. Storage changes waiting space; usable parallel preparation changes processing capacity. The backlog shrinks only while completed handovers exceed newly accepted orders, and another constraint may appear.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Paid orders queue before a limiting preparation station. More ticket storage cannot prepare drinks. An independently equipped trained barista can expand preparation, after which handover may become the next limit. The local queue and whole-process unfinished orders have different exit boundaries. Change: Increase usable preparation capacity or change accepted load, then reassess the whole process. Limitation: Staff and equipment cost money. Same machine access may prevent parallel work; quality and handover capacity remain.",
+          "relationship_key": "Upper arrows transfer work. Lower arrows show conditional intervention consequences, not measured rates. No box size represents a quantity.",
+          "changed_relationship": "Increase usable preparation capacity or change accepted load, then reassess the whole process.",
+          "residual_constraints": "Staff and equipment cost money. Same machine access may prevent parallel work; quality and handover capacity remain.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Every accepted drink order requires payment, preparation, and handover. Preparation is currently limiting. Local waiting queue loses work at preparation start; whole-process unfinished work ends at handover. Independently usable parallel preparation assumed; backlog shrinks only while completions exceed accepted arrivals.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Fourteen articles, twenty-eight editable SVGs, fourteen current research notes, and necessary asset dimensions updated.",
+        "visual": "All fourteen live articles checked in the browser at 1440px desktop and 390px phone viewports (28 layouts), with loaded expected sources and no page overflow. All twenty-eight SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (56 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

@@ -1,0 +1,1045 @@
+{
+  "status": "complete",
+  "direction": "Approved light editorial cutaways, precision plans and explanatory sections",
+  "reviewed": "2026-10-27",
+  "branch": "codex/architecture-light-illustrations",
+  "scope": {
+    "articles": 36,
+    "original_drawings": 108,
+    "compact_companions": 108,
+    "axonometric_drawings": 17,
+    "licensed_photographs_preserved": 46,
+    "photograph_placements": 60
+  },
+  "typography": "Helvetica Neue regular; Helvetica and Arial fallbacks",
+  "surface": "Fixed white in light and dark browser appearances",
+  "visual_review": {
+    "contact_sheets": 18,
+    "appearances": ["fixed light"],
+    "widths": ["desktop", "phone"],
+    "clipped_text_labels": 0,
+    "overlapping_text_labels": 0
+  },
+  "preservation": {
+    "illustration_task_changed_prose": false,
+    "photograph_files_unchanged": 46,
+    "all_figure_placements_preserved_except_one_alt": true,
+    "concurrent_prose_revisions_preserved": [
+      "arch-site-repair",
+      "arch-drained-ventilated-rainscreen",
+      "arch-test-at-full-scale"
+    ]
+  },
+  "alt_text_updates": {
+    "arch-prospect": {
+      "old": "Section compares a view available only when standing and one available from seated eye level.",
+      "new": "Matched sections compare seated and standing sight lines past the same sill. The lower sight line stops at the obstruction; the upper sight line clears it."
+    }
+  },
+  "built_images_match_sources": 216,
+  "built_photographs_match_sources": 46,
+  "film_svg_files_preserved": 102,
+  "svg_bytes": 777990,
+  "browser_checks": [
+    {
+      "article": "arch-site-repair",
+      "figure": 0,
+      "viewport": 390,
+      "pageWidth": 390,
+      "image": "http://127.0.0.1:4287/assets/architecture/site-repair-1-mobile.svg",
+      "imageWidth": 365,
+      "loaded": true
+    },
+    {
+      "article": "arch-arcades",
+      "figure": 0,
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "image": "http://127.0.0.1:4287/assets/architecture/arcades-1.svg",
+      "imageWidth": 718,
+      "loaded": true
+    },
+    {
+      "article": "arch-window-place",
+      "figure": 1,
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "image": "http://127.0.0.1:4287/assets/architecture/window-place-2.svg",
+      "imageWidth": 718,
+      "loaded": true
+    },
+    {
+      "article": "arch-window-place",
+      "figure": 1,
+      "viewport": 390,
+      "pageWidth": 390,
+      "image": "http://127.0.0.1:4287/assets/architecture/window-place-2-mobile.svg",
+      "imageWidth": 365,
+      "loaded": true
+    },
+    {
+      "article": "arch-loose-fit-layers",
+      "figure": 0,
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "image": "http://127.0.0.1:4287/assets/architecture/loose-fit-layers-1.svg",
+      "imageWidth": 718,
+      "loaded": true
+    },
+    {
+      "article": "arch-arcades",
+      "figure": 0,
+      "viewport": 390,
+      "pageWidth": 390,
+      "image": "http://127.0.0.1:4287/assets/architecture/arcades-1-mobile.svg",
+      "imageWidth": 365,
+      "loaded": true
+    }
+  ],
+  "patterns": [
+    {
+      "id": "arch-site-repair",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": true,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/site-repair-1.svg",
+          "projection": "plan",
+          "sha256": "415e036f6903d4dfae55c7e6466c8c0176c405d4236b408385d54a2f600620fd",
+          "compact_sha256": "c66ec564dab1bc8f98c0efcfa23754cb75d4e82f252e03d3389564236b0ef703"
+        },
+        {
+          "file": "architecture/site-repair-2.svg",
+          "projection": "plan-comparison",
+          "sha256": "76eaf4beb4aa3d8e524089f958a49ea84c775c73b887ca1ff32a356633edb34b",
+          "compact_sha256": "14088131bd3722af8f5dd258fe06e47ea73ae4cbf071d0898293509c0ae9b6ec"
+        },
+        {
+          "file": "architecture/site-repair-3.svg",
+          "projection": "axonometric",
+          "sha256": "f11ff690f9b8fa6bea773234524ab47f70a7621ad4acd5aec598102c11435cb4",
+          "compact_sha256": "0337bfc1d49503a72a1188df2b527ac7e6b53391aa685096729d245f85adb790"
+        }
+      ]
+    },
+    {
+      "id": "arch-south-facing-outdoors",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/south-facing-outdoors-1.svg",
+          "projection": "plan-comparison",
+          "sha256": "664bc3db35dc0226b4297c92f820c4c62e573b3d0516f1c310968b72015ca6de",
+          "compact_sha256": "d819ab8771e4e9fd507b07e449ce0b9398bbe0edd91548da8d06d70a37b655d2"
+        },
+        {
+          "file": "architecture/south-facing-outdoors-2.svg",
+          "projection": "section",
+          "sha256": "b78e448b8e29aee6cdb46ef7cb9a2ec05c3dbb6a824fb30defc0e651acaee8ba",
+          "compact_sha256": "7e77833a82ecc3b625c05d867e173ec2b7850905687103c6d429babc935810b9"
+        },
+        {
+          "file": "architecture/south-facing-outdoors-3.svg",
+          "projection": "plan",
+          "sha256": "bcd8314007b6220cbbad1f45951a96e9b263d0b958b26f14055419f050a85d8e",
+          "compact_sha256": "9462ca59e5af30f30bf920a8ad73a2e833bfc2a179f9f1cdc7d6556edc4182d1"
+        }
+      ]
+    },
+    {
+      "id": "arch-water-sensitive-landscape",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/water-sensitive-landscape-1.svg",
+          "projection": "flow-diagram",
+          "sha256": "e9db13aea957f97f6b116fab86b34117533d4359247d739fc43c8bb75b303c0a",
+          "compact_sha256": "5044c205478a18bc3dde38ef5fca8603122d06d1c840e9dceaa09a5f6aa3b2d8"
+        },
+        {
+          "file": "architecture/water-sensitive-landscape-2.svg",
+          "projection": "section",
+          "sha256": "9e19696cadf0a3af86bfbfd555e64cf037b12dc200ade52ce40862279cb1ec9e",
+          "compact_sha256": "550d58d70220505f2b5611c392a67615d724f822b215d82ec732dd79bde5e898"
+        },
+        {
+          "file": "architecture/water-sensitive-landscape-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "a01363462097aa357e2fd34777e54e35a19c24b4c26dd30a91c393d9d7bead2c",
+          "compact_sha256": "c49bdb03593920f26896669f5455f7834c30f229ead774c21daf823137d3efc0"
+        }
+      ]
+    },
+    {
+      "id": "arch-positive-outdoor-space",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/positive-outdoor-space-1.svg",
+          "projection": "plan-comparison",
+          "sha256": "d58394991be593b0872cb10f6b12d279248e5509b3c158b21f7053f6573909ba",
+          "compact_sha256": "ca8df20e493404d552129c1dbe52aea32ba748de94117711e038546cca1c6915"
+        },
+        {
+          "file": "architecture/positive-outdoor-space-2.svg",
+          "projection": "plan",
+          "sha256": "fbdd1d449497e48ae5196c501653e99b19f06f83da5c57ba8c225d9afe7a1e88",
+          "compact_sha256": "68781b1c7bfa94159586e6ce3bd9d47d65593d9c3f2ad6345e25910203a3cb85"
+        },
+        {
+          "file": "architecture/positive-outdoor-space-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "202bf80c1070ec7632477e1ebf68f24fd1cabd41ab31182d23d54c51e8cc3e9b",
+          "compact_sha256": "a671fe860d91d86ad7e2dc238571aff16f347f12ad8a9e89bc626c4b91ce778f"
+        }
+      ]
+    },
+    {
+      "id": "arch-arcades",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/arcades-1.svg",
+          "projection": "axonometric",
+          "sha256": "557afff8638c52cc81dbbb3fc6b45c6da4bf4fe83ba6b71e705968ec463787f1",
+          "compact_sha256": "e415bb763a90989a04b289b2acc9cdef377190731d186ff090125cd8e81c79b3"
+        },
+        {
+          "file": "architecture/arcades-2.svg",
+          "projection": "plan",
+          "sha256": "34ad1cce28ab268b40c2693b7d620d50e8df8b2968cac6b9ff66851e821760b6",
+          "compact_sha256": "4959154f95ab11886867e23d6c28ab4fb98dbaecbcf5616c1cae5ef6e7882565"
+        },
+        {
+          "file": "architecture/arcades-3.svg",
+          "projection": "section-comparison",
+          "sha256": "a3abe4c818ea910e0cabd057be36b8c11105976b1f52ebfe3e34adefba492304",
+          "compact_sha256": "1087e4ad8aa5f318f04ca9812610c40fe50aaeab6a94ba5c57e7a83f5cf56989"
+        }
+      ]
+    },
+    {
+      "id": "arch-entrance-transition",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/entrance-transition-1.svg",
+          "projection": "plan",
+          "sha256": "fade99de93260388b627c3de6cec420e30dcfcee89f0c2d7e91e6c51026ecec5",
+          "compact_sha256": "f3727d8c9b41283e40ab6cc921e3c192e19d22c4683cf867047e8a24c72d6292"
+        },
+        {
+          "file": "architecture/entrance-transition-2.svg",
+          "projection": "axonometric",
+          "sha256": "cc009a80d1f8ea02276ba79cbfb05b8adc204ec5ed2fc60db650747c9ad8f224",
+          "compact_sha256": "f491ebe99458d6b28b3b964a9343b0c631e398879731f79e6e6476fd595a7b14"
+        },
+        {
+          "file": "architecture/entrance-transition-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "4d00230b6977ed59d9df9828fce2864de6c47b41e5c40a79b5bd9cd8cb8b5354",
+          "compact_sha256": "75bc265900f0b54e397758a96631ee48ca5a8575a41a0c09932bd69a1ac178a2"
+        }
+      ]
+    },
+    {
+      "id": "arch-building-edge",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/building-edge-1.svg",
+          "projection": "plan",
+          "sha256": "801eb952287cbccb825f869e0ff2301c60495059818ee0dad6fd2c4f5a77d34d",
+          "compact_sha256": "b4190c976bc3f6254b78276084d5d95fe8fe0d42dadf76cc2a15d0a826bdbe23"
+        },
+        {
+          "file": "architecture/building-edge-2.svg",
+          "projection": "axonometric",
+          "sha256": "4f79912efd871162abebcc8434bc0e28687a9bd99b830f83bd716e99c71da31f",
+          "compact_sha256": "33aa0f628578002c37d57a0f76daf871d1f62fb449c47fd271ecbd8c2cca828c"
+        },
+        {
+          "file": "architecture/building-edge-3.svg",
+          "projection": "section-comparison",
+          "sha256": "9553b1f4ef8c1d334e7b15fb31fd92e98f061da76603c8f02e78ebc8755ca857",
+          "compact_sha256": "ddcc38547cce4778891267e4c5085621daa0280f800a2d07fdac983017a8a379"
+        }
+      ]
+    },
+    {
+      "id": "arch-wings-of-light",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/wings-of-light-1.svg",
+          "projection": "axonometric",
+          "sha256": "d33731dd22d31c62ee849e7e20901615cb0b6f35e0b74169a358491e560e13db",
+          "compact_sha256": "2c988985e97f498a8c1c2cbe19521e09cfe343d86bfec0dfdbef9b2a26e12ae3"
+        },
+        {
+          "file": "architecture/wings-of-light-2.svg",
+          "projection": "section-comparison",
+          "sha256": "16f8a85f069ac5fd4525da89755bc871ea4ae3fe31171b0b2f2bae722a8bc7fa",
+          "compact_sha256": "290441fa88336648c98bb1d3a5d57144a4f2a199489d5fd25164b569307b089f"
+        },
+        {
+          "file": "architecture/wings-of-light-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "5abd0faecfd31366550deee4a6413554c698dc8520f04f9494083235609ebd33",
+          "compact_sha256": "d7996de7b00ce993928e03d40b62ce1c0d8c4d783a9b8902ae17dd32dad3ced8"
+        }
+      ]
+    },
+    {
+      "id": "arch-courtyards-which-live",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/courtyards-which-live-1.svg",
+          "projection": "plan",
+          "sha256": "eb6b4f119c9ad0a9f45ac913bbd806cf15b87ae65fe0880ef5c2e8544a8f294d",
+          "compact_sha256": "f6fdb0277f0c3f0592ff81350985a61c1ab9cf7c8775435148d19832603fdd7b"
+        },
+        {
+          "file": "architecture/courtyards-which-live-2.svg",
+          "projection": "section-comparison",
+          "sha256": "ad3041dc2724d9ff875440daf48f8590ffca324ab3a8810c240827f7fb10bea5",
+          "compact_sha256": "5ca1b4109c9a4b31520c5de980199c4c1903f31bf3887f4aa205ed050cc028fd"
+        },
+        {
+          "file": "architecture/courtyards-which-live-3.svg",
+          "projection": "axonometric",
+          "sha256": "2f2fd3b862489a586c492f2bea3ecdce98309054cc664e0e47fc87abd14e71f9",
+          "compact_sha256": "51e0dc0999fdf7851098d07ef58cac5665af1b4c327717bbd3fc4ba203c02cc0"
+        }
+      ]
+    },
+    {
+      "id": "arch-compact-building-form",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/compact-building-form-1.svg",
+          "projection": "plan-comparison",
+          "sha256": "ccf3ffb49d467d2c7b1dadfaa6cf47da10bca2e38e7cb8f50fd44904191c8e2d",
+          "compact_sha256": "87b4bd24f4da1691d209cb1ed79e815550767c9c6da0d69bcfb18e83c36b0774"
+        },
+        {
+          "file": "architecture/compact-building-form-2.svg",
+          "projection": "section",
+          "sha256": "4e0d7f4aa4f8589cf4d680ebacfd18e53fb8886982fefcee63d341fd14293bd1",
+          "compact_sha256": "039961caae62a4613b28f6c83a9007a85d01f500f52681ccfc2f1e67e5dd6939"
+        },
+        {
+          "file": "architecture/compact-building-form-3.svg",
+          "projection": "comparison-table",
+          "sha256": "90a36e2c79ad503b505272e0a632f5866f526ed9b837b59d96e2cb209f62b8b8",
+          "compact_sha256": "3606e136a2cfa487572a086c0fcd048c045f1b94584b3a59dfabd746ee8a3b9a"
+        }
+      ]
+    },
+    {
+      "id": "arch-intimacy-gradient",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/intimacy-gradient-1.svg",
+          "projection": "plan",
+          "sha256": "fee3bddccff2ed634c374e55a58ecb780f4e7dcfe04ef159b718bd2fab5a701b",
+          "compact_sha256": "51f7908045cc665c49aff7c3e83b19f7b820ee8df64438a8c188e96e3db73dbd"
+        },
+        {
+          "file": "architecture/intimacy-gradient-2.svg",
+          "projection": "plan-comparison",
+          "sha256": "9c5f45678909441521724ff5f54847245d98e1a9d03431c677b42204f25ba659",
+          "compact_sha256": "74ea19d38184a1fb4417b48e18c67cdcf1ae15f75c2c53ea450021d4ecd60455"
+        },
+        {
+          "file": "architecture/intimacy-gradient-3.svg",
+          "projection": "concept-comparison",
+          "sha256": "487c7b62f99c219007495c689d9fb18a74ed421f4b78fce87c04bc0544cb6e98",
+          "compact_sha256": "f16294ecef9b1a8229467d22fe17daf221621e2c1108fe7540712679a9da6e97"
+        }
+      ]
+    },
+    {
+      "id": "arch-common-areas-at-the-heart",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/common-areas-at-the-heart-1.svg",
+          "projection": "plan",
+          "sha256": "9dd9df5093344b8a40b2ac0669810d8364d22c793ccb7d62826313106bef7b21",
+          "compact_sha256": "5b3aa5331018423edc54afb25f3aab9fd2aad52c5d0959fb445c77b178b1b8fe"
+        },
+        {
+          "file": "architecture/common-areas-at-the-heart-2.svg",
+          "projection": "plan",
+          "sha256": "3f3f92724264f6a3053d255048f5d22e2d4a999aebf22b5b01217daf70664139",
+          "compact_sha256": "88e9250a99d7a5d6fde42b53a68b27d32edd7841b80d8bb4f0d638ba3283edc1"
+        },
+        {
+          "file": "architecture/common-areas-at-the-heart-3.svg",
+          "projection": "plan",
+          "sha256": "489fe0b4efc714d380c7eb75722164b4f582d87616bdb2959daaf70376d441a2",
+          "compact_sha256": "963654450a1b91a7844bc46ac21f12947e810c5cd498ffddca9b9b2fef6f63a4"
+        }
+      ]
+    },
+    {
+      "id": "arch-flexibly-linked-rooms",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/flexibly-linked-rooms-1.svg",
+          "projection": "plan",
+          "sha256": "e48a7827c7b1ce25b3a4df6b1d01f123622cd248a3bf138e300c061f96dfc0d1",
+          "compact_sha256": "9183135cd68b5c1d20a82027d5f10426a81f11714a913e42b6ab49f5246e4928"
+        },
+        {
+          "file": "architecture/flexibly-linked-rooms-2.svg",
+          "projection": "plan-comparison",
+          "sha256": "3009dd713919a3a3568f1c82d9d0280ef9ed6fd439bd5d86f91884f97e140eb1",
+          "compact_sha256": "d960e791841134c74881798293819d47bee6b48b7d8914df6ac48d4d98facbfb"
+        },
+        {
+          "file": "architecture/flexibly-linked-rooms-3.svg",
+          "projection": "plan",
+          "sha256": "1b340c60ed4ff231d0c81b9912ff4d814b0b2018ef9512a2d9c9b53ff4cf3991",
+          "compact_sha256": "7e82997acbebd3abfe3ce41f19010c7267c6f078873ca74083a2564d192dd8ab"
+        }
+      ]
+    },
+    {
+      "id": "arch-circulation-as-orientation",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/circulation-as-orientation-1.svg",
+          "projection": "plan",
+          "sha256": "9ea55ea3c9889330f32e43d48c9479a725d86c1385c2962c780e59e985205d4f",
+          "compact_sha256": "b3c9c552c0ce59b4c1d288d5c77edebc0fa11579fda915956bcdc823b274276b"
+        },
+        {
+          "file": "architecture/circulation-as-orientation-2.svg",
+          "projection": "plan-comparison",
+          "sha256": "076fb29c5d35e436740a8ad242a719b6542acf5f84b05530186e14c4cca80f04",
+          "compact_sha256": "6bda86c2eb158805896361676f6b9044c22275f66508afd5a650d67e7869246f"
+        },
+        {
+          "file": "architecture/circulation-as-orientation-3.svg",
+          "projection": "section",
+          "sha256": "40c69356df6f2848d743f5e3649920a9c11c84c8f690b9e260ca04e0b9b164c5",
+          "compact_sha256": "25df5539fc721081224871411ff98688fa313f67891f6884eb5acea15a56d14f"
+        }
+      ]
+    },
+    {
+      "id": "arch-main-entrance",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/main-entrance-1.svg",
+          "projection": "plan",
+          "sha256": "671c89de227ca3001c816a2d9504fed7647a454338f5f97bcc7944c707959847",
+          "compact_sha256": "2bb5d71781bbd325cb667f3878818760cd74bb025a38d22a1434eb4c86efd7f0"
+        },
+        {
+          "file": "architecture/main-entrance-2.svg",
+          "projection": "elevation",
+          "sha256": "ea44e404c273692ac89af72a68a397b5c45892290d18005a163c95220d1ff8b0",
+          "compact_sha256": "cd257e63608256e828b81cac21f600afff0ffd20441e8bf672999d03552fdd85"
+        },
+        {
+          "file": "architecture/main-entrance-3.svg",
+          "projection": "section-comparison",
+          "sha256": "be2066611d208d0720f589dcbfc48cf81e36169d1feff419f9cd0b01ef9bc542",
+          "compact_sha256": "42ed4ebfc3be3bee958ccdd381642bc45593a0e483f17abbf8a576f367c629d2"
+        }
+      ]
+    },
+    {
+      "id": "arch-inclusive-arrival",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/inclusive-arrival-1.svg",
+          "projection": "plan",
+          "sha256": "6b9dd298d589367652fb0367feaaac5f243ad5eac136cb21316b82e8342a0c26",
+          "compact_sha256": "f6d49cdc24e90398cf81b053c2578c3d117af9b7e14fc26ffe7f357f6ce2a717"
+        },
+        {
+          "file": "architecture/inclusive-arrival-2.svg",
+          "projection": "section",
+          "sha256": "e7b0dcbf42c16b99782b2f6b91b6414ce5e32a6103848657a4a321915287a922",
+          "compact_sha256": "84f3f93527137f1ca1a9a47dc287dfc3bbd18938b951f4d42015d94bf4840514"
+        },
+        {
+          "file": "architecture/inclusive-arrival-3.svg",
+          "projection": "journey-diagram",
+          "sha256": "d48192bd790a40438addcc3ce637ef14cc57e1f4aa16c50f1204adb9daa63cbc",
+          "compact_sha256": "97bf6b277bd44e5ad1d68fb511ca4a0a020b0ae21bf00aed7e94ec5e9ea9c5ee"
+        }
+      ]
+    },
+    {
+      "id": "arch-staircase-as-a-stage",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/staircase-as-a-stage-1.svg",
+          "projection": "axonometric",
+          "sha256": "b5795605a537311eae45207b1dd8650f936bfa21ef03f08f5a9d684b4fbbd449",
+          "compact_sha256": "e89e03d13e3855a4b80e8c20977861ad406b2f6e2b9ce20f22570a83cf9ff1a2"
+        },
+        {
+          "file": "architecture/staircase-as-a-stage-2.svg",
+          "projection": "plan",
+          "sha256": "3996eadf88a25186bbaae43a62779b749fed5f5cc199fa8da0c2273568dab473",
+          "compact_sha256": "51a0a3ec8442858b76f6112aa3301c33373b7f4daed692203be6ab99f09b742a"
+        },
+        {
+          "file": "architecture/staircase-as-a-stage-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "4030185cebc7bffc1d20a70718ac183fe9d0712d933d601f70e00c0db9cdb451",
+          "compact_sha256": "54feca718fd930462ac51fabece3d04a3d264059620e2bdbdac4acea2076e323"
+        }
+      ]
+    },
+    {
+      "id": "arch-window-place",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/window-place-1.svg",
+          "projection": "plan",
+          "sha256": "93c641f7daf4557a8a1d021b4c54db84e10cd5c98b81f5727c6a521340897572",
+          "compact_sha256": "9b0985198aa573f61f65782b2cb134257cdcb88b2c23a47eec4a9ecedb0617c7"
+        },
+        {
+          "file": "architecture/window-place-2.svg",
+          "projection": "section",
+          "sha256": "768522e872c22c299eb917e719145d9861d303b860bd81af20202e18cd9961a5",
+          "compact_sha256": "c68c7916b98ca0be5b5c9254f1814e735de7be51872f24bc0550eccdc7df91c2"
+        },
+        {
+          "file": "architecture/window-place-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "cb9c6de36f522702538d3043339641fe53f4b9555e266466c7289bc7929f08b6",
+          "compact_sha256": "0147b56479bd05bcacf71e36f3cecf16695ba57fdf2fb5a95bd64e495e32fabc"
+        }
+      ]
+    },
+    {
+      "id": "arch-alcoves",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/alcoves-1.svg",
+          "projection": "axonometric",
+          "sha256": "b0f509f82a3d1985c83b98e0f4c93572fe9c17cd6c8f7b79521d3140f6b94255",
+          "compact_sha256": "fdcb529524c0664b362d634d4e6378e4bfd046fbb9075fc5aa8041fa38487703"
+        },
+        {
+          "file": "architecture/alcoves-2.svg",
+          "projection": "section-comparison",
+          "sha256": "d05afbd007d508deddd14097963fd7b0db74f32be7ae71b6a3750afd208ed3c2",
+          "compact_sha256": "3c4af3e7370c87e68e2608d0dd1259d4ae83a6e70b9f5f153aa067fc5ccb3ecf"
+        },
+        {
+          "file": "architecture/alcoves-3.svg",
+          "projection": "plan",
+          "sha256": "e2bdfd837c4181e4e6dfd4e36311b6981a08dfc6ba9983fdf8bd8616baae039b",
+          "compact_sha256": "bb0b8afee97bba7a0aa0980fcc537da198615a8a0b46f28f569089aa4744cdc6"
+        }
+      ]
+    },
+    {
+      "id": "arch-ceiling-height-variety",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/ceiling-height-variety-1.svg",
+          "projection": "section",
+          "sha256": "bb88470a0376d05f42d6a837568b4363c671c9cba9d09259a3e64a75db6f4f82",
+          "compact_sha256": "36858578c0d83552ea4c9233d8b66211ce9d2f88a88809779bf4adbf5742632a"
+        },
+        {
+          "file": "architecture/ceiling-height-variety-2.svg",
+          "projection": "axonometric",
+          "sha256": "d70e982a1ef45cc5fbbd99c003a3cebed6c145fb440ea8fefc75936b61beca41",
+          "compact_sha256": "b2ea8cdc66a638b632d8da45a0ba848cf89f8861b62e39dd9a928588ad975787"
+        },
+        {
+          "file": "architecture/ceiling-height-variety-3.svg",
+          "projection": "section",
+          "sha256": "2743cb6bbd02736114f531bebdcd64d374dbd2e791c4fec9b5695052c55c74d1",
+          "compact_sha256": "05722963cb4d2367e915f932b3d169236dae9a707b4913c78e1f883506390a18"
+        }
+      ]
+    },
+    {
+      "id": "arch-prospect",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": true,
+      "visuals": [
+        {
+          "file": "architecture/prospect-1.svg",
+          "projection": "axonometric",
+          "sha256": "0ee303906ad049764d3167ea542dc532ae9da7467aa811c894075b40022ff6aa",
+          "compact_sha256": "fedd0fc6d2e00cab797bb24a966699c27d706de6d0ad9ea808bee971214c1098"
+        },
+        {
+          "file": "architecture/prospect-2.svg",
+          "projection": "section",
+          "sha256": "7300fcdc2f157376a39ae66cab60f90db71f885465171b65b0ce0e5ff95d2fb0",
+          "compact_sha256": "a488dd7aa5105c1f6b8e05612e29773bbc8d523c9a99a784bf789aaf93679544"
+        },
+        {
+          "file": "architecture/prospect-3.svg",
+          "projection": "plan",
+          "sha256": "a099ade5a8db47aac8319b6e61f2a0c3c7c83b83e55b650a06ac0c128f0634c0",
+          "compact_sha256": "dc1ae3931391303010e843643eac819cec95fe8b54a5297939ce13a78ecfc23f"
+        }
+      ]
+    },
+    {
+      "id": "arch-refuge",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/refuge-1.svg",
+          "projection": "axonometric",
+          "sha256": "3bb996b817f036e40632a6063baf89d40223835002d07b450bde7e76075ff8d1",
+          "compact_sha256": "7b1d8fa05c069ed2e4a3ed4ea42dd8695f65698edd47616fc2b861fb15580534"
+        },
+        {
+          "file": "architecture/refuge-2.svg",
+          "projection": "plan-comparison",
+          "sha256": "a51e8d1f5acd3e305c2b4453216928661ab93827c894f3d5b05a5baea51e1bb4",
+          "compact_sha256": "59dd544d46ba2f652f8f2016db64c8217548cf660b74d242d8bc2d2f6cfeedca"
+        },
+        {
+          "file": "architecture/refuge-3.svg",
+          "projection": "plan",
+          "sha256": "482cf8d0b15e92eb287ceecf180088d68cf3ca5a6353726f71cba6a7a0808b11",
+          "compact_sha256": "dc55d6d41e418551e8a3e8f6afa8750410c71de6f061c2aef43dfe00046d1fe3"
+        }
+      ]
+    },
+    {
+      "id": "arch-light-on-two-sides",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/light-on-two-sides-1.svg",
+          "projection": "plan-comparison",
+          "sha256": "0969fcd6ca7494f5b2dd966f03eddca07f124c5d84e288aaf581ce85ffab0a99",
+          "compact_sha256": "2e213cc6b3d3ec4250f35d48583639112aaaf33aba086308dd5bf60d2f66dbf5"
+        },
+        {
+          "file": "architecture/light-on-two-sides-2.svg",
+          "projection": "section",
+          "sha256": "be926459f71ea0d16774f33aa352a46c93f0eb0e287585545c22cd176caad774",
+          "compact_sha256": "bbc92e141b4e786ad34d7c55b9630ce74f9e6fcde95ecf513f83356cedcd2379"
+        },
+        {
+          "file": "architecture/light-on-two-sides-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "8423425967c24d7eae098c36dfb08cfab2f105495459250bee5a8b9a4ec73ff4",
+          "compact_sha256": "a6a1f568f9b90259a3b04a5806f7c33422972bfd4bbbc37769c18c3ec9795800"
+        }
+      ]
+    },
+    {
+      "id": "arch-external-solar-shading",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/external-solar-shading-1.svg",
+          "projection": "section",
+          "sha256": "f7950cf52caa2b955f9ac2f650bcac2b3aaafe2a86d7619af664a3c1177e96e9",
+          "compact_sha256": "7329a012cbb3b3cf7570123bf1407e874ec836f6d4b1bb4ec0f6d9576875db7b"
+        },
+        {
+          "file": "architecture/external-solar-shading-2.svg",
+          "projection": "section-comparison",
+          "sha256": "d03e67be4d2c4e3f236aa134945fd1ddaacadcbbe87d2618b6d32438110b0379",
+          "compact_sha256": "0b89c32642a5dd444a5e979d4fc5e5d9c494f33c6983b76307278dc241908493"
+        },
+        {
+          "file": "architecture/external-solar-shading-3.svg",
+          "projection": "axonometric",
+          "sha256": "4d36e24a6895f3149e6ec87d4afd361c138c7ade728dc12c554eb12de924568f",
+          "compact_sha256": "a9606d398d19819287198e1b5b289f1f8556aa959e18d1414c97a2defed78bdf"
+        }
+      ]
+    },
+    {
+      "id": "arch-cross-ventilation",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/cross-ventilation-1.svg",
+          "projection": "plan",
+          "sha256": "34fc0d26959e8562da9ee4b4f28dda5b66979192d63cd64b6fa3f729ab61b991",
+          "compact_sha256": "d5d65234db639408b505d7e5ec21c14bebb40869a4db34c43c5d79ebce96e6e0"
+        },
+        {
+          "file": "architecture/cross-ventilation-2.svg",
+          "projection": "plan-comparison",
+          "sha256": "b8818dd86df6bfa7519f3793db55642b096fc7dc154107b555ddb44c8ec8fd61",
+          "compact_sha256": "3672b0088e92b65ad2ca44deaf82964d10a82fabec6d5fcb0f9824fcf5ef42a8"
+        },
+        {
+          "file": "architecture/cross-ventilation-3.svg",
+          "projection": "plan-and-section",
+          "sha256": "382ec602515dd309e60101fcd8c4dab354b3d82dde696920c2e4f69a44d6eca2",
+          "compact_sha256": "e0b05bc01f5f50ceea729651845279b8c5a1ccdbf8e1750d389d50beb728b407"
+        }
+      ]
+    },
+    {
+      "id": "arch-continuous-thermal-envelope",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/continuous-thermal-envelope-1.svg",
+          "projection": "section",
+          "sha256": "3bcdca606e69ef9388c89a8018a854d85d62c1c482eaf1c2e17376c5bf184391",
+          "compact_sha256": "12fe00794192ec07e31827fadbbc89d914c93249eca55aaf75569a264dfebd08"
+        },
+        {
+          "file": "architecture/continuous-thermal-envelope-2.svg",
+          "projection": "detail-section",
+          "sha256": "3feb1fefd153aa6009f36c691d40b4f27ed30ce7299307f440fb6e9b228e210e",
+          "compact_sha256": "5d3934c2bb331cd6f11056089fcefecc5496328d496e8c403ad22aacfecfd924"
+        },
+        {
+          "file": "architecture/continuous-thermal-envelope-3.svg",
+          "projection": "detail-comparison",
+          "sha256": "b3802f87f1833522be42c412e72b1e739a30fa6c301a31345fb1fe62d5171584",
+          "compact_sha256": "cd3ec03b491a0b37d96f925016acc10cf6fee762e1ffb1c7ecdf921751fe3d5d"
+        }
+      ]
+    },
+    {
+      "id": "arch-structural-bay-rhythm",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/structural-bay-rhythm-1.svg",
+          "projection": "axonometric",
+          "sha256": "7be57e57e71c02a8a896f498c9258507f0b0c9e56471ebe7f8efa12cc987931c",
+          "compact_sha256": "9e9c87793ddcc8ede2db87f56433d7b2a3de3c9527e90ed430bb0667e2668702"
+        },
+        {
+          "file": "architecture/structural-bay-rhythm-2.svg",
+          "projection": "elevation",
+          "sha256": "bc8cc22f4ebe2024660d09bcbd7fa7dff0b0c5524cb856b25de2046acbebfd98",
+          "compact_sha256": "55cdcc881757611f03885d9e9de1c02fc73c67a5e6a0be424c3ce59b1cee673f"
+        },
+        {
+          "file": "architecture/structural-bay-rhythm-3.svg",
+          "projection": "structural-comparison",
+          "sha256": "5f37829a1d10a24f62d3317ecd7980352356fb93beaba7f8b7966a849ec63694",
+          "compact_sha256": "7a2586ec4f4752842c4f6e9db56512c2900dffce950ea11f692339f2ba337b91"
+        }
+      ]
+    },
+    {
+      "id": "arch-drained-ventilated-rainscreen",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": true,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/drained-ventilated-rainscreen-1.svg",
+          "projection": "axonometric",
+          "sha256": "f8a171921ec68ef70aecaf1b58e904c8c425f2e718ef8db72330cf0dc83ccff1",
+          "compact_sha256": "fdd8ed061f30ea1c71db4344d5864f82159e9b63bffbdf2bf89d4dcee50e4029"
+        },
+        {
+          "file": "architecture/drained-ventilated-rainscreen-2.svg",
+          "projection": "detail-section",
+          "sha256": "8c140d275139418c553962c6395e383ca22fab357519b7be8f47b23697e7f80f",
+          "compact_sha256": "e51076fd81cde5876fd4dd762887944e76db20194b83e7e4f7eae23d2a49042d"
+        },
+        {
+          "file": "architecture/drained-ventilated-rainscreen-3.svg",
+          "projection": "detail-section",
+          "sha256": "3ea2971bfa740b6c45871ddb7f4810a0eb2f32c0ab26cf6b3bac357e18cb3b88",
+          "compact_sha256": "9c497a19785146e38905701eefe95c5d9027e8df79eee3308efbfd3350db24eb"
+        }
+      ]
+    },
+    {
+      "id": "arch-repairable-connections",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/repairable-connections-1.svg",
+          "projection": "axonometric",
+          "sha256": "b205aee1d985d28ef1ec50caf6e24083fe468b85eda05597b6271186fa293603",
+          "compact_sha256": "6035f43fa1dd0dfb9f7dec87fc5b0b3a51aae3b1f62c20b1d2dc8ecb219d2b7b"
+        },
+        {
+          "file": "architecture/repairable-connections-2.svg",
+          "projection": "detail-comparison",
+          "sha256": "5a25ae5651844d0eb2c912e42eab7bb2324afcff0e185f875999e6371d89addc",
+          "compact_sha256": "ff427bc1ecd01d2ce69c49aef520c099245eadb721955713dcb60474851b5818"
+        },
+        {
+          "file": "architecture/repairable-connections-3.svg",
+          "projection": "process-diagram",
+          "sha256": "dce6e22c912722b1be3d067096d67b69d18c520847afa3b77343dc4aa6fd9bcb",
+          "compact_sha256": "0acd17ec7667c564c993219cad04eb3dbb45271110c39a56b20837a2ea33b0bc"
+        }
+      ]
+    },
+    {
+      "id": "arch-reuse-before-replacement",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/reuse-before-replacement-1.svg",
+          "projection": "plan-comparison",
+          "sha256": "43febb1ae009eb415f723b9e3ab914c8b6c856b4d663ff82af5e0f242299cd5f",
+          "compact_sha256": "9b32fd380ab5f5ff0a51292fa79b4d99195c30797ca42fc59f59d1aa935b2936"
+        },
+        {
+          "file": "architecture/reuse-before-replacement-2.svg",
+          "projection": "section",
+          "sha256": "222651b52a7c7a4e54a587d8881b8e628c9af7c5317a52a3ae8f6fe328f16db3",
+          "compact_sha256": "aca858f5eaf8b02b1fdb613d3a8b75ad913d11011d180875cce09447bae691a5"
+        },
+        {
+          "file": "architecture/reuse-before-replacement-3.svg",
+          "projection": "concept-chart",
+          "sha256": "3d1993a480612b138ae375c7766861eccf8e6447262537bcce1f7f9981d29384",
+          "compact_sha256": "04d9224eb32fb3dadcfc826d13befb485d8fd1c26ce5d68ab9c3408563ee0b79"
+        }
+      ]
+    },
+    {
+      "id": "arch-loose-fit-layers",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/loose-fit-layers-1.svg",
+          "projection": "axonometric",
+          "sha256": "dda814121d4c077a94f7809bf7b6a066f41fa2cd43ae4cfd1444816ee69e3d65",
+          "compact_sha256": "6ff6b4552f24a6b3e7388a2fc2a382888f4d13ae619e54101eb9ee7d44517f03"
+        },
+        {
+          "file": "architecture/loose-fit-layers-2.svg",
+          "projection": "detail-comparison",
+          "sha256": "bcb10a9cbf7dce68224989114718c59420b5420a51078457c4436e8797560f92",
+          "compact_sha256": "c728c87e805a08d459a796e4143536036d548f8cb74b1627e1d47470dc1c5af3"
+        },
+        {
+          "file": "architecture/loose-fit-layers-3.svg",
+          "projection": "plan-comparison",
+          "sha256": "4a29d174f51280f31bd2eaffc359c976bfa10883377ac11a977d6067cce9d0db",
+          "compact_sha256": "f2eae8c81a8539dc3dd61621c8fe61346f2c8e85a7a6a42721f25e601b77554c"
+        }
+      ]
+    },
+    {
+      "id": "arch-design-for-disassembly",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/design-for-disassembly-1.svg",
+          "projection": "axonometric",
+          "sha256": "1bf5c484f0deaa10d18f7cf08b3c27824ed87818775a5521991d6f89821e2e74",
+          "compact_sha256": "461878a70aedf9e6c7d77b623c34e463ebbe2de68b7f712e5de7fe6078380a3d"
+        },
+        {
+          "file": "architecture/design-for-disassembly-2.svg",
+          "projection": "flow-diagram",
+          "sha256": "55dc5c822cf55cf7759047373f3d7e2ff67ae04cce715f710d231a4e31485e38",
+          "compact_sha256": "55ed3d6e5b8011f7fe5bd01b6352c30e7551391b5172aaa40f1254e54e2b8f1f"
+        },
+        {
+          "file": "architecture/design-for-disassembly-3.svg",
+          "projection": "record-diagram",
+          "sha256": "160096cec7153eea908a5df4b3864f640218fab0f8ae585612f4e38f5ebef3c6",
+          "compact_sha256": "294377a89d381d1398889b34b42b0e485ab284a9dee6805206f4b74498539da1"
+        }
+      ]
+    },
+    {
+      "id": "arch-observe-before-briefing",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/observe-before-briefing-1.svg",
+          "projection": "plan",
+          "sha256": "e077786c2bf3d8ee50336cca1ec74e83aba140e26cc5a92afa2f2ed80f9a796f",
+          "compact_sha256": "62412289e263ee238c6a1dfa48c8d523912acb2d1cabbcbf48d228148bc2ac6c"
+        },
+        {
+          "file": "architecture/observe-before-briefing-2.svg",
+          "projection": "inquiry-diagram",
+          "sha256": "87273758f603a9ec0a41f5470d9d07e9bf11a40e2d1f3eefd525f6db43969772",
+          "compact_sha256": "31069ca49372204b82741844fe5047ae00325fa52c450127ada838d2406e7bcb"
+        },
+        {
+          "file": "architecture/observe-before-briefing-3.svg",
+          "projection": "process-diagram",
+          "sha256": "cde982bb46aec7442cee7898638a63b9de0eef2c55f3c53737b225cc2b5b5a21",
+          "compact_sha256": "6f51b27c20673dd320483a1f86b77f5eb4db38ae309458a1565c3c72bd3f1ca6"
+        }
+      ]
+    },
+    {
+      "id": "arch-compare-spatial-alternatives",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/compare-spatial-alternatives-1.svg",
+          "projection": "plan-comparison",
+          "sha256": "9ca63d213c4cfcb4d9f6fddbb7d692c20013ea9d5111b290d02ab3ba9a40343e",
+          "compact_sha256": "4189f0fdcb58ce8e94abb8df7eb843d46b27ee412349264d37833127d8e6e691"
+        },
+        {
+          "file": "architecture/compare-spatial-alternatives-2.svg",
+          "projection": "comparison-table",
+          "sha256": "c967d4235b575f572719e29ffa8de93f747f07ea6b6d9e0523b5758f61409304",
+          "compact_sha256": "7ce60a001a092e3387b288d861526dbbbdd4c400376bec60d0b28f486d55029b"
+        },
+        {
+          "file": "architecture/compare-spatial-alternatives-3.svg",
+          "projection": "process-diagram",
+          "sha256": "5f6bfd88895e5937ef05aed9f09f311745170b9b9127083d8125e4326ebcf459",
+          "compact_sha256": "401532ef386dbe009712cf9290054eb97250e00255ac40577b581e36bab9ecac"
+        }
+      ]
+    },
+    {
+      "id": "arch-test-at-full-scale",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": true,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/test-at-full-scale-1.svg",
+          "projection": "plan",
+          "sha256": "f4fb94f7334614b7d893daf75a8acf46bf915678be54a1155dbdf8269e25ee21",
+          "compact_sha256": "20772aa90786d20b9d240a0d32ba493274c72db9a2ee385f362d2678939fba8a"
+        },
+        {
+          "file": "architecture/test-at-full-scale-2.svg",
+          "projection": "comparison-diagram",
+          "sha256": "f0c4842a5ebe42fbe9d6501a32b5cf26e5c1afa2fed48d17faef36b293d3ce8e",
+          "compact_sha256": "5d6f52a30d3f54dbe76138a92a5854fd2332954148cc1fab12a5cc3a9919609d"
+        },
+        {
+          "file": "architecture/test-at-full-scale-3.svg",
+          "projection": "process-diagram",
+          "sha256": "3c3260ec493437336b135af8ac6a805495c6f7b66c0b46100251afa8a586d59d",
+          "compact_sha256": "4e8e45b1acf0125b6d25b5ee8c430d9890e43ce12387675458ebe14707253c37"
+        }
+      ]
+    },
+    {
+      "id": "arch-post-occupancy-evaluation",
+      "illustration_task_preserved_prose": true,
+      "concurrent_prose_revision": false,
+      "alt_text_updated": false,
+      "visuals": [
+        {
+          "file": "architecture/post-occupancy-evaluation-1.svg",
+          "projection": "process-diagram",
+          "sha256": "9f90b6d575e60c5033fa4ec1783a5245418db4c4cfc24975a31e97464550bf83",
+          "compact_sha256": "c68663bd65f0260fad1f7ff5d2e3a81545991bc11896898e03df8276cf31caf8"
+        },
+        {
+          "file": "architecture/post-occupancy-evaluation-2.svg",
+          "projection": "plan",
+          "sha256": "c1caf0203065b3cf8eef27020380da8a9b860d2c569d3364cc7cc8d153372da0",
+          "compact_sha256": "52397c75fd9eb68675fa8f13120b1e87677b2bc87bccae4fc4e16e5be2867b80"
+        },
+        {
+          "file": "architecture/post-occupancy-evaluation-3.svg",
+          "projection": "timeline",
+          "sha256": "a2d60b2fa1ce0dd38668f50c1f48e796d8fb6d52433319fcd63bad2ea00a6c93",
+          "compact_sha256": "7733321dc4cd2f004dea51c77dd289a6fb96261fb0c3dbb66cab99b8d8d62e75"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "unit_checks": "39 compiler Architecture tests and 88 web Architecture/Filmmaking rendering, search and asset tests passed.",
+    "content": "Architecture acceptance passed for all 36 articles; complete corpus validation passed for 791 entities.",
+    "browser": "Six representative article checks at 1440px desktop and 390px phone widths: Site Repair, Arcades, Window Place and Shearing Layers. All selected images loaded; no horizontal page overflow.",
+    "visual_review": "All 108 originals and 108 phone companions rendered and reviewed on 18 contact sheets, plus representative article views. Zero clipped or overlapping text labels.",
+    "lint": "Scoped ESLint and Prettier checks passed.",
+    "build": "Production public build passed. All 216 SVGs and 46 licensed photographs match their built copies byte-for-byte."
+  }
+}

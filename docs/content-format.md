@@ -90,12 +90,74 @@ Your description: {{situation.description}}
 The corpus exposes `languagePracticeSource` separately from article content.
 Grouped forms use existing typed records, templates and timer contracts. Branching,
 choices, ratings, collections and other supported language statements can appear
-between forms. JavaScript and arbitrary HTML remain unsupported. See
+between forms. Practices do not execute JavaScript or arbitrary HTML. See
 [Practices](practices.md) and the [language reference](pattern-markdown/README.md).
 
 Legacy `patternverse-practice` YAML remains readable for import. The shared converter
 preserves grouped steps and field settings; new editor saves write Pattern Language
 only. Malformed or ambiguous source is reported rather than silently replaced.
+
+## Videos in articles
+
+An article can show a YouTube recording beside its discussion with a `patternverse-video` fence:
+
+````markdown
+```patternverse-video
+{"url":"https://www.youtube.com/watch?v=SK3H4MzPJ_Q","title":"Jerry Seinfeld: left-handed routine","start_seconds":0}
+```
+````
+
+The URL must use HTTPS and identify a YouTube video. `title` is required; `start_seconds`
+is an optional nonnegative integer and defaults to zero. Specify an offset explicitly rather than
+relying on a URL time parameter. Playback uses the existing video component without autoplay or
+looping. The article keeps a readable source link when JavaScript is unavailable. Arbitrary frames,
+HTML and player options are not accepted. A supplied offset is not a claim of timing verification.
+
+## HTML article widgets
+
+An article can embed a self-contained HTML/CSS/JavaScript document with a
+`patternverse-widget` fence:
+
+````md
+```patternverse-widget
+{
+  "src": "coin-sampling.html",
+  "title": "Coin sampling explorer",
+  "height": 480,
+  "fallback": "Larger samples tend to give a more stable estimate of the probability of heads."
+}
+```
+````
+
+Store the file at `content/assets/widgets/coin-sampling.html`. `src` is a lowercase
+filename containing letters, digits and hyphens, with an `.html` extension; paths and
+remote URLs are rejected. `title` and `fallback` are required. Height defaults to
+480 pixels and must be an integer from 200 to 1200. Files are limited to 256,000
+characters. Multiple widget blocks are allowed. The visual Markdown editor preserves
+these fences as code blocks, and rendered Markdown previews use the article widget
+renderer. The first example is `/concept/sampling-variability`.
+
+The reader chooses **Run example** to load a widget, and **Reset example** creates a
+fresh run. Its state is temporary. Keep all CSS, JavaScript, SVG and example data in
+the HTML file; external scripts, styles, images, frames and fetch requests are blocked
+by the widget host's content policy. Widgets have no Patternverse storage or API
+bridge. A sandbox with `allow-scripts` only isolates them from the application;
+do not add `allow-same-origin`. Raw HTML outside this explicit fence stays disabled.
+
+The application imports widget documents as inert source modules, never as public
+executable HTML assets. Only the small static `widget-host/frame.htm` document has
+an exception to hosting frame restrictions; the rest of the application's script
+and frame policies remain unchanged. The fixed, trusted host retains its application
+origin for service-worker offline access, accepts one message from its parent,
+and renders the authored source inside an `allow-scripts`-only sandboxed frame. Widget fallback text stays
+readable without JavaScript. After an online run, its loaded resources can be used
+offline; the explicit library download also includes the widget source modules and
+host document.
+
+Review widget code before publishing. Browser sandboxing isolates application data;
+it does not impose CPU/memory quotas or guarantee prevention of a widget navigating
+its own frame. This first version is intended for reviewed, self-contained article
+examples. There is no package installation, server execution or automatic saving.
 
 ## Validation and compiled output
 

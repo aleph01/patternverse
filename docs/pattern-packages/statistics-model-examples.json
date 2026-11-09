@@ -1,0 +1,49 @@
+{
+  "note": "Original fictional teaching cases. Numerical uncertainty is conditional on the assumptions stated in the articles; constructed validation cases do not constitute a final test set.",
+  "absolute_effects": {
+    "group_n": [100000, 100000],
+    "events": [200, 300],
+    "horizon_days": 90,
+    "display_denominator": 1000,
+    "z95": 1.959963984540054
+  },
+  "outcomes": {
+    "linear_predictors": [-4, -2, 0, 2, 4],
+    "poisson_mean": 2,
+    "continuous_mean": 0,
+    "continuous_sigma": 1,
+    "stores": ["A", "B"],
+    "complaints": [20, 30],
+    "transactions": [1000, 3000]
+  },
+  "regularization": {
+    "training_x": [
+      [-1, -1],
+      [-1, 1],
+      [1, -1],
+      [1, 1]
+    ],
+    "training_y": [-5, 1, -1, 5],
+    "validation_x": [
+      [-1, -1],
+      [-1, 1],
+      [1, -1],
+      [1, 1]
+    ],
+    "validation_y": [-2, -2, 2, 2],
+    "lambdas": [0, 4, 12, 36],
+    "note": "Minimize SSE + lambda times sum of squared slopes. The unpenalized intercept is zero. Predictors are centered, orthogonal, and have X transpose X = 4 I."
+  },
+  "blocking": {
+    "batches": [1, 2, 3, 4],
+    "a": [50, 70, 90, 110],
+    "b": [54, 73, 95, 114],
+    "position_assignment": [
+      ["A", "B"],
+      ["B", "A"],
+      ["A", "B"],
+      ["B", "A"]
+    ],
+    "note": "One illustrated realization of independent fair-coin assignment to two positions in each predeclared batch. Positions are comparable experimental units; no carryover is assumed."
+  }
+}

@@ -1,0 +1,2010 @@
+{
+  "note": "Authoring metadata outside the strict public entity schema. Recommendation queries are prepared for future retrieval integration; the current app does not consume this sidecar.",
+  "title": "Organizational Design",
+  "article_sections": [
+    "What it is for",
+    "The core idea",
+    "How it works",
+    "Why it works",
+    "Examples",
+    "Useful when",
+    "Common mistakes and limits",
+    "Related patterns"
+  ],
+  "patterns": [
+    {
+      "id": "functional-organization",
+      "title": "Functional Organization",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Group people by specialist discipline and coordinate their contributions across functions.",
+      "core_question": "How can we concentrate expertise and use specialist resources efficiently while delivering work that crosses disciplines?",
+      "use_when": [
+        "Several offerings draw on the same scarce expertise or facilities.",
+        "Professional standards and learning need a continuing organizational home.",
+        "Shared specialist capacity can be coordinated across products or projects."
+      ],
+      "goals": [
+        "Develop specialist capability",
+        "Pool scarce resources",
+        "Coordinate shared delivery"
+      ],
+      "mechanisms": [
+        "Functional grouping",
+        "Professional supervision",
+        "Explicit cross-functional commitments"
+      ],
+      "related_patterns": [
+        "teamwork-optimize-the-whole",
+        "teamwork-coordinate-dependencies-early",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "Should our specialists work in departments or belong to product teams?",
+        "We cannot afford a separate engineering team for every product.",
+        "How do we keep technical standards consistent across projects?",
+        "Our experts are scattered and have nobody to learn from.",
+        "Who should manage people whose work requires deep specialist knowledge?",
+        "Every department finishes its part but the customer still waits.",
+        "We share a testing team and keep fighting over its priorities.",
+        "Can people report to their discipline while working together on products?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/functional-organization.svg",
+        "reason": "Separate functional reporting lines from the coordination across departments that delivers a shared outcome. The chart is a hypothetical mechanism, not an Apple or GitLab organization chart."
+      },
+      "sources": [
+        {
+          "url": "https://jaygalbraith.com/wp-content/uploads/2024/03/galbraithmatrix1971.pdf",
+          "basis": "Primary organizational-design account of functional grouping, specialist resource sharing, and tradeoffs with project and matrix arrangements. The accessible indexed extract was read; no claim of a complete PDF extraction is made."
+        },
+        {
+          "url": "https://www.apple.com/careers/pdf/HBR_How_Apple_Is_Organized_For_Innovation-4.pdf",
+          "basis": "2020 account by Apple University authors of the 1997 reorganization, camera specialization, and cross-functional leadership demands. The example is explicitly historical."
+        },
+        {
+          "url": "https://handbook.gitlab.com/handbook/leadership/no-matrix-organization/",
+          "basis": "GitLab's self-description of functional management, one reporting manager, and management-development needs. Organizational effectiveness claims are not treated as independent empirical findings."
+        },
+        {
+          "url": "https://handbook.gitlab.com/handbook/company/structure/",
+          "basis": "GitLab's published arrangement of product groups and stable counterparts without a second reporting hierarchy."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis. The equipment-maker illustration and diagram are hypothetical. Named examples describe arrangements in their cited sources and do not demonstrate universal causal benefits. No guided practice."
+    },
+    {
+      "id": "divisional-organization",
+      "title": "Divisional Organization",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Group capabilities around products, markets, or regions and give each division responsibility for its results.",
+      "core_question": "How can different businesses pursue their own priorities with the capabilities and authority needed to deliver results?",
+      "use_when": [
+        "Businesses serve materially different customers or need different operating priorities.",
+        "Product decisions repeatedly escalate between functional department heads.",
+        "A business unit can be given meaningful authority over the capabilities that determine its results."
+      ],
+      "goals": [
+        "Focus on distinct business needs",
+        "Connect authority to outcomes",
+        "Coordinate functions within a business"
+      ],
+      "mechanisms": [
+        "Grouping around products, markets, or regions",
+        "Divisional leadership",
+        "Defined corporate and local authority",
+        "Explicit shared-service relationships"
+      ],
+      "related_patterns": [
+        "functional-organization",
+        "teamwork-optimize-the-whole",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "Our different product lines keep fighting over the same departmental priorities.",
+        "Should each region have its own business leader and supporting functions?",
+        "How can we make someone responsible for a product's complete result?",
+        "Our consumer and industrial businesses need very different ways of working.",
+        "Which capabilities should stay central when we create business units?",
+        "We gave a division profit responsibility but it cannot control the decisions that matter.",
+        "How do we avoid duplicating every specialist team across our businesses?",
+        "Our divisions are doing well separately but keep undermining one another."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/divisional-organization.svg",
+        "reason": "Show several capabilities nested inside each business unit, with a corporate center and explicitly shared services. The diagram is hypothetical and makes no claim to reproduce the named companies' organization charts."
+      },
+      "sources": [
+        {
+          "url": "https://jaygalbraith.com/wp-content/uploads/2024/03/EvolEnterpriseOrgDesign.pdf",
+          "basis": "Primary 2012 organizational-design account of multidivisional structures, functions within divisions, and the evolution of mixed organizational forms. Its historical framework is not treated as a necessary development sequence."
+        },
+        {
+          "url": "https://us.pg.com/structure-and-governance/corporate-structure/",
+          "basis": "Current corporate self-description of Sector Business Units, Focus Markets, shared Market Operations, Enterprise Markets, and corporate resources. The article treats these as documented arrangements, not independent proof of performance benefits."
+        },
+        {
+          "url": "https://global.toyota/en/detail/11234406",
+          "basis": "March 2016 announcement specifying allocation of functional capabilities into product-based in-house companies, their presidents' authority, and continuing regional and corporate structures. Stated goals are distinguished from measured results."
+        },
+        {
+          "url": "https://global.toyota/en/download/14788197/",
+          "basis": "December 2016 briefing confirms April 2016 establishment and the CV Company's commercial-vehicle focus."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis. The household and industrial equipment maker and its diagram are hypothetical. The P&G arrangement is dated to consultation in October 2026; Toyota is explicitly historical. The former P&G 2025 organization URL redirected to the 2026 report, so the live corporate-structure page is cited instead. No causal effect size or guided practice is claimed."
+    },
+    {
+      "id": "matrix-organization",
+      "title": "Matrix Organization",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Distribute formal authority across intersecting dimensions and make their shared decisions workable.",
+      "core_question": "How can two important dimensions both shape decisions without leaving people trapped between competing demands?",
+      "use_when": [
+        "Functional capability and project delivery both need an explicit management mandate.",
+        "Product and geographic responsibilities must be reconciled in important decisions.",
+        "Scarce specialist capacity serves several outcomes and managers can agree credible commitments."
+      ],
+      "goals": [
+        "Represent multiple organizational needs",
+        "Share specialist capability",
+        "Resolve competing commitments"
+      ],
+      "mechanisms": [
+        "Intersecting formal authority",
+        "Explicit decision rights",
+        "Agreed capacity",
+        "Manager-to-manager escalation"
+      ],
+      "related_patterns": [
+        "functional-organization",
+        "divisional-organization",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "My project manager and department head keep giving me conflicting priorities.",
+        "Can specialists keep a professional home while working under project leaders?",
+        "Our products need global consistency but regional managers need a real say.",
+        "Who decides when two projects both need the same engineer?",
+        "We added dotted reporting lines but nobody knows what they mean.",
+        "How do we divide authority between functional and product managers?",
+        "My performance review ignores the work I do for another manager.",
+        "How can we tell whether shared authority is worth the coordination effort?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/matrix-organization.svg",
+        "reason": "A function-by-project grid makes the intersection of authority visible. The illustration separates functional and project mandates while emphasizing agreed capacity and escalation; it reproduces no NASA or ABB chart."
+      },
+      "sources": [
+        {
+          "url": "https://jaygalbraith.com/wp-content/uploads/2024/03/EvolEnterpriseOrgDesign.pdf",
+          "basis": "2012 primary organizational-design account of intersecting business, country, and functional dimensions and mixed organizational forms."
+        },
+        {
+          "url": "https://www.pmi.org/learning/library/matrix-organization-structure-reason-evolution-1837",
+          "basis": "Historical project-management practitioner account of matrix structures, authority, accountability, and negotiation. It is not treated as a current mandatory standard or proof of universal effectiveness."
+        },
+        {
+          "url": "https://appel.nasa.gov/wp-content/uploads/2013/09/ASK_1.pdf",
+          "basis": "NASA ASK issue 1, Elizabeth Citrin interview, PDF pages 25–27: Goddard matrix staffing, Richard Day's team selection, and negotiation between line organizations over a common ground system. These are attributed participant accounts, not independent causal findings."
+        },
+        {
+          "url": "https://science.nasa.gov/mission/wmap/wmap-overview/",
+          "basis": "NASA mission history establishes MAP's 2001 launch and subsequent WMAP name, anchoring the interview's development-era context without inventing an issue publication date."
+        },
+        {
+          "url": "https://global.abb/content/dam/abb/global/group/investors/documents/ir-events/2019/group_strategy_update_presentation-20191.pdf",
+          "basis": "ABB's February 2019 strategy presentation, slides 29–30: depicts the existing division–region–corporate-function matrix and a proposed shift of operational ownership to businesses."
+        },
+        {
+          "url": "https://resources.news.e.abb.com/attachments/published/63578/en-US/4ED8267499FF/ABB_Our_Way_forward.pdf",
+          "basis": "June 2020 ABB release confirms discontinuation of its longstanding matrix. Statements of expected advantages are distinguished from demonstrated performance effects."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis. Consultancy, staffing allocation, and diagram are hypothetical. Both named examples are explicitly historical. Matrix denotes recognized intersecting authority; ordinary collaboration or the number of dotted chart lines alone does not establish it. No guided practice or causal effect size is claimed."
+    },
+    {
+      "id": "federated-organization",
+      "title": "Federated Organization",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Preserve member self-government while giving shared institutions a defined mandate and mutual obligations.",
+      "core_question": "How can autonomous organizations gain the benefits of belonging to a larger whole while retaining meaningful self-government?",
+      "use_when": [
+        "Member organizations have local constituencies and responsibilities worth preserving.",
+        "Shared capabilities and representation justify a continuing collective institution.",
+        "Members can accept binding commitments while retaining defined local authority."
+      ],
+      "goals": [
+        "Preserve local self-government",
+        "Sustain shared capabilities",
+        "Make collective obligations accountable"
+      ],
+      "mechanisms": [
+        "Member representation",
+        "Defined common mandate",
+        "Mutual obligations",
+        "Local and shared governance"
+      ],
+      "related_patterns": [
+        "divisional-organization",
+        "data-federated-governance",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "How can our independent organizations work together without merging?",
+        "We want shared services but need to keep control of our local work.",
+        "Who should decide what our association's central office can do?",
+        "Our members want common benefits but disagree about their obligations.",
+        "How do we give local organizations a real voice in shared decisions?",
+        "Our federation's central office keeps taking over local decisions.",
+        "Can we pool expertise while keeping separate governing bodies?",
+        "How can shared standards be binding without centralizing everything?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/federated-organization.svg",
+        "reason": "Show equal self-governing members connected through participation and accountability to shared institutions with a defined mandate. The illustration is hypothetical and reproduces neither example's formal governance chart."
+      },
+      "sources": [
+        {
+          "url": "https://www.mondragon-corporation.com/en/about-us/",
+          "basis": "Current corporate self-description of separate, self-governing cooperatives and cooperative principles, consulted October 2026. No member counts or uniform governance formulas are inferred."
+        },
+        {
+          "url": "https://www.mondragon-corporation.com/en/timeline/2016/",
+          "basis": "MONDRAGON's dated account of its July 2016 Cooperative Congress approving common policy and changes to financial intercooperation; used as a historical illustration of collective decisions."
+        },
+        {
+          "url": "https://www.ifrc.org/who-we-are/people-and-structures/ifrc-governance",
+          "basis": "Current IFRC account of member representation, the General Assembly, Governing Board, and secretariat; consulted October 2026. Mandates are distinguished from demonstrated effectiveness."
+        },
+        {
+          "url": "https://www.ifrc.org/sites/default/files/2025-01/EN_Constitution2024_Adopted.pdf",
+          "basis": "Constitution amended October 2024, especially articles 7–8 on admission, representation, contributions, and obligations. The 2019 PDF link returned 404, so the current document was followed from IFRC's official statutory-texts page. No legal implementation advice is inferred."
+        },
+        {
+          "url": "https://disasterlaw.ifrc.org/auxiliary-role",
+          "basis": "IFRC's description of National Societies as independent organizations with recognized public humanitarian functions. The example concerns IFRC membership and is not conflated with the separate ICRC institution."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis focused on federations of member organizations. Community-service network and diagram are hypothetical. Current self-descriptions are dated to consultation; MONDRAGON's 2016 Congress decision is explicitly historical. The existing data-domain Federated Governance article remains a distinct linked pattern. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "shared-services",
+      "title": "Shared Services",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Pool recurring services across organizational units, with clear service ownership and commitments to the units they serve.",
+      "core_question": "How can several organizational units share recurring services without losing dependable support for their own work?",
+      "use_when": [
+        "Several units repeat similar processes and maintain overlapping tools or expertise.",
+        "Small support teams struggle to cover absences and changing demand.",
+        "Units can agree consistent inputs, service expectations, and priority rules."
+      ],
+      "goals": [
+        "Pool recurring capabilities",
+        "Provide dependable support across units",
+        "Make service cost and quality accountable"
+      ],
+      "mechanisms": [
+        "Defined service ownership",
+        "Common service processes",
+        "Customer and provider commitments",
+        "Joint service review and exception handling"
+      ],
+      "related_patterns": [
+        "divisional-organization",
+        "teamwork-clarify-decision-rights",
+        "teamwork-optimize-the-whole"
+      ],
+      "example_user_queries": [
+        "Every division has a small support team doing the same work. Can we combine them?",
+        "How do we share finance services without losing support for local needs?",
+        "Our central service desk is cheaper but managers spend more time chasing requests.",
+        "Who decides priorities when several business units need the same support team?",
+        "How can a small department get reliable access to specialist support?",
+        "We moved work to a central office but service quality has become unclear.",
+        "What should remain with a business unit when we pool administrative work?",
+        "How do we make shared services accountable to the people who use them?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/shared-services.svg",
+        "reason": "Show distinct business units retaining decisions while a common provider owns delivery through explicit service commitments and joint review. The hypothetical mechanism diagram clarifies the boundary beyond simple centralization and reproduces neither example's organization chart."
+      },
+      "sources": [
+        {
+          "url": "https://www.siemens.com/en-us/company/about/businesses/",
+          "basis": "Corporate description consulted October 2026 places GBS alongside operating businesses and identifies Siemens units and external customers as service recipients. It does not establish that every Siemens unit uses every service."
+        },
+        {
+          "url": "https://www.siemens.com/en-us/company/about/businesses/global-business-services/",
+          "basis": "Siemens' own service portfolio describes finance and procurement, HR, and other services. Marketing claims about productivity are not treated as independently demonstrated savings."
+        },
+        {
+          "url": "https://jobs.siemens.com/de_DE/externaljobs/JobDetail/517831",
+          "basis": "Official recruitment description dated 12 August 2026 assigns application lifecycle ownership, stakeholder liaison, service reviews, and performance measures to a GBS role. It documents intended responsibilities rather than verified execution or organization-wide governance."
+        },
+        {
+          "url": "https://www.gov.uk/government/publications/global-hr-design/global-hr-design-principles-2024-html",
+          "basis": "Cabinet Office's 2024 design principles describe five shared-service clusters and intended common operating models and ERP systems. The article explicitly distinguishes the transformation arrangement from completed migration."
+        },
+        {
+          "url": "https://www.nao.org.uk/reports/update-on-government-shared-services-2026/",
+          "basis": "National Audit Office review published 6 March 2026 reports implementation progress and gaps in central mandate, technical leadership, data convergence, and interoperability. Risks are attributed to the auditor and are not presented as subsequently resolved or as achieved savings."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis. Manufacturer, invoice workflow, and diagram are hypothetical. Siemens' October 2026 self-description and August 2026 recruitment role are distinguished from independently demonstrated performance. Government design intentions and the March 2026 audit findings are explicitly dated. Service delivery, business authority, and outsourcing are kept distinct; no guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "front-back-organization",
+      "title": "Front-Back Organization",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Connect customer-facing units with shared product capabilities, balancing market needs with reusable offerings and scale.",
+      "core_question": "How can an organization respond to different customers while developing products and capabilities that many markets can share?",
+      "use_when": [
+        "Customers need coordinated offers drawn from several product capabilities.",
+        "Markets differ but expensive development and delivery capabilities can be reused.",
+        "Customer and product leaders can sustain joint planning and credible commitments."
+      ],
+      "goals": [
+        "Respond to distinct customer needs",
+        "Reuse product capabilities across markets",
+        "Make customer commitments and product priorities compatible"
+      ],
+      "mechanisms": [
+        "Customer-oriented front units",
+        "Product-oriented back units",
+        "Joint planning and information sharing",
+        "Explicit decision rights and cross-unit conflict resolution"
+      ],
+      "related_patterns": ["divisional-organization", "matrix-organization", "shared-services"],
+      "example_user_queries": [
+        "Customers have to deal with several of our product teams to get one solution.",
+        "How do we serve different industries without duplicating product development?",
+        "Our country teams keep building local versions of the same capability.",
+        "Product teams ignore market needs while sales keeps promising custom features.",
+        "Who should approve customer commitments that depend on several product groups?",
+        "How can account teams draw on shared technical capabilities?",
+        "We need local market knowledge and common offerings at the same time.",
+        "Our CEO spends every week resolving disputes between sales and product leaders."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/front-back-organization.svg",
+        "reason": "Show customer-segment units drawing on several shared product units through joint planning and decision rights. Two-way links make interdependence explicit, and the planning band is labeled as a process rather than an extra department. The hypothetical diagram reproduces neither named organization's reporting chart."
+      },
+      "sources": [
+        {
+          "url": "https://jaygalbraith.com/wp-content/uploads/2024/03/EvolEnterpriseOrgDesign.pdf",
+          "basis": "Galbraith's 2012 paper, figure 4 and accompanying discussion, defines the customer/country/segment-oriented front and product-oriented back, distinguishing this adaptation of matrix design from a generic dual-reporting chart. The upload path is not used as the publication date."
+        },
+        {
+          "url": "https://jaygalbraith.com/wp-content/uploads/2024/03/FrontBackHowitWorks.pdf",
+          "basis": "Galbraith's paper dated November 2005, pages 1–2, emphasizes leadership capacity, transparent information, collective management, and processes linking interdependent units. Interpretive comparisons of named CEOs are not repeated as established causal evidence."
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/80424/000095015206007291/l21828aexv13.htm",
+          "basis": "P&G's 2006 annual report, particularly pages 14 and 25–27, documents Global Business Units, Market Development Organization customer/channel/country teams, separate Global Business Services, and reporting to the CEO. The example is explicitly historical; management's benefit claims are distinguished from independently isolated performance effects."
+        },
+        {
+          "url": "https://www.ericsson.com/en/about-us/company-facts/our-organization",
+          "basis": "Ericsson's corporate organization description consulted October 2026 assigns selling and delivery to market areas and product/service development, maintenance, and delivery capability to business areas. The front-back classification is explicitly an interpretation of those roles. No fixed area counts or unverified pricing and escalation arrangements are inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis. Industrial technology company, customer offers, and diagram are hypothetical. P&G's arrangement is dated to 2006. Ericsson's self-description is dated to consultation and distinguished from this article's front-back interpretation. Product capabilities are kept distinct from administrative shared services, and the pattern does not imply that every employee has two managers. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "ambidextrous-organization",
+      "title": "Ambidextrous Organization",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Run established and exploratory work with different operating arrangements, linked by shared leadership and deliberate resource decisions.",
+      "core_question": "How can an organization improve today’s operations while developing opportunities that may require a different way of working?",
+      "use_when": [
+        "Current operating demands repeatedly displace uncertain opportunities.",
+        "Exploration needs different methods and measures but can use selected existing capabilities.",
+        "Leadership has resources and authority to support both activities and resolve their conflicts."
+      ],
+      "goals": [
+        "Maintain and improve established operations",
+        "Develop uncertain opportunities",
+        "Connect distinct operating arrangements through accountable leadership"
+      ],
+      "mechanisms": [
+        "Differentiated units, methods, and measures",
+        "Dedicated resources with evidence-based reviews",
+        "Selective sharing of existing capabilities",
+        "Senior leadership integration and resource decisions"
+      ],
+      "related_patterns": [
+        "divisional-organization",
+        "prefer-the-smallest-useful-experiment",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "Every new initiative loses its people when the core business gets busy.",
+        "How do we explore a new business without disrupting dependable operations?",
+        "Our innovation lab builds pilots that the rest of the company cannot use.",
+        "We judge new ventures by profit targets before they have tested demand.",
+        "Can an experimental unit use our customer relationships without following every existing process?",
+        "Who should resolve conflicts between current business targets and future opportunities?",
+        "How do we protect a venture's funding while still holding it accountable?",
+        "Our pilot worked, but nobody owns the decision to scale or transfer it."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/ambidextrous-organization.svg",
+        "reason": "Show established and exploratory arrangements with different measures under shared senior leadership, connected through selected capabilities and explicit venture reviews. The hypothetical diagram clarifies both differentiation and integration without implying that every venture must transfer to the core business."
+      },
+      "sources": [
+        {
+          "url": "https://www.hbs.edu/ris/Publication%20Files/O%27Reilly%20and%20Tushman%20AMP%20Ms%20051413_c66b0c53-5fcd-46d5-aa16-943eab6aa4a1.pdf",
+          "basis": "O'Reilly and Tushman's May 2013 manuscript defines exploration and exploitation and discusses structural, sequential, and contextual approaches. The article explicitly selects structural ambidexterity without presenting it as the only form or promising universal performance benefits."
+        },
+        {
+          "url": "https://digicoll.lib.berkeley.edu/record/284768/files/991056723509706532_C094277598_51_4.pdf",
+          "basis": "O'Reilly, Harreld, and Tushman's 2009 primary case research in California Management Review, pages 86–90: July 2000 EBO leadership appointment, distinct horizons and measures, protected funding, monthly reviews, and business-unit ownership. Berkeley's indexed full-text excerpts supplied the operational passages; direct PDF opening returned 403. Bibliographic details were cross-checked against the authors' SSRN record, https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1418194. No aggregate revenue figure or current IBM operating claim is made."
+        },
+        {
+          "url": "https://www.hbs.edu/ris/Publication%20Files/07-087.pdf",
+          "basis": "Tushman and colleagues' September 2006 working paper reports original longitudinal field research. Printed pages 15–16 document USA Today's online organization during 1995–2001, funding constraints, February 2000 leadership change, continued organizational distinction, editorial linkages, and shared senior incentives. The case is historical and its classification is attributed to the researchers; no causal effect size is inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis focused on structural ambidexterity. Equipment manufacturer, monitoring-service venture, and diagram are hypothetical. IBM and USA Today examples describe explicitly dated arrangements documented by original researchers, with no assumption that they remain current. Established work can innovate, protection is conditional on evidence, and ventures may scale, close, or move to a different home. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "microenterprise-network",
+      "title": "Microenterprise Network",
+      "domain": "organizational-design",
+      "collections": ["organizational-architectures"],
+      "short_description": "Give small units entrepreneurial responsibility and connect them through explicit agreements, shared capabilities, and common rules.",
+      "core_question": "How can a large organization let small units act entrepreneurially while keeping their work connected and accountable?",
+      "use_when": [
+        "Customer opportunities stall between departments with fragmented authority.",
+        "Small units can own identifiable contributions and influence their economics.",
+        "Shared capabilities and common rules can support explicit horizontal commitments."
+      ],
+      "goals": [
+        "Bring operating decisions closer to users",
+        "Make unit contributions and economics visible",
+        "Coordinate entrepreneurial units around customer outcomes"
+      ],
+      "mechanisms": [
+        "Small units with accountable owners and bounded authority",
+        "Understandable unit economics and internal allocations",
+        "Horizontal operating agreements",
+        "Shared capabilities and common dispute-resolution rules"
+      ],
+      "related_patterns": [
+        "divisional-organization",
+        "shared-services",
+        "teamwork-optimize-the-whole"
+      ],
+      "example_user_queries": [
+        "Our frontline teams see opportunities but cannot assemble an offer across departments.",
+        "Can small units run like businesses while sharing the company's capabilities?",
+        "How do we give teams responsibility for results without making them isolated?",
+        "Internal prices make one unit look profitable while the customer offer loses money.",
+        "We renamed departments as businesses, but they still need permission for every decision.",
+        "How should autonomous units agree capacity, quality, and shared rewards?",
+        "Our small units spend more time bargaining with each other than serving customers.",
+        "What common rules are still needed when we decentralize operating decisions?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/microenterprise-network.svg",
+        "reason": "Show small units with owners, authority, and visible economics connected horizontally around a customer outcome and supported by common capabilities and rules. The diagram is hypothetical; it depicts neither Haier nor Kyocera's actual unit boundaries and does not imply separate legal ownership."
+      },
+      "sources": [
+        {
+          "url": "https://www.mckinsey.com/capabilities/people-and-organization/our-insights/a-business-of-its-times-haiers-self-evolving-organization",
+          "basis": "First-person interview with Haier Smart Home CEO Huagang Li, 26 April 2023. Documents his description of microenterprise decision, employment, and resource-distribution rights, collaboration through ecosystem micro-communities, and a connected-kitchen example. Treated as primary management testimony, not independent verification of performance or uniform practice."
+        },
+        {
+          "url": "https://global.kyocera.com/inamori/about/manager/amoeba/amoeba01.html",
+          "basis": "Official explanation of market-oriented divisional accounting: small profit-and-loss centers, internal buying and selling, monthly plans, and Hourly Efficiency reports. Consulted October 2026. Amoeba Management is identified as a related small-unit network mechanism, without equating its authority or rewards with Haier's model."
+        },
+        {
+          "url": "https://global.kyocera.com/inamori/library/floor/second/detail02.html",
+          "basis": "Official Inamori Library description of unit leadership over planning, results, labor, and purchasing; member visibility into operating results; and unit plans aligned with company goals. Consulted October 2026. Corporate claims of superior performance are not repeated as established causal evidence."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis. Home-services company, maintenance arrangement, and diagram are hypothetical. Haier's example is dated to a 2023 interview, and Kyocera's corporate descriptions to consultation in October 2026. The examples illustrate related mechanisms rather than identical systems. Microenterprise is not assumed to mean separate incorporation, employee equity ownership, universal profit sharing, or absence of hierarchy. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "stream-aligned-team",
+      "title": "Stream-Aligned Team",
+      "domain": "organizational-design",
+      "collections": ["team-topologies"],
+      "short_description": "Give a stable team continuing responsibility for a manageable stream of value, from understanding needs through delivery and operation.",
+      "core_question": "How can a team deliver and improve a customer outcome without repeatedly handing its work between specialist departments?",
+      "use_when": [
+        "Ordinary customer changes wait between specialist departments.",
+        "A recognizable service or domain segment needs continuing delivery and operational ownership.",
+        "A team can sustain a manageable boundary using dependable supporting capabilities."
+      ],
+      "goals": [
+        "Reduce routine delivery handoffs",
+        "Connect customer feedback with service ownership",
+        "Keep team responsibility within sustainable cognitive capacity"
+      ],
+      "mechanisms": [
+        "Stable team aligned to a coherent stream of value",
+        "Cross-functional capability and usable authority",
+        "Continuing delivery and operational responsibility",
+        "Explicit dependencies and manageable cognitive load"
+      ],
+      "related_patterns": [
+        "functional-organization",
+        "teamwork-own-the-outcome-together",
+        "teamwork-coordinate-dependencies-early"
+      ],
+      "example_user_queries": [
+        "Every customer improvement waits in several departments' queues.",
+        "Who should own a service after the project team finishes its launch?",
+        "Can one stable team understand, deliver, and operate a useful part of our service?",
+        "We have cross-functional teams, but they still need several other teams to release anything.",
+        "Our team owns too many services and cannot understand all its operational responsibilities.",
+        "How do we reduce handoffs without asking each team to rebuild every shared capability?",
+        "Customer feedback reaches product managers but never the engineers who maintain the service.",
+        "Should we organize around technical components or a flow of customer value?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/stream-aligned-team.svg",
+        "reason": "Place understanding, delivery, operation, and a feedback loop inside one stable team boundary, with supporting services and specialist help outside it. The original hypothetical diagram distinguishes continuing stream ownership from sequential departmental handoffs and does not reproduce proprietary Team Topologies book artwork."
+      },
+      "sources": [
+        {
+          "url": "https://teamtopologies.com/key-concepts/",
+          "basis": "Originators' definition of a stream-aligned team, supporting team types, and deliberate interaction modes. Consulted October 2026. The article credits Team Topologies and does not infer that all current teams fit its classifications."
+        },
+        {
+          "url": "https://teamtopologies.com/s/Organization-Dynamics-with-Team-Topologies-Mini-book-MB80.pdf",
+          "basis": "Originators' July 2020 mini-book, page 14, describes stream alignment across business segments and services, with teams able to analyze, test, build, release, and monitor most changes substantially independently. Search-indexed text was used for this definition. The article avoids prescribing one mandatory team size or eliminating all dependencies."
+        },
+        {
+          "url": "https://www.docker.com/blog/building-stronger-happier-engineering-teams-with-team-topologies/",
+          "basis": "Firsthand engineering account dated 20 May 2022: April 2020 team redesign, embedded product and design roles, goals for autonomy and service ownership, scope and deadline problems, and subsequent splitting of Accounts & Growth and addition of platform teams. Described historically without attributing commercial growth solely to structure."
+        },
+        {
+          "url": "https://www.infoq.com/presentations/productivity-ft/",
+          "basis": "Sarah Wells's firsthand Financial Times presentation, published April 2022, with transcript: stream-aligned teams supported by platform and enabling capabilities, common services and ownership registry, and an earlier publishing-platform deployment-permission bottleneck. The example avoids the transcript's potentially ambiguous payroll wording and does not claim a current organization map or independently verified causal result."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis grounded in the Team Topologies concept. Subscription-service account-access example and diagram are hypothetical. Docker and Financial Times arrangements are explicitly dated to 2020–2022 accounts. A cross-functional project group, component team, and stream-aligned team are distinguished; supporting capabilities do not imply total independence. The Team Topologies collection was added because its planned category had no existing record. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "platform-team",
+      "title": "Platform Team",
+      "domain": "organizational-design",
+      "collections": ["team-topologies"],
+      "short_description": "Own shared capabilities as an internal product that helps other teams deliver with less complexity and coordination.",
+      "core_question": "How can teams use shared capabilities without repeatedly building them themselves or waiting for a central group to do the work?",
+      "use_when": [
+        "Several teams repeat similar setup, maintenance, and troubleshooting work.",
+        "Delivery teams need shared capabilities without mastering all their underlying technical detail.",
+        "Shared demand can sustain a provider that owns usability, reliability, and continuing support."
+      ],
+      "goals": [
+        "Reduce recurring delivery friction",
+        "Make shared capabilities independently consumable",
+        "Keep internal product ownership accountable to consuming teams"
+      ],
+      "mechanisms": [
+        "Internal product with identifiable team customers",
+        "Self-service interfaces and discoverable guidance",
+        "Continuing reliability, support, and lifecycle ownership",
+        "Consumer feedback and explicit exception handling"
+      ],
+      "related_patterns": ["stream-aligned-team", "shared-services", "teamwork-optimize-the-whole"],
+      "example_user_queries": [
+        "Every delivery team maintains its own deployment and monitoring setup.",
+        "Our central infrastructure team has become a queue for routine requests.",
+        "How do we let teams use common capabilities without becoming experts in everything underneath?",
+        "We built a developer portal, but teams still cannot complete ordinary tasks without help.",
+        "Who owns upgrades and support for the tools all our teams rely on?",
+        "How can we choose the smallest shared offering that will actually help developers?",
+        "Platform adoption is mandatory, but nobody measures the effort it creates for users.",
+        "Which needs belong in a common service and which should stay with an individual team?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/platform-team.svg",
+        "reason": "Show delivery teams retaining customer-service ownership while consuming a self-service capability whose internal product lifecycle belongs to a platform team. The interface, support, roadmap, and feedback make the mechanism more specific than centralizing infrastructure. The original hypothetical diagram reproduces neither named company's organization chart."
+      },
+      "sources": [
+        {
+          "url": "https://teamtopologies.com/key-concepts/",
+          "basis": "Originators' definition of a platform as a compelling internal product accelerating stream-aligned teams, and distinction from enabling and other team types. Consulted October 2026. A platform may involve several teams rather than one unlimited provider group."
+        },
+        {
+          "url": "https://teamtopologies.com/s/Organization-Dynamics-with-Team-Topologies-Mini-book-MB80.pdf",
+          "basis": "July 2020 mini-book, page 15: non-blocking platform dependencies, self-service examples, and the thinnest viable platform as tools, interfaces, and documentation. Search-indexed primary text supports the conceptual reference; no large custom system or mandatory headcount is prescribed."
+        },
+        {
+          "url": "https://engineering.atspotify.com/2020/8/how-we-use-golden-paths-to-solve-fragmentation-in-our-software-ecosystem",
+          "basis": "Spotify's 2020 firsthand product-management account of supported development paths, Backstage discoverability, TechDocs tutorials, onboarding feedback, ownership problems, and synchronized updates as tools change. The example is dated and does not infer measured delivery gains or that a portal alone constitutes a platform."
+        },
+        {
+          "url": "https://netflixtechblog.com/full-cycle-developers-at-netflix-a08c31f83249",
+          "basis": "Netflix engineering account by Philip Fisher-Ogden, Greg Burrell, and Dianne Marsh, dated 17 May 2018. Describes centralized tooling teams, reusable capabilities, service lifecycle responsibility in development teams, shared-versus-local investment decisions, and supported paths with optional adoption. The example remains historical; no adoption rule or current organization is generalized from it."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis grounded in Team Topologies. Retailer, shared deployment capability, and diagram are hypothetical. Spotify and Netflix arrangements are explicitly dated to 2020 and 2018 firsthand accounts, whose claimed benefits are not treated as independently isolated causal effects. Platform product ownership, delivery-team service ownership, and enabling help are distinguished. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "enabling-team",
+      "title": "Enabling Team",
+      "domain": "organizational-design",
+      "collections": ["team-topologies"],
+      "short_description": "Help teams acquire missing capabilities through focused facilitation, then step back as they become more self-sufficient.",
+      "core_question": "How can a team acquire a missing capability while keeping ownership of its work and becoming less dependent on specialists?",
+      "use_when": [
+        "A missing capability repeatedly blocks work that a delivery team should be able to own.",
+        "Experts keep completing tasks without increasing the receiving team's independence.",
+        "Teams have time and suitable work to learn through focused specialist facilitation."
+      ],
+      "goals": [
+        "Build capability inside receiving teams",
+        "Reduce recurring dependence on specialists",
+        "Keep service ownership with the delivery team"
+      ],
+      "mechanisms": [
+        "Specialist facilitation based on an observed capability gap",
+        "Bounded engagements with explicit learning goals",
+        "Joint practice followed by reduced assistance",
+        "Feedback on recurring organizational and platform obstacles"
+      ],
+      "related_patterns": [
+        "stream-aligned-team",
+        "platform-team",
+        "teamwork-share-critical-knowledge"
+      ],
+      "example_user_queries": [
+        "Our specialists keep fixing the same problems for teams that never learn to handle them.",
+        "How can a delivery team learn a new capability without handing its work to another department?",
+        "We launched a new platform, but teams need help applying it to their services.",
+        "Our training courses are well attended but people still need an expert for every change.",
+        "How should we know when a coaching engagement is ready to end?",
+        "The expert embedded in our team has become the only person who can do the hard work.",
+        "How do we distinguish a skill gap from an unusable tool or an overloaded team?",
+        "Can a continuing group of specialists help different teams become more self-sufficient?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/enabling-team.svg",
+        "reason": "Show specialist facilitation and retained delivery-team ownership within a bounded engagement, progressing from a defined gap through joint practice to demonstrated capability with less help. The review includes changing the goal or addressing structural constraints, rather than assuming every engagement ends by a fixed calendar date. The original diagram is hypothetical."
+      },
+      "sources": [
+        {
+          "url": "https://teamtopologies.com/key-concepts/",
+          "basis": "Originators' definition of enabling teams as overcoming obstacles and detecting missing capabilities, together with the facilitating interaction mode. Consulted October 2026. The article distinguishes facilitation from ongoing platform-service ownership."
+        },
+        {
+          "url": "https://academy.corp.teamtopologies.com/courses/effective-enabling-teams",
+          "basis": "Official course outline distinguishes short-lived and structural enabling teams and emphasizes capability gaps, sensing, mission, and measuring impact. Only the publicly available outline was consulted; no claim is based on inaccessible paid lessons. Supports separating a continuing enabling capability from bounded engagements."
+        },
+        {
+          "url": "https://tech.target.com/blog/ryse-bringing-learning-close",
+          "basis": "Target's firsthand Ryse coaching account, 8 August 2022: engineering facilitation, partnership with Enterprise Architecture, interactive remote learning, and helping teams apply a new platform. The example does not invent a fixed engagement duration, production ownership map, or independently measured graduation outcome."
+        },
+        {
+          "url": "https://esilva.net/enabling-and-platforms-for-sustainable-improvement",
+          "basis": "Eduardo da Silva's firsthand retrospective, 31 January 2026, describes an unnamed ecommerce organization's late-2010s data-orchestration capability gap, a mixed-specialist enabling team, workshops, community questions, and data-focused hackathons. His involvement as a data-discipline lead is explicit. The specific example remains anonymous; it is not automatically identified with bol.com, which is named separately in the appendix. Claimed business effects are not treated as isolated causal evidence."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis grounded in Team Topologies. Checkout monitoring scenario and diagram are hypothetical. Target's arrangement is dated to 2022; the unnamed retailer's experience to the late 2010s as recounted in 2026. Both examples are firsthand accounts with their evidence limits stated. A continuing enabling team is distinguished from its temporary engagements, and learning support from approval authority, extra delivery capacity, or permanent service ownership. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "complicated-subsystem-team",
+      "title": "Complicated-Subsystem Team",
+      "domain": "organizational-design",
+      "collections": ["team-topologies"],
+      "short_description": "Concentrate sustained specialist expertise in a bounded subsystem that other teams can use through a clear, supported interface.",
+      "core_question": "How can a team use a technically demanding capability without having to master and maintain all of its specialist detail?",
+      "use_when": [
+        "A subsystem requires sustained depth that consuming teams cannot reasonably maintain.",
+        "The capability has a coherent interface that can contain the specialist implementation.",
+        "There is enough continuing work and expertise to sustain dedicated ownership and support."
+      ],
+      "goals": [
+        "Reduce specialist knowledge demands on consuming teams",
+        "Sustain deep expertise and subsystem quality",
+        "Make specialist capability usable through a practical boundary"
+      ],
+      "mechanisms": [
+        "Bounded subsystem ownership by specialists",
+        "Defined inputs, outputs, assumptions, and failure behavior",
+        "Specialist validation with representative consumer scenarios",
+        "Explicit lifecycle, compatibility, and operating responsibilities"
+      ],
+      "related_patterns": ["stream-aligned-team", "platform-team", "enabling-team"],
+      "example_user_queries": [
+        "Our product team needs a specialist algorithm but cannot maintain all the expertise behind it.",
+        "How do we separate a demanding subsystem without creating a bottleneck for every feature?",
+        "Should every shared component have its own team, or only some of them?",
+        "One expert maintains a critical capability and every other team depends on them.",
+        "How do we define an interface that hides implementation detail without hiding important limits?",
+        "Our application engineers spend most of their time maintaining specialist internals.",
+        "When should specialists keep ownership instead of teaching the work to a delivery team?",
+        "Our technical subsystem team has lost touch with the customer workflows that use its work."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/complicated-subsystem-team.svg",
+        "reason": "Separate delivery-team workflow ownership from specialist subsystem ownership, with an explicit interface carrying behavior, assumptions, failures, and compatibility expectations. The hypothetical diagram also distinguishes collaboration on a changing boundary from lower-coordination routine consumption; it reproduces neither real example's organization chart."
+      },
+      "sources": [
+        {
+          "url": "https://teamtopologies.com/key-concepts/",
+          "basis": "Originators' definition of complicated-subsystem work in terms of significant mathematical, computational, or technical expertise and deliberate team interactions. Consulted October 2026. Shared use alone is not treated as sufficient justification."
+        },
+        {
+          "url": "https://teamtopologies.com/s/Organization-Dynamics-with-Team-Topologies-Mini-book-MB80.pdf",
+          "basis": "Originators' July 2020 mini-book, printed page 41, describes ongoing construction and maintenance of specialist subsystems requiring full-time attention. The article does not prescribe academic qualifications or a fixed team size."
+        },
+        {
+          "url": "https://www.infoq.com/articles/reduce-cognitive-load-devops-teams/",
+          "basis": "Burak Cetin and Graham Uphill's firsthand Mimecast retrospective, 11 May 2022. Identifies a MIME parser as a good fit for specialist subsystem treatment and illustrates URL-protection domain ownership consuming that library. The article preserves the authors' candidate language and does not invent a standalone parser-team staffing chart or attribute broader transformation outcomes to this boundary."
+        },
+        {
+          "url": "https://careersatdoordash.com/blog/using-ml-and-optimization-to-solve-doordashs-dispatch-problem/",
+          "basis": "DoorDash's firsthand engineering account by Alex Weinstein, 17 August 2021: DeepRed dispatch service combines predictive models and mathematical optimization, evaluated through experimentation and simulation, with a dedicated multidisciplinary dispatch data-science team. The complicated-subsystem interpretation is explicitly editorial; neither formal Team Topologies adoption nor a single small-team staffing model is inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis grounded in Team Topologies. Video-editing and noise-removal scenario and diagram are hypothetical. Mimecast's example is dated to a 2022 retrospective and retains its proposed-fit qualification; DoorDash's example is dated to 2021 and identified as an interpretation of documented specialist ownership. Ordinary component sharing, neglected code, temporary enabling help, and permanent specialist responsibility are distinguished. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "time-limited-collaboration",
+      "title": "Time-Limited Collaboration",
+      "domain": "organizational-design",
+      "collections": ["team-topologies"],
+      "short_description": "Bring teams into close joint work for a defined discovery goal, then review and deliberately change how they interact.",
+      "core_question": "How can teams solve an uncertain shared problem together without making intensive coordination their permanent way of working?",
+      "use_when": [
+        "An uncertain shared problem requires knowledge held by different teams.",
+        "Sequential handoffs repeatedly expose misunderstandings about an interface or responsibility boundary.",
+        "Teams can protect capacity for joint discovery and review how they should interact afterward."
+      ],
+      "goals": [
+        "Resolve cross-team uncertainty through joint discovery",
+        "Make intensive coordination a deliberate investment",
+        "Establish usable ownership and a suitable next interaction"
+      ],
+      "mechanisms": [
+        "Shared discovery question and protected capacity",
+        "Defined period and evidence-based review",
+        "Explicit decision rights and continuing responsibilities",
+        "Deliberate transition or bounded renewal"
+      ],
+      "related_patterns": [
+        "platform-team",
+        "enabling-team",
+        "teamwork-coordinate-dependencies-early"
+      ],
+      "example_user_queries": [
+        "Two teams need to discover an answer together, but we do not want permanent joint meetings.",
+        "Our teams keep passing requirements back and forth and finding new misunderstandings.",
+        "How do we agree when an intensive cross-team engagement should end?",
+        "We finished the prototype, but nobody agreed who will own or support it.",
+        "What should happen after two teams have worked together to define a new service?",
+        "Our temporary working group keeps renewing itself without a clear remaining question.",
+        "People have been assigned to a collaboration but have no time left from their ordinary work.",
+        "How do we tell whether to improve an interface or change a team boundary?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/time-limited-collaboration.svg",
+        "reason": "Show continuing teams entering bounded discovery and an explicit review that can choose independent delivery, supported service consumption, changed boundaries, or purposeful renewal. The diagram makes the transition conditions visible without implying that a date alone guarantees separation. It is an original hypothetical mechanism diagram."
+      },
+      "sources": [
+        {
+          "url": "https://teamtopologies.com/key-concepts-content/team-interaction-modeling-with-team-topologies",
+          "basis": "Originators' explanation of collaboration as purposeful, short-lived joint work among teams with differing skills, useful for discovery. Distinguishes prolonged collaboration dependencies and illustrates evolution toward lower-coordination interactions. Consulted October 2026. No universal number of weeks or guaranteed outcome is prescribed."
+        },
+        {
+          "url": "https://www.uxmatters.com/mt/archives/2018/09/case-study-collaborative-engineering-with-lean-ux.php",
+          "basis": "Rachel Wilkins Patel's firsthand Rockwell Automation account, 10 September 2018: cross-functional design sprints, low-fidelity prototypes, joint decisions on workflows, feasibility and scope, annotated design assets, and testing with users. It illustrates bounded discovery but does not document formal Team Topologies adoption, separate stable teams for each discipline, a fixed engagement duration, or a final service-ownership transition."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis grounded in Team Topologies' collaboration interaction. Rockwell is an explicitly dated firsthand example illustrating focused joint discovery, with limits stated. The retailer, delivery-promise interface, three-week duration, review outcomes, and diagram are clearly hypothetical. One verified real example and one developed hypothetical are used rather than attributing an undocumented end-to-end transition to a real organization. Routine coordination, enabling help, incidents, and permanent team redesign are distinguished. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "x-as-a-service",
+      "title": "X-as-a-Service",
+      "domain": "organizational-design",
+      "collections": ["team-topologies"],
+      "short_description": "Provide a supported capability through a usable interface so other teams can make routine progress without repeated coordination.",
+      "core_question": "How can one team depend on another’s capability without depending on its availability for every ordinary task?",
+      "use_when": [
+        "Teams repeatedly negotiate ordinary use of a recurring capability.",
+        "Consumers need a result without maintaining the provider’s specialist internals.",
+        "A useful interface and continuing service ownership can reduce routine waiting."
+      ],
+      "goals": [
+        "Reduce routine coordination between provider and consumers",
+        "Keep responsibility explicit on both sides",
+        "Sustain a usable service boundary through change and failure"
+      ],
+      "mechanisms": [
+        "Supported interface with clear behavior and limits",
+        "Independent routine use with examples and failure information",
+        "Explicit service expectations, support, and exception routes",
+        "Consumer feedback and managed compatibility and retirement"
+      ],
+      "related_patterns": [
+        "platform-team",
+        "time-limited-collaboration",
+        "complicated-subsystem-team"
+      ],
+      "example_user_queries": [
+        "Every release needs a meeting with the team that provides our shared capability.",
+        "How can we use another team’s work without learning all its implementation details?",
+        "We published an API but other teams still need us for every integration.",
+        "What responsibilities stay with a delivery team when it uses a shared service?",
+        "Our shared service has documentation but no clear support or failure expectations.",
+        "How can teams deliver independently while still depending on each other’s services?",
+        "We want fewer routine meetings without losing feedback from the teams using our work.",
+        "When should we collaborate on a new need instead of extending a service contract?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/x-as-a-service.svg",
+        "reason": "Separate routine service consumption through an explicit supported interface from the continuing ownership, support, feedback, and discovery relationships around it. The original hypothetical diagram distinguishes consumer and provider responsibilities without reproducing either real organization’s chart."
+      },
+      "sources": [
+        {
+          "url": "https://teamtopologies.com/news-blogs-newsletters/x-as-a-service",
+          "basis": "Originators’ 2025 newsletter explains self-service interactions, clear interfaces and service expectations, user feedback, and collaboration to evolve a boundary. Used for the interaction principle rather than a commercial pricing model or guaranteed performance effect."
+        },
+        {
+          "url": "https://teamtopologies.com/industry-examples/trade-me-journey-towards-a-thinnest-viable-platform",
+          "basis": "Firsthand retrospective by Catherine Matheson and Amir Mohtasebi. Dates the value-stream structure to 2019 and hybrid-architecture transition to 2022; describes most squad interactions explicitly as X-as-a-Service, occasional collaboration, a dedicated platform team, and automatically supplied monitoring. The page exposes 22 November but no publication year in its visible text, so the article dates documented changes rather than guessing the publication year or implying the structure remains current."
+        },
+        {
+          "url": "https://digital.gov.bc.ca/technology/cloud/private/onboard/",
+          "basis": "Province of British Columbia’s primary service guidance, updated 26 March 2026. Documents onboarding, provisioning and product administrator access, consumer application ownership, platform maintenance and support responsibilities, operating/support hours, change communications and custom requirements. Illustrates a published organizational agreement, not independently measured gains or formal Team Topologies adoption."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis of the Team Topologies interaction mode. The retailer and mechanism diagram are explicitly hypothetical. Two primary real examples distinguish documented practice from editorial interpretation: Trade Me’s retrospective dates its structure and technical changes, while British Columbia’s example is a published 2026 responsibility agreement. X-as-a-Service is distinguished from Platform Team ownership, cloud purchasing and pricing, and temporary collaboration. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "facilitation",
+      "title": "Facilitation",
+      "domain": "organizational-design",
+      "collections": ["team-topologies"],
+      "short_description": "Help another team overcome a capability gap while it retains ownership, then reduce assistance as it can proceed for itself.",
+      "core_question": "How can one team help another get past an obstacle without becoming its permanent problem-solver?",
+      "use_when": [
+        "A learnable gap blocks a team that has time and authority to act.",
+        "Advice or training has not become usable practice in the receiving team’s work.",
+        "Experts repeatedly take over while receiving teams remain dependent."
+      ],
+      "goals": [
+        "Increase the receiving team’s ability to proceed",
+        "Retain ownership and decisions with the receiving team",
+        "Reduce routine dependence on helping specialists"
+      ],
+      "mechanisms": [
+        "Agreed helping purpose and review point",
+        "Guided application, pairing, observation, and feedback",
+        "Explicit separation of assistance from delivery and approval authority",
+        "Evidence-based reduction in help and escalation of structural obstacles"
+      ],
+      "related_patterns": ["enabling-team", "time-limited-collaboration", "x-as-a-service"],
+      "example_user_queries": [
+        "Experts keep fixing our problems, but we cannot handle the next one ourselves.",
+        "How can another team help us learn without taking over our work?",
+        "We attended training but still cannot apply the method to our own product.",
+        "Our platform specialists want to help teams adopt a capability without becoming their delivery team.",
+        "When should we ask for coaching rather than work together to discover an answer?",
+        "How do we know when a helping engagement has made the receiving team more capable?",
+        "People hesitate to ask for help because the specialist is also an approver.",
+        "We keep coaching teams around the same permissions and tooling problems."
+      ],
+      "visual_decision": {
+        "type": "comparison",
+        "asset": "content/assets/organizational-design/facilitation.svg",
+        "reason": "Contrast the three inter-team interaction purposes: recipient capability, shared discovery, and supported consumption. This explains Facilitation as a relationship, distinct from Enabling Team structure, without repeating the existing enabling-team capability-transfer diagram. The comparison is illustrative, not either example’s organization chart."
+      },
+      "sources": [
+        {
+          "url": "https://teamtopologies.com/key-concepts",
+          "basis": "Originators’ definition of Facilitation as one team helping and mentoring another, contrasted with the collaboration and X-as-a-Service interaction modes and the four team types. Consulted October 2026."
+        },
+        {
+          "url": "https://teamtopologies.com/s/Finding-software-boundaries-for-fast-flow-Team-Topologies-and-Domain-Driven-Design-mini-book-MB81-v1.pdf",
+          "basis": "Originators’ May 2023 mini-book, printed page 21, describes facilitation as helping another team overcome impediments for a limited period and contrasts the other two interaction modes. Supports bounded engagement without a universal duration."
+        },
+        {
+          "url": "https://nerdnoir.com/blog/devops-dojos-at-extreme-scale",
+          "basis": "David Laribee’s firsthand account of helping scale Target’s Dojo in 2015. Describes six-week challenges, expert coaches pairing and asking questions, intended skills transfer, product-outcome framing with Joel Tosi, and work with Learning & Development. The article dates the documented arrangement, preserves the intended nature of independence, and does not infer present structure or measured effects for every team."
+        },
+        {
+          "url": "https://devblogs.microsoft.com/devops/devops-dojo-experiential-learning/",
+          "basis": "Microsoft Dojo Community’s firsthand account, 23 June 2021. Documents remote coaching with two full-time captains and specialist time-sharing, combining concepts, discussion, application and technical labs, and coaches adapting to audience questions. Used only as evidence of a guided learning arrangement and staffing tradeoff; unsupported learning-pyramid and universal training-effect claims in the source are not adopted. No intact-team composition or demonstrated post-engagement independence is inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis of Facilitation as a Team Topologies interaction, distinct from the organizational home of an Enabling Team and from facilitating a single meeting. The automated-testing illustration and comparison graphic are hypothetical. Target’s real arrangement is dated to 2015 and Microsoft’s to 2021; both are firsthand accounts with intended results and evidence limits stated. Guidance on authority, review, and retaining recipient ownership is editorial synthesis. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "shared-outcomes",
+      "title": "Shared Outcomes",
+      "domain": "organizational-design",
+      "collections": ["strategic-alignment"],
+      "short_description": "Align separate units around a result they must achieve together, with agreed measures, explicit contributions, and joint priority decisions.",
+      "core_question": "How can separate units make coherent decisions when the result that matters depends on all of them?",
+      "use_when": [
+        "Local performance targets improve while the combined customer or organizational result disappoints.",
+        "Several autonomous units must contribute capabilities to an outcome none can achieve alone.",
+        "Cross-unit plans assume resources or dependencies that have not been confirmed."
+      ],
+      "goals": [
+        "Align distinct unit choices around a meaningful combined result",
+        "Make contributions and resource commitments explicit",
+        "Use common evidence to resolve priority tradeoffs"
+      ],
+      "mechanisms": [
+        "Shared outcome boundary, baseline, and agreed measures",
+        "Distinct owned contributions and confirmed dependencies",
+        "Joint evidence review with authorized priority and resource decisions",
+        "Constraints and transparent revision of plans and assumptions"
+      ],
+      "related_patterns": [
+        "teamwork-own-the-outcome-together",
+        "teamwork-optimize-the-whole",
+        "data-shared-metric-definitions"
+      ],
+      "example_user_queries": [
+        "Every department meets its targets, but customers still experience an unfinished service.",
+        "How can separate teams agree what success means without giving everyone the same job?",
+        "Our strategy depends on another department’s capacity, but they never agreed to provide it.",
+        "How do we make shared priorities affect budget and staffing decisions?",
+        "We have a common dashboard but no one can resolve conflicts between departmental plans.",
+        "Our leaders want one metric for everyone even though teams affect the result differently.",
+        "How can we keep named accountability while several units work toward the same outcome?",
+        "We complete the agreed projects but do not know whether the intended benefit happens."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/shared-outcomes.svg",
+        "reason": "Connect distinct sales, installation and support commitments to a shared customer result, with a joint evidence review feeding authorized changes to priorities and capacity. This makes the strategic planning mechanism explicit without implying shared outcomes erase unit ownership. The broadband example is hypothetical."
+      },
+      "sources": [
+        {
+          "url": "https://www.gov.uk/government/publications/7-lenses-of-transformation/the-7-lenses-of-transformation",
+          "basis": "Cabinet Office primary transformation guidance, collaboration lens: leaders across organizations should design shared outcomes and connect plans and delivery. Used for the cross-organizational alignment principle rather than a universal causal claim."
+        },
+        {
+          "url": "https://www.gov.uk/government/publications/ministry-of-justice-outcome-delivery-plan/ministry-of-justice-outcome-delivery-plan-2021-22",
+          "basis": "Ministry of Justice primary plan published 15 July 2021, applying to England and Wales. Reducing-reoffending strategy connects accommodation, employment and treatment, lists release-related indicators, cross-department and local partner work, and proposed evaluation to inform continuation or change. The article presents documented planning intentions, not achieved reductions or a current arrangement."
+        },
+        {
+          "url": "https://www.gov.uk/government/collections/outcome-delivery-plans",
+          "basis": "Cabinet Office primary explanation, July 2021, of departments planning together for shared and cross-cutting outcomes with metrics. Contextualizes the justice example without attributing all later performance to the planning framework."
+        },
+        {
+          "url": "https://handbook.gitlab.com/handbook/security/okr/",
+          "basis": "GitLab’s published Security OKRs process, page marked last modified 27 June 2024 and consulted 29 October 2026. Functional leaders contribute to objectives; cross-functional dependencies require confirmation before finalization; unavailable capacity triggers narrowing or removal; owners and risk reporting remain explicit. The source permits a key-result owner from a different department than the objective owner. This is evidence of documented rules, not proof of every quarter’s execution, outcome quality of every KR, or measured security gains."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original strategic alignment synthesis focused on plans, common evidence, confirmed contributions, and resource tradeoffs across separate units. Deliberately distinct from Own the Outcome Together, which addresses shared follow-through in teamwork, and Optimize the Whole, which diagnoses system-level performance. The broadband provider and graphic are hypothetical. Both primary real examples preserve their dates and distinguish published arrangements or intentions from achieved effects. Strategic Alignment is added as the existing Organizational Design verse’s next needed collection using the established schema. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "mission-command",
+      "title": "Mission Command",
+      "domain": "organizational-design",
+      "collections": ["authority-and-governance"],
+      "short_description": "Give capable teams a clear intent and bounded authority to adapt their actions as circumstances change, supported by trust and timely information.",
+      "core_question": "How can people closest to events act quickly without losing the organization’s direction or exceeding their authority?",
+      "use_when": [
+        "Local events change faster than a central approval process can respond.",
+        "Competent people near the work have relevant knowledge that central leaders cannot fully observe.",
+        "A stable purpose requires adaptation within clear decision authority and coordination limits."
+      ],
+      "goals": [
+        "Preserve coherent direction while allowing local adaptation",
+        "Move appropriate decisions closer to relevant information",
+        "Make discretion accountable, informed, and bounded"
+      ],
+      "mechanisms": [
+        "Clear intent, desired result, and priorities",
+        "Delegated authority with resources, constraints, and reserved decisions",
+        "Competence, mutual trust, and checked shared understanding",
+        "Local initiative with coordination, reporting, escalation, and learning"
+      ],
+      "related_patterns": ["shared-outcomes", "teamwork-clarify-decision-rights", "facilitation"],
+      "example_user_queries": [
+        "Our local teams know what needs to change but must wait for headquarters to approve every step.",
+        "How do we let people adapt a plan without losing the overall direction?",
+        "We say teams are empowered, but managers still approve every decision.",
+        "How can we define what a team may change when circumstances no longer match the plan?",
+        "Our teams interpret the same goal differently and make conflicting local choices.",
+        "How should leaders stay involved without taking every decision back?",
+        "People wait for instructions because reasonable mistakes are punished afterward.",
+        "What should a team do when the situation exceeds its authority and its manager is unavailable?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/mission-command.svg",
+        "reason": "Separate leadership intent, resources and boundaries from teams’ discretion over methods. A return path carries updates and exceptions, while escalation and retained controls prevent the graphic from implying unlimited autonomy. The regional-team arrangement is illustrative, not either example’s organization chart."
+      },
+      "sources": [
+        {
+          "url": "https://tjaglcs.army.mil/LinkClick.aspx?fileticket=-Yv035hB3rw%3D&portalid=0",
+          "basis": "U.S. Army ADP 6-0, 31 July 2019, chapter 1, hosted by an official Army institution. Paragraphs 1-26 onward describe competence, mutual trust, shared understanding, commander’s intent, mission orders, disciplined initiative and risk acceptance. Paragraphs 1-45 to 1-65 explain intent, adaptable execution, coordination and reporting. Used as a dated doctrinal foundation; civilian guidance is explicitly an organizational application rather than a claim to reproduce every military rule."
+        },
+        {
+          "url": "https://s36124.pcdn.co/wp-content/uploads/2021/12/2004-April-OCRw.pdf",
+          "basis": "Captain David Marquet’s firsthand article The Chiefs Take Charge, The Submarine Review, April 2004, printed pages 70–76 (PDF pages 72–78). Dates his command to 1999–2001 and describes delegation of enlisted leave approval to the chief of the boat, connections to watchbills and qualifications, chiefs’ schedule ownership, and persistent conflicts. Used as a related naval governance arrangement, not formal adoption of later Army doctrine or isolated causal evidence of performance gains."
+        },
+        {
+          "url": "https://jobs.netflix.com/netflix-culture.pdf",
+          "basis": "Netflix Culture Memo, June 2024 English version, People Over Process section. Documents context and clarity, informed captains, seeking disagreement, active managerial coaching, reasons for intervention, and reflection on decisions. Used for a bounded civilian analogy, not a claim of formal Mission Command adoption, universal execution or causal business gains."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original organizational interpretation of a military command principle, placed in Authority and Governance because the mechanism concerns delegated decision authority under intent. The maintenance-company scenario and diagram are hypothetical. Two primary real organizational arrangements are explicitly related interpretations: Marquet’s 1999–2001 naval changes as recounted in 2004, and Netflix’s published June 2024 model. Required controls, authority boundaries, competence and cross-team effects are preserved; inability to reach a leader is not treated as unlimited permission. The new collection follows existing schema and is linked from the existing verse. No guided practice or universal causal benefit is claimed."
+    },
+    {
+      "id": "hoshin-kanri",
+      "title": "Hoshin Kanri",
+      "domain": "organizational-design",
+      "collections": ["strategic-alignment"],
+      "short_description": "Turn a few strategic priorities into negotiated commitments across levels and functions, then review results and adjust through a recurring learning cycle.",
+      "core_question": "How can an organization turn strategic priorities into feasible, coordinated work and keep learning whether that work is producing results?",
+      "use_when": [
+        "Strategy becomes a crowded initiative list competing for the same resources.",
+        "Targets cascade downward without meaningful discussion of capacity, methods, or dependencies.",
+        "Departments plan separately and discover too late that activities did not produce the intended change."
+      ],
+      "goals": [
+        "Concentrate strategic effort on a few meaningful changes",
+        "Negotiate feasible commitments across levels and functions",
+        "Connect execution evidence with recurring adjustment and future planning"
+      ],
+      "mechanisms": [
+        "Focused priorities linked to longer-term direction",
+        "Vertical and horizontal catchball on targets, methods, and resources",
+        "Owned commitments with measures and confirmed dependencies",
+        "Recurring plan–do–check–act review and reflection"
+      ],
+      "related_patterns": ["shared-outcomes", "mission-command", "teamwork-limit-work-in-progress"],
+      "example_user_queries": [
+        "We announce priorities every year but departments produce disconnected project lists.",
+        "Our strategy assumes extra capacity that nobody has agreed to provide.",
+        "How can frontline experience influence the plan instead of just receiving targets?",
+        "We start too many improvement projects and finish few of them.",
+        "How do we connect strategic goals with work at different organizational levels?",
+        "Our annual review shows completed activities but little change in the result.",
+        "We filled in a strategy matrix but still have no agreement between departments.",
+        "How can leaders adjust the plan during the year without constantly changing direction?"
+      ],
+      "visual_decision": {
+        "type": "process/flow",
+        "asset": "content/assets/organizational-design/hoshin-kanri.svg",
+        "reason": "Show two-way catchball before owned commitments, followed by execution, evidence review, and authorized adjustment feeding the next cycle. This makes negotiation and learning visible rather than presenting Hoshin Kanri as a one-way target cascade or a required X-matrix. The cycle is illustrative, not either company’s chart."
+      },
+      "sources": [
+        {
+          "url": "https://www.lean.org/lexicon-terms/strategy-deployment/",
+          "basis": "Lean Enterprise Institute practitioner lexicon: strategic alignment vertically and horizontally, typically annual plans with goals/actions/timing/responsibilities/measures, and catchball to reconcile targets, resources, and feasibility. Confirms Policy Deployment and Strategy Deployment as conventional names. Consulted October 2026."
+        },
+        {
+          "url": "https://www.lean.org/lexicon-terms/hoshin-kanri/",
+          "basis": "Lean Enterprise Institute’s Hoshin Kanri resource guide describes structured PDCA thinking and links strategic initiatives with responsibility and A3 problem-solving. Used for mechanism and vocabulary; broad claims about guaranteed motivation, competitive advantage or high performance are not adopted."
+        },
+        {
+          "url": "https://www.leanblog.org/2025/06/hoshin-kanri-managing-on-purpose-mark-reich/",
+          "basis": "June 2025 primary interview with Mark Reich, former Toyota hoshin manager: distinguishes strategic change from daily management, recommends recurring monthly reviews, and explains X-matrix as an optional tool rather than the method. Supports the article’s distinction between practical agreement and template completion; no fixed mandatory meeting cadence is imposed."
+        },
+        {
+          "url": "https://www.lean.org/the-lean-post/articles/3-lessons-maersk-learned-from-adopting-hoshin-kanri/",
+          "basis": "Agne Nainyte’s firsthand account, 23 March 2021, of North Europe Operations beginning Hoshin Kanri in October 2017: three-year breakthrough planning, annual priorities, customer-service observation and information website, operator evidence informing network development, and leadership attention shifting toward strategic work. Article preserves historical regional scope and does not repeat causal performance attribution as independent evidence."
+        },
+        {
+          "url": "https://www.lean.org/the-lean-post/articles/meeting-strategic-objectives/",
+          "basis": "Patricia Panchak’s original LEI interview/case report, 6 April 2022, records Doug Cooper’s direct account of Turner New York’s management system from 2019: connected plans across levels, top-down and bottom-up dialogue, frontline input, coaching, monthly A3 reviews, and next-year planning beginning in October. The direct participant account is used as primary evidence of arrangements. LEI’s coaching involvement is explicit; competitive advantage and current practice are not inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original explanatory synthesis distinguishing Hoshin Kanri’s focused deployment and PDCA cycle from Shared Outcomes and Mission Command. The equipment maker and cycle graphic are hypothetical. Maersk’s 2017 regional initiative is dated through a 2021 participant account; Turner New York’s 2019–2022 arrangement through Cooper’s direct interview in a report by an involved coaching institute. Reported arrangements and intended or reported effects are separated from independent causal proof. Template choice and review cadence remain adaptable. No guided practice is created."
+    },
+    {
+      "id": "strategic-guardrails",
+      "title": "Strategic Guardrails",
+      "domain": "organizational-design",
+      "collections": ["strategic-alignment"],
+      "short_description": "Make strategic boundaries, decision principles, and review triggers explicit so teams can choose locally without pulling the organization off course.",
+      "core_question": "Which choices can teams make for themselves, and what boundaries must those choices respect to preserve the strategy?",
+      "use_when": [
+        "Local product, customer, or investment commitments gradually dilute the agreed strategic position.",
+        "The same strategic tradeoffs repeatedly require leadership discussion.",
+        "Teams need differing local methods but clear limits and an accountable review route."
+      ],
+      "goals": [
+        "Preserve strategic direction while allowing local judgment",
+        "Reduce repeated negotiation of recurring tradeoffs",
+        "Make interpretation, exceptions, and revisions accountable"
+      ],
+      "mechanisms": [
+        "Explicit distinction between firm limits, decision principles, and review triggers",
+        "Concrete examples linked to a strategic rationale",
+        "Existing decision authority with named interpretation and exception owners",
+        "Visible decisions and periodic review of rejected opportunities and workarounds"
+      ],
+      "related_patterns": [
+        "shared-outcomes",
+        "mission-command",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "Local customer requests are turning our standard product into many custom versions.",
+        "How can teams make different choices without drifting away from the company’s strategy?",
+        "We keep escalating the same tradeoff instead of agreeing the boundary once.",
+        "Our values sound good but nobody knows what they mean for a real decision.",
+        "How do we distinguish a firm rule from guidance that still needs judgment?",
+        "Managers grant exceptions privately, so different teams follow different rules.",
+        "We want autonomy without approving every ordinary product decision.",
+        "A rule keeps rejecting useful opportunities and we do not know who can revise it."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/strategic-guardrails.svg",
+        "reason": "Show meaningful local choice within strategic limits, a separate review route for ambiguity or proposals beyond delegated limits, and shared decisions feeding back to teams. It explicitly preserves existing authority and makes permitted exceptions distinct from a general license to override requirements. The diagram is illustrative, not either example’s approval process."
+      },
+      "sources": [
+        {
+          "url": "https://www.library.hbs.edu/working-knowledge/seven-strategy-questions-a-simple-approach-for-better-execution",
+          "basis": "Robert Simons’s primary book excerpt, 22 November 2010, especially question four on strategic boundaries keeping entrepreneurial initiative aligned with direction. Used for the narrower idea of exclusions. The article’s broader distinction among firm limits, principles and review triggers is identified as an explanatory organization of this pattern, not attributed as Simons’s formal taxonomy."
+        },
+        {
+          "url": "https://www.ikea.com/global/en/our-business/how-we-work/the-ikea-value-chain/",
+          "basis": "IKEA’s primary account of product development: designers, engineers, product developers and sourcing specialists work with five Democratic Design dimensions; balance depends on the product’s role; low price is considered from the beginning. Consulted October 2026. No individual approval rights, fixed thresholds or exception process is inferred."
+        },
+        {
+          "url": "https://www.ikea.com/global/en/stories/design/ikea-ps-2026-collection/",
+          "basis": "IKEA’s primary 2026 PS collection account connects playful product solutions with the same Democratic Design principles and affordability. Used to illustrate latitude under a shared product-development approach, not causal performance or verified compliance of every product."
+        },
+        {
+          "url": "https://37signals.com/podcast/shape-up/",
+          "basis": "Basecamp’s own REWORK episode dated 23 July 2019 introduces Ryan Singer’s newly published book and firsthand description of the company’s method. Supports dating the arrangement without claiming the method remains current."
+        },
+        {
+          "url": "https://basecamp.com/shapeup/1.2-chapter-03",
+          "basis": "Ryan Singer’s primary Shape Up chapter on appetites and fixed time/variable scope. Supports a deliberate investment boundary that differs from an effort estimate or an unlimited request."
+        },
+        {
+          "url": "https://basecamp.com/shapeup/2.2-chapter-08",
+          "basis": "Primary chapter on the betting table and circuit breaker: no automatic extension of a project beyond its appetite, protecting capacity for other bets. Used as an example of a specific investment constraint, not a universal six-week prescription."
+        },
+        {
+          "url": "https://basecamp.com/shapeup/3.5-chapter-14",
+          "basis": "Primary chapter describes rare extensions when outstanding tasks are genuinely necessary and no unresolved uphill work remains. Supports the existence of deliberate exception conditions, rather than implying deadlines are casually waived."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original strategic-alignment synthesis distinguishing strategic direction and exclusions from routine procedures and from the broader Mission Command authority arrangement. The software company and diagram are hypothetical. IKEA’s published 2026 approach illustrates principles rather than hard thresholds or documented approval rights. Basecamp’s 2019 account illustrates capped investment and explicit exception conditions. Both examples are interpretations of primary documented arrangements, with evidence limits stated and no claim that the companies use this exact pattern name. No guided practice or causal performance guarantee is claimed."
+    },
+    {
+      "id": "shared-strategic-measures",
+      "title": "Shared Strategic Measures",
+      "domain": "organizational-design",
+      "collections": ["strategic-alignment"],
+      "short_description": "Choose a small set of measures that units interpret together to judge strategic progress, expose tradeoffs, and adjust their contributions.",
+      "core_question": "How can separate units judge strategic progress together without reducing success to disconnected local targets or one misleading number?",
+      "use_when": [
+        "Local performance targets improve while the overall customer or organizational result stalls.",
+        "Strategy reviews contain too many disconnected indicators to guide cross-unit decisions.",
+        "Units need common evidence while retaining different local contributions and operating measures."
+      ],
+      "goals": [
+        "Judge strategic progress across organizational boundaries",
+        "Expose dependencies and tradeoffs hidden by local targets",
+        "Connect shared interpretation to authorized decisions and accountable action"
+      ],
+      "mechanisms": [
+        "A small strategy-linked set of results, drivers, and tradeoff measures",
+        "Explicit distinction between measures, targets, and actions",
+        "Named review accountability, measure stewardship, and decision authority",
+        "Joint interpretation with context, local breakdowns, evidence limits, and recorded follow-up"
+      ],
+      "related_patterns": ["shared-outcomes", "data-shared-metric-definitions", "hoshin-kanri"],
+      "example_user_queries": [
+        "Every department hits its numbers but customers still have a bad experience.",
+        "Which measures should our business units use together to judge strategic progress?",
+        "Our executive dashboard has too many indicators to support a real decision.",
+        "How do we balance cost savings with quality and future capability?",
+        "Can teams share strategic measures without having identical local targets?",
+        "A headline score is improving but difficult customer cases are being ignored.",
+        "We disagree about whether the strategy is working because each unit brings different evidence.",
+        "How do we turn a cross-functional performance review into decisions with clear owners?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/shared-strategic-measures.svg",
+        "reason": "Distinguish different local contributions from a small common set of results, drivers, and tradeoffs, then connect contextual interpretation to named actions and feedback. The original illustration shows an evidence-to-decision mechanism rather than a dashboard implementation or either real example’s reporting structure."
+      },
+      "sources": [
+        {
+          "url": "https://www.library.hbs.edu/working-knowledge/the-strategy-focused-organization",
+          "basis": "Kaplan and Norton’s primary book excerpt, published 23 October 2000: Mobil North American marketing and refining leadership includes shared services; scorecard connected to planning/budgeting; reported first-quarter 1995 review considered nonfinancial measures and weather context; annual business/shared-service management conference reviews objectives, measures and targets. Used as a dated researcher account of arrangements, without repeating causal profitability claims."
+        },
+        {
+          "url": "https://www.library.hbs.edu/working-knowledge/partnering-and-the-balanced-scorecard",
+          "basis": "Original Kaplan and Norton chapter excerpt published 23 December 2002 describes Mobil U.S. marketing/refining customer-segment and mystery-shopper measures, independent retailers’ role in customer experience, and explicit dealer-profitability measure. Supports cross-boundary evidence and incentives in the historical example; not verification of current practice or independent causal proof."
+        },
+        {
+          "url": "https://gds.blog.gov.uk/2013/03/28/beating-performance-anxiety/",
+          "basis": "Clifford Sheppard’s firsthand 28 March 2013 GDS account names four KPIs, strategic aims for experience/cost/digital adoption, room for local additions, and planned exemplar goal-setting and public reporting. His own 5 April reply distinguishes service performance from public value and notes why speed is unsuitable for some services. Third-party comments are not treated as factual authority. Article preserves the framework’s historical date and distinguishes intentions from demonstrated outcomes."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original strategic-alignment synthesis focused on selecting and jointly interpreting evidence for strategic decisions, distinct from agreeing shared outcomes or implementing common metric calculations. Equipment repair scenario and diagram are hypothetical. Mobil is a dated primary researcher account; GDS a dated participant account, including stated plans and scope limits. Neither source independently establishes causal performance improvement or present practice. No guided practice is created."
+    },
+    {
+      "id": "teamwork-clarify-decision-rights",
+      "title": "Explicit Decision Rights",
+      "domain": "organizational-design",
+      "collections": ["authority-and-governance", "teamwork-patterns"],
+      "short_description": "Specify who prepares, contributes to, authorizes, and carries out important decisions, with clear limits and routes for exceptions.",
+      "core_question": "Who may settle a particular question, whose input or agreement is required, and where does that authority end?",
+      "use_when": [
+        "Cross-unit decisions repeatedly reopen because participation and authority are confused.",
+        "Responsibility for customers, capacity, standards, or spending attracts overlapping authority claims.",
+        "Local delegation remains dependent on hidden approvals or unlimited informal appeals."
+      ],
+      "goals": [
+        "Make consequential choices settleable across organizational boundaries",
+        "Separate meaningful consultation from authorization",
+        "Connect bounded authority with resources, execution, and legitimate reconsideration"
+      ],
+      "mechanisms": [
+        "Defined decision categories and endorsed allocation of authority",
+        "Distinct preparation, input, scoped approval, decision, and implementation roles",
+        "Explicit collective decision rules, timing, and authorized exception routes",
+        "Visible decisions, resource commitments, review triggers, and examination of actual behavior"
+      ],
+      "related_patterns": [
+        "mission-command",
+        "strategic-guardrails",
+        "teamwork-own-the-outcome-together"
+      ],
+      "example_user_queries": [
+        "Every meeting ends with a decision that another department reopens.",
+        "Who can commit the business when sales, production, and finance disagree?",
+        "Our project owner is accountable but cannot authorize the resources needed.",
+        "People think being consulted gives them a veto over the whole proposal.",
+        "We want local decisions without hidden permission from several managers.",
+        "How can a committee make clear decisions without pretending everyone agrees?",
+        "Our decision maker is absent and nobody knows who may act instead.",
+        "What should justify reopening a decision after people have started implementing it?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/teamwork/clarify-decision-rights.svg",
+        "reason": "Refresh the existing asset in place to distinguish preparation and advice, an authorized decision, implementation commitments, scoped approval, and the separate route for issues beyond the remit. The diagram is illustrative and accommodates an individual or collective authority without implying that every stakeholder has a veto."
+      },
+      "sources": [
+        {
+          "url": "https://media.bain.com/Images/DECISION_INSIGHTS_10_Great_decisions.pdf",
+          "basis": "Original 2011 practitioner article by Marcia Blenko and Jenny Davis-Peccoud explains RAPID roles, the importance of recommendation/input/approval/execution as well as final decision authority, and scoped approval rights. Used as framework guidance rather than universal comparative evidence."
+        },
+        {
+          "url": "https://www.atlassian.com/team-playbook/plays/daci",
+          "basis": "Atlassian’s primary DACI guide distinguishes Driver responsibility for reaching a decision, one Approver holding the final choice, Contributors providing advice, and Informed parties. These framework-specific distinctions illustrate role separation; the article does not claim DACI mandates all governance arrangements."
+        },
+        {
+          "url": "https://handbook.gitlab.com/handbook/people-group/directly-responsible-individuals/",
+          "basis": "Company handbook consulted October 2026 documents default DRI decision authority and stakeholder consultation, product prioritization versus engineering delivery responsibilities, and exceptional additional approval or different final decision ownership for significant cross-functional, financial or reputational implications. Preserves difference between executing/coordination responsibility and final authority. Documents stated arrangements, not consistent behavior or causal performance."
+        },
+        {
+          "url": "https://www.apache.org/foundation/how-it-works/",
+          "basis": "Foundation’s primary governance account consulted October 2026 distinguishes board oversight from project technical direction, committees as collective governing authorities, and chairs as interfaces rather than sole project leaders. Used for organizational allocation of authority without legal advice or asserting independent evidence of actual compliance."
+        },
+        {
+          "url": "https://www.apache.org/legal/release-policy.html#release-approval",
+          "basis": "Primary ASF release policy consulted October 2026: minimum three positive binding votes and more positive than negative binding votes, PMC-member binding votes, non-binding community participation, no single-vote release veto, and required review/testing before positive binding votes. Supports a specific collective authorization rule, not a general voting prescription."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Reuses the existing Clarify Decision Rights entity and asset rather than creating an equivalent organizational-design pattern. Keeps ID teamwork-clarify-decision-rights, former title as a supported alias, collaboration verse and Teamwork Patterns membership, and all inbound ID references. Rewrites the article to the requested shared outline and length with broader organizational emphasis. Original synthesis; publisher scenario and visual hypothetical. GitLab and ASF examples are dated to consultation and distinguished from independently observed implementation or causal benefits. Historical teamwork import provenance remains unchanged. No guided practice is created."
+    },
+    {
+      "id": "delegated-domains",
+      "title": "Delegated Domains",
+      "domain": "organizational-design",
+      "collections": ["authority-and-governance"],
+      "short_description": "Give a person or group continuing authority over a defined area of work, with explicit boundaries, resources, dependencies, and review.",
+      "core_question": "How can we give people lasting authority over an area of work without leaving its limits, dependencies, and accountability unclear?",
+      "use_when": [
+        "A capable team repeatedly seeks approval for ordinary decisions in the same area of work.",
+        "Responsibility for a service or process is broad while authority and neighboring responsibilities remain ambiguous.",
+        "A specialist area needs continuing attention and a mandate that survives personnel changes."
+      ],
+      "goals": [
+        "Align continuing responsibility with usable authority and means",
+        "Reduce repeated approval negotiation for recurring work",
+        "Maintain clear boundaries, dependencies, and accountable review"
+      ],
+      "mechanisms": [
+        "A standing remit identifying purpose, scope, holders, resources, and reserved powers",
+        "An authorized delegator with explicit retained and support responsibilities",
+        "Agreed interfaces with neighboring domains and internal group decision arrangements",
+        "Visible mandate, evidence-based review, and an authorized route to revise or withdraw delegation"
+      ],
+      "related_patterns": [
+        "teamwork-clarify-decision-rights",
+        "mission-command",
+        "strategic-guardrails"
+      ],
+      "example_user_queries": [
+        "Our team owns a service but needs permission for every ordinary change.",
+        "How can we delegate a whole area of work rather than assign one task at a time?",
+        "Other departments keep making promises about the work we are responsible for.",
+        "What authority and resources should come with owning an ongoing process?",
+        "We need a specialist group to maintain an area our leadership cannot attend to in detail.",
+        "How do we preserve a team’s mandate when its members change?",
+        "Two departments claim control of the same system and nobody knows the boundary.",
+        "When should leadership revise a delegation instead of blaming the local team?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/delegated-domains.svg",
+        "reason": "Show a continuing area of authority entrusted by a delegator, the holder’s recurring decisions and improvement work, retained review, and distinct relationships with neighboring domains and issues beyond the remit. This explains the mechanism more clearly than an organization chart or decision-by-decision role matrix. Original illustrative arrangement, not a claim about either real example’s exact structure."
+      },
+      "sources": [
+        {
+          "url": "https://patterns.sociocracy30.org/domain.html",
+          "basis": "Sociocracy 3.0 authors’ primary explanation of domains as responsibility/authority areas, delegation to groups or individuals within constraints, and delegator overall accountability. Used for a short conceptual attribution, not to copy its domain-description template or imply adoption of its complete governance system. The article’s examples, prose, and visual are original synthesis."
+        },
+        {
+          "url": "https://www.handelsbanken.co.uk/tron/gbpu/info/contents/v1/document/52-278301",
+          "basis": "Handelsbanken plc’s Annual Report and Financial Statements 2025, printed pages 59–60 (PDF pages 59–60, zero-based 58–59), describes branch-manager or appointed-employee customer and credit responsibility, local decision-making within centralized credit policy, central support, delegated decision limits and controls, and retained central strategy/risk frameworks. Scope is the UK entity and the 2025 reporting period. No unrestricted lending powers, exact lending thresholds, or independent causal performance effects are inferred."
+        },
+        {
+          "url": "https://peps.python.org/pep-0729/",
+          "basis": "Active primary governance PEP created September 2023 with adoption resolution November 2023: specialist Typing Council mandate, direct smaller specification changes, retained Steering Council authority over overall language direction and PEPs unless separately delegated, accountability, community consultation/public decisions, and no direct authority over external type-checker implementations. Article distinguishes adopted model from the proposal’s hypothetical retrospective examples and does not infer that every such decision happened."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original authority-and-governance synthesis focused on standing authority over a continuing area of work, distinct from Explicit Decision Rights for particular choices and Mission Command for intent-guided adaptation. Museum-network scenario and mechanism diagram are hypothetical. The Handelsbanken example is dated to the UK entity’s 2025 reporting period; Python to the model adopted in 2023, without asserting every proposed illustrative decision occurred or causal benefits were established. S3 supplies a brief acknowledged conceptual connection rather than a copied template or required governance system. No guided practice is created."
+    },
+    {
+      "id": "decide-close-to-the-work",
+      "title": "Decide Close to the Work",
+      "domain": "organizational-design",
+      "collections": ["authority-and-governance"],
+      "short_description": "Place decisions with the nearest capable people who can understand their effects, supported by clear authority, timely information, and a route for wider issues.",
+      "core_question": "Which decisions can people nearest the work make well, and which need a wider view or authority?",
+      "use_when": [
+        "Approval adds delay without adding knowledge to a recurring operational decision.",
+        "Conditions change while requests wait for an authority further from the work.",
+        "Capable local people can judge the situation if given context, powers, resources, and support."
+      ],
+      "goals": [
+        "Locate decision authority near relevant knowledge and feedback",
+        "Preserve wider coordination and reserved authority where required",
+        "Reduce routine approval queues while strengthening local capability"
+      ],
+      "mechanisms": [
+        "Decision-category analysis of knowledge, capability, mandate, and affected parties",
+        "Usable local authority with explicit resources, controls, and reserved choices",
+        "Expert advice and support brought closer without automatically transferring decision ownership",
+        "Wider authorization for choices beyond remit, notification of effects, and review of the authority allocation"
+      ],
+      "related_patterns": [
+        "teamwork-clarify-decision-rights",
+        "delegated-domains",
+        "mission-command"
+      ],
+      "example_user_queries": [
+        "Customers wait while our staff ask a distant manager to approve an obvious remedy.",
+        "Which operational decisions should move out of headquarters?",
+        "The person with approval authority knows less about the situation than the team doing the work.",
+        "How can we give local teams more say without making promises that harm neighboring teams?",
+        "Our supervisors spend all day approving routine choices instead of handling wider conflicts.",
+        "Can an expert help a local team without taking every decision away from it?",
+        "When should a frontline decision stay local and when should it escalate?",
+        "One delegated decision went badly and leadership wants to take back all local authority."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/decide-close-to-the-work.svg",
+        "reason": "Show the choice between a supported local decision, bringing in missing expertise, and seeking wider authority. This distinguishes informational support from authorization and explains why proximity alone is insufficient. The three routes are conditional responses, not a serial approval chain. Original mechanism illustration, not either company’s organization chart."
+      },
+      "sources": [
+        {
+          "url": "https://global.toyota/en/company/vision-and-philosophy/production-system/",
+          "basis": "Toyota’s primary overview consulted October 2026 describes an operator stopping the line with a stop cord when an abnormality occurs. Supports a narrow local intervention with wider quality effects, without claiming universal equipment sequences or independently demonstrated productivity benefits."
+        },
+        {
+          "url": "https://global.toyota/en/company/plant-tours/production-system/",
+          "basis": "Official virtual plant tour consulted October 2026 describes a worker pressing a call button to illuminate Andon and inform the leader, with work not resuming until the problem is resolved. Used alongside the overview to retain the combination of local response and support rather than asserting every alert immediately stops every Toyota line."
+        },
+        {
+          "url": "https://www.timpson.co.uk/our-story/our-culture",
+          "basis": "Timpson’s company account consulted October 2026 gives shop colleagues discretion to serve customers and assigns managers training, tools, support, and mentoring responsibilities. It also states standards and money-handling expectations. Used as documented intended management arrangement, not an exhaustive account of formal authority or independently observed implementation. Numerical compensation allowances and causal performance claims are not inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original authority-and-governance synthesis about choosing the location of authority using knowledge, capability, mandate, and effects. Distinct from Explicit Decision Rights role allocation, Delegated Domains standing remits, Mission Command intent-guided adaptation, and Act Within Your Discretion individual action using existing powers. Equipment-rental scenario and diagram hypothetical. Toyota and Timpson examples are dated to source consultation and described as published arrangements, with limits on implementation consistency and causal performance evidence. No guided practice is created."
+    },
+    {
+      "id": "advice-process",
+      "title": "Advice Process",
+      "domain": "organizational-design",
+      "collections": ["authority-and-governance"],
+      "short_description": "Require a decision owner to seek and consider advice from affected people and relevant experts, then decide, explain, and remain accountable for the result.",
+      "core_question": "How can someone decide independently while learning from the people affected and those with relevant expertise?",
+      "use_when": [
+        "An authorized owner needs knowledge and perspectives distributed across affected people and specialists.",
+        "Consultation repeatedly becomes an approval queue or an attempt at unanimous agreement.",
+        "Leaders want their experience to inform a decision without taking its ownership away."
+      ],
+      "goals": [
+        "Combine clear ownership with meaningful consultation",
+        "Separate advice from approval and collective authorization",
+        "Make reasons, execution, results, and learning visible"
+      ],
+      "mechanisms": [
+        "A designated owner whose permission to decide includes a consultation obligation",
+        "Advice covering both affected experience and relevant expertise before commitment",
+        "Reasoned consideration rather than counting responses or requiring agreement",
+        "Communicated decision and reasoning, bounded exception routes, implementation ownership, and result review"
+      ],
+      "related_patterns": [
+        "teamwork-clarify-decision-rights",
+        "decide-close-to-the-work",
+        "teamwork-make-it-safe-to-speak-up"
+      ],
+      "example_user_queries": [
+        "How can I decide without waiting for every stakeholder to agree?",
+        "Our decisions miss either the people affected or the technical experts.",
+        "A director says they are offering advice but everyone hears an order.",
+        "We want colleagues to seek real input without asking the boss for permission.",
+        "Can someone reject a recommendation after genuinely consulting the person who gave it?",
+        "The same few people are overloaded with requests to comment on proposals.",
+        "How do we show that consultation changed a proposal rather than rubber-stamped it?",
+        "Who should explain the final choice and follow up when advisers still disagree?"
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/advice-process.svg",
+        "reason": "Show two distinct advice constituencies converging on a named owner, followed by communicated reasons, implementation, review, and feedback to advisers. This clarifies obligatory consultation without implied voting or veto rights, while preserving separate required approvals. The original diagram is illustrative rather than either example’s exact procedure."
+      },
+      "sources": [
+        {
+          "url": "https://dennisbakke.blogspot.com/2007/06/9-everyone-must-get-advice-before.html",
+          "basis": "Dennis Bakke’s primary 7 June 2007 explanation describes an individual decision-maker seeking advice from leaders and peers while retaining the final choice. Used for the core connection between independent ownership and consultation; enjoyment and superior quality claims are identified as practitioner experience rather than comparative evidence. No modern AES practice is inferred."
+        },
+        {
+          "url": "https://playbooks.equalexperts.com/advice-process/introduction/what-is-the-advice-process",
+          "basis": "Company playbook consulted October 2026 specifies advice from affected parties and subject experts and states applicability to UK employees and other business units choosing adoption. Supports the bounded scope rather than claiming uniform adoption throughout the company."
+        },
+        {
+          "url": "https://playbooks.equalexperts.com/advice-process/how-the-ap-works/confirming-the-decision-maker",
+          "basis": "Primary company implementation guide distinguishes self-appointment below thresholds subject to constraints from leadership confirmation for larger commitments. Appointing an owner does not mean approving their eventual outcome; the owner retains responsibility. Article avoids unstable monetary thresholds and generalizing the policy to other organizations."
+        },
+        {
+          "url": "https://playbooks.equalexperts.com/advice-process/how-the-ap-works/advice-and-analysis",
+          "basis": "Primary company guidance favors meaningful conversations, varied representative sampling rather than asking every colleague individually, recording advisers, visible documentation and a period for additional input. Used as one explicit organizational variant, not a universal representation rule or proof of quality."
+        },
+        {
+          "url": "https://www.happy.co.uk/blogs/6-years-with-no-decisions-at-happy/",
+          "basis": "Henry Stewart’s firsthand company article dated 3 January 2024 describes John and Ben increasing prices through Advice Process despite his preference for a smaller increase, and his subsequent reassessment. Event’s precise date is not given. Article separates the documented ownership/advice arrangement from Stewart’s retrospective suggestion that the change helped survival during the pandemic; no causal conclusion or universal company practice is inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original authority-and-governance synthesis of consultation as an obligation attached to clearly owned decision authority, distinct from consensus, consent, optional suggestion-gathering, and required approvals. Booking-system scenario and diagram hypothetical. Equal Experts is a bounded documented implementation consulted October 2026, including explicit representative consultation; Happy a dated 2024 firsthand retrospective without a precise decision date or independently isolated causal effects. Named co-owners are distinguished from the wider adviser group. No guided practice is created."
+    },
+    {
+      "id": "consent-decision-making",
+      "title": "Consent Decision-Making",
+      "domain": "organizational-design",
+      "collections": ["authority-and-governance"],
+      "short_description": "Adopt workable proposals when no qualifying objection remains, using reasoned objections to improve the decision and explicit review to learn from it.",
+      "core_question": "How can a group decide together without requiring everyone’s preferred option or dismissing serious objections?",
+      "use_when": [
+        "An authorized group needs to adopt a collective policy while accommodating differing preferences.",
+        "Majority voting leaves reasoned implementation risks unresolved.",
+        "A proposal can be improved and reviewed through clear ownership and meaningful feedback."
+      ],
+      "goals": [
+        "Authorize workable collective commitments without requiring everyone’s ideal option",
+        "Use reasoned objections to improve proposals before implementation",
+        "Preserve clear participation, scope, review, and unresolved-dispute routes"
+      ],
+      "mechanisms": [
+        "An authorized group with a shared purpose, agreed objection criteria, quorum, and participation rules",
+        "Explicit separation of clarification, reactions, and consent checks",
+        "Reasoned examination of objections followed by revision and renewed checks",
+        "Named implementation owners, review criteria, recorded concerns, and an agreed escalation or deferral route"
+      ],
+      "related_patterns": [
+        "advice-process",
+        "delegated-domains",
+        "teamwork-make-it-safe-to-speak-up"
+      ],
+      "example_user_queries": [
+        "Our group keeps searching for an option everyone likes best and never decides.",
+        "A proposal wins the vote but a minority still sees a serious implementation risk.",
+        "How can we distinguish a personal preference from a reasoned objection?",
+        "Can I support trying a proposal even though it is not my preferred solution?",
+        "People stop raising concerns because the facilitator treats objections as obstruction.",
+        "What should happen when a collective decision has an objection we cannot resolve?",
+        "How do we make sure a trial is actually acceptable rather than just calling it safe?",
+        "We need clear rules about absent members before treating a committee decision as agreed."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/consent-decision-making.svg",
+        "reason": "Show a proposal checked for qualifying objections, a separate revision-and-recheck loop, and adoption only when none remain. This distinguishes objection integration from voting or a preference survey and includes the route for an unresolved objection. The original mechanism diagram is not a copied framework procedure or either organization’s precise meeting sequence."
+      },
+      "sources": [
+        {
+          "url": "https://www.sociocracyforall.org/consent-decision-making/",
+          "basis": "Ted Rau’s primary method explanation, dated 13 July 2022, links sociocratic objections to harm to the circle’s aim, distinguishes preference from consent, and describes explicit consent rounds. Used for a bounded methodological explanation. Broad comparative claims that consensus cannot scale or that autocracy necessarily reduces commitment are not adopted."
+        },
+        {
+          "url": "https://patterns.sociocracy30.org/consent-decision-making.html",
+          "basis": "Sociocracy 3.0 authors’ primary method page consulted October 2026 includes a broader objection criterion encompassing worthwhile improvements, along with proposal clarification, objection resolution, renewed testing and review. Used briefly to identify real variation across consent methods; article explicitly adopts the narrower purpose/responsibility/implementation-risk focus rather than implying one universal objection definition or copying its full facilitation procedure."
+        },
+        {
+          "url": "https://www.sociocracyforall.org/the-day-i-consented-to-a-proposal-i-hated/",
+          "basis": "Ted Rau’s firsthand account dated 31 March 2020 of a three-person SoFA support-circle password-consolidation proposal. He describes a negative reaction followed by consent because he judged it workable and supportive of the circle’s administrative aim. Actual meeting date is unspecified. Article does not infer password-security quality, implementation success, or a measured organizational performance benefit."
+        },
+        {
+          "url": "https://play.equal.care/equal-cares-model/circles/consent",
+          "basis": "Equal Care’s primary playbook consulted October 2026 documents consent for most circle decisions and fixed-term role selection, required local quorum/absent-member process, concern monitoring/shorter terms/amendment, referral to a broader circle when unresolved, and explicit exceptions for restructuring and employment-related decisions. Used as organizational governance evidence, not care guidance, legal advice, proof of consistent implementation, or a universal escalation/exception prescription."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original authority-and-governance synthesis focused on collective adoption when no qualifying objection remains, with objections improving the proposal and reviews supporting revision. Explicitly distinguishes varying objection criteria, preferences, majority voting, and Advice Process. Community-workshop opening-hours scenario and mechanism graphic are hypothetical. SoFA example is a dated firsthand retrospective without a precise event date; Equal Care is a published arrangement consulted October 2026. Documented rules and participant interpretations are separated from causal or universal performance evidence. No guided practice is created."
+    },
+    {
+      "id": "explicit-escalation-paths",
+      "title": "Explicit Escalation Paths",
+      "domain": "organizational-design",
+      "collections": ["authority-and-governance"],
+      "short_description": "Define when an issue needs wider help or authority, who receives it, how responsibility is accepted, and what happens if it remains unresolved.",
+      "core_question": "When an issue exceeds ordinary ownership, how does it reach someone equipped to resolve it without being lost between people?",
+      "use_when": [
+        "An issue circulates across units without an accepted owner for the next step.",
+        "Conflicting shared commitments exceed local decision authority.",
+        "Unavailable recipients or unclear triggers leave requests waiting without a dependable fallback."
+      ],
+      "goals": [
+        "Connect unresolved issues to the right expertise, capacity, or authority",
+        "Make response and handoff responsibilities observable",
+        "Return decisions to implementation and improve recurring structural problems"
+      ],
+      "mechanisms": [
+        "Recognizable triggers and destinations matched to the missing help or authority",
+        "Reachable receiving roles with coverage, alternates, and response expectations",
+        "A concise issue account and explicit distinction between receipt, coordination, and decision ownership",
+        "Agreed fallback and unresolved-dispute routes, returned outcomes, and review of recurrent escalations"
+      ],
+      "related_patterns": [
+        "teamwork-clarify-decision-rights",
+        "delegated-domains",
+        "consent-decision-making"
+      ],
+      "example_user_queries": [
+        "An urgent problem has been forwarded to five managers but nobody owns the next step.",
+        "Who should settle a conflict when two teams have promised the same scarce specialist?",
+        "How do people know when to ask for help instead of struggling alone?",
+        "Our escalation contact is away and nobody knows who covers them.",
+        "A ticket was acknowledged but the underlying issue is still waiting for a decision.",
+        "Can we bring in expert help without automatically moving decision authority upward?",
+        "People use private escalations to win arguments without showing the competing evidence.",
+        "The same issues keep escalating and we need to fix the underlying ownership problem."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/explicit-escalation-paths.svg",
+        "reason": "Distinguish the issue owner, receiving role, and authorized response, with separate branches for missing acknowledgement and unresolved or out-of-remit issues. The return route makes outcome communication visible and separates receipt from resolution. Original general mechanism, not either example’s precise workflow."
+      },
+      "sources": [
+        {
+          "url": "https://handbook.gitlab.com/handbook/leadership/",
+          "basis": "Primary leadership handbook consulted October 2026 describes effective escalation bringing in either an adviser or decision-maker for alignment or serious tradeoffs, suggests a concise account of importance/details/attempts/request, and recognizes exceptions to ordinary notification where raising concerns is unsafe. Used for a brief conceptual distinction, not universal efficacy or a claim that all escalation transfers authority."
+        },
+        {
+          "url": "https://sre.google/sre-book/tracking-outages/",
+          "basis": "Gabe Krabbe’s original Google SRE chapter describes acknowledgement tracking and the Escalator sending to the next configured destination after an interval without acknowledgement, including primary-to-secondary on-call. Article dates the account to the first SRE book and does not infer current Google tooling or that acknowledgement resolves the underlying problem."
+        },
+        {
+          "url": "https://sre.google/sre-book/being-on-call/",
+          "basis": "Andrea Spadaccini’s original Google SRE chapter describes clear escalation paths, access to partner development teams, and incident-management procedures for multi-team or uncertain-duration incidents. Used for help/coordination beyond notification, without asserting identical rotations across teams or current operational details."
+        },
+        {
+          "url": "https://research.google/pubs/site-reliability-engineering-how-google-runs-production-systems/",
+          "basis": "Google Research’s primary publication record establishes O’Reilly publication in 2016. Used solely to date the Google organizational example."
+        },
+        {
+          "url": "https://nodis3.gsfc.nasa.gov/displayDir.cfm?Internal_ID=N_PR_7120_005F_&page_name=Chapter3",
+          "basis": "NASA’s primary NPR 7120.5F with Change 4, consulted October 2026, effective date 3 August 2021 and listed expiration 3 February 2027. Section 3.4 requires documented formal dissent, joint facts/positions/impacts/recommendations when time permits, next-authority routing with wider notification, oral urgent presentations with follow-up documentation, returned recorded decisions, and appeal rights up to Administrator. Article describes this bounded space-flight program/project procedure rather than offering legal, engineering, or emergency instructions, and does not infer consistent enforcement or performance outcomes."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original authority-and-governance synthesis of triggers, destinations, response expectations, accepted responsibility, fallback, and closure. Distinct from general decision-right allocation, standing delegation, interpersonal conflict discussion, or incident-management procedures. Design-agency scenario and mechanism graphic are hypothetical. Google practices are dated to the 2016 book; NASA to the consulted F/Change 4 requirements with explicit program/project scope. Published arrangements are separated from current-tooling assumptions and independent evidence of consistent or effective implementation. No guided practice is created."
+    },
+    {
+      "id": "integrator-roles",
+      "title": "Integrator Roles",
+      "domain": "organizational-design",
+      "collections": ["coordination-across-boundaries"],
+      "short_description": "Assign a role to reconcile dependencies and tradeoffs across units so their separate contributions form a coherent shared result.",
+      "core_question": "Who keeps the whole result coherent when its parts belong to different units?",
+      "use_when": [
+        "Specialist units finish their contributions while the combined product or service fails to fit shared commitments.",
+        "Tradeoffs repeatedly cross functions, projects, regions, or partner boundaries.",
+        "Coherent delivery needs continuing attention and organizational backing while specialties remain distinct."
+      ],
+      "goals": [
+        "Keep a shared result coherent across separately owned contributions",
+        "Make dependencies, commitments, and tradeoffs visible and actionable",
+        "Preserve specialist ownership and direct collaboration with clear decision routes"
+      ],
+      "mechanisms": [
+        "A bounded integrator mandate for a product, service, project, or other shared result",
+        "Recognized information access, unit counterparts, sponsor support, and explicit decision/escalation powers",
+        "A shared view of interfaces and credible commitments negotiated against actual capacity",
+        "Direct specialist relationships, end-to-end review, shared records, and acknowledged role handovers"
+      ],
+      "related_patterns": [
+        "shared-outcomes",
+        "teamwork-coordinate-dependencies-early",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "Every department completes its part but the finished offering still does not work as a whole.",
+        "Who should keep product, production, and delivery commitments compatible?",
+        "We need someone to reconcile tradeoffs without creating another hidden boss.",
+        "Our projects depend on informal favors between departments and nobody owns the whole result.",
+        "How can a program lead obtain real commitments from teams they do not manage?",
+        "The person coordinating our work is becoming a bottleneck for every conversation.",
+        "A local specification change keeps causing unexpected costs in other departments.",
+        "Our coordination only works because one person remembers all the relationships and decisions."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/integrator-roles.svg",
+        "reason": "Show specialist delivery and direct unit-to-unit connections alongside a named integrator maintaining shared dependencies and tradeoffs. Bidirectional coordination and a separate authority for out-of-mandate choices distinguish this from a reporting chart, ownership integration, or a mandatory communication hub. Furniture-launch illustration is original and hypothetical."
+      },
+      "sources": [
+        {
+          "url": "https://global.toyota/en/detail/156949",
+          "basis": "Toyota’s primary 9 April 2012 organizational announcement allocates product-group development responsibility to chief engineers, reinforces technical teams for testing/body/chassis/powertrain and other technologies, places chief engineers under product-planning general managers, and gives chief engineers precedence in design reviews. Article treats this as a historical arrangement/announcement and does not infer detailed staffing rights, absence of direct reports, current structures, or independently established performance effects."
+        },
+        {
+          "url": "https://sre.google/sre-book/managing-incidents/",
+          "basis": "Google’s primary incident-management chapter separates incident command, operational work, communication, and planning. The commander maintains high-level state and a living incident document, structures response responsibilities, removes roadblocks, and explicitly hands over to an acknowledged successor; operations performs system modifications. Used as a bounded integrator-role example rather than generic line authority. The chapter’s fictional worked incident is not represented as an observed case."
+        },
+        {
+          "url": "https://research.google/pubs/site-reliability-engineering-how-google-runs-production-systems/",
+          "basis": "Google Research’s primary publication record establishes first publication by O’Reilly in 2016. Supports historical dating of the incident-management account, without assuming current tooling or uniform practice."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original coordination synthesis focused on a recognized role for coherence across separately owned contributions, distinct from Vertical Integration ownership boundaries, Matrix Organization intersecting formal authority, and general dependency coordination techniques. Furniture-launch scenario and diagram are hypothetical. Toyota is a dated 2012 organizational announcement; Google a dated 2016-book arrangement with illustrative narrative explicitly distinguished from observed outcomes. No causal effect or current-structure equivalence is inferred. Creates the previously absent Coordination Across Boundaries collection and links it from the existing verse using established strict metadata and wiki-link conventions. No guided practice is created."
+    },
+    {
+      "id": "double-linking",
+      "title": "Double Linking",
+      "domain": "organizational-design",
+      "collections": ["coordination-across-boundaries"],
+      "short_description": "Connect two groups through two distinct people who participate in governance decisions in both.",
+      "core_question": "How can connected groups influence each other’s decisions without depending on one person to speak for both?",
+      "use_when": [
+        "A leader is the sole interpreter of a group’s concerns in a coordinating body.",
+        "Autonomous groups need continuing representation in decisions affecting their domains or resources.",
+        "Interdependent peer groups need reciprocal influence beyond occasional consultation."
+      ],
+      "goals": [
+        "Provide reciprocal participation in governance across a group boundary",
+        "Keep representation from depending on a single person",
+        "Preserve separate domains while connecting their decisions"
+      ],
+      "mechanisms": [
+        "Two distinct people hold overlapping governance membership in two connected groups",
+        "Clear selection, confirmation, term, replacement, and accountability arrangements give each connection legitimacy",
+        "Both links bring context into deliberation with recognized participation rights rather than reporting alone",
+        "Accessible records, defined domains, absence cover, and explicit exceptions keep representation workable"
+      ],
+      "related_patterns": ["delegated-domains", "consent-decision-making", "integrator-roles"],
+      "example_user_queries": [
+        "Our team leader is the only person who gets to explain our concerns to the central group.",
+        "How can local units have a real voice in decisions made by the coordinating body?",
+        "Information travels between departments but neither can influence the other’s policies.",
+        "We hear about decisions after they are settled and cannot shape them beforehand.",
+        "One person speaks for both sides whenever our teams disagree.",
+        "How do we connect autonomous groups without merging their responsibilities?",
+        "Our representative attends meetings but is only allowed to report and leave.",
+        "We need more than one route for local concerns to reach wider governance."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/double-linking.svg",
+        "reason": "Overlapping group frames with two distinct shared participants clarify that the mechanism is membership in both decision processes, rather than two directional reporting arrows. The original hypothetical peer arrangement shows one representative selected by each circle; nested leader/delegate selection rules are explicitly identified as variants."
+      },
+      "sources": [
+        {
+          "url": "https://patterns.sociocracy30.org/double-linking.html",
+          "basis": "Primary Sociocracy 3.0 authors’ definition: two interdependent teams each select a member to represent their interests in the other team’s governance decisions. Supports the peer variant and two-way influence. Original explanatory synthesis and geometry rather than reproduction of the source’s phrasing or image."
+        },
+        {
+          "url": "https://sccan.scot/wp-content/uploads/2024/03/for-website-SCCAN-How-we-Work-v5-Dec-2022.pdf",
+          "basis": "SCCAN’s primary How We Work + Purposes for Circles v5, December 2022, pages 2–3. Working-circle domains, General Circle coordination, Lead Link and Delegate membership in both circles and consent rights in each. Used as a dated published organizational arrangement; no endorsement of the document’s stronger assertion that structure eliminates power-over, no present-day structure or measured performance inferred."
+        },
+        {
+          "url": "https://www.sociocracyforall.org/sociocracy-for-all-governance-agreement/",
+          "basis": "Sociocracy For All’s primary governance agreement published 28 July 2021, section B. Leader selection/reciprocal confirmation, subcircle-selected parent-confirmed delegates, full membership in both circles, consent policy decisions, and optional single linking with an on-call delegate at more focused levels. A dated governance provision, not evidence of implementation fidelity or performance improvement."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original coordination synthesis focused on two distinct shared governance members across a boundary, with peer and nested variants distinguished. Not a generic information channel, an additional manager, a whole sociocratic system, or a substitute for clear domains. Opening cooperative scenario and explanatory diagram are hypothetical. SCCAN and Sociocracy For All examples are dated primary governance documents; structural implications are separated from verified implementation and causal benefits. Existing collection, verse, strict public metadata, and wiki-link conventions reused. No guided practice created."
+    },
+    {
+      "id": "liaison-networks",
+      "title": "Liaison Networks",
+      "domain": "organizational-design",
+      "collections": ["coordination-across-boundaries"],
+      "short_description": "Connect units through named contacts who exchange context, route questions, and maintain working relationships.",
+      "core_question": "How can separate units keep useful working connections without relying on personal favors or escalating every question?",
+      "use_when": [
+        "People struggle to find a dependable counterpart for recurring issues across units.",
+        "Guidance and changes cross unit boundaries without enough context or timely local feedback.",
+        "Coordination depends on personal relationships that disappear when people change roles."
+      ],
+      "goals": [
+        "Make cross-unit counterparts and working interfaces dependable",
+        "Carry context in both directions and close loops on questions",
+        "Preserve unit ownership and direct specialist relationships"
+      ],
+      "mechanisms": [
+        "Named local contacts with a bounded scope, credible access, cover, and explicit role succession",
+        "A maintained directory and suitable communication rhythm linking peers or local contacts with a coordinating function",
+        "Clear distinctions between informing, convening, negotiating, and approving decisions",
+        "Protected time, orientation, shared follow-up records, direct relationships, and fallback to authorized owners"
+      ],
+      "related_patterns": ["double-linking", "integrator-roles", "explicit-escalation-paths"],
+      "example_user_queries": [
+        "Nobody knows who to ask in another department when a recurring issue comes up.",
+        "Our coordination depends on personal favors and breaks down when someone leaves.",
+        "Central announcements reach local teams but nobody explains what they mean for our work.",
+        "Changes at one site reach other sites after they have already made their plans.",
+        "We need dependable contacts across units without creating another management layer.",
+        "Our named representatives forward messages but never check whether anyone answered.",
+        "How can local teams send practical concerns back to a central specialist function?",
+        "Every question between departments ends up going through senior management."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/liaison-networks.svg",
+        "reason": "Three separate units retain delivery and decision ownership while named contacts inside them connect through questions, context, and follow-up. The original illustrative peer network distinguishes maintained working connections from reporting lines, compulsory message relays, combined-result ownership, and Double Linking governance membership. Central specialist coordination is explained as another configuration rather than depicted as a new boss."
+      },
+      "sources": [
+        {
+          "url": "https://home.cern/member-states-and-cern-heart-organization/",
+          "basis": "CERN primary account by its Director for International Relations dated 13 March 2017. Describes formalizing senior personnel as Management Liaisons for Member States with proactive dialogue mandates, coordinated by the Member State Relations Section, and forming a network supporting communication, high-level visits, and compatriot community building. The article dates the arrangement and identifies CERN’s effectiveness assessment as self-report; it does not assume present staffing, claim a particular contact cadence, or infer measured causal benefits."
+        },
+        {
+          "url": "https://www.adobe.com/trust/security/awareness-and-training.html",
+          "basis": "Adobe primary Trust Center description consulted 29 October 2026. Describes an advanced-security-trained engineer embedded as security champion in each product team, communicating security priorities and helping completion, with close Adobe Security connections, regular updates, communications, and training. Used as a distributed specialist-interface arrangement, not a claim of independently verified team coverage, peer meeting cadence, bidirectional feedback processes, approval rights, or security performance improvement."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original synthesis of maintained cross-unit working interfaces through named local contacts, supported mandates, relationships, and follow-up. Standard spelling Liaison Networks used for the user’s Liasison Networks request. Distinct from shared governance membership, an integrator’s combined-result accountability, informal helpful relationships, and compulsory gatekeeping. Museum scenario and peer-network graphic are hypothetical. CERN’s example is dated March 2017; Adobe’s self-description is qualified by consultation date and does not independently establish implementation or effects. Existing collection, strict metadata, wiki links, and asset conventions reused. No guided practice created."
+    },
+    {
+      "id": "boundary-objects",
+      "title": "Boundary Objects",
+      "domain": "organizational-design",
+      "collections": ["coordination-across-boundaries"],
+      "short_description": "Coordinate through shared artifacts that remain recognizable across groups while supporting their different uses.",
+      "core_question": "How can groups coordinate around the same work when they need to understand it differently?",
+      "use_when": [
+        "Groups use the same terms for different events or omit information needed at handovers.",
+        "Specialists need different local detail while coordinating around shared stages or interfaces.",
+        "Cross-unit choices rely on disconnected representations and knowledge held in people’s memories."
+      ],
+      "goals": [
+        "Provide a recognizable common reference across different working perspectives",
+        "Preserve useful local detail while exposing mismatches at boundaries",
+        "Connect shared representations to stewardship, authority, and change processes"
+      ],
+      "mechanisms": [
+        "A shared artifact anchored in an actual crossing of work between groups",
+        "Enough stable structure to preserve identity alongside flexible local views and annotations",
+        "Active use in reviews and handovers to surface differences and clarify consequential meanings",
+        "Named stewardship, content owners, decision rights, version continuity, and explicit unresolved points"
+      ],
+      "related_patterns": ["liaison-networks", "shared-strategic-measures", "integrator-roles"],
+      "example_user_queries": [
+        "Our departments describe the same service differently and keep missing handovers.",
+        "Everyone uses the same words but they mean different things in different teams.",
+        "How can specialists coordinate without forcing everyone to use one department’s entire model?",
+        "We have plenty of shared documents but they do not help people work together.",
+        "Our customer journey, operational process, and financial controls never line up.",
+        "Each team has its own spreadsheet and we cannot tell whether they describe the same thing.",
+        "How can we keep useful local detail while agreeing the interfaces between our work?",
+        "A map looks agreed in meetings but nobody knows who owns its assumptions or changes."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/boundary-objects.svg",
+        "reason": "One hypothetical returns map connects three groups with different local concerns while preserving common Requested, Received, and Refunded stages. Bidirectional links distinguish working through and contributing to a shared reference from a one-way broadcast. The diagram clarifies the stable shared identity/local usefulness mechanism without reproducing the museum study’s imagery or implying NASA affiliation."
+      },
+      "sources": [
+        {
+          "url": "https://doi.org/10.1177/030631289019003001",
+          "basis": "Original research by Susan Leigh Star and James R. Griesemer, Social Studies of Science 19(3), August 1989, pages 387–420, analyzing Berkeley Museum of Vertebrate Zoology work in 1907–1939. Establishes the concept’s origin, shared identity with different local uses, and historical case scope. Article is an original editorial application, not a reproduction of the authors’ typology or source wording."
+        },
+        {
+          "url": "https://griesemer.net/wp-content/uploads/2020/12/07-star-griesemer-1989-sss19-3387-420-boundary-objects.pdf",
+          "basis": "Author-hosted copy of the same primary study. Pages 410–411 describe California maps with shared state boundaries but collector/conservationist trail and location detail versus biologists’ life zones, and standardized collecting forms across dispersed sites. Text was cross-checked against the searchable University of Udine-hosted copy of the identical paper because the author-hosted PDF returned no extractable lines. Historical mechanisms are attributed to the original authors’ analysis, not represented as current museum arrangements or universal causal proof."
+        },
+        {
+          "url": "https://www.nasa.gov/reference/6-3-interface-management/",
+          "basis": "NASA primary Systems Engineering Handbook interface-management guidance consulted 29 October 2026. Describes divided development across government, contractors, and geographically separated technical teams; interface control documentation and approved change management. Used as a documented organizational coordination design, not an observed mission case or NASA’s own application of the Boundary Objects label."
+        },
+        {
+          "url": "https://www.nasa.gov/reference/appendix-l-interface-requirements-document-outline/",
+          "basis": "NASA primary interface-requirements outline, section 1.3 assigning participating organizations’ document-development responsibilities, approval authority, and change authority. Supports explicit stewardship/authority in the NASA example without offering engineering instructions or implying that a shared artifact settles authority by itself."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original coordination synthesis of stable common references, differing local uses, active working practices, stewardship, and decision rights. Distinct from mere document access, uniform interpretation, generic visualization, or authority inferred from a diagram. Retail returns scenario and explanatory SVG are hypothetical. Museum example is explicitly the 1907–1939 historical case interpreted in the 1989 primary study. NASA example is a published coordination procedure, with Boundary Objects identified as this article’s interpretation and no mission-performance claim. Existing collection, verse, strict public metadata, wiki links, and visual system reused. No guided practice created."
+    },
+    {
+      "id": "dependency-mapping",
+      "title": "Dependency Mapping",
+      "domain": "organizational-design",
+      "collections": ["coordination-across-boundaries"],
+      "short_description": "Make cross-unit dependencies explicit so people can see prerequisites, shared constraints, and the consequences of change.",
+      "core_question": "What does each unit depend on, and where could one change disrupt the wider work?",
+      "use_when": [
+        "Local progress reports obscure relationships that determine whether a shared result can proceed.",
+        "A change may propagate across teams, services, suppliers, or partners that its owner cannot identify confidently.",
+        "Several initiatives share scarce inputs or capabilities and leaders need to examine coordination or redesign."
+      ],
+      "goals": [
+        "Expose the network of reliance across organizational boundaries",
+        "Trace upstream prerequisites and downstream consequences without treating assumptions as commitments",
+        "Connect shared constraints and changes to authorized decisions and work redesign"
+      ],
+      "mechanisms": [
+        "A bounded map of recognizable contributions or capabilities with responsible units and explicit connection meanings",
+        "Validation at both ends, including usable inputs, necessary versus assumed relationships, and visible uncertainty",
+        "Upstream/downstream tracing, converging inputs, shared prerequisites, cycles, and separately identified resource competition",
+        "Named map stewardship, local commitment authority, change review, escalation, and retirement of obsolete connections"
+      ],
+      "related_patterns": [
+        "teamwork-coordinate-dependencies-early",
+        "boundary-objects",
+        "integrator-roles"
+      ],
+      "example_user_queries": [
+        "Every team reports progress but we cannot see what the whole launch is waiting for.",
+        "How do we find out which other units will be affected if this contribution slips?",
+        "Several initiatives rely on the same specialist and their local plans all look feasible.",
+        "Our organization chart tells us who reports to whom but not who needs what from whom.",
+        "We need a shared picture of prerequisites that does not turn requested dates into promises.",
+        "People keep discovering upstream requirements after they have started dependent work.",
+        "How can we identify recurring dependencies that make our organizational boundaries costly?",
+        "Our services rely on other services and suppliers, but nobody understands the wider exposure."
+      ],
+      "visual_decision": {
+        "type": "diagram",
+        "asset": "content/assets/organizational-design/dependency-mapping.svg",
+        "reason": "An original hypothetical housing-association pilot shows one procurement prerequisite fanning out to operations and service-desk work, with both feeding pilot readiness. Explicit prerequisite-to-dependent arrows and an unconfirmed status reveal cross-unit consequences without implying reporting relationships, commitments, duration estimates, or a calculated critical path."
+      },
+      "sources": [
+        {
+          "url": "https://www.atlassian.com/team-playbook/plays/dependency-mapping",
+          "basis": "Atlassian primary Team Playbook guidance consulted 29 October 2026. Identifies upstream/downstream affected systems, owners, impacts, risks, mitigation responsibility, feedback cadence, adjacent-team review, and continued map updates. Used briefly as practitioner-method support, not as proof of improved outcomes or as a reproduction of its worksheet or workshop procedure."
+        },
+        {
+          "url": "https://www.nao.org.uk/wp-content/uploads/2019/05/Completing-Crossrail.pdf",
+          "basis": "National Audit Office primary investigation dated 3 May 2019, paragraphs 2.24–2.27. Found Crossrail’s handover schedule lacked sufficient bottom-up integration, logical sequencing, cross-contract dependencies, and an effective tool for completion-risk decisions. Provides dated independent audit context, not proof that mapping is the sole cause of delivery performance."
+        },
+        {
+          "url": "https://www.wsp.com/en-au/insights/how-systems-integration-made-crossrail-a-reality",
+          "basis": "Delivery participant WSP’s primary account dated 16 September 2022, describing an SI team mobilized in early 2019 and a single-page migration plan connecting milestone logic, railway capability stages, signalling, rolling stock, stations, and the route toward May 2022 opening. Used as a dated firsthand organizational example; promotional assertions of universal success, precise critical-path certainty, and mapping-only causation are not adopted."
+        },
+        {
+          "url": "https://foresightprojects.blog.gov.uk/2018/07/12/working-together-to-design-future-facing-policy/",
+          "basis": "Government Office for Science primary blog by Lizzie Greenhaigh and Joe Randall dated 12 July 2018. Describes Policy Lab/UK Space Agency collaboration on an interactive dependency map connecting critical national infrastructure with space services, informed by the GNSS review and driver-mapping techniques, used for stakeholder engagement. Reports stakeholder understanding, not measured resilience improvement; current maintenance or use is not inferred."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original organizational coordination synthesis focused on a cross-unit network of reliance, propagation, shared constraints, and uncertainty. Existing Coordinate Dependencies Early article inspected and retained as a related broader handoff-agreement pattern; this article’s distinct focus is the map and the network-level questions it supports. Distinguishes sequence, continuing service reliance, and competition for capacity, with no critical-path claim absent durations and validated logic. Housing-association scenario and mechanism diagram are hypothetical. Crossrail is bounded by the 2019 audit and 2022 participant account; UKSA/Policy Lab by the 2018 government account. Current practices and causal performance effects are not inferred. Existing collection, strict metadata, references, and visual conventions reused. No guided practice created."
+    },
+    {
+      "id": "team-api",
+      "title": "Team API",
+      "domain": "organizational-design",
+      "collections": ["coordination-across-boundaries"],
+      "short_description": "Make a team’s responsibilities, offerings, and interaction expectations explicit and easy for other teams to use.",
+      "core_question": "How can other teams know what we own, what we offer, and how to work with us?",
+      "use_when": [
+        "People need personal introductions to discover ownership, available offerings, or how to request help.",
+        "Scattered request channels produce conflicting promises, invisible work, or confusion about response versus acceptance.",
+        "Team relationships are changing and neighboring teams need a usable description of responsibilities and interaction modes."
+      ],
+      "goals": [
+        "Make the team’s external working interface discoverable and usable",
+        "Align supported offerings, routes, and expectations with actual capacity and authority",
+        "Keep interaction descriptions current while preserving accessible human conversations"
+      ],
+      "mechanisms": [
+        "A maintained outward-facing description of purpose, ownership, usable offerings, and significant boundaries",
+        "Clear routes for routine requests, questions, joint work, incidents, and exceptions with suitable entry information",
+        "Distinctions among acknowledgment, assessment, acceptance, scheduling, and completion, with credible priority and capacity rules",
+        "Important partner relationships and modes, named maintenance, user feedback, and links to authorized decisions"
+      ],
+      "related_patterns": [
+        "x-as-a-service",
+        "time-limited-collaboration",
+        "teamwork-clarify-decision-rights"
+      ],
+      "example_user_queries": [
+        "How do other departments find out what our team owns and how to work with us?",
+        "People have to know the right person before they can request our help.",
+        "Work arrives through private messages and nobody can see what has been promised.",
+        "Other teams mistake our first reply for a commitment to finish their request.",
+        "We offer several kinds of support and people do not know which arrangement fits.",
+        "Our team boundaries are changing and neighboring teams keep contacting the old owner.",
+        "We need to explain our capacity and priority rules without making it hard to ask a question.",
+        "Our team page is a long internal manual that does not tell outsiders where to start."
+      ],
+      "visual_decision": {
+        "type": "none",
+        "reason": "No additional explanatory SVG. The mechanism is a concise, usable interaction description supported by actual routes, expectations, and conversations. The university illustration, concrete article fields, GitLab workflow, and Alfa boundary adaptation explain it directly; a labeled diagram would mostly duplicate the field list or suggest a compulsory request gateway. The required abstract concept graphic remains in the existing registry."
+      },
+      "sources": [
+        {
+          "url": "https://github.com/TeamTopologies/Team-API-template",
+          "basis": "Primary template maintained by the Team Topologies authors. Describes a Team API as a point-in-time description/specification of team interaction and covers purpose, ownership, service expectations, communications, current work, and current/anticipated partner relationships with mode, purpose, and duration. Supports the concept’s attribution; the article is original prose, not a reproduction of the template or an implementation of its optional workshop."
+        },
+        {
+          "url": "https://handbook.gitlab.com/handbook/enterprise-data/how-we-work/",
+          "basis": "GitLab primary Data Team handbook consulted 29 October 2026. Describes finite shared-service capacity, issue-first intake with request templates and triage, two-business-day first-response objectives for new issues, and expedited-response requests through the shared data channel with an issue link and reason. Used as a documented working-interface example; identifying it as a Team API is explicitly this article’s interpretation. No independent verification of response attainment, delivery outcomes, or Team API branding is implied."
+        },
+        {
+          "url": "https://medium.com/engineering-at-alfa/breaking-down-the-big-rock-enabling-enterprise-software-flow-fffaa0c1e44c",
+          "basis": "Grahame Williams’s primary Engineering at Alfa retrospective dated 29 April 2025. Describes Team Interaction Practices as Alfa’s name for Team APIs; current/future partners and communication channels; applicability for individual platform teams versus adaptation to product-area level for other work; some areas functioning without documents and possible explanations. Presented as a dated firsthand assessment without assuming today’s structure or causal performance proof."
+        }
+      ],
+      "accessed": "2026-10-29",
+      "provenance": "Original cross-boundary coordination synthesis of a maintained, usable outward-facing team interface, distinct from an internal charter, a service catalog, a software endpoint, or a mandate created by documentation. University media-team scenario is hypothetical. Published offers and response expectations are distinguished from resource commitments and delivery guarantees. GitLab’s interface is an explicitly labeled interpretation of its handbook; Alfa’s adaptation is dated April 2025 and its limitations retained. Existing X-as-a-Service, interaction modes, and decision-rights content inspected to avoid duplication; supported strict metadata, references, and collection conventions reused. Explicit visual decision omits an extra explanatory SVG while providing the required registry concept mark. No guided practice created."
+    }
+  ]
+}

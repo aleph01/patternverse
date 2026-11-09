@@ -1,0 +1,96 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Native SVG backing, pattern and surface opacity changes only. Reused photograph/cutout and presentation sources remain unchanged. No photographic editing, blurring, new generation, crop or foreground changes.",
+  "colors": {
+    "foreground": "#2e4836",
+    "opaqueSurface": "#fffdf6",
+    "productGround": "#e7e3d8",
+    "waveStroke": "#527465"
+  },
+  "examples": [
+    {
+      "name": "background-studio-invitation",
+      "source": "form-open-studios-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "sourceDimensions": [1536, 1024],
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only text-backing opacity changes 0→1. The cream rectangle stays at x85/y490/440×230. The source photograph, crop, native copy, typography, all coordinates, paper and lighting remain identical. The rest of the photograph remains untreated.",
+      "mask": [85, 490, 440, 230],
+      "declaredChanges": [
+        [
+          {
+            "element": "text-backing",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "text-backing",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "background-pitcher-texture",
+      "source": "figure-ground-pitcher-cutout.png",
+      "stage": "scale-print-stage-v2.jpg",
+      "sourceDimensions": [1312, 1199],
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only backdrop-pattern opacity changes 0.65→0.1 on a fixed #e7e3d8 field. The same native wave pattern and identical RGBA pitcher cutout stay in place. Source bytes, alpha, object scale, copy, font settings, paper and lighting remain identical. This is a photographic cutout on a designed backdrop, not a retouched scene.",
+      "mask": [65, 250, 480, 350],
+      "declaredChanges": [
+        [
+          {
+            "element": "backdrop-pattern",
+            "attribute": "opacity",
+            "value": "0.65"
+          }
+        ],
+        [
+          {
+            "element": "backdrop-pattern",
+            "attribute": "opacity",
+            "value": "0.1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "background-booking-surface",
+      "source": "audience-workspace-photo.jpg",
+      "stage": "audience-phone-stage.jpg",
+      "sourceDimensions": [1536, 1024],
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only booking-surface opacity changes 0.66→1. The cream rectangle stays at x150/y405/310×280. Photograph bytes/crop, all text, button, spacing, phone stage and lighting stay fixed. The photograph remains visible above and around the surface. This is a static fictional booking page.",
+      "mask": [150, 405, 310, 280],
+      "declaredChanges": [
+        [
+          {
+            "element": "booking-surface",
+            "attribute": "opacity",
+            "value": "0.66"
+          }
+        ],
+        [
+          {
+            "element": "booking-surface",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2090 @@
+{
+  "format_version": 1,
+  "title": "Photography",
+  "verse": "photography",
+  "groups": [
+    {
+      "id": "photography-noticing-and-intention",
+      "title": "Noticing and intention",
+      "items": ["choose-your-subject", "find-a-relationship", "show-the-scale"]
+    },
+    {
+      "id": "photography-composition",
+      "title": "Composition",
+      "items": [
+        "change-your-position",
+        "separate-subject-and-background",
+        "use-negative-space",
+        "explore-the-rule-of-thirds",
+        "use-symmetry",
+        "use-leading-lines",
+        "build-layers",
+        "check-the-edges"
+      ]
+    },
+    {
+      "id": "photography-light-and-color",
+      "title": "Light and color",
+      "items": ["follow-the-light", "find-soft-light", "use-backlight", "limit-the-color-palette"]
+    },
+    {
+      "id": "photography-camera-control",
+      "title": "Camera control",
+      "items": [
+        "focus-on-what-matters",
+        "choose-your-depth-of-field",
+        "freeze-or-show-motion",
+        "expose-for-what-matters"
+      ]
+    },
+    {
+      "id": "photography-timing-and-interaction",
+      "title": "Timing and interaction",
+      "items": [
+        "work-the-scene",
+        "find-the-frame-then-wait",
+        "anticipate-the-moment",
+        "give-people-something-to-do"
+      ]
+    },
+    {
+      "id": "photography-editing-and-storytelling",
+      "title": "Editing and storytelling",
+      "items": [
+        "crop-with-a-purpose",
+        "edit-to-guide-attention",
+        "select-the-strongest-frame",
+        "tell-a-story-in-a-sequence"
+      ]
+    },
+    {
+      "id": "photography-practice-and-learning",
+      "title": "Practice and learning",
+      "items": [
+        "review-one-thing-at-a-time",
+        "use-a-creative-constraint",
+        "return-to-the-same-place"
+      ]
+    }
+  ],
+  "metadata_mapping": "Canonical frontmatter uses only existing schema fields. Richer authoring metadata and queries remain in this established package format; current search indexes canonical text, tags, titles, summaries, aliases, and relationship names. Queries do not imply a new recommendation service.",
+  "patterns": [
+    {
+      "id": "choose-your-subject",
+      "title": "Choose Your Subject",
+      "short_description": "Decide what deserves attention, then make the rest of the photograph serve that choice.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "intention",
+        "travel",
+        "street",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My pictures include everything and don't seem to be about anything.",
+        "How do I decide what deserves attention in a busy scene?",
+        "I liked the place but my photograph feels uncertain."
+      ],
+      "goals": [
+        "Decide what deserves attention, then make the rest of the photograph serve that choice."
+      ],
+      "mechanisms": ["intention", "selective inclusion"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-a-relationship",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My pictures include everything and don't seem to be about anything.",
+        "How do I decide what deserves attention in a busy scene?",
+        "I liked the place but my photograph feels uncertain.",
+        "There are three interesting things and they compete with each other.",
+        "Should I photograph the object or the whole setting?",
+        "I don't know what to leave out of a travel picture.",
+        "Can a photograph be about a relationship instead of one object?",
+        "How do I make an ordinary café corner feel deliberate?"
+      ],
+      "article_sha256": "0cb19b95a2a2d2a1f5e233d42d691a66c94fb0c048447e918bcb797d89ad2413",
+      "article_word_count": 975,
+      "visuals": [
+        {
+          "file": "photography/choose-your-subject.webp",
+          "alt_text": "Three illustrative photographs of one café corner emphasize a red bicycle, a terracotta plant pot, and a white cup in turn.",
+          "caption": "Illustrative generated examples. Left: the bicycle describes a place to stop. Middle: the pot and foliage become the subject. Right: the cup makes the scene intimate. These are alternative interpretations, not a controlled optical comparison."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "find-a-relationship",
+      "title": "Find a Relationship",
+      "short_description": "Make a connection, contrast, or juxtaposition between elements the reason for the photograph.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "street",
+        "travel",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My photographs show objects but don't seem to mean much.",
+        "How can I connect two things in one picture?",
+        "I notice matching shapes but lose the connection when I photograph them."
+      ],
+      "goals": [
+        "Make a connection, contrast, or juxtaposition between elements the reason for the photograph."
+      ],
+      "mechanisms": ["visual comparison", "juxtaposition"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-the-frame-then-wait",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "tell-a-story-in-a-sequence",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My photographs show objects but don't seem to mean much.",
+        "How can I connect two things in one picture?",
+        "I notice matching shapes but lose the connection when I photograph them.",
+        "How can a contrast between old and new become visible?",
+        "Should I isolate one person or include what they are looking at?",
+        "I want to show the distance between people without inventing a story.",
+        "How can I make a street juxtaposition readable?",
+        "Two colors echo each other but the photograph looks busy."
+      ],
+      "article_sha256": "5ac80a3d181f85c6b65fa626a4090aec32adcb652dc9581e4c83c292022068b6",
+      "article_word_count": 1021,
+      "visuals": [
+        {
+          "file": "photography/choose-your-subject.webp",
+          "alt_text": "Illustrative café views include a red bicycle and terracotta plant pot together, then emphasize each nearby subject differently.",
+          "caption": "Generated illustration. In the left view, the warm bicycle and pot colors connect, while metal geometry contrasts with foliage. The tighter views show how isolating an object changes the relationship. No real event or capture settings are claimed."
+        },
+        {
+          "file": "photography/relationship-umbrella-comparison.svg",
+          "alt_text": "A yellow umbrella carried past three yellow umbrellas in a shop window, followed by a crop showing only the passerby.",
+          "caption": "Generated illustration with an exact crop of the same source. Above, the window umbrellas and carried umbrella create an echo. Below, the person survives but the window does not: the crop changes what the photograph can be about."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "show-the-scale",
+      "title": "Show the Scale",
+      "short_description": "Include a familiar reference when the viewer needs help judging size or distance.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "landscape",
+        "travel",
+        "composition",
+        "phone-photography"
+      ],
+      "use_when": [
+        "The view looked huge, but the photograph doesn't.",
+        "My mountain picture has no sense of size.",
+        "How can a tiny person help describe a large building?"
+      ],
+      "goals": [
+        "Include a familiar reference when the viewer needs help judging size or distance."
+      ],
+      "mechanisms": ["familiar size cues", "relative distance"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "find-a-relationship",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "build-layers",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "The view looked huge, but the photograph doesn't.",
+        "My mountain picture has no sense of size.",
+        "How can a tiny person help describe a large building?",
+        "I photographed a small mushroom and it looks enormous.",
+        "Should I include a boat to show the size of a cliff?",
+        "How can I communicate distance across a harbor?",
+        "The person is so small that they disappear on a phone screen.",
+        "Can a familiar object help someone understand an unfamiliar structure?"
+      ],
+      "article_sha256": "41423774e6b1647f726b9bc8a5299b00c49611f9f61d0e8efbf22a87dab2aec9",
+      "article_word_count": 992,
+      "visuals": [
+        {
+          "file": "photography/show-the-scale.webp",
+          "alt_text": "Two illustrative views of a large rock face compare an empty scene with one containing a small adult on the path below.",
+          "caption": "Generated illustrative comparison. A recognizable figure gives the rock face a size reference. This is an illustration of scale cues, not a record of a visit or a measurable survey."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "change-your-position",
+      "title": "Change Your Position",
+      "short_description": "Move the camera to change viewpoint, overlaps, and the relationships between near and far elements.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "portraits",
+        "landscape",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My photos look flat from my usual standing height.",
+        "Zooming doesn't remove the branch behind someone's head.",
+        "How can I change which objects overlap?"
+      ],
+      "goals": [
+        "Move the camera to change viewpoint, overlaps, and the relationships between near and far elements."
+      ],
+      "mechanisms": ["viewpoint, parallax", "perspective"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "build-layers",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "use-leading-lines",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My photos look flat from my usual standing height.",
+        "Zooming doesn't remove the branch behind someone's head.",
+        "How can I change which objects overlap?",
+        "Should I crouch or photograph this table from above?",
+        "The foreground rock looks much larger than the distant landscape.",
+        "Why do face proportions change when I photograph very close?",
+        "I can't move far but want a different viewpoint.",
+        "How can I show the shape of a jug without the chair getting in the way?"
+      ],
+      "article_sha256": "6455e51dfedd374426ef318525b5fa8e4cae09d350ebb03d2dd3f419764f72da",
+      "article_word_count": 933,
+      "visuals": [
+        {
+          "file": "photography/change-your-position.webp",
+          "alt_text": "Illustrative photographs of a jug and chair show a high view, an eye-level view, and a lower sideways view.",
+          "caption": "Generated viewpoint illustrations. Compare the visible tabletop and the jug's overlap with the chair. These demonstrate possible compositions; they are not a calibrated lens test."
+        },
+        {
+          "file": "photography/camera-position.svg",
+          "alt_text": "A simple plan view shows two camera positions looking toward the same near subject and distant background.",
+          "caption": "Move sideways: the near subject shifts against the distant background. Move closer: nearby objects grow relative to distant ones. A change in focal length at one position changes framing rather than viewpoint."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "separate-subject-and-background",
+      "title": "Separate Subject and Background",
+      "short_description": "Make the subject distinguishable through placement, tone, color, or sharpness.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "portraits",
+        "street",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My photos look cluttered.",
+        "My subject blends into the background.",
+        "The flower is sharp but difficult to notice."
+      ],
+      "goals": ["Make the subject distinguishable through placement, tone, color, or sharpness."],
+      "mechanisms": ["outline, tone, color", "sharpness differences"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "choose-your-depth-of-field",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My photos look cluttered.",
+        "My subject blends into the background.",
+        "The flower is sharp but difficult to notice.",
+        "How can I keep the setting while making a person's face clearer?",
+        "A bright sign behind the subject keeps drawing my attention.",
+        "Do I need portrait blur to make someone stand out?",
+        "How can color help a subject remain distinguishable?",
+        "The outline of my subject merges with other objects."
+      ],
+      "article_sha256": "399f314e5d799b94b205d83ba3a1d5ff4efa9655b713c7d701806c555cb2b455",
+      "article_word_count": 913,
+      "visuals": [
+        {
+          "file": "photography/separate-subject-and-background.webp",
+          "alt_text": "A matched illustrative flower comparison shows yellow petals competing with similarly bright foliage and then standing against a darker green background.",
+          "caption": "Generated illustrative comparison. Look at the petal outline and surrounding brightness. The quieter background makes the flower more distinct; the busier version contains more garden context. No exact optical settings are implied."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "use-negative-space",
+      "title": "Use Negative Space",
+      "short_description": "Give relatively empty areas a deliberate role in emphasis, atmosphere, and scale.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "landscape",
+        "portraits",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My pictures feel cramped even when the subject is clear.",
+        "How much empty sky should I leave around a small subject?",
+        "I want a photograph to feel quiet or exposed."
+      ],
+      "goals": [
+        "Give relatively empty areas a deliberate role in emphasis, atmosphere, and scale."
+      ],
+      "mechanisms": ["distribution of quiet space", "visual weight"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "crop-with-a-purpose",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "show-the-scale",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "check-the-edges",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My pictures feel cramped even when the subject is clear.",
+        "How much empty sky should I leave around a small subject?",
+        "I want a photograph to feel quiet or exposed.",
+        "Should I leave room in the direction someone is looking?",
+        "Does an empty table area contribute anything to this picture?",
+        "A tight crop loses the feeling of the place.",
+        "Can a tiny subject work in a large frame?",
+        "How do I tell useful quiet space from accidental padding?"
+      ],
+      "article_sha256": "898359e37f0a182d9f22dfa0af02b649a218710a057fc89245b58700e0fee8e2",
+      "article_word_count": 936,
+      "visuals": [
+        {
+          "file": "photography/negative-space-comparison.svg",
+          "alt_text": "Different crops of one illustrative harbor photograph compare generous sky and sea with a closer frame around a red beacon.",
+          "caption": "Crops of one generated illustrative source. Compare the amount and placement of quiet space. The wider frame emphasizes isolation; the tighter frame gives the beacon more visual weight. Neither is a universal winner."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "explore-the-rule-of-thirds",
+      "title": "Explore the Rule of Thirds",
+      "short_description": "Try thirds as one placement strategy, and compare it with a centered composition.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "landscape",
+        "portraits",
+        "travel",
+        "phone-photography"
+      ],
+      "use_when": [
+        "Everything I photograph ends up in the middle.",
+        "Where should I put the horizon?",
+        "Is central placement always boring?"
+      ],
+      "goals": [
+        "Try thirds as one placement strategy, and compare it with a centered composition."
+      ],
+      "mechanisms": ["placement alternatives", "allocation of space"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "use-negative-space",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "use-symmetry",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "Everything I photograph ends up in the middle.",
+        "Where should I put the horizon?",
+        "Is central placement always boring?",
+        "I turned on the grid but don't know what to do with it.",
+        "Should a face sit exactly on a grid intersection?",
+        "How can I compare a centered portrait with an off-center version?",
+        "The reflection looks balanced with a central horizon; is that okay?",
+        "I keep cropping important details to fit a composition rule."
+      ],
+      "article_sha256": "fb318a20e2e0d55cf2f69e8df681cf13f7938c3bcbc05efe4cc499acb97e5c67",
+      "article_word_count": 927,
+      "visuals": [
+        {
+          "file": "photography/thirds-comparison.svg",
+          "alt_text": "The same illustrative harbor source is shown with a thirds grid and in a centered crop, revealing different amounts of space around the beacon.",
+          "caption": "Native grid overlays on crops of one generated source. Thirds placement gives the beacon more open water on one side; central placement makes it a steadier visual anchor. The grid describes a choice, not a quality score."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "use-symmetry",
+      "title": "Use Symmetry",
+      "short_description": "Align mirrored or repeated arrangements to create balance, order, and purposeful interruptions.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "travel",
+        "landscape",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My photograph of a symmetrical doorway feels slightly crooked.",
+        "How can I make repeated architecture feel balanced?",
+        "Should I center a reflection?"
+      ],
+      "goals": [
+        "Align mirrored or repeated arrangements to create balance, order, and purposeful interruptions."
+      ],
+      "mechanisms": ["repetition, alignment", "expectation"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "explore-the-rule-of-thirds",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "check-the-edges",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-a-relationship",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My photograph of a symmetrical doorway feels slightly crooked.",
+        "How can I make repeated architecture feel balanced?",
+        "Should I center a reflection?",
+        "One side of a building looks larger than the other.",
+        "Can a person deliberately interrupt an orderly composition?",
+        "Does every small detail need to match for symmetry to work?",
+        "I want a direct portrait inside a balanced setting.",
+        "How do I know when exact alignment helps the picture?"
+      ],
+      "article_sha256": "a0f3c93e32609b764784e305a3911a23ac0aee38ff34282fab5be5cef3a395e6",
+      "article_word_count": 904,
+      "visuals": [
+        {
+          "file": "photography/use-symmetry.webp",
+          "alt_text": "Two illustrative frontal views show a balanced stone entrance, first empty and then interrupted by a person standing beside the right bench.",
+          "caption": "Generated illustrative comparison. The centered entrance establishes bilateral order. The figure changes the balance while leaving that order visible. This is a composed illustration, not a sequence of a real arrival."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "use-leading-lines",
+      "title": "Use Leading Lines",
+      "short_description": "Use visible or implied lines to connect important elements and organize attention.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "travel",
+        "landscape",
+        "street",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My landscape has disconnected parts.",
+        "A path is visible but doesn't seem to lead anywhere useful.",
+        "How can I connect the foreground to the distance?"
+      ],
+      "goals": [
+        "Use visible or implied lines to connect important elements and organize attention."
+      ],
+      "mechanisms": ["directional connections", "receding geometry"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "build-layers",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "anticipate-the-moment",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My landscape has disconnected parts.",
+        "A path is visible but doesn't seem to lead anywhere useful.",
+        "How can I connect the foreground to the distance?",
+        "Can people's glances create a direction in a photograph?",
+        "A railing takes attention away from the subject.",
+        "I want to use a curved shoreline without forcing a formula.",
+        "How can floor edges describe the depth of a corridor?",
+        "Do lines always have to point at an object?"
+      ],
+      "article_sha256": "fc0a4590bd1eafdd940bde72dd34df3690346f33c00a5c8a791516fb97454b3c",
+      "article_word_count": 942,
+      "visuals": [
+        {
+          "file": "photography/composition-corridor.webp",
+          "alt_text": "An illustrative cloister corridor contains receding floor joints and arches, with and without a person beside the right wall.",
+          "caption": "Generated illustration. Floor and wall edges suggest a route toward the far doorway. The person creates another point of attention, so the architecture does not dictate a single reading."
+        },
+        {
+          "file": "photography/leading-lines-overlay.svg",
+          "alt_text": "An annotated companion identifies selected receding floor and wall edges in the corridor photograph.",
+          "caption": "Editable native overlay on the generated source. The marked edges connect near architecture to the distant doorway. They describe useful paths through the picture, not a prediction of every viewer's eye movements."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "build-layers",
+      "title": "Build Layers",
+      "short_description": "Use foreground, middle ground, and background to communicate depth and relationships.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "landscape",
+        "travel",
+        "street",
+        "phone-photography"
+      ],
+      "use_when": [
+        "The place felt deep but my photograph looks flat.",
+        "How can I connect something nearby with the distant view?",
+        "A foreground branch blocks the subject instead of helping."
+      ],
+      "goals": [
+        "Use foreground, middle ground, and background to communicate depth and relationships."
+      ],
+      "mechanisms": ["overlap, apparent size", "distinct distances"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "use-leading-lines",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "show-the-scale",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "The place felt deep but my photograph looks flat.",
+        "How can I connect something nearby with the distant view?",
+        "A foreground branch blocks the subject instead of helping.",
+        "Should everything in a layered photograph be sharp?",
+        "I want to show a conversation inside a busy café.",
+        "How do I keep near and far subjects from merging?",
+        "My foreground rock dominates the landscape.",
+        "Can a doorway give a view a sense of being inside and outside?"
+      ],
+      "article_sha256": "b953403621908b4b192befe94f75fbd28baf6e4c58deffe28f1b99e5a79b7a25",
+      "article_word_count": 969,
+      "visuals": [
+        {
+          "file": "photography/composition-corridor.webp",
+          "alt_text": "An illustrative corridor places nearby columns and floor before a person in the middle distance and a doorway farther away.",
+          "caption": "Generated illustration. In the right view, near architecture, the figure, and the distant doorway occupy distinct distances. The left view relies more heavily on repeated architecture alone."
+        },
+        {
+          "file": "photography/layers-overlay.svg",
+          "alt_text": "An annotated photographic companion identifies the near column, middle-distance figure, and far doorway.",
+          "caption": "Native annotations on the generated source identify depth relationships. The regions overlap in the image but represent different distances from the camera; they are not fixed horizontal bands."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "check-the-edges",
+      "title": "Check the Edges",
+      "short_description": "Notice fragments, awkward cuts, and bright distractions where the frame meets the scene.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "composition",
+        "portraits",
+        "landscape",
+        "street",
+        "phone-photography"
+      ],
+      "use_when": [
+        "I only notice distracting fragments after taking the photograph.",
+        "A bright corner keeps pulling attention away from my subject.",
+        "How can I avoid awkward cuts through hands?"
+      ],
+      "goals": [
+        "Notice fragments, awkward cuts, and bright distractions where the frame meets the scene."
+      ],
+      "mechanisms": ["boundary inspection", "deliberate inclusion"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "crop-with-a-purpose",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "use-negative-space",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "I only notice distracting fragments after taking the photograph.",
+        "A bright corner keeps pulling attention away from my subject.",
+        "How can I avoid awkward cuts through hands?",
+        "A roof almost touches the frame and feels uncomfortable.",
+        "Should I remove every partial person at the edge?",
+        "A railing enters my landscape from nowhere.",
+        "How can I check the frame quickly before a fleeting moment?",
+        "Cropping one distraction creates another awkward boundary."
+      ],
+      "article_sha256": "589f9eb434cbf0ad69beacc1253697bf83ce4b67b8ed0683cca776894e1e70f6",
+      "article_word_count": 975,
+      "visuals": [
+        {
+          "file": "photography/edges-overlay.svg",
+          "alt_text": "An illustrative harbor photograph is annotated to identify a partial railing and a bright fragment near the frame boundaries.",
+          "caption": "Native annotations on a generated source identify two potential distractions. Their importance depends on the intended quiet harbor composition, not on a rule that all edge detail is wrong."
+        },
+        {
+          "file": "photography/edges-revised.svg",
+          "alt_text": "A revised crop of the same illustrative harbor source excludes the distracting edge fragments.",
+          "caption": "A crop of the same generated source removes the fragments while preserving the beacon. It also gives up some space around the harbor; compare that cost before choosing this version."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "follow-the-light",
+      "title": "Follow the Light",
+      "short_description": "Observe where light comes from and choose the relationship between light, subject, and camera.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "light",
+        "portraits",
+        "landscape",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My interesting subject looks flat in the photograph.",
+        "How can I tell where the light is coming from?",
+        "Why does moving around an object change its appearance?"
+      ],
+      "goals": [
+        "Observe where light comes from and choose the relationship between light, subject, and camera."
+      ],
+      "mechanisms": ["surface illumination", "shadow direction"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "find-soft-light",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "expose-for-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "return-to-the-same-place",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "use-backlight",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My interesting subject looks flat in the photograph.",
+        "How can I tell where the light is coming from?",
+        "Why does moving around an object change its appearance?",
+        "Which direction of light will reveal texture?",
+        "I want a window portrait with a readable face.",
+        "Can front lighting be a deliberate choice?",
+        "A reflection hides an important detail on a shiny object.",
+        "How do I choose between color, texture, and atmosphere in landscape light?"
+      ],
+      "article_sha256": "12deff44872bc1f084fc9f1d44284081b1d93072ad5cc8451a800fa40c438267",
+      "article_word_count": 939,
+      "visuals": [
+        {
+          "file": "photography/follow-the-light.webp",
+          "alt_text": "Three illustrative photographs of one sphere show front lighting, side lighting, and backlighting.",
+          "caption": "Generated illustrative comparison, left to right: front light, side light, backlight. Notice the sphere's surface gradient and the direction of the cast shadow. No measured settings or real studio capture are claimed."
+        },
+        {
+          "file": "photography/light-direction.svg",
+          "alt_text": "Three simple overhead arrangements place the light near the camera, beside the subject, and behind it.",
+          "caption": "Setup diagram. Front, side, and back describe the light's relationship to the camera and subject. Real sources also have height and apparent size; this simplified plan isolates direction."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "find-soft-light",
+      "title": "Find Soft Light",
+      "short_description": "Seek broad apparent light sources when gradual shadow transitions suit the subject.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "light",
+        "portraits",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "The shadows across people's faces have very sharp edges.",
+        "How can I find gentler shadow transitions?",
+        "Does a brighter light automatically make harder shadows?"
+      ],
+      "goals": [
+        "Seek broad apparent light sources when gradual shadow transitions suit the subject."
+      ],
+      "mechanisms": ["apparent source size", "partial shadowing"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "follow-the-light",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "give-people-something-to-do",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "edit-to-guide-attention",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "The shadows across people's faces have very sharp edges.",
+        "How can I find gentler shadow transitions?",
+        "Does a brighter light automatically make harder shadows?",
+        "Why does moving a large light closer change its softness?",
+        "Is all shade equally useful for a portrait?",
+        "Can soft light still have dark shadows?",
+        "A small diffuser doesn't seem to change my flash much.",
+        "How do I keep texture when broad light makes a surface look smooth?"
+      ],
+      "article_sha256": "df7484aa26cc91b3f172f0c2452d70c956c4e85d2646129e6de5657821727a96",
+      "article_word_count": 941,
+      "visuals": [
+        {
+          "file": "photography/find-soft-light.webp",
+          "alt_text": "Matching illustrative photographs of an egg in a bowl show a more defined cast shadow and a more gradual shadow transition.",
+          "caption": "Generated illustrative comparison. The left cast-shadow edge is more defined; the right transition is broader. Light direction and overall brightness remain broadly similar. This illustrates appearance, not a measured laboratory comparison."
+        },
+        {
+          "file": "photography/apparent-source-size.svg",
+          "alt_text": "A native diagram compares a source seen from near and far, showing a larger angular span at the closer subject position.",
+          "caption": "The same physical source appears larger from nearby. Its angular size at the subject helps determine shadow softness. Moving it also changes illumination strength and falloff, which may require other adjustments."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "use-backlight",
+      "title": "Use Backlight",
+      "short_description": "Put light behind the subject to explore transmission, luminous edges, atmosphere, or silhouettes.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "light",
+        "portraits",
+        "landscape",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "I want leaves to look translucent.",
+        "How can I make a luminous outline visible around hair or fibers?",
+        "My backlit portrait became a silhouette."
+      ],
+      "goals": [
+        "Put light behind the subject to explore transmission, luminous edges, atmosphere, or silhouettes."
+      ],
+      "mechanisms": ["transmission, edge illumination", "silhouette"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "follow-the-light",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "freeze-or-show-motion",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "I want leaves to look translucent.",
+        "How can I make a luminous outline visible around hair or fibers?",
+        "My backlit portrait became a silhouette.",
+        "Should I expose for a face or the bright background?",
+        "The outline disappears against the sky.",
+        "How can a silhouette remain recognizable?",
+        "My phone lifts every shadow and changes the look of backlight.",
+        "Flare reduces contrast when I photograph toward a light source."
+      ],
+      "article_sha256": "ada338c8fd31338f32e1298bb2d4a8b91553401ca2a6ef8736e67b42c831181b",
+      "article_word_count": 939,
+      "visuals": [
+        {
+          "file": "photography/use-backlight.webp",
+          "alt_text": "Three illustrative photographs show a translucent backlit leaf, luminous fibers around a dark mitten, and a dark human profile at a bright window.",
+          "caption": "Generated illustrative examples, left to right: transmitted light, edge light, silhouette. These are different materials and intentions, not a controlled exposure sequence or records of real people."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "limit-the-color-palette",
+      "title": "Limit the Color Palette",
+      "short_description": "Compose around a small set of colors to create coherence and deliberate emphasis.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "color",
+        "travel",
+        "portraits",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "Too many colors compete in my photographs.",
+        "How can I make a small set of pictures feel coherent?",
+        "One bright object steals attention from the subject."
+      ],
+      "goals": [
+        "Compose around a small set of colors to create coherence and deliberate emphasis."
+      ],
+      "mechanisms": ["color repetition, contrast", "competition"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "edit-to-guide-attention",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-a-relationship",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "Too many colors compete in my photographs.",
+        "How can I make a small set of pictures feel coherent?",
+        "One bright object steals attention from the subject.",
+        "Can I compose around orange and blue without desaturating everything?",
+        "How can I use a single color accent on a gray street?",
+        "Does a limited palette have to look dull?",
+        "Mixed lighting gives my portrait several color casts.",
+        "Should I remove extra colored objects from a still life?"
+      ],
+      "article_sha256": "753af1459d0be97b67e12d896bdebb47f1c10888e0c0111f0ab8e380f76ee582",
+      "article_word_count": 950,
+      "visuals": [
+        {
+          "file": "photography/limit-the-color-palette.webp",
+          "alt_text": "Two illustrative still lifes compare oranges and blue surroundings with the same arrangement plus several competing colored objects.",
+          "caption": "Generated illustrative comparison. The left palette centers on orange and blue. The right adds green, purple, and red, distributing attention more widely. It may suit a different intention rather than being an inferior photograph."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "focus-on-what-matters",
+      "title": "Focus on What Matters",
+      "short_description": "Select the intended subject or distance instead of accepting an accidental autofocus target.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "camera-control",
+        "portraits",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "The camera keeps focusing on the background.",
+        "The hedge is sharp but my friend's face is soft.",
+        "How can I focus beyond a wire fence?"
+      ],
+      "goals": [
+        "Select the intended subject or distance instead of accepting an accidental autofocus target."
+      ],
+      "mechanisms": ["focus-distance selection", "autofocus behavior"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-depth-of-field",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "freeze-or-show-motion",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "select-the-strongest-frame",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "The camera keeps focusing on the background.",
+        "The hedge is sharp but my friend's face is soft.",
+        "How can I focus beyond a wire fence?",
+        "Eye detection chooses the wrong person.",
+        "My close-up won't focus no matter where I tap.",
+        "Should I use single or continuous autofocus for a moving child?",
+        "I focused and recomposed but the eye is no longer sharp.",
+        "Does selecting focus also change brightness on my phone?"
+      ],
+      "article_sha256": "bf970fc1e49c32613b8f27a907194c1ac33f52ec20816dc4ce8f383900ebb2c3",
+      "article_word_count": 999,
+      "visuals": [
+        {
+          "file": "photography/focus-comparison.webp",
+          "alt_text": "Two real close-up photographs of an insect show different parts becoming sharp when the selected focus distance changes.",
+          "caption": "Real focus-distance comparison by GIGAmacro.com, CC BY-SA 3.0. The source identifies two focus positions intended for stacking; these are the separate views, not a demonstration of changing aperture. Notice which surface detail becomes readable. Capture settings are not supplied here."
+        },
+        {
+          "file": "photography/focus-garden-comparison.webp",
+          "alt_text": "Illustrated garden alternatives: sharp foreground fence wire with a soft flower above, then a sharp flower with softer wire below.",
+          "caption": "Generated teaching illustration. Top: the nearby wire has readable detail while the intended flower is soft. Bottom: the flower becomes readable and the wire recedes. These are illustrative alternatives, not real matched captures or a measured focus test. Compare the real focus-distance photographs earlier in the article."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "choose-your-depth-of-field",
+      "title": "Choose Your Depth of Field",
+      "short_description": "Decide how much of the scene needs to appear acceptably sharp, balancing context and isolation.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "camera-control",
+        "portraits",
+        "landscape",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "Only one part of my object is sharp.",
+        "How can I keep a person and their setting readable?",
+        "Do I always need the strongest background blur?"
+      ],
+      "goals": [
+        "Decide how much of the scene needs to appear acceptably sharp, balancing context and isolation."
+      ],
+      "mechanisms": ["acceptable sharpness range", "magnification"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "separate-subject-and-background",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "build-layers",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "Only one part of my object is sharp.",
+        "How can I keep a person and their setting readable?",
+        "Do I always need the strongest background blur?",
+        "Why does a close-up have such a narrow sharp region?",
+        "Does moving the background farther away change the subject's sharp range?",
+        "Will a longer lens always make the same depth of field?",
+        "My phone's aperture slider doesn't seem like a real lens opening.",
+        "Should I choose the smallest aperture for a landscape?"
+      ],
+      "article_sha256": "4c33544d43010a2bc4d5cbd8d1e4df84a1d768927b4990fc072f0974cb3ae1c6",
+      "article_word_count": 984,
+      "visuals": [
+        {
+          "file": "photography/depth-of-field.webp",
+          "alt_text": "A real comparison of a ruler photographed at f/8 and f/2.8 shows a wider and narrower region of readable markings.",
+          "caption": "Real photographs by Frank C. Müller, CC BY-SA 4.0. Source-reported apertures: left f/8, right f/2.8. Notice the extent of readable ruler detail, not merely the softest background. No unreported focal length or distance is inferred."
+        },
+        {
+          "file": "photography/garden-portrait-depth-comparison.webp",
+          "alt_text": "Illustrated gardener portraits keep the person clear while the greenhouse behind is softer above and more recognizable below.",
+          "caption": "Generated teaching illustration. Top emphasizes the gardener against a softer greenhouse; bottom retains more readable structure and plants. Ask whether the setting contributes to the portrait. These are illustrative alternatives, not real matched captures or proof of a particular aperture; the sourced ruler photographs earlier show a real aperture comparison."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "freeze-or-show-motion",
+      "title": "Freeze or Show Motion",
+      "short_description": "Choose how movement should appear, distinguishing subject motion, camera shake, and panning.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "camera-control",
+        "street",
+        "travel",
+        "landscape",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My moving subjects are blurry even though the background is sharp.",
+        "I want water to look flowing rather than frozen.",
+        "How can I tell motion blur from camera shake?"
+      ],
+      "goals": [
+        "Choose how movement should appear, distinguishing subject motion, camera shake, and panning."
+      ],
+      "mechanisms": ["displacement during capture", "reference movement"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "anticipate-the-moment",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "review-one-thing-at-a-time",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My moving subjects are blurry even though the background is sharp.",
+        "I want water to look flowing rather than frozen.",
+        "How can I tell motion blur from camera shake?",
+        "Can stabilization stop a moving person's hands?",
+        "How do I pan with a cyclist?",
+        "What changes when I use a much shorter exposure?",
+        "My phone's night mode creates ghostly moving people.",
+        "The blurred version feels less energetic than the sharp one."
+      ],
+      "article_sha256": "cc55c94b342b88f81d2dc899b1b762cbdd0482025056f087d003fecb315f5c29",
+      "article_word_count": 938,
+      "visuals": [
+        {
+          "file": "photography/motion-comparison.svg",
+          "alt_text": "Two real waterfall exposures compare distinct water shapes with a more continuous blurred flow.",
+          "caption": "Real source frames by Gregory F. Maxwell, GFDL 1.2. Source-embedded labels identify the exposure times shown. The source also reports changes in aperture and ISO: this compares motion appearance, not a test holding every capture variable fixed. The rock geometry provides a stationary reference."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "expose-for-what-matters",
+      "title": "Expose for What Matters",
+      "short_description": "Prioritize important tones when a scene's brightness range requires a compromise.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "camera-control",
+        "portraits",
+        "landscape",
+        "travel",
+        "phone-photography"
+      ],
+      "use_when": [
+        "The sky is white when the building looks bright enough.",
+        "My friend's face is dark beside a bright window.",
+        "How do I use exposure compensation?"
+      ],
+      "goals": [
+        "Prioritize important tones when a scene's brightness range requires a compromise."
+      ],
+      "mechanisms": ["capture limits, metering", "brightness priorities"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "use-backlight",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "follow-the-light",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "edit-to-guide-attention",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "select-the-strongest-frame",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "The sky is white when the building looks bright enough.",
+        "My friend's face is dark beside a bright window.",
+        "How do I use exposure compensation?",
+        "Snow looks gray in my photographs.",
+        "A black coat looks much paler than it should.",
+        "Can I recover detail from a fully clipped highlight?",
+        "Why doesn't compensation change my fully manual exposure?",
+        "Should I preserve tiny reflections or important skin detail?"
+      ],
+      "article_sha256": "2e6b0a4461f43fb378d2063a2dec3655f7a72bd553a9369bc8647377398ed5ad",
+      "article_word_count": 998,
+      "visuals": [
+        {
+          "file": "photography/exposure-comparison.webp",
+          "alt_text": "Three real exposures of the Chicago Theatre compare preserved bright-sky detail, a middle rendering, and a brighter facade with much paler highlights.",
+          "caption": "Real exposure-bracket frames by Daniel Schwen, CC BY-SA 4.0. Compare facade detail and bright sky across the matching view. These are source photographs for a later blend, not simulated brightness changes. No unreported compensation values are assigned."
+        },
+        {
+          "file": "photography/window-exposure-comparison.webp",
+          "alt_text": "Illustrated window portrait alternatives with a readable face and pale view above, then a darker face and detailed garden outside below.",
+          "caption": "Generated teaching illustration of the window tradeoff. Top prioritizes a readable face and gives up much outside detail. Bottom prioritizes the outside view and leaves the face dark. These are illustrative tonal alternatives, not a real exposure bracket or evidence of particular settings; the real theatre bracket above provides a captured comparison."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "work-the-scene",
+      "title": "Work the Scene",
+      "short_description": "Develop a photograph through deliberate variations while you are still with the subject.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "timing",
+        "travel",
+        "street",
+        "portraits",
+        "phone-photography"
+      ],
+      "use_when": [
+        "I take many pictures but they all repeat the first view.",
+        "How can I develop a photograph while I'm still at the scene?",
+        "What should I vary after the first attempt?"
+      ],
+      "goals": [
+        "Develop a photograph through deliberate variations while you are still with the subject."
+      ],
+      "mechanisms": ["feedback through deliberate shooting variations"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "build-layers",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "use-leading-lines",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "I take many pictures but they all repeat the first view.",
+        "How can I develop a photograph while I'm still at the scene?",
+        "What should I vary after the first attempt?",
+        "The subject is interesting but the first composition isn't working.",
+        "How can I compare a wide view with a meaningful detail?",
+        "I keep changing every setting and don't know what helped.",
+        "When should I stop exploring a subject?",
+        "Can an ordinary cup offer several different photographs?"
+      ],
+      "article_sha256": "161b523a97964427649cbd21248f56aedbea114676c6d914679d937dbe543bec",
+      "article_word_count": 993,
+      "visuals": [
+        {
+          "file": "photography/ford-visit-contact-sheet.webp",
+          "alt_text": "An archival contact sheet records a visit through several camera distances, orientations, expressions, and interactions.",
+          "caption": "Real contact sheet A5015, Karl Schumacher, White House Photographic Office; public domain. The 1975 Martha Graham Center visit contains meaningful changes in distance, framing, and interaction. Film order is preserved. The archive does not establish the photographer's intention for each variation."
+        },
+        {
+          "file": "photography/work-cup-variations.svg",
+          "alt_text": "Six labeled illustrative cup views compare wide context, low viewpoint, overhead shape, a turned handle, handle detail and open space.",
+          "caption": "Generated illustrative set, rearranged into labeled views. Follow the labels: wide context, low view, overhead shape, turning the cup, a handle detail and more empty space. Each asks a different question. This is a set of possible choices, not a record of a controlled shoot; framing, viewpoint and object orientation all vary."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "find-the-frame-then-wait",
+      "title": "Find the Frame, Then Wait",
+      "short_description": "Hold a useful composition while an event supplies the missing relationship.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "timing",
+        "street",
+        "travel",
+        "landscape",
+        "phone-photography"
+      ],
+      "use_when": [
+        "The background works but the picture feels incomplete.",
+        "I keep following people into cluttered backgrounds.",
+        "How can I wait for a person to enter a useful gap?"
+      ],
+      "goals": ["Hold a useful composition while an event supplies the missing relationship."],
+      "mechanisms": ["stable composition", "changing events"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "work-the-scene",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "anticipate-the-moment",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-a-relationship",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "freeze-or-show-motion",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "The background works but the picture feels incomplete.",
+        "I keep following people into cluttered backgrounds.",
+        "How can I wait for a person to enter a useful gap?",
+        "Can I prepare the composition before a wave arrives?",
+        "The same street frame changes as people cross it.",
+        "Should I hold the camera still instead of chasing every event?",
+        "How long should I wait when nothing completes the picture?",
+        "Brightness shifts when people enter my prepared frame."
+      ],
+      "article_sha256": "701f04a1645b880d1390787ba64cd6cc5fae7b929f4ab848796d0bafc44dccba",
+      "article_word_count": 943,
+      "visuals": [
+        {
+          "file": "photography/wait-sequence.svg",
+          "alt_text": "Three real video frames from a fixed camera show pedestrians before, during, and after a passage through the central pavement.",
+          "caption": "Real video frames at 4, 5, and 6 seconds from Taurus Media Technik's pedestrian-area test clip, CC0. Camera position and framing stay fixed while overlaps and gaps change. These are extracted video frames, not a still-camera burst or a record made for this article."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "anticipate-the-moment",
+      "title": "Anticipate the Moment",
+      "short_description": "Observe movement and behavior so you can prepare before a brief photographic opportunity arrives.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "timing",
+        "street",
+        "portraits",
+        "travel",
+        "phone-photography"
+      ],
+      "use_when": [
+        "I press the shutter after the gesture has already passed.",
+        "How can I prepare for a jump before it happens?",
+        "Which cues help me photograph an unfolding action?"
+      ],
+      "goals": [
+        "Observe movement and behavior so you can prepare before a brief photographic opportunity arrives."
+      ],
+      "mechanisms": ["behavioral cues", "preparation"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-the-frame-then-wait",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "work-the-scene",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "freeze-or-show-motion",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "I press the shutter after the gesture has already passed.",
+        "How can I prepare for a jump before it happens?",
+        "Which cues help me photograph an unfolding action?",
+        "A burst gives me lots of frames but no clear moment.",
+        "I want to catch a shared reaction without staging it.",
+        "Should I select the highest point of every movement?",
+        "The subject leaves the useful background before I am ready.",
+        "How can I learn from frames just before and after my selection?"
+      ],
+      "article_sha256": "871816341d2817758d7e301824aba756e5346b05b869df20f9d3a96f220f052c",
+      "article_word_count": 953,
+      "visuals": [
+        {
+          "file": "photography/skateboard-sequence.webp",
+          "alt_text": "A real three-picture skateboard sequence shows a crouch, the beginning of a jump, and an airborne phase.",
+          "caption": "Real photographic sequence by Tony Alter, CC BY 2.0. The crouch and rising body precede the airborne shape at right. For an image about lift, the right frame is the selection here; for preparation, the left may be more informative. No precise timings or successful landing are inferred."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "give-people-something-to-do",
+      "title": "Give People Something to Do",
+      "short_description": "Offer a comfortable activity that gives hands, attention, and expression somewhere natural to go.",
+      "verses": ["photography"],
+      "tags": ["photography", "beginner", "portraits", "interaction", "phone-photography"],
+      "use_when": [
+        "People look stiff in my portraits.",
+        "My friend doesn't know what to do with their hands.",
+        "Saying look natural makes the portrait less comfortable."
+      ],
+      "goals": [
+        "Offer a comfortable activity that gives hands, attention, and expression somewhere natural to go."
+      ],
+      "mechanisms": ["shared attention", "collaborative activity"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "work-the-scene",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "choose-your-depth-of-field",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "freeze-or-show-motion",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "People look stiff in my portraits.",
+        "My friend doesn't know what to do with their hands.",
+        "Saying look natural makes the portrait less comfortable.",
+        "Can a familiar activity help someone relax in front of the camera?",
+        "How do I collaborate without demanding a performance?",
+        "The person prefers a still portrait rather than walking.",
+        "I want gestures that connect someone with their everyday work.",
+        "How can I keep a portrait activity safe and comfortable?"
+      ],
+      "article_sha256": "b0105b5ca17e57f09ce9844be05f278d164622db8c7735bc20108bab3d64b30a",
+      "article_word_count": 958,
+      "visuals": [
+        {
+          "file": "photography/portrait-activity-comparison.svg",
+          "alt_text": "Two real archival views from one visit compare a seated portrait moment with an active conversational gesture.",
+          "caption": "Real frames from Karl Schumacher's contact sheet A5015, White House Photographic Office; public domain. Betty Ford's hands and expression differ between a seated moment and conversation. The archive documents the visit, not posing instructions, discomfort, or a cause-and-effect experiment. Crops selected for this comparison."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "crop-with-a-purpose",
+      "title": "Crop with a Purpose",
+      "short_description": "Refine an existing photograph's emphasis, balance, or meaning by deciding what remains inside its boundary.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "editing",
+        "composition",
+        "portraits",
+        "landscape",
+        "phone-photography"
+      ],
+      "use_when": [
+        "A tighter crop makes the object clear but loses the place.",
+        "How should I choose between a square and a wide crop?",
+        "I want several useful versions from one photograph."
+      ],
+      "goals": [
+        "Refine an existing photograph's emphasis, balance, or meaning by deciding what remains inside its boundary."
+      ],
+      "mechanisms": ["selective framing", "contextual information"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "change-your-position",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "check-the-edges",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "use-negative-space",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "edit-to-guide-attention",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "A tighter crop makes the object clear but loses the place.",
+        "How should I choose between a square and a wide crop?",
+        "I want several useful versions from one photograph.",
+        "Can cropping change perspective?",
+        "A small edge distraction is spoiling an otherwise good image.",
+        "How much can I crop before a large print loses detail?",
+        "My portrait crop removes the gesture that mattered.",
+        "Does the empty space belong in the final picture?"
+      ],
+      "article_sha256": "411e9a34d45730b9132e2ba115db81fa4dbe105fbdd6eaaf10fc87195696c0d9",
+      "article_word_count": 912,
+      "visuals": [
+        {
+          "file": "photography/crop-comparison.svg",
+          "alt_text": "Three crops of one illustrative harbor source compare a wide spatial view, a closer centered beacon, and a taller arrangement with more sky.",
+          "caption": "All panels use the same generated source image. The wide version keeps the harbor's extent, the closer version emphasizes the beacon, and the tall version changes the role of sky. No camera movement or new capture is implied."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "edit-to-guide-attention",
+      "title": "Edit to Guide Attention",
+      "short_description": "Adjust brightness, contrast, and color to support a clear intention while respecting the photograph's context.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "editing",
+        "color",
+        "portraits",
+        "landscape",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My edits keep getting stronger without becoming clearer.",
+        "How can I make a face readable while keeping a dim room?",
+        "A global brightness change flattens the whole photograph."
+      ],
+      "goals": [
+        "Adjust brightness, contrast, and color to support a clear intention while respecting the photograph's context."
+      ],
+      "mechanisms": ["tonal", "color emphasis within recorded information"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "expose-for-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "give-people-something-to-do",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "limit-the-color-palette",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My edits keep getting stronger without becoming clearer.",
+        "How can I make a face readable while keeping a dim room?",
+        "A global brightness change flattens the whole photograph.",
+        "Can I reduce a competing color without making the image look artificial?",
+        "What is the difference between expressive editing and documentary expectations?",
+        "An edit creates a halo around the subject.",
+        "Can sharpening fix focus that landed at the wrong distance?",
+        "I want a restrained before-and-after rather than a dramatic filter."
+      ],
+      "article_sha256": "41ee49a4269990e6e0b97b3a049d8ce72b2dbb6b009118207643427f6bbb588f",
+      "article_word_count": 943,
+      "visuals": [
+        {
+          "file": "photography/edit-comparison.svg",
+          "alt_text": "The same real Chicago Theatre source frame appears before and after a restrained midtone and saturation adjustment.",
+          "caption": "Before and expressive edit of the same center source frame, Daniel Schwen, CC BY-SA 4.0. The demonstration gently lifts midtones and reduces saturation; it adds or removes no objects and invents no clipped detail. Native SVG filters keep the adjustment inspectable."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "select-the-strongest-frame",
+      "title": "Select the Strongest Frame",
+      "short_description": "Compare similar photographs against a purpose, weighing gesture, composition, and technical adequacy together.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "editing",
+        "selection",
+        "portraits",
+        "street",
+        "phone-photography"
+      ],
+      "use_when": [
+        "I take lots of pictures and don't know which ones to keep.",
+        "The sharpest portrait has a weaker expression.",
+        "How can I compare near-identical frames?"
+      ],
+      "goals": [
+        "Compare similar photographs against a purpose, weighing gesture, composition, and technical adequacy together."
+      ],
+      "mechanisms": ["purpose-based comparison of gesture", "adequacy"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "work-the-scene",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "freeze-or-show-motion",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "crop-with-a-purpose",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "I take lots of pictures and don't know which ones to keep.",
+        "The sharpest portrait has a weaker expression.",
+        "How can I compare near-identical frames?",
+        "Which image should introduce a small story?",
+        "My favorite moment isn't readable in the photograph.",
+        "Should I keep a slightly blurred but meaningful gesture?",
+        "How do I choose for a profile image versus a large print?",
+        "A contact sheet feels overwhelming and I avoid deciding."
+      ],
+      "article_sha256": "8046ce5501bda5880b7f2b3cd845fcd406d979be68e910f53383577743151ea2",
+      "article_word_count": 961,
+      "visuals": [
+        {
+          "file": "photography/ansel-contact-sheet.webp",
+          "alt_text": "An archival contact sheet shows several portraits of Ansel Adams with changes in head direction, expression, orientation, and hand gesture.",
+          "caption": "Real White House Photographic Office contact-sheet excerpt A2966, public domain. For an unobstructed conversational portrait, frame 14 is the editorial selection here: face readable, mouth active, no hand across the cheek. Frame 15 may better serve a reflective interpretation. This does not identify the archive's own preferred print."
+        },
+        {
+          "file": "photography/selection-candidates.svg",
+          "alt_text": "Enlarged archival frames 11, 14 and 15 show a turned quiet face, an unobstructed speaking face and a hand near the face.",
+          "caption": "Real public-domain photographs: Tom Fitz-Patrick, White House Photographic Office, contact sheet A2966; excerpt by Svajcr. Crops enlarge frames 11, 14 and 15 without retouching. For the stated purpose of an unobstructed conversational portrait, 14 is the editorial choice here; 15 supports a more reflective reading. The archive does not designate this selection."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "tell-a-story-in-a-sequence",
+      "title": "Tell a Story in a Sequence",
+      "short_description": "Combine complementary photographs so each adds information, progression, or a useful change of perspective.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "storytelling",
+        "editing",
+        "travel",
+        "portraits",
+        "phone-photography"
+      ],
+      "use_when": [
+        "My event pictures repeat the same information.",
+        "How can several photographs tell a clearer story together?",
+        "What should an establishing image contribute?"
+      ],
+      "goals": [
+        "Combine complementary photographs so each adds information, progression, or a useful change of perspective."
+      ],
+      "mechanisms": ["complementary information", "ordering"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "select-the-strongest-frame",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "give-people-something-to-do",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "limit-the-color-palette",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "crop-with-a-purpose",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "My event pictures repeat the same information.",
+        "How can several photographs tell a clearer story together?",
+        "What should an establishing image contribute?",
+        "Do I need exactly four pictures for a sequence?",
+        "A detail makes no sense without the wider setting.",
+        "How can I end a photo essay quietly?",
+        "Can I mix dates without implying a continuous event?",
+        "My favorite standalone image duplicates another image's job."
+      ],
+      "article_sha256": "c77c55c96aaff30b8cf3166b77c63e131311f752d85c5438c792f6bb2d971a34",
+      "article_word_count": 942,
+      "visuals": [
+        {
+          "file": "photography/story-sequence.svg",
+          "alt_text": "Four archival views from one visit are selected to show the room, activity, a closer interaction detail, and departure.",
+          "caption": "Editorial sequence from Karl Schumacher's real contact sheet A5015, White House Photographic Office; public domain. Establishing view, activity, detail crop, and departure perform different roles. The detail is an explicit crop of a source frame. The selection preserves the documented visit's broad progression without claiming uninterrupted coverage."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "review-one-thing-at-a-time",
+      "title": "Review One Thing at a Time",
+      "short_description": "Examine one photographic issue and turn what you notice into a specific next experiment.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "learning",
+        "review",
+        "portraits",
+        "landscape",
+        "phone-photography"
+      ],
+      "use_when": [
+        "I look at my photos and only conclude that they are bad.",
+        "How can I turn a mistake into a useful next experiment?",
+        "There are too many issues to review at once."
+      ],
+      "goals": [
+        "Examine one photographic issue and turn what you notice into a specific next experiment."
+      ],
+      "mechanisms": ["focused comparison", "testable next choices"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "select-the-strongest-frame",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "focus-on-what-matters",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "freeze-or-show-motion",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "choose-your-depth-of-field",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "I look at my photos and only conclude that they are bad.",
+        "How can I turn a mistake into a useful next experiment?",
+        "There are too many issues to review at once.",
+        "I don't know whether softness came from focus or movement.",
+        "How can I review backgrounds without judging everything else?",
+        "A successful image doesn't tell me what helped.",
+        "I want to learn from frames I would never publish.",
+        "How can I separate observation from a story about what caused it?"
+      ],
+      "article_sha256": "8aee732c57bc109da2810e4efebb823e1295931e6a73e7d707fe266f23723d90",
+      "article_word_count": 968,
+      "visuals": [
+        {
+          "file": "photography/depth-of-field.webp",
+          "alt_text": "A real aperture comparison is revisited with attention specifically on the extent of readable ruler markings.",
+          "caption": "Focused review example using Frank C. Müller's real f/8 and f/2.8 comparison, CC BY-SA 4.0. Examine only how far the markings remain readable around the focus region. This does not establish a universal preferred aperture or test every image-quality variable."
+        },
+        {
+          "file": "photography/review-focus-next-attempt.svg",
+          "alt_text": "Annotated garden examples mark a soft intended flower and a sharp foreground wire, then a clearer flower in a proposed next attempt.",
+          "caption": "Generated focus illustration with added review boxes. Green marks the intended flower; white marks the near wire to inspect. Observation: flower detail is soft while wire detail is readable. Proposed experiment: select the flower and check again. The second view illustrates the desired result, not proof that one control caused it. The boxes are teaching annotations, not captured autofocus indicators."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "use-a-creative-constraint",
+      "title": "Use a Creative Constraint",
+      "short_description": "Narrow a choice deliberately so you can explore the remaining possibilities more deeply.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "learning",
+        "creativity",
+        "everyday-objects",
+        "phone-photography"
+      ],
+      "use_when": [
+        "Too many photographic choices leave me repeating myself.",
+        "Can staying in one small place help me see more?",
+        "I want a coherent set without buying new equipment."
+      ],
+      "goals": [
+        "Narrow a choice deliberately so you can explore the remaining possibilities more deeply."
+      ],
+      "mechanisms": ["reduced choice", "directed attention"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "work-the-scene",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "review-one-thing-at-a-time",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "choose-your-subject",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-a-relationship",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "Too many photographic choices leave me repeating myself.",
+        "Can staying in one small place help me see more?",
+        "I want a coherent set without buying new equipment.",
+        "What can I learn by keeping one field of view?",
+        "A color restriction feels arbitrary instead of useful.",
+        "How can a constraint leave enough freedom to explore?",
+        "When should I abandon a creative rule?",
+        "I keep switching gear instead of noticing the scene."
+      ],
+      "article_sha256": "17c39a52e5ebbd1f5abe7b1a97a333a2d5b00e05f2f045c1e81da72de3c8a79e",
+      "article_word_count": 983,
+      "visuals": [
+        {
+          "file": "photography/choose-your-subject.webp",
+          "alt_text": "Three illustrative photographs remain within one café corner while exploring a bicycle, plant, and cup.",
+          "caption": "Generated illustrative set under one stated constraint: stay within this café corner. Subject emphasis and viewpoint vary inside that boundary. The set demonstrates a constraint's possibilities; it is not a record of an actual shooting exercise."
+        },
+        {
+          "file": "photography/constraint-color-series-source.webp",
+          "alt_text": "Four illustrative pictures link terracotta brick, oranges, rust-colored fabric and an orange bicycle through one warm color family.",
+          "caption": "Generated illustrative series under one constraint: look for warm orange and terracotta. Read left to right, top to bottom: brick, fruit, fabric, bicycle. Subject, texture, scale and context vary while the color family connects the set. This illustrates a possible exercise, not a documented walk."
+        }
+      ],
+      "practice": "absent"
+    },
+    {
+      "id": "return-to-the-same-place",
+      "title": "Return to the Same Place",
+      "short_description": "Revisit a familiar location to notice changing conditions and deepen your understanding of its possibilities.",
+      "verses": ["photography"],
+      "tags": [
+        "photography",
+        "beginner",
+        "learning",
+        "landscape",
+        "travel",
+        "street",
+        "phone-photography"
+      ],
+      "use_when": [
+        "I think I need new destinations to make better photographs.",
+        "How can a familiar viewpoint offer new possibilities?",
+        "What changes when I revisit in different weather?"
+      ],
+      "goals": [
+        "Revisit a familiar location to notice changing conditions and deepen your understanding of its possibilities."
+      ],
+      "mechanisms": ["familiarity", "observation across conditions"],
+      "difficulty": "Beginner",
+      "prerequisites": [
+        "Access to photographs and a phone, compact camera, or interchangeable-lens camera; no manual-mode prerequisite."
+      ],
+      "related_patterns": [
+        {
+          "id": "follow-the-light",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "review-one-thing-at-a-time",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "find-the-frame-then-wait",
+          "relationship": "The article explains this neighboring choice in context."
+        },
+        {
+          "id": "use-a-creative-constraint",
+          "relationship": "The article explains this neighboring choice in context."
+        }
+      ],
+      "example_user_queries": [
+        "I think I need new destinations to make better photographs.",
+        "How can a familiar viewpoint offer new possibilities?",
+        "What changes when I revisit in different weather?",
+        "I want a genuine series across changing conditions.",
+        "How can I compare light without pretending every variable stayed fixed?",
+        "Can a windowsill be enough for a photographic project?",
+        "My first visit still produced my favorite picture.",
+        "How do I notice changes in a place I walk past every day?"
+      ],
+      "article_sha256": "b84abde9ca6844084a42e6c5b92f4de3a8aace15017c4e5f52ad28e87a82d4df",
+      "article_word_count": 952,
+      "visuals": [
+        {
+          "file": "photography/return-series.webp",
+          "alt_text": "A genuine four-view series looks across the Rhône valley from Ravoire under changing seasonal and lighting conditions.",
+          "caption": "Real series by Beaupeep99, CC BY-SA 4.0: views from Ravoire over the Rhône valley. Snow, foliage, haze, and illumination differ. Viewpoint and framing also vary, so this is observational evidence of revisiting, not a controlled one-variable test. The upload date does not establish each exposure's date."
+        }
+      ],
+      "practice": "absent"
+    }
+  ]
+}

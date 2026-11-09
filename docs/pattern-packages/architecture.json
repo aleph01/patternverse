@@ -1,0 +1,3687 @@
+{
+  "format_version": 1,
+  "title": "Architecture",
+  "verse": "architecture",
+  "scope": "Physical buildings and spaces",
+  "groups": [
+    {
+      "id": "architecture-place",
+      "title": "Place",
+      "collections": [
+        {
+          "id": "architecture-site-context-landscape",
+          "title": "Site, Context & Landscape",
+          "items": [
+            "arch-site-repair",
+            "arch-south-facing-outdoors",
+            "arch-water-sensitive-landscape",
+            "arch-courtyards-which-live",
+            "arch-reuse-before-replacement"
+          ]
+        },
+        {
+          "id": "architecture-public-realm-building-edges",
+          "title": "Public Realm & Building Edges",
+          "items": [
+            "arch-positive-outdoor-space",
+            "arch-arcades",
+            "arch-entrance-transition",
+            "arch-building-edge",
+            "arch-inclusive-arrival",
+            "arch-courtyards-which-live"
+          ]
+        },
+        {
+          "id": "architecture-building-form-massing",
+          "title": "Building Form & Massing",
+          "items": [
+            "arch-wings-of-light",
+            "arch-courtyards-which-live",
+            "arch-compact-building-form",
+            "arch-light-on-two-sides",
+            "arch-external-solar-shading"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "architecture-space",
+      "title": "Space",
+      "collections": [
+        {
+          "id": "architecture-spatial-organization-program",
+          "title": "Spatial Organization & Program",
+          "items": [
+            "arch-intimacy-gradient",
+            "arch-common-areas-at-the-heart",
+            "arch-flexibly-linked-rooms",
+            "arch-loose-fit-layers",
+            "arch-refuge"
+          ]
+        },
+        {
+          "id": "architecture-circulation-access-wayfinding",
+          "title": "Circulation, Access & Wayfinding",
+          "items": [
+            "arch-circulation-as-orientation",
+            "arch-main-entrance",
+            "arch-inclusive-arrival",
+            "arch-staircase-as-a-stage",
+            "arch-entrance-transition"
+          ]
+        },
+        {
+          "id": "architecture-human-scale-spatial-experience",
+          "title": "Human Scale & Spatial Experience",
+          "items": [
+            "arch-window-place",
+            "arch-alcoves",
+            "arch-ceiling-height-variety",
+            "arch-prospect",
+            "arch-refuge",
+            "arch-building-edge",
+            "arch-light-on-two-sides"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "architecture-fabric",
+      "title": "Fabric",
+      "collections": [
+        {
+          "id": "architecture-light-climate-comfort",
+          "title": "Light, Climate & Comfort",
+          "items": [
+            "arch-light-on-two-sides",
+            "arch-external-solar-shading",
+            "arch-cross-ventilation",
+            "arch-continuous-thermal-envelope",
+            "arch-south-facing-outdoors",
+            "arch-courtyards-which-live"
+          ]
+        },
+        {
+          "id": "architecture-structure-materials-details",
+          "title": "Structure, Materials & Details",
+          "items": [
+            "arch-structural-bay-rhythm",
+            "arch-drained-ventilated-rainscreen",
+            "arch-repairable-connections",
+            "arch-test-at-full-scale",
+            "arch-design-for-disassembly"
+          ]
+        },
+        {
+          "id": "architecture-adaptability-reuse-longevity",
+          "title": "Adaptability, Reuse & Longevity",
+          "items": [
+            "arch-reuse-before-replacement",
+            "arch-loose-fit-layers",
+            "arch-design-for-disassembly",
+            "arch-repairable-connections",
+            "arch-structural-bay-rhythm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "architecture-practice",
+      "title": "Practice",
+      "collections": [
+        {
+          "id": "architecture-architectural-design-process",
+          "title": "Architectural Design Process",
+          "items": [
+            "arch-observe-before-briefing",
+            "arch-compare-spatial-alternatives",
+            "arch-test-at-full-scale",
+            "arch-post-occupancy-evaluation",
+            "arch-reuse-before-replacement"
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "apl",
+      "title": "A Pattern Language: summary",
+      "url": "https://www.patternlanguage.com/apl/aplsummary.htm",
+      "scope": "Titles and pattern numbers checked; independent explanations, no copied book text or graphics.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "ces",
+      "title": "Christopher Alexander & CES Archive",
+      "url": "https://christopher-alexander-ces-archive.org/",
+      "scope": "Historical provenance and project context; archive access does not grant image reuse.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "ching",
+      "title": "Architecture: Form, Space, and Order, fifth edition",
+      "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374",
+      "scope": "Publisher description and table of contents consulted; full book not accessed or reproduced.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "biophilia",
+      "title": "14 Patterns of Biophilic Design",
+      "url": "https://www.terrapinbrightgreen.com/reports/14-patterns/",
+      "scope": "2014 named Prospect and Refuge; qualified evidence and individual differences. Do not imply review of a later edition.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "aia",
+      "title": "AIA Framework for Design Excellence",
+      "url": "https://www.aia.org/design-excellence/aia-framework-design-excellence",
+      "scope": "Framework principles, equity, resources, change and discovery; no certification claim.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "riba",
+      "title": "RIBA Sustainable Outcomes Guide (2019)",
+      "url": "https://www.riba.org/media/b2lgzeoo/riba-sustainable-outcomes-guide-2019-pdf.pdf",
+      "scope": "Historical outcomes framework; numerical targets not treated as current law or current certification thresholds.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "wbdg-daylight",
+      "title": "WBDG: Daylighting",
+      "url": "https://www.wbdg.org/resources/daylighting",
+      "scope": "Supplementary reference; body extraction unavailable. Detailed article claims supported by other primary sources and independent explanations.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "wbdg-ventilation",
+      "title": "WBDG: Natural Ventilation",
+      "url": "https://www.wbdg.org/resources/natural-ventilation",
+      "scope": "Supplementary reference; body extraction unavailable. Detailed article claims supported by other primary sources and independent explanations.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "phi",
+      "title": "Passive House Institute: certification",
+      "url": "https://passivehouse.com/03_certification/02_certification_buildings/01_benefits-of-certification/01_benefits-of-certification.htm",
+      "scope": "Verify current criteria location before using; five principles without numerical compliance prescriptions.",
+      "checked": "2026-10-27"
+    },
+    {
+      "title": "Latz + Partner: Landschaftspark Duisburg-Nord",
+      "url": "https://www.latzundpartner.de/en/projekte/postindustrielle-landschaften/landschaftspark-duisburg-nord-de/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Patronato de la Alhambra: The Court of the Lions",
+      "url": "https://www.alhambra-patronato.es/en/edificios-lugares/the-court-of-the-lions",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "City of Paris: Hotel de Fourcy, Place des Vosges historical context",
+      "url": "https://cdn.paris.fr/paris/2019/07/24/882e442f24e493816577ad093764f4e6.pdf",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "UNESCO: The Porticoes of Bologna",
+      "url": "https://whc.unesco.org/en/list/1650",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "English Heritage: Red House, Philip Webb for William Morris",
+      "url": "https://www.english-heritage.org.uk/visit/blue-plaques/red-house/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "U.S. Access Board: Entrances, Doors and Gates (jurisdiction-specific guidance)",
+      "url": "https://www.access-board.gov/ada/guides/chapter-4-entrances-doors-and-gates/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Bauhaus Dessau Foundation: Bauhaus Building",
+      "url": "https://bauhaus-dessau.de/en/venues/bauhaus-building/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Bioregional: The BedZED Story (2017)",
+      "url": "https://www.bioregional.com/uploads/downloads/The-BedZED-Story_Bioregional_2017.pdf",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Stockholms stadsbibliotek: Architecture by Gunnar Asplund",
+      "url": "https://biblioteket.stockholm.se/om-stadsbiblioteket-av-gunnar-asplund",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "British Museum: The Great Court",
+      "url": "https://www.britishmuseum.org/about-us/british-museum-story/architecture/great-court",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Herzog & de Meuron: 126 Tate Modern, The Ramp",
+      "url": "https://www.herzogdemeuron.com/projects/126-tate-modern/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "U.S. Access Board: Accessible Routes",
+      "url": "https://www.access-board.gov/ada/guides/chapter-4-accessible-routes/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Phillips Exeter Academy: How do I love the library?",
+      "url": "https://exeter.edu/how-do-i-love-the-library-archivist-counts-the-ways/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Patronato de la Alhambra: The Hall of the Kings",
+      "url": "https://www.alhambra-patronato.es/en/edificios-lugares/the-hall-of-the-kings",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Kimbell Art Museum: The Louis I. Kahn Building",
+      "url": "https://50.kimbellart.org/architecture/the-louis-i-kahn-building/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Pantheon: Italian Ministry of Culture site",
+      "url": "https://direzionemuseiroma.cultura.gov.it/pantheon/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "U.S. Department of Energy: Energy 101, Daylighting",
+      "url": "https://www.energy.gov/articles/energy-101-daylighting",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "U.S. DOE / PNNL Building America Solution Center: Energy Savings from Window Attachments",
+      "url": "https://basc.pnnl.gov/library/energy-savings-window-attachments",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "U.S. Department of Energy, Building Science Education: Natural Ventilation and Cooling",
+      "url": "https://bsesc.energy.gov/energy-basics/natural-ventilation-and-cooling",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "U.S. DOE Building Science Education: High-R Attics, Eaves in Vented Attics (continuity principle; numerical example not adopted)",
+      "url": "https://bsesc.energy.gov/energy-basics/high-r-attics-eaves-vented-attics",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "UNESCO: Fagus Factory in Alfeld",
+      "url": "https://whc.unesco.org/en/list/1368/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "John Straube, Building Science Corporation: BSD-013, Rain Control in Buildings",
+      "url": "https://buildingscience.com/documents/digests/bsd-013-rain-control-in-buildings",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Whole Building Design Guide: Building Envelope Design Guide",
+      "url": "https://www.wbdg.org/building-envelope-design-guide",
+      "checked": "2026-10-27",
+      "scope": "Supplementary reference; body extraction unavailable. Detailed article claims supported by other primary sources and independent explanations."
+    },
+    {
+      "title": "Getty Conservation Institute: Salk Institute Conservation Project",
+      "url": "https://www.getty.edu/projects/salk-institute-conservation/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "U.S. EPA: Designing for Adaptability, Disassembly and Reuse",
+      "url": "https://www.epa.gov/smm/best-practices-reducing-reusing-and-recycling-construction-and-demolition-materials",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Stewart Brand: How Buildings Learn (publisher description; full book not reproduced)",
+      "url": "https://www.penguinrandomhouse.com/books/320919/how-buildings-learn-by-stewart-brand/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "RIBA: Plan for Use Guide",
+      "url": "https://www.riba.org/work/insights-and-resources/plan-for-use-guide/",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "Bioregional and Peabody: BedZED Seven Years On (2009)",
+      "url": "https://www.bioregional.com/uploads/downloads/BedZED-7-years-on_Bioregional_Peabody_2009.pdf",
+      "checked": "2026-10-27",
+      "scope": "Primary project, institutional or technical reference; independently authored explanation, not copied prose or graphics."
+    },
+    {
+      "title": "WBDG: Building Commissioning (additional reference)",
+      "url": "https://www.wbdg.org/resources/building-commissioning",
+      "checked": "2026-10-27",
+      "scope": "Supplementary reference; body extraction unavailable. Detailed article claims supported by other primary sources and independent explanations."
+    },
+    {
+      "id": "crown-hall",
+      "title": "Illinois Institute of Technology: S.R. Crown Hall building history",
+      "url": "https://buildinghistory.iit.edu/buildings/crown",
+      "scope": "Primary institutional account checked for the named photographic precedent and design attribution; photograph reuse permission is recorded separately in the provenance ledger.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "farnsworth",
+      "title": "National Trust for Historic Preservation: Farnsworth House lower terrace restoration",
+      "url": "https://edithfarnsworthhouse.org/wp-content/uploads/Farnsworth_LowerTerrace_200323.pdf.pdf",
+      "scope": "Primary institutional account checked for the named photographic precedent and design attribution; photograph reuse permission is recorded separately in the provenance ledger.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "furness-library",
+      "title": "University of Pennsylvania: Fisher Fine Arts Library",
+      "url": "https://facilities.upenn.edu/maps/locations/fisher-fine-arts-library-anne-and-jerome",
+      "scope": "Primary institutional account checked for the named photographic precedent and design attribution; photograph reuse permission is recorded separately in the provenance ledger.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "lloyds-building",
+      "title": "Lloyd’s: the Lloyd’s building",
+      "url": "https://www.lloyds.com/about-lloyds/the-lloyds-building",
+      "scope": "Primary institutional account checked for the named photographic precedent and design attribution; photograph reuse permission is recorded separately in the provenance ledger.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "strawberry-hill",
+      "title": "Strawberry Hill House: history",
+      "url": "https://www.strawberryhillhouse.org.uk/the-house/history/",
+      "scope": "Primary institutional account checked for the named photographic precedent and design attribution; photograph reuse permission is recorded separately in the provenance ledger.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "katsura",
+      "title": "Imperial Household Agency: Katsura Imperial Villa",
+      "url": "https://kyoto-gosho.kunaicho.go.jp/en/katsura-rikyu",
+      "scope": "Primary institutional account checked for the named photographic precedent and design attribution; photograph reuse permission is recorded separately in the provenance ledger.",
+      "checked": "2026-10-27"
+    },
+    {
+      "id": "brock-design-team",
+      "title": "Coffield, Lappano and Mella: Brock Environmental Center, High Performing Buildings (2016)",
+      "url": "https://www.hpbmagazine.org/brock-environmental-center-virginia-beach-va/",
+      "scope": "Project design-team account: coastal conditions, mixed cross/stack ventilation, window operation and predicted natural-ventilation hours. The prediction is not treated as a measurement.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "brock-project-submission",
+      "title": "WBDG: Brock Environmental Center project-team case study",
+      "url": "https://legacy.wbdg.org/ar/case-study/brock-environmental-center",
+      "scope": "Project-team submission: airflow and controls strategy, monitoring and reported occupant-satisfaction findings; not an independent cross-flow-only performance test.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "reform-cottage-guide",
+      "title": "Passivhaus Trust: How to Build a Passivhaus, second edition (2023), Reform Cottage, printed p. 53",
+      "url": "https://www.passivhaustrust.org.uk/UserFiles/File/Technical%20Papers/How%20to%20Build%202023/How%20to%20Build%20v2.1.pdf#page=55",
+      "scope": "Reform Cottage construction case: connected wall/roof insulation, window positioning, 2018 EnerPHit certification and reported 0.31 ACH at 50 Pa airtightness.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "reform-cottage-participant",
+      "title": "21 Degrees: Reform Cottage EnerPHit, Herefordshire (2021)",
+      "url": "https://www.21degrees.com/case-studies/reform-cottage-enerphit-herefordshire/",
+      "scope": "Participating supplier and ventilation designer account: project team, existing construction, junction work and reported airtightness. Heating-need data are not presented as metered savings.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "temporary-court-reassembly",
+      "title": "cepezed: Dismantling a building and rebuilding it elsewhere (18 September 2025)",
+      "url": "https://www.cepezed.com/recent/een-gebouw-demonteren-en-elders-weer-opbouwen-kan-gewoon/",
+      "scope": "Architect account of completed courthouse reassembly as an office and knowledge lab; layout and solar-control glazing changes.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "temporary-court-client",
+      "title": "Rijksvastgoedbedrijf: Circulariteit loont, hoe een tijdelijk gebouw twee levens kreeg (13 April 2026)",
+      "url": "https://www.rijksvastgoedbedrijf.nl/actueel/nieuws/2026/04/13/circulariteit-loont-hoe-een-tijdelijk-gebouw-twee-levens-kreeg",
+      "scope": "Original public client account: contract, residual-value incentives, detachable components, storage and second use in Enschede.",
+      "checked": "2026-10-28"
+    }
+  ],
+  "metadata_mapping": "Canonical frontmatter uses the existing schema. Scale, building type and concerns are indexed as tags. All eight recommendation situations are readable article text and enter existing full-text search; the structured sets, provenance and related IDs remain in this sidecar. Existing search and Mira retrieval use the compiled corpus. No new recommendation service or dependency.",
+  "patterns": [
+    {
+      "id": "arch-site-repair",
+      "slug": "site-repair",
+      "title": "Site Repair",
+      "collection": "architecture-site-context-landscape",
+      "scale": ["urban", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["ecology", "existing-fabric"],
+      "summary": "Place new work where it can repair a damaged site while protecting what already works.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL104",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-reuse-before-replacement",
+        "arch-water-sensitive-landscape",
+        "arch-observe-before-briefing"
+      ],
+      "example_user_queries": [
+        "Where should we put an extension without destroying the best part of the site?",
+        "Our site has a damaged corner and a much-loved garden.",
+        "Can new construction improve an existing neighborhood?",
+        "How do we decide what to keep before drawing a building?",
+        "The easiest building location would remove mature trees.",
+        "We want to improve a former industrial site without erasing its history.",
+        "What should a site survey include beyond the property boundary?",
+        "How do we avoid making a greenfield site worse?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/site-repair-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan marks established trees, a retained path and disturbed ground beside an existing building.",
+          "caption": "Record what already supports life before choosing a building footprint.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/site-repair-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two site plans compare an addition in the valued garden with an addition repairing the disturbed edge.",
+          "caption": "A smaller intervention on degraded ground can preserve the most useful existing place.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/site-repair-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Axonometric fragment connects a retained wall, restored ground and an unobstructed pedestrian route.",
+          "caption": "Repair includes connections and ground conditions, not only the new building.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 104; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Latz + Partner: Landschaftspark Duisburg-Nord",
+          "url": "https://www.latzundpartner.de/en/projekte/postindustrielle-landschaften/landschaftspark-duisburg-nord-de/"
+        },
+        {
+          "title": "Christopher Alexander and CES Archive",
+          "url": "https://christopher-alexander-ces-archive.org/"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/duisburg-park.webp",
+          "caption": "Landschaftspark Duisburg-Nord; Latz + Partner. Retained industrial structures help organize the new landscape and its routes."
+        },
+        {
+          "file": "architecture/duisburg-bunker.webp",
+          "alt_text": "Retained concrete bunker walls surround a shallow pool crossed by a narrow platform at Duisburg-Nord.",
+          "caption": "Landschaftspark Duisburg-Nord; landscape adaptation by Latz + Partner. Retained ore-bunker walls frame water and a new crossing."
+        }
+      ]
+    },
+    {
+      "id": "arch-south-facing-outdoors",
+      "slug": "south-facing-outdoors",
+      "title": "South Facing Outdoors",
+      "collection": "architecture-site-context-landscape",
+      "scale": ["site", "building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["sunlight", "climate"],
+      "summary": "Give useful outdoor places access to the sun appropriate to their climate and season.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL105",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-external-solar-shading",
+        "arch-courtyards-which-live",
+        "arch-water-sensitive-landscape"
+      ],
+      "example_user_queries": [
+        "Our garden is in shade whenever we want to use it.",
+        "Where should an outdoor sitting area go on this site?",
+        "The sunny terrace is too hot in summer.",
+        "How can a northern-hemisphere building leave useful sun for its courtyard?",
+        "Does the same orientation advice work in the southern hemisphere?",
+        "How do we compare winter sun with summer shade?",
+        "Our building blocks the best outdoor space.",
+        "Should we prioritize morning sun or evening sun outside?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/south-facing-outdoors-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Northern-hemisphere site plans place outdoor space north and south of a building.",
+          "caption": "In a northern temperate climate, a building north of the garden can preserve useful southern exposure.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/south-facing-outdoors-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Seasonal section compares low winter sun and high summer sun with shading.",
+          "caption": "Evaluate occupied hours and seasonal shade; a sunny plan alone cannot establish comfort.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/south-facing-outdoors-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two outdoor seats offer shaded and sunny choices beside planting.",
+          "caption": "Choice is more useful than forcing every visitor into the same exposure.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 105; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Patronato de la Alhambra: The Court of the Lions",
+          "url": "https://www.alhambra-patronato.es/en/edificios-lugares/the-court-of-the-lions"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/alhambra-court.webp",
+          "alt_text": "A shaded pavilion and arcaded gallery face the bright open Court of the Lions at the Alhambra.",
+          "caption": "Court of the Lions, Alhambra; Nasrid royal workshop under Muhammad V. The shaded gallery and open court offer different exposures within the same outdoor place."
+        }
+      ]
+    },
+    {
+      "id": "arch-water-sensitive-landscape",
+      "slug": "water-sensitive-landscape",
+      "title": "Water-Sensitive Landscape",
+      "collection": "architecture-site-context-landscape",
+      "scale": ["urban", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["water", "biodiversity"],
+      "summary": "Shape ground, planting and drainage as a connected system that holds and safely conveys rain.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-site-repair",
+        "arch-building-edge",
+        "arch-post-occupancy-evaluation"
+      ],
+      "example_user_queries": [
+        "Rainwater runs straight off our site and floods the entrance.",
+        "Can planting help manage runoff from a roof?",
+        "Where should excess water go when a rain garden fills?",
+        "We want a greener courtyard without creating damp walls.",
+        "How do we make drainage visible and understandable?",
+        "Our paved schoolyard becomes a puddle after storms.",
+        "Can we reduce runoff without relying entirely on underground pipes?",
+        "What maintenance does a planted drainage area need?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/water-sensitive-landscape-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Site plan connects roof runoff, planted storage and a safe overflow route.",
+          "caption": "Follow the whole water path, including the route taken when storage is full.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "flow-diagram"
+        },
+        {
+          "file": "architecture/water-sensitive-landscape-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Ground section shows shallow storage separated from a building and accessible path.",
+          "caption": "Store water where the soil, foundations and expected use can tolerate it.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/water-sensitive-landscape-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two rainfall states compare normal treatment and overflow during an exceptional storm.",
+          "caption": "A landscape feature needs a failure route as well as an attractive everyday condition.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "RIBA Sustainable Outcomes Guide (2019): Sustainable Water Cycle",
+          "url": "https://www.riba.org/media/b2lgzeoo/riba-sustainable-outcomes-guide-2019-pdf.pdf"
+        },
+        {
+          "title": "AIA Framework: Design for Water",
+          "url": "https://www.aia.org/design-excellence/aia-framework-design-excellence"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/bioswale-construction.webp",
+          "alt_text": "An unplanted excavated drainage basin in front of a planted bioswale beside buildings and a path.",
+          "caption": "Two bioswales—planted channels that receive runoff—at different stages. The excavated foreground reveals the basin shape; planting fills the completed bed beyond."
+        },
+        {
+          "file": "architecture/brooklyn-bioswale.webp",
+          "alt_text": "A rectangular planted street bed sits beside a Brooklyn pavement and a row of blue rental bicycles.",
+          "caption": "Dean Street, Brooklyn. A planted bioswale receives water at the street edge, fitting drainage into the space beside everyday routes and cycle parking."
+        }
+      ]
+    },
+    {
+      "id": "arch-positive-outdoor-space",
+      "slug": "positive-outdoor-space",
+      "title": "Positive Outdoor Space",
+      "collection": "architecture-public-realm-building-edges",
+      "scale": ["urban", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["public-life", "enclosure"],
+      "summary": "Give outdoor space a legible shape and useful edges rather than leaving it as leftover ground.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL106",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-building-edge",
+        "arch-courtyards-which-live",
+        "arch-main-entrance"
+      ],
+      "example_user_queries": [
+        "The space between our buildings feels like leftover land.",
+        "Why does one small square feel better than a much larger plaza?",
+        "How can we make an outdoor meeting place feel defined?",
+        "Our development has plenty of open space but nowhere people stay.",
+        "Can we shape a public space without enclosing every side?",
+        "Where should seating go in an irregular courtyard?",
+        "How do we distinguish a useful square from a traffic island?",
+        "The lawn around our building is hard to use."
+      ],
+      "visuals": [
+        {
+          "file": "architecture/positive-outdoor-space-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Figure-ground plans compare scattered blocks and a deliberately shaped square.",
+          "caption": "Read the space itself as a figure, not only the buildings around it.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/positive-outdoor-space-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Outdoor plan uses a building, trees and low edges to define an open room.",
+          "caption": "Enclosure can be partial and varied while leaving obvious ways through.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/positive-outdoor-space-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two plans compare a circulation shortcut through seating and a route beside it.",
+          "caption": "A good shape still needs compatible routes, activities and places to pause.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/place-des-vosges.webp",
+          "caption": "Place des Vosges, Paris; seventeenth-century royal square created under Henri IV. The continuous building edge frames the planted center."
+        },
+        {
+          "file": "architecture/royal-crescent.webp",
+          "alt_text": "A continuous curved terrace at Royal Crescent faces an open green lawn with a clear building edge.",
+          "caption": "Royal Crescent, Bath; John Wood the Younger. The curved frontage gives the lawn a clear edge while leaving it open to the wider landscape."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 106; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "City of Paris: Hotel de Fourcy, Place des Vosges historical context",
+          "url": "https://cdn.paris.fr/paris/2019/07/24/882e442f24e493816577ad093764f4e6.pdf"
+        }
+      ]
+    },
+    {
+      "id": "arch-arcades",
+      "slug": "arcades",
+      "title": "Arcades",
+      "collection": "architecture-public-realm-building-edges",
+      "scale": ["building", "urban"],
+      "building_types": ["mixed-use", "civic", "commercial"],
+      "design_concerns": ["shelter", "public-life"],
+      "summary": "Make a sheltered walking edge that joins buildings to public life.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL119",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-building-edge",
+        "arch-positive-outdoor-space",
+        "arch-inclusive-arrival"
+      ],
+      "example_user_queries": [
+        "People hurry past our building because there is no shelter.",
+        "Could a covered walkway make the street more usable?",
+        "How wide should a sheltered edge feel when people also stop there?",
+        "Our shopfront canopy does not connect to the next entrance.",
+        "How can a building offer shade without closing itself to the street?",
+        "We need a dry route between public rooms.",
+        "Can columns make a walking route confusing or inaccessible?",
+        "Why do some colonnades feel welcoming and others deserted?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/arcades-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Axonometric portico shows a continuous sheltered walking route beneath a roof, with columns and a seat beside it.",
+          "caption": "The arcade makes an intermediate territory between interior rooms and exposed public ground.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/arcades-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan distinguishes a continuous clear route from doors, columns and sitting pockets.",
+          "caption": "Shelter works as public infrastructure only when the route remains usable.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/arcades-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two sections compare a shallow decorative canopy and a sheltered occupied edge.",
+          "caption": "Depth and orientation determine which weather the edge actually moderates.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section-comparison"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/bologna-arcade.webp",
+          "caption": "Portico at the Sanctuary of the Madonna di San Luca, Bologna; built through several historical campaigns. Repeated columns and sheltered bays make the route easy to follow."
+        },
+        {
+          "file": "architecture/bologna-street-portico.webp",
+          "alt_text": "A vaulted street portico in Bologna has a long clear walking line beside doors and an open square.",
+          "caption": "Portico di Santo Stefano, Bologna. Doorways and places to pause sit beside the continuous sheltered walking route."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 119; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "UNESCO: The Porticoes of Bologna",
+          "url": "https://whc.unesco.org/en/list/1650"
+        }
+      ]
+    },
+    {
+      "id": "arch-entrance-transition",
+      "slug": "entrance-transition",
+      "title": "Entrance Transition",
+      "collection": "architecture-public-realm-building-edges",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["arrival", "privacy"],
+      "summary": "Use a sequence of thresholds to make arrival legible, comfortable and socially appropriate.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL112",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-main-entrance",
+        "arch-intimacy-gradient",
+        "arch-inclusive-arrival"
+      ],
+      "example_user_queries": [
+        "Our front door opens straight from a busy street into a quiet room.",
+        "How can visitors feel welcome without exposing private activities?",
+        "The entrance lobby feels like a barrier rather than a welcome.",
+        "Can a small porch improve arrival?",
+        "We need a place to wait before entering a shared home.",
+        "How do we make arrival comfortable in bad weather?",
+        "Visitors do not know when they have entered the private part of our building.",
+        "How can a threshold work without adding steps?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/entrance-transition-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan sequences street, sheltered threshold, entrance and interior room.",
+          "caption": "Arrival can change in stages without becoming a long or exclusionary obstacle course.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/entrance-transition-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Open-sided entrance drawing shows a sheltered landing and a continuous level route through a visible doorway into the interior.",
+          "caption": "A threshold can be perceptible through enclosure and light while keeping movement step-free.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/entrance-transition-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two entrances compare direct exposure into a room and a screened intermediate place.",
+          "caption": "Protect privacy without hiding the destination or making people wait in the route.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/red-house.webp",
+          "caption": "Red House, Bexleyheath; Philip Webb for William Morris, 1859–1860. The projecting entrance marks a place to arrive between garden and house."
+        },
+        {
+          "file": "architecture/haddon-lower-court.webp",
+          "alt_text": "Broad stone steps cross the lower courtyard toward a recessed arched doorway at Haddon Hall.",
+          "caption": "Haddon Hall. Courtyard, steps and recessed doorway give arrival depth. This historic sequence illustrates successive thresholds; its stepped approach needs a separate access assessment."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 112; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "English Heritage: Red House, Philip Webb for William Morris",
+          "url": "https://www.english-heritage.org.uk/visit/blue-plaques/red-house/"
+        },
+        {
+          "title": "U.S. Access Board: Entrances, Doors and Gates (jurisdiction-specific guidance)",
+          "url": "https://www.access-board.gov/ada/guides/chapter-4-entrances-doors-and-gates/"
+        }
+      ]
+    },
+    {
+      "id": "arch-building-edge",
+      "slug": "building-edge",
+      "title": "Building Edge",
+      "collection": "architecture-public-realm-building-edges",
+      "scale": ["building", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["public-life", "comfort"],
+      "summary": "Give the meeting of building and ground enough depth to support everyday occupation.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL160",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": ["arch-arcades", "arch-window-place", "arch-positive-outdoor-space"],
+      "example_user_queries": [
+        "Our building meets the pavement with a blank wall.",
+        "Where can people wait without blocking the entrance?",
+        "How can a ground-floor facade contribute to public life?",
+        "We need places to pause along a long building.",
+        "Residents want privacy but the street feels deserted.",
+        "Can a sheltered bench improve the edge of a community building?",
+        "Our setback has become unusable planting behind a fence.",
+        "How do we make the boundary between indoors and outdoors useful?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/building-edge-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan gives an edge depth through doors, windows and sitting pockets.",
+          "caption": "A useful edge offers different ways to engage while keeping the passing route clear.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/building-edge-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Spatial fragment separates the passing route from a sheltered sitting place beside the building, with private interior beyond the wall.",
+          "caption": "Depth can mediate between public and private without forcing either to disappear.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/building-edge-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Three frontage fragments compare a blank wall, a shallow setback and an occupied threshold.",
+          "caption": "The amount of setback matters less than what it enables people to do.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 160; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "UNESCO: The Porticoes of Bologna",
+          "url": "https://whc.unesco.org/en/list/1650"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/royal-crescent.webp",
+          "caption": "Royal Crescent, Bath; John Wood the Younger. The distant view shows how a continuous inhabited frontage defines the landscape edge."
+        },
+        {
+          "file": "architecture/bologna-street-portico.webp",
+          "alt_text": "Bologna street portico with columns toward the square and entrances along the sheltered inside edge.",
+          "caption": "Bologna, Santo Stefano. Columns, doorways and the adjoining square give the edge depth for walking, entering and pausing."
+        }
+      ]
+    },
+    {
+      "id": "arch-wings-of-light",
+      "slug": "wings-of-light",
+      "title": "Wings of Light",
+      "collection": "architecture-building-form-massing",
+      "scale": ["building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["daylight", "form"],
+      "summary": "Break a deep building into shallower wings when useful daylight and outdoor relationships justify it.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL107",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-light-on-two-sides",
+        "arch-compact-building-form",
+        "arch-courtyards-which-live"
+      ],
+      "example_user_queries": [
+        "Too many rooms in our plan are far from an exterior wall.",
+        "Could a narrower building improve daylight?",
+        "Should we divide a deep building into wings?",
+        "Our courtyard barely brings light to the rooms around it.",
+        "How do we balance more daylight with more facade?",
+        "The floor plan has a dark central zone.",
+        "Can a school use several shallow wings without wasting circulation space?",
+        "Does a thin building always use less energy?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/wings-of-light-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two axonometric building forms compare a deep block with shallow connected wings around an open garden, showing their different exposed edges.",
+          "caption": "Shallower occupied zones put more rooms near exterior edges.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/wings-of-light-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Section compares deep floor area and shallow rooms with useful sky exposure.",
+          "caption": "Extra perimeter helps only if openings can see useful sky.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section-comparison"
+        },
+        {
+          "file": "architecture/wings-of-light-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Massing comparison marks daylight opportunities and longer exposed perimeter.",
+          "caption": "More facade is a real tradeoff; compare comfort, area and envelope together.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 107; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Bauhaus Dessau Foundation: Bauhaus Building",
+          "url": "https://bauhaus-dessau.de/en/venues/bauhaus-building/"
+        },
+        {
+          "title": "Ching: Architecture, Form, Space, and Order (publisher overview and contents)",
+          "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/bauhaus-workshops.webp",
+          "caption": "Bauhaus Building, Dessau; Walter Gropius. The workshop wing and connecting parts give different functions distinct building forms."
+        },
+        {
+          "file": "architecture/salk-ocean-court.webp",
+          "alt_text": "Two parallel concrete building ranges at the Salk Institute flank a courtyard opening toward the ocean.",
+          "caption": "Salk Institute; Louis I. Kahn. Open space between the building ranges brings long exterior faces beside the sky."
+        }
+      ]
+    },
+    {
+      "id": "arch-courtyards-which-live",
+      "slug": "courtyards-which-live",
+      "title": "Courtyards Which Live",
+      "collection": "architecture-building-form-massing",
+      "scale": ["building", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["public-life", "microclimate"],
+      "summary": "Make a courtyard part of daily routes and inhabited rooms, with a climate and purpose of its own.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL115",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": ["arch-positive-outdoor-space", "arch-arcades", "arch-cross-ventilation"],
+      "example_user_queries": [
+        "The courtyard looks attractive but nobody spends time there.",
+        "How can our school courtyard become part of everyday life?",
+        "Our enclosed garden is either too hot or too shaded.",
+        "People walk around the outside instead of using the central court.",
+        "How do I add outdoor space to a deep building?",
+        "Can a courtyard improve light without making rooms overlook each other?",
+        "We need a sheltered place for people to meet outdoors.",
+        "What makes a courtyard feel welcoming rather than trapped?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/courtyards-which-live-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Courtyard plan connects useful rooms through doors to a planted court, with seating beside the passing route.",
+          "caption": "Daily routes bring people beside the court; doors and useful rooms make stopping possible.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/courtyards-which-live-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two sections compare sky exposure in a tall narrow court and a wider lower court with a sheltered edge.",
+          "caption": "The same enclosure that shelters people can restrict winter sun and summer air movement.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section-comparison"
+        },
+        {
+          "file": "architecture/courtyards-which-live-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Open-sided courtyard drawing shows a usable door, a sitting edge and a separate passing route.",
+          "caption": "A court needs a reason to enter, a place to sit and a route that remains clear.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/alhambra-court.webp",
+          "caption": "Court of the Lions, Alhambra; Nasrid royal workshop under Muhammad V. A sheltered gallery connects the open court with surrounding rooms."
+        },
+        {
+          "file": "architecture/salk-ocean-court.webp",
+          "alt_text": "The Salk Institute court lies between concrete building ranges and opens to the Pacific at its far end.",
+          "caption": "Salk Institute; Louis I. Kahn. Strong side walls and an open ocean-facing end make a different kind of court from the Alhambra’s sheltered perimeter."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 115; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Patronato de la Alhambra: The Court of the Lions",
+          "url": "https://www.alhambra-patronato.es/en/edificios-lugares/the-court-of-the-lions"
+        }
+      ]
+    },
+    {
+      "id": "arch-compact-building-form",
+      "slug": "compact-building-form",
+      "title": "Compact Building Form",
+      "collection": "architecture-building-form-massing",
+      "scale": ["building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["energy", "resource-use"],
+      "summary": "Reduce unnecessary exposed envelope while preserving daylight, ventilation and a usable plan.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-wings-of-light",
+        "arch-continuous-thermal-envelope",
+        "arch-compare-spatial-alternatives"
+      ],
+      "example_user_queries": [
+        "Our building has many projections but little extra usable space.",
+        "Can a simpler shape reduce energy demand?",
+        "How do we compare a compact block with several wings?",
+        "Does reducing facade area make a building more sustainable?",
+        "We need efficient housing without dark deep rooms.",
+        "Our facade budget is growing because the plan is complicated.",
+        "How much articulation does this building actually need?",
+        "Can a courtyard be worth the extra envelope?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/compact-building-form-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Equal-area footprints compare a square and an articulated perimeter.",
+          "caption": "Similar floor area can require very different amounts of exposed enclosure.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/compact-building-form-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Section distinguishes conditioned rooms from unconditioned outside space.",
+          "caption": "Draw the actual thermal boundary before comparing compactness.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/compact-building-form-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "A comparison matrix balances envelope, daylight and useful outdoor space.",
+          "caption": "Compactness is one criterion among several, not a substitute for a usable plan.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "comparison-table"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/bedzed.webp",
+          "caption": "BedZED, London; Bill Dunster Architects and project partners. Grouped housing provides a built comparison for compact form; performance is discussed in the cited follow-up reports."
+        },
+        {
+          "file": "architecture/london-terrace.webp",
+          "alt_text": "A continuous row of brick terraced houses on Wynyatt Street shares side walls along a London pavement.",
+          "caption": "Wynyatt Street, London. Adjoining houses share side walls, reducing exposed sides compared with detached homes."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Passive House Institute: Building Certification",
+          "url": "https://passivehouse.com/03_certification/02_certification_buildings/01_benefits-of-certification/01_benefits-of-certification.htm"
+        },
+        {
+          "title": "Bioregional: The BedZED Story (2017)",
+          "url": "https://www.bioregional.com/uploads/downloads/The-BedZED-Story_Bioregional_2017.pdf"
+        }
+      ]
+    },
+    {
+      "id": "arch-intimacy-gradient",
+      "slug": "intimacy-gradient",
+      "title": "Intimacy Gradient",
+      "collection": "architecture-spatial-organization-program",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["privacy", "access"],
+      "summary": "Arrange a sequence from shared arrival to more private territory without imposing one social script.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL127",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": ["arch-entrance-transition", "arch-refuge", "arch-flexibly-linked-rooms"],
+      "example_user_queries": [
+        "Guests have to pass bedrooms to reach our shared living room.",
+        "Our clinic mixes waiting and confidential conversation.",
+        "How can a shared house offer privacy without isolating people?",
+        "Visitors cannot tell which areas they are allowed to enter.",
+        "An open plan makes every conversation feel public.",
+        "We need several degrees of privacy in a small building.",
+        "How should public rooms relate to staff-only areas?",
+        "Can a privacy gradient work without a long corridor?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/intimacy-gradient-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan sequences public arrival, shared room, quieter space and private rooms.",
+          "caption": "Place degrees of privacy in an understandable order while preserving necessary direct access.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/intimacy-gradient-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two small plans compare a visitor route through private rooms and a shared route beside them.",
+          "caption": "Circulation should not force unnecessary exposure of private activity.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/intimacy-gradient-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Overlapping zones distinguish visual, acoustic and access privacy.",
+          "caption": "Privacy has several dimensions; a screen does not provide the isolation of a separate room.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "concept-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 127; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Ching: Architecture, Form, Space, and Order (spatial relationships and organization)",
+          "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374"
+        },
+        {
+          "title": "Imperial Household Agency: Katsura Imperial Villa",
+          "url": "https://kyoto-gosho.kunaicho.go.jp/en/katsura-rikyu"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/katsura-linked-rooms.webp",
+          "alt_text": "Timber frames and open sliding screens reveal a sequence of tatami rooms at Katsura Imperial Villa.",
+          "caption": "Katsura Imperial Villa. Successive framed openings and sliding screens allow the connection between rooms to change."
+        }
+      ]
+    },
+    {
+      "id": "arch-common-areas-at-the-heart",
+      "slug": "common-areas-at-the-heart",
+      "title": "Common Areas at the Heart",
+      "collection": "architecture-spatial-organization-program",
+      "scale": ["building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["community", "program"],
+      "summary": "Put a genuinely shared place where ordinary routes can support voluntary encounter.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL129",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-intimacy-gradient",
+        "arch-circulation-as-orientation",
+        "arch-alcoves"
+      ],
+      "example_user_queries": [
+        "Our shared lounge is always empty.",
+        "How can ordinary routes support casual meetings?",
+        "People have to make a special trip to reach the common room.",
+        "We want a shared place without forcing everyone to socialize.",
+        "Where should a communal kitchen go in a housing scheme?",
+        "Our office breakout space interrupts quiet work.",
+        "Can a central space help people understand the building?",
+        "The common room belongs to nobody and is poorly maintained."
+      ],
+      "visuals": [
+        {
+          "file": "architecture/common-areas-at-the-heart-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan places a shared room beside several ordinary routes.",
+          "caption": "A common place works best when everyday journeys make it visible and easy to enter.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/common-areas-at-the-heart-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Alternative plan lets people pass beside shared activity without crossing it.",
+          "caption": "Encounter should be available; participation need not be compulsory.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/common-areas-at-the-heart-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "A shared room includes a central table and quieter edge places.",
+          "caption": "Different levels of involvement help a common room support more than one social preference.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/stockholm-library.webp",
+          "caption": "Stockholm Public Library; Gunnar Asplund. The circular book hall forms a recognizable shared center within the lower surrounding wings."
+        },
+        {
+          "file": "architecture/stockholm-entrance-stair.webp",
+          "alt_text": "An entrance stair at Stockholm Public Library rises through a darker passage toward the bright circular book hall.",
+          "caption": "Stockholm Public Library; Gunnar Asplund. The darker approach opens toward the bright central book hall, giving the journey a clear destination."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 129; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Stockholms stadsbibliotek: Architecture by Gunnar Asplund",
+          "url": "https://biblioteket.stockholm.se/om-stadsbiblioteket-av-gunnar-asplund"
+        }
+      ]
+    },
+    {
+      "id": "arch-flexibly-linked-rooms",
+      "slug": "flexibly-linked-rooms",
+      "title": "Flexibly Linked Rooms",
+      "collection": "architecture-spatial-organization-program",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["adaptability", "program"],
+      "summary": "Connect distinct rooms so they can work independently or together as activities change.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-intimacy-gradient",
+        "arch-loose-fit-layers",
+        "arch-ceiling-height-variety"
+      ],
+      "example_user_queries": [
+        "We need rooms that can work separately and together.",
+        "An open plan gives us no quiet place during simultaneous activities.",
+        "Can a large opening make two small rooms more useful?",
+        "How do we adapt a home for changing work and family needs?",
+        "Our hall is either one noisy space or several isolated rooms.",
+        "Where should a movable partition actually go?",
+        "Can connecting rooms reduce the need for more floor area?",
+        "We need flexibility that people will really use."
+      ],
+      "visuals": [
+        {
+          "file": "architecture/flexibly-linked-rooms-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan joins two usable rooms through a generous controllable opening.",
+          "caption": "Each room should function when the connection is closed, not only in the fully open presentation.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/flexibly-linked-rooms-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two operating states show one gathering and two simultaneous quiet activities.",
+          "caption": "Test distinct activities, furniture and routes in every proposed state.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/flexibly-linked-rooms-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Section locates a movable partition with storage and coordinated acoustic closure.",
+          "caption": "Operable boundaries need hardware, seals, handling and a place to go.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Ching: Architecture, Form, Space, and Order (spatial relationships and organization)",
+          "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374"
+        },
+        {
+          "title": "AIA Framework: Design for Change",
+          "url": "https://www.aia.org/design-excellence/aia-framework-design-excellence"
+        },
+        {
+          "title": "Imperial Household Agency: Katsura Imperial Villa",
+          "url": "https://kyoto-gosho.kunaicho.go.jp/en/katsura-rikyu"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/katsura-linked-rooms.webp",
+          "alt_text": "Open sliding panels link adjoining tatami rooms within timber frames at Katsura Imperial Villa.",
+          "caption": "Katsura Imperial Villa. Open sliding screens connect adjoining rooms while their timber frames keep the individual spaces recognizable."
+        }
+      ]
+    },
+    {
+      "id": "arch-circulation-as-orientation",
+      "slug": "circulation-as-orientation",
+      "title": "Circulation as Orientation",
+      "collection": "architecture-circulation-access-wayfinding",
+      "scale": ["building", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["wayfinding", "access"],
+      "summary": "Use the route itself, its landmarks and its views to explain how a building is organized.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-main-entrance",
+        "arch-common-areas-at-the-heart",
+        "arch-inclusive-arrival"
+      ],
+      "example_user_queries": [
+        "I keep getting lost in this building even with signs.",
+        "How can a corridor help people understand where they are?",
+        "Visitors cannot find reception after entering.",
+        "Every floor looks identical and people take the wrong turn.",
+        "Can daylight or a courtyard help with wayfinding?",
+        "How do we make a hospital route less confusing?",
+        "Where should we put a landmark inside a public building?",
+        "Our signs are compensating for a confusing plan."
+      ],
+      "visuals": [
+        {
+          "file": "architecture/circulation-as-orientation-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan makes a shared hall and visible courtyard landmarks along a route.",
+          "caption": "Show useful destinations before the decision point rather than after the wrong turn.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/circulation-as-orientation-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two junctions compare identical branches and branches with distinct spatial cues.",
+          "caption": "Differences in view and enclosure can support orientation alongside clear information.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/circulation-as-orientation-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Section locates lift and stair beside the same recognizable shared place.",
+          "caption": "Different movement routes should retain access to the same orientation cues.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/british-museum-court.webp",
+          "caption": "Great Court, British Museum, London; Foster and Partners, with the historic Reading Room at its center. The central form remains a reference as visitors move."
+        },
+        {
+          "file": "architecture/great-court-stair.webp",
+          "alt_text": "A broad stair curves beside the circular Reading Room in the British Museum Great Court under a glazed roof.",
+          "caption": "British Museum Great Court; redesign by Foster and Partners. The stair keeps the Reading Room in view as people move between levels."
+        }
+      ],
+      "sources": [
+        {
+          "title": "British Museum: The Great Court",
+          "url": "https://www.britishmuseum.org/about-us/british-museum-story/architecture/great-court"
+        },
+        {
+          "title": "Ching: Architecture, Form, Space, and Order (circulation chapter contents)",
+          "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374"
+        }
+      ]
+    },
+    {
+      "id": "arch-main-entrance",
+      "slug": "main-entrance",
+      "title": "Main Entrance",
+      "collection": "architecture-circulation-access-wayfinding",
+      "scale": ["building", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["arrival", "wayfinding"],
+      "summary": "Make the principal public entrance recognizable from the approach people actually use.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL110",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-entrance-transition",
+        "arch-circulation-as-orientation",
+        "arch-inclusive-arrival"
+      ],
+      "example_user_queries": [
+        "People keep trying the wrong door.",
+        "Our public entrance is hard to recognize from the street.",
+        "Can we make arrival clear without a huge sign?",
+        "The impressive front facade does not show where to enter.",
+        "Visitors arriving by bus approach the back of the building.",
+        "Which entrance should feel like the main one?",
+        "We have several doors but nobody knows which is public.",
+        "How can a small building make its doorway more welcoming?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/main-entrance-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Site plan traces routes from pavement, transport and parking to a public entrance.",
+          "caption": "The main entrance must be legible from actual arrival points, not only the architect’s preferred view.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/main-entrance-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Elevation distinguishes the entry through depth, shelter and a view inward.",
+          "caption": "Architectural cues and clear information can reinforce one another.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "elevation"
+        },
+        {
+          "file": "architecture/main-entrance-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two entrance arrangements compare an impressive stair with a shared step-free approach.",
+          "caption": "Prominence and inclusive access should describe the same arrival experience.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 110; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Herzog & de Meuron: 126 Tate Modern, The Ramp",
+          "url": "https://www.herzogdemeuron.com/projects/126-tate-modern/"
+        },
+        {
+          "title": "U.S. Access Board: Accessible Routes",
+          "url": "https://www.access-board.gov/ada/guides/chapter-4-accessible-routes/"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/tate-west-entrance.webp",
+          "alt_text": "The west entrance of Tate Modern is visible at the base of the brick power station beside its outside forecourt.",
+          "caption": "Tate Modern’s west entrance. The forecourt gives arrival space beside the retained power station by Giles Gilbert Scott; conversion by Herzog & de Meuron."
+        }
+      ]
+    },
+    {
+      "id": "arch-inclusive-arrival",
+      "slug": "inclusive-arrival",
+      "title": "Inclusive Arrival",
+      "collection": "architecture-circulation-access-wayfinding",
+      "scale": ["site", "building", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["accessibility", "dignity"],
+      "summary": "Integrate step-free movement, clear information and comfortable waiting into the main arrival experience.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-main-entrance",
+        "arch-entrance-transition",
+        "arch-circulation-as-orientation"
+      ],
+      "example_user_queries": [
+        "The accessible entrance is hidden around the back.",
+        "How can everyone use the same welcoming arrival?",
+        "Our ramp technically works but feels like a service route.",
+        "People cannot hear the entrance intercom.",
+        "The approach is step-free but the door is too difficult to use.",
+        "Where should people rest or wait near the entrance?",
+        "How do we plan arrival for different sensory and mobility needs?",
+        "Can we improve an old entrance without treating access as an afterthought?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/inclusive-arrival-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Site plan brings walking, wheeling and transport arrival to a common visible entrance.",
+          "caption": "Follow complete journeys from arrival points to the public destination.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/inclusive-arrival-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Entrance section combines shelter, a level landing and usable controls.",
+          "caption": "Removing steps is only one part of a usable threshold.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/inclusive-arrival-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Diagram connects information, movement, door operation and waiting.",
+          "caption": "A broken link anywhere in the arrival chain can undermine the whole experience.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "journey-diagram"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/vauban-courts.webp",
+          "caption": "Housing courts, Vauban district, Freiburg; buildings by multiple teams. Pedestrian routes, planted edges and entrances can be read together as parts of an everyday approach."
+        },
+        {
+          "file": "architecture/tate-arrival-ramp.webp",
+          "alt_text": "Visitors move down the broad entrance ramp into Tate Modern’s Turbine Hall alongside its retained industrial walls.",
+          "caption": "Tate Modern; conversion by Herzog & de Meuron. The broad ramp brings visitors into the principal hall along a shared route."
+        }
+      ],
+      "sources": [
+        {
+          "title": "U.S. Access Board: Accessible Routes",
+          "url": "https://www.access-board.gov/ada/guides/chapter-4-accessible-routes/"
+        },
+        {
+          "title": "U.S. Access Board: Entrances, Doors and Gates",
+          "url": "https://www.access-board.gov/ada/guides/chapter-4-entrances-doors-and-gates/"
+        }
+      ]
+    },
+    {
+      "id": "arch-staircase-as-a-stage",
+      "slug": "staircase-as-a-stage",
+      "title": "Staircase as a Stage",
+      "collection": "architecture-circulation-access-wayfinding",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["movement", "social-life"],
+      "summary": "Let a stair participate in shared space while keeping safe, equivalent routes for everyone.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL133",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-circulation-as-orientation",
+        "arch-inclusive-arrival",
+        "arch-common-areas-at-the-heart"
+      ],
+      "example_user_queries": [
+        "Our main stair is hidden and nobody uses it.",
+        "Can a stair contribute to a shared hall?",
+        "People gather on the stairs and block movement.",
+        "How can a visible stair work alongside an equally good lift route?",
+        "We want vertical circulation to feel connected to the building.",
+        "Should a stair become seating for informal events?",
+        "Our stair landing has a good view but nowhere safe to pause.",
+        "How do we avoid making a dramatic stair an obstacle?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/staircase-as-a-stage-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Open-sided spatial drawing shows a stair rising from a shared hall to a visible landing, with the lift arriving at the same upper level.",
+          "caption": "A stair can take part in shared space without making every landing a gathering obstruction.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/staircase-as-a-stage-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan places stair, lift and shared destination in one legible arrangement.",
+          "caption": "Equivalent participation needs a good lift route, not merely a lift somewhere in the building.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/staircase-as-a-stage-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two stair edges compare obstructed circulation and a separate sitting terrace.",
+          "caption": "Keep movement, waiting and optional seating distinct.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 133; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Stockholms stadsbibliotek: Asplund architecture and entrance sequence",
+          "url": "https://biblioteket.stockholm.se/om-stadsbiblioteket-av-gunnar-asplund"
+        },
+        {
+          "title": "U.S. Access Board: Accessible Routes",
+          "url": "https://www.access-board.gov/ada/guides/chapter-4-accessible-routes/"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/stockholm-entrance-stair.webp",
+          "alt_text": "A stair rises between dark walls toward the illuminated circular book hall at Stockholm Public Library.",
+          "caption": "Stockholm Public Library; Gunnar Asplund. Ascent leads from a darker, narrower space into the bright central book hall."
+        },
+        {
+          "file": "architecture/great-court-stair.webp",
+          "alt_text": "The Great Court stair wraps around the Reading Room with an open landing visible from the museum court.",
+          "caption": "British Museum Great Court; redesign by Foster and Partners. The stair and landing remain visible within the shared room, making movement part of its activity."
+        }
+      ]
+    },
+    {
+      "id": "arch-window-place",
+      "slug": "window-place",
+      "title": "Window Place",
+      "collection": "architecture-human-scale-spatial-experience",
+      "scale": ["room", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["daylight", "comfort"],
+      "summary": "Make a usable place beside a window, with the dimensions, light and thermal comfort to stay there.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL180",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": ["arch-light-on-two-sides", "arch-refuge", "arch-external-solar-shading"],
+      "example_user_queries": [
+        "There is a lovely window but nowhere comfortable to sit beside it.",
+        "How do I design a useful window seat?",
+        "Our brightest corner is also the coldest place in the room.",
+        "Can a window become a reading place without blocking circulation?",
+        "Where should a desk go near a window?",
+        "People keep moving chairs toward the same view.",
+        "The window ledge looks inviting but is too shallow to use.",
+        "How do we make a sunny edge comfortable in summer?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/window-place-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Room plan places a chair and table beside a window while keeping a separate clear approach.",
+          "caption": "A window place is a usable occupied zone, not simply a wide sill.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/window-place-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Occupied window section relates a seated reader to glazing, external shade and a continuous envelope line.",
+          "caption": "Comfort depends on the whole edge: posture, surface temperatures, glare and safe opening.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/window-place-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two room plans compare a window seat blocking movement with a dedicated pocket beside a clear route.",
+          "caption": "Keep the route clear and let the person choose how much of the room to face.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/exeter-library.webp",
+          "caption": "Class of 1945 Library, Phillips Exeter Academy; Louis I. Kahn. This central-hall context view shows the larger shared interior; the separate carrel photograph shows the individual window places."
+        },
+        {
+          "file": "architecture/exeter-window-carrels.webp",
+          "alt_text": "Individual timber study desks and chairs sit beside tall windows at Phillips Exeter Academy Library.",
+          "caption": "Phillips Exeter Academy Library; Louis I. Kahn. Individual desks, chairs and side screens make useful study places directly beside the windows."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 180; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Phillips Exeter Academy: How do I love the library?",
+          "url": "https://exeter.edu/how-do-i-love-the-library-archivist-counts-the-ways/"
+        }
+      ]
+    },
+    {
+      "id": "arch-alcoves",
+      "slug": "alcoves",
+      "title": "Alcoves",
+      "collection": "architecture-human-scale-spatial-experience",
+      "scale": ["room", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["privacy", "choice"],
+      "summary": "Carve a smaller place from a larger room so people can withdraw without leaving entirely.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL179",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-refuge",
+        "arch-common-areas-at-the-heart",
+        "arch-flexibly-linked-rooms"
+      ],
+      "example_user_queries": [
+        "Our large room has no smaller place to sit quietly.",
+        "Can someone withdraw without leaving a shared space?",
+        "How do we add a reading corner without another enclosed room?",
+        "The open lounge feels too exposed for one person.",
+        "We need a quieter edge beside a communal activity.",
+        "How can an alcove remain visible enough for supervision?",
+        "Our seating niche feels cramped rather than comfortable.",
+        "Would a screen or a deep wall recess help this room?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/alcoves-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Open-sided room drawing shows a smaller sitting pocket defined by a return wall while remaining connected to the larger shared room.",
+          "caption": "An alcove gives a smaller spatial scale while maintaining a deliberate connection to the larger room.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/alcoves-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Sections compare an open edge, a low canopy and a fully enclosed small room.",
+          "caption": "A change in enclosure changes experience; it does not automatically provide acoustic isolation.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section-comparison"
+        },
+        {
+          "file": "architecture/alcoves-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan keeps an alcove outside circulation with clear access and an outward view.",
+          "caption": "Locate withdrawal beside movement rather than in a hidden or obstructed remnant.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/kimbell-gallery-side.webp",
+          "caption": "Kimbell Art Museum, Fort Worth; Louis I. Kahn. The overhead form distinguishes a smaller setting along the occupied edge of the building."
+        },
+        {
+          "file": "architecture/furness-library-alcove.webp",
+          "alt_text": "A smaller reading area with a table and shelves sits through an arch off the larger Furness Library interior.",
+          "caption": "Furness Library, University of Pennsylvania; Frank Furness, later restored by Venturi, Scott Brown and Associates. An arched opening connects a smaller reading area to the larger interior."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 179; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Patronato de la Alhambra: The Hall of the Kings",
+          "url": "https://www.alhambra-patronato.es/en/edificios-lugares/the-hall-of-the-kings"
+        },
+        {
+          "title": "Kimbell Art Museum: The Louis I. Kahn Building",
+          "url": "https://50.kimbellart.org/architecture/the-louis-i-kahn-building/"
+        },
+        {
+          "title": "University of Pennsylvania: Fisher Fine Arts Library",
+          "url": "https://facilities.upenn.edu/maps/locations/fisher-fine-arts-library-anne-and-jerome"
+        }
+      ]
+    },
+    {
+      "id": "arch-ceiling-height-variety",
+      "slug": "ceiling-height-variety",
+      "title": "Ceiling Height Variety",
+      "collection": "architecture-human-scale-spatial-experience",
+      "scale": ["room", "building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["scale", "experience"],
+      "summary": "Use changes in overhead height to distinguish activities without relying only on partitions.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL190",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-alcoves",
+        "arch-structural-bay-rhythm",
+        "arch-flexibly-linked-rooms"
+      ],
+      "example_user_queries": [
+        "Every room has the same height and the building feels monotonous.",
+        "Can a lower ceiling make a sitting area feel more contained?",
+        "How do we distinguish spaces without adding walls?",
+        "Our hall feels impressive but uncomfortable for a small group.",
+        "Where is extra room height actually useful?",
+        "Will a lowered ceiling solve the noise in our open room?",
+        "How do services and structure affect changes in ceiling height?",
+        "Can a tall space remain comfortable and economical?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/ceiling-height-variety-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Section moves from a lower threshold into a taller shared room.",
+          "caption": "Changes in height can give activities different spatial characters.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/ceiling-height-variety-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Cutaway spatial drawing contrasts a lower canopy over a sitting edge with the taller open volume of the same room.",
+          "caption": "Variety can exist within one room without closing every activity behind a partition.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/ceiling-height-variety-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Coordinated section locates structure, services and clear headroom.",
+          "caption": "The height people experience is the remaining useful space after construction and services are resolved.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/pantheon-dome.webp",
+          "caption": "Pantheon, Rome; Roman imperial building completed under Hadrian, architect uncertain. The central opening and recessed ceiling panels reveal the dome’s height and curve."
+        },
+        {
+          "file": "architecture/kimbell-gallery.webp",
+          "alt_text": "The Kimbell gallery’s concrete vault and lower side edge make different overhead conditions visible above artworks.",
+          "caption": "Kimbell Art Museum, Fort Worth; Louis I. Kahn. The gallery vault gives a more closely occupied scale of overhead enclosure to compare with the Pantheon."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 190; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Ching: Architecture, Form, Space, and Order (proportion, scale and spatial qualities)",
+          "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374"
+        },
+        {
+          "title": "Pantheon: Italian Ministry of Culture site",
+          "url": "https://direzionemuseiroma.cultura.gov.it/pantheon/"
+        }
+      ]
+    },
+    {
+      "id": "arch-prospect",
+      "slug": "prospect",
+      "title": "Prospect",
+      "collection": "architecture-human-scale-spatial-experience",
+      "scale": ["room", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["views", "orientation"],
+      "summary": "Offer useful outward views from places where people can comfortably pause and understand their surroundings.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "BIO11",
+        "authors": "William Browning, Catherine Ryan and Joseph Clancy",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": ["arch-refuge", "arch-window-place", "arch-circulation-as-orientation"],
+      "example_user_queries": [
+        "I want somewhere to sit with a useful view across the space.",
+        "Our waiting area faces a wall and people feel disconnected.",
+        "How can a view help people understand a place?",
+        "Can we offer an outlook without exposing everyone to glare?",
+        "Where should seats go beside a shared garden?",
+        "An open view is attractive but there is nowhere comfortable to pause.",
+        "How do we avoid confusing a distant view with good wayfinding?",
+        "Will more glazing always make the room feel better?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/prospect-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Spatial drawing places a seat behind a wide framed opening toward a landscape, with a clear line of outlook from the occupied position.",
+          "caption": "Prospect is useful visibility from an occupied place, not simply a large opening.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/prospect-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Matched sections compare seated and standing sight lines past the same sill. The lower sight line stops at the obstruction; the upper sight line clears it.",
+          "caption": "Check the view from the positions people actually use.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/prospect-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan offers a broad outlook and a protected side with alternative seating.",
+          "caption": "Combine outward awareness with choices about exposure and retreat.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Browning, Ryan and Clancy: 14 Patterns of Biophilic Design, pattern 11",
+          "url": "https://www.terrapinbrightgreen.com/reports/14-patterns/"
+        },
+        {
+          "title": "British Museum: The Great Court",
+          "url": "https://www.britishmuseum.org/about-us/british-museum-story/architecture/great-court"
+        },
+        {
+          "title": "National Trust for Historic Preservation: Farnsworth House lower terrace restoration",
+          "url": "https://edithfarnsworthhouse.org/wp-content/uploads/Farnsworth_LowerTerrace_200323.pdf.pdf"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/farnsworth-outlook.webp",
+          "alt_text": "Seating and a table inside the Farnsworth House face full-height glazing overlooking grass and trees.",
+          "caption": "Farnsworth House; Ludwig Mies van der Rohe for Dr. Edith Farnsworth. Furniture beside broad glazing connects an occupied room with views of the surrounding landscape."
+        }
+      ]
+    },
+    {
+      "id": "arch-refuge",
+      "slug": "refuge",
+      "title": "Refuge",
+      "collection": "architecture-human-scale-spatial-experience",
+      "scale": ["room", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["privacy", "sensory-comfort"],
+      "summary": "Provide optional places with a protected back and controlled exposure to the surrounding activity.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "BIO12",
+        "authors": "William Browning, Catherine Ryan and Joseph Clancy",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": ["arch-prospect", "arch-alcoves", "arch-intimacy-gradient"],
+      "example_user_queries": [
+        "I need a place to pause without feeling watched from every direction.",
+        "Our open room has nowhere to withdraw briefly.",
+        "How can a waiting area offer more choice about exposure?",
+        "Can a protected back make a seat more comfortable?",
+        "We need quieter places without isolating people entirely.",
+        "Our booths feel trapped rather than reassuring.",
+        "How do we balance withdrawal with supervision?",
+        "Is a small enclosed corner always better for concentration?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/refuge-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Open-sided room drawing places a seat against a protective return wall, with a visible outlook and an unobstructed route into the shared room.",
+          "caption": "A refuge gives control over exposure while retaining an understandable connection to the room.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/refuge-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two pockets compare one clear exit with a deep concealed recess.",
+          "caption": "Protection should not remove choice, orientation or safe access.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/refuge-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Room plan offers open, partially screened and enclosed options.",
+          "caption": "Different people and activities need different degrees of withdrawal.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Browning, Ryan and Clancy: 14 Patterns of Biophilic Design, pattern 12",
+          "url": "https://www.terrapinbrightgreen.com/reports/14-patterns/"
+        },
+        {
+          "title": "University of Pennsylvania: Fisher Fine Arts Library",
+          "url": "https://facilities.upenn.edu/maps/locations/fisher-fine-arts-library-anne-and-jerome"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/randall-library-nook.webp",
+          "alt_text": "Armchairs sit against the walls of a small windowed reading corner at Randall Library in Stow, Massachusetts.",
+          "caption": "Randall Library, Stow. Chairs in a windowed corner have protected sides and daylight while remaining part of the library."
+        },
+        {
+          "file": "architecture/furness-library-alcove.webp",
+          "alt_text": "A Furness Library reading area is framed by an arch and enclosing walls with bookshelves and a table.",
+          "caption": "Furness Library; Frank Furness, later restored by Venturi, Scott Brown and Associates. Walls and an arched threshold give the table a protected setting connected to the larger room."
+        }
+      ]
+    },
+    {
+      "id": "arch-light-on-two-sides",
+      "slug": "light-on-two-sides",
+      "title": "Light on Two Sides of Every Room",
+      "collection": "architecture-light-climate-comfort",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["daylight", "glare"],
+      "summary": "Admit daylight from more than one direction when the plan, climate and use can support it.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "APL159",
+        "authors": "Christopher Alexander, Sara Ishikawa, Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-wings-of-light",
+        "arch-external-solar-shading",
+        "arch-window-place"
+      ],
+      "example_user_queries": [
+        "The back of our room is gloomy even with a big window.",
+        "How can we reduce the contrast between a bright window and a dark room?",
+        "Could a second small window make this space more comfortable?",
+        "Our corner room feels better than rooms along the corridor.",
+        "I want daylight without glazing the whole wall.",
+        "How can a deep floor plan get more useful daylight?",
+        "Where should a reading desk go in a room with two windows?",
+        "Will two glazed walls make the room overheat?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/light-on-two-sides-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plans compare light from one edge and from two adjacent edges.",
+          "caption": "A second direction of daylight can reveal surfaces in shadow; it does not guarantee sufficient light at every task.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/light-on-two-sides-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Room section shows window glare, shaded openings and a seated task.",
+          "caption": "Judge light at the person and task, including the view toward the window, not just the window area.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/light-on-two-sides-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Three small plans compare a corner room, a shallow wing and a deep floor plate.",
+          "caption": "Building form determines which rooms can reach more than one exterior edge.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/kimbell-gallery.webp",
+          "caption": "Kimbell Art Museum, Fort Worth; Louis I. Kahn. Reflectors spread roof light across the vaults: a controlled top-lighting comparison alongside the two-sided window example."
+        },
+        {
+          "file": "architecture/strawberry-hill-corner.webp",
+          "alt_text": "Two Gothic windows meet on adjoining walls beside a chair in a blue room at Strawberry Hill House.",
+          "caption": "Strawberry Hill House; developed by Horace Walpole and collaborators. Windows on adjoining walls admit daylight from two directions."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A Pattern Language, pattern 159; Alexander, Ishikawa, Silverstein and colleagues",
+          "url": "https://www.patternlanguage.com/apl/aplsummary.htm"
+        },
+        {
+          "title": "Kimbell Art Museum: The Louis I. Kahn Building",
+          "url": "https://50.kimbellart.org/architecture/the-louis-i-kahn-building/"
+        },
+        {
+          "title": "Francis D. K. Ching: Architecture, Form, Space, and Order (publisher overview and contents)",
+          "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374"
+        },
+        {
+          "title": "Strawberry Hill House: history",
+          "url": "https://www.strawberryhillhouse.org.uk/the-house/history/"
+        }
+      ]
+    },
+    {
+      "id": "arch-external-solar-shading",
+      "slug": "external-solar-shading",
+      "title": "External Solar Shading",
+      "collection": "architecture-light-climate-comfort",
+      "scale": ["building", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["overheating", "glare"],
+      "summary": "Intercept unwanted sun outside the glazing while retaining useful daylight and seasonal choice.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-south-facing-outdoors",
+        "arch-light-on-two-sides",
+        "arch-continuous-thermal-envelope"
+      ],
+      "example_user_queries": [
+        "Our glazed room overheats when the sun comes out.",
+        "Can we stop solar heat before it enters the window?",
+        "Would a horizontal overhang work on a west-facing window?",
+        "We need daylight but not direct sun on the desks.",
+        "How do we choose between fixed and movable shading?",
+        "Our internal blinds control glare but the room still feels hot.",
+        "Can shading help in winter as well as summer?",
+        "The facade looks shaded in drawings but low sun still comes in."
+      ],
+      "visuals": [
+        {
+          "file": "architecture/external-solar-shading-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Window section intercepts a solar ray outside the glass.",
+          "caption": "External shading can stop part of the solar input before it reaches the glazing.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/external-solar-shading-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Sun-angle diagrams distinguish high sun controlled by an overhang from low sun passing beneath it.",
+          "caption": "Shading geometry must match orientation, season and occupied hours.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section-comparison"
+        },
+        {
+          "file": "architecture/external-solar-shading-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Three spatial window fragments compare an overhead shade, projecting vertical fins and an exterior screen, each placed outside the glazing.",
+          "caption": "Different devices trade reliability, view, daylight and maintenance.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        }
+      ],
+      "sources": [
+        {
+          "title": "U.S. Department of Energy: Energy 101, Daylighting",
+          "url": "https://www.energy.gov/articles/energy-101-daylighting"
+        },
+        {
+          "title": "U.S. DOE / PNNL: Energy Savings from Window Attachments",
+          "url": "https://basc.pnnl.gov/library/energy-savings-window-attachments"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/genoa-shutters.webp",
+          "alt_text": "Green external louvred shutters stand open on some windows and closed across others on a Genoa facade.",
+          "caption": "Genoa. External louvred shutters are shown open and closed, making the choice between more exposure and more shade visible."
+        }
+      ]
+    },
+    {
+      "id": "arch-cross-ventilation",
+      "slug": "cross-ventilation",
+      "title": "Cross Ventilation",
+      "collection": "architecture-light-climate-comfort",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["air-quality", "thermal-comfort"],
+      "summary": "Arrange viable openings and internal paths so pressure differences can move outdoor air through occupied space.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-wings-of-light",
+        "arch-courtyards-which-live",
+        "arch-continuous-thermal-envelope"
+      ],
+      "example_user_queries": [
+        "The room has opening windows but the air barely moves.",
+        "Can openings on two sides improve natural ventilation?",
+        "Our internal doors block the intended airflow.",
+        "When is outdoor air too hot or polluted for window ventilation?",
+        "How do we plan a useful air path through a building?",
+        "Can a courtyard ventilate surrounding rooms automatically?",
+        "We want summer air movement without losing privacy.",
+        "Does opening a window replace a designed ventilation system?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/cross-ventilation-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan links an inlet and outlet through occupied room space.",
+          "caption": "A viable air path needs suitable pressure conditions and internal continuity.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/cross-ventilation-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two plans compare a blocked route and one that can operate without opening a private room.",
+          "caption": "Doors, screens and use patterns determine whether the drawn path exists in practice.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/cross-ventilation-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Section separates cross flow from a high-and-low stack-ventilation path.",
+          "caption": "Wind pressure and buoyancy are different drivers; do not label every airflow strategy as cross ventilation.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-and-section"
+        }
+      ],
+      "sources": [
+        {
+          "title": "U.S. Department of Energy, Building Science Education: Natural Ventilation and Cooling",
+          "url": "https://bsesc.energy.gov/energy-basics/natural-ventilation-and-cooling"
+        },
+        {
+          "title": "WBDG: Natural Ventilation (additional reference; body extraction unavailable in this research session)",
+          "url": "https://www.wbdg.org/resources/natural-ventilation"
+        },
+        {
+          "title": "Coffield, Lappano and Mella: Brock Environmental Center, High Performing Buildings (2016)",
+          "url": "https://www.hpbmagazine.org/brock-environmental-center-virginia-beach-va/"
+        },
+        {
+          "title": "WBDG: Brock Environmental Center project-team case study",
+          "url": "https://legacy.wbdg.org/ar/case-study/brock-environmental-center"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/jalousie-operation.webp",
+          "alt_text": "Two photographs compare a jalousie window with its glass louvres closed and tilted open.",
+          "caption": "A jalousie window with its glass slats closed and tilted open. This is one controllable opening in a potential air path; cross-ventilation also needs a suitable outlet and pressure difference."
+        },
+        {
+          "file": "architecture/brock-environmental-center.webp",
+          "alt_text": "The Brock Environmental Center has an elevated porch, a curved roof and high windows above a low coastal landscape.",
+          "caption": "Brock Environmental Center, Virginia Beach; SmithGroupJJR. High windows, the porch and coastal setting give context to the documented mixed-mode ventilation strategy."
+        }
+      ]
+    },
+    {
+      "id": "arch-continuous-thermal-envelope",
+      "slug": "continuous-thermal-envelope",
+      "title": "Continuous Thermal Envelope",
+      "collection": "architecture-light-climate-comfort",
+      "scale": ["building", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["energy", "moisture"],
+      "summary": "Keep insulation, airtightness and junction details continuous around the conditioned space.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-compact-building-form",
+        "arch-drained-ventilated-rainscreen",
+        "arch-repairable-connections"
+      ],
+      "example_user_queries": [
+        "Our well-insulated building still has cold corners.",
+        "How do we keep insulation continuous around a balcony or roof edge?",
+        "Can airtight construction work with healthy ventilation?",
+        "The wall specification is good but the junctions look unresolved.",
+        "Why does a small gap matter in the enclosure?",
+        "We need to connect a new extension to an old building without a cold bridge.",
+        "How do we coordinate windows with insulation and airtightness?",
+        "Is adding more insulation enough to make a comfortable building?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/continuous-thermal-envelope-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Section traces a continuous insulation line around roof, wall and floor.",
+          "caption": "Follow the thermal boundary through every junction rather than judging each material in isolation.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/continuous-thermal-envelope-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Window junction separates insulation continuity from the airtight layer.",
+          "caption": "Thermal resistance and airtightness are different functions that must both connect.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "detail-section"
+        },
+        {
+          "file": "architecture/continuous-thermal-envelope-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two balcony junctions compare a penetrating slab and a deliberately separated support.",
+          "caption": "Structural connections can interrupt the envelope; actual solutions require engineering and moisture assessment.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "detail-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Passive House Institute: Building Certification",
+          "url": "https://passivehouse.com/03_certification/02_certification_buildings/01_benefits-of-certification/01_benefits-of-certification.htm"
+        },
+        {
+          "title": "U.S. DOE Building Science Education: High-R Attics, Eaves in Vented Attics (continuity principle; numerical example not adopted)",
+          "url": "https://bsesc.energy.gov/energy-basics/high-r-attics-eaves-vented-attics"
+        },
+        {
+          "title": "Passivhaus Trust: How to Build a Passivhaus, second edition (2023), Reform Cottage, printed p. 53",
+          "url": "https://www.passivhaustrust.org.uk/UserFiles/File/Technical%20Papers/How%20to%20Build%202023/How%20to%20Build%20v2.1.pdf#page=55"
+        },
+        {
+          "title": "21 Degrees: Reform Cottage EnerPHit, Herefordshire (2021)",
+          "url": "https://www.21degrees.com/case-studies/reform-cottage-enerphit-herefordshire/"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/wall-insulation-retrofit.webp",
+          "alt_text": "Exposed facade insulation and unfinished protective layers surround a window during a department-store retrofit.",
+          "caption": "Facade insulation during retrofit. The unfinished window edge reveals where the insulation and protective layers need to meet the opening."
+        }
+      ]
+    },
+    {
+      "id": "arch-structural-bay-rhythm",
+      "slug": "structural-bay-rhythm",
+      "title": "Structural Bay Rhythm",
+      "collection": "architecture-structure-materials-details",
+      "scale": ["building", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["structure", "adaptability"],
+      "summary": "Coordinate repeatable structural spans with rooms, openings and future uses.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-loose-fit-layers",
+        "arch-wings-of-light",
+        "arch-repairable-connections"
+      ],
+      "example_user_queries": [
+        "Our columns keep landing in the middle of useful rooms.",
+        "How can the structural grid support several future layouts?",
+        "Should window spacing follow the structural bays?",
+        "We want repetition without a monotonous building.",
+        "A large open span seems flexible but may use more material.",
+        "How do we coordinate room sizes with structure early?",
+        "The facade module and the floor plan do not agree.",
+        "Can one repeated bay accommodate different activities?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/structural-bay-rhythm-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Open structural frame shows repeated columns and beams above several possible room divisions, with one bay highlighted independently of partitions.",
+          "caption": "A useful bay supports more than one plausible layout without placing supports in critical routes.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/structural-bay-rhythm-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Elevation distinguishes structural rhythm from the pattern of windows and infill.",
+          "caption": "Related modules can coordinate; they need not be mechanically identical.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "elevation"
+        },
+        {
+          "file": "architecture/structural-bay-rhythm-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two grids compare many close supports and fewer long spans.",
+          "caption": "Span choices trade room freedom, structural demand, depth and material.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "structural-comparison"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/fagus-factory.webp",
+          "caption": "Fagus Factory, Alfeld; Walter Gropius and Adolf Meyer. Repeated glazing and framing divisions make the facade’s rhythm visible."
+        },
+        {
+          "file": "architecture/crown-hall-interior.webp",
+          "alt_text": "The open upper floor of Crown Hall has repeated perimeter glazing and a broad ceiling above low internal partitions.",
+          "caption": "Crown Hall; Ludwig Mies van der Rohe with Pace Architects and C.F. Murphy Associates. Repeated perimeter divisions provide an order around an open interior with low partitions."
+        }
+      ],
+      "sources": [
+        {
+          "title": "UNESCO: Fagus Factory in Alfeld",
+          "url": "https://whc.unesco.org/en/list/1368/"
+        },
+        {
+          "title": "Ching: Architecture, Form, Space, and Order (grid, structure, rhythm and proportion)",
+          "url": "https://www.wiley.com/en-us/architecture-form-space-and-order-5th-edition-p-9781119853374"
+        },
+        {
+          "title": "Illinois Institute of Technology: S.R. Crown Hall building history",
+          "url": "https://buildinghistory.iit.edu/buildings/crown"
+        }
+      ]
+    },
+    {
+      "id": "arch-drained-ventilated-rainscreen",
+      "slug": "drained-ventilated-rainscreen",
+      "title": "Drained and Ventilated Rainscreen",
+      "collection": "architecture-structure-materials-details",
+      "scale": ["detail", "building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["moisture", "durability"],
+      "summary": "Separate rain shedding from the protected inner wall with a drained, deliberately detailed cavity.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-continuous-thermal-envelope",
+        "arch-repairable-connections",
+        "arch-building-edge"
+      ],
+      "example_user_queries": [
+        "Rain keeps finding its way behind our cladding.",
+        "Should a facade rely on one perfect outer seal?",
+        "How can a wall drain water that gets past the outer layer?",
+        "What happens at the bottom of a cladding cavity?",
+        "Can ventilation behind cladding help it dry?",
+        "Our facade detail has no clear route for water to leave.",
+        "How do windows interrupt a rainscreen strategy?",
+        "Is a cavity wall automatically safe and durable?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/drained-ventilated-rainscreen-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Exploded wall fragment shows partial outer cladding, an open drainage cavity and a green drainage surface beside the protected inner wall, with water directed down and out.",
+          "caption": "The outer layer sheds much of the rain; the protected inner system manages what passes it.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/drained-ventilated-rainscreen-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Window section directs water at an interruption back toward the exterior.",
+          "caption": "Every opening and cavity interruption needs a coherent drainage route.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "detail-section"
+        },
+        {
+          "file": "architecture/drained-ventilated-rainscreen-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Diagram tracks rain entry, downward drainage and drying while marking fire-control coordination.",
+          "caption": "A cavity is a designed space with several requirements, not an empty gap left to chance.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "detail-section"
+        }
+      ],
+      "sources": [
+        {
+          "title": "John Straube, Building Science Corporation: BSD-013, Rain Control in Buildings",
+          "url": "https://buildingscience.com/documents/digests/bsd-013-rain-control-in-buildings"
+        },
+        {
+          "title": "Whole Building Design Guide: Building Envelope Design Guide",
+          "url": "https://www.wbdg.org/building-envelope-design-guide"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/rainscreen-installation.webp",
+          "alt_text": "An unfinished ventilated facade exposes insulation, a membrane, metal supports and partly installed outer panels.",
+          "caption": "A ventilated facade during installation. Exposed insulation, protective layer and metal supports show how the outer covering is separated from the inner wall."
+        }
+      ]
+    },
+    {
+      "id": "arch-repairable-connections",
+      "slug": "repairable-connections",
+      "title": "Repairable Connections",
+      "collection": "architecture-structure-materials-details",
+      "scale": ["detail", "building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["maintenance", "durability"],
+      "summary": "Make vulnerable parts accessible and replaceable without dismantling sound neighboring construction.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-drained-ventilated-rainscreen",
+        "arch-design-for-disassembly",
+        "arch-loose-fit-layers"
+      ],
+      "example_user_queries": [
+        "A small failed component would require tearing out a whole wall.",
+        "How do we make building details easier to maintain?",
+        "Our fixings disappear behind permanent finishes.",
+        "Can we replace a worn part without damaging sound construction?",
+        "What should a detail show about future repair access?",
+        "The sealant joint is impossible to inspect or reach.",
+        "How can conservation keep original material rather than replace everything?",
+        "Is a visible fixing always the most repairable choice?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/repairable-connections-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Exploded spatial fragment separates one replaceable panel from its retained support, exposing the interface and the direction of access.",
+          "caption": "Make the expected replacement possible without destroying neighboring sound work.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/repairable-connections-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two details compare a concealed bonded connection and accessible mechanical access.",
+          "caption": "The relevant question is the actual repair sequence, including safe access and temporary support.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "detail-comparison"
+        },
+        {
+          "file": "architecture/repairable-connections-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Process diagram links inspection, diagnosis, targeted replacement and a new record.",
+          "caption": "Repair begins with understanding the failure, not with automatically replacing the whole assembly.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "process-diagram"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/salk-court.webp",
+          "caption": "Salk Institute, La Jolla; Louis I. Kahn. Concrete structure and timber window-wall assemblies are visible as distinct parts. This context view accompanies the documented conservation account."
+        },
+        {
+          "file": "architecture/bolted-steel-connection.webp",
+          "alt_text": "A close view shows bolts joining a galvanized steel floor joist to another steel member at a building edge.",
+          "caption": "Bolted steel floor connection, Stone County, Missouri. Visible fasteners make the joining method clear; later removal also depends on access and safe temporary support."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Getty Conservation Institute: Salk Institute Conservation Project",
+          "url": "https://www.getty.edu/projects/salk-institute-conservation/"
+        },
+        {
+          "title": "U.S. EPA: Designing for Adaptability, Disassembly and Reuse",
+          "url": "https://www.epa.gov/smm/best-practices-reducing-reusing-and-recycling-construction-and-demolition-materials"
+        }
+      ]
+    },
+    {
+      "id": "arch-reuse-before-replacement",
+      "slug": "reuse-before-replacement",
+      "title": "Reuse Before Replacement",
+      "collection": "architecture-adaptability-reuse-longevity",
+      "scale": ["building", "site"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["embodied-carbon", "heritage"],
+      "summary": "Test continued use, repair and conversion before deciding that a building needs replacement.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-site-repair",
+        "arch-loose-fit-layers",
+        "arch-post-occupancy-evaluation"
+      ],
+      "example_user_queries": [
+        "Is this old building really beyond saving?",
+        "How do we compare refurbishment with demolition and rebuilding?",
+        "We need more useful space but the existing structure seems sound.",
+        "Could an empty industrial building accommodate a new public use?",
+        "How can we preserve local character without keeping every failing detail?",
+        "What should a survey establish before we decide to demolish?",
+        "Will a new efficient building always have lower carbon impacts?",
+        "Can we improve accessibility in a building worth keeping?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/reuse-before-replacement-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Three options retain an existing building, add to it, or replace it.",
+          "caption": "Compare continued use, targeted adaptation and replacement against the same functional brief.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/reuse-before-replacement-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Building section separates retained frame from upgraded enclosure and new services.",
+          "caption": "Retention is selective: a sound frame can remain while access, comfort and services change.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "section"
+        },
+        {
+          "file": "architecture/reuse-before-replacement-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "A carbon comparison separates upfront impacts from future operation over time.",
+          "caption": "Conceptual accounting categories only. Actual carbon comparisons need quantities, service lives and consistent scenarios.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "concept-chart"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/tate-hall.webp",
+          "caption": "Turbine Hall, Tate Modern, London; power station by Giles Gilbert Scott, conversion by Herzog & de Meuron. The retained industrial volume becomes shared public space."
+        },
+        {
+          "file": "architecture/duisburg-bunker.webp",
+          "alt_text": "Existing ore-bunker walls at Duisburg-Nord enclose water and a new narrow crossing for visitors.",
+          "caption": "Duisburg-Nord; landscape adaptation by Latz + Partner. Retained industrial walls give a new landscape its enclosure and character."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Herzog & de Meuron: 126 Tate Modern",
+          "url": "https://www.herzogdemeuron.com/projects/126-tate-modern/"
+        },
+        {
+          "title": "AIA Framework: Design for Resources and Design for Change",
+          "url": "https://www.aia.org/design-excellence/aia-framework-design-excellence"
+        },
+        {
+          "title": "RIBA Sustainable Outcomes Guide (2019), whole-life approach",
+          "url": "https://www.riba.org/media/b2lgzeoo/riba-sustainable-outcomes-guide-2019-pdf.pdf"
+        }
+      ]
+    },
+    {
+      "id": "arch-loose-fit-layers",
+      "slug": "loose-fit-layers",
+      "title": "Shearing Layers",
+      "collection": "architecture-adaptability-reuse-longevity",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["adaptability", "maintenance"],
+      "summary": "Let structure, services and room divisions change on different timescales.",
+      "provenance": {
+        "kind": "established-named-pattern",
+        "reference": "BRAND",
+        "authors": "Stewart Brand, developing the time-layer model associated with Frank Duffy",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-structural-bay-rhythm",
+        "arch-repairable-connections",
+        "arch-reuse-before-replacement"
+      ],
+      "example_user_queries": [
+        "Changing the office layout requires rebuilding permanent construction.",
+        "Can services be replaced without cutting into the structure?",
+        "How do we design for different rates of building change?",
+        "Our long-lived frame is tied to short-lived equipment.",
+        "We need an adaptable plan without pretending every use is possible.",
+        "Should partitions follow the structural grid exactly?",
+        "Why does a small refurbishment trigger so much demolition?",
+        "How can a building stay useful as its occupants change?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/loose-fit-layers-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Exploded building diagram separates the durable structural floor, an accessible services zone and changeable room divisions to show different rates of change.",
+          "caption": "Different layers change at different rates; the model helps identify costly dependencies.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/loose-fit-layers-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two sections compare services cast into permanent construction and services with planned access.",
+          "caption": "Make likely changes possible while respecting fire, acoustic and structural requirements.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "detail-comparison"
+        },
+        {
+          "file": "architecture/loose-fit-layers-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plans show two room layouts within the same retained structural frame.",
+          "caption": "Useful adaptability is demonstrated through plausible scenarios, not an empty floor plate.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Stewart Brand: How Buildings Learn (publisher description; full book not reproduced)",
+          "url": "https://www.penguinrandomhouse.com/books/320919/how-buildings-learn-by-stewart-brand/"
+        },
+        {
+          "title": "Herzog & de Meuron: 126 Tate Modern",
+          "url": "https://www.herzogdemeuron.com/projects/126-tate-modern/"
+        },
+        {
+          "title": "AIA Framework: Design for Change",
+          "url": "https://www.aia.org/design-excellence/aia-framework-design-excellence"
+        },
+        {
+          "title": "Lloyd’s: the Lloyd’s building",
+          "url": "https://www.lloyds.com/about-lloyds/the-lloyds-building"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/lloyds-service-towers.webp",
+          "alt_text": "External service towers, ducts and glazed circulation rise beside the main volume of the Lloyd’s Building in London.",
+          "caption": "Lloyd’s Building, London; Richard Rogers Partnership. External service towers and circulation are visibly distinct from the main occupied volume."
+        }
+      ]
+    },
+    {
+      "id": "arch-design-for-disassembly",
+      "slug": "design-for-disassembly",
+      "title": "Design for Disassembly",
+      "collection": "architecture-adaptability-reuse-longevity",
+      "scale": ["building", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["circularity", "resource-use"],
+      "summary": "Plan connections, handling and records so components can be recovered safely for future use.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-repairable-connections",
+        "arch-loose-fit-layers",
+        "arch-reuse-before-replacement"
+      ],
+      "example_user_queries": [
+        "Can these building components be used again after this project?",
+        "We want a structure that can be taken apart safely.",
+        "Does bolting components together guarantee future reuse?",
+        "How do we keep a record of materials for later recovery?",
+        "Our temporary building should not become demolition waste.",
+        "What makes a reusable component worth recovering?",
+        "How do we compare reuse with recycling?",
+        "Can reversible connections still meet structural and fire requirements?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/design-for-disassembly-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Exploded assembly shows a component separated from retained supports, with a conceptual removal path that requires a designed stability and handling sequence.",
+          "caption": "A disassembly sequence needs accessible connections, temporary stability and a handling route.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "axonometric"
+        },
+        {
+          "file": "architecture/design-for-disassembly-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Two material paths distinguish whole-component reuse from crushing and recycling.",
+          "caption": "Recovery preserves different amounts of function; reuse and recycling are not equivalent outcomes.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "flow-diagram"
+        },
+        {
+          "file": "architecture/design-for-disassembly-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "A component record links identity, material, condition and connection information.",
+          "caption": "Information is part of the recoverable system, alongside the physical component.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "record-diagram"
+        }
+      ],
+      "sources": [
+        {
+          "title": "U.S. EPA: Best Practices for Reducing, Reusing and Recycling Construction and Demolition Materials",
+          "url": "https://www.epa.gov/smm/best-practices-reducing-reusing-and-recycling-construction-and-demolition-materials"
+        },
+        {
+          "title": "cepezed: Dismantling a building and rebuilding it elsewhere (18 September 2025)",
+          "url": "https://www.cepezed.com/recent/een-gebouw-demonteren-en-elders-weer-opbouwen-kan-gewoon/"
+        },
+        {
+          "title": "Rijksvastgoedbedrijf: Circulariteit loont, hoe een tijdelijk gebouw twee levens kreeg (13 April 2026)",
+          "url": "https://www.rijksvastgoedbedrijf.nl/actueel/nieuws/2026/04/13/circulariteit-loont-hoe-een-tijdelijk-gebouw-twee-levens-kreeg"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/bolted-steel-connection.webp",
+          "alt_text": "Accessible bolt heads connect galvanized steel members in an exposed floor assembly before finishes are installed.",
+          "caption": "Bolted steel floor connection, Stone County, Missouri. The fasteners identify points of separation to consider in a planned removal sequence."
+        }
+      ]
+    },
+    {
+      "id": "arch-observe-before-briefing",
+      "slug": "observe-before-briefing",
+      "title": "Observe Before Briefing",
+      "collection": "architecture-architectural-design-process",
+      "scale": ["site", "building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["participation", "program"],
+      "summary": "Learn how people use and maintain a place before fixing the design problem and accommodation schedule.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-site-repair",
+        "arch-post-occupancy-evaluation",
+        "arch-intimacy-gradient"
+      ],
+      "example_user_queries": [
+        "We have a room schedule but do not understand how people actually use the building.",
+        "How do we write a better architectural brief?",
+        "Staff keep improvising around the existing layout.",
+        "Which users should we speak to before designing an extension?",
+        "The client wants more space but the present rooms are often empty.",
+        "How can observation reveal access problems?",
+        "We need to understand a place without intruding on private activities.",
+        "How do we turn user complaints into spatial requirements?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/observe-before-briefing-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Plan records actual routes, waiting and improvised activities on an existing layout.",
+          "caption": "Observe use before treating the official room labels as the complete brief.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/observe-before-briefing-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Diagram pairs an observation with several possible explanations and a question.",
+          "caption": "Keep what was seen separate from the interpretation; test the explanation with users.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "inquiry-diagram"
+        },
+        {
+          "file": "architecture/observe-before-briefing-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Briefing loop connects users, caretakers, designers and a revised requirement.",
+          "caption": "A brief should preserve evidence and uncertainty as well as a room schedule.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "process-diagram"
+        }
+      ],
+      "sources": [
+        {
+          "title": "RIBA: Plan for Use Guide",
+          "url": "https://www.riba.org/work/insights-and-resources/plan-for-use-guide/"
+        },
+        {
+          "title": "Christopher Alexander and CES Archive: user participation context",
+          "url": "https://christopher-alexander-ces-archive.org/"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/cambridge-desire-line.webp",
+          "alt_text": "A worn route through winter grass and patchy snow crosses an open green toward a bridge in Cambridge.",
+          "caption": "A winter desire line in Cambridge. Repeated walking leaves a route across the ground: a visible starting point for observing where people want to go."
+        }
+      ]
+    },
+    {
+      "id": "arch-compare-spatial-alternatives",
+      "slug": "compare-spatial-alternatives",
+      "title": "Compare Spatial Alternatives",
+      "collection": "architecture-architectural-design-process",
+      "scale": ["site", "building"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["decision-making", "performance"],
+      "summary": "Compare genuinely different layouts against shared requirements before polishing a preferred scheme.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-compact-building-form",
+        "arch-reuse-before-replacement",
+        "reframing-alternative-paths"
+      ],
+      "example_user_queries": [
+        "We chose a building layout before comparing any real alternatives.",
+        "How can we evaluate different plans fairly?",
+        "Every option looks like a minor version of the same design.",
+        "Should we compare refurbishment, extension and a new building?",
+        "The most polished rendering keeps winning the discussion.",
+        "How do we compare daylight, access and cost without one misleading score?",
+        "What makes an architectural option genuinely different?",
+        "We need to explain why one layout is preferable."
+      ],
+      "visuals": [
+        {
+          "file": "architecture/compare-spatial-alternatives-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Three plan options use the same brief with different spatial organizations.",
+          "caption": "Compare genuinely different relationships rather than cosmetic variants of one plan.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan-comparison"
+        },
+        {
+          "file": "architecture/compare-spatial-alternatives-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Comparison table keeps access, daylight, construction and cost visible separately.",
+          "caption": "A transparent set of criteria reveals tradeoffs that a single score can hide.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "comparison-table"
+        },
+        {
+          "file": "architecture/compare-spatial-alternatives-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Decision diagram links an uncertain assumption to a targeted study and revised choice.",
+          "caption": "Investigate the uncertainty most likely to change the decision before refining minor details.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "process-diagram"
+        }
+      ],
+      "sources": [
+        {
+          "title": "AIA Framework: Design for Integration",
+          "url": "https://www.aia.org/design-excellence/aia-framework-design-excellence"
+        },
+        {
+          "title": "RIBA: Plan for Use Guide",
+          "url": "https://www.riba.org/work/insights-and-resources/plan-for-use-guide/"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/royal-crescent.webp",
+          "alt_text": "The curved frontage of Royal Crescent frames a broad lawn with a continuous built edge.",
+          "caption": "Royal Crescent, Bath; John Wood the Younger. A continuous curved frontage provides one reference for organizing buildings around open space."
+        },
+        {
+          "file": "architecture/bauhaus-workshops.webp",
+          "alt_text": "The Bauhaus workshop wing and connecting building elements show differentiated volumes rather than a continuous housing frontage.",
+          "caption": "Bauhaus, Dessau; Walter Gropius. Separate wings and connections provide a contrasting reference for building form. These photographs illustrate different relationships, not proposals for the same brief."
+        }
+      ]
+    },
+    {
+      "id": "arch-test-at-full-scale",
+      "slug": "test-at-full-scale",
+      "title": "Test at Full Scale",
+      "collection": "architecture-architectural-design-process",
+      "scale": ["room", "detail"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["usability", "construction"],
+      "summary": "Use a focused full-size mock-up to resolve a consequential uncertainty before repetition makes it expensive.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-compare-spatial-alternatives",
+        "arch-repairable-connections",
+        "prefer-the-smallest-useful-experiment"
+      ],
+      "example_user_queries": [
+        "The room looks fine on the plan but we cannot judge how it will feel.",
+        "Should we mock up this entrance before building it?",
+        "How can users test a reception desk before fabrication?",
+        "We are about to repeat an uncertain facade detail many times.",
+        "What should a full-size architectural mock-up actually test?",
+        "Can tape and cardboard reveal a layout problem?",
+        "How do we avoid treating a visual mock-up as a performance test?",
+        "We need evidence before committing to expensive fixed joinery."
+      ],
+      "visuals": [
+        {
+          "file": "architecture/test-at-full-scale-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Full-size layout marks doors, furniture and circulation on the floor.",
+          "caption": "A simple spatial mock-up can reveal conflicts in reach, movement and simultaneous use.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/test-at-full-scale-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Detail mock-up separates visual review, assembly review and tested performance.",
+          "caption": "Different questions require different fidelity and test methods.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "comparison-diagram"
+        },
+        {
+          "file": "architecture/test-at-full-scale-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Feedback loop records a question, test condition, observation, revision and retest.",
+          "caption": "Define the uncertainty first so the mock-up can produce a decision.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "process-diagram"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Getty Conservation Institute: Salk Institute Conservation Project, trial mock-ups",
+          "url": "https://www.getty.edu/projects/salk-institute-conservation/"
+        },
+        {
+          "title": "RIBA: Plan for Use Guide",
+          "url": "https://www.riba.org/work/insights-and-resources/plan-for-use-guide/"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/olympia-full-size-mockup.webp",
+          "alt_text": "A historic photograph shows a full-size column capital and portico ceiling mock-up standing within timber scaffolding.",
+          "caption": "Washington State Capitol, Olympia, 1926; architects Wilder and White. A full-size plaster column and ceiling mock-up makes the overhead proportions possible to inspect."
+        },
+        {
+          "file": "architecture/brick-sample-panel.webp",
+          "alt_text": "A freestanding brick sample panel displays several bands of different brick colors and mortar arrangements.",
+          "caption": "A brick mock-up panel compares actual materials, mortar joints and color combinations side by side at full size."
+        }
+      ]
+    },
+    {
+      "id": "arch-post-occupancy-evaluation",
+      "slug": "post-occupancy-evaluation",
+      "title": "Post-Occupancy Evaluation",
+      "collection": "architecture-architectural-design-process",
+      "scale": ["building", "room"],
+      "building_types": ["housing", "education", "civic", "workplace"],
+      "design_concerns": ["feedback", "performance"],
+      "summary": "Compare lived experience and measured operation with the brief, then assign and verify improvements.",
+      "provenance": {
+        "kind": "modern-synthesis",
+        "reference": "SYN",
+        "authors": "Patternverse editorial synthesis; source organizations credited in article",
+        "evidence_note": "A design proposition to evaluate in context, not a universal performance or health guarantee."
+      },
+      "related_patterns": [
+        "arch-observe-before-briefing",
+        "arch-continuous-thermal-envelope",
+        "arch-compare-spatial-alternatives"
+      ],
+      "example_user_queries": [
+        "The building is finished but does it work as intended?",
+        "Occupants complain even though the design met its targets.",
+        "How do we learn from a building after handover?",
+        "What should we measure besides energy use?",
+        "Can we investigate overheating without blaming users?",
+        "Who should act on feedback from a new building?",
+        "Our evaluation report did not lead to any changes.",
+        "How do we compare predicted performance with actual use fairly?"
+      ],
+      "visuals": [
+        {
+          "file": "architecture/post-occupancy-evaluation-1.svg",
+          "kind": "original-schematic",
+          "alt_text": "Diagram connects original brief, occupied evidence, corrective action and verification.",
+          "caption": "Evaluation needs an action owner and a return check, not just a report.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "process-diagram"
+        },
+        {
+          "file": "architecture/post-occupancy-evaluation-2.svg",
+          "kind": "original-schematic",
+          "alt_text": "Building plan pairs user observations with environmental and operational data.",
+          "caption": "Combine lived experience and measurements; neither alone explains every cause.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "plan"
+        },
+        {
+          "file": "architecture/post-occupancy-evaluation-3.svg",
+          "kind": "original-schematic",
+          "alt_text": "Seasonal timeline places early feedback, later seasonal checks and lessons for the next project.",
+          "caption": "A single handover visit cannot represent all operating conditions.",
+          "creator": "Patternverse",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "style": "light-editorial",
+          "projection": "timeline"
+        }
+      ],
+      "sources": [
+        {
+          "title": "RIBA: Plan for Use Guide",
+          "url": "https://www.riba.org/work/insights-and-resources/plan-for-use-guide/"
+        },
+        {
+          "title": "Bioregional and Peabody: BedZED Seven Years On (2009)",
+          "url": "https://www.bioregional.com/uploads/downloads/BedZED-7-years-on_Bioregional_Peabody_2009.pdf"
+        },
+        {
+          "title": "WBDG: Building Commissioning (additional reference)",
+          "url": "https://www.wbdg.org/resources/building-commissioning"
+        }
+      ],
+      "photographs": [
+        {
+          "file": "architecture/bedzed-powerhouse.webp",
+          "alt_text": "The BedZED power-house building stands beside a road and parked cars with its glazed entrance and roof form visible.",
+          "caption": "BedZED’s power house; development by Bill Dunster Architects and the project team. This services building provides context for the published operational follow-up."
+        },
+        {
+          "file": "architecture/bedzed.webp",
+          "alt_text": "Homes and shared outdoor circulation at BedZED show the occupied development discussed in its published follow-up reporting.",
+          "caption": "BedZED, London; Bill Dunster Architects and the project team. The housing and shared routes provide the everyday setting for the cited follow-up reporting."
+        }
+      ]
+    }
+  ],
+  "practices": [],
+  "curation_notes": [
+    "No physical-architecture canonical patterns existed in the 588-pattern starting inventory.",
+    "The software Prototype article is a GoF object-creation pattern; full-scale architectural testing is distinct.",
+    "General experiment and alternative-path reasoning remain canonical in their existing articles and are cross-linked from the architecture-specific applications.",
+    "Risk/Peril and rigid historic social prescriptions were not selected as general recommendations. All selected patterns require contextual evaluation.",
+    "Shearing Layers retains the established Brand/Duffy attribution; Loose-Fit Layers is retained only in its stable descriptive file ID.",
+    "Architecture contains article-based field guides only. Do not add guided practices to this verse."
+  ],
+  "article_outline": [
+    "What it is for",
+    "The core idea",
+    "How it works",
+    "Why it works",
+    "Architectural examples",
+    "Design considerations",
+    "Useful when",
+    "Common mistakes and limits",
+    "Related patterns",
+    "Sources and provenance"
+  ],
+  "article_outline_notes": "All canonical Architecture guides use these H2 headings in order. Case-specific H3 headings distinguish named precedents, contextual comparisons and illustrative scenarios. Figures stay beside the relationships or examples they explain. The Architecture verse has no guided practices.",
+  "illustration_pilot": {
+    "direction": "Editorial plans with spatial drawings where they clarify the relationship",
+    "patterns": ["arch-site-repair", "arch-courtyards-which-live", "arch-window-place"],
+    "original_drawings": 9,
+    "compact_companions": 9,
+    "style_source": "scripts/architecture-editorial-visuals.mjs",
+    "scope": "Approved pilot direction now applied to every Architecture article.",
+    "status": "approved-and-extended"
+  },
+  "illustration_style": {
+    "direction": "White editorial illustrations with cutaways, plans and sections selected for clarity",
+    "scope": "All 36 canonical Architecture articles",
+    "original_drawings": 108,
+    "compact_companions": 108,
+    "axonometric_drawings": 17,
+    "style_source": "scripts/architecture-editorial-visuals.mjs",
+    "spatial_source": "scripts/architecture-spatial-visuals.mjs",
+    "principles": [
+      "White illustration surfaces in every appearance",
+      "Consistent Helvetica Neue regular typography",
+      "Fine outlines, quiet gray context and restrained mint fields",
+      "A purposeful green accent identifies the explained relationship",
+      "Filled silhouettes for occupied sections; overhead symbols for plans",
+      "Short callouts; fuller explanations in the existing figure captions",
+      "Cutaways, plans, sections and sequences chosen for what they teach"
+    ],
+    "typography": "Helvetica Neue, Helvetica, Arial, sans-serif; regular weight",
+    "background": "#ffffff",
+    "figure_source": "scripts/architecture-figure-symbols.mjs"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "presentation-model",
+  "title": "Presentation Model",
+  "aliases": ["MVVM", "Model-View-ViewModel", "Model View ViewModel"],
+  "primary_collection": "software-presentation-ui-state",
+  "primary_collection_title": "Presentation and UI State",
+  "body_word_count": 1450,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary sources: Fowler’s Presentation Model catalog entry, Gossman’s original MVVM introduction archived by Microsoft, and official Microsoft documentation on MVVM, WPF binding source-update timing, and RelayCommand availability notification. Fowler explicitly lists MVVM as another name; the article uses one canonical record, explains the binding-oriented realization, and distinguishes MVC/MVP and accepted domain state. The Python example is an explicit synchronization implementation rather than a claimed WPF or MAUI binding engine.",
+    "python_examples": {
+      "status": "passed",
+      "code_files": ["editor.py", "demo.py"],
+      "stdout": [
+        "'Ada' | False | False | Ada | Ready",
+        "'  ' | False | True | Ada | Name must contain 1–40 characters",
+        "'Grace' | True | True | Ada | Ready",
+        "'Grace' | False | False | Grace | Saved",
+        "'Grace' | False | False | Grace | Discarded"
+      ],
+      "verification": "Independent domain guards, invalid drafts, disabled-action guard, Unicode/length boundaries, normalization, no-op Apply, Cancel reload, separate sessions, and failure checks passed."
+    },
+    "content": "1264 entities validate with drafts included. Published-only compilation has 1117 entities and no diagnostics.",
+    "integration_tests": "Presentation Model, MVC, MVP, and GoF article integration suites pass. The combined run has 37 passed checks and one unrelated global authored-graphic coverage failure across five files. The other four graphics geometry, safety, fallback, and export checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, validator, integration test, authoring sidecar, concept registry, and authoring documentation. The article retains repository Markdown conventions.",
+    "collection": "Reuses Presentation and UI State, retaining MVC and MVP as its first two members and adding Presentation Model as the third. No collection or future-pattern stub was created.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-presentation-ui-state.md"],
+      "other_existing_content_unchanged": 1262,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "existing_mvc_mvp_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 29,
+      "prior_graphics_unchanged": 441,
+      "prior_dimensions_unchanged": 1558,
+      "new_dimensions": {
+        "software-engineering/presentation-model-boundaries.svg": {
+          "width": 720,
+          "height": 936
+        },
+        "software-engineering/presentation-model-boundaries-mobile.svg": {
+          "width": 360,
+          "height": 1184
+        },
+        "software-engineering/presentation-model-draft.svg": {
+          "width": 720,
+          "height": 992
+        },
+        "software-engineering/presentation-model-draft-mobile.svg": {
+          "width": 360,
+          "height": 1168
+        }
+      }
+    },
+    "production_build": "The standard public build script succeeds in an isolated source copy, with Public web build checks passed. The isolated build avoids altering shared generated output or another session’s staging directory. Private environment files were excluded; an empty PUBLIC_DROPBOX_APP_KEY supplies the disabled local sync integration. No credentials were copied, and no renderer or build implementation was changed.",
+    "illustrations": "Two native editable SVG figures explain view/editor/domain boundaries and invalid-to-valid draft transitions. Each has an independent phone composition. Fixed white, regular Helvetica Neue with Helvetica/Arial fallbacks, the approved ink/secondary/context/construction/accent palette, square boundaries, and restrained strokes are preserved. All four variants have no measured label collisions, outside labels, or outside rectangles. Actual embedded desktop and phone figures were visually inspected for labels, arrow meanings, accuracy, contrast, spacing, and captions.",
+    "browser": "Actual production article checked at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive diagrams, exact selectable Python text, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. All four related article routes return 200. The existing verse redirect leads to the filtered library; the Presentation and UI State button opens its three-member gallery; the Presentation Model card opens the article with its correct collection breadcrumb. Desktop/phone article tops, code viewport, gallery, and both embedded figures at both widths were visually inspected. No browser console or page errors were recorded.",
+    "built_assets": {
+      "build_root": ".local/software-presentation-model/build-workspace/apps/web/build",
+      "local_file_references": 73,
+      "missing": [],
+      "navigation_data_bytes": 41538
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. The check reports one error and zero warnings. The file remains unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic. Four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential in-memory profile editing session. Profile owns a trimmed 1–40 Unicode-code-point name and independently validates rename before assignment. ProfileEditor owns raw drafts, feedback, derived Apply/Cancel availability, and actions without any view reference. Invalid Apply leaves accepted state unchanged; successful Apply normalizes and accepts the draft; Cancel reloads the current domain value, not an initial snapshot or save rollback. The console view explicitly pulls properties after each interaction and prints the domain name only as diagnostic evidence. No GUI, binding engine, change notification, async service, persistence, authorization, or concurrent-edit protection is implemented. A search-screen second context illustrates stale completion policy but is not runnable search code.",
+  "preview": "http://127.0.0.1:43014/pattern/presentation-model",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-presentation-model",
+  "browser_measurements": ".local/software-presentation-model/browser-checks.json",
+  "build_log": ".local/software-presentation-model/public-build-isolated.log",
+  "branch": "codex/software-presentation-model",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request.",
+  "browser_check_script": ".local/software-presentation-model/check-browser.mjs"
+}

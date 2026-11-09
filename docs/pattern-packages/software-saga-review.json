@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "saga",
+  "title": "Saga",
+  "aliases": ["Sagas"],
+  "primary_collection": "software-distributed-data-coordination",
+  "primary_collection_title": "Distributed Data and Coordination",
+  "body_word_count": 1384,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Garcia-Molina and Salem’s original Sagas (1987) SIGMOD paper hosted by Cornell; Chris Richardson’s Saga catalog; Microsoft’s Saga and Compensating Transaction patterns; Temporal’s Saga documentation and Emily Fortuna’s compensating-actions article. The Princeton technical-report URL denied access; the original published paper was read through Cornell and no research blocker remains. The original long-lived-transaction motivation is distinguished from the modern distributed-service form. Sagas is retained as the original plural alias. Compensation, orchestration/choreography, uncertainty, lack of global isolation, progress durability, domain-specific order, and operating repair are explicit. Broad claims that independent databases universally preclude distributed transactions or that compensation restores the original world are not inferred.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["saga.py", "demo.py"],
+      "stdout": ["waiting_compensation 2 1 1", "compensated 4 1 0", "other order: 1"],
+      "verification": "Exact demo output and trace T1/T2/T3 refusal/C2/C1 pause/C1 resume; pending compensation retains done=1, completed compensation is not rerun, and unrelated O99 remains held with four mugs available; terminal compensated calls are inert; successful forward completion invokes no compensation and is separately terminal; first/second-step refusal compensates only accepted earlier work; uncertain forward response after effect retries the same identity without double reservation or blind compensation; unavailable-before-effect pauses after one attempt and resumes on the same plan/state; compensation response lost after release can be retried without adding capacity; unexpected errors propagate without pretending recovery succeeded; repeated reserve/release, conflicting identity payload, closed-key late-request rejection, independent ledgers, and exact 1/1000 capacity/quantity boundaries. Trusted nonempty string operation keys and single-caller fixed-plan ownership are preconditions. In-memory sequential simulation only: no durable crash recovery, network, concurrency, transactional database, scheduler, or production idempotency retention is inferred."
+    },
+    "content": "1280 entities validate with drafts included; final published-only compilation contains 1133 entities without diagnostics.",
+    "integration_tests": "All seven focused article suites pass: Saga, Transactional Outbox, Event Sourcing, CQRS, Database per Service, Idempotent Receiver, and GoF. Combined run across eight files reports 46 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass. After adding a sentence labeling every printed example value, the final Saga suite passes all three checks again and the exact code validator passes again.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Saga has no existing canonical article. Added saga with original plural alias Sagas. Created only the required Distributed Data and Coordination collection, with this completed article as its sole member, and linked it from the existing Software Engineering verse. Compensating Actions remains a distinct unchanged article for the narrower recovery mechanism. Database per Service, Transactional Outbox, and Idempotent Receiver retain their canonical related links. No new future stub, practice, worksheet, or duplicate article.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": ["content/verses/software-engineering.md"],
+      "other_existing_content_unchanged": 1277,
+      "new_content": [
+        "content/patterns/saga.md",
+        "content/collections/software-distributed-data-coordination.md"
+      ],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_and_collections_unchanged": true,
+      "compensating_actions_article_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 47,
+      "prior_graphics_unchanged": 459,
+      "prior_dimensions_unchanged": 1626,
+      "new_dimensions": {
+        "software-engineering/saga-sequence.svg": {
+          "width": 720,
+          "height": 904
+        },
+        "software-engineering/saga-sequence-mobile.svg": {
+          "width": 360,
+          "height": 1112
+        },
+        "software-engineering/saga-recovery.svg": {
+          "width": 720,
+          "height": 920
+        },
+        "software-engineering/saga-recovery-mobile.svg": {
+          "width": 360,
+          "height": 1144
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. The final article explicitly labels output status, free mug/slot units, and outstanding compensation count; the final build contains this clarification. Task article, primary collection, Software Engineering verse, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier software article, or GoF changes. The task-local server was reopened after rebuilding its snapshot directory and final browser checks pass.",
+    "illustrations": "Two editable native SVGs explain independently committed participant steps followed by explicit compensation, and the O42/O99 interleaving with a paused Inventory compensation that resumes to four available mugs. Both have separately composed phone variants, meaningful alternatives/captions, approved fixed white surface/regular Helvetica Neue palette/square geometry, and explicit arrow meanings. The declared C2-before-C1 order is not claimed universal. The recovery figure and caption distinguish in-memory resume from durable crash recovery. All four variants have zero measured outside labels, text overlaps, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for accuracy, placement, contrast, and readability.",
+    "browser": "Final production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all four related routes returning 200. The new Distributed Data and Coordination route and Software Engineering verse gallery both open the Saga article with its correct primary breadcrumb; the collection contains one completed member. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-saga/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 44444
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original bounded sequential Python 3.11+ simulation of an orchestrated Saga. Each Pool models participant-local atomic reservation/release calls with separate ledgers, quantity/capacity range 1–1000, repeat-safe operations, conflicting identity rejection, and retained closed keys. Trusted nonempty application-generated string keys, fresh controlled state, one caller, and a fixed step plan are preconditions. A definitive Declined means no active forward effect for that identified operation; Unavailable retains the current operation for same-identity reconciliation/retry. O42 holds two of five mugs and one packing slot, while an unrelated O99 takes one mug. Carrier declines; Packing compensation succeeds; Inventory compensation pauses once and resumes, preserving O99 and leaving four mugs. Successful completion, earlier refusal, lost forward/compensation replies, unknown errors, late forwards, and boundaries are checked. No database, network, concurrent threads, durable journal, scheduler, process-crash recovery, authentication, production idempotency retention, or plan migration. Dictionary assignments model local transactions under sequential assumptions; they do not implement a production transaction protocol. The compensated state is not order fulfillment and does not restore global isolation.",
+  "preview": "http://127.0.0.1:43032/pattern/saga",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-saga",
+  "browser_measurements": ".local/software-saga/browser-checks.json",
+  "browser_check_script": ".local/software-saga/check-browser.mjs",
+  "build_log": ".local/software-saga/public-build-isolated.log",
+  "branch": "codex/software-saga",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

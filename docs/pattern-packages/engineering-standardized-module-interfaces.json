@@ -1,0 +1,237 @@
+{
+  "title": "Engineering — Standardized Module Interfaces",
+  "edition": "Draft illustrated field-guide article",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples",
+    "Assumptions for correctness",
+    "When to use it",
+    "Tradeoffs and operating costs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "engineering-standardized-module-interfaces",
+      "taxonomy_id": "P010",
+      "title": "Standardized Module Interfaces",
+      "status": "draft",
+      "domain": "Engineering",
+      "family": "Function and Architecture",
+      "entry_type": "terminal pattern",
+      "parent": {
+        "taxonomy_id": "P001",
+        "id": "engineering-segmentation",
+        "title": "Segmentation"
+      },
+      "collections": ["engineering-function-and-architecture"],
+      "summary": "Preserve the connection contract between replaceable units so suitable alternatives can work without redesigning their neighbors.",
+      "identity_resolution": {
+        "decision": "New physical-engineering specialization of Segmentation.",
+        "existing_catalog_checked": [
+          "engineering-segmentation",
+          "adapter",
+          "bridge",
+          "modular-upgrade-revenue"
+        ],
+        "boundary": "Segmentation chooses independently manageable units. Adapter translates an existing software mismatch, Bridge separates software variation dimensions, and Modular Upgrade Revenue concerns a business offering. This article specifies the physical, electrical, fluid, and semantic contract that approved replacement units preserve. Different implementations may share it; Common Parts instead reduces the assortment of actual components."
+      },
+      "use_when": [
+        "Replaceable units must substitute without redesigning surrounding equipment.",
+        "Multiple suppliers or product variants must preserve defined boundary behavior.",
+        "A mechanically mating replacement can still have incompatible ratings, supply conditions, or signal meaning."
+      ],
+      "goals": [
+        "Preserve useful neighboring equipment",
+        "Make substitution criteria inspectable",
+        "Permit internal implementation variation within a defined compatibility family"
+      ],
+      "mechanisms": [
+        "Stable datums and mating geometry",
+        "Declared operating and performance limits",
+        "Unambiguous signal units and mappings",
+        "Versioned contracts and configuration variants",
+        "Layered dimensional and functional verification"
+      ],
+      "not_ideal_when": [
+        "The supposed common interface erases consequential functional differences.",
+        "A universal envelope or protocol adds more burden than the compatibility family justifies.",
+        "No process exists for checking conformity or managing revisions."
+      ],
+      "example_user_queries": [
+        "The replacement valve has the right bolt holes but does not fit between the pipes.",
+        "How can we change suppliers without redesigning the surrounding machine?",
+        "Our sensor connector fits but the displayed pressure is wrong.",
+        "What should a replaceable module's interface specification include?",
+        "Can different components be interchangeable without using the same part number?",
+        "A new sensor has the same current output but a different measurement range.",
+        "Which dimensions have to stay fixed when a valve is replaced?",
+        "How do we keep module revisions compatible with installed equipment?",
+        "We need to specify the connector, mounting face, power, and signal meaning together.",
+        "Does matching a flange size prove the replacement is suitable?",
+        "Should we preserve an interface or adapt each new component separately?",
+        "How can we verify that a new head works with our existing receiver?"
+      ],
+      "related_patterns": [
+        {
+          "taxonomy_id": "P001",
+          "id": "engineering-segmentation",
+          "title": "Segmentation",
+          "relationship": "Direct parent; chooses the manageable-unit boundary without guaranteeing interchangeability.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P122",
+          "title": "Common Parts",
+          "relationship": "Different from this pattern: reduces actual component variety rather than preserving a common connection contract.",
+          "article_status": "planned"
+        },
+        {
+          "taxonomy_id": "P011",
+          "title": "Reconfigurable Architecture",
+          "relationship": "Can be enabled by stable connections; changes working arrangement, not just substitutability.",
+          "article_status": "planned"
+        },
+        {
+          "id": "adapter",
+          "title": "Adapter",
+          "relationship": "Cross-verse software analogy: translates a mismatch; this pattern defines the intended stable physical-engineering boundary.",
+          "article_status": "published"
+        }
+      ],
+      "worked_examples": [
+        {
+          "name": "Reserved isolation-valve station",
+          "kind": "illustrative",
+          "held_fixed": [
+            "neighboring pipe datum planes",
+            "flow-axis alignment",
+            "station duty",
+            "reserved installation envelope"
+          ],
+          "assumptions": {
+            "valve_face_to_face_mm": 200,
+            "compressed_gasket_each_mm": 2,
+            "gaskets": 2,
+            "pipe_face_gap_mm": 204,
+            "candidate_long_body_mm": 240
+          },
+          "computed": {
+            "nominal_required_gap_mm": 204,
+            "long_candidate_required_gap_mm": 244,
+            "excess_length_mm": 40
+          },
+          "limits": "Teaching values are not ASME dimensions or a buildable flange specification. Does not evaluate tolerances, gasket behavior, loads, pressure rating, or functional compliance."
+        },
+        {
+          "name": "Two approved pressure heads",
+          "kind": "illustrative",
+          "contract": {
+            "nominal_supply_V": 24,
+            "supply_range_V": [18, 30],
+            "current_mA": [4, 20],
+            "pressure_kPa_gauge": [0, 100],
+            "output": "Sourced current with compatible receiver load",
+            "contact_assignments": {
+              "1": "Nominal +24 V DC",
+              "2": "Return",
+              "3": "Sourced 4–20 mA",
+              "4": "Reserved, no connection"
+            }
+          },
+          "verification_fixture": [
+            {
+              "pressure_kPa": 0,
+              "current_mA": 4
+            },
+            {
+              "pressure_kPa": 50,
+              "current_mA": 12
+            },
+            {
+              "pressure_kPa": 100,
+              "current_mA": 20
+            }
+          ],
+          "limits": "Project-only connector and mounting sketch. Not an industry pinout, a TI device, or an IEEE 1451.4 implementation. Accuracy, dynamics, environment, and fault criteria require additional specified checks."
+        },
+        {
+          "name": "Mechanically mating but semantically incompatible head",
+          "kind": "illustrative",
+          "current_mA": 12,
+          "current_span_mA": [4, 20],
+          "receiver_pressure_span_kPa": [0, 100],
+          "candidate_pressure_span_kPa": [0, 1000],
+          "computed": {
+            "fraction_of_span": 0.5,
+            "head_pressure_kPa": 500,
+            "receiver_display_kPa": 50,
+            "interpretation_ratio": 10,
+            "absolute_mismatch_kPa": 450
+          },
+          "additional_voltage_boundary": {
+            "rack_nominal_V": 24,
+            "hypothetical_head_nominal_V": 3.3,
+            "hypothetical_head_maximum_V": 3.6
+          },
+          "limits": "Linear mapping arithmetic on declared fixtures; not measured sensor error, fault detection, or device damage characterization. A valid electrical range does not establish compatible meaning."
+        }
+      ],
+      "sources": [
+        "https://www.asme.org/codes-standards/find-codes-standards/b16-10-face-face-end-end-dimensions-valves",
+        "https://www.asme.org/codes-standards/find-codes-standards/b16-5-pipe-flanges-flanged-fittings-nps-1-2-nps-24-metric-inch-standard",
+        "https://www.ni.com/en/support/documentation/supplemental/06/sensor-calibration-with-teds-technology.html",
+        "https://www.ti.com/lit/ug/tiduc27b/tiduc27b.pdf"
+      ],
+      "source_notes": [
+        {
+          "source": "ASME B16.10 public scope page",
+          "accessed": "2026-10-27",
+          "basis": "Read scope: installation dimensions and interchangeability for specified valve material, type, size, rating class, and end connection. Page displays 2022 edition.",
+          "boundary": "Public scope only; full standard and dimension tables not accessed. No cross-type interchangeability or compliance claim."
+        },
+        {
+          "source": "ASME B16.5 public scope page",
+          "accessed": "2026-10-27",
+          "basis": "Read scope: pressure–temperature ratings, materials, dimensions, tolerances, and related flange requirements. Page displays 2025 edition.",
+          "boundary": "No real flange dimensions, sizing, or ratings selected. Toy pattern F1 and all installation numbers are original illustrative fixtures."
+        },
+        {
+          "source": "NI, Sensor Calibration with TEDS Technology",
+          "accessed": "2026-10-27",
+          "basis": "Read overview and calibration discussion: sensor excitation, ranges, calibration information, and electrical-to-physical interpretation.",
+          "boundary": "The illustrated connector implements no electronic identification. No automatic calibration or product accuracy improvement claimed."
+        },
+        {
+          "source": "Texas Instruments, TIDUC27B, section 2, p. 12",
+          "accessed": "2026-10-27",
+          "basis": "Read current-loop explanation of the 4 mA lower endpoint and 20 mA full-scale endpoint with a 16 mA span.",
+          "boundary": "TI's reference design is a two-wire loop-powered humidity transmitter; only endpoint conventions inform this article's independently declared pressure-mapping fixture. No transfer of its power, wiring, accuracy, or performance specifications."
+        },
+        {
+          "source": "University of Michigan Design Heuristics handout supplied as a research lead",
+          "access_status": "Direct fetch returned HTTP 403 during the preceding article's research.",
+          "boundary": "Not used as evidentiary support or represented as read. This taxonomy is not relabeled as the official card set."
+        }
+      ],
+      "graphics": {
+        "decision": "Three static original SVG figures and phone companions; no widget.",
+        "reason": "The exploded station and heads expose the physical contract; the fixed 12 mA plot exposes the semantic mismatch. No necessary learning question requires a simulation.",
+        "style": "Approved fixed-white editorial engineering style with regular Helvetica Neue, fine neutral lines, and restrained green.",
+        "generator": "scripts/engineering-module-interfaces-visuals.mjs",
+        "assets": [
+          "content/assets/engineering/module-interfaces-valve.svg",
+          "content/assets/engineering/module-interfaces-valve-mobile.svg",
+          "content/assets/engineering/module-interfaces-sensor-heads.svg",
+          "content/assets/engineering/module-interfaces-sensor-heads-mobile.svg",
+          "content/assets/engineering/module-interfaces-signal-meaning.svg",
+          "content/assets/engineering/module-interfaces-signal-meaning-mobile.svg"
+        ],
+        "provenance": "Original schematic geometry and a calculated linear fixture. Not traced from standards, manufacturer drawings, or photographs."
+      }
+    }
+  ]
+}

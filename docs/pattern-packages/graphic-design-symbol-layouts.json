@@ -1,0 +1,140 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Original native vector symbols and unchanged embedded photographic sources; only two selected symbol hrefs and one label opacity change. No photographic regeneration, retouching, font scale, crop, position, color or unrelated copy changes.",
+  "examples": [
+    {
+      "name": "symbols-information",
+      "sources": [
+        {
+          "id": "photo",
+          "file": "audience-museum-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 180, 480, 240],
+      "description": "Only service-symbol href changes from the original rosette ornament to an original drawing of a conventional circled lowercase i. The80×80 icon window, text labels, image bytes/crop, all other native typography, paper and presentation remain fixed. Neither symbol is copied from a certified sign system. Fictional visitor guide.",
+      "masks": [[65, 450, 80, 80]],
+      "copy": [
+        ["brand", 65, 104, "COMMON / VISITOR GUIDE", 20],
+        ["headline", 65, 158, "Welcome to Common", 44],
+        ["service-label", 170, 482, "Visitor information", 30],
+        ["service-detail", 170, 520, "Ask at the entrance desk.", 23],
+        ["hours", 65, 625, "Open Tue–Sun · 10:00–17:00", 25],
+        ["address", 65, 673, "18 Market Lane · Free entry", 23],
+        ["footer", 65, 820, "common.example/visit", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "service-symbol",
+            "attribute": "href",
+            "value": "#rosette"
+          }
+        ],
+        [
+          {
+            "element": "service-symbol",
+            "attribute": "href",
+            "value": "#information"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "symbols-download",
+      "sources": [
+        {
+          "id": "photo",
+          "file": "form-open-studios-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "stage": "audience-phone-stage.jpg",
+      "phone": true,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [158, 285, 294, 196],
+      "description": "Only action-symbol href changes from an upward upload arrow to a downward download arrow. The32×32 icon window, receiving-tray geometry, Download PDF label, button, metadata, fixed photo/crop, all font settings, screen, device and lighting remain identical. Original native SVG symbols; fictional static interface mockup, not an implemented download.",
+      "masks": [[174, 635, 32, 32]],
+      "copy": [
+        ["brand", 158, 132, "COMMON / PUBLICATIONS", 18],
+        ["headline", 158, 205, "Studio review", 36],
+        ["year", 158, 250, "2026", 36],
+        ["purpose", 158, 533, "Workshops + open studios", 20],
+        ["format", 158, 573, "PDF · 8 pages · 1.2 MB", 20],
+        ["button-label", 224, 660, "Download PDF", 22],
+        ["footer", 158, 754, "common.example/review", 18]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "action-symbol",
+            "attribute": "href",
+            "value": "#upload"
+          }
+        ],
+        [
+          {
+            "element": "action-symbol",
+            "attribute": "href",
+            "value": "#download"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "symbols-audio-label",
+      "sources": [
+        {
+          "id": "photo",
+          "file": "core-message-library-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 205, 480, 240],
+      "description": "Only audio-label opacity changes0→1 to show Audio guide. The headphone symbol, photo bytes/crop, icon window, all other copy and font settings, reserved label space, layout, paper and lighting stay fixed. The label is part of the explanatory intervention; no other information is deleted. Original pictogram and fictional collection leaflet.",
+      "masks": [[180, 475, 250, 50]],
+      "copy": [
+        ["brand", 65, 104, "COMMON / THE COLLECTION", 20],
+        ["headline", 65, 170, "Explore the collection", 43],
+        ["audio-label", 185, 515, "Audio guide", 32],
+        ["detail", 65, 625, "Ask at the desk · Free to borrow", 25],
+        ["hours", 65, 673, "Available Tue–Sun · 10:00–16:30", 23],
+        ["footer", 65, 820, "common.example/collection", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "audio-label",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "audio-label",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    }
+  ]
+}

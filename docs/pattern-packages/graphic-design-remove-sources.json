@@ -1,0 +1,38 @@
+{
+  "pattern": "Remove the Nonessential",
+  "mode": "Built-in image generation for photographic artwork; exact SVG composition with deletion-only comparisons.",
+  "date": "2026-10-27",
+  "fictional": true,
+  "sources": [
+    {
+      "name": "remove-courtyard-cinema-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic banner for a believable neighborhood summer outdoor-cinema poster. Primary request: an intimate ordinary brick courtyard prepared for an outdoor film screening at blue hour, neat rows of assorted simple folding chairs, a small projection screen softly glowing without any recognizable movie scene or writing, understated warm string lights and a few plants. Modest local community atmosphere, inviting and practical, realistic evening exposure and textured weathered brick. No people, logos, posters, prices or readable text. Edge-to-edge editorial photograph only, not a poster or layout. Landscape 3:2 framing, composed so the courtyard, chairs and screen remain visible in a shallow wide photo crop.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-a7e1db3c-f2a6-4ca4-bb70-9e356d13434b.png",
+      "asset": "content/assets/graphic-design/remove-courtyard-cinema-photo.jpg",
+      "sha256": "4140f35208c0e9768402eda5f4c47d16d419f960b7722e6094aaf4821d6c778a"
+    }
+  ],
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/core-message-coffee-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "a3ab6d3b61e0a3c33e85c50d3c2a2daebf64abb2f335948519c0e0fd91e0606e"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-coffee-package-stage.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "71dd92a3961965ac46c392c8f3b1061519d82af72241c94bb20b77770ed747bb"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-delivery-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "9901929cb9bc436f822f59e2fa54310e9060cbb24b2c24ac513dca59eb44ab65"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Only marked groups are deleted. Every retained element keeps identical text, styling, position and image bytes/crops. Poster removes one repeated admission badge; coffee removes a care seal and border; report removes a community-update block. There is no reflow or replacement copy."
+}

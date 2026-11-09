@@ -1,5 +1,7 @@
 # Personal pattern-icon studio
 
+> Historical documentation for the archived version-1 grid tool. The library now uses the authored concept graphics described in [Pattern concept graphics](pattern-graphics.md). `pnpm studio` opens that collection by default; the older recipes remain available under **Archived grid tool** for export and recovery. References below to applying icons describe the legacy registry, which no longer selects public artwork.
+
 Double-click `launchers/Open Pattern Mark Studio.command` to open http://127.0.0.1:4202. Alternatively, run `pnpm studio` and open http://127.0.0.1:4201. Restart an older studio server to load the new grammar. This is a separate loopback-only development application, never a public route. Large editorial illustrations remain in the second tab; they are not small pattern icons.
 
 ## Review and author

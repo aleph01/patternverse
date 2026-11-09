@@ -1,0 +1,38 @@
+{
+  "pattern": "Chunk Information",
+  "mode": "Built-in image generation for photographic artwork; deterministic SVG composition for controlled grouping comparisons.",
+  "date": "2026-10-27",
+  "fictional": true,
+  "sources": [
+    {
+      "name": "chunk-garden-supper-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic banner for a believable community garden supper invitation. Primary request: a modest communal outdoor supper table in a leafy greenhouse courtyard at early evening, simple ceramic bowls, metal spoons, bread and shared vegetable dishes, ordinary wooden furniture and a few understated warm string lights. Inviting local community atmosphere with realistic materials and soft natural evening light, not luxury hospitality or commercial stock-photo glamour. No people, no hands, readable writing, menus, signs, logos or watermarks. Edge-to-edge editorial photograph only, not a poster, page or layout. Landscape 3:2, composed to retain the set table and garden setting in a shallow wide banner crop.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-ae985e74-029f-4ce2-baff-abc5f387ae31.png",
+      "asset": "content/assets/graphic-design/chunk-garden-supper-photo.jpg",
+      "sha256": "53328167015da4550cd4810094a20ba6502c627867119c646fc7a74bc937872f"
+    }
+  ],
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-delivery-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "9901929cb9bc436f822f59e2fa54310e9060cbb24b2c24ac513dca59eb44ab65"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Supper invitation preserves all six fact strings and their typography, changes only their baselines and adds three semantic headings. Booking screen preserves all activity/date/place values and styling, replacing field-type headings with two activity-based groups and boundaries. Collection notice changes only two separator spaces within the displayed identifier; all characters, styles, positions, imagery/crops, palette and presentation otherwise remain fixed."
+}

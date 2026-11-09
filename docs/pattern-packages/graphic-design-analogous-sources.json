@@ -1,0 +1,89 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-coffee-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "a3ab6d3b61e0a3c33e85c50d3c2a2daebf64abb2f335948519c0e0fd91e0606e"
+    },
+    {
+      "asset": "content/assets/graphic-design/chunk-garden-supper-photo.jpg",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "53328167015da4550cd4810094a20ba6502c627867119c646fc7a74bc937872f"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Build Analogous Harmony",
+  "date": "2026-10-28",
+  "mode": "Previously generated photographic artwork and paper presentation reused unchanged. Native SVG text and geometry composed separately. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-analogous-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-analogous-layouts.json",
+    "sha256": "20123fc228da33186f40adee4ff606f596b9abc2f077a94fa42e8944706e9104",
+    "method": "Declared fill-only changes within three controlled photographic examples. The first two preserve color count and approximately match saturation/relative luminance while changing hue span; the third retains hue/saturation and intentionally changes only text lightness."
+  },
+  "comparisonPolicy": "First and third programme surface hues become teal/blue around an unchanged cyan; House/Night coffee surfaces widen a near-single hue into a local warm arc around unchanged Orchard; four supper detail fills darken at nominal fixed hue140/saturation30. Only two/two/four fills change. Three surface colors remain three in the first two, with approximately matched luminance/saturation. All words, font settings, positioning, geometry, photographic sources/crops and presentation remain fixed.",
+  "colorModel": "Digital HSL. Local hue arcs are specimen choices, not universal definitions or equal perceptual steps.",
+  "calculatedTextContrast": {
+    "supperBefore": 1.8697574068838247,
+    "supperAfter": 8.490245050932884
+  },
+  "verification": {
+    "comparisons": [
+      {
+        "name": "analogous-workshop-family",
+        "changedPixels": 61002,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "analogous-coffee-variation",
+        "changedPixels": 73614,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "analogous-supper-legibility",
+        "changedPixels": 8424,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared analogous-color intervention regions differ.",
+    "scope": "Exact DOM normalization permits only declared fill attributes. All other artifact nodes and embedded image/font bytes remain identical. Wide/stacked browser checks cover text bounds, loaded fonts, horizontal overflow, image/inline SVG equality and pixels outside declared color regions."
+  },
+  "limitations": "Editorial judgments about color character, not measured unity, emotional response, recognition speed or preference. Approximate relative-luminance matching after 8-bit quantization does not establish equal perceived lightness. Local HSL arcs are examples, not universal harmony boundaries. Specified-color contrast ratios are not physical print proof or complete accessibility conformance."
+}

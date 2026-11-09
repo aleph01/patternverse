@@ -1,0 +1,72 @@
+{
+  "name": "nlp-title-2026-11-03",
+  "status": "published and verified live",
+  "published": true,
+  "publishedAt": "2026-11-03T12:19:28.260Z",
+  "parentRelease": "games-direct-2026-11-03",
+  "productionUrl": "https://patternverse.org",
+  "deploymentUrl": "https://13c2550d.patternverse.pages.dev",
+  "version": "1793708073182",
+  "include": [
+    "Rename the existing NLP collection to NLP: Sleight of Mouth",
+    "Preserve collection identity, existing articles, aliases, and the last verified public release"
+  ],
+  "exclude": [
+    "Contribute team invitation and founder portrait",
+    "Unselected draft content",
+    "Private music/player studies",
+    "MCP or guided-AI service publication"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "expectedPublicEntries": 1362,
+  "artifact": {
+    "directory": "/private/tmp/patternverse-nlp-title-release-2026-11-03/apps/web/build",
+    "files": 11711,
+    "bytes": 653306168,
+    "manifestSha256": "8aaa062100f0ad68d25579fd4c01f353bff9f539b44b9b9cc871390f43b4f2d8",
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/nlp-title-2026-11-03/artifact-files.json"
+  },
+  "verification": {
+    "content": {
+      "entries": 1362,
+      "diagnostics": 0,
+      "title": "NLP: Sleight of Mouth",
+      "collectionItems": 15,
+      "contentChange": "title only"
+    },
+    "unitTests": {
+      "passed": 3
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "browsers": {
+      "passed": 2,
+      "desktop": true,
+      "phone": true,
+      "renamedCollectionAndArticleNavigation": true
+    },
+    "publicScan": "passed",
+    "liveHttp": {
+      "passed": true,
+      "resources": 7,
+      "version": "1793708073182",
+      "exactArtifactHashes": true
+    },
+    "liveBrowsers": {
+      "passed": 2,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "renamedCollectionAndArticleNavigation": true
+    }
+  },
+  "sourceDelta": "/Users/jeger-benninger/Documents/patternverse/.local/releases/nlp-title-2026-11-03/source-delta.tar.gz",
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/nlp-title-2026-11-03/release-report.json"
+}

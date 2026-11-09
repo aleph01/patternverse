@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "data-mapper",
+  "title": "Data Mapper",
+  "aliases": ["Data Mapper Pattern", "Object-Relational Data Mapper"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1391,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six authoritative source notes. Fowler’s Data Mapper entry in Patterns of Enterprise Application Architecture establishes separate object/database representation transfer with a domain model independent of persistence and the mapper. Active Record supplies the responsibility contrast; Identity Map is treated as an additional pattern. Official SQLAlchemy documentation shows imperative/declarative mapper configuration and the separate expected-version mechanism for stale updates. Official Python SQLite documentation supports caller-owned transaction and connection handling. The appointment example and native illustrations are original teaching material. No ORM dependency or neighboring candidate stub was added.",
+    "python_examples": "All three actual article fences execute as model.py, mapper.py, and demo.py and produce six stated lines exactly. Checks verify that the model imports only dataclasses, start/end and start/duration round-trip inversely, loaded objects retain overlap behavior, midnight/day-end and full-day intervals are valid, empty/reversed/out-of-range/noninteger intervals reject, half-open adjacency is not overlap, independent immutable loads have explicit identity semantics, exact ASCII IDs preserve quotes and whitespace, missing loads return None, missing updates raise LookupError, unchanged-row updates succeed, duplicates and operational failures propagate, malformed stored intervals reject, insert and update do not commit, caller rollback restores writes, multiple operations roll back together, and committed state is visible through another connection. An explicit stale-object update overwrites later state, verifying the documented absence of version protection rather than implying concurrency safety.",
+    "python_stdout": [
+      "loaded end minute: 570",
+      "adjacent overlaps: False",
+      "stored start, duration: (600, 45)",
+      "reloaded end minute: 645",
+      "old snapshot end: 570",
+      "missing: None"
+    ],
+    "article_tests": "87 article integration tests pass across Data Mapper and all prior software/GoF suites. Coverage includes canonical ID and aliases without duplicates, one primary collection retaining Repository, verse navigation, eight exact sections, three copyable highlighted Python blocks, accessible responsive figures and four manifest dimensions, resolved related links, search, ten queries, revision hash, and concept mark. Repository’s former singleton membership assertion was changed to retained membership so its collection can grow. Two workers, 20-second test timeout, and 60-second corpus hook timeout bound load on the large corpus.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 91 passed and one unrelated failure across 23 files.",
+    "content": "1254 entities validate with drafts included. Published-only corpus contains 1107 entities and no errors.",
+    "collection": "Reused Persistence and Transactions, appending data-mapper after repository. Prior collection body and member remain; no new collection, duplicate alias article, or practice. Other primary collections and the Software Engineering verse are unchanged.",
+    "public_build": "Production build and public web build checks pass. Actual browser verification used the completed build; no deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the visual generator, executable validator, Data Mapper integration test, necessary Repository test adjustment, authoring sidecar, concept registry, and authoring documentation. The updated Repository documentation no longer claims its collection is a singleton. That prose clarification and this review report are formatted separately.",
+    "visuals": "All four native editable SVG variants load. Native and production-browser measurements show no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. All native renders and actual desktop/phone article figures were visually inspected. The representation figure distinguishes nested TimeSlot start/end values from flat begin/duration columns and labels inverse read/write transfers. The lifecycle figure shows explicit mapper updates and provisional row changes inside a caller-owned transaction, branching to commit or rollback while leaving the old object unchanged. Exact light palette, fixed white surface, regular Helvetica typography, square geometry, contrast, label placement, arrow meanings, captions, and readability were checked. The concept mark appears in the article and gallery.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: eight exact H2 headings, all three Python blocks preserved in DOM text, colored syntax tokens, text selection retaining indentation, focusable code blocks, keyboard horizontal code scrolling for mapper.py at 320px, phone SVG variants loaded, and no page overflow. Browser selection normally omits the final newline. Actual article tops, code, diagrams, captions, and collection gallery screenshots were visually inspected.",
+    "navigation_browser": "Domain Model, Repository, Value Object, and Service Layer routes return HTTP 200. Persistence and Transactions renders its direct route and two-pattern Software Engineering gallery; the Data Mapper card opens its canonical route with the correct breadcrumb and 2/2 article indicator.",
+    "preservation": "All 23 GoF article files and their collection match actual pre-change SHA-256 hashes. All twenty earlier software articles and authoring records remain unchanged. All 432 previous concept marks and 1522 prior asset dimensions are unchanged. The Software Engineering verse, Application Architecture collection, and Domain Modeling and Business Logic collection are byte-for-byte unchanged. Persistence and Transactions retains its original body and Repository membership, adding only Data Mapper membership and introduction."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ and standard-library SQLite. Appointment and TimeSlot are immutable snapshots with exact nonblank ASCII IDs and whole minutes in one abstract local day, using half-open intervals in [0,1440]. The mapper supports find, insert, and update only, and does not commit or close the caller’s connection. It supplies no deletion, identity map, dirty tracking, calendar dates, time zones, daylight-saving transitions, authorization, scheduling-conflict enforcement, or expected-version check. Its ID-only update can overwrite later state, as explicitly tested. Caller transaction and concurrency policies remain separate from representation transfer. The minimal table permits legacy invalid intervals so reconstruction failures are visible; the domain constructor does not silently repair them.",
+  "preview": "http://127.0.0.1:43005/pattern/data-mapper",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-data-mapper",
+  "browser_measurements": ".local/software-data-mapper/browser-checks.json",
+  "browser_check_script": ".local/software-data-mapper/check-browser.mjs",
+  "preservation_checks": ".local/software-data-mapper/preservation.json",
+  "build_log": ".local/software-data-mapper/public-build.log",
+  "branch": "codex/software-data-mapper",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

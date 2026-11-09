@@ -1,0 +1,37 @@
+{
+  "generation_mode": "Built-in image_gen",
+  "purpose": "Original photographic artwork for three message-only design comparisons.",
+  "sources": [
+    {
+      "name": "core-message-repair-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic image panel for a finished neighborhood repair-cafe poster. Wide landscape editorial photograph of a real-looking community workshop table: a navy fabric jacket with a small sewing kit and thread in the foreground, a bicycle wheel and a modest set of hand tools in the middle distance, soft practical daylight, warm wood and muted forest-green details. Tactile, approachable and everyday rather than commercial stock photography. The scene suggests volunteer repair of ordinary belongings without any hazardous electrical work, sparks, or implied guaranteed results. No people, hands, visible writing, labels, logos or graphic overlays. Edge-to-edge photograph only, not a poster or mockup. Compose as 3:2 landscape, suitable for cropping to a wide shallow poster photo band.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-610b8363-9bf8-446f-ba02-a5931e0cc605.png",
+      "workspace_asset": "content/assets/graphic-design/core-message-repair-photo.jpg",
+      "sha256": "f5c4449de84c1cb2d5c6d4142830a8067ff21ce0367f80b059d55a16194e2b07"
+    },
+    {
+      "name": "core-message-coffee-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic image panel for a finished coffee-package label. Wide landscape editorial still life of roasted whole coffee beans in a small dark ceramic dish, an ordinary cream ceramic cup of black coffee, a folded natural linen napkin and warm pale wood. Quiet soft window light, understated premium grocery art direction, believable everyday materials, true photographic texture. No steam theatrics, no people, no hands, no lettering, labels, logos or words anywhere. Edge-to-edge photographic image only, no printed package or mockup. Landscape 3:2 composition that crops well to a shallow horizontal label image.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-8dcf12a1-8a0f-4149-af48-71eb9d7dbf37.png",
+      "workspace_asset": "content/assets/graphic-design/core-message-coffee-photo.jpg",
+      "sha256": "a3ab6d3b61e0a3c33e85c50d3c2a2daebf64abb2f335948519c0e0fd91e0606e"
+    },
+    {
+      "name": "core-message-library-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic banner for an internal public-library service review. Wide landscape editorial photograph of a welcoming small public library technology help area, an unoccupied wooden desk with a closed notebook and a laptop seen at an angle with an unlit screen, softly receding bookshelves whose book spines have no readable lettering, warm daylight and muted sage and navy accents. Calm ordinary public-service setting, real photographic detail, no staged corporate glamour. No people, no visible text, numbers, signage, brand names or logos. Edge-to-edge photo only, not an infographic or document mockup. Landscape 3:2, suitable for a shallow report banner crop.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-a25194ae-f1ca-4bfd-992f-497a709891d5.png",
+      "workspace_asset": "content/assets/graphic-design/core-message-library-photo.jpg",
+      "sha256": "9a09beb4b55a5038e6d8e5aa0d790d0cbe18255bdbc1b8ce2b2b4523b7915cdf"
+    },
+    {
+      "name": "core-message-coffee-package-stage",
+      "prompt": "Use case: product-mockup. Asset type: reusable photographic backdrop for a precise coffee packaging before-and-after example. A single upright plain kraft-paper coffee pouch, straight front-on camera with no rotation or perspective distortion, set on a pale neutral studio background with soft daylight and subtle contact shadow. A perfectly flat completely blank warm ivory rectangular paper label covers the front of the pouch. In this portrait 2:3 image, the label should occupy x approximately 10% through 90% of the image width and y approximately 18% through 89% of image height. Its face is almost orthographic and has no wrinkles or folds so exact graphic artwork can be placed over it. The pouch has realistic fine kraft texture, neat sealed top and unobtrusive folded base. Label entirely empty, no typography, graphics, image, logo or markings anywhere. Entire pouch visible with narrow margins, no props, no dramatic gradients or CGI gloss. High-quality realistic grocery packaging photography.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-af0e5a39-4380-4010-87ed-a129785ac372.png",
+      "workspace_asset": "content/assets/graphic-design/core-message-coffee-package-stage.jpg",
+      "sha256": "71dd92a3961965ac46c392c8f3b1061519d82af72241c94bb20b77770ed747bb"
+    }
+  ],
+  "reused_source": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+  "comparison_rule": "Only the two marked headline text nodes may change within each pair. All other text, images, crops, font sizes, weights, positions, layout, colors, paper or packaging, and lighting remain identical.",
+  "composition_builder": "scripts/build-graphic-design-core-message-examples.mjs"
+}

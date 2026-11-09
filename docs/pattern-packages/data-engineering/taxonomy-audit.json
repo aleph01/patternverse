@@ -1,0 +1,1269 @@
+{
+  "basis": "Original 12-family expanded taxonomy in this chat, compared with completed article responses and illustration inventory. This is not a publication audit.",
+  "taxonomy_entries": 179,
+  "illustrations": 181,
+  "entries": [
+    {
+      "title": "Model Around Business Processes",
+      "family": "Meaning & boundaries",
+      "idea": "Organize models around activities such as ordering, fulfillment, and payment.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Declare the Grain",
+      "family": "Meaning & boundaries",
+      "idea": "State exactly what one record represents before defining its attributes.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Bounded Contexts",
+      "family": "Meaning & boundaries",
+      "idea": "Allow concepts to have different meanings within explicit domain boundaries.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Shared Business Vocabulary",
+      "family": "Meaning & boundaries",
+      "idea": "Agree on definitions for terms used across producers and consumers.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Separate Entities from Events",
+      "family": "Meaning & boundaries",
+      "idea": "Distinguish enduring things from occurrences involving those things.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Separate Definitions from Instances",
+      "family": "Meaning & boundaries",
+      "idea": "Distinguish a product specification, for example, from an individual manufactured item.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Separate Source Facts from Derived Interpretations",
+      "family": "Meaning & boundaries",
+      "idea": "Preserve observations independently from calculations and classifications.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Model Lifecycle States Explicitly",
+      "family": "Meaning & boundaries",
+      "idea": "Represent meaningful states and permitted transitions directly.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Make Units Explicit",
+      "family": "Meaning & boundaries",
+      "idea": "Attach currency, measurement units, and conversion context to values.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Distinguish Missing, Unknown, and Inapplicable",
+      "family": "Meaning & boundaries",
+      "idea": "Preserve differences that a single null value would conceal.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Controlled Vocabularies",
+      "family": "Meaning & boundaries",
+      "idea": "Use governed categories when free text would create inconsistent meanings.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Shared Metric Definitions",
+      "family": "Meaning & boundaries",
+      "idea": "Define calculations, filters, grain, and time conventions consistently.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Natural Keys",
+      "family": "Identity & relationships",
+      "idea": "Identify entities using stable identifiers meaningful in the business domain.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Surrogate Keys",
+      "family": "Identity & relationships",
+      "idea": "Introduce identifiers independent of changing source or business attributes.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Composite Keys",
+      "family": "Identity & relationships",
+      "idea": "Use multiple attributes when identity depends on their combination.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Namespaced Identifiers",
+      "family": "Identity & relationships",
+      "idea": "Combine source or tenant context with otherwise ambiguous identifiers.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Identity Crosswalks",
+      "family": "Identity & relationships",
+      "idea": "Map identifiers from different systems to corresponding entities.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Entity Resolution",
+      "family": "Identity & relationships",
+      "idea": "Combine matching evidence to identify records describing the same entity.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Golden Records",
+      "family": "Identity & relationships",
+      "idea": "Select authoritative attribute values from conflicting source records.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Normalized Relations",
+      "family": "Identity & relationships",
+      "idea": "Separate independent facts to reduce update anomalies and duplication.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Associative Entities",
+      "family": "Identity & relationships",
+      "idea": "Represent many-to-many relationships as records of their own.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Relationships with Attributes",
+      "family": "Identity & relationships",
+      "idea": "Store properties such as role or allocation on the relationship.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Supertype–Subtype Modeling",
+      "family": "Identity & relationships",
+      "idea": "Share common attributes while representing meaningful entity variations.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Party–Role Modeling",
+      "family": "Identity & relationships",
+      "idea": "Separate a person or organization from the roles it performs.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Adjacency Lists",
+      "family": "Identity & relationships",
+      "idea": "Represent a hierarchy through immediate parent–child relationships.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Closure Tables",
+      "family": "Identity & relationships",
+      "idea": "Store ancestor–descendant relationships to simplify hierarchy traversal.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Materialized Paths",
+      "family": "Identity & relationships",
+      "idea": "Encode hierarchical ancestry in each node’s stored path.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Document Aggregates",
+      "family": "Identity & relationships",
+      "idea": "Embed closely related data that is usually read and changed together.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Graph Relationships",
+      "family": "Identity & relationships",
+      "idea": "Make connections directly traversable when relationship exploration dominates.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Star Schema",
+      "family": "Analytical structure",
+      "idea": "Organize measurements around descriptive dimensions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Snowflake Schema",
+      "family": "Analytical structure",
+      "idea": "Normalize dimension structures into related tables.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Transaction Fact Tables",
+      "family": "Analytical structure",
+      "idea": "Record individual measurable business occurrences.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Factless Fact Tables",
+      "family": "Analytical structure",
+      "idea": "Record participation or occurrence without numeric measurements.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Conformed Dimensions",
+      "family": "Analytical structure",
+      "idea": "Reuse consistent descriptive context across business processes.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Conformed Facts",
+      "family": "Analytical structure",
+      "idea": "Align measurement definitions across analytical models.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Role-Playing Dimensions",
+      "family": "Analytical structure",
+      "idea": "Reuse a dimension in distinct contextual roles.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Degenerate Dimensions",
+      "family": "Analytical structure",
+      "idea": "Keep useful transaction identifiers directly in facts.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Junk Dimensions",
+      "family": "Analytical structure",
+      "idea": "Combine miscellaneous low-cardinality flags into a dimension.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Bridge Tables",
+      "family": "Analytical structure",
+      "idea": "Represent multivalued dimensional relationships explicitly.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Calendar Dimensions",
+      "family": "Analytical structure",
+      "idea": "Centralize business calendar attributes.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Aggregate Fact Tables",
+      "family": "Analytical structure",
+      "idea": "Store summaries at a coarser grain.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Store Additive Components",
+      "family": "Analytical structure",
+      "idea": "Preserve components needed to recompute ratios correctly.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Drill Across",
+      "family": "Analytical structure",
+      "idea": "Compare separately aggregated facts through conformed dimensions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Retain Original Values — SCD Type 0",
+      "family": "Time & history",
+      "idea": "Keep selected attributes fixed at their original values.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Overwrite Attributes — SCD Type 1",
+      "family": "Time & history",
+      "idea": "Replace previous values when historical versions are unnecessary.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Version Dimension Rows — SCD Type 2",
+      "family": "Time & history",
+      "idea": "Create effective-dated rows when tracked attributes change.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Keep Previous Values — SCD Type 3",
+      "family": "Time & history",
+      "idea": "Preserve a limited alternative or previous attribute value.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Mini-Dimensions",
+      "family": "Time & history",
+      "idea": "Separate rapidly changing descriptive attributes into reusable profiles.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Hybrid Slowly Changing Dimensions",
+      "family": "Time & history",
+      "idea": "Combine current-value and historical perspectives where consumers need both.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Effective-Dated Records",
+      "family": "Time & history",
+      "idea": "Record when a fact or relationship applies in the business world.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Recorded-Time History",
+      "family": "Time & history",
+      "idea": "Record when information entered or changed in the system.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Bitemporal Records",
+      "family": "Time & history",
+      "idea": "Track both business validity and the history of recorded knowledge.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Periodic Snapshots",
+      "family": "Time & history",
+      "idea": "Capture a consistent state at recurring intervals.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Accumulating Snapshots",
+      "family": "Time & history",
+      "idea": "Update a process record as it passes through milestones.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Event Sourcing",
+      "family": "Time & history",
+      "idea": "Use recorded domain events as the authoritative history of state changes.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "As-of Joins",
+      "family": "Time & history",
+      "idea": "Join records using the versions applicable at a specified time.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Half-Open Time Intervals",
+      "family": "Time & history",
+      "idea": "Use inclusive starts and exclusive ends to avoid boundary ambiguity.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Inferred Dimension Members",
+      "family": "Time & history",
+      "idea": "Create provisional members when facts arrive before their descriptive context.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Historical Restatement",
+      "family": "Time & history",
+      "idea": "Recalculate affected history when late information changes previous results.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Full Snapshot Extraction",
+      "family": "Capture & synchronization",
+      "idea": "Copy the complete source dataset when simplicity outweighs extraction cost.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Cursor-Based Incremental Extraction",
+      "family": "Capture & synchronization",
+      "idea": "Fetch changes after a durable timestamp, sequence, or compound cursor.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Log-Based Change Data Capture",
+      "family": "Capture & synchronization",
+      "idea": "Read database changes from the transaction log.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Trigger-Based Change Capture",
+      "family": "Capture & synchronization",
+      "idea": "Record changes through source-side triggers when other capture methods are unavailable.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Snapshot Then Stream",
+      "family": "Capture & synchronization",
+      "idea": "Bootstrap existing state and continue from a coordinated change position.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Consistent Snapshot Reads",
+      "family": "Capture & synchronization",
+      "idea": "Extract related data from a coherent source state.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Chunked Snapshotting",
+      "family": "Capture & synchronization",
+      "idea": "Divide large initial copies into bounded, resumable segments.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Keyset Pagination",
+      "family": "Capture & synchronization",
+      "idea": "Page through stable keys instead of shifting row offsets.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Overlapping Extraction Windows",
+      "family": "Capture & synchronization",
+      "idea": "Re-read a bounded interval to catch delayed or imprecisely timestamped changes.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Transactional Outbox",
+      "family": "Capture & synchronization",
+      "idea": "Commit application changes and publishable events in the same transaction.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Publish–Subscribe Distribution",
+      "family": "Capture & synchronization",
+      "idea": "Let multiple consumers receive source events independently.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Manifest-Based File Ingestion",
+      "family": "Capture & synchronization",
+      "idea": "Use explicit manifests to identify complete, intended file deliveries.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Claim Check",
+      "family": "Capture & synchronization",
+      "idea": "Send a reference to a large payload through the messaging system.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Deletion Tombstones",
+      "family": "Capture & synchronization",
+      "idea": "Communicate deletions explicitly so downstream copies can remove corresponding state.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Preserve Raw Inputs",
+      "family": "Transformation & refinement",
+      "idea": "Retain source representations for investigation and bounded replay.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Standardize at Staging",
+      "family": "Transformation & refinement",
+      "idea": "Normalize names, types, and source conventions near ingestion.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Separate Cleaning from Business Logic",
+      "family": "Transformation & refinement",
+      "idea": "Keep technical repairs distinguishable from domain interpretation.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Progressive Refinement",
+      "family": "Transformation & refinement",
+      "idea": "Move through explicit levels of validation, integration, and consumer readiness.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Reusable Intermediate Models",
+      "family": "Transformation & refinement",
+      "idea": "Share cohesive transformations used by multiple downstream outputs.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Deterministic Transformations",
+      "family": "Transformation & refinement",
+      "idea": "Make outputs reproducible from explicit inputs, configuration, and versions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Incremental Transformation",
+      "family": "Transformation & refinement",
+      "idea": "Process changed inputs instead of rebuilding everything.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Merge and Upsert",
+      "family": "Transformation & refinement",
+      "idea": "Apply incoming changes using explicit matching and update rules.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Partition Replacement",
+      "family": "Transformation & refinement",
+      "idea": "Rebuild complete affected partitions to simplify correction semantics.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Lookback Recalculation",
+      "family": "Transformation & refinement",
+      "idea": "Recompute recent history to absorb late or revised inputs.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Deduplicate with an Explicit Winner",
+      "family": "Transformation & refinement",
+      "idea": "Resolve competing records using a documented ordering rule.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Reference-Data Enrichment",
+      "family": "Transformation & refinement",
+      "idea": "Add context through governed lookup datasets.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Canonical Mapping",
+      "family": "Transformation & refinement",
+      "idea": "Translate differing source representations into an agreed target representation.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Reshape at Boundaries",
+      "family": "Transformation & refinement",
+      "idea": "Pivot, unpivot, flatten, or nest data for its next consumer.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Metadata-Driven Pipelines",
+      "family": "Transformation & refinement",
+      "idea": "Generate repeated processing behavior from controlled configuration.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Event-Time Processing",
+      "family": "Streaming & event processing",
+      "idea": "Base business calculations on occurrence time rather than arrival time.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Tumbling Windows",
+      "family": "Streaming & event processing",
+      "idea": "Aggregate into fixed, non-overlapping time intervals.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Sliding Windows",
+      "family": "Streaming & event processing",
+      "idea": "Calculate over overlapping intervals for moving perspectives.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Session Windows",
+      "family": "Streaming & event processing",
+      "idea": "Group activity separated by bounded periods of inactivity.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Watermarks",
+      "family": "Streaming & event processing",
+      "idea": "Estimate event-time progress to coordinate completion and late-data handling.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Allowed Lateness",
+      "family": "Streaming & event processing",
+      "idea": "Define how long delayed events can revise windowed results.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Early Results with Corrections",
+      "family": "Streaming & event processing",
+      "idea": "Publish preliminary results and update them as information accumulates.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Stateful Stream Deduplication",
+      "family": "Streaming & event processing",
+      "idea": "Remember event identities within a defined retention horizon.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Bounded Stream–Stream Joins",
+      "family": "Streaming & event processing",
+      "idea": "Match events within explicit temporal limits.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Stream–Table Enrichment",
+      "family": "Streaming & event processing",
+      "idea": "Enrich events using maintained reference or entity state.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Per-Key Ordering",
+      "family": "Streaming & event processing",
+      "idea": "Preserve order within the entity scope that requires it.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Backpressure",
+      "family": "Streaming & event processing",
+      "idea": "Slow upstream processing when downstream capacity is constrained.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Microbatch Processing",
+      "family": "Streaming & event processing",
+      "idea": "Process bounded groups of arriving events at short intervals.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "State Expiration",
+      "family": "Streaming & event processing",
+      "idea": "Remove obsolete processing state according to explicit correctness assumptions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Idempotent Writes",
+      "family": "Execution & recovery",
+      "idea": "Make repeated execution produce the same intended destination state.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Transactional Inbox",
+      "family": "Execution & recovery",
+      "idea": "Record consumed event identities with their effects to suppress duplicate processing.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Checkpoint and Resume",
+      "family": "Execution & recovery",
+      "idea": "Persist progress so interrupted processing can restart safely.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Atomic Publication",
+      "family": "Execution & recovery",
+      "idea": "Expose a complete output version in one publication step.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Replayable Backfills",
+      "family": "Execution & recovery",
+      "idea": "Reprocess explicit historical ranges with controlled inputs and destinations.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Exponential Backoff with Jitter",
+      "family": "Execution & recovery",
+      "idea": "Space transient-failure retries to reduce synchronized overload.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Bounded Retries",
+      "family": "Execution & recovery",
+      "idea": "Stop automatic retries after defined limits and surface unresolved failures.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Dead-Letter Queues",
+      "family": "Execution & recovery",
+      "idea": "Isolate repeatedly failing events for inspection and controlled reprocessing.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Circuit Breakers",
+      "family": "Execution & recovery",
+      "idea": "Temporarily stop calls to a persistently failing dependency.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Workload Isolation",
+      "family": "Execution & recovery",
+      "idea": "Prevent one pipeline or backfill from exhausting shared capacity.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Data-Aware Dependencies",
+      "family": "Execution & recovery",
+      "idea": "Start work when required input versions are ready.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Leases with Fencing Tokens",
+      "family": "Execution & recovery",
+      "idea": "Prevent obsolete workers from continuing to mutate shared outputs.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Transactional Consume–Process–Publish",
+      "family": "Execution & recovery",
+      "idea": "Coordinate input progress and output changes within a supported transaction boundary.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Compensating Actions",
+      "family": "Execution & recovery",
+      "idea": "Apply explicit corrective operations when completed work cannot be rolled back.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Run Ledgers",
+      "family": "Execution & recovery",
+      "idea": "Record inputs, outputs, versions, progress, and outcomes for each execution.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Separate Backfill from Live Processing",
+      "family": "Execution & recovery",
+      "idea": "Give historical repair and current processing independent resource controls.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Partition by Access Pattern",
+      "family": "Storage & access",
+      "idea": "Organize data so common queries can skip irrelevant partitions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Cluster Related Records",
+      "family": "Storage & access",
+      "idea": "Place frequently co-accessed values near one another.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Horizontal Sharding",
+      "family": "Storage & access",
+      "idea": "Distribute records across independently managed storage partitions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Vertical Partitioning",
+      "family": "Storage & access",
+      "idea": "Separate columns with different access, size, or sensitivity characteristics.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Columnar Storage",
+      "family": "Storage & access",
+      "idea": "Organize analytical data to read and compress selected columns efficiently.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Secondary Access Paths",
+      "family": "Storage & access",
+      "idea": "Add indexes or lookup structures for important alternative queries.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Covering Indexes",
+      "family": "Storage & access",
+      "idea": "Include enough data in an index to satisfy targeted queries.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Materialized Views",
+      "family": "Storage & access",
+      "idea": "Persist derived results to reduce repeated computation.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Predicate and Projection Pushdown",
+      "family": "Storage & access",
+      "idea": "Filter rows and select columns as close to storage as possible.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Broadcast Small Inputs",
+      "family": "Storage & access",
+      "idea": "Replicate small join inputs to avoid moving larger datasets.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Co-Located Joins",
+      "family": "Storage & access",
+      "idea": "Organize related datasets to reduce redistribution during joins.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Skew Splitting",
+      "family": "Storage & access",
+      "idea": "Distribute disproportionately heavy keys across additional processing units.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Small-File Compaction",
+      "family": "Storage & access",
+      "idea": "Combine fragmented files to reduce listing and read overhead.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Hot–Cold Tiering",
+      "family": "Storage & access",
+      "idea": "Match storage cost and access speed to usage patterns.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Read Replicas",
+      "family": "Storage & access",
+      "idea": "Offload suitable reads from the primary write-serving system.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Result Caching",
+      "family": "Storage & access",
+      "idea": "Reuse computed results under explicit freshness and invalidation rules.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Schema Validation at Boundaries",
+      "family": "Quality & observability",
+      "idea": "Check incoming structure and types before accepting data.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Business Invariant Checks",
+      "family": "Quality & observability",
+      "idea": "Test rules that must hold for the represented domain.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Referential Integrity Checks",
+      "family": "Quality & observability",
+      "idea": "Detect missing or inconsistent relationships between datasets.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Source-to-Target Reconciliation",
+      "family": "Quality & observability",
+      "idea": "Compare counts, totals, or records across processing boundaries.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Quarantine Invalid Records",
+      "family": "Quality & observability",
+      "idea": "Separate rejected data while preserving reasons and recovery options.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Freshness Monitoring",
+      "family": "Quality & observability",
+      "idea": "Detect when expected data stops arriving or being published.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Volume Monitoring",
+      "family": "Quality & observability",
+      "idea": "Detect unusual changes in record counts and delivery sizes.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Distribution Monitoring",
+      "family": "Quality & observability",
+      "idea": "Detect shifts in values, missingness, categories, and statistical profiles.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Segmented Quality Checks",
+      "family": "Quality & observability",
+      "idea": "Inspect important subgroups so aggregate results cannot hide localized failures.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Transformation Unit Tests",
+      "family": "Quality & observability",
+      "idea": "Verify business transformations against small, explicit examples.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Property-Based Data Tests",
+      "family": "Quality & observability",
+      "idea": "Check invariants across generated or varied input cases.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Representative Test Fixtures",
+      "family": "Quality & observability",
+      "idea": "Include realistic edge cases and meaningful combinations of conditions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Publication Quality Gates",
+      "family": "Quality & observability",
+      "idea": "Require specified checks to pass before exposing outputs.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "End-to-End Canary Records",
+      "family": "Quality & observability",
+      "idea": "Trace known inputs through a pipeline to verify delivery behavior.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Operational Service Objectives",
+      "family": "Quality & observability",
+      "idea": "Define measurable expectations for delivery, freshness, and successful processing.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Capture Lineage at Transformation",
+      "family": "Quality & observability",
+      "idea": "Record which inputs and operations produced each dataset version.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Explicit Data Contracts",
+      "family": "Contracts & evolution",
+      "idea": "Publish expectations for schema, meaning, quality, ownership, and delivery.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Schema Registries",
+      "family": "Contracts & evolution",
+      "idea": "Maintain discoverable schema versions and their compatibility rules.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Compatibility Checks in Delivery",
+      "family": "Contracts & evolution",
+      "idea": "Reject changes that violate declared consumer compatibility requirements.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Additive Schema Evolution",
+      "family": "Contracts & evolution",
+      "idea": "Introduce compatible additions before requiring consumers to adopt them.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Expand–Migrate–Contract",
+      "family": "Contracts & evolution",
+      "idea": "Add the replacement, migrate usage, then retire the old representation.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Versioned Dataset Interfaces",
+      "family": "Contracts & evolution",
+      "idea": "Offer explicit interface versions when meanings or structures diverge.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Tolerant Readers",
+      "family": "Contracts & evolution",
+      "idea": "Accept compatible additions while retaining validation of required semantics.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Consumer-Driven Contract Tests",
+      "family": "Contracts & evolution",
+      "idea": "Verify producer changes against actual consumer requirements.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Published Deprecation Windows",
+      "family": "Contracts & evolution",
+      "idea": "Give consumers clear notice and migration deadlines.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Shadow Pipelines",
+      "family": "Contracts & evolution",
+      "idea": "Run a replacement without making it the authoritative output.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Parallel-Run Comparison",
+      "family": "Contracts & evolution",
+      "idea": "Compare old and new outputs before switching consumers.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Incremental Replacement",
+      "family": "Contracts & evolution",
+      "idea": "Migrate one bounded dataset or processing responsibility at a time.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Version Transformation Logic",
+      "family": "Contracts & evolution",
+      "idea": "Associate published outputs with the code and configuration that produced them.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Stable Logical Interfaces",
+      "family": "Contracts & evolution",
+      "idea": "Hide physical reorganization behind maintained views or access interfaces.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Domain-Owned Data Products",
+      "family": "Ownership & lifecycle",
+      "idea": "Assign responsibility for useful, supported datasets to domain teams.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Named Dataset Stewardship",
+      "family": "Ownership & lifecycle",
+      "idea": "Identify accountable owners for definitions, quality, and operational decisions.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Self-Service Data Discovery",
+      "family": "Ownership & lifecycle",
+      "idea": "Publish searchable metadata, examples, access instructions, and limitations.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Federated Governance",
+      "family": "Ownership & lifecycle",
+      "idea": "Combine shared interoperability rules with local implementation responsibility.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Policy as Code",
+      "family": "Ownership & lifecycle",
+      "idea": "Express repeatable governance controls as versioned, executable rules.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Row- and Column-Level Access",
+      "family": "Ownership & lifecycle",
+      "idea": "Restrict access at the granularity required by data usage.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Dynamic Masking",
+      "family": "Ownership & lifecycle",
+      "idea": "Present different representations according to the reader’s access context.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Tokenization",
+      "family": "Ownership & lifecycle",
+      "idea": "Replace sensitive identifiers with controlled surrogate representations.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Sensitive-Data Segregation",
+      "family": "Ownership & lifecycle",
+      "idea": "Isolate sensitive attributes to simplify access boundaries and handling.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Data Minimization",
+      "family": "Ownership & lifecycle",
+      "idea": "Collect and retain only what defined purposes require.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Classification-Based Retention",
+      "family": "Ownership & lifecycle",
+      "idea": "Assign lifecycle rules according to data category and intended use.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Deletion Propagation",
+      "family": "Ownership & lifecycle",
+      "idea": "Carry deletion requests through derived datasets and downstream copies.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Access Audit Trails",
+      "family": "Ownership & lifecycle",
+      "idea": "Record access and administrative actions for investigation and accountability.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Location-Aware Placement",
+      "family": "Ownership & lifecycle",
+      "idea": "Route and store data according to declared geographic constraints.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    },
+    {
+      "title": "Dataset Deprecation and Retirement",
+      "family": "Ownership & lifecycle",
+      "idea": "Discover dependencies, migrate consumers, and remove obsolete datasets deliberately.",
+      "article_status": "completed in chat",
+      "illustration_status": "complete"
+    }
+  ],
+  "open_or_partial": [],
+  "taxonomy_articles_completed": 179,
+  "open_or_partial_count": 0,
+  "notes": [
+    "Quality Gates is an additional completed entry outside the original 179-entry catalog.",
+    "The two most recently added illustrations do not complete the earlier unfinished article requests.",
+    "Source Facts and Derived Interpretations has its completed article later in a response containing multiple articles.",
+    "Representative Test Fixtures is now complete; Representative Text Fixtures remains a separate specialist article."
+  ]
+}

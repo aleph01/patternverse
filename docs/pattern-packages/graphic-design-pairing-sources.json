@@ -1,0 +1,166 @@
+{
+  "pattern": "Pair Complementary Typefaces",
+  "date": "2026-10-27",
+  "mode": "Reused existing generated photographic artwork and paper stage; composed exact typography separately with embedded open-licensed faces. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-pairing-examples.mjs",
+  "font_preparation": "scripts/prepare-graphic-design-pairing-font.py",
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/SourceSerif4%5Bopsz%2Cwght%5D.ttf",
+      "sha256": "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/OFL.txt",
+      "sha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/jost/Jost[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/Jost%5Bwght%5D.ttf",
+      "sha256": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/jost/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/OFL.txt",
+      "sha256": "1af3438a4d5f0ed2bdbc5751a5a67ebf6d537334161184b7fbb68503ef0ea0c5"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/fraunces/Fraunces[SOFT,WONK,opsz,wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf",
+      "sha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/fraunces/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/OFL.txt",
+      "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/Pacifico-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/pacifico/Pacifico-Regular.ttf",
+      "sha256": "5b6c0d5334a7bf77dea52b975c5a0c408878c0f7115ed5b6fb151f634b7bf701"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/Pacifico-OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/pacifico/OFL.txt",
+      "sha256": "a47e5daeda73568969395c656823102678f2eefb0d7d7ecb47aac4cc17e42204"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "reading-display.woff2",
+      "family": "PV Reading Display",
+      "source": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "axes": {
+        "wght": 400,
+        "opsz": 60
+      },
+      "sha256": "89fdc50eab02abe8fb62ca9b0cd7f57168207f0da89ee384288afb1a350a4712",
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/reading-display.woff2"
+    },
+    {
+      "file": "geometric.woff2",
+      "family": "PV Geometric",
+      "source": "docs/pattern-packages/graphic-design-typeface-fonts/jost/Jost[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "38306349b1004503f27cd46790da3b072eb98a4a6888464187d225e700747881",
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/geometric.woff2"
+    },
+    {
+      "file": "event.woff2",
+      "family": "PV Event",
+      "source": "docs/pattern-packages/graphic-design-typeface-fonts/fraunces/Fraunces[SOFT,WONK,opsz,wght].ttf",
+      "axes": {
+        "wght": 400,
+        "opsz": 72,
+        "SOFT": 50,
+        "WONK": 1
+      },
+      "sha256": "b08919e52e7924699d691e03de544f22267ebcb538a3447429fadd52bd81a56b",
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/event.woff2"
+    },
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    },
+    {
+      "file": "pairing-script.woff2",
+      "family": "PV Pairing Script",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/Pacifico-Regular.ttf",
+      "axes": {},
+      "sha256": "4d60cbb14d0824c64e56fdd5b06fa58f99410fe1f92b749d66e14f5ab168a9cc",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-script.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Original files and OFL notices are retained. Static illustration instances are internally renamed; copyright and license names are preserved. The Source Sans 3 and Pacifico sources and prepared fonts supplement three existing instances without changing them.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Invitation: the supporting role switches Pacifico to Jost; the Fraunces title stays fixed. Journal: only the headline switches Jost to Source Serif 4 Display; all other text remains Source Sans 3. Programme: only second-session title/details assignments switch, giving Fraunces to both activity names and Jost to both sets of logistics. Every variant uses exactly two faces. Copy, nominal sizes, requested weights, baselines, anchors, line breaks, colors, spacing, images/crops, paper and lighting are fixed. Natural glyph metrics and apparent weight differ with the selected font.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "pairing-supporting-voice",
+        "changedPixels": 22044,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "pairing-distinct-roles",
+        "changedPixels": 5562,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "pairing-consistent-assignments",
+        "changedPixels": 6973,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared pairing intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "All six saved browser views visually inspected. All five embedded faces load. Full-size SVG img rendering equals inline rendering byte for byte. Same-origin browser pixel checks found no changes outside the declared text regions. Text fits the paper and narrow views have no horizontal overflow. DOM checks preserve every unrelated attribute and all copy; image bytes and wide/stacked variants match. Structural tests confirm exactly two used faces in each artifact and consistent title/logistics roles after the programme repair. Article-renderer markup is checked separately."
+  },
+  "limitations": "No audience study, measured performance/preference or attendance benefit, physical print trial, full accessibility audit or production-route result. Compatibility and voice judgments are contextual editorial interpretations. Similar pairs, expressive pairs and one-family systems may suit other briefs. Production may need reflow and further typesetting."
+}

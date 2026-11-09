@@ -1,0 +1,117 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Policy Resistance",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "policy-resistance",
+      "title": "Policy Resistance",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; adaptive responses, conflicting goals, stocks and flows, and intervention boundaries",
+      "article": "content/concepts/policy-resistance.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Donella H. Meadows, Thinking in Systems: A Primer (2008; linked UK Earthscan edition 2009), edited by Diana Wright",
+          "url": "https://www.sustainable.soltechdesigns.com/meadows.pdf",
+          "supports": "Narrow policy-resistance account involving actors' differing goals for shared system states and counteracting balancing loops; practical proposals to involve actors and seek compatible goals.",
+          "read_method": "Full book scan opened and read: publication/editorial information, system dynamics background, and chapter five's policy-resistance section, printed pages 112–116 (PDF pages 128–132).",
+          "boundary": "Accessible conceptual synthesis, not a theorem of universal failure or direct empirical test of the hypothetical road-expansion response. No sole-inventor claim and no historical anecdotes imported as current evidence. The linked edition's 2009 imprint is distinguished from the original 2008 publication."
+        },
+        {
+          "title": "John D. Sterman, Learning from Evidence in a Complex World (2006)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1470513/",
+          "doi": "10.2105/AJPH.2005.066043",
+          "supports": "Broader system dynamics framing of policy resistance; feedback, endogenous responses, delays, dynamic complexity, learning, and model boundaries.",
+          "read_method": "Published full-text article opened and read: abstract, policy-resistance definition, complexity/feedback/delay discussion and diagram explanation, model boundaries, and endogenous actor responses.",
+          "boundary": "Conceptual systems account and evidence review; does not establish the road example’s behavioral response or the effectiveness of its proposed charge-and-alternatives package. Dated medical statistics and domain-specific examples are not asserted as current facts."
+        },
+        {
+          "title": "Gilles Duranton and Matthew A. Turner, The Fundamental Law of Road Congestion: Evidence from US Cities (2011)",
+          "url": "https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2616",
+          "manuscript": "https://matthewturner.org/ec2410/readings/Duranton_Turner_AER_2011.pdf",
+          "doi": "10.1257/aer.101.6.2616",
+          "supports": "Documented empirical case of roughly proportional metropolitan interstate driving responses to lane capacity, supporting examination of induced demand.",
+          "read_method": "Author-hosted full manuscript opened and read: introduction, headline findings, empirical setup, fixed-effects/first-difference and instrumental-variable methods, and identification concerns. AEA published record opened and read to verify abstract, title, authors, DOI, date, and pages. The final publisher PDF returned 403; manuscript and final record are distinguished.",
+          "boundary": "Historical US metropolitan analysis under identification assumptions, not randomized road allocation or a prediction for an individual road project. No universal claim that capacity is worthless, no single-road forecast, and no inference that traffic volume alone measures welfare or delay."
+        }
+      ],
+      "related_patterns": [
+        "balancing-feedback-loops",
+        "bottlenecks-and-capacity-constraints",
+        "congestion-problems"
+      ],
+      "status": "published",
+      "short_description": "Identify the responses an intervention triggers, then evaluate changes to feedback, shared goals, and system boundaries rather than assuming the rest of the system stays still.",
+      "use_when": [
+        "Which response offsets the initial time saving?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Plan for behavioral responses and change incentives or feasible alternatives where authorized.",
+        "Access, affordability, diversion, implementation, and long-term development can limit or reverse the intended benefit."
+      ],
+      "example_structure": {
+        "scenario": "Hypothesized capacity-to-time-to-driving-to-delay response. Short-term rerouting distinguished from additional regional driving; rapid travel choices distinguished from slow relocation and development. Vehicle stock, travel flows, and built-capacity stocks distinguished. Proposed charge-plus-alternatives package requires authority, implementation, usable alternatives, and distributional review; no measured package outcome claimed.",
+        "changed_relationship": "Plan for behavioral responses and change incentives or feasible alternatives where authorized.",
+        "residual_constraints": "Access, affordability, diversion, implementation, and long-term development can limit or reverse the intended benefit.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/policy-resistance-repair-flow.svg",
+          "content/assets/structural-traps/policy-resistance-repair-flow-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1031,
+            "textBlocks": 21
+          },
+          "phone": {
+            "width": 360,
+            "height": 1888,
+            "textBlocks": 21
+          }
+        },
+        "question": "Which response offsets the initial time saving?",
+        "alternative_text": "Hypothetical qualitative illustration. Added road capacity can reduce journey time, making driving more attractive and adding peak demand. The resulting congestion offsets part of the initial relief. A proposed peak charge with usable alternatives changes choices and requires wider monitoring. Change: Plan for behavioral responses and change incentives or feasible alternatives where authorized. Limitation: Access, affordability, diversion, implementation, and long-term development can limit or reverse the intended benefit.",
+        "caption": "Hypothetical illustration. The upper map is a hypothesized counteracting response to capacity, not proof from a traffic rebound. Fast travel changes and slower location changes have different delays. A charge-and-alternatives package changes incentives and imposes burdens; its result must be tested.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Added road capacity can reduce journey time, making driving more attractive and adding peak demand. The resulting congestion offsets part of the initial relief. A proposed peak charge with usable alternatives changes choices and requires wider monitoring. Change: Plan for behavioral responses and change incentives or feasible alternatives where authorized. Limitation: Access, affordability, diversion, implementation, and long-term development can limit or reverse the intended benefit.",
+          "relationship_key": "Upper arrows show hypothesized causal effects; the return label describes opposition to the initial relief. Lower arrows show a proposed policy sequence, not measured effects.",
+          "changed_relationship": "Plan for behavioral responses and change incentives or feasible alternatives where authorized.",
+          "residual_constraints": "Access, affordability, diversion, implementation, and long-term development can limit or reverse the intended benefit.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Hypothesized capacity-to-time-to-driving-to-delay response. Short-term rerouting distinguished from additional regional driving; rapid travel choices distinguished from slow relocation and development. Vehicle stock, travel flows, and built-capacity stocks distinguished. Proposed charge-plus-alternatives package requires authority, implementation, usable alternatives, and distributional review; no measured package outcome claimed.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

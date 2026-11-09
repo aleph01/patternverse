@@ -1,0 +1,108 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Only caption-group positions, feature-leader opacity or title-panel position changes. Photographic source bytes, crops, frames, native copy, font settings, palette, unrelated geometry and presentation remain identical. No raster editing or new image generation.",
+  "examples": [
+    {
+      "name": "integration-newsletter-captions",
+      "sources": [
+        ["photo", "meaning-handbuilding-photo.jpg", 1536, 1024],
+        ["photo2", "explicit-tableware-photo.jpg", 1536, 1024]
+      ],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only two caption-group transforms change: each rises300 units. Photographs, source bytes, image windows/crops, copy, type settings, introduction, footer, paper and lighting remain identical. The offers stay in their original left and right columns.",
+      "masks": [
+        [65, 360, 225, 100],
+        [320, 360, 225, 100],
+        [65, 660, 225, 100],
+        [320, 660, 225, 100]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "workshop-caption",
+            "attribute": "transform",
+            "value": "translate(65 660)"
+          },
+          {
+            "element": "shop-caption",
+            "attribute": "transform",
+            "value": "translate(320 660)"
+          }
+        ],
+        [
+          {
+            "element": "workshop-caption",
+            "attribute": "transform",
+            "value": "translate(65 360)"
+          },
+          {
+            "element": "shop-caption",
+            "attribute": "transform",
+            "value": "translate(320 360)"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "integration-pitcher-labels",
+      "sources": [["photo", "figure-ground-pitcher-cutout.png", 1312, 1199]],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only feature-leaders opacity changes0→1. Two fixed elbow paths end at the pouring lip and loop-handle opening. Product source/alpha, placement, scale, captions, colors, typography, page geometry, paper and lighting remain identical. No claims about performance are introduced.",
+      "masks": [[100, 270, 400, 245]],
+      "declaredChanges": [
+        [
+          {
+            "element": "feature-leaders",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "feature-leaders",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "integration-maker-poster",
+      "sources": [["photo", "guide-maker-portrait.jpg", 1024, 1536]],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only title-panel transform changes from translate(85 320) to translate(85 590). Panel size/fill, words, type sizes, source portrait/crop, all other positions, paper and lighting remain identical. The panel moves from the face to the lower apron area. The generated person is fictional.",
+      "masks": [
+        [85, 320, 440, 155],
+        [85, 590, 440, 155]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "title-panel",
+            "attribute": "transform",
+            "value": "translate(85 320)"
+          }
+        ],
+        [
+          {
+            "element": "title-panel",
+            "attribute": "transform",
+            "value": "translate(85 590)"
+          }
+        ]
+      ]
+    }
+  ]
+}

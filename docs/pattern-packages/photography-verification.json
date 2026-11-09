@@ -1,0 +1,164 @@
+{
+  "status": "local-browser-verification-complete",
+  "verified_date": "2026-10-23",
+  "import": {
+    "archive_sha256": "f1316fc0553bc8e388256492b854680e5232924b0619b6775ebb8518e037506e",
+    "additions": 94,
+    "shared_files_merged": 2,
+    "other_preexisting_source_files_preserved": 2940,
+    "existing_article_widget_support": "preserved"
+  },
+  "content_validation": {
+    "entities": 399,
+    "unresolved_references": 0
+  },
+  "production_web_build": "passed; public-build guard passed",
+  "web_types": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "changed_code_eslint": "passed",
+  "focused_tests": {
+    "passed": 41,
+    "files": 3
+  },
+  "browser_tests": {
+    "passed": 62,
+    "desktop_viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "mobile_viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "browser": "Chromium"
+  },
+  "browser_review": {
+    "status": "passed",
+    "widths": [1440, 390, 320],
+    "page_viewport_checks": 123,
+    "rendered_figure_captures": 72,
+    "asset_routes": 39,
+    "license": {
+      "status": 200,
+      "fullText": true
+    },
+    "page_errors": [],
+    "document_overflow": false,
+    "visual_inspection": "All 39 source assets, all rendered figures at desktop/mobile sizes, and collection/reference layouts inspected. No visual defects found.",
+    "navigation_flows": "Reading path, foundations, keyboard scrolling, full-size visual and browser back passed at 1440 and 390 pixels.",
+    "reproduce": "node scripts/review-photography.mjs",
+    "local_artifacts": "/tmp/photography-transfer-import"
+  },
+  "remaining_photography_blockers": [],
+  "other_existing_tests": {
+    "files_rerun": ["PatternFeed.component.test.ts", "LibraryCollections.component.test.ts"],
+    "passed": 12,
+    "failed": 1,
+    "failure": "LibraryCollections.component.test.ts:80 expects 6 patterns but receives 6patterns. Synthetic fixture and unchanged component; unrelated to photography.",
+    "full_workspace_suite": "not rerun in this focused local review"
+  },
+  "previous_cloud_results": {
+    "web_unit_tests": {
+      "passed": 1410,
+      "failed": 4,
+      "baseline_confirmed": true,
+      "preexisting_failures": [
+        "FAIL  src/lib/components/LibraryCollections.component.test.ts > Inline collection browsing > shows unsaved items inside a saved collection and bookmarks them without closing the collection",
+        "FAIL  src/lib/components/PatternFeed.component.test.ts > Pattern feed > excludes Commons and personal verses/concepts/practices from All, search and My library",
+        "FAIL  src/lib/components/PatternFeed.component.test.ts > Pattern feed > shows Explore without a redundant clear action for an empty personal library",
+        "FAIL  src/lib/components/PatternFeed.component.test.ts > Pattern feed > filters actual verse membership and combines it with search on either layout"
+      ]
+    },
+    "formatting": {
+      "changed_files": "passed",
+      "preexisting_files": [
+        "apps/web/src/lib/components/PatternverseGuide.svelte",
+        "apps/web/src/lib/mira/openrouter.ts",
+        "apps/web/tests/about.spec.ts",
+        "apps/web/tests/home.spec.ts"
+      ]
+    },
+    "note": "Historical cloud results only; browser/socket blocker resolved locally."
+  },
+  "provenance": {
+    "visuals": 39,
+    "recommendation_queries": 240
+  },
+  "publication": "Local workspace only; uncommitted; no push or deployment.",
+  "description_and_icons_followup": {
+    "date": "2026-10-23",
+    "description": "Removed redundant group overview and pattern counts from parent collection prose and summary.",
+    "authored_photography_graphics": 30,
+    "existing_graphics_preserved": 202,
+    "focused_icon_tests_passed": 38,
+    "visual_sizes": [32, 48, 96],
+    "geometry_clipping": false,
+    "desktop_and_mobile_graphic_assignments_verified": 60,
+    "compact_mobile_list": "Existing layout hides decorative icons below 800px; unchanged.",
+    "production_build": "passed",
+    "browser_errors": []
+  },
+  "example_expansion": {
+    "verified_date": "2026-10-25",
+    "status": "complete",
+    "article_examples_added": 8,
+    "foundations_illustrations_added": 3,
+    "photography_assets": 59,
+    "original_assets_preserved": 39,
+    "new_source_illustrations": 6,
+    "new_native_svg_layouts": 7,
+    "mobile_svg_companions": 7,
+    "prompt_and_provenance": "docs/pattern-packages/photography-provenance.json",
+    "example_placements": "docs/pattern-packages/photography-example-expansion.json",
+    "optical_examples": "Explicitly generated everyday illustrations, with existing real technical comparisons retained. No invented camera settings or real matched-capture claims.",
+    "content_validation": {
+      "entities": 404,
+      "unresolved_references": 0
+    },
+    "production_web_build": "passed, including public-build guard",
+    "web_types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "focused_tests": {
+      "passed": 44,
+      "files": 2
+    },
+    "changed_code_eslint": "passed",
+    "browser_tests": {
+      "passed": 62,
+      "desktop_viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "mobile_viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "browser": "Chromium"
+    },
+    "browser_review": {
+      "widths": [1440, 390, 320],
+      "page_viewport_checks": 123,
+      "rendered_figure_captures": 94,
+      "manifest_asset_routes": 87,
+      "photography_assets": 59,
+      "page_errors": [],
+      "document_overflow": false,
+      "license": "HTTP 200 and full text verified",
+      "visual_inspection": "All eleven added examples inspected at desktop and mobile widths. Existing sources preserved. Mobile layout and caption readability verified.",
+      "capture_note": "Figure-only screenshots hide sticky navigation to reveal the whole visual; page checks use normal navigation."
+    },
+    "regeneration": "All 87 current image assets, including other collection assets, reproduced byte-for-byte.",
+    "remaining_blockers": [],
+    "limitations": [
+      "Chromium viewport/touch emulation; no physical-device or other-browser checks.",
+      "Full workspace unit suite and historical unrelated failures were not rerun."
+    ],
+    "local_artifacts": "/tmp/photography-expansion-20261025",
+    "uncommitted": true,
+    "pushed_or_published": false
+  }
+}

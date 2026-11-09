@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "unit-of-work",
+  "title": "Unit of Work",
+  "aliases": ["Unit of Work Pattern", "UoW"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1410,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six authoritative source notes. Fowler’s Unit of Work catalog entry in Patterns of Enterprise Application Architecture establishes tracking affected objects and coordinating their persistence and concurrency policy. Percival and Gregory support scoped persistence and explicit completion. SQLAlchemy documentation distinguishes instrumented tracking, flushing, committing, and additional expected-version protection. Official SQLite and Python documentation supports the local transaction, BEGIN IMMEDIATE contention, explicit SQL configuration, and connection ownership. The article distinguishes the pattern from a generic transaction wrapper or job batch. The label scenario, manual tracker, code, and diagrams are original teaching material.",
+    "python_examples": "Both actual article fences execute as uow.py and demo.py with five stated output lines exactly. Checks cover explicit new/dirty/deleted tracking, no SQL during registration, update/insert/delete order, immutable snapshots, exact nonblank ASCII IDs and printable text boundaries, single final intent per ID, no-commit discard and exception cleanup, duplicate registration, wrong object types, later-insert failure and missing-row rollback after an earlier update, single-use lifecycle, preservation of a pre-existing caller transaction, exception after successful commit, empty commit, quoted IDs, explicit connection configuration, actual competing SQLite writers, committed visibility, closed connections, and stale proposals overwriting newer state. The latter explicitly demonstrates that a write lock acquired at commit does not provide expected-version protection for previously collected snapshots.",
+    "python_stdout": [
+      "before commit: Original",
+      "committed: [('A', 'Ready'), ('B', 'New')]",
+      "without commit: Ready",
+      "failed batch: rolled back",
+      "after failure: [('A', 'Ready'), ('B', 'New')]"
+    ],
+    "article_tests": "93 article integration tests pass across Unit of Work and all prior software/GoF suites. Coverage includes canonical ID and aliases, one primary collection, verse navigation, eight exact H2 sections, both copyable highlighted Python blocks, responsive figures and manifest dimensions, four resolved related links, search, ten recommendation queries, content hash, and concept mark. Two workers, 20-second test timeout, and 60-second corpus hook timeout bound load on the large corpus.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 97 passed and one unrelated failure across 25 files.",
+    "content": "1256 entities validate with drafts included. Published-only corpus contains 1109 entities and no errors.",
+    "collection": "Reused Persistence and Transactions, appending Unit of Work after Repository, Data Mapper, and Active Record. Prior members and body are retained. No new collection, duplicate alias article, or practice was added.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the visual generator, executable validator, integration test, authoring sidecar, concept registry, and authoring documentation. The final review report is formatted separately.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 hashes. All twenty-two earlier software articles and authoring records remain unchanged. All 434 prior concept marks and 1530 asset-dimension entries are unchanged. The Software Engineering verse, Application Architecture collection, and Domain Modeling and Business Logic collection are byte-for-byte unchanged. Persistence and Transactions retains its three previous members and body, adding only Unit of Work membership and introduction.",
+    "public_build": "Production build and public web build checks pass. Browser verification used the completed production build; no deployment.",
+    "visuals": "All four editable native SVG variants load. Native and production-browser measurements report no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. All four native renders and actual desktop/phone article figures were visually inspected. The tracking diagram separates new/modified/removed registry categories from the explicit persistence boundary; registration is labeled as issuing no SQL. The failure diagram accurately follows an UPDATE of A followed by duplicate B insertion and rollback of the earlier update, retaining the committed baseline. Arrow meanings, dashed failure paths, fixed white surface, exact light palette, regular Helvetica typography, square geometry, label placement, contrast, captions, and phone readability were reviewed. The concept mark appears in the article and collection gallery.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: eight exact H2 headings, both Python blocks preserved in DOM text, colored syntax tokens, text selection retaining indentation, focusable code blocks, keyboard horizontal scrolling at 320px, both phone SVG variants loaded, and no page overflow. Article tops, code, all figures, captions, and collection gallery were visually inspected. Browser selection normally omits the final newline. A tall code-element screenshot includes the existing sticky navigation overlay; DOM and selection checks verify the complete copyable code.",
+    "navigation_browser": "Repository, Data Mapper, Service Layer, and Active Record routes return HTTP 200. Persistence and Transactions renders its direct route and four-pattern Software Engineering gallery. The Unit of Work card opens the canonical route with the correct primary breadcrumb and 4/4 article indicator."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ and standard-library SQLite. Independent label rows, exact nonblank ASCII IDs, and 1–40 printable nonblank label characters. Explicit immutable snapshots classify one final intent per ID; registrations do not issue SQL. Explicit commit applies updates, inserts, and deletes under one local transaction, with IDs sorted within each group. Default exit discards unwritten proposals; an in-scope commit attempt or scope exit consumes the coordinator. Caller owns connection closing; the coordinator owns only the transaction it starts. Failed writes roll back earlier participating writes, while exceptions after successful commit cannot undo it. No automatic dirty tracking, identity map, repeated-intent coalescing, read API, foreign-key dependency ordering, version checks, authorization, automatic retry, or cross-resource coordination is implemented. Writer locking starts at commit, so stale proposals can still overwrite newer values.",
+  "preview": "http://127.0.0.1:43007/pattern/unit-of-work",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-unit-of-work",
+  "browser_measurements": ".local/software-unit-of-work/browser-checks.json",
+  "browser_check_script": ".local/software-unit-of-work/check-browser.mjs",
+  "preservation_checks": ".local/software-unit-of-work/preservation.json",
+  "build_log": ".local/software-unit-of-work/public-build.log",
+  "branch": "codex/software-unit-of-work",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

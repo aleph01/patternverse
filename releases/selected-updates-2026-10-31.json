@@ -1,0 +1,109 @@
+{
+  "name": "selected-updates-2026-10-31",
+  "status": "published-and-verified",
+  "verifiedAt": "2026-10-31T19:34:46.974Z",
+  "deployment": {
+    "id": "d2dd6976-1a10-4f29-8a7a-89a2bf01394d",
+    "url": "https://d2dd6976.patternverse.pages.dev",
+    "production": "https://patternverse.org",
+    "previousId": "8545410d-e6eb-44a0-b8c4-67591d96043e"
+  },
+  "scope": {
+    "publicEntries": 1263,
+    "newEntries": 189,
+    "updates": [
+      "Life & Wellbeing area rename",
+      "Active navigation underline removal",
+      "Personal article selection in Contribute",
+      "Share links, cards and supported practice embeds",
+      "Inline article videos",
+      "Pattern Language authoring improvements",
+      "Parenting",
+      "Software Engineering",
+      "AI Usage",
+      "Pedagogy",
+      "Five Alternative Frames",
+      "Photography illustration updates",
+      "Joke Mechanics"
+    ]
+  },
+  "verification": {
+    "content": {
+      "entries": 1263,
+      "diagnostics": 0
+    },
+    "webTypes": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "focusedTests": {
+      "passed": 472,
+      "files": 104,
+      "notes": "469 passed initially; the 3 Event Sourcing checks passed with a larger setup timeout. Shared-checkout selected content fingerprints match the candidate.",
+      "logs": [
+        "focused-tests-checkout.log",
+        "event-sourcing-rerun.log"
+      ]
+    },
+    "rustCore": {
+      "passed": 317,
+      "suites": 34
+    },
+    "rustHost": {
+      "passed": 23
+    },
+    "contributionService": {
+      "passed": 17,
+      "dryRun": "passed"
+    },
+    "browser": {
+      "passed": 82,
+      "desktop": true,
+      "phone": true,
+      "notes": "78 passed initially; four candidate-local fixture corrections passed without application or artifact changes. Photography startup error is absent."
+    },
+    "deploymentSafeguards": {
+      "passed": 16
+    },
+    "publicScan": "passed",
+    "sourcePreservation": "All 240 selected content files match the shared checkout; no source publication flags changed.",
+    "production": {
+      "checked": 11092,
+      "passed": 11092,
+      "failures": 0,
+      "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-10-31/production-verification.json"
+    },
+    "liveBrowser": {
+      "passed": 6,
+      "desktop": true,
+      "phone": true,
+      "framingHeaders": "passed",
+      "notes": [
+        "Actual live embed cards and practice welcome screens render.",
+        "New Parenting, software, AI, Pedagogy and Joke pages have working reading and sharing controls.",
+        "Live photography image loads and usefulness controls work.",
+        "One test assertion was corrected to allow the intentionally absent CSP response header; HTML CSP and unrelated-page framing protections remain checked."
+      ]
+    }
+  },
+  "artifact": {
+    "directory": "/private/tmp/patternverse-selected-2026-10-31/apps/web/build",
+    "files": 10923,
+    "bytes": 624757751,
+    "sha256": "04a491b6f2a875d0bea5389eb059d8cd6e047ee2d1b606d2bac017731d72405c"
+  },
+  "sourceArchive": {
+    "path": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-10-31/selected-source.tar.gz",
+    "bytes": 367646808,
+    "sha256": "aaacc9884d596cd4997dc9d4693505396a042c500c97ec251aa630021f64ec1d"
+  },
+  "contributionServiceDeployment": {
+    "name": "patternverse-article-contributions",
+    "version": "87419efa-67a0-4b9d-b104-b5fb8ff22d09",
+    "scope": "Matching reviewed article manifest and new personal-article suggestion contract; no database migration or Access-policy change.",
+    "availableAfterPublication": true
+  },
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-10-31/release-report.json",
+  "gitPush": false,
+  "pullRequest": false
+}

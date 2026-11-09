@@ -1,0 +1,612 @@
+{
+  "title": "Creativity shared article structure",
+  "reviewed_on": "2026-10-28",
+  "scope": "All 31 reader-facing entries in See the Problem Differently and Find New Possibilities: 30 patterns and the Five Alternative Frames practice. The shared explanatory outline applies to both entity types.",
+  "article_outline": [
+    "Core idea",
+    "When to use it",
+    "How it works",
+    "Worked examples",
+    "Pitfalls and limits",
+    "Related patterns",
+    "Sources and attribution"
+  ],
+  "opening": "An unheaded recognizable situation before Core idea.",
+  "practice_policy": "Existing executable sources, practice prompts, identities, summaries, memberships and attribution are retained. Practices follow the article as separate sections.",
+  "visual_policy": "Use an explanatory illustration when a concrete relationship, comparison, sequence, or change in possibilities is easier to see. Place it beside the worked example. Use the approved light editorial style and supply a separately composed phone version, alternative text and a caption.",
+  "patterns": [
+    {
+      "id": "reframing-alternative-paths",
+      "source_sha256": "f961c5ef5edd19b02f3a382bab4ed29fa7942ed80eba6d4c06d9cda6cce7a46f",
+      "title": "Find Alternative Paths",
+      "article_words": 467,
+      "visual": {
+        "type": "none",
+        "rationale": "The routes vary in access, cost, and tradeoffs. The comparisons are clearer in text; Abstraction Laddering supplies the related branching mechanism."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "56883d1a9c4ec9192629ed946cfe39da365a7dc92fb108b272be54e3918a3a12",
+      "executable_source_sha256": [
+        "c6eafc3daaa948806d648d3f23aa1ed7726714725c34f146a3c9b8f315ee817b"
+      ]
+    },
+    {
+      "id": "reframing-break-tradeoff",
+      "source_sha256": "d939da8ebead51dc9e2e6e0534e4afc45fdbdf5a47c38d76c3758b7b6df32de9",
+      "title": "Break a False Trade-Off",
+      "article_words": 564,
+      "visual": {
+        "type": "none",
+        "rationale": "The paired benefits differ across examples; a general two-to-three-option diagram would conceal the actual design work."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "b66889a02afbfb49ae9a52cb6c75fbe0cf194505acca33495b2525d26dd61097",
+      "executable_source_sha256": [
+        "6801fdf6d0f6868b38d33a40cca0055e82bd0073df43dcf8e5aa2439abecb48b"
+      ]
+    },
+    {
+      "id": "reframing-challenge-goal-logic",
+      "source_sha256": "479e68c9ef0699f7e51ed4f6593128efbfb39dc6ccbd0198a92b130fb42bef43",
+      "title": "Challenge Goal Logic",
+      "article_words": 446,
+      "visual": {
+        "id": "reframing-challenge-goal-logic",
+        "type": "process/flow",
+        "file": "creativity/reframing-challenge-goal-logic.svg",
+        "compact_file": "creativity/reframing-challenge-goal-logic-mobile.svg",
+        "alt_text": "The proposed chain links more meetings to better communication to fewer mistakes. Under each arrow is a question: are decisions recorded, and which mistakes involve missing information?",
+        "caption": "The arrows are assumptions to examine. Recording decisions or clarifying ownership may matter more than adding meetings; the chain alone cannot settle that.",
+        "rationale": "Separate questions attached to each causal link distinguish the intended outcome from the proposed mechanism.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 680
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "b614530df63e3b025d540afb7220db62542b485608fa8543ecf737083f10914a",
+      "executable_source_sha256": [
+        "595135734a83441259ecc7da78c5448504210c60862c4846119e3c7c2364fc04"
+      ]
+    },
+    {
+      "id": "reframing-detect-baked-solution",
+      "source_sha256": "3f7928f4d2d4459d3ff1081b218eb7a47e52a7f6065ed5e5e59638276c6316cd",
+      "title": "Detect a Baked-In Solution",
+      "article_words": 419,
+      "visual": {
+        "type": "none",
+        "rationale": "The contrast is between an intervention named in a request and the result sought. The paired sentences expose that distinction."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "bd00d7eedd5dabbe01dcbae131fb6db686f813f47e02d38a39ee1693633a7f6f",
+      "executable_source_sha256": [
+        "ae70135d640931892f3eeb33d34910a0dcdc01e0c40f221f45358881a9ad2dd7"
+      ]
+    },
+    {
+      "id": "reframing-escape-hammer",
+      "source_sha256": "f6c87da11656c0ab5e405e6dca2a1f3c7962bbcb0bf358c36688722fe871e9e6",
+      "title": "Escape Your Hammer",
+      "article_words": 425,
+      "visual": {
+        "type": "none",
+        "rationale": "The varied professional interpretations and their checks are directly legible in the examples."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "330288f5c181a026adf3f1b9f29fe53b75f51299e783c71f8096076ea8609e56",
+      "executable_source_sha256": [
+        "41abfc6645a0ffca4c7b1210de89b3d74fed02edaf7fa5606a3117f92e218c09"
+      ]
+    },
+    {
+      "id": "reframing-expand-time-window",
+      "source_sha256": "a1f6a3996430c7143c8693f6aeecc02e3e64eb996bd35a2d329c8c68ca94c4b5",
+      "title": "Expand the Time Window",
+      "article_words": 469,
+      "visual": {
+        "id": "reframing-expand-time-window",
+        "type": "timeline",
+        "file": "creativity/reframing-expand-time-window.svg",
+        "compact_file": "creativity/reframing-expand-time-window-mobile.svg",
+        "alt_text": "A timeline places changing expectations and urgent requests before a missed deadline. After it, anticipated criticism may delay the next warning. The expectation is marked as a hypothesis.",
+        "caption": "Widen the time window around the missed deadline. Sequence is not proof of cause: check both the earlier demands and the person’s account of the anticipated response.",
+        "rationale": "The timeline separates the visible episode from nearby events and from an inferred expectation.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 660
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "77fba851d4ce8f7021feea1ee1878cadfe0e47c9e2bcf269ee1b4f7a14824579",
+      "executable_source_sha256": [
+        "eb137b683104c3c71393a9e9b9d18fec9ba612d9d45bd574983ab56b9d791fc2"
+      ]
+    },
+    {
+      "id": "reframing-explore-or-break",
+      "source_sha256": "44b0606e38534309b8faba86f09ac8d63975c2c41852df45e64badf5bfde6975",
+      "title": "Explore or Break the Frame",
+      "article_words": 624,
+      "visual": {
+        "id": "reframing-explore-or-break",
+        "type": "comparison",
+        "file": "creativity/reframing-explore-or-break.svg",
+        "compact_file": "creativity/reframing-explore-or-break-mobile.svg",
+        "alt_text": "The concern that meetings run too long leads to two moves. Exploration inspects which agenda item expands; breaking the frame asks which decisions need a live meeting at all.",
+        "caption": "Exploring keeps the meeting as the setting and investigates variation. Breaking questions whether the decisions need to be synchronous. Either move may be useful.",
+        "rationale": "A paired comparison holds the concern constant while distinguishing a closer investigation from a changed premise.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 630
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "565bcac1fced30c2c29046027971f9529d8b93d829f81e3fd58fceb6ed856454",
+      "executable_source_sha256": [
+        "178a9add495d7f783c5e90e8e597542fc7ae229da281453dffa8ccc69d0391ff"
+      ]
+    },
+    {
+      "id": "reframing-find-hidden-influence",
+      "source_sha256": "3d02fd2d3173467dd282ad2c3d9a7ec60f2a57ef0c8dc4f08c514728f0491595",
+      "title": "Find Hidden Influences",
+      "article_words": 408,
+      "visual": {
+        "type": "none",
+        "rationale": "The examples generate possible explanations rather than an established causal graph. Text keeps those qualifications attached to each hypothesis."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "f296b8871df8d176f6bea536c3c465d6e3221074ef3dd9f560421d7a9b405349",
+      "executable_source_sha256": [
+        "0e1434bfe2ad892d3ebb82bc5d8ba36a6d9a31e03615d730f02f83cdba1758cf"
+      ]
+    },
+    {
+      "id": "reframing-find-hidden-properties",
+      "source_sha256": "2f4de2a5feacf65eee7b49a5c4a675c2f9e3963cbb6093518a808bd12751ba50",
+      "title": "Find Hidden Properties",
+      "article_words": 417,
+      "visual": {
+        "id": "reframing-find-hidden-properties",
+        "type": "comparison",
+        "file": "creativity/reframing-find-hidden-properties.svg",
+        "compact_file": "creativity/reframing-find-hidden-properties-mobile.svg",
+        "alt_text": "The same shipping crate is drawn as a storage container and as a possible raised display surface. The new use relies on its shape and stiffness and still requires a stability check.",
+        "caption": "Look beyond the label “storage.” A crate may provide a raised surface, but its strength and stability need checking before it becomes part of a stall.",
+        "rationale": "The same concrete object in two uses shows how a functional label can hide useful properties.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 620
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "3f98fa7af05236615e0148b4dc5dfdd4ca101137cd6f84644582513a2adfb90f",
+      "executable_source_sha256": [
+        "78944b2c5aa319a41465f82ff8e37d98a838d095c712df097410c6240e6c3a48"
+      ]
+    },
+    {
+      "id": "reframing-frame-problem",
+      "source_sha256": "1f5df0814e48796a69580e25000bd2de15f8ce7b3e9fafb9808e976a5a3ddbea",
+      "title": "Frame the Problem",
+      "article_words": 504,
+      "visual": {
+        "type": "none",
+        "rationale": "The useful change is the wording of the provisional statement, already visible in three comparisons."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "f50b2e5bf01955a4c01de025d03ebc2d3db938c1002b89d311e7ab2f6d82e3e6",
+      "executable_source_sha256": [
+        "c8d4129e224e05963184b971f6e0fb2edf47826e4ed9f818c80219275d7f9062"
+      ]
+    },
+    {
+      "id": "reframing-generate-real-options",
+      "source_sha256": "02abbd4a576c5b1056d3e63de4bbdeb07edd7948178c3614c62c077b8963b0a3",
+      "title": "Generate Real Options",
+      "article_words": 458,
+      "visual": {
+        "id": "reframing-generate-real-options",
+        "type": "comparison",
+        "file": "creativity/reframing-generate-real-options.svg",
+        "compact_file": "creativity/reframing-generate-real-options-mobile.svg",
+        "alt_text": "Vendor A, Vendor B, and an internal dashboard share the assumption of preserving a report. Other options question whether to simplify, partly automate, or retire the report.",
+        "caption": "The first group varies the implementation while retaining the report. The second changes the underlying account of what work is needed. Relevance still matters more than novelty.",
+        "rationale": "Grouping choices by their shared premise makes structural diversity visible.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 680
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "b44e1318273e9882013c42cc7c9d944b371c868fbfd6a9e6b97766f9785b9f70",
+      "executable_source_sha256": [
+        "16c3e8e635654da13e70f2ce3aebf0d96945e7e0fb379de5381fd70848d21e0b"
+      ]
+    },
+    {
+      "id": "reframing-identify-problem-form",
+      "source_sha256": "0a96073e4e0ae8abac9ab718ba4cf5d8737efce95902ff28cd345070e70a20bd",
+      "title": "Identify the Problem Form",
+      "article_words": 448,
+      "visual": {
+        "type": "none",
+        "rationale": "The forms are deliberately overlapping, tentative routing aids. A diagram could imply rigid categories."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "599fddff2331d81a801798948f03cfddec5aaca7b6f9be911dd3066898217948",
+      "executable_source_sha256": [
+        "7f2b1f1a1016e1b40cda73603b739f7d95ac01ebd05b456ce5f933a65d84d82b"
+      ]
+    },
+    {
+      "id": "reframing-inspect-emotion",
+      "source_sha256": "bfd94346ab11648944e81df8a78408da7093d2514b0e1f7cf5309863665ad5e0",
+      "title": "Inspect Emotional Language",
+      "article_words": 494,
+      "visual": {
+        "type": "none",
+        "rationale": "Observation, feeling, and interpretation need the speaker’s exact language and qualifications. The text avoids implying an emotion has one underlying cause."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "78d5bf26a898e920c2e1662024a0f5995769d77aae79be8425e2823487d192a1",
+      "executable_source_sha256": [
+        "91bdecfdd4fb945b370430560e2e8c5e3b3e9af9ac9ad31c62ee47e820906976"
+      ]
+    },
+    {
+      "id": "reframing-locate-problem",
+      "source_sha256": "8f94ce030b00a32b9dabce0f9975f85b9254a493c8e2dd76a7459830989e222b",
+      "title": "Locate the Problem",
+      "article_words": 454,
+      "visual": {
+        "type": "none",
+        "rationale": "The four framings hold one incident constant and show the effect of pronouns and responsibility directly in words."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "c0299e48865a74b4bce99370cbdfbe67d634ccd8186cd2c603c08c3c8cb1707b",
+      "executable_source_sha256": [
+        "3194cd879c85a3e6332a5701da0d39b7d638a61209e3cecda9a4fbaf9c7c282b"
+      ]
+    },
+    {
+      "id": "reframing-look-outside-frame",
+      "source_sha256": "03c6c0874ebf340522cb4d49207b201139937b2014df51ce80178f6d28aebca0",
+      "title": "Look Outside the Frame",
+      "article_words": 518,
+      "visual": {
+        "type": "none",
+        "rationale": "The four lenses are explained through a concrete hiring case; a generic boundary illustration would repeat the metaphor without adding evidence."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "f437a0ae8d3ed6241865ed6e40e50b1089a6225f4f11277c0fa9ff88ecefaa07",
+      "executable_source_sha256": [
+        "39ff89785e641a2769151a05a9f394a503a93f9fe6e66b8729d77c8c20c9bdf2"
+      ]
+    },
+    {
+      "id": "reframing-map-stakeholders",
+      "source_sha256": "bb4b1c7503c4f904c58840ccec26fb9cfdf547a02a7ccdc052ddf236d11f015e",
+      "title": "Map Stakeholders",
+      "article_words": 471,
+      "visual": {
+        "id": "reframing-map-stakeholders",
+        "type": "map",
+        "file": "creativity/reframing-map-stakeholders.svg",
+        "compact_file": "creativity/reframing-map-stakeholders-mobile.svg",
+        "alt_text": "A release is connected to developers implementing, a product owner changing scope, reviewers approving, support handling defects, and customers waiting. The labels describe roles rather than assign blame.",
+        "caption": "Map what each group does or experiences before deciding where the delay originates. A role map suggests people to consult; it does not establish the cause.",
+        "rationale": "A spatial map restores omitted roles and makes the difference between responsibility and causal blame visible.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 750
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "d60c890ebe11da9adebe081cbc13d7bb81d4b5671a416cbbc77aa06a6697b0e8",
+      "executable_source_sha256": [
+        "bf66fef059fc81c3d4319fecd29bca5498bc052ea7c5786bdb9e42803a9c1722"
+      ]
+    },
+    {
+      "id": "reframing-rapid-reframe",
+      "source_sha256": "2466f1014a60403f2085366f643cbecb6386a8bca43d5721ae6c8d25c354293a",
+      "title": "Rapid Reframe",
+      "article_words": 503,
+      "visual": {
+        "id": "reframing-rapid-reframe",
+        "type": "comparison",
+        "file": "creativity/reframing-rapid-reframe.svg",
+        "compact_file": "creativity/reframing-rapid-reframe-mobile.svg",
+        "alt_text": "One concern, always being behind, branches into work arriving faster than it can finish and one request type blocking the rest. Each frame points to a different observation.",
+        "caption": "Both frames retain the backlog concern. One asks for incoming and completed work; the other asks where work waits. These checks can refine either interpretation.",
+        "rationale": "The branches pair each interpretation with its distinct check, showing why a wording change alone is insufficient.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 680
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "8f18a7b209db8d1c3bb7c5d162bb4ecbb860a001d600e3e2d764b7d5c6dd548d",
+      "executable_source_sha256": [
+        "f3e8d2dd721e369161d07ef54270f808d7ca83f833926542fcc0c1a36b868b2f"
+      ]
+    },
+    {
+      "id": "reframing-remove-constraints",
+      "source_sha256": "d51605998986ece94710bbc9b75d43f921297c7dd5ed12e75ac41336b934488e",
+      "title": "Remove Constraints",
+      "article_words": 448,
+      "visual": {
+        "type": "none",
+        "rationale": "The restrictive phrase and broader question are already explicit in each example. Keeping the confirmed limits visible matters more than a generic expansion graphic."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "07e43cc57462e54985fe30044eaf7af4c42732602e2d68d24312d039fc707a63",
+      "executable_source_sha256": [
+        "f086d9af7c9ec9126aeb503a820bbf5d9b93c42831a6a041417ab5eb1a6d193d"
+      ]
+    },
+    {
+      "id": "reframing-rethink-goal",
+      "source_sha256": "b1295251a4e85452207953f463a8d9fc151b6d46c3eefaa6efb25b05d8cfba1a",
+      "title": "Rethink the Goal",
+      "article_words": 462,
+      "visual": {
+        "type": "none",
+        "rationale": "The approval-process example explains the change directly; the neighboring goal tree and alternative-route figures provide the useful spatial views."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "b335fc66f16d2fd412456274cfda667e450b82a786f5344d33a0af7e7e82cd12",
+      "executable_source_sha256": [
+        "c5647f8c4af5a617d6386c67480c313de00d257f0b322bdb48a7d9e09f17a181"
+      ]
+    },
+    {
+      "id": "reframing-review-frame",
+      "source_sha256": "4ee812315e67e11c1529808a39424092d99afc70451d54cac59469628463a6ba",
+      "title": "Review the Frame",
+      "article_words": 515,
+      "visual": {
+        "type": "none",
+        "rationale": "The scan selects a relevant question rather than following every lens. Another process graphic could make the quick review appear compulsory."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "7f3eb751f64c28b2d882ae5f9b971f1dbe33c6a439f2acf1aca7084b6bd11263",
+      "executable_source_sha256": [
+        "2de632aaae2df7d21e12fc17fd1d8a8848fe874eebbdcbe7e92b85466a43f9ab"
+      ]
+    },
+    {
+      "id": "reframing-surface-higher-goals",
+      "source_sha256": "32a52d2ac4748b477e0dbef437dfb798be1f46ffd9595792183302958a266e22",
+      "title": "Surface Higher-Level Goals",
+      "article_words": 896,
+      "visual": {
+        "id": "reframing-surface-higher-goals",
+        "type": "map",
+        "file": "creativity/reframing-surface-higher-goals.svg",
+        "compact_file": "creativity/reframing-surface-higher-goals-mobile.svg",
+        "alt_text": "A promotion branches into income, responsibility, and recognition. Each branch points to a different possible purpose: financial security, consequential work, and feeling valued.",
+        "caption": "Keep the branches distinct. A route that increases income may not provide responsibility or recognition; the person decides which purposes fit their experience.",
+        "rationale": "The tree preserves multiple legitimate purposes instead of collapsing the goal into a single inferred motive.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 650
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "b613edfda4996fda8bee7f9096a50b1452655929bba5621433186b51fc08836d",
+      "executable_source_sha256": [
+        "c31aca9e6d995ba1573aa6a61acd83707ca82a5d7bf4f5e3d11d34ba7028e163",
+        "ad3fda34b4c1aa7bb8ad146cb9b937f15ca7f3f06d06964b3045858489b7a838"
+      ]
+    },
+    {
+      "id": "reframing-validate-frame",
+      "source_sha256": "f9883e468fd83a5c763c3f1924418bcbe7abb2658a1664d56a00ec4a68a55a87",
+      "title": "Validate the Frame",
+      "article_words": 490,
+      "visual": {
+        "type": "none",
+        "rationale": "The paired predictions and checks are already explicit; Rapid Reframe illustrates the frame-to-observation relationship."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "115d28f406b593e39939158db863f38137c86ca6d08a74ec75bf8631acd81331",
+      "executable_source_sha256": [
+        "0f960648de0a743d84507b1b2fcff1372d5c9313db58f37bd3aa2fea5758807e"
+      ]
+    },
+    {
+      "id": "reframing-verify-statement",
+      "source_sha256": "0a191ffa7fa13f45bd9164716125c49ca91b24be03170dcb2280d3c210492dde",
+      "title": "Verify the Statement",
+      "article_words": 490,
+      "visual": {
+        "type": "none",
+        "rationale": "The distinction depends on the wording and evidential status of each claim; the paired text examples are the clearest explanation."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "72d102b5d6c834d990158be4e560f9b821216b35a2f0b7acf0b1aef12c245cd4",
+      "executable_source_sha256": [
+        "7c265304f0ab17c3a82b5b1d558ace764152b0afba2dd16f51cec85641f3f771"
+      ]
+    },
+    {
+      "id": "abstraction-laddering",
+      "source_sha256": "05496ff03b424b3a12295118942a1973716ca5dc9aa5e3358959f6bdf17afd86",
+      "title": "Abstraction Laddering",
+      "article_words": 912,
+      "visual": {
+        "id": "abstraction-laddering",
+        "type": "map",
+        "file": "creativity/abstraction-laddering.svg",
+        "compact_file": "creativity/abstraction-laddering-mobile.svg",
+        "alt_text": "The room-booking website leads to the purpose of reliable access to suitable rooms. That purpose also leads to clearer descriptions, standing allocations, and drop-in space.",
+        "caption": "Ask what booking makes possible, then return through other ways to provide suitable space. The alternatives still need to meet the same requirements.",
+        "rationale": "The branches make the move from one implementation to a purpose and back through alternative implementations visible.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 630
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "17380f9e8ef178275d71c5f2d00ea7a040df21e856aa9a8d56d9174f4f359469",
+      "executable_source_sha256": [
+        "55dd062df15abe02a575694a18e9a2f79298ee38e98c76b1cc6cd464a4fb790c"
+      ]
+    },
+    {
+      "id": "zwicky-box",
+      "source_sha256": "3c3d822581cfc8fb73d6dd8ea68cf1a71b234733bcd82ca84db6ecfd0e264e8f",
+      "title": "Zwicky Box",
+      "article_words": 894,
+      "visual": {
+        "id": "zwicky-box",
+        "type": "comparison",
+        "file": "creativity/zwicky-box.svg",
+        "compact_file": "creativity/zwicky-box-mobile.svg",
+        "alt_text": "Three dimensions each offer two choices: setting, encounter, and contribution. Walking route, audio excerpts, and remembered places combine into a listening trail; the kitchen-table combination becomes a conversation pack.",
+        "caption": "Choose one alternative from each dimension, then describe and check the combination. The listening trail and conversation pack differ in their underlying arrangement.",
+        "rationale": "Aligned alternatives and complete combinations make recombination concrete without pretending to enumerate every possible design.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 735
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "334aaf810ead28b5c31bd8cb465c917690aad6c461b5af7e1eb59272e07c7d5b",
+      "executable_source_sha256": [
+        "889795386c96eaf40c73d7a4d76f2374cb4ae2f3a0383d28a093eb889ea3b61f"
+      ]
+    },
+    {
+      "id": "productive-thinking-model",
+      "source_sha256": "2da5b7e7755b0c1ce5923004a8cd8573691e99a135bdbbf531c74e2d27ba602f",
+      "title": "Productive Thinking Model",
+      "article_words": 1071,
+      "visual": {
+        "id": "productive-thinking-model",
+        "type": "process/flow",
+        "file": "creativity/productive-thinking-model.svg",
+        "compact_file": "creativity/productive-thinking-model-mobile.svg",
+        "alt_text": "Six thinking jobs connect the courtyard concern to a trial: understand use, describe success, frame a question, generate options, develop a proposal, and align resources. A dashed return from the storage question reopens development.",
+        "caption": "The courtyard proposal moves through six different thinking jobs. If storage is unavailable, return to development instead of treating the plan as settled.",
+        "rationale": "The figure distinguishes thinking jobs and makes the return from a resource discovery to solution development explicit.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 900
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "eb89d03d6e3902838d5c4e20808843f684f812e81aa52dfe3739a685bf928254",
+      "executable_source_sha256": [
+        "fd0ff60675f8401512ca5c5d46c8bdd92c56a736eddeeb7a48a1607dee16246b"
+      ]
+    },
+    {
+      "id": "enact-a-possibility-before-committing",
+      "source_sha256": "1813a491dfadd5ea8dc63263522d5a16f84a4db15a74906d813b56555798c66a",
+      "title": "Enact a Possibility Before Committing",
+      "article_words": 892,
+      "visual": {
+        "id": "enact-a-possibility-before-committing",
+        "type": "comparison",
+        "file": "creativity/enact-a-possibility-before-committing.svg",
+        "compact_file": "creativity/enact-a-possibility-before-committing-mobile.svg",
+        "alt_text": "Two simplified event entrance plans compare one host dividing attention between a visitor, a list, and a waiting person with two roles: initial contact and booking lookup. A separate map and queue marker are added in the second scene.",
+        "caption": "The second scene redistributes attention and clarifies waiting. Acting it out can expose new exceptions; the arrangement has not yet been validated with real visitors.",
+        "rationale": "A concrete plan comparison makes attention, roles, and physical arrangement visible in the same welcome-desk case.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 700
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "a8f41ea5a73d9b877bfc25eddc06e19f86b5b60ba7820e85608dda5049e735e2",
+      "executable_source_sha256": [
+        "c03db0300c42778bd34b809ee4929107ea2b73909d98e683bc78316009f8c402"
+      ]
+    },
+    {
+      "id": "tell-the-story-without-words",
+      "source_sha256": "df4beb2f0b407e8033caebda9f8d9f5c0714b0af71e3f8626da1d05e0932d83d",
+      "title": "Tell the Story Without Words",
+      "article_words": 865,
+      "visual": {
+        "id": "tell-the-story-without-words",
+        "type": "comparison",
+        "file": "creativity/tell-the-story-without-words.svg",
+        "compact_file": "creativity/tell-the-story-without-words-mobile.svg",
+        "alt_text": "A wordless drawing places one person between two blocks. A revised drawing shows people within both blocks and several possible connections. Tentative interpretations sit outside the drawings.",
+        "caption": "Changing scale and relationships can open a question about connecting work. The viewer’s interpretation remains tentative, and the artist can correct or reject it.",
+        "rationale": "The paired drawings demonstrate the change of representation while keeping interpretations outside the wordless image.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 710
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "e4f043a498c4eb6262a1828ad7eeeaa249628a947299219af650bcc75c92af1d",
+      "executable_source_sha256": [
+        "35a9445759a23cf8e5416a5909884f8e8b74e8fd433c137c3fb69a980a3f40fd"
+      ]
+    },
+    {
+      "id": "creative-reframing",
+      "source_sha256": "d209fc04f890242a5afed326d76b18259944930692ab103cee60ccb3eb032afd",
+      "title": "Creative Reframing",
+      "article_words": 512,
+      "visual": {
+        "type": "none",
+        "rationale": "The two worked cases explain different framing moves; a generic branching image would add little beyond the more specific figures in the specialist articles."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "aab46e676b443a476efc3fb09ef7f412a4980112358be33c91e0b3d84e01c7cd",
+      "executable_source_sha256": []
+    },
+    {
+      "id": "reduce-the-first-step",
+      "source_sha256": "da30010b7745fecef7e47b17bd3f18b2b732a3f66e728637c1f1895327b130a8",
+      "title": "Reduce the First Step",
+      "article_words": 490,
+      "visual": {
+        "type": "none",
+        "rationale": "The useful change is the size of a concrete commitment. The sentence and photographic examples communicate it directly."
+      },
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "e3d7f56f0bfec0420f3a78f44d10e3c396eff7638f2cd3fc8effbd53f746d56e",
+      "executable_source_sha256": [
+        "e7fbb0ab2d2debb690bc390a34088833044127444c230ad5a22dbf3f65181cf8"
+      ]
+    }
+  ],
+  "practices": [
+    {
+      "id": "five-alternative-frames",
+      "title": "Five Alternative Frames",
+      "article_words": 1046,
+      "visual": {
+        "id": "five-alternative-frames",
+        "type": "comparison",
+        "file": "creativity/five-alternative-frames.svg",
+        "compact_file": "creativity/five-alternative-frames-mobile.svg",
+        "alt_text": "The same observation, few members speaking, is viewed through five possible frames: turn-taking, the opening question, discussion climate, the purpose of the gathering, and participation conditions. Each points to a different inquiry.",
+        "caption": "Keep the observation constant while changing the account. These five frames suggest different questions; they are hypotheses to examine, and several may overlap.",
+        "rationale": "The comparison demonstrates five structurally different interpretations and the different inquiry each opens.",
+        "width": 720,
+        "height": 470,
+        "compact_width": 360,
+        "compact_height": 805
+      },
+      "source_sha256": "52f92a94132b6924af526064e5cf5eda8eacc69d2b6c807b4c76e4a2e1ba925d",
+      "executable_sources_preserved": true,
+      "frontmatter_sha256": "c83c140951a581a0ed3aaaea69b522c9d8fd826de37c44e12f9da5f979f96720",
+      "executable_source_sha256": [
+        "f64a03680f6e0442f303edb10c09a3dcba956c45c1fb82aa797ca40e87f71b39"
+      ]
+    }
+  ],
+  "coverage_rule": "Audit the complete set of collection items rather than filtering by pattern type. Every entry must have a substantive readable explanation before any executable practice."
+}

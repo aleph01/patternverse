@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "functional-core-imperative-shell",
+  "title": "Functional Core, Imperative Shell",
+  "aliases": ["Functional Core / Imperative Shell", "Functional Core and Imperative Shell"],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1495,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Bernhardt's accessible original episode description establishes the named arrangement and its 2012-07-12 publication; his public Boundaries description supplies the value-boundary context. No subscription-video or transcript access is claimed. Seemann's primary articles distinguish an effectful callback from an already-read value and explain impure/pure/impure composition without requiring one enormous preload. Official Python documentation supports frozen-record limitations, CSV conversion and newline handling, and file context management. The replenishment scenario, Python code, and figures are original teaching material.",
+    "python_examples": "All three actual article blocks execute and print sku,units and pen,7 on separate lines. Checks verify constrained core imports and absence of direct I/O operations, repeated equal results without input changes, frozen item and proposal records, empty input, inclusive and adjacent thresholds, zero-unit suppression, over-target stock, identifier validation, duplicate rejection, invalid count types and values, target bounds, and input-order preservation. These focused checks do not constitute a general Python purity proof. Real CSV checks cover quoted identifiers, expected output, invalid later rows and malformed numeric input without opening or changing output, missing columns with rows, same-path rejection, missing input and invalid output paths, and handle closure. An instrumented real output stream fails after writing the header; the original exception propagates, the handle closes, and partial output remains, matching the stated non-atomic behavior. A fresh observation produces a fresh decision while the previously returned snapshot result stays unchanged.",
+    "article_tests": "51 article tests pass across Functional Core, Imperative Shell, Dependency Injection, Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical ID and spelling aliases, one primary home, resolved related links, all eight headings, exact highlighted code, responsive figures and dimensions, search, ten queries, revision hash, and concept marks. The initial high-concurrency run timed out in seven corpus-loading setup hooks. Rerunning with maxWorkers=2 resolves those timeouts without changing test or application code.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check retains the unrelated existing failure listed below. The final bounded-worker run reports 55 passed and one unrelated failure.",
+    "content": "1228 entities validate with drafts included. The published-only corpus contains 1082 entities and reports no errors.",
+    "public_build": "Production build passes, including public web build checks. Actual browser review uses that build. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new illustration generator, executable example validator, article integration test, and updated authoring metadata. The refined illustration generator is checked again after moving labels clear of flow arrows. The review report is separately formatted and checked.",
+    "visuals": "All four editable native SVG variants load. Browser measurements find no overlapping or out-of-bounds labels and no out-of-canvas rectangles. Desktop and separately composed phone layouts were visually inspected for accurate value/effect boundaries, connected value-flow arrows, snapshot-versus-current-state distinctions, inclusive-threshold arithmetic, fixed white surfaces, regular typography, palette, contrast, and readable labels. External-change labels were moved clear of arrows during review. Structure, step numbers, and labels supplement color.",
+    "article_browser": "Actual production article checked at 1440, 390, and 320 pixels: all eight headings, all three Python blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard code scrolling at 320px, responsive phone illustrations loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article, code, and figure screenshots were inspected.",
+    "navigation_browser": "Application Architecture opens Functional Core, Imperative Shell with the correct breadcrumb. Related Ports and Adapters, Dependency Injection, Command, and Transactional Outbox routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. Prior authoring records, concept marks, and asset dimensions remain unchanged. The existing Application Architecture collection and canonical related-pattern IDs were reused."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Single-threaded whole-batch CSV processing with an eager tuple of input records and local builders inside a value-based core. Frozen records contain only strings and integers; Python does not generally enforce purity. Results are proposals, not purchases or stock updates. Output is opened for ordinary replacement after complete parsing and validation; a write failure may leave partial output. No atomic file replacement, durable commit, inventory snapshot transaction, concurrency protection, or exactly-once effect execution is implemented. The shell requires the documented CSV columns and integer text counts.",
+  "preview": "http://127.0.0.1:42993/pattern/functional-core-imperative-shell",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-functional-core-imperative-shell",
+  "browser_measurements": ".local/software-functional-core-imperative-shell/browser-checks.json",
+  "browser_check_script": ".local/software-functional-core-imperative-shell/check-browser.mjs",
+  "preservation_checks": ".local/software-functional-core-imperative-shell/preservation-checks.json",
+  "test_log": ".local/software-functional-core-imperative-shell/tests-bounded-workers.log",
+  "build_log": ".local/software-functional-core-imperative-shell/public-build.log",
+  "branch": "codex/software-functional-core-imperative-shell",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "aggregate",
+  "title": "Aggregate",
+  "aliases": ["DDD Aggregate", "Domain Aggregate"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1393,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Evans's original accessible DDD Reference, Aggregates on printed page 16, establishes a root, whole-unit invariants, controlled references, and transaction boundaries. Fowler distinguishes domain aggregates from generic collections and UML aggregation. Vernon, Effective Aggregate Design Part I, supports real invariants, small consistency boundaries, loading/contention costs, and one-aggregate transactions as a design goal requiring analysis. Microsoft's domain-model guidance supports root-controlled updates and identity references; official EF Core concurrency documentation supports conditional version checks, stale-write failure, and conflict handling. Python documents frozen-field behavior. Aggregate root is identified as a role, rather than aliased to every object in the boundary. SQL aggregate functions and analytics summaries are explicitly separate meanings. The load-plan policy, code, and native SVGs are original teaching material.",
+    "python_examples": "Both actual Python article blocks execute together and produce all five output lines exactly. Checks cover positive exact-integer kilogram inputs, Boolean/fractional/text/zero/negative rejection, nonblank opaque text identifiers, constructor validation, empty valid plans, exact-capacity acceptance, capacity excess on addition or replacement without mutation, replacement rather than duplicate accumulation, repeated setting without increments, stable root identity, immutable tuples and frozen allocation fields, earlier snapshots retained through later changes, separate plans referencing the same package without claiming global uniqueness, and arbitrarily large integer unit counts. An independent dictionary oracle checks every intermediate accepted/rejected state in 1875 bounded four-command sequences. A separate sequential trace verifies the illustrated version-7/version-8 conflict and rejection after re-evaluation; it is explicitly not a persistence or atomic compare-and-swap implementation. The model imports only dataclasses and performs no I/O.",
+    "python_stdout": [
+      "total kg: 100",
+      "rejected: Capacity exceeded",
+      "unchanged kg: 100",
+      "revised kg: 90",
+      "earlier snapshot kg: 60"
+    ],
+    "article_tests": "63 article tests pass across Aggregate, Value Object, Entity, Domain Model, Functional Core Imperative Shell, Dependency Injection, Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and GoF. Coverage includes canonical names and aliases without duplicate articles, exactly one primary collection with prior members retained, resolved related links, eight headings, exact highlighted code, accessible responsive figures and dimensions, search, recommendation queries, revision metadata, and concept marks. Corpus-loading concurrency is bounded using maxWorkers=2.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check retains its unrelated missing access-over-ownership graphic. Combined result: 67 passed, one unrelated failure, across 15 test files.",
+    "content": "1242 entities validate with drafts included. The published-only corpus contains 1096 entities and reports no errors.",
+    "collection": "Reused Domain Modeling and Business Logic, appending Aggregate after Domain Model, Entity, and Value Object. No new collection or candidate stub. Document Aggregates keeps its existing data-engineering identity and collection; overlaps are represented with a related link.",
+    "public_build": "Production build and public web build checks pass. Browser review uses that completed production build. No deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, executable validator, article integration test, and updated authoring metadata. The corrected generator drawing order and review report are separately checked.",
+    "visuals": "All four native editable SVG variants load. Browser measurements report no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and independently composed phone layouts were inspected for root entry, owned allocation values, correct kilogram units, capacity arithmetic, independent package lifecycle, solid command versus dashed reference arrows, competing loaded copies, ordered save/conflict/reload steps, exact version numbers, fixed white surfaces, regular Helvetica typography, palette, contrast, and readable labels. Phone command-arrow drawing order was corrected so the boundary surface does not hide its arrowhead. The concept mark depicts one root controlling two values within a common boundary.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 headings, both Python blocks preserved exactly in the DOM, colored syntax tokens, selectable code preserving indentation, keyboard horizontal code scrolling at 320px, responsive phone variants loaded, and no page overflow. Normal browser selection omits the terminal newline. Actual desktop/phone article, figure, code, and collection-gallery screenshots were visually inspected.",
+    "navigation_browser": "The primary collection direct route renders the correct title. Software Engineering's library filter opens the Domain Modeling and Business Logic gallery; its Aggregate card opens the article with the correct breadcrumb. Entity, Value Object, Domain Model, and Document Aggregates routes return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. Application Architecture and the Software Engineering verse remain byte-for-byte unchanged. Domain Model, Entity, and Value Object match their prior revision hashes. All prior authoring records, concept marks, and asset dimensions remain unchanged, and existing primary collection members are retained."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; unrelated file left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "One sequential in-memory LoadPlan root owns immutable Allocation values. It models only positive integer kilograms and a combined weight limit; it does not model vehicle safety, volume, axle distribution, route ordering, package existence, global exclusive assignment, root-ID allocation, persistence, transaction rollback, authorization, or competing writers. Underscore fields and frozen dataclasses protect normal API use, not deliberate runtime bypass. The separate version diagram and ordered validation trace describe a required persistent concurrency protocol; storage must provide atomic expected-version comparison, all member writes, and token advancement. A root-row token is effective only when every child-writing path participates. Cross-aggregate messages, duplicate handling, ordering, and external-effect delivery require additional designs.",
+  "preview": "http://127.0.0.1:42997/pattern/aggregate",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-aggregate",
+  "browser_measurements": ".local/software-aggregate/browser-checks.json",
+  "browser_check_script": ".local/software-aggregate/check-browser.mjs",
+  "preservation_checks": ".local/software-aggregate/preservation-checks.json",
+  "build_log": ".local/software-aggregate/public-build.log",
+  "branch": "codex/software-aggregate",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

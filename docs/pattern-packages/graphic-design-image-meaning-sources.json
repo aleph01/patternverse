@@ -1,0 +1,113 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-library-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "9a09beb4b55a5038e6d8e5aa0d790d0cbe18255bdbc1b8ce2b2b4523b7915cdf"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-seed-packing-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "487e04205d1aaecfd64e883a8def1adcd091fdf4430dd65001b9d772b5b7503b"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "generatedSources": [
+    {
+      "name": "meaning-handbuilding-photo",
+      "mode": "Built-in image_gen",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic artwork for a fictional beginner handbuilding-workshop poster, not a finished poster. An adult's two natural, anatomically believable hands gently joining a short clay coil onto the rim of a small, visibly handmade unfinished bowl on a wooden pottery workbench. The bowl, both hands and a few unused clay coils are clearly visible near the center. A wooden modeling tool and damp sponge nearby; understated ceramics studio blurred behind. Honest tactile editorial photography, warm natural window light, muted cream, clay and sage, similar to a small commissioned craft-workshop shoot. Show an accessible handbuilding activity, no pottery wheel, no professional finished glazed ware, no faces. Landscape 3:2 framing, intended to fit a central 480-by-300 image window without cutting off the main hands or bowl. No text, lettering, logos, watermarks, page, borders, graphics or mockup. This is illustrative generated imagery, not documentation of a real event.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-1d1183d9-cd84-48ab-81ed-39d30994c0c2.png",
+      "source_sha256": "b6c96bb0838ac488dd448b4a3495a0da843d06da38cb2528f0a44b3d9d87dd78",
+      "asset": "content/assets/graphic-design/meaning-handbuilding-photo.jpg",
+      "sha256": "26676e6fb1dfcdca24725cc465e31d977d03f728bc974022d0ff5835dbc80d55",
+      "dimensions": [1536, 1024],
+      "preparation": "JPEG encoding at quality94, 4:4:4. No resizing, cropping or image-content editing. Original PNG retained."
+    },
+    {
+      "name": "meaning-enclosed-room-photo",
+      "mode": "Built-in image_gen",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic artwork for a fictional enclosed-room booking card, not a designed card. A believable modest small enclosed work/meeting room for two people, photographed from one interior corner looking across a pale wooden table with exactly two chairs. The room's physical enclosure is clearly readable: solid warm-neutral walls and a closed ordinary framed glass door visible on the right, plus a daylight window on another wall. A closed notebook, small ceramic cup and one plant are optional restrained details. No rows of shared desks, no open-plan background, no additional chairs, no people, no screens showing content. Natural soft window light, warm wood and muted sage details, tactile real-looking commissioned property photography, no luxury styling or exaggerated wide-angle distortion. Landscape 3:2 composition that preserves the table, both chairs and closed door in a central 480-by-300 window. No writing, signs, lettering, logos, watermarks, graphic layout, borders or mockup. Illustrative generated room, not proof of a real venue or acoustic privacy.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-787a43c4-0fd6-4fbc-ae95-2d2e8194a0d7.png",
+      "source_sha256": "af0fc89430ad5c6542c9262fd4a74f706bcad306ea282a40f885fa9bbb66f331",
+      "asset": "content/assets/graphic-design/meaning-enclosed-room-photo.jpg",
+      "sha256": "33fba583a187116e75139cd49e6394e40bc11925fbacbaef68d339bd91497b68",
+      "dimensions": [1536, 1024],
+      "preparation": "JPEG encoding at quality94, 4:4:4. No resizing, cropping or image-content editing. Original PNG retained."
+    }
+  ],
+  "pattern": "Choose Images for Meaning",
+  "date": "2026-10-28",
+  "mode": "Two new illustrative photographs created with built-in imagegen; four previous generated photographs and paper stage reused. Native SVG typography and composition.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-image-meaning-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-image-meaning-layouts.json",
+    "sha256": "a1c5969ab36a1438b1bf6f794a1f17a656eaa299b029b2076580510744b3e6ea",
+    "method": "One selected-photo href changes in each pair. Both complete 3:2 sources use the same full-image 480\u00d7320 frame with meet fitting. All other artifact DOM, words, font settings, colors, positioning, source paper and lighting are identical. Selection necessarily changes subject and image-internal appearance; these are editorial demonstrations, not isolated reader-performance experiments."
+  },
+  "comparisonPolicy": "Each pair changes only the photograph selection. No copy, typography, color, alignment, size, positioning or paper/lighting changes. Both full 3:2 source images fit the same frame without additional crop. Source selection necessarily changes image-internal subject, composition and lighting together.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "image-meaning-handbuilding",
+        "changedPixels": 153599,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "image-meaning-enclosed-room",
+        "changedPixels": 153594,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "image-meaning-seed-library",
+        "changedPixels": 153600,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared image-selection intervention regions differ.",
+    "scope": "Exact DOM normalization permits only the selected-photo href. Image sources are embedded at 1536\u00d71024 and displayed completely in an identical 480\u00d7320 meet-fitted frame. Other artwork nodes, type and paper bytes are identical. Pixel changes are confined to the photo window. Wide/stacked checks cover loaded fonts, text bounds, overflow and image/inline equality."
+  },
+  "limitations": "Editorial judgments about image contribution, not measured comprehension, attention or conversions. Illustrative synthetic scenes are not proof of real services, outcomes, events, acoustic privacy, access or availability. No physical print proof or full accessibility evaluation is claimed."
+}

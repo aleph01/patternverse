@@ -1,0 +1,119 @@
+{
+  "model": "injected-fixture-responses",
+  "live": false,
+  "sourceSha256": "28ccb229e291a4d45f19d1ad535a61b68d515092d8a34c07bf8f7a425f579fbd",
+  "resourceSha256": "2d8623c6dd4192cae392411bbe1937b984a8de12bedd4b9dbad39d7297a1781d",
+  "sizes": {
+    "resourceBytes": 210743,
+    "maxSavedBytes": 1848957,
+    "maxMessagesBytes": 236882
+  },
+  "cases": [
+    {
+      "id": "limited-experience",
+      "candidates": [
+        {
+          "basis": "expressed",
+          "connection": "Injected fixture response for runtime verification.",
+          "entry": "S0041-E02",
+          "evidence": "I feel boring because I have not traveled much.",
+          "unconfirmed_assumptions": []
+        }
+      ],
+      "questions": 0,
+      "modelCalls": 1,
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "slightly-messy-home",
+      "candidates": [
+        {
+          "basis": "expressed",
+          "connection": "Injected fixture response for runtime verification.",
+          "entry": "S0050-E02",
+          "evidence": "My housekeeping is slightly messy and I feel a little embarrassed about it. I am not saying I am an inadequate person.",
+          "unconfirmed_assumptions": []
+        }
+      ],
+      "questions": 0,
+      "modelCalls": 1,
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "parents-manners",
+      "candidates": [
+        {
+          "basis": "expressed",
+          "connection": "Injected fixture response for runtime verification.",
+          "entry": "S0008-E02",
+          "evidence": "I feel embarrassed by my parents' manners at the table. I do not feel guilty about having that embarrassment.",
+          "unconfirmed_assumptions": []
+        }
+      ],
+      "questions": 0,
+      "modelCalls": 1,
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "shame-about-parents-embarrassment",
+      "candidates": [
+        {
+          "basis": "expressed",
+          "connection": "Injected fixture response for runtime verification.",
+          "entry": "S0008-E06",
+          "evidence": "I feel like a bad child for being embarrassed by my parents. It is my own embarrassment that I am judging.",
+          "unconfirmed_assumptions": []
+        }
+      ],
+      "questions": 0,
+      "modelCalls": 1,
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "visible-effort",
+      "candidates": [
+        {
+          "basis": "expressed",
+          "connection": "Injected fixture response for runtime verification.",
+          "entry": "S0048",
+          "evidence": "I feel embarrassed when other people see how hard I am trying. I think of myself as a try-hard.",
+          "unconfirmed_assumptions": []
+        }
+      ],
+      "questions": 0,
+      "modelCalls": 1,
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "practical-limitation",
+      "candidates": [],
+      "questions": 1,
+      "modelCalls": 3,
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "actual-wrongdoing",
+      "candidates": [],
+      "questions": 1,
+      "modelCalls": 3,
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "unspecified-global-feeling",
+      "candidates": [],
+      "questions": 1,
+      "modelCalls": 3,
+      "passed": true,
+      "issues": []
+    }
+  ],
+  "passed": 8,
+  "total": 8
+}

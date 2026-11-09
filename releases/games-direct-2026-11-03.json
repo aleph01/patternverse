@@ -1,0 +1,110 @@
+{
+  "name": "games-direct-2026-11-03",
+  "status": "published and verified live",
+  "published": true,
+  "publishedAt": "2026-11-03T07:55:10.476Z",
+  "parentRelease": "nvc-articles-2026-11-03",
+  "productionUrl": "https://patternverse.org",
+  "deploymentUrl": "https://608fcda0.patternverse.pages.dev",
+  "version": "1793692165593",
+  "include": [
+    "Remove the redundant Transactional Analysis parent collection",
+    "Keep all 36 Games People Play articles directly in Communication & Relationships",
+    "Update article footers and collection links; redirect the former parent URL to Games People Play",
+    "Preserve the published NVC, Bowen, and remaining site content",
+    "Exclude hosting redirect metadata from optional offline downloads"
+  ],
+  "exclude": [
+    "Contribute team invitation and founder portrait",
+    "Unselected draft content",
+    "Private music/player studies",
+    "MCP or guided-AI service publication"
+  ],
+  "removedEntries": [
+    "collection:transactional-analysis"
+  ],
+  "deletedSourceFiles": [
+    "content/collections/transactional-analysis.md"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "expectedPublicEntries": 1362,
+  "artifact": {
+    "directory": "/private/tmp/patternverse-games-direct-release-2026-11-03/apps/web/build",
+    "files": 11711,
+    "bytes": 653295503,
+    "manifestSha256": "c78e11a1e597be63984b9ef4e516c3cac38a70d267a4081e0b1266b85ed4a3c1",
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/games-direct-2026-11-03/artifact-files.json"
+  },
+  "verification": {
+    "content": {
+      "entries": 1362,
+      "diagnostics": 0,
+      "gamesPeoplePlayArticles": 36,
+      "nvcArticles": 8,
+      "bowenArticles": 6,
+      "redundantParent": "absent from corpus, search, links, and static pages"
+    },
+    "unitTests": {
+      "passed": 48,
+      "completeIllustratedArticlesPreserved": true,
+      "hostingMetadataExcludedFromOfflineDownloads": true
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "browsers": {
+      "passed": 4,
+      "desktop": true,
+      "phone": true,
+      "directGamesPeoplePlayCollection": true,
+      "normalRefresh": true
+    },
+    "publicScan": "passed",
+    "liveHttp": {
+      "passed": true,
+      "resources": 133,
+      "version": "1793692165593",
+      "exactArtifactHashes": true,
+      "legacyRedirects": [
+        {
+          "url": "/collection/transactional-analysis",
+          "kind": "legacy-redirect",
+          "status": 301,
+          "location": "/collection/games-people-play",
+          "passed": true
+        },
+        {
+          "url": "/collection/transactional-analysis.html",
+          "kind": "legacy-redirect",
+          "status": 301,
+          "location": "/collection/games-people-play",
+          "passed": true
+        },
+        {
+          "url": "/collection/transactional-analysis/",
+          "kind": "legacy-redirect",
+          "status": 301,
+          "location": "/collection/games-people-play",
+          "passed": true
+        }
+      ]
+    },
+    "liveBrowsers": {
+      "passed": 4,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "directGamesPeoplePlayCollection": true,
+      "normalRefresh": true
+    }
+  },
+  "sourceBaselineSnapshot": "/Users/jeger-benninger/Documents/patternverse/.local/releases/nvc-articles-2026-11-03/source-snapshot.tar.gz",
+  "sourceDelta": "/Users/jeger-benninger/Documents/patternverse/.local/releases/games-direct-2026-11-03/source-delta.tar.gz",
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/games-direct-2026-11-03/release-report.json"
+}

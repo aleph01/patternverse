@@ -1,0 +1,160 @@
+{
+  "fonts": {
+    "PVLanguageBody": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+    "PVLanguageTitle": "docs/pattern-packages/graphic-design-typeface-fonts/reading-display.woff2"
+  },
+  "method": "Controlled native artwork sets. Every artifact is preserved between the wide and interleaved narrow presentations. Only four font roles, four extra-motif opacities or three selected image hrefs change within the respective comparison.",
+  "examples": [
+    {
+      "name": "language-cross-format-roles",
+      "title": "Shared type roles across a poster, ticket and reminder",
+      "sources": [
+        {
+          "id": "clay",
+          "file": "audience-pottery-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "description": "Only four font-family attributes change: title/facts groups in the ticket and reminder. The poster establishes Source Serif4 Display for event titles and Source Sans3 Regular for facts; the other formats adopt those same roles. Nominal sizes, weights, text, positions, individual layouts, colors and embedded photographs/fitting remain identical. Intrinsic glyph drawing and text widths change with the declared face. Original fictional flat-artwork set, not implemented email or printed evidence.",
+      "dimensions": {
+        "wide": [1320, 1634],
+        "stacked": [660, 3212]
+      },
+      "artifacts": [
+        {
+          "id": "poster",
+          "label": "POSTER",
+          "width": 610,
+          "height": 700,
+          "masks": []
+        },
+        {
+          "id": "ticket",
+          "label": "ADMISSION TICKET",
+          "width": 610,
+          "height": 260,
+          "masks": [
+            [60, 55, 490, 55],
+            [60, 110, 490, 125]
+          ]
+        },
+        {
+          "id": "reminder",
+          "label": "EMAIL REMINDER",
+          "width": 610,
+          "height": 360,
+          "masks": [
+            [60, 55, 490, 55],
+            [265, 122, 280, 80],
+            [60, 254, 490, 45]
+          ]
+        }
+      ],
+      "presentation": "Wide: all before artifacts beside all after artifacts. Narrow: before/after interleaved by artifact; each artifact’s entire native content and geometry are preserved."
+    },
+    {
+      "name": "language-motif-function",
+      "title": "Repeat a programme motif with one stable job",
+      "sources": [
+        {
+          "id": "clay",
+          "file": "audience-pottery-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "description": "Only four redundant motif-group opacity attributes change1→0. One paired-square signature beside the brand line remains in each artifact. Two poster marks beside facts, one ticket mark beside price and one reminder mark beside preparation text disappear. All text, font settings, positions, image source/crops, surfaces and retained signatures remain identical. The marker is an original fictional programme motif, not a learned service symbol or a tested identity asset.",
+      "dimensions": {
+        "wide": [1320, 1634],
+        "stacked": [660, 3212]
+      },
+      "artifacts": [
+        {
+          "id": "poster",
+          "label": "POSTER",
+          "width": 610,
+          "height": 700,
+          "masks": [
+            [508, 475, 35, 16],
+            [508, 517, 35, 16]
+          ]
+        },
+        {
+          "id": "ticket",
+          "label": "ADMISSION TICKET",
+          "width": 610,
+          "height": 260,
+          "masks": [[508, 162, 35, 16]]
+        },
+        {
+          "id": "reminder",
+          "label": "EMAIL REMINDER",
+          "width": 610,
+          "height": 360,
+          "masks": [[508, 267, 35, 16]]
+        }
+      ],
+      "presentation": "Wide: all before artifacts beside all after artifacts. Narrow: before/after interleaved by artifact; each artifact’s entire native content and geometry are preserved."
+    },
+    {
+      "name": "language-controlled-image-variation",
+      "title": "Allow content-specific imagery inside stable session-card rules",
+      "sources": [
+        {
+          "id": "studio",
+          "file": "form-open-studios-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "clay",
+          "file": "audience-pottery-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "seeds",
+          "file": "form-seed-packing-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "coffee",
+          "file": "core-message-coffee-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "description": "Only three selected-photo href attributes change from one generic studio image to clay, seed-packing and coffee images. These existing generated photographs deliberately differ in subject and photographic content. Every card retains its own copy, Source Serif4 title/Source Sans3 facts, font sizes/weights/anchors, fixed220×146.667 full-image fitting, arrangement, paired-square signature, colors and surface. No claim that image selection isolates semantic effects or that object crops/content remain identical. Fictional flat-artwork programme cards.",
+      "dimensions": {
+        "wide": [1320, 1394],
+        "stacked": [660, 2732]
+      },
+      "artifacts": [
+        {
+          "id": "clay-card",
+          "label": "CLAY BOWL",
+          "width": 610,
+          "height": 360,
+          "masks": [[65, 140, 220, 147]]
+        },
+        {
+          "id": "seed-card",
+          "label": "SEED PACKING",
+          "width": 610,
+          "height": 360,
+          "masks": [[65, 140, 220, 147]]
+        },
+        {
+          "id": "coffee-card",
+          "label": "COFFEE TASTING",
+          "width": 610,
+          "height": 360,
+          "masks": [[65, 140, 220, 147]]
+        }
+      ],
+      "presentation": "Wide: all before artifacts beside all after artifacts. Narrow: before/after interleaved by artifact; each artifact’s entire native content and geometry are preserved."
+    }
+  ]
+}

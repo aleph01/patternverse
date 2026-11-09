@@ -1,0 +1,89 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "pattern": "Assign Consistent Color Roles",
+  "date": "2026-10-28",
+  "mode": "Existing generated photographic sources and paper/device presentation reused unchanged. Native typography and geometry composed separately. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-color-roles-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-color-roles-layouts.json",
+    "sha256": "8e21502782d7823f9909dea66d7a10a0e48d55e00a70777d9eb8d5e7b8d4857c",
+    "method": "Fill-only role reassignment within each unchanged palette. Copy, font, sizes, weights, positions, photographs/crops and print/device presentation remain fixed."
+  },
+  "comparisonPolicy": "Only existing fill assignments change: desk-price blue to dark green and room-button dark green to blue; April Riverside/Hill fills swap to match March; Payment outstanding surface becomes existing attention yellow. Two/two/one attributes change. Palette membership, all copy/labels/symbols, fonts/sizes/weights, geometry, data values, source image bytes/crops and presentation remain fixed.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "color-roles-primary-actions",
+        "changedPixels": 15323,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "color-roles-studio-report",
+        "changedPixels": 13104,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "color-roles-order-status",
+        "changedPixels": 13474,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared color-role intervention regions differ.",
+    "scope": "DOM normalization permits only the declared fill attributes. All other artifact nodes and exact embedded font/photo bytes are identical. Each pair retains identical native fill-color membership; category labels, symbols, values and non-color identification remain present. Wide/stacked views, text bounds, font loading, horizontal overflow and image/inline SVG equality checked."
+  },
+  "limitations": "Original editorial interpretations, not measured task speed, error reduction or universal color meanings. Same palettes need not have equal visual weight after reassignment. Static fictional artifacts, not an implemented booking service, reader study, physical print proof or full accessibility evaluation."
+}

@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "anti-corruption-layer",
+  "title": "Anti-Corruption Layer",
+  "aliases": ["Anticorruption Layer", "Anti Corruption Layer", "ACL"],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1500,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Four primary sources: Eric Evans’s DDD Reference, Anticorruption Layer (printed page 34, PDF page 41); Microsoft Azure Architecture Center; AWS Prescriptive Guidance; and Martin Fowler’s Bounded Context article. The source PDF’s original summary was read. The article explains protection of a downstream model through locally expressed capability, requests, results, and failures. It distinguishes the original Anticorruption spelling and ACL shorthand from security access-control lists, model protection from mechanical adaptation, and permanent boundaries from temporary migration support. The primary home is Messaging and Integration; model and architecture overlaps are related links.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["domain.py", "boundary.py", "demo.py"],
+      "stdout": [
+        "sellable units: 1",
+        "can supply 1: True",
+        "can supply 2: False",
+        "lookup: Supplier unavailable"
+      ],
+      "verification": "Five stock fixtures including true zero and insufficient stock, exact mapped identity and pre-call rejection, copied mappings, timeout normalization with cause, unmasked programming failure, malformed/unsupported/mismatched supplier payloads, invalid/inconsistent integer quantities, source nonmutation, immutable local values, domain request boundaries, no reservation side effects, and standard-library-only domain imports passed."
+    },
+    "content": "1273 entities validate with drafts included; published-only compilation contains 1126 entities without diagnostics.",
+    "integration_tests": "Anti-Corruption Layer, Message Translator, Content-Based Router, Correlation Identifier, Request-Reply, Publish-Subscribe, and GoF integration suites pass. Combined run reports 46 passed checks and one unrelated global authored-graphic coverage failure across eight files. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, validator, integration test, authoring sidecar, concept registry, authoring documentation, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Messaging and Integration, preserving the first five members and appending Anti-Corruption Layer sixth with an explanatory paragraph. Bounded Context, Ports and Adapters, Adapter, and Message Translator are linked using existing canonical IDs. No new collection or future stub.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1271,
+      "new_content": ["content/patterns/anti-corruption-layer.md"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "related_data_engineering_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 38,
+      "prior_graphics_unchanged": 450,
+      "prior_dimensions_unchanged": 1593,
+      "new_dimensions": {
+        "software-engineering/anti-corruption-layer-model.svg": {
+          "width": 720,
+          "height": 1008
+        },
+        "software-engineering/anti-corruption-layer-model-mobile.svg": {
+          "width": 360,
+          "height": 1168
+        },
+        "software-engineering/anti-corruption-layer-outcomes.svg": {
+          "width": 720,
+          "height": 952
+        },
+        "software-engineering/anti-corruption-layer-outcomes-mobile.svg": {
+          "width": 360,
+          "height": 920
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. The final article and metadata agree with the staged copy. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and other session staging directories were untouched. No renderer or build implementation changes.",
+    "illustrations": "Two editable native SVGs explain local capability, identity mapping, request/result translation, stock semantics, and integration failures. Both have separately composed phone versions. White surface, regular Helvetica Neue/Helvetica/Arial, approved palette, square geometry, generous spacing, labels, arrow meanings, contrast, and captions verified. Desktop solid arrows are explicitly runtime requests/values; a separate label states the source dependency from boundary.py to domain.py. Four variants have zero measured label collisions, outside labels, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected.",
+    "browser": "Actual production article verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive diagrams, three exact selectable highlighted Python source blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. All four related routes return 200. Collection route and software verse gallery show six members over two pages; the Anti-Corruption Layer card on page two opens with the correct primary breadcrumb. Desktop/phone article tops, code viewports, gallery, and embedded figures were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-anti-corruption-layer/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 49009
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic; four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential supplier-stock read simulation. The protected domain.py imports only standard-library definitions and owns frozen Availability, local StockUnavailable, and the positive-integer can_supply rule. boundary.py depends on that model, maps SKU-42 to ITEM-9, and validates an exact six-field decoded supplier version-1 record. A means active record, not available for sale. Total quantity includes disjoint committed and damaged categories from one coherent snapshot, so 10 minus 7 minus 2 yields 1 sellable unit. Unknown mapping stops before transport; malformed, unsupported, mismatched, or inconsistent records cannot create a local stock fact. TimeoutError is normalized to StockUnavailable with its cause; other unexpected errors are not broadly hidden. Caller mapping is copied; input response is not mutated. True zero stock is a known Availability and differs from unknown evidence. No network, stock mutation, atomic reservation, cache/freshness protocol, synchronization, authorization, client lifecycle, mapping updates, or automatic retry. The stub and arithmetic contract are teaching material, not a vendor or stock-allocation implementation.",
+  "preview": "http://127.0.0.1:43023/pattern/anti-corruption-layer",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-anti-corruption-layer",
+  "browser_measurements": ".local/software-anti-corruption-layer/browser-checks.json",
+  "browser_check_script": ".local/software-anti-corruption-layer/check-browser.mjs",
+  "build_log": ".local/software-anti-corruption-layer/public-build-isolated.log",
+  "branch": "codex/software-anti-corruption-layer",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

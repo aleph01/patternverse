@@ -1,0 +1,129 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Seeking the Wrong Goal",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "seeking-the-wrong-goal",
+      "title": "Seeking the Wrong Goal",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; operational objectives, proxy measures, service purpose, allocation, and outcome evaluation",
+      "article": "content/concepts/seeking-the-wrong-goal.md",
+      "source_checked": "2026-11-01",
+      "sources": [
+        {
+          "author": "Donella H. Meadows",
+          "year": 2008,
+          "title": "Thinking in Systems: A Primer",
+          "url": "https://www.sustainable.soltechdesigns.com/meadows.pdf",
+          "read_method": "Opened and read Seeking the Wrong Goal, printed pages 138–141 (PDF pages 154–157), including the distinction between following a misdefined goal and evading a rule.",
+          "supports": "Named system trap, goal sensitivity of feedback, effort/output versus intended result, and the contrast with Rule Beating.",
+          "boundary": "Foundational qualitative structural account, not a universal empirical law or theorem. Historical claims elsewhere in the chapter are not imported as verified case outcomes. The article does not claim Meadows originated all prior research on performance measures."
+        },
+        {
+          "author": "Donald T. Campbell",
+          "year": 1976,
+          "title": "Assessing the Impact of Planned Social Change",
+          "url": "https://www.humanlearning.systems/uploads/08%20Assessing%20the%20Impact%20of%20Planned%20Social%20Change.pdf",
+          "read_method": "Opened the complete original occasional paper, dated December 1976, and read the Corrupting Effect of Quantitative Indicators discussion, printed pages 49–52, including the stated evidential limits and the employment-services illustration.",
+          "supports": "Earlier warning about consequential indicators distorting the processes they describe; reported shift toward easier placements when placement counts determine evaluation.",
+          "boundary": "Campbell describes his supporting evidence as predominantly anecdotal. The employment-services illustration reports earlier studies rather than a new controlled experiment in this paper. It is not used to estimate prevalence, quantify an intervention effect, or establish a universal mathematical law. Controversial military and industrial examples are not imported."
+        },
+        {
+          "author": "U.S. Government Accountability Office",
+          "year": 2011,
+          "title": "Performance Measurement and Evaluation: Definitions and Relationships, GAO-11-646SP",
+          "url": "https://www.gao.gov/assets/a77278.html",
+          "read_method": "Opened and read the full accessible report, released May 20, 2011, especially the definitions of process/output/outcome measures and the complementary roles of performance measurement, outcome evaluation and impact evaluation.",
+          "supports": "Operational distinctions among activities, services delivered and their results, and why routine performance monitoring does not alone isolate program contribution.",
+          "boundary": "Official methodological guidance, not evidence that the support-service intervention has a measured effect. Measuring an outcome and attributing a net impact remain distinct."
+        },
+        {
+          "author": "Australian Bureau of Statistics",
+          "year": 2026,
+          "title": "Measures of GDP, Australian System of National Accounts: Concepts, Sources and Methods, Edition 8",
+          "url": "https://www.abs.gov.au/statistics/detailed-methodology-information/concepts-sources-methods/australian-system-national-accounts-concepts-sources-and-methods/edition-8/chapter-8-gross-domestic-product/measures-gdp",
+          "read_method": "Opened and read the official methodology page, released January 20, 2026, especially section 8.20 on the purpose and welfare limitations of GDP.",
+          "supports": "GDP is a production measure; production matters to welfare but does not comprehensively represent it. A valid statistic can be misused as an exhaustive objective.",
+          "boundary": "Documented measurement scope, not a causal estimate that economic growth fails to help welfare or that a particular replacement indicator is superior."
+        }
+      ],
+      "related_patterns": [
+        "rule-beating",
+        "multitask-incentive-distortion",
+        "drift-to-low-performance"
+      ],
+      "status": "published",
+      "short_description": "Recognize when a system is successfully producing a measured result that does not serve its purpose, then revise the objective, evidence, and constraints that direct decisions.",
+      "use_when": [
+        "Which objective determines what staff actually do?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Make substantive resolution govern decisions, with meaningful access and quality constraints.",
+        "Longer calls can increase waiting. No single score settles capacity, hard-case access, or the meaning of resolution."
+      ],
+      "example_structure": {
+        "scenario": "Accurate duration data and sincere management priorities can favor calls ending over problems being resolved, without individual bonuses or fabricated closure. Repeat contacts linked to unresolved cases; calls are events, cases can accumulate. Revised purpose and decision rule preserve safety, access, and difficult cases while acknowledging finite staff time.",
+        "changed_relationship": "Make substantive resolution govern decisions, with meaningful access and quality constraints.",
+        "residual_constraints": "Longer calls can increase waiting. No single score settles capacity, hard-case access, or the meaning of resolution.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/seeking-wrong-goal-shuttle.svg",
+          "content/assets/structural-traps/seeking-wrong-goal-shuttle-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 870,
+            "textBlocks": 20
+          },
+          "phone": {
+            "width": 360,
+            "height": 1773,
+            "textBlocks": 20
+          }
+        },
+        "question": "Which objective determines what staff actually do?",
+        "alternative_text": "Hypothetical qualitative illustration. A shortest-call objective favors brief explanations and early endings even when call times are accurate. Some problems remain and generate repeat contact. A revised resolution objective authorizes necessary work and links contacts to cases, while preserving safety, accessibility, and difficult cases. Change: Make substantive resolution govern decisions, with meaningful access and quality constraints. Limitation: Longer calls can increase waiting. No single score settles capacity, hard-case access, or the meaning of resolution.",
+        "caption": "Hypothetical illustration. Both procedures use the same staff time. Green changes the authorized objective and decision rule, not reporting accuracy or an individual bonus. More complete calls may leave fewer slots for new callers, and counted closure still needs verification.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. A shortest-call objective favors brief explanations and early endings even when call times are accurate. Some problems remain and generate repeat contact. A revised resolution objective authorizes necessary work and links contacts to cases, while preserving safety, accessibility, and difficult cases. Change: Make substantive resolution govern decisions, with meaningful access and quality constraints. Limitation: Longer calls can increase waiting. No single score settles capacity, hard-case access, or the meaning of resolution.",
+          "relationship_key": "Upper arrows show a stipulated consequence of the old objective. Lower arrows show an alternative procedure, not a measured before-and-after trajectory.",
+          "changed_relationship": "Make substantive resolution govern decisions, with meaningful access and quality constraints.",
+          "residual_constraints": "Longer calls can increase waiting. No single score settles capacity, hard-case access, or the meaning of resolution.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Accurate duration data and sincere management priorities can favor calls ending over problems being resolved, without individual bonuses or fabricated closure. Repeat contacts linked to unresolved cases; calls are events, cases can accumulate. Revised purpose and decision rule preserve safety, access, and difficult cases while acknowledging finite staff time.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Replace superseded transport terminology with call handling and linked-case evidence; improvement after combined changes does not isolate the original cause.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

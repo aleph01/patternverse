@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "pipes-and-filters",
+  "title": "Pipes and Filters",
+  "aliases": [
+    "Pipeline Architecture",
+    "Pipes and Filters Architecture",
+    "Pipe-and-Filter Architecture"
+  ],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1384,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "The accessible POSA chapter preview establishes the canonical name and architectural catalog placement. Hohpe and Woolf's public catalog describes independent stages connected by channels. Richards and Ford's chapter preview establishes the Pipeline Architecture alias. Official Microsoft guidance supports failure and repeated-effect considerations. Official Python documentation supports generator behavior, CSV input, and bounded queue semantics. No inaccessible full book chapter is claimed as consulted.",
+    "python_examples": "All three actual article blocks run as separate modules. Checks pass for stated Fahrenheit output; exact and just-below Celsius threshold values; record order; quoted CSV and whitespace; negative, zero, and boiling-point conversion; empty input; no consumption during construction; two records consumed for the first result; no read-ahead after early stop; malformed record shape, numeric values, CSV syntax, and non-finite values; partial output retained on later failure; reuse without selection; frozen parsed values; and caller-owned source lifetime.",
+    "article_tests": "36 tests pass across Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical aliases, all eight headings, one primary collection, resolved neighbors, exact highlighted code text, responsive figures and dimensions, search, recommendation metadata, article revision hash, and concept marks.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass, including the new mark. The global coverage check has an unrelated existing failure listed below.",
+    "content": "1212 entities validate with drafts included. The published-only corpus contains 1066 entities and reports no errors.",
+    "public_build": "Production build passes, including the public web build checks. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new source files and updated authoring metadata.",
+    "visuals": "All four editable SVG variants load from the production preview. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and phone compositions were visually inspected for unit accuracy, arrow meanings, fixed white surfaces, regular typography, contrast, and label placement. Solid data arrows and dashed demand arrows remain distinguishable without color.",
+    "article_browser": "Production article checked at 1440, 390, and 320 pixels: all eight headings, all three code blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard code scrolling at 320px, both responsive images loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article and figure screenshots were inspected.",
+    "navigation_browser": "Application Architecture opens Pipes and Filters with the correct collection breadcrumb. Related Chain of Responsibility, Microkernel, Workflow Pipeline, and Adapter routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and the GoF collection match pre-change SHA-256 checksums byte for byte. All prior authoring records, concept marks, and asset dimensions remain unchanged."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Synchronous in-process generator composition, with caller-owned source and sink resources. No worker concurrency, message queues, durable delivery, replay, or atomic publication. Earlier sink output remains visible after a later record fails; stateful or buffering stages would need their own memory and lifecycle design.",
+  "preview": "http://127.0.0.1:42988/pattern/pipes-and-filters",
+  "evidence_directory": ".local/software-pipes-and-filters",
+  "browser_measurements": ".local/software-pipes-and-filters/browser-checks.json",
+  "browser_check_script": ".local/software-pipes-and-filters/check-browser.mjs",
+  "preservation_checks": ".local/software-pipes-and-filters/preservation-checks.json",
+  "branch": "codex/software-pipes-and-filters",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

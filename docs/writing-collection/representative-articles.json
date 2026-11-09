@@ -1,0 +1,152 @@
+{
+  "purpose": "Editorial recommendation metadata and source provenance for the three representative writing articles. These fields are kept outside the strict Commons frontmatter schema.",
+  "articles": [
+    {
+      "id": "writing-let-the-verb-do-the-work",
+      "index_ref": "P08",
+      "title": "Let the Verb Do the Work",
+      "source_path": "content/patterns/writing-let-the-verb-do-the-work.md",
+      "status": "draft",
+      "domain": "writing",
+      "use_when": [
+        "Modifiers repeat information already carried by a verb.",
+        "A broad verb and surrounding explanation conceal the intended action.",
+        "A revision uses more dramatic verbs without checking whether their meaning is accurate."
+      ],
+      "goals": ["Accurate action", "Economical wording", "Deliberate voice"],
+      "mechanisms": ["Semantic specificity", "Removing redundant modification"],
+      "not_ideal_when": [
+        "A modifier adds essential information about intention, duration, degree, or contrast.",
+        "A plain verb or ongoing construction serves the passage's focus and rhythm."
+      ],
+      "related_patterns": [
+        "writing-show-what-matters-summarize-the-rest",
+        "writing-set-up-and-pay-off"
+      ],
+      "example_user_queries": [
+        "My sentences have lots of adverbs and still feel vague.",
+        "How can I make actions easier to picture?",
+        "I keep adding very and really to everything.",
+        "When should I keep an adverb?",
+        "My edited prose sounds more dramatic than what actually happened.",
+        "Can I use said without making dialogue boring?",
+        "I want to shorten my wording without losing nuance.",
+        "Every verb in my story sounds as if it came from a thesaurus.",
+        "I cannot tell whether this modifier adds anything.",
+        "Is a simple verb sometimes better than a colorful one?"
+      ],
+      "visual_decision": {
+        "type": "comparison",
+        "implementation": "Connected prose follows a workshop-key exchange through alternative revisions, explaining each choice before drawing out its consequences. No table or separate graphic is used."
+      },
+      "sources": [
+        {
+          "author": "Roy Peter Clark",
+          "title": "Fifty Writing Tools: Quick List",
+          "url": "https://www.poynter.org/reporting-editing/2006/fifty-writing-tools-quick-list/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Primary-source indexed excerpt of tools 3 and 5, distinguishing verb activation from adverbs that change meaning. Direct page retrieval returned HTTP 403.",
+          "supports": "The selective treatment of verb choice and meaningful adverbs.",
+          "limits": "No claim to have inspected the full Writing Tools book. No Stephen King passage is attributed or quoted."
+        }
+      ]
+    },
+    {
+      "id": "writing-show-what-matters-summarize-the-rest",
+      "index_ref": "P11",
+      "title": "Show What Matters, Summarize the Rest",
+      "source_path": "content/patterns/writing-show-what-matters-summarize-the-rest.md",
+      "status": "draft",
+      "domain": "writing",
+      "use_when": [
+        "Routine intervals consume more space than consequential encounters.",
+        "Important emotions or changes are announced without an experience that makes them tangible.",
+        "Applying a blanket showing rule has produced excessive small actions and withheld context."
+      ],
+      "goals": ["Purposeful narrative attention", "Concrete experience", "Controlled pacing"],
+      "mechanisms": ["Allocation of reading time", "Scene expansion", "Summary compression"],
+      "not_ideal_when": [
+        "The purpose requires a concise record rather than a dramatized reconstruction.",
+        "The factual record does not support exact dialogue or attributed interior experience."
+      ],
+      "related_patterns": ["writing-let-the-verb-do-the-work", "writing-set-up-and-pay-off"],
+      "example_user_queries": [
+        "My story describes every small action and moves too slowly.",
+        "I keep saying how characters feel instead of making it convincing.",
+        "Which moments in my story deserve a full scene?",
+        "Can I summarize the months between important events?",
+        "I followed show don't tell and now my draft is twice as long.",
+        "The big conversation in my story is over before readers can care.",
+        "How can I move through routine events without making them dull?",
+        "My scene has lots of sensory details but nothing seems to happen.",
+        "When is directly explaining a relationship useful?",
+        "How do I write about a real conversation when I cannot remember the exact words?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed passages compare a compressed announcement, an expanded conversation, a compressed aftermath, and a cumulative summary. Narrative duration is explained in prose without a separate table."
+      },
+      "sources": [
+        {
+          "author": "Ursula K. Le Guin",
+          "title": "Navigating the Ocean of Story, Session 1",
+          "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The answer to Paige's question on showing and telling, preserved on the author's site; originally posted 10 August 2015.",
+          "supports": "Telling can remain vivid and moving; the maxim should not become a blanket ban on narration.",
+          "limits": "The merged pattern formulation and comparisons of narrative attention are original synthesis. No passage-level claim about Steering the Craft, Writing Fiction, or Draft No. 4 is made."
+        }
+      ]
+    },
+    {
+      "id": "writing-set-up-and-pay-off",
+      "index_ref": "P36",
+      "title": "Set Up and Pay Off",
+      "source_path": "content/patterns/writing-set-up-and-pay-off.md",
+      "status": "draft",
+      "domain": "writing",
+      "use_when": [
+        "A late solution depends on an object or ability that has not been established.",
+        "An early detail receives conspicuous attention but no later significance.",
+        "An emotional return is understandable to the writer but not prepared for the reader."
+      ],
+      "goals": ["Earned developments", "Recognizable connections", "Proportionate preparation"],
+      "mechanisms": ["Establishing narrative dependencies", "Expectation and recognition"],
+      "not_ideal_when": [
+        "An incidental detail serves atmosphere without creating an expectation of later use.",
+        "An imposed setup would distort the factual record or make preparation excessively obvious."
+      ],
+      "related_patterns": [
+        "writing-show-what-matters-summarize-the-rest",
+        "writing-let-the-verb-do-the-work"
+      ],
+      "example_user_queries": [
+        "The solution at the end of my story feels too convenient.",
+        "How can I introduce a clue without making it obvious?",
+        "My character suddenly has a skill the reader has never seen.",
+        "Do I need a twist for an ending to be satisfying?",
+        "An early detail in my story seems to promise something that never happens.",
+        "I want a small farewell gesture to carry more meaning.",
+        "How much preparation does a late reveal need?",
+        "Readers can guess the ending and I am unsure whether that is a problem.",
+        "My callback repeats an object but does not seem to matter.",
+        "How can an essay return to its opening with a new understanding?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "implementation": "A complete emotional-return example establishes invitation, refusal, and later acceptance. Separate practical and essay examples explain the same relationship in context. No dependency table is needed."
+      },
+      "sources": [
+        {
+          "author": "Brandon Sanderson's official site",
+          "title": "Brandon Sanderson's 2025 Guide to Plot (Lecture #2)",
+          "url": "https://www.brandonsanderson.com/blogs/blog/brandon-sandersons-2025-guide-to-plot-lecture-2",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The official notes' sections on promise, progress, and payoff, including expectations and the possibility of effective payoffs without a twist.",
+          "supports": "A related framework connecting established expectations, development, and eventual payoff.",
+          "limits": "The notes are not treated as a transcript personally written by Sanderson or an origin claim for setup and payoff. The dependency analysis and examples are original. The proposed Saunders and Burroway book passages remain unverified leads."
+        }
+      ]
+    }
+  ]
+}

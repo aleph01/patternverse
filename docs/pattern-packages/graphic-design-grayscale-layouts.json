@@ -1,0 +1,201 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Color originals and revisions plus matched grayscale checks. One fixed linearRGB matrix maps each linear-light channel to0.2126R+0.7152G+0.0722B without changing alpha. The same filter covers each complete artifact; it is not a color-vision simulation or print proof.",
+  "grayscale": {
+    "space": "linearRGB",
+    "weights": [0.2126, 0.7152, 0.0722],
+    "matrix": [
+      0.2126, 0.7152, 0.0722, 0, 0, 0.2126, 0.7152, 0.0722, 0, 0, 0.2126, 0.7152, 0.0722, 0, 0, 0,
+      0, 0, 1, 0
+    ]
+  },
+  "colors": {
+    "ink": "#2e4836",
+    "paper": "#fffdf6",
+    "detailBefore": "#9aaabd",
+    "detailAfter": "#334d6b",
+    "studioA": "#2d649a",
+    "studioB": "#954e2b",
+    "link": "#18446f"
+  },
+  "luminances": {
+    "ink": 0.05481913622019295,
+    "studioA": 0.12005325252037516,
+    "studioB": 0.1201275765910075,
+    "link": 0.054761316844138985
+  },
+  "contrastRatios": {
+    "detailsBefore": 2.3291036104311624,
+    "detailsAfter": 8.544979518345535,
+    "linkBody": 1.0005519153232867,
+    "linkSurface": 9.847564298531275
+  },
+  "studioBookings": {
+    "months": ["Feb", "Mar", "Apr"],
+    "A": [42, 56, 64],
+    "B": [38, 48, 60]
+  },
+  "examples": [
+    {
+      "name": "grayscale-workshop-details",
+      "source": "audience-pottery-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "description": "Only four detail text fills darken. Typography, copy, geometry and photographs stay fixed. The grayscale original/revision use one identical linear-light luminance-weighted preview.",
+      "dimensions": {
+        "wide": [1320, 2100],
+        "stacked": [660, 4140]
+      },
+      "declaredChanges": [
+        [
+          {
+            "element": "detail-0",
+            "attribute": "fill",
+            "value": "#9aaabd"
+          },
+          {
+            "element": "detail-1",
+            "attribute": "fill",
+            "value": "#9aaabd"
+          },
+          {
+            "element": "detail-2",
+            "attribute": "fill",
+            "value": "#9aaabd"
+          },
+          {
+            "element": "detail-3",
+            "attribute": "fill",
+            "value": "#9aaabd"
+          }
+        ],
+        [
+          {
+            "element": "detail-0",
+            "attribute": "fill",
+            "value": "#334d6b"
+          },
+          {
+            "element": "detail-1",
+            "attribute": "fill",
+            "value": "#334d6b"
+          },
+          {
+            "element": "detail-2",
+            "attribute": "fill",
+            "value": "#334d6b"
+          },
+          {
+            "element": "detail-3",
+            "attribute": "fill",
+            "value": "#334d6b"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "grayscale-studio-categories",
+      "source": "form-open-studios-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "description": "Only six A/B identifiers become visible below existing bars. Blue and orange bar fills, heights, numbers, legend, months, copy and photography stay fixed. Both hues have nearly identical relative luminance.",
+      "dimensions": {
+        "wide": [1320, 2100],
+        "stacked": [660, 4140]
+      },
+      "declaredChanges": [
+        [
+          {
+            "element": "studio-0-0",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "studio-1-0",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "studio-0-1",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "studio-1-1",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "studio-0-2",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "studio-1-2",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "studio-0-0",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "studio-1-0",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "studio-0-1",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "studio-1-1",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "studio-0-2",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "studio-1-2",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "grayscale-booking-link",
+      "source": "audience-workspace-photo.jpg",
+      "stage": "audience-phone-stage.jpg",
+      "phone": true,
+      "description": "Only one underline becomes visible under Change date. Text, foreground colors, positions, photography and device stay fixed. Link and body colors have approximately matched relative luminance. Static fictional form.",
+      "dimensions": {
+        "wide": [1320, 2100],
+        "stacked": [660, 4140]
+      },
+      "declaredChanges": [
+        [
+          {
+            "element": "link-underline",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "link-underline",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    }
+  ]
+}

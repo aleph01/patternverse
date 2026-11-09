@@ -4,22 +4,25 @@
 
 The production web build defaults to `core`: chat, saved sessions, library browsing/editing,
 therapy approach selection, simple OpenRouter model choices, and standalone patterns that do not
-need AI remain available. AI-guided therapy patterns, voice tools, advanced model selection and
-Dropbox sync are hidden. Non-therapy AI-assisted patterns remain available with a user-supplied
+need AI remain available. Encrypted Dropbox workspace sync is available under Workspace →
+Sync & backup. AI-guided therapy patterns, voice tools and advanced model selection are hidden.
+Non-therapy AI-assisted patterns remain available with a user-supplied
 OpenRouter key and an explanation of why the model is used.
 The desktop app and local development keep their full interface. No local data is deleted.
 
-Build with `VITE_RELEASE_PROFILE=full` to restore all four features, or set individual
+Build with `VITE_RELEASE_PROFILE=full` to restore the remaining advanced features, or set individual
 `VITE_FEATURE_VOICE`, `VITE_FEATURE_GUIDED_EXERCISES`, `VITE_FEATURE_ADVANCED_MODELS`, or
 `VITE_FEATURE_DROPBOX_SYNC` to `true` or `false`. These are public build settings, not secrets.
 Changing a switch requires a new web build and deployment; hiding a feature is not an
 authorization boundary. Full regression browser tests deliberately build the full profile.
 
-With Dropbox hidden, transfer between the old Pages origin and patternverse.org is unavailable
-in the first public release. Keep the old origin accessible and do not clear its site data.
-Mira sessions can use the encrypted archive in Sessions, but that does not include personal
-library items. Enable Dropbox sync later or provide a library export/import before retiring
-the old origin.
+Dropbox and expanded workspace sync default to enabled. Set `VITE_FEATURE_DROPBOX_SYNC=false`
+to hide Dropbox, or `VITE_WORKSPACE_DROPBOX_SYNC=false` to retain the older sync adapter.
+The default mode encrypts remote workspace data using a separate sync phrase and runs only
+when the user chooses **Sync now**. Sign-in-only storage and automatic sync remain explicitly
+opt-in through `VITE_DROPBOX_SIGN_IN_ONLY=true`; existing archives are never silently converted.
+Configure `PUBLIC_DROPBOX_APP_KEY` and register the exact callback URL for each published origin.
+Keep the old origin accessible and its site data intact until cross-origin transfer is verified.
 
 Do not switch DNS or redirect the existing app until the checks below are complete.
 The existing design and desktop downloads are outside this security-preparation change.

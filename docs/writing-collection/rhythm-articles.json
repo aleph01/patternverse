@@ -1,0 +1,374 @@
+{
+  "purpose": "Editorial recommendation metadata and inspected-source provenance for P17–P22, the six rhythm and emphasis drafts. Fields remain outside strict Commons frontmatter.",
+  "articles": [
+    {
+      "id": "writing-vary-sentence-length-deliberately",
+      "index_ref": "P17",
+      "title": "Vary Sentence Length Deliberately",
+      "use_when": [
+        "Sentences have a mechanically uniform movement despite changes in thought.",
+        "A discovery receives the same weight as routine background or action.",
+        "The passage needs a deliberate relationship between continuing, qualifying, and stopping."
+      ],
+      "goals": ["Purposeful rhythm", "Local emphasis", "Clear grouping of thought"],
+      "mechanisms": [
+        "Grouping related material into continuous movement",
+        "Creating contrast through changes of length and structure",
+        "Matching sentence shape to its contribution in context"
+      ],
+      "not_ideal_when": [
+        "Uniformity deliberately supports routine, comparison, pressure, or usability.",
+        "A forced length change would obscure the logic or become a predictable dramatic formula."
+      ],
+      "related_patterns": [
+        "writing-keep-subjects-and-verbs-close",
+        "writing-give-each-paragraph-a-main-job",
+        "writing-signal-the-real-relationship"
+      ],
+      "example_user_queries": [
+        "Every sentence in my paragraph sounds the same.",
+        "A discovery in my scene feels like one more routine action.",
+        "Do shorter sentences always make the pace faster?",
+        "I alternate long and short sentences but the writing still feels mechanical.",
+        "How can I join background to a claim without burying the point?",
+        "My short sentences seem to slow the scene down.",
+        "I want a deliberate routine rather than random variety.",
+        "Should I aim for a particular average sentence length?",
+        "My paragraphs all end with a tiny dramatic sentence and the effect feels repetitive.",
+        "How do I hear where a passage needs to continue or stop?"
+      ],
+      "sources": [
+        {
+          "author": "Ursula K. Le Guin",
+          "title": "Book View Cafe: Navigating the Ocean of Story: Session 1, Part 5",
+          "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-5",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The question from Linda and Le Guin's answer on sentence length as one element of pacing, variety, appropriateness, and contextual fit.",
+          "supports": "Using varied lengths suited to what a sentence says and its context, without treating short sentences as a general pacing rule.",
+          "limits": "No full book passage, quoted advice, fixed word threshold, or empirical reading-time claim is adopted. The rehearsal and workshop situations are original."
+        },
+        {
+          "author": "Purdue OWL, Purdue University",
+          "title": "Strategies for Variation",
+          "url": "https://owl.purdue.edu/owl/general_writing/academic_writing/sentence_variety/index.html",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The introductory guidance and the discussion of rhythm, length, structure, and emphasis.",
+          "supports": "Considering sentence structure and length as related choices that can alter rhythm and emphasis.",
+          "limits": "No source exercise is reproduced and no mandatory alternation or claim that every repeated form is monotonous is adopted. The original comparisons do not isolate word count experimentally."
+        }
+      ],
+      "source_path": "content/patterns/writing-vary-sentence-length-deliberately.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons show the relevant metaphor, inference, or change of sentence movement directly. A separate table or graphic would detach the choices from their context; no interactive practice is included."
+      }
+    },
+    {
+      "id": "writing-put-weight-at-the-end",
+      "index_ref": "P18",
+      "title": "Put Weight at the End",
+      "use_when": [
+        "A sentence's main development loses force under trailing procedural detail.",
+        "The same facts need a different emphasis for this paragraph's purpose.",
+        "A final qualification must be retained but its placement obscures the intended arrival."
+      ],
+      "goals": [
+        "Deliberate local emphasis",
+        "Preserved claim boundaries",
+        "Useful paragraph closure"
+      ],
+      "mechanisms": [
+        "Arranging a sentence toward its intended arrival",
+        "Moving attribution and secondary context without erasing them",
+        "Giving paragraph details a relevant point of closure"
+      ],
+      "not_ideal_when": [
+        "Readers need an immediate answer or instruction before any build-up.",
+        "A revised ending would delete a material qualification or distort an established sequence."
+      ],
+      "related_patterns": [
+        "writing-move-from-familiar-to-new",
+        "writing-vary-sentence-length-deliberately",
+        "writing-remove-explanatory-echoes"
+      ],
+      "example_user_queries": [
+        "My important point is buried before a tail of background detail.",
+        "A sentence says the right thing but seems to end on the wrong thing.",
+        "How can I emphasize the decision without removing its source?",
+        "The paragraph loses its force in the last sentence.",
+        "Should the most important information always go last?",
+        "A qualification at the end is necessary but makes the sentence awkward.",
+        "I want the reader to arrive at a consequence rather than a meeting date.",
+        "Can passive voice help place the information I want to emphasize?",
+        "My cancellation notice takes too long to give the actual news.",
+        "How do I make a quiet paragraph ending meaningful without inventing a dramatic twist?"
+      ],
+      "sources": [
+        {
+          "author": "Duke Graduate School Scientific Writing Resource",
+          "title": "Lesson 2: Cohesion, Coherence, and Emphasis",
+          "url": "https://sites.duke.edu/scientificwriting/lesson-2-cohesion-coherence-and-emphasis/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Principle 1 and its explanation of sentence endings as a position of emphasis, with the old/new-information relationship.",
+          "supports": "Considering final position as a useful place to arrange information intended to receive emphasis.",
+          "limits": "The society update, translator scene, and notice are original hypothetical examples. No scientific exercise, universal reading response, quantified memory benefit, or full book passage is adopted. Paragraph closure and answer-first alternatives are editorial extensions."
+        }
+      ],
+      "source_path": "content/patterns/writing-put-weight-at-the-end.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons directly expose changes in placement, structural correspondence, and verbal recurrence. A separate table or diagram would add little to these explanations; no interactive practice is included."
+      }
+    },
+    {
+      "id": "writing-use-parallel-form-for-related-ideas",
+      "index_ref": "P19",
+      "title": "Use Parallel Form for Related Ideas",
+      "use_when": [
+        "Related ideas change grammatical footing within a comparison or series.",
+        "Descriptions of options leave the reader to discover which features correspond.",
+        "Matching forms risk hiding unequal responsibilities or evidence."
+      ],
+      "goals": ["Legible comparisons", "Coherent series", "Faithful correspondence"],
+      "mechanisms": [
+        "Matching grammatical shapes to related contributions",
+        "Making each element fit a shared construction",
+        "Preserving distinctions of agency and evidential status within correspondence"
+      ],
+      "not_ideal_when": [
+        "The situations do not warrant the implied equivalence.",
+        "A deliberately unsettled exchange would be misrepresented by composed symmetry."
+      ],
+      "related_patterns": [
+        "writing-repeat-with-a-purpose",
+        "writing-signal-the-real-relationship",
+        "writing-put-actors-in-subjects-and-actions-in-verbs"
+      ],
+      "example_user_queries": [
+        "My comparison describes different features of each option.",
+        "A list changes shape halfway through and readers lose track.",
+        "How can I make two positions easier to compare without pretending they are equal?",
+        "The sentence is grammatical but its comparison still feels uneven.",
+        "One item in my list does not fit the opening phrase.",
+        "Do parallel phrases need the same number of words?",
+        "A neat rewrite has hidden who is responsible for each action.",
+        "Can matching sentence forms express two characters' different concerns?",
+        "I have a confirmed quote for one option and only a guess for the other.",
+        "Does parallel structure require repeating the same words?"
+      ],
+      "sources": [
+        {
+          "author": "Purdue OWL, Purdue University",
+          "title": "Parallel Structure",
+          "url": "https://owl.purdue.edu/owl/general_writing/mechanics/parallel_structure.html",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The definition and sections on words and phrases, clauses, and lists after a colon.",
+          "supports": "Using grammatical correspondence for related elements at several scales and making each element fit its construction.",
+          "limits": "No source exercise or claim that balanced forms establish equal support is adopted. Courses, workshop instructions, siblings, and estimates are original hypothetical examples."
+        },
+        {
+          "author": "Australian Government Style Manual",
+          "title": "Parallel structure for lists",
+          "url": "https://www.stylemanual.gov.au/style-manual-resources/government-writing-handbook/editors-tips/parallel-structure-lists",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The explanation of matching each item to the lead-in and the Repetition section distinguishing parallel structure from identical openings.",
+          "supports": "Checking shared grammatical footing and distinguishing structural correspondence from repeated wording.",
+          "limits": "No example is reproduced or fixed equal-length requirement imposed. The discussion of information gaps, evidential asymmetry, and narrative stance is editorial development."
+        }
+      ],
+      "source_path": "content/patterns/writing-use-parallel-form-for-related-ideas.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons directly expose changes in placement, structural correspondence, and verbal recurrence. A separate table or diagram would add little to these explanations; no interactive practice is included."
+      }
+    },
+    {
+      "id": "writing-repeat-with-a-purpose",
+      "index_ref": "P20",
+      "title": "Repeat with a Purpose",
+      "use_when": [
+        "A repeated phrase could gather force as distinct contributions accumulate.",
+        "Replacing recurring labels makes continuity harder to follow.",
+        "The same words acquire a new role as a local exchange develops."
+      ],
+      "goals": ["Purposeful recurrence", "Stable orientation", "Audible development"],
+      "mechanisms": [
+        "Holding wording steady while context or contribution changes",
+        "Using repeated beginnings to connect related statements",
+        "Maintaining a clear established label across instructions"
+      ],
+      "not_ideal_when": [
+        "Recurrence restates an effect already complete without adding orientation or pressure.",
+        "A repeated accusation would flatten materially different facts into a misleading pattern."
+      ],
+      "related_patterns": [
+        "writing-cut-redundancy",
+        "writing-use-parallel-form-for-related-ideas",
+        "writing-make-references-unambiguous"
+      ],
+      "example_user_queries": [
+        "I keep replacing repeated words and the writing starts to sound unnatural.",
+        "How can a repeated phrase build pressure without becoming redundant?",
+        "A key term needs to stay recognizable through several instructions.",
+        "I want the reader to hear that these separate requests have something in common.",
+        "Can the same words mean something different later in a conversation?",
+        "My email sounds like a speech because every sentence starts the same way.",
+        "How many times should I repeat a phrase?",
+        "I cannot tell whether a recurring sentence adds force or just takes up space.",
+        "A strong repeated accusation may oversimplify what actually happened.",
+        "What should change around a repeated phrase to keep the passage developing?"
+      ],
+      "sources": [
+        {
+          "author": "Ursula K. Le Guin, in Hachette UK's Gollancz Festival Q&A",
+          "title": "Ursula K. Le Guin – Answers your questions for Gollancz Festival 2015",
+          "url": "https://www.hachette.co.uk/ursula-k-le-guin-2/2015/10/18/ursula-le-guin-answers-your-questions/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Keegan Spindler's question and Le Guin's answer distinguishing deliberate repetition from carelessness, including names and pronouns needed for clarity.",
+          "supports": "Retaining useful recurrence rather than automatically replacing repeated wording and attending to its purpose during revision.",
+          "limits": "No quoted answer or full Steering the Craft passage is reproduced. The booking, studio, and restaurant situations are original; no universal benefit is asserted."
+        },
+        {
+          "author": "Raymond Malewitz, Oregon State University",
+          "title": "What is Anaphora?",
+          "url": "https://liberalarts.oregonstate.edu/wlf/what-anaphora",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The opening definition and explanation of recurring beginnings across clauses and sentences.",
+          "supports": "Identifying repeated beginnings as a rhetorical form that can connect a sequence of statements.",
+          "limits": "No source speech or poem is reproduced, no etymological claim is made, and no quantified or empirical memory benefit is adopted. Emotional and practical comparisons are editorial development."
+        }
+      ],
+      "source_path": "content/patterns/writing-repeat-with-a-purpose.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons directly expose changes in placement, structural correspondence, and verbal recurrence. A separate table or diagram would add little to these explanations; no interactive practice is included."
+      }
+    },
+    {
+      "id": "writing-punctuate-for-pace-and-meaning",
+      "index_ref": "P21",
+      "title": "Punctuate for Pace and Meaning",
+      "use_when": [
+        "Punctuation makes a qualification, explanation, or interruption read with the wrong relationship.",
+        "The writer follows imagined breath without clarifying clause boundaries.",
+        "A narrative fragment or aside needs an intentional place in the sentence's movement."
+      ],
+      "goals": [
+        "Legible sentence relationships",
+        "Purposeful continuity and interruption",
+        "Preserved grammatical meaning"
+      ],
+      "mechanisms": [
+        "Choosing boundaries according to clause relationships",
+        "Distinguishing continuation from specification and interruption",
+        "Making fragments intelligible through available context"
+      ],
+      "not_ideal_when": [
+        "Additional marks would preserve an overloaded sentence that needs rebuilding.",
+        "A punctuation change would demote a material limit or obscure which group a claim concerns."
+      ],
+      "related_patterns": [
+        "writing-signal-the-real-relationship",
+        "writing-vary-sentence-length-deliberately",
+        "writing-keep-subjects-and-verbs-close"
+      ],
+      "example_user_queries": [
+        "The words are right but the sentence moves in the wrong way.",
+        "Should these statements be joined by a semicolon, a colon, or a full stop?",
+        "I use dashes for every qualification and the prose feels overdramatic.",
+        "I put commas where I breathe but my sentences are still confusing.",
+        "A change of punctuation seems to change which people the sentence is about.",
+        "How do I make an aside secondary without hiding something important?",
+        "Can a sentence fragment work in a narrative?",
+        "I keep adding marks to a sentence that may need to be split.",
+        "A report makes a routine qualification sound like a big revelation.",
+        "How can punctuation show the relationship rather than just create pauses?"
+      ],
+      "sources": [
+        {
+          "author": "Purdue OWL, Purdue University",
+          "title": "Brief Overview of Punctuation",
+          "url": "https://owl.purdue.edu/owl/general_writing/punctuation/punctuation/index.html",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Definitions of independent and dependent clauses and the sections on comma boundaries, semicolons, colons, parentheses, and dashes.",
+          "supports": "Choosing conventional punctuation according to grammatical relationships and the placement or emphasis of related material.",
+          "limits": "The hall update, courtyard comparison, and student scene are original hypothetical examples. No source exercise, fixed pause duration, comprehensive rulebook, or universal hierarchy of emotional effects is adopted. Fragment and contextual-emphasis comparisons are editorial development."
+        }
+      ],
+      "source_path": "content/patterns/writing-punctuate-for-pace-and-meaning.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose passages show clause relationships, formal departures, and differences in perceptual selection directly. A table or graphic would add little; no interactive practice is included."
+      }
+    },
+    {
+      "id": "writing-break-an-established-form-for-emphasis",
+      "index_ref": "P22",
+      "title": "Break an Established Form for Emphasis",
+      "use_when": [
+        "An important contrast passes like another item in a series.",
+        "A passage has an identifiable verbal or grammatical baseline that a turn can depart from.",
+        "A proposed emphasis needs to be distinguished from merely adding surprising information."
+      ],
+      "goals": [
+        "Perceptible formal contrast",
+        "Purposeful emphasis",
+        "Preserved factual and narrative fit"
+      ],
+      "mechanisms": [
+        "Establishing a recognizable baseline",
+        "Changing grammatical roles or sentence type at a relevant turn",
+        "Judging a departure relative to what the passage has prepared"
+      ],
+      "not_ideal_when": [
+        "No actual baseline exists or the change is only a new fact in the same form.",
+        "Manufactured regularity would distort the facts, voice, or usability of the passage."
+      ],
+      "related_patterns": [
+        "writing-use-parallel-form-for-related-ideas",
+        "writing-repeat-with-a-purpose",
+        "writing-vary-sentence-length-deliberately"
+      ],
+      "example_user_queries": [
+        "My decisive contrast reads like one more item in the list.",
+        "How can I use a repeated sentence shape to give a turn more force?",
+        "I call this a pattern break but I cannot identify the pattern.",
+        "The event is surprising but the form of the prose has not changed.",
+        "Can a shift from statements to a question create emphasis?",
+        "I have made the earlier sentences too neat just to set up the ending.",
+        "Every paragraph in my draft builds a pattern and then snaps into a fragment.",
+        "How many repetitions are needed before a departure becomes noticeable?",
+        "A rhetorical question makes the problem look fatal without considering answers.",
+        "The formal symmetry sounds too composed for my narrator's current state."
+      ],
+      "sources": [
+        {
+          "author": "Regent University Writing Lab",
+          "title": "Creating Emphasis",
+          "url": "https://www.regent.edu/wp-content/uploads/2024/07/Regent-University-Writing-Lab-Creating-Emphasis.pdf",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Points 4 and 5, on creating a repeated verbal pattern and breaking the pattern to emphasize a point, across the two-page handout.",
+          "supports": "Using an established verbal baseline and a deliberate departure as a local emphasis technique.",
+          "limits": "No source example, historical assertion, fixed repetition count, or claim that another emphasis tip cannot be overused is adopted. Tariq's closure and the magazine proposal are original; role reversal, voice, and evidential discussions are editorial development."
+        }
+      ],
+      "source_path": "content/patterns/writing-break-an-established-form-for-emphasis.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose passages show clause relationships, formal departures, and differences in perceptual selection directly. A table or graphic would add little; no interactive practice is included."
+      }
+    }
+  ]
+}

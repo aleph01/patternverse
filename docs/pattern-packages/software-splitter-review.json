@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "splitter",
+  "title": "Splitter",
+  "aliases": ["Message Splitter"],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1354,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five referenced primary sources: Hohpe and Woolf’s Splitter, Message Sequence, and Aggregator catalog entries; Apache Camel Split 4.22 documentation; and RabbitMQ consumer acknowledgments/publisher confirms. Spring Integration’s official Splitter documentation also corroborated message-part processing, sequence metadata, streaming, and empty-container concerns. The established canonical name is Splitter; Message Splitter is a descriptive search alias. The historical Sequencer.html URL is not treated as an alias. Resequencing, broadcasting, structural reshaping, and data-skew workload splitting remain distinct.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["splitter.py", "demo.py"],
+      "stdout": [
+        "('E901', 'L1') BOOK 2 1/2",
+        "('E901', 'L2') MUG 1 2/2",
+        "empty: 0",
+        "rejected: Units must be an integer from 1 to 1000"
+      ],
+      "verification": "Concrete two-child fixture and conserved quantities; immutable independent output; unchanged source on success and rejection; replay keys and distinct parent identities; 0/1/2/100 lines and 101-line rejection; repeated SKU with distinct line identities; duplicate line rejection; late invalid element constructs no children; 1/1000-unit limits with malformed/Boolean/range rejection; exact input shape and identifier grammar/length checks; structured identity independent of position. No broker or external-effects guarantee is inferred."
+    },
+    "content": "1274 entities validate with drafts included; published-only compilation contains 1127 entities without diagnostics.",
+    "integration_tests": "All eight focused suites pass, including Splitter, the previous six Messaging and Integration articles, and GoF. Combined run across nine files reports 49 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, code validator, integration test, JSON authoring metadata, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing repository conventions.",
+    "collection": "Reused Messaging and Integration, preserving six existing members and appending Splitter seventh with an explanatory paragraph. Existing canonical IDs provide all four related links. No future stub, new collection, worksheet, or practice.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1272,
+      "new_content": ["content/patterns/splitter.md"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "related_data_engineering_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 39,
+      "prior_graphics_unchanged": 451,
+      "prior_dimensions_unchanged": 1597,
+      "new_dimensions": {
+        "software-engineering/splitter-parts.svg": {
+          "width": 720,
+          "height": 1032
+        },
+        "software-engineering/splitter-parts-mobile.svg": {
+          "width": 360,
+          "height": 1280
+        },
+        "software-engineering/splitter-boundaries.svg": {
+          "width": 720,
+          "height": 1048
+        },
+        "software-engineering/splitter-boundaries-mobile.svg": {
+          "width": 360,
+          "height": 1248
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, authoring metadata, concept registry, and collection agree with staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer or build implementation changes.",
+    "illustrations": "Two editable native SVGs explain composite-to-child decomposition and the boundary between local validation/construction and later partial publication. Both have separately composed phone variants, meaningful alternatives and captions, approved fixed white/regular-font/palette/square-boundary style, and explicit arrow meanings. All four variants have zero measured outside labels, colliding labels, or outside rectangles. Native and actual embedded figures were visually inspected at desktop and phone sizes; no placement or readability defect found.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: all eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal code scrolling at 320 pixels, no page overflow, and all four related routes returning 200. The collection route and software verse gallery show seven members across two pages. The Splitter card on page two opens with the correct primary breadcrumb. Desktop/phone article tops, code, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-splitter/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 43474
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original bounded order-line splitter with strict decoded-input fields, ASCII identifiers, 0..100 lines and 1..1000 integer physical units per line. Two frozen child values retain immutable event/order/line identity, SKU, units, one-based position and size. Structured (parent event ID, line ID) keys distinguish repeated SKUs and survive replay and reordering; event IDs must be unique within the integration and immutable. Full validation precedes tuple construction. Empty input returns no children, invalid late elements return no partial tuple, and input is not mutated. No broker, publication, acknowledgments, deduplication store, aggregation, concurrent mutation, durable handoff, authentication, or external effects are implemented. Order-line motivation follows EIP; code, figures, bounds, fixtures, and policies are original.",
+  "preview": "http://127.0.0.1:43024/pattern/splitter",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-splitter",
+  "browser_measurements": ".local/software-splitter/browser-checks.json",
+  "browser_check_script": ".local/software-splitter/check-browser.mjs",
+  "build_log": ".local/software-splitter/public-build-isolated.log",
+  "branch": "codex/software-splitter",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

@@ -1,0 +1,125 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Circular Prerequisites and Bootstrapping",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "circular-prerequisites-and-bootstrapping",
+      "title": "Circular Prerequisites and Bootstrapping",
+      "entity_type": "concept",
+      "domain": "Dependency and feasibility traps",
+      "article": "content/concepts/circular-prerequisites-and-bootstrapping.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Python Software Foundation, graphlib — Functionality to operate with graph-like structures",
+          "url": "https://docs.python.org/3.14/library/graphlib.html",
+          "supports": "A complete topological ordering exists exactly for a directed acyclic graph; cycle detection can still permit independent ready work.",
+          "boundary": "Formal result for a correctly specified finite prerequisite graph; not evidence that a real institutional requirement is necessary or immutable."
+        },
+        {
+          "title": "Bootstrappable Builds, Best Practices",
+          "url": "https://www.bootstrappable.org/best-practices.html",
+          "supports": "Alternative language implementations, minimal compiler implementations, simpler build-system routes, and provenance of bootstrap binaries.",
+          "boundary": "Specialist engineering recommendations. No cross-domain effectiveness rate or guarantee is inferred."
+        },
+        {
+          "title": "Rust Compiler Development Guide, What Bootstrapping Does",
+          "url": "https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html",
+          "supports": "A precompiled stage-zero compiler and standard library produce a compiler from current source, followed by later build stages.",
+          "boundary": "Primary current process documentation, checked on 31 October 2026. No exact release compatibility claim, build command, benchmark, or security guarantee is made."
+        },
+        {
+          "title": "Bootstrappable Builds",
+          "url": "https://www.bootstrappable.org/",
+          "supports": "The compiler chicken-and-egg problem and motivation to examine the initial binary seed and its production chain.",
+          "boundary": "Project goals and explanation; successful bootstrapping alone does not prove source-to-binary correspondence or eliminate all trust assumptions."
+        },
+        {
+          "title": "NIST Computer Security Resource Center, bootstrapping",
+          "url": "https://csrc.nist.gov/glossary/term/bootstrapping",
+          "supports": "Network-layer onboarding introduces sufficient initial information for trust and a secure channel, potentially through a human-assisted out-of-band process.",
+          "boundary": "Glossary definition sourced to NIST IR 8350; not a general recommendation to bypass authentication or evidence of outcomes."
+        },
+        {
+          "title": "AAA, Fourteen Reasons Why Your Car Will Not Start",
+          "url": "https://ww1.aaa.com/autorepair/articles/14-reasons-why-your-car-wont-start",
+          "supports": "Explains starter operation and charging by an alternator while the engine runs. Supports distinguishing discharged battery, starter, and charging-system faults.",
+          "boundary": "Specialist practical explanation of physical dependencies; not proof that external starting repairs a fault, restores full charge, or applies identically to all powertrains. Article provides no equipment-connection instructions.",
+          "checked": "2026-11-02",
+          "read_method": "Opened and read starting-battery, alternator, and starter sections."
+        }
+      ],
+      "related_patterns": [
+        "catch-22",
+        "reframing-remove-constraints",
+        "prefer-the-smallest-useful-experiment"
+      ],
+      "status": "published",
+      "short_description": "Identify a chain of prerequisites that has no available first step, then supply a usable starting condition or authorize a different entry route.",
+      "use_when": [
+        "What supplies energy before the engine can recharge its battery?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Supply a compatible starting source available before ordinary operation.",
+        "Assumes discharge only. Assistance costs resources; faults and the cause of discharge still need attention."
+      ],
+      "example_structure": {
+        "scenario": "Conventional engine-driven charging system, discharged but serviceable starting battery, otherwise functioning starter and charging system. External energy supplies the initial condition; a start does not prove full charge or repair. Dependency-state analogy distinguished from a topological-order theorem.",
+        "changed_relationship": "Supply a compatible starting source available before ordinary operation.",
+        "residual_constraints": "Assumes discharge only. Assistance costs resources; faults and the cause of discharge still need attention.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/circular-prerequisites-archive.svg",
+          "content/assets/structural-traps/circular-prerequisites-archive-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 767,
+            "textBlocks": 19
+          },
+          "phone": {
+            "width": 360,
+            "height": 1487,
+            "textBlocks": 19
+          }
+        },
+        "question": "What supplies energy before the engine can recharge its battery?",
+        "alternative_text": "Hypothetical qualitative illustration. Battery charge enables the starter and engine; the running engine enables later alternator charging. Without starting charge, the ordinary route has no first step. Compatible external energy enables the engine before its charging system can operate. Change: Supply a compatible starting source available before ordinary operation. Limitation: Assumes discharge only. Assistance costs resources; faults and the cause of discharge still need attention.",
+        "caption": "Hypothetical illustration. The upper cycle distinguishes initial stored energy from later replenishment. The lower route supplies a seed without changing the car’s normal starting requirement. A successful start does not diagnose the battery or charging system, or establish full recharge.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Battery charge enables the starter and engine; the running engine enables later alternator charging. Without starting charge, the ordinary route has no first step. Compatible external energy enables the engine before its charging system can operate. Change: Supply a compatible starting source available before ordinary operation. Limitation: Assumes discharge only. Assistance costs resources; faults and the cause of discharge still need attention.",
+          "relationship_key": "Upper arrows show enabling dependencies at different times; lower arrows show the conditional starting sequence. This is not a repair procedure.",
+          "changed_relationship": "Supply a compatible starting source available before ordinary operation.",
+          "residual_constraints": "Assumes discharge only. Assistance costs resources; faults and the cause of discharge still need attention.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Conventional engine-driven charging system, discharged but serviceable starting battery, otherwise functioning starter and charging system. External energy supplies the initial condition; a start does not prove full charge or repair. Dependency-state analogy distinguished from a topological-order theorem.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Fourteen articles, twenty-eight editable SVGs, fourteen current research notes, and necessary asset dimensions updated.",
+        "visual": "All fourteen live articles checked in the browser at 1440px desktop and 390px phone viewports (28 layouts), with loaded expected sources and no page overflow. All twenty-eight SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (56 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "purpose": "Editorial recommendation metadata and inspected-source provenance for the six clarity and orientation articles, P01–P06. These fields remain outside the strict Commons frontmatter schema.",
+  "articles": [
+    {
+      "id": "writing-move-from-familiar-to-new",
+      "index_ref": "P01",
+      "title": "Move from Familiar to New",
+      "source_path": "content/patterns/writing-move-from-familiar-to-new.md",
+      "status": "draft",
+      "domain": "writing",
+      "use_when": [
+        "Individual sentences are clear but their progression is hard to follow.",
+        "Readers meet a detail before learning the context that makes it useful.",
+        "Transition words have not repaired the connection between ideas."
+      ],
+      "goals": ["Readable progression", "Audience orientation", "Deliberate emphasis"],
+      "mechanisms": [
+        "Familiar information as an entry point",
+        "Making relationships between ideas available"
+      ],
+      "not_ideal_when": [
+        "A brief unfamiliar arrival deliberately creates discovery or curiosity.",
+        "A forced chain of repeated words would obscure the paragraph's larger purpose."
+      ],
+      "related_patterns": [
+        "writing-put-actors-in-subjects-and-actions-in-verbs",
+        "writing-keep-subjects-and-verbs-close"
+      ],
+      "example_user_queries": [
+        "Each sentence makes sense but my paragraph still feels jumpy.",
+        "Readers keep looking backward to understand what I mean.",
+        "I added transition words and the writing still does not flow.",
+        "How can I introduce a new concept without losing people?",
+        "The terms in my explanation are familiar to me but not my audience.",
+        "My paragraphs feel like separate facts rather than a developing idea.",
+        "Do I have to repeat the same subject at the start of every sentence?",
+        "I cannot tell how much background to give before a new detail.",
+        "How can I keep the connections clear without repeating whole sentences?",
+        "Can a story introduce an unfamiliar object before explaining its significance?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons show the relevant choices and their effects. No separate table or diagram is needed; terms and grammatical relationships are explained where used."
+      },
+      "sources": [
+        {
+          "author": "Duke Graduate School Scientific Writing Resource",
+          "title": "Lesson 2: Cohesion, Coherence, and Emphasis",
+          "url": "https://sites.duke.edu/scientificwriting/lesson-2-cohesion-coherence-and-emphasis/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Principle 1 on familiar/new information and Principle 2 on deliberate passive voice, including their explanatory passages.",
+          "supports": "The craft guidance to connect established information to unfamiliar material and choose sentence order deliberately.",
+          "limits": "The library notice and narrative alternatives are original. No direct passage-level attribution to Williams or Birkenstein is made, and no measured cognitive benefit is asserted."
+        }
+      ]
+    },
+    {
+      "id": "writing-put-actors-in-subjects-and-actions-in-verbs",
+      "index_ref": "P02",
+      "title": "Put Actors in Subjects and Actions in Verbs",
+      "source_path": "content/patterns/writing-put-actors-in-subjects-and-actions-in-verbs.md",
+      "status": "draft",
+      "domain": "writing",
+      "use_when": [
+        "Actions are buried in abstract nouns while verbs only announce occurrence or requirement.",
+        "An account obscures who decided something or who must act next.",
+        "A revision exposes a responsibility that has not actually been established."
+      ],
+      "goals": ["Visible agency", "Clear responsibilities", "Accurate expression of actions"],
+      "mechanisms": [
+        "Aligning grammatical roles with intended actors and actions",
+        "Unpacking nominalized events"
+      ],
+      "not_ideal_when": [
+        "The actor is unknown or unimportant and should not be invented.",
+        "A familiar abstraction or an affected object is the appropriate subject."
+      ],
+      "related_patterns": [
+        "writing-let-the-verb-do-the-work",
+        "writing-move-from-familiar-to-new",
+        "writing-keep-subjects-and-verbs-close"
+      ],
+      "example_user_queries": [
+        "My report describes decisions but nobody can tell who made them.",
+        "I use approval and implementation a lot and the prose feels bureaucratic.",
+        "Readers do not know who is supposed to act next.",
+        "How do I make responsibility clear without blaming someone unfairly?",
+        "Should I turn every abstract noun into a verb?",
+        "Is passive voice always a problem?",
+        "I am trying to sound professional and my sentences have become impersonal.",
+        "A rewrite is forcing me to name an actor I do not actually know.",
+        "How can I explain several people's roles without making the process confusing?",
+        "When is the action itself a useful topic for the next sentence?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons show the relevant choices and their effects. No separate table or diagram is needed; terms and grammatical relationships are explained where used."
+      },
+      "sources": [
+        {
+          "author": "Boston University Teaching Writing",
+          "title": "Sentences Tell Stories: A Principle of Clarity",
+          "url": "https://www.bu.edu/teaching-writing/resources/essential-lesson-10/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Conceptual Framework and Part III on nominalizations, including the attribution of the characters/actions formulation to Joseph Williams.",
+          "supports": "The relationship between grammatical subjects and verbs and the intended characters and actions, with nominalization treated as a possible source of obscurity.",
+          "limits": "The community-hall example and grammatical alternatives are original. No textbook example or exercise is reproduced, and no complete Williams book passage is claimed to have been checked."
+        }
+      ]
+    },
+    {
+      "id": "writing-keep-subjects-and-verbs-close",
+      "index_ref": "P03",
+      "title": "Keep Subjects and Verbs Close",
+      "source_path": "content/patterns/writing-keep-subjects-and-verbs-close.md",
+      "status": "draft",
+      "domain": "writing",
+      "use_when": [
+        "Readers must traverse a long qualification before discovering the main statement.",
+        "Background or a long list hides the relation between the subject and its verb.",
+        "Moving a qualification risks changing which group or causal relationship the sentence describes."
+      ],
+      "goals": ["Legible sentence structure", "Preserved qualifications", "Purposeful timing"],
+      "mechanisms": [
+        "Making the main statement available earlier",
+        "Redistributing interrupting material"
+      ],
+      "not_ideal_when": [
+        "A short qualification is essential to identifying the subject.",
+        "A deliberate, understandable delay contributes to narrative timing."
+      ],
+      "related_patterns": [
+        "writing-put-actors-in-subjects-and-actions-in-verbs",
+        "writing-move-from-familiar-to-new"
+      ],
+      "example_user_queries": [
+        "I get lost halfway through my own long sentences.",
+        "The main point arrives after a pile of qualifications.",
+        "Should I shorten a sentence or move some of its detail?",
+        "My editor keeps asking who is doing what even though both are named.",
+        "I want to preserve a qualification without burying the action.",
+        "Moving a clause seems to change which people my sentence refers to.",
+        "Can I keep a long sentence when its rhythm matters?",
+        "Is there a rule for how many words can separate a subject from its verb?",
+        "Putting all the background first has made my sentence just as hard to follow.",
+        "How can a delayed answer create a useful effect in a scene?"
+      ],
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons show the relevant choices and their effects. No separate table or diagram is needed; terms and grammatical relationships are explained where used."
+      },
+      "sources": [
+        {
+          "author": "Duke Graduate School Scientific Writing Resource",
+          "title": "Lesson 1: Subjects and Actions",
+          "url": "https://sites.duke.edu/scientificwriting/lesson-1-subjects-and-actions/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Principle 3 on subject–verb proximity, distinct from Principles 1 and 2 on role selection.",
+          "supports": "The structural recommendation to reduce burdensome separation between a sentence's subject and verb.",
+          "limits": "The article does not borrow the source's scientific or list examples and does not assert a fixed distance threshold."
+        },
+        {
+          "author": "Michael Simon, MLA Style Center",
+          "title": "“Parting Is Such Sweet Sorrow”: When a Comma Separates Subject and Verb",
+          "url": "https://style.mla.org/comma-separates-subject-and-verb/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The opening discussion connecting a misplaced comma with excessive subject–verb separation and a possible structural rewrite.",
+          "supports": "Considering sentence restructuring when the subject and verb have become too far apart.",
+          "limits": "The tenants' report, restricted-group comparison, and family scene are original. The source is not treated as an empirical study."
+        }
+      ]
+    },
+    {
+      "id": "writing-make-references-unambiguous",
+      "index_ref": "P04",
+      "title": "Make References Unambiguous",
+      "use_when": [
+        "A pronoun or demonstrative has several plausible targets.",
+        "Changing labels makes one object or group appear to be several.",
+        "A reported opinion is being carried forward as if it were the writer's own judgment."
+      ],
+      "goals": ["Identifiable references", "Traceable voices", "Accurate handovers"],
+      "mechanisms": [
+        "Naming competing referents where the distinction matters",
+        "Maintaining meaningful labels across a passage",
+        "Separating uncertainty about identity from uncertainty about significance"
+      ],
+      "not_ideal_when": [
+        "The referent is already unmistakable and repeated names would burden the prose.",
+        "Uncertainty about identity is deliberate and serves a clear literary purpose."
+      ],
+      "related_patterns": [
+        "writing-move-from-familiar-to-new",
+        "writing-put-actors-in-subjects-and-actions-in-verbs",
+        "writing-signal-the-real-relationship"
+      ],
+      "example_user_queries": [
+        "Readers cannot tell which person I mean by she.",
+        "My handover mentions several documents and people keep confusing them.",
+        "I know what this refers to but my editor says it is unclear.",
+        "How can I avoid repeating names without losing track of who is speaking?",
+        "Does changing the noun each time make my writing more elegant?",
+        "I want to report someone's criticism without sounding as if I agree.",
+        "My sentences are grammatical but readers come away with different accounts of the agreement.",
+        "When should I add a noun after this or that?",
+        "How can I keep a mystery while making the physical action clear?",
+        "A revision would require me to name someone whose role I have not confirmed."
+      ],
+      "sources": [
+        {
+          "author": "Purdue OWL, Purdue University",
+          "title": "Improving Sentence Clarity",
+          "url": "https://owl.purdue.edu/owl/general_writing/mechanics/sentence_clarity.html",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The section Avoid unclear pronoun references, including guidance on naming an implied referent and making pronoun targets clear.",
+          "supports": "Checking that readers can identify the intended target of a pronoun and naming it when necessary.",
+          "limits": "The exhibition update, attributed judgment, and shop scene are original. Stable-label and narrative discussions are editorial synthesis, not attributed textbook passages or empirical claims."
+        }
+      ],
+      "source_path": "content/patterns/writing-make-references-unambiguous.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons make the consequential choices visible in context. A separate diagram or table would add little; no graphic or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-give-each-paragraph-a-main-job",
+      "index_ref": "P05",
+      "title": "Give Each Paragraph a Main Job",
+      "use_when": [
+        "Sentences share a subject but alternate between unfinished lines of thought.",
+        "Paragraph breaks reflect visual length rather than a meaningful change.",
+        "An example or detail is relevant to the topic but does not develop the paragraph at this point."
+      ],
+      "goals": ["Paragraph unity", "Adequate development", "Purposeful paragraph breaks"],
+      "mechanisms": [
+        "Grouping details by the contribution they make",
+        "Distinguishing a broad subject from a local purpose",
+        "Using breaks to shape changes in thought or experience"
+      ],
+      "not_ideal_when": [
+        "A rigid topic-sentence formula would flatten dialogue, narrative, or associative prose.",
+        "The difficulty concerns missing sections or the order of the whole work rather than local paragraph development."
+      ],
+      "related_patterns": [
+        "writing-move-from-familiar-to-new",
+        "writing-signal-the-real-relationship",
+        "writing-show-what-matters-summarize-the-rest"
+      ],
+      "example_user_queries": [
+        "All the sentences are about the same thing but my paragraph still wanders.",
+        "Where should I put a paragraph break?",
+        "My proposal mixes the problem with the arrangements for solving it.",
+        "I split a long paragraph and both halves still feel unfinished.",
+        "Does every paragraph need a topic sentence?",
+        "How do I know whether a detail belongs here or somewhere else?",
+        "My paragraphs make claims but never seem to develop them.",
+        "Can one paragraph include a claim, an example, and a qualification?",
+        "I want paragraph breaks in my story to control the timing.",
+        "Do paragraphs have to contain a fixed number of sentences?"
+      ],
+      "sources": [
+        {
+          "author": "Harvard College Writing Center",
+          "title": "Anatomy of a Body Paragraph",
+          "url": "https://writingcenter.fas.harvard.edu/anatomy-body-paragraph",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The guidance on a main point, topic sentences, evidence, analysis, and paragraph endings; the page explicitly frames these as academic essay guidance.",
+          "supports": "Developing a local point rather than collecting unsupported statements, and distinguishing evidence from its interpretation.",
+          "limits": "No source example is reproduced. The repair-café proposal and narrative scene are original; narrative timing is an editorial extension beyond the page's academic-argument scope."
+        },
+        {
+          "author": "UNC Writing Center, University of North Carolina at Chapel Hill",
+          "title": "Paragraphs",
+          "url": "https://writingcenter.unc.edu/tips-and-tools/paragraphs/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The sections What is a paragraph?, How do I decide what to put in a paragraph?, and How do I organize a paragraph?, including the distinction between unity and length and the list of development forms.",
+          "supports": "Paragraph unity is not a fixed sentence count, and paragraph organization depends on the purpose of the development.",
+          "limits": "No five-step formula or source illustration is reproduced or prescribed across genres. Fiction and associative-prose discussion is editorial synthesis."
+        }
+      ],
+      "source_path": "content/patterns/writing-give-each-paragraph-a-main-job.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons make the consequential choices visible in context. A separate diagram or table would add little; no graphic or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-signal-the-real-relationship",
+      "index_ref": "P06",
+      "title": "Signal the Real Relationship",
+      "use_when": [
+        "Readers understand individual statements but cannot tell why one follows another.",
+        "A transition implies causation or a settled conclusion that the evidence does not support.",
+        "A qualification is mistaken for opposition because the particular connection is unstated."
+      ],
+      "goals": ["Legible relationships", "Accurate inference signals", "Deliberate emphasis"],
+      "mechanisms": [
+        "Identifying the relation before choosing a transition",
+        "Explaining the specific connection when a broad connector leaves it uncertain",
+        "Using clause structure to assign emphasis"
+      ],
+      "not_ideal_when": [
+        "The relationship is already available and extra signposting would interrupt the prose.",
+        "The argument lacks evidence or a supporting reason that no connector can provide."
+      ],
+      "related_patterns": [
+        "writing-give-each-paragraph-a-main-job",
+        "writing-move-from-familiar-to-new",
+        "writing-make-references-unambiguous"
+      ],
+      "example_user_queries": [
+        "My essay feels like separate statements even though each sentence makes sense.",
+        "I keep adding however and therefore but the argument still feels weak.",
+        "Am I claiming cause and effect when I only know what happened first?",
+        "Readers think I oppose a proposal when I only question its deadline.",
+        "How do I show that the next point qualifies the first one?",
+        "Do I need a transition at the start of every paragraph?",
+        "A conclusion sounds convincing but I cannot explain why it follows.",
+        "How can sentence structure change which idea gets the emphasis?",
+        "My editor says the connection between these paragraphs is missing.",
+        "Explaining the contrast in my story seems to spoil the effect."
+      ],
+      "sources": [
+        {
+          "author": "Harvard College Writing Center",
+          "title": "Transitions",
+          "url": "https://writingcenter.fas.harvard.edu/transitions",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The discussion of identifying relationships before choosing transitional words, the comparison/concession/elaboration categories, and the caution about accurate causal links.",
+          "supports": "Choosing signals to fit an established relationship rather than adding connectors as decoration or using causal terms without a supported connection.",
+          "limits": "The arts-centre figures, magazine proposal, and café scene are original hypothetical examples. Sentence emphasis and narrative implication are editorial synthesis; no empirical or book-passage claim is made."
+        }
+      ],
+      "source_path": "content/patterns/writing-signal-the-real-relationship.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed prose comparisons make the consequential choices visible in context. A separate diagram or table would add little; no graphic or interactive practice is needed."
+      }
+    }
+  ]
+}

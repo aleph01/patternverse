@@ -1,0 +1,89 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "pattern": "Reinforce Meaning Beyond Color",
+  "date": "2026-10-28",
+  "mode": "Previously generated photographs and paper/device stages reused unchanged. Typography, charts and inline cues composed as native SVG. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-beyond-color-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-beyond-color-layouts.json",
+    "sha256": "5a140208aa608f13d12af35b5ff1981bc9de42f87c0dcbf67963ccb1197eec3d",
+    "method": "Three controlled comparisons retain color coding and add an independent visible carrier. Only local status labels, Plan line/key dash patterns or inline error text change. Existing typography, copy, geometry and photo sources remain fixed."
+  },
+  "comparisonPolicy": "Three local status labels become visible; Plan receives the same dash pattern in line/key; two inline error text lines become visible. Original palette, content, fonts, positions, dimensions, data geometry, input values, photo/crop and presentation stay fixed. Session capacities describe total class size, not remaining places.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "beyond-color-session-status",
+        "changedPixels": 1072,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "beyond-color-actual-plan",
+        "changedPixels": 1326,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "beyond-color-email-error",
+        "changedPixels": 3003,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared beyond-color intervention regions differ.",
+    "scope": "Exact DOM normalization permits only three status-label opacities, two Plan stroke-dasharray attributes or two error-line opacities. Other artifact nodes, all original colors and embedded photo/font bytes are identical. Wide/stacked browser checks cover loaded fonts, text bounds, overflow, image/inline equality and changed pixels outside declared regions."
+  },
+  "limitations": "Original editorial examples, not measured reading speed or task performance. Pattern identity does not substitute for contrast, meaningful labeling or semantic accessibility. Static booking form does not verify validation announcements, focus, keyboard behavior or reflow. No physical print proof or complete accessibility conformance is claimed."
+}

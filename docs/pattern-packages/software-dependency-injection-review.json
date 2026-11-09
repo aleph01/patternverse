@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "dependency-injection",
+  "title": "Dependency Injection",
+  "aliases": ["Dependency Injection Pattern"],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1469,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Fowler's 2004 article establishes the name, external assembly, constructor/setter/interface forms, and the Service Locator and broader Inversion of Control distinctions. Seemann supports composition near the application entry point and container-free composition. Microsoft's official guidelines support lifetime mismatch, resource disposal, and resolved-object thread-safety concerns; its architecture guidance supports dependency direction toward abstractions as distinct from supplying collaborators. Official Python documentation supports structural protocols without runtime enforcement, closing on exceptional exits, and SQLite transaction context management without automatic connection closure. The quotation scenario, example, and diagrams are original teaching material.",
+    "python_examples": "All three actual article blocks execute and print sqlite 375 and memory 375 on separate lines. Checks verify that the consumer imports only typing, requires its collaborator as a constructor argument, and works with SQLite, memory, and a recording provider without concrete-provider inheritance. Invalid quantities fail before provider calls; zero-cent prices work; invalid prices fail; both real providers raise KeyError for missing products. Provider failure propagates unchanged, protocol annotations do not silently validate arbitrary objects, fixture copies remain independent, and different supplied providers produce independent results. Instrumented real SQLite connections verify query cursor closure, borrowed connections staying open after operations and failures, connection closure on normal scope exit, use-after-close failure, and connection closure when an actual startup quote raises. The validator executes a modified startup fixture to force that exceptional path.",
+    "article_tests": "48 article tests pass across Dependency Injection, Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical ID and alias, one primary home, related links, eight headings, exact highlighted code, responsive figures and dimensions, search, ten queries, revision hash, and concept marks.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check has the unrelated existing failure listed below. Combined article and graphics results: 52 passed, one unrelated failure.",
+    "content": "1225 entities validate with drafts included. The published-only corpus contains 1079 entities and reports no errors.",
+    "public_build": "Production build passes, including the public web build checks. Actual article review uses that production build. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new illustration generator, executable example validator, article integration test, and updated authoring metadata. The review report is separately formatted and checked.",
+    "visuals": "All four editable SVG variants load. Browser measurements find no overlapping or out-of-bounds labels and no out-of-canvas rectangles. Desktop and phone compositions were visually inspected for external assembly, clearly distinguished startup wiring and operational calls, dependency ownership, connection lifetime, scope exit, fixed white surfaces, regular typography, contrast, and readable labels. Line styles, step labels, and structure carry the meaning as well as color.",
+    "article_browser": "Actual production article checked at 1440, 390, and 320 pixels: all eight headings, all three Python blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard horizontal code scrolling at 320px, responsive phone illustrations loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article, code, and figure screenshots were inspected.",
+    "navigation_browser": "Application Architecture opens Dependency Injection with the correct breadcrumb. Related Ports and Adapters, Strategy, Abstract Factory, and Adapter routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. Existing authoring records, concept marks, and asset dimensions remain unchanged. The completed Application Architecture collection and existing related-pattern IDs were reused."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Manual constructor injection with standard-library Python, one single-threaded in-memory SQLite connection, and integer-cent unit prices. No DI container, durable storage, concurrent access policy, pricing reservation, automatic fallback, or automatic runtime protocol validation is implemented. The application owns the connection; the adapter owns its per-query cursor and borrows the connection; the consumer borrows the provider. Injection supplies no transaction, synchronization, or security-isolation guarantee.",
+  "preview": "http://127.0.0.1:42992/pattern/dependency-injection",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-dependency-injection",
+  "browser_measurements": ".local/software-dependency-injection/browser-checks.json",
+  "browser_check_script": ".local/software-dependency-injection/check-browser.mjs",
+  "preservation_checks": ".local/software-dependency-injection/preservation-checks.json",
+  "build_log": ".local/software-dependency-injection/public-build.log",
+  "branch": "codex/software-dependency-injection",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

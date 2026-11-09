@@ -1,0 +1,161 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Declared color-only changes isolate value contrast: four text lightness changes, one empty-checkbox stroke lightness change and a two-fill masthead treatment. Hue/saturation inputs stay fixed within each role; all geometry, typography and photographic sources remain identical.",
+  "colors": {
+    "ink": "#2e4836",
+    "paper": "#fffdf6",
+    "cinemaPanel": "#222e39",
+    "cinemaBefore": "#4d6680",
+    "cinemaAfter": "#d9e0e8",
+    "controlBefore": "#becfc4",
+    "controlAfter": "#526f5c",
+    "mastheadBefore": "#2e4836",
+    "mastheadAfter": "#e0ebe4",
+    "mastheadTextBefore": "#f3f7f4",
+    "mastheadTextAfter": "#2e4836"
+  },
+  "hslInputs": {
+    "cinemaPanel": [210, 0.25, 0.18],
+    "cinemaBefore": [210, 0.25, 0.4],
+    "cinemaAfter": [210, 0.25, 0.88],
+    "controlBefore": [140, 0.15, 0.78],
+    "controlAfter": [140, 0.15, 0.38],
+    "mastheadBefore": [140, 0.22, 0.23],
+    "mastheadAfter": [140, 0.22, 0.9],
+    "mastheadTextBefore": [140, 0.22, 0.96],
+    "mastheadTextAfter": [140, 0.22, 0.23]
+  },
+  "contrastRatios": {
+    "cinemaBefore": 2.324143123143245,
+    "cinemaAfter": 10.394549756359414,
+    "controlBefore": 1.5980028880006074,
+    "controlAfter": 5.44822130450689,
+    "mastheadBefore": 9.264326364878391,
+    "mastheadAfter": 8.19176675121867
+  },
+  "monthlyBookings": [42, 56, 64, 76],
+  "total": 238,
+  "examples": [
+    {
+      "name": "value-cinema-details",
+      "source": "remove-courtyard-cinema-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only four practical text fills lighten at nominal HSL hue210/saturation25. Panel, words, fonts, sizes, geometry and photograph/crop stay fixed. Specified text/background ratios are recorded separately from any print or reader-performance claim.",
+      "declaredChanges": [
+        [
+          {
+            "element": "detail-0",
+            "attribute": "fill",
+            "value": "#4d6680"
+          },
+          {
+            "element": "detail-1",
+            "attribute": "fill",
+            "value": "#4d6680"
+          },
+          {
+            "element": "detail-2",
+            "attribute": "fill",
+            "value": "#4d6680"
+          },
+          {
+            "element": "detail-3",
+            "attribute": "fill",
+            "value": "#4d6680"
+          }
+        ],
+        [
+          {
+            "element": "detail-0",
+            "attribute": "fill",
+            "value": "#d9e0e8"
+          },
+          {
+            "element": "detail-1",
+            "attribute": "fill",
+            "value": "#d9e0e8"
+          },
+          {
+            "element": "detail-2",
+            "attribute": "fill",
+            "value": "#d9e0e8"
+          },
+          {
+            "element": "detail-3",
+            "attribute": "fill",
+            "value": "#d9e0e8"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "value-guest-checkbox",
+      "source": "audience-workspace-photo.jpg",
+      "stage": "audience-phone-stage.jpg",
+      "phone": true,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only the checkbox stroke darkens at nominal HSL hue140/saturation15. Its 24-unit square, 2-unit stroke width, empty state, adjacent label, surface color, other controls, photo and phone stay fixed. Static fictional form, not an implemented interface.",
+      "declaredChanges": [
+        [
+          {
+            "element": "guest-checkbox",
+            "attribute": "stroke",
+            "value": "#becfc4"
+          }
+        ],
+        [
+          {
+            "element": "guest-checkbox",
+            "attribute": "stroke",
+            "value": "#526f5c"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "value-report-masthead",
+      "source": "form-open-studios-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only two fills change: masthead background lightens and its label switches from near-white to existing dark green. Text contrast remains strong. Main subject, 238 total, monthly counts42/56/64/76, fonts, sizes, positions and photograph stay fixed.",
+      "declaredChanges": [
+        [
+          {
+            "element": "masthead",
+            "attribute": "fill",
+            "value": "#2e4836"
+          },
+          {
+            "element": "masthead-label",
+            "attribute": "fill",
+            "value": "#f3f7f4"
+          }
+        ],
+        [
+          {
+            "element": "masthead",
+            "attribute": "fill",
+            "value": "#e0ebe4"
+          },
+          {
+            "element": "masthead-label",
+            "attribute": "fill",
+            "value": "#2e4836"
+          }
+        ]
+      ]
+    }
+  ]
+}

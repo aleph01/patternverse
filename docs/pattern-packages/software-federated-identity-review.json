@@ -1,0 +1,463 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "federated-identity",
+  "title": "Federated Identity",
+  "aliases": ["Identity Federation"],
+  "primary_collection": "software-security-access-boundaries",
+  "primary_collection_title": "Security and Access Boundaries",
+  "body_word_count": 1469,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary sources verified. Microsoft Azure Architecture Center establishes the delegated user-authentication pattern. Current final NIST SP800-63C-4 publication confirmed July2025; it establishes IdP/RP trust, issuer-qualified federated identifiers and account responsibilities. NIST SP800-63B-4 section5 explicitly describes independent IdP/RP session termination and RP authority over reauthentication. OpenID Connect Core1.0 errata set2 sections3.1.3.7 and5.7 establish validation and stable issuer/subject identity, including changeable/non-unique email. RFC9700 establishes code-flow, PKCE, callback and browser-bound transaction protection. No existing exact canonical article found. Identity Federation is a broader-name alias; SSO is a possible experience, OIDC/SAML are protocols and OAuth alone is not user authentication.",
+    "sources": [
+      {
+        "title": "Federated Identity pattern",
+        "author": "Microsoft Azure Architecture Center",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/federated-identity",
+        "supports": "Established delegated user-authentication pattern, explicitly trusted IdPs, distinction from application authorization, partner/SSO applicability and operational dependencies."
+      },
+      {
+        "title": "Digital Identity Guidelines: Federation and Assertions, SP800-63C-4",
+        "author": "NIST",
+        "url": "https://pages.nist.gov/800-63-4/sp800-63c.html",
+        "supports": "Current final revision confirmed by NIST publication page. IdP/RP trust and account responsibilities, multi-part federated identifiers, account linking/provisioning, privacy and independent RP/IdP sessions."
+      },
+      {
+        "title": "OpenID Connect Core1.0 incorporating errata set2",
+        "author": "OpenID Foundation",
+        "url": "https://openid.net/specs/openid-connect-core-1_0.html",
+        "supports": "OIDC authentication layer over OAuth, code-flow roles, ID Token validation section3.1.3.7 and issuer/subject stability with non-unique/changeable email in section5.7."
+      },
+      {
+        "title": "RFC9700: Best Current Practice for OAuth2.0 Security",
+        "author": "IETF",
+        "url": "https://www.rfc-editor.org/rfc/rfc9700.html",
+        "supports": "Authorization-code/PKCE/verifier, redirect validation, browser-bound transaction protection and issuer mix-up protections. Diagram is a summarized concrete OIDC form, not a generic SAML sequence."
+      },
+      {
+        "title": "SP800-63B-4, section5: Session Management",
+        "author": "NIST",
+        "url": "https://pages.nist.gov/800-63-4/sp800-63b.html",
+        "supports": "Explicitly independent IdP and RP session establishment/termination and RP authority over reauthentication requirements. Complements SP800-63C-4 federation/account lifecycle guidance."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "accounts a1 b9",
+        "north weekly totals",
+        "south denied",
+        "unlinked denied",
+        "new-email weekly totals",
+        "revoked denied"
+      ],
+      "identity_matrix_cases": 24,
+      "recognized_identities": 2,
+      "permitted_matrix_cases": 1,
+      "denied_matrix_cases": 23,
+      "malformed_identity_cases": 19,
+      "checks": [
+        "issuer-qualified subject separation despite equal subject and email",
+        "exact issuer and opaque-subject matching with no normalization or email fallback",
+        "unknown identities never auto-provision",
+        "malformed/raw identity shapes deny before report retrieval",
+        "email changes preserve identity without granting another account access",
+        "local grants independent across accounts and separate from recognition",
+        "revocation affects next operation while account link and earlier returned data remain",
+        "denied operations cannot retrieve report bodies",
+        "local link/grant/report faults propagate without success fallback",
+        "immutable scalar identity fixtures",
+        "constructor is explicitly not cryptographic authentication; no IdP/protocol/session claim"
+      ]
+    },
+    "content": "All1308 entities validate. Published-only compilation contains1161 entities without diagnostics. Eight exact H2s, one complete Python3 post-validation program, two figures/four responsive assets, three existing related IDs and ten distinct recommendation queries. No practice/worksheet or future stub. Reuses existing Security and Access Boundaries collection, retaining Reference Monitor and Gatekeeper in order. New canonical article, no duplicate or new collection.",
+    "published_compilation": {
+      "status": "passed",
+      "published_entities": 1161,
+      "bytes": 23505684,
+      "sha256": "533b28de9f8075a812dfa5f2718355dd98cb27b744978d0917ff86128a6cc5a2",
+      "compiler_log": ".local/software-federated-identity/published-compilation.log",
+      "temporary_output_removed_after_verification": true
+    },
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "Federated Identity3, Gatekeeper3, Reference Monitor3, GoF24 and four authored-graphic checks pass. Existing global graphic coverage fails because access-over-ownership lacks a graphic. Following the final source-link addition and concept refinement, Federated Identity3 and four graphic checks passed again; the same unrelated coverage failure remains. New tests verify alias/search, single primary home, collection/verse navigation, all23GoF members, three resolved related IDs, exact focusable highlighted code, accessible responsive figures/dimensions, metadata hash and ten queries."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses exact in ByRoleOptions, which does not define that property."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-code validator, integration test, authoring JSON/documentation, illustration registry, asset manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-security-access-boundaries.md"],
+      "other_existing_content_unchanged": 1306,
+      "new_content": ["content/patterns/federated-identity.md"],
+      "two_existing_primary_collection_members_retained_in_order": true,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 77,
+      "prior_graphics_unchanged": 489,
+      "all_prior_dimensions_unchanged": 1740,
+      "new_dimensions": {
+        "software-engineering/federated-identity-trust.svg": {
+          "width": 720,
+          "height": 1080
+        },
+        "software-engineering/federated-identity-trust-mobile.svg": {
+          "width": 360,
+          "height": 1304
+        },
+        "software-engineering/federated-identity-accounts.svg": {
+          "width": 720,
+          "height": 880
+        },
+        "software-engineering/federated-identity-accounts-mobile.svg": {
+          "width": 360,
+          "height": 1144
+        }
+      },
+      "prior_integration_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "preview_web_source_matches_current_source": true,
+      "preview_content_reads_actual_current_content": true
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/federated-identity-trust.svg",
+        "labels": 20,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1080
+      },
+      {
+        "path": "/assets/software-engineering/federated-identity-trust-mobile.svg",
+        "labels": 27,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1304
+      },
+      {
+        "path": "/assets/software-engineering/federated-identity-accounts.svg",
+        "labels": 26,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 880
+      },
+      {
+        "path": "/assets/software-engineering/federated-identity-accounts-mobile.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1144
+      }
+    ],
+    "native_generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "assets": {
+        "content/assets/software-engineering/federated-identity-trust-mobile.svg": "97af6bf4aeeab10bfac3aee9b24ef8dcbe4ab32b923691432c365bd08d43878c",
+        "content/assets/software-engineering/federated-identity-accounts.svg": "b8879198c079985368928d9552a94bf41f5162781cece94691418a1d74dc83fc",
+        "content/assets/software-engineering/federated-identity-trust.svg": "56a747cf7d2fe63385d7b5e6898985937fccb961f2832de056f63300edd79a6b",
+        "content/assets/software-engineering/federated-identity-accounts-mobile.svg": "2a998d77fb0e195dd2dbf37ace8210ea9675a3dbad97fb9d98a61f8d949f5992"
+      }
+    },
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 7,
+          "width": 90,
+          "height": 82
+        },
+        {
+          "x": 29,
+          "y": 19,
+          "width": 49,
+          "height": 58
+        }
+      ]
+    },
+    "visual_review": "All four native SVG variants and the final concept mark inspected. Actual desktop/phone article tops, both figures and captions at1440and390px, phone code viewport and three-card collection gallery inspected. Fixed white surfaces, regular Helvetica Neue/Helvetica/Arial, requested palette, square geometry and readable labels. No clipped/overlapping text or outside shapes. OIDC arrows order summarized phases, with code through browser and tokens through protected back channel; no claim to depict SAML or execute the protocol. Account table becomes a separately composed phone card sequence. A local account remains recognized after its grant is revoked. Final small concept separates its two incoming arrowheads clearly and matches the preview registry paths.",
+    "browser": {
+      "status": "passed",
+      "mode": "Actual Vite application renderer using copied web source and current linked content; not a completed production export.",
+      "widths": [1440, 390, 320],
+      "details": [
+        {
+          "path": "/assets/software-engineering/federated-identity-trust.svg",
+          "labels": 20,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 1080
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-trust-mobile.svg",
+          "labels": 27,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1304
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-accounts.svg",
+          "labels": 26,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 880
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-accounts-mobile.svg",
+          "labels": 23,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1144
+        },
+        {
+          "viewport": 1440,
+          "pageWidth": 1440,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/federated-identity-trust.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/federated-identity-accounts.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 152,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(72, 86, 76)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 96, 67)",
+                "rgb(23, 74, 139)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": ["/pattern/gatekeeper", "/pattern/reference-monitor", "/pattern/adapter"],
+          "copyable": true
+        },
+        {
+          "viewport": 390,
+          "pageWidth": 390,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/federated-identity-trust-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/federated-identity-accounts-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 152,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(72, 86, 76)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 96, 67)",
+                "rgb(23, 74, 139)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": ["/pattern/gatekeeper", "/pattern/reference-monitor", "/pattern/adapter"],
+          "copyable": true
+        },
+        {
+          "viewport": 320,
+          "pageWidth": 320,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/federated-identity-trust-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/federated-identity-accounts-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 152,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(72, 86, 76)",
+                "rgb(123, 66, 24)",
+                "rgb(23, 96, 67)",
+                "rgb(23, 74, 139)",
+                "rgb(138, 59, 34)"
+              ]
+            }
+          ],
+          "links": ["/pattern/gatekeeper", "/pattern/reference-monitor", "/pattern/adapter"],
+          "copyable": true,
+          "keyboard_code_scroll": true
+        },
+        {
+          "collection": "software-security-access-boundaries",
+          "article": "federated-identity",
+          "navigation": "collection route and verse gallery to article passed",
+          "related_routes": "all returned 200"
+        }
+      ],
+      "checks": [
+        "eight exact H2s",
+        "four native SVG variants load with zero label overlaps or outside shapes",
+        "correct phone assets selected",
+        "exact code text and browser selection",
+        "six highlighting colors and focusable code",
+        "keyboard horizontal code scrolling at320px",
+        "no page overflow",
+        "three related article routes return200",
+        "collection route, Software Engineering gallery, card concept and article breadcrumb work",
+        "no browser page/console errors"
+      ]
+    },
+    "live_resources": {
+      "status": "passed",
+      "mode": "actual Vite development renderer with copied web source and current linked content; full static export not rerun because disk capacity is still exhausted",
+      "source_links_verified": [
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/federated-identity",
+        "https://pages.nist.gov/800-63-4/sp800-63c.html",
+        "https://openid.net/specs/openid-connect-core-1_0.html",
+        "https://www.rfc-editor.org/rfc/rfc9700.html",
+        "https://pages.nist.gov/800-63-4/sp800-63b.html"
+      ],
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-trust-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-trust.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-accounts-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-accounts.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/federated-identity-trust.svg",
+          "status": 200,
+          "sha256": "56a747cf7d2fe63385d7b5e6898985937fccb961f2832de056f63300edd79a6b",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-trust-mobile.svg",
+          "status": 200,
+          "sha256": "97af6bf4aeeab10bfac3aee9b24ef8dcbe4ab32b923691432c365bd08d43878c",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-accounts.svg",
+          "status": 200,
+          "sha256": "b8879198c079985368928d9552a94bf41f5162781cece94691418a1d74dc83fc",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/federated-identity-accounts-mobile.svg",
+          "status": 200,
+          "sha256": "2a998d77fb0e195dd2dbf37ace8210ea9675a3dbad97fb9d98a61f8d949f5992",
+          "matches_source": true
+        }
+      ]
+    },
+    "production_export": {
+      "status": "not-rerun-disk-capacity",
+      "reason": "Earlier Reference Monitor full-site export attempts failed twice with ENOSPC during prerendering. The volume remains100%used, with approximately219MiB reported free before cleanup. This session verified the actual live application renderer instead of repeating the known full-site disk failure.",
+      "completed_export_claimed": false,
+      "repository_build_scripts_renderer_and_dependencies_modified": false,
+      "scope": "Separate task-owned runtime copies web source with native copy-on-write and links current local content/packages/scripts/dependencies. No private environment files copied. Other previews and previous work retained. Only this session temporary published corpus was removed after its successful result, size and SHA-256 were recorded."
+    }
+  },
+  "example_limits": "Sequential in-memory RP account/authorization simulation after a real trusted protocol verifier has accepted a login. Login construction is explicitly a fixture operation and can be performed without an IdP; it is not authentication, cryptographic assertion validation or an unforgeable capability. No JWT implementation, live IdP, browser redirects, session cookies, automatic email linking/provisioning, durable links/grants or concurrent consistency guarantee. Real deployment still needs complete protocol validation, expected issuer/audience/transaction binding, approved account linking, current local authorization, secure independent session lifecycles, deprovisioning and provider/key failure handling. Local grant revocation here affects the next modeled operation, not every IdP/RP session globally.",
+  "preview_url": "http://127.0.0.1:43062/pattern/federated-identity",
+  "version_control": {
+    "tool": "GitButler",
+    "branch": "codex/software-federated-identity",
+    "committed": false,
+    "pushed": false,
+    "pull_request_created": false
+  },
+  "evidence_directory": ".local/software-federated-identity",
+  "externally_published": false,
+  "deployed": false
+}

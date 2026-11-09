@@ -1,0 +1,150 @@
+{
+  "pattern": "Match Typeface to Context",
+  "date": "2026-10-27",
+  "mode": "Reused existing generated photos and paper stage; authored exact typography separately with embedded OFL font instances. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-typeface-examples.mjs",
+  "font_preparation": "scripts/prepare-graphic-design-typeface-fonts.py",
+  "fontSources": [
+    {
+      "file": "sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/SourceSerif4%5Bopsz%2Cwght%5D.ttf",
+      "sha256": "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b"
+    },
+    {
+      "file": "sourceserif4/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/OFL.txt",
+      "sha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9"
+    },
+    {
+      "file": "jost/Jost[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/Jost%5Bwght%5D.ttf",
+      "sha256": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076"
+    },
+    {
+      "file": "jost/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/OFL.txt",
+      "sha256": "1af3438a4d5f0ed2bdbc5751a5a67ebf6d537334161184b7fbb68503ef0ea0c5"
+    },
+    {
+      "file": "fraunces/Fraunces[SOFT,WONK,opsz,wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf",
+      "sha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb"
+    },
+    {
+      "file": "fraunces/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/OFL.txt",
+      "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b"
+    },
+    {
+      "file": "atkinsonhyperlegiblemono/AtkinsonHyperlegibleMono[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/atkinsonhyperlegiblemono/AtkinsonHyperlegibleMono%5Bwght%5D.ttf",
+      "sha256": "5ce8b1698d1ded7dff2178c1a3ad159470085a58ea239e8b2cb88f4fb4a6f646"
+    },
+    {
+      "file": "atkinsonhyperlegiblemono/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/atkinsonhyperlegiblemono/OFL.txt",
+      "sha256": "1ebb31cf7393164f20d10c1d48406cddb5314feff8465531cf1e4ba37e9dd740"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "reading-display.woff2",
+      "family": "PV Reading Display",
+      "source": "sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "axes": {
+        "wght": 400,
+        "opsz": 60
+      },
+      "sha256": "89fdc50eab02abe8fb62ca9b0cd7f57168207f0da89ee384288afb1a350a4712"
+    },
+    {
+      "file": "reading-text.woff2",
+      "family": "PV Reading Text",
+      "source": "sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "axes": {
+        "wght": 400,
+        "opsz": 12
+      },
+      "sha256": "9c3d1996c151789f1f6a59d4fa6491c298aea756a64beff96454a734ec34ebab"
+    },
+    {
+      "file": "geometric.woff2",
+      "family": "PV Geometric",
+      "source": "jost/Jost[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "38306349b1004503f27cd46790da3b072eb98a4a6888464187d225e700747881"
+    },
+    {
+      "file": "event.woff2",
+      "family": "PV Event",
+      "source": "fraunces/Fraunces[SOFT,WONK,opsz,wght].ttf",
+      "axes": {
+        "wght": 400,
+        "opsz": 72,
+        "SOFT": 50,
+        "WONK": 1
+      },
+      "sha256": "b08919e52e7924699d691e03de544f22267ebcb538a3447429fadd52bd81a56b"
+    },
+    {
+      "file": "code.woff2",
+      "family": "PV Code",
+      "source": "atkinsonhyperlegiblemono/AtkinsonHyperlegibleMono[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "e534d7f442dd1cf7e61f7ad90ce26902f91a9932984289b537f78f054de16747"
+    }
+  ],
+  "fontDirectory": "docs/pattern-packages/graphic-design-typeface-fonts",
+  "fontLicensePolicy": "Original source fonts and complete OFL notices are retained. Static illustration instances are renamed internally to avoid retaining reserved family names; upstream copyrights and license information are preserved. They are used only for these examples.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/chunk-garden-supper-photo.jpg",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "53328167015da4550cd4810094a20ba6502c627867119c646fc7a74bc937872f"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Reading: only the body group font-family switches Source Serif 4 optical-size-60 instance to optical-size-12 instance, both weight 400. Invitation: only the headline switches Jost 400 to Fraunces 400 at opsz72 SOFT50 WONK1. Reference: only the code switches Jost 400 to Atkinson Hyperlegible Mono 400. Nominal font sizes, requested weights, baselines, line breaks, copy, colors, all other styling, images/crops and presentation remain fixed. Natural glyph widths, apparent size and stroke texture differ as properties of the selected fonts.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "typeface-reading-cut",
+        "changedPixels": 35031,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "typeface-event-tone",
+        "changedPixels": 4073,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "typeface-reference-code",
+        "changedPixels": 4154,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared typeface intervention regions differ.",
+    "viewports": {
+      "desktop": 1320,
+      "narrow": 396
+    },
+    "scope": "All six saved browser PNGs visually inspected. Embedded faces loaded successfully. Browser-rendered same-origin pixel comparisons found no change outside designated text regions. SVG img rendering was byte-identical to inline rendering at full size, confirming embedded fonts work in the article image context. Text stays on paper and narrow layouts have no horizontal overflow. DOM checks preserve all unrelated attributes and copy; source bytes and wide/stacked variants are identical. Article-renderer markup is checked separately."
+  },
+  "limitations": "No audience study, measured legibility/emotion/transcription improvement, physical print proof, complete accessibility audit or full production-route check. Static layouts hold line breaks fixed to isolate the selection. Real production may require reflow and subsequent typesetting. Tone judgments are contextual editorial interpretations. The displayed dates and arrangements are fictional."
+}

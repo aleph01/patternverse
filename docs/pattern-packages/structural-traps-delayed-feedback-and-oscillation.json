@@ -1,0 +1,132 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Delayed Feedback and Oscillation",
+  "metadata_mapping": "Existing concept schema and responsive SVG convention; existing publication status retained; local edits only.",
+  "patterns": [
+    {
+      "id": "delayed-feedback-and-oscillation",
+      "title": "Delayed Feedback and Oscillation",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; delayed observation, stock correction, response strength, action records, and oscillatory control",
+      "article": "content/concepts/delayed-feedback-and-oscillation.md",
+      "related_patterns": [
+        "fixes-that-fail",
+        "growth-and-underinvestment",
+        "escalation"
+      ],
+      "source_checked": "2026-11-01",
+      "sources": [
+        {
+          "author": "James Clerk Maxwell",
+          "year": 1868,
+          "title": "On Governors",
+          "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/maxwell1.pdf",
+          "read_method": "Opened and read the original Proceedings scan, especially printed pages 270–272 (PDF pages 1–3), describing speed regulation, growing/decaying oscillatory disturbances and instability as governing power increases.",
+          "supports": "Historical foundation for feedback stability analysis and the distinction between strong correction and stable regulation.",
+          "boundary": "Mechanical governor analysis under stated mathematical assumptions, not the invention of every delay phenomenon or proof of this shower model. No general numerical gain threshold or modern controller performance is attributed to Maxwell."
+        },
+        {
+          "author": "Donella H. Meadows",
+          "year": 2008,
+          "title": "Thinking in Systems: A Primer",
+          "url": "https://www.sustainable.soltechdesigns.com/meadows.pdf",
+          "read_method": "Opened and read the business-inventory delay example, printed pages 51–58 (PDF pages 67–74), including perception, response and delivery delays and alternative adjustment speeds.",
+          "supports": "Inventory-delay comparisons and the long-pipe shower illustration on printed page 54. They explain possible oscillation and differing delay locations, not inevitable instability or validation of this example’s response rule.",
+          "boundary": "Illustrative systems models and conceptual synthesis. Their trajectories are not measurements of every inventory system, universal prescriptions for waiting, or a basis for attributing every economic cycle to one cause.",
+          "current_example_check": {
+            "date": "2026-11-02",
+            "read": "Reopened and read the shower paragraph and surrounding inventory-delay discussion on printed pages 54–55."
+          }
+        },
+        {
+          "author": "John D. Sterman",
+          "year": 1989,
+          "title": "Modeling Managerial Behavior: Misperceptions of Feedback in a Dynamic Decision Making Experiment",
+          "url": "https://jmvidal.cse.sc.edu/library/sterman89a.pdf",
+          "doi": "10.1287/mnsc.35.3.321",
+          "read_method": "Opened the original twenty-page PDF. Its searchable layer contains only the archive cover, so downloaded the same paper to temporary storage, rendered and OCR-read printed pages 321–323 and 334–335. Read introduction, stock-management structure, and analysis of decision rules and supply-line misperceptions.",
+          "supports": "Laboratory Beer Distribution Game behavior, estimated stock-adjustment rules and underweighting of the supply line; distinction between observed choices and fitted explanatory models.",
+          "boundary": "Evidence from a particular simulated distribution system with multiple actors and time lags. It neither measures Ada’s shower nor establishes that every participant or real manager ignores delays. No fitted coefficient or policy-effect estimate is transferred to the illustrative shower."
+        }
+      ],
+      "status": "published",
+      "short_description": "Recognize when corrective actions chase outdated conditions, then coordinate response strength, action records, and observation timing with the delays in the system.",
+      "use_when": [
+        "Why can another turn overshoot before the first is felt?",
+        "Ada repeatedly turns a shower mixer before changed water arrives at the outlet; later overshoot prompts reversal."
+      ],
+      "goals": [
+        "Recognize the familiar predicament before specialist terminology.",
+        "Explain the defining mechanism and distinguish neighboring concepts.",
+        "Physical transport/response delay, not delayed reporting. Water in transit is accumulated; temperature is a property, not a volume stock. Mixer and supply held steady. No exact trajectory, validated controller, or universal stability claim.",
+        "Separate hypothetical behavior, model results, documented cases, and practical editorial proposals."
+      ],
+      "mechanisms": [
+        "Moderate correction and allow the earlier physical effect to arrive before reassessing.",
+        "Supply and equipment are held steady here. Waiting takes time; changing delays, disturbances, and safe limits need separate control."
+      ],
+      "example_user_queries": [
+        "Why can another turn overshoot before the first is felt?"
+      ],
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Why can another turn overshoot before the first is felt?",
+        "assets": [
+          "content/assets/structural-traps/delayed-feedback-test-tank.svg",
+          "content/assets/structural-traps/delayed-feedback-test-tank-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 922,
+            "textBlocks": 19
+          },
+          "phone": {
+            "width": 360,
+            "height": 1604,
+            "textBlocks": 19
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Ada turns the shower mixer warmer. Earlier cool water still in the pipe arrives before the changed mixture. Repeating a large warmer turn can stack correction and later make the spray too hot. An alternative modest-adjustment procedure waits to assess the first change before repeating it; physical transit delay remains. One overshoot is shown here. Oscillation requires repeated reversals; delay alone does not establish it. Change: Coordinate adjustment size and timing with the physical response delay. Limitation: Supply and equipment are held steady here. Waiting takes time; changing delays, disturbances, and safe limits need separate control.",
+        "caption": "Hypothetical illustration. Earlier water continues arriving while the first change travels through the pipe. The two lower branches compare stacked correction with allowing an effect to arrive before reassessment. This is physical-response delay, not stale reporting; no exact temperature path or stable controller is claimed. One overshoot is shown here. Oscillation requires repeated reversals; delay alone does not establish it.",
+        "representation": {
+          "scenario": "Ada repeatedly turns a shower mixer before changed water arrives at the outlet; later overshoot prompts reversal.",
+          "interpretation": "Hypothetical qualitative illustration. Ada turns the shower mixer warmer. Earlier cool water still in the pipe arrives before the changed mixture. Repeating a large warmer turn can stack correction and later make the spray too hot. An alternative modest-adjustment procedure waits to assess the first change before repeating it; physical transit delay remains. One overshoot is shown here. Oscillation requires repeated reversals; delay alone does not establish it. Change: Coordinate adjustment size and timing with the physical response delay. Limitation: Supply and equipment are held steady here. Waiting takes time; changing delays, disturbances, and safe limits need separate control.",
+          "relationship_key": "Upper arrows show mixing and arrival order. Lower branches are alternative decision procedures from the same condition. No spacing represents elapsed time or temperature. One overshoot is shown here. Oscillation requires repeated reversals; delay alone does not establish it.",
+          "changed_relationship": "Moderate correction and allow the earlier physical effect to arrive before reassessing.",
+          "residual_constraints": "Supply and equipment are held steady here. Waiting takes time; changing delays, disturbances, and safe limits need separate control.",
+          "phone_treatment": "Separate composition retains readable labels and the same alternatives, dependencies, causal links, or chronology."
+        }
+      },
+      "example_structure": {
+        "scenario": "Ada repeatedly turns a shower mixer before changed water arrives at the outlet; later overshoot prompts reversal.",
+        "changed_relationship": "Moderate correction and allow the earlier physical effect to arrive before reassessing.",
+        "required_assumptions": "Physical transport/response delay, not delayed reporting. Water in transit is accumulated; temperature is a property, not a volume stock. Mixer and supply held steady. No exact trajectory, validated controller, or universal stability claim. The illustration shows one overshoot, not evidence of repeated oscillation.",
+        "residual_constraints": "Supply and equipment are held steady here. Waiting takes time; changing delays, disturbances, and safe limits need separate control.",
+        "comparison": "Qualitative relationships only; no invented utility scores, numerical trajectories, or measured improvement claimed."
+      },
+      "evidence_boundary": "The central scenario and resulting behavior are hypothetical. Source-specific formal and empirical limits remain explicit. The expected recognizability of a classic example is editorial judgment, not a reader-study result.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "change": "Ada repeatedly turns a shower mixer before changed water arrives at the outlet; later overshoot prompts reversal.",
+        "scope": "Article, two editable responsive SVGs, caption, alternative text, manifest dimensions, and current research notes. All forty retain separate identities and existing publication status.",
+        "source_handling": "Existing source identities and original source-check dates retained. Current examples are no longer the earlier workshop, booking, or dashboard scenarios. Research claims are not reclassified as measured outcomes.",
+        "verification": "Passed current content, semantic consistency, responsive browser, SVG bounds, and text-contrast checks; see verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Carry the existing one-overshoot versus repeated-oscillation boundary into both SVGs, caption, and alternative text.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "domain-event",
+  "title": "Domain Event",
+  "aliases": ["DDD Domain Event", "Domain Event Pattern"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1400,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Evans's original accessible DDD Reference, Domain Events on printed page 13, establishes domain-significant occurrences, immutable fact data, and temporal/propagation concerns. Fowler's Domain Event source is explicitly identified as a draft and supports source data and occurrence versus observation time. Bogard supports recording independently of dispatch. Microsoft explains dispatch timing, participating transactions, and internal domain versus committed integration contracts. Richardson's original Outbox pattern supports durable publication intent and possible repeated delivery. Fowler's Event Sourcing draft supports the separate authoritative-history/reconstruction pattern. Official Python sources support frozen fields and aware UTC datetime behavior. The shipment policy, code, and native illustrations are original teaching material.",
+    "python_examples": "Both actual article blocks execute and produce all six stated lines exactly. Checks verify fact payload and identity/time snapshots, frozen fields, immutable datetime components, strict timezone.utc validation, rejection of malformed text, naive timestamps, other offsets, date-only inputs and datetime subclasses, invalid-input stability before mutation, readonly public status and pending properties, one accepted local dispatch, repeated-transition rejection without another fact, nondestructive tuple snapshots, pure independent description functions, retained original context across different shipments and times, opaque text preservation, and caller-supplied historical occurrence time. A separate shipment can reuse the supplied event ID, explicitly verifying that no allocator, global uniqueness enforcement, consumer inbox, or deduplication is silently implemented. The model imports only dataclasses and datetime and performs no I/O.",
+    "python_stdout": [
+      "status: dispatched",
+      "fact: ShipmentDispatched E1",
+      "archive: S1 TRACK-9",
+      "notice: S1 E1",
+      "rejected: Shipment is not ready",
+      "pending: 1"
+    ],
+    "article_tests": "69 distinct article tests verified across Domain Event and the existing software/GoF suites. The first bounded-concurrency run passed 68 article tests and four graphics checks; one existing Functional Core Imperative Shell search test exceeded its five-second limit. A targeted rerun of that file with maxWorkers=1, testTimeout=20000, and hookTimeout=60000 passed all three tests in 7.22 seconds without code changes. Domain Event's three integration tests pass. Coverage includes canonical ID and aliases without duplicates, one primary home with prior members retained, eight headings, exact highlighted code, responsive assets, related links, search, ten queries, revision hashes, and concept marks.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-graphic coverage check retains the unrelated missing access-over-ownership graphic. The initial combined run reported 72 passed and two failures out of 74; the search timeout is resolved by the targeted rerun, leaving the known coverage failure.",
+    "content": "1245 entities validate with drafts included. The published-only corpus contains 1099 entities and reports no errors.",
+    "collection": "Reused Domain Modeling and Business Logic and appended Domain Event after the existing five articles. Aggregate, Observer, Transactional Outbox, and Event Sourcing keep their existing IDs and homes. No new collection or candidate stub.",
+    "public_build": "Production build and public web build checks pass. Actual browser review uses that completed build. No deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the new generator, executable validator, article integration test, and updated authoring metadata. The clarified rollback label and review report are separately checked.",
+    "visuals": "All four editable native SVG variants load. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and separate phone compositions were visually inspected for command versus accepted local fact, stable E1/S1/TRACK-9 occurrence data and UTC time, independent pure descriptions, pending versus committed versus delivered stages, mapped outgoing message M1, one atomic state/outbox boundary, neither proposed change committing on rollback, relay reads after commit, and possible resend retaining M1. Solid versus dashed arrows and explicit labels carry distinctions independently of color. White surfaces, regular Helvetica typography, exact palette, contrast, and readability were checked. The concept mark depicts a transition producing a fact and independent reactions.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 headings, both Python blocks preserved exactly in the DOM with colored syntax tokens, selectable code retaining indentation, keyboard horizontal code scrolling at 320px, responsive phone variants loaded, and no page overflow. Browser selection normally omits the terminal newline. Actual desktop/phone article, figures, code, and gallery screenshots were visually inspected.",
+    "navigation_browser": "The primary collection's direct route renders the correct title. Software Engineering opens the Domain Modeling and Business Logic gallery; Next page exposes Domain Event as the sixth article, and its card opens the article with the correct breadcrumb. Aggregate, Observer, Transactional Outbox, and Event Sourcing routes return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. Every prior software article and both related data-engineering articles match actual pre-change hashes. Software Engineering verse and Application Architecture are byte-for-byte unchanged. All prior authoring records, concept marks, and asset dimensions are unchanged, and existing primary collection members remain."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; unrelated file left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Sequential in-memory Shipment ready-to-dispatched state with caller-provided opaque identity and strict UTC time. Accepted events are local pending facts until a surrounding transaction commits. Pure descriptions only return strings; no physical dispatch verification, database, transaction, rollback implementation, allocator, global uniqueness check, reliable dispatcher, broker, delivery, acknowledgement, replay, sequence protocol, consumer deduplication, or concurrent transition protection exists. Normal API immutability is not a security boundary. The separate outbox illustration describes a durable publishing design rather than implemented code; it distinguishes domain fact E1 from mapped message M1 and preserves message identity on resend. Handler dispatch timing, participating transaction boundaries, effect ordering, schema evolution, privacy, external idempotency, and pending-event cleanup require explicit production choices.",
+  "preview": "http://127.0.0.1:42999/pattern/domain-event",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-domain-event",
+  "browser_measurements": ".local/software-domain-event/browser-checks.json",
+  "browser_check_script": ".local/software-domain-event/check-browser.mjs",
+  "preservation_checks": ".local/software-domain-event/preservation-checks.json",
+  "build_log": ".local/software-domain-event/public-build.log",
+  "search_rerun_log": ".local/software-domain-event/search-recheck.log",
+  "branch": "codex/software-domain-event",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

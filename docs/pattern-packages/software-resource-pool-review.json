@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "resource-pool",
+  "title": "Resource Pool",
+  "aliases": ["Pooling"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1407,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Seven primary references: Kircher and Jain’s original Pooling paper; Apache Commons Pool GenericObjectPool and PooledObjectFactory APIs; SQLAlchemy connection pooling; Microsoft ObjectPool; official Python Condition and contextmanager documentation. The original paper explicitly names Resource Pool as a synonym, distinguishes object-only pooling and caching by resource identity, and describes reuse, initialization/anonymity and synchronized acquisition. Its full ten-page author-hosted PDF was retrieved at the published HTTP address after HTTPS certificate validation failed; relevant definitions, roles, implementation policy and related-pattern text were read. The article links the verified working address, and the primary documentation independently corroborates borrow/reset/validation/destruction, retained-versus-total allocation limits and reset-on-return qualifications. Pooling is preserved as an alias; Object Pool is described as the narrower object-based form. The buffer model, byte limits, guarded handle, close policy, code and diagrams are original teaching material.",
+    "original_paper": {
+      "retrieved_url": "http://www.kircher-schwanninger.de/michael/publications/Pooling.pdf",
+      "pages": 10,
+      "evidence_file": ".local/software-resource-pool/Pooling.pdf",
+      "text_evidence": ".local/software-resource-pool/Pooling.txt",
+      "sha256": "268e842e3b31f7f16ceb8aa1b1e94387cc37f2b301220708daed280816e9694e"
+    },
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["buffer_pool.py", "demo.py"],
+      "stdout": [
+        "job failed; returned",
+        "reset: 0000000000000000",
+        "old borrow: rejected",
+        "active borrow: ok",
+        "new borrow: rejected"
+      ],
+      "verification": "Exact five-line demo output; positive integer size and immutable 0/8-byte and binary payload boundaries, invalid inputs preserving contents, copied reads, eager physical resource count, and no pool-created worker; same backing resource receives a fresh guarded handle while old public read/write reject even during reuse; previous immutable read copies remain unchanged rather than claiming secure erasure; ordinary and BaseException job failures propagate while reset/return still occur, and repeated context exit does not double-return; real Condition instrumentation proves exhausted checkout waits, releases/reacquires the lock, and rechecks after an extra notification; real bytearray instrumentation gates reset outside the availability lock, keeps the slot unavailable, invalidates the old handle before reset, and verifies both open-pool republication and close-during-reset dropping; close wakes three blocked borrowers, preserves two active borrows until return, rejects new checkout, and does not republish returned buffers; four real callers perform 120 uses at size one and another 120 at size two, verifying no overlapping resource ownership, fixed physical inventory, clean contents at checkout, isolated writes, and stale-handle rejection; independent pool inventories/locks/close flags, final zeroed idle buffers, repeated close and all caller-thread joins return thread inventory to baseline. Instrumentation wraps real Condition/bytearray seams without replacing article pool methods. Assumes trusted nonshared handles and successful allocation/fixed cleanup; no broken-resource replacement, external-handle disposal, secure wipe of copies, deadline, forced reclamation, fairness or join-borrowers API is inferred."
+    },
+    "content": "1291 entities validate with drafts included; final published-only compilation contains 1144 entities without diagnostics.",
+    "integration_tests": "All four focused article suites pass: Resource Pool, Thread Pool, Monitor Object, and GoF. Combined run across five files reports 37 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass. After changing the original-paper link to its verified HTTP address, all three Resource Pool integration checks pass again with the final article hash and metadata.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Resource Pool as its seventh completed member, preserving all six earlier members and collection contents. Thread Pool, Monitor Object and Lease retain canonical IDs and primary homes as related links. Exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1289,
+      "new_content": ["content/patterns/resource-pool.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "six_prior_concurrency_members_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 57,
+      "prior_graphics_unchanged": 469,
+      "prior_dimensions_unchanged": 1666,
+      "new_dimensions": {
+        "software-engineering/resource-pool-ownership.svg": {
+          "width": 720,
+          "height": 1200
+        },
+        "software-engineering/resource-pool-ownership-mobile.svg": {
+          "width": 360,
+          "height": 1312
+        },
+        "software-engineering/resource-pool-return.svg": {
+          "width": 720,
+          "height": 1200
+        },
+        "software-engineering/resource-pool-return-mobile.svg": {
+          "width": 360,
+          "height": 1424
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. A second build incorporates the final verified original-paper link and authoring metadata after the initial successful build. Final article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other existing collection, software verse, or GoF changes.",
+    "illustrations": "Two editable native SVG figures explain physical-resource lifetime versus exclusive borrower use, and the ordered end-handle/reset/open-versus-closed return path. Both have separate phone compositions, meaningful alternative text and captions, fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained strokes and precise arrow meanings. Resource grants are not copies or permanent ownership. Resource places remain occupied while borrowed or resetting. Desktop grant arrows break around labels to avoid crossing text; the phone version composes caller B’s checkout before the separate status of caller A’s already-held resource. The return figure invalidates the old handle before resetting eight bytes, publishes availability only after reset, and drops the returned buffer if closed. Close wakes waiters, rejects new borrows and does not interrupt or join active borrowers. Native and embedded desktop/phone versions were visually inspected for technical accuracy, label placement, contrast and readability; all four variants have zero measured outside labels, label overlaps or outside rectangles.",
+    "browser": "Actual final production article verified at 1440, 390, and 320 CSS pixels: eight exact H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all three related routes returning 200. Concurrency and Resource Management has seven members; its route and Software Engineering verse gallery page two open Resource Pool with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-resource-pool/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 44703
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ fixed pool of eager eight-byte bytearrays; the example demonstrates coordination rather than a claimed speed benefit for cheap memory allocation. Positive integer size sets the physical resource inventory. A real Condition protects idle availability and closure; while loops recheck after waiting/extra notifications. Each scoped borrow gets a fresh public-method guard over one exclusive backing array. Writes accept immutable 0–8-byte data and pad to eight bytes; reads return immutable copies. Finally invalidates the handle, zeroes the array outside the condition lock while unavailable, then republishes only if open. Closed pools drop returned buffers, reject new borrows and wake blocked callers while active use remains valid until scope exit. Tests verify ordinary/BaseException propagation with cleanup, stale guards during reuse, no double return on repeated context exit, reset gating and close races, three woken waiters with two active borrows, independent pools, and 240 concurrent uses across inventories one and two with all caller threads joined. Pool close itself does not join borrowers. Assumes allocation and fixed cleanup complete; clients are trusted not to bypass private state or share a handle concurrently. There is no failed-resource replacement, validation/disposal callback API, timeout, cancellation, fairness or forced reclamation. Clearing the bytearray does not erase existing returned copies or provide cryptographic secure-memory erasure. Real connections require backend-specific reset, compatibility, validation, retirement and failure policy; pool return does not decide commit or undo external effects.",
+  "preview": "http://127.0.0.1:43042/pattern/resource-pool",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-resource-pool",
+  "browser_measurements": ".local/software-resource-pool/browser-checks.json",
+  "browser_check_script": ".local/software-resource-pool/check-browser.mjs",
+  "build_log": ".local/software-resource-pool/public-build-isolated.log",
+  "branch": "codex/software-resource-pool",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

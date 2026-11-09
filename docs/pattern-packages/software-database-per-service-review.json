@@ -1,0 +1,205 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "database-per-service",
+  "title": "Database per Service",
+  "aliases": ["Database-per-Service"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1415,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Chris Richardson’s Database per Service catalog, Microsoft’s microservice data considerations, and PostgreSQL Schemas, Privileges, GRANT, and SET ROLE documentation. The established name and hyphenated punctuation alias are preserved. The article distinguishes private ownership from mandatory physical server isolation, private-table/private-schema/server variants, authoritative facts from consumer-owned projections, owner/runtime privileges, and local transactions from explicit cross-service coordination. It does not repeat an overbroad claim that CAP universally prohibits distributed transactions. PGlite’s official documentation was separately consulted for isolated verification, not as the source for the architectural pattern.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["setup.sql", "demo.sql"],
+      "engine": "PostgreSQL 18.6 (PGlite 0.5.13) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.5 (1db513782be24469589d7cb8a1f1834e9a33f271), 32-bit",
+      "sql_result_sets": [
+        [
+          {
+            "sku": "MUG",
+            "available_units": 3
+          }
+        ],
+        [
+          {
+            "orders_written": 0
+          }
+        ],
+        [
+          {
+            "verified_boundary": "Orders direct read denied"
+          }
+        ],
+        [
+          {
+            "verified_boundary": "Inventory direct write denied"
+          }
+        ]
+      ],
+      "verification": "Executed both actual SQL fences in a fresh embedded PostgreSQL engine; exact stated result sets and partial progress; transaction-local role reset; owner/runtime roles and flags; own-schema and column grants; no owner membership or public DDL; live cross-service read/write/join denials; runtime DDL/ownership/identity-column denials; successful own-store operations; quantity and uniqueness constraints with unchanged earlier commits; insufficient-stock guard; no cross-service foreign key; owner-only schema evolution and no implicit grants on future objects. PGlite is single connection: no authentication, network, multiserver/concurrency, or production service workflow is tested.",
+      "rejection_checks": [
+        {
+          "role": "orders_app",
+          "sqlstate": "42501",
+          "statement": "SELECT * FROM inventory.stock"
+        },
+        {
+          "role": "orders_app",
+          "sqlstate": "42501",
+          "statement": "UPDATE inventory.stock SET available_units=9 WHERE sku='MUG'"
+        },
+        {
+          "role": "inventory_app",
+          "sqlstate": "42501",
+          "statement": "SELECT * FROM orders.orders"
+        },
+        {
+          "role": "inventory_app",
+          "sqlstate": "42501",
+          "statement": "INSERT INTO orders.orders VALUES ('BYPASS','MUG',1)"
+        },
+        {
+          "role": "orders_owner",
+          "sqlstate": "42501",
+          "statement": "SELECT * FROM inventory.stock"
+        },
+        {
+          "role": "orders_app",
+          "sqlstate": "42501",
+          "statement": "CREATE TABLE orders.escape(x integer)"
+        },
+        {
+          "role": "orders_app",
+          "sqlstate": "42501",
+          "statement": "CREATE TABLE public.escape(x integer)"
+        },
+        {
+          "role": "orders_app",
+          "sqlstate": "42501",
+          "statement": "ALTER TABLE orders.orders ADD COLUMN escape integer"
+        },
+        {
+          "role": "inventory_app",
+          "sqlstate": "42501",
+          "statement": "UPDATE inventory.stock SET sku='RENAMED' WHERE sku='MUG'"
+        },
+        {
+          "role": "inventory_app",
+          "sqlstate": "42501",
+          "statement": "DELETE FROM inventory.stock"
+        },
+        {
+          "role": "orders_app",
+          "sqlstate": "23514",
+          "statement": "INSERT INTO orders.orders VALUES ('O44','MUG',0)"
+        },
+        {
+          "role": "orders_app",
+          "sqlstate": "23505",
+          "statement": "INSERT INTO orders.orders VALUES ('O43','MUG',2)"
+        },
+        {
+          "role": "inventory_app",
+          "sqlstate": "23514",
+          "statement": "UPDATE inventory.stock SET available_units=-1 WHERE sku='MUG'"
+        },
+        {
+          "role": "orders_app",
+          "sqlstate": "42501",
+          "statement": "SELECT * FROM orders.orders JOIN inventory.stock USING (sku)"
+        },
+        {
+          "role": "inventory_app",
+          "sqlstate": "42501",
+          "statement": "SELECT * FROM inventory.internal_note"
+        }
+      ]
+    },
+    "content": "1277 entities validate with drafts included; published-only compilation contains 1130 entities without diagnostics.",
+    "integration_tests": "All eleven focused article suites pass: Database per Service, the existing eight Persistence and Transactions articles, Microservices, and GoF. Combined run across twelve files reports 58 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the diagram generator, SQL validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Persistence and Transactions, preserving eight existing members and appending Database per Service ninth with an explanatory paragraph. Existing Microservices, Bounded Context, Transactional Outbox, and Materialized Views canonical IDs provide related links. The new article has one primary collection and Software Engineering verse membership. No new collection, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed-for-task-scope",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-persistence-transactions.md"
+      ],
+      "other_existing_content_unchanged": 1272,
+      "new_content": ["content/patterns/database-per-service.md"],
+      "unrelated_concurrent_content_changes": [
+        "content/patterns/songwriting-pitch-and-intervals.md",
+        "content/patterns/songwriting-syncopation-and-anticipation.md",
+        "content/patterns/songwriting-borrow-a-chord.md"
+      ],
+      "unrelated_new_content": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "related_data_engineering_articles_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "sql_runtime": "Ignored task-local PGlite 0.5.13 only",
+      "prior_software_authoring_unchanged": 43,
+      "prior_graphics_unchanged": 455,
+      "prior_dimensions_unchanged": 1612,
+      "new_dimensions": {
+        "software-engineering/database-per-service-ownership.svg": {
+          "width": 720,
+          "height": 896
+        },
+        "software-engineering/database-per-service-ownership-mobile.svg": {
+          "width": 360,
+          "height": 1176
+        },
+        "software-engineering/database-per-service-commits.svg": {
+          "width": 720,
+          "height": 1008
+        },
+        "software-engineering/database-per-service-commits-mobile.svg": {
+          "width": 360,
+          "height": 1024
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, primary collection, authoring metadata, and concept registry agree with staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer or build implementation changes. Project package.json and pnpm-lock.yaml remain unchanged; PGlite is only in the ignored task-local verification directory. Three concurrent songwriting article edits were observed after the baseline and left untouched; the build represents its isolated copy of surrounding content.",
+    "illustrations": "Two editable native SVGs explain separate runtime roles and private schemas on one physical PostgreSQL host, a conceptual service API outside the SQL boundary, and partial progress across an Inventory commit and deliberately rejected Orders write. Both have separately composed phone variants, meaningful alternatives and captions, approved fixed white surface/regular Helvetica Neue palette/square geometry, and explicit arrow meanings. A long phone heading was shortened before final rendering. All four final variants have zero measured outside labels, overlaps, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for accuracy, placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted SQL blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all four related routes returning 200. Persistence and Transactions shows nine members over three pages; the new card on page three opens with the correct primary breadcrumb. Desktop/phone article tops, SQL viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-database-per-service/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 42764
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original executable PostgreSQL SQL example of private Orders and Inventory schemas on one shared database. Four NOLOGIN owner/runtime roles are provisioned in a fresh isolated cluster; public CREATE is revoked, new private schemas have no PUBLIC access, runtime roles get only own-store USAGE/SELECT plus Orders INSERT or Inventory UPDATE(available_units). The provisioning administrator uses SET ROLE/SET LOCAL ROLE for permission checks; production separate authentication is not modeled. Inventory starts with five physical units and commits a two-unit local adjustment. A deliberate zero-unit Orders insert raises check_violation, leaving no order while Inventory remains at three. Two live cross-service SQL attempts must raise insufficient_privilege. Exception blocks catch only the expected SQLSTATE class and fail on unexpected success. No API, network, reservation lifecycle, retries, reconciliation, authentication setup, distributed transaction, or production checkout workflow. The host has PostgreSQL clients but no server, so the SQL is verified in an isolated ignored PGlite 0.5.13 runtime using its PostgreSQL 18.6 engine, without project dependency changes. PGlite is single-connection verification and is not a concurrency or production deployment test.",
+  "verification_runtime": {
+    "package": "@electric-sql/pglite",
+    "version": "0.5.13",
+    "engine": "PostgreSQL 18.6",
+    "location": ".local/software-database-per-service/runtime",
+    "reason": "Native PostgreSQL client programs are installed but the server binary is absent and Docker is not running. An isolated embedded PostgreSQL engine executes the actual SQL without modifying project dependencies or a user database.",
+    "limits": "Single-connection permissions and transaction verification only. No production login configuration, network, concurrent connections, multiserver deployment, or service workflow test."
+  },
+  "preview": "http://127.0.0.1:43028/pattern/database-per-service",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-database-per-service",
+  "browser_measurements": ".local/software-database-per-service/browser-checks.json",
+  "browser_check_script": ".local/software-database-per-service/check-browser.mjs",
+  "build_log": ".local/software-database-per-service/public-build-isolated.log",
+  "branch": "codex/software-database-per-service",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

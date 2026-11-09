@@ -1,0 +1,89 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/figure-ground-pitcher-cutout.png",
+      "generation_record": "graphic-design-figure-ground-sources.json",
+      "sha256": "3ecc57ffd075e64447f73dacf120eb607b2cdbed9f9d8a8038d4ee927b4735d3"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "pattern": "Control the Background",
+  "date": "2026-10-28",
+  "mode": "Reused existing generated photographic assets and print/phone stages. Native background backing, wave pattern and content surface; no raster edits or new generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-background-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-background-layouts.json",
+    "sha256": "c666c66130c5f9b5b804ef415829c52d5e3f9c2a03a1bc6db2f8c5afc6c55f6a",
+    "method": "Native SVG backing, pattern and surface opacity changes only. Reused photograph/cutout and presentation sources remain unchanged. No photographic editing, blurring, new generation, crop or foreground changes."
+  },
+  "comparisonPolicy": "Studio backing opacity0\u21921; product wave opacity0.65\u21920.1 on unchanged base; booking surface opacity0.66\u21921. Exactly one opacity differs per pair. All photographic bytes/crops, cutout alpha/scale/placement, copy, typography, geometry and presentation remain identical.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "background-studio-invitation",
+        "changedPixels": 98312,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "background-pitcher-texture",
+        "changedPixels": 22731,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "background-booking-surface",
+        "changedPixels": 74024,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared background intervention regions differ.",
+    "scope": "DOM normalization permits only the one declared background opacity per artifact. All source image/font/stage bytes, photograph crops, foreground copy/type/position and other attributes remain identical. Pixels differ only within the declared treatment bounds. Wide/narrow checks cover text bounds, loaded fonts, overflow and image/inline equality. Product source transparency is identical; blended fringe/shadow pixels may change with its ground. All six saved PNGs were visually inspected. Bounded concept mark inspected at32/48/96 pixels. Opaque text/cream surface pair independently calculates above4.5:1; this is not overall conformance."
+  },
+  "limitations": "Editorial examples, not tested attention, reading or booking improvements. Contrast checks cover only specified colors, not complete accessibility. Generated illustrations do not verify real products, venues, availability or specifications. No physical print proof. Cutout source is unchanged but semi-transparent final edge pixels depend on the composited background."
+}

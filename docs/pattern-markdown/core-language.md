@@ -1,55 +1,54 @@
-# M2: interactions, expressions and forward control flow
+# Core Pattern Language
 
-Later extension: [choices and ranking](selections.md) adds optional header parameters,
-multiple selection and ordered results, with desktop chat and Preview widgets.
-The [realization and functional-loop extension](realization.md) adds explicit `~`
-wording and always-cancellable `?loop[max]` iteration in the core and desktop UI.
+Pattern Language combines authored Markdown, typed immutable values, participant
+interactions, and explicit control flow. The website, source preview, and Mira use
+one Rust compiler/runtime. See [readable authoring](readability.md) for the current
+binding, optional-question, and structured-branch conventions.
 
-Status: executable in the portable Rust core and CLI, not connected to Mira chat.
-Updated through M3: [collections](collections.md) add typed records and single-Run lifecycle controls.
-M4 adds [subpatterns and executable snapshots](composition.md), using the same body primitives.
-This extends the M1 subset without moving orchestration into the Host. The
-[check-in example](examples/check-in.pattern.md) and its
-[fixture](examples/check-in.fixture.json) exercise ask, rate, derivation, ordered
-branching, branch-local result assignment and a shared review step.
-
-## Text and rating interactions
+## Questions and ratings
 
 ```pattern
-!ask focus {
-    What would you like to focus on?
-}
+:language 1
+:output focus
+:output energy
 
-!rate energy -2.5..10 {
-    :prefer slider
-    :low "Very little"
-    :high "Plenty"
-    How much energy is available for {{focus}}?
+focus = !ask {
+  What would you like to focus on?
 }
+energy = !rate -2.5..10 {
+  :prefer slider
+  :low "Very little"
+  :high "Plenty"
+  How much energy is available for {{focus}}?
+}
+-> end
 ```
 
-Ask commits participant text, including an intentionally empty response. A rating
-commits a finite number within inclusive literal bounds. Decimal and negative values
-are allowed; the language does not impose integer steps. Invalid types, NaN, infinity
-and out-of-range values leave the effect pending. `:prefer`, `:low` and `:high` are
-presentation metadata; they cannot change the numeric contract. Unknown presentation
-preferences are safe for a Host to ignore.
+Standalone questions accept participant text, including an intentionally empty
+answer. Use a [form](../practices.md) for required nonblank fields or several
+questions submitted together. `notes = !ask [optional] { ... }` makes a form field
+optional; optional answers are still explicit submitted text values.
 
-Action blocks may use shorthand: omit braces and let the following Markdown belong
-to that action until the next action, derivation, control block, label or jump.
-An empty `!ask answer` captures the next text response. Control blocks always use
-explicit braces. Attributes must precede body text in both forms.
+Ratings accept finite numbers within inclusive literal bounds. Decimal and negative
+values are allowed. Invalid types, NaN, infinity, and out-of-range values leave the
+interaction pending. `:prefer`, `:low`, and `:high` are presentation metadata; they
+cannot change the numeric contract.
 
-## Expressions
+Prefer explicit braces. The older shorthand body form remains supported: subsequent
+Markdown belongs to an action until the next recognized boundary. Attributes precede
+body text. Control blocks always require braces.
 
-`= binding expression` creates an immutable derived value. Supported operands are
-quoted strings with JSON escapes, finite numbers (including decimal/exponent forms),
-booleans, binding references and known fields. Choice fields are `.value` and `.label`;
-M3 adds typed paths through collection-produced records, not untyped record inputs.
+## Immutable values and expressions
 
-From strongest to weakest, precedence is:
+`name = expression` creates an immutable binding. There is no implicit coercion,
+truthiness, reassignment, or generated-code evaluation. Equality requires compatible
+types; choice equality compares semantic IDs, not labels. Lists and records compare
+recursively. Arithmetic and ordered comparisons require numbers; Boolean operators
+require booleans.
 
-1. Parentheses, references and `count(...)`.
+From strongest to weakest, the core precedence is:
+
+1. Parentheses, literals, references, field paths, and function calls.
 2. Unary minus.
 3. Multiplication `*`.
 4. Addition/subtraction `+` and `-`.
@@ -57,109 +56,125 @@ From strongest to weakest, precedence is:
 6. `not`.
 7. Short-circuit `and`.
 8. Short-circuit `or`.
+9. Pipelines `|>` and explicit mapping pipes `|>>`, evaluated left to right.
 
-Arithmetic and ordered comparisons require numbers; boolean operators require
-booleans. Equality requires the same type. Choice equality compares semantic IDs,
-not labels; choice lists and typed lists compare corresponding items in order.
-M3 record equality compares corresponding fields recursively, preserving choice-ID equality.
-There is no coercion, truthiness or string concatenation. Arithmetic producing a
-non-finite value rejects the transition atomically, including any just-submitted
-response; no partial bindings or receipts are committed.
+See the [functional core](functional-core.md) for typed lists and records, pure named
+helpers, built-ins, pipelines, traversal, and explicit yielded results. Arithmetic
+producing a non-finite value rejects the transition atomically, including any
+just-submitted response. No partial bindings or receipts are committed.
 
-`count` accepts `choices` or homogeneous `list<T>` values. Typed lists can be supplied
-as explicit inputs, including empty lists. Example input value for `list<text>`:
+Names use ASCII letters or underscore followed by letters, digits, underscores, or
+hyphens. A hyphenated name is one token: write `left - right` for subtraction. Language
+keywords and built-in names are reserved where required by the compiler. Expressions
+are limited to 16 KiB and bounded nesting/operators; functional evaluation also has
+explicit operation and value-size budgets.
 
-```json
-{"type":"list","value":{"element_type":"text","items":[{"type":"text","value":"A"}]}}
-```
-
-Lists have no literals, indexing or mutation; M3 collections produce typed record lists.
-Agent return contracts remain the original five scalar/choices contracts.
-Arbitrary functions, dynamic properties, I/O, randomness and evaluation of generated
-strings are not supported.
-
-Names retain M1's ASCII letters/underscore followed by letters, digits, underscores
-or hyphens. A hyphenated name is one token: write `left - right` for subtraction.
-`true`, `false`, `not`, `and`, `or` and `count` are reserved binding names. As an authoring
-guard, an expression is limited to 16 KiB, 16 nested parentheses and 128 operator
-characters/boolean keywords outside strings. These are not production import quotas.
-
-## Branches, matches and labels
+## Local branches and exact matches
 
 ```pattern
+:language 1
+:output next_step
+
+energy = !rate 0..10 {
+  How much energy is available?
+}
 ?branch {
-    :when energy >= 8 -> high
-    :when energy >= 4 -> medium
-    :else -> low
+  :when energy >= 8 {
+    next_step = "Try a focused work period."
+  }
+  :when energy >= 4 {
+    next_step = "Choose one small action."
+  }
+  :else {
+    next_step = "Make room to rest."
+  }
 }
-```
-
-Branch evaluates conditions in order and transfers to the first true arm. Match
-evaluates its subject once and compares exact cases:
-
-```pattern
-?match selected {
-    :case first_step -> start
-    :case "take a break" -> rest
-    :else -> review
-}
-```
-
-For a choice subject, cases are semantic IDs (bare identifiers or quoted strings).
-For text, number or boolean subjects, cases must be corresponding literals. No case
-expressions, ranges, list matching or duplicate cases. Both constructs require a
-single final `:else`; even a constant condition does not waive that requirement.
-
-`label:` identifies the next instruction. Labels create no scope. `-> label` must
-point strictly forward; backward/self jumps, unknown/duplicate labels, a label with
-no following instruction, and a user-defined `end:` label are rejected. `-> end`
-completes the Run immediately. Every reachable path must explicitly terminate;
-falling off the source is an error. Content after one path's end can still be reached
-from another branch.
-
-The compiler tracks **definitely assigned** bindings (intersection at joins) and
-**possibly assigned** bindings (union). A read requires definite assignment. A write
-requires no possible earlier assignment on that path. Mutually exclusive paths may
-bind the same result with the same type; they lower to the same binding slot. Every
-declared output must exist at every reachable completion. All authored branch arms
-are conservatively considered possible—no constant-folding exceptions.
-
-Unreachable statements produce `S_UNREACHABLE` warnings with source spans and help.
-They are still syntax/type checked; disconnected dead paths never satisfy a live
-path's assignment/output requirements. Warnings are exposed through the compiler
-API and rendered by the CLI.
-
-## Literal Markdown and interpolation
-
-Within action content, prefix a reserved syntax line with a backslash to display it:
-
-```pattern
 !show {
-    \!ask example
-    \:option example "Label"
-    \-> end
-    \}
-    Show literal \{{unknown}}, but interpolate {{focus}}.
+  A possible next step: {{next_step}}
 }
+-> end
 ```
 
-`\{{` is a literal opening delimiter, `\\` is a literal backslash, and other
-Markdown escapes are preserved. Leading escape handling preserves relative
-indentation after common dedenting. Inside explicit action blocks, ordinary text
-such as `Given:` stays Markdown; in shorthand it is a label boundary, so escape it
-or use braces. These are source-level escapes only: interpolated participant/AI text
-is never re-parsed as Pattern source. The UI Host still owns safe Markdown rendering.
+Branch evaluates conditions in order and runs the first true arm, or the final
+`:else`. Match evaluates its subject once and selects an exact case:
 
-## Reproducibility and limits
+```pattern
+:language 1
+selection = !choose {
+  What would help?
+  - start: "Take one step"
+  - rest: "Pause for now"
+}
+?match selection {
+  :case start {
+    !show {
+      Choose one manageable step.
+    }
+  }
+  :case rest {
+    !show {
+      You can leave this here.
+    }
+  }
+}
+-> end
+```
 
-Branch decisions and derived values are internal deterministic operations, not Host
-effects. Effects, accepted receipts, source provenance, duplicate handling and restore
-all use the existing runtime. Checkpoint replay covers each branch without repeating
-accepted AI/user interactions. M2 introduced snapshot schema 2 / compiler m2-v1;
-M3 used 3 / m3-v1; M4 now uses **4 / m4-v1**. Earlier development snapshots are rejected rather than
-silently reinterpreted; there are no production Pattern runs to migrate yet.
+A static choice match may omit `:else` only when every offered ID is covered. Closed
+enum matches follow the same rule for variants. Other subjects and unknown/dynamic
+choice catalogues need a final fallback. Text, number, and Boolean cases are matching
+literals; choice cases are IDs. No ranges, arbitrary case expressions, list matching,
+or duplicate cases are accepted.
 
-M3 implements collections, record fields and single-Run pause/resume/cancel/fail.
-M4 adds isolated child runs and a pure Run Manager. Compiled refinement,
-durable/encrypted Host storage, editor and chat UI remain pending. The standalone `!refine` frame remains
-the required basis for its later integration.
+An arm normally continues after the decision; `-> end` completes explicitly. Values
+used after a decision must be definitely assigned on every continuing path, with
+matching types. The compiler also rejects any possible earlier assignment on the
+same path. Every completion path must supply every declared output. Conditions are
+conservatively considered possible, including constant conditions.
+
+## Compatible label syntax
+
+Older `label:` declarations, `-> label`, and `:case value -> label` /
+`:when condition -> label` dispatch remain supported. Targets must point strictly
+forward. Unknown or duplicate labels, backward/self jumps, labels without a following
+instruction, and a user-defined `end:` label are rejected. Labels create no scope.
+Use local arms for new code; labels and escaping jumps are not allowed inside them.
+
+Every reachable path must explicitly terminate. Falling off the source is an error.
+Unreachable authored statements remain type-checked and produce source diagnostics;
+they cannot satisfy a reachable path's output requirements.
+
+## Markdown and interpolation
+
+Use `{{binding}}` or known fields such as `{{entry.answer}}` to display values.
+A choice displays its label. Interpolated participant and AI text remains data and
+is never parsed as Pattern source. The host owns safe Markdown rendering.
+
+Prefix reserved syntax with a backslash when it should be displayed literally:
+
+```pattern
+:language 1
+!show {
+  \!ask example
+  \:option example "Label"
+  \-> end
+  \}
+  Show literal \{{unknown}}.
+}
+-> end
+```
+
+`\{{` is a literal opening delimiter, `\\` is a literal backslash, and other Markdown
+escapes are preserved. Common dedenting preserves relative indentation. In explicit
+action blocks, ordinary `Given:` text stays Markdown; in shorthand it can become a
+label boundary, so escape it or use braces.
+
+## Execution and saved runs
+
+Derivations and decisions are deterministic runtime operations. User and model
+interactions use typed effects and accepted receipts, with atomic validation,
+idempotent replies, pause/resume, cancellation, and replay. Runs pin their exact
+source and transitive dependencies; editing a practice never patches an active run.
+The readability extension uses the existing compiled instructions and checkpoint
+schemas. See [composition](composition.md), [persistence](persistence.md), and the
+[language index](README.md) for the other supported constructs and host boundaries.

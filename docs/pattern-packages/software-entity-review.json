@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "entity",
+  "title": "Entity",
+  "aliases": ["Domain Entity", "Reference Object"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1502,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Evans's accessible original DDD Reference, Entities on printed page 11, establishes continuing identity across lifecycle, changed attributes, and distinct representations. Fowler's Evans Classification establishes the reference-object alias, distinguishes value objects, and warns about overloaded database terminology; the example's identity-based operator is explicitly an implementation choice. Microsoft supports context-specific identity representations and behavior-bearing domain objects. Fowler's Identity Map catalog supports controlling duplicate loaded objects within a unit of work without implying global synchronization. Official Python documentation supports runtime identity, unsupported comparison results, hash obligations, frozen records, and underscore privacy limits. The equipment scenario, scoped key, equality policy, code, and illustrations are original teaching material.",
+    "python_examples": "Both actual article blocks execute and produce the four stated lines: recreated: True False; identity equal, labels equal: True False; same label, same entity: True False; other catalog: False. Checks pass for no model I/O imports, strict nonblank trimmed identifier fields, opaque text numbers including distinct 0042 and 42, case-sensitive catalog scope, frozen key fields, required typed identity, validated and normalized labels, read-only public properties, unchanged identity during multiple renames, unchanged state on invalid renames, stable hash and lookup by EquipmentId, explicitly unhashable Equipment, NotImplemented for unsupported comparisons, distinct concrete types, symmetric same-key equality, identical labels with distinct identities, independent objects with diverging state, preserved JSON snapshots, and reconstruction with an equal key in a different key and entity instance. Separate objects intentionally sharing a key also verify that this implementation supplies no allocation uniqueness or automatic synchronization.",
+    "article_tests": "57 article tests pass across Entity, Domain Model, Functional Core, Imperative Shell, Dependency Injection, Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical ID and aliases without duplicate entities, one primary home, retained Domain Model membership and verse link, exclusion from Application Architecture, resolved related links, eight headings, exact highlighted code, responsive figure descriptions and dimensions, search, ten queries, revision hash, and concept marks. Tests use maxWorkers=2 to bound corpus-loading concurrency.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check retains the unrelated existing failure listed below. Combined results are 61 passed and one unrelated failure.",
+    "content": "1236 entities validate with drafts included. The published-only corpus contains 1090 entities and reports no errors.",
+    "collection": "Reused Domain Modeling and Business Logic and appended Entity alongside Domain Model. No new collection or candidate stub was created. Existing Entity Resolution, Identity Crosswalks, and Bounded Contexts canonical IDs were reused as related links rather than duplicated or moved.",
+    "public_build": "Production build passes, including public web build checks. Actual browser review uses that build. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new generator, executable example validator, article integration test, and updated authoring metadata. The review report is separately formatted and checked.",
+    "visuals": "All four editable native SVG variants load. Browser measurements find no overlapping or out-of-bounds labels and no out-of-canvas rectangles. Desktop and separately composed phone layouts were visually inspected for identity continuity, exact demo ordering, object A versus reconstructed object B, same identity with divergent state, different numbers with identical labels, catalog scope, fixed white surfaces, regular typography, exact palette, contrast, and readable labels. Arrows represent rename and reconstruction in the continuity diagram; equality symbols and explicit case labels distinguish comparisons without suggesting synchronization. Meaning is carried by labels and structure as well as color.",
+    "article_browser": "Actual production article checked at 1440, 390, and 320 pixels: all eight headings, both Python blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard horizontal code scrolling at 320px, responsive phone assets loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article, code, and figure screenshots were inspected.",
+    "navigation_browser": "The primary collection's direct route renders its correct title. Software Engineering's library filter opens the existing Domain Modeling and Business Logic gallery, whose Entity card opens the article with the correct breadcrumb. Related Domain Model, Bounded Contexts, Entity Resolution, and Identity Crosswalks routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. Application Architecture and the Software Engineering verse are byte-for-byte unchanged. The existing Domain Model article matches its pre-change revision hash. All prior authoring records, concept marks, and asset dimensions remain unchanged."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "A single-threaded in-memory Equipment model with externally assigned catalog-local numbers, a frozen EquipmentId value, explicit concrete-type-and-key equality, unhashable mutable entities, and validated label changes. Public API conventions do not prevent deliberate underscore-field bypass. The JSON round trip is not a database or durable commit. Identifier allocation, persistent uniqueness, optimistic versions, locks, authorization, reconciliation, and automatic synchronization are not implemented. Equal identities deliberately do not imply equal or current state; this is not a universal operator policy for every Entity design.",
+  "preview": "http://127.0.0.1:42995/pattern/entity",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-entity",
+  "browser_measurements": ".local/software-entity/browser-checks.json",
+  "browser_check_script": ".local/software-entity/check-browser.mjs",
+  "preservation_checks": ".local/software-entity/preservation-checks.json",
+  "build_log": ".local/software-entity/public-build.log",
+  "branch": "codex/software-entity",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

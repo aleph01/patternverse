@@ -1,0 +1,1543 @@
+{
+  "title": "Data Visualization Patterns",
+  "article_structure": [
+    "What to notice",
+    "Useful when",
+    "Watch out for",
+    "Related patterns",
+    "Sources"
+  ],
+  "patterns": [
+    {
+      "id": "dataviz-align-for-comparison",
+      "title": "Align for Comparison",
+      "domain": "data-visualization",
+      "short_description": "Use shared scales and aligned positions when readers need to compare magnitudes across views.",
+      "use_when": [
+        "Use shared scales when comparing groups, periods, locations, or alternative scenarios with the same measure and units. Align corresponding categories too, so readers can compare without reconstructing their positions."
+      ],
+      "goals": ["Compare magnitudes across views", "Avoid misleading scale differences"],
+      "mechanisms": ["Shared coordinate scales", "Aligned categories"],
+      "tags": ["data-visualization", "comparison", "scales"],
+      "related_patterns": ["dataviz-small-multiples", "dataviz-sort-to-reveal-order"],
+      "not_ideal_when": [
+        "Independent scales can reveal the shape of a small series that would otherwise look flat. Label that choice clearly and avoid presenting lengths as directly comparable. Shared axes also cannot make incompatible units or differently defined populations comparable."
+      ],
+      "example_user_queries": [
+        "My two charts look similar even though their values differ.",
+        "Should every panel use the same axis limits?",
+        "Small values disappear next to the largest group.",
+        "How can readers compare regions across panels?",
+        "The bars fill each chart but represent different amounts.",
+        "Our dashboard changes scales between periods.",
+        "When are independent scales appropriate?",
+        "How can I align matching categories across views?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/multi-panel-figures.html",
+        "https://observablehq.github.io/plot/marks/bar"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-align-for-comparison.html",
+        "reason": "North records 18, 24, and 30 units; South records 60, 80, and 100. Independent axes stretch both teams to the same apparent width. A shared zero-to-110 scale preserves their magnitude differences."
+      },
+      "article_words": 174
+    },
+    {
+      "id": "dataviz-sort-to-reveal-order",
+      "title": "Sort to Reveal Order",
+      "domain": "data-visualization",
+      "short_description": "Arrange unordered categories by value to expose their ranking and differences.",
+      "use_when": [
+        "Readers need to identify the largest or smallest categories.",
+        "Alphabetical or arbitrary order makes values difficult to compare."
+      ],
+      "goals": ["Compare magnitudes", "Identify rank and gaps"],
+      "mechanisms": ["Value-based ordering", "Controlled comparison"],
+      "tags": ["comparison", "ranking", "categorical-data"],
+      "related_patterns": [
+        "dataviz-align-for-comparison",
+        "dataviz-highlight-the-relevant-contrast"
+      ],
+      "not_ideal_when": [
+        "Categories have a meaningful temporal, ordinal, or process sequence.",
+        "Readers primarily need to find a known label.",
+        "Independent reordering would prevent tracking categories across views."
+      ],
+      "example_user_queries": [
+        "My bar chart makes it hard to see which category is largest.",
+        "The values are all there but I cannot see a ranking.",
+        "Should I put my categories in alphabetical order?",
+        "How can I make the biggest differences easier to compare?",
+        "Our chart has a long tail that is hard to spot.",
+        "I want to compare support ticket categories at a glance.",
+        "Should each panel use a different category order?",
+        "How should I arrange bars with equal values?",
+        "Is it useful to sort monthly figures by their totals?",
+        "Readers keep searching back and forth to find the leaders."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-amounts.html",
+        "https://observablehq.github.io/plot/marks/bar"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-sort-order.html",
+        "reason": "Change only category order while preserving counts, scale, and color."
+      }
+    },
+    {
+      "id": "dataviz-compare-against-a-reference",
+      "title": "Compare Against a Reference",
+      "domain": "data-visualization",
+      "short_description": "Place a justified benchmark beside the observations so readers can interpret their departures.",
+      "use_when": [
+        "Use a reference when readers ask whether a value is above expectation, within a target, or different from a relevant starting point. Keep the benchmark labeled and visually distinct from observations."
+      ],
+      "goals": ["Interpret distance from a benchmark", "Identify departures from a target"],
+      "mechanisms": ["Visible reference line", "Explicit benchmark context"],
+      "tags": ["data-visualization", "comparison", "benchmarks"],
+      "related_patterns": ["dataviz-align-for-comparison", "dataviz-show-uncertainty"],
+      "not_ideal_when": [
+        "The line is an explicitly fictional operational target, not a confidence limit. In real work, name the benchmark and explain its basis. A convenient average may be an unsuitable goal. Crossing a target does not by itself establish a meaningful effect or explain its cause."
+      ],
+      "example_user_queries": [
+        "Is this value good or bad compared with our target?",
+        "My chart shows numbers without any context.",
+        "How should I show a historical baseline?",
+        "Which periods exceeded the expected level?",
+        "Readers cannot see the distance from our goal.",
+        "Should I use the average as a benchmark?",
+        "How can I distinguish a target from observed values?",
+        "I need to show departures without changing the raw measurements."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-amounts.html",
+        "https://observablehq.github.io/plot/marks/rule"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-compare-against-a-reference.html",
+        "reason": "Daily output is 72, 85, 64, and 91 units. Against a target of 80, only Tuesday and Thursday exceed the reference. Adding the target changes no observation."
+      },
+      "article_words": 184
+    },
+    {
+      "id": "dataviz-show-paired-differences",
+      "title": "Show Paired Differences",
+      "domain": "data-visualization",
+      "short_description": "Preserve matched identities and show the change for each case, rather than only comparing group summaries.",
+      "use_when": [
+        "Use this for repeated measurements, matched comparisons, revisions, or two measurements of the same object. Retain the case identifier so the relation remains inspectable in the data table."
+      ],
+      "goals": ["Inspect individual change", "Preserve matched identity"],
+      "mechanisms": ["Pairing corresponding observations", "Computing signed differences"],
+      "tags": ["data-visualization", "comparison", "paired-data"],
+      "related_patterns": [
+        "dataviz-keep-individual-observations-visible",
+        "dataviz-plot-variables-together"
+      ],
+      "not_ideal_when": [
+        "Pairs must be genuinely matched. Connecting unrelated cases creates a false relationship. Difference plots make change easy to compare but hide starting levels, so preserve the original values nearby. These four fictional pairs do not establish that an intervention caused their changes."
+      ],
+      "example_user_queries": [
+        "How can I show which participants improved?",
+        "The averages hide people whose scores declined.",
+        "Should I connect before and after measurements?",
+        "I want readers to compare changes directly.",
+        "Two groups have different starting values.",
+        "How can I retain matched identities in a chart?",
+        "A difference chart hides the original levels.",
+        "Does this before and after comparison establish a cause?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-associations.html",
+        "https://observablehq.github.io/plot/marks/rule"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-paired-differences.html",
+        "reason": "Before/after pairs are 12/15, 18/16, 8/14, and 20/21. Their changes are +3, −2, +6, and +1 points; the mean change is +2. Matching preserves the identity of each case."
+      },
+      "article_words": 179
+    },
+    {
+      "id": "dataviz-show-the-distribution",
+      "title": "Show the Distribution",
+      "domain": "data-visualization",
+      "short_description": "Expose the shape and spread of observations when a typical value would hide important variation.",
+      "use_when": [
+        "Use this when readers need to understand typical experience, exceptional cases, skew, or the range behind an aggregate. Choose a representation that suits the number and kind of observations."
+      ],
+      "goals": ["Understand shape and spread", "Locate concentrations and tails"],
+      "mechanisms": ["Equal-width binning", "Retaining a mean reference"],
+      "tags": ["data-visualization", "distribution", "variation"],
+      "related_patterns": [
+        "dataviz-keep-individual-observations-visible",
+        "dataviz-show-uncertainty"
+      ],
+      "not_ideal_when": [
+        "Bin boundaries affect a histogram. Inspect other reasonable widths before treating a feature as robust, and label counts versus density. These twelve fictional cases illustrate a shape; they do not establish a stable population distribution. Uncertainty about an estimated mean is a separate question from variation among observations."
+      ],
+      "example_user_queries": [
+        "The average waiting time hides some very long waits.",
+        "How can I show variation behind a summary?",
+        "My data may have more than one cluster.",
+        "Should I use a histogram or just the mean?",
+        "The typical value does not describe our customers.",
+        "How much does the histogram bin width matter?",
+        "I need to see whether the data is skewed.",
+        "Are these error bars showing spread or uncertainty?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/histograms-density-plots.html",
+        "https://observablehq.github.io/plot/marks/rect"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-the-distribution.html",
+        "reason": "Twelve waiting times have a mean of 7 minutes, but range from 2 to 18. Four-minute bins contain 2, 6, 2, 1, and 1 cases. The same average conceals the tail."
+      },
+      "article_words": 190
+    },
+    {
+      "id": "dataviz-keep-individual-observations-visible",
+      "title": "Keep Individual Observations Visible",
+      "domain": "data-visualization",
+      "short_description": "Keep cases visible when group summaries conceal variation, repeated values, or unusual observations.",
+      "use_when": [
+        "Use this for small or moderate samples, matched cases, or questions where exceptions and subgroup structure matter. Showing the observations also lets readers see how much evidence supports a summary."
+      ],
+      "goals": ["Inspect variation behind summaries", "Recognize repeated and unusual cases"],
+      "mechanisms": ["Individual marks", "Displacement on a nonmeasurement axis"],
+      "tags": ["data-visualization", "distribution", "observations"],
+      "related_patterns": [
+        "dataviz-show-the-distribution",
+        "dataviz-expose-sample-size-and-coverage"
+      ],
+      "not_ideal_when": [
+        "Overlapping dots can conceal repeated values. Use controlled offsets, transparency, or another appropriate representation, and explain any displacement. Do not jitter a meaningful measurement axis carelessly. With very large datasets, a distribution or aggregate may communicate more clearly; retain access to underlying cases rather than forcing every mark into the foreground."
+      ],
+      "example_user_queries": [
+        "Two groups have the same average but feel different.",
+        "My summary chart hides unusual cases.",
+        "Can I show all observations instead of just bars?",
+        "Repeated values are hiding behind one another.",
+        "How should I display a very small sample?",
+        "Does a boxplot conceal the shape of my data?",
+        "Are the vertical offsets meaningful measurements?",
+        "When should individual dots give way to an aggregate?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/boxplots-violins.html",
+        "https://observablehq.github.io/plot/marks/dot"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-keep-individual-observations-visible.html",
+        "reason": "Group A contains 2, 4, 6, 8, and 10 minutes; B contains 5, 5, 6, 7, and 7. Both means are 6, while their spreads differ. Dot offsets separate duplicate values without changing their horizontal measurement."
+      },
+      "article_words": 193
+    },
+    {
+      "id": "dataviz-plot-variables-together",
+      "title": "Plot Variables Together",
+      "domain": "data-visualization",
+      "short_description": "Place matched variables on shared axes to reveal relationships among their paired observations.",
+      "use_when": [
+        "Use this when investigating whether two quantitative variables vary together, whether groups occupy different regions, or which cases depart from a relationship. Label units on both axes."
+      ],
+      "goals": ["Investigate an association", "Identify departures from a relationship"],
+      "mechanisms": ["Paired coordinate encoding", "Preserved case identity"],
+      "tags": ["data-visualization", "relationships", "quantitative-data"],
+      "related_patterns": [
+        "dataviz-show-paired-differences",
+        "dataviz-keep-individual-observations-visible"
+      ],
+      "not_ideal_when": [
+        "An association does not identify its cause. Selection, confounding, or a third variable could produce the observed pattern. Six fictional cases demonstrate an encoding, not a reliable population finding. Dense point clouds need overlap handling, and a fitted line should not replace inspection of the observations or imply unsupported predictions."
+      ],
+      "example_user_queries": [
+        "Do these two measurements move together?",
+        "Separate charts make the relationship hard to see.",
+        "How should I plot paired quantitative variables?",
+        "I need to identify cases that depart from a trend.",
+        "Does this scatterplot establish a causal relationship?",
+        "Can I retain participant identity in a scatterplot?",
+        "A fitted line hides the individual observations.",
+        "Should I split this relationship by relevant groups?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-associations.html",
+        "https://observablehq.github.io/plot/marks/dot"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-plot-variables-together.html",
+        "reason": "Practice hours 1, 2, 3, 4, 5, and 6 pair with 2, 3, 5, 4, 7, and 8 completed tasks. A scatterplot preserves each pair and reveals a generally rising association, without establishing causation."
+      },
+      "article_words": 192
+    },
+    {
+      "id": "dataviz-preserve-elapsed-time",
+      "title": "Preserve Elapsed Time",
+      "domain": "data-visualization",
+      "short_description": "Space time observations by their actual elapsed intervals when readers need to interpret timing and rate.",
+      "use_when": [
+        "Use elapsed spacing for irregular sampling, gaps in reporting, sensor readings, and time-dependent rates. Readers should be able to distinguish a long interval from a short one without inspecting a separate date list."
+      ],
+      "goals": ["Interpret rate of change", "Recognize unequal time intervals"],
+      "mechanisms": ["Continuous elapsed-time axis", "Preserved chronological order"],
+      "tags": ["data-visualization", "time-series", "irregular-sampling"],
+      "related_patterns": ["dataviz-distinguish-missing-from-zero", "dataviz-align-for-comparison"],
+      "not_ideal_when": [
+        "A connecting line guides the eye between observations; it does not show measurements taken inside the interval. Preserve visible gaps when continuity is unsupported. If equal spacing represents events or sequence positions intentionally, label that axis accordingly. Dates with time zones or daylight-saving changes also require a clear definition of elapsed time."
+      ],
+      "example_user_queries": [
+        "My time observations are not evenly spaced.",
+        "A chart makes a slow change look sudden.",
+        "Should missing dates occupy space on the axis?",
+        "How do I show an interval with no readings?",
+        "The same change happened over different durations.",
+        "Does connecting points imply we measured between them?",
+        "Can I use an event sequence instead of elapsed time?",
+        "How should I compare rates across irregular observations?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/time-series.html",
+        "https://observablehq.github.io/plot/marks/line"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-preserve-elapsed-time.html",
+        "reason": "Readings are 10, 14, 18, and 20 on days 0, 1, 8, and 9. The middle rise takes seven days; the first takes one. Equal gaps between all observations conceal that difference."
+      },
+      "article_words": 201
+    },
+    {
+      "id": "dataviz-show-parts-in-context",
+      "title": "Show Parts in Context",
+      "domain": "data-visualization",
+      "short_description": "Keep group totals available when shares and absolute contributions answer different questions.",
+      "use_when": [
+        "Use this for composition, survey results, market shares, or contributions from unequal groups. Decide whether readers need prevalence, workload, or both, then label the measure and denominator clearly."
+      ],
+      "goals": ["Compare shares and contributions", "Retain meaningful denominators"],
+      "mechanisms": ["Part-to-whole encoding", "Complementary counts and shares"],
+      "tags": ["data-visualization", "composition", "denominators"],
+      "related_patterns": [
+        "dataviz-align-for-comparison",
+        "dataviz-expose-sample-size-and-coverage"
+      ],
+      "not_ideal_when": [
+        "Parts must refer to a defined whole. Overlapping categories cannot simply be stacked as exclusive shares, and percentages can conceal changes in group size. Counts do not establish representative sampling or explain why groups differ. Stacked components without a shared baseline can also be difficult to compare precisely; use aligned shares when that comparison takes priority."
+      ],
+      "example_user_queries": [
+        "A larger percentage actually represents fewer people.",
+        "Should I show counts or percentages?",
+        "Groups have very different total sizes.",
+        "A composition chart hides how large each group is.",
+        "Which group contributes more cases overall?",
+        "Can overlapping categories be stacked into one whole?",
+        "My percentages add to more than one hundred.",
+        "How can I preserve the denominator beside each share?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-proportions.html",
+        "https://observablehq.github.io/plot/marks/bar"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-parts-in-context.html",
+        "reason": "A has 40 positive responses out of 100 (40%); B has 90 out of 300 (30%). A has the larger share, while B has the larger positive count. Both statements describe the same observations."
+      },
+      "article_words": 199
+    },
+    {
+      "id": "dataviz-small-multiples",
+      "title": "Small Multiples",
+      "domain": "data-visualization",
+      "short_description": "Repeat a consistent visual structure across subsets to compare patterns without excessive overlap.",
+      "use_when": [
+        "Use this when comparing distributions, trajectories, maps, or relationships across several groups. Repeat the visual grammar and keep panel ordering purposeful so readers learn the structure once."
+      ],
+      "goals": ["Compare subgroup patterns", "Reduce visual overlap"],
+      "mechanisms": ["Faceting into repeated panels", "Consistent scales and identity"],
+      "tags": ["data-visualization", "multiple-views", "faceting"],
+      "related_patterns": ["dataviz-align-for-comparison", "dataviz-label-directly"],
+      "not_ideal_when": [
+        "More panels consume space, especially on a phone. Show a manageable set or support filtering. Independent scales may help inspect shapes but weaken magnitude comparisons; make that choice explicit. Small multiples also separate marks that are useful to compare through direct coincidence, so an overlay can remain preferable for a small number of compatible series."
+      ],
+      "example_user_queries": [
+        "Too many lines overlap in one chart.",
+        "How can I compare a pattern across several groups?",
+        "Should I use one chart or repeated panels?",
+        "My panels use different scales and look misleading.",
+        "Readers keep losing track of individual trajectories.",
+        "How should I order small multiple panels?",
+        "A grid of charts becomes too long on a phone.",
+        "When is an overlay better than separate panels?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/multi-panel-figures.html",
+        "https://observablehq.github.io/plot/features/facets"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-small-multiples.html",
+        "reason": "North rises from 10 to 25, East falls from 25 to 10, and West rises from 12 to 24. Repeated panels use the same month and zero-to-35 scales to separate their trajectories."
+      },
+      "article_words": 192
+    },
+    {
+      "id": "dataviz-match-color-to-the-data",
+      "title": "Match Color to the Data",
+      "domain": "data-visualization",
+      "short_description": "Choose categorical, sequential, diverging, or cyclic color scales according to the variable being encoded.",
+      "use_when": [
+        "Use this whenever color carries meaning. First ask whether viewers need to distinguish identities, follow increasing magnitude, compare departures from a meaningful center, or read a repeating cycle. Keep the mapping consistent across related views."
+      ],
+      "goals": ["Represent the structure of a variable", "Maintain interpretable color meaning"],
+      "mechanisms": ["Categorical differentiation", "Sequential, diverging, or cyclic mapping"],
+      "tags": ["data-visualization", "color", "encoding"],
+      "related_patterns": ["dataviz-redundant-coding", "dataviz-highlight-the-relevant-contrast"],
+      "not_ideal_when": [
+        "A diverging midpoint needs a defensible meaning; the average of an arbitrary range is not automatically suitable. Limit categorical identities to a distinguishable set, and check contrast at the final size. Color alone may fail in grayscale or for some viewers, so supply labels or another usable cue. A palette cannot repair an unsuitable measure."
+      ],
+      "example_user_queries": [
+        "Should I use a sequential or diverging palette?",
+        "My categories look as though they have a rank.",
+        "What color scale works for positive and negative values?",
+        "How should I color directions that wrap around?",
+        "Does my color midpoint have a meaningful interpretation?",
+        "I need consistent colors across several charts.",
+        "Too many category colors are hard to distinguish.",
+        "A pretty palette makes the values harder to read."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/color-basics.html",
+        "https://observablehq.github.io/plot/features/scales"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-match-color-to-the-data.html",
+        "reason": "Categories need distinct identities; ordered values need a progression; deviations need a meaningful midpoint; directions wrap from 315 degrees back toward zero. This control changes the variable being illustrated, not just the palette."
+      },
+      "article_words": 195
+    },
+    {
+      "id": "dataviz-highlight-the-relevant-contrast",
+      "title": "Highlight the Relevant Contrast",
+      "domain": "data-visualization",
+      "short_description": "Emphasize the comparison that matters while preserving the evidence around it.",
+      "use_when": [
+        "Use this in explanations with a defined comparison, a selected case, or an exception that needs attention. Make the accompanying text identify why this particular item deserves emphasis for the current question."
+      ],
+      "goals": ["Direct attention to a relevant comparison", "Retain surrounding evidence"],
+      "mechanisms": ["Selective emphasis", "Visible comparison context"],
+      "tags": ["data-visualization", "attention", "explanation"],
+      "related_patterns": ["dataviz-label-directly", "dataviz-match-color-to-the-data"],
+      "not_ideal_when": [
+        "Highlighting can steer readers toward a flattering or alarming result. Preserve relevant context and avoid treating the chosen observation as automatically important. If many marks are highlighted, the distinction loses usefulness. Exploratory views may instead need neutral styling or reader-controlled selection. Ensure emphasized and background marks remain legible, with labels supplying meaning beyond color."
+      ],
+      "example_user_queries": [
+        "Readers do not know where to look first.",
+        "I want one comparison to stand out in a chart.",
+        "Highlighting everything makes nothing stand out.",
+        "Can I emphasize one category without hiding the others?",
+        "My chart is clear but the main finding is easy to miss.",
+        "How can I avoid cherry-picking through visual emphasis?",
+        "Should an exploratory chart highlight a preferred result?",
+        "The background observations have become too faint to read."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/color-pitfalls.html",
+        "https://observablehq.github.io/plot/marks/bar"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-highlight-the-relevant-contrast.html",
+        "reason": "Billing has 124 of 525 tickets. Highlighting it changes attention, not the counts, row order, or axis. All seven other categories remain available for comparison."
+      },
+      "article_words": 191
+    },
+    {
+      "id": "dataviz-label-directly",
+      "title": "Label Directly",
+      "domain": "data-visualization",
+      "short_description": "Place identifying text beside the marks it describes to reduce repeated legend lookup.",
+      "use_when": [
+        "Use direct labels for a manageable number of series, important observations, thresholds, or selected outliers. Place text where its association is unambiguous and preserve enough space for the words at the actual display size."
+      ],
+      "goals": ["Identify graphical marks efficiently", "Reduce legend lookup"],
+      "mechanisms": ["Spatial association of text and marks", "Connectors for displaced labels"],
+      "tags": ["data-visualization", "annotation", "legibility"],
+      "related_patterns": ["dataviz-small-multiples", "dataviz-redundant-coding"],
+      "not_ideal_when": [
+        "Label placement is part of the design, especially on a phone. Crowded text can be harder to decode than a compact key. When labels move away from a mark, use a clear connector. Do not silently move data points to accommodate words, and retain an equivalent account for viewers who cannot follow the visual association."
+      ],
+      "example_user_queries": [
+        "The reader keeps checking the legend to identify lines.",
+        "Can I put names beside their trajectories?",
+        "My endpoint labels overlap on a phone.",
+        "How should I label a selected outlier?",
+        "Moving labels makes it unclear which point they describe.",
+        "Should I label every point or only a subset?",
+        "The legend order does not match the chart.",
+        "Can direct labels reduce reliance on color?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/redundant-coding.html",
+        "https://observablehq.github.io/plot/marks/text"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-label-directly.html",
+        "reason": "North ends at 25, West at 24, and East at 10 units. Direct labels identify the lines near their endpoints; separate label positions avoid collisions between the neighboring North and West values."
+      },
+      "article_words": 201
+    },
+    {
+      "id": "dataviz-show-uncertainty",
+      "title": "Show Uncertainty",
+      "domain": "data-visualization",
+      "short_description": "Display a clearly defined uncertainty interval beside an estimate so precision is not silently assumed.",
+      "use_when": [
+        "Use this when estimates or predictions may otherwise appear exact, particularly when readers compare their precision or make a decision near a threshold. Select an uncertainty representation appropriate to the method and audience."
+      ],
+      "goals": [
+        "Interpret estimation precision",
+        "Distinguish uncertainty from observation spread"
+      ],
+      "mechanisms": ["Named confidence intervals", "Point and interval encoding"],
+      "tags": ["data-visualization", "uncertainty", "estimation"],
+      "related_patterns": [
+        "dataviz-expose-sample-size-and-coverage",
+        "dataviz-show-the-distribution"
+      ],
+      "not_ideal_when": [
+        "Label the interval method, level, and assumptions. Frequentist coverage concerns the procedure across repeated samples; it is not a 95% probability assigned to this fixed parameter after observing these cases. Independence and the sampling model matter. Intervals do not repair bias or missing coverage, and interval overlap alone is not a general test of a difference."
+      ],
+      "example_user_queries": [
+        "Two estimates look equally precise but use different sample sizes.",
+        "How should I show confidence intervals around a rate?",
+        "What do these error bars actually represent?",
+        "Readers treat our forecast as an exact number.",
+        "Is variation among cases the same as uncertainty about a mean?",
+        "Does overlapping uncertainty prove there is no difference?",
+        "How can I label interval assumptions clearly?",
+        "Will a narrow interval reveal sampling bias?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-uncertainty.html",
+        "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+        "https://observablehq.github.io/plot/marks/rule"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-uncertainty.html",
+        "reason": "Both samples estimate 70% positive responses. Seven of ten gives a Wilson 95% interval of about 39.7–89.2%; seventy of one hundred gives 60.4–78.1%. Equal point estimates need not have equal precision."
+      },
+      "article_words": 194
+    },
+    {
+      "id": "dataviz-distinguish-missing-from-zero",
+      "title": "Distinguish Missing from Zero",
+      "domain": "data-visualization",
+      "short_description": "Represent an unavailable measurement separately from an observed absence.",
+      "use_when": [
+        "Use this when reporting is incomplete, devices fail, categories are suppressed, or a source distinguishes absent values from actual zero activity. Carry the distinction through transformations as well as the final graphic."
+      ],
+      "goals": ["Preserve unknown values", "Avoid unsupported zero measurements"],
+      "mechanisms": ["Visible line gaps", "Distinct missing-value semantics"],
+      "tags": ["data-visualization", "data-quality", "missing-data"],
+      "related_patterns": [
+        "dataviz-preserve-elapsed-time",
+        "dataviz-expose-sample-size-and-coverage"
+      ],
+      "not_ideal_when": [
+        "A blank needs an explanation; viewers should not have to guess whether it means unavailable, not applicable, or zero. If you impute values, distinguish them from observations and explain the method. Connecting across a gap may suggest unsupported continuity. Also preserve genuine zero values: dropping them as though they were missing creates a different distortion."
+      ],
+      "example_user_queries": [
+        "Our chart turns unavailable values into zeros.",
+        "How can I show a day with no report?",
+        "Is a blank cell the same as no activity?",
+        "Should I connect a line across missing observations?",
+        "A reporting outage looks like a sudden decline.",
+        "How should estimated values differ from measurements?",
+        "My filtering code drops genuine zero values.",
+        "Readers cannot tell missing from not applicable."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/time-series.html",
+        "https://observablehq.github.io/plot/marks/line"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-distinguish-missing-from-zero.html",
+        "reason": "Monday reports 12, Tuesday 0, Wednesday is missing, Thursday 18, and Friday 15. The gap represents unavailable evidence; filling it with zero invents a measurement. Tuesday is a genuine observed zero."
+      },
+      "article_words": 199
+    },
+    {
+      "id": "dataviz-expose-sample-size-and-coverage",
+      "title": "Expose Sample Size and Coverage",
+      "domain": "data-visualization",
+      "short_description": "Keep respondent counts and population coverage visible beside percentages and other summaries.",
+      "use_when": [
+        "Use this when comparing rates, averages, groups of unequal size, response summaries, or results with incomplete follow-up. Name what the denominator includes and which population the result is intended to describe."
+      ],
+      "goals": ["Interpret supporting evidence", "Recognize incomplete population coverage"],
+      "mechanisms": ["Visible numerators and denominators", "Separate response-coverage counts"],
+      "tags": ["data-visualization", "evidence", "sample-size", "coverage"],
+      "related_patterns": ["dataviz-show-uncertainty", "dataviz-show-parts-in-context"],
+      "not_ideal_when": [
+        "A large sample does not guarantee representative coverage, and complete response among invitees does not make the invitation process representative. Counts alone do not quantify uncertainty. Keep unknown or excluded cases explicit rather than silently removing them from the denominator. Avoid presenting a minimum sample-size rule as a guarantee of a trustworthy estimate."
+      ],
+      "example_user_queries": [
+        "Two identical percentages are based on different numbers of people.",
+        "How many cases support each estimate?",
+        "Our survey has many invited people who did not respond.",
+        "Does a large sample guarantee a representative result?",
+        "Which denominator should I report beside a rate?",
+        "Readers cannot see that one group has only four observations.",
+        "Should excluded cases disappear from the denominator?",
+        "Is sample size the same as population coverage?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/boxplots-violins.html",
+        "https://observablehq.github.io/plot/marks/dot"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-expose-sample-size-and-coverage.html",
+        "reason": "Both groups report 75% positive. A has 3 positives among 4 respondents, with 4 of 10 invitees responding. B has 75 among 100, with all 100 invitees responding. Sample size and response coverage describe different limitations."
+      },
+      "article_words": 196
+    },
+    {
+      "id": "dataviz-redundant-coding",
+      "title": "Redundant Coding",
+      "domain": "data-visualization",
+      "short_description": "Give essential distinctions more than one visible carrier so they remain usable without color identification.",
+      "use_when": [
+        "Use redundant cues for important categories, statuses, selected items, or comparisons that may be viewed in grayscale or by people who cannot distinguish the chosen colors. Choose an additional channel appropriate to the marks."
+      ],
+      "goals": ["Preserve essential category distinctions", "Support reproduction without hue"],
+      "mechanisms": ["Parallel color and shape cues", "Consistent keys"],
+      "tags": ["data-visualization", "accessibility", "redundancy"],
+      "related_patterns": ["dataviz-match-color-to-the-data", "dataviz-label-directly"],
+      "not_ideal_when": [
+        "Grayscale is a useful reproduction check, not a simulation of every color-vision difference. Shapes need sufficient size and separation, and the key must preserve the same mapping. Too many symbol types become another decoding problem. Redundancy should reinforce the intended meaning rather than assign unrelated variables to cues that readers naturally interpret together."
+      ],
+      "example_user_queries": [
+        "My chart relies entirely on color to identify groups.",
+        "The categories become indistinguishable in grayscale.",
+        "How can I add shapes without changing the data?",
+        "Will a colorblind-friendly palette be enough?",
+        "Our chart will be printed in black and white.",
+        "The symbols are too small to distinguish.",
+        "Should shape and color encode the same category?",
+        "Does grayscale simulate every color-vision difference?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/redundant-coding.html",
+        "https://observablehq.github.io/plot/marks/dot"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-redundant-coding.html",
+        "reason": "North, East, and West keep the same positions. Circles, squares, and triangles provide an additional identification channel that remains available in grayscale. Grayscale is a reproduction test, not a simulation of every color-vision difference."
+      },
+      "article_words": 199
+    },
+    {
+      "id": "dataviz-provide-an-equivalent-text-account",
+      "title": "Provide an Equivalent Text Account",
+      "domain": "data-visualization",
+      "short_description": "Accompany a visual with a usable textual account of its subject, findings, and interpretive limits.",
+      "use_when": [
+        "Use this for charts, maps, and diagrams whose meaning matters to the surrounding content. Provide a short identification and a longer account when the graphic contains substantial information. Make the account available to everyone when it improves understanding."
+      ],
+      "goals": ["Communicate findings without sight of the chart", "Preserve interpretive context"],
+      "mechanisms": ["Textual account of essential relationships", "Accessible underlying table"],
+      "tags": ["data-visualization", "accessibility", "text-alternatives"],
+      "related_patterns": ["dataviz-label-directly", "dataviz-expose-sample-size-and-coverage"],
+      "not_ideal_when": [
+        "A title alone is rarely an equivalent description. Describe meaningful relationships and qualifications without reproducing every decorative detail. A table preserves values but may still leave the main relationship unexplained. Keep the account synchronized with filters and updates, and avoid claiming causes or conclusions that the visual evidence does not support."
+      ],
+      "example_user_queries": [
+        "What should the alternative text for this chart say?",
+        "A chart title does not explain the finding.",
+        "How can readers understand the graphic without seeing it?",
+        "Should I provide a table as well as a summary?",
+        "Our chart changes but the description stays the same.",
+        "How detailed should a long chart description be?",
+        "I need to state the limits of a visual finding.",
+        "Can a text account help readers beyond screen-reader users?"
+      ],
+      "sources": [
+        "https://www.w3.org/WAI/tutorials/images/complex/",
+        "https://clauswilke.com/dataviz/figure-titles-captions.html",
+        "https://observablehq.github.io/plot/features/accessibility"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-provide-an-equivalent-text-account.html",
+        "reason": "Across eight support categories in one fictional week, Billing has the most tickets: 124 of 525 (23.6%). Subscription follows at 97; Feedback has the fewest at 28. Counts describe workload, not severity or time spent."
+      },
+      "article_words": 202
+    },
+    {
+      "id": "dataviz-normalize-by-exposure",
+      "title": "Normalize by Exposure",
+      "domain": "data-visualization",
+      "short_description": "Divide by a relevant exposure when groups have different opportunities for events to occur.",
+      "use_when": [
+        "Use rates to compare places of different population sizes, failures across unequal operating hours, or purchases across different numbers of visits. Choose the denominator that represents the opportunity relevant to the question, and state its units and reporting period."
+      ],
+      "goals": [
+        "Divide by a relevant exposure when groups have different opportunities for events to occur."
+      ],
+      "mechanisms": ["Measure: Counts, Per 100,000 people"],
+      "tags": ["data-visualization", "normalization", "rates", "comparison"],
+      "related_patterns": [
+        "dataviz-expose-sample-size-and-coverage",
+        "dataviz-show-parts-in-context"
+      ],
+      "not_ideal_when": [
+        "A rate is only as meaningful as its denominator. Resident population may poorly represent exposure in a commuter district. Small denominators can produce unstable rates, and differences in age or other composition can remain. Keep counts nearby when readers also need workload; normalization alone does not establish comparability."
+      ],
+      "example_user_queries": [
+        "Our largest city always has the most incidents.",
+        "How do I compare failures across machines with different running hours?",
+        "Should I show counts or rates?",
+        "These regions have very different populations.",
+        "The busiest service has the most complaints.",
+        "What denominator should I use for this comparison?",
+        "How can I keep workload visible beside a rate?",
+        "A small district has an unexpectedly high incident rate."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/geospatial-data.html",
+        "https://observablehq.github.io/plot/marks/bar"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-normalize-by-exposure.html",
+        "reason": "North has 240 incidents among 120,000 people (200 per 100,000); Central has 180 among 45,000 (400); South has 90 among 90,000 (100). North has the most incidents; Central has the highest population rate."
+      },
+      "article_words": 193
+    },
+    {
+      "id": "dataviz-index-to-a-common-start",
+      "title": "Index to a Common Start",
+      "domain": "data-visualization",
+      "short_description": "Give each series the same starting index to compare proportional growth from different initial levels.",
+      "use_when": [
+        "Use an index when comparing growth across services, prices, output, or other positive measures that start at different magnitudes. State the baseline period explicitly, and retain the original values for readers who need absolute scale."
+      ],
+      "goals": [
+        "Give each series the same starting index to compare proportional growth from different initial levels."
+      ],
+      "mechanisms": ["Measure: Original values, Start = 100"],
+      "tags": ["data-visualization", "indexing", "growth", "time"],
+      "related_patterns": ["dataviz-normalize-by-exposure", "dataviz-preserve-elapsed-time"],
+      "not_ideal_when": [
+        "An index conceals the starting amounts. Baseline choice can strongly affect the impression, especially if the first period is unusual. A zero baseline cannot be used as a divisor; negative baselines complicate interpretation. Equal indexed growth does not imply equal additional users, resources, or contribution to the total."
+      ],
+      "example_user_queries": [
+        "I want to compare growth from very different starting sizes.",
+        "The small series looks flat next to the big one.",
+        "Which service grew fastest in percentage terms?",
+        "How can all my lines begin at the same level?",
+        "Should I set the first period to one hundred?",
+        "The ranking changes when I change the baseline date.",
+        "How do I retain original values beside indexed growth?",
+        "Two groups doubled but added very different amounts."
+      ],
+      "sources": [
+        "https://observablehq.github.io/plot/transforms/normalize",
+        "https://observablehq.github.io/plot/marks/line"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-index-to-a-common-start.html",
+        "reason": "Atlas grows from 1,000 to 1,400 users (+40%); Birch grows from 100 to 200 (+100%). An index of 100 at the first quarter reveals relative growth while concealing absolute scale."
+      },
+      "article_words": 191
+    },
+    {
+      "id": "dataviz-resolve-overplotting",
+      "title": "Resolve Overplotting",
+      "domain": "data-visualization",
+      "short_description": "Reveal multiplicity when several observations occupy the same visual position.",
+      "use_when": [
+        "Use this when rounded measurements, dense scatterplots, or repeated responses conceal how many cases are present. Choose a representation according to whether readers need individual identity, approximate concentration, or explicit aggregate counts."
+      ],
+      "goals": ["Reveal multiplicity when several observations occupy the same visual position."],
+      "mechanisms": ["Display: Plain points, Transparency, Jitter, Hexagonal bins"],
+      "tags": ["data-visualization", "overplotting", "density", "observations"],
+      "related_patterns": [
+        "dataviz-keep-individual-observations-visible",
+        "dataviz-show-the-distribution"
+      ],
+      "not_ideal_when": [
+        "Jitter moves displayed positions and must remain small and clearly explained. Transparency can saturate, making different large counts look alike. Binning depends on bin size and replaces exact locations with regions; these screen-space hexagons can regroup on resize. Keep the table and text account available, and avoid treating an offset as a more precise measurement."
+      ],
+      "example_user_queries": [
+        "I suspect several points are hiding behind each other.",
+        "My scatterplot contains thousands of records but looks sparse.",
+        "Repeated survey answers lie exactly on top of one another.",
+        "Should I use transparency or jitter?",
+        "How can I show density without drawing every dot?",
+        "Dark points all look equally dense.",
+        "Does jitter change the measured value?",
+        "Can a binned chart preserve individual identities?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/overlapping-points.html",
+        "https://observablehq.github.io/plot/marks/dot"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-resolve-overplotting.html",
+        "reason": "Eighty observations occupy only five recorded coordinate pairs, with counts 18, 12, 25, 15, and 10. Transparency, deterministic offsets, and hexagonal counts reveal multiplicity in different ways. Offsets are display positions, not additional measurements."
+      },
+      "article_words": 186
+    },
+    {
+      "id": "dataviz-condition-on-groups",
+      "title": "Condition on Groups",
+      "domain": "data-visualization",
+      "short_description": "Inspect relationships within meaningful groups before interpreting the pooled pattern.",
+      "use_when": [
+        "Use this when cases come from different environments, populations, operating conditions, or periods. Compare a pooled relationship with justified subsets, using color, facets, or filters while keeping compatible axes."
+      ],
+      "goals": [
+        "Inspect relationships within meaningful groups before interpreting the pooled pattern."
+      ],
+      "mechanisms": ["Context: Pooled, Separate groups"],
+      "tags": ["data-visualization", "aggregation", "groups", "association"],
+      "related_patterns": ["dataviz-plot-variables-together", "dataviz-small-multiples"],
+      "not_ideal_when": [
+        "Do not invent groups solely to obtain a preferred result. Small subsets may be unstable, and further differences may remain within each group. A reversal like this illustrates an aggregation problem; it does not identify a causal explanation. Conditioning can itself distort causal interpretation when the chosen variable is inappropriate."
+      ],
+      "example_user_queries": [
+        "The overall trend disagrees with every subgroup.",
+        "Should I split my scatterplot by context?",
+        "Our teams work under different conditions.",
+        "An aggregate relationship disappears when I separate regions.",
+        "How can I show a reversal without moving the observations?",
+        "Does this association hold within each group?",
+        "Which groups should I compare before pooling data?",
+        "A pooled trend seems misleading."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-associations.html",
+        "https://observablehq.github.io/plot/marks/linear-regression"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-condition-on-groups.html",
+        "reason": "Context A pairs hours 1, 2, 3 with scores 8, 9, 10. Context B pairs hours 7, 8, 9 with scores 2, 3, 4. The pooled association is negative, although the association within each context is positive. Neither view establishes causation."
+      },
+      "article_words": 193
+    },
+    {
+      "id": "dataviz-show-the-smooth-with-the-raw",
+      "title": "Show the Smooth with the Raw",
+      "domain": "data-visualization",
+      "short_description": "Keep observations visible beside a smooth so readers can inspect what the summary suppresses.",
+      "use_when": [
+        "Use this for noisy time series, repeated measurements, or relationships where a trend helps orient the reader but individual departures still matter. Explain the smoothing method, window, alignment, and handling of boundaries."
+      ],
+      "goals": [
+        "Keep observations visible beside a smooth so readers can inspect what the summary suppresses."
+      ],
+      "mechanisms": ["Evidence: Smooth only, Smooth + raw"],
+      "tags": ["data-visualization", "smoothing", "time", "observations"],
+      "related_patterns": [
+        "dataviz-preserve-elapsed-time",
+        "dataviz-keep-individual-observations-visible"
+      ],
+      "not_ideal_when": [
+        "A smooth is a derived summary, not an extra observation or a forecast. Centered windows use subsequent observations, so they are unsuitable for depicting information available in real time. Larger windows can hide abrupt changes. Here the samples are equally spaced; irregular timestamps need a method that respects elapsed time rather than silently averaging a fixed number of rows."
+      ],
+      "example_user_queries": [
+        "My trend line hides a sharp drop.",
+        "How much smoothing should I apply?",
+        "Can readers see the observations behind this curve?",
+        "The moving average changes when I change its window.",
+        "Why does a centered average stop before the last day?",
+        "Should I use a trailing or centered average?",
+        "Our measurements are not equally spaced.",
+        "A smooth curve is being mistaken for actual readings."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/visualizing-trends.html",
+        "https://observablehq.github.io/plot/marks/line"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-the-smooth-with-the-raw.html",
+        "reason": "Daily readings are 12, 18, 11, 21, 14, 25, 3, 26, 20, 30, 23, 33, 27, 36, 31 units. A centered moving average summarizes the trend; the day-seven reading of 3 remains important. Only full windows are calculated."
+      },
+      "article_words": 202
+    },
+    {
+      "id": "dataviz-decompose-the-change",
+      "title": "Decompose the Change",
+      "domain": "data-visualization",
+      "short_description": "Connect a starting total to an ending total through contributions that reconcile.",
+      "use_when": [
+        "Use this for inventories, budgets, workload, or other additive balances when readers need to understand the components behind a net change. Include both increases and decreases, with compatible units and a clear period."
+      ],
+      "goals": [
+        "Connect a starting total to an ending total through contributions that reconcile."
+      ],
+      "mechanisms": ["Explanation: Start and end, Show contributions"],
+      "tags": ["data-visualization", "change", "contributions", "reconciliation"],
+      "related_patterns": [
+        "dataviz-show-paired-differences",
+        "dataviz-compare-against-a-reference"
+      ],
+      "not_ideal_when": [
+        "The accounting must close: omitted or overlapping contributions break the explanation. This example treats new, resolved, and reopened events as separate signed movements; the same case may appear in different movements over time. The display explains arithmetic, not causation. Order can suggest a sequence, so distinguish a real chronology from a convenient arrangement of additive components."
+      ],
+      "example_user_queries": [
+        "Which contributions explain the change in our total?",
+        "The net increase hides large additions and removals.",
+        "How do I connect opening and closing balances?",
+        "Our waterfall does not reconcile.",
+        "Should every contribution start at zero?",
+        "Readers confuse a total with a signed change.",
+        "How can I show resolved and reopened cases together?",
+        "Does a breakdown explain why the change happened?"
+      ],
+      "sources": [
+        "https://observablehq.github.io/plot/marks/rect",
+        "https://observablehq.github.io/plot/marks/rect"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-decompose-the-change.html",
+        "reason": "Workload starts at 100, adds 40 new cases, removes 25 resolved cases, and adds 15 reopened cases, ending at 130. Contributions reconcile exactly: 100 + 40 − 25 + 15 = 130. This arithmetic does not establish causes."
+      },
+      "article_words": 199
+    },
+    {
+      "id": "dataviz-reveal-multiplicative-differences",
+      "title": "Reveal Multiplicative Differences",
+      "domain": "data-visualization",
+      "short_description": "Use logarithmic position when equal ratios matter more than equal additive differences.",
+      "use_when": [
+        "Use this for positive values spanning several orders of magnitude, proportional growth, or comparisons in which a doubling should have the same visual meaning at different levels. Clearly identify the logarithmic scale and label useful original values."
+      ],
+      "goals": [
+        "Use logarithmic position when equal ratios matter more than equal additive differences."
+      ],
+      "mechanisms": ["Horizontal scale: Linear, Logarithmic"],
+      "tags": ["data-visualization", "logarithms", "scales", "ratios"],
+      "related_patterns": ["dataviz-index-to-a-common-start", "dataviz-align-for-comparison"],
+      "not_ideal_when": [
+        "An ordinary log scale cannot include zero or negative measurements. Do not silently discard them or add an arbitrary constant to make them fit. Equal visual gaps no longer mean equal absolute gains, and readers may need an explicit example. A straight trajectory on a log-scaled time plot indicates multiplicative growth, not a constant additive increase."
+      ],
+      "example_user_queries": [
+        "My values span several orders of magnitude.",
+        "The smallest measurements disappear on the axis.",
+        "I want a doubling to have the same visual distance everywhere.",
+        "Should I use a logarithmic scale?",
+        "Can I put zero on this log axis?",
+        "Equal gaps seem to represent different numeric changes.",
+        "How do I label original units on a log plot?",
+        "Why does a growth curve become straight after rescaling?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/coordinate-systems-axes.html",
+        "https://observablehq.github.io/plot/marks/dot"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-reveal-multiplicative-differences.html",
+        "reason": "Measurements are 1, 10, 100, and 1,000 units. Equal tenfold ratios occupy equal distances on a logarithmic axis. On a linear axis, equal distances represent equal additive differences. Zero and negative values are not supported by this log scale."
+      },
+      "article_words": 207
+    },
+    {
+      "id": "dataviz-show-the-cumulative-distribution",
+      "title": "Show the Cumulative Distribution",
+      "domain": "data-visualization",
+      "short_description": "Accumulate observations into a share to answer questions about thresholds directly.",
+      "use_when": [
+        "Use this when readers ask how many cases meet a limit, what share exceeds a waiting time, or which value contains a chosen proportion of observations. State whether the threshold includes equality and which population supplies the denominator."
+      ],
+      "goals": [
+        "Accumulate observations into a share to answer questions about thresholds directly."
+      ],
+      "mechanisms": ["Representation: Histogram, Cumulative"],
+      "tags": ["data-visualization", "distribution", "thresholds", "cumulative"],
+      "related_patterns": [
+        "dataviz-show-the-distribution",
+        "dataviz-expose-sample-size-and-coverage"
+      ],
+      "not_ideal_when": [
+        "A cumulative curve can be less familiar than a histogram, so accompany it with a plain-language readout. Its slope is not a count at one exact value. Finite observations do not describe the entire population without uncertainty. Missing or censored waiting times require explicit treatment; silently excluding unfinished waits can make service appear faster."
+      ],
+      "example_user_queries": [
+        "What percentage of waits are under this limit?",
+        "How many requests meet our response-time threshold?",
+        "A histogram makes the percentile hard to read.",
+        "What fraction exceeds ten minutes?",
+        "Should equal values count toward the threshold?",
+        "I want to compare service limits interactively.",
+        "Can I show a distribution without choosing bins?",
+        "Some waits are unfinished when we collect the data."
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/ecdf-qq.html",
+        "https://observablehq.github.io/plot/marks/line"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-the-cumulative-distribution.html",
+        "reason": "Waiting times are 2, 3, 4, 4, 5, 5, 6, 7, 8, 10, 12, and 18 minutes. Seven of twelve waits (58.3%) are at most six minutes. The cumulative curve includes ties and reaches 100% at eighteen minutes."
+      },
+      "article_words": 202
+    },
+    {
+      "id": "dataviz-align-around-an-event",
+      "title": "Align Around an Event",
+      "domain": "data-visualization",
+      "short_description": "Shift each timeline to a shared event origin to compare its surrounding trajectory.",
+      "use_when": [
+        "Use this to compare launches, repairs, admissions, outages, or other episodes occurring at different dates. Define the event precisely and show sufficient context before and after it. Preserve calendar dates in supporting data when wider conditions matter."
+      ],
+      "goals": [
+        "Shift each timeline to a shared event origin to compare its surrounding trajectory."
+      ],
+      "mechanisms": ["Time origin: Calendar day, Days since launch"],
+      "tags": ["data-visualization", "events", "time", "alignment"],
+      "related_patterns": ["dataviz-preserve-elapsed-time", "dataviz-compare-cohorts-at-equal-age"],
+      "not_ideal_when": [
+        "Alignment alone cannot show that the event caused a change. Calendar conditions, selection, prior trends, and different event definitions may explain apparent similarities. Repeated events need a rule for assigning observations to episodes. Unequal follow-up should appear as missing coverage, not invented values. Avoid averaging aligned trajectories without also showing how much evidence supports each relative time."
+      ],
+      "example_user_queries": [
+        "Our launches happened on different dates.",
+        "How can I compare recovery after separate outages?",
+        "I want every timeline to start at the same event.",
+        "What happened just before and after each release?",
+        "Calendar dates obscure a shared trajectory.",
+        "Does aligning an intervention establish its effect?",
+        "Some episodes have shorter follow-up.",
+        "Which launch should anchor a repeated event?"
+      ],
+      "sources": ["https://timeviz.net/", "https://observablehq.github.io/plot/marks/line"],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-align-around-an-event.html",
+        "reason": "Atlas launches on calendar day 4; Birch on day 10. Both are observed from two days before to three days after launch. Aligning launch at zero reveals similarly rising trajectories, without demonstrating that launch caused the changes."
+      },
+      "article_words": 211
+    },
+    {
+      "id": "dataviz-compare-cohorts-at-equal-age",
+      "title": "Compare Cohorts at Equal Age",
+      "domain": "data-visualization",
+      "short_description": "Compare groups at the same elapsed stage when they entered a process at different times.",
+      "use_when": [
+        "Use this for customer retention, learning progress, equipment survival, or groups entering a process at different dates. Define membership once, state the starting denominator, and compare only ages supported by observations."
+      ],
+      "goals": [
+        "Compare groups at the same elapsed stage when they entered a process at different times."
+      ],
+      "mechanisms": ["Time origin: Calendar month, Months since signup"],
+      "tags": ["data-visualization", "cohorts", "retention", "time"],
+      "related_patterns": [
+        "dataviz-align-around-an-event",
+        "dataviz-expose-sample-size-and-coverage"
+      ],
+      "not_ideal_when": [
+        "Equal age does not guarantee equivalent conditions. Cohorts may differ in composition or experience different calendar events. Recent cohorts often have incomplete follow-up; leave unavailable ages empty rather than interpreting them as zero retention. Specify whether returning members count as retained and whether the denominator stays fixed. In real survival data, censoring may require methods beyond dividing an observed count by the original cohort size."
+      ],
+      "example_user_queries": [
+        "Newer customer groups have had less time to leave.",
+        "How do I compare retention across signup months?",
+        "The calendar view mixes new and mature cohorts.",
+        "Should cohort percentages use the initial group size?",
+        "Our newest group has no six-month result yet.",
+        "Can I compare learning progress at the same stage?",
+        "What happens when a customer leaves and returns?",
+        "Different cohorts experienced different calendar conditions."
+      ],
+      "sources": ["https://timeviz.net/", "https://observablehq.github.io/plot/marks/line"],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-compare-cohorts-at-equal-age.html",
+        "reason": "January retention is 100%, 70%, 55%, 45%; March retention is 100%, 80%, 65%, 60%. Both cohorts are observed to age three months. At equal age, March retains more users, although calendar conditions and group composition may differ."
+      },
+      "article_words": 211
+    },
+    {
+      "id": "dataviz-align-repeating-cycles",
+      "title": "Align Repeating Cycles",
+      "domain": "data-visualization",
+      "short_description": "Align observations by their position within a recurring cycle to expose repeated structure.",
+      "use_when": [
+        "Use this for daily demand, weekday activity, seasonal measurements, or repeating operational schedules. Choose a cycle supported by the process, and retain a continuous view when longer-term change or sequence matters."
+      ],
+      "goals": [
+        "Align observations by their position within a recurring cycle to expose repeated structure."
+      ],
+      "mechanisms": ["Layout: Continuous days, Aligned weeks"],
+      "tags": ["data-visualization", "cycles", "seasonality", "time"],
+      "related_patterns": ["dataviz-preserve-elapsed-time", "dataviz-small-multiples"],
+      "not_ideal_when": [
+        "Cycle boundaries are a design choice. Holidays, variable-length months, daylight-saving changes, and local time zones can disrupt correspondence. Repeated-looking shapes do not establish a stable seasonal mechanism. Averaging cycles can hide exceptions or changing levels. Keep individual cycles visible when those differences matter, and do not join the end of one cycle to its beginning unless the boundary is meaningful."
+      ],
+      "example_user_queries": [
+        "Is there a recurring weekday pattern?",
+        "I want to compare Monday with Monday across weeks.",
+        "Weekend demand keeps disappearing inside a long timeline.",
+        "Are these seasonal peaks consistent each year?",
+        "Can I preserve individual weeks instead of averaging them?",
+        "How should I handle holidays in a weekly comparison?",
+        "The cycle looks different after the clocks change.",
+        "Where should a repeating period begin?"
+      ],
+      "sources": ["https://timeviz.net/", "https://observablehq.github.io/plot/marks/line"],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-align-repeating-cycles.html",
+        "reason": "Each of three weeks has lower weekend demand and a midweek peak. Aligning Monday with Monday reveals the recurring weekly pattern while preserving each week as a separate series. The full timeline retains the sequence between weeks."
+      },
+      "article_words": 202
+    },
+    {
+      "id": "dataviz-show-duration-explicitly",
+      "title": "Show Duration Explicitly",
+      "domain": "data-visualization",
+      "short_description": "Represent an activity from its start to its finish when length and overlap matter.",
+      "use_when": [
+        "Use this for schedules, treatment episodes, sessions, running jobs, or any process where duration is part of the observation. Distinguish point events from intervals and label the time origin, unit, and endpoint conventions."
+      ],
+      "goals": [
+        "Represent an activity from its start to its finish when length and overlap matter."
+      ],
+      "mechanisms": ["Representation: Start times, Start to finish"],
+      "tags": ["data-visualization", "duration", "intervals", "time"],
+      "related_patterns": ["dataviz-preserve-elapsed-time", "dataviz-overview-plus-detail"],
+      "not_ideal_when": [
+        "An interval shows elapsed time, which may include waiting and pauses rather than continuous effort. Overlap does not prove that tasks share resources or depend on one another. Do not invent finish times for ongoing activities; mark an open endpoint instead. Dense schedules may need grouping or filtering. A display organized by task also differs from a resource calendar, even when both use horizontal bars."
+      ],
+      "example_user_queries": [
+        "Start markers hide how long each task takes.",
+        "Which activities overlap?",
+        "How can I show running jobs that have not finished?",
+        "Does this bar represent effort or elapsed time?",
+        "I need to compare session lengths on a common timeline.",
+        "A schedule looks sequential but the tasks overlap.",
+        "Should I use intervals instead of event dots?",
+        "Some activities include long pauses."
+      ],
+      "sources": ["https://timeviz.net/", "https://observablehq.github.io/plot/marks/bar"],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-duration-explicitly.html",
+        "reason": "Intake runs from hour 0 to 2, Review from 1 to 5, Build from 3 to 8, and Check from 7 to 9. Start markers omit duration. Intervals reveal overlaps, including Review and Build between hours 3 and 5."
+      },
+      "article_words": 212
+    },
+    {
+      "id": "dataviz-preserve-meaningful-geography",
+      "title": "Preserve Meaningful Geography",
+      "domain": "data-visualization",
+      "short_description": "Keep real spatial relationships visible when adjacency and location are part of the question.",
+      "use_when": [
+        "Use a map when readers need to understand location, neighboring areas, routes, or spatial concentrations. Pair it with an aligned comparison when ranking matters too. Choose a projection and geographic detail appropriate to the question."
+      ],
+      "goals": [
+        "Keep real spatial relationships visible when adjacency and location are part of the question."
+      ],
+      "mechanisms": ["View: Ranked values, Geographic context"],
+      "tags": ["data-visualization", "geography", "maps", "spatial"],
+      "related_patterns": ["dataviz-normalize-by-exposure", "dataviz-sort-to-reveal-order"],
+      "not_ideal_when": [
+        "A region’s area is not its population, and large shapes can dominate attention. Use appropriate denominators for shaded rates; counts may suit proportional symbols instead. Administrative boundaries can conceal local variation. Adjacency alone does not identify a shared cause, and a synthetic teaching map cannot support conclusions about any real place. Always state the location and spatial unit represented."
+      ],
+      "example_user_queries": [
+        "Does this high value form a geographic cluster?",
+        "A ranked bar chart hides which regions are neighbors.",
+        "Should this comparison be a map?",
+        "Large regions dominate the choropleth.",
+        "I need to compare location and magnitude together.",
+        "Should I shade counts or rates by region?",
+        "The administrative boundaries hide local differences.",
+        "What geographic detail does the reader actually need?"
+      ],
+      "sources": [
+        "https://clauswilke.com/dataviz/geospatial-data.html",
+        "https://observablehq.github.io/plot/marks/geo"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-preserve-meaningful-geography.html",
+        "reason": "The west-coast districts Bay, Cove, and Delta have rates 80, 70, and 60 per 1,000; inland Elm, Fern, and Grove have 20, 30, and 25. Ranking reveals the largest rate; geographic positions reveal the coastal cluster. All values and boundaries are fictional."
+      },
+      "article_words": 209
+    },
+    {
+      "id": "dataviz-show-intersections-explicitly",
+      "title": "Show Intersections Explicitly",
+      "domain": "data-visualization",
+      "short_description": "Show exact category combinations when people or items can belong to several sets.",
+      "use_when": [
+        "Use this for overlapping interests, product usage, attributes, or diagnostic tags when combinations matter more than individual set totals. State whether intersections are exact memberships or inclusive overlaps."
+      ],
+      "goals": [
+        "Show exact category combinations when people or items can belong to several sets."
+      ],
+      "mechanisms": ["Counts: Category totals, Exact intersections"],
+      "tags": ["data-visualization", "sets", "intersections", "membership"],
+      "related_patterns": ["dataviz-show-parts-in-context", "dataviz-filter-to-focus"],
+      "not_ideal_when": [
+        "“A and B” can mean either AB alone or every member shared by A and B, including ABC. Label that distinction. Combinations increase rapidly with more sets; filtering or ranking may help, but disclose omitted intersections and people outside all sets. This example contains no outside-all group. Keep counts alongside the membership matrix so dot patterns do not become a puzzle without quantities."
+      ],
+      "example_user_queries": [
+        "The category counts add to more people than we have.",
+        "How many users belong to both groups?",
+        "I need to show overlapping memberships.",
+        "Does this intersection include the three-way overlap?",
+        "A Venn diagram is difficult to compare quantitatively.",
+        "Which exact combinations are most common?",
+        "Some people belong to none of the listed sets.",
+        "How do I avoid counting the same person twice?"
+      ],
+      "sources": [
+        "https://www.visdesignlab.net/publications/2014_infovis_upset/",
+        "https://observablehq.github.io/plot/marks/cell"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-show-intersections-explicitly.html",
+        "reason": "Exact memberships are A only 4, B only 3, C only 2, AB only 5, AC only 1, BC only 2, ABC 3. These mutually exclusive intersections sum to 20 people. Category totals A=13, B=13, C=8 overlap and sum to 34 memberships."
+      },
+      "article_words": 208
+    },
+    {
+      "id": "dataviz-expose-parent-child-structure",
+      "title": "Expose Parent–Child Structure",
+      "domain": "data-visualization",
+      "short_description": "Preserve parent links when membership within a hierarchy carries meaning.",
+      "use_when": [
+        "Use this for catalogues, organizational structures, file systems, taxonomies, or nested classifications with a clear parent relation. Start at a useful depth and allow expansion when showing everything would overwhelm the reader. Preserve a visible path back to broader context."
+      ],
+      "goals": ["Preserve parent links when membership within a hierarchy carries meaning."],
+      "mechanisms": ["Depth: Top level, All levels"],
+      "tags": ["data-visualization", "hierarchy", "trees", "structure"],
+      "related_patterns": ["dataviz-show-parts-in-context", "dataviz-overview-plus-detail"],
+      "not_ideal_when": [
+        "A tree assumes one parent per node. Shared ownership, cross-listings, and cycles require additional links or a different representation. Do not imply that equally spaced siblings have equal size or importance. Very deep hierarchies can become difficult to navigate, especially on narrow screens. Collapsing a branch should conceal its children explicitly, rather than making an incomplete structure look complete."
+      ],
+      "example_user_queries": [
+        "Which category does this item belong under?",
+        "My flat list hides the hierarchy.",
+        "How do I show an item’s path to the root?",
+        "The entire catalogue is too large to display at once.",
+        "Can I expand one level at a time?",
+        "Some items have more than one parent.",
+        "Readers interpret branch length as a measurement.",
+        "I need to preserve context inside a nested structure."
+      ],
+      "sources": [
+        "https://idl.uw.edu/papers/visualization-zoo",
+        "https://observablehq.github.io/plot/marks/tree"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-expose-parent-child-structure.html",
+        "reason": "The catalogue contains Research (Field, Desk) and Delivery (Build, Support). A tree preserves the parent of each item. Expanding the hierarchy adds the four leaves while retaining the two branches and root. Edge lengths do not encode quantity."
+      },
+      "article_words": 202
+    },
+    {
+      "id": "dataviz-compare-state-transitions",
+      "title": "Compare State Transitions",
+      "domain": "data-visualization",
+      "short_description": "Track matched identities between states so movement is not mistaken for a change in totals alone.",
+      "use_when": [
+        "Use this for movement between customer stages, employment states, classifications, or process statuses when the same entities are observed at two points. Keep the state definitions and observation times clear; preserve a category for genuinely unknown status if needed."
+      ],
+      "goals": [
+        "Track matched identities between states so movement is not mistaken for a change in totals alone."
+      ],
+      "mechanisms": ["Starting state: All members, Started New, Started Active, Started Paused"],
+      "tags": ["data-visualization", "transitions", "matched-data", "states"],
+      "related_patterns": ["dataviz-show-paired-differences", "dataviz-show-parts-in-context"],
+      "not_ideal_when": [
+        "Endpoint transitions omit intermediate changes: someone may leave and return between observations. Distinguish staying in a state from entering it, and reconcile both row and column totals. New entrants or departures need explicit treatment. A large diagonal may reflect a large starting population rather than unusually stable behavior; counts and row-based transition percentages answer different questions."
+      ],
+      "example_user_queries": [
+        "Where did the same customers move between periods?",
+        "Totals hide people entering and leaving a state.",
+        "How many members stayed in their original category?",
+        "I need to distinguish transitions from endpoint counts.",
+        "Which starting group supplied the final active members?",
+        "Some people changed status twice between snapshots.",
+        "Should transition cells show counts or percentages?",
+        "How can I reconcile origin and destination totals?"
+      ],
+      "sources": [
+        "https://idl.uw.edu/papers/visualization-zoo",
+        "https://observablehq.github.io/plot/marks/cell"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-compare-state-transitions.html",
+        "reason": "Of four members starting New, three become Active and one Paused. Of five starting Active, four remain Active and one becomes Paused. Of three starting Paused, two become Active and one remains Paused. End totals are nine Active and three Paused."
+      },
+      "article_words": 211
+    },
+    {
+      "id": "dataviz-overview-plus-detail",
+      "title": "Overview Plus Detail",
+      "domain": "data-visualization",
+      "short_description": "Pair a focused view with a broader overview so detail retains its location in the whole.",
+      "use_when": [
+        "Use this for long timelines, large documents, spatial views, or dense records where readers need both local inspection and orientation. Keep the selected region clearly indicated and update the overview and detail from the same selection state."
+      ],
+      "goals": [
+        "Pair a focused view with a broader overview so detail retains its location in the whole."
+      ],
+      "mechanisms": ["Layout: Detail only, Overview + detail"],
+      "tags": ["data-visualization", "navigation", "overview", "detail"],
+      "related_patterns": ["dataviz-preserve-elapsed-time", "dataviz-filter-to-focus"],
+      "not_ideal_when": [
+        "Detail can overemphasize a convenient interval. State the full extent and selected extent, and make it easy to move elsewhere. Independent vertical scales may help local inspection but must be explicit. This example uses a slider rather than a draggable overview; either control should describe the same interval. Missing values and aggregation differences still need disclosure in both views."
+      ],
+      "example_user_queries": [
+        "I lose my place when I zoom into a timeline.",
+        "How can readers see the interval outside the current view?",
+        "The detail window hides a later spike.",
+        "I need local detail without losing the whole record.",
+        "Should the overview share the same vertical scale?",
+        "How can I make a selected time window explicit?",
+        "Readers assume the visible segment is all the data.",
+        "Can an overview and detail use the same selection?"
+      ],
+      "sources": [
+        "https://idl.uw.edu/papers/interactive-dynamics",
+        "https://observablehq.github.io/plot/features/interactions"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-overview-plus-detail.html",
+        "reason": "The detail always contains six consecutive months. A full 24-month overview locates that interval within the longer series and retains a later spike outside many selected windows. Both panels keep the same value scale."
+      },
+      "article_words": 210
+    },
+    {
+      "id": "dataviz-filter-to-focus",
+      "title": "Filter to Focus",
+      "domain": "data-visualization",
+      "short_description": "Narrow the visible records to a relevant subset while making the selection and remaining evidence explicit.",
+      "use_when": [
+        "Use this when readers have a meaningful question about one group, range, or category within a larger dataset. Keep active criteria visible, give a clear route back to all records, and show the denominator when the remaining sample size affects interpretation."
+      ],
+      "goals": [
+        "Narrow the visible records to a relevant subset while making the selection and remaining evidence explicit."
+      ],
+      "mechanisms": ["Region: All regions, East, West"],
+      "tags": ["data-visualization", "filtering", "interaction", "subsets"],
+      "related_patterns": [
+        "dataviz-expose-sample-size-and-coverage",
+        "dataviz-brushing-and-linking"
+      ],
+      "not_ideal_when": [
+        "A selected subset can look persuasive even when it contains very little evidence. Do not silently rescale its axes or hide the selection criteria. An empty result is different from unavailable data or observed zero activity. Multiple filters usually combine conditions; state that rule. Filtering removes context from the chart, so consider linked highlighting when readers need the rest of the population to stay visible."
+      ],
+      "example_user_queries": [
+        "I only need the records from one region.",
+        "How many observations remain after my filters?",
+        "An empty chart gives no explanation.",
+        "Should axes change when I filter?",
+        "I want to narrow by group and a numeric threshold.",
+        "Readers forget which filters are active.",
+        "Can I keep the original data table available?",
+        "The filtered result is based on just two cases."
+      ],
+      "sources": [
+        "https://idl.uw.edu/papers/interactive-dynamics",
+        "https://observablehq.github.io/plot/features/interactions"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-filter-to-focus.html",
+        "reason": "Twelve requests have recorded hours and task counts. Region filters show a subset on fixed axes; they do not change the underlying records. The displayed count always states how many of twelve observations remain. An additional hours threshold can produce an empty result."
+      },
+      "article_words": 217
+    },
+    {
+      "id": "dataviz-details-on-demand",
+      "title": "Details on Demand",
+      "domain": "data-visualization",
+      "short_description": "Reveal exact values and supporting context when a reader selects an observation.",
+      "use_when": [
+        "Use this when extra fields help explain individual cases but displaying every label at once would obscure the overall pattern. Keep the most important takeaway visible without interaction, and make selected details easy to inspect and compare."
+      ],
+      "goals": ["Reveal exact values and supporting context when a reader selects an observation."],
+      "mechanisms": ["Explanation: Overview, Show details"],
+      "tags": ["data-visualization", "details", "interaction", "accessibility"],
+      "related_patterns": ["dataviz-label-directly", "dataviz-provide-an-equivalent-text-account"],
+      "not_ideal_when": [
+        "Tooltips alone are fragile on touch devices and for keyboard users. Provide a persistent alternative and avoid hiding essential qualifications behind hover. Selection should be unambiguous when points overlap. Details describe a record, not necessarily the reasons behind it: here, completed tasks do not measure difficulty or quality. Keep identifiers consistent across the plot, account, and table."
+      ],
+      "example_user_queries": [
+        "I want exact values without labeling every point.",
+        "Readers need the note attached to a record.",
+        "How can keyboard users inspect chart details?",
+        "Tooltips disappear before I finish reading.",
+        "Touch users cannot hover over a point.",
+        "Can I keep a selected observation highlighted?",
+        "I need supporting fields beside a clean overview.",
+        "Essential context is hidden inside a tooltip."
+      ],
+      "sources": [
+        "https://idl.uw.edu/papers/interactive-dynamics",
+        "https://observablehq.github.io/plot/features/interactions"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-details-on-demand.html",
+        "reason": "The overview shows twelve requests by hours and completed tasks. Select a case to retrieve its identifier, region, exact values, and note; hover or tap a point for a tooltip. The table preserves all observations regardless of selection."
+      },
+      "article_words": 205
+    },
+    {
+      "id": "dataviz-brushing-and-linking",
+      "title": "Brushing and Linking",
+      "domain": "data-visualization",
+      "short_description": "Carry a selection across multiple views by matching observation identities.",
+      "use_when": [
+        "Use this when readers need to explore how a group visible in one chart is distributed along another variable. Maintain stable identifiers across views, show selection criteria and counts, and provide keyboard controls alongside dragging."
+      ],
+      "goals": ["Carry a selection across multiple views by matching observation identities."],
+      "mechanisms": ["Selection: All observations, Highlight selection"],
+      "tags": ["data-visualization", "brushing", "linked-views", "interaction"],
+      "related_patterns": ["dataviz-filter-to-focus", "dataviz-plot-variables-together"],
+      "not_ideal_when": [
+        "Selection changes emphasis here; it does not remove records. Distinguish selected counts from the background total and keep axes stable. A visual cluster may not be a meaningful population, and exploratory selections do not establish a relationship’s significance. Large datasets may need aggregation, but the linked selection must still refer to the same underlying cases. State whether successive gestures replace, add to, or subtract from the current selection; this example replaces it."
+      ],
+      "example_user_queries": [
+        "I want selected points highlighted in another chart.",
+        "Which records make up this part of the distribution?",
+        "Can two views share the same selection?",
+        "Filtering removes too much context.",
+        "How do I support brushing without requiring a mouse?",
+        "The highlighted groups disagree between charts.",
+        "Should a second drag replace the first selection?",
+        "Can I list the identities behind a linked highlight?"
+      ],
+      "sources": [
+        "https://idl.uw.edu/papers/interactive-dynamics",
+        "https://observablehq.github.io/plot/features/interactions"
+      ],
+      "visual": {
+        "type": "comparison",
+        "interactive_asset": "dataviz-brushing-and-linking.html",
+        "reason": "A horizontal hours interval selects the same request identities in both views. Unselected observations remain visible in gray. Drag across the scatterplot, or use the two hour controls. Selection changes emphasis; it does not filter out observations."
+      },
+      "article_words": 211
+    }
+  ],
+  "collections": [
+    {
+      "id": "dataviz-comparison-and-scale",
+      "title": "Comparison & Scale",
+      "summary": "Compare magnitudes, ranks, benchmarks, and relative differences on appropriate scales.",
+      "items": [
+        "dataviz-align-for-comparison",
+        "dataviz-sort-to-reveal-order",
+        "dataviz-compare-against-a-reference",
+        "dataviz-show-paired-differences",
+        "dataviz-normalize-by-exposure",
+        "dataviz-index-to-a-common-start",
+        "dataviz-reveal-multiplicative-differences",
+        "dataviz-small-multiples"
+      ]
+    },
+    {
+      "id": "dataviz-distributions-and-relationships",
+      "title": "Distributions & Relationships",
+      "summary": "Reveal variation, concentration, thresholds, and associations among observations.",
+      "items": [
+        "dataviz-show-the-distribution",
+        "dataviz-keep-individual-observations-visible",
+        "dataviz-resolve-overplotting",
+        "dataviz-show-the-cumulative-distribution",
+        "dataviz-plot-variables-together",
+        "dataviz-condition-on-groups"
+      ]
+    },
+    {
+      "id": "dataviz-time-and-change",
+      "title": "Time & Change",
+      "summary": "Show elapsed time, duration, recurring cycles, aligned trajectories, and changes between states.",
+      "items": [
+        "dataviz-preserve-elapsed-time",
+        "dataviz-show-duration-explicitly",
+        "dataviz-align-repeating-cycles",
+        "dataviz-show-the-smooth-with-the-raw",
+        "dataviz-align-around-an-event",
+        "dataviz-compare-cohorts-at-equal-age",
+        "dataviz-decompose-the-change",
+        "dataviz-compare-state-transitions"
+      ]
+    },
+    {
+      "id": "dataviz-composition-and-structure",
+      "title": "Composition & Structure",
+      "summary": "Make parts, overlapping memberships, hierarchies, and spatial relationships visible.",
+      "items": [
+        "dataviz-show-parts-in-context",
+        "dataviz-show-intersections-explicitly",
+        "dataviz-expose-parent-child-structure",
+        "dataviz-preserve-meaningful-geography"
+      ]
+    },
+    {
+      "id": "dataviz-visual-explanation-and-accessibility",
+      "title": "Visual Explanation & Accessibility",
+      "summary": "Guide attention and make visual meaning available through color, labels, redundant cues, and text.",
+      "items": [
+        "dataviz-match-color-to-the-data",
+        "dataviz-highlight-the-relevant-contrast",
+        "dataviz-label-directly",
+        "dataviz-redundant-coding",
+        "dataviz-provide-an-equivalent-text-account"
+      ]
+    },
+    {
+      "id": "dataviz-evidence-and-uncertainty",
+      "title": "Evidence & Uncertainty",
+      "summary": "Keep precision, missingness, sample size, and coverage visible beside the findings.",
+      "items": [
+        "dataviz-show-uncertainty",
+        "dataviz-distinguish-missing-from-zero",
+        "dataviz-expose-sample-size-and-coverage"
+      ]
+    },
+    {
+      "id": "dataviz-interactive-exploration",
+      "title": "Interactive Exploration",
+      "summary": "Focus, inspect, and connect observations while preserving orientation and context.",
+      "items": [
+        "dataviz-overview-plus-detail",
+        "dataviz-filter-to-focus",
+        "dataviz-details-on-demand",
+        "dataviz-brushing-and-linking"
+      ]
+    }
+  ]
+}

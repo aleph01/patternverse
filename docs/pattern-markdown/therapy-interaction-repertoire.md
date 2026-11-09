@@ -92,7 +92,7 @@ This is the existing single-choice syntax (the accompanying runnable fixture inc
 consent, context, a skip path, and completion):
 
 ```pattern
-!choose thinking_style {
+thinking_style = !choose {
     :option all_or_nothing "All-or-nothing thinking"
     :option mind_reading "Assuming what someone else thinks"
     :option none "None of these fits"
@@ -109,7 +109,7 @@ operation from answering this question *inside* a running technique.
 ### Proposed multi-select extension — not supported syntax yet
 
 ```pattern
-!choose thinking_styles {
+thinking_styles = !choose {
     :selection multiple
     :min 0
     :max 3

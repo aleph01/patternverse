@@ -25,23 +25,21 @@ result = message ?~ intent {
   :with prompt
 }
 ?match result {
-  :case answer -> explore
-  :case question -> explain
-  :case other -> clarify
-}
-explore:
-!show {
-  Thank you. We can explore that together.
-}
--> end
-explain:
-!show {
-  This question invites you to choose a topic. You can also pause or end here.
-}
--> end
-clarify:
-!ask clarification {
-  What would help you continue?
+  :case answer {
+    !show {
+      Thank you. We can explore that together.
+    }
+  }
+  :case question {
+    !show {
+      This question invites you to choose a topic. You can also pause or end here.
+    }
+  }
+  :case other {
+    clarification = !ask {
+      What would help you continue?
+    }
+  }
 }
 -> end
 ```

@@ -15,16 +15,16 @@ This supplies the refinement mechanism. It does not turn ordinary modality selec
 :input initial_statement text
 :output statement
 
-!refine[rounds=4, renewable] statement = initial_statement {
+statement = !refine[rounds=4, renewable] initial_statement {
     :as current
 
-    !ask correction {
+    correction = !ask {
         What would you change in this wording?
 
         > {{current}}
     }
 
-    !agent revised {
+    revised = !agent {
         :returns text
 
         Revise the current wording only as requested.

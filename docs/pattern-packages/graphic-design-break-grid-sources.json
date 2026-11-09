@@ -1,0 +1,59 @@
+{
+  "pattern": "Break the Grid Deliberately",
+  "date": "2026-10-27",
+  "mode": "Selected existing generated photographs and composed typography and layout separately. New original SVG anatomy diagram; no new photograph generated.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-break-grid-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-workshop-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Poster: only whole headline x translation changes, 110 to 65. Editorial: only complete image-and-caption x translation changes, 65 to 191. Workshop sheet: only the left booking-band x translation changes, 45 to 79; the intentional guest-photo outset stays fixed. Every word, font attribute, image source/crop/size, other position, paper and lighting remains identical within pairs. Diagram rules are explicitly declared original teaching geometry.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "break-grid-open-studio",
+        "changedPixels": 9544,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "break-grid-material-study",
+        "changedPixels": 72693,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "break-grid-workshop-booking",
+        "changedPixels": 6348,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within paper surface, including nested copy-block transforms",
+    "pixelCheck": "Only intended declared grid-exception intervention regions differ.",
+    "viewports": {
+      "comparisonsDesktop": 1320,
+      "diagramDesktop": 660,
+      "narrow": 396
+    },
+    "scope": "All six saved comparison PNGs and both tightly bounded diagram PNGs inspected. Comparison text fits the paper and diagram text fits its canvas; no horizontal page overflow. Pixel differences verify only declared complete-module moves, not reader outcomes."
+  },
+  "limitations": "No measured viewer benefit, fixed gaze path, physical trim/print proof, responsive implementation, accessibility conformance or full production article-route result is claimed. A placement can become a normal variant under a different grid."
+}

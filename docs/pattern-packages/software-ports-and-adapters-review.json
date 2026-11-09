@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "ports-and-adapters",
+  "title": "Ports and Adapters",
+  "aliases": ["Hexagonal Architecture", "Ports & Adapters", "Ports and Adapters Architecture"],
+  "primary_collection": "software-application-architecture",
+  "primary_collection_title": "Application Architecture",
+  "body_word_count": 1403,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Cockburn's original 2005 article establishes the name, alias, purposeful ports, driving/driven roles, and isolated execution. Fowler supports separating wiring from use; Martin's original Clean Architecture article supports the neighboring design and source dependency distinction. Official Python documentation supports Protocol and SQLite connection lifecycle details. The stock example and figures are original teaching material.",
+    "python_examples": "All four actual article blocks execute. Checks pass for an application test importing no adapter or SQLite module; both real and substitute stock allocation; insufficient, missing, and exactly exhausted stock; invalid quantities before storage access; input conversion; translated missing-table and closed-connection failures; committed visibility through a second connection; and startup connection closure. Output is reserved, then unavailable; the isolated script prints isolated checks passed.",
+    "article_tests": "30 tests pass across Ports and Adapters, Layers, and the existing GoF article suite. Coverage includes canonical aliases without a duplicate article, the eight-section outline, one primary collection, resolved neighbors, exact highlighted code text, responsive figures and dimensions, search, recommendation metadata, article revision hash, and the new concept mark.",
+    "graphics_tests": "Four concept-graphic geometry, safety, fallback, and export checks pass. The global coverage test has an unrelated existing failure listed below.",
+    "content": "1203 entities validate with drafts included. The published-only corpus contains 1058 entities and reports no errors.",
+    "public_build": "Production build passes, including the public web build checks. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new source files and updated authoring metadata.",
+    "visuals": "All four SVG variants load. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and phone compositions were visually inspected for the actual mechanism, arrow meanings, regular typography, white surfaces, contrast, and label placement.",
+    "article_browser": "Production article checked at 1440, 390, and 320 pixels: eight headings, four code blocks preserved exactly in the DOM with colored syntax tokens, selectable code preserving its content and indentation, keyboard code scrolling at 320px, both responsive images loaded, and no page overflow. Browser selection omits the terminal newline normally; all other whitespace is preserved.",
+    "navigation_browser": "The collection opens the article with the correct Application Architecture breadcrumb. Related Layers, Adapter, and Facade routes all return HTTP 200.",
+    "gof_collection": "The existing 23 GoF members remain in their established collection. No GoF articles changed."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphic checks pass, including the newly added geometry; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Local stock allocation only, not a complete order workflow. The adapter owns one transaction per call on a dedicated connection. The sequential memory substitute establishes neither database durability nor concurrent correctness. No remote retry or idempotency mechanism is implemented.",
+  "preview": "http://127.0.0.1:42986/pattern/ports-and-adapters",
+  "evidence_directory": ".local/software-ports-and-adapters",
+  "browser_measurements": ".local/software-ports-and-adapters/browser-checks.json",
+  "browser_check_script": ".local/software-ports-and-adapters/check-browser.mjs",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

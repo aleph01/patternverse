@@ -1,0 +1,136 @@
+{
+  "name": "ta-articles-2026-11-02",
+  "status": "published and verified live",
+  "published": true,
+  "publishedAt": "2026-11-02T20:57:42.802Z",
+  "parentRelease": "communication-relationships-2026-11-02",
+  "productionUrl": "https://patternverse.org",
+  "deploymentUrl": "https://8b25dcc2.patternverse.pages.dev",
+  "version": "1793652750120",
+  "include": [
+    "All content and behavior from the verified communication-relationships-2026-11-02 release",
+    "Import all 36 complete Games People Play articles from Find a Patternverse community, with 72 original illustration layouts",
+    "Populate Games People Play and its Transactional Analysis parent collection",
+    "Register the update worker through a release-specific URL in the same scope and prevent future CDN caching of update discovery files"
+  ],
+  "exclude": [
+    "Contribute team invitation and founder portrait",
+    "Unselected draft content",
+    "Private music/player studies",
+    "MCP or guided-AI service publication"
+  ],
+  "newEntries": [
+    "pattern:ta-alcoholic",
+    "pattern:ta-debtor",
+    "pattern:ta-kick-me",
+    "pattern:ta-now-ive-got-you-you-son-of-a-bitch",
+    "pattern:ta-see-what-you-made-me-do",
+    "pattern:ta-corner",
+    "pattern:ta-courtroom",
+    "pattern:ta-frigid-woman",
+    "pattern:ta-harried",
+    "pattern:ta-if-it-werent-for-you",
+    "pattern:ta-look-how-hard-ive-tried",
+    "pattern:ta-sweetheart",
+    "pattern:ta-aint-it-awful",
+    "pattern:ta-blemish",
+    "pattern:ta-schlemiel",
+    "pattern:ta-why-dont-you-yes-but",
+    "pattern:ta-lets-you-and-him-fight",
+    "pattern:ta-perversion",
+    "pattern:ta-rapo",
+    "pattern:ta-the-stocking-game",
+    "pattern:ta-uproar",
+    "pattern:ta-cops-and-robbers",
+    "pattern:ta-how-do-you-get-out-of-here",
+    "pattern:ta-lets-pull-a-fast-one-on-joey",
+    "pattern:ta-greenhouse",
+    "pattern:ta-im-only-trying-to-help-you",
+    "pattern:ta-indigence",
+    "pattern:ta-peasant",
+    "pattern:ta-psychiatry",
+    "pattern:ta-stupid",
+    "pattern:ta-wooden-leg",
+    "pattern:ta-busmans-holiday",
+    "pattern:ta-cavalier",
+    "pattern:ta-happy-to-help",
+    "pattern:ta-homely-sage",
+    "pattern:ta-theyll-be-glad-they-knew-me"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "expectedPublicEntries": 1347,
+  "artifact": {
+    "directory": "/private/tmp/patternverse-ta-articles-release-2026-11-02/apps/web/build",
+    "files": 11599,
+    "bytes": 649226336,
+    "manifestSha256": "9141d8f39f138d2170ec86c1cb2114c6ec928332b09f18b0430b65fe3530ca8e",
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/ta-articles-2026-11-02/artifact-files.json"
+  },
+  "verification": {
+    "contentImport": {
+      "articles": 36,
+      "illustrationLayouts": 72,
+      "unitChecks": 40
+    },
+    "content": {
+      "entries": 1347,
+      "diagnostics": 0,
+      "fullArticles": 36,
+      "originalIllustrationLayouts": 72
+    },
+    "publicScan": "passed",
+    "browser": {
+      "passed": 78,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "all36Articles": true,
+      "all72IllustrationLayouts": true,
+      "staleWorkerRecovery": "passed with another tab retaining its unsaved draft",
+      "search": "passed"
+    },
+    "updateAndContentUnitChecks": {
+      "passed": 72
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "live": {
+      "passed": true,
+      "resourceChecks": 112,
+      "articlePages": 36,
+      "originalIllustrationLayouts": 72,
+      "version": "1793652750120",
+      "exactArtifactBytes": "matched for all article pages, illustrations, collections, and the release-specific worker"
+    },
+    "liveBrowsers": {
+      "passed": 12,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "normalRefresh": "passed",
+      "currentWorkerActivation": "passed",
+      "collectionsAndArticleAccess": "passed"
+    }
+  },
+  "sourceChat": {
+    "id": "01a198db-841d-7ad2-8304-3e18c39941ae",
+    "title": "Find a Patternverse community",
+    "completeArticlesImported": 36,
+    "originalSvgLayouts": 72,
+    "latestRevisionsOnly": true
+  },
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/ta-articles-2026-11-02/release-report.json",
+  "notes": [
+    "Corrects the empty collection homes from the preceding release by importing the existing complete articles.",
+    "The Games People Play collection lists all 36 articles in original catalog order; Transactional Analysis links to the populated field guide.",
+    "The Contribute team invitation and other unselected work remain excluded.",
+    "Website published from the verified artifact; no Git push or backend-service publication."
+  ]
+}

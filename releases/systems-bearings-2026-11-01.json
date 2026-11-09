@@ -1,0 +1,106 @@
+{
+  "name": "systems-bearings-2026-11-01",
+  "status": "published-and-verified",
+  "verifiedAt": "2026-11-01T21:58:44.164Z",
+  "deployment": {
+    "id": "d55417c4-618d-408f-ad75-cc4913b9866c",
+    "url": "https://d55417c4.patternverse.pages.dev",
+    "production": "https://patternverse.org",
+    "previousId": "9339089f-45a6-46c1-bcaa-386f481c2d64"
+  },
+  "scope": {
+    "publicEntries": 1305,
+    "newEntries": 41,
+    "newConcepts": 40,
+    "newCollections": 1,
+    "changedExistingEntries": 0,
+    "updates": [
+      "Systemic Traps and Dilemmas in Systems Thinking",
+      "Quieter app updates",
+      "Separate Commons / My Library filters",
+      "Bearings in shared preview mode"
+    ]
+  },
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false",
+    "VITE_PREVIEW_ENABLED": "true"
+  },
+  "verification": {
+    "content": {
+      "entries": 1305,
+      "diagnostics": 0
+    },
+    "webTypes": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "workspaceTests": {
+      "passed": 71
+    },
+    "focusedWebTests": {
+      "passed": 81
+    },
+    "deploymentSafeguards": {
+      "passed": 15
+    },
+    "browser": {
+      "passed": 54,
+      "skipped": 2,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "notes": "Release checks use the real production build and runtime. Two mobile skips cover desktop-only interactions. Initial test assumptions about saved-library defaults, phone collection buttons and collapsed filters were corrected; no application change was needed."
+    },
+    "publicScan": "passed",
+    "contributionService": {
+      "passed": 17,
+      "dryRun": "passed",
+      "availableAfterPublication": true
+    },
+    "sourcePreservation": {
+      "selectedFiles": 205,
+      "selectedMatches": true,
+      "existingContentFiles": 1264,
+      "existingContentUnchanged": true,
+      "newStatusOnlyChanges": 41,
+      "heldEntries": 149
+    },
+    "production": {
+      "checked": 11346,
+      "passed": 11346,
+      "failures": 0,
+      "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/systems-bearings-2026-11-01/production-verification.json"
+    },
+    "liveBrowser": {
+      "passed": 18,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true
+    }
+  },
+  "sourceStatusUpdate": {
+    "published": 41,
+    "otherContentUnchanged": true
+  },
+  "artifact": {
+    "directory": "/private/tmp/patternverse-systems-bearings-2026-11-01/apps/web/build",
+    "files": 11198,
+    "bytes": 638580309,
+    "sha256": "d878f78905591fd0e685b5922fe20cb9859da74e0ec4f72a283802d9fc88f742"
+  },
+  "sourceArchive": {
+    "path": "/Users/jeger-benninger/Documents/patternverse/.local/releases/systems-bearings-2026-11-01/selected-source.tar.gz",
+    "bytes": 369911571,
+    "sha256": "0fcb72ff5603505186b5f1a1b0276407173ef3809408d1e294ed9779fea9553d"
+  },
+  "contributionServiceDeployment": {
+    "name": "patternverse-article-contributions",
+    "version": "e4388a2e-e01e-4813-9899-2b94f89fc6cd",
+    "scope": "Expanded the approved article inventory to 1305 entries, preserving the previous service implementation, database and Access configuration."
+  },
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/systems-bearings-2026-11-01/release-report.json",
+  "gitPush": false,
+  "pullRequest": false
+}

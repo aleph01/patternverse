@@ -1,0 +1,116 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Resource Deadlock",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "resource-deadlock",
+      "title": "Resource Deadlock",
+      "entity_type": "concept",
+      "domain": "Dependency and feasibility traps: reusable-resource allocation and circular waiting",
+      "article": "content/concepts/resource-deadlock.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "E. G. Coffman Jr., M. J. Elphick, A. Shoshani (1971), System Deadlocks",
+          "url": "https://uobdv.github.io/Design-Verification/Supplementary/System_Deadlocks-Four_necessary_and_sufficient_conditions_for_deadlock.pdf",
+          "supports": "Original twelve-page survey read in a university teaching mirror: introduction and pp. 70–74 on necessary conditions, resource multiplicity, prevention, detection, and recovery. Original venue Computing Surveys 3(2):67–78.",
+          "boundary": "Foundational synthesis of earlier work, not sole origin and not a trial of organizational interventions. The controlled traffic scenario is original and hypothetical.",
+          "current_example_check": {
+            "date": "2026-11-02",
+            "read": "Figure 1 and surrounding discussion, printed p. 69, explicitly map traffic around a square to held-space and next-space requests.",
+            "boundary": "The safe-bay recovery and entry control are this article’s hypothetical additions."
+          }
+        },
+        {
+          "title": "University of Illinois CS 341 coursebook, Deadlock",
+          "url": "https://cs341.cs.illinois.edu/coursebook/Deadlock",
+          "supports": "Coffman conditions, single-instance allocation cycles, common ordering, and opposite-order release/retry livelock.",
+          "boundary": "Only those standard model claims are used. No assertion is taken from the page’s broader operating-system or undecidability discussion."
+        },
+        {
+          "title": "John Bell, Operating Systems: Deadlocks, University of Illinois Chicago",
+          "url": "https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/7_Deadlocks.html",
+          "supports": "Multiple-instance counterexample, prevention costs, bundle allocation, declared maximum demands, safe sequences, and unsafe versus already deadlocked states.",
+          "boundary": "Identifiable teaching notes based on Operating System Concepts, ninth edition; no empirical effect sizes or current operating-system behavior are inferred."
+        },
+        {
+          "title": "PostgreSQL 18 documentation, 13.3.4 Deadlocks",
+          "url": "https://www.postgresql.org/docs/18/explicit-locking.html#LOCKING-DEADLOCKS",
+          "supports": "Opposite-order account-row updates, automatic deadlock detection and victim abortion, unpredictable victim selection, consistent ordering, and retry of aborted transactions.",
+          "boundary": "Official product behavior and worked documentation example, not an observed intervention study or a guarantee about arbitrary lock types or external side effects."
+        }
+      ],
+      "related_patterns": [
+        "circular-prerequisites-and-bootstrapping",
+        "scoped-locking",
+        "scoped-resource-management"
+      ],
+      "status": "published",
+      "short_description": "Trace who holds each needed resource, break a closed chain of waiting safely, and change allocation rules to prevent the same deadlock from returning.",
+      "use_when": [
+        "Which held space prevents each driver from moving?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Create a safe release, then prevent new entry from closing the cycle again.",
+        "Safe geometry, authority, and compliance are assumed. No road-control specification is supplied."
+      ],
+      "example_structure": {
+        "scenario": "Four distinct cars hold four exclusive spaces and require the next held space before forward release. No ordinary gap or escape. Recovery explicitly adds an authorized safe bay movement and controls new entry; no road engineering prescription. Single-instance resource result kept separate from multi-instance systems.",
+        "changed_relationship": "Create a safe release, then prevent new entry from closing the cycle again.",
+        "residual_constraints": "Safe geometry, authority, and compliance are assumed. No road-control specification is supplied.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/resource-deadlock-workshop.svg",
+          "content/assets/structural-traps/resource-deadlock-workshop-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 812,
+            "textBlocks": 25
+          },
+          "phone": {
+            "width": 360,
+            "height": 1649,
+            "textBlocks": 25
+          }
+        },
+        "question": "Which held space prevents each driver from moving?",
+        "alternative_text": "Hypothetical qualitative illustration. A holds A and requests B; B holds B and requests C; C holds C and requests D; D holds D and requests A. No ordinary forward move is available. Authorized removal of A to a safe bay frees A, allowing D, C, and B to move before A can re-enter. Change: Create a safe release, then prevent new entry from closing the cycle again. Limitation: Safe geometry, authority, and compliance are assumed. No road-control specification is supplied.",
+        "caption": "Hypothetical illustration. The upper arrows are requests for occupied spaces, not directions on a road map. The lower sequence creates a gap and keeps new entry from consuming it. A safe bay and controlled movement are additional capabilities, and A loses priority.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. A holds A and requests B; B holds B and requests C; C holds C and requests D; D holds D and requests A. No ordinary forward move is available. Authorized removal of A to a safe bay frees A, allowing D, C, and B to move before A can re-enter. Change: Create a safe release, then prevent new entry from closing the cycle again. Limitation: Safe geometry, authority, and compliance are assumed. No road-control specification is supplied.",
+          "relationship_key": "Upper arrows: requests to the next holder. Lower arrows: recovery chronology. Each space has one occupant; there is no ordinary escape in the initial model.",
+          "changed_relationship": "Create a safe release, then prevent new entry from closing the cycle again.",
+          "residual_constraints": "Safe geometry, authority, and compliance are assumed. No road-control specification is supplied.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Four distinct cars hold four exclusive spaces and require the next held space before forward release. No ordinary gap or escape. Recovery explicitly adds an authorized safe bay movement and controls new entry; no road engineering prescription. Single-instance resource result kept separate from multi-instance systems.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Fourteen articles, twenty-eight editable SVGs, fourteen current research notes, and necessary asset dimensions updated.",
+        "visual": "All fourteen live articles checked in the browser at 1440px desktop and 390px phone viewports (28 layouts), with loaded expected sources and no page overflow. All twenty-eight SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (56 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

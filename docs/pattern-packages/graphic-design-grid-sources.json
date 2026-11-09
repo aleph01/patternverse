@@ -1,0 +1,157 @@
+{
+  "pattern": "Establish a Grid",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographs; authored controlled grid comparisons, a construction diagram and a separate HTML layout study. No new photograph was generated.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-grid-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-repair-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "f5c4449de84c1cb2d5c6d4142830a8067ff21ce0367f80b059d55a16194e2b07"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-workshop-photo-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "comparisonPolicy": "Program: only three intact card translations change. Editorial: only story frame width/span and the consequent line wrapping change; content, font, size, weight, leading and origin stay fixed. Small natural glyph overhangs remain visible. Narrow courses: column policy changes course placement, image/button geometry, text placement and inclusion wrapping; exact words, fonts/sizes/weights/colors, original course order and normalized centered 2:1 photo crops remain fixed. Shared paper/phone and lighting remain fixed.",
+  "verificationFixture": {
+    "path": "docs/pattern-packages/graphic-design-grid-responsive-proof.html",
+    "sha256": "78cd5aa330334006c72ff921cd7bfda2ffbcca85edb6cf97b2a2b3d9c963cea0",
+    "scope": "Independent breakpoint-policy study, not pixel equivalence to the phone illustration. Two columns at 960 pixels in both variants; two before and one after at 396 pixels. No booking implementation."
+  },
+  "verification": {
+    "photographic": {
+      "comparisons": [
+        {
+          "name": "grid-studio-program",
+          "changedPixels": 19353,
+          "pixelsChangedOutsideDeclaredRegions": 0
+        },
+        {
+          "name": "grid-editorial-spans",
+          "changedPixels": 11618,
+          "pixelsChangedOutsideDeclaredRegions": 0
+        },
+        {
+          "name": "grid-responsive-workshops",
+          "changedPixels": 121783,
+          "pixelsChangedOutsideDeclaredRegions": 0
+        }
+      ],
+      "desktopAndMobileBrowserChecks": "passed",
+      "textBounds": "within paper or phone content surface, including nested group transforms",
+      "pixelCheck": "Only intended declared declared grid regions differ."
+    },
+    "responsive": {
+      "proof": [
+        {
+          "width": 960,
+          "variants": [
+            {
+              "variant": "before",
+              "columns": 2,
+              "sourceOrder": ["clay", "print"],
+              "fonts": ["20px", "20px"],
+              "crops": [
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                },
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                }
+              ]
+            },
+            {
+              "variant": "after",
+              "columns": 2,
+              "sourceOrder": ["clay", "print"],
+              "fonts": ["20px", "20px"],
+              "crops": [
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                },
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "width": 396,
+          "variants": [
+            {
+              "variant": "before",
+              "columns": 2,
+              "sourceOrder": ["clay", "print"],
+              "fonts": ["20px", "20px"],
+              "crops": [
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                },
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                }
+              ]
+            },
+            {
+              "variant": "after",
+              "columns": 1,
+              "sourceOrder": ["clay", "print"],
+              "fonts": ["20px", "20px"],
+              "crops": [
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                },
+                {
+                  "fit": "cover",
+                  "position": "50% 50%",
+                  "ratio": "2 / 1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "Breakpoint policy in a separate layout study, not pixel equivalence to the phone illustration or a working booking service."
+    }
+  },
+  "limitations": "Saved standalone assets, text/frame bounds and responsive column policy were checked. No measured attention, reading-speed, booking, assistive-technology or complete production article route result. The two-width study is not a complete WCAG audit."
+}

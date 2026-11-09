@@ -1,0 +1,510 @@
+{
+  "date": "2026-10-29",
+  "status": "technical source scout; no performance auditions or complete score checks",
+  "sources": [
+    {
+      "key": "bach-prelude-c",
+      "url": "https://www.mutopiaproject.org/ftp/BachJS/BWV846/wtk1-prelude1/wtk1-prelude1.mid",
+      "bytes": 4676,
+      "sha256": "874e07d0479542971bfceaf420d6117da8d602d89d26eea4610e7dd1ef58bf26",
+      "download_status": "downloaded privately for technical inspection",
+      "inspection": {
+        "status": "parsed; not auditioned or checked against score/performance",
+        "title": "control track",
+        "duration_seconds": 140,
+        "quarter_note_resolution": 384,
+        "tempo_events": 1,
+        "initial_tempo": 60,
+        "meters": [
+          {
+            "ticks": 0,
+            "meter": [4, 4]
+          }
+        ],
+        "tracks": [
+          {
+            "name": "lower:2",
+            "channel": 0,
+            "instrument": "acoustic grand piano",
+            "notes": 134,
+            "lowest": 36,
+            "highest": 64
+          },
+          {
+            "name": "upper:",
+            "channel": 1,
+            "instrument": "acoustic grand piano",
+            "notes": 415,
+            "lowest": 50,
+            "highest": 81
+          }
+        ],
+        "total_notes": 549
+      },
+      "title": "Bach — Prelude in C major, BWV 846",
+      "catalog_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=5",
+      "source_credit": "Tobias Erbsland",
+      "terms_observed": "Public Domain label on this Mutopia edition",
+      "teaching_review": "Two piano parts present; choose a short opening passage and retain the arpeggio timing.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": "docs/musical-composition/midi-research/bach-prelude-c.mid",
+      "reuse_status": "Open-source edition route identified; preserve exact source terms. Not integrated into the app."
+    },
+    {
+      "key": "joplin-entertainer",
+      "url": "https://www.mutopiaproject.org/ftp/JoplinS/entertainer/entertainer.mid",
+      "bytes": 22084,
+      "sha256": "33e4e81ee64ffb2edf90d1c6a1ddee7276507296bfb915c2bb775231a467f066",
+      "download_status": "downloaded privately for technical inspection",
+      "inspection": {
+        "status": "parsed; not auditioned or checked against score/performance",
+        "title": "The Entertainer",
+        "duration_seconds": 252.92,
+        "quarter_note_resolution": 384,
+        "tempo_events": 1,
+        "initial_tempo": 72.00002880001152,
+        "meters": [
+          {
+            "ticks": 0,
+            "meter": [2, 4]
+          }
+        ],
+        "tracks": [
+          {
+            "name": "up:",
+            "channel": 0,
+            "instrument": "acoustic grand piano",
+            "notes": 1394,
+            "lowest": 60,
+            "highest": 90
+          },
+          {
+            "name": "down:",
+            "channel": 1,
+            "instrument": "acoustic grand piano",
+            "notes": 1227,
+            "lowest": 29,
+            "highest": 65
+          }
+        ],
+        "total_notes": 2621
+      },
+      "title": "Scott Joplin — The Entertainer",
+      "catalog_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=263",
+      "source_credit": "Chris Sawer",
+      "terms_observed": "Public Domain label on this Mutopia edition",
+      "teaching_review": "Separate upper/lower tracks; this source is in 2/4. Do not silently label it 4/4.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": "docs/musical-composition/midi-research/joplin-entertainer.mid",
+      "reuse_status": "Open-source edition route identified; preserve exact source terms. Not integrated into the app."
+    },
+    {
+      "key": "bach-invention-1",
+      "url": "https://www.mutopiaproject.org/ftp/BachJS/BWV772/bach-invention-01/bach-invention-01.mid",
+      "bytes": 3929,
+      "sha256": "9b9a6213941932d5171d9102d85912c3c1c61f8176ce02005cd2198881823c2d",
+      "download_status": "downloaded privately for technical inspection",
+      "inspection": {
+        "status": "parsed; not auditioned or checked against score/performance",
+        "title": "control track",
+        "duration_seconds": 66,
+        "quarter_note_resolution": 384,
+        "tempo_events": 1,
+        "initial_tempo": 80,
+        "meters": [
+          {
+            "ticks": 0,
+            "meter": [4, 4]
+          }
+        ],
+        "tracks": [
+          {
+            "name": "one",
+            "channel": 1,
+            "instrument": "acoustic grand piano",
+            "notes": 240,
+            "lowest": 60,
+            "highest": 84
+          },
+          {
+            "name": "two",
+            "channel": 2,
+            "instrument": "acoustic grand piano",
+            "notes": 218,
+            "lowest": 36,
+            "highest": 70
+          }
+        ],
+        "total_notes": 458
+      },
+      "title": "Bach — Invention No. 1, BWV 772",
+      "catalog_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=40",
+      "source_credit": "jeff covey",
+      "terms_observed": "CC BY-SA 3.0; retain attribution and applicable share-alike terms for this edition",
+      "teaching_review": "Two independent piano tracks are present; choose and check the first imitative entry.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": "docs/musical-composition/midi-research/bach-invention-1.mid",
+      "reuse_status": "Open-source edition route identified; preserve exact source terms. Not integrated into the app."
+    },
+    {
+      "key": "mozart-k545-1",
+      "url": "https://www.mutopiaproject.org/ftp/MozartWA/KV545/K545-1/K545-1.mid",
+      "bytes": 11580,
+      "sha256": "54e510ba1e5865aeedc4e96bf70b83c93ecddf5b66660033ef98a5a8204ab02d",
+      "download_status": "downloaded privately for technical inspection",
+      "inspection": {
+        "status": "parsed; not auditioned or checked against score/performance",
+        "title": "control track",
+        "duration_seconds": 132.27,
+        "quarter_note_resolution": 384,
+        "tempo_events": 1,
+        "initial_tempo": 132.000132000132,
+        "meters": [
+          {
+            "ticks": 0,
+            "meter": [4, 4]
+          }
+        ],
+        "tracks": [
+          {
+            "name": "",
+            "channel": 0,
+            "instrument": "acoustic grand piano",
+            "notes": 610,
+            "lowest": 55,
+            "highest": 89
+          },
+          {
+            "name": "",
+            "channel": 1,
+            "instrument": "acoustic grand piano",
+            "notes": 678,
+            "lowest": 36,
+            "highest": 74
+          }
+        ],
+        "total_notes": 1288
+      },
+      "title": "Mozart — Piano Sonata K. 545, movement I",
+      "catalog_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=998",
+      "source_credit": "Alejandro Sierra",
+      "terms_observed": "CC BY-SA 3.0; retain attribution and applicable share-alike terms for this edition",
+      "teaching_review": "Separate piano tracks are present; match a cadence/voice-leading passage to the score.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": "docs/musical-composition/midi-research/mozart-k545-1.mid",
+      "reuse_status": "Open-source edition route identified; preserve exact source terms. Not integrated into the app."
+    },
+    {
+      "key": "debussy-clair-de-lune",
+      "url": "https://www.mutopiaproject.org/ftp/DebussyC/L75/debussy_Ste_Bergamesq_Clair/debussy_Ste_Bergamesq_Clair.mid",
+      "bytes": 12476,
+      "sha256": "4eee9a1546ffde1ff74cb9824ba0e57cbc821185a15185bfea9faed97820bf8c",
+      "download_status": "downloaded privately for technical inspection",
+      "inspection": {
+        "status": "parsed; not auditioned or checked against score/performance",
+        "title": "control track",
+        "duration_seconds": 322.5,
+        "quarter_note_resolution": 384,
+        "tempo_events": 1,
+        "initial_tempo": 60,
+        "meters": [
+          {
+            "ticks": 0,
+            "meter": [9, 8]
+          }
+        ],
+        "tracks": [
+          {
+            "name": "upper",
+            "channel": 1,
+            "instrument": "acoustic grand piano",
+            "notes": 743,
+            "lowest": 53,
+            "highest": 97
+          },
+          {
+            "name": "lower",
+            "channel": 2,
+            "instrument": "acoustic grand piano",
+            "notes": 725,
+            "lowest": 27,
+            "highest": 85
+          }
+        ],
+        "total_notes": 1468
+      },
+      "title": "Debussy — Clair de lune",
+      "catalog_url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1778",
+      "source_credit": "Keith OHara",
+      "terms_observed": "Public Domain label on this Mutopia edition",
+      "teaching_review": "Separate upper/lower tracks; source meter is 9/8. Fixed-tempo MIDI does not reproduce performed rubato.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": "docs/musical-composition/midi-research/debussy-clair-de-lune.mid",
+      "reuse_status": "Open-source edition route identified; preserve exact source terms. Not integrated into the app."
+    },
+    {
+      "key": "aphex-avril-henry",
+      "url": "https://www.aphextwin.nu/audio/drukqs/scores/henry-avril_14th.mid",
+      "download_status": "not retrieved",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "title": "Aphex Twin — Avril 14th, Henry transcription lead",
+      "catalog_url": "https://www.aphextwin.nu/news/100581545278392.shtml",
+      "source_credit": "Henry, as credited by the community page",
+      "terms_observed": "Not established",
+      "teaching_review": "Page offers MIDI and score; direct host did not resolve from this environment. File not inspected.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": null,
+      "reuse_status": "Private source scouting only; not a cleared application asset."
+    },
+    {
+      "key": "aphex-avril-jake",
+      "url": "https://www.aphextwin.nu/audio/drukqs/scores/jake-avril_14th.mid",
+      "download_status": "not retrieved",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "title": "Aphex Twin — Avril 14th, Jake transcription lead",
+      "catalog_url": "https://www.aphextwin.nu/news/100581545278392.shtml",
+      "source_credit": "Jake, as credited by the community page",
+      "terms_observed": "Not established",
+      "teaching_review": "A separate historical MIDI lead; host did not resolve. Do not label this a retrieved file.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": null,
+      "reuse_status": "Private source scouting only; not a cleared application asset."
+    },
+    {
+      "key": "wonder-superstition-demo",
+      "url": "https://www.mididb.com/midi-download/AUD_HT1145.mid",
+      "bytes": 13145,
+      "sha256": "9fac1cf64de1a9f6dcb4eef8c60a823d804a0da8b8ecc3de1eb1ed716ab7dca5",
+      "download_status": "downloaded privately for technical inspection",
+      "inspection": {
+        "status": "parsed; not auditioned or checked against score/performance",
+        "title": "",
+        "duration_seconds": 45.15,
+        "quarter_note_resolution": 480,
+        "tempo_events": 1,
+        "initial_tempo": 101.00006901671382,
+        "meters": [
+          {
+            "ticks": 0,
+            "meter": [4, 4]
+          }
+        ],
+        "tracks": [
+          {
+            "name": "",
+            "channel": 1,
+            "instrument": "electric bass (finger)",
+            "notes": 200,
+            "lowest": 27,
+            "highest": 47
+          },
+          {
+            "name": "",
+            "channel": 2,
+            "instrument": "clavi",
+            "notes": 218,
+            "lowest": 20,
+            "highest": 54
+          },
+          {
+            "name": "",
+            "channel": 3,
+            "instrument": "tenor sax",
+            "notes": 75,
+            "lowest": 54,
+            "highest": 68
+          },
+          {
+            "name": "",
+            "channel": 4,
+            "instrument": "brass section",
+            "notes": 203,
+            "lowest": 51,
+            "highest": 82
+          },
+          {
+            "name": "",
+            "channel": 5,
+            "instrument": "electric guitar (muted)",
+            "notes": 145,
+            "lowest": 44,
+            "highest": 59
+          },
+          {
+            "name": "Superstition - Stevie Wonder",
+            "channel": 6,
+            "instrument": "acoustic grand piano",
+            "notes": 219,
+            "lowest": 27,
+            "highest": 70
+          },
+          {
+            "name": "Superstition - Stevie Wonder",
+            "channel": 9,
+            "instrument": "standard kit",
+            "notes": 399,
+            "lowest": 35,
+            "highest": 54
+          }
+        ],
+        "total_notes": 1459
+      },
+      "title": "Stevie Wonder — Superstition, provider demo",
+      "catalog_url": "https://www.mididb.com/stevie-wonder/superstition-midi/",
+      "source_credit": "MIDIdb / Hit Trax listing",
+      "terms_observed": "Provider permits demo download; website redistribution/transformation permission has not been established",
+      "teaching_review": "45-second demo includes bass, clavinet and drums. Check excerpt location, arrangement and clavinet octave against the recording.",
+      "reviewed_on": "2026-10-29",
+      "musical_accuracy_verified": false,
+      "app_integration": false,
+      "research_asset": null,
+      "reuse_status": "Private source scouting only; not a cleared application asset."
+    },
+    {
+      "key": "videotape-bonnaroo",
+      "title": "Radiohead — Videotape, Bonnaroo 17 June 2006",
+      "catalog_url": "https://www.radiohead.com/library/#ir/2006-06-17-bonnaroo",
+      "kind": "exact-performance-identity",
+      "status": "Official library route identified; page is JavaScript-driven. User confirmed this exact performance.",
+      "download_status": "No verified combined piano/drum MIDI found.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "videotape-community",
+      "title": "Radiohead — Videotape, community sequence by amftl, based on yiyb",
+      "catalog_url": "https://onlinesequencer.net/4128452",
+      "kind": "community-midi-offer",
+      "status": "Indexed page offers MIDI export; direct retrieval returned 403. Arrangement is not identified as Bonnaroo.",
+      "download_status": "Not retrieved; exact version, parts and beat placement unverified.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "videotape-bonnaroo-drums",
+      "title": "Radiohead — Videotape (Bonnaroo version), drum chart",
+      "catalog_url": "https://supersimpledrum.com/songs/videotape-bonnaroo-version-radiohead",
+      "kind": "version-specific-drum-midi-offer",
+      "status": "Indexed provider page explicitly offers MIDI/MusicXML for this version. Direct page retrieval returned 403.",
+      "download_status": "Not retrieved or checked; a drum chart is not a piano transcription.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "videotape-official-score",
+      "title": "Radiohead — Videotape, official artist-approved piano-solo arrangement",
+      "catalog_url": "https://www.fabermusic.com/shop/videotape-d4589",
+      "kind": "publisher-score",
+      "status": "Publisher page retrieved; artist-approved score offered. It does not identify the arrangement as Bonnaroo 2006.",
+      "download_status": "Not purchased or downloaded; source/comparison lead, not a reusable MIDI license.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "videotape-analysis",
+      "title": "Videotape — TheoryTab",
+      "catalog_url": "https://www.hooktheory.com/theorytab/view/radiohead/videotape",
+      "kind": "community-analysis",
+      "status": "Analysis page retrieved; potential notes/harmony reference.",
+      "download_status": "No MIDI export retrieved; analysis is not a verified multitrack transcription or reuse permission.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "superstition-analysis",
+      "title": "Superstition — TheoryTab",
+      "catalog_url": "https://www.hooktheory.com/theorytab/view/stevie-wonder/superstition",
+      "kind": "community-analysis",
+      "status": "Analysis page retrieved; potential notes/harmony reference.",
+      "download_status": "No MIDI export retrieved; analysis is not a verified multitrack transcription or reuse permission.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "lean-on-me-analysis",
+      "title": "Lean On Me — TheoryTab",
+      "catalog_url": "https://www.hooktheory.com/theorytab/view/bill-withers/lean-on-me",
+      "kind": "community-analysis",
+      "status": "Analysis page retrieved; potential notes/harmony reference.",
+      "download_status": "No MIDI export retrieved; analysis is not a verified multitrack transcription or reuse permission.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "avril-analysis",
+      "title": "Avril 14Th — TheoryTab",
+      "catalog_url": "https://www.hooktheory.com/theorytab/view/aphex-twin/avril-14th",
+      "kind": "community-analysis",
+      "status": "Analysis page retrieved; potential notes/harmony reference.",
+      "download_status": "No MIDI export retrieved; analysis is not a verified multitrack transcription or reuse permission.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "seven-nation-analysis",
+      "title": "Seven Nation Army — TheoryTab",
+      "catalog_url": "https://www.hooktheory.com/theorytab/view/the-white-stripes/seven-nation-army",
+      "kind": "community-analysis",
+      "status": "Analysis page retrieved; potential notes/harmony reference.",
+      "download_status": "No MIDI export retrieved; analysis is not a verified multitrack transcription or reuse permission.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "space-oddity-analysis",
+      "title": "Space Oddity — TheoryTab",
+      "catalog_url": "https://www.hooktheory.com/theorytab/view/david-bowie/space-oddity",
+      "kind": "community-analysis",
+      "status": "Analysis page retrieved; potential notes/harmony reference.",
+      "download_status": "No MIDI export retrieved; analysis is not a verified multitrack transcription or reuse permission.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "get-lucky-analysis",
+      "title": "Get Lucky — TheoryTab",
+      "catalog_url": "https://www.hooktheory.com/theorytab/view/daft-punk/get-lucky",
+      "kind": "community-analysis",
+      "status": "Analysis page retrieved; potential notes/harmony reference.",
+      "download_status": "No MIDI export retrieved; analysis is not a verified multitrack transcription or reuse permission.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    },
+    {
+      "key": "lean-on-me-provider",
+      "title": "Bill Withers — Lean on Me, provider arrangement",
+      "catalog_url": "https://midifiles.com/midi/bill-withers/lean-on-me",
+      "kind": "commercial-midi-offer",
+      "status": "Indexed provider listing found; no purchase. Verify that the MIDI includes the vocal melody needed by this lesson.",
+      "download_status": "Not retrieved; standard provider terms and required parts still to review.",
+      "musical_accuracy_verified": false,
+      "reviewed_on": "2026-10-29",
+      "app_integration": false
+    }
+  ]
+}

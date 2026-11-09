@@ -1,0 +1,684 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "ml-canary-rollout-with-rollback",
+  "title": "Canary Release",
+  "primary_collection": "software-evolution-delivery",
+  "preview": "http://127.0.0.1:43079/pattern/ml-canary-rollout-with-rollback",
+  "body_word_count": 1487,
+  "sources": [
+    {
+      "title": "Canary Release",
+      "author": "Danilo Sato (2014), published on martinfowler.com",
+      "url": "https://martinfowler.com/bliki/CanaryRelease.html",
+      "supports": "Established name, staged real-user exposure, release progression and restoration; author is Sato, not Fowler."
+    },
+    {
+      "title": "Canarying Releases",
+      "author": "Alec Warner and Štěpán Davidovič with contributors, Google SRE Workbook",
+      "url": "https://sre.google/workbook/canarying-releases/",
+      "supports": "Population and duration, attributable representative metrics, evaluation tradeoffs and contaminated comparisons."
+    },
+    {
+      "title": "Analysis",
+      "author": "Argo Rollouts documentation",
+      "url": "https://argo-rollouts.readthedocs.io/en/stable/features/analysis/",
+      "supports": "Successful, failed and inconclusive analysis; inconclusive runs can pause and require an explicit next decision."
+    },
+    {
+      "title": "Use canary traffic shifting",
+      "author": "Amazon SageMaker AI documentation",
+      "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-blue-green-canary.html",
+      "supports": "Documented two-step fleet traffic shift, baking periods and restoration under configured alarms; differs from original four-stage teaching fixture."
+    },
+    {
+      "title": "Auto-Rollback Configuration and Monitoring",
+      "author": "Amazon SageMaker AI documentation",
+      "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-configuration.html",
+      "supports": "CloudWatch alarm prerequisites, release-specific dimensions and monitoring configuration; no automatic invention of quality checks."
+    },
+    {
+      "title": "Ensuring rollback safety during deployments",
+      "author": "Sandeep Pokkunuri, AWS Builders’ Library",
+      "url": "https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/",
+      "supports": "Version compatibility and data/protocol concerns across forward and backward transitions."
+    }
+  ],
+  "code": {
+    "status": "passed",
+    "command": "python3 canary_release.py",
+    "output": [
+      "10%: 0/10 failed; ADVANCE",
+      "25%: 3/25 failed; ROLL BACK",
+      "candidate requests already served: 35"
+    ],
+    "checks": [
+      "default 10%/25% replay advances then restores after35candidate requests",
+      "candidate3/25=12% failure rate vs endpoint5/100=5%;22quality labels and1error",
+      "quality-only regression restores despite healthy serving",
+      "0requests/too few requests/missing or partial labels hold",
+      "known breach outranks missing evidence and minimum counts",
+      "exact5% serving and10% quality threshold equality passes",
+      "healthy100% stage promotes; healthy full replay185candidate/400total",
+      "one lag window yields60candidate requests and6candidate failures",
+      "invalid index/share/scenario rejected"
+    ],
+    "mutation_checks": [
+      {
+        "fault": "equality incorrectly breaches serving limit",
+        "detected": true
+      },
+      {
+        "fault": "quality gate omitted",
+        "detected": true
+      },
+      {
+        "fault": "partial labels approve expansion",
+        "detected": true
+      },
+      {
+        "fault": "router omits last selected request",
+        "detected": true
+      }
+    ],
+    "limits": [
+      "Deterministic fixed100request windows, not elapsed time or unique people",
+      "No statistical inference, retries, in-flight effects, capacity or state repair",
+      "Incumbent assumed warm, healthy, compatible and able to resume traffic",
+      "A hold ends replay; live exposure continues unless routing changes separately"
+    ],
+    "widget_cross_check": {
+      "status": "passed",
+      "combinations": 48,
+      "dimensions": [
+        "serving/quality/healthy",
+        "10/25% initial share",
+        "ready/pending labels",
+        "10/30 minimum requests",
+        "0/1 lag window"
+      ],
+      "preserved_widget_source": true
+    }
+  },
+  "native": [
+    {
+      "path": "/assets/software-engineering/canary-release-gate.svg",
+      "labels": 24,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 720,
+      "height": 872
+    },
+    {
+      "path": "/assets/software-engineering/canary-release-gate-mobile.svg",
+      "labels": 21,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 360,
+      "height": 1104
+    },
+    {
+      "path": "/assets/software-engineering/canary-release-exposure.svg",
+      "labels": 16,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 720,
+      "height": 720
+    },
+    {
+      "path": "/assets/software-engineering/canary-release-exposure-mobile.svg",
+      "labels": 19,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 360,
+      "height": 996
+    }
+  ],
+  "browser": [
+    {
+      "path": "/assets/software-engineering/canary-release-gate.svg",
+      "labels": 24,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 720,
+      "height": 872
+    },
+    {
+      "path": "/assets/software-engineering/canary-release-gate-mobile.svg",
+      "labels": 21,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 360,
+      "height": 1104
+    },
+    {
+      "path": "/assets/software-engineering/canary-release-exposure.svg",
+      "labels": 16,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 720,
+      "height": 720
+    },
+    {
+      "path": "/assets/software-engineering/canary-release-exposure-mobile.svg",
+      "labels": 19,
+      "outside": [],
+      "overlaps": [],
+      "shapes": [],
+      "width": 360,
+      "height": 996
+    },
+    {
+      "viewport": 1440,
+      "pageWidth": 1440,
+      "headings": [
+        "Purpose and problem",
+        "Core idea",
+        "How it works",
+        "Worked example",
+        "When to use it",
+        "Tradeoffs and common mistakes",
+        "Related patterns",
+        "Sources"
+      ],
+      "figures": [
+        {
+          "src": "/assets/software-engineering/canary-release-gate.svg",
+          "loaded": true
+        },
+        {
+          "src": "/assets/software-engineering/canary-release-exposure.svg",
+          "loaded": true
+        }
+      ],
+      "highlighting": [
+        {
+          "focusable": true,
+          "tokens": 189,
+          "colors": [
+            "rgb(122, 45, 137)",
+            "rgb(23, 74, 139)",
+            "rgb(72, 86, 76)",
+            "rgb(138, 59, 34)",
+            "rgb(123, 66, 24)",
+            "rgb(23, 96, 67)"
+          ]
+        }
+      ],
+      "links": [
+        "/pattern/blue-green-deployment",
+        "/pattern/ml-shadow-deployment",
+        "/pattern/feature-toggle",
+        "/pattern/ml-continuous-model-evaluation"
+      ],
+      "copyable": true
+    },
+    {
+      "viewport": 390,
+      "pageWidth": 390,
+      "headings": [
+        "Purpose and problem",
+        "Core idea",
+        "How it works",
+        "Worked example",
+        "When to use it",
+        "Tradeoffs and common mistakes",
+        "Related patterns",
+        "Sources"
+      ],
+      "figures": [
+        {
+          "src": "/assets/software-engineering/canary-release-gate-mobile.svg",
+          "loaded": true
+        },
+        {
+          "src": "/assets/software-engineering/canary-release-exposure-mobile.svg",
+          "loaded": true
+        }
+      ],
+      "highlighting": [
+        {
+          "focusable": true,
+          "tokens": 189,
+          "colors": [
+            "rgb(122, 45, 137)",
+            "rgb(23, 74, 139)",
+            "rgb(72, 86, 76)",
+            "rgb(138, 59, 34)",
+            "rgb(123, 66, 24)",
+            "rgb(23, 96, 67)"
+          ]
+        }
+      ],
+      "links": [
+        "/pattern/blue-green-deployment",
+        "/pattern/ml-shadow-deployment",
+        "/pattern/feature-toggle",
+        "/pattern/ml-continuous-model-evaluation"
+      ],
+      "copyable": true
+    },
+    {
+      "viewport": 320,
+      "pageWidth": 320,
+      "headings": [
+        "Purpose and problem",
+        "Core idea",
+        "How it works",
+        "Worked example",
+        "When to use it",
+        "Tradeoffs and common mistakes",
+        "Related patterns",
+        "Sources"
+      ],
+      "figures": [
+        {
+          "src": "/assets/software-engineering/canary-release-gate-mobile.svg",
+          "loaded": true
+        },
+        {
+          "src": "/assets/software-engineering/canary-release-exposure-mobile.svg",
+          "loaded": true
+        }
+      ],
+      "highlighting": [
+        {
+          "focusable": true,
+          "tokens": 189,
+          "colors": [
+            "rgb(122, 45, 137)",
+            "rgb(23, 74, 139)",
+            "rgb(72, 86, 76)",
+            "rgb(138, 59, 34)",
+            "rgb(123, 66, 24)",
+            "rgb(23, 96, 67)"
+          ]
+        }
+      ],
+      "links": [
+        "/pattern/blue-green-deployment",
+        "/pattern/ml-shadow-deployment",
+        "/pattern/feature-toggle",
+        "/pattern/ml-continuous-model-evaluation"
+      ],
+      "copyable": true,
+      "keyboard_code_scroll": true
+    },
+    {
+      "collection": "software-evolution-delivery",
+      "article": "ml-canary-rollout-with-rollback",
+      "navigation": "collection route and verse gallery to article passed",
+      "related_routes": "all returned 200"
+    }
+  ],
+  "interactive_browser": {
+    "status": "passed",
+    "cases": [
+      {
+        "viewport": 1440,
+        "case": "default serving failure",
+        "decision": "ROLL BACK",
+        "exposed": 35,
+        "failures": 3,
+        "nextShare": 0,
+        "wrong": 1,
+        "output": "ROLL BACK. Candidate exposure: 35/200. Candidate serving failures: 3. Next candidate share: 0%.",
+        "width": 686,
+        "scrollWidth": 686
+      },
+      {
+        "viewport": 1440,
+        "case": "one lag window",
+        "decision": "ROLL BACK",
+        "exposed": 60,
+        "failures": 6,
+        "nextShare": 0,
+        "wrong": 2,
+        "output": "ROLL BACK. Candidate exposure: 60/300. Candidate serving failures: 6. Next candidate share: 0%.",
+        "width": 686,
+        "scrollWidth": 686
+      },
+      {
+        "viewport": 1440,
+        "case": "quality-only failure",
+        "decision": "ROLL BACK",
+        "exposed": 35,
+        "failures": 0,
+        "nextShare": 0,
+        "wrong": 5,
+        "output": "ROLL BACK. Candidate exposure: 35/200. Candidate serving failures: 0. Next candidate share: 0%.",
+        "width": 686,
+        "scrollWidth": 686
+      },
+      {
+        "viewport": 1440,
+        "case": "missing labels",
+        "decision": "HOLD",
+        "exposed": 10,
+        "failures": 0,
+        "nextShare": 10,
+        "wrong": 0,
+        "output": "HOLD. Candidate exposure: 10/100. Candidate serving failures: 0. Next candidate share: 10%.",
+        "width": 686,
+        "scrollWidth": 686
+      },
+      {
+        "viewport": 1440,
+        "case": "healthy promotion",
+        "decision": "PROMOTE",
+        "exposed": 185,
+        "failures": 0,
+        "nextShare": 100,
+        "wrong": 8,
+        "output": "PROMOTE. Candidate exposure: 185/400. Candidate serving failures: 0. Next candidate share: 100%.",
+        "width": 686,
+        "scrollWidth": 686
+      },
+      {
+        "viewport": 1440,
+        "case": "insufficient sample",
+        "decision": "HOLD",
+        "exposed": 10,
+        "failures": 0,
+        "nextShare": 10,
+        "wrong": 0,
+        "output": "HOLD. Candidate exposure: 10/100. Candidate serving failures: 0. Next candidate share: 10%.",
+        "width": 686,
+        "scrollWidth": 686
+      },
+      {
+        "viewport": 390,
+        "case": "default serving failure",
+        "decision": "ROLL BACK",
+        "exposed": 35,
+        "failures": 3,
+        "nextShare": 0,
+        "wrong": 1,
+        "output": "ROLL BACK. Candidate exposure: 35/200. Candidate serving failures: 3. Next candidate share: 0%.",
+        "width": 333,
+        "scrollWidth": 333
+      },
+      {
+        "viewport": 390,
+        "case": "one lag window",
+        "decision": "ROLL BACK",
+        "exposed": 60,
+        "failures": 6,
+        "nextShare": 0,
+        "wrong": 2,
+        "output": "ROLL BACK. Candidate exposure: 60/300. Candidate serving failures: 6. Next candidate share: 0%.",
+        "width": 333,
+        "scrollWidth": 333
+      },
+      {
+        "viewport": 390,
+        "case": "quality-only failure",
+        "decision": "ROLL BACK",
+        "exposed": 35,
+        "failures": 0,
+        "nextShare": 0,
+        "wrong": 5,
+        "output": "ROLL BACK. Candidate exposure: 35/200. Candidate serving failures: 0. Next candidate share: 0%.",
+        "width": 333,
+        "scrollWidth": 333
+      },
+      {
+        "viewport": 390,
+        "case": "missing labels",
+        "decision": "HOLD",
+        "exposed": 10,
+        "failures": 0,
+        "nextShare": 10,
+        "wrong": 0,
+        "output": "HOLD. Candidate exposure: 10/100. Candidate serving failures: 0. Next candidate share: 10%.",
+        "width": 333,
+        "scrollWidth": 333
+      },
+      {
+        "viewport": 390,
+        "case": "healthy promotion",
+        "decision": "PROMOTE",
+        "exposed": 185,
+        "failures": 0,
+        "nextShare": 100,
+        "wrong": 8,
+        "output": "PROMOTE. Candidate exposure: 185/400. Candidate serving failures: 0. Next candidate share: 100%.",
+        "width": 333,
+        "scrollWidth": 333
+      },
+      {
+        "viewport": 390,
+        "case": "insufficient sample",
+        "decision": "HOLD",
+        "exposed": 10,
+        "failures": 0,
+        "nextShare": 10,
+        "wrong": 0,
+        "output": "HOLD. Candidate exposure: 10/100. Candidate serving failures: 0. Next candidate share: 10%.",
+        "width": 333,
+        "scrollWidth": 333
+      },
+      {
+        "viewport": 320,
+        "case": "default serving failure",
+        "decision": "ROLL BACK",
+        "exposed": 35,
+        "failures": 3,
+        "nextShare": 0,
+        "wrong": 1,
+        "output": "ROLL BACK. Candidate exposure: 35/200. Candidate serving failures: 3. Next candidate share: 0%.",
+        "width": 267,
+        "scrollWidth": 267
+      },
+      {
+        "viewport": 320,
+        "case": "one lag window",
+        "decision": "ROLL BACK",
+        "exposed": 60,
+        "failures": 6,
+        "nextShare": 0,
+        "wrong": 2,
+        "output": "ROLL BACK. Candidate exposure: 60/300. Candidate serving failures: 6. Next candidate share: 0%.",
+        "width": 267,
+        "scrollWidth": 267
+      },
+      {
+        "viewport": 320,
+        "case": "quality-only failure",
+        "decision": "ROLL BACK",
+        "exposed": 35,
+        "failures": 0,
+        "nextShare": 0,
+        "wrong": 5,
+        "output": "ROLL BACK. Candidate exposure: 35/200. Candidate serving failures: 0. Next candidate share: 0%.",
+        "width": 267,
+        "scrollWidth": 267
+      },
+      {
+        "viewport": 320,
+        "case": "missing labels",
+        "decision": "HOLD",
+        "exposed": 10,
+        "failures": 0,
+        "nextShare": 10,
+        "wrong": 0,
+        "output": "HOLD. Candidate exposure: 10/100. Candidate serving failures: 0. Next candidate share: 10%.",
+        "width": 267,
+        "scrollWidth": 267
+      },
+      {
+        "viewport": 320,
+        "case": "healthy promotion",
+        "decision": "PROMOTE",
+        "exposed": 185,
+        "failures": 0,
+        "nextShare": 100,
+        "wrong": 8,
+        "output": "PROMOTE. Candidate exposure: 185/400. Candidate serving failures: 0. Next candidate share: 100%.",
+        "width": 267,
+        "scrollWidth": 267
+      },
+      {
+        "viewport": 320,
+        "case": "insufficient sample",
+        "decision": "HOLD",
+        "exposed": 10,
+        "failures": 0,
+        "nextShare": 10,
+        "wrong": 0,
+        "output": "HOLD. Candidate exposure: 10/100. Candidate serving failures: 0. Next candidate share: 10%.",
+        "width": 267,
+        "scrollWidth": 267
+      }
+    ],
+    "errors": []
+  },
+  "assets": {
+    "status": "passed",
+    "mode": "actual local static public export; isolated source copy includes existing sibling application imports",
+    "local_references": [
+      {
+        "path": "/font-size.js",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/PatternverseLogo.Cr_c3FgX.css",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/LegalLinks.C1VwvvwC.css",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/0.LPYfGvVT.css",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/pattern-mark-presets.Dx3BoDxs.css",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/LibraryViewSwitch.yR3Qs8SB.css",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/MarkdownRenderer.DDyfSN4x.css",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/WorksheetButton.Dsl9OpN0.css",
+        "status": 200
+      },
+      {
+        "path": "/_app/immutable/assets/3.DBGXFlWk.css",
+        "status": 200
+      },
+      {
+        "path": "/icons/patternverse-mark.png",
+        "status": 200
+      },
+      {
+        "path": "/assets/software-engineering/canary-release-gate-mobile.svg",
+        "status": 200
+      },
+      {
+        "path": "/assets/software-engineering/canary-release-gate.svg",
+        "status": 200
+      },
+      {
+        "path": "/assets/software-engineering/canary-release-exposure-mobile.svg",
+        "status": 200
+      },
+      {
+        "path": "/assets/software-engineering/canary-release-exposure.svg",
+        "status": 200
+      }
+    ],
+    "illustration_bytes": [
+      {
+        "path": "/assets/software-engineering/canary-release-gate.svg",
+        "status": 200,
+        "sha256": "2190f9e8e98c568199ac0a8bc5978f192db8cfc30c3bc71844cded04fb1954ac",
+        "matches_source": true
+      },
+      {
+        "path": "/assets/software-engineering/canary-release-gate-mobile.svg",
+        "status": 200,
+        "sha256": "e5461a838003918095ec52c1afadef2a335eb0573e476630509145eb343c90c9",
+        "matches_source": true
+      },
+      {
+        "path": "/assets/software-engineering/canary-release-exposure.svg",
+        "status": 200,
+        "sha256": "a74b93b4d24c4d4bfb392ad483003bf7455c6d43c780db068aace9b9cf2cdf1e",
+        "matches_source": true
+      },
+      {
+        "path": "/assets/software-engineering/canary-release-exposure-mobile.svg",
+        "status": 200,
+        "sha256": "653dc43cd290469c0313fa9bbc61ffce9cddcd946dc2f4d2b4db4d9c6db74bcb",
+        "matches_source": true
+      }
+    ]
+  },
+  "preservation_at_original_verification": {
+    "status": "passed",
+    "existing_content_changed": [
+      "content/collections/machine-learning-training-and-deployment.md",
+      "content/collections/software-evolution-delivery.md",
+      "content/patterns/ml-canary-rollout-with-rollback.md"
+    ],
+    "new_content": [],
+    "other_existing_content_unchanged": 1314,
+    "canonical_id_and_url_retained": true,
+    "old_title_searchable_alias": true,
+    "original_machine_learning_verse_and_context_retained": true,
+    "single_primary_home": "software-evolution-delivery",
+    "former_home_retains_nine_members_and_crosslink": true,
+    "collection_changes_exact_inverse_matches_baseline": true,
+    "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+    "prior_authoring_records_unchanged": 88,
+    "prior_graphics_unchanged": 500,
+    "prior_dimensions_unchanged": 1781,
+    "new_dimensions": 4,
+    "historical_ml_authoring_records_queries_widget_and_original_svg_bytes_unchanged": true,
+    "widget_fence_and_fallback_exactly_preserved": true,
+    "all_protected_tests_renderer_dependencies_build_scripts_unchanged": true,
+    "authoring_documentation_preserved": true,
+    "both_isolated_workspaces_match_current_web_source_and_linked_content": true
+  },
+  "published_compilation": {
+    "entities": 1170,
+    "bytes": 23738013,
+    "sha256": "88fd9fb0899ae4309eddb6ac9cab363610a892ff1b48f3b07bb198a111ce2173",
+    "diagnostics": [],
+    "unresolved_references": []
+  },
+  "verification": {
+    "focused_tests_passed": 46,
+    "unrelated_graphic_failure": "access-over-ownership",
+    "unrelated_type_failure": "VerseSelector.component.test.ts:79 exact option",
+    "public_build": "passed",
+    "visual_review": "Native variants, actual article at desktop/phone, highlighted code, sandboxed controls and diagram viewed; 18 interactive scenarios passed with no errors. All48widget configurations match Python.",
+    "historical_note": "Original review’s former ML collection had nine members. Subsequent authorized Shadow Traffic migration reduces it to eight; Canary remains a crosslink and its sole primary home stays Evolution and Delivery.",
+    "harness_note": "Playwright service-worker-blocking injection conflicts with an opaque-origin sandbox; normal fresh-browser execution passes without that injection. Product sandbox was not weakened."
+  },
+  "limitations": [
+    "Fixed synthetic request windows, not statistical inference or live rollback",
+    "A hold in the replay terminates simulation; live traffic requires a bounded observation policy"
+  ],
+  "version_control": {
+    "local_uncommitted": true,
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

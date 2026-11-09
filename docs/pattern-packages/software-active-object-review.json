@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "active-object",
+  "title": "Active Object",
+  "aliases": ["Concurrent Object"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1409,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Lavender and Schmidt’s original Active Object paper, the authors’ POSA Volume 2 catalog, official Python queue/concurrent.futures/threading documentation, and Akka actor-model documentation. Concurrent Object is preserved as an alias. The original paper’s historical Actor term is acknowledged while broader actor messaging/supervision semantics remain distinct. Proxy, method request, activation queue, scheduler, servant, future, optional guard scheduling, immutable argument/result boundaries, queue capacity, accepted FIFO order, cancellation states, callback self-waits, and graceful non-daemon lifecycle are explicit. A generic multi-worker executor is not assumed to serialize one mutable servant.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["active_stock.py", "demo.py"],
+      "stdout": [
+        "after +3: 3 units",
+        "rejected: negative stock",
+        "after +2: 5 units",
+        "after close: rejected"
+      ],
+      "verification": "Exact four-line demo output on real threads; FIFO stock updates and pre-mutation rejection preserve quantity while later work continues; integer inputs reject Boolean and invalid values; an instrumented real Queue gates the owner to verify asynchronous return, two waiting places, immediate Full, queued cancellation without early queue-space release, timeout without cancellation, and worker-only execution; a gated custom Future proves running cancellation fails and the request completes; two concurrent close callers mark admission closed before a full stop-marker insertion, reject later calls, drain accepted work and join with one marker; a worker completion callback cannot self-close but can enqueue a nonblocking continuation; four concurrent producers perform 100 real accepted updates with exact unique results 1–100 and final quantity 100, without assuming caller start order or fairness; separate owners have independent state and workers; repeated close is safe, non-daemon workers terminate, queue task bookkeeping returns to zero and queues are empty. Gates wrap real Queue/Future seams in tests and do not replace the article worker logic. No durable mailbox, restart supervision, forced interruption, guards, distributed actor-runtime semantics, external effects, cross-object transactions, or CPU-parallelism claim is inferred."
+    },
+    "content": "1287 entities validate with drafts included; published-only compilation contains 1140 entities without diagnostics.",
+    "integration_tests": "All four focused article suites pass: Active Object, Reactor, Proactor, and GoF. Combined run across five files reports 37 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Active Object as its third completed member, preserving Reactor, Proactor, and prior collection contents. Command, Proxy, Proactor, and Reactor retain canonical IDs and primary homes as related links. Active Object has exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1285,
+      "new_content": ["content/patterns/active-object.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "reactor_and_proactor_collection_members_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 53,
+      "prior_graphics_unchanged": 465,
+      "prior_dimensions_unchanged": 1650,
+      "new_dimensions": {
+        "software-engineering/active-object-owner.svg": {
+          "width": 720,
+          "height": 1320
+        },
+        "software-engineering/active-object-owner-mobile.svg": {
+          "width": 360,
+          "height": 1256
+        },
+        "software-engineering/active-object-results.svg": {
+          "width": 720,
+          "height": 1056
+        },
+        "software-engineering/active-object-results-mobile.svg": {
+          "width": 360,
+          "height": 1112
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other existing collection, software verse, or GoF changes.",
+    "illustrations": "Two editable native SVGs explain caller/proxy/activation-queue/owner/scheduler/servant/future collaboration and serialized results, validation failure, and shutdown. Both have separately composed phone variants, meaningful alternatives/captions, the approved fixed white surface, regular Helvetica Neue palette, square geometry, restrained strokes, and precise arrow meanings. The first distinguishes returning the future reference from later resolving its result and keeps the servant’s quantity on the worker side. The control lock guards admission/closure rather than stock access. The second shows +3 returning 3, -5 rejecting before mutation and preserving 3, +2 returning 5, and close stopping admission, draining accepted work, and joining. Execution order is not presented as caller start order, and validation failure is not a general rollback guarantee. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and embedded desktop/phone figures were visually inspected for accuracy, label placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all four related routes returning 200. Concurrency and Resource Management contains Reactor, Proactor, and Active Object; its route and Software Engineering verse gallery open Active Object with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-active-object/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 42827
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ real threaded custom executor for one stock owner. The proxy accepts integer item deltas, rejects Boolean/noninteger inputs, captures immutable deltas and Future references, and admits with put_nowait into a two-place FIFO activation queue. One non-daemon worker owns local quantity and performs every check/update. Zero change queries through the same queue. Negative stock fails before mutation and reaches its future; later work continues. Queued cancellation skips execution when the worker dequeues it, but does not remove its physical queue place early; running cancellation fails and a result-wait timeout is not cancellation. Admission and close share a lock, while servant state relies on worker confinement. Close marks admission closed, appends one stop marker after accepted requests without holding the control lock during a blocking queue put, drains and joins; worker self-join is rejected. task_done balances requests including cancellations and the stop marker. Repeated/concurrent close and 100 updates from four producers are verified with finite gate-based tests, without claiming fairness or caller start ordering. Futures are for observation/cancellation rather than manual client completion. A stuck worker/callback can make close wait indefinitely, and unexpected worker death has no restart/unresolved-request recovery. No guard scheduling, durable mailbox, actor-runtime supervision, distributed execution, external I/O, forced interruption, cross-object transaction, general rollback, or CPU-parallelism guarantee is inferred.",
+  "preview": "http://127.0.0.1:43038/pattern/active-object",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-active-object",
+  "browser_measurements": ".local/software-active-object/browser-checks.json",
+  "browser_check_script": ".local/software-active-object/check-browser.mjs",
+  "build_log": ".local/software-active-object/public-build-isolated.log",
+  "branch": "codex/software-active-object",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

@@ -1,0 +1,176 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Growth and Underinvestment",
+  "metadata_mapping": "Existing concept-draft schema, responsive editable SVG convention, and research sidecar. Only the requested article and necessary assets; no practices, navigation, or publication changes.",
+  "patterns": [
+    {
+      "id": "growth-and-underinvestment",
+      "title": "Growth and Underinvestment",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; suppressed demand, service performance, investment rules, commissioning delay, and capacity recovery",
+      "article": "content/concepts/growth-and-underinvestment.md",
+      "status": "draft",
+      "short_description": "Recognize when inadequate capacity is suppressing the demand used to justify investment, then test capacity needs against service commitments and evidence beyond the order book.",
+      "use_when": [
+        "Service delays are discouraging customers before they place orders.",
+        "Weak bookings appear to justify withholding the capacity needed for better service.",
+        "Investment approval or commissioning takes longer than service can absorb.",
+        "Managers interpret disappearing demand as evidence that a previous capacity concern was imaginary."
+      ],
+      "goals": [
+        "Distinguish inadequate investment from an ordinary capacity limit or prudent restraint.",
+        "Explain how demand observed after service deterioration can mislead the investment decision.",
+        "Separate inquiries, bookings, completed jobs, and backlog.",
+        "Show capacity-building delay and the extra headroom needed to clear old work.",
+        "Expose investment risk if customers fail to return or the resource fails to become usable.",
+        "Keep growth potential, financial feasibility, service standards, and evidence requirements explicit."
+      ],
+      "mechanisms": [
+        "Observe qualified inquiries and refusal reasons alongside actual bookings and delivery quotes.",
+        "Test customer response to credible service improvements with temporary or staged usable capacity.",
+        "Evaluate investment against service commitments and tested demand rather than bookings alone.",
+        "Protect commissioning, training, and transition resources.",
+        "Plan separately for ongoing work and backlog recovery; monitor actual returns before extending investment.",
+        "Choose viable smaller scope, pricing, pacing, or redirection when the larger service cannot be supported."
+      ],
+      "related_patterns": [
+        "limits-to-growth",
+        "drift-to-low-performance",
+        "bottlenecks-and-capacity-constraints"
+      ],
+      "example_user_queries": [
+        "Customers leave because we are slow, then low sales are used to deny more staff.",
+        "Our order book looks weak but we keep losing people when they hear the delivery date.",
+        "How can we prove demand before investing if we cannot serve it without investing?",
+        "We wait so long to expand that the customers have gone by the time capacity arrives.",
+        "Is a shrinking queue good news, or have customers given up?",
+        "We need to distinguish inquiries from actual bookings.",
+        "The budget assumes demand is low, but our service may be causing that low demand.",
+        "Would a temporary capacity trial show whether customers will come back?",
+        "We added enough capacity for new work but old work is still waiting.",
+        "How can we avoid spending on expansion that will sit idle?",
+        "Our delivery standard keeps slipping and expansion never seems urgent.",
+        "When is accepting a smaller reliable service better than chasing growth?"
+      ],
+      "visual": {
+        "type": "loop-qualitative",
+        "question": "Why can poor service conceal the demand that would justify investment?",
+        "assets": [
+          "content/assets/structural-traps/growth-and-underinvestment-print-studio.svg",
+          "content/assets/structural-traps/growth-and-underinvestment-print-studio-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 886,
+            "textBlocks": 18
+          },
+          "phone": {
+            "width": 360,
+            "height": 1667,
+            "textBlocks": 18
+          }
+        },
+        "representation": {
+          "mode": "loop",
+          "title": "Poor service can hide demand from the investment test",
+          "nodes": [
+            [
+              "Delivery delay",
+              "Tess’s finishing queue lengthens quotes"
+            ],
+            [
+              "Bookings",
+              "Some customers decline long waits"
+            ],
+            [
+              "Case for investment",
+              "Owner relies on signed orders"
+            ],
+            [
+              "Usable finishing capacity",
+              "Equipped and prepared operators"
+            ]
+          ],
+          "edges": [
+            "reduces",
+            "supports",
+            "after approval, equipping, and training",
+            "reduces delay"
+          ],
+          "change": "Test delay-sensitive demand and time investment for preparation, rather than waiting only for deterred bookings.",
+          "limit": "Inquiries are not guaranteed orders. Extra capacity may fail if price, product, or quality explains the decline.",
+          "note": "The growth slowdown can be a response to poor service, which then becomes a reason not to improve service.",
+          "interpretation": "Hypothetical feedback map. Long delivery quotes suppress Tess’s bookings. Weak bookings reduce the case for investment; usable finishing capacity arrives only after approval, equipping, and training. Inadequate capacity sustains delivery delay. Backlog recovery additionally requires completions above new bookings long enough to clear inherited work. Change: Test delay-sensitive demand and time investment for preparation. Limitation: Inquiries are not orders or proof that expansion pays; returning demand can consume the added capacity.",
+          "caption": "Hypothetical illustration. Poor service can suppress the bookings used to justify investment. Approval, equipping, and training separate an investment decision from usable capacity. Clearing inherited work also needs a temporary completion surplus over new bookings. Testing qualified demand can inform the decision; inquiries do not prove expansion will pay.",
+          "accumulation_feedback_time_revision": "Make commissioning delay visible and state the completion surplus needed for backlog recovery.",
+          "recovery_condition": "Completed jobs exceed new bookings long enough to clear inherited work."
+        },
+        "alternative_text": "Hypothetical feedback map. Long delivery quotes suppress Tess’s bookings. Weak bookings reduce the case for investment; usable finishing capacity arrives only after approval, equipping, and training. Inadequate capacity sustains delivery delay. Backlog recovery additionally requires completions above new bookings long enough to clear inherited work. Change: Test delay-sensitive demand and time investment for preparation. Limitation: Inquiries are not orders or proof that expansion pays; returning demand can consume the added capacity.",
+        "caption": "Hypothetical illustration. Poor service can suppress the bookings used to justify investment. Approval, equipping, and training separate an investment decision from usable capacity. Clearing inherited work also needs a temporary completion surplus over new bookings. Testing qualified demand can inform the decision; inquiries do not prove expansion will pay.",
+        "style": "Fixed white including dark surroundings; regular Helvetica Neue with Helvetica and Arial fallbacks; ink and secondary text meet contrast on prescribed fills. Green identifies intervention geometry. Essential connections use ink; light construction lines remain contextual."
+      },
+      "source_checked": "2026-11-01",
+      "sources": [
+        {
+          "author": "Peter M. Senge",
+          "year": 1990,
+          "title": "The Fifth Discipline: The Art and Practice of the Learning Organization",
+          "url": "https://www.bookdio.org/_files/ugd/ef8af1_5169a4238fd3412dba674fd8dbd81be6.pdf",
+          "read_method": "Opened and read Chapter 7 discussion of capacity, delivery delay, discouraged demand, weakened investment response, and eroding standards, especially PDF pages 104–111. Scan identifies original 1990 publication.",
+          "supports": "Named Growth and Underinvestment archetype; relationship to Limits to Growth and the decision to build supporting capacity.",
+          "boundary": "Foundational structural account. Teaching narratives and historical interpretations are not treated as controlled empirical evidence, universal proof of growth potential, or measured counterfactual outcomes."
+        },
+        {
+          "author": "Daniel H. Kim / The Systems Thinker",
+          "title": "Growth and Underinvestment: Is Your Company Playing with a Wooden Racket?",
+          "url": "https://thesystemsthinker.com/growth-and-underinvestment-is-your-company-playing-with-a-wooden-racket/",
+          "original_pdf": "https://thesystemsthinker.com/wp-content/uploads/pdfs/030502E.pdf",
+          "read_method": "Opened and read full web article: conditional investment based on poor past performance, capacity commissioning delays, apparent cyclical demand, and alternatives to relying on past results. PDF was identified but its text and screenshot could not be retrieved; no date is inferred from the filename.",
+          "supports": "Self-confirming investment decisions and the risk that waiting for marketplace signals postpones capacity until customers have left.",
+          "boundary": "Practitioner explanation. The unnamed capital-equipment narrative is not presented as a fully identified empirical study; oscillations alone are not treated as a causal diagnostic."
+        },
+        {
+          "author": "Rogelio Oliva and John D. Sterman",
+          "year": 2001,
+          "title": "Cutting Corners and Working Overtime: Quality Erosion in the Service Industry",
+          "url": "https://www.researchgate.net/publication/227447430_Cutting_corners_and_working_overtime_Quality_erosion_in_the_service_industry",
+          "doi": "10.1287/mnsc.47.7.894.9807",
+          "read_method": "Opened author-uploaded full text and read introduction, service-delivery/capacity model structure, and the empirical testing and research-site sections. The research site is a UK bank consumer-lending center; statistical estimation and fit to operating data precede simulation analysis.",
+          "supports": "Field-informed modeling of service capacity, work pressure, effort, training, and eroding norms; distinction between empirical grounding and simulated policy comparisons.",
+          "boundary": "A field-calibrated system dynamics study, not a randomized test showing that expansion always pays. No site-specific coefficients or simulated erosion rates are transferred to the print-studio example."
+        }
+      ],
+      "evidence_boundary": "The scenario and illustration are hypothetical. Qualitative formal comparisons depend on the stated players, actions, preferences, information, timing, and repetition assumptions. Empirical findings retain their source-specific limits. Practical interventions are editorial synthesis, not measured effects of this scenario.",
+      "verification": {
+        "status": "passed",
+        "content": "All forty remain separate drafts with nine sections and one responsive figure each. Only five articles received the authorized qualitative accumulation/timing clarifications; source links, frontmatter, and collection membership are unchanged. Schema and rendered Markdown checks passed.",
+        "visual": "Passed: content/schema validation (1451 entities), rendered Markdown checks for all forty drafts, and unchanged collection membership/source links. All ten revised SVG compositions checked at actual desktop and phone image widths in light and dark surroundings (20 layouts); no text overlap, clipping, card overflow, page overflow, or white-surface errors detected. All five affected articles checked live at 1440px and 390px with updated image dimensions, alternative text, captions, and responsive sources. Causal paths visually traced; no reader-comprehension study or measured scenario effect claimed.",
+        "editorial": "Storage capacity is distinct from actual queued work; capability losses are distinct from slower gains; commissioning delay and backlog recovery headroom are explicit. Admissions versus membership and finite catch-up demand are qualified. Captions, alt text, SVG descriptions, dimensions, and research representations agree."
+      },
+      "example_structure": {
+        "scenario": "Hypothetical narrative; no invented utility scores, numerical trajectory, or probability cutoff is required to follow the example.",
+        "changed_relationship": "Test delay-sensitive demand and time investment for preparation, rather than waiting only for deterred bookings.",
+        "residual_constraints": "Inquiries are not guaranteed orders. Extra capacity may fail if price, product, or quality explains the decline."
+      },
+      "editorial_revision": {
+        "date": "2026-11-01",
+        "purpose": "Explain the general principle through concrete choices, relationships, and consequences; remove illustrative calculation as a reading requirement.",
+        "source_handling": "Existing attributable research and source links retained where still relevant; source_checked remains the original research date."
+      },
+      "illustration_teaching_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the teaching-value audit while retaining every article and its qualitative worked example.",
+        "change": "Preserve the explanatory structure; improve contrast and the interpretive caption.",
+        "source_handling": "Article prose, external source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed."
+      },
+      "accumulation_feedback_time_revision": {
+        "date": "2026-11-01",
+        "change": "Make commissioning delay visible and state the completion surplus needed for backlog recovery.",
+        "source_handling": "Original sources, source-check dates, and empirical qualifications preserved. Qualitative scenario conditions clarified; no measured outcome added.",
+        "verification": "Passed: content/schema validation (1451 entities), rendered Markdown checks for all forty drafts, and unchanged collection membership/source links. All ten revised SVG compositions checked at actual desktop and phone image widths in light and dark surroundings (20 layouts); no text overlap, clipping, card overflow, page overflow, or white-surface errors detected. All five affected articles checked live at 1440px and 390px with updated image dimensions, alternative text, captions, and responsive sources. Causal paths visually traced; no reader-comprehension study or measured scenario effect claimed."
+      }
+    }
+  ]
+}

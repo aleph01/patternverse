@@ -1,0 +1,109 @@
+{
+  "fonts": {
+    "PVDistinctBody": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+    "PVDistinctTitle": "docs/pattern-packages/graphic-design-typeface-fonts/reading-display.woff2"
+  },
+  "method": "Only declared cue hrefs change. Identical source photographs, copy, type, scale, anchors, surface and presentation within each pair. Original native identity candidates; no audience recognition results.",
+  "examples": [
+    {
+      "name": "distinctive-comparison-set",
+      "title": "Compare identity cues among nearby workshop providers",
+      "sources": [
+        {
+          "id": "clay",
+          "file": "audience-pottery-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "coffee",
+          "file": "core-message-coffee-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "description": "Only the two Common issuer-mark hrefs change from paired outline squares to offset solid corners. The Gather mark remains paired squares. The complete listing, all text, fonts, sizes, anchors, colors, image bytes/crops, rules and surfaces remain fixed. This is a bounded comparison with one fictional alternative, not evidence of market-wide uniqueness or audience recognition.",
+      "dimensions": {
+        "wide": [1320, 1036],
+        "stacked": [660, 1964]
+      },
+      "artifacts": [
+        {
+          "id": "directory",
+          "label": "SHARED WORKSHOP LISTING",
+          "height": 850,
+          "width": 610,
+          "masks": [
+            [504, 159, 34, 34],
+            [504, 579, 34, 34]
+          ]
+        }
+      ],
+      "presentation": "Wide: before set beside after set. Narrow: before/after interleaved by artifact. Native artifact content and geometry are preserved."
+    },
+    {
+      "name": "distinctive-small-size",
+      "title": "Preserve the identifying silhouette at small size",
+      "sources": [
+        {
+          "id": "clay",
+          "file": "audience-pottery-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "description": "Only three selected cue hrefs change from engraved rails to solid corner bands: one 24-unit mark in the confirmation, plus 24-unit and 96-unit production-proof renderings. Bounding boxes, placements, paper, copy, fonts, photos/crops and all other attributes stay fixed. The enlarged detail is explanatory, not the intended viewing size. Pixel labels refer to 1x source rendering; responsive display can scale the artwork.",
+      "dimensions": {
+        "wide": [1320, 870],
+        "stacked": [660, 1658]
+      },
+      "artifacts": [
+        {
+          "id": "booking",
+          "label": "BOOKING CONFIRMATION",
+          "height": 390,
+          "width": 610,
+          "masks": [[64, 41, 26, 26]]
+        },
+        {
+          "id": "proof",
+          "label": "EXPLANATORY PRODUCTION PROOF",
+          "height": 230,
+          "width": 610,
+          "masks": [
+            [89, 103, 26, 26],
+            [259, 73, 98, 98]
+          ]
+        }
+      ],
+      "presentation": "Wide: before set beside after set. Narrow: before/after interleaved by artifact. Native artifact content and geometry are preserved."
+    },
+    {
+      "name": "distinctive-unintended-meaning",
+      "title": "Separate an identity cue from a possible verification signal",
+      "sources": [
+        {
+          "id": "studio",
+          "file": "form-open-studios-photo.jpg",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "description": "Only one selected issuer-mark href changes from a fictional shield-and-check design to offset corners. The offer, price, URL, typography, placements, image bytes/crop, colors and surface remain identical. Verification or protection is a possible unintended reading, not an observed audience response. The new mark is not claimed to be unique, learned or legally cleared.",
+      "dimensions": {
+        "wide": [1320, 806],
+        "stacked": [660, 1504]
+      },
+      "artifacts": [
+        {
+          "id": "membership",
+          "label": "STUDIO MEMBERSHIP ANNOUNCEMENT",
+          "height": 620,
+          "width": 610,
+          "masks": [[492, 42, 50, 50]]
+        }
+      ],
+      "presentation": "Wide: before set beside after set. Narrow: before/after interleaved by artifact. Native artifact content and geometry are preserved."
+    }
+  ]
+}

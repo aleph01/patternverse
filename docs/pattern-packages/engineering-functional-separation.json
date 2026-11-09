@@ -1,0 +1,272 @@
+{
+  "title": "Engineering — Functional Separation",
+  "edition": "Draft illustrated field-guide article",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples",
+    "Assumptions for correctness",
+    "When to use it",
+    "Tradeoffs and operating costs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "engineering-functional-separation",
+      "taxonomy_id": "P002",
+      "title": "Functional Separation",
+      "status": "draft",
+      "domain": "Engineering",
+      "family": "Function and Architecture",
+      "entry_type": "terminal pattern",
+      "parent": null,
+      "collections": ["engineering-function-and-architecture"],
+      "summary": "Assign incompatible jobs to different elements, then design the connections they still need.",
+      "identity_resolution": {
+        "decision": "New engineering terminal pattern; Function and Architecture is a navigation family, not a parent.",
+        "existing_catalog_checked": [
+          "engineering-segmentation",
+          "engineering-standardized-module-interfaces",
+          "engineering-replaceable-wear-units",
+          "separate-observation-meaning-and-action"
+        ],
+        "boundary": "Physical function allocation under incompatible operating conditions. Segmentation selects manageable units; process-oriented separation of observation, interpretation, and action concerns reasoning stages, not an engineering element/interface allocation."
+      },
+      "use_when": [
+        "One element must satisfy incompatible environments or working conditions.",
+        "Improving one function repeatedly makes another worse.",
+        "The conflict path and required surviving interfaces can be identified."
+      ],
+      "goals": [
+        "Give each job suitable working conditions",
+        "Make required interactions explicit",
+        "Compare the original conflict with the added interface burden"
+      ],
+      "mechanisms": [
+        "Identify incompatible functional requirements",
+        "Allocate jobs to distinct elements or regions",
+        "Specify connections for required power, information, force, or material transfer",
+        "Control unwanted transfer and verify the operating envelope"
+      ],
+      "not_ideal_when": [
+        "The functions are compatible and a shared element already meets the duty.",
+        "The dominant conflict path remains effectively shared.",
+        "The added connection burden defeats the function being protected."
+      ],
+      "example_user_queries": [
+        "Our pump needs bearing oil but the process fluid cannot accept it.",
+        "Two jobs in the same component keep forcing conflicting design choices.",
+        "Should we move the power electronics outside the measurement enclosure?",
+        "The reference drifts as the drive cabinet warms up.",
+        "We moved the electronics away and the sensor signal became slower.",
+        "How do we decide which functions need separate elements?",
+        "Can separate functional regions stay in one assembly?",
+        "The parts are farther apart but heat still reaches the sensitive structure.",
+        "What new problems do we create when we separate the sensor and amplifier?",
+        "Should a low-heat sensor front end stay near the measurement point?",
+        "How is dividing a machine for service different from separating its jobs?",
+        "Which functions must share a connection even after we split them?"
+      ],
+      "related_patterns": [
+        {
+          "taxonomy_id": "P001",
+          "id": "engineering-segmentation",
+          "title": "Segmentation",
+          "relationship": "Neighbor chooses independently manageable units; physical service boundaries and function allocation can differ. Not a parent.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P003",
+          "id": "engineering-function-integration",
+          "title": "Function Integration",
+          "relationship": "Combines compatible jobs; can complement separation elsewhere in a system.",
+          "article_status": "draft"
+        },
+        {
+          "taxonomy_id": "P035",
+          "title": "Disturbance Isolation",
+          "relationship": "Attenuates unwanted coupling without necessarily reallocating jobs; separation can still require isolation.",
+          "article_status": "planned"
+        },
+        {
+          "taxonomy_id": "P095",
+          "title": "Isolate Metrology from Working Loads",
+          "relationship": "Provides an independent structural reference path; moving a heat source does not necessarily provide that path.",
+          "article_status": "planned"
+        }
+      ],
+      "worked_examples": [
+        {
+          "name": "Pump wet region and lubricated bearing housing",
+          "kind": "illustrative",
+          "baseline": "Chosen bearing lubricant is incompatible with the process-fluid requirement.",
+          "intervention": "Place lubricated bearings outside the wetted region; retain a continuous shaft through an appropriate casing seal.",
+          "held_fixed": ["Fluid duty", "required shaft support", "torque transmission"],
+          "evidence": "Functional regions and necessary shaft crossing are visible in an original cutaway.",
+          "limits": "No contamination level, leakage rate, alignment tolerance, seal selection, or pump rating is calculated. Bearing housing seals and intervening space also require design."
+        },
+        {
+          "name": "External power stage for a measuring machine",
+          "kind": "illustrative",
+          "intervention": "Relocate power electronics and cooling outside the reference enclosure.",
+          "held_fixed": ["Reference geometry and supports", "measurement task", "electrical duty"],
+          "fixture": {
+            "reference_length_mm": 250,
+            "assumed_expansion_coefficient_per_K": 2e-5,
+            "prescribed_uniform_temperature_rises_K": [4, 1]
+          },
+          "computed": {
+            "free_length_changes_micrometres": [20, 5]
+          },
+          "limits": "Uniform temperature and unconstrained expansion. The prescribed temperatures are not predicted outcomes of the relocation. No heat-flow model or material selection."
+        },
+        {
+          "name": "Remote high-impedance sensor",
+          "kind": "illustrative failure comparison",
+          "held_fixed": [
+            "Source resistance",
+            "capacitance per metre",
+            "ideal high-input-resistance receiver",
+            "unit step"
+          ],
+          "fixture": {
+            "source_resistance_ohms": 100000,
+            "cable_capacitance_F_per_m": 1e-10,
+            "cable_lengths_m": [2, 20]
+          },
+          "computed": {
+            "cable_capacitances_F": [2e-10, 2e-9],
+            "time_constants_seconds": [2e-5, 0.0002],
+            "t90_microseconds": [46.05170185988092, 460.51701859880916]
+          },
+          "equations": ["tau = R C", "received_fraction(t) = 1 - exp(-t/tau)", "t90 = ln(10) tau"],
+          "limits": "Passive lumped-capacitance model. Settling, not propagation delay. Omits resistance/inductance of cable, input capacitance, leakage, pickup, and active-driver dynamics. No noise or amplifier-stability prediction. A local front end is a design candidate, not a universal repair."
+        }
+      ],
+      "sources": [
+        "https://www.pumpworks.com/wp-content/uploads/2026/01/Installation_Operation_and_Maintenance_Manual_-Rev.2-1.pdf",
+        "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/shaft-seal-1116516",
+        "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=957076",
+        "https://openstax.org/books/university-physics-volume-2/pages/1-3-thermal-expansion",
+        "https://www.analog.com/media/cn/training-seminars/design-handbooks/Hardware_Design_Techniques_Section9.pdf",
+        "https://openstax.org/books/university-physics-volume-2/pages/10-5-rc-circuits"
+      ],
+      "source_notes": [
+        {
+          "source": "PumpWorks, PWA-IL manual, DESIGN-3–4 (PDF pages 9–10)",
+          "url": "https://www.pumpworks.com/wp-content/uploads/2026/01/Installation_Operation_and_Maintenance_Manual_-Rev.2-1.pdf",
+          "accessed": "2026-10-27",
+          "basis": "Read casing/seal-chamber and power-end descriptions, bearing roles, and oil/grease lubrication arrangements.",
+          "boundary": "Supports component allocation for that model; the original horizontal schematic is not a drawing of this vertical inline product. No manufacturer geometry, operating limit, contamination outcome, or performance figure is reused."
+        },
+        {
+          "source": "KSB, Shaft seal",
+          "url": "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/shaft-seal-1116516",
+          "accessed": "2026-10-27",
+          "basis": "Read shaft/casing sealing function, mechanical-seal leakage and heat discussion, and dependence on operating conditions.",
+          "boundary": "Supports an imperfect, condition-dependent boundary. No universal seal selection, operating procedure, or zero-leakage claim."
+        },
+        {
+          "source": "Li et al., Machine Tool Thermal Error Measurement and Prediction via Wireless Microscope, 2024",
+          "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=957076",
+          "accessed": "2026-10-27",
+          "basis": "Read abstract and introduction identifying structural thermal deformation from internal sources and ambient temperature.",
+          "boundary": "General mechanism only. The cabinet layout and uniform temperature fixtures are hypothetical; no paper measurement, accuracy percentage, or compensation result is transferred."
+        },
+        {
+          "source": "OpenStax, University Physics Volume 2, 1.3 Thermal Expansion",
+          "url": "https://openstax.org/books/university-physics-volume-2/pages/1-3-thermal-expansion",
+          "accessed": "2026-10-27",
+          "basis": "Read linear-expansion relation and its use with temperature change.",
+          "boundary": "Coefficient, length, and temperature rises are explicit teaching assumptions; they do not establish a temperature reduction from the cabinet move."
+        },
+        {
+          "source": "Analog Devices, Hardware Design Techniques, Section 9, printed pages 86–87 / PDF pages 85–86",
+          "url": "https://www.analog.com/media/cn/training-seminars/design-handbooks/Hardware_Design_Techniques_Section9.pdf",
+          "accessed": "2026-10-27",
+          "basis": "Read Figures 9.79–9.80 and adjacent discussion of high-impedance remote sensors, cable capacitance, leakage, and nearby preamplification.",
+          "boundary": "Qualitative evidence for interface burden; the numerical passive RC fixture is original and is not a photodiode/transimpedance amplifier model. No source shielding sketch is copied or presented as a universal grounding rule."
+        },
+        {
+          "source": "OpenStax, University Physics Volume 2, 10.5 RC Circuits",
+          "url": "https://openstax.org/books/university-physics-volume-2/pages/10-5-rc-circuits",
+          "accessed": "2026-10-27",
+          "basis": "Read charging relation, exponential limiting behavior, and RC time-constant units.",
+          "boundary": "Simple passive settling only; not a propagation, pickup, transmission-line, or active-driver stability calculation."
+        }
+      ],
+      "research_lead_status": [
+        {
+          "lead": "University of Michigan Design Heuristics handout",
+          "status": "Not used as evidence; direct PDF fetch returned HTTP 403 during earlier research in this chat. This taxonomy is not represented as its official cards."
+        },
+        {
+          "lead": "J. E. Gordon, Structures: Or Why Things Don’t Fall Down",
+          "status": "Contextual lead only. No specific passage was read for this article, and no claim or illustration is attributed to the book."
+        }
+      ],
+      "graphics": {
+        "decision": "Three static original SVG figures, each with a phone companion; no widget.",
+        "reason": "The region allocation, matched thermal layouts, and two explicitly computed settling curves answer fixed questions. An interactive control would add little to these comparisons.",
+        "style": "Approved fixed-white editorial engineering drawings; regular Helvetica Neue, fine neutral strokes and restrained green.",
+        "generator": "scripts/engineering-functional-separation-visuals.mjs",
+        "figures": [
+          {
+            "asset": "content/assets/engineering/functional-separation-pump.svg",
+            "phone_asset": "content/assets/engineering/functional-separation-pump-mobile.svg",
+            "learning_question": "Which jobs occupy distinct pump regions, and what still connects them?",
+            "held_fixed": ["Fluid duty", "shaft-support requirement", "torque transmission"],
+            "changed": "Bearing lubrication is allocated outside the wetted chamber; a seal manages the shaft penetration.",
+            "arrow_meaning": "Process-fluid flow",
+            "phone_composition": "Same full-width section with larger labels and greater vertical callout spacing.",
+            "alt": "Pump section shows the wetted impeller chamber on the left, a shaft seal at its right wall, an intervening space, and two bearings in a separate lubricated housing. The continuous shaft crosses these regions.",
+            "caption": "Original schematic, not to scale. Green arrows show process-fluid flow; the shaft remains a mechanical connection. The shaft seal controls the casing penetration. Separate bearing-housing seals and the intervening space also matter; the drawing does not establish contamination control or seal performance."
+          },
+          {
+            "asset": "content/assets/engineering/functional-separation-thermal-layout.svg",
+            "phone_asset": "content/assets/engineering/functional-separation-thermal-layout-mobile.svg",
+            "learning_question": "What changes when the heat-generating power stage leaves the reference enclosure?",
+            "held_fixed": [
+              "Reference geometry and supports",
+              "measurement task",
+              "electrical duty"
+            ],
+            "changed": "The power stage and its cooling path move into an external cabinet; a cable remains.",
+            "arrow_meaning": "Qualitative heat paths, not computed heat flux",
+            "phone_composition": "Stacked matched sections retained; greater space between cases and larger labels.",
+            "alt": "Two stacked machine sections retain the same reference bar and supports. In the first, the power stage shares the measurement enclosure; in the second, it sits in an external cabinet connected by cable, with its cooling path outside.",
+            "caption": "Matched schematic layouts retain the reference and electrical duty. Arrows indicate qualitative heat paths, not computed heat flux. The separate temperature-sensitivity calculation assumes uniform prescribed temperature rises; relocation alone does not establish a change from 4 K to 1 K."
+          },
+          {
+            "asset": "content/assets/engineering/functional-separation-cable.svg",
+            "phone_asset": "content/assets/engineering/functional-separation-cable-mobile.svg",
+            "learning_question": "What settling burden can a longer cable impose on a high-impedance sensor?",
+            "held_fixed": [
+              "100 kΩ source resistance",
+              "100 pF/m assumed cable capacitance",
+              "ideal high-input-resistance receiver",
+              "unit-step input"
+            ],
+            "changed": "Cable length changes from 2 m to 20 m.",
+            "arrow_meaning": "No flow arrows; circuit paths are electrical connections and plot axes show time and received fraction.",
+            "phone_composition": "Circuit and plot remain stacked, with larger labels and greater circuit-to-plot spacing.",
+            "alt": "A sensor represented by a voltage source and resistance drives a cable capacitance at the receiver. Computed step-response curves compare the assumed 2 metre and 20 metre cables, marking their different times to reach 90 percent.",
+            "caption": "Calculated passive RC teaching model: the same 100 kΩ source drives cable capacitance of 100 pF/m. Solid and dashed curves distinguish 2 m and 20 m. This is settling lag, not cable propagation time, a noise prediction, or an amplifier-stability analysis."
+          }
+        ],
+        "assets": [
+          "content/assets/engineering/functional-separation-pump.svg",
+          "content/assets/engineering/functional-separation-pump-mobile.svg",
+          "content/assets/engineering/functional-separation-thermal-layout.svg",
+          "content/assets/engineering/functional-separation-thermal-layout-mobile.svg",
+          "content/assets/engineering/functional-separation-cable.svg",
+          "content/assets/engineering/functional-separation-cable-mobile.svg"
+        ],
+        "provenance": "Original editable schematic geometry and numerically evaluated RC traces. No traced manufacturer/book drawings, borrowed photographs, raster generation, or simulated temperature fields."
+      }
+    }
+  ]
+}

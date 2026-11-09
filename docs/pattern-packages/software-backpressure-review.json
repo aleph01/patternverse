@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "data-backpressure",
+  "title": "Backpressure",
+  "aliases": ["Back Pressure"],
+  "primary_collection": "software-reliability-failure-handling",
+  "primary_collection_title": "Reliability and Failure Handling",
+  "body_word_count": 1424,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Seven primary references: Reactive Streams 1.0.4 specifies demand-bounded delivery and non-pausable sources; Node.js documents normal writable admission/readiness, pipeline coordination, threshold versus total memory and independent transform buffers; Flink establishes the spaced spelling Back Pressure and output-buffer constraints propagating upstream; Kafka 4.1 documents buffer blocking limits and additional memory; Python closing, synchronization and task documentation establish the actual ownership, suspension and cooperative cancellation behavior. Backpressure is capacity feedback, not a fixed rate quota or durable processing acknowledgment. A normal writable backpressure false can follow an accepted chunk, so it must not trigger resubmission; error/closure also require handling because drain may never arrive. Original 5000/2000/6000 rates, export, stream processor and retained-log 180000/90-second cases remain. Code, event-gated experiment and native illustrations are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["transfer.py", "demo.py"],
+      "stdout": ["while blocked: 1 0", "finished: 3 6 True"],
+      "verification": "Actual article fences run unchanged on Python 3.11+. A real Event holds the first write while repeated event-loop turns leave source reads at one and completed bytes at zero; release resumes the three sequential writes with peak one unfinished callback, six bytes and a closed source. Empty input, zero-length chunks, order/counts and caller-owned destination lifetime are verified. A callback with gated finally cleanup keeps the next source read blocked until its TemporaryFile closes. Exact source/sink errors preserve prior completed effects, stop further reads and close actual source/callback files. Cancellation during the second write closes owned files without reversing the first write or reading the third chunk. Pre-start cancellation leaves the source caller-owned and explicitly closed by the caller. All created tasks are awaited and no background task remains. Original steady-rate calculations match 6000 places in two seconds, 180000 backlog in sixty seconds and ninety-second net drain. No total-memory bound, real database/file transfer, deadline, worker pool, retry, durable acknowledgment, remote cancellation or reversal is inferred."
+    },
+    "content": "1296 entities validate including drafts; published-only compilation has 1149 entities without diagnostics. Counts unchanged because the canonical article is revised in place.",
+    "integration_tests": "Seven focused suites pass: Backpressure, Queue-Based Load Leveling, Bulkhead, Circuit Breaker, Retry with Backoff and Jitter, Timeout and GoF. Across eight files, 46 checks pass and the pre-existing global authored-graphic coverage check fails for access-over-ownership; four other global graphic checks pass. The final article suite passes again after the readiness/error wording clarification. Canonical title, spaced alias, one primary home, both verse memberships, former collection cross-link, no duplicate, unchanged 23-member GoF collection, exact copyable highlighted Python, responsive figures/dimensions, metadata hash and alias search are verified. Earlier tests unchanged.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native generator, actual-code validator, new integration test, authoring JSON/documentation, concept registry and review record. Article/collection Markdown follow existing conventions.",
+    "collection": "Revised data-backpressure in place, preserving canonical ID/URL/title/summary, Data Engineering tags/verse and historical import metadata. Added Software Engineering membership and the spaced Back Pressure alias. Its one primary home moves to Reliability and Failure Handling as the sixth member, after Queue-Based Load Leveling. Only this item is removed from Streaming & event processing, whose count becomes thirteen and which retains a cross-link. All five earlier primary members, other articles/collections, verse files, prior authoring records and GoF entries remain. No new article, collection, future stub, practice or worksheet. Original article/SVG archived locally.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/patterns/data-backpressure.md",
+        "content/collections/data-engineering-streaming-event-processing.md",
+        "content/collections/software-reliability-failure-handling.md"
+      ],
+      "other_existing_content_unchanged": 1293,
+      "new_content": [],
+      "no_duplicate_article_or_new_collection": true,
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_other_articles_unchanged": true,
+      "all_other_collections_unchanged": true,
+      "existing_verses_unchanged": true,
+      "canonical_id_route_title_summary_data_tags_and_verse_preserved": true,
+      "prior_five_primary_collection_members_preserved": true,
+      "former_collection_keeps_crosslink_and_13_other_members": true,
+      "historical_data_engineering_import_unchanged": true,
+      "earlier_article_integration_tests_unchanged": true,
+      "original_article_and_figure_archived_locally": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 65,
+      "prior_graphics_unchanged": 477,
+      "prior_dimensions_unchanged": 1694,
+      "updated_dimension": {
+        "data-engineering/backpressure.svg": {
+          "before": {
+            "width": 720,
+            "height": 560
+          },
+          "after": {
+            "width": 720,
+            "height": 1072
+          }
+        }
+      },
+      "new_dimensions": {
+        "data-engineering/backpressure-mobile.svg": {
+          "width": 360,
+          "height": 1216
+        },
+        "software-engineering/backpressure-pull.svg": {
+          "width": 720,
+          "height": 1048
+        },
+        "software-engineering/backpressure-pull-mobile.svg": {
+          "width": 360,
+          "height": 1144
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The unchanged standard public build succeeds in an isolated source snapshot with Public web build checks passed. Revised article, two collections, authoring/docs, generator/validator, test, concept registry, manifest and four SVGs match staged sources. Gallery-card paths match the reviewed registry. Private environment files excluded and PUBLIC_DROPBOX_APP_KEY empty to disable local sync. Hash-verified native copy-on-write clones reduce disk use only for this task’s identical asset snapshots/generated copies; temporary clones remain outside scanned output and the helper tolerates directories recreated by the build. Source, shared output, earlier previews and build implementation remain unchanged. After success only this task’s redundant .svelte-kit/output compiler directory is removed; the finished preview remains. No dependency/renderer changes.",
+    "illustrations": "Two editable native figures with separate phone compositions. The canonical comparison shows steady-rate input 5000 records/s, completion 2000/s, free buffer places 6000 and growth 3000/s, filling in two seconds. Separate forward data arrows and upstream capacity-permission return arrows distinguish delivery from feedback. Labels state that excess work stays outside the controlled boundary and non-pausable sources need policy. The awaited-write figure matches the real code: one first-byte chunk read, unfinished write held by an event, no next read while blocked, completion permits further reads, then three chunks/six bytes and closed source. Error/cancellation closing is qualified by ownership beginning when transfer starts; callback owns sink cleanup. Fixed white, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained strokes, meaningful alt/captions. Four variants have zero measured outside labels, overlaps or outside rectangles; concept paths fit 96-by-96 with stroke. Native/embedded desktop and phone figures, labels, contrast, captions, code viewports and gallery visually inspected. One existing dimension updated; three added; all other dimensions preserved.",
+    "browser": "Actual production article checked at 1440, 390 and 320 CSS pixels: eight exact H2s, two loaded responsive figures, two exact selectable syntax-highlighted Python blocks, distinct token colors, focusable code, keyboard horizontal scrolling on a genuinely overflowing block at 320 pixels, no page overflow and all four related routes returning 200. Existing collection route and Software Engineering gallery reach the canonical article with correct primary breadcrumb and final concept paths. Pagination reaches the sixth member. Former Streaming & event processing cross-link reaches the same canonical route. Desktop/phone article tops, both embedded figures, code viewports and gallery visually inspected; no console/page errors.",
+    "built_assets": {
+      "build_root": ".local/software-backpressure/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 42850
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 7,
+          "y": 17,
+          "width": 82,
+          "height": 26
+        },
+        {
+          "x": 13.5,
+          "y": 43.5,
+          "width": 66,
+          "height": 27
+        }
+      ]
+    },
+    "disk_space_management": {
+      "status": "passed",
+      "native_compaction": {
+        "status": "passed",
+        "files": 5684,
+        "logical_bytes_cloned": 1157528884,
+        "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+      },
+      "during_standard_build": {
+        "status": "passed",
+        "build_command": "node scripts/build-public-web.mjs",
+        "build_exit_code": 0,
+        "compaction_passes": [
+          {
+            "status": "passed",
+            "files": 5684,
+            "logical_bytes_cloned": 1157528884,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5684,
+            "logical_bytes_cloned": 1157528884,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5684,
+            "logical_bytes_cloned": 1157528884,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5684,
+            "logical_bytes_cloned": 1157528884,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5684,
+            "logical_bytes_cloned": 1157528884,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5684,
+            "logical_bytes_cloned": 1157528884,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          }
+        ],
+        "scope": "Only this task’s byte-identical asset copies, including while they are generated. Each native clone is hash-verified before atomic file replacement. Source, build implementation and other previews are unchanged."
+      },
+      "temporary_clones_outside_scanned_output": ".local/software-backpressure/clone-temporaries",
+      "redundant_compiler_output_removed_after_successful_build": ".local/software-backpressure/build-workspace/apps/web/.svelte-kit/output",
+      "finished_build_and_running_preview_preserved": true,
+      "source_shared_output_and_earlier_previews_unchanged": true
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Existing data-backpressure is revised in place, preserving canonical ID/URL/title/summary, Data Engineering tags/verse and allocation asset path, original 5000/2000/6000 steady-rate arithmetic, CSV/compression export, Flink slow-sink diagnosis, retained-log backlog 180000 and net-drain 90-second calculation, Kafka bounded blocking caveat and historical import metadata. Back Pressure is a spaced spelling, not a different pattern. The one primary home moves to Reliability and Failure Handling; Streaming & event processing keeps a cross-link and thirteen other members. Original article/SVG archived locally. Original Python 3.11+ transfer owns a closeable incremental synchronous generator once its coroutine starts, awaits each asynchronous writer before requesting the next item and counts only completed callbacks. The generator must advance without blocking I/O and produce bounded chunks; callback work/cleanup must finish before return, without detached operations. A real Event gates the first writer while source-read count remains one and completed bytes remain zero. Three chunks of lengths 1/2/3 finish with six bytes and a closed source after owned release/join. The caller owns destination lifetime and pre-start source cleanup. No worker pool, per-chunk task queue, hard total-memory bound, deadline, timed rate limiter, durable acknowledgment, retries, deduplication or remote rollback is supplied. Tests verify real suspension, zero read-ahead during the held write and its cleanup, peak one unfinished callback, resume/order/counts, empty input, zero-length chunks, exact source/sink errors, real TemporaryFile closure, cancellation after ownership starts and caller-owned pre-start cleanup. Prior completed writes remain visible. All created tasks are awaited. The events model a controlled writer; no actual network/database transfer, complete memory bound, deadline, cancellation of remote work or durable business acknowledgment is inferred.",
+  "preview": "http://127.0.0.1:43050/pattern/data-backpressure",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-backpressure",
+  "browser_measurements": ".local/software-backpressure/browser-checks.json",
+  "browser_check_script": ".local/software-backpressure/check-browser.mjs",
+  "build_log": ".local/software-backpressure/public-build-isolated.log",
+  "branch": "codex/software-backpressure",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

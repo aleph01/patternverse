@@ -1,0 +1,129 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Threshold Contribution Problems",
+  "metadata_mapping": "Existing concept schema and responsive SVG convention; existing publication status retained; local edits only.",
+  "patterns": [
+    {
+      "id": "threshold-contribution-problems",
+      "title": "Threshold Contribution Problems",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; threshold public goods and conditional commitments",
+      "article": "content/concepts/threshold-contribution-problems.md",
+      "related_patterns": [
+        "the-public-goods-dilemma",
+        "the-volunteers-dilemma",
+        "cold-starts-and-critical-mass"
+      ],
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Van de Kragt, Orbell, and Dawes, The Minimal Contributing Set as a Solution to Public Goods Problems (1983)",
+          "url": "https://www.cambridge.org/core/journals/american-political-science-review/article/abs/minimal-contributing-set-as-a-solution-to-public-goods-problems/2A0FA64FDDB11B6BF4346E49E74E133F",
+          "supports": "Early fixed-contribution threshold experiments, minimal contributing set, communication and coalition designation.",
+          "boundary": "Publisher abstract read. No unverified sample details, effect sizes, or universal causal claim are added. The paper proposes criticalness as an explanation; the article does not treat that proposed mechanism as demonstrated for the hypothetical backers."
+        },
+        {
+          "title": "Bagnoli and Lipman, Provision of Public Goods: Fully Implementing the Core through Private Contributions (1989)",
+          "url": "https://sites.bu.edu/blipman/files/2021/10/public_goods.pdf",
+          "supports": "Refund-on-failure mechanism; complete information and flexible contribution assumptions; distinction between ordinary Nash and undominated perfect equilibrium.",
+          "read_method": "Author-hosted published PDF downloaded and extracted locally. Introduction, formal definitions, single-unit mechanism, and discussion of inefficient Nash equilibria read.",
+          "boundary": "The theorem uses a different contribution space and stronger equilibrium selection than the binary backer example. No guaranteed provision or elimination of all ordinary Nash failure equilibria is claimed."
+        },
+        {
+          "title": "List and Lucking-Reiley, The Effects of Seed Money and Refunds on Charitable Giving (2002)",
+          "url": "https://econweb.ucsd.edu/~jandreon/PhilanthropyAndFundraising/Volume%202/8%20List%20Lucking-Riley%202002.pdf",
+          "doi": "10.1086/324392",
+          "supports": "Published field experiment, random assignment of 3,000 households to six fundraising treatments; effects of seed money and refunds; two of three refund campaigns below target and donations returned.",
+          "read_method": "Published PDF read, including methods, solicitation terms, and results. Author version also inspected; article links the published version.",
+          "boundary": "Selected prospective donors in one university capital campaign. Raising more donations does not establish net profitability or predict hypothetical backer behavior; preparation and solicitation costs matter."
+        },
+        {
+          "title": "Kickstarter, Creator Handbook: Funding",
+          "url": "https://www.kickstarter.com/help/handbook/funding",
+          "supports": "Official all-or-nothing model: below-goal campaigns do not collect pledges; creators should budget for the promised delivery and rewards.",
+          "read_method": "Official handbook opened and read in this conversation, including funding model, budget, and support guidance.",
+          "checked": "2026-11-02",
+          "boundary": "Does not establish Maya’s extra full-collection or shortfall-return conditions, a public-good structure for all campaigns, guaranteed payment collection, or delivery."
+        }
+      ],
+      "status": "published",
+      "short_description": "Recognize when a shared project needs a minimum combined contribution, then distinguish protecting pledges from coordinating enough contributors to make provision possible.",
+      "use_when": [
+        "What has to happen before an all-or-nothing film can proceed?",
+        "Maya crowdfunds a free-to-watch documentary. Ari, Bea, and Cam’s agreed shares are jointly sufficient; Dev can benefit without paying."
+      ],
+      "goals": [
+        "Recognize the familiar predicament before specialist terminology.",
+        "Explain the defining mechanism and distinguish neighboring concepts.",
+        "Binary complete-information teaching benchmark separated from the campaign’s practical procedure. Refund protection and coordination are distinct; no-contribution can remain a weak equilibrium when an unsuccessful isolated pledge is costless. Kickstarter supports only the documented all-or-nothing rule, not this campaign’s extra guarantees.",
+        "Separate hypothetical behavior, model results, documented cases, and practical editorial proposals."
+      ],
+      "mechanisms": [
+        "Collect only after valid sufficient pledges; authorize production only after actual sufficient collection; use the expressly agreed shortfall-return rule.",
+        "Payment failures, production risk, unequal contributions, and administration remain. These extra conditions are not attributed to every platform."
+      ],
+      "example_user_queries": [
+        "What has to happen before an all-or-nothing film can proceed?"
+      ],
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "What has to happen before an all-or-nothing film can proceed?",
+        "assets": [
+          "content/assets/structural-traps/threshold-audio-guide.svg",
+          "content/assets/structural-traps/threshold-audio-guide-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 867,
+            "textBlocks": 20
+          },
+          "phone": {
+            "width": 360,
+            "height": 1782,
+            "textBlocks": 20
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Ari, Bea, and Cam’s agreed pledges are all required in this plan for Maya’s free-to-watch film. Valid sufficient pledges permit collection; only sufficient actual collection permits production. A missing pledge blocks collection; a shortfall triggers this hypothetical campaign’s return rule. Dev can watch without pledging. Change: Protect failed pledges, coordinate enough real backing, and check collected funds before production. Limitation: Payment failures, production risk, unequal contributions, and administration remain. These extra conditions are not attributed to every platform.",
+        "caption": "Hypothetical illustration. The crowdfunding example separates sufficient commitments, successful collection, and eventual production. All-or-nothing pledges address one failure risk; the hypothetical shortfall-return rule adds a separate protection. Funding does not guarantee completion, and preparation still needs coverage.",
+        "representation": {
+          "scenario": "Maya crowdfunds a free-to-watch documentary. Ari, Bea, and Cam’s agreed shares are jointly sufficient; Dev can benefit without paying.",
+          "interpretation": "Hypothetical qualitative illustration. Ari, Bea, and Cam’s agreed pledges are all required in this plan for Maya’s free-to-watch film. Valid sufficient pledges permit collection; only sufficient actual collection permits production. A missing pledge blocks collection; a shortfall triggers this hypothetical campaign’s return rule. Dev can watch without pledging. Change: Protect failed pledges, coordinate enough real backing, and check collected funds before production. Limitation: Payment failures, production risk, unequal contributions, and administration remain. These extra conditions are not attributed to every platform.",
+          "relationship_key": "The pledge shares are jointly required at this plan’s agreed amounts. Arrows below show conditional authorization steps, not a guarantee that the next step succeeds.",
+          "changed_relationship": "Collect only after valid sufficient pledges; authorize production only after actual sufficient collection; use the expressly agreed shortfall-return rule.",
+          "residual_constraints": "Payment failures, production risk, unequal contributions, and administration remain. These extra conditions are not attributed to every platform.",
+          "phone_treatment": "Separate composition retains readable labels and the same alternatives, dependencies, causal links, or chronology."
+        }
+      },
+      "example_structure": {
+        "scenario": "Maya crowdfunds a free-to-watch documentary. Ari, Bea, and Cam’s agreed shares are jointly sufficient; Dev can benefit without paying.",
+        "changed_relationship": "Collect only after valid sufficient pledges; authorize production only after actual sufficient collection; use the expressly agreed shortfall-return rule.",
+        "required_assumptions": "Binary complete-information teaching benchmark separated from the campaign’s practical procedure. Refund protection and coordination are distinct; no-contribution can remain a weak equilibrium when an unsuccessful isolated pledge is costless. Kickstarter supports only the documented all-or-nothing rule, not this campaign’s extra guarantees.",
+        "residual_constraints": "Payment failures, production risk, unequal contributions, and administration remain. These extra conditions are not attributed to every platform.",
+        "comparison": "Qualitative relationships only; no invented utility scores, numerical trajectories, or measured improvement claimed."
+      },
+      "evidence_boundary": "The central scenario and resulting behavior are hypothetical. Source-specific formal and empirical limits remain explicit. The expected recognizability of a classic example is editorial judgment, not a reader-study result.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "change": "Maya crowdfunds a free-to-watch documentary. Ari, Bea, and Cam’s agreed shares are jointly sufficient; Dev can benefit without paying.",
+        "scope": "Article, two editable responsive SVGs, caption, alternative text, manifest dimensions, and current research notes. All forty retain separate identities and existing publication status.",
+        "source_handling": "Existing source identities and original source-check dates retained. Current examples are no longer the earlier workshop, booking, or dashboard scenarios. Research claims are not reclassified as measured outcomes.",
+        "verification": "Passed current content, semantic consistency, responsive browser, SVG bounds, and text-contrast checks; see verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

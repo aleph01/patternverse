@@ -1,0 +1,87 @@
+{
+  "format_version": 1,
+  "title": "Life Strategies — Satisficing",
+  "verse": "decision-making",
+  "metadata_mapping": "Canonical frontmatter uses the existing entity schema. Richer recommendation metadata remains in this sidecar; the current search index does not automatically ingest these queries.",
+  "patterns": [
+    {
+      "id": "satisficing",
+      "title": "Satisficing",
+      "domain": "Life patterns and decision making",
+      "short_description": "Define what an acceptable option must provide, then stop searching when one meets that standard.",
+      "collections": ["life-strategies", "decision-making-patterns"],
+      "use_when": [
+        "A useful acceptance standard can be stated and verified.",
+        "An adequate option is available but further possibilities keep extending the search.",
+        "Comparing more alternatives consumes attention or delays the benefit of choosing.",
+        "A bounded task needs an explicit completion threshold."
+      ],
+      "goals": [
+        "Choose an option that serves the actual purpose",
+        "Give search a usable stopping rule",
+        "Preserve important requirements while releasing optional comparisons"
+      ],
+      "mechanisms": [
+        "Specify an aspiration level as checkable acceptance conditions",
+        "Separate requirements from optional preferences",
+        "Search sequentially and stop when an option meets the standard",
+        "Review thresholds when evidence changes or the search yields no acceptable option"
+      ],
+      "tags": ["decision-making", "life-patterns", "search", "stopping-rules"],
+      "related_patterns": [
+        "define-the-decision-before-comparing-options",
+        "make-trade-offs-explicit",
+        "separate-reversible-from-irreversible-decisions",
+        "obliquity"
+      ],
+      "not_ideal_when": [
+        "The acceptance standard omits something important or cannot yet be verified.",
+        "A small, known set of options can be compared reliably at little additional cost.",
+        "Exhaustion or an attractive candidate is being used to excuse an unmet requirement.",
+        "The person needs to clarify the purpose before setting a threshold."
+      ],
+      "example_user_queries": [
+        "I found something suitable but I keep looking for a better option.",
+        "How do I know when I have done enough research to choose?",
+        "Every time I compare options I add another thing I want.",
+        "I spend more time picking tools than using them.",
+        "We keep debating places to meet and never arrange the meeting.",
+        "What would count as good enough for this particular decision?",
+        "I want a stopping rule without abandoning my real requirements.",
+        "How do I separate what I need from nice extras?",
+        "I keep polishing a small task long after it serves its purpose.",
+        "What should I do if nothing meets the standard I set?",
+        "I worry that an unseen option will always be better.",
+        "When is more comparison actually worth the time?"
+      ],
+      "practice": {
+        "id": "set-a-good-enough-stopping-rule",
+        "estimated_minutes": 10,
+        "format": "Optional individual reflection using the existing Pattern Language renderer",
+        "boundary": "Records requirements, evidence, and a user-selected next move. It does not verify facts, recommend a candidate automatically, or perform a transaction."
+      },
+      "visual": {
+        "article_decision": "none",
+        "reason": "Concrete sequential-search examples explain the stopping rule without suggesting measured option scores or a guaranteed optimum.",
+        "concept_graphic": "A sequence of inspected candidates ends at the first accented candidate that reaches an ink acceptance boundary; two gray candidates remain beyond the search endpoint.",
+        "registry": "apps/web/src/lib/illustrations/pattern-graphics.json"
+      },
+      "sources": [
+        {
+          "title": "Herbert A. Simon, A Behavioral Model of Rational Choice (1955)",
+          "url": "https://doi.org/10.2307/1884852",
+          "text_url": "https://cooperative-individualism.org/simon-herbert_a-behavioral-model-of-rational-choice-1955-feb.pdf",
+          "accessed": "2026-10-28",
+          "supports": "Satisfactory alternatives, limited information and evaluation, and changing aspiration levels during search."
+        },
+        {
+          "title": "Artinger, Gigerenzer, and Jacobs, Satisficing: Integrating Two Traditions (2022)",
+          "url": "https://www.aeaweb.org/articles?id=10.1257/jel.20201396",
+          "accessed": "2026-10-28",
+          "supports": "Definition and decision-environment-dependent effectiveness; reviewed the publisher abstract, not the full article."
+        }
+      ],
+      "evidence_boundary": "A practical adaptation of a decision framework. The desk, venue, and notice examples are original scenarios. No guarantee of happiness, absence of regret, or universally superior choice is claimed."
+    }
+  ]
+}

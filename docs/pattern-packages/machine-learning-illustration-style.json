@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "reviewed": "2026-10-27",
+  "direction": "Light editorial numerical diagrams, following Architecture and Filmmaking",
+  "scope": {
+    "articles": 33,
+    "original_illustrations": 33,
+    "compact_companions": 33,
+    "interactive_explorers": 31
+  },
+  "typography": "Helvetica Neue regular; Helvetica and Arial fallbacks",
+  "surface": "Fixed white, including dark browser appearance",
+  "palette": {
+    "ink": "#252c28",
+    "context": "#f1f2ef",
+    "construction": "#a6aca3",
+    "mechanism": "#00855b",
+    "light_accent": "#edf5f0"
+  },
+  "composition": {
+    "hashed_feature": "New aligned-slot comparison, composed separately for desktop and phone; actual FNV-1a assignments retained",
+    "other_illustrations": "Mechanism coordinates and numerical labels retained; regular typography, square boundaries, and shared palette applied",
+    "color_legends": "Orange renamed gray wherever the secondary-series color changed"
+  },
+  "preservation": {
+    "article_prose_unchanged": 33,
+    "recommendation_metadata_unchanged": true,
+    "calculations_and_reset_behavior": "Preserved; executable checks and all article browser suites verify behavior"
+  },
+  "reproducibility": "All 33 existing generators finish through ml-illustration-style.mjs",
+  "verification": {
+    "ml_unit_checks": 190,
+    "all_asset_bounds": "66 variants measured; no out-of-bounds text",
+    "contact_sheets_reviewed": 11,
+    "representative_article_viewports": [393, 1440],
+    "browser_suite": "133 passed in the whole-set run; two legacy desktop navigation expectations updated for the current library filter. All eight checks in those two suites passed on the final rerun.",
+    "unit_command": "pnpm exec vitest run src/lib/ml-*.test.ts --maxWorkers=2 --testTimeout=30000",
+    "web_type_check": "zero errors and warnings",
+    "focused_lint": "passed",
+    "formatting": "passed",
+    "production_build": "passed",
+    "public_build_checks": "passed",
+    "built_assets_match_sources": 66,
+    "browser_unique_checks_passed": 135,
+    "browser_duplicate_phone_contact_review_skipped": 1,
+    "navigation_rerun_directory": "/private/tmp/patternverse-ml-style-navigation",
+    "local_preview": "http://127.0.0.1:42861/pattern/ml-hashed-feature?revision=light-editorial",
+    "local_preview_http_status": 200
+  },
+  "evidence_directory": "/private/tmp/patternverse-ml-style-browser"
+}

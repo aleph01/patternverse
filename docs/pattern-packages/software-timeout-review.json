@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "timeout",
+  "title": "Timeout",
+  "aliases": ["Timeouts"],
+  "primary_collection": "software-reliability-failure-handling",
+  "primary_collection_title": "Reliability and Failure Handling",
+  "body_word_count": 1367,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary references: Michael Nygard’s Release It! publisher catalog lists Timeouts under stability patterns; Marc Brooker’s AWS article supports timeout selection, scarce-resource retention, phase coverage and retry risks; the gRPC deadline guide distinguishes timeout duration from a deadline and describes propagation/clock handling/server cancellation; Gráinne Sheerin’s gRPC article establishes possible disagreement between server success and client expiry; official Python 3.11 task/timeout and event-loop documentation supports cooperative cancellation, timeout_at semantics, cleanup, and local monotonic timing. Timeout is canonical and Timeouts is the plural catalog alias. Deadline is a related representation rather than a duplicate alias article. Quote scenario, budget arithmetic, mock dependencies, code and diagrams are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["quote_budget.py", "demo.py"],
+      "stdout": [
+        "fast: (2, 500)",
+        "shipping: released",
+        "slow: timeout",
+        "zero: expired before work"
+      ],
+      "verification": "Actual article fences run unchanged on Python 3.11+. Exact four-line demo output; malformed, Boolean, negative, nonfinite and excessive budgets reject before work; zero expires before callable creation; positive integer, float and 60000 ms maximum accepted. Controlled-clock accounting with real timeout contexts proves one deadline for serial stages, 120 ms leaves 180 ms of a 300 ms budget, exact equality and overrun prevent the next stage, and an overdue second-stage return is rejected. Native asyncio timers expire during each phase; explicitly gated awaited cleanup proves the caller remains pending until cleanup finishes and observes TimeoutError afterward, with no detached work. Dependency ConnectionError and dependency-origin TimeoutError preserve identity without attributing them to this timer. External caller cancellation propagates as CancelledError after cleanup, with no false TimeoutError conversion. A cleanup exception overrides timeout and preserves cancellation context. Blocking synchronous work returns before explicit expiry checks reject its late result, demonstrating no preemption. A dependency that suppresses one cancellation still cannot publish an overdue value; no guarantee is inferred for indefinite suppression. Current-task cancellation state clears, independent calls succeed after errors, legitimate zero-valued business data remains distinct from timeout, all owned jobs are observed, and task inventory returns to baseline. Tests do not claim real-time return bounds, actual network cancellation, remote rollback, thread termination or retry safety."
+    },
+    "content": "1295 entities validate including drafts; published-only compilation contains 1148 entities without diagnostics.",
+    "integration_tests": "Four focused article suites pass: Timeout, Scoped Resource Management, Scoped Locking and GoF. Across five files, 37 checks pass and the pre-existing global authored-graphic coverage check fails for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, article integration test, authoring JSON/documentation, concept registry and review record. Article, verse and new collection Markdown follow existing conventions.",
+    "collection": "Created only the needed Reliability and Failure Handling collection with its completed Timeout member, and appended its link to the existing Software Engineering verse. All existing collections and earlier articles remain unchanged. Exactly one primary collection and one Software Engineering verse membership. Request-Reply, existing Circuit Breakers (data-circuit-breakers), Idempotent Receiver and Scoped Resource Management retain canonical IDs and primary homes as related links. No duplicate alias article, future stub, practice or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": ["content/verses/software-engineering.md"],
+      "other_existing_content_unchanged": 1292,
+      "new_content": [
+        "content/patterns/timeout.md",
+        "content/collections/software-reliability-failure-handling.md"
+      ],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "all_existing_collections_unchanged": true,
+      "all_nine_concurrency_members_preserved": true,
+      "software_verse_only_appends_new_home_link": true,
+      "new_collection_contains_only_completed_timeout": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 60,
+      "prior_graphics_unchanged": 472,
+      "prior_dimensions_unchanged": 1678,
+      "new_dimensions": {
+        "software-engineering/timeout-budget.svg": {
+          "width": 720,
+          "height": 1040
+        },
+        "software-engineering/timeout-budget-mobile.svg": {
+          "width": 360,
+          "height": 1240
+        },
+        "software-engineering/timeout-outcome.svg": {
+          "width": 720,
+          "height": 1152
+        },
+        "software-engineering/timeout-outcome-mobile.svg": {
+          "width": 360,
+          "height": 1424
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The standard public build succeeds in an isolated source copy with Public web build checks passed. Task article, new collection, verse link, metadata, generator/validator/test, concept registry, dimensions manifest and native assets match staged sources. Actual collection-card paths match the final reviewed registry. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty to disable local sync. Shared generated output and earlier stage directories were untouched; no renderer, build implementation, project dependency, prior article, existing collection or GoF changes.",
+    "illustrations": "Two editable native SVG figures with separately composed phone variants. The budget comparison uses one consistent desktop scale: 120 ms inventory plus 180 ms shipping within 300 ms, contrasted with 120 ms plus a renewed 300 ms extending to 420 ms. Labels identify units, boundaries and illustrative rather than benchmark status. The outcome comparison separates cooperative local cancellation/finally/TimeoutError from a possible server commit/client expiry/late-reply ordering; arrows mean order within each example, not cross-column causal synchronization. Remote outcome reconciliation and no rollback inference are explicit. Meaningful alt text and captions, fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry and restrained strokes. All four variants have no measured outside labels, label overlaps or outside rectangles. Concept mark measured within its 96-by-96 view box including stroke. Native and actual embedded figures, concept mark, contrast, label placement and desktop/phone readability visually inspected.",
+    "browser": "Actual production article checked at 1440, 390 and 320 CSS pixels: all eight exact H2 headings, two loaded responsive figures, two exact selectable syntax-highlighted Python blocks, distinct token colors, focusable code, keyboard horizontal code scrolling at 320 pixels, no page overflow, and all four related routes returning 200. New primary collection route and Software Engineering verse gallery open Timeout with the correct primary breadcrumb and final concept paths. Desktop/phone article tops, code viewports, both embedded figures and collection gallery visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-timeout/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 36162
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 6.5,
+          "y": 6.5,
+          "width": 85,
+          "height": 83
+        },
+        {
+          "x": 6.5,
+          "y": 64.5,
+          "width": 87,
+          "height": 25
+        }
+      ]
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ serial quote wrapper using one loop.time-based deadline and asyncio.timeout_at in the caller task. Zero-argument async stock and shipping callables share a numeric 0–60000 millisecond budget; Boolean, negative, oversized and nonfinite values reject before work. Zero or exact expiry prevents new work; explicit checks reject overdue synchronous returns and prevent starting shipping after inventory consumes the budget. Success returns an item count and a fee in cents. Cooperative stalled shipping yields to cancellation and runs a finally marker before TimeoutError handling. No detached child tasks or actual network connections are created. Cleanup and cancellation resistance can extend elapsed return time; this is not forced termination, remote rollback, safe retry, process isolation, a network client or a hard wall-clock guarantee. Verification combines controlled-clock accounting (while retaining real timeout contexts) with native timer expiry during both phases, awaited cleanup gates proving delayed caller completion, dependency-error identity, caller cancellation, cleanup exceptions and cancellation context, blocking synchronous returns, one-time cancellation suppression, cleared cancellation counters, independent calls and unchanged task inventory. The finally print models cleanup and the mocks open no sockets or remote connections. There is no latency benchmark, forced termination, remote rollback, thread killing or retry-safety guarantee.",
+  "preview": "http://127.0.0.1:43045/pattern/timeout",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-timeout",
+  "browser_measurements": ".local/software-timeout/browser-checks.json",
+  "browser_check_script": ".local/software-timeout/check-browser.mjs",
+  "build_log": ".local/software-timeout/public-build-isolated.log",
+  "branch": "codex/software-timeout",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

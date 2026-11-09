@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-28",
+  "status": "implemented-locally",
+  "articles": 23,
+  "collections": 1,
+  "figures": 24,
+  "illustration_variants": 48,
+  "article_viewport_checks": 46,
+  "style": "light-editorial",
+  "outline": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked example",
+    "When to use it",
+    "Tradeoffs and common mistakes",
+    "Related patterns",
+    "Sources"
+  ],
+  "validation": {
+    "python_examples": "23 independent examples and behavior assertions passed",
+    "compiler": "24 GoF content checks passed",
+    "web": "37 GoF rendering, search, and safe Markdown checks passed",
+    "navigation_unit": "4 breadcrumb checks passed with drafts included",
+    "content": "907 entities validated with drafts included",
+    "types": "Zero errors and warnings",
+    "lint": "Scoped ESLint passed",
+    "visuals": "All 48 variants measured; no clipped or overlapping labels. All variants visually inspected on desktop and phone contact sheets.",
+    "articles": "All 23 pages at 1440px and 390px. Original code text, token colors, responsive sources, eight headings, and no page overflow verified.",
+    "retired_routes": "All three old collection URLs redirect to the consolidated collection",
+    "public_build": {
+      "status": "blocked-by-unrelated-content",
+      "reason": "Published urge-surfing links to tracking-the-unfolding-experience, which is a draft excluded from the public build."
+    },
+    "navigation_browser": "10 unique desktop and phone checks passed: picker navigation, failed-download fallback, and all three category redirects. Picker rerun after concurrent development-file rebuilds completed."
+  },
+  "preview": "http://127.0.0.1:42982/collection/gof-design-patterns",
+  "evidence_directory": ".local/gof-editorial-rollout"
+}

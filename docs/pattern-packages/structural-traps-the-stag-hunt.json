@@ -1,0 +1,114 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — The Stag Hunt: Cooperation Under Uncertainty",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "the-stag-hunt",
+      "title": "The Stag Hunt: Cooperation Under Uncertainty",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; assurance, strategic uncertainty, and ranked coordination equilibria",
+      "article": "content/concepts/the-stag-hunt.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Rousseau, Discourse on Inequality (1755)",
+          "url": "https://www.gutenberg.org/cache/epub/11136/pg11136.html",
+          "supports": "Historical deer-and-hare passage and participants leaving their posts for an individual opportunity.",
+          "read_method": "Original translated passage and its surrounding discussion read.",
+          "boundary": "Philosophical illustration, not a fully specified modern game or empirical account of actual prehistoric behavior. No numerical payoff or formal equilibrium result attributed to Rousseau."
+        },
+        {
+          "title": "Skyrms, The Stag Hunt (2001)",
+          "url": "https://sites.socsci.uci.edu/~bskyrms/bio/papers/StagHunt.pdf",
+          "supports": "Assurance-game structure, contrast with the prisoner’s dilemma, belief-dependent best responses, risk versus mutual benefit, variations of the safer action payoff, and risk dominance.",
+          "read_method": "Author-hosted March 2001 presidential address read, especially pages 1–4 and notes on assurance and risk dominance.",
+          "boundary": "A formal and philosophical account, not measured hunting returns or tutor utilities or evidence for the proposed guarantee. The hunters’ and tutors’ qualitative preference comparisons are original editorial assumptions, not utilities estimated by this source.",
+          "current_example_check": {
+            "date": "2026-11-02",
+            "read": "Reopened foundational text: stag/hare assumptions and conditional best responses, pp. 1–4.",
+            "boundary": "Current teaching example is a qualitative editorial translation, not an observed intervention outcome."
+          }
+        },
+        {
+          "title": "Charness, Self-Serving Cheap Talk: A Test of Aumann’s Conjecture (2000)",
+          "url": "https://econweb.ucsd.edu/~jandreon/Econ264/papers/Charness%20GEB%202003.pdf",
+          "doi": "10.1006/game.1999.0776",
+          "supports": "Written one-way pre-play messages in Stag Hunt variants, random-rematching methods, and sensitivity to whether the sender communicates before or after choosing an action.",
+          "read_method": "Published PDF methods, treatment payoffs, results, and interpretation read.",
+          "boundary": "The filename includes 2003, but the PDF is Games and Economic Behavior 33 (2000), 177–194. Sessions used ten periods of anonymous random rematching within six-person subgroups, not ten repeated encounters with one known partner. Communication results do not validate a guarantee or all promises."
+        }
+      ],
+      "related_patterns": [
+        "coordination-problems",
+        "the-prisoners-dilemma",
+        "threshold-contribution-problems"
+      ],
+      "status": "published",
+      "short_description": "Recognize when mutually beneficial cooperation depends on confidence in others, then distinguish building credible assurance from reducing the loss if cooperation fails.",
+      "use_when": [
+        "Which choice is best when the other hunter joins?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Build credible assurance about the same joint plan; protection against failure would instead change payoffs.",
+        "Technical hunting risk is set aside. Promises alone may fail; the qualitative rankings do not establish risk dominance."
+      ],
+      "example_structure": {
+        "scenario": "Original stag/hare story now leads; Asha and Ben are stylized hunters in the principal illustration. One-shot simultaneous known-preference benchmark, no binding commitment or reputation, technical hunt risk set aside. Joint stag best, hare dependable, lone stag worst; both matching outcomes are equilibria. Acknowledged readiness may select the joint outcome; tutors’ limited guarantee remains a clearly separate modern application changing payoffs. Qualitative rankings do not establish risk dominance.",
+        "changed_relationship": "Build credible assurance about the same joint plan; protection against failure would instead change payoffs.",
+        "residual_constraints": "Technical hunting risk is set aside. Promises alone may fail; the qualitative rankings do not establish risk dominance.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Which choice is best when the other hunter joins?",
+        "assets": [
+          "content/assets/structural-traps/stag-hunt-course.svg",
+          "content/assets/structural-traps/stag-hunt-course-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 950,
+            "textBlocks": 18
+          },
+          "phone": {
+            "width": 360,
+            "height": 1167,
+            "textBlocks": 15
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Asha and Ben choose stag or hare without observing the other’s choice. Both stag and both hare are double-outlined equilibria. Each prefers stag against stag, but hare against hare. A lone stag hunter loses the dependable fallback. Change: Build credible assurance about the same joint plan; protection against failure would instead change payoffs. Limitation: Technical hunting risk is set aside. Promises alone may fail; the qualitative rankings do not establish risk dominance.",
+        "caption": "Hypothetical illustration. Compare each hunter’s alternatives while holding the other’s action fixed. Mutual stag is preferred by both, yet mutual hare is also stable. Credible readiness and an acknowledged plan can support cooperation; they do not guarantee a partner or remove the cautious equilibrium.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Asha and Ben choose stag or hare without observing the other’s choice. Both stag and both hare are double-outlined equilibria. Each prefers stag against stag, but hare against hare. A lone stag hunter loses the dependable fallback. Change: Build credible assurance about the same joint plan; protection against failure would instead change payoffs. Limitation: Technical hunting risk is set aside. Promises alone may fail; the qualitative rankings do not establish risk dominance.",
+          "relationship_key": "Cells compare simultaneous alternatives, not hunting chronology. Double outlines mark Nash equilibria. The story is a stylized teaching model, not a field observation.",
+          "changed_relationship": "Build credible assurance about the same joint plan; protection against failure would instead change payoffs.",
+          "residual_constraints": "Technical hunting risk is set aside. Promises alone may fail; the qualitative rankings do not establish risk dominance.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Original stag/hare story now leads; Asha and Ben are stylized hunters in the principal illustration. One-shot simultaneous known-preference benchmark, no binding commitment or reputation, technical hunt risk set aside. Joint stag best, hare dependable, lone stag worst; both matching outcomes are equilibria. Acknowledged readiness may select the joint outcome; tutors’ limited guarantee remains a clearly separate modern application changing payoffs. Qualitative rankings do not establish risk dominance.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

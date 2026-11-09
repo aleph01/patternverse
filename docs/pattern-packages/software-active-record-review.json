@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "active-record",
+  "title": "Active Record",
+  "aliases": ["Active Record Pattern", "ActiveRecord"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1441,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six authoritative source notes. Fowler’s Active Record entry in Patterns of Enterprise Application Architecture establishes the record object combining row data, domain behavior, and database access. Rails official basics, validation, transaction, and optimistic-locking documentation supplies concrete framework behavior and qualifications: construction versus persistence, model uniqueness checks versus database constraints, connection-scoped transactions, object state after rollback, and configured version protection. Official Python SQLite documentation supports this implementation’s caller-owned transaction and connection lifetime. The article distinguishes the pattern from Rails’s particular API; its Python example and native diagrams are original teaching material.",
+    "python_examples": "Both actual article fences execute as task.py and demo.py and produce six stated lines exactly. Checks cover printable title boundaries, Boolean completion and positive generated IDs, read-only public properties, invalid rename preservation, local no-rename-after-completion policy, idempotent completion, unsaved construction without SQL, memory changes without automatic save, new insert versus existing update, unchanged-row update behavior, missing/corrupt rows and propagated storage errors, parameterized quoted titles, no hidden commit, assigned IDs retained after rolled-back inserts, object/row divergence after rollback, multiple-record caller rollback, committed cross-connection visibility, and failure when persisting through a closed connection. An explicit stale copy overwrites later completion state, demonstrating that the local rule is not a concurrency guarantee and that no version protection is supplied.",
+    "python_stdout": [
+      "new ID: None",
+      "saved ID: 1",
+      "object done: True",
+      "stored done: False",
+      "committed done: True",
+      "rename: Completed task cannot be renamed"
+    ],
+    "article_tests": "90 article integration tests pass across Active Record and all prior software/GoF suites. Coverage includes canonical ID and aliases without duplicates, one primary home retaining Repository and Data Mapper, verse navigation, eight exact sections, both copyable highlighted Python blocks, accessible responsive figures and manifest dimensions, four resolved related links, search, ten queries, revision hash, and concept mark. Two workers, 20-second test timeout, and 60-second corpus hook timeout bound load on the large corpus.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check retains the unrelated missing access-over-ownership graphic. Combined run: 94 passed and one unrelated failure across 24 files.",
+    "content": "1255 entities validate with drafts included. Published-only corpus contains 1108 entities and no errors.",
+    "collection": "Reused Persistence and Transactions, appending active-record after Repository and Data Mapper. All previous collection body and members remain. No new collection, duplicate alias article, or practice was added. Other collections and the Software Engineering verse remain unchanged.",
+    "public_build": "Production build and public web build checks pass. Actual browser verification used the completed build; no deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the visual generator, executable validator, integration test, authoring sidecar, concept registry, and authoring documentation. This review report is formatted separately.",
+    "visuals": "All four editable native SVG variants load. Native and production-browser measurements report no overlapping or out-of-bounds text labels and no out-of-canvas rectangles. All native renders and actual desktop/phone article figures were visually inspected. The responsibility figure encloses data, local business rules, and persistence methods in one Task object and labels calls versus SQL execution. The rollback comparison labels committed baseline, the writer’s uncommitted database view, restored row state, unchanged in-memory state, and reloading a fresh record on phone. Exact light palette, fixed white surface, regular Helvetica typography, square geometry, contrast, label placement, arrow meanings, captions, and readability were checked. The concept mark appears in the article and gallery.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: eight exact H2 headings, both Python blocks preserved in DOM text, colored syntax tokens, text selection retaining indentation, focusable code blocks, keyboard horizontal code scrolling for task.py at 320px, both phone SVG variants loaded, and no page overflow. Browser selection normally omits the final newline. Actual article tops, code, figures, captions, and collection gallery screenshots were visually inspected.",
+    "navigation_browser": "Data Mapper, Domain Model, Transaction Script, and Service Layer routes return HTTP 200. Persistence and Transactions renders its direct route and three-pattern Software Engineering gallery. The Active Record card opens the canonical route with the correct primary breadcrumb and 3/3 article indicator.",
+    "preservation": "All 23 GoF articles and their collection match actual pre-change SHA-256 hashes. All twenty-one earlier software articles and authoring records remain unchanged. All 433 previous concept marks and 1526 prior asset dimensions are unchanged. The Software Engineering verse, Application Architecture collection, and Domain Modeling and Business Logic collection are byte-for-byte unchanged. Persistence and Transactions retains its prior body and two members, adding only Active Record membership and introduction."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error and zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Python 3.10+ and standard-library SQLite. Original Task policy uses 1–80 printable nonblank title characters, Boolean completion, and positive generated integer IDs. Public properties are read-only; business methods change local state and save issues insert/update SQL. The caller owns commit, rollback, and connection closing. Construction and completion do not save; save does not commit. Rollback does not rewind object fields or clear assigned IDs in this implementation, so affected objects need reloading or discarding. The rename guard checks loaded local state, not current database state. No deletion, callbacks, associations, identity caching, authorization, expected-version check, automatic retry, or cross-database atomicity is implemented. The hand-written API is not a Rails reproduction.",
+  "preview": "http://127.0.0.1:43006/pattern/active-record",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-active-record",
+  "browser_measurements": ".local/software-active-record/browser-checks.json",
+  "browser_check_script": ".local/software-active-record/check-browser.mjs",
+  "preservation_checks": ".local/software-active-record/preservation.json",
+  "build_log": ".local/software-active-record/public-build.log",
+  "branch": "codex/software-active-record",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

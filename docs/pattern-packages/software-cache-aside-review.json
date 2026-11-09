@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "cache-aside",
+  "title": "Cache-Aside",
+  "aliases": ["Lazy Loading (Cache)"],
+  "primary_collection": "software-performance-scalability",
+  "primary_collection_title": "Performance and Scalability",
+  "body_word_count": 1344,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary references: Microsoft catalogs Cache-Aside and application-owned loading/source-first invalidation; AWS identifies the lazy-loading alias, hit/miss steps and write-through contrast; Jas Chhabra at AWS describes cold/shared/local caches, failure amplification, coalescing and expiration; Python documents monotonic elapsed time and bounded memoization. Lazy Loading (Cache) is disambiguated from deferred object construction. No claim that Cache-Aside alone guarantees consistency, that write-through is inherently atomic, or that TTL establishes source age. Original catalog example, runnable program, controlled race analysis and native figures.",
+    "runnable_example": {
+      "status": "passed",
+      "output": ["1200 1200 1", "1300 2", "1300 2", "1400 3", "missing not cached True"],
+      "checks": [
+        "zero value and warm hit",
+        "bounded LRU and recency",
+        "fixed TTL before/equal expiry",
+        "missing and failed expired reload",
+        "source-first ordering and pre-commit failure",
+        "independent local instances",
+        "controlled stale late fill",
+        "TTL from installation not source age",
+        "monotonic default",
+        "cold-cache reload"
+      ],
+      "late_fill_trace": [
+        ["reader reads", 1200],
+        ["writer commits", 1300],
+        ["writer invalidated", true],
+        ["late fill", 1200]
+      ]
+    },
+    "content": "1300 entities validate including drafts; published-only compilation yields 1153 entities without diagnostics. Exactly eight required H2s and one complete Python fence. No practice or worksheet.",
+    "integration_tests": "The corrected new Cache-Aside suite passes all three tests. The initial four-file batch also passes Health Endpoint (3), GoF (24) and four global graphic checks; its one Cache-Aside assertion retained old copied alias labels, which were corrected and all three new checks rerun successfully. Net final coverage is 34 passing checks and one pre-existing global missing-graphic failure for access-over-ownership. Existing test sources and timeout settings unchanged. New tests verify canonical name/alias/search, one primary collection and Software Engineering verse, exact selectable highlighted code, two responsive figures/four dimensions/alts/captions, related links, metadata hash and ten queries.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, code validator, new integration test, metadata/documentation, concept registry, manifest and review record.",
+    "collection": "New Performance and Scalability collection contains only the completed Cache-Aside article. The Software Engineering verse appends a link to this collection and article. No prior article or collection changes; existing Result Caching stays in Data Engineering and is linked as a distinct neighbor. Proxy, CQRS and Load Shedding retain their canonical IDs/homes.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": ["content/verses/software-engineering.md"],
+      "other_existing_content_unchanged": 1297,
+      "new_content": [
+        "content/patterns/cache-aside.md",
+        "content/collections/software-performance-scalability.md"
+      ],
+      "one_new_canonical_article_and_needed_primary_collection": true,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "existing_result_caching_unchanged": true,
+      "all_existing_articles_and_collections_unchanged": true,
+      "verse_change_only_appends_completed_collection": true,
+      "historical_data_engineering_import_unchanged": true,
+      "prior_software_authoring_unchanged": 68,
+      "prior_graphics_unchanged": 480,
+      "prior_dimensions_unchanged": 1706,
+      "new_dimensions": {
+        "software-engineering/cache-aside-paths.svg": {
+          "width": 720,
+          "height": 888
+        },
+        "software-engineering/cache-aside-paths-mobile.svg": {
+          "width": 360,
+          "height": 1664
+        },
+        "software-engineering/cache-aside-race.svg": {
+          "width": 720,
+          "height": 944
+        },
+        "software-engineering/cache-aside-race-mobile.svg": {
+          "width": 360,
+          "height": 1184
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The unchanged standard public build succeeds in an isolated source snapshot with Public web build checks passed. Task article/collection/verse, docs/metadata, generator/validator, test, registry, manifest and four assets match staged source. Dependencies and renderer unchanged. PUBLIC_DROPBOX_APP_KEY is empty; private environment files excluded. Native copy-on-write files save disk only in this task snapshot and identical generated asset copies; each generated clone is hash-verified before replacement. Temporary clones stay outside scanned output. Source, shared output, previous previews and build implementation remain unchanged. Only this task redundant .svelte-kit/output directory is removed after successful build/inspection; finished preview remains.",
+    "illustrations": "Two editable native explanatory figures with separately composed phone versions. The first compares usable hit, miss/expired and application-write paths, with arrows explicitly denoting the next operation, source-first writes and no cross-system atomicity claim. The second shows reader 1200, writer commit 1300, delete, then older fill 1200; integer-cent units are explicit and TTL is qualified as installation age. The actual article program is exercised with a controlled reentrant loader to reproduce this trace. Fixed white, regular Helvetica Neue/Helvetica/Arial, approved palette, square geometry, generous spacing and restrained strokes. Four variants have zero measured outside labels, overlapping labels or outside rectangles. Concept bounds fit 96 by 96 with stroke. All native figures, embedded desktop/phone figures and captions, code viewports, article tops and gallery were visually inspected.",
+    "browser": "Actual production article verified at 1440, 390 and 320 CSS pixels: eight exact H2s, two loaded responsive figures, exact selectable Python program, syntax token colors, focusable code, keyboard horizontal scroll at narrow width and no page overflow. Four related routes return 200. Primary collection route and Software Engineering gallery reach the canonical article with correct primary breadcrumb and reviewed concept paths. No console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-cache-aside/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 36888
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 5,
+          "y": 7,
+          "width": 85,
+          "height": 82
+        },
+        {
+          "x": 27,
+          "y": 32,
+          "width": 56,
+          "height": 17
+        }
+      ]
+    },
+    "disk_space_management": {
+      "status": "passed",
+      "staging": "Native cp -cR copy-on-write clone of content assets in an isolated source snapshot; other source files copied, dependencies symlinked, private environment files excluded.",
+      "during_standard_build": {
+        "status": "passed",
+        "build_command": "node scripts/build-public-web.mjs",
+        "build_exit_code": 0,
+        "compaction_passes": [
+          {
+            "status": "passed",
+            "files": 3851,
+            "logical_bytes_cloned": 776473752,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3851,
+            "logical_bytes_cloned": 776473752,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3851,
+            "logical_bytes_cloned": 776473752,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3851,
+            "logical_bytes_cloned": 776473752,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 3851,
+            "logical_bytes_cloned": 776473752,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5720,
+            "logical_bytes_cloned": 1157667481,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          },
+          {
+            "status": "passed",
+            "files": 5720,
+            "logical_bytes_cloned": 1157667481,
+            "scope": "Only this task’s byte-identical generated asset copies; originals and earlier builds unchanged."
+          }
+        ],
+        "scope": "Only this task’s byte-identical asset copies, including while they are generated. Each native clone is hash-verified before atomic file replacement. Source, build implementation and other previews are unchanged."
+      },
+      "temporary_clones_outside_scanned_output": ".local/software-cache-aside/clone-temporaries",
+      "redundant_compiler_output_removed_after_successful_build": ".local/software-cache-aside/build-workspace/apps/web/.svelte-kit/output",
+      "finished_build_and_running_preview_preserved": true,
+      "source_shared_output_and_earlier_previews_unchanged": true
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original catalog price example with immutable integer cents, authoritative in-memory source, two-entry LRU application-owned cache, fixed ten-second TTL from successful fill and injectable monotonic clock. Configuration is trusted positive finite TTL and positive integer capacity. One thread/process, no network/database deployment. Exact outputs: 1200 1200 1; 1300 2; 1300 2; 1400 3; missing not cached True. Source first then invalidation, hit does not renew TTL, equality at expiry misses, missing raises without fill and zero is a valid value. Expired entries removed lazily; capacity bounded. The separate original interleaving shows reader 1200, writer commit 1300, delete, then old fill 1200. The same article implementation is tested under a controlled reentrant load callback to reproduce that race, without claiming concurrency safety. No synchronization, request coalescing, authorization implementation, negative caching, distributed invalidation, stale-source detection, production cache backend, uncertain-write recovery or strict consistency guarantee. Existing Result Caching remains a separate Data Engineering article about valid computed-result reuse; this article specifies application-managed access paths.",
+  "preview": "http://127.0.0.1:43053/pattern/cache-aside",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-cache-aside",
+  "browser_measurements": ".local/software-cache-aside/browser-checks.json",
+  "browser_check_script": ".local/software-cache-aside/check-browser.mjs",
+  "build_log": ".local/software-cache-aside/public-build-isolated.log",
+  "branch": "codex/software-cache-aside",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

@@ -1,0 +1,455 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "gatekeeper",
+  "title": "Gatekeeper",
+  "aliases": [],
+  "primary_collection": "software-security-access-boundaries",
+  "primary_collection_title": "Security and Access Boundaries",
+  "body_word_count": 1414,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Four primary sources verified. Microsoft Azure Architecture Center establishes the cloud Gatekeeper pattern: limited-privilege public request validation separated from private business processing and storage authority. OWASP establishes least privilege, deny by default, authorization on every request and safe failure. Python documents input limits and the object-pairs decoder hook. OPA documents its separately named Kubernetes Gatekeeper policy product, which is not an alias for the architecture pattern. No existing exact canonical article found; no additional alias invented. Reference Monitor remains a stronger whole-boundary concept; Facade/Proxy/Bulkhead remain distinct existing patterns. Bulkhead reuses its established canonical data-workload-isolation ID.",
+    "sources": [
+      {
+        "title": "Gatekeeper pattern",
+        "author": "Microsoft Azure Architecture Center",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gatekeeper",
+        "supports": "Established limited-privilege public validation fa\u00e7ade, separate private trusted hosts with storage authority, private endpoint and transport considerations, latency/availability costs and platform-control alternative."
+      },
+      {
+        "title": "Authorization Cheat Sheet",
+        "author": "OWASP",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+        "supports": "Least privilege, deny by default, authorization on every request, placement of checks, safe failures, logging and tests. Internal ingress is not a substitute for current operation/object permission."
+      },
+      {
+        "title": "JSON encoder and decoder",
+        "author": "Python documentation",
+        "url": "https://docs.python.org/3/library/json.html",
+        "supports": "Limits for untrusted input and object_pairs_hook for detecting duplicate object fields. Example uses hooks available in Python3, not new 3.15-only APIs."
+      },
+      {
+        "title": "Gatekeeper introduction",
+        "author": "OPA Gatekeeper project",
+        "url": "https://open-policy-agent.github.io/gatekeeper/website/docs/",
+        "supports": "Separately named Kubernetes validating/mutating policy webhook product, not an alias for this cloud architecture pattern."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "accepted O100 x2",
+        "extra-field rejected",
+        "boolean rejected",
+        "quota denied",
+        "other-owner denied"
+      ],
+      "admission_rejection_cases": 49,
+      "body_byte_boundaries": [127, 128, 129],
+      "independent_authorization_cases": 48,
+      "permitted_authorization_cases": 4,
+      "denied_authorization_cases": 44,
+      "sample_handoffs": 3,
+      "sample_blocked_before_handoff": 2,
+      "checks": [
+        "strict body/type/UTF8/JSON/shape/field and duplicate-key rejection before forwarding",
+        "128-byte inclusive body limit before parsing",
+        "immutable selected-field transfer value and fixed callback",
+        "independent owner and business-quota authorization",
+        "current ownership change applies to next preview",
+        "service exceptions propagate without retries or bypass fallback",
+        "sample and all five diagram outcomes agree",
+        "same-process Python state remains accessible; no isolation claim"
+      ]
+    },
+    "content": "All 1307 entities validate. Published-only compilation contains 1160 entities without diagnostics. Eight exact H2s, one complete Python3 program, two figures/four responsive assets, four existing related IDs, ten distinct recommendation queries, no practice/worksheet. Reuses the existing Security and Access Boundaries collection, retaining Reference Monitor first. No new collection or future stub.",
+    "integration_tests": {
+      "passed": 34,
+      "unrelated_failures": 1,
+      "details": "Gatekeeper3, Reference Monitor3, GoF24 and four authored-graphic checks pass. Existing global graphic coverage fails because access-over-ownership lacks a graphic. The Gatekeeper test verifies canonical name, absence of invented aliases, search and primary collection, current collection/verse link, all23GoF members, four canonical related IDs, exact selectable highlighted code, alt/caption/mobile/dimensions, metadata hash and ten queries. Optional absent aliases are normalized to an empty array in the metadata comparison."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses exact in ByRoleOptions, which does not define that property."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, actual-code validator, integration test, authoring JSON/documentation, illustration registry, asset manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-security-access-boundaries.md"],
+      "other_existing_content_unchanged": 1305,
+      "new_content": ["content/patterns/gatekeeper.md"],
+      "existing_primary_collection_member_retained_before_gatekeeper": true,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 76,
+      "prior_graphics_unchanged": 488,
+      "all_prior_dimensions_unchanged": 1736,
+      "new_dimensions": {
+        "software-engineering/gatekeeper-boundary.svg": {
+          "width": 720,
+          "height": 1040
+        },
+        "software-engineering/gatekeeper-boundary-mobile.svg": {
+          "width": 360,
+          "height": 1184
+        },
+        "software-engineering/gatekeeper-decisions.svg": {
+          "width": 720,
+          "height": 880
+        },
+        "software-engineering/gatekeeper-decisions-mobile.svg": {
+          "width": 360,
+          "height": 1144
+        }
+      },
+      "prior_integration_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "preview_web_source_matches_current_source": true,
+      "preview_content_reads_actual_current_content": true
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/gatekeeper-boundary.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1040
+      },
+      {
+        "path": "/assets/software-engineering/gatekeeper-boundary-mobile.svg",
+        "labels": 26,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1184
+      },
+      {
+        "path": "/assets/software-engineering/gatekeeper-decisions.svg",
+        "labels": 26,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 880
+      },
+      {
+        "path": "/assets/software-engineering/gatekeeper-decisions-mobile.svg",
+        "labels": 23,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1144
+      }
+    ],
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 7,
+          "width": 90,
+          "height": 82
+        },
+        {
+          "x": 19,
+          "y": 26,
+          "width": 66,
+          "height": 29
+        }
+      ]
+    },
+    "visual_review": "All four native SVGs and the concept mark inspected. Actual desktop/phone article top, both figures/captions at1440and390px, phone code viewport and two-card primary collection gallery inspected. Fixed white surfaces, regular Helvetica Neue/Helvetica/Arial, requested palette, square geometry, readable labels and precise operation arrows. No clipped or overlapping labels or outside shapes. Phone figures are separately composed. Phone result preserves exact O100 identifier casing. Admitted requests have forwarding arrows; rejected requests show Not called and no forwarding arrow. Concept mark paths match the article/gallery.",
+    "browser": {
+      "status": "passed",
+      "mode": "Actual Vite application renderer using copied web source and current linked content. Not a completed production static export.",
+      "widths": [1440, 390, 320],
+      "details": [
+        {
+          "path": "/assets/software-engineering/gatekeeper-boundary.svg",
+          "labels": 19,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 1040
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-boundary-mobile.svg",
+          "labels": 26,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1184
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-decisions.svg",
+          "labels": 26,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 720,
+          "height": 880
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-decisions-mobile.svg",
+          "labels": 23,
+          "outside": [],
+          "overlaps": [],
+          "shapes": [],
+          "width": 360,
+          "height": 1144
+        },
+        {
+          "viewport": 1440,
+          "pageWidth": 1440,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/gatekeeper-boundary.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/gatekeeper-decisions.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 203,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(23, 74, 139)",
+                "rgb(123, 66, 24)",
+                "rgb(72, 86, 76)",
+                "rgb(138, 59, 34)",
+                "rgb(23, 96, 67)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/reference-monitor",
+            "/pattern/facade",
+            "/pattern/proxy",
+            "/pattern/data-workload-isolation"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 390,
+          "pageWidth": 390,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/gatekeeper-boundary-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/gatekeeper-decisions-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 203,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(23, 74, 139)",
+                "rgb(123, 66, 24)",
+                "rgb(72, 86, 76)",
+                "rgb(138, 59, 34)",
+                "rgb(23, 96, 67)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/reference-monitor",
+            "/pattern/facade",
+            "/pattern/proxy",
+            "/pattern/data-workload-isolation"
+          ],
+          "copyable": true
+        },
+        {
+          "viewport": 320,
+          "pageWidth": 320,
+          "headings": [
+            "Purpose and problem",
+            "Core idea",
+            "How it works",
+            "Worked example",
+            "When to use it",
+            "Tradeoffs and common mistakes",
+            "Related patterns",
+            "Sources"
+          ],
+          "figures": [
+            {
+              "src": "/assets/software-engineering/gatekeeper-boundary-mobile.svg",
+              "loaded": true
+            },
+            {
+              "src": "/assets/software-engineering/gatekeeper-decisions-mobile.svg",
+              "loaded": true
+            }
+          ],
+          "highlighting": [
+            {
+              "focusable": true,
+              "tokens": 203,
+              "colors": [
+                "rgb(122, 45, 137)",
+                "rgb(23, 74, 139)",
+                "rgb(123, 66, 24)",
+                "rgb(72, 86, 76)",
+                "rgb(138, 59, 34)",
+                "rgb(23, 96, 67)"
+              ]
+            }
+          ],
+          "links": [
+            "/pattern/reference-monitor",
+            "/pattern/facade",
+            "/pattern/proxy",
+            "/pattern/data-workload-isolation"
+          ],
+          "copyable": true,
+          "keyboard_code_scroll": true
+        },
+        {
+          "collection": "software-security-access-boundaries",
+          "article": "gatekeeper",
+          "navigation": "collection route and verse gallery to article passed",
+          "related_routes": "all returned 200"
+        }
+      ],
+      "checks": [
+        "all eight exact H2s",
+        "all four SVG variants load with zero label overlaps or outside geometry",
+        "phone SVG selected at narrow widths",
+        "exact code content and text selection",
+        "six highlighting colors and focusable code",
+        "keyboard horizontal code scroll at320px",
+        "no page overflow",
+        "all four related routes return200",
+        "collection route, Software Engineering gallery, authored card graphic and article breadcrumb work",
+        "no browser page or console errors"
+      ]
+    },
+    "live_resources": {
+      "status": "passed",
+      "mode": "Actual Vite development renderer with copied web source and current linked content. Full static export not rerun because disk capacity is still exhausted.",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-boundary-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-boundary.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-decisions-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-decisions.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/gatekeeper-boundary.svg",
+          "status": 200,
+          "sha256": "c544b0c2eaad7970c4ebe9ed37f3b40fc42d665ed6fb200899531d6efe5715c1",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-boundary-mobile.svg",
+          "status": 200,
+          "sha256": "75f49aaf6b3583c0f98fb76b9745c373feec24c76fd8bcb6cfa1c3394c9fea4b",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-decisions.svg",
+          "status": 200,
+          "sha256": "dac929fc705e196096fbd6e4f0eb4139259ac491e3edb678b57609e519c5a484",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/gatekeeper-decisions-mobile.svg",
+          "status": 200,
+          "sha256": "a89150828a6a1093f3ac5b0add74f37328714caf9b6889b7abda932980e26023",
+          "matches_source": true
+        }
+      ]
+    },
+    "production_export": {
+      "status": "not-rerun-disk-capacity",
+      "reason": "The preceding Reference Monitor full-site export failed twice with ENOSPC during prerendering. The volume remains100%used with approximately247MiB reported free, much of it filesystem reserve. This session used the actual application development renderer for article verification rather than repeating the known full-site disk failure.",
+      "completed_export_claimed": false,
+      "repository_build_scripts_renderer_and_dependencies_modified": false,
+      "scope": "Separate task-owned preview runtime copies web source with native copy-on-write and links current content/packages/scripts/dependencies. No private environment files copied. Other preview outputs and earlier work retained."
+    },
+    "native_generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "assets": {
+        "content/assets/software-engineering/gatekeeper-decisions-mobile.svg": "a89150828a6a1093f3ac5b0add74f37328714caf9b6889b7abda932980e26023",
+        "content/assets/software-engineering/gatekeeper-boundary.svg": "c544b0c2eaad7970c4ebe9ed37f3b40fc42d665ed6fb200899531d6efe5715c1",
+        "content/assets/software-engineering/gatekeeper-boundary-mobile.svg": "75f49aaf6b3583c0f98fb76b9745c373feec24c76fd8bcb6cfa1c3394c9fea4b",
+        "content/assets/software-engineering/gatekeeper-decisions.svg": "dac929fc705e196096fbd6e4f0eb4139259ac491e3edb678b57609e519c5a484"
+      }
+    }
+  },
+  "example_limits": "Bounded behavioral responsibility simulation, not a deployed security boundary. Trusted composition supplies an already verified principal. The fixed callback stands in for an authenticated restricted service channel. Two classes, frozen values and private-field naming provide no process/network isolation, authentication, tamper resistance or storage-credential protection. The sample is a read-only preview, not durable submission/printing, and makes no exactly-once or concurrent transaction guarantee. Real ingestion needs streaming body limits before assembly; real services need current authoritative authorization and operation-specific consistency, capacity/deadline/lifecycle controls. A compromised gatekeeper can abuse its permitted internal capability.",
+  "preview_url": "http://127.0.0.1:43061/pattern/gatekeeper",
+  "version_control": {
+    "tool": "GitButler",
+    "branch": "codex/software-gatekeeper",
+    "committed": false,
+    "pushed": false,
+    "pull_request_created": false
+  },
+  "evidence_directory": ".local/software-gatekeeper",
+  "published": false,
+  "deployed": false
+}

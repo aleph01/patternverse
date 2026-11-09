@@ -1,0 +1,101 @@
+{
+  "name": "selected-updates-2026-11-01",
+  "status": "published-and-verified",
+  "verifiedAt": "2026-11-01T16:35:10.442Z",
+  "deployment": {
+    "id": "9339089f-45a6-46c1-bcaa-386f481c2d64",
+    "url": "https://9339089f.patternverse.pages.dev",
+    "production": "https://patternverse.org",
+    "previousId": "d2dd6976-1a10-4f29-8a7a-89a2bf01394d"
+  },
+  "scope": {
+    "publicEntries": 1264,
+    "newEntries": 1,
+    "changedExistingEntries": 3,
+    "updates": [
+      "Collection browsing includes all authored members",
+      "Systems Thinking Foundations collection rename",
+      "Joke transcript correction",
+      "Identify Limiting Beliefs: browser and AI practice",
+      "OpenRouter status, About AI dialog and connection at the AI step"
+    ]
+  },
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "verification": {
+    "rustCore": {
+      "passed": 321
+    },
+    "rustHost": {
+      "passed": 23
+    },
+    "content": {
+      "entries": 1264,
+      "diagnostics": 0
+    },
+    "webTypes": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "focusedTests": {
+      "passed": 92,
+      "files": 15
+    },
+    "compilerDataLibraries": {
+      "passed": 4
+    },
+    "guidedAiContracts": {
+      "passed": 11
+    },
+    "browser": {
+      "passed": 12,
+      "desktop": true,
+      "phone": true,
+      "notes": "Real Rust runtime with mocked OpenRouter authorization and model response; actual site iframe isolation and normal service-worker behavior verified."
+    },
+    "deploymentSafeguards": {
+      "passed": 15
+    },
+    "publicScan": "passed",
+    "sourcePreservation": "All four selected content files and two new assets match the shared checkout.",
+    "contributionService": {
+      "passed": 17,
+      "dryRun": "passed",
+      "availableAfterPublication": true
+    },
+    "liveBrowser": {
+      "passed": 12,
+      "desktop": true,
+      "phone": true,
+      "notes": "Live site and actual runtime; OpenRouter authorization and model replies mocked, with no paid model requests or public submissions."
+    },
+    "production": {
+      "checked": 11124,
+      "passed": 11124,
+      "failures": 0,
+      "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-11-01/production-verification.json"
+    }
+  },
+  "artifact": {
+    "directory": "/private/tmp/patternverse-selected-2026-11-01/apps/web/build",
+    "files": 10938,
+    "bytes": 625681741,
+    "sha256": "39445b8dfd01b9aada8b0f74a9bb9d9494652e3420fd6bb94f88c705555f9459"
+  },
+  "sourceArchive": {
+    "path": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-11-01/selected-source.tar.gz",
+    "bytes": 367868570,
+    "sha256": "9f840cbfe88e0b58d0a506f985461032939c686af06e0c16cd35f068d515a2bb"
+  },
+  "contributionServiceDeployment": {
+    "name": "patternverse-article-contributions",
+    "version": "e96d039e-1329-42d8-b3d1-d5ac55d87264",
+    "scope": "Updated approved article inventory with Identify Limiting Beliefs; existing service implementation, database and Access settings retained."
+  },
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/selected-updates-2026-11-01/release-report.json",
+  "gitPush": false,
+  "pullRequest": false
+}

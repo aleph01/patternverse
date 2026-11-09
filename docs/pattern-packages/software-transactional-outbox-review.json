@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "data-transactional-outbox",
+  "title": "Transactional Outbox",
+  "aliases": ["Outbox Pattern"],
+  "primary_collection": "software-persistence-transactions",
+  "primary_collection_title": "Persistence and Transactions",
+  "body_word_count": 1456,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Eight primary sources: Chris Richardson’s Transactional Outbox, Polling Publisher, and Transaction Log Tailing catalog entries; AWS Transactional Outbox; Particular Software’s NServiceBus Outbox; Debezium Outbox Event Router; SQLite Transactions; Python sqlite3. The established Transactional Outbox name and common Outbox Pattern shorthand are distinguished from an email outbox, transient queue, transactional inbox, receiving deduplication, and Event Sourcing. Broad exactly-once or cross-service atomicity claims are not inferred from product guidance. The article separates the local commit guarantee, later broker acceptance, and consumer completion, and makes relay liveness, ordering, stable identity, pending retention, and asynchronous failure ownership explicit.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["outbox.py", "demo.py"],
+      "stdout": [
+        "local: 1 1",
+        "after lost ack pending: 1",
+        "broker IDs: ['E901', 'E901']",
+        "final: 1 0"
+      ],
+      "verification": "Exact demo output; original EUR 70.00 payload/schema/type/order version; atomic source commit; forced after-insert failure in either table rolls back both; duplicate order/event identity leaves no orphan; committed-only reads and same-connection active-transaction rejection; publisher executes without a held source transaction and permits another writer; empty/dispatched queues invoke no publisher; unavailable broker preserves pending intent; lost acknowledgment, dispatch-record failure after acknowledgment, and actual process death after durable acceptance all retry the same ID and bytes without repeating the order; source reopen and pre-commit crash recovery; original payload survives later business-state change; sequential single-worker pending delivery; exact total and ID boundaries; BEGIN/COMMIT errors roll back and permit retry; competing writers with one event identity leave one matching order/message pair. Durable acceptance log is a local test double, not a broker/consumer or a production ordering, authentication, parallel-relay, deduplication, or power-loss test."
+    },
+    "content": "1278 entities validate with drafts included; published-only compilation contains 1131 entities without diagnostics.",
+    "integration_tests": "All seven focused article suites pass: Transactional Outbox, Event Sourcing, CQRS, Database per Service, Domain Event, Idempotent Receiver, and GoF. Combined run across eight files reports 46 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused existing data-transactional-outbox ID and route, title and summary, original primary diagram path, Data Engineering tags and verse membership, and O42/E901 scenario. Persistence and Transactions becomes the sole primary collection as its twelfth member. Capture & synchronization retains an explanatory cross-reference and adjusts its curated count from thirteen to twelve. Idempotent Receiver, Transactional Inbox, Log-Based Change Data Capture, and Event Sourcing remain separate existing canonical articles with related links. No duplicate article, new collection, practice, or worksheet.",
+    "preservation": {
+      "status": "passed-for-task-scope",
+      "existing_content_changed_by_this_task": [
+        "content/patterns/data-transactional-outbox.md",
+        "content/collections/software-persistence-transactions.md",
+        "content/collections/data-engineering-capture-synchronization.md"
+      ],
+      "other_existing_content_unchanged": 1275,
+      "new_content_by_this_task": [],
+      "unrelated_concurrent_content_changes": [],
+      "unrelated_new_content": [],
+      "unrelated_concept_graphic_changes": [],
+      "canonical_id_and_route_preserved": "data-transactional-outbox",
+      "prior_summary_and_data_engineering_membership_preserved": true,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 46,
+      "prior_graphics_unchanged": 458,
+      "prior_dimensions_unchanged": 1622,
+      "revised_original_dimensions": {
+        "data-engineering/transactional-outbox.svg": {
+          "width": 720,
+          "height": 944
+        }
+      },
+      "new_dimensions": {
+        "data-engineering/transactional-outbox-mobile.svg": {
+          "width": 360,
+          "height": 1176
+        },
+        "software-engineering/transactional-outbox-retry.svg": {
+          "width": 720,
+          "height": 984
+        },
+        "software-engineering/transactional-outbox-retry-mobile.svg": {
+          "width": 360,
+          "height": 1176
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, both collections, authoring metadata, concept mark, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and earlier staging directories were untouched. No renderer, build implementation, project dependency, or earlier Software Engineering/GoF article changes.",
+    "illustrations": "Two editable native SVG figures explain one local transaction containing order and captured message, later relay/broker acceptance, and a lost-acknowledgment retry retaining E901 while the order remains single. The existing data-engineering/transactional-outbox.svg is revised in place and three responsive assets are added. Both figures have separately composed phone variants, meaningful alternatives and captions, approved fixed white surface/regular Helvetica Neue palette/square geometry, and explicit arrow meanings. The restart label was moved clear of its arrow before final build. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for accuracy, placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all four related routes returning 200. Persistence and Transactions has twelve members over three pages; the existing article appears on page three and opens with the correct primary breadcrumb. The retained Capture & synchronization cross-reference also opens the canonical article. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-transactional-outbox/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 58816
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original two-file Python 3.11+ standard-library SQLite simulation. One source transaction stores order O42 at 7000 euro cents and serialized OrderPlaced E901, schema one, order version one. A single-worker polling relay selects committed pending intent in sequence order, publishes without a held source transaction, and marks dispatched only after the publisher returns according to its acceptance contract. The publisher is a separately durable SQLite acceptance test log, not a network broker or consumer. Lost acknowledgment, mark failure after acknowledgment, and actual process death after log commit cause same-ID/same-payload retries; the order transaction is not repeated. Application data remains authoritative and outbox retention is separate from Event Sourcing. No production network broker, receiver deduplication, authentication, parallel relay claims, timeouts/backoff implementation, cleanup, broker partition/global ordering, or client retry protocol. Source BEGIN/COMMIT/insert failures, invalid boundaries, competing event identities, publisher outage, committed-only visibility, no transaction during publish, reopened files, and abrupt pre-commit recovery are tested; production power-loss and real messaging guarantees are not inferred.",
+  "preview": "http://127.0.0.1:43031/pattern/data-transactional-outbox",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-transactional-outbox",
+  "browser_measurements": ".local/software-transactional-outbox/browser-checks.json",
+  "browser_check_script": ".local/software-transactional-outbox/check-browser.mjs",
+  "build_log": ".local/software-transactional-outbox/public-build-isolated.log",
+  "branch": "codex/software-transactional-outbox",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

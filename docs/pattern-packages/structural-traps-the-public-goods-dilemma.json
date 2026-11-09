@@ -1,0 +1,120 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — The Public-Goods Dilemma",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "the-public-goods-dilemma",
+      "title": "The Public-Goods Dilemma",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; collective provision, dispersed benefits, and funding institutions",
+      "article": "content/concepts/the-public-goods-dilemma.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Paul A. Samuelson (1954), The Pure Theory of Public Expenditure",
+          "url": "https://publics22.classes.ryansafner.com/readings/Samuelson-1954.pdf",
+          "supports": "Collective consumption without subtraction from others’ consumption; explicit acknowledgement of earlier public-finance writers.",
+          "boundary": "Original scan opened; first substantive page, printed p. 387, was rendered and read by local OCR because web extraction returned only the archive cover. No unread detailed welfare theorem is imported into the example."
+        },
+        {
+          "title": "Ernst Fehr, Cooperation and Public Goods Provision, author teaching slides hosted at MIT",
+          "url": "https://web.mit.edu/14.193/www/Fehr-MIT-Lecture7-8CooperationPublicGoods.pdf",
+          "supports": "Linear voluntary-contribution game, simultaneous choices, alpha < 1 private incentive and n*alpha > 1 group-return condition.",
+          "boundary": "Formal framework for the qualitative comparison of private contribution cost and dispersed benefit, not data about the radio station. Empirical observations are separately attributed to the original experiment."
+        },
+        {
+          "title": "Urs Fischbacher, Simon Gächter, Ernst Fehr (2001), Are People Conditionally Cooperative? Evidence from a Public Goods Experiment",
+          "url": "https://www.econ.uzh.ch/dam/jcr%3Affffffff-9758-127f-0000-00003449356a/ArePeopleCondCooperative.pdf",
+          "doi": "10.1016/S0165-1765(01)00394-9",
+          "supports": "Final eight-page paper read, including one-shot strategy-method design, 44 undergraduate participants, 22 conditional-cooperation schedules, and 13 all-zero schedules.",
+          "boundary": "Monetary student laboratory sample and elicited contribution schedules. No population-wide personality prevalence, measured reporting benefit, repeated-game outcome, or causal effect of the proposed budget rule is inferred."
+        },
+        {
+          "title": "Elinor Ostrom (2009), Beyond Markets and States: Polycentric Governance of Complex Economic Systems, Nobel lecture",
+          "url": "https://faculty.sites.iastate.edu/tesfatsi/archive/tesfatsi/BeyondMarketsAndStates.NobelLecture.EOstrom2009.pdf",
+          "supports": "Read the university-hosted facsimile: public goods versus common-pool resources, excludability and subtractability as varying dimensions, and diverse institutional arrangements for provision.",
+          "boundary": "No claim that common-pool harvesting studies directly prove a funding intervention for public goods. No universal design principle, governance winner, or empirical effect size is transferred. Nobel-hosted PDF access failed; the readable academic mirror is linked."
+        }
+      ],
+      "related_patterns": [
+        "the-prisoners-dilemma",
+        "the-volunteers-dilemma",
+        "threshold-contribution-problems",
+        "cold-starts-and-critical-mass",
+        "make-trade-offs-explicit"
+      ],
+      "status": "published",
+      "short_description": "Recognize when shared benefits exceed their private return to contributors, then distinguish voluntary cooperation from funding arrangements that change who must contribute and how.",
+      "use_when": [
+        "Which funding obligation changes while listening stays open?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Secure accepted, collectible funding for a defined period while retaining open listening.",
+        "Joining is voluntary; collection, fairness, editorial accountability, and later renewal still matter."
+      ],
+      "example_structure": {
+        "scenario": "Incremental reporting within an operating listener-supported broadcast, not an all-or-nothing station launch. Own incremental benefit below private cost; combined benefit above cost. One-shot, known structure, own net interests; actual generosity not ruled out. Optional membership adoption is separate from accepted collectible dues; nonmember free riding remains.",
+        "changed_relationship": "Secure accepted, collectible funding for a defined period while retaining open listening.",
+        "residual_constraints": "Joining is voluntary; collection, fairness, editorial accountability, and later renewal still matter.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/public-goods-map-funding.svg",
+          "content/assets/structural-traps/public-goods-map-funding-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 627,
+            "textBlocks": 13
+          },
+          "phone": {
+            "width": 360,
+            "height": 1186,
+            "textBlocks": 14
+          }
+        },
+        "question": "Which funding obligation changes while listening stays open?",
+        "alternative_text": "Hypothetical qualitative illustration. Original voluntary donations and accepted member dues are alternative routes funding incremental local reporting. All listeners, including nonmembers, can benefit under either route. Dues work only after willing adoption and reliable collection for the agreed period. Change: Secure accepted, collectible funding for a defined period while retaining open listening. Limitation: Joining is voluntary; collection, fairness, editorial accountability, and later renewal still matter.",
+        "caption": "Hypothetical illustration. Dashed and green inputs compare funding arrangements for the same open broadcast. Accepted dues can support an agreed period without excluding nonmembers, but voluntary adoption and continued funding remain unresolved tasks. No single production threshold is assumed.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Original voluntary donations and accepted member dues are alternative routes funding incremental local reporting. All listeners, including nonmembers, can benefit under either route. Dues work only after willing adoption and reliable collection for the agreed period. Change: Secure accepted, collectible funding for a defined period while retaining open listening. Limitation: Joining is voluntary; collection, fairness, editorial accountability, and later renewal still matter.",
+          "relationship_key": "Input arrows show funding. Output arrow shows shared access, not a money transfer or rival portions. Green is an alternative route, not an extra automatic payment.",
+          "changed_relationship": "Secure accepted, collectible funding for a defined period while retaining open listening.",
+          "residual_constraints": "Joining is voluntary; collection, fairness, editorial accountability, and later renewal still matter.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Incremental reporting within an operating listener-supported broadcast, not an all-or-nothing station launch. Own incremental benefit below private cost; combined benefit above cost. One-shot, known structure, own net interests; actual generosity not ruled out. Optional membership adoption is separate from accepted collectible dues; nonmember free riding remains.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

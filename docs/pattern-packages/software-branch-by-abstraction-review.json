@@ -1,0 +1,493 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "branch-by-abstraction",
+  "title": "Branch by Abstraction",
+  "aliases": ["Branch-by-Abstraction"],
+  "primary_collection": "software-evolution-delivery",
+  "primary_collection_title": "Evolution and Delivery",
+  "body_word_count": 1393,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43073/pattern/branch-by-abstraction",
+  "validation": {
+    "research": "No existing canonical Branch by Abstraction article found. Hammant’s early publication, Fowler’s catalog and Humble’s first-hand migration account verify the established staged supplier-replacement technique. Hyphenated name is an alias; source-control branching, isolated feature flags and permanent implementation strategies are distinguished. One existing primary collection reused; no empty collection created.",
+    "sources": [
+      {
+        "title": "Introducing Branch By Abstraction",
+        "author": "Paul Hammant (2007)",
+        "url": "https://paulhammant.com/blog/branch_by_abstraction.html",
+        "supports": "Early published staged abstraction/refactor/second implementation/switch/retire sequence; explicitly credits Stacy Curl with the name."
+      },
+      {
+        "title": "Branch By Abstraction",
+        "author": "Martin Fowler (2014)",
+        "url": "https://martinfowler.com/bliki/BranchByAbstraction.html",
+        "supports": "Gradual supplier replacement while continuing releases; migration granularity and testing; feature flags optional."
+      },
+      {
+        "title": "Make Large Scale Changes Incrementally with Branch By Abstraction",
+        "author": "Jez Humble (2011)",
+        "url": "https://continuousdelivery.com/2011/05/make-large-scale-changes-incrementally-with-branch-by-abstraction/",
+        "supports": "First-hand ThoughtWorks Go iBatis-to-Hibernate repository migration during feature development; need for an exit strategy."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "command": "python3 branch_by_abstraction.py",
+      "output": ["legacy: 700 US cents; zero rejected", "new: 700 US cents; zero rejected"],
+      "checks": [
+        "both shared-contract callers tested for both selected suppliers",
+        "all integer weights 1 through 10000 grams match independent expected formula",
+        "exact first and subsequent kilogram boundaries",
+        "zero and negative weights rejected on both implementations",
+        "unexpected legacy currency rejected",
+        "supplier failures propagate without fallback",
+        "composition selects legacy or replacement explicitly"
+      ],
+      "mutation_checks": [
+        {
+          "fault": "new engine rounds exact kilograms incorrectly",
+          "detected": true
+        },
+        {
+          "fault": "legacy implementation accepts zero",
+          "detected": true
+        },
+        {
+          "fault": "preview bypasses selected supplier",
+          "detected": true
+        }
+      ],
+      "limits": [
+        "Positive integer grams are a caller precondition; annotations are not runtime validation",
+        "Pure deterministic in-memory calculation; no persistence or concurrent deployment controller",
+        "Finite tests do not prove equivalence for all possible supplier behaviors"
+      ]
+    },
+    "content": "All 1315 content entities validate. Published compilation has 1168 entities with zero diagnostics or unresolved references. Eight exact H2s, one complete Python3.9+ program, two figures/four responsive variants, four existing related IDs, ten distinct queries, no practice.",
+    "published_compilation": {
+      "entities": 1168,
+      "bytes": 23673792,
+      "sha256": "922f10cdd16f9f735b5930c289379003a1fb3e925a834f16b7439de6f60c9af2",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "details": "New Branch by Abstraction3, Expand–Migrate–Contract3, Strangler Fig3, GoF24, and four graphic-integrity tests pass. Global graphic coverage retains the pre-existing missing access-over-ownership mark. Only the earlier Expand–Migrate–Contract test’s collection assertion changes to retained self-membership, so adding this authorized third member does not freeze the collection."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses unsupported exact in ByRoleOptions."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for new/changed integration tests, generator, actual-code validator, sidecar, authoring documentation, registry and this review.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-evolution-delivery.md"],
+      "new_content": ["content/patterns/branch-by-abstraction.md"],
+      "other_existing_content_unchanged": 1313,
+      "single_primary_home": "software-evolution-delivery",
+      "existing_collection_members_retained": true,
+      "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 85,
+      "prior_graphics_unchanged": 497,
+      "prior_dimensions_unchanged": 1769,
+      "new_dimensions": 4,
+      "existing_expand_contract_test_adjustment": "Only its primary-collection membership assertion changed to contains-self as the collection grows. Exact inverse restores baseline hash.",
+      "all_other_protected_tests_renderer_dependencies_build_scripts_unchanged": true,
+      "authoring_documentation_preserved": true,
+      "both_isolated_workspaces_match_current_web_source_and_linked_content": true
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "content/assets/software-engineering/branch-by-abstraction-lifecycle-mobile.svg": "ac3fa09b6a823abf4503fff9b3a2e694f2ca4a00c451e95db1136bf08d340aa6",
+        "content/assets/software-engineering/branch-by-abstraction-lifecycle.svg": "e5150ee29e05b2175e49a9d9ec40c855dea520678f2671db3c0ccfcbe1ea55dc",
+        "content/assets/software-engineering/branch-by-abstraction-seam-mobile.svg": "3d1b836918470c228d75e123ef2e7f2c4ba4150aa34159f9c395d3cf606a7a38",
+        "content/assets/software-engineering/branch-by-abstraction-seam.svg": "cde48792af1c9b416d893bc46fe6ed463a0a1ef3578f68e818fdfefe3df196be"
+      }
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-seam.svg",
+        "labels": 15,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 652
+      },
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-seam-mobile.svg",
+        "labels": 15,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-lifecycle.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-lifecycle-mobile.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 920
+      }
+    ],
+    "contrast": {
+      "status": "passed",
+      "normal_text_AA_4_5_minimum": true,
+      "pairs": [
+        {
+          "foreground": "#252c28",
+          "background": "#ffffff",
+          "contrast": 14.29
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#f1f2ef",
+          "contrast": 12.72
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#edf5f0",
+          "contrast": 12.87
+        },
+        {
+          "foreground": "#626962",
+          "background": "#ffffff",
+          "contrast": 5.65
+        },
+        {
+          "foreground": "#626962",
+          "background": "#f1f2ef",
+          "contrast": 5.03
+        },
+        {
+          "foreground": "#626962",
+          "background": "#edf5f0",
+          "contrast": 5.09
+        }
+      ]
+    },
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 7,
+          "y": 7,
+          "width": 82,
+          "height": 84
+        },
+        {
+          "x": 59,
+          "y": 55,
+          "width": 30,
+          "height": 36
+        }
+      ]
+    },
+    "static_browser": [
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-seam.svg",
+        "labels": 15,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 652
+      },
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-seam-mobile.svg",
+        "labels": 15,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-lifecycle.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 844
+      },
+      {
+        "path": "/assets/software-engineering/branch-by-abstraction-lifecycle-mobile.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 920
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/branch-by-abstraction-seam.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/branch-by-abstraction-lifecycle.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 168,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/adapter",
+          "/pattern/dependency-injection",
+          "/pattern/data-expand-migrate-contract",
+          "/pattern/data-incremental-replacement"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/branch-by-abstraction-seam-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/branch-by-abstraction-lifecycle-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 168,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/adapter",
+          "/pattern/dependency-injection",
+          "/pattern/data-expand-migrate-contract",
+          "/pattern/data-incremental-replacement"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/branch-by-abstraction-seam-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/branch-by-abstraction-lifecycle-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 168,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/adapter",
+          "/pattern/dependency-injection",
+          "/pattern/data-expand-migrate-contract",
+          "/pattern/data-incremental-replacement"
+        ],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-evolution-delivery",
+        "article": "branch-by-abstraction",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "static_assets": {
+      "status": "passed",
+      "mode": "actual local static public export verified after disk capacity recovered; isolated source copy includes existing sibling application imports",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/PatternverseLogo.Cr_c3FgX.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LegalLinks.C1VwvvwC.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/0.LPYfGvVT.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/pattern-mark-presets.Dx3BoDxs.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LibraryViewSwitch.yR3Qs8SB.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/MarkdownRenderer.DDyfSN4x.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/WorksheetButton.Dsl9OpN0.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/3.DBGXFlWk.css",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-seam-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-seam.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-lifecycle-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-lifecycle.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-seam.svg",
+          "status": 200,
+          "sha256": "cde48792af1c9b416d893bc46fe6ed463a0a1ef3578f68e818fdfefe3df196be",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-seam-mobile.svg",
+          "status": 200,
+          "sha256": "3d1b836918470c228d75e123ef2e7f2c4ba4150aa34159f9c395d3cf606a7a38",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-lifecycle.svg",
+          "status": 200,
+          "sha256": "e5150ee29e05b2175e49a9d9ec40c855dea520678f2671db3c0ccfcbe1ea55dc",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/branch-by-abstraction-lifecycle-mobile.svg",
+          "status": 200,
+          "sha256": "ac3fa09b6a823abf4503fff9b3a2e694f2ca4a00c451e95db1136bf08d340aa6",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "Viewed all four native figures, the corrected desktop seam label clear of arrows, actual desktop and phone article tops, the phone seam figure and caption, and highlighted phone code viewport. All label bounds fit with no measured text overlap or clipping. Fixed white surface, regular Helvetica Neue/Helvetica/Arial, prescribed palette and square geometry. Static renderer checked1440/390/320 widths: no page overflow, exact selectable code, syntax colors, keyboard horizontal code scrolling, responsive assets, all four related routes, and Evolution collection/gallery/card/concept mark/breadcrumb.",
+    "public_static_export": "PASSED repository build-public-web.mjs and public-build inspection in an isolated current-source workspace with existing sibling application imports linked. Static preview43073 serves14local resource references with200 responses; four SVG bodies exactly match reviewed source SHA256. Initial related Markdown links were corrected to canonical wiki links after export caught their .md URLs; final compilation, integration and full export pass. No renderer, schema, build-system or dependency changes."
+  },
+  "limitations": [
+    "Python models deterministic calculation and instance selection; no persistent state migration, deployment automation or concurrent handover. Positive integer grams are a caller precondition, not runtime type validation. Finite behavioral checks do not prove universal equivalence.",
+    "Pre-existing VerseSelector type error and access-over-ownership graphic-coverage failure remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-branch-by-abstraction",
+    "local_uncommitted": true,
+    "unrelated_work": "preserved",
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

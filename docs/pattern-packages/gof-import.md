@@ -1,49 +1,35 @@
-# GoF article integration
+# GoF illustrated field guide
 
-Imported from `GoF-Patternverse-Articles.zip`, using **patterns.json only**. The individual JSON files are duplicate representations, and the HTML reading edition is not embedded. Inspection found no existing matching GoF titles or slugs. Existing content remains intact.
+The GoF collection contains all 23 canonical patterns in alphabetical order. Each article follows the approved software pattern outline: Purpose and problem, Core idea, How it works, Worked example, When to use it, Tradeoffs and common mistakes, Related patterns, and Sources.
 
-## Mapping
+The 28 October 2026 editorial revision reorganizes the existing educational explanations, preserves their developed examples and qualifications, and adds a complete Python teaching example to each article. Strategy follows the reviewed pilot. Articles are reading references; no guided practices are attached.
 
-| Portable field                                      | Patternverse representation                                                                                           |
-| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| title, slug                                         | Canonical `title`, kebab-case `id`, existing `/pattern/<id>` route                                                    |
-| short_description                                   | `summary`                                                                                                             |
-| domain                                              | `verses: [software-engineering]` and new Software Engineering verse                                                   |
-| collection                                          | GoF Design Patterns collection, in supplied order                                                                     |
-| category                                            | Category tag and Creational, Structural, or Behavioral collection                                                     |
-| tags                                                | Supplied tags, plus `gof-design-patterns`                                                                             |
-| use_when, not_ideal_when, prerequisites, difficulty | Reading sections under “Pattern details”; also retained in metadata JSON                                              |
-| related_patterns                                    | Canonical labels on resolved wiki links; title and ID lists retained in metadata                                      |
-| article_markdown                                    | Full, unchanged prose through the existing Markdown renderer; diagram inserted before the first conceptual subsection |
-| graphic                                             | Local SVG Markdown image with accessible description and caption; original and public paths retained in metadata      |
-| example_user_queries                                | All 184 queries retained in `gof.json` for future recommendation integration                                          |
-| source_reference                                    | Attribution and reference link in articles, full source metadata in `gof.json`                                        |
-| practices                                           | Absent: no practice fences, records, or run actions                                                                   |
+## Collection and relationships
 
-No schema extension or new dependency. `gof.json` is an authoring metadata sidecar, not a second content loader. Its article SHA-256 hashes were captured from the supplied export before the import; tests remove only the inserted diagram and added details, then check every original article byte-for-byte.
+`content/collections/gof-design-patterns.md` is the only GoF collection. The former Creational, Structural, and Behavioral collections and their article category labels and tags have been removed. Individual pattern IDs and routes remain stable. The existing entity route redirects all three retired collection URLs to the consolidated collection, including in static prerendering.
 
-The existing full-text library indexes titles, summaries, tags, prose, collection names and verse names. There is no dedicated recommendation engine, so example queries are preserved separately rather than mixed into article text or misrepresented as AI recommendations.
+`gof.json` retains each pattern's recommendation queries, applicability metadata, difficulty, prerequisites, resolved neighbors, and source attribution. Current article hashes cover the complete revised Markdown body. Historical import hashes and graphic metadata live under `original_import`; the source snapshot in `gof-original-articles.json` preserves the original text for provenance and reproducibility. Neither file is a second public content loader.
 
-## Diagrams
+## Illustrations
 
-All 23 supplied diagrams retain their geometry, labels, explanatory descriptions and captions. Fonts and light colors match the application’s Inter/system stack and ink/white/mint/green palette. Self-contained dark-preference styles keep labels and arrows legible; the application currently has no separate site-wide dark-mode toggle.
+The collection has 24 explanatory figures: one per pattern, with two for Strategy. Each has a separately composed phone version, giving 48 SVG assets under `content/assets/software-engineering/gof/`. They use the approved light editorial direction: a fixed white surface, regular Helvetica Neue, restrained green mechanism accents, gray context, square boundaries, and explicit relationship labels. Accessible descriptions and captions explain the collaboration rather than decorate the article.
 
-The Markdown renderer presents local diagrams as safe figures. Images are separate SVG documents, so even repeated diagrams have isolated IDs; original per-pattern ID prefixes remain. On small screens, the diagram alone scrolls horizontally at its native 720px width, avoiding tiny labels and page-level overflow. The scroll region is named, keyboard-focusable, and accompanied by an instruction. Ordinary Markdown and HTML sanitization remain in use; no raw SVG or HTML from the package is injected into the page.
+The existing article asset manifest supplies intrinsic dimensions and responsive phone sources. The former `/diagrams/gof/<id>.svg` URLs retain current drawings for compatibility with older article revisions. Small card and header concept marks use the existing graphics registry.
+
+`gof-editorial-visuals.mjs` contains the authored visual compositions. `gof-examples.mjs` contains the original executable examples and behavior checks. `build-gof-editorial.mjs` rebuilds the articles, figures, metadata, and collection from the retained original source and the approved Strategy pilot. It preserves other entries in the shared image manifest.
+
+Run `node scripts/validate-gof-examples.mjs` to execute every published article example with its behavior assertions using Python's standard library.
+
+## Code presentation
+
+The normal safe Markdown renderer highlights declared code languages using the directly declared `@speed-highlight/core` dependency. Highlighting adds generated token spans after sanitization; source text remains literal and copyable. Unknown languages remain plain code. Highlighted blocks use the same light colors as the pilot and support keyboard-accessible horizontal scrolling.
 
 ## Validation
 
-`packages/compiler/test/gof-content.test.ts` checks 23 records, the 5/7/11 split, full article hashes, metadata, absent practices, category/verse membership, serialization, diagram assets and references. `apps/web/src/lib/server/gof-content.test.ts` checks all article renderings, accessible figures, resolved routes and existing search discovery. The Markdown renderer also tests repeated diagrams alongside its existing unsafe-HTML tests.
+The compiler checks the 23 canonical records, alphabetical collection, eight-section outline, revised body hashes, retained recommendation queries, resolved neighbors, absent practices, and both SVG variants. Web tests check article outlines, highlighted code text preservation, responsive accessible figures, search, navigation, and retired collection redirects. Markdown tests cover literal markup inside code and unknown languages.
 
-Validation completed:
+Browser review checks all articles at desktop and phone widths, rendered code, responsive image selection, collection membership, and legacy routes. Illustration review measures text bounds and overlaps and inspects contact sheets for every variant. Python examples run independently with behavior assertions.
 
-- Content validation and compilation: 89 total entities, no diagnostics or unresolved references.
-- All workspace package tests: 333 tests pass (including all 23 article hashes and renderings).
-- Workspace type checks: pass; Svelte reports zero errors and zero warnings.
-- Production web build and existing public-build credential/file checks: pass.
-- All 23 built article pages, 23 SVG assets, related routes, four collection pages and Software Engineering page: verified in the static build.
-- Changed TypeScript files: ESLint passes. Changed code and metadata documentation: formatting checks pass.
-- Browser review: Factory Method, Adapter and Observer inspected at 1280px desktop and 390px mobile widths; images load, mobile page width remains 390px, and keyboard arrows scroll the diagram region. Library search, Software Engineering's 23-article group, category browsing and related navigation work. No preview console errors observed.
+## Original import
 
-Repository-wide ESLint remains blocked by four pre-existing, unrelated errors: unused `busy` in `apps/web/src/lib/mira/native-voice-listener.ts`, unused `resolve` in `apps/web/src/routes/my/+page.svelte`, and undeclared worklet globals `AudioWorkletProcessor` / `registerProcessor` in `apps/web/static/voice-capture.js`. These files were not changed by this integration.
-
-Local implementation only: not committed, pushed or published. Recommendation queries are preserved for future use; there is no recommendation engine to connect them to today.
+The original import used `patterns.json` from `GoF-Patternverse-Articles.zip`; individual JSON files were duplicate representations, and the HTML reading edition was not embedded. The 2026 editorial revision supersedes the old import's byte-for-byte public article preservation requirement while retaining its provenance.

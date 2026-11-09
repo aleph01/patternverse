@@ -1,0 +1,428 @@
+{
+  "purpose": "Editorial recommendation metadata and inspected-source provenance for P40–P46, completing the argument and persuasion family. Fields remain outside strict Commons frontmatter.",
+  "articles": [
+    {
+      "id": "writing-make-the-main-claim-findable",
+      "index_ref": "P40",
+      "title": "Make the Main Claim Findable",
+      "use_when": [
+        "Readers recognize the subject but cannot identify the position being advanced.",
+        "A recommendation is implied by facts or questions rather than stated.",
+        "The writer’s view blends into quotations, competing proposals, or a purpose announcement."
+      ],
+      "goals": [
+        "Identifiable central proposition",
+        "Readable ownership and conditions",
+        "A position the reader can assess"
+      ],
+      "mechanisms": [
+        "Distinguishing a topic or inquiry from the proposed answer",
+        "Making the actual change or interpretation specific enough to recognize",
+        "Choosing a usable position for the claim while keeping necessary conditions and provisional status visible"
+      ],
+      "not_ideal_when": [
+        "The piece is genuinely exploratory, descriptive, or narrative without asking readers to accept an argument.",
+        "A more forceful formulation would hide uncertainty or alter the position the support can defend."
+      ],
+      "related_patterns": [
+        "writing-build-around-a-governing-question",
+        "writing-connect-evidence-to-the-claim",
+        "minto-pyramid"
+      ],
+      "example_user_queries": [
+        "Readers know what my piece is about but cannot say what I think.",
+        "My recommendation is somewhere in the draft but people keep missing it.",
+        "I announce that I will discuss a problem without stating the answer I support.",
+        "How can I distinguish my position from a source I quote?",
+        "My proposal says we need improvement but not what should change.",
+        "Can a careful or tentative conclusion still be clear?",
+        "Does the main claim have to be the first sentence?",
+        "The conclusion recommends something different from the rest of the piece.",
+        "How do I keep an important condition from disappearing in the headline?",
+        "The writing changed my mind and now the opening claim no longer fits."
+      ],
+      "sources": [
+        {
+          "author": "Harvard College Writing Center",
+          "title": "Thesis",
+          "url": "https://writingcenter.fas.harvard.edu/thesis",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The guide’s distinction between a central claim, analytical question, descriptive summary, supporting evidence, and appropriate scope.",
+          "supports": "Making a proposition identifiable and distinguishable from its subject and evidence.",
+          "limits": "The source concerns academic essays. No Sandel example, exercise, medical or policy claim, universal first-sentence requirement, or full argument hierarchy is adopted. The anthology committee and privacy story are invented. Professional recommendations, ownership, placement, and provisional conclusions are editorial development. No full book-passage review is claimed."
+        }
+      ],
+      "source_path": "content/patterns/writing-make-the-main-claim-findable.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Self-contained prose comparisons make the proposition, fair starting position, and inferential bridge directly inspectable. No separate graphic, mechanical table, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-enter-the-conversation-fairly",
+      "index_ref": "P41",
+      "title": "Enter the Conversation Fairly",
+      "use_when": [
+        "A response does not establish the actual position or practice it addresses.",
+        "A summary omits a condition or substitutes a motive that makes the source easier to criticize.",
+        "Readers cannot distinguish the source’s proposal from the writer’s reconstruction or contribution."
+      ],
+      "goals": [
+        "Faithful starting position",
+        "Relevant context for response",
+        "Readable continuity and disagreement"
+      ],
+      "mechanisms": [
+        "Selecting the proposal, reasons, and conditions needed to understand the response",
+        "Separating stated purposes from an assessment of effects or possible defences",
+        "Identifying the writer’s contribution without inventing consensus or requiring exhaustive coverage"
+      ],
+      "not_ideal_when": [
+        "No existing position is needed to understand the work’s purpose.",
+        "An attempt at balance would misrepresent a source, silently improve it, or imply equal evidential standing for every possible view."
+      ],
+      "related_patterns": [
+        "writing-make-the-main-claim-findable",
+        "writing-make-references-unambiguous",
+        "writing-connect-evidence-to-the-claim"
+      ],
+      "example_user_queries": [
+        "My argument attacks a view I have not actually explained.",
+        "I shortened a proposal and lost the qualification that changes its meaning.",
+        "How do I disagree strongly without attributing motives I cannot establish?",
+        "My summary makes an argument sound more extreme than it is.",
+        "How much of another position should I present before responding?",
+        "I agree with the aim but disagree with the proposed method.",
+        "Can I discuss harmful effects without claiming those effects were intended?",
+        "I have improved the opposing argument; how do I distinguish that from what its author said?",
+        "A quotation is accurate but the surrounding account still feels misleading.",
+        "I keep presenting one person’s draft suggestion as what everybody believes."
+      ],
+      "sources": [
+        {
+          "author": "Harvard College Writing Program, Harvard Guide to Using Sources",
+          "title": "Summarizing, Paraphrasing, and Quoting",
+          "url": "https://usingsources.fas.harvard.edu/summarizing-paraphrasing-and-quoting",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The summary and paraphrase guidance on accurate representation, author/source identification, relevant selection, and preparing a response.",
+          "supports": "Giving the reader a faithful and appropriately selected account of a source before responding to it.",
+          "limits": "No Milgram or O’Brien example, quotation, empirical generalization, exercise, or equal-space requirement is adopted. The committee, proposal, and responses are invented. Motive–effect distinctions, possible defences, proposal status, and the boundary with answering objections are editorial development. No direct inspection of They Say / I Say book passages is claimed."
+        }
+      ],
+      "source_path": "content/patterns/writing-enter-the-conversation-fairly.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Self-contained prose comparisons make the proposition, fair starting position, and inferential bridge directly inspectable. No separate graphic, mechanical table, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-connect-evidence-to-the-claim",
+      "index_ref": "P42",
+      "title": "Connect Evidence to the Claim",
+      "use_when": [
+        "A clear claim and relevant material appear without an explanation of their connection.",
+        "Readers infer something different from the same quotation, observation, or number.",
+        "A consequential assumption remains hidden inside a conclusion or connective."
+      ],
+      "goals": [
+        "Inspectable inferential links",
+        "Analysis beyond restatement",
+        "Relevant support for a specific claim"
+      ],
+      "mechanisms": [
+        "Identifying what the evidence establishes and why it bears on this conclusion",
+        "Making a necessary assumption or practical objective available to challenge",
+        "Distinguishing analysis from repetition, a transition, source attribution, or whole-argument architecture"
+      ],
+      "not_ideal_when": [
+        "The connection is already secure for the intended audience and further explanation would be needless.",
+        "Writing a bridge would disguise missing evidence or an assumption that still needs investigation."
+      ],
+      "related_patterns": [
+        "writing-make-the-main-claim-findable",
+        "writing-signal-the-real-relationship",
+        "minto-pyramid"
+      ],
+      "example_user_queries": [
+        "I include evidence but readers do not see how it supports the point.",
+        "My paragraph jumps from a statistic straight to a recommendation.",
+        "I added therefore and the reasoning still feels incomplete.",
+        "I keep repeating the quotation instead of analyzing it.",
+        "Different readers draw different conclusions from the same fact.",
+        "How do I expose the assumption between my evidence and my claim?",
+        "My recommendation depends on an objective I have never stated.",
+        "How can I explain why a small textual detail supports an interpretation?",
+        "The evidence is relevant but the proposed solution does not obviously follow.",
+        "How much reasoning should I spell out for a specialist audience?"
+      ],
+      "sources": [
+        {
+          "author": "Purdue OWL, Purdue University",
+          "title": "Toulmin Argument",
+          "url": "https://owl.purdue.edu/owl/general_writing/academic_writing/historical_perspectives_on_argumentation/toulmin_argument.html",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The prose definitions of claim, grounds, and warrant as an explicit or implied link.",
+          "supports": "Identifying the inference or assumption joining evidence and conclusion.",
+          "limits": "No source example, diagram, exercise, empirical assertion, qualifier/rebuttal system, or universal credibility claim is reproduced. The museum counts and layout are invented; the article does not review Toulmin’s original book or teach the complete method."
+        },
+        {
+          "author": "Harvard College Writing Center",
+          "title": "Anatomy of a Body Paragraph",
+          "url": "https://writingcenter.fas.harvard.edu/anatomy-body-paragraph",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The guide’s distinction between evidence and analysis explaining what the reader should understand from that evidence.",
+          "supports": "Doing analytical work beyond including or restating support.",
+          "limits": "No Marx, Douglass, Wollstonecraft, or student-paper example is adopted, and no fixed paragraph template is imposed. The workshop passage is invented. Practical objectives, interpretive alternatives, audience needs, and connections to Minto are editorial development."
+        }
+      ],
+      "source_path": "content/patterns/writing-connect-evidence-to-the-claim.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Self-contained prose comparisons make the proposition, fair starting position, and inferential bridge directly inspectable. No separate graphic, mechanical table, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-answer-the-strongest-objection",
+      "index_ref": "P43",
+      "title": "Answer the Strongest Objection",
+      "use_when": [
+        "A piece answers easy disagreements while leaving the consequential challenge untouched.",
+        "An objection is acknowledged but the recommendation ignores what it establishes.",
+        "A competing explanation puts pressure on a premise or interpretation."
+      ],
+      "goals": [
+        "Consequential objections made assessable",
+        "Responses that meet the actual challenge",
+        "Revision when an objection succeeds"
+      ],
+      "mechanisms": [
+        "Selecting a reasonable challenge by its effect on the claim",
+        "Preserving the concern’s reasons and distinguishing anticipated from reported objections",
+        "Supplying support, distinguishing cases, revising the proposal, or withdrawing an unsupported position"
+      ],
+      "not_ideal_when": [
+        "The objection is irrelevant to the actual conclusion or would invent a false appearance of dispute.",
+        "The writer cannot establish the objection’s factual basis and would present speculation as a reported finding."
+      ],
+      "related_patterns": [
+        "writing-enter-the-conversation-fairly",
+        "writing-make-the-main-claim-findable",
+        "writing-match-the-claim-to-the-evidence"
+      ],
+      "example_user_queries": [
+        "My argument persuades people who already agree but overlooks the main concern.",
+        "How do I choose which objection to address?",
+        "I acknowledge a problem and then repeat my original recommendation.",
+        "What if the strongest objection actually changes my mind?",
+        "My response repeats the benefit without answering the drawback.",
+        "Can I retain part of a proposal after accepting a criticism?",
+        "Does a counterargument always belong near the end?",
+        "How do I distinguish a possible objection from one someone actually made?",
+        "An alternative interpretation accounts for something mine overlooks.",
+        "How much disagreement does a short argument need to address?"
+      ],
+      "sources": [
+        {
+          "author": "Harvard College Writing Center",
+          "title": "Counterargument",
+          "url": "https://writingcenter.fas.harvard.edu/counterargument",
+          "checked_on": "2026-10-25",
+          "inspected_material": "Guidance on reasonable challenges to premises, evidence, interpretation, and consequences; possible responses, flexible placement, and revising a thesis when a challenge succeeds.",
+          "supports": "Engaging a material counterargument and allowing its force to change the position.",
+          "limits": "No source example, exercise, fixed placement rule, or empirical claim about meetings is adopted. The editorial team, observations, and proposals are invented. Task analysis, anticipated versus reported concerns, and acknowledgement versus revision are editorial applications. No full book-passage review is claimed."
+        }
+      ],
+      "source_path": "content/patterns/writing-answer-the-strongest-objection.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed, self-contained prose comparisons make the revision and its consequences directly inspectable. No separate graphic, mechanical table, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-match-the-claim-to-the-evidence",
+      "index_ref": "P44",
+      "title": "Match the Claim to the Evidence",
+      "use_when": [
+        "A limited observation becomes a statement about a broader group, time, or format.",
+        "A recorded arrangement becomes an unconditional prediction.",
+        "Automatic hedging obscures a directly established bounded fact."
+      ],
+      "goals": [
+        "Warranted scope and confidence",
+        "Informative qualifications",
+        "Consistent boundaries throughout the piece"
+      ],
+      "mechanisms": [
+        "Identifying the actual set, period, condition, or feature examined",
+        "Separating confidence within a boundary from breadth beyond it",
+        "Preserving qualifications in summaries, headlines, predictions, and recommendations"
+      ],
+      "not_ideal_when": [
+        "The underlying inference is unsupported and qualification would merely disguise the gap.",
+        "The evidence is incomplete or uncertain and a precise sentence would falsely imply a secure record."
+      ],
+      "related_patterns": [
+        "writing-connect-evidence-to-the-claim",
+        "writing-make-the-main-claim-findable",
+        "writing-choose-the-specific-word"
+      ],
+      "example_user_queries": [
+        "My conclusion makes a claim about everyone from one small case.",
+        "Does adding may fix a generalization?",
+        "How do I distinguish uncertainty from limited scope?",
+        "I keep hedging facts I directly checked.",
+        "My headline drops a qualification the article needs.",
+        "A staffing plan is being described as a guarantee about attendance.",
+        "How can I report a firm result without implying it applies everywhere?",
+        "My example concerns one format but the conclusion covers all information.",
+        "The summary says always although I examined only one date.",
+        "Which qualifications tell the reader something useful rather than sounding cautious?"
+      ],
+      "sources": [
+        {
+          "author": "University of Manchester Academic Phrasebank",
+          "title": "Being cautious",
+          "url": "https://www.phrasebank.manchester.ac.uk/using-cautious-language/",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The guide’s account of avoiding unwarranted certainty and generalization, including its sections on explanations, implications, and future outcomes.",
+          "supports": "Adjusting certainty and generality to the support available rather than making an unconditional claim.",
+          "limits": "No source phrase list, exercise, empirical finding about academic writing, or climate or clinical example is reproduced. The gallery inspection, all counts, and roster are invented. Confident bounded reporting, claim consistency, and scope versus certainty are editorial development, not a statistical procedure or universal hedging rule."
+        }
+      ],
+      "source_path": "content/patterns/writing-match-the-claim-to-the-evidence.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed, self-contained prose comparisons make the revision and its consequences directly inspectable. No separate graphic, mechanical table, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-explain-what-is-at-stake",
+      "index_ref": "P45",
+      "title": "Explain What Is at Stake",
+      "use_when": [
+        "A coherent argument leaves readers unsure why its particular distinction matters.",
+        "A proposal’s effect on a reader’s choice remains implied.",
+        "An interpretation is supported but its consequence for understanding the work is missing."
+      ],
+      "goals": [
+        "Specific significance",
+        "Visible consequences for affected people",
+        "Proportionate reasons to assess the argument"
+      ],
+      "mechanisms": [
+        "Showing what understanding or choice depends on the answer",
+        "Distinguishing the reading audience from people affected by a decision",
+        "Keeping conditional consequences separate from documented outcomes and inflated urgency"
+      ],
+      "not_ideal_when": [
+        "The explanation would invent consequences the case cannot sustain.",
+        "The relevance is already clear and repeating significance would crowd out the argument."
+      ],
+      "related_patterns": [
+        "writing-build-around-a-governing-question",
+        "writing-make-the-main-claim-findable",
+        "writing-match-the-claim-to-the-evidence"
+      ],
+      "example_user_queries": [
+        "My argument is clear but readers still ask why they should care.",
+        "I say the topic is important without explaining why this claim matters.",
+        "How do I show stakes without exaggerating the danger?",
+        "The people reading my proposal are not the people affected by it.",
+        "What accepting my recommendation changes is still implicit.",
+        "Can a literary interpretation have stakes without a practical policy outcome?",
+        "How can uncertainty itself matter to a decision?",
+        "I repeat urgent and significant but the consequence remains vague.",
+        "How do I explain a possible consequence without pretending it has been measured?",
+        "My introduction explains the broad subject but not what this argument adds."
+      ],
+      "sources": [
+        {
+          "author": "Harvard College Writing Center",
+          "title": "Introductions",
+          "url": "https://writingcenter.fas.harvard.edu/introductions",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The distinction between a broad topic and why a particular thesis is worth considering, with guidance against a compulsory dramatic hook.",
+          "supports": "Explaining the specific significance of the argument rather than assuming importance follows from the general topic.",
+          "limits": "No source example, exercise, legal claim, or empirical finding about education is adopted. The arts centre, classes, and short story are invented. Practical choices, conditional consequences, interpretive stakes, and proportionate urgency are editorial development. No full book-passage review is claimed."
+        }
+      ],
+      "source_path": "content/patterns/writing-explain-what-is-at-stake.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed, self-contained prose comparisons make the revision and its consequences directly inspectable. No separate graphic, mechanical table, or interactive practice is needed."
+      }
+    },
+    {
+      "id": "writing-separate-the-record-from-the-interpretation",
+      "index_ref": "P46",
+      "title": "Separate the Record from the Interpretation",
+      "use_when": [
+        "A factual account blends documents, reported memories, and the writer’s explanation into one assured voice.",
+        "A reconstructed conversation appears to be a transcript.",
+        "A source citation seems to support more of a sentence than the source actually establishes."
+      ],
+      "goals": [
+        "Visible provenance and statement status",
+        "Assessable interpretation",
+        "Faithful treatment of memory and disagreement"
+      ],
+      "mechanisms": [
+        "Signalling changes between documentary record, reported account, recollection, and inference",
+        "Giving attribution verbs the role the source actually performs",
+        "Preserving consequential gaps and conflicts without inventing a smoother account"
+      ],
+      "not_ideal_when": [
+        "Attribution would repeat an already clear source without helping assessment.",
+        "The writer would treat visible provenance as a substitute for sound inference or adequate support."
+      ],
+      "related_patterns": [
+        "writing-connect-evidence-to-the-claim",
+        "writing-match-the-claim-to-the-evidence",
+        "ladder-of-inference",
+        "separate-observation-meaning-and-action"
+      ],
+      "example_user_queries": [
+        "My report blends what I found with what I think it means.",
+        "How do I show which details come from a later interview?",
+        "A document supports part of my sentence but not the motive I added.",
+        "I remember a conversation but not its exact words.",
+        "Can I reconstruct a scene without making it sound recorded?",
+        "Two witnesses disagree and I cannot establish which account is right.",
+        "Does adding a citation make the whole paragraph supported?",
+        "I use confirms and admits just to avoid repeating says.",
+        "The source records a plan but I describe it as something that happened.",
+        "How much uncertainty belongs in the text rather than a source note?"
+      ],
+      "sources": [
+        {
+          "author": "Harvard College Writing Program, Harvard Guide to Using Sources",
+          "title": "The Nuts & Bolts of Integrating",
+          "url": "https://usingsources.fas.harvard.edu/nuts-bolts-integrating",
+          "checked_on": "2026-10-25",
+          "inspected_material": "The framing-source-material and signal-phrase sections on distinguishing source material from the writer’s contribution and the implications of attribution verbs.",
+          "supports": "Making the ownership of statements and shifts into the writer’s own interpretation readable.",
+          "limits": "No source example, exercise, quotation list, fixed paragraph template, or empirical historical claim is adopted. Cinema records, dates, interviews, and the memoir passage are invented. Memory, reconstruction, conflicting accounts, and documentary status are editorial applications. Existing Ladder of Inference and Separate Observation, Meaning, and Action articles were inspected locally for scope only; no complete reporting method or full book-passage review is claimed."
+        }
+      ],
+      "source_path": "content/patterns/writing-separate-the-record-from-the-interpretation.md",
+      "status": "draft",
+      "domain": "writing",
+      "visual_decision": {
+        "type": "none",
+        "implementation": "Developed, self-contained prose comparisons make the changes in attribution, purpose, or process directly inspectable. No mechanical table, separate graphic, or interactive practice is needed."
+      }
+    }
+  ]
+}

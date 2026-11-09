@@ -1,0 +1,84 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/meaning-handbuilding-photo.jpg",
+      "generation_record": "graphic-design-image-meaning-sources.json",
+      "sha256": "26676e6fb1dfcdca24725cc465e31d977d03f728bc974022d0ff5835dbc80d55"
+    },
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/meaning-enclosed-room-photo.jpg",
+      "generation_record": "graphic-design-image-meaning-sources.json",
+      "sha256": "33fba583a187116e75139cd49e6394e40bc11925fbacbaef68d339bd91497b68"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "pattern": "Crop for Impact",
+  "date": "2026-10-28",
+  "mode": "Existing generated photographs and paper stage reused unchanged. Native SVG source windows and exact explanatory insets; no raster editing or new generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-crop-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-crop-layouts.json",
+    "sha256": "f74c9aea3f4b8bed5af63662e8e42ef4c9707cea32ffc9e02311ef7f479e02c0",
+    "method": "Only image-window viewBox changes in each fixed artifact. The same embedded1536\u00d71024 source is fitted uniformly to a fixed frame; crop/frame aspect ratios match exactly. Native copy, font settings, colors, paper and presentation are identical. Source insets show exact dashed-before and solid-after boundaries outside the printed artifacts. No raster editing, stretching, rotation, color correction or new generation."
+  },
+  "comparisonPolicy": "Handbuilding window tightens1536\u00d71024\u21921080\u00d7720 at400/130; product window pans128\u2192400 at unchanged1024-square/y0; room window widens960\u00d7640 at200/100\u2192full1536\u00d71024. Only viewBox changes. Frame bounds, aspect ratio, source image bytes, typography, text, palette, geometry and paper/lighting are fixed. Source insets are outside the designed artifacts.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "crop-handbuilding-action",
+        "changedPixels": 153576,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "crop-tableware-edge",
+        "changedPixels": 159986,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "crop-room-context",
+        "changedPixels": 153411,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared crop-window intervention regions differ.",
+    "scope": "Exact DOM normalization permits only image-window viewBox. All crop rectangles stay within the same embedded1536\u00d71024 source and match fixed frame proportions. Other artifact nodes and embedded photo/font/stage bytes remain identical. Pixels differ only inside photo frames. Source-guide rectangles exactly project those windows. Wide/narrow checks cover text bounds, loaded fonts, overflow and image/inline equality."
+  },
+  "limitations": "Editorial framing choices, not measured attention or conversion improvements. Retained pixels do not gain detail through fitting. Context-preserving crop does not verify documentary truth, product specifications, venue features, physical print quality or complete accessibility. Generated photographs are illustrative."
+}

@@ -1,0 +1,174 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Three controlled comparisons retain color coding and add an independent visible carrier. Only local status labels, Plan line/key dash patterns or inline error text change. Existing typography, copy, geometry and photo sources remain fixed.",
+  "colors": {
+    "ink": "#2e4836",
+    "paper": "#fffdf6",
+    "green": "#2f6f52",
+    "amber": "#946016",
+    "red": "#9d3f3d",
+    "blue": "#2d649a",
+    "orange": "#954e2b"
+  },
+  "sessions": [
+    {
+      "title": "Handbuilding",
+      "detail": "Wed 18 Nov · 18:30 · Capacity 12",
+      "status": "Open",
+      "color": "#2f6f52"
+    },
+    {
+      "title": "Wheel basics",
+      "detail": "Thu 19 Nov · 18:30 · Capacity 6",
+      "status": "Waitlist",
+      "color": "#946016"
+    },
+    {
+      "title": "Glazing",
+      "detail": "Sat 21 Nov · 10:00 · Capacity 10",
+      "status": "Full",
+      "color": "#9d3f3d"
+    }
+  ],
+  "chart": {
+    "months": ["Feb", "Mar", "Apr", "May"],
+    "actual": [42, 56, 64, 76],
+    "plan": [50, 58, 66, 74],
+    "axisMinimum": 40,
+    "axisMaximum": 80,
+    "scale": 4.2,
+    "baseline": 730,
+    "x": [110, 240, 370, 500],
+    "afterDash": "10 7"
+  },
+  "form": {
+    "name": "Alex Morgan",
+    "email": "",
+    "price": 18,
+    "errorDescription": "Email address is missing.",
+    "errorInstruction": "Enter it to receive your pass."
+  },
+  "examples": [
+    {
+      "name": "beyond-color-session-status",
+      "source": "audience-pottery-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only three local status labels become visible. Existing colored dots, legend, dates, times, capacities, fonts, geometry and photograph remain fixed. Open, Waitlist and Full name the status without hue matching.",
+      "declaredChanges": [
+        [
+          {
+            "element": "status-label-0",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "status-label-1",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "status-label-2",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "status-label-0",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "status-label-1",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "status-label-2",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "beyond-color-actual-plan",
+      "source": "form-open-studios-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only two stroke-dasharray attributes change: the Plan series and its legend sample. All colors, stroke widths, path geometry, axes, months, values and photograph remain fixed. Actual stays solid and Plan becomes dashed.",
+      "declaredChanges": [
+        [
+          {
+            "element": "plan-key",
+            "attribute": "stroke-dasharray",
+            "value": "none"
+          },
+          {
+            "element": "plan-line",
+            "attribute": "stroke-dasharray",
+            "value": "none"
+          }
+        ],
+        [
+          {
+            "element": "plan-key",
+            "attribute": "stroke-dasharray",
+            "value": "10 7"
+          },
+          {
+            "element": "plan-line",
+            "attribute": "stroke-dasharray",
+            "value": "10 7"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "beyond-color-email-error",
+      "source": "audience-workspace-photo.jpg",
+      "stage": "audience-phone-stage.jpg",
+      "phone": true,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only two inline error lines become visible. Email remains empty and retains its red outline; generic notice, name, input geometry, button, price, photo and phone remain fixed. Fictional static form, not an implemented accessible interface.",
+      "declaredChanges": [
+        [
+          {
+            "element": "error-description",
+            "attribute": "opacity",
+            "value": "0"
+          },
+          {
+            "element": "error-instruction",
+            "attribute": "opacity",
+            "value": "0"
+          }
+        ],
+        [
+          {
+            "element": "error-description",
+            "attribute": "opacity",
+            "value": "1"
+          },
+          {
+            "element": "error-instruction",
+            "attribute": "opacity",
+            "value": "1"
+          }
+        ]
+      ]
+    }
+  ]
+}

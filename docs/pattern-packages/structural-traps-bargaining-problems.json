@@ -1,0 +1,116 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Bargaining Problems",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "bargaining-problems",
+      "title": "Bargaining Problems",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; gains from agreement, distribution, alternatives, and bargaining procedures",
+      "article": "content/concepts/bargaining-problems.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "John F. Nash Jr., The Bargaining Problem (1950)",
+          "url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf",
+          "doi": "10.2307/1907266",
+          "supports": "Two-person bargaining as mutually beneficial alternatives with distributional conflict; disagreement normalization; compact convex utility set; axiomatic product-of-gains characterization.",
+          "read_method": "Original paper opened on university host and downloaded; utility construction, disagreement baseline, assumptions, axioms, and product maximization derivation read in extracted text.",
+          "boundary": "The cooperative axiomatic benchmark does not specify the worked example’s negotiating procedure or predict acceptance of a mediator’s proposal. The example is a conditional facilitated agreement, rather than an equilibrium derived from a fully specified offer protocol. Symmetry and other axioms are modeling choices, not a universal justice standard."
+        },
+        {
+          "title": "Ariel Rubinstein, Perfect Equilibrium in a Bargaining Model (1982)",
+          "url": "https://arielrubinstein.org/papers/11.pdf",
+          "doi": "10.2307/1912531",
+          "supports": "Distinction between axiomatic and strategic approaches; alternating proposals, preferences over share and delay, complete information, and perfect-equilibrium sensitivity to patience and first mover.",
+          "read_method": "Author-hosted original scanned paper opened and downloaded. First three pages rendered and OCR read, including introduction, preference assumptions, fixed-discount characterization, complete-information caveat, and subgame perfection.",
+          "boundary": "The article discusses only the constant-discount version for procedural comparison. Its alternating-offer results are not applied to the hypothetical bicycle-price agreement, and no numerical Rubinstein outcome is claimed."
+        },
+        {
+          "title": "Alvin E. Roth, J. Keith Murnighan, and Françoise Schoumaker, The Deadline Effect in Bargaining: Some Experimental Evidence (1988)",
+          "url": "https://web.stanford.edu/~alroth/papers/1988_AER_Deadline_Effect.pdf",
+          "supports": "Four laboratory bargaining experiments showed agreements concentrated near deadlines and substantial disagreement; much timing analysis was retrospective.",
+          "read_method": "Author-hosted scanned original report opened and downloaded; first three pages rendered and OCR read, covering study motivation, laboratory timing, agreement distribution, design limitations, and binary-lottery environment.",
+          "boundary": "Laboratory observations are not a universal field prediction or a randomized estimate of the effect of imposing tighter deadlines. Article uses no empirical percentage as a target for the invented negotiation."
+        }
+      ],
+      "related_patterns": [
+        "zero-sum-conflict",
+        "battle-of-the-sexes",
+        "chicken"
+      ],
+      "status": "published",
+      "short_description": "Recognize when agreement creates a shared gain but competing claims prevent its division, then separate feasible deals, bargaining procedures, alternatives, and fairness judgments.",
+      "use_when": [
+        "Which prices can both prefer to walking away?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Establish real alternatives and select acceptable enforceable terms within the overlap.",
+        "Private limits may be hard to learn. No overlap requires a changed package or no sale; fairness remains open."
+      ],
+      "example_structure": {
+        "scenario": "Known condition and ownership of one secondhand bicycle; fixed included package, credible known acceptance limits and outside options, rejection available, earlier discussion nonbinding, single sale. A price in the overlap is acceptable but not uniquely fair. Price ordering only; no invented monetary utilities.",
+        "changed_relationship": "Establish real alternatives and select acceptable enforceable terms within the overlap.",
+        "residual_constraints": "Private limits may be hard to learn. No overlap requires a changed package or no sale; fairness remains open.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/bargaining-display-price.svg",
+          "content/assets/structural-traps/bargaining-display-price-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 648,
+            "textBlocks": 13
+          },
+          "phone": {
+            "width": 360,
+            "height": 1147,
+            "textBlocks": 13
+          }
+        },
+        "question": "Which prices can both prefer to walking away?",
+        "alternative_text": "Hypothetical qualitative illustration. Prices below Dev’s acceptance minimum fail for the seller; prices above Mira’s maximum fail for the buyer. The interval between permits agreement on the same known bicycle. A higher price within that overlap favors Dev and a lower price favors Mira. Change: Establish real alternatives and select acceptable enforceable terms within the overlap. Limitation: Private limits may be hard to learn. No overlap requires a changed package or no sale; fairness remains open.",
+        "caption": "Hypothetical illustration. Regions are ordered by increasing price without numerical distances. Overlap makes a mutually acceptable sale possible, but selects no uniquely fair price. The example assumes known acceptance limits and a feasible exchange.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Prices below Dev’s acceptance minimum fail for the seller; prices above Mira’s maximum fail for the buyer. The interval between permits agreement on the same known bicycle. A higher price within that overlap favors Dev and a lower price favors Mira. Change: Establish real alternatives and select acceptable enforceable terms within the overlap. Limitation: Private limits may be hard to learn. No overlap requires a changed package or no sale; fairness remains open.",
+          "relationship_key": "Cards are alternative price regions, not chronological steps or utility quantities. Green marks the agreement region; the words also identify it.",
+          "changed_relationship": "Establish real alternatives and select acceptable enforceable terms within the overlap.",
+          "residual_constraints": "Private limits may be hard to learn. No overlap requires a changed package or no sale; fairness remains open.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Known condition and ownership of one secondhand bicycle; fixed included package, credible known acceptance limits and outside options, rejection available, earlier discussion nonbinding, single sale. A price in the overlap is acceptable but not uniquely fair. Price ordering only; no invented monetary utilities.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

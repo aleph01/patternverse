@@ -1,0 +1,114 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Battle of the Sexes: Coordinating with Conflicting Preferences",
+  "metadata_mapping": "Existing concept schema and responsive SVG convention; existing publication status retained; local edits only.",
+  "patterns": [
+    {
+      "id": "battle-of-the-sexes",
+      "title": "Battle of the Sexes: Coordinating with Conflicting Preferences",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; coordination with opposing rankings and public correlation",
+      "article": "content/concepts/battle-of-the-sexes.md",
+      "related_patterns": [
+        "coordination-problems",
+        "the-stag-hunt",
+        "the-prisoners-dilemma"
+      ],
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Historical reference to Luce and Raiffa, Games and Decisions (1957), pp. 90–91",
+          "url": "https://plato.stanford.edu/archives/spr2022/entries/game-ethics/notes.html",
+          "supports": "Classic named presentation and couple-based activity-choice interpretation.",
+          "read_method": "Stanford Encyclopedia of Philosophy specialist notes read.",
+          "boundary": "Historical bibliography checked through the specialist source; original book pages were not obtained. Article says the classic presentation appears there, without claiming that the authors invented every precursor or that the title establishes gender differences."
+        },
+        {
+          "title": "Ben Polak, Yale ECON 159 lecture 6, Nash Equilibrium: Dating and Cournot",
+          "url": "https://oyc.yale.edu/economics/econ-159/lecture-6",
+          "supports": "Two matching equilibria and conflicting preferences over them; communication can coordinate while leaving disagreement over which equilibrium.",
+          "read_method": "Official lecture transcript coordination sections read.",
+          "boundary": "An accessible technical explanation and classroom demonstration, not population-level empirical evidence or validation of the hypothetical event."
+        },
+        {
+          "title": "Duffy, Lai, and Lim, Coordination via Correlation: An Experimental Study (2017)",
+          "url": "https://sites.socsci.uci.edu/~duffy/papers/ETDuffyLaiLim.pdf",
+          "doi": "10.1007/s00199-016-0998-8",
+          "supports": "Public correlated selection, distinction from independent mixing, learning direct versus indirect signals, and alternation with fixed partners.",
+          "read_method": "Author-hosted published PDF introduction, formal framework, procedures, and reported findings read. Earlier author version also inspected. Bibliographic record identifies Economic Theory 64 (2017), 265–304; online publication/copyright 2016.",
+          "boundary": "214 HKUST undergraduates in 60-round sessions; random matching within groups or fixed pairs. The experiment uses specified monetary payoffs; the article instead states qualitative venue preferences. No experimental rates transferred to the article. Shared signals require common interpretation; the research does not establish automatic compliance or acceptance of any public lottery."
+        }
+      ],
+      "status": "published",
+      "short_description": "Recognize when everyone prefers agreement to a split but favors a different agreement, then distinguish coordinating actions from deciding whose preference prevails.",
+      "use_when": [
+        "How can both want to meet while favoring different plans?",
+        "Nia prefers a film and Theo a concert. Both prefer either shared activity to separate evenings."
+      ],
+      "goals": [
+        "Recognize the familiar predicament before specialist terminology.",
+        "Explain the defining mechanism and distinguish neighboring concepts.",
+        "One-shot choices without seeing the other’s current choice; preferences and feasible options known. No future rewards or binding commitment in the initial game. One person still accepts a less preferred evening.",
+        "Separate hypothetical behavior, model results, documented cases, and practical editorial proposals."
+      ],
+      "mechanisms": [
+        "One accepted shared draw and acknowledged activity select an existing matching equilibrium.",
+        "Both activities must be feasible and acceptable. One person still receives the less preferred outcome."
+      ],
+      "example_user_queries": [
+        "How can both want to meet while favoring different plans?"
+      ],
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "How can both want to meet while favoring different plans?",
+        "assets": [
+          "content/assets/structural-traps/battle-of-sexes-venues.svg",
+          "content/assets/structural-traps/battle-of-sexes-venues-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 927,
+            "textBlocks": 18
+          },
+          "phone": {
+            "width": 360,
+            "height": 1099,
+            "textBlocks": 15
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Nia prefers a film, Theo a concert, and both prefer either shared activity to separate evenings. Together at the film and together at the concert are the two double-outlined equilibria. A shared acknowledged draw can select one. Change: Agree one shared selection and confirm the same activity before departing. Limitation: Both activities must be feasible and acceptable. One person still receives the less preferred outcome.",
+        "caption": "Hypothetical illustration. Compare Nia’s and Theo’s activity choices. Matching choices keep them together but favor different people. A shared draw selects an existing equilibrium; equal chances do not give both their preferred evening or settle fairness.",
+        "representation": {
+          "scenario": "Nia prefers a film and Theo a concert. Both prefer either shared activity to separate evenings.",
+          "interpretation": "Hypothetical qualitative illustration. Nia prefers a film, Theo a concert, and both prefer either shared activity to separate evenings. Together at the film and together at the concert are the two double-outlined equilibria. A shared acknowledged draw can select one. Change: Agree one shared selection and confirm the same activity before departing. Limitation: Both activities must be feasible and acceptable. One person still receives the less preferred outcome.",
+          "relationship_key": "Each card or cell is an alternative combination of choices, not a later turn. Choices are made without seeing the other’s current choice. Double outlines mark equilibria.",
+          "changed_relationship": "One accepted shared draw and acknowledged activity select an existing matching equilibrium.",
+          "residual_constraints": "Both activities must be feasible and acceptable. One person still receives the less preferred outcome.",
+          "phone_treatment": "Separate composition retains readable labels and the same alternatives, dependencies, causal links, or chronology."
+        }
+      },
+      "example_structure": {
+        "scenario": "Nia prefers a film and Theo a concert. Both prefer either shared activity to separate evenings.",
+        "changed_relationship": "One accepted shared draw and acknowledged activity select an existing matching equilibrium.",
+        "required_assumptions": "One-shot choices without seeing the other’s current choice; preferences and feasible options known. No future rewards or binding commitment in the initial game. One person still accepts a less preferred evening.",
+        "residual_constraints": "Both activities must be feasible and acceptable. One person still receives the less preferred outcome.",
+        "comparison": "Qualitative relationships only; no invented utility scores, numerical trajectories, or measured improvement claimed."
+      },
+      "evidence_boundary": "The central scenario and resulting behavior are hypothetical. Source-specific formal and empirical limits remain explicit. The expected recognizability of a classic example is editorial judgment, not a reader-study result.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "change": "Nia prefers a film and Theo a concert. Both prefer either shared activity to separate evenings.",
+        "scope": "Article, two editable responsive SVGs, caption, alternative text, manifest dimensions, and current research notes. All forty retain separate identities and existing publication status.",
+        "source_handling": "Existing source identities and original source-check dates retained. Current examples are no longer the earlier workshop, booking, or dashboard scenarios. Research claims are not reclassified as measured outcomes.",
+        "verification": "Passed current content, semantic consistency, responsive browser, SVG bounds, and text-contrast checks; see verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Content validator passes for 1454 entities. All forty collection members remain separate, with nine sections and a responsive illustration each. Collection, article metadata, existing publication status, and original source identities are unchanged. Exactly 33 scoped files changed: eight articles, sixteen SVG compositions, eight notes, and the asset manifest.",
+        "visual": "Eight revised live articles checked at 1440px desktop and 390px phone viewports (16 layouts), selecting the expected images at 718px and approximately 364.6px article widths, without page overflow. Sixteen SVG compositions checked in light and dark surroundings (32 layouts): no text overlap, clipping, card overflow, or white-surface errors. Visual review of desktop and phone renderings confirms readable labels and traceable relationships. Minimum text contrast 5.03; smallest rendered text approximately 13.68px on desktop.",
+        "evidence_boundary": "Editorial, semantic, and browser-rendering checks only; no reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

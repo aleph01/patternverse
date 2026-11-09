@@ -1,0 +1,127 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Multitask Incentive Distortion",
+  "metadata_mapping": "Existing concept schema and responsive SVG convention; existing publication status retained; local edits only.",
+  "patterns": [
+    {
+      "id": "multitask-incentive-distortion",
+      "title": "Multitask Incentive Distortion",
+      "entity_type": "concept",
+      "domain": "Information, incentive, and commitment problems; multiple responsibilities, effort allocation, performance measurement, and contract/job design",
+      "article": "content/concepts/multitask-incentive-distortion.md",
+      "related_patterns": [
+        "seeking-the-wrong-goal",
+        "rule-beating",
+        "the-principal-agent-problem",
+        "moral-hazard",
+        "bottlenecks-and-capacity-constraints"
+      ],
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Bengt Holmström and Paul Milgrom, Multitask Principal-Agent Analyses: Incentive Contracts, Asset Ownership, and Job Design (1991)",
+          "url": "https://gwern.net/doc/economics/1991-holmstrom.pdf",
+          "doi": "10.1093/jleo/7.special_issue.24",
+          "supports": "Foundational multitask agency analysis of how incentive strength redirects effort when duties compete and measurability differs; role of costs, risk/measurement, job design, and constraints.",
+          "read_method": "Original published paper opened and read: introduction, modeling assumptions, linear compensation/risk framing, substitution versus complementarity discussion, unmeasurable-task examples, and job-design/constraint overview.",
+          "boundary": "Formal conditional results; not a blanket claim that incentives fail or fixed wages always work. Mara and Jo’s qualitative teaching-time comparison is original teaching synthesis and does not reproduce the paper’s continuous stochastic model or prove all of its results."
+        },
+        {
+          "title": "George P. Baker, Incentive Contracts and Performance Measurement (1992)",
+          "url": "https://www.edegan.com/pdfs/Baker%20%281992%29%20-%20Incentive%20Contracts%20and%20Performance%20Measurement.pdf",
+          "doi": "10.1086/261831",
+          "supports": "Mismatch between the marginal response of the contracted performance measure and the principal’s objective, including distorted incentives even without agent risk aversion under the model’s information assumptions.",
+          "read_method": "Original published scan opened and read in full-text extraction: abstract, introduction, objective-versus-measure setup, linear contract, asymmetric information about the state, and model assumptions. Publisher record checked for DOI/year/pages. A university scan was also opened but lacked extracted text.",
+          "boundary": "The article notes that results depend on information/contracting assumptions. It does not substitute the qualitative teaching-time comparison for Baker’s private-state model, or assert that an accurately recorded count must always be uninformative."
+        },
+        {
+          "title": "Fuhai Hong, Tanjim Hossain, John A. List, and Migiwa Tanaka, Testing the Theory of Multitasking: Evidence from a Natural Field Experiment in Chinese Factories (2018; accessible April 2017 manuscript consulted)",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1111/iere.12278",
+          "manuscript": "https://fieldexperiments-papers2.s3.amazonaws.com/papers/00609.pdf",
+          "doi": "10.1111/iere.12278",
+          "supports": "Field evidence on extra quantity incentives and quality, with stronger quantity–quality trade-offs under flat-rate base pay; covert quality measurement, context dependence, and limitations of comparing preexisting salary structures.",
+          "read_method": "Publisher abstract/metadata opened and read. Authors’ FieldExperiments listing and full April 2017 manuscript opened and read: abstract/introduction, factory/base-pay context, task and inspection design, treatment/control-round description, and discussion of heterogeneous effects. Original university final-PDF link returned 404; manuscript versus 2018 publication is explicit.",
+          "boundary": "No effect size, randomized assignment of base salaries, universal damage claim, or measured teaching effect is asserted. Base-pay schemes differed across factories and tasks; the comparison is not a clean randomized base-pay-policy experiment. Statistically insignificant quality effects in one group are not treated as proof of zero effects."
+        }
+      ],
+      "status": "published",
+      "short_description": "Recognize when rewarding a measurable part of a job diverts effort from other valuable duties, then evaluate the whole pattern of incentives, measurement, and task design.",
+      "use_when": [
+        "What loses time when tested results become more rewarding?",
+        "Mara rewards Jo’s test results. Jo’s finite teaching time shifts toward tested exercises and away from discussion and extended writing."
+      ],
+      "goals": [
+        "Recognize the familiar predicament before specialist terminology.",
+        "Explain the defining mechanism and distinguish neighboring concepts.",
+        "School chooses enforceable terms before Jo chooses effort; one-period benchmark excludes future promotion and reputation. Accurate results and real tested gains can coexist with displacement. Task substitution and value require evidence.",
+        "Separate hypothetical behavior, model results, documented cases, and practical editorial proposals."
+      ],
+      "mechanisms": [
+        "Moderate the narrow reward, keep acceptable pay, protect broader teaching, and review substantive learning.",
+        "Less concentrated test preparation can lower reported gains. Broader learning and the effects of review still need evidence."
+      ],
+      "example_user_queries": [
+        "What loses time when tested results become more rewarding?"
+      ],
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "What loses time when tested results become more rewarding?",
+        "assets": [
+          "content/assets/structural-traps/multitask-workshop.svg",
+          "content/assets/structural-traps/multitask-workshop-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 804,
+            "textBlocks": 16
+          },
+          "phone": {
+            "width": 360,
+            "height": 1326,
+            "textBlocks": 16
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Alternative pre-teaching reward rules influence Jo’s allocation of finite teaching time between tested exercises and broader discussion and writing. A narrow bonus can favor real tested gains while displacing valuable untested work. Revised terms moderate the bonus and protect broader teaching. Change: Moderate the narrow reward and protect valuable learning outside the measure. Limitation: Less concentrated test preparation can lower reported gains. Broader learning and the effects of review still need evidence.",
+        "caption": "Hypothetical illustration. Both duties use the same teaching time. The original reward can redirect effort without cheating or false results. Green marks alternative terms agreed before work; a better balance still requires worthwhile neglected work, feasible time, and credible review.",
+        "representation": {
+          "scenario": "Mara rewards Jo’s test results. Jo’s finite teaching time shifts toward tested exercises and away from discussion and extended writing.",
+          "interpretation": "Hypothetical qualitative illustration. Alternative pre-teaching reward rules influence Jo’s allocation of finite teaching time between tested exercises and broader discussion and writing. A narrow bonus can favor real tested gains while displacing valuable untested work. Revised terms moderate the bonus and protect broader teaching. Change: Moderate the narrow reward and protect valuable learning outside the measure. Limitation: Less concentrated test preparation can lower reported gains. Broader learning and the effects of review still need evidence.",
+          "relationship_key": "Dashed and green inputs are alternative reward rules, not simultaneous payments. Branches allocate finite attention; their sizes show no quantities or learning effects.",
+          "changed_relationship": "Moderate the narrow reward, keep acceptable pay, protect broader teaching, and review substantive learning.",
+          "residual_constraints": "Less concentrated test preparation can lower reported gains. Broader learning and the effects of review still need evidence.",
+          "phone_treatment": "Separate composition retains readable labels and the same alternatives, dependencies, causal links, or chronology."
+        }
+      },
+      "example_structure": {
+        "scenario": "Mara rewards Jo’s test results. Jo’s finite teaching time shifts toward tested exercises and away from discussion and extended writing.",
+        "changed_relationship": "Moderate the narrow reward, keep acceptable pay, protect broader teaching, and review substantive learning.",
+        "required_assumptions": "School chooses enforceable terms before Jo chooses effort; one-period benchmark excludes future promotion and reputation. Accurate results and real tested gains can coexist with displacement. Task substitution and value require evidence.",
+        "residual_constraints": "Less concentrated test preparation can lower reported gains. Broader learning and the effects of review still need evidence.",
+        "comparison": "Qualitative relationships only; no invented utility scores, numerical trajectories, or measured improvement claimed."
+      },
+      "evidence_boundary": "The central scenario and resulting behavior are hypothetical. Source-specific formal and empirical limits remain explicit. The expected recognizability of a classic example is editorial judgment, not a reader-study result.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "change": "Mara rewards Jo’s test results. Jo’s finite teaching time shifts toward tested exercises and away from discussion and extended writing.",
+        "scope": "Article, two editable responsive SVGs, caption, alternative text, manifest dimensions, and current research notes. All forty retain separate identities and existing publication status.",
+        "source_handling": "Existing source identities and original source-check dates retained. Current examples are no longer the earlier workshop, booking, or dashboard scenarios. Research claims are not reclassified as measured outcomes.",
+        "verification": "Passed current content, semantic consistency, responsive browser, SVG bounds, and text-contrast checks; see verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

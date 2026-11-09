@@ -18,6 +18,32 @@ runner. `PatternRun.svelte` is shared by embedded pattern and standalone practic
 `PatternForm.svelte` is shared by the public runner, editor preview and Mira effect view.
 There is no TypeScript YAML practice interpreter.
 
+## Multiple practices for a pattern
+
+A pattern may contain its existing embedded practice and be implemented by any number
+of separate `type: practice` records. Each separate practice has its own stable ID,
+title, summary, optional `duration_minutes`, and Pattern Language fence; its `implements`
+list names the patterns it applies. Keep one executable fence per record. A practice
+can implement several patterns without duplicating its definition.
+
+Pattern pages show a matrix when more than one practice is available: practices form
+the rows, and self-guided runs, Mira conversations, and blank worksheets form the
+columns. Each action uses that row's definition and identity. Unsupported combinations
+have no action. A single practice retains the existing three-choice presentation.
+The compact article shortcut opens the choice of practices when there are several.
+
+The pattern editor's **Interactive practices** section supports adding and editing
+additional practice records, including their title, purpose, duration, blocks, source,
+and preview. Saving validates every source before atomically storing the pattern and
+all its practice drafts. Removing an additional practice unlinks it from this pattern;
+its record, other pattern relationships, annotations, and saved history are kept.
+Public articles, private records, and existing run URLs keep their current boundaries.
+
+Mira links for matrix rows select the exact source-qualified practice. Its readable
+article and blank worksheet supply conversation context; a conversation does not
+claim to execute the interactive program. Self-guided runs keep the practice entity's
+identity, so histories for different exercises remain distinct.
+
 ## Grouped questions
 
 Use `!form` for questions which belong to one worksheet step:
@@ -32,14 +58,11 @@ reflection = !form {
   !show {
 Notice one manageable situation.
   }
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     :placeholder "What came to mind?"
 What was your first thought?
   }
-  !ask note {
-    :required false
+  note = !ask [optional] {
     :multiline false
 Anything else you want to remember?
   }
@@ -50,10 +73,10 @@ Your thought: {{reflection.thought}}
 -> end
 ```
 
-A form contains 1–256 ordered `!show`, `!ask` or `!timer` blocks.
+A form contains 1–256 ordered `!show`, `!ask`, `!rate`, `!choose` or `!timer` blocks.
 Field IDs are unique within a form. `:title` is optional. Text fields default to
-required and multiline; placeholders are optional quoted strings. These attributes
-apply to form fields, not existing standalone `!ask` statements.
+required and multiline; `[optional]` explicitly permits an empty answer, and placeholders are optional quoted strings. These attributes
+apply to form fields. Standalone `!ask` retains its existing empty-answer behavior; the marker can document it without changing that contract.
 
 The runtime emits one `interaction.form` effect. A `form` fulfillment maps every
 field ID to a tagged Value. Required text cannot be whitespace-only; optional text
@@ -62,10 +85,84 @@ are rejected atomically. After acceptance, the binding is an immutable typed rec
 `reflection.thought` can be used by later statements. Show-only forms accept an empty
 record as acknowledgement.
 
+### Grouped ratings and choices
+
+Ratings and single/multiple choices use the same contracts as standalone inputs,
+but remain drafts until the form's one **Continue** submission:
+
+```pattern
+:language 1
+:output assessment
+
+assessment = !form {
+  :title "Assess an initiative"
+  initiative = !ask {
+    What initiative are you considering?
+  }
+  impact = !rate 1..5 {
+    :low "Small improvement"
+    :high "Major improvement"
+    How much impact could it have?
+  }
+  evidence = !choose {
+    What supports your estimate?
+    - observed: "Observed results"
+    - research: "Research or interviews"
+    - assumption: "An untested assumption"
+  }
+  dependencies = !choose [multi, min=0, max=2] {
+    Which teams would be involved?
+    - design: "Design"
+    - engineering: "Engineering"
+  }
+}
+-> end
+```
+
+`assessment.impact` is a number, `assessment.evidence` is a choice, and
+`assessment.dependencies` is a typed list of choices. Ratings must be finite and
+within their inclusive bounds; decimal, negative and zero answers retain the
+standalone numeric semantics. Ratings begin unanswered, without an accepted default.
+
+Choice IDs, uniqueness and cardinality use the existing selection validator.
+Both literal options and `from=<binding or field path>` catalogues are supported.
+Dynamic catalogues and effective bounds are frozen when the whole form opens;
+they cannot depend on another field's unsubmitted answer. Multi-selection outputs
+follow catalogue order, and repeating an accepted submission with a different
+checkbox order is idempotent. Labels are resolved from the offered catalogue.
+`min=0` permits an explicitly submitted empty list; single choice requires one.
+`!rank` is not a form field.
+
+The runtime validates every field before accepting any answer or advancing the run.
+Missing or extra fields, wrong types, invalid ratings, unknown/duplicate choices,
+and cardinality violations leave the entire form pending. Browser validation keeps
+the draft available for correction; Rust remains authoritative. Confirmed typed
+answers use the existing checkpoint/replay, history and revisit paths.
+
 Templates use existing outer bindings. Sibling answers are not available until the whole
 form commits. Branching, child calls, agent work and nested forms are not allowed inside
 a form; use ordinary language statements between forms. This is a small addition to the
 existing AST/compiled instructions, not a second interaction language or workflow engine.
+
+## AI notices and connection timing
+
+Practices that may use AI show an informational notice below the title, including
+the actual OpenRouter connection status and an **About AI** dialog. The dialog
+explains the practice's use of AI, OpenRouter, credits, transmitted context and
+optional response saving. Desktop local models and explicitly selected free AI
+have their own provider labels and explanations.
+
+Potential AI use is not a connection prerequisite for starting ordinary steps.
+Run initialization and connection readiness are separate states. A disconnected
+participant can complete a non-AI path; the host waits only when execution reaches
+a model effect. Connection checks and returning from sign-in never fulfill a
+pending AI effect. Existing answers, drafts and restored progress remain in place.
+Free AI still requires an explicit provider choice and never falls back to paid
+OpenRouter automatically. Completion copy reports AI use only when the run's
+accepted effects actually include AI work.
+
+This is shared runner presentation and orchestration, not additional Pattern
+Language syntax or an alternate execution engine.
 
 ## Timers
 
@@ -91,7 +188,8 @@ standalone practice `/run` URLs still work.
 `PracticeDefinition` and its strict YAML parser remain only as an import compatibility
 boundary. The corpus reader converts valid legacy personal records to language source for
 consumers. Opening a personal record prepares a converted editor draft without rewriting
-IndexedDB; saving writes only Pattern Language. Malformed or ambiguous dual-format records
+IndexedDB; saving writes only Pattern Language. Conversion also generates canonical
+bindings and `[optional]` markers. Malformed or ambiguous dual-format records
 remain intact and cannot be saved until repaired. Numeric legacy field IDs receive an
 unambiguous `field_` prefix because language identifiers cannot start with a digit.
 
@@ -109,17 +207,17 @@ blocks (`!show`) and timers (`!timer`) have field editors. Response and option I
 remain stable; rename responses in Source. Desktop keeps the existing preview beside
 the editor; mobile uses the three tabs.
 
-**Paths** projects an existing `?match` as exact-answer cases, or a `?branch` as
+**Paths** authors local `?match` / `?branch` arms, with their actions directly inside each case. Legacy Paths also projects an existing `?match` as exact-answer cases, or a `?branch` as
 ordered numeric rules on one earlier response. Otherwise remains explicit. Each path
 owns its blocks and an explicit destination: continue after Paths or finish the practice.
-Rules run in authored priority order, not through a second UI evaluator. Adding/removing
+Rules run in authored priority order, not through a second UI evaluator. Local static-choice matches can be exhaustive without an Otherwise arm. Adding/removing
 cases and moving rules produces ordinary Pattern Language source.
 
 Rust inspection supplies exact UTF-8 source ranges and groups only distinct, labelled,
 linear arms with explicit outgoing jumps and at most one shared continuation. Shared
 entry targets, nested dispatch, compound conditions, enum dispatch and other advanced
-constructs remain editable in Source rather than being simplified or discarded. Other
-unsupported blocks, including forms, collections, loops and AI constructs, also stay
+constructs remain editable in Source rather than being simplified or discarded. Local structured branches and forms expose their nested blocks and form-field optionality. Other
+unsupported blocks, including collections, loops and AI constructs, stay
 intact as Source blocks. This is a conservative authoring projection of the existing
 parser and checked flow, not a new AST, grammar or runtime.
 
@@ -147,6 +245,10 @@ preview and narrow layouts. Existing language programs and saved catalog runs re
 
 ## Portable presentation prototype
 
+The production Share panel now offers light pattern cards and self-guided practice
+embeds using the full website runner. See [Sharing and website embeds](sharing.md).
+The following describes the retained, narrower checkpoint-transfer prototype.
+
 Open `/embed/define-the-decision-before-comparing-options` on the local development
 server to review a compact, navigation-free version of the same public worksheet.
 It loads the existing corpus source, not a copied definition. No homepage/navigation
@@ -168,10 +270,10 @@ or automatic cross-host sync. Checkpoints contain answers in plaintext: any futu
 adapter must obtain appropriate consent and provide its own secure transport/storage.
 Live timer clocks are presentation-local and are not transferred by this prototype.
 
-The website's existing `X-Frame-Options: DENY` and `frame-ancestors 'none'` headers
-are intentionally unchanged. The local demo is a standalone presentation, not an
-externally frameable production endpoint. An eventual MCP App needs a dedicated UI
-entry/build and an explicit host security policy, not a blanket relaxation of the site.
+The legacy demo retains `X-Frame-Options: DENY` and `frame-ancestors 'none'`.
+Only the new public `/embed/card/*` and `/embed/practice/*` namespaces have framing
+exceptions; the rest of the website remains protected. An MCP App needs a dedicated
+UI entry/build and an explicit host security policy, not a blanket relaxation of the site.
 
 Tests compare all five public worksheet transitions between uninterrupted and restored
 runs, typed outputs, required-field validation, stale revisions, source mismatch, and

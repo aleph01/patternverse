@@ -1,0 +1,512 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "blue-green-deployment",
+  "title": "Blue-Green Deployment",
+  "aliases": ["Blue/Green Deployment", "Blue Green Deployment"],
+  "primary_collection": "software-evolution-delivery",
+  "primary_collection_title": "Evolution and Delivery",
+  "body_word_count": 1444,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43077/pattern/blue-green-deployment",
+  "validation": {
+    "research": "No canonical Blue-Green Deployment article existed. Fowler’s catalog, drawing on Humble and Farley’s Continuous Delivery, verifies the two-environment structure and alternating roles. Official AWS environment-boundary, data-tier and draining guidance support readiness, current-state compatibility and in-flight handling. Slash/spaced aliases retained. Canary is distinguished as a traffic-exposure policy; shadow retains incumbent serving authority. Existing canonical ML canary/shadow IDs reused without moving or editing them. One existing Evolution and Delivery collection reused.",
+    "sources": [
+      {
+        "title": "Blue Green Deployment",
+        "author": "Martin Fowler (2010), drawing on Humble and Farley’s Continuous Delivery",
+        "url": "https://martinfowler.com/bliki/BlueGreenDeployment.html",
+        "supports": "Established two switchable environments, alternating roles and application routing; retained old code does not resolve transactions or data compatibility."
+      },
+      {
+        "title": "Blue/Green Deployment Methodology and Environment Boundaries",
+        "author": "AWS whitepaper",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html",
+        "supports": "Separate candidate validation, promotion, environment-scope choices and temporary capacity; canary traffic policy can use the same two-environment structure."
+      },
+      {
+        "title": "Best Practices for Managing Data Synchronization and Schema Changes",
+        "author": "AWS whitepaper",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/best-practices-for-managing-data-synchronization-and-schema-changes.html",
+        "supports": "Current data for forward promotion and return, common shared-store boundary, compatible expansion and delayed destructive schema changes."
+      },
+      {
+        "title": "Application Load Balancer: Deregistration Delay",
+        "author": "AWS Elastic Load Balancing documentation",
+        "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/edit-target-group-attributes.html#deregistration-delay",
+        "supports": "New request admission, draining in-flight requests, and premature connection termination errors; platform-specific timing is not claimed as a universal guarantee."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "command": "python3 blue_green_deployment.py",
+      "output": [
+        "unready promotion blocked",
+        "requests: blue then green",
+        "drain required",
+        "compatible rollback: blue",
+        "incompatible rollback blocked"
+      ],
+      "checks": [
+        "unready promotion and admission fail without active-route/pending/ID mutation",
+        "new requests follow current route while admitted requests retain their environment owner",
+        "cannot stop an active environment or one with outstanding requests",
+        "completion consumes the request ID once; duplicate finish raises without affecting others",
+        "compatible return to blue preserves a pending green request",
+        "schema-incompatible return fails without changing active route",
+        "stopped environment cannot be selected even after schema becomes compatible",
+        "100 alternating route changes preserve distinct request ownership through reverse-order completion"
+      ],
+      "mutation_checks": [
+        {
+          "fault": "promotion skips readiness checks",
+          "detected": true
+        },
+        {
+          "fault": "stop ignores in-flight work",
+          "detected": true
+        },
+        {
+          "fault": "return ignores incompatible schema",
+          "detected": true
+        },
+        {
+          "fault": "new requests keep going to old environment",
+          "detected": true
+        }
+      ],
+      "limits": [
+        "Sequential in-memory routing/control model; no network or concurrent control plane",
+        "Readiness and schema support are declared facts, not real probes or proof of semantic compatibility",
+        "No database operations, drain deadline, durable recovery or automatic business-effect rollback"
+      ]
+    },
+    "content": "All 1317 content entities validate. Published compilation has 1170 entities with zero diagnostics and unresolved references. Eight exact H2s, one complete Python 3.9+ program, two figures/four responsive variants, four existing related IDs, ten distinct recommendation queries, and no practice.",
+    "published_compilation": {
+      "entities": 1170,
+      "bytes": 23733268,
+      "sha256": "9d1f263e555173b8ffc8db0f8f3842f8dffdc9fffcaf3774a1cc75f37468baa2",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "integration_tests": {
+      "passed": 43,
+      "unrelated_failures": 1,
+      "details": "Blue-Green Deployment 3, Feature Toggle 3, Branch by Abstraction 3, Expand–Migrate–Contract 3, Strangler Fig 3, GoF 24, and four graphic-integrity tests pass. Global artwork coverage retains the pre-existing missing access-over-ownership mark. All existing tests remain byte-identical to baseline. New article tests verify both canonical aliases, one primary home, renderer sections/code/assets, source hash, related IDs and search."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses unsupported exact in ByRoleOptions."
+    },
+    "lint_and_format": "Scoped ESLint and Prettier pass for the new integration test, SVG generator, actual-code validator, metadata sidecar, authoring documentation, concept registry and this review.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-evolution-delivery.md"],
+      "new_content": ["content/patterns/blue-green-deployment.md"],
+      "other_existing_content_unchanged": 1315,
+      "single_primary_home": "software-evolution-delivery",
+      "existing_collection_members_retained": true,
+      "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 87,
+      "prior_graphics_unchanged": 499,
+      "prior_dimensions_unchanged": 1777,
+      "new_dimensions": 4,
+      "all_other_protected_tests_renderer_dependencies_build_scripts_unchanged": true,
+      "authoring_documentation_preserved": true,
+      "both_isolated_workspaces_match_current_web_source_and_linked_content": true
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "content/assets/software-engineering/blue-green-deployment-cutover-mobile.svg": "aedaa139fc1ac30149dfde94bc7ad01ac444bf87b01d03c0f278d7e788bf5133",
+        "content/assets/software-engineering/blue-green-deployment-cutover.svg": "345891b9e473f8bcd725d1e54ee34d690cc7d2f9c49dfe0aa7e202c751d20230",
+        "content/assets/software-engineering/blue-green-deployment-recovery-mobile.svg": "3cfa24cd798327fc755acec92c4ba9ad40ffe4d5d5d2cd807ef7241fa89c665b",
+        "content/assets/software-engineering/blue-green-deployment-recovery.svg": "31c150457eff093b0604d6ffbdc2006d0249a6ed9d543b7d4c4757634edc47c0"
+      }
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-cutover.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 828
+      },
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-cutover-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1052
+      },
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-recovery.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 732
+      },
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-recovery-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1044
+      }
+    ],
+    "contrast": {
+      "status": "passed",
+      "normal_text_AA_4_5_minimum": true,
+      "pairs": [
+        {
+          "foreground": "#252c28",
+          "background": "#ffffff",
+          "contrast": 14.29
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#f1f2ef",
+          "contrast": 12.72
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#edf5f0",
+          "contrast": 12.87
+        },
+        {
+          "foreground": "#626962",
+          "background": "#ffffff",
+          "contrast": 5.65
+        },
+        {
+          "foreground": "#626962",
+          "background": "#f1f2ef",
+          "contrast": 5.03
+        },
+        {
+          "foreground": "#626962",
+          "background": "#edf5f0",
+          "contrast": 5.09
+        }
+      ]
+    },
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 7,
+          "width": 86,
+          "height": 54
+        },
+        {
+          "x": 23,
+          "y": 51,
+          "width": 66,
+          "height": 38
+        }
+      ]
+    },
+    "static_browser": [
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-cutover.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 828
+      },
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-cutover-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1052
+      },
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-recovery.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 732
+      },
+      {
+        "path": "/assets/software-engineering/blue-green-deployment-recovery-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1044
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/blue-green-deployment-cutover.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/blue-green-deployment-recovery.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 152,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 74, 139)",
+              "rgb(23, 96, 67)",
+              "rgb(98, 105, 98)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/ml-canary-rollout-with-rollback",
+          "/pattern/ml-shadow-deployment",
+          "/pattern/feature-toggle",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/blue-green-deployment-cutover-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/blue-green-deployment-recovery-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 152,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 74, 139)",
+              "rgb(23, 96, 67)",
+              "rgb(98, 105, 98)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/ml-canary-rollout-with-rollback",
+          "/pattern/ml-shadow-deployment",
+          "/pattern/feature-toggle",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/software-engineering/blue-green-deployment-cutover-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/blue-green-deployment-recovery-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 152,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(72, 86, 76)",
+              "rgb(138, 59, 34)",
+              "rgb(23, 74, 139)",
+              "rgb(23, 96, 67)",
+              "rgb(98, 105, 98)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/ml-canary-rollout-with-rollback",
+          "/pattern/ml-shadow-deployment",
+          "/pattern/feature-toggle",
+          "/pattern/data-expand-migrate-contract"
+        ],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-evolution-delivery",
+        "article": "blue-green-deployment",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "static_assets": {
+      "status": "passed",
+      "mode": "actual local static public export; isolated source copy includes existing sibling application imports",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/PatternverseLogo.Cr_c3FgX.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LegalLinks.C1VwvvwC.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/0.LPYfGvVT.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/pattern-mark-presets.Dx3BoDxs.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LibraryViewSwitch.yR3Qs8SB.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/MarkdownRenderer.DDyfSN4x.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/WorksheetButton.Dsl9OpN0.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/3.DBGXFlWk.css",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-cutover-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-cutover.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-recovery-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-recovery.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-cutover.svg",
+          "status": 200,
+          "sha256": "345891b9e473f8bcd725d1e54ee34d690cc7d2f9c49dfe0aa7e202c751d20230",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-cutover-mobile.svg",
+          "status": 200,
+          "sha256": "aedaa139fc1ac30149dfde94bc7ad01ac444bf87b01d03c0f278d7e788bf5133",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-recovery.svg",
+          "status": 200,
+          "sha256": "31c150457eff093b0604d6ffbdc2006d0249a6ed9d543b7d4c4757634edc47c0",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/blue-green-deployment-recovery-mobile.svg",
+          "status": 200,
+          "sha256": "3cfa24cd798327fc755acec92c4ba9ad40ffe4d5d5d2cd807ef7241fa89c665b",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "Viewed all four native figures and closed concept mark before building, then actual desktop/phone article tops, phone cutover figure/caption and highlighted phone code viewport. All measured labels fit with no text overlap or clipping; arrows explicitly represent new-request routing or recovery choices. Fixed white surface, regular Helvetica Neue/Helvetica/Arial, approved palette, square geometry and restrained lines. Static article checked at 1440/390/320 widths: no page overflow, exact selectable code, syntax colors, focus and keyboard code scrolling, phone asset selection, four related routes, and primary collection/gallery/card/concept mark/breadcrumb.",
+    "public_static_export": "PASSED repository build-public-web.mjs and public-build inspection in an isolated current-source workspace with existing sibling imports linked. Local preview 43077 serves 14 referenced resources with 200 responses; four SVG response bodies match source SHA256 and built concept paths match the registry. No renderer, schema, build-system, dependency or existing-test changes."
+  },
+  "limitations": [
+    "Sequential in-memory routing/control model, not a deployment tool: no network, actual database, concurrent control plane, drain deadline or durable request recovery. Readiness and supported schema versions are supplied facts and do not prove semantic compatibility. Returning traffic does not reverse committed business effects.",
+    "Pre-existing VerseSelector type error and access-over-ownership graphic-coverage failure remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-blue-green-deployment",
+    "local_uncommitted": true,
+    "unrelated_work": "preserved",
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

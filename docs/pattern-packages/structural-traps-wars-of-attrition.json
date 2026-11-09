@@ -1,0 +1,114 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Wars of Attrition",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "wars-of-attrition",
+      "title": "Wars of Attrition",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; costly waiting, concession timing, and resource dissipation",
+      "article": "content/concepts/wars-of-attrition.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Mark Broom, The Use of Multiplayer Game Theory in the Modeling of Biological Populations",
+          "url": "https://openaccess.city.ac.uk/id/eprint/988/1/Comtb.pdf",
+          "supports": "Classic two-player attrition payoffs, tie convention, exponential distribution with mean prize value under unit waiting cost, and attribution to Maynard Smith (1974).",
+          "read_method": "University-hosted manuscript opened and read through definitions and Section 2.1, including the two-player payoff formula and exponential strategy.",
+          "boundary": "Specialist research account, not a direct reading of the 1974 original. Repository metadata lists a 2003 publication; manuscript cover is dated April 2004. Article avoids conflating Nash equilibrium with the stronger evolutionary-stability concept."
+        },
+        {
+          "title": "George Georgiadis, Youngsoo Kim, and H. Dharma Kwon, The Absence of Attrition in a War of Attrition under Complete Information (2021 manuscript)",
+          "url": "https://www.kellogg.northwestern.edu/faculty/georgiadis/WarOfAttrition.pdf",
+          "supports": "Canonical complete-information games can admit both pure and mixed equilibria. Under the paper’s stochastic flow-payoff, heterogeneous exit-option, and strategy restrictions, only pure Markov-perfect equilibria remain.",
+          "read_method": "Author-hosted original paper opened; introduction, model, strategy definitions, and equilibrium-selection framing read.",
+          "boundary": "Restricted mathematical result, not general absence of attrition in all stochastic games. The manuscript’s discounted, state-dependent model is different from the article’s undiscounted constant-cost benchmark."
+        },
+        {
+          "title": "Hannah Hörisch and Oliver Kirchkamp, Less Fighting Than Expected—Experiments with Wars of Attrition and All-Pay Auctions (2009 manuscript; published 2010)",
+          "url": "https://www.kirchkamp.de/pdf/ad12.pdf",
+          "supports": "Original laboratory comparison of static and dynamic wars of attrition, private waiting costs, rematching and repeated-interaction treatments, and bids below risk-neutral equilibrium predictions.",
+          "read_method": "Author-hosted manuscript opened and downloaded; introduction and model read in web extraction; experimental setup and result sections read from extracted local full text, including Section 3 and Section 4.2.",
+          "boundary": "Private heterogeneous costs and laboratory institutions differ from the illustrative complete-information equal-cost contest. No measured bid percentage or empirical duration is transferred into the hypothetical shop-exit example."
+        }
+      ],
+      "related_patterns": [
+        "chicken",
+        "bargaining-problems",
+        "zero-sum-conflict"
+      ],
+      "status": "published",
+      "short_description": "Recognize contests in which everyone pays to remain while hoping someone else concedes, then distinguish choosing when to stop from changing how the contested outcome is allocated.",
+      "use_when": [
+        "What makes another period of losses look worth bearing?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Compare forward-looking costs with a genuine exit option; improve that option where feasible.",
+        "Closure costs and lost survivor opportunity remain. A suitable alternative may be unavailable; survivor viability is assumed."
+      ],
+      "example_structure": {
+        "scenario": "Two shops incur net losses during coexistence; a survivor could be viable and continued operation has no separate productive benefit sufficient to explain losses. Continuous stopping opportunity. Ideal complete-information unbounded-resources benchmark separated from finite real reserves. A verified outside job and feasible closure improve Iris’s exit option; no allocation of customers by an organizer or agreement dividing the market.",
+        "changed_relationship": "Compare forward-looking costs with a genuine exit option; improve that option where feasible.",
+        "residual_constraints": "Closure costs and lost survivor opportunity remain. A suitable alternative may be unavailable; survivor viability is assumed.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/attrition-grant-contest.svg",
+          "content/assets/structural-traps/attrition-grant-contest-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 780,
+            "textBlocks": 18
+          },
+          "phone": {
+            "width": 360,
+            "height": 1568,
+            "textBlocks": 18
+          }
+        },
+        "question": "What makes another period of losses look worth bearing?",
+        "alternative_text": "Hypothetical qualitative illustration. Iris and Noah each pay net operating losses while both shops remain. First exit ends coexistence costs and leaves the survivor opportunity to the other. A verified outside job and feasible closure improve Iris’s exit option; she exits in the stipulated continuation. Change: Compare forward-looking costs with a genuine exit option; improve that option where feasible. Limitation: Closure costs and lost survivor opportunity remain. A suitable alternative may be unavailable; survivor viability is assumed.",
+        "caption": "Hypothetical illustration. Parallel cards describe the same coexistence period. Losses continue until first exit; earlier losses are not recovered. The proposed outside option changes Iris’s decision, rather than letting a mediator award customers or guaranteeing the remaining shop’s success.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Iris and Noah each pay net operating losses while both shops remain. First exit ends coexistence costs and leaves the survivor opportunity to the other. A verified outside job and feasible closure improve Iris’s exit option; she exits in the stipulated continuation. Change: Compare forward-looking costs with a genuine exit option; improve that option where feasible. Limitation: Closure costs and lost survivor opportunity remain. A suitable alternative may be unavailable; survivor viability is assumed.",
+          "relationship_key": "Upper cards are simultaneous cost streams. Lower arrows show one hypothetical exit sequence, not an equilibrium forecast or a general business prescription.",
+          "changed_relationship": "Compare forward-looking costs with a genuine exit option; improve that option where feasible.",
+          "residual_constraints": "Closure costs and lost survivor opportunity remain. A suitable alternative may be unavailable; survivor viability is assumed.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Two shops incur net losses during coexistence; a survivor could be viable and continued operation has no separate productive benefit sufficient to explain losses. Continuous stopping opportunity. Ideal complete-information unbounded-resources benchmark separated from finite real reserves. A verified outside job and feasible closure improve Iris’s exit option; no allocation of customers by an organizer or agreement dividing the market.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

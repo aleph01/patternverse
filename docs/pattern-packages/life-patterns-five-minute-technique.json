@@ -1,0 +1,86 @@
+{
+  "format_version": 1,
+  "title": "Life Strategies — Five-Minute Technique",
+  "verse": "decision-making",
+  "metadata_mapping": "Canonical frontmatter uses the existing entity schema. Richer recommendation metadata remains in this sidecar; the current search index does not automatically ingest these queries.",
+  "patterns": [
+    {
+      "id": "five-minute-technique",
+      "title": "Five-Minute Technique",
+      "domain": "Life patterns, everyday action, and wellbeing",
+      "short_description": "Commit to five minutes of a task, then decide whether to continue using what the attempt reveals.",
+      "collections": ["life-strategies", "decision-making-patterns", "cbt"],
+      "use_when": [
+        "Starting feels like committing to a much longer session.",
+        "A concrete first action is feasible but motivation or confidence is being treated as a prerequisite.",
+        "A brief attempt can clarify the task or reveal a dependency."
+      ],
+      "goals": [
+        "Make a credible, manageable starting commitment",
+        "Learn from actual engagement",
+        "Preserve an honest choice about continuing"
+      ],
+      "mechanisms": [
+        "Bound the initial duration rather than promising completion",
+        "Make contact with the actual task",
+        "Use the attempt to reassess interest, effort, and obstacles",
+        "Respect stopping as a valid outcome"
+      ],
+      "tags": ["procrastination", "motivation", "life-patterns", "bounded-experiments"],
+      "related_patterns": [
+        "cbt-graded-task",
+        "cbt-activation",
+        "prefer-the-smallest-useful-experiment",
+        "satisficing"
+      ],
+      "difficulty": "Beginner",
+      "estimated_practice_time": "About eight minutes including a five-minute trial",
+      "not_ideal_when": [
+        "The task is unsafe, infeasible, or requires substantially more setup than the trial permits.",
+        "The central problem is excessive workload, lack of resources, or an unresolved decision.",
+        "The short agreement is being used as a covert obligation to continue."
+      ],
+      "example_user_queries": [
+        "I keep waiting to feel motivated before I begin.",
+        "Starting a task feels like giving up my whole afternoon.",
+        "How can I try something without promising to finish it?",
+        "I dread the report so much that I never open it.",
+        "What if I start and still do not want to continue?",
+        "I spend all my time preparing instead of doing the actual task.",
+        "I cannot tell whether I am avoiding the work or missing something I need.",
+        "I want a small way back into a hobby that feels demanding.",
+        "How do I make beginning feel manageable?",
+        "I keep turning a tiny commitment into a huge work session.",
+        "Can I stop after a short attempt without treating it as failure?",
+        "I want to find out whether motivation improves after I start."
+      ],
+      "practice": {
+        "id": "try-a-five-minute-start",
+        "estimated_minutes": 8,
+        "format": "Optional offline guided practice with a user-started, non-blocking five-minute timer",
+        "boundary": "Records a plan, timer receipt, observations, and a chosen next move. Early continuation and cancellation remain available. It does not schedule work or infer that the user performed the activity."
+      },
+      "visual": {
+        "article_decision": "none",
+        "reason": "Three contrasting examples show continuation, a discovered dependency, and stopping. A single flow could imply that continued work is the expected successful outcome.",
+        "concept_graphic": "A short accented starting segment reaches an ink decision point, with three equally weighted gray paths beyond it for continuing, stopping, or adjusting.",
+        "registry": "apps/web/src/lib/illustrations/pattern-graphics.json"
+      },
+      "sources": [
+        {
+          "title": "NHS, Tackling your to-do list",
+          "url": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/tackling-your-to-do-list/",
+          "accessed": "2026-10-28",
+          "supports": "An existing just-five-minutes strategy: start with a timer and reassess energy or willingness to continue."
+        },
+        {
+          "title": "Centre for Clinical Interventions, Practical Strategies to Stop Procrastinating",
+          "url": "https://www.cci.health.wa.gov.au/~/media/CCI/Mental-Health-Professionals/Procrastination/Procrastination---Information-Sheets/Procrastination-Information-Sheet---04---Practical-Strategies-to-Stop-Procrastinating.pdf",
+          "accessed": "2026-10-28",
+          "supports": "Five-minute starts and other practical strategies, including task chunking; guidance rather than an isolated efficacy trial."
+        }
+      ],
+      "evidence_boundary": "Existing self-help technique, not a claim of isolated efficacy or a uniquely effective duration. The proposed reasons it can help are practical explanations. Examples are fictional; improved motivation is optional."
+    }
+  ]
+}

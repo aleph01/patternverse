@@ -1,0 +1,116 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Credible Commitment",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "credible-commitment",
+      "title": "Credible Commitment",
+      "entity_type": "concept",
+      "domain": "Information, incentive, and commitment problems; sequential strategic choices, payment control, enforcement, and self-commitment",
+      "article": "content/concepts/credible-commitment.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Thomas C. Schelling, An Essay on Bargaining (1956)",
+          "url": "https://userpages.umbc.edu/~nmiller/POLI388/BARGAINING.TCS.pdf",
+          "stable_identifier": "JSTOR 1805498",
+          "supports": "Foundational strategic self-binding, visible changes in incentives or discretion, contingent threats, and institutional and renegotiation limits on contractual commitments.",
+          "read_method": "University-hosted original paper opened and read in full-text extraction: introductory definition, bargaining power and third-party commitment examples, observability, renegotiation, and the threat section. Publication metadata checked on the original scan.",
+          "boundary": "The article attributes a foundational analysis rather than inventorship of all commitment practices. No direct quotation or recommendation of destructive bargaining tactics. Ira and Sam’s payment game is an original teaching model, not Schelling’s house-price example."
+        },
+        {
+          "title": "Finn E. Kydland and Edward C. Prescott, Rules Rather than Discretion: The Inconsistency of Optimal Plans (1977)",
+          "url": "https://www.econ.puc-rio.br/mgarcia/Macro%20II%20-%20Mestrado/KydlandPrescott1977.pdf",
+          "doi": "10.1086/260580",
+          "supports": "Formal policy time inconsistency with rational expectations and a fixed objective; anticipation of later choices changes earlier private decisions.",
+          "read_method": "Original paper opened and read in university-hosted full-text extraction after an alternate scan yielded no text. Introduction, two-period framing, patent example, stated inflation/unemployment assumptions, and consistency/expectations discussion read.",
+          "boundary": "Conditional theoretical results, not an empirical universal claim that rules outperform discretion. No macroeconomic parameter, contemporary policy recommendation, or proof verification is asserted."
+        },
+        {
+          "title": "Nava Ashraf, Dean Karlan, and Wesley Yin, Tying Odysseus to the Mast: Evidence from a Commitment Savings Product in the Philippines (2006)",
+          "url": "https://www.povertyactionlab.org/sites/default/files/research-paper/16_19_Tying%20odysseus%20to%20the%20mast.Dean,Ashraf_May2006.pdf",
+          "supports": "Original randomized field experiment offering a savings product restricting withdrawals to a goal date or balance; voluntary take-up, higher average bank savings at twelve months for the offered group, and accompanying goal-oriented features.",
+          "read_method": "Published QJE paper opened and read: abstract, introduction, product design and exceptions, deposit/goal features, randomization and survey sample, and reported twelve-month intent-to-treat result.",
+          "boundary": "The article reports direction, not effect size, and correctly concerns assignment to an offer rather than all account openers. It does not identify restrictions separately from every bundled feature, infer individual welfare gains, claim universal adoption, extrapolate beyond twelve months, or test the hypothetical camera-sale commitment mechanism."
+        }
+      ],
+      "related_patterns": [
+        "signaling-and-credibility",
+        "trust-games",
+        "bargaining-problems"
+      ],
+      "status": "published",
+      "short_description": "Make future promises dependable by changing control, available choices, or the consequences of reversal before another party becomes vulnerable.",
+      "use_when": [
+        "Who controls payment after satisfactory delivery?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Reserve payment under reliable independent control before dispatch, with clear release and failure rules.",
+        "No named platform is modeled. Satisfactory delivery must be verifiable; secure later payment does not fund earlier costs."
+      ],
+      "example_structure": {
+        "scenario": "Hypothetical online camera sale contrasts seller dispatch before unsecured later payment with independent reservation before dispatch and conditional release after verified satisfactory delivery. Own-material one-shot benchmark excludes effective recovery, intrinsic honesty, and future dealings. Reliable custody, verification, failure/dispute rules, fees, acceptance, and earlier packing/postage finance are required. No named platform terms or guarantee of working goods is asserted.",
+        "changed_relationship": "Reserve payment under reliable independent control before dispatch, with clear release and failure rules.",
+        "residual_constraints": "No named platform is modeled. Satisfactory delivery must be verifiable; secure later payment does not fund earlier costs.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Who controls payment after satisfactory delivery?",
+        "assets": [
+          "content/assets/structural-traps/credible-commitment-payment.svg",
+          "content/assets/structural-traps/credible-commitment-payment-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 824,
+            "textBlocks": 20
+          },
+          "phone": {
+            "width": 360,
+            "height": 1739,
+            "textBlocks": 20
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. In the unsecured sale Ira sends the camera before Sam chooses whether to pay. In the revised arrangement an independent holder reserves payment before dispatch and releases it after verified satisfactory delivery. Sam cannot unilaterally divert that payment; Ira still funds earlier costs. Change: Reserve payment under reliable independent control before dispatch, with clear release and failure rules. Limitation: No named platform is modeled. Satisfactory delivery must be verifiable; secure later payment does not fund earlier costs.",
+        "caption": "Hypothetical illustration. The lower sequence changes later control, rather than relying on a stronger promise. Payment release is conditional on the defined delivery test. Custody, verification, disputes, tied-up money, and packing or postage finance remain real constraints.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. In the unsecured sale Ira sends the camera before Sam chooses whether to pay. In the revised arrangement an independent holder reserves payment before dispatch and releases it after verified satisfactory delivery. Sam cannot unilaterally divert that payment; Ira still funds earlier costs. Change: Reserve payment under reliable independent control before dispatch, with clear release and failure rules. Limitation: No named platform is modeled. Satisfactory delivery must be verifiable; secure later payment does not fund earlier costs.",
+          "relationship_key": "Arrows show transaction chronology. The lower row is an alternative arrangement; verification authorizes release rather than guaranteeing it.",
+          "changed_relationship": "Reserve payment under reliable independent control before dispatch, with clear release and failure rules.",
+          "residual_constraints": "No named platform is modeled. Satisfactory delivery must be verifiable; secure later payment does not fund earlier costs.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Hypothetical online camera sale contrasts seller dispatch before unsecured later payment with independent reservation before dispatch and conditional release after verified satisfactory delivery. Own-material one-shot benchmark excludes effective recovery, intrinsic honesty, and future dealings. Reliable custody, verification, failure/dispute rules, fees, acceptance, and earlier packing/postage finance are required. No named platform terms or guarantee of working goods is asserted.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

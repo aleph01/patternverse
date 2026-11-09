@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "correlation-identifier",
+  "title": "Correlation Identifier",
+  "aliases": ["Correlation ID", "Conversation Identifier", "Conversation ID"],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1440,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Hohpe and Woolf’s Correlation Identifier and Return Address catalogs; Hohpe’s Correlation and Conversations essay; RabbitMQ RPC tutorial; W3C Trace Context; and Stripe idempotent-request documentation. The article explains the originating request-ID form and broader Conversation Identifier alias, and separates envelope, business, trace, conversation, and idempotency identities. The inference that a whole-checkout trace ID can be too broad for several pending quote contexts is presented through an original example, not as a W3C application-matching guarantee.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["matching.py", "demo.py"],
+      "stdout": [
+        "forwarded: relay:M9 desk:C2",
+        "wrong source: None",
+        "express: ('O42', 'express', 1200)",
+        "duplicate: None",
+        "economy: ('O42', 'economy', 500)",
+        "cleanup: True",
+        "late: None"
+      ],
+      "verification": "Both reply order permutations, same-order independent contexts, envelope rewrite, independent reply IDs, repeated envelope ID across conversations, unexpected-source preservation, unknown/duplicate/late replies, invalid input without context consumption, zero and invalid cents, capacity/disposal, ID nonreuse, separate fresh namespaces, exact token matching, and immutable envelopes passed."
+    },
+    "content": "1270 entities validate with drafts included; published-only compilation contains 1123 entities without diagnostics.",
+    "integration_tests": "Correlation Identifier, Request-Reply, existing Publish-Subscribe, and GoF integration suites pass. Combined run reports 37 passed checks and one unrelated global authored-graphic coverage failure across five files. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the generator, validator, integration test, authoring metadata, concept registry, authoring documentation, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Messaging and Integration. Preserved Publish-Subscribe and Request-Reply as the first two members and appended Correlation Identifier third with an explanatory paragraph. No new collection or future stub.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1268,
+      "new_content": ["content/patterns/correlation-identifier.md"],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 35,
+      "prior_graphics_unchanged": 447,
+      "prior_dimensions_unchanged": 1581,
+      "new_dimensions": {
+        "software-engineering/correlation-identifier-matching.svg": {
+          "width": 720,
+          "height": 1120
+        },
+        "software-engineering/correlation-identifier-matching-mobile.svg": {
+          "width": 360,
+          "height": 1136
+        },
+        "software-engineering/correlation-identifier-lifecycle.svg": {
+          "width": 720,
+          "height": 1120
+        },
+        "software-engineering/correlation-identifier-lifecycle-mobile.svg": {
+          "width": 360,
+          "height": 1296
+        }
+      }
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and other session staging directories were untouched; no renderer or build implementation changes.",
+    "illustrations": "Two editable native SVGs explain independent message and conversation identity across a relay, and expected-source validation, completion, duplicates, and explicit cleanup. Both have separately composed phone variants. Fixed white surface, regular Helvetica Neue/Helvetica/Arial, approved palette, square geometry, generous spacing, labels, arrows, contrast, alternative outcomes, and captions verified. All four variants have zero measured label collisions, outside labels, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected.",
+    "browser": "Actual production article verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. All three related routes return 200. Collection route and software verse gallery show three members; the article card opens with the correct primary breadcrumb. Desktop/phone article tops, code viewports, gallery, and embedded figures were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-correlation-identifier/build-workspace/apps/web/build",
+      "local_file_references": 57,
+      "missing": [],
+      "navigation_data_bytes": 45517
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic; four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential shipping-quote matching simulation. Two conversations for O42 carry independent correlation IDs and recover distinct economy/express contexts. Envelope IDs can change across a simulated relay and each reply has its own message ID. A matcher owns up to two pending provider/order/mode contexts. Validated replies from the expected source consume one context; unknown, unexpected-source, duplicate, and abandoned answers do not consume other contexts. Forget models explicit owner disposal without a timer. Tokens are exact nonblank strings up to 128 characters; prices are nonnegative integer US dollar cents. Source identity is assumed to come from a trusted adapter; a caller-controlled string provides no authentication. Session freshness is an assumption, not a production unique-ID scheme. No broker, inbox routing, network, actual shipping computation, persistence, retry, server deduplication, automatic expiration, thread synchronization, remote cancellation, or restart recovery.",
+  "preview": "http://127.0.0.1:43020/pattern/correlation-identifier",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-correlation-identifier",
+  "browser_measurements": ".local/software-correlation-identifier/browser-checks.json",
+  "browser_check_script": ".local/software-correlation-identifier/check-browser.mjs",
+  "build_log": ".local/software-correlation-identifier/public-build-isolated.log",
+  "branch": "codex/software-correlation-identifier",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

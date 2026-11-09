@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "value-object",
+  "title": "Value Object",
+  "aliases": ["Domain Value Object", "Value Object Pattern"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1502,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Evans's original accessible DDD Reference, Value Objects on printed page 12, establishes meaningful attributes, functionality, conceptual absence of identity, immutability, and side-effect-free operations. Fowler supports property equality, aliasing, replacement, and contextual modeling. His DTO catalog distinguishes the transport role and historical naming overload. Microsoft supports component equality and distinguishes persistence keys from domain identity. Official Python sources support exact concrete-type/field equality, compatible hashing, shallow frozen-field behavior, immutable calendar dates, date arithmetic, and hash obligations. The nonempty half-open stay policy, example, and illustrations are original teaching material.",
+    "python_examples": "Both actual article blocks execute together and produce all five stated output lines exactly. Checks verify separate equal instances, both endpoints and concrete type in equality, unsupported comparisons, no implicit ordering, equal hashes for equal values, dictionary lookup and set behavior, frozen fields, immutable date components, unchanged aliases, replacement with new objects, signed and zero whole-day shifts, leap days and year boundaries, empty/reversed range rejection, rejection of timestamps/text/Boolean/fractional shifts, and overflow without state changes. A separate occupied-calendar-day-set oracle verifies 1296 half-open overlap pairs, including adjacency, gaps, intersections, containment, equality, and symmetry. The model imports only dataclasses and datetime and performs no I/O.",
+    "python_stdout": [
+      "equal, same object: True False",
+      "booked: 2026-10-29 2026-11-01 3",
+      "proposed: 2026-10-31 2026-11-03 3",
+      "adjacent overlaps: False",
+      "lookup: 3"
+    ],
+    "article_tests": "60 article tests pass across Value Object, Entity, Domain Model, Functional Core, Imperative Shell, Dependency Injection, Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and GoF. Coverage includes the canonical ID and aliases without duplicates, one primary home, retained prior members, no category changes, resolved related links, eight sections, exact highlighted Python text, responsive illustrations and intrinsic dimensions, search, ten queries, revision metadata, and concept marks. Corpus-loading concurrency is bounded with maxWorkers=2.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check retains the unrelated existing missing access-over-ownership graphic. Combined results: 64 passed, one unrelated failure, across 14 test files.",
+    "content": "1239 entities validate with drafts included. The published-only corpus contains 1093 entities and reports no errors.",
+    "collection": "Reused Domain Modeling and Business Logic and appended Value Object alongside Domain Model and Entity. No new collection or candidate stub. All four related patterns use existing canonical IDs.",
+    "public_build": "Production build and public web build checks pass. Browser review uses the completed production build. No deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new generator, executable validator, article test, and updated authoring metadata. The review report is separately formatted and checked.",
+    "visuals": "All four native editable SVG variants load. Browser measurements find no overlapping or out-of-bounds labels or out-of-canvas rectangles. Desktop and separately composed phone layouts were visually inspected for distinct equal objects, exact date components, before/after shared references, replacement without mutation, exact assignment labeling, arrow meaning, white surfaces, regular Helvetica typography, palette, contrast, and readable labels. Structure and labels convey distinctions independently of color. The concept mark uses distinct containers with matching components and an equals sign.",
+    "article_browser": "Actual production article verified at 1440, 390, and 320 pixels: exact eight H2 sections, both Python blocks preserved in the DOM, colored syntax tokens, selectable content preserving indentation, keyboard horizontal code scrolling at 320px, both responsive phone variants loaded, and no page overflow. Normal browser selection omits the terminal newline. Actual desktop/phone article, figures, code, and collection gallery screenshots were visually inspected.",
+    "navigation_browser": "The collection's direct route renders the correct title. The Software Engineering library filter opens the Domain Modeling and Business Logic gallery; its Value Object card opens the article with the correct breadcrumb. Entity, Domain Model, Functional Core Imperative Shell, and Flyweight routes all return HTTP 200.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. Software Engineering verse and Application Architecture remain byte-for-byte unchanged. Domain Model and Entity articles match their prior revision hashes. All prior authoring records, concept marks, and asset dimensions remain unchanged; existing primary collection members are retained."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; unrelated file left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "Date-only in-memory values count calendar nights, not elapsed hours or time-zone-aware instants. Nonempty half-open stays are an explicit teaching policy, not a universal date-range rule. Frozen dataclasses emulate public-API immutability; immutable date fields avoid nested mutable state, but this is no defense against deliberate runtime bypass. The cache illustrates pure calculation lookup, not reservation identity or availability. No persistence, authorization, clock, allocation registry, booking coordination, transaction, or concurrent owner-update protection is implemented. Value equality requires neither interning nor a shared-instance cache.",
+  "preview": "http://127.0.0.1:42996/pattern/value-object",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-value-object",
+  "browser_measurements": ".local/software-value-object/browser-checks.json",
+  "browser_check_script": ".local/software-value-object/check-browser.mjs",
+  "preservation_checks": ".local/software-value-object/preservation-checks.json",
+  "build_log": ".local/software-value-object/public-build.log",
+  "branch": "codex/software-value-object",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

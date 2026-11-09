@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "producer-consumer",
+  "title": "Producer-Consumer",
+  "aliases": ["Producer Consumer"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1389,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Five primary documentation sources: Eiffel’s Producer-consumer description; Microsoft BlockingCollection overview and producer-consumer dataflow documentation; official Python queue and threading documentation. Established roles, bounded-buffer form, synchronization, rate decoupling, blocking and completion are distinguished from implementation choices such as FIFO, local threads, immutable references, indexed reporting, and stop markers. Producer Consumer is a spelling alias; bounded-buffer problem is explained as the bounded form rather than a separate duplicate article or an alias implying every implementation is bounded. The reading-parser scenario, limits, code, outcome policy, and diagrams are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["readings.py", "demo.py"],
+      "stdout": ["0 ok 7", "1 error expected ASCII digits", "2 ok 11", "3 ok 0"],
+      "verification": "Exact four-line demo output; all structural input errors precede queue/thread creation; empty batch, zero/100-unit boundaries, eight-byte leading-zero input, empty/signed/space/nonnumeric and over-range records with later successful processing; real Queue/Thread seams prove a producer blocks with one queued and one executing job, removal frees capacity before completion, full nonblocking admission rejects without adding data, consumer-only processing, and a second consumer records later-indexed success and rejection while the first is gated; reporting is sorted despite verified completion order 1,2,0; all accepted entries are removed FIFO, every data/error/identity stop is accounted exactly once, one stop per worker follows all data, queue join waits for handled work, and all non-daemon consumer threads terminate and join; 360 indexed records pass across 1/2/4 consumers and capacities 1/2, with bounded waiting counts, no loss or duplicate outcomes, final empty buffers and baseline thread cleanup. Instrumentation wraps real queue/thread/decode seams without replacing article coordination. No success guarantee for failed readings, deadline, unexpected-worker-death recovery, durable delivery, cancellation or CPU speedup is inferred."
+    },
+    "content": "1289 entities validate with drafts included; published-only compilation contains 1142 entities without diagnostics.",
+    "integration_tests": "All four focused article suites pass: Producer-Consumer, Monitor Object, Active Object, and GoF. Combined run across five files reports 37 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Producer-Consumer as its fifth completed member, preserving Reactor, Proactor, Active Object, Monitor Object, and prior collection contents. Related Monitor Object and Active Object retain canonical IDs; Publish-Subscribe reuses its established data-publish-subscribe-distribution ID and existing primary home. Exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1287,
+      "new_content": ["content/patterns/producer-consumer.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "reactor_proactor_active_object_monitor_object_members_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 55,
+      "prior_graphics_unchanged": 467,
+      "prior_dimensions_unchanged": 1658,
+      "new_dimensions": {
+        "software-engineering/producer-consumer-buffer.svg": {
+          "width": 720,
+          "height": 1176
+        },
+        "software-engineering/producer-consumer-buffer-mobile.svg": {
+          "width": 360,
+          "height": 1296
+        },
+        "software-engineering/producer-consumer-finish.svg": {
+          "width": 720,
+          "height": 1176
+        },
+        "software-engineering/producer-consumer-finish-mobile.svg": {
+          "width": 360,
+          "height": 1336
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, primary collection, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other existing collection, software verse, or GoF changes.",
+    "illustrations": "Two editable native SVG figures explain a full two-place FIFO queue with two active consumers and a producer holding the next record, then coordinator shutdown alongside continuing consumer execution. Separate phone compositions retain all essential distinctions. Fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry, restrained line weights, alternative text, captions, and explicit arrow meanings. Waiting entries and processing are separate: two queued plus two executing permits four accepted records, excluding producer-held/input/result storage. Arrows to current consumers represent their subsequent take, not delivery of the same job to both. Stop markers follow all producers; consumers run while the coordinator inserts stops and waits. Queue task completion includes handled failures and differs from thread termination. Native and embedded desktop/phone views were visually inspected; all four variants have zero measured outside labels, overlaps, or outside rectangles.",
+    "browser": "Actual production article verified at 1440, 390, and 320 CSS pixels: all eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all three related routes returning 200. Concurrency and Resource Management has five members; its route and Software Engineering verse gallery page two open Producer-Consumer with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and the collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-producer-consumer/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 43773
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ finite tuple-of-bytes batch; each immutable payload has at most eight bytes. Positive integer worker count/capacity and payload shape are validated before queue/thread creation. The coordinator is the sole producer; a bounded FIFO pending queue feeds fixed non-daemon consumers that decode ASCII digits into 0–100 units. Expected ValueError rejections become indexed error outcomes and do not kill workers. A separate unbounded outcome queue retains one result per finite input; final index sorting preserves report order without serializing processing. Input batch, active jobs, producer-held entry, and collected outcomes are outside the pending capacity limit. One private identity stop per consumer follows all jobs, every get balances task_done including stops/errors, then queue join and thread joins finish. Tests use real gated queue/thread/decode seams for capacity pressure and out-of-order completion, plus 360 records across one/two/four consumers. Assumes successful worker startup and finishing processing/outcome operations. No timeout, cancellation, unexpected-worker-death supervision, general resource-failure cleanup, durable delivery, exactly-once effects, fairness, processing-order, or CPU-parallel speedup guarantee. A continuous stream needs a concurrent result sink and bounds across all stages; a blocked sink can deadlock a coordinator waiting for completion.",
+  "preview": "http://127.0.0.1:43040/pattern/producer-consumer",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-producer-consumer",
+  "browser_measurements": ".local/software-producer-consumer/browser-checks.json",
+  "browser_check_script": ".local/software-producer-consumer/check-browser.mjs",
+  "build_log": ".local/software-producer-consumer/public-build-isolated.log",
+  "branch": "codex/software-producer-consumer",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

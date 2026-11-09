@@ -1,0 +1,435 @@
+{
+  "date": "2026-10-29",
+  "scope": "First four requested acquisition targets; all selected source bytes unchanged. No purchase, redistribution license or complete performance transcription approval.",
+  "selected": [
+    {
+      "id": "sinatra-fly-me-to-the-moon",
+      "file": "sinatra-fly-me-to-the-moon.mid",
+      "title": "Fly Me to the Moon · community swing arrangement",
+      "focus": "Swung melody against a walking bass",
+      "cue": "Follow the melody against one bass attack per beat. Offbeat melody entrances keep unequal spacing; the nylon-guitar accompaniment supplies the chord reference.",
+      "start": 24,
+      "beats": 16,
+      "passage": "Community source bars 7–10 · 4/4",
+      "key": "C major / A minor material",
+      "source": "https://bitmidi.com/fly-me-to-the-moon-mid",
+      "credit": "Community MIDI via BitMidi; original transcriber not identified",
+      "terms": "Private local review; public-app reuse permission not established; file is not bundled with the application",
+      "private": true,
+      "parts": [
+        {
+          "source": "midi-28",
+          "id": "melody",
+          "label": "Melody",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-15",
+          "id": "bass",
+          "label": "Walking bass",
+          "instrument": "bass-guitar"
+        },
+        {
+          "source": "midi-16",
+          "id": "accompaniment",
+          "label": "Chord accompaniment",
+          "instrument": "guitar"
+        }
+      ],
+      "note": "The source uses a jazz-guitar program for the familiar melody; it plays on sampled piano here. Walking-bass onsets and unequal melody placements are retained, without quantization. Sparse flute fills, brass and brush/ride drums are omitted. This community arrangement is not claimed to be an exact Sinatra/Count Basie transcription. The piano roll follows its timing; this passage needs reviewed rhythm annotation before the automatic notation view can show it.",
+      "lessons": [
+        {
+          "id": "songwriting-swing-and-timing",
+          "title": "Give the Groove a Consistent Feel"
+        },
+        {
+          "id": "songwriting-write-a-bass-line",
+          "title": "Write a Bass Line"
+        },
+        {
+          "id": "songwriting-progressions-and-arrival",
+          "title": "Decide Where the Harmony Arrives"
+        }
+      ],
+      "patterns": ["swing"],
+      "download": "https://bitmidi.com/uploads/47016.mid",
+      "sha256": "1fc687cab45f522804e3e912a4e0550b9fab208360309c89e6e544f631e21b97",
+      "bytes": 30403,
+      "sourceNotes": 3320,
+      "sourceBeats": 295.96875,
+      "excerptNotes": 92,
+      "excerptParts": {
+        "melody": 11,
+        "bass": 16,
+        "accompaniment": 65
+      },
+      "sourceNotesCheck": "Source bytes preserved. Selected onsets, pitches, part identities and the specified swing/key-change/inversion/layer relationship checked in MIDI data. Complete score/recording fidelity remains unapproved.",
+      "assetLocation": ".local/music-repertoire/sinatra-fly-me-to-the-moon.mid",
+      "publicationReady": false
+    },
+    {
+      "id": "jackson-man-in-the-mirror",
+      "notationParts": ["melody", "return", "accompaniment", "bass"],
+      "file": "jackson-man-in-the-mirror.mid",
+      "title": "Michael Jackson · Man in the Mirror · key-change passage",
+      "focus": "A G-centred passage rises to A-flat",
+      "cue": "Hear the approach in G, then the new A-flat setting from excerpt bar 9. The source switches melody-guide tracks at the return; both are retained. This is an actual later passage in the arrangement, not our transposition of the earlier notes.",
+      "start": 260,
+      "beats": 64,
+      "passage": "Community source bars 66–81 · 4/4; new setting near source bar 74",
+      "key": "G major → A♭ major",
+      "source": "https://bitmidi.com/man-in-the-mirror-2-mid",
+      "credit": "Community MIDI via BitMidi; original transcriber not identified",
+      "terms": "Private local review; public-app reuse permission not established; file is not bundled with the application",
+      "private": true,
+      "parts": [
+        {
+          "source": "midi-28",
+          "id": "melody",
+          "label": "Melody before the change",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-7",
+          "id": "return",
+          "label": "Melody after the change",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-1",
+          "id": "accompaniment",
+          "label": "Keyboard harmony",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-3",
+          "id": "bass",
+          "label": "Bass",
+          "instrument": "bass-guitar"
+        },
+        {
+          "source": "midi-20-drum-35",
+          "id": "kick",
+          "label": "Kick"
+        },
+        {
+          "source": "midi-20-drum-42",
+          "id": "hat",
+          "label": "Hi-hat"
+        }
+      ],
+      "note": "The selected 16 bars cross the arranged key change. Early bass and voicings outline G, B and C material; at source beat 292 the bass starts A-flat and the keyboard uses A-flat/C/E-flat. The source clarinet and calliope melody guides play on piano. Other doubled parts and most percussion are omitted. Complete score/recording alignment remains under review; the generated notation shows pitched parts with accidentals rather than a fully edited mid-piece signature change. Detailed drums stay in playback and the beat grid.",
+      "lessons": [
+        {
+          "id": "songwriting-modes-drones-and-key-changes",
+          "title": "Change the Tonal World Deliberately"
+        },
+        {
+          "id": "songwriting-make-the-chorus-arrive",
+          "title": "Make the Chorus Arrive"
+        },
+        {
+          "id": "songwriting-shape-energy-over-time",
+          "title": "Shape Energy over Time"
+        }
+      ],
+      "patterns": ["sectional-contrast"],
+      "download": "https://bitmidi.com/uploads/71711.mid",
+      "sha256": "2ea658d53bc309e8469eed5716315577642b8ae0d555003d701fce5dc4df4502",
+      "bytes": 55992,
+      "sourceNotes": 5901,
+      "sourceBeats": 495.6041666666667,
+      "excerptNotes": 596,
+      "excerptParts": {
+        "melody": 60,
+        "return": 62,
+        "accompaniment": 178,
+        "bass": 113,
+        "kick": 64,
+        "hat": 119
+      },
+      "sourceNotesCheck": "Source bytes preserved. Selected onsets, pitches, part identities and the specified swing/key-change/inversion/layer relationship checked in MIDI data. Complete score/recording fidelity remains unapproved.",
+      "assetLocation": ".local/music-repertoire/jackson-man-in-the-mirror.mid",
+      "publicationReady": false
+    },
+    {
+      "id": "beachboys-god-only-knows",
+      "file": "beachboys-god-only-knows-demo.mid",
+      "title": "The Beach Boys · God Only Knows · bass and upper chords",
+      "focus": "Chord root and bass note are different choices",
+      "cue": "Follow A–G-sharp–F-sharp–E in the bass while the upper chord tones change. In the second bar the upper E-major harmony has G-sharp underneath: the bass is not the chord root.",
+      "start": 24,
+      "beats": 16,
+      "passage": "Provider source bars 7–10 · 4/4",
+      "key": "A / E-centred introduction",
+      "source": "https://www.mididb.com/the-beach-boys/god-only-knows-midi/",
+      "credit": "MIDI DB provider demo",
+      "terms": "Private local review; public-app reuse permission not established; file is not bundled with the application",
+      "private": true,
+      "parts": [
+        {
+          "source": "midi-17",
+          "id": "accompaniment",
+          "label": "Upper chord tones",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-1",
+          "id": "bass",
+          "label": "Bass line",
+          "instrument": "bass-guitar"
+        }
+      ],
+      "note": "Only the provider keyboard and bass are retained. The provider gives the fourth bar an E bass; this reduction is not claimed to match every inversion of the original recording. Horn, guitar doubling, harpsichord and drums are omitted. The teaching claim is the explicit E-major upper tones with G-sharp in the bass, not a complete reconstruction of the record.",
+      "lessons": [
+        {
+          "id": "songwriting-inversions-and-voice-leading",
+          "title": "Connect Chords with Small Moves"
+        },
+        {
+          "id": "songwriting-write-a-bass-line",
+          "title": "Write a Bass Line"
+        },
+        {
+          "id": "songwriting-give-each-part-a-job",
+          "title": "Give Each Part a Job"
+        }
+      ],
+      "patterns": ["register-separation"],
+      "download": "https://www.mididb.com/midi-download/AUD_AP3815.mid",
+      "sha256": "65f8f4adc219e5cd4dc8d363067e2f892ddc2761aeed2b6fa70f328aecf61880",
+      "bytes": 5123,
+      "sourceNotes": 534,
+      "sourceBeats": 69.41041666666666,
+      "excerptNotes": 65,
+      "excerptParts": {
+        "accompaniment": 52,
+        "bass": 13
+      },
+      "sourceNotesCheck": "Source bytes preserved. Selected onsets, pitches, part identities and the specified swing/key-change/inversion/layer relationship checked in MIDI data. Complete score/recording fidelity remains unapproved.",
+      "assetLocation": ".local/music-repertoire/beachboys-god-only-knows-demo.mid",
+      "publicationReady": false
+    },
+    {
+      "id": "abba-dancing-queen",
+      "notationParts": ["melody", "accompaniment", "strings", "bass"],
+      "file": "abba-dancing-queen.mid",
+      "title": "ABBA · Dancing Queen · melody and layer contrast",
+      "focus": "A longer passage with a higher melody and a string entrance",
+      "cue": "Follow this 16-bar passage into its higher melodic setting. A sustained string part returns near excerpt bar 13 while the bass and basic beat keep moving. Use the four-bar navigation to inspect the approach and arrival.",
+      "start": 108,
+      "beats": 64,
+      "passage": "Community source bars 28–43 · 4/4; string entrance near source bar 40",
+      "key": "A major",
+      "source": "https://bitmidi.com/dancing-queen-1-mid",
+      "credit": "Community MIDI via BitMidi; original transcriber not identified",
+      "terms": "Private local review; public-app reuse permission not established; file is not bundled with the application",
+      "private": true,
+      "parts": [
+        {
+          "source": "midi-5",
+          "id": "melody",
+          "label": "Melody",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-7",
+          "id": "accompaniment",
+          "label": "Keyboard accompaniment",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-15",
+          "id": "strings",
+          "label": "String line on piano",
+          "instrument": "piano"
+        },
+        {
+          "source": "midi-1",
+          "id": "bass",
+          "label": "Bass",
+          "instrument": "bass-guitar"
+        },
+        {
+          "source": "midi-16-drum-36",
+          "id": "kick",
+          "label": "Kick"
+        },
+        {
+          "source": "midi-16-drum-40",
+          "id": "snare",
+          "label": "Snare"
+        },
+        {
+          "source": "midi-16-drum-42",
+          "id": "hat",
+          "label": "Hi-hat"
+        }
+      ],
+      "note": "A complete four-minute community sequence was obtained; this is a 16-bar reduction for review. Its melody rises from C-sharp4/E4 material to C-sharp5/D5, and the selected string line returns at source beat 155.958. Piano, bass and basic drums are retained; guitar, extra strings, tambourine and other percussion are omitted. String notes play on piano, so this demonstrates note/register and entrance changes, not the original string timbre. Notation shows the pitched parts; detailed drums stay in playback and the beat grid. Exact verse/chorus boundary labels require recording or complete-score alignment.",
+      "lessons": [
+        {
+          "id": "songwriting-make-the-chorus-arrive",
+          "title": "Make the Chorus Arrive"
+        },
+        {
+          "id": "songwriting-jobs-of-song-sections",
+          "title": "Give Each Section a Purpose"
+        },
+        {
+          "id": "songwriting-shape-energy-over-time",
+          "title": "Shape Energy over Time"
+        },
+        {
+          "id": "songwriting-give-each-part-a-job",
+          "title": "Give Each Part a Job"
+        }
+      ],
+      "patterns": ["chorus-lift", "sectional-contrast"],
+      "download": "https://bitmidi.com/uploads/37569.mid",
+      "sha256": "ed518f0f7452c4e2745cf86e8382d62f993b296477d65d411b69f297372f2806",
+      "bytes": 98029,
+      "sourceNotes": 9058,
+      "sourceBeats": 408,
+      "excerptNotes": 448,
+      "excerptParts": {
+        "melody": 59,
+        "accompaniment": 130,
+        "strings": 5,
+        "bass": 116,
+        "kick": 37,
+        "snare": 37,
+        "hat": 64
+      },
+      "sourceNotesCheck": "Source bytes preserved. Selected onsets, pitches, part identities and the specified swing/key-change/inversion/layer relationship checked in MIDI data. Complete score/recording fidelity remains unapproved.",
+      "assetLocation": ".local/music-repertoire/abba-dancing-queen.mid",
+      "publicationReady": false
+    }
+  ],
+  "candidates": [
+    {
+      "id": "fly-provider",
+      "page": "https://www.mididb.com/frank-sinatra/fly-me-to-the-moon-midi/",
+      "url": "https://www.mididb.com/midi-download/AUD_AP4414DS.mid",
+      "bytes": 3531,
+      "sha256": "eb10dfadf896c76c4a1331034e18b10a3119bcee697c93496b5a83e6d7a7b9ee",
+      "file": "batch-2-research/fly-provider.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "fly-community",
+      "page": "https://bitmidi.com/fly-me-to-the-moon-mid",
+      "url": "https://bitmidi.com/uploads/47016.mid",
+      "bytes": 30403,
+      "sha256": "1fc687cab45f522804e3e912a4e0550b9fab208360309c89e6e544f631e21b97",
+      "file": "batch-2-research/fly-community.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "mirror-1",
+      "page": "https://bitmidi.com/man-in-the-mirror-1-mid",
+      "url": "https://bitmidi.com/uploads/71710.mid",
+      "bytes": 64253,
+      "sha256": "03847075087fcddf0efe104e4a00bc795d974d61b8696ed4e02e8b3e427ae3b6",
+      "file": "batch-2-research/mirror-1.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "mirror-2",
+      "page": "https://bitmidi.com/man-in-the-mirror-2-mid",
+      "url": "https://bitmidi.com/uploads/71711.mid",
+      "bytes": 55992,
+      "sha256": "2ea658d53bc309e8469eed5716315577642b8ae0d555003d701fce5dc4df4502",
+      "file": "batch-2-research/mirror-2.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "mirror-k",
+      "page": "https://bitmidi.com/jackson-man-in-the-mirror-k-mid",
+      "url": "https://bitmidi.com/uploads/62042.mid",
+      "bytes": 60430,
+      "sha256": "da410b7fc1514611dc0a8d58cca6aa651ecc82f50b7c7f8a571066c7e8fac033",
+      "file": "batch-2-research/mirror-k.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "god-provider",
+      "page": "https://www.mididb.com/the-beach-boys/god-only-knows-midi/",
+      "url": "https://www.mididb.com/midi-download/AUD_AP3815.mid",
+      "bytes": 5123,
+      "sha256": "65f8f4adc219e5cd4dc8d363067e2f892ddc2761aeed2b6fa70f328aecf61880",
+      "file": "batch-2-research/god-provider.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "dancing-provider",
+      "page": "https://www.mididb.com/abba/dancing-queen-midi/",
+      "url": "https://www.mididb.com/midi-download/AUD_HT1000.mid",
+      "bytes": 15786,
+      "sha256": "66c775ab19603a69f690b24cffbc01ea4a8cff265317abb300df2ac0bbc70858",
+      "file": "batch-2-research/dancing-provider.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "dancing-1",
+      "page": "https://bitmidi.com/dancing-queen-1-mid",
+      "url": "https://bitmidi.com/uploads/37569.mid",
+      "bytes": 98029,
+      "sha256": "ed518f0f7452c4e2745cf86e8382d62f993b296477d65d411b69f297372f2806",
+      "file": "batch-2-research/dancing-1.mid",
+      "status": "downloaded for private technical inspection"
+    },
+    {
+      "id": "dancing-2",
+      "page": "https://bitmidi.com/dancing-queen-2-mid",
+      "url": "https://bitmidi.com/uploads/37570.mid",
+      "bytes": 80095,
+      "sha256": "01d2c3b9916e3c59c0bdc2f390d47cb3307da8b38042a1bd66e6b9288d352983",
+      "file": "batch-2-research/dancing-2.mid",
+      "status": "downloaded for private technical inspection"
+    }
+  ],
+  "rejectedOrLimited": [
+    {
+      "id": "fly-provider",
+      "reason": "Short demo has sparse flute fills but not the main melody-guide part. Chose a complete community arrangement with the familiar melody and measured uneven placements."
+    },
+    {
+      "id": "mirror-1",
+      "reason": "Exceeds the shared importer limit of 32 playable parts/percussion lanes; no need to loosen the safety limit."
+    },
+    {
+      "id": "mirror-k",
+      "reason": "Exceeds the same part limit. Selected mirror-2 instead."
+    },
+    {
+      "id": "dancing-provider",
+      "reason": "Only about 44 seconds; 644 zero-duration drum notes fail the strict importer. No repair or timing invention was made."
+    },
+    {
+      "id": "dancing-2",
+      "reason": "Valid but shorter community arrangement; chose the complete roughly four-minute dancing-1 source."
+    }
+  ],
+  "checks": {
+    "fly": "Walking bass at consecutive beat starts and offbeat melody attacks at 2/3 of a beat are retained.",
+    "mirror": "Source beat 292 changes the bass G to A-flat across the compared settings; upper chord pitch classes shift from G/B/D/A to A-flat/C/E-flat/B-flat. Two actual source melody-guide tracks are retained.",
+    "god": "Source bass at beats 24,28,32,36 is A1,G-sharp1,F-sharp1,E1. At beat 28 the upper pitch classes are E/G-sharp/B, giving E/G-sharp rather than a new G-sharp root.",
+    "dancing": "The melody’s average pitch is higher in the final selected span; the chosen string lane enters at source beat 155.958333. Exact verse/chorus recording alignment still requires editorial review."
+  },
+  "permission": "Public-app reuse unresolved for all four. No license is inferred from a free download, purchase listing or community export.",
+  "references": [
+    {
+      "url": "https://www.musicnotes.com/sheetmusic/michael-jackson/man-in-the-mirror/MN0037340",
+      "scope": "Publisher reference for G-major setting, not a certification of this community performance."
+    },
+    {
+      "url": "https://www.musicnotes.com/sheetmusic/abba/dancing-queen/MN0073819",
+      "scope": "Publisher reference for A-major setting, not a certification of source timing or exact section boundaries."
+    },
+    {
+      "url": "https://www.midi.com.au/terms-and-conditions/",
+      "scope": "Provider terms do not establish app redistribution permission."
+    }
+  ]
+}

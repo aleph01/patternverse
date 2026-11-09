@@ -1,0 +1,137 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "Existing renamed Source Sans 3 Regular WOFF2 reused unchanged at weight400 in both variants. Original source and OFL notice retained.",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "pattern": "Test in Grayscale",
+  "date": "2026-10-28",
+  "mode": "Reused generated photographs and presentation stages. Native SVG composition and one fixed grayscale filter. No new image generation.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-grayscale-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-grayscale-layouts.json",
+    "sha256": "d2f7a8757e7ba45be95037be15c4ab1056c5214bc5cbb992d2294fbf57b06b5f",
+    "method": "Color originals and revisions plus matched grayscale checks. One fixed linearRGB matrix maps each linear-light channel to0.2126R+0.7152G+0.0722B without changing alpha. The same filter covers each complete artifact; it is not a color-vision simulation or print proof."
+  },
+  "comparisonPolicy": "Four workshop detail fills darken; six A/B identifiers become visible; one Change date underline becomes visible. Existing words, color palette in the latter two, font settings, geometry, sources/crops and presentation remain fixed. Both color originals/revisions are duplicated through the exact same grayscale filter.",
+  "grayscaleConversion": {
+    "space": "linearRGB",
+    "weights": [0.2126, 0.7152, 0.0722],
+    "matrix": [
+      0.2126, 0.7152, 0.0722, 0, 0, 0.2126, 0.7152, 0.0722, 0, 0, 0.2126, 0.7152, 0.0722, 0, 0, 0,
+      0, 0, 1, 0
+    ]
+  },
+  "calculatedContrastRatios": {
+    "detailsBefore": 2.3291036104311624,
+    "detailsAfter": 8.544979518345535,
+    "linkBody": 1.0005519153232867,
+    "linkSurface": 9.847564298531275
+  },
+  "specifiedLuminances": {
+    "ink": 0.05481913622019295,
+    "studioA": 0.12005325252037516,
+    "studioB": 0.1201275765910075,
+    "link": 0.054761316844138985
+  },
+  "verification": {
+    "comparisons": [
+      {
+        "name": "grayscale-workshop-details",
+        "view": "color",
+        "changedPixels": 8920,
+        "pixelsChangedOutsideDeclaredRegions": 0,
+        "nonGrayPixels": 0
+      },
+      {
+        "name": "grayscale-workshop-details",
+        "view": "grayscale",
+        "changedPixels": 8920,
+        "pixelsChangedOutsideDeclaredRegions": 0,
+        "nonGrayPixels": 0
+      },
+      {
+        "name": "grayscale-studio-categories",
+        "view": "color",
+        "changedPixels": 594,
+        "pixelsChangedOutsideDeclaredRegions": 0,
+        "nonGrayPixels": 0
+      },
+      {
+        "name": "grayscale-studio-categories",
+        "view": "grayscale",
+        "changedPixels": 594,
+        "pixelsChangedOutsideDeclaredRegions": 0,
+        "nonGrayPixels": 0
+      },
+      {
+        "name": "grayscale-booking-link",
+        "view": "color",
+        "changedPixels": 198,
+        "pixelsChangedOutsideDeclaredRegions": 0,
+        "nonGrayPixels": 0
+      },
+      {
+        "name": "grayscale-booking-link",
+        "view": "grayscale",
+        "changedPixels": 198,
+        "pixelsChangedOutsideDeclaredRegions": 0,
+        "nonGrayPixels": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "pixelCheck": "Only declared repair regions differ in both color and grayscale. Grayscale surfaces contain neutral pixels. Original/revision use the exact same filter and artifact nodes.",
+    "textBounds": "within the paper or phone surface",
+    "imageInlineEquality": "passed",
+    "scope": "Exact DOM normalization permits only four fills, six identifier opacities or one underline opacity. Color/grayscale artifacts share identical children; only the same preview filter differs. Pixel checks isolate repair regions in both views and confirm neutral grayscale pixels. Wide/narrow checks cover loaded fonts, bounds, overflow and image/inline equality."
+  },
+  "limitations": "A documented diagnostic conversion, not a simulation of every color-vision difference or a prediction of a printer. Grayscale appearance is not a contrast measurement or accessibility certification. Category labels and underline repairs are editorial examples of additional visible cues. No reader-performance study, physical print proof or implemented interface is claimed."
+}

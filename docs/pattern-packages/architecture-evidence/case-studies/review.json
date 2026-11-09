@@ -1,0 +1,169 @@
+{
+  "checked": "2026-10-28",
+  "status": "complete; production build blocked by unrelated corpus reference",
+  "scope": [
+    "arch-cross-ventilation",
+    "arch-continuous-thermal-envelope",
+    "arch-design-for-disassembly"
+  ],
+  "selection": "Three first cases target articles previously supported by hypothetical scenarios and component-level photos. Each adds a problem, a project-specific decision, a reported outcome and a transferable lesson.",
+  "sources": [
+    {
+      "id": "brock-design-team",
+      "title": "Coffield, Lappano and Mella: Brock Environmental Center, High Performing Buildings (2016)",
+      "url": "https://www.hpbmagazine.org/brock-environmental-center-virginia-beach-va/",
+      "scope": "Project design-team account: coastal conditions, mixed cross/stack ventilation, window operation and predicted natural-ventilation hours. The prediction is not treated as a measurement.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "brock-project-submission",
+      "title": "WBDG: Brock Environmental Center project-team case study",
+      "url": "https://legacy.wbdg.org/ar/case-study/brock-environmental-center",
+      "scope": "Project-team submission: airflow and controls strategy, monitoring and reported occupant-satisfaction findings; not an independent cross-flow-only performance test.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "reform-cottage-guide",
+      "title": "Passivhaus Trust: How to Build a Passivhaus, second edition (2023), Reform Cottage, printed p. 53",
+      "url": "https://www.passivhaustrust.org.uk/UserFiles/File/Technical%20Papers/How%20to%20Build%202023/How%20to%20Build%20v2.1.pdf#page=55",
+      "scope": "Reform Cottage construction case: connected wall/roof insulation, window positioning, 2018 EnerPHit certification and reported 0.31 ACH at 50 Pa airtightness.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "reform-cottage-participant",
+      "title": "21 Degrees: Reform Cottage EnerPHit, Herefordshire (2021)",
+      "url": "https://www.21degrees.com/case-studies/reform-cottage-enerphit-herefordshire/",
+      "scope": "Participating supplier and ventilation designer account: project team, existing construction, junction work and reported airtightness. Heating-need data are not presented as metered savings.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "temporary-court-reassembly",
+      "title": "cepezed: Dismantling a building and rebuilding it elsewhere (18 September 2025)",
+      "url": "https://www.cepezed.com/recent/een-gebouw-demonteren-en-elders-weer-opbouwen-kan-gewoon/",
+      "scope": "Architect account of completed courthouse reassembly as an office and knowledge lab; layout and solar-control glazing changes.",
+      "checked": "2026-10-28"
+    },
+    {
+      "id": "temporary-court-client",
+      "title": "Rijksvastgoedbedrijf: Circulariteit loont, hoe een tijdelijk gebouw twee levens kreeg (13 April 2026)",
+      "url": "https://www.rijksvastgoedbedrijf.nl/actueel/nieuws/2026/04/13/circulariteit-loont-hoe-een-tijdelijk-gebouw-twee-levens-kreeg",
+      "scope": "Original public client account: contract, residual-value incentives, detachable components, storage and second use in Enschede.",
+      "checked": "2026-10-28"
+    }
+  ],
+  "cases": [
+    {
+      "id": "brock-environmental-center",
+      "pattern": "arch-cross-ventilation",
+      "heading": "Brock Environmental Center — a documented mixed-mode building",
+      "sources": ["brock-design-team", "brock-project-submission"],
+      "project": "Brock Environmental Center",
+      "location": "Virginia Beach, United States",
+      "design_credit": "SmithGroupJJR",
+      "evidence": [
+        {
+          "kind": "documented-design",
+          "claim": "Low and high openings on north and south faces; weather-linked window operation; cross flow combined with stack ventilation.",
+          "source": "brock-project-submission"
+        },
+        {
+          "kind": "modelled",
+          "claim": "Over 11% of occupied annual hours predicted for natural-ventilation cooling.",
+          "source": "brock-design-team"
+        },
+        {
+          "kind": "reported-post-occupancy",
+          "claim": "Project-team account reports environmental measurements and occupant satisfaction above comparison benchmarks.",
+          "source": "brock-project-submission"
+        }
+      ],
+      "before_sha256": "5cf561331d99005bf619d2e63a0df344cc5b4a98ca01f258d1f12e40cabf3288",
+      "after_sha256": "175958188d04d680324ef2ce9f9abb6d4e04418024a4fc3bab0b7ba9432ba462",
+      "preservation": "Existing frontmatter, outline, figures, credits, links and original sources retained; case and primary source entries added.",
+      "article_words": 1207
+    },
+    {
+      "id": "reform-cottage",
+      "pattern": "arch-continuous-thermal-envelope",
+      "heading": "Reform Cottage — connecting an old house’s envelope",
+      "sources": ["reform-cottage-guide", "reform-cottage-participant"],
+      "project": "Reform Cottage",
+      "location": "Herefordshire, United Kingdom",
+      "design_credit": "Owner and retrofit consultant Gervase Mangwana, with a local building team and specialist advisers",
+      "evidence": [
+        {
+          "kind": "documented-construction",
+          "claim": "External wall insulation connected to roof insulation; windows placed within the insulation zone and sealed with tapes and membranes.",
+          "source": "reform-cottage-guide"
+        },
+        {
+          "kind": "reported-pressure-test",
+          "value": 0.31,
+          "unit": "air changes per hour at 50 Pa",
+          "claim": "Reported achieved airtightness; guide records EnerPHit certification in 2018.",
+          "source": "reform-cottage-guide"
+        },
+        {
+          "kind": "participant-account",
+          "claim": "Owner-led retrofit of an extended nineteenth-century stone cottage, including ventilation design.",
+          "source": "reform-cottage-participant"
+        }
+      ],
+      "before_sha256": "416830a280088ced0d823d3491636c7530e091e1b79914a59bde593cd249845c",
+      "after_sha256": "5937029ae62b96640fc449c2300d29ce2c93e85bcd1d7cc3310cab8d052410bb",
+      "preservation": "Existing frontmatter, outline, figures, credits, links and original sources retained; case and primary source entries added.",
+      "article_words": 1240
+    },
+    {
+      "id": "temporary-amsterdam-courthouse",
+      "pattern": "arch-design-for-disassembly",
+      "heading": "Amsterdam’s temporary courthouse — a completed second use",
+      "sources": ["temporary-court-reassembly", "temporary-court-client"],
+      "project": "Temporary Amsterdam Courthouse, reassembled at Kennispark Twente",
+      "location": "Amsterdam and Enschede, Netherlands",
+      "design_credit": "cepezed and project partners; disassembly and reassembly by Lagemaat and Groothuis Bouwgroep",
+      "evidence": [
+        {
+          "kind": "client-account",
+          "claim": "Contract included design, construction, dismantling and reuse; residual component value formed part of the financial arrangement.",
+          "source": "temporary-court-client"
+        },
+        {
+          "kind": "completed-reassembly-reported",
+          "claim": "Architect’s September 2025 account reports reassembly in Enschede as an office and knowledge lab, with a changed layout and relocated solar-control glazing.",
+          "source": "temporary-court-reassembly"
+        },
+        {
+          "kind": "date-qualification",
+          "claim": "Client and contractor describe dismantling beginning in 2021; architect describes dismantling in 2022. Article uses 2021–22 for the process.",
+          "source": "temporary-court-client"
+        }
+      ],
+      "before_sha256": "0d3357b5305e1b6c764c83b50f8d41980eb9a6636545b549836f09dbfb276996",
+      "after_sha256": "a06f98c21fc02ff9efb152485d18e053b47f84084ddbc38257edb2a046d14d64",
+      "preservation": "Existing frontmatter, outline, figures, credits, links and original sources retained; case and primary source entries added.",
+      "article_words": 1191
+    }
+  ],
+  "new_photograph": "architecture/brock-environmental-center.webp",
+  "image_limits": [
+    "No reviewed reusable project photo was found for Reform Cottage; the primary technical guide links directly to its construction photographs.",
+    "No reviewed reusable photograph of the temporary courthouse was found; the architect’s reassembly account links to actual project photographs. Existing component photos retain their own headings."
+  ],
+  "excluded_claims": [
+    "Brock’s predicted natural-ventilation hours are not labelled as measured savings or cross-flow-only performance.",
+    "Reform Cottage’s published heating-need figure is not labelled as metered consumption.",
+    "The courthouse’s reported percentage reuse has no mass or cost basis stated in the consulted account, so the article emphasizes completed reassembly instead.",
+    "No numerical carbon saving is asserted for the courthouse."
+  ],
+  "verification": {
+    "acceptance": "36 articles; 169 captioned figures; 155 distinct visuals; zero Architecture acceptance errors",
+    "article_rendering": "38 tests passed",
+    "compiler_integration": "38 Architecture integration tests passed. One global-corpus assertion fails because published urge-surfing links to draft tracking-the-unfolding-experience; no unrelated content modified.",
+    "content_cli": "Validated 910 entities",
+    "build": "Production build blocked by the same published-to-draft Therapy reference. Development preview includes drafts using the existing server convention.",
+    "preview": "http://127.0.0.1:4292/pattern/arch-cross-ventilation#user-content-article-section-architectural-examples",
+    "browser": "Six scoped desktop/phone checks passed for all three new cases; headings, case evidence text, images and ten-section outline render correctly without horizontal overflow.",
+    "visual_review": "Desktop case paragraphs, phone Reform Cottage layout and Brock project photograph/caption reviewed from browser screenshots."
+  }
+}

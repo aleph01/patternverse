@@ -1,0 +1,39 @@
+{
+  "pattern": "Design for the Audience",
+  "mode": "Built-in image generation; photographic source assets only, exact typography and comparisons composed separately in SVG.",
+  "generated": "2026-10-27",
+  "fictional": true,
+  "sources": [
+    {
+      "name": "audience-pottery-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic panel for a finished beginner pottery-workshop poster. Wide landscape editorial photograph of a welcoming small ceramics studio worktable, a simple unfired handbuilt clay pot beside coils of clay, a small flat slab of clay, a modest wooden shaping tool, a plain water dish and a linen apron. Warm wood, natural clay and muted sage, gentle window daylight, believable used materials and handcraft texture. Quiet and approachable; no intimidating machinery. No people or hands, no readable text, labels or logos. Edge-to-edge photograph only, not a poster or mockup. 3:2 landscape framing, suitable for a shallow wide poster photo band.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-5695f3b0-8462-4518-abcb-b9e7e59e77dc.png",
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "name": "audience-museum-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photograph for a finished museum visitor-information sign. Wide editorial photograph of an ordinary contemporary art-museum entrance hall: a ground-floor information desk to the left, clear stairs ascending to galleries on the right, a simple closed lift door beside the desk, pale plaster, warm stone and understated wood. Soft overcast daylight, believable materials, friendly public institution rather than extravagant architecture. No people, no visible writing or signs, no logos, no digital overlays. Photographic image only, not an image of a poster or sign. Landscape 3:2, composed so the desk, staircase and lift remain understandable in a wide shallow crop.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-64b48c8e-a985-431a-9e6e-d879df35c897.png",
+      "asset": "content/assets/graphic-design/audience-museum-photo.jpg",
+      "sha256": "f0cde6fcfd40dad264a8319de509bb3f8d49f15f842531995420d14186b405fb"
+    },
+    {
+      "name": "audience-workspace-photo",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic banner for a realistic coworking day-pass booking page. Wide editorial photograph of a modest well-maintained shared workspace with a few uncluttered desks, comfortable practical chairs, warm wood, large windows and muted green plants. One empty desk in the foreground establishes a place to work; softly receding desks imply shared space. Calm natural daylight, ordinary useful workplace, realistic small-business website photography. No people, visible lettering, brand names, prices, logos or screens showing text. Edge-to-edge photograph only, not a phone or website screenshot. Landscape 3:2, suitable for a shallow mobile booking-page banner.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-2d024314-df6b-4c90-979b-761b1ed41c45.png",
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "name": "audience-phone-stage",
+      "prompt": "Use case: product-mockup. Asset type: reusable photographic background for precise mobile booking-page comparison. A single contemporary smartphone in a simple black case lying flat on a pale warm gray desk, photographed exactly from above with parallel straight sides, no tilt or perspective distortion. Portrait 2:3 overall image. The entire phone is visible with narrow clean margins. Its display is completely blank uniform warm ivory, occupying approximately x 12% to 88% of image width and y 8% to 92% of image height. Keep any camera cutout small and at the extreme top. Realistic thin bezel, matte frame, subtle believable glass and contact shadow, even diffuse daylight without glare across the screen. No hands, props, cables, brand names, icons, status bar, interface, writing or graphics. This blank screen will receive exact typography later. Photorealistic, restrained product photograph, no CGI sheen.",
+      "generatedSource": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-403b011a-d525-44f1-a838-811311fbd9f1.png",
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "reusedStage": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+  "comparisonPolicy": "Each pair embeds identical photographic bytes. Pottery changes four text nodes; museum changes only four direction text nodes and their size/baseline; day pass changes five fact text nodes. All other visual attributes are fixed.",
+  "reusedStageSha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+}

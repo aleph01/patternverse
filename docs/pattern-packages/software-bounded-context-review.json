@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "data-bounded-contexts",
+  "title": "Bounded Context",
+  "aliases": ["Bounded Contexts", "DDD Bounded Context"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1429,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "canonical_reuse": {
+    "route": "/pattern/data-bounded-contexts",
+    "previous_title": "Bounded Contexts",
+    "no_duplicate_article": true,
+    "original_archive": "docs/pattern-packages/bounded-context-original.md",
+    "original_sha256": "ef01e265a1add5855c9461c45e7dad85ed8fc82cbfcf146d00affff71b4ea091",
+    "retained_verses": ["data-engineering", "software-engineering"],
+    "retained_original_tags": ["data-engineering", "meaning-boundaries"]
+  },
+  "validation": {
+    "research": "Seven authoritative references: Evans’s DDD Reference establishes model applicability and Context Map relationships; Fowler explains locally unified meanings and deliberate mappings; Microsoft distinguishes context modeling from deployment units and documents translation ownership; Salesforce supplies the retained API-federation example; Python documents frozen-field behavior. Bounded Context is distinguished from a subdomain, aggregate, department, deployment, database, security boundary, and transaction boundary. Northstar and inventory scenarios are retained original teaching examples; new Python and native SVGs are original.",
+    "python_examples": "All three article fences execute as billing.py, access.py, and demo.py and produce the five stated lines exactly. Checks cover published-contract-only imports, local validation, nonblank opaque IDs, strict finite payment vocabulary and Boolean enabled states, exact funding identity, mismatched and unresolved mappings, immutable snapshots, both enabled states, no hidden state across repeated assessments, and one payer funding multiple distinct workspaces. No permissions or persistence are changed.",
+    "python_stdout": [
+      "current: keep_current_access",
+      "overdue: review_access",
+      "still enabled: True",
+      "wrong payer: Funding payer mismatch",
+      "unmapped: Funding mapping unresolved"
+    ],
+    "article_tests": "75 article tests pass across Bounded Context and the prior software/GoF suites. Checks cover the preserved canonical ID, searchable aliases without duplicate articles, eight sections, all three highlighted code blocks, exact copyable text, two responsive figures and four dimensions, resolved related links, one primary home, former collection cross-link, archive hash, ten queries, revision hash, and concept mark. The run uses two workers, 20-second test timeout, and 60-second corpus hook timeout.",
+    "graphics_tests": "Four global geometry, safety, fallback, and export checks pass. The authored-coverage check has the unrelated missing access-over-ownership graphic. Combined results: 79 passed and one unrelated failure across 19 files.",
+    "content": "1249 entities validate with drafts included. The published-only corpus has 1102 entities and no errors.",
+    "collection": "Appended the existing canonical article to Domain Modeling and Business Logic after all seven prior members. Removed only its direct membership from Meaning & boundaries, retained that collection’s eleven other articles, and added a visible cross-link to the canonical article and primary home. Retained original data-engineering verse membership and tags. No new collection, duplicate pattern, or stub.",
+    "public_build": "Production build and public web build checks pass. Browser review used the completed build; no deployment.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new generator, executable validator, integration test, and updated metadata. Review report formatted separately.",
+    "visuals": "Four editable native SVG variants load. Native and production browser measurements find no overlapping or out-of-bounds labels and no out-of-canvas rectangles. All four native renders plus the actual desktop and phone figures were visually inspected. The diagrams distinguish one-to-many identity mappings from a specific funding relationship, then show receiver-owned assessment and explicit mapping rejection without changing access. Fixed white surfaces, regular Helvetica typography, exact palette, square geometry, label placement, arrow meanings, contrast, and readability were checked. A separate concept mark appears in the article and collection gallery.",
+    "article_browser": "Actual production article checked at 1440, 390, and 320 pixels: exact eight H2 headings, all three Python blocks preserved in the DOM, colored syntax tokens, text selection preserving indentation, keyboard horizontal code scrolling for access.py at 320px, both phone SVGs loaded, and no page overflow. Browser selection omits the terminal newline normally. Actual desktop/phone article tops, code, diagrams, captions, and collection gallery were visually inspected.",
+    "navigation_browser": "All four related routes return HTTP 200. The former Data Engineering collection cross-link opens the existing canonical route with Domain Modeling and Business Logic in the breadcrumb. The primary collection direct route renders; the Software Engineering gallery shows the article as its eighth member on page two and opens it with the correct breadcrumb.",
+    "preservation": "All 23 GoF articles and the GoF collection match actual pre-change SHA-256 hashes. All sixteen prior software articles, sixteen prior software authoring records, 427 prior concept marks, and 1506 previous asset dimensions are unchanged. The Software Engineering verse, Application Architecture collection, historical Data Engineering import manifest, and legacy bounded-contexts.svg are byte-for-byte unchanged. The complete previous article is archived byte-for-byte, and other collection members are retained."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not recognize it. One existing type error, zero warnings; unrelated file untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership article lacks an authored concept graphic. The other four graphics checks pass; unrelated coverage untouched."
+    }
+  ],
+  "example_limits": "Single-process snapshot assessment only, Python 3.10+. It does not implement invoice calculation, transport, producer authentication, freshness, revision ordering, retry handling, historical crosswalks, persistence, concurrency coordination, or permission changes. Frozen fields protect normal API assignment, not authority or all possible mutation. The current/overdue interpretation is an original local teaching policy, not a guarantee of the pattern. Production mappings and coordination need explicit ownership, contracts, effective times, and failure handling.",
+  "preview": "http://127.0.0.1:43001/pattern/data-bounded-contexts",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-bounded-context",
+  "browser_measurements": ".local/software-bounded-context/browser-checks.json",
+  "browser_check_script": ".local/software-bounded-context/check-browser.mjs",
+  "preservation_checks": ".local/software-bounded-context/preservation.json",
+  "build_log": ".local/software-bounded-context/public-build.log",
+  "branch": "codex/software-bounded-context",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

@@ -1,0 +1,961 @@
+{
+  "format_version": 1,
+  "title": "Systemic Therapy Essentials",
+  "status": "draft",
+  "verse": "therapy",
+  "collection": "systemic-therapy-essentials",
+  "article_sections": [
+    "Purpose and problem",
+    "Core idea",
+    "How it works",
+    "Worked examples and case studies",
+    "Conditions for useful application",
+    "When to use it",
+    "Tradeoffs",
+    "Common mistakes and limitations",
+    "Related patterns",
+    "Sources and further reading"
+  ],
+  "patterns": [
+    {
+      "id": "map-the-relevant-system",
+      "title": "Map the Relevant System",
+      "domain": "Systemic therapy",
+      "short_description": "Understand a difficulty within the relationships, histories, institutions, resources, and material circumstances that shape the available choices.",
+      "status": "draft",
+      "use_when": [
+        "Accounts repeatedly locate a difficulty in one person while omitting the relevant circumstances.",
+        "Several services or households are involved and the practical picture is fragmented.",
+        "A transition has changed daily arrangements and an existing plan no longer fits.",
+        "An apparently reasonable response is impractical given time, transport, money, safety, or support."
+      ],
+      "goals": [
+        "Develop a more adequate, revisable account of the relevant circumstances.",
+        "Identify support and constraints without assuming that connections establish causes.",
+        "Distinguish who matters to understanding from who should be contacted or attend."
+      ],
+      "mechanisms": [
+        "Collaborative representation can make omitted context and practical options visible; this is a practice rationale, not an established isolated treatment effect.",
+        "Separating reported circumstances, interpretations, and open questions supports correction and further inquiry."
+      ],
+      "tags": [
+        "systemic-therapy",
+        "relational-context",
+        "systems-thinking",
+        "ecomaps",
+        "genograms"
+      ],
+      "related_patterns": ["reframing-map-stakeholders", "map-the-loop", "find-what-already-helps"],
+      "prerequisites": [
+        "A clear purpose for requesting contextual information.",
+        "Accessible ways for the person to contribute, correct descriptions, and discuss information sharing."
+      ],
+      "not_ideal_when": [
+        "Immediate danger, urgent medical needs, or a straightforward practical obstacle requires action first.",
+        "A joint mapping conversation would expose someone to intimidation or unsafe disclosure.",
+        "Further detail does not change the current understanding or next decision."
+      ],
+      "example_user_queries": [
+        "Everyone keeps treating my child's difficulties as a motivation problem.",
+        "We have a lot of professionals involved but nobody seems to see the whole picture.",
+        "I cannot follow the advice because it does not fit my work hours or transport.",
+        "How can I explain all the caregiving pressures without making this about blame?",
+        "My relatives are counted as support but they are not actually available to help.",
+        "Things got harder after we moved and I am not sure which changes matter.",
+        "My therapist keeps asking about family, but my friends are the people who support me.",
+        "How can we tell who needs to be involved without inviting everyone into the conversation?",
+        "I want to understand the context without assuming my family caused the problem.",
+        "Our plan sounds reasonable but we cannot make it work in everyday life."
+      ],
+      "visual_decision": {
+        "type": "map",
+        "reason": "A comparison of two frames of one fictional attendance situation demonstrates changing the scope of inquiry without depicting a treatment outcome.",
+        "file": "systemic-therapy/relevant-system-school.svg",
+        "compact_file": "systemic-therapy/relevant-system-school-mobile.svg",
+        "generator": "scripts/systemic-map-visuals.mjs",
+        "style": "Fixed-white light editorial; regular Helvetica Neue; fine neutral lines; green added connections."
+      },
+      "case_provenance": [
+        {
+          "title": "Sam's mornings",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented people, circumstances, dialogue, and continuation. The drawing does not depict the invented outcome."
+        },
+        {
+          "title": "Caregiving beyond one person's coping",
+          "type": "published-clinical-case-study",
+          "setting": "Family-systems nursing, not a controlled psychotherapy trial",
+          "source_id": "wildhaber-2025",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "note": "Original paraphrase/adaptation of the published account. No invented dialogue or added clinical outcome. Grandmother-supported time is described as discussed, not implemented. The authors' interpretation is distinguished from this field guide's commentary."
+        },
+        {
+          "title": "When a family-centered map misses the relevant support",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented person, circumstances, dialogue, and responses; demonstrates a professional assumption requiring correction."
+        },
+        {
+          "title": "Missed appointments and support abroad",
+          "type": "fictional-brief-examples",
+          "note": "Two original short contrasts, not clinical reports."
+        }
+      ],
+      "sources": [
+        {
+          "id": "ucl-basic-systemic",
+          "title": "Basic systemic competences",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_basic_systemic_competences.pdf",
+          "supports": "Multiple contexts, significant relationships, professional networks, cultural and sociopolitical setting, individual health and development.",
+          "access": "Primary six-page PDF accessed; the rationale and contextual domains were consulted."
+        },
+        {
+          "id": "ucl-specific-systemic",
+          "title": "Specific systemic techniques",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_specific_systemic_techniques.pdf",
+          "supports": "Mapping using genograms, ecomaps, structural maps, and other techniques; contextual and historical inquiry.",
+          "access": "Primary four-page PDF accessed; particularly the mapping section on page 3."
+        },
+        {
+          "id": "hartman-1978",
+          "title": "Diagrammatic Assessment of Family Relationships",
+          "authors": "Ann Hartman",
+          "year": 1978,
+          "url": "https://journals.sagepub.com/doi/10.1177/104438947805900803",
+          "supports": "Historical ecological social-work provenance and diagramming of family/community relationships.",
+          "access": "Publisher abstract and bibliographic record consulted; not presented as full-text access."
+        },
+        {
+          "id": "wildhaber-2025",
+          "title": "Gaining More Ease in Everyday Life as a Family With a Child With Intellectual Disability Through Family-Systemic Therapeutic Conversations: An Exploratory Single-Case Study",
+          "authors": "Simone Pascale Wildhaber, Corina Sgier, Margrit Hilpertshauser, and Evelyn Huber",
+          "year": 2025,
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12623666/",
+          "doi": "10.1177/10748407251392885",
+          "license": "CC BY 4.0",
+          "supports": "Attributed genogram-ecomap clinical case, family context, options discussed, and limits of causal interpretation.",
+          "access": "Full open-access paper consulted."
+        },
+        {
+          "id": "nice-ph50",
+          "title": "Domestic violence and abuse: multi-agency working (PH50)",
+          "authors": "National Institute for Health and Care Excellence",
+          "year": 2014,
+          "url": "https://www.nice.org.uk/guidance/ph50/chapter/Recommendations",
+          "supports": "Recommendation 6: private, one-to-one enquiry in a safe setting; recommendation 7: information sharing.",
+          "access": "Primary guideline text available through indexed search; direct retrieval returned HTTP 403 during research."
+        }
+      ]
+    },
+    {
+      "id": "map-the-loop",
+      "title": "Map the Loop",
+      "domain": "Systemic therapy",
+      "short_description": "Trace a recurring sequence of responses, including how efforts to solve a difficulty may help recreate the conditions for its return.",
+      "status": "draft",
+      "use_when": [
+        "People explain their own responses as consequences and the other person's responses as causes.",
+        "The same attempted remedy brings diminishing returns or leads to more intense responses.",
+        "A family and a service repeat unsuccessful responses to one another.",
+        "A broad description such as poor communication leaves the actual exchange unclear."
+      ],
+      "goals": [
+        "Reconstruct specific actions, reported meanings, and the proposed return path.",
+        "Keep accounts revisable rather than assigning permanent interpersonal roles.",
+        "Distinguish recognizing a pattern from selecting an intervention or demonstrating improvement."
+      ],
+      "mechanisms": [
+        "Making a recurring sequence explicit can expose a mismatch between an attempted solution and its effects; this is a practice rationale, not a demonstrated isolated treatment effect.",
+        "Separating actions from interpretations supports correction and further inquiry into how recurrence is maintained."
+      ],
+      "tags": [
+        "systemic-therapy",
+        "interaction-patterns",
+        "feedback",
+        "attempted-solutions",
+        "circular-inquiry"
+      ],
+      "related_patterns": [
+        "map-the-relevant-system",
+        "reinforcing-feedback-loops",
+        "change-one-part-of-the-interaction"
+      ],
+      "prerequisites": [
+        "A clear question and a specific episode rather than a fixed judgment about personalities.",
+        "Meaningful opportunities to correct the account, including accessible communication.",
+        "Attention to safety and unequal authority before considering joint discussion."
+      ],
+      "not_ideal_when": [
+        "Immediate protection, urgent assessment, or an obvious access remedy needs priority.",
+        "Joint inquiry would expose a participant to intimidation or harmful disclosure.",
+        "The apparent return path is being imposed without evidence or recognition of wider constraints."
+      ],
+      "example_user_queries": [
+        "We keep having the same argument even though we both want it to stop.",
+        "The more I ask what is happening, the less my teenager tells me.",
+        "We each think we are only reacting to what the other person does.",
+        "Our attempts to solve the problem seem to make the next conversation harder.",
+        "The clinic keeps sending stronger reminders and I find it harder to respond.",
+        "I want to understand the sequence without saying we are equally to blame.",
+        "We can describe our pattern clearly but nothing seems to change.",
+        "How do we separate what someone did from what we assumed it meant?",
+        "Is taking a break from an argument always the same as withdrawing?",
+        "I feel stuck between doing more and getting less information back."
+      ],
+      "visual_decision": {
+        "type": "process/flow",
+        "reason": "A four-event reconstruction distinguishes participant-reported meanings from actions and highlights the proposed return to checking. It depicts no clinical result.",
+        "file": "systemic-therapy/homework-loop.svg",
+        "compact_file": "systemic-therapy/homework-loop-mobile.svg",
+        "generator": "scripts/systemic-loop-visuals.mjs",
+        "style": "Fixed-white light editorial; regular Helvetica Neue; fine neutral sequence arrows; green return connection."
+      },
+      "case_provenance": [
+        {
+          "title": "Checking that produces less information",
+          "type": "fictional-teaching-scenario",
+          "note": "Invented family, actions, reported meanings, dialogue, and continuation. The diagram and its first-person quotations reconstruct this fiction and contain no clinical data."
+        },
+        {
+          "title": "A clinic's reminders become part of the difficulty",
+          "type": "fictional-teaching-scenario",
+          "note": "Invented patient, service procedure, responses, accommodation, and continuation. Contact options are specific to this fictional service."
+        },
+        {
+          "title": "Recognizing an interaction without resolving it",
+          "type": "published-clinical-case-study",
+          "source_id": "liekmeier-2021",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "note": "Original paraphrase/adaptation of couple B, using the source's modified identifying details. No invented clinical dialogue, diagram, or later outcome. Repeated interaction and therapist responses are documented; the paper does not test loop drawing. Observational outcomes and questionnaire results are distinguished."
+        },
+        {
+          "title": "Care arrangements and reliable pauses",
+          "type": "fictional-brief-examples",
+          "note": "Two short invented contrasts showing how a sequence may sustain a difficulty or help regulate discussion."
+        }
+      ],
+      "sources": [
+        {
+          "id": "ucl-specific-systemic",
+          "title": "Specific systemic techniques",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_specific_systemic_techniques.pdf",
+          "supports": "Nonjudgmental sequence analysis, circular inquiry, events before an apparent first step, and attempted solutions that aggravate or maintain difficulties.",
+          "access": "Primary PDF accessed; sequence and attempted-solution sections consulted."
+        },
+        {
+          "id": "rohrbaugh-shoham-2015",
+          "title": "Brief Strategic Couple Therapy: Toward a Family Consultation Approach",
+          "authors": "Michael J. Rohrbaugh and Varda Shoham",
+          "year": 2015,
+          "url": "https://rohrbaughbanksassociates.com/wp-content/uploads/2017/06/Strategic-couple-therapy-2015_prepub.pdf",
+          "supports": "MRI problem-focused interactional approach to repeated attempted solutions and its distinction from other strategic models. Not treated as evidence for a universal causal claim.",
+          "access": "Author-hosted prepublication chapter accessed; opening conceptual and historical sections consulted."
+        },
+        {
+          "id": "liekmeier-2021",
+          "title": "Affective Behavior in Parent Couples Undergoing Couple Therapy: Contrasting Case Studies",
+          "authors": "Esther Liekmeier, Joëlle Darwiche, Lara Pinna, Anne-Sylvie Repond, and Jean-Philippe Antonietti",
+          "year": 2021,
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.634276/full",
+          "doi": "10.3389/fpsyg.2021.634276",
+          "license": "CC BY 4.0",
+          "supports": "Couple B's clinical description, six sessions, interventions, persistence of negative interactions, questionnaire differences, continuation beyond the study, and methodological limits.",
+          "access": "Open-access primary paper accessed; methods, clinical analyses, results, limitations, attribution, and license consulted."
+        },
+        {
+          "id": "papp-2009",
+          "title": "Demand-Withdraw Patterns in Marital Conflict in the Home",
+          "authors": "Lauren M. Papp, Chrystyna D. Kouros, and E. Mark Cummings",
+          "year": 2009,
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3218801/",
+          "doi": "10.1111/j.1475-6811.2009.01223.x",
+          "supports": "A diary study of 116 married couples found similar frequency of both gender configurations of demand-withdraw; does not establish universal roles or treatment effects.",
+          "access": "Primary author-manuscript abstract, bibliographic record, and introductory definitions consulted."
+        },
+        {
+          "id": "nice-ph50",
+          "title": "Domestic violence and abuse: multi-agency working (PH50)",
+          "authors": "National Institute for Health and Care Excellence",
+          "year": 2014,
+          "url": "https://www.nice.org.uk/guidance/ph50/chapter/Recommendations",
+          "supports": "Recommendation 6: private one-to-one enquiry in a safe setting.",
+          "access": "Official indexed primary guideline text consulted; direct page retrieval returned HTTP 403."
+        }
+      ]
+    },
+    {
+      "id": "open-another-perspective",
+      "title": "Open Another Perspective",
+      "domain": "Systemic therapy",
+      "short_description": "Explore another account of a situation, invite correction, and keep interpretations provisional without losing sight of evidence, power, or harm.",
+      "status": "draft",
+      "use_when": [
+        "One interpretation determines every subsequent response before another person has explained their account.",
+        "Participants attach different meanings to the same event.",
+        "A professional assumption has become more authoritative than the person's priorities.",
+        "A more positive reframe is being pursued despite signs that it does not fit or is badly timed."
+      ],
+      "goals": [
+        "Distinguish an event from the meaning assigned to it.",
+        "Allow participants to correct accounts of their experience, including professional accounts.",
+        "Identify a more informative question without presuming benevolent intentions or factual equivalence."
+      ],
+      "mechanisms": [
+        "Loosening a settled interpretation can make a different question or response available; this is a clinical rationale, not a demonstrated isolated treatment effect.",
+        "Explicit, revisable hypotheses can expose professional assumptions and support collaborative inquiry."
+      ],
+      "prerequisites": [
+        "A credible opportunity to disagree, correct, or decline the proposed interpretation.",
+        "Accessible communication and sufficient time for the person whose account is being discussed.",
+        "Attention to safety, authority, evidence, and responsibility."
+      ],
+      "not_ideal_when": [
+        "An urgent need or a clear violation requires action rather than more alternative meanings.",
+        "Joint discussion would expose someone to coercion or unsafe disclosure.",
+        "The invitation demands forgiveness, reassurance of the therapist, or acceptance of a preferred answer."
+      ],
+      "tags": [
+        "systemic-therapy",
+        "perspectives",
+        "circular-inquiry",
+        "reframing",
+        "collaborative-inquiry"
+      ],
+      "related_patterns": [
+        "map-the-relevant-system",
+        "map-the-loop",
+        "try-another-model-of-the-world"
+      ],
+      "example_user_queries": [
+        "We keep treating one action as proof of what someone is like.",
+        "I am angry about how much care I do, but I want to understand what my sibling actually means.",
+        "Could there be another explanation without pretending the problem is not real?",
+        "My therapist keeps offering a positive interpretation that does not fit my experience.",
+        "Everyone assumes I want less support, but I want more say in the support I get.",
+        "We agree about what happened but disagree about what it means.",
+        "How do I ask about someone's perspective without inventing their motives?",
+        "I can understand their reasons and still need a boundary.",
+        "I say yes to professionals even when I disagree with their explanation.",
+        "How can we question a professional assumption without dismissing their expertise?"
+      ],
+      "visual_decision": {
+        "type": "comparison",
+        "reason": "One unchanged fictional event is paired with three provisional accounts and distinct questions. Accent marks inquiry rather than a supposedly correct interpretation.",
+        "file": "systemic-therapy/perspective-care-accounts.svg",
+        "compact_file": "systemic-therapy/perspective-care-accounts-mobile.svg",
+        "generator": "scripts/systemic-perspective-visuals.mjs",
+        "style": "Fixed-white light editorial; regular Helvetica Neue; fine table rules; neutral shared observation; green questions."
+      },
+      "case_provenance": [
+        {
+          "title": "A refused visit and three possible meanings",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented siblings, caregiving situation, dialogue, constraints, and continuation. Figure hypotheses and questions are fictional possibilities, not known motives."
+        },
+        {
+          "title": "When independence is the professional's interpretation",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented adult receiving disability support, family and service accounts, accessible conversation, and continuation. Does not generalize preferences from disability or culture."
+        },
+        {
+          "title": "A caring interpretation offered too quickly",
+          "type": "published-clinical-conversation-analysis",
+          "source_id": "muntigl-horvath-2023",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "note": "Paraphrase/adaptation of the Colin/Anna exchange, especially extracts 2 and 4. Uses the paper's participant labels without asserting that they are verified real names or documented pseudonyms. Preserves observed distress, the authors' timing interpretation, and the overall improved treatment category. Adds no invented dialogue, joint repair, or causal efficacy claim."
+        },
+        {
+          "title": "Privacy and agreement with a professional",
+          "type": "fictional-brief-examples",
+          "note": "Two short invented contrasts: privacy need interpreted as rejection; agreement interpreted as engagement despite difficulty disagreeing."
+        }
+      ],
+      "sources": [
+        {
+          "id": "ucl-specific-systemic",
+          "title": "Specific systemic techniques",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_specific_systemic_techniques.pdf",
+          "supports": "Concurrent, explicit, revisable hypotheses; collaborative correction; circular inquiry and reframing.",
+          "access": "Primary PDF accessed; hypothesizing, circular interviewing, and reframing sections consulted."
+        },
+        {
+          "id": "cecchin-1987",
+          "title": "Hypothesizing, Circularity, and Neutrality Revisited: An Invitation to Curiosity",
+          "authors": "Gianfranco Cecchin",
+          "year": 1987,
+          "doi": "10.1111/j.1545-5300.1987.00405.x",
+          "url": "https://doi.org/10.1111/j.1545-5300.1987.00405.x",
+          "consulted_copy": "https://shinuischool.co.il/wp-content/uploads/2021/10/Cecchin-G.-1987.-Hypothesizing-Circularity-and-Neutrality-Revisited.pdf",
+          "supports": "Curiosity and nonattachment to one position; distinction from detached noninvolvement. Theoretical lineage, not outcome evidence.",
+          "access": "Publisher abstract and bibliographic record verified; opening neutrality/curiosity section of primary-paper copy hosted by Shinui consulted."
+        },
+        {
+          "id": "muntigl-horvath-2023",
+          "title": "Strategic use of observer-perspective questions in couples therapy",
+          "authors": "Peter Muntigl and Adam O. Horvath",
+          "year": 2023,
+          "doi": "10.3389/fpsyg.2023.1229991",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1229991/full",
+          "license": "CC BY 4.0",
+          "supports": "Documented couple exchange, possible premature positive reframing, interactional observations, selective conversation-analysis design, narrative/solution-focused modality, and overall improved treatment category.",
+          "access": "Primary open-access article accessed; methods, extracts 2 and 4 with accompanying analysis, discussion, author details, and license consulted."
+        },
+        {
+          "id": "nice-ph50",
+          "title": "Domestic violence and abuse: multi-agency working (PH50)",
+          "authors": "National Institute for Health and Care Excellence",
+          "year": 2014,
+          "url": "https://www.nice.org.uk/guidance/ph50/chapter/Recommendations",
+          "supports": "Recommendation 6: private, one-to-one enquiry in a safe environment.",
+          "access": "Official primary guideline text available through indexed search; no claim that a live direct-page HTTP check passed."
+        }
+      ]
+    },
+    {
+      "id": "find-what-already-helps",
+      "title": "Find What Already Helps",
+      "domain": "Systemic therapy",
+      "short_description": "Identify helpful exceptions, capabilities, relationships, and conditions, then examine what makes them available and whose effort they require.",
+      "status": "draft",
+      "use_when": [
+        "Difficulties dominate the description and helpful variation receives little attention.",
+        "A supportive contribution is being overlooked or assumed to be unlimited.",
+        "People want to understand why a particular occasion was more manageable.",
+        "A change may disrupt assistance or conditions that already matter."
+      ],
+      "goals": [
+        "Identify actual helpful variation without denying continuing distress.",
+        "Distinguish capabilities from the conditions and assistance that enable their use.",
+        "Clarify whose experience improves, who contributes, and whether support is available and sustainable."
+      ],
+      "mechanisms": [
+        "Detailed comparison can reveal candidate helpful actions and conditions; this is a clinical rationale, not evidence of an isolated treatment effect.",
+        "Considering effort, support, and access together can make resource descriptions more specific and correct assumptions about availability."
+      ],
+      "prerequisites": [
+        "A credible opportunity to say that nothing helped or that an apparent success was costly.",
+        "Accessible ways for affected people to describe their own experience.",
+        "Attention to consent, safety, capacity, material conditions, and supporters' boundaries."
+      ],
+      "not_ideal_when": [
+        "Urgent protection, medical assessment, or basic material needs require priority.",
+        "A search for positives is displacing the person's account of distress.",
+        "A supposedly helpful arrangement depends on silence, coercion, or an unavailable contribution."
+      ],
+      "tags": ["systemic-therapy", "exceptions", "resources", "social-support", "solution-focused"],
+      "related_patterns": [
+        "map-the-relevant-system",
+        "look-for-the-exception",
+        "change-one-part-of-the-interaction"
+      ],
+      "example_user_queries": [
+        "We argue about everything, but one conversation last week went better. What was different?",
+        "I want to notice what helps without pretending the problem is solved.",
+        "People tell me I am resilient when what I need is more help.",
+        "We managed once, but the support that made it possible is not always available.",
+        "How do we tell whether a calmer household is better for everyone?",
+        "My friends want to help, but we need to know what each person can actually offer.",
+        "Nothing feels better, though some things make the day less lonely.",
+        "I can do more when the setting is accessible, but people only notice my effort.",
+        "The useful routine works because I do all the preparation, and I need that to change.",
+        "How can therapy explore our strengths without overlooking money, illness, or missing services?"
+      ],
+      "visual_decision": {
+        "type": "comparison",
+        "reason": "The same fictional household responsibilities are shown across difficult conversations and one manageable occasion. Several differing conditions are visible together without isolating a cause or implying measured improvement.",
+        "file": "systemic-therapy/helpful-conversation-conditions.svg",
+        "compact_file": "systemic-therapy/helpful-conversation-conditions-mobile.svg",
+        "generator": "scripts/systemic-resource-visuals.mjs",
+        "style": "Fixed-white light editorial; regular Helvetica Neue; fine comparison rules; neutral shared context; green candidate helpful conditions."
+      },
+      "case_provenance": [
+        {
+          "title": "A conversation that stayed manageable",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented couple, household circumstances, dialogue, episode comparison, and continuation. Figure is illustrative and supplies no causal or clinical measurement."
+        },
+        {
+          "title": "Support that worked, but could not simply be repeated",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented chosen-family support arrangement, fluctuating disability, failed repetition, revision, and incomplete continuation. No composite or patient history is claimed."
+        },
+        {
+          "title": "When searching for exceptions initially fails",
+          "type": "published-clinical-vignette",
+          "source_id": "iveson-2002",
+          "note": "Concise paraphrase of case example 1 using the source label Mrs Brown. Observations, author interpretation, and limitations are distinguished. No invented dialogue, history, or follow-up is added."
+        },
+        {
+          "title": "An accessible school arrival and companionship during grief",
+          "type": "fictional-brief-examples",
+          "note": "Two original invented contrasts showing an enabling arrangement and support without symptom improvement."
+        }
+      ],
+      "sources": [
+        {
+          "id": "sfbta-manual-2025",
+          "title": "Solution Focused Therapy Treatment Manual for Working with Individuals, third edition",
+          "authors": "Solution Focused Brief Therapy Association Research Committee",
+          "year": 2025,
+          "url": "https://www.sfbta.org/Solution%20Focused%20Therapy%20Treatment%20Manual%20for%20Working%20with%20Individuals%20-3rd%20Edition-%20final.pdf",
+          "supports": "Solution-focused lineage, exceptions, collaborative exploration, coping conversations, and acceptance of reports that nothing is better. A practice manual, not evidence that this editorial pattern has an isolated effect.",
+          "access": "Official association primary PDF accessed; origins, exceptions, coping, and nothing-is-better sections consulted (printed pages 6–7, 21–22, 29, 33–34)."
+        },
+        {
+          "id": "ucl-specific-systemic",
+          "title": "Specific systemic techniques",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_specific_systemic_techniques.pdf",
+          "supports": "Individual and family strengths, helpful patterns over time, past actions, and resources within a broader systemic framework.",
+          "access": "Primary PDF accessed; strengths and resources section on page 2 consulted."
+        },
+        {
+          "id": "iveson-2002",
+          "title": "Solution-focused brief therapy",
+          "authors": "Chris Iveson",
+          "year": 2002,
+          "doi": "10.1192/apt.8.2.149",
+          "url": "https://www.cambridge.org/core/journals/advances-in-psychiatric-treatment/article/solutionfocused-brief-therapy/B8198B18DDEE77F9D39A09FDBCC0CE15",
+          "supports": "Published clinical vignette, case example 1. Used as a clinical illustration rather than causal outcome evidence.",
+          "access": "Accessible primary full article and journal bibliographic details verified. Original issue date March 2002 is distinguished from the later online posting date.",
+          "reuse": "Concise attributed paraphrase; no quotation or reproduced figure."
+        },
+        {
+          "id": "nice-ph50",
+          "title": "Domestic violence and abuse: multi-agency working (PH50)",
+          "authors": "National Institute for Health and Care Excellence",
+          "year": 2014,
+          "url": "https://www.nice.org.uk/guidance/ph50/chapter/Recommendations",
+          "supports": "Recommendation 6: private, one-to-one enquiry in a safe environment.",
+          "access": "Official primary guideline text verified through indexed search, including the official PDF extract."
+        }
+      ]
+    },
+    {
+      "id": "describe-the-preferred-future",
+      "title": "Describe the Preferred Future",
+      "domain": "Systemic therapy",
+      "short_description": "Translate hopes for change into meaningful differences people could recognize in everyday life, while keeping ownership, disagreement, and practical constraints visible.",
+      "status": "draft",
+      "use_when": [
+        "A broad hope such as trust, independence, or a better relationship conceals different expectations.",
+        "People know what they want to stop but have not described what they want instead.",
+        "Therapy is proceeding without a recognizable purpose shared with the people concerned.",
+        "A service goal needs checking against the person's own priorities and support needs."
+      ],
+      "goals": [
+        "Develop a recognizable description of wanted change without turning it into a prediction or promise.",
+        "Make ownership, overlap, and disagreement about goals explicit.",
+        "Distinguish a meaningful desired difference from a proposed method and from external results outside participants' control."
+      ],
+      "mechanisms": [
+        "Situated descriptions can make abstract aspirations and professional assumptions available for correction; this is a clinical rationale, not a demonstrated isolated treatment effect.",
+        "Distinguishing signs of progress from steps toward them can clarify the direction of work while leaving the route open."
+      ],
+      "prerequisites": [
+        "A credible opportunity for the person to author, reject, or revise the goal.",
+        "Accessible communication and enough time, without requiring visualization or a miracle scenario.",
+        "Attention to safety, consent, competing priorities, material resources, and institutional constraints."
+      ],
+      "not_ideal_when": [
+        "Immediate protection, medical care, or practical assistance requires priority.",
+        "A future-oriented question is displacing acknowledgment of present distress or loss.",
+        "A joint goal would override one person's safety, freedom, or right to decline reconciliation."
+      ],
+      "tags": [
+        "systemic-therapy",
+        "preferred-future",
+        "therapeutic-goals",
+        "solution-focused",
+        "collaborative-inquiry"
+      ],
+      "related_patterns": [
+        "find-what-already-helps",
+        "change-one-part-of-the-interaction",
+        "learn-from-feedback"
+      ],
+      "example_user_queries": [
+        "We both want more trust, but we seem to mean different things by it.",
+        "I know what I want to stop, but I do not know what I want life to look like instead.",
+        "How would we recognize a better relationship in an ordinary conversation?",
+        "My illness will still be here, so imagining that all my problems disappear does not fit.",
+        "The service wants me to be more independent, but I want help participating in my own life.",
+        "We keep attending therapy without knowing what would count as useful change.",
+        "I want to handle a difficult event better even though I cannot guarantee the result.",
+        "We agreed to have more conversations, but I still do not feel heard.",
+        "I cannot picture a whole better future, but I could describe a more manageable afternoon.",
+        "Our family agrees on the word better but disagrees about what anyone should do differently."
+      ],
+      "visual_decision": {
+        "type": "comparison",
+        "reason": "One fictional shared hope is expanded into two participants' desired differences, with limited overlap and unresolved disagreement shown explicitly. This is goal clarification, not a before-and-after clinical outcome.",
+        "file": "systemic-therapy/preferred-future-trust.svg",
+        "compact_file": "systemic-therapy/preferred-future-trust-mobile.svg",
+        "generator": "scripts/systemic-future-visuals.mjs",
+        "style": "Fixed-white light editorial; regular Helvetica Neue; fine rules; neutral shared hope; restrained green overlap; no causal arrows."
+      },
+      "case_provenance": [
+        {
+          "title": "Two meanings of more trust",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented parent and adolescent, dialogue, preferred descriptions, disagreement, and continuation. Figure portrays desired differences, not observations or measured improvement."
+        },
+        {
+          "title": "A better future with assistance still present",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented adult with disability, spouse, service goal, poorly fitting question, revision, and continuing resource limitation. Not a composite or patient history."
+        },
+        {
+          "title": "Getting through the exam, without passing it",
+          "type": "published-clinical-vignette",
+          "source_id": "zatloukal-2025",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "note": "Paraphrase and adaptation of case example 2, The Exam. The paper identifies its examples as real therapeutic practice and reports seeking clients' consent. Reported changes and exam non-passage are retained. No invented name, dialogue, partner account, retake result, or causal effect is added."
+        },
+        {
+          "title": "Family meals during grief and a pupil's quiet break",
+          "type": "fictional-brief-examples",
+          "note": "Two original invented contrasts, showing meaningful participation without eliminating sadness and a preferred response involving the school as well as the pupil."
+        }
+      ],
+      "sources": [
+        {
+          "id": "sfbta-manual-2025",
+          "title": "Solution Focused Therapy Treatment Manual for Working with Individuals, third edition",
+          "authors": "Solution Focused Brief Therapy Association Research Committee",
+          "year": 2025,
+          "url": "https://www.sfbta.org/Solution%20Focused%20Therapy%20Treatment%20Manual%20for%20Working%20with%20Individuals%20-3rd%20Edition-%20final.pdf",
+          "supports": "Solution-focused lineage; miracle and preferred-future conversations; client-generated, detailed, recognizable descriptions. Practice guidance rather than an isolated efficacy claim.",
+          "access": "Official association primary PDF accessed; co-constructing the miracle or preferred future section consulted, printed pages 18–21."
+        },
+        {
+          "id": "ucl-basic-systemic",
+          "title": "Basic systemic competences",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_basic_systemic_competences.pdf",
+          "supports": "Overlapping participant goals, collaborative formulation of goals, and revision as new information emerges.",
+          "access": "Primary PDF accessed; engagement and appropriate-goals sections on printed page 4 consulted."
+        },
+        {
+          "id": "zatloukal-2025",
+          "title": "Varieties of Work with Preferred Futures in Solution-Focused Brief Therapy",
+          "authors": "Leoš Zatloukal",
+          "year": 2025,
+          "first_published_online": "2024-12-20",
+          "doi": "10.1007/s10591-024-09725-9",
+          "url": "https://link.springer.com/article/10.1007/s10591-024-09725-9",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "supports": "Distinctions among preferred-future conversational forms, signs versus steps, real-practice provenance, and case example 2. Illustrative clinical reasoning and reported observations, not a controlled effectiveness study.",
+          "access": "Primary open-access article accessed; relevant conceptual sections, complete exam vignette, case provenance statement, bibliography, issue date, and license verified."
+        },
+        {
+          "id": "nice-ph50",
+          "title": "Domestic violence and abuse: multi-agency working (PH50)",
+          "authors": "National Institute for Health and Care Excellence",
+          "year": 2014,
+          "url": "https://www.nice.org.uk/guidance/ph50/chapter/Recommendations",
+          "supports": "Recommendation 6: private, one-to-one enquiry in a safe environment.",
+          "access": "Official guideline wording verified through indexed NICE text. Direct fetch of the official PDF returned HTTP 403; no claim of a successful direct fetch."
+        }
+      ]
+    },
+    {
+      "id": "change-one-part-of-the-interaction",
+      "title": "Change One Part of the Interaction",
+      "domain": "Systemic therapy",
+      "short_description": "Explore an agreed change in a response, role, boundary, or arrangement, making its purpose and limits clear while leaving other people's responses open.",
+      "status": "draft",
+      "use_when": [
+        "A familiar interaction is understood but insight has not changed what happens next.",
+        "Participants want to explore a specific alternative that fits a wanted difference.",
+        "A proposed change in roles or boundaries needs practical support to become usable.",
+        "A manageable rehearsal could clarify what a proposed response actually involves."
+      ],
+      "goals": [
+        "Identify a specific, meaningful contribution or arrangement people can choose to change.",
+        "Establish understanding, willingness, necessary support, and room to stop or revise.",
+        "Try the alternative without assuming control over another person's response or durable clinical improvement."
+      ],
+      "mechanisms": [
+        "A changed contribution alters part of what others encounter and can create an opportunity for a different exchange; this is a clinical rationale, not a demonstrated isolated treatment effect.",
+        "Rehearsal can make a proposed skill or response concrete, while practical arrangements determine whether participants can use it outside the session."
+      ],
+      "prerequisites": [
+        "Enough understanding of the interaction and wanted difference to select a meaningful alternative.",
+        "Voluntary participation where another person's involvement is required, accessible communication, and a credible way to stop.",
+        "Attention to safety, authority, required assistance, time, resources, and the distribution of responsibility."
+      ],
+      "not_ideal_when": [
+        "A task would expose someone to coercion, retaliation, or unsafe joint disclosure.",
+        "Immediate protection, medical needs, or material obstacles require priority.",
+        "The change would remove necessary assistance or place more responsibility on someone already overburdened."
+      ],
+      "tags": [
+        "systemic-therapy",
+        "interaction",
+        "relational-change",
+        "enactment",
+        "collaborative-experiment"
+      ],
+      "related_patterns": ["map-the-loop", "describe-the-preferred-future", "learn-from-feedback"],
+      "example_user_queries": [
+        "We understand our argument, but we still do the same thing when it starts.",
+        "I offer advice to help, and the conversation gets worse. Could I try a different reply?",
+        "How can we change one part of an exchange without expecting everything to be solved?",
+        "We agreed on a boundary, but nobody arranged the support needed to make it work.",
+        "People say I should speak for myself, but the appointment moves on before I can answer.",
+        "I want to try something different without promising how the other person will respond.",
+        "Could we rehearse the conversation before trying it at home?",
+        "The therapist's task feels like another demand, and I need to be able to say no.",
+        "We keep passing messages through another relative and want a clearer arrangement.",
+        "I am willing to make a change, but I already carry most of the work."
+      ],
+      "visual_decision": {
+        "type": "sequence-comparison",
+        "reason": "The fictional opening is held constant while a familiar reply is compared with an agreed alternative. The next response to the variation is explicitly left open, preventing a prediction of successful change.",
+        "file": "systemic-therapy/interaction-changed-reply.svg",
+        "compact_file": "systemic-therapy/interaction-changed-reply-mobile.svg",
+        "generator": "scripts/systemic-interaction-visuals.mjs",
+        "style": "Fixed-white light editorial; regular Helvetica Neue; fine sequence arrows; neutral shared opening; green only on the changed reply. Arrows mean response order, not proven causation."
+      },
+      "case_provenance": [
+        {
+          "title": "Before the first piece of advice",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented couple, occupational circumstances, rehearsal, and mixed continuation. The figure compares a familiar sequence and proposed reply, not measured outcomes."
+        },
+        {
+          "title": "When a new boundary has no support behind it",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented adult using a communication device, aunt, service review, unsuccessful initial change, revised arrangement, and incomplete continuation. Not a composite or patient history."
+        },
+        {
+          "title": "Rehearsing a request during a computer game",
+          "type": "published-clinical-vignette",
+          "source_id": "zatloukal-2025",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "note": "Paraphrase and adaptation of case examples 1, 8, and 9. The paper describes real therapeutic practice and reports seeking consent. Distinguishes the author's interpretation, reported rehearsal and home practice, and limitations. No invented name, dialogue, family outcome, or follow-up is added."
+        },
+        {
+          "title": "A shared appointment update and a pause with continuation",
+          "type": "fictional-brief-examples",
+          "note": "Two original invented contrasts: information-sharing arrangements among adult siblings and an agreed pause in a couple conversation."
+        }
+      ],
+      "sources": [
+        {
+          "id": "ucl-specific-systemic",
+          "title": "Specific systemic techniques",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_specific_systemic_techniques.pdf",
+          "supports": "Manageable in-session enactments, reflection on difficulty, and experimenting with alternative interactions. Also planning selected alternatives and reviewing outcomes.",
+          "access": "Primary PDF accessed; resolving problems and enactment sections on pages 3–4 consulted."
+        },
+        {
+          "id": "sfbta-manual-2025",
+          "title": "Solution Focused Therapy Treatment Manual for Working with Individuals, third edition",
+          "authors": "Solution Focused Brief Therapy Association Research Committee",
+          "year": 2025,
+          "url": "https://www.sfbta.org/Solution%20Focused%20Therapy%20Treatment%20Manual%20for%20Working%20with%20Individuals%20-3rd%20Edition-%20final.pdf",
+          "supports": "Historical MRI emphasis on attempted solutions and therapeutic tasks, distinguished from later solution-focused solution development.",
+          "access": "Official association primary PDF accessed; origins and development section on printed pages 6–7 consulted."
+        },
+        {
+          "id": "minuchin-fishman-1981",
+          "title": "Family Therapy Techniques, chapter 7: Enactment",
+          "authors": "Salvador Minuchin and H. Charles Fishman",
+          "year": 1981,
+          "url": "https://www.jstor.org/stable/j.ctvjnrtsx.9",
+          "consulted_copy": "https://www.jstor.org/stable/j.ctvjnrtsx",
+          "supports": "Historical place of enactment and the distinction between interaction in the room and accounts of interaction. No clinical case or treatment effect is borrowed.",
+          "access": "Harvard University Press book record, contents, chapter pages 78–97, and opening excerpt available in the JSTOR book listing verified. Does not claim full chapter access."
+        },
+        {
+          "id": "zatloukal-2025",
+          "title": "Varieties of Work with Preferred Futures in Solution-Focused Brief Therapy",
+          "authors": "Leoš Zatloukal",
+          "year": 2025,
+          "first_published_online": "2024-12-20",
+          "doi": "10.1007/s10591-024-09725-9",
+          "url": "https://link.springer.com/article/10.1007/s10591-024-09725-9",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "supports": "Published clinical practice excerpt showing skill clarification and agreed parent-child rehearsal, with reported continuation of practice. Not controlled evidence that rehearsal reduces family conflict.",
+          "access": "Primary open-access article accessed; case examples 1, 8, and 9, provenance statement, bibliographic details, and license verified."
+        },
+        {
+          "id": "nice-ph50",
+          "title": "Domestic violence and abuse: multi-agency working (PH50)",
+          "authors": "National Institute for Health and Care Excellence",
+          "year": 2014,
+          "url": "https://www.nice.org.uk/guidance/ph50/chapter/Recommendations",
+          "supports": "Recommendation 6: private, one-to-one enquiry in a safe environment.",
+          "access": "Official primary guideline wording verified through indexed search."
+        }
+      ]
+    },
+    {
+      "id": "learn-from-feedback",
+      "title": "Learn from Feedback",
+      "domain": "Systemic therapy",
+      "short_description": "Examine what the work is doing for different people, make room for correction, and use that information to reconsider the next decision.",
+      "status": "draft",
+      "use_when": [
+        "A change appears helpful by one measure but participants describe different effects.",
+        "Progress has stalled or the therapeutic approach may not fit.",
+        "Feedback forms look positive while access, attendance, or participation suggests a need for inquiry.",
+        "A client's account challenges the therapist's interpretation of what happened or helped."
+      ],
+      "goals": [
+        "Compare hoped-for differences with participants' actual experiences without flattening disagreement.",
+        "Examine the therapist's approach and the conditions under which feedback is obtained.",
+        "Use the information to continue, revise, stop, end, or seek another form of help, while acknowledging uncertainty."
+      ],
+      "mechanisms": [
+        "Including accounts of effects can expose missing costs, excluded priorities, and professional assumptions; this is a clinical rationale, not evidence that every feedback procedure improves outcomes.",
+        "Responding visibly to feedback can make correction consequential for the next decision; measures and conversational invitations have different purposes and evidence bases."
+      ],
+      "prerequisites": [
+        "A credible opportunity to offer unwelcome or mixed feedback without punishment or pressure to reassure the therapist.",
+        "Accessible communication, appropriate ways for children to contribute, and clarity about use and sharing of information.",
+        "Attention to privacy, safety, resources, service constraints, and the therapist's willingness to reconsider their account."
+      ],
+      "not_ideal_when": [
+        "Urgent protection or medical concerns require action before further ratings or review.",
+        "Joint feedback would expose someone to coercion or retaliation.",
+        "The procedure collects information without capacity or willingness to respond, or places excessive demands on participants."
+      ],
+      "tags": [
+        "systemic-therapy",
+        "feedback",
+        "therapeutic-alliance",
+        "outcome-monitoring",
+        "collaborative-inquiry"
+      ],
+      "related_patterns": [
+        "change-one-part-of-the-interaction",
+        "describe-the-preferred-future",
+        "open-another-perspective"
+      ],
+      "example_user_queries": [
+        "We argue less now, but important concerns never get discussed.",
+        "The new arrangement helps one of us and makes more work for someone else.",
+        "My therapist asks for feedback, but nothing changes when I give it.",
+        "Our family forms look positive, but they do not reflect everyone's experience.",
+        "I say things are going well because I do not want to disappoint the therapist.",
+        "I appreciate the help but need to say that the appointment time costs me paid work.",
+        "How can a child explain what a session was like without filling in an adult questionnaire?",
+        "The therapist's explanation of my improvement does not fit what I experienced.",
+        "A difficult session mattered to me even though I would not call it enjoyable.",
+        "How do we decide whether to continue, change the approach, or find other help?"
+      ],
+      "visual_decision": {
+        "type": "comparison",
+        "reason": "One fictional observation, fewer arguments, is retained alongside two different experiences. A revised review question is highlighted without averaging accounts or drawing measured clinical improvement.",
+        "file": "systemic-therapy/feedback-different-effects.svg",
+        "compact_file": "systemic-therapy/feedback-different-effects-mobile.svg",
+        "generator": "scripts/systemic-feedback-visuals.mjs",
+        "style": "Fixed-white light editorial; regular Helvetica Neue; fine comparison rules; neutral shared observation; restrained green review question; no causal arrows."
+      },
+      "case_provenance": [
+        {
+          "title": "Less arguing, but less opportunity to finish",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented couple, dialogue, agreed pauses, mixed experiences, therapist correction, and incomplete continuation. Figure shows qualitative invented accounts, not measured effects."
+        },
+        {
+          "title": "The positive forms that did not mean agreement",
+          "type": "fictional-teaching-scenario",
+          "note": "Original invented family, interpreter and form-access mismatch, work and scheduling pressures, child contribution, revision, and continuation. Does not infer preferences or deference from cultural background."
+        },
+        {
+          "title": "A client's correction of the therapist's explanation",
+          "type": "published-individual-therapy-case-study",
+          "source_id": "helleseth-2023",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "note": "Paraphrase and adaptation of the Sonja case, particularly later member checking. Pseudonym, informed written consent, client commentary, mixed experiences, author involvement in system development, and limitations are documented in the paper. No invented dialogue, later therapy repair, or additional outcome is supplied. The source is individual therapy with an emotion-focused clinician, not a systemic-family treatment trial."
+        },
+        {
+          "title": "Caregiver sleep and a teenager's disagreement",
+          "type": "fictional-brief-examples",
+          "note": "Two original invented contrasts: a coordination gain with an increased burden and a disliked session with valued room to disagree."
+        }
+      ],
+      "sources": [
+        {
+          "id": "ucl-basic-systemic",
+          "title": "Basic systemic competences",
+          "authors": "UCL systemic psychological therapies competence framework",
+          "url": "https://www.ucl.ac.uk/brain-sciences/sites/brain_sciences/files/migrated-files/Systemic_basic_systemic_competences.pdf",
+          "supports": "Revising goals, therapist reflexivity, using outcome measures and discussing them with clients, and reviewing endings.",
+          "access": "Primary PDF accessed; relevant sections on printed pages 4–6 consulted."
+        },
+        {
+          "id": "rober-van-tricht-sundet-2021",
+          "title": "One step up, but not there yet: using client feedback to optimise the therapeutic alliance in family therapy",
+          "authors": "Peter Rober, Karine Van Tricht, and Rolf Sundet",
+          "year": 2021,
+          "first_published_online": "2020-02-11",
+          "doi": "10.1111/1467-6427.12292",
+          "url": "https://doi.org/10.1111/1467-6427.12292",
+          "consulted_copy": "https://mareld.se/wp-content/uploads/2023/02/Rober.van-Tricht-Sundet-2020.pdf",
+          "supports": "Dialogical family feedback as a conversational tool, mixed responses and child participation; explicit distinction from quantitative outcome measurement. No case or tool diagram is reproduced.",
+          "access": "Accessible primary-paper PDF consulted, especially Developing a feedback culture and Dialogical feedback instruments as conversational tools. Publisher bibliographic record verified through indexed search; direct publisher fetch returned HTTP 403."
+        },
+        {
+          "id": "anker-duncan-sparks-2009",
+          "title": "Using Client Feedback to Improve Couple Therapy Outcomes: A Randomized Clinical Trial in a Naturalistic Setting",
+          "authors": "Morten G. Anker, Barry L. Duncan, and Jacqueline A. Sparks",
+          "year": 2009,
+          "doi": "10.1037/a0016062",
+          "url": "https://digitalcommons.uri.edu/hdf_facpubs/220/",
+          "supports": "This trial reported better outcomes with a structured feedback approach than usual care. Does not establish all feedback procedures as effective.",
+          "access": "Primary research abstract and bibliography available in an author institution's repository verified; full trial methods not claimed as consulted."
+        },
+        {
+          "id": "tilden-2020",
+          "title": "Feedback in Couple and Family Therapy: A Randomized Clinical Trial",
+          "authors": "Terje Tilden and colleagues",
+          "year": 2020,
+          "first_published_online": "2019-09-09",
+          "doi": "10.1111/famp.12485",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31497883/",
+          "publisher_url": "https://onlinelibrary.wiley.com/doi/10.1111/famp.12485",
+          "supports": "This randomized STIC monitoring trial found no significant outcome difference versus usual care. It is not a head-to-head comparison with the Anker study's feedback system.",
+          "access": "Primary research abstract and bibliographic details verified through PubMed and publisher record."
+        },
+        {
+          "id": "helleseth-2023",
+          "title": "Case report: A dual case study of how clinical feedback can be a communication aide and influence therapeutic work",
+          "authors": "Marianne Magnesdotter Helleseth, Andrew Athan McAleavey, and Christian Moltu",
+          "year": 2023,
+          "doi": "10.3389/fpsyg.2023.1199431",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1199431/full",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "supports": "Documented individual-therapy case, later client correction of the therapist's explanation, valued feedback alongside an overwhelming intervention and continuing difficulties; limitations and author involvement in system development.",
+          "access": "Primary full open-access article accessed; methods, member-checking section, limitations, ethics, conflict-of-interest disclosure, bibliographic details, and license verified. Does not claim that later member checking produced a new therapy repair."
+        },
+        {
+          "id": "nice-ph50",
+          "title": "Domestic violence and abuse: multi-agency working (PH50)",
+          "authors": "National Institute for Health and Care Excellence",
+          "year": 2014,
+          "url": "https://www.nice.org.uk/guidance/ph50/chapter/Recommendations",
+          "supports": "Recommendation 6: private, one-to-one enquiry in a safe environment.",
+          "access": "Official primary guideline wording verified through indexed search."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "pattern": "Differentiate Levels of Importance",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographs and composed new controlled SVG examples. No new photograph was generated for this article.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-levels-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-phone-stage.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "a4f4c943362e207fb44c296a54ccaa122506945512dd796a0b4ed59e5a10e9a7"
+    }
+  ],
+  "comparisonPolicy": "Course changes only two lead font sizes 30 to 64 and two reference sizes 30 to 22; three practical lines stay 30. Booking changes only three second-card font-weight/fill pairs, preserving every size and value. Day-pass condition/slogan change only font-weight/fill. All unrelated copy, fonts, weights in the scale example, colors, anchors, baselines, imagery/crops, paper/phone and lighting remain identical.",
+  "specifiedColorCheck": {
+    "muted": "#56665c",
+    "solidTermsPanel": "#f4f1e8",
+    "ratio": 5.388345756706158,
+    "scope": "Specified solid-color calculation only; no working-interface accessibility or print measurement is claimed."
+  }
+}

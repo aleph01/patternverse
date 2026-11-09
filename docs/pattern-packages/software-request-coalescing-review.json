@@ -1,0 +1,213 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "request-coalescing",
+  "title": "Request Coalescing",
+  "aliases": ["Singleflight", "Request Collapsing"],
+  "primary_collection": "software-performance-scalability",
+  "primary_collection_title": "Performance and Scalability",
+  "body_word_count": 1474,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Four official primary sources: Go singleflight documents duplicate-call suppression, namespace scope, shared results/errors and Forget; Varnish describes busy objects/waiting lists as request coalescing; Fastly documents request collapsing with origin-response eligibility and private/uncacheable handling; Python documents default/eager scheduling, shielding, strong task references, cancellation and gathering. No existing exact canonical article found. Singleflight and Request Collapsing are searchable names with implementation-specific scope qualified. One primary home Performance and Scalability because the mechanism avoids duplicate overlapping execution. Memoization, Cache-Aside, Batching and Timeout remain distinct existing neighbors. Complete operation/authorization identity, local versus fleet scope, independent waiter/load lifetime, failed-flight retirement, active-work capacity, mutable results, stale cache fills and non-equivalent commands are explicit.",
+    "runnable_example": {
+      "status": "passed",
+      "output": ["B cancelled its wait", "shared 1200 1200 loads 1", "later 1200 loads 2"],
+      "same_key_waiters": 20,
+      "independent_key_variants": 5,
+      "shared_failure_waiters": 12,
+      "checks": [
+        "same-key duplicate suppression under real coroutine overlap",
+        "tenant/resource/currency/version separation and independent progress",
+        "later call executes anew without result cache",
+        "independent coordinator scopes do not share",
+        "shared ordinary failure and successful retry",
+        "initiating-waiter cancellation isolation",
+        "caller timeout isolation",
+        "all-waiters-left strong task retention and failure observation",
+        "underlying cancellation reaches waiters and permits retry",
+        "completed-flight bypass and stale cleanup identity",
+        "shutdown rejects new work and drains flights",
+        "cancelled shutdown wait does not cancel owned work",
+        "zero/None results and unhashable keys",
+        "no remaining background tasks"
+      ]
+    },
+    "content": "All1304 entities validate; published-only compilation1157 without diagnostics. Eight exact H2s, one complete Python3.11+ program, two figures/four responsive variants, four existing related links, ten distinct recommendation queries and no practice/worksheet. One new canonical article, no duplicate or future stub.",
+    "integration_tests": "Request Coalescing3, Batching3, Cache-Aside3 and GoF24 pass. Four global graphic checks pass; the pre-existing coverage failure remains missing access-over-ownership. Total37 passed,1 unrelated failure. New checks verify title/two aliases/search, Software Engineering verse, single primary membership, all23GoF members, four related IDs, exact selectable highlighted code, accessible alts/captions/mobile sources/dimensions, metadata hash and queries. Earlier integration tests unchanged.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-code validator, new integration test, authoring JSON/documentation, registry, manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-performance-scalability.md"],
+      "other_existing_content_unchanged": 1302,
+      "new_content": ["content/patterns/request-coalescing.md"],
+      "one_primary_home_performance_and_scalability": true,
+      "five_existing_collection_members_preserved_in_order": true,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 74,
+      "prior_graphics_unchanged": 486,
+      "all_prior_dimensions_unchanged": 1728,
+      "new_dimensions": {
+        "software-engineering/request-coalescing-sharing.svg": {
+          "width": 720,
+          "height": 816
+        },
+        "software-engineering/request-coalescing-sharing-mobile.svg": {
+          "width": 360,
+          "height": 920
+        },
+        "software-engineering/request-coalescing-lifecycle.svg": {
+          "width": 720,
+          "height": 1008
+        },
+        "software-engineering/request-coalescing-lifecycle-mobile.svg": {
+          "width": 360,
+          "height": 1072
+        }
+      },
+      "previous_integration_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "staged_sources_and_assets_match": true
+    },
+    "illustrations": "Two editable native SVG figures with separately composed phone versions. Sharing diagram: A/B/C use complete keyK tenant-A/SKU-7/USD/priceVersion3, join flightK/task1, start one price loader and share1200USD cents. Arrows explicitly distinguish joining, starting once and returning an outcome; scope and separate-key behavior are labeled. Lifecycle diagram matches actual program: three callers join flight1, B cancels only its wait, A/C receive1200cents, completion retires flight1, later call starts flight2 and raises loads1→2. Service work and separate caller waits are explicit; no completed-price cache or automatic last-waiter cancellation implied. Fixed white, regular Helvetica Neue/Helvetica/Arial400, exact approved palette, square boundaries, generous spacing and restrained strokes. Four variants have zero measured outside/overlapping labels or outside rectangles; concept bounds include stroke within96×96. Native/embedded desktop/phone figures and captions, article tops, code viewport and gallery visually inspected.",
+    "native_figure_measurements": [
+      {
+        "path": "/assets/software-engineering/request-coalescing-sharing.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 816
+      },
+      {
+        "path": "/assets/software-engineering/request-coalescing-sharing-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 920
+      },
+      {
+        "path": "/assets/software-engineering/request-coalescing-lifecycle.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 1008
+      },
+      {
+        "path": "/assets/software-engineering/request-coalescing-lifecycle-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1072
+      }
+    ],
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 5,
+          "y": 9,
+          "width": 86,
+          "height": 78
+        },
+        {
+          "x": 27,
+          "y": 19,
+          "width": 46,
+          "height": 58
+        }
+      ]
+    },
+    "production_build": "The unchanged repository public build command exits zero and Public web build checks passed in an isolated source snapshot. Temporary NODE_OPTIONS filesystem-copy helper uses macOS native copy-on-write clones only for this task generated prerendered pages/dependencies/data copied into its own navigation-cache and finished build, with every source/destination SHA256 checked. Other copy calls forward unchanged; background asset clones also use hashes. No dependency, renderer or repository build-script edits. No failed build attempts in this task. Private environment excluded and PUBLIC_DROPBOX_APP_KEY empty. Staged article, collection, metadata/docs, generator/validator/test, registry, manifest and four assets match source. Only own redundant generated output removed after browser success; source, earlier previews and finished preview remain.",
+    "disk_space_management": {
+      "status": "passed",
+      "successful_command": "node scripts/build-public-web.mjs",
+      "successful_exit_code": 0,
+      "failed_attempts": 0,
+      "background_hash_verified_compaction_passes": 46,
+      "native_copy_results": [
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 5378,
+          "logical_bytes": 526006023,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 2476,
+          "logical_bytes": 49426158,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/build",
+          "files": 5378,
+          "logical_bytes": 526006023,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/build",
+          "files": 2476,
+          "logical_bytes": 49426158,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        }
+      ],
+      "temporary_runtime_helper": ".local/software-request-coalescing/clone-generated-assets.mjs",
+      "native_helper": ".local/software-request-coalescing/clone-asset-tree.py",
+      "redundant_generated_output_removed_after_browser_success": [
+        ".local/software-request-coalescing/build-workspace/apps/web/.svelte-kit/output"
+      ],
+      "finished_preview_source_and_earlier_previews_preserved": true
+    },
+    "browser": "Actual production article checked at1440,390,320CSS pixels: exact eight H2s, two figures/allfour responsive assets loaded, exact code text/selection, multiple syntax colors, focusable code with keyboard horizontal scrolling at320, no page overflow, allfour related routes200. Performance and Scalability route and Software Engineering gallery navigate to sixth member on second page with exact reviewed concept paths and primary breadcrumb. Native/embedded desktop and phone figures/captions, article tops, code viewport and gallery visually inspected. No page/console errors.",
+    "browser_measurements": {
+      "records": 8,
+      "widths": [1440, 390, 320],
+      "related_routes": 4,
+      "errors": []
+    },
+    "built_assets": {
+      "build_root": ".local/software-request-coalescing/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 41816
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not accept it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other graphic checks pass."
+    }
+  ],
+  "example_limits": "New canonical request-coalescing article, with Singleflight and Request Collapsing as qualified searchable names. No existing exact article found; existing cache-aside, memoization, batching and timeout IDs/homes reused as related links. Single primary home Performance and Scalability as sixth member. Original price-reader scenario and complete Python3.11+ real asyncio implementation, using one Coalescer instance on one event loop and default deferred task scheduling. Trusted immutable hashable keys encode operation identity within a loader namespace; demo tuple tenant-A/SKU-7/USD/version3. Immutable result1200USD cents. A starts event-gated load1; B/C join; B cancels its wait while shield keeps load1 alive; A/C return1200 withloads1; later same-key call performs load2 because completed results are not cached. Registry retains strong task references, observes ordinary errors even if no waiter remains, identity-guards cleanup, bypasses done entries pending callbacks, and propagates load failures/cancellation to remaining waits. close rejects new get calls and drains shielded owned tasks. No network/cache/auth implementation, explicit capacity limits, loader deadline, all-waiters-left cancellation, cross-thread/loop or distributed coordination. Loader must not recursively await its own flight or rely on hidden request-specific context. A stuck loader can block drain. HTTP proxy eligibility context is explanatory, not executed. Original program/scenarios/cancellation experiment and native diagrams are teaching material.",
+  "preview": "http://127.0.0.1:43059/pattern/request-coalescing",
+  "preview_mode": "isolated-static-production-build-with-byte-verified-native-copies",
+  "evidence_directory": ".local/software-request-coalescing",
+  "browser_check_script": ".local/software-request-coalescing/check-browser.mjs",
+  "build_log": ".local/software-request-coalescing/public-build-isolated.log",
+  "branch": "codex/software-request-coalescing",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

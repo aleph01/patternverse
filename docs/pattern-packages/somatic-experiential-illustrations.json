@@ -1,0 +1,88 @@
+{
+  "status": "complete",
+  "reviewed": "2026-10-28",
+  "article": "give-experience-a-form",
+  "scope": {
+    "illustrations": 1,
+    "responsive_assets": 2,
+    "photographs": 1,
+    "interactive_practices": false
+  },
+  "style": {
+    "direction": "Approved Architecture and Filmmaking light editorial drawings",
+    "surface": "Fixed white in light and dark browser appearances",
+    "typography": "Helvetica Neue regular, with Helvetica and Arial fallbacks",
+    "ink": "#252c28",
+    "context": "#f1f2ef",
+    "construction": "#a6aca3",
+    "accent": "#00855b",
+    "light_accent": "#edf5f0",
+    "human_symbols": "Filled seated silhouettes and view-specific overhead symbols reused from architecture-figure-symbols.mjs"
+  },
+  "generator": "docs/pattern-packages/render-experiential-forms.mjs",
+  "provenance": "The five-form comparison is an original editable SVG composition with fictional examples. The sandplay photograph is reproduced unchanged from Akimoto and colleagues (2021), Figure 2, under CC BY 4.0. Superseded scene SVGs remain as unused source assets.",
+  "illustrations": [
+    {
+      "id": "five-forms",
+      "placement": "How the experience unfolds, before the five subpatterns",
+      "purpose": "Distinguish five related forms without prescribing a sequence or assigning universal meaning to a posture or gesture.",
+      "desktop": {
+        "asset": "somatic-experiential/give-experience-a-form.svg",
+        "width": 720,
+        "height": 820
+      },
+      "phone": {
+        "asset": "somatic-experiential/give-experience-a-form-mobile.svg",
+        "width": 360,
+        "height": 1220
+      }
+    }
+  ],
+  "verification": {
+    "all_four_assets_visually_reviewed": true,
+    "svg_text_out_of_bounds": 0,
+    "overlapping_svg_text_labels": 0,
+    "all_svg_text_regular_weight": true,
+    "actual_markdown_renderer_used": true,
+    "article_widths": [1440, 393],
+    "appearances": ["light", "dark"],
+    "correct_responsive_assets": true,
+    "article_horizontal_overflow": false,
+    "article_figure_and_caption_review": "Desktop and phone figures rendered with the existing article renderer and article stylesheet; final light and dark captures inspected.",
+    "content_validation": "passed",
+    "formatting": "passed",
+    "evidence_directory": "/private/tmp/patternverse-experiential-visual-review",
+    "limitations": "Drawings illustrate fictional examples; no reader study or clinical outcome is claimed. Phone checks use browser viewport emulation.",
+    "review_scope": "The SVG geometry and browser checks below describe the original two-drawing review. The later photo replacement is tracked separately in photo_update_verification."
+  },
+  "photographs": [
+    {
+      "id": "sandplay-photograph",
+      "placement": "Sandtray and Sandplay implementation, before the fictional conversational example",
+      "purpose": "Make the sand, miniatures, and constructed landscape recognizable without implying that the photograph depicts the fictional example.",
+      "url": "https://www.frontiersin.org/files/Articles/723211/xml-images/fpsyg-12-723211-g002.webp",
+      "source": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.723211/full",
+      "figure": 2,
+      "credit": "© 2021 Akimoto, Tanaka, Ito, Kubota, and Seiyama",
+      "publication": "Inter-Brain Synchronization During Sandplay Therapy: Individual Analyses. Frontiers in Psychology 12:723211.",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "modifications": "None",
+      "delivery": "Bundled local content asset; publisher URL retained for provenance.",
+      "replaces": [
+        "somatic-experiential/symbolic-scene.svg",
+        "somatic-experiential/symbolic-scene-mobile.svg"
+      ],
+      "asset": "somatic-experiential/sandplay-scene-akimoto-2021.webp",
+      "width": 1421,
+      "height": 891
+    }
+  ],
+  "photo_update_verification": {
+    "license_checked": "2026-10-28",
+    "caption_distinguishes_fictional_example": true,
+    "source_author_copyright_and_license_links_present": true,
+    "content_validation": "passed",
+    "rendered_markdown": "Actual article renderer verified the bundled photograph URL, 1421 × 891 dimensions, photo figure, caption, attribution and license links. Local image decoded and visually inspected. Chat preview refresh requested; its display could not be inspected."
+  }
+}

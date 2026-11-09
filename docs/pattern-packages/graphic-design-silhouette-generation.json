@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-28",
+  "mode": "built-in image_gen",
+  "transparent_background": true,
+  "fictional": true,
+  "prompts": [
+    {
+      "key": "silhouette_shears",
+      "prompt": "Use case: product-mockup. Asset type: transparent photographic cutout for an editorial graphic design teaching comparison. Primary request: one real-looking pair of traditional hand pruning shears, open, isolated on genuine transparency. Object entire and uncropped, diagonally oriented with steel bypass blades toward upper left and two separate muted sage green handles toward lower right. Handles visibly separated, blades open with a clearly visible negative gap. All components mechanically plausible, no lettering or logo. Front-on three-quarter view close to flat lay, camera nearly perpendicular so the open tool outline is recognizable. Soft even studio light, realistic steel and textured rubber, restrained product photography. No props, no hands, no cast ground, no background, no external drop shadow. Transparent spaces between the blades and handles must remain transparent. Do not generate any typography, panel, comparison or borders."
+    },
+    {
+      "key": "silhouette_maker",
+      "prompt": "Use case: photorealistic-natural. Asset type: transparent photographic cutout for a fictional studio event poster used in a graphic design article. One fictional adult ceramic maker, waist-up with entire head, shoulders and waist visible, turned in a clear right-facing three-quarter profile, looking slightly toward camera so eyes, nose and mouth remain visible. Short curly dark hair, olive work apron over an ivory linen shirt. Relaxed arms down, no tools, no hands near face. Warm natural skin texture and believable soft studio light. Neutral calm expression. Genuine transparent background around the person, no environment, no props, no cast ground shadow. Preserve all curls and clothing edges as natural photographic cutout with clean alpha, no halo. Place subject centered with generous transparent margins, do not crop the head or shoulders. No lettering, brands, watermark, shapes, layout, frame or comparison. This is a fictional person, not a real public figure."
+    }
+  ],
+  "outputs": [
+    {
+      "prompt_key": "silhouette_shears",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-276f5adb-72af-4812-a0c1-e952aa6f7e34.png",
+      "workspace_asset": "content/assets/graphic-design/silhouette-shears-cutout.png",
+      "sha256": "1066e99f3ff8a0ea324c4a53133d56f7c51dfe463ce0de9c3d75523f7db63778",
+      "width": 1536,
+      "height": 1024,
+      "has_alpha": true,
+      "preparation": "Byte-for-byte copy, original retained. No crop, resizing, color correction, raster retouching or alpha cleanup."
+    },
+    {
+      "prompt_key": "silhouette_maker",
+      "generated_path": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-fcb92d9d-234c-41a0-854b-b59699d945b9.png",
+      "workspace_asset": "content/assets/graphic-design/silhouette-maker-cutout.png",
+      "sha256": "d8b027e936e24005754ab7fa86215ea8e8f0e13dbeb24ae369829de0cd9e6d6e",
+      "width": 1145,
+      "height": 1374,
+      "has_alpha": true,
+      "preparation": "Byte-for-byte copy, original retained. No crop, resizing, color correction, raster retouching or alpha cleanup."
+    }
+  ]
+}

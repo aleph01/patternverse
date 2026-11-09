@@ -13,10 +13,10 @@ desktop chat and Pattern Library preview; it does not update the website.
 ## Realization syntax
 
 ```pattern
-!ask worry {
+worry = !ask {
     What are you afraid would happen?
 }
-!ask consequence {
+consequence = !ask {
     ~ Ask what would be worst if {{worry}} happened.
 }
 !show {
@@ -79,11 +79,11 @@ instruction-like content; live-model semantic evaluation remains necessary.
 ## Functional loops: `?loop[max]`
 
 ```pattern
-!ask initial_worry {
+initial_worry = !ask {
     What are you afraid would happen?
 }
 ?loop[10] worry = initial_worry {
-    !ask next_worry {
+    next_worry = !ask {
         ~ Ask what would be worst if {{worry}} happened. Keep it hypothetical.
     }
     -> repeat next_worry
@@ -147,13 +147,13 @@ These snippets assume their referenced bindings were collected earlier; each mak
 one scripted move rather than delegating therapeutic judgment:
 
 ```pattern
-!ask evidence {
+evidence = !ask {
     ~ Ask what evidence the user sees for the thought {{belief}}, without asserting it is true.
 }
-!ask prediction {
+prediction = !ask {
     ~ Ask what the user predicts would happen if they tried {{action}}.
 }
-!ask fit {
+fit = !ask {
     ~ Ask whether the user's phrase {{felt_phrase}} still fits their felt sense. Do not interpret it.
 }
 !show {

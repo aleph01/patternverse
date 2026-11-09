@@ -1,0 +1,56 @@
+[
+  {
+    "id": "limited-experience",
+    "description": "I feel boring because I have not traveled much.",
+    "acceptable": ["S0041-E02"],
+    "forbidden": ["S0041"],
+    "maxScope": "local"
+  },
+  {
+    "id": "slightly-messy-home",
+    "description": "My housekeeping is slightly messy and I feel a little embarrassed about it. I am not saying I am an inadequate person.",
+    "acceptable": ["S0050-E02"],
+    "forbidden": ["S0050", "S0050-E04"],
+    "maxScope": "local"
+  },
+  {
+    "id": "parents-manners",
+    "description": "I feel embarrassed by my parents' manners at the table. I do not feel guilty about having that embarrassment.",
+    "acceptable": ["S0008-E02"],
+    "forbidden": ["S0008-E06"],
+    "maxScope": "local"
+  },
+  {
+    "id": "shame-about-parents-embarrassment",
+    "description": "I feel like a bad child for being embarrassed by my parents. It is my own embarrassment that I am judging.",
+    "acceptable": ["S0008-E06"],
+    "forbidden": ["S0008-E02", "S0008-E03", "S0008-E04", "S0008-E05"],
+    "maxScope": "local"
+  },
+  {
+    "id": "visible-effort",
+    "description": "I feel embarrassed when other people see how hard I am trying. I think of myself as a try-hard.",
+    "acceptable": ["S0048", "S0048-E02"],
+    "forbidden": [],
+    "maxScope": "local"
+  },
+  {
+    "id": "practical-limitation",
+    "description": "I have not learned to cook yet, so I asked a friend to show me. This is a practical skill gap and I do not feel bad about myself for it.",
+    "acceptable": [],
+    "forbidden": []
+  },
+  {
+    "id": "actual-wrongdoing",
+    "description": "I deliberately lied so that a colleague was blamed for my mistake. I feel guilty about doing that, not about an ordinary need or characteristic.",
+    "acceptable": [],
+    "forbidden": []
+  },
+  {
+    "id": "unspecified-global-feeling",
+    "description": "There is something wrong with me, but I cannot identify any particular aspect or meaning.",
+    "clarification": "",
+    "acceptable": [],
+    "forbidden": []
+  }
+]

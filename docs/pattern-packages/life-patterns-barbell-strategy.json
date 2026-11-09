@@ -1,0 +1,84 @@
+{
+  "format_version": 1,
+  "title": "Life Strategies — Barbell Strategy",
+  "verse": "decision-making",
+  "metadata_mapping": "Canonical frontmatter uses the existing entity schema. Richer recommendation metadata remains in this sidecar; the current search index does not automatically ingest these queries.",
+  "patterns": [
+    {
+      "id": "barbell-strategy",
+      "title": "Barbell Strategy",
+      "domain": "Life strategies and decisions under uncertainty",
+      "short_description": "Protect a dependable base while reserving a bounded share of resources for uncertain opportunities with substantial potential upside.",
+      "collections": ["life-strategies", "decision-making-patterns"],
+      "use_when": [
+        "A promising but uncertain opportunity could threaten resources needed for ordinary life.",
+        "Some essential resources can be kept dependable while a smaller exposure is genuinely bounded.",
+        "An exploratory activity could open valuable opportunities without needing to support the entire arrangement immediately."
+      ],
+      "goals": [
+        "Protect what cannot afford to fail",
+        "Allow exposure to meaningful uncertain upside",
+        "Make limits and shared dependencies explicit"
+      ],
+      "mechanisms": [
+        "Apply different attitudes toward uncertainty to different parts of an arrangement",
+        "Contain the downside of exploratory activity",
+        "Inspect whether costs can spread into protected resources",
+        "Review before increasing exposure"
+      ],
+      "tags": ["life-strategies", "uncertainty", "downside-protection", "experimentation"],
+      "related_patterns": [
+        "prefer-the-smallest-useful-experiment",
+        "separate-reversible-from-irreversible-decisions",
+        "build-a-web-of-goals"
+      ],
+      "difficulty": "Requires a realistic account of resources and obligations",
+      "estimated_practice_time": "About ten minutes to examine an arrangement; execution varies",
+      "not_ideal_when": [
+        "Essential demands already consume all available resources.",
+        "Losses or obligations could spread beyond an enforceable limit.",
+        "A supposedly dependable base depends on the same vulnerable resources as the experiment.",
+        "The decision is indivisible or other people could bear unbounded consequences."
+      ],
+      "example_user_queries": [
+        "I want to explore a new direction without risking everything I rely on.",
+        "How can I try uncertain work while keeping my ordinary life workable?",
+        "My side project is starting to consume the rest it was meant to leave intact.",
+        "What needs to stay protected if this experiment fails?",
+        "I want room for an ambitious creative project alongside dependable work.",
+        "How do I tell whether a small experiment has hidden costs?",
+        "I cannot afford for an untested idea to support me immediately.",
+        "Can I separate essential commitments from a speculative opportunity?",
+        "I keep increasing a project limit whenever it becomes inconvenient.",
+        "The same problem could disrupt both my regular work and my new project.",
+        "How can I choose a limit before I get carried away?",
+        "I want some possibility of a large benefit while keeping failure manageable."
+      ],
+      "practice": {
+        "id": "protect-a-base-and-bound-an-experiment",
+        "estimated_minutes": 10,
+        "format": "Optional individual reflection using the existing Pattern Language renderer",
+        "boundary": "Records the person's assessment of a protected base, an opportunity, exposure limits, shared dependencies, and a next move. It does not verify safety, recommend investments, begin the experiment, or schedule a review."
+      },
+      "visual": {
+        "article_decision": "diagram",
+        "reason": "Separate areas make the protected base and bounded experiment explicit; a boundary prompts inspection of shared costs rather than implying guaranteed isolation. The portrait layout is also supplied as a compact companion so the existing article renderer scales it to the phone width.",
+        "assets": [
+          "content/assets/life-patterns/barbell-strategy.svg",
+          "content/assets/life-patterns/barbell-strategy-mobile.svg"
+        ],
+        "concept_graphic": "A large ink circle and a smaller green circle occupy opposite ends of a gray bar; the size contrast represents a protected base and a bounded exploratory allocation without prescribing a ratio.",
+        "registry": "apps/web/src/lib/illustrations/pattern-graphics.json"
+      },
+      "sources": [
+        {
+          "title": "Donald Geman, Hélyette Geman, and Nassim Nicholas Taleb, Tail Risk Constraints and Maximum Entropy",
+          "url": "https://www.fooledbyrandomness.com/barbell.pdf",
+          "accessed": "2026-10-28",
+          "supports": "The definition of a barbell combining maximal conservatism in one portion with high uncertainty in another, and a financial model under specified constraints. Consulted the author-hosted manuscript, whose publication placeholders are incomplete."
+        }
+      ],
+      "evidence_boundary": "The source concerns financial portfolio construction under model assumptions. The teaching and creative-work cases are original practical analogies. No fixed allocation ratio, guaranteed protection, clinical effect, or financial recommendation is claimed."
+    }
+  ]
+}

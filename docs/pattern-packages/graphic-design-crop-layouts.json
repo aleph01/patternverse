@@ -1,0 +1,144 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Only image-window viewBox changes in each fixed artifact. The same embedded1536×1024 source is fitted uniformly to a fixed frame; crop/frame aspect ratios match exactly. Native copy, font settings, colors, paper and presentation are identical. Source insets show exact dashed-before and solid-after boundaries outside the printed artifacts. No raster editing, stretching, rotation, color correction or new generation.",
+  "examples": [
+    {
+      "name": "crop-handbuilding-action",
+      "source": "meaning-handbuilding-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1420],
+        "stacked": [660, 2480]
+      },
+      "sourceDimensions": [1536, 1024],
+      "frame": [65, 155, 480, 320],
+      "before": [0, 0, 1536, 1024],
+      "after": [400, 130, 1080, 720],
+      "description": "Only the image-window viewBox changes from the full1536×1024 source to x400/y130/1080×720. The same source photograph, fixed480×320 frame, typography, copy, colors, paper and presentation remain identical. Source inset marks before dashed and after solid.",
+      "copy": [
+        ["brand", 65, 104, "YARD / EVENING WORKSHOPS", 20],
+        ["headline", 65, 541, "Clay after work", 48],
+        ["purpose", 65, 595, "Make a small bowl by hand.", 28],
+        ["date", 65, 646, "Wed 18 Nov · 18:30–20:30", 23],
+        ["conditions", 65, 689, "£28 · Clay, tools and firing included", 23],
+        ["action", 65, 736, "yard.example/clay", 23],
+        ["footer", 65, 820, "Illustrative image · No experience needed", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "image-window",
+            "attribute": "viewBox",
+            "value": "0 0 1536 1024"
+          }
+        ],
+        [
+          {
+            "element": "image-window",
+            "attribute": "viewBox",
+            "value": "400 130 1080 720"
+          }
+        ]
+      ],
+      "guide": {
+        "width": 360,
+        "height": 240,
+        "scale": 0.234375,
+        "beforeDash": "8 5",
+        "afterDash": "none"
+      }
+    },
+    {
+      "name": "crop-tableware-edge",
+      "source": "explicit-tableware-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1420],
+        "stacked": [660, 2480]
+      },
+      "sourceDimensions": [1536, 1024],
+      "frame": [105, 145, 400, 400],
+      "before": [128, 0, 1024, 1024],
+      "after": [400, 0, 1024, 1024],
+      "description": "Only the image-window viewBox x coordinate changes128→400. Both windows are1024×1024 at y0. Same square400×400 frame, source photo, product copy, font settings, colors and paper. No zoom, retouching or new image. Source inset marks before dashed and after solid.",
+      "copy": [
+        ["brand", 65, 104, "YARD / TABLEWARE", 20],
+        ["headline", 65, 607, "Cup + saucer", 44],
+        ["purpose", 65, 653, "Sold as a two-piece set.", 25],
+        ["dimensions", 65, 696, "320 ml cup · 14 cm saucer", 23],
+        ["price", 65, 737, "£24 · Stoneware · Warm white", 23],
+        ["action", 65, 778, "yard.example/tableware", 21],
+        ["footer", 65, 826, "Illustrative product image", 18]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "image-window",
+            "attribute": "viewBox",
+            "value": "128 0 1024 1024"
+          }
+        ],
+        [
+          {
+            "element": "image-window",
+            "attribute": "viewBox",
+            "value": "400 0 1024 1024"
+          }
+        ]
+      ],
+      "guide": {
+        "width": 360,
+        "height": 240,
+        "scale": 0.234375,
+        "beforeDash": "8 5",
+        "afterDash": "none"
+      }
+    },
+    {
+      "name": "crop-room-context",
+      "source": "meaning-enclosed-room-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1420],
+        "stacked": [660, 2480]
+      },
+      "sourceDimensions": [1536, 1024],
+      "frame": [65, 155, 480, 320],
+      "before": [200, 100, 960, 640],
+      "after": [0, 0, 1536, 1024],
+      "description": "Only the image-window viewBox changes from x200/y100/960×640 to full1536×1024 source. Same480×320 frame, source photograph, copy, typography, colors, paper and lighting. Widening restores the closed door and more room context; it does not establish acoustic privacy. Source inset marks before dashed and after solid.",
+      "copy": [
+        ["brand", 65, 104, "COMMON / ROOMS", 20],
+        ["headline", 65, 541, "Room for two", 48],
+        ["purpose", 65, 595, "Book an enclosed room.", 28],
+        ["price", 65, 646, "Up to 2 people · £12 per hour", 23],
+        ["hours", 65, 689, "Mon–Fri · 09:00–18:00", 23],
+        ["action", 65, 736, "common.example/rooms", 23],
+        ["footer", 65, 820, "Illustrative image · Check availability", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "image-window",
+            "attribute": "viewBox",
+            "value": "200 100 960 640"
+          }
+        ],
+        [
+          {
+            "element": "image-window",
+            "attribute": "viewBox",
+            "value": "0 0 1536 1024"
+          }
+        ]
+      ],
+      "guide": {
+        "width": 360,
+        "height": 240,
+        "scale": 0.234375,
+        "beforeDash": "8 5",
+        "afterDash": "none"
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "model-view-presenter",
+  "title": "Model-View-Presenter",
+  "aliases": ["MVP", "Model View Presenter"],
+  "primary_collection": "software-presentation-ui-state",
+  "primary_collection_title": "Presentation and UI State",
+  "body_word_count": 1484,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary source notes: Potel’s 1996 Taligent publication, Fowler’s GUI Architectures, Passive View, Supervising Controller, his retirement note for his own former MVP entry, and official Python Protocol documentation. Original framework semantics are distinguished from later Passive View teaching code. MVP and Model View Presenter are aliases; MVC/MVVM and the more precise variant names are not silently merged. The assessment-screen second context follows the binding-versus-explicit-update distinction; there is no second runnable GUI implementation.",
+    "python_examples": {
+      "code_files": ["booking.py", "demo.py"],
+      "stdout": [
+        "Seats left: 3 | True | Ready",
+        "Seats left: 1 | True | Reserved",
+        "Seats left: 1 | True | Not enough seats",
+        "Seats left: 1 | True | Enter 1–3 ASCII digits",
+        "Seats left: 0 | False | Reserved",
+        "Seats left: 0 | False | Not enough seats"
+      ],
+      "verification": "Boundary, independent model guards, exact view outputs, stale click, explicit refresh, frozen screen, and failure checks passed.",
+      "status": "passed"
+    },
+    "content": "1263 entities validate with drafts included. The published-only corpus contains 1116 entities and no diagnostics.",
+    "integration_tests": "The MVP, MVC, and GoF article integration suites pass. The combined focused run reports 34 passed checks and one unrelated global graphic coverage failure across four files. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, validator, integration test, authoring sidecar, concept registry, and authoring documentation. Content remains in the repository’s Markdown format.",
+    "collection": "Reused Presentation and UI State, preserving its MVC member and adding MVP as its second member. No new collection or future-pattern stub was created.",
+    "preservation": {
+      "existing_content_changed": ["content/collections/software-presentation-ui-state.md"],
+      "other_existing_content_unchanged": 1261,
+      "all_23_gof_and_collection_unchanged": true,
+      "prior_software_authoring_unchanged": 28,
+      "prior_graphics_unchanged": 440,
+      "prior_dimensions_unchanged": 1554,
+      "new_dimensions": {
+        "software-engineering/model-view-presenter-roles.svg": {
+          "width": 720,
+          "height": 1024
+        },
+        "software-engineering/model-view-presenter-roles-mobile.svg": {
+          "width": 360,
+          "height": 1184
+        },
+        "software-engineering/model-view-presenter-rejection.svg": {
+          "width": 720,
+          "height": 1008
+        },
+        "software-engineering/model-view-presenter-rejection-mobile.svg": {
+          "width": 360,
+          "height": 1160
+        }
+      },
+      "status": "passed"
+    },
+    "production_build": "The isolated production build succeeds and Public web build checks pass. The ordinary build refused to replace an occupied .public-routes staging directory. An independent source copy under the ignored local evidence directory avoided altering that directory or shared generated output. The copy excludes private environment files and uses an empty PUBLIC_DROPBOX_APP_KEY for its disabled local sync integration; no credentials were copied. Its standard public build script and source renderer are unchanged.",
+    "illustrations": "Two editable native SVG figures, each with an independent phone composition, use the approved fixed white surface, palette, square boundaries, restrained line weights, and regular Helvetica Neue/Helvetica/Arial. Browser measurements find zero label collisions, outside labels, or outside rectangles in all four variants. The actual embedded desktop and phone figures were visually inspected for mechanism accuracy, arrow meanings, labels, contrast, spacing, and captions.",
+    "browser": "The actual production article passes at 1440, 390, and 320 CSS pixels: exact eight H2 sections, loaded responsive SVGs, exact selectable code text, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, and no page overflow. All three related routes return 200. The existing verse redirect opens the filtered library, the collection button opens the two-member gallery, and its MVP card reaches the article with the correct collection breadcrumb. Desktop/phone article tops, code viewport, collection gallery, and both embedded figures at both widths were visually inspected. No browser console errors or page errors were recorded.",
+    "built_assets": {
+      "build_root": ".local/software-model-view-presenter/build-workspace/apps/web/build",
+      "local_file_references": 73,
+      "missing": [],
+      "navigation_data_bytes": 41268
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. The current check reports one error and zero warnings. This file is unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored concept graphic; the other four global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original sequential in-memory reservation form demonstrating the Passive View variant of MVP. The booking model owns positive whole-seat and capacity rules. The presenter accepts one to three ASCII digits, translates expected BookingError failures into feedback, reads remaining seats, and sends one immutable Screen value to a View render contract. RecordingView stores those values without a model dependency or GUI. It deliberately receives a stale click after Reserve is disabled. The second assessment-screen context illustrates the Supervising Controller tradeoff described by Fowler; it is not a full binding implementation. No GUI event wiring, observers, async work, disposal implementation, persistence, cross-process concurrency, authorization, or rollback is supplied. Unexpected failures propagate; rendering failure does not undo a booking.",
+  "preview": "http://127.0.0.1:43013/pattern/model-view-presenter",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-model-view-presenter",
+  "browser_measurements": ".local/software-model-view-presenter/browser-checks.json",
+  "build_log": ".local/software-model-view-presenter/public-build-isolated.log",
+  "branch": "codex/software-model-view-presenter",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request.",
+  "browser_check_script": ".local/software-model-view-presenter/check-browser.mjs"
+}

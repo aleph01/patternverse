@@ -1,0 +1,702 @@
+{
+  "status": "complete",
+  "date": "2026-10-27",
+  "verse": "filmmaking",
+  "articles": 49,
+  "illustrations": 51,
+  "compact_companions": 51,
+  "style": "light-editorial",
+  "background": "#ffffff",
+  "typography": "Helvetica Neue regular; Helvetica and Arial fallbacks",
+  "photographic_image_placements_preserved": 110,
+  "prose_headings_ids_relationships_citations_and_attribution_preserved": true,
+  "guided_practices_added": 0,
+  "approved_design_examples": [
+    "Mirror Gags with Duplicate Sets",
+    "Wild Walls and Removable Sets",
+    "Forced Perspective",
+    "Negative Fill"
+  ],
+  "verification": {
+    "article_rendering_tests": 50,
+    "corpus_validation_entities": 789,
+    "rendered_variants": 102,
+    "contact_sheets_generated": 18,
+    "contact_sheets_visually_reviewed": 18,
+    "appearance": "Fixed white illustration surface, including in dark browser appearance",
+    "layouts": ["desktop", "phone"],
+    "text_bounds_issues": 0,
+    "text_overlap_issues": 0,
+    "article_viewports_css_pixels": [390, 1440],
+    "review_method": "Whole-set SVG rendering, label measurements, manual mechanism and composition review, canonical-source byte comparison and live article layouts.",
+    "public_build": "passed",
+    "built_asset_hashes_match_sources": 102,
+    "local_preview": "http://127.0.0.1:4287/library?verse=commons%3Afilmmaking",
+    "evidence_directory": ".local/film-light-editorial",
+    "illustrations_reproduce_from_sources": 102,
+    "built_article_asset_links_checked": 49,
+    "representative_articles_reviewed": [
+      "film-mirror-gags-with-duplicate-sets",
+      "film-wild-walls-and-removable-sets",
+      "film-negative-fill",
+      "film-background-projection",
+      "film-stop-motion-and-replacement-animation"
+    ],
+    "phone_page_horizontal_overflow": false,
+    "phone_images_loaded_from_compact_sources": true,
+    "temporary_review_pages_removed": true,
+    "browser_checks": [
+      {
+        "article": "film-mirror-gags-with-duplicate-sets",
+        "viewport": 1280,
+        "loaded": true
+      },
+      {
+        "article": "film-negative-fill",
+        "viewport": 390,
+        "page_width": 390,
+        "image_width": 365,
+        "compact_source": true,
+        "loaded": true
+      },
+      {
+        "article": "film-wild-walls-and-removable-sets",
+        "viewport": 390,
+        "page_width": 390,
+        "image_width": 365,
+        "compact_source": true,
+        "loaded": true
+      },
+      {
+        "article": "film-stop-motion-and-replacement-animation",
+        "viewport": 390,
+        "page_width": 390,
+        "image_width": 365,
+        "compact_source": true,
+        "loaded": true
+      },
+      {
+        "article": "film-background-projection",
+        "viewport": 1440,
+        "page_width": 1440,
+        "image_width": 718,
+        "loaded": true
+      },
+      {
+        "article": "film-wild-walls-and-removable-sets",
+        "viewport": 1440,
+        "page_width": 1440,
+        "image_width": 718,
+        "loaded": true
+      }
+    ]
+  },
+  "articles_preserved": [
+    {
+      "id": "film-animatronics",
+      "preserved_prose_sha256": "f0cddfe61f4a3567cabe817ed8996c39464a0a78b9f62d96cf40f1d2e0511359"
+    },
+    {
+      "id": "film-background-projection",
+      "preserved_prose_sha256": "ed8d08db7b87226032e0fcd4d037f404dda24de5df9c86cb935a84ad471d60ec"
+    },
+    {
+      "id": "film-bleach-bypass-silver-retention",
+      "preserved_prose_sha256": "f6c5bf24fdf67350bbba6cd9f382a63336f87ddf4852d13c570d0a3991b4bfd5"
+    },
+    {
+      "id": "film-body-mounted-cameras-snorricam",
+      "preserved_prose_sha256": "3d6582356c1a4033b7685c3049a06b97cf15b024d20811ff9600b74eac8ed9de"
+    },
+    {
+      "id": "film-breakaway-props",
+      "preserved_prose_sha256": "66bf48f496dd6a848a3e2605bbd0289349b6f8b4aa98b0b55cf7e7c765e4e8ae"
+    },
+    {
+      "id": "film-bullet-time",
+      "preserved_prose_sha256": "8e05c0b8ff83e39615c8ae2ba616f74cca1d3bc647f31d59356881b26fd3fc32"
+    },
+    {
+      "id": "film-camera-mapping-and-2-5d-projection",
+      "preserved_prose_sha256": "d26f60da8c83591251d7ecd0b6b296b38b277999bce1194033afcf584db27398"
+    },
+    {
+      "id": "film-cloud-tanks",
+      "preserved_prose_sha256": "695234a1f549038f06a7ecf2bd4cf933b10f16bf54d7bb0b6d404cd62121d8fb"
+    },
+    {
+      "id": "film-creative-geography",
+      "preserved_prose_sha256": "3b7d72fdfdac45208a6115c7f9c1b5920f27ad0c0e35f700bbeb648eb56e0829"
+    },
+    {
+      "id": "film-creature-suits",
+      "preserved_prose_sha256": "fb707370b3211f851be50c473d0e65537ca274d752364113dbbb36e57dd66402"
+    },
+    {
+      "id": "film-day-for-night",
+      "preserved_prose_sha256": "72ab78622a9e21edf037cc7d550e355e1138f991124454741c95f30ac4b06dc6"
+    },
+    {
+      "id": "film-digital-cleanup-and-object-removal",
+      "preserved_prose_sha256": "ae002ee4734d32a933b35b9874b438fff0629c23531174bb5ce47b60a2a5d880"
+    },
+    {
+      "id": "film-digital-doubles-and-face-replacement",
+      "preserved_prose_sha256": "15d70e6568c498623217a43228f1327029b0f3ac09ee83a537aeaea8ed9f1c48"
+    },
+    {
+      "id": "film-dolly-zoom",
+      "preserved_prose_sha256": "deb1b1d8b08a9a1ae80e27f260fd514e2fd5161448032447a83e1c3e6d4eed90"
+    },
+    {
+      "id": "film-dry-for-wet",
+      "preserved_prose_sha256": "e538d1acf13b90360c49b0d7153df551963208c873d4a55d3897bc9743a6dde3"
+    },
+    {
+      "id": "film-forced-perspective",
+      "preserved_prose_sha256": "cc53c1a44da758dc493e707c9c370daecaf78a0ce9fd20a7546b825210848220"
+    },
+    {
+      "id": "film-hidden-cuts-and-invisible-stitching",
+      "preserved_prose_sha256": "1ada94ace5275a8cfd915ab327f0316b05bc6da1f162da14bcff759de36fd0b7"
+    },
+    {
+      "id": "film-image-based-lighting-and-hdr-capture",
+      "preserved_prose_sha256": "a6ec0ed9d674bbb44b3927415f29c55df67f82beeec4372ea258a117e84f094f"
+    },
+    {
+      "id": "film-interactive-lighting",
+      "preserved_prose_sha256": "16eb61499c2163c6fe9e7bd8517d224a403671ad7932c236da67757c9ec836bb"
+    },
+    {
+      "id": "film-lens-diffusion",
+      "preserved_prose_sha256": "2131b82b33aa1f4dc745d6ec175e6103c54484ada39ba1b2ffe31bdbca5b8a8d"
+    },
+    {
+      "id": "film-match-cuts",
+      "preserved_prose_sha256": "ddd6093855d263369d2f25e5e3107873398e2d161097a31de35939e730ae1d84"
+    },
+    {
+      "id": "film-matchmoving-and-camera-tracking",
+      "preserved_prose_sha256": "25d0d960e3bcbc9f9fd1b8de2cba4aac9dec2799345c09ad1b8decd41a09d956"
+    },
+    {
+      "id": "film-miniatures",
+      "preserved_prose_sha256": "cbd9f3a7d3a1a49771c6a048ded7a079d9dd5b98aa45aa06cf423a98436bdf1d"
+    },
+    {
+      "id": "film-mirror-gags-with-duplicate-sets",
+      "preserved_prose_sha256": "52979dec667a93e58ea1e77b3c2605c11b95bfe0db5b45842ab3b0fbab6ee1f8"
+    },
+    {
+      "id": "film-morphing",
+      "preserved_prose_sha256": "30ef5dd86b66cf0375acf6a5987c34d8211e686ea213e60415c2d5a8f10efc84"
+    },
+    {
+      "id": "film-motion-bases-and-gimbals",
+      "preserved_prose_sha256": "1fde0e61cadc43ad57e00dbb3a7a77e29d95c385a5002323bbe056d59957b36c"
+    },
+    {
+      "id": "film-motion-control-and-repeatable-camera-movements",
+      "preserved_prose_sha256": "6c04e273bd9336a8d3d68b8b99c5c5683f47f60477a0e2033c73bbe4de43babc"
+    },
+    {
+      "id": "film-negative-fill",
+      "preserved_prose_sha256": "3d42de869c1ae6f4ca42e1ae5162f395c713c7ad193340cc7ca92de0c76aa82d"
+    },
+    {
+      "id": "film-overcranking-and-undercranking",
+      "preserved_prose_sha256": "de1f1f24e14d06adaebc9b0444f3eca5e5ac88d8b40c1182d223ddb09ac01a65"
+    },
+    {
+      "id": "film-peppers-ghost-and-mirror-compositing",
+      "preserved_prose_sha256": "f635cce9b619c8cb798611b8310bf9fd6825417866c7f495293c290c953af79b"
+    },
+    {
+      "id": "film-performance-capture",
+      "preserved_prose_sha256": "be06368b7d7648c1d07e1cd58f996b4590827b4837e9035d535cbd6b51e3bab8"
+    },
+    {
+      "id": "film-photogrammetry",
+      "preserved_prose_sha256": "3bd52342bb0eb2ddb302814d74d6b9032c37de63146daf4314de38077ef4b2d4"
+    },
+    {
+      "id": "film-physics-simulation",
+      "preserved_prose_sha256": "6dcf76ae62d44534710b9fed64ee807be105768e0dbf6379090402c8cac66024"
+    },
+    {
+      "id": "film-practical-rain-and-storm-rigs",
+      "preserved_prose_sha256": "68cddc3cf3e5efb8c90fb0081ac00dc8993447cc549b7706a677d01361e112c8"
+    },
+    {
+      "id": "film-probe-and-periscope-lenses",
+      "preserved_prose_sha256": "8e388d66d64c7282553c8df4ff10980e28a920f5ebe699795e0d248228afb08a"
+    },
+    {
+      "id": "film-procedural-crowds",
+      "preserved_prose_sha256": "9653e8cc28fca74c4b401a019ba6f7614b980964e0ad41be010c46afcaa0c5e0"
+    },
+    {
+      "id": "film-prosthetic-makeup",
+      "preserved_prose_sha256": "ea01fbe096371a127e2e5d9913b79b61e202518947bfebc1a2eaaed6311bf225"
+    },
+    {
+      "id": "film-reverse-motion",
+      "preserved_prose_sha256": "4f3995e1ec7e14f4ba9e261c73154cdadd8cefb87358ec30fe563f9cea0114db"
+    },
+    {
+      "id": "film-rigged-impacts-and-squibs",
+      "preserved_prose_sha256": "4c7d3bc5af15820d6b6fad2a93ff0e42dfa7d1b884c53f55c0b83a7725ed318d"
+    },
+    {
+      "id": "film-rotating-sets",
+      "preserved_prose_sha256": "7263f80c1e7d509d04d4074f37cc984d4d14cd3c7a192090beb887699063dbdc"
+    },
+    {
+      "id": "film-rotoscoping",
+      "preserved_prose_sha256": "b3572afa666a7809f98b10743968f64ff5ef9f7f63b5373d41f34c91d30eebc0"
+    },
+    {
+      "id": "film-screen-combat-and-cheated-contact",
+      "preserved_prose_sha256": "d1e59c26b7759e3d63fde58ec43e50a84ba57d555455917eab7c8d579c5f6008"
+    },
+    {
+      "id": "film-selective-focus-miniaturization",
+      "preserved_prose_sha256": "9eea57137a6fdb99ab31168d4496959dfb4f1648e97890952938bd649f8f4725"
+    },
+    {
+      "id": "film-slit-scan-photography",
+      "preserved_prose_sha256": "a9a115f7eca2e07e7bf10d0d19766b47d521305bd0136d66c62aeb747e38d2e9"
+    },
+    {
+      "id": "film-split-field-diopters",
+      "preserved_prose_sha256": "5782180ca0c8bb8b9cc0dd6991ce76bdb2cbf442290c6a28b4bb4b8c8f55b926"
+    },
+    {
+      "id": "film-stop-motion-and-replacement-animation",
+      "preserved_prose_sha256": "20b737c0e9fb411dc48263c01deaa83d50f1a19d05321ebe813dc28fe5dcc03c"
+    },
+    {
+      "id": "film-substitution-splices",
+      "preserved_prose_sha256": "fd25094b5b8ed7b6505589a102af7b3a86a9e7957160adaa8e2d6377c41aee61"
+    },
+    {
+      "id": "film-wild-walls-and-removable-sets",
+      "preserved_prose_sha256": "4fd84627b464bffaacea37f8cb92e822dd1363ea3ab47d727c2f902287a1c9cd"
+    },
+    {
+      "id": "film-wire-assisted-stunts",
+      "preserved_prose_sha256": "2f0312aab9b2e11cbc4531738a1ee0cc9c07584fdd5e98bd7e27ec364f06afc3"
+    }
+  ],
+  "assets": [
+    {
+      "file": "filmmaking/forced-perspective.svg",
+      "sha256": "498089beb30031b9f6f6b1cdcebc6e1af53e3b6f1e0047e6854be4c3b1d052a7"
+    },
+    {
+      "file": "filmmaking/forced-perspective-mobile.svg",
+      "sha256": "498089beb30031b9f6f6b1cdcebc6e1af53e3b6f1e0047e6854be4c3b1d052a7"
+    },
+    {
+      "file": "filmmaking/mirror-duplicate-sets.svg",
+      "sha256": "3a45e8342e0a9710b4b0346ba4835ddeb5c8851cbdf32fd1b43490cc2ba7820b"
+    },
+    {
+      "file": "filmmaking/mirror-duplicate-sets-mobile.svg",
+      "sha256": "3a45e8342e0a9710b4b0346ba4835ddeb5c8851cbdf32fd1b43490cc2ba7820b"
+    },
+    {
+      "file": "filmmaking/dolly-zoom.svg",
+      "sha256": "cee8c18ea720308b97a559a2f25e3497d0eb161cc05ac967aae19dbd285619d0"
+    },
+    {
+      "file": "filmmaking/dolly-zoom-mobile.svg",
+      "sha256": "12270291b11a6d8a5d06cbce2183963530600a0ea9a2efeb08e6ee55f3a54191"
+    },
+    {
+      "file": "filmmaking/reverse-motion.svg",
+      "sha256": "69025324fd812fc88015a59db4abac7f57b38dab7b06b43fe3f9c182e4a3ba1c"
+    },
+    {
+      "file": "filmmaking/reverse-motion-mobile.svg",
+      "sha256": "c5c9dc220de9cdb8823e9a1783c745cf2f8eec7658720faa8bd4580b7e8ced0d"
+    },
+    {
+      "file": "filmmaking/hidden-cut.svg",
+      "sha256": "6cf3f4d9c8eedea0a32dd702540823313d7bc438c34418d0e22d29a93ff9c826"
+    },
+    {
+      "file": "filmmaking/hidden-cut-mobile.svg",
+      "sha256": "205dd6e582f83ee17e75964ddc75ac11ea42a4e5bc75038b7e667be7b195b4e2"
+    },
+    {
+      "file": "filmmaking/rotating-set.svg",
+      "sha256": "9933c2d95a5b997116d794fa511f69c55005ec903e257332ad17f02ff04d1351"
+    },
+    {
+      "file": "filmmaking/rotating-set-mobile.svg",
+      "sha256": "13e9e0198dcfb0f4d6bc22bc47a9bb0b4c9fcf6b7a7b41a87b0c43fa2380680c"
+    },
+    {
+      "file": "filmmaking/breakaway-versions.svg",
+      "sha256": "195af5cd4c95d5f8dd980b114c5555436568a76995ecf1e01f71e6f582bd6173"
+    },
+    {
+      "file": "filmmaking/breakaway-versions-mobile.svg",
+      "sha256": "2058502d4761556f229be536bd3454d9199b3ef3cb8a3e024d1092767ed16fe4"
+    },
+    {
+      "file": "filmmaking/camera-mapping.svg",
+      "sha256": "06f3ceda7a951d599b0180823f992252e6084e88926c7c6778178cb5c0631aa0"
+    },
+    {
+      "file": "filmmaking/camera-mapping-mobile.svg",
+      "sha256": "578564f9a354021d8e1927c9ac7cadfafc8d1832c89102536c8307d8323a7b06"
+    },
+    {
+      "file": "filmmaking/peppers-ghost-rays.svg",
+      "sha256": "d1f1c14cd7825353d5ec1bc22379668560e2953ac034d71e387be75778ebcacc"
+    },
+    {
+      "file": "filmmaking/peppers-ghost-rays-mobile.svg",
+      "sha256": "d1f1c14cd7825353d5ec1bc22379668560e2953ac034d71e387be75778ebcacc"
+    },
+    {
+      "file": "filmmaking/schufftan-masked-mirror.svg",
+      "sha256": "6847ce32abd41bf0929b441c1101117adbf30a2ed34aff1e7951af6146be06ce"
+    },
+    {
+      "file": "filmmaking/schufftan-masked-mirror-mobile.svg",
+      "sha256": "ba099f75994e28533bb7b7b3ba598e14a07db4bf7c64db0178c87141378de502"
+    },
+    {
+      "file": "filmmaking/slit-scan-exposure.svg",
+      "sha256": "5603184d92af081a4f3b673096eb41e3783abd476fdeb7a7e9e5a5d6a8840aab"
+    },
+    {
+      "file": "filmmaking/slit-scan-exposure-mobile.svg",
+      "sha256": "d5b8e3dc13c4b9895b867bed273fdbcb6e37b18a93d76734d393db98ba7ac8f3"
+    },
+    {
+      "file": "filmmaking/diffusion-highlight.svg",
+      "sha256": "b7b79f2a5bdd0896a1c63cc0dcaa11b3fcb60ae4242cd032e585018e1d921984"
+    },
+    {
+      "file": "filmmaking/diffusion-highlight-mobile.svg",
+      "sha256": "b7deb665e635ad419d02c4704709cc71bed0e60e5562376c32a3c6e2fdc787f7"
+    },
+    {
+      "file": "filmmaking/substitution-join.svg",
+      "sha256": "0e90cd625116a3025fc66d9102abc04fceb7bd96e758892badf529ea956a00e6"
+    },
+    {
+      "file": "filmmaking/substitution-join-mobile.svg",
+      "sha256": "fc2002dc54070db657975cd0060d71098ab3f82c2ea99af7c9551e410fa37410"
+    },
+    {
+      "file": "filmmaking/bullet-time-array.svg",
+      "sha256": "8687828ccd010d0b1aac8fae6607b33f28e53dcb71b6dd902b97f72e2d616c04"
+    },
+    {
+      "file": "filmmaking/bullet-time-array-mobile.svg",
+      "sha256": "8687828ccd010d0b1aac8fae6607b33f28e53dcb71b6dd902b97f72e2d616c04"
+    },
+    {
+      "file": "filmmaking/motion-control-passes.svg",
+      "sha256": "fdb60a13b0667ad9d9fa4e4be53758f42a119f7ab7e4f0bf7543b35456cb74fa"
+    },
+    {
+      "file": "filmmaking/motion-control-passes-mobile.svg",
+      "sha256": "fdb60a13b0667ad9d9fa4e4be53758f42a119f7ab7e4f0bf7543b35456cb74fa"
+    },
+    {
+      "file": "filmmaking/capture-playback-rates.svg",
+      "sha256": "bfe006b13447e453dd5fe7dc06da6b154fe65cc0d937178c8114b74ee928ed65"
+    },
+    {
+      "file": "filmmaking/capture-playback-rates-mobile.svg",
+      "sha256": "2113ba32d9a27f36e3809b5c9c17569d704b0083b736b54cf6a957b96956f03e"
+    },
+    {
+      "file": "filmmaking/impact-evidence-timing.svg",
+      "sha256": "af3d28d266f914d44db432689891467b61fec21b97abe6b8fe6482ace45b40c8"
+    },
+    {
+      "file": "filmmaking/impact-evidence-timing-mobile.svg",
+      "sha256": "a7b9a2bd97d0f19dee5899c0a6cfdf0481aa8a2ecc55fbd06e568c4c00034f8d"
+    },
+    {
+      "file": "filmmaking/cheated-contact-viewpoint.svg",
+      "sha256": "6b44ec903e2e5c8444a05b41179262706ffe58e4b670efe19c87b9d5de2ef668"
+    },
+    {
+      "file": "filmmaking/cheated-contact-viewpoint-mobile.svg",
+      "sha256": "6b44ec903e2e5c8444a05b41179262706ffe58e4b670efe19c87b9d5de2ef668"
+    },
+    {
+      "file": "filmmaking/negative-fill-paths.svg",
+      "sha256": "62e29b227e13cfc0ac8d8e07b901015eb42dc938de49ddd5b5fef29298400661"
+    },
+    {
+      "file": "filmmaking/negative-fill-paths-mobile.svg",
+      "sha256": "62e29b227e13cfc0ac8d8e07b901015eb42dc938de49ddd5b5fef29298400661"
+    },
+    {
+      "file": "filmmaking/miniature-shot-layers.svg",
+      "sha256": "7c668fc98f0f827b15d50daa193519deec7effd959f4f51ca14efd527d7e923a"
+    },
+    {
+      "file": "filmmaking/miniature-shot-layers-mobile.svg",
+      "sha256": "7c668fc98f0f827b15d50daa193519deec7effd959f4f51ca14efd527d7e923a"
+    },
+    {
+      "file": "filmmaking/selective-focus-depth.svg",
+      "sha256": "87c3c386e006312636633bbca25fa3593b0f24608cccf982ca42e2bafeea79cd"
+    },
+    {
+      "file": "filmmaking/selective-focus-depth-mobile.svg",
+      "sha256": "3b37506a1ee381a2924791779562e36ab22430770464602dd7104dd75fa661ee"
+    },
+    {
+      "file": "filmmaking/wild-wall-access.svg",
+      "sha256": "d5806aaf1fe1717828fcc9f9caae9fc8455bff4a33cab415785aab1a0b310a03"
+    },
+    {
+      "file": "filmmaking/wild-wall-access-mobile.svg",
+      "sha256": "d5806aaf1fe1717828fcc9f9caae9fc8455bff4a33cab415785aab1a0b310a03"
+    },
+    {
+      "file": "filmmaking/creative-geography-pemberley.svg",
+      "sha256": "d4109d40f682a61dd8a85aed12ef773fe3324a110c4e78e45a1df63f926602b8"
+    },
+    {
+      "file": "filmmaking/creative-geography-pemberley-mobile.svg",
+      "sha256": "341a99bb2e3955d54c8578e781b29be3be68a35bc53cabe18272d5129fc32bb2"
+    },
+    {
+      "file": "filmmaking/split-diopter-zones.svg",
+      "sha256": "44787f264e06f99d80c37bee8a0c7c966c73f4bab03c1a60cb758889fbeaca95"
+    },
+    {
+      "file": "filmmaking/split-diopter-zones-mobile.svg",
+      "sha256": "5c9f2d41df3518540a3b840c0f256d757bcbdd74969db994355bbc4408d7fee9"
+    },
+    {
+      "file": "filmmaking/probe-relay-paths.svg",
+      "sha256": "c20592cc29c4ae559fe56ab403ff710597e3800b3acbf66e76d4b78c7ad815c8"
+    },
+    {
+      "file": "filmmaking/probe-relay-paths-mobile.svg",
+      "sha256": "c20592cc29c4ae559fe56ab403ff710597e3800b3acbf66e76d4b78c7ad815c8"
+    },
+    {
+      "file": "filmmaking/body-camera-anchor.svg",
+      "sha256": "553db8b2f1f5881687a16413b7c6a2206b55619eec34d3b72bf2d491f6d7ce54"
+    },
+    {
+      "file": "filmmaking/body-camera-anchor-mobile.svg",
+      "sha256": "07d9a665d9993f1ec172184b180e7cb1efdacf18c5be21e8ee1984527812a927"
+    },
+    {
+      "file": "filmmaking/silver-retention-path.svg",
+      "sha256": "01410adb38c492f05c017f97474f8cd9b38b7490d23545cafedd5b1d8bd502ea"
+    },
+    {
+      "file": "filmmaking/silver-retention-path-mobile.svg",
+      "sha256": "a30019f1e62ba878d69aaea122b3011929238a2810fe97ed0879bf6646e516db"
+    },
+    {
+      "file": "filmmaking/stop-motion-frames.svg",
+      "sha256": "52b12dd526529dd471286c6156705e19ede1255040c672bebeb418d2695625ad"
+    },
+    {
+      "file": "filmmaking/stop-motion-frames-mobile.svg",
+      "sha256": "b81f2f92852fcc7b2e03627dd0b91da4c810ecd092773de80f6f872895a813d5"
+    },
+    {
+      "file": "filmmaking/match-cut-alignment.svg",
+      "sha256": "06985270f179291ee37719156753dfc56f7073a86949af12a1c1105f76a68e61"
+    },
+    {
+      "file": "filmmaking/match-cut-alignment-mobile.svg",
+      "sha256": "dd5805835e9a2611087661a7b56a534e4c378c769e353bb3ccefeb9b016ca500"
+    },
+    {
+      "file": "filmmaking/wire-support-roles.svg",
+      "sha256": "d4ab76affe92010ba4f9c9cd5552f81d51cf6fceccbf93bb0e5e1178f92d9016"
+    },
+    {
+      "file": "filmmaking/wire-support-roles-mobile.svg",
+      "sha256": "9111d14b3d5b31a210f3985c7255557d077dbea1fd7833a91d4812c41559f349"
+    },
+    {
+      "file": "filmmaking/rear-projection-layout.svg",
+      "sha256": "0debb8c5124a675ca692fce5957c5bf57702e68790fbf490d9f3afb588a386d2"
+    },
+    {
+      "file": "filmmaking/rear-projection-layout-mobile.svg",
+      "sha256": "0debb8c5124a675ca692fce5957c5bf57702e68790fbf490d9f3afb588a386d2"
+    },
+    {
+      "file": "filmmaking/front-projection-layout.svg",
+      "sha256": "baee359d18c31f2bd625f122971dc4ae60edc7d485861cd1b00d0daaec460dd9"
+    },
+    {
+      "file": "filmmaking/front-projection-layout-mobile.svg",
+      "sha256": "baee359d18c31f2bd625f122971dc4ae60edc7d485861cd1b00d0daaec460dd9"
+    },
+    {
+      "file": "filmmaking/day-night-contributions.svg",
+      "sha256": "eaffacca86f6a79d2153d000d2c5e2cfad71b580a459f8bfdd0bed478557ef11"
+    },
+    {
+      "file": "filmmaking/day-night-contributions-mobile.svg",
+      "sha256": "9eb17575362edf577a18e7f72bd2940c1720574353d427e6f9c78f32ece2e75b"
+    },
+    {
+      "file": "filmmaking/dry-wet-cues.svg",
+      "sha256": "1c15e4059d4f2099b8c36a46c36a9fcfc9bb1d9b4595b14ff3b5cf2ccf30728a"
+    },
+    {
+      "file": "filmmaking/dry-wet-cues-mobile.svg",
+      "sha256": "30f931efc95c07e5b5d9f4d1426c137345978e5f074f6cf18b96d6831a957931"
+    },
+    {
+      "file": "filmmaking/cloud-tank-layers.svg",
+      "sha256": "f5b3fcbe12fc9c5ab8d4a0ab51fa2f882588f7df47c40296160eb01a62f8960c"
+    },
+    {
+      "file": "filmmaking/cloud-tank-layers-mobile.svg",
+      "sha256": "f5b3fcbe12fc9c5ab8d4a0ab51fa2f882588f7df47c40296160eb01a62f8960c"
+    },
+    {
+      "file": "filmmaking/gimbal-camera-relationship.svg",
+      "sha256": "a98760976db75cab720fa58c87968ae2a4568a94e3561faaee1d800a2163a1c4"
+    },
+    {
+      "file": "filmmaking/gimbal-camera-relationship-mobile.svg",
+      "sha256": "270a1fc31b87403fea62dd3dc9cc8be56b7b5d1b7da9cc3eb8ac56a42e7ab79e"
+    },
+    {
+      "file": "filmmaking/rain-light-background.svg",
+      "sha256": "ce1fa2d51ffd1c1004f4f1c2a9c482016e792a17761dcef5d78f79c747545331"
+    },
+    {
+      "file": "filmmaking/rain-light-background-mobile.svg",
+      "sha256": "f8495d7a595d69d44cbd0e18d5a0c4c3f79c2ac7551789fe4e286ec091f83d7f"
+    },
+    {
+      "file": "filmmaking/crowd-authored-rules.svg",
+      "sha256": "c8e99644982850c52ae4b17cdd51e025cfce0fa5492701cd925298b0aabf9ada"
+    },
+    {
+      "file": "filmmaking/crowd-authored-rules-mobile.svg",
+      "sha256": "f133d010b6dda9e5c444dddcef50d93869ba755d43e2d696b5fa2ead71ee4321"
+    },
+    {
+      "file": "filmmaking/performance-to-character.svg",
+      "sha256": "42ff31971752c40eda76cfc527998472ff1a52ab13de485249fca7ec047b702d"
+    },
+    {
+      "file": "filmmaking/performance-to-character-mobile.svg",
+      "sha256": "f6dbf56a742d4ddaf377ff3d790e5d90f62cba58c86ccdca98765b1eb440defc"
+    },
+    {
+      "file": "filmmaking/prosthetic-edge-section.svg",
+      "sha256": "c05589f4e2b6a188a0e2e8048c4e8315fdcdd93c85955ad994b7ad4dddc33fc9"
+    },
+    {
+      "file": "filmmaking/prosthetic-edge-section-mobile.svg",
+      "sha256": "135abff378c85fe7333fb90d0284453292834896b191cf509650b68bbcd995c0"
+    },
+    {
+      "file": "filmmaking/digital-replacement-scope.svg",
+      "sha256": "29d642157d7f4c49ebd6e29803c1d3b0610543006fd05ce12bdaab6fad58a68b"
+    },
+    {
+      "file": "filmmaking/digital-replacement-scope-mobile.svg",
+      "sha256": "dba06c215bc45a36f4ddf504884c5b83ced889b1f3079f42ace2964e96d71c6b"
+    },
+    {
+      "file": "filmmaking/animatronic-control-chain.svg",
+      "sha256": "4a24ae5786ca98817456e3cace1c10108572020c16726e27ee1c62d878512212"
+    },
+    {
+      "file": "filmmaking/animatronic-control-chain-mobile.svg",
+      "sha256": "4a24ae5786ca98817456e3cace1c10108572020c16726e27ee1c62d878512212"
+    },
+    {
+      "file": "filmmaking/creature-suit-body.svg",
+      "sha256": "3be783a440ba36798cf70fefa9941add24a7a13cd8b2315d5ae2091bfbd463ff"
+    },
+    {
+      "file": "filmmaking/creature-suit-body-mobile.svg",
+      "sha256": "d5d694902f01354b2bca829b13e997c413348c46ea93e31cd4248eb2220b2069"
+    },
+    {
+      "file": "filmmaking/cleanup-rebuild-layers.svg",
+      "sha256": "c300c40161712a1e09da34991e6e4c9795f39d1a49f4a7bf0d2a3443325a2bb9"
+    },
+    {
+      "file": "filmmaking/cleanup-rebuild-layers-mobile.svg",
+      "sha256": "3228b8a4b0d5239819dafc12b2be107bfb7f9fb25eed7d8df25bcc59bbf27e34"
+    },
+    {
+      "file": "filmmaking/roto-shape-and-matte.svg",
+      "sha256": "0a7ddfaa8db92b31e11b001d8284e25e6d46490dfa8ea856aa4e81fa3ded8ecb"
+    },
+    {
+      "file": "filmmaking/roto-shape-and-matte-mobile.svg",
+      "sha256": "a9e3d2c21fa8496baadb9277639852e3ca173181f85ffc673ae24411b3124fd1"
+    },
+    {
+      "file": "filmmaking/simulation-state-steps.svg",
+      "sha256": "3f3176091badd0ef804e5c430add4bbd973282bc9cbed8e1a60dc832b863f42b"
+    },
+    {
+      "file": "filmmaking/simulation-state-steps-mobile.svg",
+      "sha256": "050b47bdfddc96e959817806e4a40c804af8e6c31b6714bbb23745cda93ba080"
+    },
+    {
+      "file": "filmmaking/morph-correspondence.svg",
+      "sha256": "4a9f280d5b936ceb25f56b6a652c2b41bb657e713303b27499f13cd2bd2ce758"
+    },
+    {
+      "file": "filmmaking/morph-correspondence-mobile.svg",
+      "sha256": "a0e81e17aaa95b7fc8c284998137e36a35ce97970ef56b9c93cf607ce119fc4e"
+    },
+    {
+      "file": "filmmaking/camera-parallax-agreement.svg",
+      "sha256": "95824796f80c847537d743efb717e3c51b511b8ee1368abcb31f55cff1ff724d"
+    },
+    {
+      "file": "filmmaking/camera-parallax-agreement-mobile.svg",
+      "sha256": "747aca2b3949529952310670d370f0d89ed1d5c1b9bd22896a546e10b1611b21"
+    },
+    {
+      "file": "filmmaking/photogrammetry-rays.svg",
+      "sha256": "281f55bacf59bf76e66ee1b761e157046f14230d77dc21e4d66c3833f81c8bc9"
+    },
+    {
+      "file": "filmmaking/photogrammetry-rays-mobile.svg",
+      "sha256": "d6be22c2ed500e617fdedabe50ddb7011ec840ee5210fb84d852b05c557ffc8e"
+    },
+    {
+      "file": "filmmaking/interactive-light-consequence.svg",
+      "sha256": "3d1cdf998da65cd7c85faacd5ee665638bced9a6f34c0fb0677c200f9b4e7399"
+    },
+    {
+      "file": "filmmaking/interactive-light-consequence-mobile.svg",
+      "sha256": "f0df813c37a0297be1729e2aa271624287657564d2e841a96b3aa799fc63736a"
+    },
+    {
+      "file": "filmmaking/hdr-capture-to-light.svg",
+      "sha256": "9c855d62a4f931757b44183990dfe5f67bc3b7a0d3ffc85ab7aba45a1311bbe8"
+    },
+    {
+      "file": "filmmaking/hdr-capture-to-light-mobile.svg",
+      "sha256": "46826b7170a9e84882a4a21f4a404ddde028e224c3c066133fa53640763f87c1"
+    }
+  ]
+}

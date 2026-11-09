@@ -1,3 +1,8 @@
+> Current authoring: completion inserts canonical bindings and local decision arms.
+> The shared block editor exposes local branches, nested forms, and optional fields.
+> All edits still pass the Rust compiler before application. See
+> [readable authoring](readability.md) and [interactive practices](../practices.md).
+
 # M9 — Pattern editor and simulation
 
 Open **Pattern Library** in Mira desktop. The initial view is a searchable card grid;

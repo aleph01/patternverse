@@ -1,0 +1,131 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — The Volunteer’s Dilemma",
+  "metadata_mapping": "Existing draft-concept schema; research and recommendation queries in this sidecar. No navigation or schema changes.",
+  "patterns": [
+    {
+      "id": "the-volunteers-dilemma",
+      "title": "The Volunteer's Dilemma",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; provision by one costly volunteer",
+      "article": "content/concepts/the-volunteers-dilemma.md",
+      "status": "draft",
+      "short_description": "Identify a one-person provision threshold and coordinate an accepted owner while exposing the burden and capability assumptions.",
+      "use_when": [
+        "Everyone wants a task completed but prefers someone else to incur its cost.",
+        "One competent action is enough and duplicate effort adds no modeled benefit.",
+        "A request to a group has no accepted owner or observable completion."
+      ],
+      "goals": [
+        "Separate the volunteer’s dilemma from the prisoner’s dilemma and psychological bystander effect.",
+        "Distinguish equilibrium existence from equilibrium selection, reliability, and fairness.",
+        "Make the single-action threshold and capability assumptions explicit.",
+        "Separate coordination within unchanged stage payoffs from changed incentives or timing."
+      ],
+      "mechanisms": [
+        "Select an accepted owner with acknowledged roles.",
+        "Observe completion and allow time for an explicitly accepted backup.",
+        "Allocate recurring burdens by agreed rota or lottery.",
+        "Reduce costs, improve capability, or compensate action with real resources."
+      ],
+      "related_patterns": [
+        "the-public-goods-dilemma",
+        "the-prisoners-dilemma",
+        "make-trade-offs-explicit"
+      ],
+      "example_user_queries": [
+        "Everyone agrees someone should do it, but nobody accepts the task.",
+        "Why do people wait when any one of them could fix the problem?",
+        "How do we choose one owner without asking everyone to duplicate the work?",
+        "Is this a prisoner’s dilemma or a volunteer’s dilemma?",
+        "Does adding more people make it more likely someone will act?",
+        "Our most reliable colleague always ends up volunteering.",
+        "A person was named but never confirmed they would act.",
+        "We have agreement but no evidence that the upload happened.",
+        "Can assigning responsibility solve this without penalties?",
+        "What if the nominated person cannot actually complete the task?",
+        "Does the bystander effect explain every failure to help?",
+        "Why can an equilibrium still leave a shared task undone?"
+      ],
+      "visual": {
+        "type": "alternative-volunteers-and-completion-branches-qualitative",
+        "question": "How does an open request become an accepted responsibility?",
+        "assets": [
+          "content/assets/structural-traps/volunteers-dilemma-program.svg",
+          "content/assets/structural-traps/volunteers-dilemma-program-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1261,
+            "textBlocks": 23
+          },
+          "phone": {
+            "width": 360,
+            "height": 1817,
+            "textBlocks": 23
+          }
+        },
+        "representation": {
+          "mode": "alternative-volunteers-and-completion-branches",
+          "question": "How does an open request become an accepted responsibility?",
+          "interpretation": "Ari, Bea, and Cam are alternative capable volunteers: any one upload suffices. The proposed protocol selects Ari, obtains Bea and Cam’s acknowledgement, and checks Ari’s completion receipt. A missing receipt calls for an accepted capable backup, not an assumption that someone acted.",
+          "relationship_key": "Dashed inputs: alternative possible volunteers; any one suffices. Solid arrows: the accepted protocol and its conditional completion branches.",
+          "changed_relationship": "Agree one capable owner, acknowledge the assignment, and verify completion.",
+          "residual_constraints": "Assignment cannot fix expired access, an unnoticed failure, or an unavailable backup.",
+          "phone_treatment": "Separate composition preserves the causal, dependency, comparison, or choice relationships with regular legible text; it is not a scaled desktop image."
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Ari, Bea, and Cam are alternative capable volunteers: any one upload suffices. The proposed protocol selects Ari, obtains Bea and Cam’s acknowledgement, and checks Ari’s completion receipt. A missing receipt calls for an accepted capable backup, not an assumption that someone acted. Change: Agree one capable owner, acknowledge the assignment, and verify completion. Limitation: Assignment cannot fix expired access, an unnoticed failure, or an unavailable backup.",
+        "caption": "Hypothetical illustration. Any one volunteer is sufficient; the names are alternatives. The accepted-owner sequence selects Ari and adds a completion check. A backup needs capability and time, and Ari still bears effort the others avoid.",
+        "style": "Fixed white including dark surroundings; regular Helvetica Neue with Helvetica and Arial fallbacks; ink and secondary text meet contrast on prescribed fills. Green identifies intervention geometry. Essential connections use ink; light construction lines remain contextual."
+      },
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Diekmann, Volunteer’s Dilemma (1985)",
+          "url": "https://doi.org/10.1177/0022002785029004003",
+          "doi": "10.1177/0022002785029004003",
+          "supports": "Foundational named formulation; absence of a dominant strategy and role of communication.",
+          "read_source": "https://www.researchgate.net/publication/249728094_Volunteer%27s_Dilemma",
+          "boundary": "Bibliographic record and original abstract read. The scanned full text was located but not text-readable through the available source interface; no claim depends on unread details. Full equilibrium derivation read in Goeree et al."
+        },
+        {
+          "title": "Goeree, Holt, and Smith, An Experimental Examination of the Volunteer’s Dilemma",
+          "url": "https://www.agora.group/_files/ugd/a4ac94_864593148f2849d9b5f1bb70a539294c.pdf",
+          "supports": "Definition, pure equilibria, symmetric mixed equilibrium, random-matching procedures and group-size results.",
+          "boundary": "March 2016 author version, subsequently published in Games and Economic Behavior 102 (2017), 305–315. Article identifies the version. Student laboratory results do not measure the hypothetical upload case."
+        },
+        {
+          "title": "Darley and Latané, Bystander Intervention in Emergencies: Diffusion of Responsibility (1968)",
+          "url": "https://www.ucdenver.edu/docs/librariesprovider102/default-document-library/bystander-intervention-john-darley-and-bibb-latane.pdf",
+          "supports": "Student reporting behavior under a simulated emergency with different numbers of perceived unseen co-bystanders.",
+          "boundary": "Experimental psychological evidence; not a universal strategic explanation, emergency-response protocol, or real-world reliability estimate. The historically disputed introductory crime anecdote is not repeated."
+        }
+      ],
+      "evidence_boundary": "The scenario and illustration are hypothetical. Qualitative formal comparisons depend on the stated players, actions, preferences, information, timing, and repetition assumptions. Empirical findings retain their source-specific limits. Practical interventions are editorial synthesis, not measured effects of this scenario.",
+      "verification": {
+        "status": "passed",
+        "content": "All forty remain separate drafts with nine required sections and one responsive figure; collection unchanged. Corpus/schema and rendered Markdown checks passed; public corpus excludes the drafts. Non-figure article text and external source links are unchanged from the illustration-revision baseline.",
+        "visual": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed.",
+        "editorial": "Mechanism-specific illustration redrawn or clarified. Examples remain qualitative and hypothetical. Caption and alternative text explain the mechanism, changed relationship, and residual limitations. Green text replaced with ink; essential connections strengthened. Source records and source-check dates preserved."
+      },
+      "example_structure": {
+        "scenario": "Hypothetical narrative; no invented utility scores, numerical trajectory, or probability cutoff is required to follow the example.",
+        "changed_relationship": "Select a capable owner instead of repeating an open request.",
+        "residual_constraints": "Ari still bears the effort. Access, completion, fairness, and backup need attention."
+      },
+      "editorial_revision": {
+        "date": "2026-11-01",
+        "purpose": "Explain the general principle through concrete choices, relationships, and consequences; remove illustrative calculation as a reading requirement.",
+        "source_handling": "Existing attributable research and source links retained where still relevant; source_checked remains the original research date."
+      },
+      "illustration_teaching_revision": {
+        "date": "2026-11-01",
+        "purpose": "Apply the teaching-value audit while retaining every article and its qualitative worked example.",
+        "change": "Replace or clarify the representation around its specific mechanism.",
+        "source_handling": "Article prose, external source links, source-check dates, and empirical qualifications preserved.",
+        "verification": "Passed: collection/schema and rendered Markdown checks; all 40 live articles at 1440px desktop and 390px phone viewports; all 80 SVG compositions at actual image widths (718px desktop and approximately 364.6px phone) in light and dark surroundings. No text bounds, card containment, text overlap, clipping, or page overflow issues detected. Responsive sources, captions, alternative text, dimensions, and fixed white surfaces checked. Semantic tracing and visual inspection performed; no reader-comprehension study claimed."
+      }
+    }
+  ]
+}

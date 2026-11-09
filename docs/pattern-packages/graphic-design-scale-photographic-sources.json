@@ -1,0 +1,63 @@
+{
+  "generation_mode": "Built-in image_gen",
+  "purpose": "Photographic source images and a common print stage for scale-only before-and-after examples.",
+  "sources": [
+    {
+      "name": "scale-greenhouse-photo-v2",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic image panel for a professionally designed cultural event poster, not the whole poster. Create a wide landscape editorial photograph inside a lush glass-and-steel botanical greenhouse at dusk, large tropical foliage in the foreground, a narrow quiet path receding toward the right, warm subtle lamps among leaves, believable deep forest-green foliage, natural organic detail and fine photographic grain, muted warm evening highlights. Match the evocative real photographic content of an arts festival poster. Realistic documentary photography, contemporary cultural institution art direction. Edge-to-edge photograph only. No typography, lettering, labels, logos, borders, poster, printed sheet, frame or surrounding wall. Compose to work as a shallow wide full-width photo band with interest across the horizontal frame. Landscape 3:2.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-e5e43310-90b4-4c2a-92a0-f450909b8c57.png",
+      "workspace_asset": "content/assets/graphic-design/scale-greenhouse-photo-v2.jpg",
+      "sha256": "0f4e3efdc680eada7505fc4638b42b32cebf634083275dc565df3d2ce702aeed"
+    },
+    {
+      "name": "scale-workshop-photo-v2",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic panel for a finished creative workshop promotion. Create a wide editorial photograph looking diagonally down over a real creative studio worktable: textured sketch paper without any writing, a few graphite pencils, folded cream and sage paper, one charcoal drawing tool, soft natural window daylight, warm wood and quiet muted green accents. The objects feel used and practical rather than arranged like stock advertising. A thoughtful small creative workshop atmosphere, tactile material detail, believable shadows, real photographic depth. No people or hands. Wide shallow composition usable as a full-width image band across a cultural workshop poster, visual interest distributed horizontally. Edge-to-edge photographic image only. No text or lettering anywhere, no logos, printed poster, display frame or surrounding mockup. Landscape 3:2.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-38f170ea-7742-40d6-8060-d29c485fa261.png",
+      "workspace_asset": "content/assets/graphic-design/scale-workshop-photo-v2.jpg",
+      "sha256": "edd1d8e2e2e1728fd1dcdada94050742108a0132e7e306b50ce8af24400aa162"
+    },
+    {
+      "name": "scale-delivery-photo-v2",
+      "prompt": "Use case: photorealistic-natural. Asset type: photographic image panel for a polished operations review report. Create a wide editorial photograph inside a contemporary small distribution facility: neatly arranged plain brown cardboard parcels on a workbench in the foreground, softly receding storage shelving and parcel carts, calm practical daylight with subtle muted green surroundings. Realistic ordinary working environment, precise corrugated cardboard texture, understated professional annual-report photography. No workers, visible logos, shipping labels, lettering, barcodes, numbers or text anywhere. Wide horizontal composition that remains recognizable cropped to a shallow panoramic report banner. Edge-to-edge photograph only, no graphic overlays, no document mockup, no poster or frame. Landscape 3:2.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-725304be-5bc4-4221-932c-41586c86419b.png",
+      "workspace_asset": "content/assets/graphic-design/scale-delivery-photo-v2.jpg",
+      "sha256": "9901929cb9bc436f822f59e2fa54310e9060cbb24b2c24ac513dca59eb44ab65"
+    },
+    {
+      "name": "scale-print-stage-v2",
+      "prompt": "Use case: product-mockup. Asset type: reusable photographic background for precise print design comparisons. A single absolutely blank warm ivory matte A3 portrait paper sheet mounted flat on a very pale warm gray plaster wall. Front-on orthographic camera, perfectly rectangular sheet with vertical sides parallel to the image edges, no tilt or perspective convergence. Paper rectangle occupies approximately x 6% through 94% of image width and y 4% through 96% of height. Extremely subtle natural fine paper grain, fine clean paper edges, slight thickness, soft believable narrow contact shadow below and to the right, even diffuse daylight. The sheet is completely blank and uniformly light, suitable for adding accurate typography later. Photorealistic printed material product photograph. Portrait 2:3 composition. No markings, typography, drawings, images, tape, pins, frames, props, strong gradients or vignette. The background and paper should be clean and almost orthographic, with realism provided by materials and subtle light, not dramatic staging.",
+      "sourcePath": "/Users/jeger-benninger/.codex/generated_images/01a1750b-11de-7502-9e62-ba9ba6fa22d2/exec-b9fe5df1-5405-4ad9-9cb6-ae669f9050c3.png",
+      "workspace_asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "composition_builder": "scripts/build-graphic-design-scale-examples.mjs",
+  "comparison_rule": "Only font-size on marked text elements and scale() on the centered workshop rosette may differ. Photographs, crop, text, font family, weight, ink, paper, lighting, alignment, baselines, and photo bounds stay identical.",
+  "revision_verification": {
+    "date": "2026-10-27",
+    "new_generation": false,
+    "verification": {
+      "comparisons": [
+        {
+          "name": "scale-event-poster-photographic",
+          "changedPixels": 37688,
+          "pixelsChangedOutsideScaleRegions": 0
+        },
+        {
+          "name": "scale-workshop-promotion-photographic",
+          "changedPixels": 38398,
+          "pixelsChangedOutsideScaleRegions": 0
+        },
+        {
+          "name": "scale-report-metrics-photographic",
+          "changedPixels": 12438,
+          "pixelsChangedOutsideScaleRegions": 0
+        }
+      ],
+      "desktopAndMobileBrowserChecks": "passed",
+      "textBounds": "within paper",
+      "pixelCheck": "Only intended scale regions differ."
+    },
+    "scope": "Saved standalone SVG comparisons at desktop and 396-pixel viewport, with same-origin raster comparisons; no viewer attention experiment or complete production article route test."
+  }
+}

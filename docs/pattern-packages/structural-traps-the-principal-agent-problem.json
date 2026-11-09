@@ -1,0 +1,127 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — The Principal-Agent Problem",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "the-principal-agent-problem",
+      "title": "The Principal-Agent Problem",
+      "entity_type": "concept",
+      "domain": "Information, incentive, and commitment problems; delegation, hidden action, participation, measurement, and risk",
+      "article": "content/concepts/the-principal-agent-problem.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Stephen A. Ross, The Economic Theory of Agency: The Principal’s Problem (1973)",
+          "url": "https://gwern.net/doc/economics/mechanism-design/1973-ross.pdf",
+          "supports": "Agency as acting for another; principal’s fee choice anticipates the agent’s action under uncertainty; participation constraints and limitations of observable payoffs.",
+          "read_method": "Original six-page paper opened and downloaded; definition, fee/action model, uncertainty, and minimum expected utility constraint read in web extraction and local text.",
+          "boundary": "Early formal treatment, not the invention of delegation or all agency theory. The estate-agent scenario and its qualitative incentive comparisons are original editorial illustrations, rather than results estimated by Ross."
+        },
+        {
+          "title": "Bengt Holmström and Paul Milgrom, Multitask Principal-Agent Analyses: Incentive Contracts, Asset Ownership, and Job Design (1991)",
+          "url": "https://gwern.net/doc/economics/1991-holmstrom.pdf",
+          "doi": "10.1093/jleo/7.special_issue.24",
+          "supports": "Incentives both allocate risk and direct effort among tasks; poorly measured dimensions can be neglected when efforts substitute; job design, ownership, and authority can complement compensation.",
+          "read_method": "Original paper opened and downloaded; introduction, task examples, model description with noisy signals/risk aversion, and effort-substitution discussion read from original extracted text.",
+          "boundary": "Conditional formal analysis using a specific multitask model. It does not prove that incentives always crowd out quality, and its multitask, risk-averse-agent model differs from the article’s simplified single-service comparison."
+        },
+        {
+          "title": "Edward P. Lazear, Performance Pay and Productivity (2000)",
+          "url": "https://houdekpetr.cz/%21data/papers/Lazear%202000.pdf",
+          "doi": "10.1257/aer.90.5.1346",
+          "supports": "Safelite’s transition from hourly wages to piece rates, observed output changes, within-worker and composition analyses, and importance of measurable output and detectable quality problems.",
+          "read_method": "Original published paper opened and downloaded. Introduction and decomposition of productivity findings, fixed-effects discussion, quality-control section, and explicit limitations on generalizing piecework profitability read.",
+          "boundary": "Observational data from one firm, not randomized general evidence for all occupations. Article gives no numerical Safelite effect as a prediction for the property sale and does not assume a uniform quality-control process throughout the firm’s transition."
+        },
+        {
+          "title": "Steven D. Levitt and Chad Syverson, Market Distortions When Agents Are Better Informed (2005 working paper; published 2008)",
+          "url": "https://pricetheory.uchicago.edu/levitt/Papers/market%20distortion.pdf",
+          "supports": "Introduction, model motivation, and abstract compare incentives for agents’ own home sales and clients’ sales; historical observational price and duration differences conditional on measured controls.",
+          "boundary": "Not randomized; does not establish that all agents misadvise or identify an optimal current contract. No historical commission percentages or empirical effect sizes are used in the hypothetical example.",
+          "checked": "2026-11-02",
+          "read_method": "Author-hosted working paper opened; abstract and introduction read."
+        }
+      ],
+      "related_patterns": [
+        "moral-hazard",
+        "adverse-selection",
+        "multitask-incentive-distortion",
+        "trust-games",
+        "bargaining-problems",
+        "bottlenecks-and-capacity-constraints"
+      ],
+      "status": "published",
+      "short_description": "Recognize when delegated work combines different interests with hard-to-observe actions, then design information, incentives, and decision rights around the work that actually matters.",
+      "use_when": [
+        "Who gains from waiting, and who bears the extra effort?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Improve the evidence supporting the principal’s retained decision and review the terms inducing advice.",
+        "Independent assessment is costly and fallible. Better information guarantees neither a higher price nor aligned interests."
+      ],
+      "example_structure": {
+        "scenario": "One property sale under an expressly hypothetical commission arrangement. Homeowner retains most incremental proceeds; agent bears further selling effort and receives only a share. Delegated advice has information limits; final sale is noisy. Independent review changes information rather than proving aligned incentives or a better sale. Existing moral-hazard, multitask, and Safelite research remains broader context.",
+        "changed_relationship": "Improve the evidence supporting the principal’s retained decision and review the terms inducing advice.",
+        "residual_constraints": "Independent assessment is costly and fallible. Better information guarantees neither a higher price nor aligned interests.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/principal-agent-maintenance.svg",
+          "content/assets/structural-traps/principal-agent-maintenance-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 844,
+            "textBlocks": 21
+          },
+          "phone": {
+            "width": 360,
+            "height": 1723,
+            "textBlocks": 21
+          }
+        },
+        "question": "Who gains from waiting, and who bears the extra effort?",
+        "alternative_text": "Hypothetical qualitative illustration. Nina keeps most of a higher sale price; Eli receives only a small share and bears extra selling effort. His recommendation informs her acceptance decision, while market conditions also affect the sale. An independent paid assessment adds evidence before she chooses. Change: Improve the evidence supporting the principal’s retained decision and review the terms inducing advice. Limitation: Independent assessment is costly and fallible. Better information guarantees neither a higher price nor aligned interests.",
+        "caption": "Hypothetical illustration. Roles share an interest in selling but can rank price and delay differently. Independent evidence can reduce reliance on unsupported advice without removing the incentive conflict. Fees, imperfect assessment, market risk, and lost current offers remain.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Nina keeps most of a higher sale price; Eli receives only a small share and bears extra selling effort. His recommendation informs her acceptance decision, while market conditions also affect the sale. An independent paid assessment adds evidence before she chooses. Change: Improve the evidence supporting the principal’s retained decision and review the terms inducing advice. Limitation: Independent assessment is costly and fallible. Better information guarantees neither a higher price nor aligned interests.",
+          "relationship_key": "Role cards compare incentives. Arrows show advice informing a decision and a later uncertain result; the green route adds evidence before that decision.",
+          "changed_relationship": "Improve the evidence supporting the principal’s retained decision and review the terms inducing advice.",
+          "residual_constraints": "Independent assessment is costly and fallible. Better information guarantees neither a higher price nor aligned interests.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "One property sale under an expressly hypothetical commission arrangement. Homeowner retains most incremental proceeds; agent bears further selling effort and receives only a share. Delegated advice has information limits; final sale is noisy. Independent review changes information rather than proving aligned incentives or a better sale. Existing moral-hazard, multitask, and Safelite research remains broader context.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

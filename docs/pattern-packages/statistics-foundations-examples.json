@@ -1,0 +1,65 @@
+{
+  "note": "Original fictional teaching cases. Assumed distributions and uncertainties are stated in each article.",
+  "updating": {
+    "successes": 8,
+    "trials": 10,
+    "priors": [
+      [2, 2],
+      [8, 8]
+    ],
+    "next_successes": 7,
+    "next_trials": 10
+  },
+  "precision": {
+    "sigma": 12,
+    "half_width": 3,
+    "z95": 1.959963984540054,
+    "retention": 0.8,
+    "display_n": [16, 64, 256]
+  },
+  "model_check": {
+    "x": [-3, -2, -1, 0, 1, 2, 3],
+    "y": [10, 5, 2, 1, 2, 5, 10],
+    "fresh_x": [-2.5, -0.5, 1.5, 2.5],
+    "fresh_y": [7.4, 1.5, 3.1, 7.0],
+    "counts": [0, 0, 0, 0, 0, 0, 4, 4, 6, 6]
+  },
+  "equivalence": {
+    "margin": 2,
+    "z90": 1.6448536269514722,
+    "z95": 1.959963984540054,
+    "cases": [
+      { "label": "Equivalent", "estimate": 0.4, "se": 0.5 },
+      { "label": "Inconclusive", "estimate": 0.4, "se": 2 },
+      { "label": "Beyond the margin", "estimate": 3, "se": 0.5 }
+    ]
+  },
+  "validation": {
+    "worker": ["A", "A", "A", "A", "B", "B", "B", "B"],
+    "month": [1, 2, 3, 4, 1, 2, 3, 4],
+    "outcome": [10, 11, 12, 13, 30, 31, 32, 33],
+    "train": {
+      "Random rows": [0, 2, 5, 7],
+      "Future months": [0, 1, 4, 5],
+      "New worker": [0, 1, 2, 3]
+    }
+  },
+  "measurement": {
+    "reference": 100,
+    "readings": {
+      "Stable, near reference": [99.8, 100, 100.2, 100],
+      "Stable, biased": [101.8, 102, 102.2, 102],
+      "Noisy, centered": [98, 102, 99, 101],
+      "Drifting": [99, 100, 101, 102]
+    },
+    "correction": 2,
+    "calibration_standard_uncertainty": 0.3
+  },
+  "sampling": {
+    "groups": ["New", "Established"],
+    "population": [200, 800],
+    "invited": [100, 100],
+    "responded": [80, 20],
+    "rating_mean": [4.5, 3.0]
+  }
+}

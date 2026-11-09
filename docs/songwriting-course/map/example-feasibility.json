@@ -1,0 +1,3334 @@
+{
+  "title": "Songwriting example selection and feasibility review",
+  "date": "2026-10-29",
+  "status": "selection and source review; no publication",
+  "scope": "All 49 current lessons mapped to original-first demonstrations and selected repertoire; all 15 local repertoire files reparsed. Edition licenses and key source pages checked. No fresh full-performance audition or exhaustive score alignment is claimed.",
+  "counts": {
+    "local_repertoire": 15,
+    "source_public_domain": 4,
+    "source_cc_by_sa": 2,
+    "public_reuse_unconfirmed": 9,
+    "lessons": 49,
+    "lessons_with_focused_original_material_identified": 8
+  },
+  "repertoire": [
+    {
+      "id": "withers-lean-on-me-demo",
+      "title": "Bill Withers — Lean on Me (demo reduction)",
+      "recommendation": "Keep familiar context",
+      "teaching_use": "Stepwise intervals and melodic contour",
+      "passage": "Provider demo bars 6–9 · 4/4",
+      "musical_scope": "Provider demo bars 6–9. The C C D E F phrase is present. Guide transformations exist, but this arrangement is not a note-perfect claim about Withers’s recording.",
+      "next_musical_check": "Confirm the selected later phrase against an appropriate score or performance; retain arrangement identity.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "The available download or community export does not establish a public-app redistribution grant. MIDI DB grants demo downloads; Hit Trax’s published terms restrict distribution absent a specific license.",
+      "source": "https://www.mididb.com/bill-withers/lean-on-me-midi/",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "MIDI DB provider demo",
+      "publication_ready": false,
+      "technical": {
+        "id": "withers-lean-on-me-demo",
+        "file": "withers-lean-on-me-demo.mid",
+        "path": ".local/music-repertoire/withers-lean-on-me-demo.mid",
+        "bytes": 4409,
+        "sha256": "e7c178c2ce84d1e12bf0c6a4dee155de996b4290fd71a4b626834b05d165f20f",
+        "sourceBeats": 54.503125,
+        "excerptBeats": 16,
+        "notes": 59,
+        "parts": {
+          "accompaniment": 45,
+          "melody": 14
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "white-stripes-seven-nation-army",
+      "title": "The White Stripes — Seven Nation Army (riff reduction)",
+      "recommendation": "Prioritize",
+      "teaching_use": "Motif hook and repetition",
+      "passage": "Community MIDI bars 5–8 · 4/4",
+      "musical_scope": "Community bars 5–8 contain the repeated E E G E D C B riff with unequal durations and a minimal beat. The bass rendering represents an octave-down guitar riff.",
+      "next_musical_check": "Confirm riff timing and register against the named recording; obtain a publication basis for the transcription and composition.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "Community download or export is available or was previously retrieved. No public-app reuse grant was established from the source page.",
+      "source": "https://www.midis101.com/free-midi/10674-the-white-stripes-seven-nation-army",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "Community MIDI via Midis101",
+      "publication_ready": false,
+      "technical": {
+        "id": "white-stripes-seven-nation-army",
+        "file": "white-stripes-seven-nation-army.mid",
+        "path": ".local/music-repertoire/white-stripes-seven-nation-army.mid",
+        "bytes": 19005,
+        "sha256": "b1e97e617580b94c24427fcd536943825889808056828f4540dc05f7950cecef",
+        "sourceBeats": 452,
+        "excerptBeats": 16,
+        "notes": 46,
+        "parts": {
+          "bass": 14,
+          "hat": 16,
+          "kick": 16
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "jackson-billie-jean",
+      "title": "Michael Jackson — Billie Jean (bass & beat)",
+      "recommendation": "Keep",
+      "teaching_use": "Bass ostinato and reference beat",
+      "passage": "Provider demo bars 5–8 · 4/4",
+      "musical_scope": "Provider bars 5–8 have the repeating bass with kick, snare and hat. The file is a backing reduction, not the original instrumental sound.",
+      "next_musical_check": "Confirm note and rhythm detail against the intended version; retain the bass-and-basic-beat scope.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "The available download or community export does not establish a public-app redistribution grant. MIDI DB grants demo downloads; Hit Trax’s published terms restrict distribution absent a specific license.",
+      "source": "https://www.mididb.com/michael-jackson/billie-jean-midi/",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "MIDI DB provider demo",
+      "publication_ready": false,
+      "technical": {
+        "id": "jackson-billie-jean",
+        "file": "jackson-billie-jean.mid",
+        "path": ".local/music-repertoire/jackson-billie-jean.mid",
+        "bytes": 6510,
+        "sha256": "08f2202fc509d97bf3ce6646a1c4ecb22f303bfc2f96b9da4194f92e402f3785",
+        "sourceBeats": 95.74739583333333,
+        "excerptBeats": 16,
+        "notes": 80,
+        "parts": {
+          "bass": 32,
+          "kick": 8,
+          "hat": 32,
+          "snare": 8
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "daft-get-lucky",
+      "title": "Daft Punk — Get Lucky (groove reduction)",
+      "recommendation": "Keep for interlocking parts",
+      "teaching_use": "Interlocking groove and part roles",
+      "passage": "Provider demo bars 2–5 · 4/4",
+      "musical_scope": "Provider bars 2–5 retain bass, guitar, chord reference and basic drums. The Bm D F#m E loop is present, but it is a poor first example if the lesson assumes one uncontested tonic.",
+      "next_musical_check": "Keep the first chord-number demonstration in an unambiguous original key; use this loop later with a stated tonal interpretation.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "The available download or community export does not establish a public-app redistribution grant. MIDI DB grants demo downloads; Hit Trax’s published terms restrict distribution absent a specific license.",
+      "source": "https://www.mididb.com/daft-punk/get-lucky-midi/",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "MIDI DB provider demo",
+      "publication_ready": false,
+      "technical": {
+        "id": "daft-get-lucky",
+        "file": "daft-get-lucky.mid",
+        "path": ".local/music-repertoire/daft-get-lucky.mid",
+        "bytes": 17813,
+        "sha256": "7ca2e5c5e25ed51f3deecf86ae3e853df300dca1ad798cc99b7c5bf71b42bcc9",
+        "sourceBeats": 84,
+        "excerptBeats": 16,
+        "notes": 189,
+        "parts": {
+          "bass": 23,
+          "kick": 16,
+          "accompaniment": 16,
+          "guitar": 92,
+          "hat": 34,
+          "snare": 8
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "aphex-avril-piano",
+      "title": "Aphex Twin — Avril 14th (community piano arrangement)",
+      "recommendation": "Secondary choice",
+      "teaching_use": "Broken harmony and melodic space",
+      "passage": "Community MIDI bars 1–4 · 4/4",
+      "musical_scope": "Community bars 1–4 use one merged piano track. A repaired playback copy removes eight zero-duration events. Independent left/right-hand isolation is not available.",
+      "next_musical_check": "Compare register and notes with a reliable score; do not label an automatic track split as separate hands. Prefer Bach for the first distributable arpeggiation case.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "Community download or export is available or was previously retrieved. No public-app reuse grant was established from the source page.",
+      "source": "https://onlinesequencer.net/4284602",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "Online Sequencer #4284602, based on #1913583",
+      "publication_ready": false,
+      "technical": {
+        "id": "aphex-avril-piano",
+        "file": "aphex-avril-piano.mid",
+        "path": ".local/music-repertoire/aphex-avril-piano.mid",
+        "bytes": 4145,
+        "sha256": "d64f8ba4a8cd5eb26d204ec0319db94fbe9ab1490cc685059f8a89005644669b",
+        "sourceBeats": 148,
+        "excerptBeats": 16,
+        "notes": 52,
+        "parts": {
+          "melody": 52
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "radiohead-no-surprises",
+      "title": "Radiohead — No Surprises (guitar reduction)",
+      "recommendation": "Prioritize for borrowing",
+      "teaching_use": "Borrowed minor iv and changed chord third",
+      "passage": "Community MIDI bars 2–5 · 4/4",
+      "musical_scope": "Community bars 2–5 supply the F-major setting and B-flat D-flat F figure. The guided lesson has controlled alternatives. The community source page could not be refreshed in this check; the local bytes are intact.",
+      "next_musical_check": "Retain the specific guitar-arrangement attribution and the scope of the earlier score check. Resolve publication permission before hosting.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "Community download or export is available or was previously retrieved. No public-app reuse grant was established from the source page.",
+      "source": "https://www.midis101.com/free-midi/56491-radiohead-no-surprises",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "Community MIDI via Midis101; track credit: Path B Guy @ AOL",
+      "publication_ready": false,
+      "technical": {
+        "id": "radiohead-no-surprises",
+        "file": "radiohead-no-surprises.mid",
+        "path": ".local/music-repertoire/radiohead-no-surprises.mid",
+        "bytes": 36232,
+        "sha256": "61d4d798e135e74cf3944f5d91f089e55617d9bf2c217329b6726184e04e1814",
+        "sourceBeats": 288,
+        "excerptBeats": 16,
+        "notes": 48,
+        "parts": {
+          "melody": 20,
+          "bass": 16,
+          "accompaniment": 12
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refresh failed; local file and prior provenance retained."
+    },
+    {
+      "id": "simon-scarborough-fair",
+      "title": "Simon & Garfunkel — Scarborough Fair (guitar demo)",
+      "recommendation": "Use narrowly",
+      "teaching_use": "Dorian colour over an E centre",
+      "passage": "Provider demo bars 3–10 · 3/4",
+      "musical_scope": "Provider bars 3–10 are a picked guitar introduction in 3/4, not the vocal melody or Canticle counterpoint. The traditional tune’s age does not establish permission for this modern provider arrangement.",
+      "next_musical_check": "Use only for the modal introduction represented by the file. Do not count it as a counterpoint or vocal-phrasing example.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "The available download or community export does not establish a public-app redistribution grant. MIDI DB grants demo downloads; Hit Trax’s published terms restrict distribution absent a specific license.",
+      "source": "https://www.mididb.com/simon-garfunkel/scarborough-fair-midi/",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "MIDI DB provider demo",
+      "publication_ready": false,
+      "technical": {
+        "id": "simon-scarborough-fair",
+        "file": "simon-scarborough-fair.mid",
+        "path": ".local/music-repertoire/simon-scarborough-fair.mid",
+        "bytes": 1453,
+        "sha256": "d45c1be75807649c13f2699fc12cc96ae3c0ff4c938ed3e0c80c0069c42ade0e",
+        "sourceBeats": 33.24166666666667,
+        "excerptBeats": 24,
+        "notes": 46,
+        "parts": {
+          "melody": 46
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 3,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "desmond-take-five",
+      "title": "Paul Desmond — Take Five (5/4 reduction)",
+      "recommendation": "Keep for meter",
+      "teaching_use": "Five-beat grouping",
+      "passage": "Provider demo bars 6–9 · 5/4",
+      "musical_scope": "Provider bars 6–9 preserve 5/4 with melody, piano and bass. Brush and ride timbres are omitted.",
+      "next_musical_check": "Confirm the intended 3+2 grouping and passage against the score; avoid using this reduction to certify the original swing feel.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "The available download or community export does not establish a public-app redistribution grant. MIDI DB grants demo downloads; Hit Trax’s published terms restrict distribution absent a specific license.",
+      "source": "https://www.mididb.com/paul-desmond/take-five-midi/",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "MIDI DB provider demo",
+      "publication_ready": false,
+      "technical": {
+        "id": "desmond-take-five",
+        "file": "desmond-take-five.mid",
+        "path": ".local/music-repertoire/desmond-take-five.mid",
+        "bytes": 4087,
+        "sha256": "cdf006e2aa880e6866fb719f54ff55b526e0825a93bf4cc0ec7094df787ac907",
+        "sourceBeats": 64.47395833333333,
+        "excerptBeats": 20,
+        "notes": 99,
+        "parts": {
+          "melody": 25,
+          "accompaniment": 58,
+          "bass": 16
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 5,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "chopin-fantaisie-impromptu",
+      "title": "F. Chopin — Fantaisie-Impromptu, Op. 66",
+      "recommendation": "Prioritize as advanced context",
+      "teaching_use": "Four against three",
+      "passage": "Source bars 5–8 · 4/4",
+      "musical_scope": "Source bars 5–8 have four upper starts against three lower starts within representative quarter-note spans. This is 4:3, not the first 3:2 demonstration.",
+      "next_musical_check": "Teach a minimal original 3:2 cycle first, then bracket one verified 4:3 span in the score.",
+      "permission_status": "source-public-domain",
+      "permission_evidence": "The edition page and Mutopia licensing page explicitly label the contribution Public Domain.",
+      "source": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1693",
+      "source_terms": "Public Domain label on the source edition",
+      "credit": "Mutopia edition by Guy D. Lederfein",
+      "publication_ready": false,
+      "technical": {
+        "id": "chopin-fantaisie-impromptu",
+        "file": "chopin-fantaisie-impromptu.mid",
+        "path": "docs/musical-composition/midi-research/chopin-fantaisie-impromptu.mid",
+        "bytes": 30982,
+        "sha256": "b29f6add7473b6e931c2e66349e860bf0e884cf68e19e90420a4870aae689f96",
+        "sourceBeats": 552,
+        "excerptBeats": 16,
+        "notes": 110,
+        "parts": {
+          "accompaniment": 49,
+          "melody": 61
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Edition page refreshed in this pass."
+    },
+    {
+      "id": "joplin-entertainer",
+      "title": "Scott Joplin — The Entertainer",
+      "recommendation": "Prioritize",
+      "teaching_use": "Syncopated melody against accompaniment",
+      "passage": "Source bars 5–12 · 2/4",
+      "musical_scope": "Source bars 5–12 provide a piano syncopation case with separate upper and lower parts. The recording-style choice is not automatically swing.",
+      "next_musical_check": "Mark the reference beats and ties or displaced attacks against the score. Do not present ragtime as proof of an Ellington swing ratio.",
+      "permission_status": "source-public-domain",
+      "permission_evidence": "The edition page and Mutopia licensing page explicitly label the contribution Public Domain.",
+      "source": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=263",
+      "source_terms": "Public Domain label on the source edition",
+      "credit": "Mutopia edition by Chris Sawer",
+      "publication_ready": false,
+      "technical": {
+        "id": "joplin-entertainer",
+        "file": "joplin-entertainer.mid",
+        "path": "docs/musical-composition/midi-research/joplin-entertainer.mid",
+        "bytes": 22084,
+        "sha256": "33e4e81ee64ffb2edf90d1c6a1ddee7276507296bfb915c2bb775231a467f066",
+        "sourceBeats": 303.5,
+        "excerptBeats": 16,
+        "notes": 139,
+        "parts": {
+          "melody": 70,
+          "accompaniment": 69
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 2,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Edition page refreshed in this pass."
+    },
+    {
+      "id": "wonder-superstition-demo",
+      "title": "Stevie Wonder — Superstition (demo reduction)",
+      "recommendation": "Keep as familiar context",
+      "teaching_use": "Displaced keyboard attacks and an interlocking groove",
+      "passage": "Provider demo bars 2–5 · 4/4",
+      "musical_scope": "Provider bars 2–5 retain selected keyboard, bass and drum lanes. The guided two-bar version raises the keyboard two octaves for piano clarity as an authored choice. It is not a reconstruction of every clavinet layer.",
+      "next_musical_check": "Verify the exact entrance relationship against the selected performance; retain the register adaptation label.",
+      "permission_status": "public-reuse-unconfirmed",
+      "permission_evidence": "The available download or community export does not establish a public-app redistribution grant. MIDI DB grants demo downloads; Hit Trax’s published terms restrict distribution absent a specific license.",
+      "source": "https://www.mididb.com/stevie-wonder/superstition-midi/",
+      "source_terms": "Private local demo playback; file is not bundled with the application",
+      "credit": "MIDI DB provider demo",
+      "publication_ready": false,
+      "technical": {
+        "id": "wonder-superstition-demo",
+        "file": "wonder-superstition-demo.mid",
+        "path": ".local/music-repertoire/wonder-superstition-demo.mid",
+        "bytes": 13145,
+        "sha256": "9fac1cf64de1a9f6dcb4eef8c60a823d804a0da8b8ecc3de1eb1ed716ab7dca5",
+        "sourceBeats": 76,
+        "excerptBeats": 16,
+        "notes": 154,
+        "parts": {
+          "bass": 48,
+          "melody": 47,
+          "kick": 19,
+          "hat": 31,
+          "snare": 8,
+          "open-hat": 1
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Page refreshed in this pass; no public-app grant established."
+    },
+    {
+      "id": "bach-invention-1",
+      "title": "J. S. Bach — Invention No. 1",
+      "recommendation": "Prioritize",
+      "teaching_use": "Motif imitation and independent lines",
+      "passage": "Source bars 1–4 · 4/4",
+      "musical_scope": "Source bars 1–4 have separate upper and lower parts. They support an introductory independent-lines or motif discussion, rather than a generic pop-drum groove claim.",
+      "next_musical_check": "Bracket the motive and its delayed entry against the score; inspect the simultaneous intervals rather than claiming every motion is contrary.",
+      "permission_status": "source-cc-by-sa-3.0",
+      "permission_evidence": "The edition page specifies CC BY-SA 3.0. Carry attribution, license and adaptation notices; distribute adaptations under the applicable ShareAlike terms.",
+      "source": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=40",
+      "source_terms": "Creative Commons Attribution-ShareAlike 3.0",
+      "credit": "Mutopia edition by jeff covey",
+      "publication_ready": false,
+      "technical": {
+        "id": "bach-invention-1",
+        "file": "bach-invention-1.mid",
+        "path": "docs/musical-composition/midi-research/bach-invention-1.mid",
+        "bytes": 3929,
+        "sha256": "9b9a6213941932d5171d9102d85912c3c1c61f8176ce02005cd2198881823c2d",
+        "sourceBeats": 88,
+        "excerptBeats": 16,
+        "notes": 86,
+        "parts": {
+          "melody": 55,
+          "accompaniment": 31
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Edition page refreshed in this pass."
+    },
+    {
+      "id": "bach-prelude-c",
+      "title": "J. S. Bach — Prelude in C major, BWV 846",
+      "recommendation": "Prioritize",
+      "teaching_use": "Arpeggiation and harmonic continuity",
+      "passage": "Source bars 1–4 · 4/4",
+      "musical_scope": "Source bars 1–4 have repeating broken-chord material. The importer’s two tracks are layout parts, not evidence of two independent melodies.",
+      "next_musical_check": "Use the opening for arpeggiation. Select and verify later source bars for secondary-dominant or cadence lessons; the four-bar excerpt does not stand in for the whole piece.",
+      "permission_status": "source-public-domain",
+      "permission_evidence": "The edition page and Mutopia licensing page explicitly label the contribution Public Domain.",
+      "source": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=5",
+      "source_terms": "Public Domain label on the source edition",
+      "credit": "Mutopia edition by Tobias Erbsland",
+      "publication_ready": false,
+      "technical": {
+        "id": "bach-prelude-c",
+        "file": "bach-prelude-c.mid",
+        "path": "docs/musical-composition/midi-research/bach-prelude-c.mid",
+        "bytes": 4676,
+        "sha256": "874e07d0479542971bfceaf420d6117da8d602d89d26eea4610e7dd1ef58bf26",
+        "sourceBeats": 140,
+        "excerptBeats": 16,
+        "notes": 64,
+        "parts": {
+          "accompaniment": 16,
+          "melody": 48
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Edition page refreshed in this pass."
+    },
+    {
+      "id": "mozart-k545-1",
+      "title": "W. A. Mozart — Piano Sonata K. 545, I",
+      "recommendation": "Keep",
+      "teaching_use": "Melody and broken-chord accompaniment",
+      "passage": "Source bars 1–4 · 4/4",
+      "musical_scope": "Source bars 1–4 separate melody and accompaniment. The full local source can supply later harmonic passages, but those are not the current excerpt.",
+      "next_musical_check": "Keep the opening for texture and melody support. Select the exact cadence and annotate harmony before using it for arrival.",
+      "permission_status": "source-cc-by-sa-3.0",
+      "permission_evidence": "The edition page specifies CC BY-SA 3.0. Carry attribution, license and adaptation notices; distribute adaptations under the applicable ShareAlike terms.",
+      "source": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=998",
+      "source_terms": "Creative Commons Attribution-ShareAlike 3.0",
+      "credit": "Mutopia edition by Alejandro Sierra",
+      "publication_ready": false,
+      "technical": {
+        "id": "mozart-k545-1",
+        "file": "mozart-k545-1.mid",
+        "path": "docs/musical-composition/midi-research/mozart-k545-1.mid",
+        "bytes": 11580,
+        "sha256": "54e510ba1e5865aeedc4e96bf70b83c93ecddf5b66660033ef98a5a8204ab02d",
+        "sourceBeats": 291,
+        "excerptBeats": 16,
+        "notes": 47,
+        "parts": {
+          "melody": 15,
+          "accompaniment": 32
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Edition page refreshed in this pass."
+    },
+    {
+      "id": "debussy-clair-de-lune",
+      "title": "Claude Debussy — Clair de lune",
+      "recommendation": "Keep selectively",
+      "teaching_use": "Space compound meter and chord spacing",
+      "passage": "Source bars 1–4 · 9/8",
+      "musical_scope": "Source bars 1–4 are in 9/8 and have separate upper and lower layout parts. Sampled piano represents notes and durations, not a particular pianist’s pedalling or expressive timing.",
+      "next_musical_check": "Specify one chord or rest relationship. Do not use the short opening to cover all extended-chord types or the whole-piece energy arc.",
+      "permission_status": "source-public-domain",
+      "permission_evidence": "The edition page and Mutopia licensing page explicitly label the contribution Public Domain.",
+      "source": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1778",
+      "source_terms": "Public Domain label on the source edition",
+      "credit": "Mutopia edition by Keith OHara",
+      "publication_ready": false,
+      "technical": {
+        "id": "debussy-clair-de-lune",
+        "file": "debussy-clair-de-lune.mid",
+        "path": "docs/musical-composition/midi-research/debussy-clair-de-lune.mid",
+        "bytes": 12476,
+        "sha256": "4eee9a1546ffde1ff74cb9824ba0e57cbc821185a15185bfea9faed97820bf8c",
+        "sourceBeats": 322.5,
+        "excerptBeats": 18,
+        "notes": 32,
+        "parts": {
+          "accompaniment": 8,
+          "melody": 24
+        },
+        "meters": [
+          {
+            "beat": 0,
+            "numerator": 9,
+            "denominator": 8
+          }
+        ],
+        "checks": "Parsed actual local bytes through the current importer and excerpt selector; finite notes, positive durations, in-range starts and nonempty output. No fresh audio or score alignment in this check."
+      },
+      "source_check": "Edition page refreshed in this pass."
+    }
+  ],
+  "lessons": [
+    {
+      "article_id": "songwriting-what-makes-a-song",
+      "title": "Protect the Song's Identity",
+      "current_number": 1,
+      "proposed_block": "0",
+      "role": "process",
+      "original_first": "Same phrase in two original settings",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Hallelujah — Cohen and Buckley versions",
+      "repertoire_id": null,
+      "media_route": "context",
+      "reason": "Identity across arrangements needs the two actual versions; MIDI alone cannot carry vocal interpretation.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Leonard Cohen / Jeff Buckley — “Hallelujah.”",
+          "teaching_angle": "Compare one shared melodic phrase or refrain across two very different vocal and instrumental settings. Ask what preserves the song’s identity while the recording’s character changes. The versions also differ in their selection of verses, so do not describe the entire lyric as unchanged.",
+          "identity_references": [
+            {
+              "label": "Cohen’s official recording page",
+              "url": "https://www.leonardcohen.com/video/hallelujah"
+            },
+            {
+              "label": "Buckley’s official Bearsville performance",
+              "url": "https://www.youtube.com/watch?v=y8AWFf7EAc4"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Beethoven — Symphony No. 5, movement I.",
+          "teaching_angle": "Follow the short opening rhythmic idea through changes of pitch, orchestration, and scale. It could help readers name what remains recognizable when the surface changes.",
+          "identity_references": [
+            {
+              "label": "Boston Symphony work notes",
+              "url": "https://www.bso.org/works/beethoven-symphony-no-5"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Daft Punk — “Around the World.”",
+          "teaching_angle": "Ask what identifies the recording before considering the repeated vocal phrase: the bass movement, rhythmic relationships, and timbres. This keeps the pattern applicable to dance music whose identity is not reducible to a sung melody.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=K0HSD_i2DvA"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-five-ways-to-begin",
+      "title": "Begin with What You Have",
+      "current_number": 2,
+      "proposed_block": "0",
+      "role": "process",
+      "original_first": "A seed begun from words melody rhythm or sound",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Blue Monday — New Order",
+      "repertoire_id": null,
+      "media_route": "context",
+      "reason": "A finished recording can illustrate layered material; it does not prove the historical writing process.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "New Order — “Blue Monday,” original single.",
+          "teaching_angle": "Treat the drum-machine pattern, sequenced material, and bass as possible entry points for building a section. Compare that imagined starting route with the band’s own account when preparing the study; the finished recording alone cannot establish the order in which its parts were written.",
+          "identity_references": [
+            {
+              "label": "Licensed original single",
+              "url": "https://open.spotify.com/album/0YdEEZG4XiZN7AOxuNrmaR"
+            },
+            {
+              "label": "band interview",
+              "url": "https://songexploder.net/new-order"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Schubert — “Gretchen am Spinnrade,” D 118.",
+          "teaching_angle": "Consider the piano's revolving figure as a possible compositional entry: what kind of vocal line and situation could such motion invite? Present this as an imagined writing route, not evidence that Schubert actually composed accompaniment first.",
+          "identity_references": [
+            {
+              "label": "Schubert Digital work record",
+              "url": "https://schubert-digital.acdh-dev.oeaw.ac.at/W-00026.html"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-listen-like-a-songwriter",
+      "title": "Listen Like a Songwriter",
+      "current_number": 4,
+      "proposed_block": "0",
+      "role": "process",
+      "original_first": "A short annotated listening map",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Prelude in C BWV 846 — Bach",
+      "repertoire_id": "bach-prelude-c",
+      "media_route": "midi",
+      "reason": "Use a small passage to separate what is heard from an analytical explanation.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Bach — Prelude in C major, BWV 846.",
+          "teaching_angle": "Set one listening question: where does the repeating broken-chord texture change its harmonic direction? It gives beginners an audible constant against which to notice change.",
+          "identity_references": [
+            {
+              "label": "Netherlands Bach Society performance",
+              "url": "https://www.bachvereniging.nl/en/bwv/bwv-846"
+            }
+          ],
+          "midi_source_keys": ["bach-prelude-c"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Radiohead — “Everything in Its Right Place,” on _Kid A_.",
+          "teaching_angle": "Make three separate passes for keyboard, lead voice, and manipulated vocal material. A simple entrance map could distinguish an observation about the recording from an interpretation of its mood.",
+          "identity_references": [
+            {
+              "label": "Official album stream",
+              "url": "https://radiohead.bandcamp.com/album/kid-a"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-capture-musical-seeds",
+      "title": "Capture Musical Seeds",
+      "current_number": 5,
+      "proposed_block": "0",
+      "role": "process",
+      "original_first": "An original seed memo and its captured variants",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": null,
+      "repertoire_id": null,
+      "media_route": "original-only",
+      "reason": "No named song is necessary to demonstrate capture; use our own recordings and notes.",
+      "reference_check": "No repertoire asset required for the first explanation.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Billie Eilish — “everything i wanted,” with FINNEAS.",
+          "teaching_angle": "The original voice memos in their interview would make the difference between a captured seed and a polished recording concrete. Focus on what the rough document preserved well enough to return to.",
+          "identity_references": [
+            {
+              "label": "Artist interview with voice memos",
+              "url": "https://songexploder.net/billie-eilish"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-pulse-and-tempo",
+      "title": "Set the Pace for the Phrase",
+      "current_number": 7,
+      "proposed_block": "1",
+      "role": "foundation",
+      "original_first": "One event pattern at two tempos",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Billie Jean — Michael Jackson",
+      "repertoire_id": "jackson-billie-jean",
+      "media_route": "midi",
+      "reason": "Use the bass-and-beat excerpt as context after separating tempo from activity.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Massive Attack — “Teardrop.”",
+          "teaching_angle": "Hear the busier repeating instrumental material beneath the spacious vocal. It could help readers separate the underlying pulse, subdivisions, and rate of sung information before deciding to speed up a song.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=u7K72X4eo_s"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Schubert — “Der Leiermann,” _Winterreise_, D 911 No. 24.",
+          "teaching_angle": "Compare the recurring accompaniment with the measured vocal phrases. This could show how a steady instrumental motion leaves room for an unhurried delivery.",
+          "identity_references": [
+            {
+              "label": "Historical edition record",
+              "url": "https://schubert-online.at/activpage/werke_einzelansicht.php?herkunft=allewerke&top=7&werke_id=656"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-beats-bars-and-meter",
+      "title": "Group the Beat Around the Phrase",
+      "current_number": 8,
+      "proposed_block": "1",
+      "role": "foundation",
+      "original_first": "Six small pulses grouped in two ways",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Take Five — Paul Desmond / Dave Brubeck Quartet",
+      "repertoire_id": "desmond-take-five",
+      "media_route": "midi",
+      "reason": "Teach beat versus division first; the available 5/4 excerpt is the later five-beat case.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Radiohead — “15 Step,” on _In Rainbows_.",
+          "teaching_angle": "Use the recurring five-beat grouping as an alternative to four-beat expectations. Keep the first demonstration physical and audible: where does the pattern start again, even while the individual sounds change?",
+          "identity_references": [
+            {
+              "label": "Official album stream",
+              "url": "https://radiohead.bandcamp.com/album/in-rainbows"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "The Animals — “House of the Rising Sun,” original hit recording.",
+          "teaching_angle": "Follow the rolling accompaniment and compare a two-large-beat compound count with its smaller subdivisions. Fix the count to the selected score/recording before illustrating 6/8; do not call every flowing arpeggio compound meter.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=MJkr0DWbhTk"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Chopin — Waltz in D-flat major, Op. 64 No. 1.",
+          "teaching_angle": "Compare the three-beat dance framework with the many quicker notes passing through it. This is a clear way to show that the number of note attacks is not the meter.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=483"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-subdivision-and-rests",
+      "title": "Make Space Part of the Rhythm",
+      "current_number": 9,
+      "proposed_block": "1",
+      "role": "pattern",
+      "original_first": "One bar with a note replaced by a rest",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Clair de lune — Debussy",
+      "repertoire_id": "debussy-clair-de-lune",
+      "media_route": "midi",
+      "reason": "Use the opening’s space and compound framework narrowly; James Blake remains audio context for production-scale silence.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "James Blake — “Limit to Your Love.”",
+          "teaching_angle": "Contrast the piano-and-voice passages, gaps, and bass entrances. This is a vivid example of silence and withheld low-frequency energy becoming part of the arrangement's rhythm.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=oOT2-OTebx0"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Billie Eilish — “when the party's over.”",
+          "teaching_angle": "Attend to the ends of vocal phrases and the space before a response. It could show why adding accompaniment into every opening may weaken the delivery.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=pbMwTqkKSps"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-syncopation-and-anticipation",
+      "title": "Pull an Entrance Across the Beat",
+      "current_number": 10,
+      "proposed_block": "1",
+      "role": "pattern",
+      "original_first": "On-beat versus shifted kick",
+      "original_asset_state": "Original syncopation A/B exists.",
+      "selected_work": "The Entertainer — Joplin",
+      "repertoire_id": "joplin-entertainer",
+      "media_route": "midi",
+      "reason": "Primary distributable candidate. Superstition is the familiar alternative; exact Bonnaroo Videotape remains deferred.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Radiohead — Videotape, Bonnaroo 17 June 2006",
+          "teaching_angle": "Use the confirmed live version. Establish the drummer/bass beat independently, then show the piano placement against it. An optional guide pulse is our teaching aid, not an extra part claimed to be on the recording.",
+          "identity_references": [
+            {
+              "label": "Official performance library route",
+              "url": "https://www.radiohead.com/library/#ir/2006-06-17-bonnaroo"
+            },
+            {
+              "label": "Berklee contextual rhythm study",
+              "url": "https://www.berklee.edu/berklee-now/news/vox-radiohead-s-secret-rhythm"
+            }
+          ],
+          "midi_source_keys": [
+            "videotape-bonnaroo",
+            "videotape-community",
+            "videotape-bonnaroo-drums",
+            "videotape-official-score",
+            "videotape-analysis"
+          ],
+          "midi_availability": "MIDI offer found; file/version not verified.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Scott Joplin — “The Entertainer.”",
+          "teaching_angle": "Compare the melody's offbeat activity with the left hand's reference pattern. A short, carefully counted phrase could make syncopation easier to hear without shifting the entire accompaniment.",
+          "identity_references": [
+            {
+              "label": "Library of Congress score",
+              "url": "https://www.loc.gov/item/2023864238/"
+            }
+          ],
+          "midi_source_keys": ["joplin-entertainer"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Stevie Wonder — “Superstition.”",
+          "teaching_angle": "Follow one entrance in the clavinet riff against the steady beat. The lesson would isolate a rhythmic relationship instead of reducing the whole groove to the instruction “play off the beat.”",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=egqv1mtos6A"
+            }
+          ],
+          "midi_source_keys": ["wonder-superstition-demo", "superstition-analysis"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-swing-and-timing",
+      "title": "Give the Groove a Consistent Feel",
+      "current_number": 11,
+      "proposed_block": "1",
+      "role": "pattern",
+      "original_first": "Straight versus unequal pairs; separately a late whole part",
+      "original_asset_state": "Original swing A/B exists.",
+      "selected_work": "It Don’t Mean a Thing — Ellington with Ivie Anderson",
+      "repertoire_id": null,
+      "media_route": "audio-needed",
+      "reason": "Keep the original beat as the playable comparison; a performed swing example needs its recording or an independently checked expressive transcription.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Duke Ellington and His Orchestra, featuring Ivie Anderson — “It Don't Mean a Thing (If It Ain't Got That Swing).”",
+          "teaching_angle": "Follow the band's shared phrasing rather than treating swing as a fixed mathematical ratio. Specify the early Ellington/Anderson recording when choosing the listening link.",
+          "identity_references": [
+            {
+              "label": "Smithsonian archival recording notes",
+              "url": "https://folkways-media.si.edu/docs/folkways/artwork/FW02804.pdf"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "J Dilla — “Time: The Donut of the Heart,” on _Donuts_.",
+          "teaching_angle": "Listen for the recurring relationship among sample, kick, and snare. The point is a repeatable feel, not a claim that random timing variation reproduces Dilla's approach or that all his tracks use one formula.",
+          "identity_references": [
+            {
+              "label": "Official label release",
+              "url": "https://dilla.bandcamp.com/album/donuts"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "D'Angelo — “Untitled (How Does It Feel).”",
+          "teaching_angle": "Compare the vocal placement with the instrumental reference. It offers a useful distinction between relaxed placement around a shared pulse and an ensemble simply losing time. Avoid assigning an exact millisecond offset without measurement.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=SxVNOnPyvIU"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-interlock-the-groove",
+      "title": "Interlock the Groove",
+      "current_number": 12,
+      "proposed_block": "1",
+      "role": "pattern",
+      "original_first": "Three parts that either share or leave each other space",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Get Lucky — Daft Punk",
+      "repertoire_id": "daft-get-lucky",
+      "media_route": "midi",
+      "reason": "Use retained guitar, bass and drum parts for interlocking. Source permission remains unresolved for public hosting.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Fela Kuti — “Water No Get Enemy,” on _Expensive Shit_.",
+          "teaching_angle": "Follow one accompaniment part at a time before hearing the composite groove. It would demonstrate how repeated parts can be relatively economical individually while producing a rich ensemble relationship.",
+          "identity_references": [
+            {
+              "label": "Official label release",
+              "url": "https://felakuti.bandcamp.com/album/expensive-shit-1975"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Bach — Invention in C major, BWV 772.",
+          "teaching_angle": "Trace how the two lines answer, overlap, and exchange material. This makes an illuminating historical comparison for arranging complementary parts, while keeping contrapuntal imitation distinct from a drum groove.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=40"
+            }
+          ],
+          "midi_source_keys": ["bach-invention-1"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-pitch-and-intervals",
+      "title": "Intervals and Melodic Shape",
+      "current_number": 13,
+      "proposed_block": "2",
+      "role": "foundation",
+      "original_first": "Equal pitch distances versus one changed interval",
+      "original_asset_state": "Original interval sketch and comparisons exist.",
+      "selected_work": "Lean on Me — Bill Withers",
+      "repertoire_id": "withers-lean-on-me-demo",
+      "media_route": "midi",
+      "reason": "The foundation sketch and guided local lesson exist; distinguish the provider reduction from the original recording.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Bill Withers — “Lean on Me.”",
+          "teaching_angle": "Compare the repeated notes and neighboring steps in a short vocal phrase with its larger pitch movements. A checked interval sketch could show why preserving the distances matters when moving a familiar tune to another starting note.",
+          "identity_references": [
+            {
+              "label": "Official audio",
+              "url": "https://www.youtube.com/watch?v=gOZgo8gMIoM"
+            }
+          ],
+          "midi_source_keys": ["lean-on-me-analysis", "lean-on-me-provider"],
+          "midi_availability": "MIDI offer found; file/version not verified.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Beethoven — the “Ode to Joy” theme, Symphony No. 9, movement IV.",
+          "teaching_angle": "Begin with the tune's repeated notes and stepwise motion. Its familiarity can help separate interval relationships from the octave, instrument, or key in which the theme appears.",
+          "identity_references": [
+            {
+              "label": "Performing institution's work notes",
+              "url": "https://handelandhaydn.org/program-notes-beethoven-symphony-no-9/"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Kraftwerk — “The Model,” _3-D The Catalogue_ recording.",
+          "teaching_angle": "Follow the recurring instrumental melody through the electronic setting. It could demonstrate that intervals remain useful when there is no acoustic instrument to watch. Use this named version consistently rather than mixing it with the original studio recording.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=C3nL7c34VK0"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-build-a-scale",
+      "title": "Build a Scale from Steps",
+      "current_number": 14,
+      "proposed_block": "2",
+      "role": "foundation",
+      "original_first": "Major and natural minor step patterns on a fixed tonic",
+      "original_asset_state": "Original major-scale and major/minor comparisons exist.",
+      "selected_work": null,
+      "repertoire_id": null,
+      "media_route": "original-only",
+      "reason": "A named song is unnecessary before the learner can follow the construction. Joy to the World can be an optional future tune study after a source edition is selected.",
+      "reference_check": "No repertoire asset required for the first explanation.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Joy to the World — ANTIOCH tune; opening descending major scale",
+          "teaching_angle": "Use a newly authored note-only rendition of the named tune after checking a historical score. Compare its descending step pattern with the original scale-construction example; do not treat every folk/hymn arrangement as the same source.",
+          "identity_references": [],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-scales-and-tonal-home",
+      "title": "Establish a Tonal Home",
+      "current_number": 15,
+      "proposed_block": "2",
+      "role": "pattern",
+      "original_first": "The same collection with C or A as home",
+      "original_asset_state": "Original C-home and A-home comparisons exist.",
+      "selected_work": null,
+      "repertoire_id": null,
+      "media_route": "original-only",
+      "reason": "Keep the tonal-centre contrast controlled. A So What or modal example is later context rather than the first proof of tonic.",
+      "reference_check": "No repertoire asset required for the first explanation.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Miles Davis — “So What,” _Kind of Blue_.",
+          "teaching_angle": "Attend to bass, recurring responses, and sustained modal regions. It could establish that a center can feel clear without a stream of conventional dominant-to-tonic cadences.",
+          "identity_references": [
+            {
+              "label": "Official album and preview",
+              "url": "https://www.milesdavis.com/albums/kind-of-blue/"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Bach — Cello Suite No. 1 in G major, BWV 1007, Prelude.",
+          "teaching_angle": "Hear how a single melodic instrument can suggest harmony and a center through its arpeggios and returns. It is a strong counterexample to needing a full block chord to establish home.",
+          "identity_references": [
+            {
+              "label": "Lucia Swarts / Netherlands Bach Society performance",
+              "url": "https://www.bachvereniging.nl/en/bwv/bwv-1007"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-build-and-hear-chords",
+      "title": "Choose Chords by Their Notes",
+      "current_number": 16,
+      "proposed_block": "2",
+      "role": "foundation",
+      "original_first": "C major and C minor sounded separately then together",
+      "original_asset_state": "Original major/minor triad comparisons exist.",
+      "selected_work": "Prelude in C BWV 846 — Bach",
+      "repertoire_id": "bach-prelude-c",
+      "media_route": "midi",
+      "reason": "Use the work later for broken harmony. Do not turn the arpeggiation case into the first explanation of all triad qualities.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Aphex Twin — “Avril 14th,” on _Drukqs_.",
+          "teaching_angle": "Its piano texture could bridge electronic listeners into hearing the pitches inside an accompaniment. Reduce a selected passage carefully; not every simultaneous pitch collection should be forced into a plain triad label.",
+          "identity_references": [
+            {
+              "label": "Official Warp release",
+              "url": "https://aphextwin.warp.net/release/71102-aphex-twin-drukqs?lang=en_US"
+            }
+          ],
+          "midi_source_keys": ["aphex-avril-henry", "aphex-avril-jake", "avril-analysis"],
+          "midi_availability": "Analysis or historical MIDI lead found; no usable file verified.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Bach — Prelude in C major, BWV 846.",
+          "teaching_angle": "Reduce a few broken-chord groups to their sounding pitch collections. This makes the difference between a chord's notes and the order in which those notes are played tangible. Start with simple groups before addressing the more complex harmony later.",
+          "identity_references": [
+            {
+              "label": "Official performance",
+              "url": "https://www.bachvereniging.nl/en/bwv/bwv-846"
+            }
+          ],
+          "midi_source_keys": ["bach-prelude-c"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-chord-families-and-numbers",
+      "title": "Think in Chord Numbers",
+      "current_number": 17,
+      "proposed_block": "2",
+      "role": "foundation",
+      "original_first": "I IV V moved between two clear major keys",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": null,
+      "repertoire_id": null,
+      "media_route": "original-only",
+      "reason": "Use an unambiguous original home for the first chord-number explanation; Get Lucky’s loop is a later interpretive case.",
+      "reference_check": "No repertoire asset required for the first explanation.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Daft Punk featuring Pharrell Williams and Nile Rodgers — “Get Lucky.”",
+          "teaching_angle": "Use the recurring progression to discuss relative chord relationships and harmonic rhythm. It is also a useful boundary case: agree on and explain the tonal-center reading before presenting a single Roman-numeral analysis as settled.",
+          "identity_references": [
+            {
+              "label": "Official audio",
+              "url": "https://www.youtube.com/watch?v=5NV6Rdv1a3I"
+            }
+          ],
+          "midi_source_keys": ["get-lucky-analysis"],
+          "midi_availability": "Analysis or historical MIDI lead found; no usable file verified.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "The Beatles — “Let It Be.”",
+          "teaching_angle": "Compare chord names with Roman numerals in one short passage, then move the same relationships to another key. Keep the actual sequence and phrase lengths visible rather than substituting a generic four-chord loop.",
+          "identity_references": [
+            {
+              "label": "Official performance page",
+              "url": "https://www.thebeatles.com/let-it-be-3"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Pachelbel — Canon in D.",
+          "teaching_angle": "Number the repeating harmonic framework and retain its durations while the upper parts change. It provides an especially clear comparison between a progression and the much richer musical result built on it.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2047"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-circle-of-fifths",
+      "title": "Transpose the Song to Fit the Voice",
+      "current_number": 18,
+      "proposed_block": "2",
+      "role": "pattern",
+      "original_first": "One original phrase and progression shifted together",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": null,
+      "repertoire_id": null,
+      "media_route": "original-only",
+      "reason": "Teach the signature map first. Amazing Grace is optional future repertoire only after selecting an actual tune edition and preparing the asset.",
+      "reference_check": "No repertoire asset required for the first explanation.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "“Amazing Grace,” using the NEW BRITAIN tune.",
+          "teaching_angle": "Use the historical tune as the basis for a newly made two-key demonstration, asking where the low and high notes sit for a particular singer. Name the tune: the text has been paired with other melodies.",
+          "identity_references": [
+            {
+              "label": "Archive of historical tune sources",
+              "url": "https://www.hymnologyarchive.com/amazing-grace"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Schubert — “An die Musik,” in high- and low-voice editions.",
+          "teaching_angle": "Compare the same song in two published voice ranges, checking both ends of the line and the accompanying harmony. This is stronger evidence of transposition than assuming that two singers' very different arrangements differ only in key.",
+          "identity_references": [
+            {
+              "label": "High-voice edition",
+              "url": "https://www.halleonard.com/product/1143/franz-schubert-15-selected-songs-high-voice"
+            },
+            {
+              "label": "low-voice edition",
+              "url": "https://www.halleonard.com/product/1144/franz-schubert-15-selected-songs-low-voice"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-progressions-and-arrival",
+      "title": "Decide Where the Harmony Arrives",
+      "current_number": 19,
+      "proposed_block": "2",
+      "role": "pattern",
+      "original_first": "The same phrase with open settled and redirected endings",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Sonata K 545 I — Mozart",
+      "repertoire_id": "mozart-k545-1",
+      "media_route": "new-passage",
+      "reason": "A full local score/MIDI exists, but select a cadence later than the existing opening excerpt.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Mozart — Piano Sonata in C major, K 545, movement I.",
+          "teaching_angle": "Compare a passage that keeps moving with a clearly articulated phrase ending. A short score-backed example could separate harmonic direction, melodic punctuation, and the feeling of an arrival.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=998"
+            }
+          ],
+          "midi_source_keys": ["mozart-k545-1"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Sam Cooke — “A Change Is Gonna Come.”",
+          "teaching_angle": "Compare the endings of recurring vocal passages with the contrasting middle section. It could show how melody, harmony, and orchestral pacing cooperate to make an arrival feel earned. Select a short phrase and check its cadence before turning the listening observation into a harmonic diagram.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=Z5zDRtEC0x0"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Bicep — “Glue,” on _Bicep_.",
+          "teaching_angle": "Ask where arrivals are felt when recurring harmony works with entrances, texture, and rhythmic release. It is a useful contrast with a classical cadence; do not invent a new chord change for every perceived rise in energy.",
+          "identity_references": [
+            {
+              "label": "Artist/label release",
+              "url": "https://bicep.bandcamp.com/album/bicep"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-finish-a-tiny-song",
+      "title": "Finish a Tiny Song",
+      "current_number": 6,
+      "proposed_block": "2",
+      "role": "process",
+      "original_first": "The complete original Porch Light miniature",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": null,
+      "repertoire_id": null,
+      "media_route": "original-only",
+      "reason": "The full sixteen-bar project needs a dedicated playback arrangement; existing prose and fragments are not that complete asset.",
+      "reference_check": "No repertoire asset required for the first explanation.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Vashti Bunyan — “Diamond Day.”",
+          "teaching_angle": "Map how a brief vocal piece establishes a scene, repeats a manageable idea, and comes to a close. It could make finishing a small song feel achievable without requiring a contrasting bridge, a dramatic climax, or a full-band arrangement.",
+          "identity_references": [
+            {
+              "label": "Licensed song release",
+              "url": "https://music.apple.com/us/song/269891652"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Schumann — “Von fremden Ländern und Menschen,” _Kinderszenen_, Op. 15 No. 1.",
+          "teaching_angle": "Map the compact opening, contrast, and return. It offers a complete miniature whose sense of proportion matters more than fitting the labels verse, chorus, and bridge.",
+          "identity_references": [
+            {
+              "label": "Henle edition",
+              "url": "https://www.henle.de/de/Kinderszenen-op.-15/HN-44"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-repetition-variation-surprise",
+      "title": "Repeat with a Reason",
+      "current_number": 3,
+      "proposed_block": "3",
+      "role": "pattern",
+      "original_first": "A repeated figure with one controlled change",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Seven Nation Army — The White Stripes",
+      "repertoire_id": "white-stripes-seven-nation-army",
+      "media_route": "midi",
+      "reason": "Prefer this available riff for a focused repetition case; retain Four Tet as optional production context.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Four Tet — “Two Thousand and Seventeen,” on _New Energy_.",
+          "teaching_angle": "Follow the plucked figure and mark changes around its returns. This is an approachable example of development through context, layering, and small changes rather than an escalating series of new melodies.",
+          "identity_references": [
+            {
+              "label": "Artist release",
+              "url": "https://fourtet.bandcamp.com/album/new-energy"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Ravel — _Boléro_.",
+          "teaching_angle": "Compare the stability of the recurring material with the changing orchestral color and accumulation. This can show that purposeful repetition does not require rewriting the tune on every return.",
+          "identity_references": [
+            {
+              "label": "Score-and-recording study",
+              "url": "https://timbreandorchestration.org/learn-about-orchestration/scores-and-recordings/ravel/bolero"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-start-with-a-motif",
+      "title": "Start with a Motif",
+      "current_number": 20,
+      "proposed_block": "3",
+      "role": "pattern",
+      "original_first": "The three-note original seed inside a longer phrase",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Seven Nation Army — The White Stripes",
+      "repertoire_id": "white-stripes-seven-nation-army",
+      "media_route": "midi",
+      "reason": "Strong recognizable motif case; distinguish motif identity from the foreground role of a hook.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "The White Stripes — “Seven Nation Army.”",
+          "teaching_angle": "Isolate the recurring guitar figure and follow its relationship to the vocal and fuller ensemble passages. It is a clear example of a tiny pitch-and-rhythm idea carrying a large share of a song’s identity without being the whole song.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=0J2QdDbelmY"
+            }
+          ],
+          "midi_source_keys": ["seven-nation-analysis"],
+          "midi_availability": "Analysis or historical MIDI lead found; no usable file verified.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Beethoven — Symphony No. 5, movement I.",
+          "teaching_angle": "Take the opening rhythmic cell as a deliberately tiny unit and compare a few of its responses. Here the focus is building a phrase from the unit; article 1 uses the same work to discuss identity across larger changes.",
+          "identity_references": [
+            {
+              "label": "Work notes",
+              "url": "https://www.bso.org/works/beethoven-symphony-no-5"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Jon Hopkins — “Open Eye Signal,” on _Immunity_.",
+          "teaching_angle": "Follow the recurring bass figure as the track develops around it. It offers an electronic example of a small unit capable of sustaining a much longer structure.",
+          "identity_references": [
+            {
+              "label": "Artist/label release",
+              "url": "https://jonhopkins.bandcamp.com/album/immunity"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-contour-and-register",
+      "title": "Give the Melody a Destination",
+      "current_number": 21,
+      "proposed_block": "3",
+      "role": "pattern",
+      "original_first": "A contour with a reserved high point",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Wuthering Heights — Kate Bush",
+      "repertoire_id": null,
+      "media_route": "audio-needed",
+      "reason": "Keep the original contour playable; source a precise sung passage rather than substituting any convenient available melody.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Kate Bush — “Wuthering Heights.”",
+          "teaching_angle": "Compare the register and contour of its contrasting vocal passages. The useful question is what a high register does to the character and intensity of a phrase, not whether beginners should imitate Bush's range.",
+          "identity_references": [
+            {
+              "label": "Official video, version 1",
+              "url": "https://www.youtube.com/watch?v=-1pMMIe4hb4"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Schubert — “Ellens Gesang III” (“Ave Maria”), D 839.",
+          "teaching_angle": "Sketch the rise, sustained emphasis, and release of a selected vocal phrase. Specify the original song setting rather than silently switching between its German text and later Latin adaptations.",
+          "identity_references": [
+            {
+              "label": "Schubert critical-edition database",
+              "url": "https://schubert-ausgabe.de/en/research/schubert-database/?FORM%5Bdetail%5D=475&cursor=925"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "SOPHIE — “Is It Cold in the Water?”",
+          "teaching_angle": "Compare the vocal line's register with the surrounding electronic activity. It could show how a melodic destination is supported by sound and space, rather than explained by the highest pitch alone.",
+          "identity_references": [
+            {
+              "label": "Licensed song release",
+              "url": "https://music.apple.com/us/album/is-it-cold-in-the-water/1709023350?i=1709023358"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-melody-and-harmony",
+      "title": "Support or Challenge the Melody Note",
+      "current_number": 22,
+      "proposed_block": "3",
+      "role": "pattern",
+      "original_first": "A held melody note over two harmonic settings",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Sonata K 545 I — Mozart",
+      "repertoire_id": "mozart-k545-1",
+      "media_route": "midi",
+      "reason": "The opening can show melody above accompaniment. A controlled reharmonization is authored material, not another Mozart performance.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Amy Winehouse — “Love Is a Losing Game.”",
+          "teaching_angle": "Follow a held or recurring vocal note through a short harmonic passage, listening for how the accompaniment changes its expressive weight. Check the actual pitches before labeling a note as a chord tone, suspension, or other tension; a sustained note is not automatically a suspension.",
+          "identity_references": [
+            {
+              "label": "Licensed song release",
+              "url": "https://music.apple.com/us/song/1422677786"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Bach — “Air,” Orchestral Suite No. 3 in D major, BWV 1068, movement II.",
+          "teaching_angle": "Follow a sustained upper note while other voices move beneath it. It gives a concrete route into hearing a note's changing relationship to harmony without changing the note itself.",
+          "identity_references": [
+            {
+              "label": "Netherlands Bach Society performance",
+              "url": "https://www.bachvereniging.nl/en/bwv/bwv-1068"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Portishead — “Roads,” on _Dummy_.",
+          "teaching_angle": "Listen to the expressive relationship between the vocal and the repeating keyboard harmony. It could introduce tension that is carried by a note's context and delivery rather than by a complicated new melody.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=7nxWP9BhI7w"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-phrases-and-breathing",
+      "title": "Let the Phrase Breathe",
+      "current_number": 23,
+      "proposed_block": "3",
+      "role": "pattern",
+      "original_first": "A phrase with a counted gap before the next entrance",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Mohabbat — Arooj Aftab",
+      "repertoire_id": null,
+      "media_route": "audio-needed",
+      "reason": "Actual breathing, flexible delivery and accompanying space need the recording; the piano reduction is not equivalent.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Arooj Aftab — “Mohabbat,” on _Vulture Prince_.",
+          "teaching_angle": "Attend to the length, release, and space around vocal gestures. It could widen the course's idea of a phrase beyond short English-language pop lines; provide a concise contextual explanation without imitating a tradition through a generic rule.",
+          "identity_references": [
+            {
+              "label": "Artist/label release",
+              "url": "https://aroojaftab.bandcamp.com/album/vulture-prince"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Schumann — “Träumerei,” _Kinderszenen_, Op. 15 No. 7.",
+          "teaching_angle": "Draw phrase arcs through the piano melody and notice where an instrumental line suggests breathing. This is an analogy for phrasing, not evidence that an instrumental phrase has the same physical limits as a singer.",
+          "identity_references": [
+            {
+              "label": "Urtext edition",
+              "url": "https://www.henle.de/de/Kinderszenen-op.-15/HN-44"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-write-a-hook",
+      "title": "Write a Hook",
+      "current_number": 24,
+      "proposed_block": "3",
+      "role": "pattern",
+      "original_first": "A hook heard in a clear gap and in a crowded texture",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Seven Nation Army — The White Stripes",
+      "repertoire_id": "white-stripes-seven-nation-army",
+      "media_route": "midi",
+      "reason": "Reuse the riff for foreground recognizability with a different question from motif construction.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Kylie Minogue — “Can't Get You Out of My Head.”",
+          "teaching_angle": "Follow the recurring vocal cell and its relationship to the electronic groove. It could demonstrate a compact hook whose repetition is part of the song's subject and character.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=c18441Eh_WE"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Michael Jackson — “Billie Jean.”",
+          "teaching_angle": "Compare the bass hook with the sung refrain. It is a strong example of multiple memorable features taking different roles, rather than one hook having to carry every part of a song.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Mozart — _Eine kleine Nachtmusik_, K 525, movement I.",
+          "teaching_angle": "Isolate the opening gesture and ask why it is easy to recognize before the listener knows the whole movement. “Hook” is our songwriting comparison here, not Mozart's historical label for the phrase.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=900"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-develop-without-losing-the-idea",
+      "title": "Develop Without Losing the Idea",
+      "current_number": 25,
+      "proposed_block": "3",
+      "role": "pattern",
+      "original_first": "A repeated versus sequenced original motif",
+      "original_asset_state": "Original repeated/sequence A/B exists.",
+      "selected_work": "Invention No 1 BWV 772 — Bach",
+      "repertoire_id": "bach-invention-1",
+      "media_route": "midi",
+      "reason": "Bracket the motive and transformation; avoid using the phrase developing variation as a historical label for every alteration.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "The Beatles — “Blackbird.”",
+          "teaching_angle": "Follow a recurring accompaniment gesture as phrases and harmonic positions change. It could show how a recognizable playing idea can connect varied material rather than remaining an identical loop under everything.",
+          "identity_references": [
+            {
+              "label": "Official song page",
+              "url": "https://www.thebeatles.com/blackbird"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Beethoven — Symphony No. 6, “Pastoral,” movement I.",
+          "teaching_angle": "Compare repetitions, extensions, and changes of context in the opening material. It offers development that can feel expansive without requiring constant replacement of the basic idea.",
+          "identity_references": [
+            {
+              "label": "Boston Symphony work notes",
+              "url": "https://www.bso.org/works/beethoven-symphony-no-6-pastoral"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-inversions-and-voice-leading",
+      "title": "Connect Chords with Small Moves",
+      "current_number": 32,
+      "proposed_block": "4",
+      "role": "pattern",
+      "original_first": "Two voices held while one moves to the next chord",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Prelude in C BWV 846 — Bach",
+      "repertoire_id": "bach-prelude-c",
+      "media_route": "midi",
+      "reason": "Show the pitch connections explicitly. Its two MIDI layout tracks do not isolate each chord voice automatically.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "The Beach Boys — “God Only Knows.”",
+          "teaching_angle": "Use a very short, checked passage to compare the chord labels with the bass and upper-voice motion. Its richness is a reason to make a precise small example, not to give beginners an unexplained chart of every chord.",
+          "identity_references": [
+            {
+              "label": "Official album context",
+              "url": "https://thebeachboys.com/blogs/news/the-beach-boys-on-pet-sounds-the-beach-boys"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Daft Punk — “Something About Us.”",
+          "teaching_angle": "Reduce the electric-keyboard harmony to a few moving voices and common tones. It could connect smooth chord changes with electronic pop, while distinguishing the chosen teaching reduction from the full recording's voicings.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=sOS9aOIXPEk"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Bach — “Air,” BWV 1068, movement II.",
+          "teaching_angle": "Follow one upper voice across several changes, then listen separately to the bass. This would make the distinction between smooth inner/upper movement and a more active bass line audible.",
+          "identity_references": [
+            {
+              "label": "Official ensemble performance",
+              "url": "https://www.bachvereniging.nl/en/bwv/bwv-1068"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-write-a-bass-line",
+      "title": "Write a Bass Line",
+      "current_number": 33,
+      "proposed_block": "4",
+      "role": "pattern",
+      "original_first": "An original bass skeleton and a connecting version",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Billie Jean — Michael Jackson",
+      "repertoire_id": "jackson-billie-jean",
+      "media_route": "midi",
+      "reason": "Use the available ostinato as a clear bass case; I Wish remains an alternate requiring a source.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Stevie Wonder — “I Wish.”",
+          "teaching_angle": "Listen to the bass line as both rhythmic character and harmonic guide. A short transcription could distinguish target notes from the connecting motion that makes the line feel alive.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=c7IYSAUj78g"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Daft Punk — “Around the World.”",
+          "teaching_angle": "Isolate the bass's identity and compare it with the other repeated parts. This builds on the song-identity example in article 1 with a concrete bass-writing focus.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=K0HSD_i2DvA"
+            },
+            {
+              "label": "Ableton's bass-line listening study",
+              "url": "https://learningmusic.ableton.com/make-basslines/around-the-world.html"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Bach — Passacaglia in C minor, BWV 582.",
+          "teaching_angle": "Begin with the recurring bass subject and hear the changing material above it. This illustrates bass as a structural idea, not merely the lowest note of whatever chord happens to be sounding.",
+          "identity_references": [
+            {
+              "label": "Reitze Smits / Netherlands Bach Society performance",
+              "url": "https://www.bachvereniging.nl/en/bwv/bwv-582"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-sevenths-added-notes-suspensions",
+      "title": "Add Color to a Working Chord",
+      "current_number": 34,
+      "proposed_block": "4",
+      "role": "pattern",
+      "original_first": "One triad with separately introduced seventh added-note and suspension choices",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Clair de lune — Debussy",
+      "repertoire_id": "debussy-clair-de-lune",
+      "media_route": "new-passage",
+      "reason": "Identify the exact chord and voicing first. The available four bars are not a ready-made comparison of all these chord types.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Stevie Wonder — “Isn't She Lovely,” _Songs in the Key of Life_ version.",
+          "teaching_angle": "Compare a short passage's basic harmonic direction with its sevenths and other color tones. Check actual voicings and melody notes before choosing a chord symbol; do not derive the analysis from a simplified internet chart.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=7YGc6RMOYF8"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Daft Punk — “Something About Us.”",
+          "teaching_angle": "Compare one plain-triad teaching version with a checked version of the richer keyboard sonority. It would make a clear demonstration of a small pitch change having a large effect on the song's character.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=sOS9aOIXPEk"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Debussy — “Clair de lune,” from _Suite bergamasque_.",
+          "teaching_angle": "Take one carefully chosen sonority and compare a plain reduction with the pitches that give it color. Keep this a small listening comparison; the entire piece cannot be explained as ordinary triads with decorative notes added.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1778"
+            }
+          ],
+          "midi_source_keys": ["debussy-clair-de-lune"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-borrow-a-chord",
+      "title": "Borrow a Chord",
+      "current_number": 35,
+      "proposed_block": "4",
+      "role": "pattern",
+      "original_first": "An original major IV versus minor iv frame",
+      "original_asset_state": "Original borrowed-third frame exists in the guided local lesson.",
+      "selected_work": "No Surprises — Radiohead",
+      "repertoire_id": "radiohead-no-surprises",
+      "media_route": "midi",
+      "reason": "Prefer the already prepared borrowed-third case. Space Oddity remains a second candidate with an unselected source.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "David Bowie — “Space Oddity.”",
+          "teaching_angle": "Compare a major subdominant with its minor-colored counterpart in a selected passage. It could show one altered chord tone changing a phrase’s atmosphere while the surrounding tonal reference remains recognizable. Check the passage against the recording and the publisher’s arrangement before drawing the comparison.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=iYYRH4apXDo"
+            },
+            {
+              "label": "Faber score edition",
+              "url": "https://www.fabermusic.com/shop/space-oddity-d49340"
+            }
+          ],
+          "midi_source_keys": ["space-oddity-analysis"],
+          "midi_availability": "Analysis or historical MIDI lead found; no usable file verified.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Louis Armstrong — “What a Wonderful World.”",
+          "teaching_angle": "Use the borrowed flat-six major chord as an alternative to another minor-subdominant example. A small checked reduction could compare this color with a version using only the major-key chord family. Match the score edition to the selected recording before naming exact pitches or bar numbers.",
+          "identity_references": [
+            {
+              "label": "Publisher’s score edition",
+              "url": "https://www.halleonard.com/product/355528/what-a-wonderful-world"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-point-to-a-temporary-home",
+      "title": "Point to a Temporary Home",
+      "current_number": 36,
+      "proposed_block": "4",
+      "role": "pattern",
+      "original_first": "A destination chord with and without its secondary dominant",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Prelude in C BWV 846 — Bach",
+      "repertoire_id": "bach-prelude-c",
+      "media_route": "new-passage",
+      "reason": "Select later bars containing the targeted relationship. The four-bar opening excerpt is not approved as this example.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Ray Charles — “Georgia on My Mind,” _Live at Montreux 1997_.",
+          "teaching_angle": "Select a short passage where a dominant chord directs the ear toward a local target, then follow what happens after that arrival. This would connect tonicization with a sung standard while keeping the song’s larger home distinct from its passing destinations. Check this live version’s harmony rather than substituting a generic lead sheet.",
+          "identity_references": [
+            {
+              "label": "Official live performance",
+              "url": "https://www.youtube.com/watch?v=qIp9TwSEgFg"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Bach — Prelude in C major, BWV 846.",
+          "teaching_angle": "Select an applied-dominant passage and follow its immediate target. It could show the difference between momentarily strengthening a chord and declaring that the whole piece has permanently moved to a new key.",
+          "identity_references": [
+            {
+              "label": "Official performance",
+              "url": "https://www.bachvereniging.nl/en/bwv/bwv-846"
+            }
+          ],
+          "midi_source_keys": ["bach-prelude-c"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-modes-drones-and-key-changes",
+      "title": "Change the Tonal World Deliberately",
+      "current_number": 37,
+      "proposed_block": "4",
+      "role": "pattern",
+      "original_first": "A held D centre with a changed palette; separately a new sustained home",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Scarborough Fair — Simon and Garfunkel guitar demo",
+      "repertoire_id": "simon-scarborough-fair",
+      "media_route": "midi",
+      "reason": "The source only supports its Dorian guitar introduction. Use an original modulation comparison for the separate new-home decision.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Miles Davis — “So What.”",
+          "teaching_angle": "Compare the modal regions and the return, hearing a change of center while a related pitch pattern remains available. It could distinguish a genuine regional shift from one chromatic chord inside an otherwise stable home.",
+          "identity_references": [
+            {
+              "label": "Official album and preview",
+              "url": "https://www.milesdavis.com/albums/kind-of-blue/"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "The Beatles — “Tomorrow Never Knows.”",
+          "teaching_angle": "Listen to how a persistent tonal reference accommodates changing melodic and textural events. It would show that deliberate tonal design can involve staying in one world, not only engineering a dramatic key change.",
+          "identity_references": [
+            {
+              "label": "Official song page",
+              "url": "https://www.thebeatles.com/tomorrow-never-knows"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Debussy — “Voiles,” _Préludes_, Book I No. 2.",
+          "teaching_angle": "Compare its prevailing whole-tone material with the contrasting pentatonic passage. It offers a pitch-palette comparison outside ordinary major/minor; whole-tone writing should not be mislabeled as one of the diatonic modes.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition, Book I",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=2207"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-find-the-central-idea",
+      "title": "Find the Central Idea",
+      "current_number": 26,
+      "proposed_block": "5",
+      "role": "pattern",
+      "original_first": "An original lyric premise and a scene that supports it",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Jolene — Dolly Parton",
+      "repertoire_id": null,
+      "media_route": "audio-text",
+      "reason": "Use official listening context and authorized text where needed; MIDI cannot demonstrate the central situation.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Dolly Parton — “Jolene.”",
+          "teaching_angle": "Identify the specific speaker, addressee, and urgent request that organize the lyric. It is a clear example of turning a broad theme such as jealousy into an immediate situation.",
+          "identity_references": [
+            {
+              "label": "Artist's album page and description",
+              "url": "https://www.dollyparton.com/album/jolene"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Joni Mitchell — “Both Sides Now.”",
+          "teaching_angle": "Ask what repeated relationship connects its different subjects: an attractive view of something and an experience that complicates it. This could teach a unifying idea without reducing the lyric to a one-word theme.",
+          "identity_references": [
+            {
+              "label": "Official song archive",
+              "url": "https://www.jonimitchell.com/music/song.cfm?id=83"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-choose-the-speaker",
+      "title": "Choose the Speaker",
+      "current_number": 27,
+      "proposed_block": "5",
+      "role": "pattern",
+      "original_first": "One original scene from two speakers",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Luka — Suzanne Vega",
+      "repertoire_id": null,
+      "media_route": "audio-text",
+      "reason": "The point of view is carried by the words and delivery; no standalone MIDI substitution.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Suzanne Vega — “Luka.”",
+          "teaching_angle": "Consider how a first-person speaker's limited disclosures shape what the listener understands. Keep the explanation sensitive to the song's subject and grounded in the fictional address, rather than equating the character with the songwriter.",
+          "identity_references": [
+            {
+              "label": "Official artist recording",
+              "url": "https://www.youtube.com/watch?v=-06n1iy4Ey4"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "The Postal Service — “Nothing Better,” on _Give Up_.",
+          "teaching_angle": "Follow the two voices as one perspective meets a reply that challenges it. This would illustrate a deliberate shift of speaker with musical cues, rather than an accidental change of pronouns.",
+          "identity_references": [
+            {
+              "label": "Official Sub Pop release",
+              "url": "https://thepostalservice.bandcamp.com/album/give-up"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-write-through-images",
+      "title": "Write Through Images",
+      "current_number": 28,
+      "proposed_block": "5",
+      "role": "pattern",
+      "original_first": "An abstract lyric line and a concrete original alternative",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Tom’s Diner — Suzanne Vega original a cappella",
+      "repertoire_id": null,
+      "media_route": "audio-text",
+      "reason": "Keep the a-cappella version explicit. Its images and viewpoint require words, not an instrumental transcription.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Suzanne Vega — “Tom’s Diner,” original a cappella version on _Solitude Standing_.",
+          "teaching_angle": "Follow how observed gestures, objects, and small changes in a café create a scene without a long explanation of the speaker’s feelings. Use the original vocal recording for this study, distinguishing it from the later DNA remix.",
+          "identity_references": [
+            {
+              "label": "Artist’s album archive",
+              "url": "https://www.suzannevega.com/music"
+            },
+            {
+              "label": "licensed album",
+              "url": "https://open.spotify.com/album/5w4IN5bPXAQD5iAVPNqvMg"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Lorde — “Ribs,” on _Pure Heroine_.",
+          "teaching_angle": "Look at how a remembered social scene carries a much larger anxiety about growing older. This could help beginners move from stating an emotion to choosing a scene in which the emotion becomes perceptible.",
+          "identity_references": [
+            {
+              "label": "Licensed album release",
+              "url": "https://music.apple.com/us/album/pure-heroine/1440818584"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-rhyme-and-lyric-sound",
+      "title": "Let Sound Support the Lyric",
+      "current_number": 29,
+      "proposed_block": "5",
+      "role": "pattern",
+      "original_first": "One original line with different vowel and rhyme choices",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Subterranean Homesick Blues — Bob Dylan",
+      "repertoire_id": null,
+      "media_route": "audio-text",
+      "reason": "Use the heard word sounds and an original comparison; do not infer rhyme from MIDI notes.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Bob Dylan — “Subterranean Homesick Blues.”",
+          "teaching_angle": "Focus on chains of rhyme, consonants, and rapid verbal momentum. A prose description and a small original comparison could show how sound joins ideas without quoting a long stretch of Dylan's text.",
+          "identity_references": [
+            {
+              "label": "Official song page",
+              "url": "https://www.bobdylan.com/songs/subterranean-homesick-blues/"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Daft Punk — “Harder, Better, Faster, Stronger.”",
+          "teaching_angle": "Examine the syllable lengths, repeated word endings, and processing of the vocal. It offers an electronic example in which verbal sound and rhythmic arrangement are inseparable.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=gAjR4_CbPpQ"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-words-against-music",
+      "title": "Make Speech and Melody Agree",
+      "current_number": 30,
+      "proposed_block": "5",
+      "role": "pattern",
+      "original_first": "A spoken original line and two musical stress placements",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Hyperballad — Björk",
+      "repertoire_id": null,
+      "media_route": "audio-text",
+      "reason": "Select the actual sung passage and align syllables only with an appropriate text basis. MIDI is at most a timing scaffold.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Björk — “Hyperballad,” on _Post_.",
+          "teaching_angle": "Follow the detail-rich verse delivery and the different pacing of the recurring section. It could show how a lyric can retain an intelligible sentence shape inside an electronic setting while making expressive departures from everyday speech.",
+          "identity_references": [
+            {
+              "label": "Official label release",
+              "url": "https://bjork.bandcamp.com/album/post"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Amy Winehouse — “Love Is a Losing Game.”",
+          "teaching_angle": "Compare the natural speech emphasis of a short phrase with its sung stresses, stretched vowels, and releases. This would examine prosody specifically; article 21 would use a different passage or a cross-reference for the relationship between melody notes and harmony.",
+          "identity_references": [
+            {
+              "label": "Licensed song release",
+              "url": "https://music.apple.com/us/song/1422677786"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-make-the-lyric-develop",
+      "title": "Make the Lyric Develop",
+      "current_number": 31,
+      "proposed_block": "5",
+      "role": "pattern",
+      "original_first": "An original chorus returning after new information",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Fast Car — Tracy Chapman original recording",
+      "repertoire_id": null,
+      "media_route": "audio-text",
+      "reason": "The changed meaning depends on the lyric sequence. Keep this distinct from the later arrangement question.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Tracy Chapman — “Fast Car,” original album recording.",
+          "teaching_angle": "Map the changing circumstances and expectations around the recurring appeal. It is a strong case for a repeated section gaining a different meaning because of what the verses reveal.",
+          "identity_references": [
+            {
+              "label": "Official artist audio, 2015 remaster",
+              "url": "https://www.youtube.com/watch?v=JpscHOoGIqQ"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Joni Mitchell — “Both Sides Now.”",
+          "teaching_angle": "Compare the recurring verbal structure across its successive subjects. Here the focus is progression through the whole lyric, rather than article 25's single organizing idea.",
+          "identity_references": [
+            {
+              "label": "Official song archive",
+              "url": "https://www.jonimitchell.com/music/song.cfm?id=83"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-choose-a-sonic-setting",
+      "title": "Choose the World Around the Song",
+      "current_number": 44,
+      "proposed_block": "6",
+      "role": "pattern",
+      "original_first": "The same original events in two recorded or rendered sound settings",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Both Sides Now — Joni Mitchell 1969 and 2000",
+      "repertoire_id": null,
+      "media_route": "audio-needed",
+      "reason": "The actual arrangement, vocal character and sound carry this comparison. MIDI cannot replace those recordings.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Joni Mitchell — “Both Sides Now,” 1969 and 2000.",
+          "teaching_angle": "Compare accompaniment, vocal pacing, register, and orchestral framing of the same composition. This could be the anchor for changing a song's setting while retaining a recognizable core.",
+          "identity_references": [
+            {
+              "label": "1969 album",
+              "url": "https://jonimitchell.com/music/album.cfm?id=3"
+            },
+            {
+              "label": "2000 album",
+              "url": "https://www.jonimitchell.com/music/album.cfm?id=22&o=3"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Nine Inch Nails / Johnny Cash — “Hurt.”",
+          "teaching_angle": "Compare the sonic materials, voice, space, and scale of the two recordings. Treat performance and small textual differences as part of the comparison; this is not a controlled experiment in changing instrumentation alone.",
+          "identity_references": [
+            {
+              "label": "Nine Inch Nails official audio",
+              "url": "https://www.youtube.com/watch?v=OvoTktdpIiI"
+            },
+            {
+              "label": "Cash's official recording page",
+              "url": "https://www.johnnycash.com/track/hurt-2/"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-give-each-part-a-job",
+      "title": "Give Each Part a Job",
+      "current_number": 45,
+      "proposed_block": "6",
+      "role": "pattern",
+      "original_first": "Original melody bass and accompaniment assigned distinct roles",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Superstition — Stevie Wonder",
+      "repertoire_id": "wonder-superstition-demo",
+      "media_route": "midi",
+      "reason": "The available reduction can show selected roles. It does not reproduce the original clavinet layering or production.",
+      "reference_check": "Local file rechecked in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Bonobo — “Kerala.”",
+          "teaching_angle": "Follow the sampled vocal, low end, percussion, and sustained elements as separate roles. Discuss a hypothetical removal of one role without claiming to have isolated stems from a stereo mix.",
+          "identity_references": [
+            {
+              "label": "Artist/label release",
+              "url": "https://bonobomusic.bandcamp.com/album/migration"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Stevie Wonder — “Superstition.”",
+          "teaching_angle": "Make a role map for clavinet, bass, drums, horns, and voice, using only what is actually audible in the selected passage. It could show that occupying different registers and moments can matter as much as choosing different instruments.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=egqv1mtos6A"
+            }
+          ],
+          "midi_source_keys": ["wonder-superstition-demo", "superstition-analysis"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Bach — Invention in C major, BWV 772.",
+          "teaching_angle": "Identify which voice presents, answers, or carries on an idea at each moment. Unlike article 12's rhythmic interlocking, this use would focus on exchanging roles while keeping both lines intelligible.",
+          "identity_references": [
+            {
+              "label": "Score and MIDI edition",
+              "url": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=40"
+            }
+          ],
+          "midi_source_keys": ["bach-invention-1"],
+          "midi_availability": "A MIDI file was downloaded and parsed; passage/musical review remains.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-vocal-delivery-and-harmonies",
+      "title": "Let the Voice Carry the Meaning",
+      "current_number": 47,
+      "proposed_block": "6",
+      "role": "pattern",
+      "original_first": "An original sung line as lead double and harmony",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Cellophane — FKA twigs",
+      "repertoire_id": null,
+      "media_route": "audio-needed",
+      "reason": "Vocal delivery cannot be replaced by piano notes. New original sung recordings are needed for the controlled comparison.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "FKA twigs — “cellophane.”",
+          "teaching_angle": "Attend to the exposed lead, changes of vocal weight, and the support around the line. It could demonstrate that intimacy is made by specific performance and arrangement choices, not simply by turning the accompaniment down.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=YkLjqFpBh84"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Joni Mitchell — “Both Sides Now,” 2000 recording.",
+          "teaching_angle": "Follow a few phrase endings, pauses, and changes in vocal weight. It could show how delivery reshapes a familiar lyric's force; avoid equating expressive depth with a particular age or vocal timbre.",
+          "identity_references": [
+            {
+              "label": "Official album page",
+              "url": "https://www.jonimitchell.com/music/album.cfm?id=22&o=3"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-jobs-of-song-sections",
+      "title": "Give Each Section a Purpose",
+      "current_number": 38,
+      "proposed_block": "7",
+      "role": "pattern",
+      "original_first": "Original sections labelled by their musical jobs",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Running Up That Hill — Kate Bush",
+      "repertoire_id": null,
+      "media_route": "audio-map",
+      "reason": "A section map and actual recording are the immediate context route; no verified complete MIDI is in the library.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Kate Bush — “Running Up That Hill (A Deal with God).”",
+          "teaching_angle": "Map what the recurring groove, verse, and focal vocal sections contribute to the song’s negotiation. This could show distinct section jobs inside a persistent sonic setting: not every meaningful formal change requires a completely new texture.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=wp43OdtAAkM"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Daft Punk — “Giorgio by Moroder.”",
+          "teaching_angle": "Follow the movement from spoken recollection to successive instrumental settings. This could make a strong case for sections defined by narrative and changing musical roles rather than by the presence of a sung chorus.",
+          "identity_references": [
+            {
+              "label": "Official audio",
+              "url": "https://www.youtube.com/watch?v=zhl-Cs1-sG4"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-make-the-chorus-arrive",
+      "title": "Make the Chorus Arrive",
+      "current_number": 39,
+      "proposed_block": "7",
+      "role": "pattern",
+      "original_first": "One original chorus with a selected layer or register change",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Dancing on My Own — Robyn",
+      "repertoire_id": null,
+      "media_route": "audio-map",
+      "reason": "The production and vocal arrival matter. A note-only reduction would need to preserve the specific layer changes to carry the claim.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Robyn — “Dancing on My Own.”",
+          "teaching_angle": "Listen to the relationship between the verse's account and the returning focal statement. The electronic pulse can continue while the vocal framing and accumulated context make the chorus feel consequential.",
+          "identity_references": [
+            {
+              "label": "Official video page",
+              "url": "https://www.robyn.com/videos/v/dancing-on-my-own-official-video"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "ABBA — “Dancing Queen.”",
+          "teaching_angle": "Compare the preparation, register, vocal arrangement, and harmonic motion around a recurring chorus. It could show several coordinated causes of arrival, rather than attributing the effect only to the volume of the mix.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=xFrGuyw1V8s"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Fred again.. — “Delilah (pull me out of this).”",
+          "teaching_angle": "Follow the recurring vocal material into a fuller release of rhythmic energy. Use it as an electronic comparison for preparing a focal return; do not automatically call every dance-music release a conventional pop chorus.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=Cl6Rz1Uvi2M"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-make-the-second-verse-count",
+      "title": "Make the Second Verse Count",
+      "current_number": 40,
+      "proposed_block": "7",
+      "role": "pattern",
+      "original_first": "A repeated original verse frame with changed information",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Fast Car — Tracy Chapman original recording",
+      "repertoire_id": null,
+      "media_route": "audio-text",
+      "reason": "Reuse the work for the new information carried by a later return; avoid claiming a MIDI progression shows that meaning.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Sufjan Stevens — “Casimir Pulaski Day.”",
+          "teaching_angle": "Track what each new narrative passage adds about the relationship, illness, and the speaker’s response. It could demonstrate later verses earning their place through new evidence and changed understanding while much of the musical setting remains familiar.",
+          "identity_references": [
+            {
+              "label": "Official artist/label release",
+              "url": "https://sufjanstevens.bandcamp.com/track/casimir-pulaski-day"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Tracy Chapman — “Fast Car.”",
+          "teaching_angle": "Compare successive narrative verses while keeping a map of what the listener newly knows. This is a particularly strong anchor for consequences and changed circumstances; article 30 would study the resulting whole-lyric arc.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=JpscHOoGIqQ"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-earn-the-bridge",
+      "title": "Earn the Bridge",
+      "current_number": 41,
+      "proposed_block": "7",
+      "role": "pattern",
+      "original_first": "An original return with and without a bridge",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Call Your Girlfriend — Robyn",
+      "repertoire_id": null,
+      "media_route": "audio-map",
+      "reason": "Select and verify the bridge boundary in the named recording. Do not use an instrumental solo as automatic evidence of a lyrical bridge.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Robyn — “Call Your Girlfriend.”",
+          "teaching_angle": "Use the instrumental break as a bridge candidate and compare its texture and vocal fragments with the surrounding sung sections. Ask what the contrast contributes before the return: a bridge can earn its place musically without introducing a new lyrical argument. Confirm the section boundaries in the linked version before preparing the diagram.",
+          "identity_references": [
+            {
+              "label": "Official video page",
+              "url": "https://www.robyn.com/videos/v/call-your-girlfriend"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Fleetwood Mac — “Landslide,” _The Dance_ live performance.",
+          "teaching_angle": "Compare the contrasting passage about fear of change with the surrounding reflective verses. It would give a bridge a specific emotional job: bringing the underlying hesitation into the open before returning to familiar material. Keep the form map tied to this named performance.",
+          "identity_references": [
+            {
+              "label": "Official live video",
+              "url": "https://www.youtube.com/watch?v=WM7-PYtXtJM"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-choose-a-song-form",
+      "title": "Choose a Form That Serves the Song",
+      "current_number": 42,
+      "proposed_block": "7",
+      "role": "pattern",
+      "original_first": "Original A B A versus A B C sections",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Bohemian Rhapsody — Queen",
+      "repertoire_id": null,
+      "media_route": "audio-map",
+      "reason": "A whole-work structural map is needed. A four-bar MIDI loop cannot demonstrate the form.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Queen — “Bohemian Rhapsody.”",
+          "teaching_angle": "Map the connected vocal, ballad, operatic, rock, and closing passages by their contributions to the whole. This is an accessible example of a song taking an unfolding route instead of returning to a conventional chorus; its scale is a possibility, not a template every writer must follow.",
+          "identity_references": [
+            {
+              "label": "Official video",
+              "url": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Duke Ellington — “It Don't Mean a Thing (If It Ain't Got That Swing),” with Ivie Anderson.",
+          "teaching_angle": "Identify the AABA song chorus separately from the full performance's introduction, solos, and repeats. This avoids equating a 32-bar underlying song form with the running order of a jazz recording.",
+          "identity_references": [
+            {
+              "label": "Smithsonian archival notes",
+              "url": "https://folkways-media.si.edu/docs/folkways/artwork/FW02804.pdf"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Jon Hopkins — “Open Eye Signal.”",
+          "teaching_angle": "Draw an event-and-energy map of the full album track. It demonstrates a process-led electronic form in which gradual transformations and strategically placed changes can do the work that verses and choruses do elsewhere.",
+          "identity_references": [
+            {
+              "label": "Artist/label release",
+              "url": "https://jonhopkins.bandcamp.com/album/immunity"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-pacing-transitions-endings",
+      "title": "Shape the Approach and the Ending",
+      "current_number": 43,
+      "proposed_block": "7",
+      "role": "pattern",
+      "original_first": "An original transition with a break overlap or anticipatory figure",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Dance Yrself Clean — LCD Soundsystem album version",
+      "repertoire_id": null,
+      "media_route": "audio-map",
+      "reason": "Keep the full version explicit and preserve the preparation and arrival. No verified note-and-layer asset is available.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "LCD Soundsystem — “Dance Yrself Clean,” full _This Is Happening_ version.",
+          "teaching_angle": "Compare the extended restrained opening with the later entrance of the fuller track. It could show a long approach earning its duration through expectation. Use the album version, not a shortened edit, and describe its dynamic change before playback.",
+          "identity_references": [
+            {
+              "label": "Official artist audio",
+              "url": "https://www.youtube.com/watch?v=9ZNkPA_zUd4"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Beethoven — Symphony No. 5, movement IV.",
+          "teaching_angle": "Use the extended closing passage to discuss repeated confirmation of an ending. It is a useful contrast with an abrupt close, not a recommendation that every song should prolong its final cadence.",
+          "identity_references": [
+            {
+              "label": "Work notes",
+              "url": "https://www.bso.org/works/beethoven-symphony-no-5"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Brian Eno — “An Ending (Ascent),” from _Apollo: Atmospheres and Soundtracks_.",
+          "teaching_angle": "Listen to how the sustained layers establish a world and how the recording lets that world recede. It offers an approach-and-ending comparison based on gradual presence and release, rather than a large final chord or a dramatic last lyric.",
+          "identity_references": [
+            {
+              "label": "Licensed song release",
+              "url": "https://music.apple.com/us/song/an-ending-ascent/714861225"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-shape-energy-over-time",
+      "title": "Shape Energy over Time",
+      "current_number": 46,
+      "proposed_block": "7",
+      "role": "pattern",
+      "original_first": "An original layer timeline and matched sound states",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "Says — Nils Frahm Spaces recording",
+      "repertoire_id": null,
+      "media_route": "audio-map",
+      "reason": "The accumulating timbre and intensity require audio and a longer map; a short repeating note pattern is insufficient.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Nils Frahm — “Says,” on _Spaces_.",
+          "teaching_angle": "Compare the repeating electronic figure, sustained layers, and growth of intensity. It could show how activity, register, and density create a trajectory without needing a new lyric section at every stage.",
+          "identity_references": [
+            {
+              "label": "Artist/label release",
+              "url": "https://nilsfrahm.bandcamp.com/album/spaces"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Ravel — _Boléro_.",
+          "teaching_angle": "Make a timeline of orchestral entrances and changes of weight while recurring material remains stable. This is the large-scale energy use of the work; article 3 would focus on repetition itself.",
+          "identity_references": [
+            {
+              "label": "Score-and-recording study",
+              "url": "https://timbreandorchestration.org/learn-about-orchestration/scores-and-recordings/ravel/bolero"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 3,
+          "role": "contrasting option",
+          "work": "Floating Points, Pharoah Sanders, and the London Symphony Orchestra — _Promises_, Movement 6.",
+          "teaching_angle": "Trace the orchestral expansion against the larger work's recurring reference. It offers an alternative energy arc whose scale comes from texture, range, and ensemble weight rather than a dance-floor drop.",
+          "identity_references": [
+            {
+              "label": "Official release",
+              "url": "https://floatingpoints.bandcamp.com/album/promises"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "No MIDI source checked for this candidate in this pass; source or transcribe the chosen excerpt.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-revise-the-weakest-moment",
+      "title": "Revise the Weakest Moment",
+      "current_number": 48,
+      "proposed_block": "8",
+      "role": "process",
+      "original_first": "An original draft and one targeted revision",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": "True Love Waits — Radiohead 2001 live and 2016 studio",
+      "repertoire_id": null,
+      "media_route": "audio-needed",
+      "reason": "Keep the exact pair of versions. Recorded arrangement and delivery support the revision discussion; no complete paired MIDI is prepared.",
+      "reference_check": "Editorial selection from the prior course shortlist; no new recording audition, timestamp or cleared asset established in this pass.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "Radiohead — “True Love Waits,” _I Might Be Wrong_ live recording and _A Moon Shaped Pool_.",
+          "teaching_angle": "Compare the guitar-led live setting with the later studio setting, then choose one focus such as harmonic pacing or the space around the voice. Do not present the earlier release as an unfinished mistake.",
+          "identity_references": [
+            {
+              "label": "Official live audio",
+              "url": "https://www.youtube.com/watch?v=mbVKGlh3gg4"
+            },
+            {
+              "label": "official studio album",
+              "url": "https://radiohead.bandcamp.com/album/a-moon-shaped-pool"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "The Postal Service — “The District Sleeps Alone Tonight.”",
+          "teaching_angle": "Use Jimmy Tamborello's component-by-component account to choose a small, audible arranging decision for discussion. This supplies actual process evidence; it should not be retold as a fictional story in which the creators followed our revision checklist.",
+          "identity_references": [
+            {
+              "label": "Song Exploder interview",
+              "url": "https://songexploder.net/the-postal-service"
+            },
+            {
+              "label": "official album",
+              "url": "https://thepostalservice.bandcamp.com/album/give-up"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    },
+    {
+      "article_id": "songwriting-finish-and-learn",
+      "title": "Finish and Learn",
+      "current_number": 49,
+      "proposed_block": "8",
+      "role": "process",
+      "original_first": "An original finished version and a precise feedback record",
+      "original_asset_state": "Written material or editorial brief exists; a focused playable comparison still needs authoring or adaptation.",
+      "selected_work": null,
+      "repertoire_id": null,
+      "media_route": "original-only",
+      "reason": "Finishing is a process decision. A famous song is optional context, not a necessary playable proof.",
+      "reference_check": "No repertoire asset required for the first explanation.",
+      "alternative_candidates": [
+        {
+          "rank": 1,
+          "role": "recommended anchor",
+          "work": "LCD Soundsystem — “Christmas Will Break Your Heart.”",
+          "teaching_angle": "James Murphy's account of a song kept for years and finally recorded when collaborators were available could illustrate a practical completion window. Use the first-person archive entry “Christmas Song”; it is evidence about this particular release, not a universal rule about deadlines.",
+          "identity_references": [
+            {
+              "label": "Artist's archive and account",
+              "url": "https://lcdsoundsystem.com/home-page-new/"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        },
+        {
+          "rank": 2,
+          "role": "contrasting option",
+          "work": "Schumann — “Träumerei,” Op. 15 No. 7.",
+          "teaching_angle": "Revisit a compact, fully shaped work and make a reader-facing completion checklist: clear identity, proportion, and an intentional close. This illustrates what a complete musical result can contain; the score cannot tell us why Schumann decided to stop revising.",
+          "identity_references": [
+            {
+              "label": "Urtext edition",
+              "url": "https://www.henle.de/de/Kinderszenen-op.-15/HN-44"
+            }
+          ],
+          "midi_source_keys": [],
+          "midi_availability": "MIDI supports context only; retain text, performance or process evidence.",
+          "musical_review_status": "Proposed passage/interpretation; not a completed listening audition or note-level verification.",
+          "publishable_asset": false
+        }
+      ]
+    }
+  ],
+  "deferred": [
+    {
+      "work": "Radiohead — Videotape Bonnaroo 17 June 2006",
+      "status": "Keep as a high-priority candidate, not a ready example",
+      "available_lead": "Super Simple Drum advertises a Bonnaroo-version drum chart and MIDI/MusicXML download. The exact page could not be refreshed beyond its search result in this pass.",
+      "source": "https://supersimpledrum.com/songs/videotape-bonnaroo-version-radiohead",
+      "missing": [
+        "Verified piano attacks aligned to the actual live beat",
+        "A checked excerpt of the combined live arrangement",
+        "Explicit source and publication basis"
+      ],
+      "rule": "Do not substitute album piano MIDI, call a guide pulse the original drums, or claim the drum chart alone verifies the piano rhythm."
+    },
+    {
+      "work": "David Bowie — Space Oddity",
+      "status": "Retain as secondary borrowing candidate",
+      "missing": [
+        "Selected passage from the previously parsed provider demo",
+        "Score or performance alignment",
+        "Public-app permission"
+      ],
+      "rule": "No Surprises is the prepared local borrowed-third example; the Space Oddity source is not made ready by its being downloaded."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.mutopiaproject.org/legal.html",
+      "finding": "Edition contributions may be reused under their stated Public Domain or Creative Commons terms."
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "finding": "Credit, link the license, indicate derivative changes and apply the ShareAlike requirements to adaptations."
+    },
+    {
+      "url": "https://www.mididb.com/stevie-wonder/superstition-midi/",
+      "finding": "Page grants permission to download demos, not an explicit right to redistribute them inside a public education app."
+    },
+    {
+      "url": "https://www.midi.com.au/terms-and-conditions/",
+      "finding": "Hit Trax terms restrict copying and redistribution absent specific permission. Purchasing a backing track is not treated as an app-redistribution license."
+    },
+    {
+      "url": "https://www.midis101.com/free-midi/10674-the-white-stripes-seven-nation-army",
+      "finding": "Download available; no public-app grant found on the inspected page."
+    },
+    {
+      "url": "https://onlinesequencer.net/4284602",
+      "finding": "Community sequence export exists and credits a prior sequence; no composition or public-app redistribution grant established."
+    }
+  ]
+}

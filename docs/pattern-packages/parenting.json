@@ -1,0 +1,926 @@
+{
+  "title": "Parenting Field Guide",
+  "verse_id": "parenting",
+  "area": "health",
+  "collection_id": "parenting-field-guide",
+  "scope": "Import of all 27 revised articles, preserving their nine-section structure, substantive text, evidence qualifications, and research links. Private draft links are converted to library references.",
+  "groups": [
+    {
+      "id": "parenting-emotions-frustration-and-confidence",
+      "title": "Emotions, frustration, and confidence",
+      "pattern_ids": [
+        "parenting-frequent-tantrums",
+        "parenting-losing-and-disappointment",
+        "parenting-giving-up-when-things-are-hard",
+        "parenting-fear-of-mistakes-and-perfectionism"
+      ]
+    },
+    {
+      "id": "parenting-worries-separation-and-avoidance",
+      "title": "Worries, separation, and avoidance",
+      "pattern_ids": [
+        "parenting-avoiding-unfamiliar-activities",
+        "parenting-repeated-reassurance",
+        "parenting-separation-and-drop-off",
+        "parenting-school-reluctance-and-refusal"
+      ]
+    },
+    {
+      "id": "parenting-boundaries-and-cooperation",
+      "title": "Boundaries and cooperation",
+      "pattern_ids": [
+        "parenting-following-instructions",
+        "parenting-whining-and-repeated-demands",
+        "parenting-arguing-about-rules",
+        "parenting-hitting-biting-and-pushing"
+      ]
+    },
+    {
+      "id": "parenting-relationships-and-connection",
+      "title": "Relationships and connection",
+      "pattern_ids": [
+        "parenting-sibling-rivalry",
+        "parenting-sharing-and-taking-turns",
+        "parenting-exclusion-and-making-friends",
+        "parenting-arguments-with-friends",
+        "parenting-being-teased-or-bullied",
+        "parenting-teasing-or-excluding-others",
+        "parenting-withdrawal-and-communication"
+      ]
+    },
+    {
+      "id": "parenting-daily-routines-and-habits",
+      "title": "Daily routines and habits",
+      "pattern_ids": [
+        "parenting-bedtime-battles",
+        "parenting-picky-eating",
+        "parenting-screen-time-conflicts",
+        "parenting-homework-resistance",
+        "parenting-stopping-and-transitions",
+        "parenting-dressing-washing-and-teeth"
+      ]
+    },
+    {
+      "id": "parenting-honesty-and-fairness",
+      "title": "Honesty and fairness",
+      "pattern_ids": ["parenting-white-lies-and-feelings", "parenting-cheating-to-win"]
+    }
+  ],
+  "patterns": [
+    {
+      "id": "parenting-frequent-tantrums",
+      "title": "Frequent tantrums",
+      "short_description": "Understand recurring outbursts and choose between immediate protection, comfort, prevention, and changes to recurring interactions.",
+      "aliases": ["Temper tantrums", "Recurring outbursts"],
+      "verses": ["parenting"],
+      "collections": ["parenting-emotions-frustration-and-confidence"],
+      "related_patterns": [
+        "parenting-stopping-and-transitions",
+        "parenting-hitting-biting-and-pushing"
+      ],
+      "example_user_queries": [
+        "My toddler screams whenever we leave the park.",
+        "My child has several outbursts every day.",
+        "Warnings and choices do not stop the screaming.",
+        "Should I comfort my child during a tantrum?",
+        "How do I hold a limit while my child is furious?",
+        "My child kicks when I say it is time to go.",
+        "How can I tell what triggers these outbursts?",
+        "When do frequent tantrums need extra support?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_625e04dddf588191b1c200abcea66097",
+      "source_article_sha256": "a2f34cb81dc5ddee6798c10194a887316f01bac3d465d789b92fd158d7e7b859",
+      "article_sha256": "9dbebbf0a8af111d9dfd25db0725ff37330d62325ce9e493287e9bbc4c0f631c",
+      "article_word_count": 2268,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-losing-and-disappointment",
+      "title": "Difficulty Losing or Accepting Disappointment",
+      "short_description": "Help a child handle losing and disappointment while separating competition, skill demands, and fears about being good enough.",
+      "aliases": ["Being a sore loser", "Handling disappointment"],
+      "verses": ["parenting"],
+      "collections": ["parenting-emotions-frustration-and-confidence"],
+      "related_patterns": ["parenting-cheating-to-win"],
+      "example_user_queries": [
+        "My child cannot bear losing a board game.",
+        "A lost match ruins the rest of the day.",
+        "My child says losing means they are stupid.",
+        "Should I let my child win sometimes?",
+        "How do I respond when a game ends in tears?",
+        "My child only loses badly against a sibling.",
+        "My child refuses another try after a disappointment.",
+        "When is competition too much for my child?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_778afbc03104819197c0bc8fe6a014ca",
+      "source_article_sha256": "c10b41531a3cbf133eb6f89ac5d2c302efa803b6b876e48a9793c4963ed33a7a",
+      "article_sha256": "baaf60df7173196ee84c5ac0504d42e43da35ec00c76a7e7327d41799a8120be",
+      "article_word_count": 2423,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-giving-up-when-things-are-hard",
+      "title": "Giving Up Quickly When Something Is Hard",
+      "short_description": "Distinguish missing skills, overwhelm, and fear of failure when a child abandons difficult tasks.",
+      "aliases": ["Giving up quickly", "Low frustration tolerance"],
+      "verses": ["parenting"],
+      "collections": ["parenting-emotions-frustration-and-confidence"],
+      "related_patterns": ["parenting-losing-and-disappointment", "parenting-homework-resistance"],
+      "example_user_queries": [
+        "My child quits as soon as something gets difficult.",
+        "Homework ends with I cannot do it.",
+        "Should I help or let my child struggle?",
+        "My child will not try a puzzle unless it is easy.",
+        "How can I tell whether a task is too hard?",
+        "My child expects to get everything right immediately.",
+        "Every new skill turns into an argument.",
+        "How do I encourage effort without pushing too far?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_11889f55e3708191937e064a860bea31",
+      "source_article_sha256": "cfc3a52dcce831dd3893d36e6c55ce8130cbf789d073ed84475ae5e3fb9baad2",
+      "article_sha256": "52359c3da172881ade503fd1ef91152c3da356288a05c3d3424b7bfd4c9f2e5e",
+      "article_word_count": 2399,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-fear-of-mistakes-and-perfectionism",
+      "title": "Fear of mistakes or needing everything to be perfect",
+      "short_description": "Respond to fear of mistakes without reinforcing endless checking, avoidance, or pressure to perform.",
+      "aliases": ["Childhood perfectionism", "Fear of getting things wrong"],
+      "verses": ["parenting"],
+      "collections": ["parenting-emotions-frustration-and-confidence"],
+      "related_patterns": [
+        "parenting-giving-up-when-things-are-hard",
+        "parenting-losing-and-disappointment"
+      ],
+      "example_user_queries": [
+        "My child erases the same sentence over and over.",
+        "My child refuses to submit work unless it is perfect.",
+        "A tiny mistake ruins a drawing.",
+        "My child is afraid to answer in class.",
+        "How do I help my child tolerate imperfect work?",
+        "My child checks everything repeatedly.",
+        "My teenager feels worthless after a lower grade.",
+        "When does wanting things perfect need help?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_81601d607c0c8191952da217ed4de807",
+      "source_article_sha256": "9de80471cfea2666d0109d07e03f4db6358272fa353ab953893fb85b2b45e534",
+      "article_sha256": "3cb5e533876af7217af422a25c208a4df2543fd3f85e4941c18a34d039914b27",
+      "article_word_count": 2336,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-avoiding-unfamiliar-activities",
+      "title": "Avoiding unfamiliar activities",
+      "short_description": "Choose between preparation, changes to the setting, gradual participation, and respecting a child's preferences.",
+      "aliases": ["Reluctance to try new things", "Avoiding new activities"],
+      "verses": ["parenting"],
+      "collections": ["parenting-worries-separation-and-avoidance"],
+      "related_patterns": [
+        "parenting-fear-of-mistakes-and-perfectionism",
+        "parenting-giving-up-when-things-are-hard"
+      ],
+      "example_user_queries": [
+        "My child refuses to join a new class.",
+        "My child watches but never takes part.",
+        "Should I push my child to try something unfamiliar?",
+        "My child is frightened by new places.",
+        "How do I tell fear from a genuine lack of interest?",
+        "New activities are too noisy for my child.",
+        "My child wants to join but cannot walk through the door.",
+        "How small should the first step into a new activity be?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_bdc05e86211081919abb5c5e2a67aaa3",
+      "source_article_sha256": "dc9fb9ccd8b6f65ae8ce16837a86d9583dee6148dad906e475745815b7b06ae0",
+      "article_sha256": "3b2c3edf2638edf737301d81a4e1500d51748ce0a66ba0377970403833d40922",
+      "article_word_count": 2348,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-repeated-reassurance",
+      "title": "Repeatedly asking for reassurance",
+      "short_description": "Distinguish requests for information and connection from repeated attempts to eliminate uncertainty.",
+      "aliases": ["Reassurance seeking", "Repeated worried questions"],
+      "verses": ["parenting"],
+      "collections": ["parenting-worries-separation-and-avoidance"],
+      "related_patterns": [
+        "parenting-fear-of-mistakes-and-perfectionism",
+        "parenting-avoiding-unfamiliar-activities"
+      ],
+      "example_user_queries": [
+        "My child asks the same worried question all evening.",
+        "My answers only reassure my child for a minute.",
+        "My child keeps asking whether I am angry.",
+        "Should I stop answering repeated questions?",
+        "My child needs certainty that nothing bad will happen.",
+        "How do I help without getting pulled into endless checking?",
+        "My child asks me to check their work repeatedly.",
+        "When does reassurance seeking need professional help?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_9615c76929c08191be856f24e751c99d",
+      "source_article_sha256": "2d9bbaeb4ff9f1cfd4e813c4587ac145158087b45daa7ff443eec4dd3415df12",
+      "article_sha256": "3be0ee36dfe3e779bb1dca4b3c390b22466ae67af658fe391c4f808728ff0750",
+      "article_word_count": 2297,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-separation-and-drop-off",
+      "title": "Distress at separation or drop-off",
+      "short_description": "Understand separation distress and plan a handover that fits the child's development and experience of care.",
+      "aliases": ["Separation anxiety", "Difficult drop-offs"],
+      "verses": ["parenting"],
+      "collections": ["parenting-worries-separation-and-avoidance"],
+      "related_patterns": [
+        "parenting-school-reluctance-and-refusal",
+        "parenting-avoiding-unfamiliar-activities",
+        "parenting-repeated-reassurance"
+      ],
+      "example_user_queries": [
+        "My toddler clings to me at nursery drop-off.",
+        "My child cries whenever I leave.",
+        "Should I stay longer at the classroom door?",
+        "How do I know whether my child settles after I go?",
+        "My child was fine at drop-off and is suddenly distressed.",
+        "How can we practice separating without overwhelming my child?",
+        "My child is worried I will not come back.",
+        "When should we reconsider the childcare arrangement?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_36949452b0ac8191a9fcce4cd17844aa",
+      "source_article_sha256": "b7a469243a49b32bf41b62004d5ce6118b1227ebbd1a62b02c69ac96a6a9e88c",
+      "article_sha256": "76ce8ffcff0a98efa2ba4030b322fe4003abee61fa1b9e22cafc867643b60a30",
+      "article_word_count": 2274,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-school-reluctance-and-refusal",
+      "title": "Reluctance or refusal to attend school",
+      "short_description": "Investigate school avoidance and coordinate attendance support with changes to unsafe or unmanageable conditions.",
+      "aliases": ["School refusal", "School avoidance"],
+      "verses": ["parenting"],
+      "collections": ["parenting-worries-separation-and-avoidance"],
+      "related_patterns": [
+        "parenting-separation-and-drop-off",
+        "parenting-fear-of-mistakes-and-perfectionism",
+        "parenting-avoiding-unfamiliar-activities"
+      ],
+      "example_user_queries": [
+        "My child says they cannot go to school.",
+        "Every school morning starts with a stomach ache.",
+        "My teenager has stopped attending classes.",
+        "Should I insist on school when my child is distressed?",
+        "How do we plan a return after several weeks away?",
+        "My child feels unsafe at school.",
+        "Schoolwork is overwhelming my child.",
+        "How can I work with school without blaming my child?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_0dd0c03247448191b57e3cdc7387c2b4",
+      "source_article_sha256": "433d070dcfb82a9de6112c946e9c1110f90e788cbb5c05fbe62a0773ac7a458a",
+      "article_sha256": "1713487fc5c3112f2e4fd10a42f1df1aa181ef0ef06135bc60fc741d0a5ff025",
+      "article_word_count": 2329,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-following-instructions",
+      "title": "Not listening or following instructions",
+      "short_description": "Separate attention, understanding, memory, and disagreement before choosing how to help a child follow directions.",
+      "aliases": ["Not listening", "Difficulty following directions"],
+      "verses": ["parenting"],
+      "collections": ["parenting-boundaries-and-cooperation"],
+      "related_patterns": ["parenting-stopping-and-transitions"],
+      "example_user_queries": [
+        "My child ignores me when I ask them to get ready.",
+        "I have to repeat every instruction.",
+        "My child can repeat directions but never starts.",
+        "How many steps can I expect my child to remember?",
+        "My child follows instructions at school but not at home.",
+        "Should I give a consequence for not listening?",
+        "How do I tell defiance from not understanding?",
+        "My child loses track halfway through getting dressed."
+      ],
+      "source_page": "https://chatgpt.com/space/page_1dd70c2e19388191a6ab332992d2bfd7",
+      "source_article_sha256": "10916a1da238401e683e6c93d3840f3d516c059bbc3fcccbcc2c95f823fac17d",
+      "article_sha256": "41454e420cc183bc7eecf161596e76b5d7bd299934e9618d35bbe37a20b12c70",
+      "article_word_count": 2337,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-whining-and-repeated-demands",
+      "title": "Whining and repeated demands",
+      "short_description": "Respond to repeated requests while distinguishing unmet needs, negotiation, and a narrow role for selective attention.",
+      "aliases": ["Whining", "Pestering"],
+      "verses": ["parenting"],
+      "collections": ["parenting-boundaries-and-cooperation"],
+      "related_patterns": [
+        "parenting-repeated-reassurance",
+        "parenting-losing-and-disappointment",
+        "parenting-frequent-tantrums"
+      ],
+      "example_user_queries": [
+        "My child keeps asking after I have said no.",
+        "Every request comes out in a whiny voice.",
+        "Should I ignore whining?",
+        "My child wears me down until I give in.",
+        "How do I stop negotiating the same request?",
+        "My child whines most when I am busy.",
+        "How do I tell distress from repeated bargaining?",
+        "Can I hold a limit without refusing comfort?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_0d3f9b0fda0481919e2833ac589c38b7",
+      "source_article_sha256": "30127ae61ff2a8834f91bc0603c9ea547b48541066be4da97fa0f8e7ce3e42d5",
+      "article_sha256": "8c272cd03452012b43e5cdcfb3e1a82018a432d0d8018477d90d632baa3a0d44",
+      "article_word_count": 2291,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-arguing-about-rules",
+      "title": "Arguing about rules",
+      "short_description": "Decide which rules need explanation, negotiation, revision, or a firm limit without requiring agreement.",
+      "aliases": ["Rule arguments", "Challenging family rules"],
+      "verses": ["parenting"],
+      "collections": ["parenting-boundaries-and-cooperation"],
+      "related_patterns": [
+        "parenting-following-instructions",
+        "parenting-whining-and-repeated-demands"
+      ],
+      "example_user_queries": [
+        "My child debates every household rule.",
+        "My teenager says our rules are unfair.",
+        "Should children get a say in family rules?",
+        "My child points out that I break my own rules.",
+        "How do I end an argument without shutting down discussion?",
+        "Which rules should be negotiable?",
+        "My child agrees to a rule and then argues about it again.",
+        "How do we revise a rule that is not working?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_7341fd9bc1708191b0308e1e5cf8b656",
+      "source_article_sha256": "373604c5c1bf476ab0dbf0e57b1508e01f808bdfa7eb2ecd42a3fbaa84e173cf",
+      "article_sha256": "6be642b31c0c086bd95fa9f85b6a3bcf65fb1621612f5020a81649f90c70cdd3",
+      "article_word_count": 2193,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-hitting-biting-and-pushing",
+      "title": "Hitting, biting, or pushing",
+      "short_description": "Protect people from physical aggression, investigate recurring triggers, and teach safer ways to act.",
+      "aliases": ["Child aggression", "Biting and hitting"],
+      "verses": ["parenting"],
+      "collections": ["parenting-boundaries-and-cooperation"],
+      "related_patterns": [
+        "parenting-frequent-tantrums",
+        "parenting-sibling-rivalry",
+        "parenting-losing-and-disappointment",
+        "parenting-following-instructions"
+      ],
+      "example_user_queries": [
+        "My toddler bites other children at nursery.",
+        "My child hits when a toy is taken.",
+        "How should I stop my child from pushing?",
+        "What do I do first when one child hurts another?",
+        "Should I make my child apologize after hitting?",
+        "My child is too upset to use words before lashing out.",
+        "Biting keeps happening despite reminders.",
+        "When does aggression need professional support?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_59c5e9f6a7508191aa2b462631fd2fe9",
+      "source_article_sha256": "a674b06265d440a6a88b637013492f35cc624f4d857f1944949dbaf568de755a",
+      "article_sha256": "8146baabd0b51722d73232528f9ae86fadc0b487cf1e17a423febae5e2c3c90a",
+      "article_word_count": 2485,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-sibling-rivalry",
+      "title": "Sibling rivalry",
+      "short_description": "Distinguish ordinary sibling conflict from recurring harm and choose between protection, mediation, and changes to family arrangements.",
+      "aliases": ["Sibling conflict", "Brothers and sisters fighting"],
+      "verses": ["parenting"],
+      "collections": ["parenting-relationships-and-connection"],
+      "related_patterns": [
+        "parenting-hitting-biting-and-pushing",
+        "parenting-losing-and-disappointment",
+        "parenting-arguing-about-rules"
+      ],
+      "example_user_queries": [
+        "My children fight over everything.",
+        "One sibling keeps destroying the other's games.",
+        "My child says I always favor their sibling.",
+        "Should I let siblings sort arguments out themselves?",
+        "How can I mediate without choosing a favorite?",
+        "My older child is afraid of a sibling.",
+        "Do siblings need identical rules and privileges?",
+        "How do I reduce competition for my attention?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_2145ffa8e7bc8191b05c4f57cdb1117a",
+      "source_article_sha256": "e461eb55373d322d4d3411c2c5aff530f18371b2a36b1e1caa0ccee6f8eb8078",
+      "article_sha256": "c0354ebae5f30de8d48366ceaca959c452fb05ca45643b8d33180bc97f121a75",
+      "article_word_count": 2445,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-sharing-and-taking-turns",
+      "title": "Difficulty sharing and taking turns",
+      "short_description": "Teach workable access and waiting arrangements while respecting ownership and developing self-control.",
+      "aliases": ["Learning to share", "Taking turns"],
+      "verses": ["parenting"],
+      "collections": ["parenting-relationships-and-connection"],
+      "related_patterns": [
+        "parenting-losing-and-disappointment",
+        "parenting-sibling-rivalry",
+        "parenting-hitting-biting-and-pushing",
+        "parenting-arguing-about-rules"
+      ],
+      "example_user_queries": [
+        "My toddler will not share toys.",
+        "Should I make my child hand over a toy?",
+        "Two children both want the same playground equipment.",
+        "My child cannot wait for a turn.",
+        "Do visitors have to be allowed to use every toy?",
+        "How do I teach sharing without rewarding grabbing?",
+        "My child understands fairness but still refuses to share.",
+        "When should I step in during a toy dispute?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_f468ce4401b08191967f2018d12534c7",
+      "source_article_sha256": "bcfada6935f93c252030cb49f279d11e78882718474b89f07c48157ee7e74da9",
+      "article_sha256": "14bd354534a5d6730cb1742f63a0adb7a59bcb4e2dd1baad22b7bcaa0d380ee8",
+      "article_word_count": 2363,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-exclusion-and-making-friends",
+      "title": "Feeling excluded or struggling to make friends",
+      "short_description": "Distinguish loneliness, a difficult peer setting, and missing opportunities or skills before choosing friendship support.",
+      "aliases": ["Difficulty making friends", "Feeling left out"],
+      "verses": ["parenting"],
+      "collections": ["parenting-relationships-and-connection"],
+      "related_patterns": [
+        "parenting-being-teased-or-bullied",
+        "parenting-avoiding-unfamiliar-activities",
+        "parenting-withdrawal-and-communication",
+        "parenting-sharing-and-taking-turns",
+        "parenting-school-reluctance-and-refusal"
+      ],
+      "example_user_queries": [
+        "My child says nobody likes them.",
+        "My child is left out at lunch.",
+        "How do I help my child make a friend?",
+        "My child wants friends but cannot join a game.",
+        "Should I arrange more playdates?",
+        "My child has acquaintances but still feels lonely.",
+        "How do I tell exclusion from a friendship misunderstanding?",
+        "My teenager feels shut out of the group chat."
+      ],
+      "source_page": "https://chatgpt.com/space/page_16902187f4048191bc97d338fbe06d77",
+      "source_article_sha256": "a9a3402db372fa2d73402e7a365ba22db0a458526bc93c40dda9874dc013d14a",
+      "article_sha256": "0d594eee1354514a25e68e4105e6e3a47fb4e56889646c9c193e7fc5e6a08c29",
+      "article_word_count": 2485,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-arguments-with-friends",
+      "title": "Frequent arguments with friends",
+      "short_description": "Help a child understand recurring friendship conflict, attempt proportionate repair, and recognize when distance or protection fits better.",
+      "aliases": ["Friendship conflict", "Falling out with friends"],
+      "verses": ["parenting"],
+      "collections": ["parenting-relationships-and-connection"],
+      "related_patterns": [
+        "parenting-being-teased-or-bullied",
+        "parenting-exclusion-and-making-friends",
+        "parenting-losing-and-disappointment",
+        "parenting-sharing-and-taking-turns"
+      ],
+      "example_user_queries": [
+        "My child falls out with the same friend every week.",
+        "Every playdate ends in an argument.",
+        "Should I contact the other child's parent?",
+        "My child wants an apology before speaking again.",
+        "How do I help my child repair a friendship?",
+        "My child's friend keeps crossing a boundary.",
+        "When should my child take a break from a friendship?",
+        "My child argues online and then regrets the messages."
+      ],
+      "source_page": "https://chatgpt.com/space/page_3f276409cdb0819180fe42e34f6cb391",
+      "source_article_sha256": "924420259eba413d2ada4f0ad3806580be4ffbda7f77564b1fed914755d43b0e",
+      "article_sha256": "3c8a34268665865c0f69d438d8af81f9ae09806f4e26b6cdad84860a0d0875c3",
+      "article_word_count": 2542,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-being-teased-or-bullied",
+      "title": "Being teased or bullied",
+      "short_description": "Identify harmful peer patterns and coordinate protection without making the targeted child responsible for stopping them.",
+      "aliases": ["Bullying victimization", "Cyberbullying"],
+      "verses": ["parenting"],
+      "collections": ["parenting-relationships-and-connection"],
+      "related_patterns": [
+        "parenting-exclusion-and-making-friends",
+        "parenting-arguments-with-friends",
+        "parenting-school-reluctance-and-refusal",
+        "parenting-withdrawal-and-communication"
+      ],
+      "example_user_queries": [
+        "My child is being mocked at school.",
+        "Other children hide my child's belongings.",
+        "My child says telling an adult will make bullying worse.",
+        "How do I tell teasing from bullying?",
+        "What should I ask the school to do?",
+        "My child is being harassed in a group chat.",
+        "Should I teach my child to fight back?",
+        "My child no longer wants to go to school after repeated teasing."
+      ],
+      "source_page": "https://chatgpt.com/space/page_5a82b87a730c81918112a9d31c4abbd6",
+      "source_article_sha256": "310ddd6be248d4e55e6b8fcb5be393f7b96be885bc99f522622e2b67f1849983",
+      "article_sha256": "3c9e3032ec5b6678b5a642b91b7fc4d3400f423e4ff8ad37e5921a8ca4ecbb4c",
+      "article_word_count": 2318,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-teasing-or-excluding-others",
+      "title": "Teasing or excluding other children",
+      "short_description": "Stop harmful peer behavior, understand its social context, and support accountability without forcing closeness.",
+      "aliases": ["Relational aggression", "Excluding classmates"],
+      "verses": ["parenting"],
+      "collections": ["parenting-relationships-and-connection"],
+      "related_patterns": [
+        "parenting-being-teased-or-bullied",
+        "parenting-arguments-with-friends",
+        "parenting-exclusion-and-making-friends"
+      ],
+      "example_user_queries": [
+        "My child is encouraging others to leave someone out.",
+        "The teacher says my child is bullying a classmate.",
+        "My child says it was only a joke.",
+        "Do I have to make my child be friends with everyone?",
+        "How should my child repair harm after teasing?",
+        "My child joins in because they fear losing friends.",
+        "How do I stop cruel group-chat messages?",
+        "What consequence fits repeated exclusion?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_c08c9028b9c081918cddf8c62d1d245a",
+      "source_article_sha256": "04cb55df455242201d2a633e035a22f4e8d4fc3b6e84a97a14a26db511798695",
+      "article_sha256": "d8d2416d1b2b09d0faa1a37122af1f230c42208214615c2fa2e5f0f1890a6af0",
+      "article_word_count": 2406,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-withdrawal-and-communication",
+      "title": "Withdrawal or reduced communication",
+      "short_description": "Distinguish privacy and recovery time from a concerning change in connection, mood, or communication.",
+      "aliases": ["Reduced communication", "Child withdrawal"],
+      "verses": ["parenting"],
+      "collections": ["parenting-relationships-and-connection"],
+      "related_patterns": [
+        "parenting-exclusion-and-making-friends",
+        "parenting-being-teased-or-bullied",
+        "parenting-avoiding-unfamiliar-activities",
+        "parenting-school-reluctance-and-refusal"
+      ],
+      "example_user_queries": [
+        "My child has stopped telling me about their day.",
+        "My teenager spends all evening alone.",
+        "How do I tell privacy from withdrawal?",
+        "My child says nothing is wrong but seems different.",
+        "Questions make my child shut down further.",
+        "My child speaks freely at home but not elsewhere.",
+        "How do I offer company without demanding a conversation?",
+        "When does reduced communication need assessment?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_29af2d8b2b8c8191acbeddd2c7864b2f",
+      "source_article_sha256": "74b0a262e229455b543f21af667193d13db72d8322b4471b40fe5ab905bfd54d",
+      "article_sha256": "9535fecd1c2169d97f32626b20ab4cbb2c0f75977d9de2304d0d99aa6ccb67a0",
+      "article_word_count": 2423,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-bedtime-battles",
+      "title": "Bedtime battles",
+      "short_description": "Choose responses that fit sleep timing, repeated requests, fear, or difficulty settling at night.",
+      "aliases": ["Bedtime resistance", "Refusing to go to bed"],
+      "verses": ["parenting"],
+      "collections": ["parenting-daily-routines-and-habits"],
+      "related_patterns": [
+        "parenting-repeated-reassurance",
+        "parenting-separation-and-drop-off",
+        "parenting-arguing-about-rules",
+        "parenting-screen-time-conflicts"
+      ],
+      "example_user_queries": [
+        "My child keeps getting out of bed.",
+        "Bedtime takes two hours every night.",
+        "My child asks for endless stories and drinks.",
+        "Should I stay beside my child until they fall asleep?",
+        "My child is not sleepy at the bedtime we set.",
+        "My teenager cannot fall asleep early enough for school.",
+        "How do I limit bedtime requests without ignoring fear?",
+        "When should we look for a sleep problem?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_991c08d6c33c8191ad8b363f1dd8b1b9",
+      "source_article_sha256": "08647f9b6b56bf17883e637804625c3ffac84a8ee0b7e70f3a0c92b95896f301",
+      "article_sha256": "3b0dd8eeb20da8392cbcb39c74167a9c644cba0c9e884e62184bdb7ef0db3ddb",
+      "article_word_count": 2413,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-picky-eating",
+      "title": "Picky eating",
+      "short_description": "Support adequate eating and low-pressure learning while checking for pain, swallowing difficulties, or nutritional concerns.",
+      "aliases": ["Selective eating", "Food refusal"],
+      "verses": ["parenting"],
+      "collections": ["parenting-daily-routines-and-habits"],
+      "related_patterns": [
+        "parenting-avoiding-unfamiliar-activities",
+        "parenting-arguing-about-rules"
+      ],
+      "example_user_queries": [
+        "My child eats only a handful of foods.",
+        "My child refuses anything with bits in it.",
+        "Should I insist on one bite?",
+        "How do I introduce foods without a battle?",
+        "My child gags at unfamiliar textures.",
+        "My child is growing normally but avoids whole food groups.",
+        "Do I need to cook a separate meal?",
+        "When does picky eating need a feeding assessment?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_dc7ca1a06b9c819182bc4f59656035f1",
+      "source_article_sha256": "58703cdcb6e5eb4795e612939f8c436e3dc2c9d8fe565a54e901baf09a5f7434",
+      "article_sha256": "ea4a94a1a0e870ec1a27b1cf26a678116fa0c8070edacd84b48cde480159948b",
+      "article_word_count": 2638,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-screen-time-conflicts",
+      "title": "Screen-time conflicts",
+      "short_description": "Balance digital enjoyment and connection with sleep, family routines, stopping skills, and growing autonomy.",
+      "aliases": ["Screen time", "Device arguments"],
+      "verses": ["parenting"],
+      "collections": ["parenting-daily-routines-and-habits"],
+      "related_patterns": [
+        "parenting-stopping-and-transitions",
+        "parenting-arguing-about-rules",
+        "parenting-homework-resistance",
+        "parenting-exclusion-and-making-friends",
+        "parenting-being-teased-or-bullied"
+      ],
+      "example_user_queries": [
+        "My child gets furious when a game ends.",
+        "We fight about phones every evening.",
+        "How do I set limits without taking over every decision?",
+        "My teenager needs a phone for friends and homework.",
+        "My child cannot stop watching short videos.",
+        "Should we focus on screen minutes or what screens displace?",
+        "Autoplay makes stopping a constant battle.",
+        "How do we tell whether our screen agreement is working?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_508d73d1e5b48191a06e5e25e88e848d",
+      "source_article_sha256": "8e2dc0046b6bebb10e25a0baefb4df65774f38b41542b130020d1db0a03f418a",
+      "article_sha256": "f369719e077983d87e7eae0c1a08e197d353a94111d4434d08cf59b8e331c7ba",
+      "article_word_count": 2626,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-homework-resistance",
+      "title": "Homework resistance",
+      "short_description": "Distinguish task difficulty, starting problems, fear, and unreasonable workload before choosing homework support.",
+      "aliases": ["Homework refusal", "Homework battles"],
+      "verses": ["parenting"],
+      "collections": ["parenting-daily-routines-and-habits"],
+      "related_patterns": [
+        "parenting-giving-up-when-things-are-hard",
+        "parenting-fear-of-mistakes-and-perfectionism",
+        "parenting-screen-time-conflicts",
+        "parenting-school-reluctance-and-refusal"
+      ],
+      "example_user_queries": [
+        "Homework takes all evening and ends in tears.",
+        "My child refuses to start school assignments.",
+        "Should I sit beside my child for every question?",
+        "My child understands the lesson but cannot organize the work.",
+        "My child erases answers instead of finishing.",
+        "How do I know whether homework is too difficult?",
+        "How much help is too much?",
+        "When should I ask the teacher to change the homework?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_b6c7386cb3b88191bdc41c388c513e56",
+      "source_article_sha256": "ddc8d2ee5401da1cf87b78788b70fd7c2c1eb305c69ff5813fbfafa998d028ee",
+      "article_sha256": "5bdca986fc9d46e98336b147f3e07648096722d5927205c879a37b280e2329a3",
+      "article_word_count": 2591,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-stopping-and-transitions",
+      "title": "Difficulty stopping an enjoyable activity or moving between activities",
+      "short_description": "Help a child leave absorbing activities and start the next task by addressing uncertainty, loss, and practical barriers.",
+      "aliases": ["Difficulty with transitions", "Stopping play"],
+      "verses": ["parenting"],
+      "collections": ["parenting-daily-routines-and-habits"],
+      "related_patterns": [
+        "parenting-losing-and-disappointment",
+        "parenting-avoiding-unfamiliar-activities",
+        "parenting-homework-resistance",
+        "parenting-school-reluctance-and-refusal",
+        "parenting-screen-time-conflicts"
+      ],
+      "example_user_queries": [
+        "My child melts down when it is time to leave the park.",
+        "Warnings do not help my child stop playing.",
+        "How do I move from a game to dinner?",
+        "My child cannot leave a project unfinished.",
+        "Are timers useful for difficult transitions?",
+        "My child resists only when the next activity is school.",
+        "How can I preserve progress when an activity must end?",
+        "When should I change the plan instead of insisting on a transition?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_a7a3759368a881919c44d4fc847a7968",
+      "source_article_sha256": "b677ea2d704de8b81ca0e08aedc21986640d3f09ab382f5402c73b5f817dc791",
+      "article_sha256": "d32081a869aa06aa48396c55b17f13286c913c7f2f3804a71d8d59a4e0625e66",
+      "article_word_count": 2471,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-dressing-washing-and-teeth",
+      "title": "Resistance to dressing, washing, or brushing teeth",
+      "short_description": "Distinguish discomfort, sensory demands, skill gaps, and autonomy in daily personal-care routines.",
+      "aliases": ["Personal-care resistance", "Toothbrushing battles"],
+      "verses": ["parenting"],
+      "collections": ["parenting-daily-routines-and-habits"],
+      "related_patterns": [
+        "parenting-stopping-and-transitions",
+        "parenting-picky-eating",
+        "parenting-avoiding-unfamiliar-activities"
+      ],
+      "example_user_queries": [
+        "My child refuses to brush their teeth.",
+        "Getting dressed causes a battle every morning.",
+        "My child says all their socks hurt.",
+        "Hair washing makes my child panic.",
+        "How do I help with hygiene while respecting bodily autonomy?",
+        "My child wants to brush alone but misses most teeth.",
+        "Could pain be behind sudden resistance to washing?",
+        "When do we need dental or occupational support?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_05c93618547c8191986f058d59e1d9c1",
+      "source_article_sha256": "1f1b4aa0932754c5cedf52a4c07a3ec4f3f9bdb7b2ac3694a4170e93738954d0",
+      "article_sha256": "b638bd3d49a0d27dd14027710a75da1b63def5742584bb2f1246160d22076869",
+      "article_word_count": 2520,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-white-lies-and-feelings",
+      "title": "White lies to spare someone’s feelings",
+      "short_description": "Help a child navigate kindness and honesty without making them responsible for protecting adults from every disappointment.",
+      "aliases": ["Prosocial lies", "Polite white lies"],
+      "verses": ["parenting"],
+      "collections": ["parenting-honesty-and-fairness"],
+      "related_patterns": [],
+      "example_user_queries": [
+        "My child pretends to like presents to avoid hurting feelings.",
+        "Should I correct a polite lie in front of relatives?",
+        "How do I teach honesty without encouraging cruelty?",
+        "My child says they love food they actually dislike.",
+        "Is it okay for my child to say they do not want a hug?",
+        "How do we thank someone without pretending?",
+        "My child is afraid honest feedback will upset a friend.",
+        "How do I distinguish kindness from hiding wrongdoing?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_0d9ab0d757ec8191815ba7fd3a74644e",
+      "source_article_sha256": "a5acdf6dfbf160132c2242e671025a7c365797cbc32b85822b98f06789e5a794",
+      "article_sha256": "81ee72077a6c1213d7499aba7e338af5641347fd2edcfa5c976afd881a09d647",
+      "article_word_count": 2440,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    },
+    {
+      "id": "parenting-cheating-to-win",
+      "title": "Cheating to win",
+      "short_description": "Respond to unfair play with clear rules, proportionate repair, and attention to what winning means to the child.",
+      "aliases": ["Cheating at games", "Unfair play"],
+      "verses": ["parenting"],
+      "collections": ["parenting-honesty-and-fairness"],
+      "related_patterns": [
+        "parenting-losing-and-disappointment",
+        "parenting-fear-of-mistakes-and-perfectionism",
+        "parenting-sibling-rivalry"
+      ],
+      "example_user_queries": [
+        "My child changes the rules whenever they are losing.",
+        "I saw my child move extra spaces on a board game.",
+        "Should I stop the game after cheating?",
+        "My child denies cheating even when everyone saw it.",
+        "How do I make fairness matter more than winning?",
+        "My child only cheats against a sibling.",
+        "Can I simplify a game without rewarding cheating?",
+        "When should I worry about repeated unfair play?"
+      ],
+      "source_page": "https://chatgpt.com/space/page_dd0a094c8c0c8191b02b7d56346673f2",
+      "source_article_sha256": "463c7cdaaa8a0e4681701ae64cbbe8f2d713313c728f87e8f5aaccf738430ab9",
+      "article_sha256": "92789e8cb82ab18d30e1890007870c57c732e7e928bac920db0c87e54a1c6a52",
+      "article_word_count": 2494,
+      "visual_decision": {
+        "type": "none",
+        "reason": "Import the revised field-guide article as written; its examples and existing tables provide the explanation."
+      },
+      "practice": null
+    }
+  ]
+}

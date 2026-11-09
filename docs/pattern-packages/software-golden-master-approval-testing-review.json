@@ -1,0 +1,258 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "golden-master-approval-testing",
+  "title": "Golden Master / Approval Testing",
+  "primary_collection": "software-testing-testability",
+  "primary_collection_title": "Testing and Testability",
+  "preview": "http://127.0.0.1:43085/pattern/golden-master-approval-testing",
+  "body_word_count": 1248,
+  "body_word_count_includes_code": true,
+  "recommendation_queries": 10,
+  "sources": [
+    {
+      "title": "ApprovalTests",
+      "author": "ApprovalTests project",
+      "url": "https://approvaltests.com/",
+      "supports": "Reviewed baseline comparison"
+    },
+    {
+      "title": "ApprovalTests.Python",
+      "author": "ApprovalTests maintainers",
+      "url": "https://github.com/approvals/ApprovalTests.Python",
+      "supports": "Implementation and approval tooling"
+    },
+    {
+      "title": "difflib",
+      "author": "Python",
+      "url": "https://docs.python.org/3/library/difflib.html",
+      "supports": "Unified diff diagnostics"
+    }
+  ],
+  "figures": 1,
+  "editable_svg_variants": 2,
+  "concept_marks": 1,
+  "validation": {
+    "content": "All 1322 entities validate; published 1175 with no diagnostics or unresolved references. Eight exact H2s, complete runnable Python, related canonical links, ten queries and no practice.",
+    "code": {
+      "id": "golden-master-approval-testing",
+      "status": "passed",
+      "stdout": "baseline matched; changed total rejected; approval unchanged\n",
+      "stderr": "",
+      "checks": [
+        "changed cents and currency rejected without reapproval",
+        "only timestamp removed; stable key order",
+        "success cleans stale received file; missing approval fails"
+      ]
+    },
+    "native_figures": [
+      {
+        "path": "/assets/software-engineering/golden-master-approval-testing.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 800
+      },
+      {
+        "path": "/assets/software-engineering/golden-master-approval-testing-mobile.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 884
+      }
+    ],
+    "browser": [
+      {
+        "id": "golden-master-approval-testing",
+        "width": 1440,
+        "scrollWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "focus": true,
+        "colors": [
+          "rgb(122, 45, 137)",
+          "rgb(123, 66, 24)",
+          "rgb(72, 86, 76)",
+          "rgb(23, 96, 67)",
+          "rgb(23, 74, 139)",
+          "rgb(138, 59, 34)"
+        ],
+        "figure": "http://127.0.0.1:43085/assets/software-engineering/golden-master-approval-testing.svg",
+        "alt": "A fixed scenario produces an actual report that is compared with a reviewed approved file. A mismatch writes a separate received file and a diff. Only a deliberate review can replace the approved baseline; the normal test never updates it.",
+        "links": [
+          "/pattern/parameterized-test",
+          "/pattern/test-double",
+          "/pattern/test-data-builder"
+        ],
+        "copyable": true
+      },
+      {
+        "id": "golden-master-approval-testing",
+        "width": 390,
+        "scrollWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "focus": true,
+        "colors": [
+          "rgb(122, 45, 137)",
+          "rgb(123, 66, 24)",
+          "rgb(72, 86, 76)",
+          "rgb(23, 96, 67)",
+          "rgb(23, 74, 139)",
+          "rgb(138, 59, 34)"
+        ],
+        "figure": "http://127.0.0.1:43085/assets/software-engineering/golden-master-approval-testing-mobile.svg",
+        "alt": "A fixed scenario produces an actual report that is compared with a reviewed approved file. A mismatch writes a separate received file and a diff. Only a deliberate review can replace the approved baseline; the normal test never updates it.",
+        "links": [
+          "/pattern/parameterized-test",
+          "/pattern/test-double",
+          "/pattern/test-data-builder"
+        ],
+        "copyable": true
+      },
+      {
+        "id": "golden-master-approval-testing",
+        "width": 320,
+        "scrollWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "focus": true,
+        "colors": [
+          "rgb(122, 45, 137)",
+          "rgb(123, 66, 24)",
+          "rgb(72, 86, 76)",
+          "rgb(23, 96, 67)",
+          "rgb(23, 74, 139)",
+          "rgb(138, 59, 34)"
+        ],
+        "figure": "http://127.0.0.1:43085/assets/software-engineering/golden-master-approval-testing-mobile.svg",
+        "alt": "A fixed scenario produces an actual report that is compared with a reviewed approved file. A mismatch writes a separate received file and a diff. Only a deliberate review can replace the approved baseline; the normal test never updates it.",
+        "links": [
+          "/pattern/parameterized-test",
+          "/pattern/test-double",
+          "/pattern/test-data-builder"
+        ],
+        "keyboard_scroll": true,
+        "copyable": true
+      },
+      {
+        "id": "golden-master-approval-testing",
+        "asset": "/assets/software-engineering/golden-master-approval-testing.svg",
+        "status": 200,
+        "sha256": "38bbbcb0c7550a38393ffbcac967580e420fe800d642e4d4a9f043d96634f1e6"
+      },
+      {
+        "id": "golden-master-approval-testing",
+        "asset": "/assets/software-engineering/golden-master-approval-testing-mobile.svg",
+        "status": 200,
+        "sha256": "920b5d7f7457c17a30dd6723395dfee719ddda3fbab63021b6fecbcfe25515d1"
+      },
+      {
+        "id": "golden-master-approval-testing",
+        "collection": "software-testing-testability",
+        "gallery_and_breadcrumb": true
+      }
+    ],
+    "focused_tests": {
+      "passed": 46,
+      "unrelated_failure": "Global graphic coverage still lacks access-over-ownership. Five new articles 15, Canary 3, GoF 24 and four other graphic checks pass."
+    },
+    "type_check": "One pre-existing VerseSelector.component.test.ts:79 exact option error, zero warnings at verification.",
+    "lint_format": "Scoped ESLint and Prettier pass.",
+    "full_local_public_build": "Passed build-public-web.mjs and public-export inspection in an isolated current-task source copy.",
+    "preservation": {
+      "status": "passed",
+      "new_articles": [
+        "content/patterns/audit-logging.md",
+        "content/patterns/golden-master-approval-testing.md",
+        "content/patterns/humble-object.md",
+        "content/patterns/parameterized-test.md"
+      ],
+      "existing_content_changed_by_this_task": [
+        "content/collections/machine-learning-training-and-deployment.md",
+        "content/collections/software-evolution-delivery.md",
+        "content/collections/software-security-access-boundaries.md",
+        "content/collections/software-testing-testability.md",
+        "content/patterns/ml-shadow-deployment.md"
+      ],
+      "concurrent_unrelated_content_changes_not_touched": [
+        "content/collections/songwriting-course.md",
+        "content/collections/songwriting-glossary.md",
+        "content/collections/songwriting-listening-guide.md",
+        "content/collections/songwriting-part-7.md",
+        "content/patterns/songwriting-choose-a-song-form.md",
+        "content/patterns/songwriting-develop-without-losing-the-idea.md",
+        "content/patterns/songwriting-give-each-part-a-job.md",
+        "content/patterns/songwriting-shape-energy-over-time.md"
+      ],
+      "other_existing_content_unchanged": 1305,
+      "prior_authoring_records_preserved": 90,
+      "prior_concept_marks_preserved": 502,
+      "prior_dimensions_preserved": 1789,
+      "new_dimensions": 10,
+      "old_ml_metadata_and_shadow_widget_bytes_unchanged": true,
+      "widget_embed_preserved": true,
+      "original_shadow_id_and_ml_verse_preserved": true,
+      "only_existing_test_change": "Canary assertion stops freezing former collection size after authorized Shadow move; inverse restores baseline hash.",
+      "renderer_dependencies_and_other_software_tests_unchanged": true,
+      "concurrent_songwriting_test_changes_not_modified": true,
+      "byte_identical_svg_regeneration": {
+        "content/assets/software-engineering/audit-logging-mobile.svg": "6d9b05d0a18a250385271c7d163681213c701472155cd48075e83f777c304efc",
+        "content/assets/software-engineering/audit-logging.svg": "5683571a47e5986edc076f81c52af94b7d05eaa306f822ca24532eafc5d45fbb",
+        "content/assets/software-engineering/golden-master-approval-testing-mobile.svg": "920b5d7f7457c17a30dd6723395dfee719ddda3fbab63021b6fecbcfe25515d1",
+        "content/assets/software-engineering/golden-master-approval-testing.svg": "38bbbcb0c7550a38393ffbcac967580e420fe800d642e4d4a9f043d96634f1e6",
+        "content/assets/software-engineering/humble-object-mobile.svg": "3474928c8521cf1b0fa94454115f96209025705a7f2f81f501252537b5618d0a",
+        "content/assets/software-engineering/humble-object.svg": "fe9445723cfda762c6772f078d19aab608d704fe0535592084d7dfa3e0886aa8",
+        "content/assets/software-engineering/parameterized-test-mobile.svg": "43b11f97e65c4f9c1870a33ed877100a4121014d28034d2d8ec285cf4a949617",
+        "content/assets/software-engineering/parameterized-test.svg": "269dec1eea107e4768308e2f2b6d548646f174cc9839a0df6abbd8619ffdb32e",
+        "content/assets/software-engineering/shadow-traffic-mobile.svg": "3c81c9e66422bc4d85e9b92f2e20531b5ba2f0575cf7d49c647214cb80cad41e",
+        "content/assets/software-engineering/shadow-traffic.svg": "279f9385cf5ef5216cee47c23f3d6b5a8909f3625db9cf3fcc89273f693db146"
+      },
+      "isolated_sources_match_task_web_source": true
+    },
+    "visual_review": "Viewed native desktop and separately composed phone SVGs plus actual desktop/phone article tops. Actual article at 1440/390/320 passes exact code text selection, syntax colors, focus, keyboard horizontal code scrolling, responsive image loading, source SHA, related routes, collection gallery/card/concept mark and breadcrumb. No measured label clipping, text overlap or page overflow. Fixed white surface, approved palette, regular Helvetica Neue/Helvetica/Arial and square boundaries.",
+    "permission_review_note": "Initial native-browser approval review timed out before execution. Its permitted retry succeeded; no security setting or sandbox was weakened."
+  },
+  "example_limits": "Original complete standard-library Python teaching example and native SVG. Preconditions, failure behavior and limits are stated in the article. No practice.",
+  "remaining_unrelated_blockers": [
+    "VerseSelector test type error",
+    "Missing access-over-ownership concept graphic"
+  ],
+  "version_control": {
+    "branch": "codex/complete-remaining-articles",
+    "local_uncommitted": true,
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false,
+    "concurrent_songwriting_work_not_modified": true
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Native SVG tracking preserves default font kerning in the first two examples. The third holds automatic kerning disabled in both variants and restores only the T–o interval from the same font’s measured pair difference. Detail viewports repeat the same artifact with identical crop/scale and explanatory guides.",
+  "examples": [
+    {
+      "name": "letter-spacing-capitals",
+      "source": "explicit-tableware-photo.jpg",
+      "kind": "tracking",
+      "value": "STONEWARE",
+      "size": 28,
+      "x": 65,
+      "y": 440,
+      "before": 0,
+      "after": 2.24,
+      "metrics": {
+        "pairUnkerned": 30.183990478515625,
+        "pairKerned": 28.335983276367188,
+        "defaultAdvance": 148.0919647216797
+      },
+      "detailRegion": [45, 405, 340, 60],
+      "dimensions": {
+        "wide": [1320, 1460],
+        "stacked": [660, 2850]
+      }
+    },
+    {
+      "name": "letter-spacing-headline",
+      "source": "audience-workspace-photo.jpg",
+      "kind": "tracking",
+      "value": "Room to make",
+      "size": 64,
+      "x": 65,
+      "y": 500,
+      "before": 5.12,
+      "after": 0,
+      "metrics": {
+        "pairUnkerned": 68.99198913574219,
+        "pairKerned": 64.76799011230469,
+        "defaultAdvance": 386.81591796875
+      },
+      "detailRegion": [45, 440, 510, 110],
+      "dimensions": {
+        "wide": [1320, 1460],
+        "stacked": [660, 2850]
+      }
+    },
+    {
+      "name": "letter-spacing-pair",
+      "source": "core-message-coffee-photo.jpg",
+      "kind": "pair",
+      "value": "Tonic",
+      "size": 72,
+      "x": 65,
+      "y": 500,
+      "before": 0,
+      "after": -4.752,
+      "metrics": {
+        "pairUnkerned": 77.61598205566406,
+        "pairKerned": 72.86398315429688,
+        "defaultAdvance": 162.79196166992188
+      },
+      "detailRegion": [45, 430, 350, 135],
+      "dimensions": {
+        "wide": [1320, 1460],
+        "stacked": [660, 2850]
+      }
+    }
+  ]
+}

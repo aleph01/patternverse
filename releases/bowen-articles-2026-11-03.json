@@ -1,0 +1,89 @@
+{
+  "name": "bowen-articles-2026-11-03",
+  "status": "published and verified live",
+  "published": true,
+  "publishedAt": "2026-11-03T07:33:35.818Z",
+  "parentRelease": "ta-articles-2026-11-02",
+  "productionUrl": "https://patternverse.org",
+  "deploymentUrl": "https://88fe6a36.patternverse.pages.dev",
+  "version": "1793690903262",
+  "include": [
+    "Preserve the last verified public release",
+    "Six complete Bowen articles from Find similar theories of dynamics",
+    "Original five interactive comparisons and Family Diagram illustration, table, and text alternative",
+    "Bowen Family Systems Theory collection within Communication & Relationships"
+  ],
+  "exclude": [
+    "Contribute team invitation and founder portrait",
+    "Unselected draft content",
+    "Private music/player studies",
+    "MCP or guided-AI service publication"
+  ],
+  "newEntries": [
+    "collection:bowen-family-systems",
+    "pattern:bowen-i-position",
+    "pattern:bowen-detriangling",
+    "pattern:bowen-overfunctioning-underfunctioning-reciprocity",
+    "pattern:bowen-person-to-person-relationship",
+    "pattern:bowen-family-projection-process",
+    "pattern:bowen-family-diagram"
+  ],
+  "buildSettings": {
+    "VITE_RELEASE_PROFILE": "core",
+    "VITE_FEATURE_GUIDED_EXERCISES": "true",
+    "VITE_PREVIEW_ENABLED": "true",
+    "PATTERNVERSE_INCLUDE_DRAFTS": "false"
+  },
+  "expectedPublicEntries": 1354,
+  "artifact": {
+    "directory": "/private/tmp/patternverse-bowen-release-2026-11-03/apps/web/build",
+    "files": 11654,
+    "bytes": 652037923,
+    "manifestSha256": "6768ca6cc725643cf749d336289d33e65717476ad4ad9e3290f4dbe4ccf57fec",
+    "manifest": "/Users/jeger-benninger/Documents/patternverse/.local/releases/bowen-articles-2026-11-03/artifact-files.json"
+  },
+  "verification": {
+    "content": {
+      "entries": 1354,
+      "diagnostics": 0,
+      "bowenArticles": 6,
+      "originalInteractiveComparisons": 5,
+      "familyDiagramLayouts": 2,
+      "existingGamesPeoplePlayArticles": 36,
+      "existingGameIllustrationLayouts": 72
+    },
+    "unitTests": {
+      "passed": 58
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "browsers": {
+      "passed": 16,
+      "desktop": true,
+      "phone": true,
+      "allComparisonPathsAndMoments": true,
+      "normalRefresh": true
+    },
+    "publicScan": "passed",
+    "liveHttp": {
+      "passed": true,
+      "resources": 121,
+      "version": "1793690903262",
+      "exactArtifactHashes": true
+    },
+    "liveBrowsers": {
+      "passed": 16,
+      "unexpected": 0,
+      "desktop": true,
+      "phone": true,
+      "allFiveComparisons": true,
+      "normalRefresh": true
+    }
+  },
+  "sourceChat": "Find similar theories of dynamics",
+  "sourceThreadId": "01a19905-76a0-7df0-a8e6-f4d26be7aa59",
+  "sourceSnapshot": "/Users/jeger-benninger/Documents/patternverse/.local/releases/bowen-articles-2026-11-03/source-snapshot.tar.gz",
+  "report": "/Users/jeger-benninger/Documents/patternverse/.local/releases/bowen-articles-2026-11-03/release-report.json"
+}

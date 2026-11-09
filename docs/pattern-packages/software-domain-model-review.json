@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "domain-model",
+  "title": "Domain Model",
+  "aliases": ["Rich Domain Model", "Domain Model Pattern"],
+  "primary_collection": "software-domain-modeling-business-logic",
+  "primary_collection_title": "Domain Modeling and Business Logic",
+  "body_word_count": 1494,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Fowler's public Domain Model catalog establishes the executable data-plus-behavior pattern; Anemic Domain Model and Transaction Script distinguish alternative organizations of behavior. Data Mapper supports independence between model and storage representations. The Service Layer entry is correctly attributed to Randy Stafford. Evans's accessible DDD Reference Model-Driven Design discussion on printed page 6 connects implementation and domain language; Microsoft's official domain-model guide supports rich behavior, aggregate ownership, and invariants. Official Python documentation supports frozen records and the absence of enforced privacy from underscore names. The workshop scenario, policies, code, and diagrams are original teaching material. No inaccessible book chapter is claimed as consulted.",
+    "python_examples": "Both actual article blocks execute and print remaining 1, Not enough seats, and booked b remaining 0 on separate lines. Checks pass for model imports without I/O dependencies, positive-integer capacity and quantities, invalid references, independently validated Reservation creation, empty and exact-capacity states, duplicates, oversubscription rejection, unchanged state after every rejected operation, missing cancellation references, cancellation restoring derived availability, immutable reservation records and read-only collection properties, old tuples remaining snapshots, closed-state rejection of both reservation and cancellation, repeated closure, closing an empty workshop, and independent model instances. All reachable states in 4681 bounded public-operation sequences preserve the capacity and uniqueness invariants. Two separate locally valid copies also demonstrate that this model alone supplies no global capacity protection.",
+    "article_tests": "54 article tests pass across Domain Model, Functional Core, Imperative Shell, Dependency Injection, Microservices, Modular Monolith, Blackboard, Pipes and Filters, Microkernel, Ports and Adapters, Layers, and the existing GoF article suite. The new three-test suite passes again after making the collection assertion allow future completed members. Coverage includes canonical aliases, one primary home, new collection publication eligibility and verse membership, its Software Engineering verse link, exclusion from Application Architecture, related links, eight headings, exact highlighted code, responsive figures and dimensions, search, ten queries, revision hash, and concept marks. Tests use maxWorkers=2 to keep corpus-loading work within existing setup timeouts.",
+    "graphics_tests": "Four global concept-graphic geometry, safety, fallback, and export checks pass. The global coverage check has the unrelated existing failure listed below. Combined results are 58 passed and one unrelated failure.",
+    "content": "1232 entities validate with drafts included. The published-only corpus contains 1086 entities and reports no errors.",
+    "collection": "Created Domain Modeling and Business Logic only for the completed Domain Model article, with no candidate stubs. Added its collection and article links to the Software Engineering verse. Existing collection contents remain intact.",
+    "public_build": "Production build passes, including public web build checks. Actual browser review uses that build. No deployment performed.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the new generator, executable example validator, integration test, and updated authoring metadata. The final generator and integration assertion are checked again after refinement. The review report is separately formatted and checked.",
+    "visuals": "All four editable SVG variants load. Browser measurements find no overlapping or out-of-bounds labels and no out-of-canvas rectangles. Desktop and separately composed phone figures were visually inspected for shared domain operations, owned collection updates, derived capacity, exact open/closed policy, valid self-loops, unambiguous closure, fixed white surfaces, regular typography, palette, contrast, and readable labels. Request arrows were moved clear of their label. Meaning is conveyed by labels and structure as well as color.",
+    "article_browser": "Actual production article checked at 1440, 390, and 320 pixels: all eight headings, both Python blocks preserved exactly in the DOM with colored tokens, selectable code preserving content and indentation, keyboard horizontal code scrolling at 320px, responsive phone figures loaded, and no page overflow. Browser selection normally omits the terminal newline; other whitespace remains intact. Actual desktop and phone article, code, and figure screenshots were inspected.",
+    "navigation_browser": "The new collection's direct page renders its title. Opening the Software Engineering verse reaches the library's verse filter; the collection card opens its intended desktop gallery. Clicking Domain Model in that gallery opens the article with the correct Domain Modeling and Business Logic breadcrumb. Related Bounded Contexts, Ports and Adapters, State, and Functional Core, Imperative Shell routes all return HTTP 200. An initial browser script expected collection-card navigation rather than the existing gallery behavior; the verifier was corrected without changing application navigation.",
+    "preservation": "All 23 GoF articles and their collection match pre-change SHA-256 checksums byte for byte. Application Architecture is byte-for-byte unchanged. Existing Software Engineering verse text is preserved, with the new paragraph appended. Prior authoring records, concept marks, and asset dimensions remain unchanged. Existing canonical related IDs are reused."
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "pnpm --filter @patternverse/web check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to a ByRoleOptions type that does not recognize it. One type error and no warnings; left untouched."
+    },
+    {
+      "check": "Global concept-graphic coverage test",
+      "detail": "The existing access-over-ownership article has no authored concept graphic. The other four graphics checks pass; unrelated coverage left untouched."
+    }
+  ],
+  "example_limits": "A single-threaded in-memory workshop with fixed positive capacity, unique reservation references, derived remaining seats, and an explicit registration-closure policy. Public operations are the intended boundary; Python underscores do not enforce access control. Frozen booking records contain strings and integers. No persistence mapper, durable commit, concurrent capacity protection, authorization, automatic clock transition, external publication, or rollback of other effects is implemented. Domain Model is distinguished from the wider DDD approach, a database schema, and a mandatory State-pattern hierarchy.",
+  "preview": "http://127.0.0.1:42994/pattern/domain-model",
+  "preview_mode": "production",
+  "evidence_directory": ".local/software-domain-model",
+  "browser_measurements": ".local/software-domain-model/browser-checks.json",
+  "browser_check_script": ".local/software-domain-model/check-browser.mjs",
+  "preservation_checks": ".local/software-domain-model/preservation-checks.json",
+  "build_log": ".local/software-domain-model/public-build.log",
+  "branch": "codex/software-domain-model",
+  "publication": "Local implementation only. No publishing, deployment, push, or pull request."
+}

@@ -1,0 +1,114 @@
+{
+  "format_version": 1,
+  "title": "Life Strategies — Build a Web of Goals",
+  "verse": "decision-making",
+  "metadata_mapping": "Canonical frontmatter uses the existing entity schema. Richer metadata stays in this sidecar; recommendation queries are not automatically ingested by current search.",
+  "patterns": [
+    {
+      "id": "build-a-web-of-goals",
+      "title": "Build a Web of Goals",
+      "domain": "Life patterns and systems thinking",
+      "short_description": "Connect recurring activities through shared benefits so they support several purposes with less conflict.",
+      "collections": ["life-strategies", "decision-making-patterns"],
+      "use_when": [
+        "Each worthwhile goal seems to need a separate competing commitment.",
+        "An activity advances one purpose while undermining another.",
+        "You want to understand how recurring activities support one another.",
+        "One expected payoff carries the entire value of a pursuit."
+      ],
+      "goals": [
+        "Find several worthwhile contributions in a manageable activity",
+        "Connect activities through shared purposes and applicable skills",
+        "Keep costs, conflicts, and failed expectations visible",
+        "Adapt activities as their contributions become clearer"
+      ],
+      "mechanisms": [
+        "Map intended benefits and unwanted side effects",
+        "Represent goals as shared nodes and activities as modules",
+        "Choose compatible arrangements rather than proliferating separate programs",
+        "Reconsider an activity when a contribution changes without assuming all value is lost"
+      ],
+      "tags": ["life-patterns", "decision-making", "systems-thinking", "goals", "resilience"],
+      "related_patterns": [
+        "second-order-thinking",
+        "make-trade-offs-explicit",
+        "obliquity",
+        "connection-circles"
+      ],
+      "not_ideal_when": [
+        "Combining purposes removes something essential supplied by a specialist activity.",
+        "Benefits are asserted without checking actual costs or experience.",
+        "Every leisure activity is being forced to justify itself through productivity.",
+        "Shared dependencies are being mistaken for guaranteed resilience."
+      ],
+      "example_user_queries": [
+        "Every new goal seems to add another obligation to my week.",
+        "Can fewer activities support more of what matters to me?",
+        "My efforts to improve one part of life make another part harder.",
+        "How do I see which commitments support one another?",
+        "Could my hobbies, friendships, and practical learning fit together better?",
+        "An activity did not deliver one expected benefit; is it still worth doing?",
+        "I want a diagram of how my activities connect to my goals.",
+        "I keep paying for separate solutions to problems that might be connected.",
+        "How can I reduce conflict between saving money and enjoying life?",
+        "How do I keep several reasons for a pursuit without making every hobby useful?",
+        "What side effects should I include when planning a change?",
+        "My whole plan depends on a single payoff working out."
+      ],
+      "visual": {
+        "article_decision": "map",
+        "generator": "scripts/life-patterns-web-of-goals-visuals.mjs",
+        "figures": [
+          {
+            "asset": "content/assets/life-patterns/web-of-goals.svg",
+            "phone_asset": "content/assets/life-patterns/web-of-goals-mobile.svg",
+            "question": "How do three activities join through shared goals?",
+            "mapping": "Each labeled point is a goal. Each shaded polygon is a recurring activity. Shapes share points; neither edges nor geometry encode causation or measured magnitude.",
+            "activities": {
+              "Walk with a friend": ["Movement", "Connection", "Enjoyment"],
+              "Shared cooking": ["Connection", "Practical skills", "Lower expenses"],
+              "Repair circle": ["Practical skills", "Lower expenses", "Independence"]
+            },
+            "phone_composition": "The same graph is arranged vertically with larger labels. Node membership and activity identity remain unchanged."
+          },
+          {
+            "asset": "content/assets/life-patterns/web-of-goals-adaptation.svg",
+            "phone_asset": "content/assets/life-patterns/web-of-goals-adaptation-mobile.svg",
+            "question": "What remains when one expected benefit does not occur?",
+            "mapping": "A three-goal cooking module is compared with the same module after the expense benefit fails. Dashed links and a crossed-out node denote the unavailable benefit; connection and skills remain possible reasons to continue.",
+            "held_fixed": [
+              "Shared cooking activity",
+              "Connection purpose",
+              "Practical-skills purpose"
+            ],
+            "changed": "The lower-expenses expectation is unsupported in the worked month.",
+            "phone_composition": "The two comparison panels stack with the same node identities and states."
+          }
+        ],
+        "concept_graphic": "Three triangular activity modules join through shared goal points; the purple module bridges the two ink modules.",
+        "registry": "apps/web/src/lib/illustrations/pattern-graphics.json",
+        "provenance": "Original editable SVG geometry and examples, inspired by the goal/activity encoding in the supplied book excerpt; no traced or reproduced book figures."
+      },
+      "sources": [
+        {
+          "title": "Jacob Lund Fisker, Early Retirement Extreme",
+          "basis": "Nine user-supplied screenshot excerpts, especially A web of goals and Tensegrity; no page numbers visible.",
+          "sections": [
+            "Contingency goal-setting",
+            "Effect-mapping",
+            "A web of goals",
+            "Tensegrity"
+          ],
+          "supports": "Effects beyond a primary goal, activity modules joined at shared goals, and adaptive value when one purpose changes."
+        },
+        {
+          "title": "Jacob Lund Fisker, About ERE",
+          "url": "https://earlyretirementextreme.com/about-the-blog",
+          "accessed": "2026-10-28",
+          "supports": "Author's description of mutually supportive skills and adaptive web-of-goals contingency planning."
+        }
+      ],
+      "evidence_boundary": "An educational adaptation of the supplied framework. Tensegrity is treated as a metaphor, not a proved resilience property. Examples make no causal, medical, financial-return, or universally superior lifestyle claims."
+    }
+  ]
+}

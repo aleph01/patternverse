@@ -1,0 +1,161 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Success to the Successful",
+  "metadata_mapping": "Existing concept and responsive asset conventions; no new schema, navigation, or publication action.",
+  "patterns": [
+    {
+      "id": "success-to-the-successful",
+      "title": "Success to the Successful",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; coupled resource/results loops, cumulative advantage, evaluation, and opportunity allocation",
+      "article": "content/concepts/success-to-the-successful.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "author": "Peter M. Senge",
+          "year": 1990,
+          "title": "The Fifth Discipline: The Art and Practice of the Learning Organization",
+          "url": "https://www.bookdio.org/_files/ugd/ef8af1_5169a4238fd3412dba674fd8dbd81be6.pdf",
+          "read_method": "Opened book text and read Success to the Successful discussion at PDF pages 281–283 and Appendix 2 entry at PDF pages 360–361. Scan identifies original 1990 publication and 1994 paperback introduction.",
+          "supports": "Named archetype: two activities competing for limited support and coupled reinforcing processes.",
+          "boundary": "Qualitative structural account. No claim that Senge originated all cumulative-advantage concepts or that the archetype fixes a universal growth rate."
+        },
+        {
+          "author": "Donella H. Meadows",
+          "year": 2008,
+          "title": "Thinking in Systems: A Primer",
+          "url": "https://www.sustainable.soltechdesigns.com/meadows.pdf",
+          "read_method": "Opened and read printed pages 127–130, PDF pages 143–146.",
+          "supports": "Rewards that provide the means to win again; control through changed rewards, limits, redistribution, or alternative resources.",
+          "boundary": "The article does not import broad historical, ecological, market-concentration, or inevitability claims as universal formal results. The current qualitative article bounds allocation by the shared finite resource pool and explicitly qualifies concentration by the allocation rule. A two-hour floor belonged to an earlier numerical example and is not a current scenario assumption."
+        },
+        {
+          "author": "Robert K. Merton",
+          "year": 1968,
+          "title": "The Matthew Effect in Science",
+          "url": "https://garfield.library.upenn.edu/merton/matthew1.pdf",
+          "doi": "10.1126/science.159.3810.56",
+          "read_method": "Opened original paper reprint; read basis in Zuckerman interviews, scientific credit allocation, and visibility discussion.",
+          "supports": "Origin of the Matthew-effect label in the specific scientific recognition and communication setting; related cumulative-advantage idea.",
+          "boundary": "Not presented as the first formal resource-allocation model or a randomized causal demonstration."
+        },
+        {
+          "author": "Daniel H. Kim",
+          "year": 1999,
+          "title": "A Tale of Two Loops: The Behavior of Success to the Successful",
+          "url": "https://thesystemsthinker.com/a-tale-of-two-loops-the-behavior-of-success-to-the-successful/",
+          "original_pdf": "https://thesystemsthinker.com/wp-content/uploads/pdfs/100102pk.pdf",
+          "read_method": "Opened and read full web article and two-page volume 10 issue 1 PDF.",
+          "supports": "Learning/investment delays and premature withdrawal from alternatives; separate assessment and decoupled support.",
+          "boundary": "Practitioner archetype analysis. Examples are not used as causal empirical effect estimates."
+        },
+        {
+          "author": "Arnout van de Rijt, Soong Moon Kang, Michael Restivo, and Akshay Patil",
+          "year": 2014,
+          "title": "Field experiments of success-breeds-success dynamics",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4024896/",
+          "doi": "10.1073/pnas.1316836111",
+          "read_method": "Opened and read introduction, four experimental designs, results, marginal-return experiments, discussion, and sampling/methods.",
+          "supports": "Randomized early success produced later rewards in selected online environments. In first crowdfunding study, 70 percent treated versus 39 percent control received later third-party funding. Larger initial boosts did not yield proportional further gains in follow-up treatments.",
+          "boundary": "Selected initially unfunded low-goal US crowdfunding projects and specified samples in three other platforms, with limited observation horizons. Subsequent funding is not project completion. The experiments do not identify the hypothetical funder’s rule, validate the hypothetical support-to-research relationships, prove unlimited compounding, or quantify long-term welfare."
+        },
+        {
+          "author": "Albert-László Barabási and Réka Albert",
+          "year": 1999,
+          "title": "Emergence of Scaling in Random Networks",
+          "url": "https://barabasi.com/media/Emergence-Barabasi-1999_gN74Tws.pdf",
+          "doi": "10.1126/science.286.5439.509",
+          "read_method": "Opened and read article introduction and growth/preferential-attachment model, especially the degree-weighted connection rule.",
+          "supports": "Neighboring preferential-attachment mechanism: new links favor already well-connected nodes.",
+          "boundary": "Only the conceptual distinction is used. No assertion that the research-funding example has a power-law distribution or inherits this network model’s formal results."
+        },
+        {
+          "author": "Michael L. Katz and Carl Shapiro",
+          "year": 1994,
+          "title": "Systems Competition and Network Effects",
+          "url": "https://faculty.haas.berkeley.edu/shapiro/systems.pdf",
+          "doi": "10.1257/jep.8.2.93",
+          "read_method": "Opened authors’ paper and read introduction and direct/indirect adoption effects, especially pages 94–96.",
+          "supports": "Neighboring positive network effect: a user’s value can increase as compatible users join.",
+          "boundary": "Only the distinction is used; none of the paper’s market-equilibrium, optimality, compatibility, or policy results is transferred to the research-allocation example."
+        }
+      ],
+      "related_patterns": [
+        "zero-sum-conflict",
+        "drift-to-low-performance",
+        "find-the-conditions-behind-success"
+      ],
+      "status": "published",
+      "short_description": "Trace how success earns the resources that produce further success, then redesign allocation and evaluation so that an early lead does not decide every later opportunity.",
+      "use_when": [
+        "How does an earlier grant influence the next award?"
+      ],
+      "goals": [
+        "Recognize the concrete predicament before terminology.",
+        "Preserve defining assumptions and distinctions without calculations.",
+        "Evaluate intervention authority, costs, residual risks, and changed assumptions."
+      ],
+      "mechanisms": [
+        "Evaluate opportunity and quality, and protect a usable trial rather than automatically rewarding raw totals.",
+        "Fixed funding means opportunity cost. Recruiting, research delay, quality, and inherited reputation still matter."
+      ],
+      "example_structure": {
+        "scenario": "Fixed grant pool, support influences usable capability and delayed results, raw results influence the next award, and A’s extra allocation reduces B’s opportunity. Comparable potential stipulated. Grants are allocation flows; skill, equipment, and reputation accumulate. Protected trial entails A’s opportunity cost and no guaranteed research success.",
+        "changed_relationship": "Evaluate opportunity and quality, and protect a usable trial rather than automatically rewarding raw totals.",
+        "residual_constraints": "Fixed funding means opportunity cost. Recruiting, research delay, quality, and inherited reputation still matter.",
+        "evidence": "Hypothetical scenario and stipulated continuation; no expected result presented as measured outcome. Qualitative ranking and ordering replace illustrative arithmetic."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "assets": [
+          "content/assets/structural-traps/success-to-the-successful-bench-time.svg",
+          "content/assets/structural-traps/success-to-the-successful-bench-time-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 998,
+            "textBlocks": 22
+          },
+          "phone": {
+            "width": 360,
+            "height": 1881,
+            "textBlocks": 22
+          }
+        },
+        "question": "How does an earlier grant influence the next award?",
+        "alternative_text": "Hypothetical qualitative illustration. A has more grant support and a larger research record; B has less support and a smaller record under the illustration’s comparable-potential assumption. A funder rewarding raw results feeds support back toward A from a fixed pool, leaving less for B. A usable trial changes the allocation rule. Change: Evaluate opportunity and quality, and protect a usable trial rather than automatically rewarding raw totals. Limitation: Fixed funding means opportunity cost. Recruiting, research delay, quality, and inherited reputation still matter.",
+        "caption": "Hypothetical illustration. Both teams’ results feed the same next-award decision. Research capability builds over time, so funding and immediate output are not interchangeable. Protected trial support gives B an opportunity to generate evidence while diverting funds from A; it guarantees no winner.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. A has more grant support and a larger research record; B has less support and a smaller record under the illustration’s comparable-potential assumption. A funder rewarding raw results feeds support back toward A from a fixed pool, leaving less for B. A usable trial changes the allocation rule. Change: Evaluate opportunity and quality, and protect a usable trial rather than automatically rewarding raw totals. Limitation: Fixed funding means opportunity cost. Recruiting, research delay, quality, and inherited reputation still matter.",
+          "relationship_key": "Upper arrows show support enabling results; the explicit feedback statement returns results to the next allocation for both teams. Lower arrows show the proposed trial and review.",
+          "changed_relationship": "Evaluate opportunity and quality, and protect a usable trial rather than automatically rewarding raw totals.",
+          "residual_constraints": "Fixed funding means opportunity cost. Recruiting, research delay, quality, and inherited reputation still matter.",
+          "phone_treatment": "Separate readable composition with identical causal, dependency, decision, or chronology semantics; fixed white surface in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Foundational definitions and formal results retain their assumptions. Empirical studies retain setting and design limitations. Examples and suggested practical responses are original editorial synthesis. Expected familiarity is an editorial judgment, not a comprehension-study finding.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Fourteen strongest replacements from the remaining-thirty-two review. Article, two editable responsive SVGs, caption, alternative text, research note, and manifest dimensions. Forty separate identities and existing statuses retained.",
+        "current_example": "Fixed grant pool, support influences usable capability and delayed results, raw results influence the next award, and A’s extra allocation reduces B’s opportunity. Comparable potential stipulated. Grants are allocation flows; skill, equipment, and reputation accumulate. Protected trial entails A’s opportunity cost and no guaranteed research success.",
+        "source_handling": "Existing source identities and provenance retained; superseded narrative and verification fields replaced. New specialist sources have dated reading notes; original source_checked dates are not presented as a fresh review of every source.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validates with 1454 entities. All forty collection members remain separate, with nine article sections and one responsive figure each. Existing metadata, publication statuses, collection membership, navigation, and article source URLs preserved. Four articles, one collection introduction, four SVGs, asset dimensions, sixteen existing research notes, and one new Moral Hazard note comprise this revision.",
+        "visual": "Four revised SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (eight layouts). No text overlap, clipping, bounds overflow, page overflow, or fixed-white-surface issue. All eight screenshots visually inspected. Four affected live articles checked at 1440px and 390px (eight layouts), loading the expected desktop or phone illustration. Collection introduction and unchanged Moral Hazard article also checked at both widths. Captions, alternative text, source selection, and dimensions agree.",
+        "minimum_text_contrast": 5.65,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Content, source-provenance, semantic, and browser-rendering checks; no reader study or measured intervention outcome claimed."
+      },
+      "diagnostic_accuracy_revision": {
+        "date": "2026-11-02",
+        "change": "Clarify diagnostic conditions and align source boundaries with the current qualitative example; no new measured outcome or fresh reading of unchanged sources is implied.",
+        "source_handling": "Existing source identities and actual source-reading dates retained. Superseded example references corrected; an absent historical model is not represented as current verification.",
+        "verification": "Passed current content, scope, semantic, and browser checks; see verification."
+      }
+    }
+  ]
+}

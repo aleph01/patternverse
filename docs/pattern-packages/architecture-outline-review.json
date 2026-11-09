@@ -1,0 +1,269 @@
+{
+  "outline": [
+    "What it is for",
+    "The core idea",
+    "How it works",
+    "Why it works",
+    "Architectural examples",
+    "Design considerations",
+    "Useful when",
+    "Common mistakes and limits",
+    "Related patterns",
+    "Sources and provenance"
+  ],
+  "status": "complete",
+  "patterns": {
+    "arch-site-repair": {
+      "before_sha256": "f5fdbd4564631eca8eeb925c43c9cccb4d42da5bfe92e747678a7bb6fd4e2b4b",
+      "after_sha256": "04d479e834916e81b960eec804abfe08b5c40909d0da2c2daf2895d74bcad085",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-south-facing-outdoors": {
+      "before_sha256": "f8aaa1a34be15d28d86096d2183dc73e0cdc09ef30f84551c50d74c2682119be",
+      "after_sha256": "5a7f4b04c43f5e3d269a2885ca69f284895c6afe3b3a06386e75c6596805d90c",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-water-sensitive-landscape": {
+      "before_sha256": "7b25e11fcac141895938e0dc00c9658d2bc2dd1128e5ac436593b330d2873817",
+      "after_sha256": "24fe19389b6273359adab294a48389d0ed340ddfb829817e5c073c533fa4efbb",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-positive-outdoor-space": {
+      "before_sha256": "94106491ded2428a8f176c45b71a73b6b542a6a9a0c57fbd30e58cb876b9aad0",
+      "after_sha256": "026c45be42d05e9bbfeec6ce81e3976b80bd356a4e3e86d75fc0163943bef234",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-arcades": {
+      "before_sha256": "5200e4648cd95991bfedf34d306ea649e98c24fee6a703261f9c052d84781d80",
+      "after_sha256": "22084cdb04d80bab6c6f29dc028f8371c5f1d01e09e649211bd0f5e07a1bb1b1",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-entrance-transition": {
+      "before_sha256": "815cf6a07a1016c6cf1d18af240d7d256442658a8b43ffb53762cdb04207cbd6",
+      "after_sha256": "a202a075011ce0a74467fdd0e16b24fe0c1cff7b788baa4be6c8f34acac0bbad",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-building-edge": {
+      "before_sha256": "088d8e819c90e9aebe223596850b5a52dafb66cc1aa773e32075323dd6fc6441",
+      "after_sha256": "1aee91f0461a98595c0cd1b3b425e494356fefdfc98f1f580de42eb481fccaea",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-wings-of-light": {
+      "before_sha256": "cf0b02c81d000970e4adeec17844c2220360a4254f619d74b91f4b904a5309ba",
+      "after_sha256": "db11cd863d475d1e83c0c9751c8560c5182589d4b42b247e6f43a8f74882d032",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-courtyards-which-live": {
+      "before_sha256": "eea457062102b71f1769b93ce07c3630b9e404f353c384d35f5d3597f968ced1",
+      "after_sha256": "d54ceb2a8a12d0951ea20f7b99cf5bc3bc733878d49dc6ae6855fc5ebe1c8e5e",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-compact-building-form": {
+      "before_sha256": "cacf2df29a074dedab3d4a70d75309de5caff4f74949228f60517dc9265d8eb2",
+      "after_sha256": "ea551a07d050fca019f22b2ae6416969f00fde5dc996ab8ce6ca3248c3a8a6b2",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-intimacy-gradient": {
+      "before_sha256": "c734304c08fe7c1f60f7a8ed9e6ef64ebadf3269b7914a58c7baef43b5cf2daa",
+      "after_sha256": "60bdf2759bec53c142d5098852191f15183ec388d0e54a6fe7db881852132538",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-common-areas-at-the-heart": {
+      "before_sha256": "761cd9887c91ebd28af1f394532fd9b81a8debc80b8ccfbf5a164aeae8087f1f",
+      "after_sha256": "dd9230836b8ae8b614d967591108e7198377c46467565c16d4fcd08dd41b3f39",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-flexibly-linked-rooms": {
+      "before_sha256": "eb89f5ce322f03d3579efcf9e4a51c354ba17058149bcce440dd668a532cb7ad",
+      "after_sha256": "06b02819906c9d1522471d069fc84ba04a6b05b7ff6e1961686d1779316984cd",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-circulation-as-orientation": {
+      "before_sha256": "5decde80596427371bc08e3932a545eea7cda3cb1766896ffc40396e75c97a02",
+      "after_sha256": "999d03ffd5300e402e0e4a965104d19bd3359f4bc912031d607633ec11f89865",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-main-entrance": {
+      "before_sha256": "1fbb3ae19c0ee9f6d77daf0924fd73f595b079a0f79c3b94df3106e011ec50bf",
+      "after_sha256": "3952a4a4dff2e0869f83253264bcb417bc5e63cbc0cc1756734c23fb30ade607",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-inclusive-arrival": {
+      "before_sha256": "6bd0067bae99419fb2d4646a52bd400ba1a6f1809b5a069cd94d12487972de16",
+      "after_sha256": "048cf99aa7351c6615404fbff65db22e0e8ce65795424f2997f0265ae818031b",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-staircase-as-a-stage": {
+      "before_sha256": "b2842664a6e3c6f4a98555ba420f10eede2d56cc64ae4a655de6d7cab0562eb0",
+      "after_sha256": "97731cf8c3b039814e0ec30c601967f76ee4d5c891eb89f1bd34cb57b2eb8b35",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-window-place": {
+      "before_sha256": "a0811a7b6ed050628d9ff4332442c09ec41c9a44edac9bac8f93ea51b38bfbd4",
+      "after_sha256": "b640752317dc9df2a693cd4e12c97a1ed14b36e670163addcab669f9c9b0a58f",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-alcoves": {
+      "before_sha256": "dabc6914b9b86981cdde3c492ec5abd4555587beeeff04246c3aadeaedd4e587",
+      "after_sha256": "c338e2d5011e6745deb3077b0d081bdc0f9e40063dc3398d72ad480a34ba0ac6",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-ceiling-height-variety": {
+      "before_sha256": "92c0d7c159e5157c84a03c236feb7d35995b899241b514baf0fae906722ef033",
+      "after_sha256": "da18c80e79999cf23d77eeeabe298643ec9881a1dd73f5e4c32ab5db174aaedc",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-prospect": {
+      "before_sha256": "8928673f9372b4a66987d818f941bd5cee58b4d54443025a3c92d8c1e9e1ace6",
+      "after_sha256": "d6c0c5634a76e42a8500f81372229af0b5cb33d29da3c9ff14653af236025661",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-refuge": {
+      "before_sha256": "0d7ebbe5c590e63d3385f97b735ff66d6d047344fb266749cc7718fb6883ef7f",
+      "after_sha256": "5cf33ac45bc5779f9edc2cd620b28c18bab728410ad337a83e56eb686151ff6e",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-light-on-two-sides": {
+      "before_sha256": "ff1c90d46b2df96453cf59b688854eb025f27f3d3e7c806656f8788e166a3ef6",
+      "after_sha256": "3b778aef87c16c3af13be187f265ea63c994638c1b1e489ae0807930d2ebba77",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-external-solar-shading": {
+      "before_sha256": "f81154860643f31478c0369233a1fe2fd3d6d164b298e004218b68d858044e77",
+      "after_sha256": "c6cb056cf79aeda65bb7f8cdacf54a81283627b566858fe418d97bd0ed5567f5",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-cross-ventilation": {
+      "before_sha256": "33196618ea4af0290fe5ae76b90b9e743e445d33d364f446425c31dee07d1522",
+      "after_sha256": "dc6733da8272ffc96f8b117c929554dc0c355259a2a02279cbaae25078790344",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-continuous-thermal-envelope": {
+      "before_sha256": "95ab3adc8501854fb6d95c66e733c7e1bdc51b5f3252a681a49051c3e0bcb1c5",
+      "after_sha256": "64b49a24fb437038cba22c87dc90646a6c42eaba47a73190c7b917eaed42b92a",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-structural-bay-rhythm": {
+      "before_sha256": "5cf0abb686fdca0641a3e13a2d83ac7c22efdbd5deb8db00ae616ba21299079c",
+      "after_sha256": "cb9687889a50430ee92ce328914e63934f962213b0411820557154f0ffd6a9e3",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-drained-ventilated-rainscreen": {
+      "before_sha256": "f1eeaf4a587c85adc102d5c48f693bc01b45665ea8ff771e654c3ae6cb9c6995",
+      "after_sha256": "71c9febfe411dbb6234a4944559dc1aff81e1a65558185de88797474741789be",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-repairable-connections": {
+      "before_sha256": "f2c99afd887376d003c4c922df67d99cd72306ba8a2d97a8dffbbb1efb544ac3",
+      "after_sha256": "fed65ae28d0c193d28bb5e198e83b9a4cd288ec2eef50eca0c486599e1e0fa34",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-reuse-before-replacement": {
+      "before_sha256": "d5c73298a41e35b87c85c48bb0f8029022cc5a6b4028c6520e4f4a3f0cf18205",
+      "after_sha256": "5a113cf13f7ecee9590d61692de0223181c25cbb6becb1a556e9ed4a45ef8bd7",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-loose-fit-layers": {
+      "before_sha256": "6fa42200ffad763b8d634af25ee5563e4207b2e4a67855110c5bb9fb5677ed7e",
+      "after_sha256": "bf8ccb1e8ee1327b13af3e415e0cadb30ec8b6939a5bd8f136ab412e4105cbcf",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-design-for-disassembly": {
+      "before_sha256": "43c5b8fce119eca560eb69a742a6192c7153d81369a1368d4c4590f980b3e18f",
+      "after_sha256": "dcb43a1b0c008acd991717a3d7fdc38e40e806499a8833e4f5eca3e06abd7ddd",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-observe-before-briefing": {
+      "before_sha256": "10aa1f7ebc9ac9cc693cd598f3028a5de24486882590e0db4259ffd56f324817",
+      "after_sha256": "df55ed7e5aff5170b25604b7edb0edef34e2d005686ec22af9ddffffe28f1c39",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-compare-spatial-alternatives": {
+      "before_sha256": "aaa477f4b60a9b6a87c09c1aad46e133bb1a9a5372f10cc322618468f53ead20",
+      "after_sha256": "2ad917736281492cf0cb6d8f3e8de52b413dcbcbf8bbfb1a9c4ce1ff85a3010b",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 2,
+      "operational_explanation_added": true
+    },
+    "arch-test-at-full-scale": {
+      "before_sha256": "35f6c71d516c6135f334b5910c9529e6448451771a0d23a3188abdd7e5982645",
+      "after_sha256": "2b711cf85b4dea2b9100b99b6de177909734b2ff7ad6077341e1881663cee47a",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    },
+    "arch-post-occupancy-evaluation": {
+      "before_sha256": "021429dba4c2b6df42312120635854a537f779ed4c12d8d6c17ffff44a7331fb",
+      "after_sha256": "4e23e8469bc3c22afdeb3403e7bc579a5bbce3a303b44f015292f0f4b6d54126",
+      "original_prose_and_assets_preserved": true,
+      "example_subheadings": 3,
+      "operational_explanation_added": true
+    }
+  }
+}

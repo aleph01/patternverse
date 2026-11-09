@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "data-circuit-breakers",
+  "title": "Circuit Breaker",
+  "aliases": ["Circuit Breakers"],
+  "primary_collection": "software-reliability-failure-handling",
+  "primary_collection_title": "Reliability and Failure Handling",
+  "body_word_count": 1448,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary references: Michael Nygard’s Release It! publisher catalog; Martin Fowler’s Circuit Breaker explanation and Nygard attribution; Microsoft’s state/classification/resource-scope guidance; Resilience4j documentation for configurable windows/minimum samples/slow calls/probes and concurrency separation; Polly documentation for retained scope, lazy half-open transitions and no implicit retries; Marc Brooker’s AWS discussion of retry pressure, uncertain outcomes and modal recovery tradeoffs. Singular Circuit Breaker is the established title and the old plural title remains an alias. Original warehouse, rate-window/minimum-sample, independent supplier/shard, uncertain-write and provenance-labelled catalog fallback contexts are retained. The small virtual-time code, chosen thresholds, trace and native diagrams are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["breaker.py", "demo.py"],
+      "stdout": [
+        "DependencyFailure closed",
+        "DependencyFailure open",
+        "CircuitOpen open",
+        "DependencyFailure open",
+        "CircuitOpen open",
+        "written closed",
+        "dependency calls: 4"
+      ],
+      "illustration_trace_matches_execution": true,
+      "verification": "Actual article fences run unchanged on Python 3.11+. Exact seven-line output and six-request/four-invocation trace match every figure row. Two counted failures open; successful/falsy results reset history; ignored ValueError, unclassified TimeoutError and cancellation-like BaseException preserve closed-state counter and error identity. Cooldown starts at failure completion with arbitrary clock origin, rejects just before expiry, admits at equality/afterward, and local rejection changes neither deadline nor counts nor invokes the callback. Time advancement alone performs no background transition. Failed probes restart cooldown at their completion; successful probes close/reset, and a later isolated failure does not immediately reopen. Inconclusive/error/cancelled probes propagate unchanged, reopen without incrementing failure count and release actual callback-owned TemporaryFiles. A sequential reentry seam exercises busy-probe rejection without claiming thread safety. Independent breakers isolate scopes; newly created instances do not share history. Real files close before caller observation and callbacks own that cleanup. No network, concurrency synchronization, fleet sharing, timer thread, deadline enforcement, retry, durable batch/fallback implementation or remote rollback is inferred."
+    },
+    "content": "1295 entities validate including drafts; published-only compilation has 1148 entities without diagnostics. Count remains unchanged because the canonical article is revised in place.",
+    "integration_tests": "Four focused article suites pass: Circuit Breaker, Retry with Backoff and Jitter, Timeout and GoF. Across five files, 37 checks pass and the pre-existing global authored-graphic coverage check fails for access-over-ownership; four other global graphic checks pass. Singular title/plural alias, canonical ID, two verse memberships, one primary home, former collection cross-link, exact copyable highlighted code, responsive assets, metadata hash and alias search are verified. The earlier retry test removes only an obsolete fixed fourteen-member global collection count; its own membership/cross-link assertions remain, and this task’s baseline preservation check verifies all thirteen remaining members.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, new integration test, one-line prior retry-test adjustment, authoring JSON/documentation, concept registry and review record. Article and both collection Markdown files follow existing conventions.",
+    "collection": "Reused data-circuit-breakers and its article URL. Established singular title replaces the old plural title, retained as an alias. Data Engineering tags/verse remain; Software Engineering verse membership is added. Its one primary home moves to Reliability and Failure Handling as the third member after Timeout and Exponential Backoff with Jitter. Only this item is removed from Execution & recovery, whose count becomes thirteen with an explicit cross-link. No other collection memberships, article bodies, verse files, GoF entries or historical import metadata change. No duplicate article, collection, future stub, practice or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/patterns/data-circuit-breakers.md",
+        "content/collections/software-reliability-failure-handling.md",
+        "content/collections/data-engineering-execution-recovery.md"
+      ],
+      "other_existing_content_unchanged": 1292,
+      "new_content": [],
+      "no_duplicate_article_or_new_collection": true,
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_other_articles_unchanged": true,
+      "all_other_collections_unchanged": true,
+      "both_existing_verses_unchanged": true,
+      "canonical_id_route_old_title_alias_data_tags_and_verse_preserved": true,
+      "former_collection_retains_crosslink_and_other_13_members": true,
+      "prior_timeout_and_retry_members_preserved": true,
+      "historical_data_engineering_import_unchanged": true,
+      "prior_retry_test_only_removes_obsolete_global_collection_count": true,
+      "original_article_and_figure_archived_locally": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 62,
+      "prior_graphics_unchanged": 474,
+      "prior_dimensions_unchanged": 1684,
+      "updated_dimension": {
+        "data-engineering/circuit-breakers.svg": {
+          "before": {
+            "width": 720,
+            "height": 560
+          },
+          "after": {
+            "width": 720,
+            "height": 1008
+          }
+        }
+      },
+      "new_dimensions": {
+        "data-engineering/circuit-breakers-mobile.svg": {
+          "width": 360,
+          "height": 1344
+        },
+        "software-engineering/circuit-breaker-trace.svg": {
+          "width": 720,
+          "height": 1080
+        },
+        "software-engineering/circuit-breaker-trace-mobile.svg": {
+          "width": 360,
+          "height": 1400
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "The standard public build succeeds in an isolated source copy with Public web build checks passed. Revised article, two changed collections, metadata/docs, generator/validator, new and adjusted tests, concept registry, dimensions manifest and four SVG variants match staged sources. Actual collection-card paths match the reviewed registry. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty to disable local sync. Shared generated output and earlier stages remain untouched. An initial asset-copy failure due to low disk space was resolved by replacing only this task’s byte-identical asset copies with native copy-on-write clones before rerunning the standard build. No renderer, build implementation or dependency changes. Original article/SVG are archived in ignored local task evidence; historical Data Engineering import remains intact.",
+    "illustrations": "Two editable native figures with separately composed phone layouts. The canonical state-figure path is preserved and reworked: closed admits/observes, a threshold opens, cooldown plus a subsequent call permits limited half-open probing, qualifying success closes and failed/inconclusive model probes reopen. Arrows mean transitions, not retries, buffering or cancellation. Phone composition uses explicit alternative probe outcomes and moves arrows clear of labels. A new warehouse trace shows six sequential requests, times 0/0/0/100/199/200 virtual milliseconds, four callback invocations and two local rejections; failed-probe completion restarts cooldown and equality at 200 admits recovery. Every trace row matches actual article execution. Meaningful alt/captions, fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry and restrained strokes. Four variants have zero measured outside labels, label overlaps or outside rectangles; the closed-boundary concept mark fits 96-by-96 including stroke. Native/embedded desktop and phone figures, labels, contrast, captions, routing and code viewports visually inspected. One existing dimension updates and three new dimensions are added.",
+    "browser": "Actual production article checked at 1440, 390 and 320 CSS pixels: eight exact H2 sections, two loaded responsive figures, two exact selectable syntax-highlighted Python blocks, distinct token colors, focusable code, keyboard horizontal code scrolling at 320 pixels, no page overflow and all four related routes returning 200. Reliability and Failure Handling route and Software Engineering verse gallery open the canonical article with its new primary breadcrumb and final concept paths. Former Data Engineering collection cross-link also opens that same canonical route with the new primary breadcrumb. Desktop/phone article tops, both embedded figures, code viewports and collection gallery visually inspected; no browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-circuit-breaker/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 43015
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 26.5,
+          "y": 4.5,
+          "width": 43,
+          "height": 85
+        },
+        {
+          "x": 8.5,
+          "y": 7.5,
+          "width": 79,
+          "height": 73
+        }
+      ]
+    },
+    "disk_space_recovery": {
+      "status": "passed",
+      "files_replaced_by_identical_copy_on_write_clones": 5654,
+      "logical_bytes_cloned": 1157406461,
+      "scope": "Only this task’s content-asset snapshot and generated asset copies; original source and earlier stages untouched.",
+      "redundant_task_compiler_output_removed_after_successful_build": true,
+      "finished_preview_build_and_source_preserved": true
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Existing canonical data-circuit-breakers is revised in place, preserving ID, URL, Data Engineering tags/verse, warehouse resource-exhaustion scenario, versioned catalog fallback, supplier/shard scoping, window/sample teaching context and primary state-figure asset path. Established singular Circuit Breaker becomes the title; former title Circuit Breakers remains an alias. Its one primary home moves to Reliability and Failure Handling; former Execution & recovery retains a cross-link and thirteen other members. Historical Data Engineering import metadata is unchanged and original article/SVG are archived locally. Original Python 3.11+ single-caller virtual-time simulation retains one breaker. Two counted DependencyFailure outcomes since the last success open it; 100 ms cooldown starts at failure completion. A subsequent call at or after the boundary is one half-open probe. Probe success resets history; failed/inconclusive probes reopen; nondependency errors/cancellation propagate and do not increment the counted-failure total. Action-owned cleanup precedes returning/raising. Six sequential requests cause four callback invocations and two local rejections. No network, timer thread, rate window, slow-call detection, concurrent synchronization, fleet sharing, timeout, automatic retry, batch persistence, fallback implementation or remote rollback is supplied. Tests verify exact threshold, falsy-success reset, classification/error identity, local rejection without execution or state/deadline extension, arbitrary clock origin and cooldown from failure completion, lazy transitions and exact before/at/after boundaries, probe failure/restart, reset after recovery, inconclusive cancellation/error probes, real callback-owned TemporaryFile closure and scope isolation. A sequential reentry seam exercises the explicit busy-probe guard only and supplies no concurrency guarantee. No claim is made that the breaker closes unknown resources; callback cleanup is a stated precondition. In-memory diagnostic fields and a virtual clock expose the teaching state, with no real service or timer.",
+  "preview": "http://127.0.0.1:43047/pattern/data-circuit-breakers",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-circuit-breaker",
+  "browser_measurements": ".local/software-circuit-breaker/browser-checks.json",
+  "browser_check_script": ".local/software-circuit-breaker/check-browser.mjs",
+  "build_log": ".local/software-circuit-breaker/public-build-isolated.log",
+  "branch": "codex/software-circuit-breaker",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

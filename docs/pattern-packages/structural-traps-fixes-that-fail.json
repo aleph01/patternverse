@@ -1,0 +1,126 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Fixes That Fail",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "fixes-that-fail",
+      "title": "Fixes That Fail",
+      "entity_type": "concept",
+      "domain": "Systems and feedback traps; immediate symptom relief, delayed harm, latent rework, and transition capacity",
+      "article": "content/concepts/fixes-that-fail.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Daniel H. Kim, Using ‘Fixes That Fail’ to Get Off the Problem-Solving Treadmill (September 1992)",
+          "url": "https://thesystemsthinker.com/wp-content/uploads/pdfs/030703E.pdf",
+          "web_text": "https://thesystemsthinker.com/using-fixes-that-fail-to-get-off-the-problem-solving-treadmill/",
+          "supports": "Early practitioner treatment of the named system dynamics archetype; intended relief, delayed harmful consequences, possible transition to Shifting the Burden, and structural causal mapping.",
+          "read_method": "Web text opened and read through the mechanism, seven mapping stages, and distinctions. The linked original two-page PDF was opened; its text extraction was empty because it is scanned. Page one was rendered and visually inspected to verify Kim's byline, September 1992 date, causal diagram, and explicit reference to a November 1990 treatment.",
+          "boundary": "Conceptual/practical framework, not a theorem of inevitable failure or evidence that Rae's quantities are measured. No sole-inventor claim. The 1990 reference is attributed to the 1992 source rather than pretending the earlier article was directly read."
+        },
+        {
+          "title": "Virginia Anderson, Introducing the Systems Archetypes: Fixes That Fail (March 1999)",
+          "url": "https://thesystemsthinker.com/wp-content/uploads/pdfs/100209pk.pdf",
+          "web_text": "https://thesystemsthinker.com/introducing-the-systems-archetypes-fixes-that-fail/",
+          "supports": "Accessible account of a fix whose immediate relief creates delayed harm that worsens the original symptom.",
+          "read_method": "Full web article and original one-page PDF opened and read. PDF verifies Virginia Anderson's byline, March 1999 imprint, and adaptation from Daniel H. Kim and Virginia Anderson's Systems Archetype Basics: From Story to Structure (1998).",
+          "boundary": "Illustrative practitioner explanation. The water-on-wheel and borrowing stories are not reused as empirical demonstrations, technical materials advice, financial guidance, or current macroeconomic claims."
+        },
+        {
+          "title": "Rogelio Oliva and John D. Sterman, Death Spirals and Virtuous Cycles: Human Resource Dynamics in Knowledge-Based Services (2010)",
+          "url": "https://mitsloan.mit.edu/shared/ods/documents?PublicationDocumentID=4349",
+          "supports": "Explicit service-system stock-flow model of undiscovered errors, delayed discovery, return to backlog, and reinforcing rework pressure; context from earlier service fieldwork, resource constraints, and modeled policy trade-offs.",
+          "read_method": "Author-hosted full chapter opened and read: title/citation, service backlog and completion definitions, pressure responses, overtime/fatigue and corner-cutting sections, undiscovered-error equations 34–38 and rework loop, prior bank-fieldwork discussion, financial-boundary extension, policy recommendations, conclusion, and references.",
+          "boundary": "Handbook of Service Science chapter, pages 321–358. The model integrates field-informed relationships and assumptions; its simulation outcomes are not randomized interventions or measured returns for Rae's operation. Rae's shortcut, latent defects, and recovery sequence are hypothetical teaching assumptions, not a reproduction or calibration of the authors' discovery model. Dated service-quality trend statistics and numerical policy effects are not imported."
+        },
+        {
+          "title": "Rogelio Oliva and John D. Sterman, Cutting Corners and Working Overtime: Quality Erosion in the Service Industry (2001)",
+          "url": "https://pubsonline.informs.org/doi/10.1287/mnsc.47.7.894.9807",
+          "doi": "10.1287/mnsc.47.7.894.9807",
+          "supports": "Corroborates publication identity and the earlier UK consumer-lending fieldwork context cited by the 2010 chapter: interviews, observations, archives, and econometric calibration.",
+          "read_method": "Publisher's original record and full abstract opened and read. The full publisher PDF redirected to its abstract, and an alternate scan fetch returned 403. Its detailed context is taken from the later author-hosted chapter, not from inaccessible full text.",
+          "boundary": "Not claimed as a full-paper read or as randomized evidence. Main article links the accessible 2010 model and states the limits of its connection to field research."
+        },
+        {
+          "title": "NIOSH, Overtime and Extended Work Shifts: Recent Findings on Illnesses, Injuries, and Health Behaviors (2004)",
+          "url": "https://stacks.cdc.gov/view/cdc/11308",
+          "supports": "Official integrative-review abstract describes heterogeneous associations between extended hours, fatigue, vigilance, and performance, and explicitly notes that study quality was not critically evaluated.",
+          "boundary": "Supports investigating a possible fatigue/performance path, not a universal causal size, a safe hours threshold, or proof that Rae’s rework outweighs immediate relief. The example’s net effect is stipulated.",
+          "checked": "2026-11-02",
+          "read_method": "Opened official repository record and read the full abstract, design limitations, and performance findings."
+        }
+      ],
+      "related_patterns": [
+        "policy-resistance",
+        "reinforcing-feedback-loops",
+        "bottlenecks-and-capacity-constraints"
+      ],
+      "status": "published",
+      "short_description": "Trace how a remedy's immediate relief creates delayed harm, then change that causal relationship while managing the work and costs already in the pipeline.",
+      "use_when": [
+        "How can the relief help recreate the original backlog?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Break the fatigue-and-error path while covering continuing work and inherited corrections.",
+        "Recovery and discovery take time. Added qualified coverage, slower promises, or reduced commitments have costs."
+      ],
+      "example_structure": {
+        "scenario": "Repeated extended work initially clears backlog; inadequate recovery may cause fatigue and errors, which return after discovery as correction work. Delayed burden exceeds immediate relief by stipulation, not a universal effect of overtime. Active unfinished work, latent defects, and fatigue have distinct accumulation and recovery/discovery times. Temporary qualified coverage, recovery, and revised promises address transition; no weakened learning capability is required.",
+        "changed_relationship": "Break the fatigue-and-error path while covering continuing work and inherited corrections.",
+        "residual_constraints": "Recovery and discovery take time. Added qualified coverage, slower promises, or reduced commitments have costs.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "How can the relief help recreate the original backlog?",
+        "assets": [
+          "content/assets/structural-traps/fixes-that-fail-service-desk.svg",
+          "content/assets/structural-traps/fixes-that-fail-service-desk-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 840,
+            "textBlocks": 20
+          },
+          "phone": {
+            "width": 360,
+            "height": 1648,
+            "textBlocks": 20
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. Backlog pressure prompts extended work, whose extra completions initially reduce pressure. Repeated insufficient recovery can contribute to fatigue, undiscovered errors, and later corrections that refill the backlog. The return burden exceeds initial relief by assumption in this case. Change: Break the fatigue-and-error path while covering continuing work and inherited corrections. Limitation: Recovery and discovery take time. Added qualified coverage, slower promises, or reduced commitments have costs.",
+        "caption": "Hypothetical illustration. The fast loop relieves the queue; the delayed return path can restore it through errors from the remedy. Ending routine extended hours does not erase inherited corrections. The relationships require evidence, and a bounded recoverable extra effort can behave differently.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. Backlog pressure prompts extended work, whose extra completions initially reduce pressure. Repeated insufficient recovery can contribute to fatigue, undiscovered errors, and later corrections that refill the backlog. The return burden exceeds initial relief by assumption in this case. Change: Break the fatigue-and-error path while covering continuing work and inherited corrections. Limitation: Recovery and discovery take time. Added qualified coverage, slower promises, or reduced commitments have costs.",
+          "relationship_key": "Arrows are hypothesized causal effects, not measured rates. The lower route returns to backlog pressure; latent errors and known unfinished work are different accumulations.",
+          "changed_relationship": "Break the fatigue-and-error path while covering continuing work and inherited corrections.",
+          "residual_constraints": "Recovery and discovery take time. Added qualified coverage, slower promises, or reduced commitments have costs.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Repeated extended work initially clears backlog; inadequate recovery may cause fatigue and errors, which return after discovery as correction work. Delayed burden exceeds immediate relief by stipulation, not a universal effect of overtime. Active unfinished work, latent defects, and fatigue have distinct accumulation and recovery/discovery times. Temporary qualified coverage, recovery, and revised promises address transition; no weakened learning capability is required.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "ink": "#2e4836",
+  "ground": "#e7e3d8",
+  "matrix": "0 0 0 0 0.1803921568627451 0 0 0 0 0.2823529411764706 0 0 0 0 0.21176470588235294 0 0 0 1 0",
+  "method": "Native SVG constant-RGB silhouette matrix preserves the input alpha channel. First pair applies it to an unchanged pitcher cutout; second preserves the shears silhouette while changing only its ground; third removes it to restore a portrait when internal detail matters. Every source, alpha, image fitting, pose, scale, placement, copy, typography and presentation stays fixed within each pair. No raster editing, automatic tracing or regenerated comparison variants.",
+  "examples": [
+    {
+      "name": "silhouette-pitcher-shelf",
+      "source": "figure-ground-pitcher-cutout.png",
+      "sourceDimensions": [1312, 1199],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only object-tone filter changes none→silhouette-tone. The native SVG color matrix sets RGB to a constant ink color and leaves source alpha unchanged. Same photographic cutout, silhouette boundary, handle opening, image fitting/placement and frame; no tracing, redraw, raster edit or scale change. All copy, typography, backdrop and paper/light remain identical. Soft source-edge/shadow alpha is retained.",
+      "copy": [
+        ["brand", 65, 104, "FIELD / SHARED STUDIO", 20],
+        ["headline", 65, 170, "Pitchers", 46],
+        ["instruction", 65, 608, "Return clean pitchers here.", 28],
+        ["condition", 65, 656, "All finishes · Shelf 03", 23],
+        ["purpose", 65, 704, "Category cue · Check the written label", 21],
+        ["url", 65, 820, "field.example/studio", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "object-tone",
+            "attribute": "filter",
+            "value": "none"
+          }
+        ],
+        [
+          {
+            "element": "object-tone",
+            "attribute": "filter",
+            "value": "url(#silhouette-tone)"
+          }
+        ]
+      ],
+      "filters": ["none", "url(#silhouette-tone)"],
+      "grounds": ["#e7e3d8", "#e7e3d8"]
+    },
+    {
+      "name": "silhouette-shears-ground",
+      "source": "silhouette-shears-cutout.png",
+      "sourceDimensions": [1536, 1024],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 220, 480, 320],
+      "description": "Only object-ground fill changes #687464→#e7e3d8. The identical generated open-shears PNG and constant-RGB alpha-preserving silhouette filter remain fixed. Blade/handle separation, fitting, orientation, size, placement, copy, typography and paper/light are identical. No moving parts, new silhouette geometry or recolored text. Source transparency including antialiased edges is retained.",
+      "copy": [
+        ["brand", 65, 104, "COMMON / TOOL RETURN", 20],
+        ["headline", 65, 170, "Pruning shears", 46],
+        ["instruction", 65, 608, "Return after cleaning.", 28],
+        ["condition", 65, 656, "Tool rack · Hook 04", 23],
+        ["purpose", 65, 704, "Match the shape and the written label.", 21],
+        ["url", 65, 820, "common.example/tool-library", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "object-ground",
+            "attribute": "fill",
+            "value": "#687464"
+          }
+        ],
+        [
+          {
+            "element": "object-ground",
+            "attribute": "fill",
+            "value": "#e7e3d8"
+          }
+        ]
+      ],
+      "filters": ["url(#silhouette-tone)", "url(#silhouette-tone)"],
+      "grounds": ["#687464", "#e7e3d8"]
+    },
+    {
+      "name": "silhouette-maker-detail",
+      "source": "silhouette-maker-cutout.png",
+      "sourceDimensions": [1145, 1374],
+      "stage": "scale-print-stage-v2.jpg",
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "frame": [65, 210, 480, 390],
+      "description": "Only object-tone filter changes silhouette-tone→none. The identical generated fictional maker cutout, alpha, outline, pose, image frame/fitting, position and all text/type/paper/light stay fixed. Original source color and internal detail return; no reshoot, new identity, pose change, retouching or crop change. This is an intentional exception to silhouette use.",
+      "copy": [
+        ["brand", 65, 104, "YARD / STUDIO CONVERSATIONS", 20],
+        ["headline", 65, 170, "Meet the maker", 44],
+        ["speaker", 65, 660, "With Ari Vale · Ceramic maker", 26],
+        ["event", 65, 704, "Thu 19 Nov · 19:00 · Free entry", 23],
+        ["url", 65, 820, "yard.example/conversations", 20]
+      ],
+      "declaredChanges": [
+        [
+          {
+            "element": "object-tone",
+            "attribute": "filter",
+            "value": "url(#silhouette-tone)"
+          }
+        ],
+        [
+          {
+            "element": "object-tone",
+            "attribute": "filter",
+            "value": "none"
+          }
+        ]
+      ],
+      "filters": ["url(#silhouette-tone)", "none"],
+      "grounds": ["#e7e3d8", "#e7e3d8"]
+    }
+  ]
+}

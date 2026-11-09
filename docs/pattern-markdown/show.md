@@ -1,5 +1,12 @@
 # Compositional displays
 
+The website lists this component as **Data visualization & display**. Try the
+editable live examples for [mapping](https://patternverse.org/about/pattern-language/components#show/map),
+[grouping](https://patternverse.org/about/pattern-language/components#show/group),
+[ordering](https://patternverse.org/about/pattern-language/components#show/order),
+[relationships](https://patternverse.org/about/pattern-language/components#show/relationships),
+and [split views](https://patternverse.org/about/pattern-language/components#show/split).
+
 `!show` can display an immutable typed collection, independently of how it was
 created. The existing `!show { Markdown }` form remains supported unchanged.
 
@@ -79,7 +86,7 @@ These are explicit heuristics, not guesses about the meaning of causal labels.
 
 Collections are immutable. `!rate` binds a scalar answer, not a mutable collection
 attribute. Use the existing `each`/`!collect` syntax to construct rated records,
-then pure `map`, `filter`, or `sort` expressions before display:
+then pure `map` or `filter` expressions before display. Use `:order` to order the view:
 
 ```pattern
 :language 1

@@ -1,0 +1,61 @@
+{
+  "format_version": 1,
+  "title": "Life Strategies — Try Before You Commit",
+  "verse": "decision-making",
+  "canonical_package": "docs/pattern-packages/decision-making.json",
+  "metadata_mapping": "Supplemental life-transition context for an existing canonical article; its ID, title, and original decision-making package remain in place. Recommendation queries are authoring metadata, not automatically ingested by search.",
+  "patterns": [
+    {
+      "id": "prefer-the-smallest-useful-experiment",
+      "title": "Prefer the Smallest Useful Experiment",
+      "aliases": ["Try Before You Commit", "Prototype the Life Change"],
+      "domain": "Life strategies and experiential decision making",
+      "short_description": "Replace speculation with the smallest safe real-world test that teaches you something important.",
+      "collections": ["life-strategies", "decision-making-patterns"],
+      "use_when": [
+        "A decision depends on what a possible way of living would feel like in practice.",
+        "A limited experience can preserve a relevant feature of the future commitment.",
+        "A proxy experience needs examination before drawing broad conclusions."
+      ],
+      "goals": [
+        "Learn about a possible transition through limited experience",
+        "Distinguish what a trial reveals from what remains unknown"
+      ],
+      "mechanisms": [
+        "Preserve the uncertainty that matters in a bounded experience",
+        "Observe preferences and practical interactions firsthand",
+        "Avoid treating an analogy as proof of suitability for a different commitment"
+      ],
+      "related_patterns": [
+        "barbell-strategy",
+        "separate-reversible-from-irreversible-decisions",
+        "look-for-the-decisive-unknown"
+      ],
+      "example_user_queries": [
+        "Can we learn something about living together before sharing a home?",
+        "We enjoyed a holiday together, but does that tell us about ordinary life?",
+        "I want to try a possible future before making a major commitment.",
+        "How can I sample a different way of living without changing everything?",
+        "What would a realistic rehearsal of this transition look like?",
+        "I am unsure whether a smaller experience is a good proxy for the bigger decision.",
+        "Can sharing care of a pet tell us anything about sharing responsibility?",
+        "I want to separate what this trial revealed from what it could not test.",
+        "What can a short stay tell me about moving to a different place?",
+        "How do I learn whether I like a role rather than just its imagined version?"
+      ],
+      "visual": {
+        "article_decision": "none",
+        "reason": "The existing article uses concrete experience examples; the life-transition supplement distinguishes shared features from untested differences without implying equivalence."
+      },
+      "sources": [
+        {
+          "title": "Designing Your Life, How to Prototype Life-Designs",
+          "url": "https://designingyour.life/insights/how-to-prototype-life-designs/",
+          "accessed": "2026-10-28",
+          "supports": "Prototype experiences offer limited firsthand contact before a larger commitment. The relationship and caregiving examples are original applications, not tested predictions."
+        }
+      ],
+      "evidence_boundary": "A vacation is a partial sample of shared living. Pet care does not establish readiness for parenthood; pet ownership remains a substantive commitment. The article does not claim that these experiences predict a later transition."
+    }
+  ]
+}

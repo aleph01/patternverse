@@ -2,10 +2,10 @@
 :title "Choose a small step"
 :input topic text
 :output next_step
-!ask detail {
+detail = !ask {
     What would you like to try for {{topic}}?
 }
-!ask next_step {
+next_step = !ask {
     What is one small step toward {{detail}}?
 }
 -> end

@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "template-view",
+  "title": "Template View",
+  "aliases": ["TemplateView"],
+  "primary_collection": "software-presentation-ui-state",
+  "primary_collection_title": "Presentation and UI State",
+  "body_word_count": 1392,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Fowler’s Template View catalog, Python string.Template and html.escape documentation, Jinja template-language and API documentation, and OWASP context-specific output-encoding guidance. The article distinguishes Template View from GoF Template Method, view-state modeling, and request dispatch; richer template engines are supporting context rather than a new dependency.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["product.html", "view.py", "demo.py"],
+      "stdout": [
+        "<article class=\"product-card\">",
+        "  <h1>A&amp;B &lt;Lab&gt;</h1>",
+        "  <p>In stock</p>",
+        "  <p>Units available: 3</p>",
+        "</article>",
+        "Unavailable",
+        "Missing field: availability"
+      ],
+      "verification": "Exact source output, HTML structure/text preservation, escaping, non-recursive substitution, missing fields, zero units, invalid data, context isolation, module-relative loading, and template reuse checks passed."
+    },
+    "content": "1266 entities validate with drafts included. Published-only compilation contains 1119 entities and no diagnostics.",
+    "integration_tests": "Template View, Front Controller, Presentation Model, MVP, MVC, and GoF article integration suites pass. The focused combined run reports 43 passed checks and one unrelated authored-graphic coverage failure across seven files. The other four global graphics geometry, safety, fallback, and export checks pass. Mixed HTML/Python fences are verified as exact highlighted source.",
+    "lint_and_format": "Scoped ESLint and Prettier checks pass for the generator, validator, integration test, authoring sidecar, concept registry, and authoring documentation. Content follows existing Markdown conventions.",
+    "collection": "Reuses Presentation and UI State, preserving MVC, MVP, Presentation Model, and Front Controller as earlier members and adding Template View fifth. No new collection or future-pattern stub was created.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-presentation-ui-state.md"],
+      "other_existing_content_unchanged": 1264,
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "earlier_software_articles_unchanged": true,
+      "prior_software_authoring_unchanged": 31,
+      "prior_graphics_unchanged": 443,
+      "prior_dimensions_unchanged": 1566,
+      "new_dimensions": {
+        "software-engineering/template-view-render.svg": {
+          "width": 720,
+          "height": 912
+        },
+        "software-engineering/template-view-render-mobile.svg": {
+          "width": 360,
+          "height": 1144
+        },
+        "software-engineering/template-view-boundary.svg": {
+          "width": 720,
+          "height": 1016
+        },
+        "software-engineering/template-view-boundary-mobile.svg": {
+          "width": 360,
+          "height": 1120
+        }
+      }
+    },
+    "production_build": "The standard public build script succeeds in an isolated source copy, with Public web build checks passed. Isolation avoids modifying shared generated output or another session’s staging directory. Private environment files were excluded; an empty PUBLIC_DROPBOX_APP_KEY supplies the disabled local sync integration. No credentials were copied, and no application renderer or build implementation was changed.",
+    "illustrations": "Two editable native SVG figures explain independent rendering inputs and HTML text interpretation versus missing-field failure. Each has a separately composed phone version. Fixed white, regular Helvetica Neue/Helvetica/Arial, the approved palette, square boundaries, and restrained strokes are preserved. All four final variants have zero measured label collisions, outside labels, or outside rectangles. Native and actual embedded desktop/phone figures were visually inspected for mechanism accuracy, encoding labels, contrast, spacing, and captions.",
+    "browser": "Actual production article checked at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive SVGs, three exact selectable HTML/Python source blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling of Python code at 320 pixels, and no page overflow. All four related routes return 200. The existing verse redirect leads to the filtered library, whose collection gallery reaches Template View on page 2 of 2 with the correct primary-collection breadcrumb. Desktop/phone article tops, both code languages, gallery, and both embedded figures at both widths were visually inspected. An additional narrow capture checks the complete short HTML block clear of sticky navigation. No browser console or page errors were recorded.",
+    "generated_html_dom": "Both normal and markup-looking names were rendered with the actual example, then parsed in a browser. Heading text equals original data; the only body elements are article, h1, p, p, with the sole fixed product-card class attribute. No injected image, script, or extra attribute is created; marker-like text inside a value remains literal. The standard-library HTMLParser independently verifies the same structure, Unicode/text preservation, and attributes.",
+    "built_assets": {
+      "build_root": ".local/software-template-view/build-workspace/apps/web/build",
+      "local_file_references": 73,
+      "missing": [],
+      "navigation_data_bytes": 40955
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. The check reports one error and zero warnings. The file remains unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "The existing access-over-ownership article lacks an authored graphic. Four other global graphics checks pass."
+    }
+  ],
+  "example_limits": "Original product-card Template View with three complete files: trusted product.html, standard-library Python preparation/renderer, and demo. Nonblank raw names and nonnegative whole stock counts excluding booleans become display strings. A fixed template is loaded once relative to view.py; each rendering call makes a fresh HTML-escaped mapping and strict string.Template substitution. All markers are HTML text. Missing availability fails before a buffered string returns; zero stock is valid and displays Unavailable. Values are not recursively parsed as templates. No Jinja installation, template evaluation language, database, HTTP transport, streaming, dynamic attribute/URL/script context, authorization, rich HTML sanitization, rendered-page cache, or live-stock guarantee is supplied. The order-summary second context is explanatory, not a second runnable implementation.",
+  "preview": "http://127.0.0.1:43016/pattern/template-view",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-template-view",
+  "browser_measurements": ".local/software-template-view/browser-checks.json",
+  "browser_check_script": ".local/software-template-view/check-browser.mjs",
+  "template_capture_script": ".local/software-template-view/capture-template.mjs",
+  "build_log": ".local/software-template-view/public-build-isolated.log",
+  "branch": "codex/software-template-view",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

@@ -1,0 +1,84 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    }
+  ],
+  "fontLicensePolicy": "The existing renamed Source Sans 3 Regular instance is reused unchanged with source and OFL notice retained. The same static font, optical design and weight400 are used in both variants.",
+  "pattern": "Adjust Letter Spacing",
+  "date": "2026-10-28",
+  "mode": "Existing generated photographic artwork and paper presentation reused unchanged. Native SVG letter spacing preserves font kerning in the first two examples. A measured font pair adjustment is isolated with automatic kerning disabled in both variants of the third.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-letter-spacing-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-letter-spacing-layouts.json",
+    "sha256": "543d54831a5c5418ad059241681bacf5405331c369524260f2bd16d0e8bf5893",
+    "method": "Native SVG tracking preserves default font kerning in the first two examples. The third holds automatic kerning disabled in both variants and restores only the T\u2013o interval from the same font\u2019s measured pair difference. Detail viewports repeat the same artifact with identical crop/scale and explanatory guides."
+  },
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/explicit-tableware-photo.jpg",
+      "generation_record": "graphic-design-explicit-sources.json",
+      "sha256": "7a79c70eececb3078f9a51dbd413bb44f8276b95d005db52686020fbacc98b01"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-workspace-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "871f4f48a8ef2d09270b3b236ffa4e18b2ded4daf4c31141c2f07642444d5145"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-coffee-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "a3ab6d3b61e0a3c33e85c50d3c2a2daebf64abb2f335948519c0e0fd91e0606e"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Only STONEWARE tracking0\u21922.24 at size28, headline tracking5.12\u21920 at size64, and T\u2013o pair dx0\u2192\u22124.752 at size72 change. Each run preserves its first anchor and baseline. In the pair example onic moves as one run, preserving every subsequent interval. Copy, glyphs, font/weight/size, line breaks, image bytes/crops, paper, lighting and unrelated elements remain fixed. Detail viewports repeat exact artifacts at matched scale/crop.",
+  "verification": {
+    "comparisons": [
+      {
+        "name": "letter-spacing-capitals",
+        "changedPixels": 1836,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "letter-spacing-headline",
+        "changedPixels": 8159,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "letter-spacing-pair",
+        "changedPixels": 2641,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "desktopAndMobileBrowserChecks": "passed",
+    "textBounds": "within the declared paper or phone surface",
+    "pixelCheck": "Only intended declared letter-spacing intervention regions differ.",
+    "characterPositions": "Rendered character starts confirm i\u00d7trackingDelta in the first two examples; the third preserves T and shifts onic by exactly the pair delta. All baselines remain fixed. Wide/narrow copies and exact-artifact detail reuse are verified."
+  },
+  "limitations": "Original English-language editorial examples; no universal tracking/kerning values, reader-performance measurements, physical print proof, implemented responsive expansion behavior or full accessibility evaluation. The pair before deliberately omits metrics to isolate a restoration, not to imply a defect in Source Sans 3."
+}

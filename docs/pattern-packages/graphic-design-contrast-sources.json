@@ -1,0 +1,39 @@
+{
+  "pattern": "Create Deliberate Contrast",
+  "date": "2026-10-27",
+  "mode": "Selected existing built-in generated photographs and composed new controlled SVG examples. No new photograph was generated for this article.",
+  "fictional": true,
+  "composition_builder": "scripts/build-graphic-design-contrast-examples.mjs",
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/chunk-garden-supper-photo.jpg",
+      "generation_record": "graphic-design-chunk-sources.json",
+      "sha256": "53328167015da4550cd4810094a20ba6502c627867119c646fc7a74bc937872f"
+    },
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-repair-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "f5c4449de84c1cb2d5c6d4142830a8067ff21ce0367f80b059d55a16194e2b07"
+    },
+    {
+      "asset": "content/assets/graphic-design/scale-print-stage-v2.jpg",
+      "generation_record": "graphic-design-scale-photographic-sources.json",
+      "sha256": "1640eb37fc7484fc87c7f42f90a67589ac3b1f20ff37c927789bc269b7a680f5"
+    }
+  ],
+  "comparisonPolicy": "Only four practical text fills, the Evening plot and matching legend dash attributes, or three response font-family/font-style pairs change. Every word, value, chart point, path geometry, unrelated paint, font size/weight, anchor, baseline, line break, photo/crop, paper and lighting remains fixed. The interview and named volunteer are fictional; the quote is original.",
+  "colorMeasurements": {
+    "method": "WCAG relative luminance calculated from specified sRGB colors",
+    "background": "#f4f1e8",
+    "before": "#929f96",
+    "after": "#17352f",
+    "beforeRatio": 2.4395606150075007,
+    "afterRatio": 11.718498670976597,
+    "scope": "Specified solid color pairs only; no print measurement, reading test or complete accessibility assessment."
+  }
+}

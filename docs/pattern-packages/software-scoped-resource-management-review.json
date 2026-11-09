@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "scoped-resource-management",
+  "title": "Scoped Resource Management",
+  "aliases": ["RAII", "Resource Acquisition Is Initialization"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1377,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Six primary sources: Bjarne Stroustrup’s resource-management/finally FAQ; Stroustrup and Sutter’s C++ Core Guidelines R.1; official Python with-statement, ExitStack, gzip and TemporaryDirectory documentation. Resource Acquisition Is Initialization (RAII) names the C++ object-lifetime idiom; Python explicit context scopes express the same ownership goal without claiming identical destructor semantics. Ownership can transfer or extend beyond an initial lexical block. Wrapping a resource does not establish ownership of its release; GzipFile explicitly leaves a supplied raw file open. Successful-entry registration, reverse dependency unwinding, internal cleanup responsibility of failing entry, exit exception replacement/suppression and release-error limits are source-supported. The archive scenario, size limits, composition, code and diagrams are original teaching material.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["small_archive.py", "demo.py"],
+      "stdout": ["decoded: b'red'", "invalid archive: rejected", "oversize: rejected"],
+      "verification": "Actual article fences executed unchanged. Exact three-line output; invalid type, mutable input, empty and 65-byte inputs reject before any acquisition; empty, ordinary, exact eight-byte output and padded 64-byte compressed input accepted; nine-byte output rejected. Real gzip bad header, CRC and truncated trailer errors propagate. Instrumentation retains real resources and wraps entry/exit seams without replacing article logic or ExitStack. Real decoder close leaves supplied raw open; raw closes before directory removal. All live handles are closed and directories absent before caller observes a result/error. Output remains independent immutable bytes and caller input unchanged; separate calls own distinct directories. A real raw-file open failure releases only directory; injected decoder-construction and failed-entry cases clean prior acquisitions, with entry cleaning its own partial wrapper and no unmatched decoder exit. BaseException body interruption unwinds all successful registrations. Decoder/raw cleanup errors injected after actual close still run remaining exits and replace success; body plus decoder cleanup failure retains BadGzipFile as exception context. Cleanup invocation does not prove release success under arbitrary release errors. No abrupt-process cleanup, rollback, async/background completion, deadline, or decompression CPU/memory security bound is inferred."
+    },
+    "content": "1293 entities validate including drafts; published-only compilation contains 1146 entities without diagnostics.",
+    "integration_tests": "All four focused article suites pass: Scoped Resource Management, Scoped Locking, Resource Pool and GoF. Combined run across five files reports 37 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Reused Concurrency and Resource Management and appended Scoped Resource Management as its ninth completed member, preserving eight earlier members and collection contents. Scoped Locking, Resource Pool and Proactor retain canonical IDs and primary homes as related links. Exactly one primary collection and Software Engineering verse membership. No new collection, duplicate alias article, future stub, practice or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": [
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "other_existing_content_unchanged": 1291,
+      "new_content": ["content/patterns/scoped-resource-management.md"],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "other_existing_collections_unchanged": true,
+      "eight_prior_concurrency_members_preserved": true,
+      "software_verse_unchanged": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 59,
+      "prior_graphics_unchanged": 471,
+      "prior_dimensions_unchanged": 1674,
+      "new_dimensions": {
+        "software-engineering/scoped-resource-management-ownership.svg": {
+          "width": 720,
+          "height": 1240
+        },
+        "software-engineering/scoped-resource-management-ownership-mobile.svg": {
+          "width": 360,
+          "height": 1320
+        },
+        "software-engineering/scoped-resource-management-failure.svg": {
+          "width": 720,
+          "height": 1312
+        },
+        "software-engineering/scoped-resource-management-failure-mobile.svg": {
+          "width": 360,
+          "height": 1368
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final article, primary collection, authoring metadata, concept registry and four SVG assets match staged sources; actual gallery concept paths also match the final reviewed registry. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and earlier staging directories were untouched. No renderer, build implementation, project dependency, earlier article, other collection, software verse or GoF changes.",
+    "illustrations": "Two editable native SVG figures, each with a separately composed phone variant, show directory/raw-file/decoder acquisition and reverse release, separate raw-file ownership beneath a borrowing gzip decoder, detached returned bytes, successful-entry registration, partial raw-reader acquisition failure, internal responsibility of a failed entry, and remaining cleanup attempts when a cleanup handler raises. Arrows explicitly mean acquisition order or scope-exit cleanup; phone failure-case numbering explicitly gives cleanup order. Meaningful alternative text/captions, fixed white surface, regular Helvetica Neue with Helvetica/Arial fallbacks, approved palette, square geometry and restrained strokes. All native and embedded desktop/phone figures visually inspected for accuracy, contrast, placement and readability. All four variants have zero measured outside labels, label overlaps or outside rectangles. The new concept mark is visually inspected and measured inside its 96-by-96 view box including stroke.",
+    "browser": "Actual production article checked at 1440, 390 and 320 CSS pixels: eight exact H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard code scrolling at 320 pixels, no page overflow and all three related routes returning 200. The primary collection route and Software Engineering verse gallery open the article with the correct primary breadcrumb; the gallery uses the final reviewed concept paths. Desktop/phone article tops, Python viewports, both embedded figures and the collection gallery visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-scoped-resource-management/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 38839
+    },
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 6.5,
+          "y": 2.5,
+          "width": 83,
+          "height": 91
+        },
+        {
+          "x": 31.5,
+          "y": 6.5,
+          "width": 49,
+          "height": 71
+        }
+      ]
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python archive reader using real TemporaryDirectory, raw file and GzipFile contexts registered in ExitStack. Trusted immutable compressed input is 1–64 bytes; accepted decoded content is 0–8 bytes. A nine-byte sample detects excess output but is not a decompression resource-limit or security sandbox. GzipFile borrows its supplied raw file, so raw ownership is registered separately. Successful acquisitions unwind decoder, raw file, directory before returning independent bytes or propagating an error. Partial setup unwinds only successfully entered contexts; failed entry owns its internal partial cleanup. Cleanup invocation does not guarantee successful release, rollback, durable output, crash recovery or completion of background borrowers. Actual-code verification additionally exercises real malformed-header, CRC and truncated-trailer failures, all input/output byte boundaries, separate successful calls, unchanged caller input, retained real handles proving explicit close, a real missing-file acquisition failure, decoder-construction and failed-entry seams, BaseException body interruption, decoder/raw exit failures injected after actual close, remaining exit execution, and chained body-error context. No general resource-security limit is inferred from a buffered nine-byte read. Abrupt process termination is outside structured exit guarantees.",
+  "preview": "http://127.0.0.1:43044/pattern/scoped-resource-management",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-scoped-resource-management",
+  "browser_measurements": ".local/software-scoped-resource-management/browser-checks.json",
+  "browser_check_script": ".local/software-scoped-resource-management/check-browser.mjs",
+  "build_log": ".local/software-scoped-resource-management/public-build-isolated.log",
+  "branch": "codex/software-scoped-resource-management",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

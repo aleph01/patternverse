@@ -1,0 +1,132 @@
+{
+  "fontSources": [
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourcesans3/OFL.txt",
+      "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/SourceSerif4%5Bopsz%2Cwght%5D.ttf",
+      "sha256": "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b"
+    },
+    {
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/sourceserif4/OFL.txt",
+      "sha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9"
+    }
+  ],
+  "fontInstances": [
+    {
+      "file": "pairing-sans.woff2",
+      "family": "PV Pairing Sans",
+      "source": "docs/pattern-packages/graphic-design-pairing-fonts/SourceSans3[wght].ttf",
+      "axes": {
+        "wght": 400
+      },
+      "sha256": "2f8759d59b9bb1749f25c76b78d1937ddaaba9486692d8cf29679453adbe316c",
+      "asset": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2"
+    },
+    {
+      "file": "reading-display.woff2",
+      "family": "PV Reading Display",
+      "source": "docs/pattern-packages/graphic-design-typeface-fonts/sourceserif4/SourceSerif4[opsz,wght].ttf",
+      "axes": {
+        "wght": 400,
+        "opsz": 60
+      },
+      "sha256": "89fdc50eab02abe8fb62ca9b0cd7f57168207f0da89ee384288afb1a350a4712",
+      "asset": "docs/pattern-packages/graphic-design-typeface-fonts/reading-display.woff2"
+    }
+  ],
+  "reusedSources": [
+    {
+      "asset": "content/assets/graphic-design/audience-pottery-photo.jpg",
+      "generation_record": "graphic-design-audience-sources.json",
+      "sha256": "9a3e52bf5c6a2cb983431595517dac24de329ded2773b35a4563a6760097a4c4"
+    },
+    {
+      "asset": "content/assets/graphic-design/form-open-studios-photo.jpg",
+      "generation_record": "graphic-design-form-sources.json",
+      "sha256": "b9e0298fbc4701ac672e5586788785a0cffba82a4fd1f07765613533e05868f0"
+    },
+    {
+      "asset": "content/assets/graphic-design/core-message-coffee-photo.jpg",
+      "generation_record": "graphic-design-core-message-sources.json",
+      "sha256": "a3ab6d3b61e0a3c33e85c50d3c2a2daebf64abb2f335948519c0e0fd91e0606e"
+    }
+  ],
+  "pattern": "Develop Distinctive Visual Cues",
+  "date": "2026-10-28",
+  "fictional": true,
+  "mode": "No new image generation. Existing photographic JPEGs embedded unchanged; original candidate cues, flat surfaces and native typography composed separately.",
+  "fontLicensePolicy": "Original sources and OFL notices retained. Source Sans3 Regular and Source Serif4 Display (weight400, optical-size60 instance) embedded unchanged as PVDistinctBody/PVDistinctTitle.",
+  "composition_builder": "scripts/build-graphic-design-distinctive-examples.mjs",
+  "layout_record": {
+    "path": "docs/pattern-packages/graphic-design-distinctive-layouts.json",
+    "sha256": "fbd6a73ae11ee75a56573a79e5e5f40297bc2542620de02d6f530dafe8cb2a20"
+  },
+  "comparisonPolicy": "Only selected cue hrefs change: two in a fictional directory, three small/enlarged cue renderings in a confirmation/proof set and one membership mark. Images/crops, wording, fonts, sizes, anchors, surfaces and all unrelated geometry remain fixed within every before/after artifact.",
+  "verification": {
+    "artifacts": [
+      {
+        "name": "distinctive-comparison-set",
+        "artifact": "directory",
+        "changedPixels": 984,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "distinctive-small-size",
+        "artifact": "booking",
+        "changedPixels": 230,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "distinctive-small-size",
+        "artifact": "proof",
+        "changedPixels": 3686,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      },
+      {
+        "name": "distinctive-unintended-meaning",
+        "artifact": "membership",
+        "changedPixels": 968,
+        "pixelsChangedOutsideDeclaredRegions": 0
+      }
+    ],
+    "savedComparisons": 6,
+    "desktopAndNarrow": "passed",
+    "bounds": "all native text within surface",
+    "inlineImageEquivalence": "passed",
+    "visualInspection": "All three final wide comparisons and all three interleaved narrow views inspected; mark inspected at 32, 48 and 96 pixels.",
+    "liveArticle": "Passed at 1440px and 390px: three loaded illustrations, descriptive alternatives, visible captions, correct responsive image sources and no horizontal page overflow.",
+    "validation": {
+      "comparisonAndConsolidationTests": "34 passed across the new, shared-language and consolidation suites",
+      "boundedMarkGeometry": "1 passed; 4 unrelated tests skipped",
+      "content": "909 entities validated in the observed shared workspace snapshot",
+      "webCheck": "0 errors, 0 warnings",
+      "scopedLint": "passed",
+      "integrity": "38 article body hashes and 360 asset hashes/dimensions verified; source/font/layout provenance checked; exact 38-mark coverage; one brief remains planned"
+    }
+  },
+  "limitations": "No audience recognition, source-attribution, memory, market-wide uniqueness or legal-clearance result. The possible shield/check service association is an editorial hypothesis. 24px proof labels refer to native 1x rendering; responsive display can scale the artwork. Original fictional flat artwork, not implemented booking or physical proofs.",
+  "sources": [
+    {
+      "url": "https://marketingscience.info/news-and-insights/brands-of-distinction",
+      "supports": "Jenni Romaniuk distinguishes fame (association with the brand) and uniqueness (association with that brand rather than alternatives). This supports evaluating learned attribution instead of treating novelty as proof."
+    },
+    {
+      "url": "https://www.ibm.com/design/language/iconography/app-icons/usage/",
+      "supports": "IBM recommends checking existing app icons to avoid similar designs and optimizing for specified small sizes. Sizing and context guidance; no claim that these fictional cues achieve recognition."
+    },
+    {
+      "url": "https://design-system.service.gov.uk/styles/images/#icons",
+      "supports": "GOV.UK cautions that icon interpretations can differ and usually recommends visible labels. The shield/check interpretation in this article is an editorial hypothesis."
+    }
+  ]
+}

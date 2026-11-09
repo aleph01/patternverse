@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-29",
+  "status": "implemented-locally",
+  "article": "reactor",
+  "title": "Reactor",
+  "aliases": ["Dispatcher", "Notifier"],
+  "primary_collection": "software-concurrency-resource-management",
+  "primary_collection_title": "Concurrency and Resource Management",
+  "body_word_count": 1330,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Seven primary sources: Schmidt’s original Reactor paper (including Dispatcher/Notifier aliases), the original Proactor paper, official Python selectors and Socket Programming HOWTO documentation, libuv design documentation, Linux epoll manual, and Project Reactor introduction. The pattern is readiness dispatch rather than asynchronous operation completion or the JVM reactive-streams library. Waiting, registration, callback dispatch, per-connection framing, partial reads/writes, would-block, EOF, resource ownership, loop thread confinement, offloaded blocking work, input/output bounds, and raw edge-triggered drain/rearm responsibilities are explicit. Generic aliases are scoped to the original pattern rather than duplicate articles.",
+    "runnable_example": {
+      "status": "passed",
+      "code_files": ["reactor.py", "demo.py"],
+      "stdout": ["B b'ok'", "A b'hello'", "A truncated", "registered: 0"],
+      "verification": "Exact four-line demo output on real local stream sockets; all 32 fragmentations of two LF-delimited records preserve framing; multiple records per recv; empty, exactly eight-byte, and arbitrary binary payload boundaries; ninth payload byte closes only the offending reader without needing LF; incomplete A does not stall B; EOF discards only an unfinished suffix and retains completed records; clean EOF emits nothing; actual registered callbacks tolerate would-block without state loss; an instrumented real-socket adapter verifies one recv of at most four bytes per callback; OSError triggers connection error cleanup while RuntimeError remains visible; real-socket lifecycle instrumentation verifies unregister before close and selector release; independent per-connection buffers, nonblocking read interests, duplicate-registration failure, and fixture cleanup. No selector fairness, listener, write dispatcher, TLS, worker pool, durable sink, global backpressure, authentication, or production throughput claim is inferred."
+    },
+    "content": "1285 entities validate with drafts included; published-only compilation contains 1138 entities without diagnostics.",
+    "integration_tests": "Both focused article suites pass: Reactor and GoF. Combined run across three files reports 31 passed checks and one unrelated global authored-graphic coverage failure for access-over-ownership. Four other global graphics checks pass.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for the native SVG generator, actual-code validator, integration test, authoring JSON, authoring documentation, concept registry, and review record. Article and collection Markdown follow existing conventions.",
+    "collection": "Created Concurrency and Resource Management only for the completed Reactor article and appended its link to the Software Engineering verse. Reactor has exactly one primary collection. Existing collections and prior verse links remain unchanged. Observer, Facade, and Strategy retain their canonical IDs and GoF primary home as related links. Dispatcher and Notifier are aliases, with no duplicate alias article, future stub, practice, or worksheet.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed_by_this_task": ["content/verses/software-engineering.md"],
+      "other_existing_content_unchanged": 1282,
+      "new_content": [
+        "content/patterns/reactor.md",
+        "content/collections/software-concurrency-resource-management.md"
+      ],
+      "unrelated_concurrent_content_changes": [],
+      "all_23_gof_articles_and_collection_unchanged": true,
+      "all_earlier_articles_unchanged": true,
+      "all_existing_collections_unchanged": true,
+      "existing_software_verse_links_preserved": true,
+      "project_dependency_files_unchanged": true,
+      "prior_software_authoring_unchanged": 51,
+      "prior_graphics_unchanged": 463,
+      "prior_dimensions_unchanged": 1642,
+      "new_dimensions": {
+        "software-engineering/reactor-dispatch.svg": {
+          "width": 720,
+          "height": 1104
+        },
+        "software-engineering/reactor-dispatch-mobile.svg": {
+          "width": 360,
+          "height": 1256
+        },
+        "software-engineering/reactor-fragments.svg": {
+          "width": 720,
+          "height": 1104
+        },
+        "software-engineering/reactor-fragments-mobile.svg": {
+          "width": 360,
+          "height": 1104
+        }
+      },
+      "staged_task_sources_and_assets_match": true
+    },
+    "production_build": "Standard public build succeeds in an isolated source copy with Public web build checks passed. Final task article, new primary collection, verse link, authoring metadata, concept registry, and all four SVG assets match staged sources. Private environment files were excluded and PUBLIC_DROPBOX_APP_KEY was empty for disabled local sync. Shared generated output and prior staging directories were untouched. No renderer, build implementation, project dependency, earlier article, existing collection, or GoF changes.",
+    "illustrations": "Two editable native SVGs explain registration/readiness/handler control flow and fragmented per-connection records. Both have separately composed phone variants, meaningful alternatives/captions, the approved fixed white surface, regular Helvetica Neue palette, square geometry, restrained strokes, and labeled arrow meanings. The first distinguishes readiness registration from completed records and shows handlers performing nonblocking I/O and returning. The second is explicitly an explanatory trace rather than a selector-order guarantee: A retains hel, B completes ok, A completes hello, and EOF rejects an unfinished suffix with unregister-before-close cleanup. All four variants have zero measured outside labels, overlaps, or outside rectangles. Native and embedded desktop/phone figures were visually inspected for accuracy, label placement, contrast, and readability.",
+    "browser": "Actual production page verified at 1440, 390, and 320 CSS pixels: exact eight H2 sections, two loaded responsive figures, two exact selectable highlighted Python blocks, distinct syntax colors, focusable code, keyboard horizontal scrolling at 320 pixels, no page overflow, and all three related routes returning 200. The new Concurrency and Resource Management collection route and Software Engineering verse gallery open Reactor with the correct primary breadcrumb. Desktop/phone article tops, Python viewports, both embedded figures, and collection gallery were visually inspected. No browser console or page errors.",
+    "built_assets": {
+      "build_root": ".local/software-reactor/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 41736
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 supplies exact to ByRoleOptions, which does not recognize it. One error and zero warnings; file unchanged by this task."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other global graphic checks pass."
+    }
+  ],
+  "example_limits": "Original Python 3.11+ read-only collector using real local stream socket pairs and DefaultSelector. One loop thread owns successfully registered readers and dispatches callbacks sequentially. Each callback attempts one nonblocking recv of at most four bytes. Arbitrary-byte records use LF delimiters and 0–8 payload bytes; the ninth unfinished payload byte rejects only that connection. Per-connection fragments survive callbacks; EOF rejects an unfinished suffix without rolling back earlier complete records. Would-block returns control, OSError records connection failure and cleans up, and unexpected programming errors remain visible. Readers unregister before close and finally releases the selector. The fixture sends tiny blocking writes outside callbacks and uses a two-second progress timeout, not a production deadline. Result/error lists retain output and are not a bounded production sink. No public listener, write dispatcher, TLS, worker pool, durable sink, complete admission/backpressure policy, authentication, callback fairness, throughput guarantee, or raw edge-triggered implementation is inferred.",
+  "preview": "http://127.0.0.1:43036/pattern/reactor",
+  "preview_mode": "isolated-static-production-build",
+  "evidence_directory": ".local/software-reactor",
+  "browser_measurements": ".local/software-reactor/browser-checks.json",
+  "browser_check_script": ".local/software-reactor/check-browser.mjs",
+  "build_log": ".local/software-reactor/public-build-isolated.log",
+  "branch": "codex/software-reactor",
+  "publication": "Local implementation only. No publishing, deployment, commit, push, or pull request."
+}

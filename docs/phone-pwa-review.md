@@ -4,7 +4,8 @@ This is a local review build. Do not publish it until an iPhone Safari and insta
 
 ## Available offline
 
-- The static Patternverse library is cached by the versioned service worker.
+- Installation caches a small standalone offline page. Browsing caches visited pages and loaded resources.
+- Choose **Download library for offline use** in **My workspace → Settings → Offline access** and wait for **Library available offline** before relying on unvisited Commons articles offline. The optional download can be paused and resumed.
 - Personal library items remain editable in IndexedDB without a network connection.
 - Mira's encrypted local sessions remain readable without a network connection.
 - AI replies require an OpenRouter connection. Browser dictation depends on the speech service available to Safari; it is not promised offline.
@@ -24,7 +25,7 @@ The first successful sync needs a strong phrase (minimum 12 characters). A secon
 ## Device review checklist
 
 1. Add the site to the iPhone Home Screen and open it standalone.
-2. Open the library and Mira online once, turn off connectivity, then read a pattern, edit and save a personal library item, and reopen a saved Mira session.
+2. Open the library, editor, and Mira online once. Choose **Download library for offline use** and wait for completion. Turn off connectivity, then read an unvisited pattern, edit and save a personal library item, and reopen a saved Mira session.
 3. Reconnect, add an OpenRouter key, and send a test message. Confirm text appears even when spoken reply is enabled.
 4. Dictate a message, inspect the live transcript in the composer, stop, and confirm nothing was sent before tapping Send.
 5. Link a Dropbox account on both devices, use the same sync phrase, and move a test pattern, concept, practice, verse, collection, and conversation in both directions.

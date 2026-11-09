@@ -1,0 +1,531 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "data-expand-migrate-contract",
+  "title": "Expand–Migrate–Contract",
+  "aliases": [
+    "Expand-Contract",
+    "Expand and Contract",
+    "Parallel Change",
+    "Expand-Migrate-Contract"
+  ],
+  "primary_collection": "software-evolution-delivery",
+  "primary_collection_title": "Evolution and Delivery",
+  "body_word_count": 1366,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "preview": "http://127.0.0.1:43071/pattern/data-expand-migrate-contract",
+  "validation": {
+    "research": "Existing canonical Expand–Migrate–Contract article reused with ID, title and URL retained. Danilo Sato’s original Parallel Change article verifies expand-and-contract aliases and three phases; author correctly credited as Sato. Official Prisma/GitLab/dbt documentation and Stripe primary migration account verified. Generic parallel execution is distinguished from interface coexistence. Sole primary home moved to existing Evolution and Delivery; former Data home crosslinks.",
+    "sources": [
+      {
+        "title": "Parallel Change",
+        "author": "Danilo Sato (2014), published on martinfowler.com",
+        "url": "https://martinfowler.com/bliki/ParallelChange.html",
+        "supports": "Established parallel change / expand and contract naming; expand old+new interfaces, migrate usages and contract after migration. Author is Sato, not Fowler."
+      },
+      {
+        "title": "Using the expand and contract pattern for schema changes",
+        "author": "Prisma Data Guide",
+        "url": "https://www.prisma.io/dataguide/types/relational/expand-and-contract-pattern",
+        "supports": "Schema/data/client transition and supported coexistence; article qualifies that operations may still lock and recovery depends on current representable data."
+      },
+      {
+        "title": "Online migrations at scale",
+        "author": "Stripe engineering",
+        "url": "https://stripe.com/blog/online-migrations",
+        "supports": "Staged subscription writes, backfill, read comparison and read/write transitions before old representation removal."
+      },
+      {
+        "title": "Batched background migrations",
+        "author": "GitLab documentation",
+        "url": "https://docs.gitlab.com/development/database/batched_background_migrations/",
+        "supports": "Small idempotent background work, explicit completion/finalization and data checks, live workload considerations."
+      },
+      {
+        "title": "Avoiding downtime in migrations",
+        "author": "GitLab documentation",
+        "url": "https://docs.gitlab.com/development/database/avoiding_downtime_in_migrations/",
+        "supports": "Column removal requires ignore/drop/remove-ignore across releases because running processes and schema caches can retain assumptions; destructive removal is not simply reversible."
+      },
+      {
+        "title": "Model versions",
+        "author": "dbt documentation",
+        "url": "https://docs.getdbt.com/docs/mesh/govern/model-versions",
+        "supports": "Maintaining old/new model interfaces during consumer migration and explicit deprecation/removal windows; semantic changes may exceed schema checks."
+      }
+    ],
+    "runnable_example": {
+      "status": "passed",
+      "command": "python3 parallel_change.py",
+      "output": [
+        "expanded: standard through both names",
+        "contract blocked: monthly_export remains old",
+        "contracted: premium",
+        "old interface removed"
+      ],
+      "checks": [
+        "both API names share one canonical backing value",
+        "writes through either name are visible through the other before contraction",
+        "old/unknown declared consumer versions block contraction without mutation",
+        "all declared consumers new permits current-value copy into V2",
+        "V2 intentionally lacks old reader interface",
+        "existing bridge instance still exists; contraction does not revoke references or update in-flight writes",
+        "empty registry cannot prove completeness"
+      ],
+      "mutation_checks": [
+        {
+          "fault": "legacy setter stops updating canonical state",
+          "detected": true
+        },
+        {
+          "fault": "contraction ignores remaining old clients",
+          "detected": true
+        },
+        {
+          "fault": "contraction retains old interface",
+          "detected": true
+        }
+      ],
+      "limits": [
+        "Sequential in-memory API model, not database schema migration",
+        "Manual registry does not discover missing consumers",
+        "Returning a new instance does not transfer later concurrent mutations",
+        "Separate versioned-backfill figure requires shared authoritative per-key revision ordering"
+      ]
+    },
+    "content": "All1314 entities validate. Published compilation1167 entities, zero diagnostics/unresolved references. Eight exact H2s, one complete runnable Python3 program, two figures/four variants, four existing related IDs, ten distinct queries and no practice. DataEngineering metadata and canonical identity retained; SoftwareEngineering verse and recognized aliases added.",
+    "published_compilation": {
+      "entities": 1167,
+      "bytes": 23645489,
+      "sha256": "7edce4879d073bd0d95711b0edf35c9533d4f8a7fa8ae752e0d3246d692fc7ac",
+      "diagnostics": [],
+      "unresolved_references": []
+    },
+    "integration_tests": {
+      "passed": 37,
+      "unrelated_failures": 1,
+      "final_article_recheck": 3,
+      "details": "Expand3, Strangler3, Contract3, GoF24 and four authored-graphic checks pass. Global graphic coverage retains pre-existing missing access-over-ownership. Earlier Strangler singleton collection-membership assertion was updated only to require retained membership now that the authorized collection includes this second article. Final3article tests pass again after explicit atomic-write clarification."
+    },
+    "type_check": {
+      "errors": 1,
+      "warnings": 0,
+      "unrelated_blocker": "apps/web/src/lib/components/VerseSelector.component.test.ts:79 uses unsupported exact in ByRoleOptions."
+    },
+    "lint_and_format": "Scoped ESLint passes for both changed/new integration tests, generator and actual-code validator. Prettier passes for changed scripts/tests/sidecar/documentation/registry/review.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": [
+        "content/collections/data-engineering-contracts-evolution.md",
+        "content/collections/software-evolution-delivery.md",
+        "content/patterns/data-expand-migrate-contract.md"
+      ],
+      "new_content": [],
+      "other_existing_content_unchanged": 1311,
+      "canonical_id_title_and_route_retained": true,
+      "prior_data_verse_and_tags_retained": true,
+      "single_primary_home": "software-evolution-delivery",
+      "former_data_home_retains11other_members_and_crosslink": true,
+      "evolution_collection_retains_strangler_fig_and_adds_only_completed_article": true,
+      "all_other_articles_collections_verses_and_23gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 84,
+      "prior_graphics_unchanged": 496,
+      "prior_dimensions_unchanged": 1765,
+      "revised_dimensions": ["data-engineering/expand-migrate-contract.svg"],
+      "new_dimensions": 3,
+      "existing_strangler_test_adjustment": "Only membership assertion changed from singleton equality to contains-Strangler because the authorized new collection now has two members. Exact inverse restores baseline hash.",
+      "all_other_protected_tests_renderer_dependencies_build_scripts_historical_data_import_and_taxonomy_unchanged": true,
+      "authoring_documentation_preserved": true,
+      "both_isolated_workspaces_match_current_web_source_and_linked_content": true
+    },
+    "generator": {
+      "status": "passed",
+      "byte_identical_regeneration": true,
+      "sha256": {
+        "content/assets/data-engineering/expand-migrate-contract.svg": "6d42ceb6ffe01b72df961bbd18ab7e8415ca8243cd792bd54a53e55563c7b69e",
+        "content/assets/data-engineering/expand-migrate-contract-mobile.svg": "b7081ee677fc6e427fd421fd31971a3c104b52af97e9169f69b6590b8f5a659f",
+        "content/assets/software-engineering/expand-contract-backfill.svg": "55c5b82118c33a8c5f57a1ea96687455ff7784523dd4e6c85a369d6d0ae65020",
+        "content/assets/software-engineering/expand-contract-backfill-mobile.svg": "3f4cd75001dce5116cd35491c8968ed064ad68b3b05e74b436fdaa4de1de1de4"
+      }
+    },
+    "native_illustrations": [
+      {
+        "path": "/assets/data-engineering/expand-migrate-contract.svg",
+        "labels": 16,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 864
+      },
+      {
+        "path": "/assets/data-engineering/expand-migrate-contract-mobile.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1040
+      },
+      {
+        "path": "/assets/software-engineering/expand-contract-backfill.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 764
+      },
+      {
+        "path": "/assets/software-engineering/expand-contract-backfill-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 928
+      }
+    ],
+    "contrast": {
+      "status": "passed",
+      "normal_text_AA_4_5_minimum": true,
+      "pairs": [
+        {
+          "foreground": "#252c28",
+          "background": "#ffffff",
+          "contrast": 14.29
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#f1f2ef",
+          "contrast": 12.72
+        },
+        {
+          "foreground": "#252c28",
+          "background": "#edf5f0",
+          "contrast": 12.87
+        },
+        {
+          "foreground": "#626962",
+          "background": "#ffffff",
+          "contrast": 5.65
+        },
+        {
+          "foreground": "#626962",
+          "background": "#f1f2ef",
+          "contrast": 5.03
+        },
+        {
+          "foreground": "#626962",
+          "background": "#edf5f0",
+          "contrast": 5.09
+        }
+      ]
+    },
+    "concept_mark": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 3,
+          "y": 15,
+          "width": 90,
+          "height": 66
+        },
+        {
+          "x": 23,
+          "y": 41,
+          "width": 64,
+          "height": 24
+        }
+      ]
+    },
+    "static_browser": [
+      {
+        "path": "/assets/data-engineering/expand-migrate-contract.svg",
+        "labels": 16,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 864
+      },
+      {
+        "path": "/assets/data-engineering/expand-migrate-contract-mobile.svg",
+        "labels": 21,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1040
+      },
+      {
+        "path": "/assets/software-engineering/expand-contract-backfill.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 764
+      },
+      {
+        "path": "/assets/software-engineering/expand-contract-backfill-mobile.svg",
+        "labels": 18,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 928
+      },
+      {
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/data-engineering/expand-migrate-contract.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/expand-contract-backfill.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 96,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/data-incremental-replacement",
+          "/pattern/data-additive-schema-evolution",
+          "/pattern/data-replayable-backfills",
+          "/pattern/data-source-to-target-reconciliation"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 390,
+        "pageWidth": 390,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/data-engineering/expand-migrate-contract-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/expand-contract-backfill-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 96,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/data-incremental-replacement",
+          "/pattern/data-additive-schema-evolution",
+          "/pattern/data-replayable-backfills",
+          "/pattern/data-source-to-target-reconciliation"
+        ],
+        "copyable": true
+      },
+      {
+        "viewport": 320,
+        "pageWidth": 320,
+        "headings": [
+          "Purpose and problem",
+          "Core idea",
+          "How it works",
+          "Worked example",
+          "When to use it",
+          "Tradeoffs and common mistakes",
+          "Related patterns",
+          "Sources"
+        ],
+        "figures": [
+          {
+            "src": "/assets/data-engineering/expand-migrate-contract-mobile.svg",
+            "loaded": true
+          },
+          {
+            "src": "/assets/software-engineering/expand-contract-backfill-mobile.svg",
+            "loaded": true
+          }
+        ],
+        "highlighting": [
+          {
+            "focusable": true,
+            "tokens": 96,
+            "colors": [
+              "rgb(122, 45, 137)",
+              "rgb(123, 66, 24)",
+              "rgb(23, 74, 139)",
+              "rgb(72, 86, 76)",
+              "rgb(23, 96, 67)"
+            ]
+          }
+        ],
+        "links": [
+          "/pattern/data-incremental-replacement",
+          "/pattern/data-additive-schema-evolution",
+          "/pattern/data-replayable-backfills",
+          "/pattern/data-source-to-target-reconciliation"
+        ],
+        "copyable": true,
+        "keyboard_code_scroll": true
+      },
+      {
+        "collection": "software-evolution-delivery",
+        "article": "data-expand-migrate-contract",
+        "navigation": "collection route and verse gallery to article passed",
+        "related_routes": "all returned 200"
+      }
+    ],
+    "static_assets": {
+      "status": "passed",
+      "mode": "actual local static public export verified after disk capacity recovered; isolated source copy includes existing sibling application imports",
+      "local_references": [
+        {
+          "path": "/font-size.js",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/PatternverseLogo.Cr_c3FgX.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LegalLinks.C1VwvvwC.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/0.LPYfGvVT.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/pattern-mark-presets.Dx3BoDxs.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/LibraryViewSwitch.yR3Qs8SB.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/MarkdownRenderer.DDyfSN4x.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/WorksheetButton.Dsl9OpN0.css",
+          "status": 200
+        },
+        {
+          "path": "/_app/immutable/assets/3.DBGXFlWk.css",
+          "status": 200
+        },
+        {
+          "path": "/icons/patternverse-mark.png",
+          "status": 200
+        },
+        {
+          "path": "/assets/data-engineering/expand-migrate-contract-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/data-engineering/expand-migrate-contract.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/expand-contract-backfill-mobile.svg",
+          "status": 200
+        },
+        {
+          "path": "/assets/software-engineering/expand-contract-backfill.svg",
+          "status": 200
+        }
+      ],
+      "illustration_bytes": [
+        {
+          "path": "/assets/data-engineering/expand-migrate-contract.svg",
+          "status": 200,
+          "sha256": "6d42ceb6ffe01b72df961bbd18ab7e8415ca8243cd792bd54a53e55563c7b69e",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/data-engineering/expand-migrate-contract-mobile.svg",
+          "status": 200,
+          "sha256": "b7081ee677fc6e427fd421fd31971a3c104b52af97e9169f69b6590b8f5a659f",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/expand-contract-backfill.svg",
+          "status": 200,
+          "sha256": "55c5b82118c33a8c5f57a1ea96687455ff7784523dd4e6c85a369d6d0ae65020",
+          "matches_source": true
+        },
+        {
+          "path": "/assets/software-engineering/expand-contract-backfill-mobile.svg",
+          "status": 200,
+          "sha256": "3f4cd75001dce5116cd35491c8968ed064ad68b3b05e74b436fdaa4de1de1de4",
+          "matches_source": true
+        }
+      ]
+    },
+    "visual_review": "Viewed all four native SVGs, actual desktop/phone article tops, updated atomic-guard phone figure and highlighted phone code viewport. All labels fit, no measured overlap/clipping or page overflow. Fixed white surface, Helvetica Neue/Helvetica/Arial regular font, prescribed palette and square geometry. Actual static renderer measured all four SVGs and article1440/390/320, exact code text/selection, highlight colors/focus, keyboard code scrolling, related routes and Evolution collection/gallery/card/breadcrumb.",
+    "public_static_export": "PASSED the repository build-public-web.mjs and inspectPublicBuild in a separate source workspace with existing sibling applications linked. Final export includes explicit atomically-accept wording and final SVG bytes. Static preview43071 verified14local references return200, four SVG response bodies match source SHA256, and all four related routes return200. No deployment or publishing.",
+    "build_workspace_notes": "An intermediate build command ran from the wrong directory before any edits; correcting the root path and waiting for the local build staging owner resolved setup. Final isolated build and static checks passed without repository build/renderer/dependency changes."
+  },
+  "limitations": [
+    "The Python example is a sequential in-memory API bridge; it does not implement a physical-column migration, concurrency, live dependency discovery, permission boundaries or atomic data handover. An empty registry cannot establish completeness; copying into a new object cannot capture later concurrent mutations. These limits are explicit.",
+    "The revision-race diagram separately requires an atomic conditional compare/write and one authoritative comparable ordering per account; deletion revisions and durable recovery must also be handled.",
+    "Pre-existing VerseSelector type error and access-over-ownership missing-graphic coverage failure remain."
+  ],
+  "version_control": {
+    "branch": "codex/software-expand-contract",
+    "local_uncommitted": true,
+    "canonical_route_preserved": true,
+    "unrelated_work": "preserved",
+    "published": false,
+    "deployed": false,
+    "pushed": false,
+    "pull_request_opened": false
+  }
+}

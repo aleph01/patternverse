@@ -1,0 +1,122 @@
+{
+  "font": "docs/pattern-packages/graphic-design-pairing-fonts/pairing-sans.woff2",
+  "method": "Fill-only role reassignment within each unchanged palette. Copy, font, sizes, weights, positions, photographs/crops and print/device presentation remain fixed.",
+  "colors": {
+    "ink": "#17352f",
+    "blue": "#225c91",
+    "terra": "#9e3e25",
+    "ready": "#dceadc",
+    "attention": "#f6e6b6"
+  },
+  "values": [
+    [42, 28],
+    [48, 36]
+  ],
+  "roleMappings": {
+    "actions": {
+      "bookingAction": "#225c91",
+      "ordinaryInformation": "#17352f"
+    },
+    "studios": {
+      "Riverside": "#225c91",
+      "Hill": "#9e3e25"
+    },
+    "orders": {
+      "ready": "#dceadc",
+      "needsAttention": "#f6e6b6"
+    }
+  },
+  "examples": [
+    {
+      "name": "color-roles-primary-actions",
+      "source": "audience-workspace-photo.jpg",
+      "stage": "audience-phone-stage.jpg",
+      "phone": true,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only the desk-price text and room-button fill change. Blue is assigned to both booking actions; the price returns to dark green. The same two ordinary ink colors remain. Copy, font, sizes, positions, photography, device and lighting stay fixed.",
+      "declaredFills": [
+        [
+          {
+            "element": "desk-price",
+            "fill": "#225c91"
+          },
+          {
+            "element": "room-button",
+            "fill": "#17352f"
+          }
+        ],
+        [
+          {
+            "element": "desk-price",
+            "fill": "#17352f"
+          },
+          {
+            "element": "room-button",
+            "fill": "#225c91"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "color-roles-studio-report",
+      "source": "form-open-studios-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only two April bar fills swap: Riverside becomes blue and Hill terracotta, matching March. All four values, direct site labels, common scale, bar geometry, type and photography remain identical. Palette unchanged. Fictional data: March42/28, April48/36.",
+      "declaredFills": [
+        [
+          {
+            "element": "bar-1-0",
+            "fill": "#9e3e25"
+          },
+          {
+            "element": "bar-1-1",
+            "fill": "#225c91"
+          }
+        ],
+        [
+          {
+            "element": "bar-1-0",
+            "fill": "#225c91"
+          },
+          {
+            "element": "bar-1-1",
+            "fill": "#9e3e25"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "color-roles-order-status",
+      "source": "explicit-tableware-photo.jpg",
+      "stage": "scale-print-stage-v2.jpg",
+      "phone": false,
+      "dimensions": {
+        "wide": [1320, 1060],
+        "stacked": [660, 2070]
+      },
+      "description": "Only the payment-outstanding badge background changes from existing pale green to existing pale yellow. Ready to dispatch remains green; Address missing remains yellow. All explicit words, symbols, positions, typography and photographic artwork stay fixed. Palette unchanged.",
+      "declaredFills": [
+        [
+          {
+            "element": "payment-background",
+            "fill": "#dceadc"
+          }
+        ],
+        [
+          {
+            "element": "payment-background",
+            "fill": "#f6e6b6"
+          }
+        ]
+      ]
+    }
+  ]
+}

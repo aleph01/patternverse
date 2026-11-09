@@ -1,0 +1,112 @@
+{
+  "format_version": 1,
+  "title": "Structural Traps — Trust Games",
+  "metadata_mapping": "Existing concept schema and responsive SVG conventions; local content changes only, no navigation or publication action.",
+  "patterns": [
+    {
+      "id": "trust-games",
+      "title": "Trust Games",
+      "entity_type": "concept",
+      "domain": "Strategic and game-theoretic problems; sequential vulnerability, reciprocity, preferences, and commitment",
+      "article": "content/concepts/trust-games.md",
+      "source_checked": "2026-10-31",
+      "sources": [
+        {
+          "title": "Joyce Berg, John Dickhaut, and Kevin McCabe, Trust, Reciprocity, and Social History (1995)",
+          "url": "https://christosaioannou.com/Trust%2C%20Reciprocity%20and%20Social%20History%20GEB%201995.pdf",
+          "doi": "10.1006/game.1995.1027",
+          "supports": "Landmark anonymous one-shot investment game; endowed first-mover transfers tripled before recipient return decision; positive transfers and reciprocity observations; relationship to earlier Kreps (1990) trust game.",
+          "read_method": "Original paper opened and downloaded from academic host. Scanned first five pages rendered and OCR prepared; first three pages read, including abstract, one-shot anonymity, rule description, historical footnote, findings discussion, and start of procedures. Cox’s original paper also gives explicit rules and reported transfer/return findings.",
+          "boundary": "The online-purchase scenario is a qualitative adaptation of sequential vulnerability and discretionary response, not a reproduction of the investment experiment’s transfer amounts or return choices. Kreps historical attribution follows Berg’s footnote; no claim to direct reading of the 1990 text. Original participant behavior is not evidence for a universal reciprocity rate."
+        },
+        {
+          "title": "James C. Cox, How to Identify Trust and Reciprocity (2004)",
+          "url": "https://econweb.ucsd.edu/~jandreon/Econ264/papers/Cox%20GEB%202004.pdf",
+          "doi": "10.1016/S0899-8256(03)00119-2",
+          "supports": "Self-regarding preferences are a restrictive game-theory assumption, not rationality itself; triadic comparison conditions distinguish conditional transfer responses from unconditional other-regarding preferences.",
+          "read_method": "University-hosted original paper opened and downloaded. Introduction, investment-game description, interpretation of Berg findings, and Treatment A/B/C procedures read in extracted full text.",
+          "boundary": "Experimental comparisons aid identification of behavior across conditions; they do not read individual motives or validate generalized character judgments. No Cox measured transfer size is copied into the hypothetical example."
+        },
+        {
+          "title": "Ernst Fehr, On the Economics and Biology of Trust (2008 discussion paper; published 2009)",
+          "url": "https://docs.iza.org/dp3895.pdf",
+          "doi": "10.1162/JEEA.2009.7.2-3.235",
+          "supports": "Behavioral definition centers voluntary vulnerability and expected benefit; trust depends on beliefs and risk/social preferences and can differ from impersonal risk-taking.",
+          "read_method": "Research-institute discussion paper opened and downloaded; introduction and Section 2 definition and measurement discussion read, including the binary game and belief/preference distinction.",
+          "boundary": "Specialist review, not the primary trial for every cited behavioral mechanism. Its binary example uses different multiplier and returns from this article; these are not conflated. No neurobiological intervention, causal macroeconomic claim, or broad trait estimate is made."
+        }
+      ],
+      "related_patterns": [
+        "credible-commitment",
+        "the-stag-hunt",
+        "the-prisoners-dilemma",
+        "bargaining-problems"
+      ],
+      "status": "published",
+      "short_description": "Recognize when cooperation requires an initial act of vulnerability followed by another person's discretionary response, then distinguish evidence about intentions from changes in incentives and control.",
+      "use_when": [
+        "Does a smaller order remove the seller’s choice?"
+      ],
+      "goals": [
+        "Recognize the familiar situation and preserve the defining mechanism.",
+        "Distinguish formal assumptions, empirical findings, and hypothetical continuations.",
+        "Make intervention authority, opportunity costs, and remaining constraints explicit."
+      ],
+      "mechanisms": [
+        "Use relevant evidence and an affordable separable trial where appropriate, or change control through protection.",
+        "Maya can still lose the exposed payment. No universal trust threshold or guarantee of future honesty follows."
+      ],
+      "example_structure": {
+        "scenario": "Online buyer pays unfamiliar seller before dispatch with no effective payment protection or recovery in the benchmark. Known exclusively own-material preferences predict refusal by backward induction. Practical small-order trial explicitly changes information to uncertain preferences, requires independently useful divisible goods and affordable loss, and leaves the seller’s discretion intact. Delivery success is stipulated evidence about one occasion, not a measured outcome or guaranteed honesty at larger stakes.",
+        "changed_relationship": "Use relevant evidence and an affordable separable trial where appropriate, or change control through protection.",
+        "residual_constraints": "Maya can still lose the exposed payment. No universal trust threshold or guarantee of future honesty follows.",
+        "comparison": "Qualitative choices, dependencies, and consequences; no invented scores, computed trajectory, or measured improvement claimed."
+      },
+      "visual": {
+        "type": "qualitative-explanatory-comparison",
+        "question": "Does a smaller order remove the seller’s choice?",
+        "assets": [
+          "content/assets/structural-traps/trust-token-control.svg",
+          "content/assets/structural-traps/trust-token-control-mobile.svg"
+        ],
+        "dimensions": {
+          "desktop": {
+            "width": 840,
+            "height": 1219,
+            "textBlocks": 20
+          },
+          "phone": {
+            "width": 360,
+            "height": 1701,
+            "textBlocks": 20
+          }
+        },
+        "alternative_text": "Hypothetical qualitative illustration. After a full payment, Omar can send or withhold the described goods. A separable small order lowers Maya’s affordable exposure but leaves the same two responses available. The practical trial assumes uncertainty about his preferences, unlike the known-selfish-preferences benchmark. Change: Use relevant evidence and an affordable separable trial where appropriate, or change control through protection. Limitation: Maya can still lose the exposed payment. No universal trust threshold or guarantee of future honesty follows.",
+        "caption": "Hypothetical illustration. Both branches leave meaningful discretion with the seller. A useful small order can bound loss without enforcing delivery. One completed sale supplies evidence about that occasion; an indivisible purchase, changing stakes, or shipping failure limits what can be inferred.",
+        "representation": {
+          "interpretation": "Hypothetical qualitative illustration. After a full payment, Omar can send or withhold the described goods. A separable small order lowers Maya’s affordable exposure but leaves the same two responses available. The practical trial assumes uncertainty about his preferences, unlike the known-selfish-preferences benchmark. Change: Use relevant evidence and an affordable separable trial where appropriate, or change control through protection. Limitation: Maya can still lose the exposed payment. No universal trust threshold or guarantee of future honesty follows.",
+          "relationship_key": "Each fork is a sequence: payment first, then the seller’s choice. The two panels are alternative order sizes, not automatically promised repeat business.",
+          "changed_relationship": "Use relevant evidence and an affordable separable trial where appropriate, or change control through protection.",
+          "residual_constraints": "Maya can still lose the exposed payment. No universal trust threshold or guarantee of future honesty follows.",
+          "phone_treatment": "Separate composition preserves mechanisms and reading order at phone article width; fixed white surface also in dark surroundings."
+        }
+      },
+      "evidence_boundary": "Central scenarios and successful continuations are hypothetical. Sources retain design and scope limitations. Recommendations and expected recognizability are editorial synthesis, not reader-study findings or guaranteed outcomes.",
+      "recognizable_examples_revision": {
+        "date": "2026-11-02",
+        "scope": "Ten framing or smaller-change recommendations from the remaining-thirty-two audit. Current article, two responsive editable SVGs, alt text, caption, research notes, and asset dimensions updated. Forty identities and existing publication statuses retained.",
+        "current_example": "Online buyer pays unfamiliar seller before dispatch with no effective payment protection or recovery in the benchmark. Known exclusively own-material preferences predict refusal by backward induction. Practical small-order trial explicitly changes information to uncertain preferences, requires independently useful divisible goods and affordable loss, and leaves the seller’s discretion intact. Delivery success is stipulated evidence about one occasion, not a measured outcome or guaranteed honesty at larger stakes.",
+        "source_handling": "Existing source identities, reading provenance, and original source_checked dates retained; obsolete scenario and verification fields replaced. New sources and reopened passages have separate dated checks.",
+        "verification": "Passed current content, semantic consistency, responsive image loading, browser layout, text bounds, and contrast checks. See verification."
+      },
+      "verification": {
+        "status": "passed",
+        "content": "Corpus validator passes for 1454 entities. All forty collection articles remain separate with nine sections and a responsive illustration each. Article metadata, existing statuses, collection, navigation, and original source identities remain unchanged. Ten articles, twenty editable SVGs, ten current research notes, and necessary asset dimensions updated.",
+        "visual": "All ten live articles checked in the browser at 1440px desktop and 390px phone viewports (20 layouts), with loaded expected sources and no page overflow. All twenty SVG compositions checked at 718px desktop and approximately 364.6px phone article widths in light and dark surroundings (40 layouts). No text overlap, clipping, card overflow, or fixed-white-surface error detected. Desktop and phone renderings visually reviewed for labels, relationship meaning, and reading order.",
+        "minimum_text_contrast": 5.03,
+        "minimum_rendered_font_px": 13.68,
+        "evidence_boundary": "Editorial, semantic, content, and browser-rendering verification. No reader-comprehension study or measured intervention outcome claimed."
+      }
+    }
+  ]
+}

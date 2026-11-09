@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-30",
+  "status": "implemented-locally",
+  "article": "competing-consumers",
+  "title": "Competing Consumers",
+  "aliases": [],
+  "primary_collection": "software-messaging-integration",
+  "primary_collection_title": "Messaging and Integration",
+  "body_word_count": 1454,
+  "body_word_count_includes_code": true,
+  "figures": 2,
+  "illustration_variants": 4,
+  "concept_marks": 1,
+  "style": "light-editorial",
+  "recommendation_queries": 10,
+  "validation": {
+    "research": "Four primary references: Hohpe/Woolf Enterprise Integration Patterns defines Competing Consumers on a shared point-to-point channel; Microsoft documents concurrent queue processing and operational choices; RabbitMQ documents distinct consumer/publisher acknowledgments, bounded outstanding deliveries and connection-loss requeue; Apache Kafka documents conventional consumer-group partition assignment and committed progress. No existing canonical article found; new ID competing-consumers. Consumer groups and shared subscriptions are qualified implementation arrangements, not blanket aliases. Messaging and Integration is the single primary home because the essential collaboration is interchangeable receivers sharing one logical work stream. Publish-Subscribe, Producer-Consumer, Queue-Based Load Leveling and Idempotent Receiver distinctions are explicit. Idempotency does not imply order independence, and delivery ownership does not imply exactly-once external effects.",
+    "runnable_example": {
+      "status": "passed",
+      "output": [
+        "in flight J1 J2",
+        "next J3",
+        "redelivered J1 4",
+        "stale ack rejected",
+        "drained True"
+      ],
+      "scheduled_interleavings": 12,
+      "jobs_per_interleaving": 50,
+      "checks": [
+        "invalid and duplicate message IDs",
+        "empty batch",
+        "exclusive outstanding delivery per worker",
+        "distinct jobs held simultaneously in modeled time",
+        "continued progress while another consumer holds work",
+        "queue emptiness differs from drained delivery state",
+        "disconnection returns unacknowledged job once",
+        "fresh token with stable logical identity",
+        "stale and wrong-current acknowledgments rejected without effects",
+        "duplicate acknowledgment refused",
+        "same worker-name reuse does not revive old token",
+        "job conservation under randomized bounded interleavings",
+        "all deliveries drained after recovery"
+      ]
+    },
+    "content": "All1302 entities validate; published-only compilation1155 without diagnostics. Eight exact H2s, one complete Python3.10+ program, two figures/four responsive assets, four existing related links, ten distinct recommendation queries and no practice/worksheet. Adds one complete canonical article without duplicate/stub content.",
+    "integration_tests": "Competing Consumers3, Publish-Subscribe3, Producer-Consumer3 and GoF24 pass. Four global graphic checks pass; the pre-existing authored-coverage check fails for missing access-over-ownership. Total37 passed,1 unrelated failure. New checks verify canonical title/empty alias list/search, Software Engineering membership, one primary home, all23GoF members, related IDs, exact selectable highlighted code, image alts/captions/mobile sources/dimensions, metadata hash and queries. No existing integration test modified.",
+    "lint_and_format": "Scoped ESLint and Prettier pass for generator, actual-code validator, new integration test, authoring JSON/documentation, registry, manifest and review record.",
+    "preservation": {
+      "status": "passed",
+      "existing_content_changed": ["content/collections/software-messaging-integration.md"],
+      "other_existing_content_unchanged": 1300,
+      "new_content": ["content/patterns/competing-consumers.md"],
+      "one_primary_home_messaging_and_integration": true,
+      "ten_existing_collection_members_preserved_in_order": true,
+      "all_existing_articles_other_collections_verses_and_23_gof_members_unchanged": true,
+      "prior_authoring_records_unchanged": 72,
+      "prior_graphics_unchanged": 484,
+      "all_prior_dimensions_unchanged": 1720,
+      "new_dimensions": {
+        "software-engineering/competing-consumers-sharing.svg": {
+          "width": 720,
+          "height": 744
+        },
+        "software-engineering/competing-consumers-sharing-mobile.svg": {
+          "width": 360,
+          "height": 920
+        },
+        "software-engineering/competing-consumers-redelivery.svg": {
+          "width": 720,
+          "height": 928
+        },
+        "software-engineering/competing-consumers-redelivery-mobile.svg": {
+          "width": 360,
+          "height": 1040
+        }
+      },
+      "previous_integration_tests_renderer_dependencies_and_build_scripts_unchanged": true,
+      "existing_authoring_documentation_preserved": true,
+      "staged_sources_and_assets_match": true
+    },
+    "illustrations": "Two editable native SVG figures with separately composed phone variants. First is a snapshot after two receives: shared queue hasJ3 ready, A holdsJ1/token1 and B holdsJ2/token2; B can progress toJ3 while A holdsJ1. Separate labeled delivery arrows distribute distinct jobs rather than fan out one publication. The second shows explicit disconnectA retiring token1 and returningJ1, B receivingJ1/token4 afterJ2/J3 were acknowledged, rejection ofold ack1 and acceptance ofcurrent ack4. Business outcome remains explicitly unknown. Values match actual code execution. Fixed white, regular Helvetica Neue/Helvetica/Arial400, exact approved palette, square geometry and restrained strokes. A desktop delivery label was moved clear of its arrow after inspection. Four variants have zero measured outside labels/overlaps/outside rectangles. Native and embedded desktop/phone figures, captions, article tops, code viewports and gallery visually inspected; concept bounds include stroke inside96×96.",
+    "native_figure_measurements": [
+      {
+        "path": "/assets/software-engineering/competing-consumers-sharing.svg",
+        "labels": 16,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 744
+      },
+      {
+        "path": "/assets/software-engineering/competing-consumers-sharing-mobile.svg",
+        "labels": 17,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 920
+      },
+      {
+        "path": "/assets/software-engineering/competing-consumers-redelivery.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 720,
+        "height": 928
+      },
+      {
+        "path": "/assets/software-engineering/competing-consumers-redelivery-mobile.svg",
+        "labels": 19,
+        "outside": [],
+        "overlaps": [],
+        "shapes": [],
+        "width": 360,
+        "height": 1040
+      }
+    ],
+    "concept_geometry": {
+      "status": "passed",
+      "bounds": [
+        {
+          "x": 5,
+          "y": 9,
+          "width": 86,
+          "height": 78
+        },
+        {
+          "x": 39,
+          "y": 14,
+          "width": 22,
+          "height": 68
+        }
+      ]
+    },
+    "production_build": "The unchanged repository public build command exits zero and Public web build checks passed in an isolated source snapshot. Temporary NODE_OPTIONS filesystem-copy helper uses native macOS copy-on-write clones only for this task generated prerendered pages/dependencies/data copied into its own navigation-cache and finished build; SHA256 equality checked for every source/destination. Other copies forward unchanged. Background generated-asset cloning is also hash-verified. No renderer, dependency or repository build-script edits. This task had no failed build attempts. Private environment excluded and PUBLIC_DROPBOX_APP_KEY empty. Staged article, collection, metadata/docs, generator/validator/test, registry, manifest and assets match source. Only own redundant generated output was removed after browser success; finished preview and earlier previews remain.",
+    "disk_space_management": {
+      "status": "passed",
+      "successful_command": "node scripts/build-public-web.mjs",
+      "successful_exit_code": 0,
+      "failed_attempts": 0,
+      "background_hash_verified_compaction_passes": 44,
+      "native_copy_results": [
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 5364,
+          "logical_bytes": 525606646,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/.svelte-kit/navigation-cache",
+          "files": 2472,
+          "logical_bytes": 49276852,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "pages",
+          "destination": "apps/web/build",
+          "files": 5364,
+          "logical_bytes": 525606646,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        },
+        {
+          "status": "passed",
+          "tree": "dependencies",
+          "destination": "apps/web/build",
+          "files": 2472,
+          "logical_bytes": 49276852,
+          "scope": "Only this isolated build/export or navigation-cache tree; macOS clonefile and SHA-256 source/destination equality. No repository source, dependency or build-script edits."
+        }
+      ],
+      "temporary_runtime_helper": ".local/software-competing-consumers/clone-generated-assets.mjs",
+      "native_helper": ".local/software-competing-consumers/clone-asset-tree.py",
+      "redundant_generated_output_removed_after_browser_success": [
+        ".local/software-competing-consumers/build-workspace/apps/web/.svelte-kit/output"
+      ],
+      "finished_preview_source_and_earlier_previews_preserved": true
+    },
+    "browser": "Actual production article verified at1440,390,320CSS pixels: exact eight H2s, two responsive figures with allfour assets loaded, exact code text and selection, multiple syntax colors, focusable code with keyboard horizontal scrolling at320, no page overflow, four related routes200. Messaging and Integration route and Software Engineering gallery navigate to article with primary breadcrumb; eleventh member appears on third gallery page using exact reviewed concept paths. Native and embedded figures/captions, desktop/phone article tops, code viewport and gallery visually inspected. No page/console errors.",
+    "browser_measurements": {
+      "records": 8,
+      "widths": [1440, 390, 320],
+      "related_routes": 4,
+      "errors": []
+    },
+    "built_assets": {
+      "build_root": ".local/software-competing-consumers/build-workspace/apps/web/build",
+      "local_file_references": 59,
+      "missing": [],
+      "navigation_data_bytes": 44780
+    }
+  },
+  "unrelated_repository_failures": [
+    {
+      "check": "Web type check",
+      "detail": "VerseSelector.component.test.ts:79 passes exact to ByRoleOptions, which does not accept it. One error and zero warnings; file unchanged."
+    },
+    {
+      "check": "Global concept-graphic coverage",
+      "detail": "Existing access-over-ownership lacks an authored concept graphic; four other graphic checks pass."
+    }
+  ],
+  "example_limits": "New canonical competing-consumers article, no existing article ID replaced. Competing Consumers is the established Hohpe/Woolf name; shared subscription and consumer group are implementation arrangements, not invented aliases. One primary home Messaging and Integration, as its eleventh completed member. Original thumbnail-job context and bounded sequential Python3.10+ delivery model; one finite tuple of distinct nonempty job IDs, trusted registered consumers A/B, one outstanding delivery each. Explicit scripted interleaving, not real threads/processes or a broker. A receivesJ1/token1, B receivesJ2/token2; B acknowledgesJ2 then receives/acknowledgesJ3/token3 while A still holdsJ1. Explicit disconnectA retires delivery1 and returnsJ1; B receivesJ1/token4, stale token1 acknowledgment is rejected and token4 acknowledged. Logical identity survives redelivery; prior external effect is unknown. Drained means no ready/inflight deliveries, not verified business success. No thumbnail execution, actual parallelism, network, durability, automatic detection/timer, retry limit, transaction/effect store or duplicate-effect prevention. Tokens protect modeled lifecycle only, not external writes or authorization. Kafka conventional partition-group context differs from per-message queue scheduling. Scenarios, simulator and diagrams are original teaching material.",
+  "preview": "http://127.0.0.1:43057/pattern/competing-consumers",
+  "preview_mode": "isolated-static-production-build-with-byte-verified-native-copies",
+  "evidence_directory": ".local/software-competing-consumers",
+  "browser_check_script": ".local/software-competing-consumers/check-browser.mjs",
+  "build_log": ".local/software-competing-consumers/public-build-isolated.log",
+  "branch": "codex/software-competing-consumers",
+  "publication": "Local implementation only. No publishing, deployment, commit, push or pull request."
+}

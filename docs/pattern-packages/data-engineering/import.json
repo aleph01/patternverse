@@ -1,0 +1,1503 @@
+{
+  "source": "/Users/jeger-benninger/.codex/visualizations/2026/10/26/01a1772a-3c29-7c00-863d-1c9a44311300/data-engineering-editorial",
+  "articles": [
+    {
+      "id": "data-access-audit-trails",
+      "sourceId": "access-audit-trails",
+      "title": "Access Audit Trails",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "ff1bdf1aed370894b72332c42a0a5f6c524dae14919591a86f94cad21904c9e1",
+      "svgSha256": "21b004163202ec1d7863c29ae53a89f05032a82c076b72dada7095ecb99c6d48"
+    },
+    {
+      "id": "data-accumulating-snapshots",
+      "sourceId": "accumulating-snapshots",
+      "title": "Accumulating Snapshots",
+      "family": "Time & history",
+      "sourceSha256": "cea2fc8b0a7d56e28a835dc76cc9c33cba4344fc6d037756eb06d6eb2af630cc",
+      "svgSha256": "d359d3715cf880731fc4cf5f7c74e4ec73690d635d671dafeb6325bef191bbb7"
+    },
+    {
+      "id": "data-additive-schema-evolution",
+      "sourceId": "additive-schema-evolution",
+      "title": "Additive Schema Evolution",
+      "family": "Contracts & evolution",
+      "sourceSha256": "ecd2a0b11bd036a8144f0eb710d5647bf7efb4efb8cc5d2d0d5c0a89e6323125",
+      "svgSha256": "a0a2b8210f73f02cc3f9c2654ac4264034229f38de8c2f3a9b6105a41694c9cf"
+    },
+    {
+      "id": "data-adjacency-lists",
+      "sourceId": "adjacency-lists",
+      "title": "Adjacency Lists",
+      "family": "Identity & relationships",
+      "sourceSha256": "543cb780c28be4ebf0f9fb6021ccfb517d4a315cfa2df1220d9f8837af45bd6d",
+      "svgSha256": "529920a162509cd60bdc6d0e53817aa7bf9cd8dc2b45e55cc7dbc5da9804635c"
+    },
+    {
+      "id": "data-aggregate-fact-tables",
+      "sourceId": "aggregate-fact-tables",
+      "title": "Aggregate Fact Tables",
+      "family": "Analytical structure",
+      "sourceSha256": "cad037dc9ae4d94e1f52e4e54231059ad102973a92445910fb5b6d0a816e15cc",
+      "svgSha256": "74c7df145d7f68ac79aed81df756102ff7bfe4ebc98373dce60124ade2fd79b7"
+    },
+    {
+      "id": "data-allowed-lateness",
+      "sourceId": "allowed-lateness",
+      "title": "Allowed Lateness",
+      "family": "Streaming & event processing",
+      "sourceSha256": "06f68f17a191bacc09c8f9b18cb061fb94be67379490685563101352e69b5933",
+      "svgSha256": "dc05f847e88f1e301a46b1f3b91de9c1bcdc51d6ddf56d4338465a075e1db03e"
+    },
+    {
+      "id": "data-as-of-joins",
+      "sourceId": "as-of-joins",
+      "title": "As-of Joins",
+      "family": "Time & history",
+      "sourceSha256": "f3beba304c4a87fc742e89f70e7724b075f7c3514e66eb5fce51bb0c05925b14",
+      "svgSha256": "a303d254bd9001a1509adcceb15326623d732c7030a2c9fe1907d3cb8e8efdb1"
+    },
+    {
+      "id": "data-associative-entities",
+      "sourceId": "associative-entities",
+      "title": "Associative Entities",
+      "family": "Identity & relationships",
+      "sourceSha256": "bb73a848e5388b36a2c02611bc49f4583a65a8436b3efd37b3247ebba66dc434",
+      "svgSha256": "68c1f9c581be9bd94b249af85fcd5d7d091cbb6dfb10145c74554694e396178a"
+    },
+    {
+      "id": "data-atomic-publication",
+      "sourceId": "atomic-publication",
+      "title": "Atomic Publication",
+      "family": "Execution & recovery",
+      "sourceSha256": "ad4441a925f14ab934532074aa23fba6aadacd22e6ae05f1f2ef902db6e31c71",
+      "svgSha256": "d66fdccc6f0f51318ef0765d08d8e932493f42e8927987d2f41cd24127d348e1"
+    },
+    {
+      "id": "data-backpressure",
+      "sourceId": "backpressure",
+      "title": "Backpressure",
+      "family": "Streaming & event processing",
+      "sourceSha256": "1b64797e161e5ccea9ace502e7b773e8c6efd61f5a67b4d90d660ff697024a61",
+      "svgSha256": "274653361fa490dd8e392ccd9dabde89a3092a44763f1b7dcd321925208cc22c"
+    },
+    {
+      "id": "data-bitemporal-records",
+      "sourceId": "bitemporal-records",
+      "title": "Bitemporal Records",
+      "family": "Time & history",
+      "sourceSha256": "8a24fdf1696b4236165929eabafb239d84edbd05d66dfeb2219a51b5dc2888cf",
+      "svgSha256": "7431f20cc16e4cfae7d7dea1bec6345d4cb465333c492235660223544590d557"
+    },
+    {
+      "id": "data-bounded-contexts",
+      "sourceId": "bounded-contexts",
+      "title": "Bounded Contexts",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "6e8da1e3502b8233d6259e52b7ac92d2bd12b16637d32d4bded6fafaa79f497c",
+      "svgSha256": "f7d2f50ae34821c6c0089912b5e077d5dda3ac75fefc0bb3e16559a51016e84f"
+    },
+    {
+      "id": "data-bounded-retries",
+      "sourceId": "bounded-retries",
+      "title": "Bounded Retries",
+      "family": "Execution & recovery",
+      "sourceSha256": "5c11485f998434ae029a0e6d14eae34d45a9690fd0daed952647fe9bcc18a3bf",
+      "svgSha256": "1b4e073a782013dd672055e75348bbd2be6063ee1001b2244c9b08b90f51711f"
+    },
+    {
+      "id": "data-bounded-stream-stream-joins",
+      "sourceId": "bounded-stream-stream-joins",
+      "title": "Bounded Stream–Stream Joins",
+      "family": "Streaming & event processing",
+      "sourceSha256": "d406bff1602c785b89f82a4604be2db69c11f57a442d1f8da9114d9748c21e40",
+      "svgSha256": "1faab243e667dbbadbbe99628b8bda45c0b809a6eb1544159273cb22a5123369"
+    },
+    {
+      "id": "data-bridge-tables",
+      "sourceId": "bridge-tables",
+      "title": "Bridge Tables",
+      "family": "Analytical structure",
+      "sourceSha256": "8f06bcbfa72947255dce68be3149426378281b939c0c46c7f8fb5e3834132a69",
+      "svgSha256": "6241c232e5055fddb45ac3300f91318a9e559ae3d9cc2bb520da31ccb65649c7"
+    },
+    {
+      "id": "data-broadcast-small-inputs",
+      "sourceId": "broadcast-small-inputs",
+      "title": "Broadcast Small Inputs",
+      "family": "Storage & access",
+      "sourceSha256": "916ae3c5c5c7f91b9cf50095b50c86c8273f0cdf1831b825e7b927e67afa2e2f",
+      "svgSha256": "0950b69f9e02aeaf8150f1e021e9201cc577ee61801ff117edcb2efca2b835d9"
+    },
+    {
+      "id": "data-business-invariant-checks",
+      "sourceId": "business-invariant-checks",
+      "title": "Business Invariant Checks",
+      "family": "Quality & observability",
+      "sourceSha256": "bc6cb6e25276f9ac4b7ad916071851ac2784c2966fd6278429930567400e9cec",
+      "svgSha256": "00c8e1d81646db6e8b9b714da8dc75153448233e3752832e6f19e37caa2c602a"
+    },
+    {
+      "id": "data-calendar-dimensions",
+      "sourceId": "calendar-dimensions",
+      "title": "Calendar Dimensions",
+      "family": "Analytical structure",
+      "sourceSha256": "b811642295c199e0700f3463598527c08282af82481823bb02390cad1bfaa8e3",
+      "svgSha256": "9c6e1e444cf94007cbe46ad7bacde13864c78ed598289da1e2d3cb787e8e169e"
+    },
+    {
+      "id": "data-canonical-mapping",
+      "sourceId": "canonical-mapping",
+      "title": "Canonical Mapping",
+      "family": "Transformation & refinement",
+      "sourceSha256": "70afc92bc1dde0a92eacddee538b3c6e9e8955e65d2d2ca46fc28a6ed52fad74",
+      "svgSha256": "039fab45bdf96bbdb1bc5289c07cffbc405637b0c5ed42b52cb00edd6fd667b0"
+    },
+    {
+      "id": "data-capture-lineage-at-transformation",
+      "sourceId": "capture-lineage-at-transformation",
+      "title": "Capture Lineage at Transformation",
+      "family": "Quality & observability",
+      "sourceSha256": "8db06fc81ea122afd508845b8d77f5512f4262d6669a45071a07e2f33fee9769",
+      "svgSha256": "d0ab88e6ac41a1cb1367f75b40b2e83d984f02dbc47c77d793f9a3e22c8663f3"
+    },
+    {
+      "id": "data-checkpoint-and-resume",
+      "sourceId": "checkpoint-and-resume",
+      "title": "Checkpoint and Resume",
+      "family": "Execution & recovery",
+      "sourceSha256": "34777581110d4665c2632b03d9b9242301179e8e9a2c33f1573144173a1eb4a4",
+      "svgSha256": "d57559b5a1059adf357c7948f47972904a2b60c8141d458097dd7932b8477b20"
+    },
+    {
+      "id": "data-chunked-snapshotting",
+      "sourceId": "chunked-snapshotting",
+      "title": "Chunked Snapshotting",
+      "family": "Capture & synchronization",
+      "sourceSha256": "183c539a66e502e08375d9bb6145758ab562a408078a49234b0b0157e52aa256",
+      "svgSha256": "2f0e2ae23e8ed6811c5f401a0d79f9a8bf4bd316aa8d5652585260b617c3eeac"
+    },
+    {
+      "id": "data-circuit-breakers",
+      "sourceId": "circuit-breakers",
+      "title": "Circuit Breakers",
+      "family": "Execution & recovery",
+      "sourceSha256": "2a409460ebea9bd7bfa99ff0ce5f537acbbaf1c718b3cf7861058c58761ed645",
+      "svgSha256": "7e313212bd9d56a645adc0a1a3f49a64976fefbb2b6b0a99df46cd2cd01016a4"
+    },
+    {
+      "id": "data-claim-check",
+      "sourceId": "claim-check",
+      "title": "Claim Check",
+      "family": "Capture & synchronization",
+      "sourceSha256": "598696c29ba08c113c02a0741223af2fbf03bfc784e0cef16bc10401504a5e01",
+      "svgSha256": "fa59b7d22150557664820d17f4c31226255729a4f439a249a77def8c10011594"
+    },
+    {
+      "id": "data-classification-based-retention",
+      "sourceId": "classification-based-retention",
+      "title": "Classification-Based Retention",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "1853b8a5eb313649b4aaf64b38d241c3d87d5e26dd5bdd91b4ac2437c1a02313",
+      "svgSha256": "74bc09d1e64f83e9f433b32149e3b7ca52cd0061977a3f8d1bedfa880ceb9de6"
+    },
+    {
+      "id": "data-closure-tables",
+      "sourceId": "closure-tables",
+      "title": "Closure Tables",
+      "family": "Identity & relationships",
+      "sourceSha256": "c24dbc2f343787e72b0645a6c24384aaf1baded4044328f42eba0ef61d87b395",
+      "svgSha256": "6101534c589ed9c6bd5876fcdd2407c4a7fce5b82987cdf9e0ca91f6ac5bc015"
+    },
+    {
+      "id": "data-cluster-related-records",
+      "sourceId": "cluster-related-records",
+      "title": "Cluster Related Records",
+      "family": "Storage & access",
+      "sourceSha256": "3a7c692882dbdb33c53c6fdab3726c0561a054a9957ea200ac3a8ab1ffaef6c2",
+      "svgSha256": "ea825f4823b7c4e388e6d881958dfb0872ff8c2e3b0336490d083f8919847938"
+    },
+    {
+      "id": "data-co-located-joins",
+      "sourceId": "co-located-joins",
+      "title": "Co-Located Joins",
+      "family": "Storage & access",
+      "sourceSha256": "4d3213925ba39ba7294302385a9a5d6b089e2beb653d595627f0d8736959c5d4",
+      "svgSha256": "08d56ebd6289970e2c2767d7566d97398691ef5c4ff3257b38cb119c3cef5f42"
+    },
+    {
+      "id": "data-columnar-storage",
+      "sourceId": "columnar-storage",
+      "title": "Columnar Storage",
+      "family": "Storage & access",
+      "sourceSha256": "798dc5d74c8efbd61806cf3178568ec4b32e10ce120850b7f2f79bd695e45466",
+      "svgSha256": "cbf2ca39cd2630224ed20f188cce63c93a7d099a611abf820f7c34633d7343ed"
+    },
+    {
+      "id": "data-compatibility-checks-in-delivery",
+      "sourceId": "compatibility-checks-in-delivery",
+      "title": "Compatibility Checks in Delivery",
+      "family": "Contracts & evolution",
+      "sourceSha256": "cf6444426769ecf78f71c2f95a63f6f1aff3a67f1879f636a996b50759cf9e54",
+      "svgSha256": "f5e40fca85713fbbbb16718d0168a6d76499d98ea428e6cba1ffc149ed2ef18d"
+    },
+    {
+      "id": "data-compensating-actions",
+      "sourceId": "compensating-actions",
+      "title": "Compensating Actions",
+      "family": "Execution & recovery",
+      "sourceSha256": "f629e5c02980a72ce55c354e5c6d652bb2c9019bc1b01b9418707353ce3b480b",
+      "svgSha256": "68d50ec60adf0dcc0c3f4864a7bb93c437e68dbfb98ac3b53aab586b03f0470b"
+    },
+    {
+      "id": "data-composite-keys",
+      "sourceId": "composite-keys",
+      "title": "Composite Keys",
+      "family": "Identity & relationships",
+      "sourceSha256": "7dc6c0ae102103aa790cfbea43216d8dd2f345b5ec9c92cd85a422a5fe646796",
+      "svgSha256": "08c74b2f5970cd6230b90a0a365e3004cfbe920f30747af3294472c1a90a991f"
+    },
+    {
+      "id": "data-conformed-dimensions",
+      "sourceId": "conformed-dimensions",
+      "title": "Conformed Dimensions",
+      "family": "Analytical structure",
+      "sourceSha256": "1ca2aef14d91952760844c76f0b45aa9351f40b2ff05ed4ef549a98daf60fb23",
+      "svgSha256": "8325009893089061d0ab18a9a50f5520bcd8f24a1cc69d6edda37d1e1cbede78"
+    },
+    {
+      "id": "data-conformed-facts",
+      "sourceId": "conformed-facts",
+      "title": "Conformed Facts",
+      "family": "Analytical structure",
+      "sourceSha256": "0c6c7f5184126a314127314bc0cdc633eda1f76b560446b4d1cba805e72b5dd6",
+      "svgSha256": "f62631b96044627d3001fa779a1512d2db89f231a06c4ca4fe37e2e8529b473e"
+    },
+    {
+      "id": "data-consistent-snapshot-reads",
+      "sourceId": "consistent-snapshot-reads",
+      "title": "Consistent Snapshot Reads",
+      "family": "Capture & synchronization",
+      "sourceSha256": "f89da4bf0eaa3b7d1f5e6ca167941cb1226087b534d6991512b2170788177f2a",
+      "svgSha256": "3f8fda966b9504722b91cd16ade8104fe0af1d13d6c9e65cb139049eb8efc82d"
+    },
+    {
+      "id": "data-consumer-driven-contract-tests",
+      "sourceId": "consumer-driven-contract-tests",
+      "title": "Consumer-Driven Contract Tests",
+      "family": "Contracts & evolution",
+      "sourceSha256": "fd5bf1b3123ccf7f8c744beabe01c850105e3108a6cc1a5149422d1bb8afb898",
+      "svgSha256": "4c6a6255e85e90012a1722bb59806347f0b4cc58ab2bfdc623b8115b48ac0d92"
+    },
+    {
+      "id": "data-controlled-vocabularies",
+      "sourceId": "controlled-vocabularies",
+      "title": "Controlled Vocabularies",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "a59f8191b435b041a18146171d4301296e1f6fc13e3263617707c2d3b6f881bb",
+      "svgSha256": "f9f23d0d010b9d78d5b8d4ab79076a06302d759b03823aa8d191f843c4a55dd4"
+    },
+    {
+      "id": "data-covering-indexes",
+      "sourceId": "covering-indexes",
+      "title": "Covering Indexes",
+      "family": "Storage & access",
+      "sourceSha256": "d8d9fa089fa9886da9259029d603495cac3e76c447b7c8e86ec161d3eb66738c",
+      "svgSha256": "c15a54fb3e0b8a114dced6ad106972be5aed58f83f1d0ecc33b5bc3786c70132"
+    },
+    {
+      "id": "data-cursor-based-incremental-extraction",
+      "sourceId": "cursor-based-incremental-extraction",
+      "title": "Cursor-Based Incremental Extraction",
+      "family": "Capture & synchronization",
+      "sourceSha256": "e8f6362a914015d335d47e0039c01389231d3b257d58d5e886a57e690acc2869",
+      "svgSha256": "7e0f2af5b9b4a902b5a207d3139f11b09f44a5804701d7a6270b421357f6f7bd"
+    },
+    {
+      "id": "data-data-minimization",
+      "sourceId": "data-minimization",
+      "title": "Data Minimization",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "bc92933cbceeca8156686ee8ce107563432c490f4bea4f41907362d890e194fd",
+      "svgSha256": "e4550226a8a6b4c7ee483f746e84cfa0ffd94e6e99fec35e4e65f65e145ec706"
+    },
+    {
+      "id": "data-data-aware-dependencies",
+      "sourceId": "data-aware-dependencies",
+      "title": "Data-Aware Dependencies",
+      "family": "Execution & recovery",
+      "sourceSha256": "ad35eb9c3e4a757981eeddc0e804c24c29e742b65fcbdff7340a1b22636736c4",
+      "svgSha256": "3901a17a2d819fcaced0a5cb575cee7510db72306cf777a2be84da4c44c58c9e"
+    },
+    {
+      "id": "data-dataset-deprecation-and-retirement",
+      "sourceId": "dataset-deprecation-and-retirement",
+      "title": "Dataset Deprecation and Retirement",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "333d413c0cb964704d1b01674b1c0239793f92e436eaa3831b2d8d1acbc5953e",
+      "svgSha256": "b0fac7519f3863606503b0f1d03a4b328ad1b28283e2607d9eba36c7a4d07b4d"
+    },
+    {
+      "id": "data-dead-letter-queues",
+      "sourceId": "dead-letter-queues",
+      "title": "Dead-Letter Queues",
+      "family": "Execution & recovery",
+      "sourceSha256": "f28cacf7a8425d9b6f9908941b0e9dd5a14611d7f2127f7bef412a072078d211",
+      "svgSha256": "4413ed43b94c1346a36885fe82e58d67defd4044ac25e7e5ce5c3d420e7636a5"
+    },
+    {
+      "id": "data-declare-the-grain",
+      "sourceId": "declare-the-grain",
+      "title": "Declare the Grain",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "88dd772e19a8558529986fa4e39d077e5f795df9ab1e6a700ca7a597f61cbae2",
+      "svgSha256": "6c39fc398fdf285778250f5e99b9fc003234df5a9830b3baf11de5123a6ae68f"
+    },
+    {
+      "id": "data-deduplicate-explicit-winner",
+      "sourceId": "deduplicate-explicit-winner",
+      "title": "Deduplicate with an Explicit Winner",
+      "family": "Transformation & refinement",
+      "sourceSha256": "50b83b9ba1db1eb1d9a931d1816c0c4bfefdd377deaff69f8a942c4437cccc07",
+      "svgSha256": "587afad7463f5a7373f7aca5c8fe09e2b6e593d77ee47d49ecd8269f5ebc6d30"
+    },
+    {
+      "id": "data-degenerate-dimensions",
+      "sourceId": "degenerate-dimensions",
+      "title": "Degenerate Dimensions",
+      "family": "Analytical structure",
+      "sourceSha256": "c7d15afeae0d2f272ce0e09a4f53e0f66047fc1c4ec70e0b180429fcd26aaef0",
+      "svgSha256": "f5af6d7781e44115c6aa7b5b17438085acb7b3222a81dd0088b2e64527d0f690"
+    },
+    {
+      "id": "data-deletion-propagation",
+      "sourceId": "deletion-propagation",
+      "title": "Deletion Propagation",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "fb4cb07efc001848109302addacf121365e1a18961cc07dc096cf1457edd9410",
+      "svgSha256": "bfcfd47c19033437d17cfbdd5bc3c90a6e8d44196eb3dfd3796c7e327cb39646"
+    },
+    {
+      "id": "data-deletion-tombstones",
+      "sourceId": "deletion-tombstones",
+      "title": "Deletion Tombstones",
+      "family": "Capture & synchronization",
+      "sourceSha256": "30f1557e8caa929cad4e5ca1e1fb34d90adeefcc7179baf22e558d4d91a86223",
+      "svgSha256": "08d8ab2af4c6fdf76b4c9da276587f92c31bd370409b306a30466de74503a673"
+    },
+    {
+      "id": "data-deterministic-transformations",
+      "sourceId": "deterministic-transformations",
+      "title": "Deterministic Transformations",
+      "family": "Transformation & refinement",
+      "sourceSha256": "0db300e35e32c3943cfb791806a554904849f7b996a7786ceecb22c30a7856a7",
+      "svgSha256": "afe21f825b44ceb56168d33df601b0db2e2582404329e723778f7fd9209d5ec6"
+    },
+    {
+      "id": "data-distinguish-missing-unknown-inapplicable",
+      "sourceId": "distinguish-missing-unknown-inapplicable",
+      "title": "Distinguish Missing, Unknown, and Inapplicable",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "6aba42dc35d7fe4f6c69df2a9ae77e2346bf1397c91f8ca6a59df8b7a8fa7723",
+      "svgSha256": "122d3ea4586e676f607dd5cf61507d7596971b5f13da5f0e136308550f59fd2b"
+    },
+    {
+      "id": "data-distribution-monitoring",
+      "sourceId": "distribution-monitoring",
+      "title": "Distribution Monitoring",
+      "family": "Quality & observability",
+      "sourceSha256": "5ec53389c7f588341b5716a1832833a1804e2dfb91d3694554b93fd63c1d7227",
+      "svgSha256": "e15696a90564f4c9ed761e7afb1b7a2824660235ea125b82d8458462d60e558c"
+    },
+    {
+      "id": "data-document-aggregates",
+      "sourceId": "document-aggregates",
+      "title": "Document Aggregates",
+      "family": "Identity & relationships",
+      "sourceSha256": "1e4bd644fc5f8e3147740737d535ac10a7e5baa270ad8660e6abd3ac8580a6b8",
+      "svgSha256": "1a6efc813d21eed00ab6e573d59f4d8fdbda7616bc8d9df32e23ea77bdefc7bf"
+    },
+    {
+      "id": "data-domain-owned-data-products",
+      "sourceId": "domain-owned-data-products",
+      "title": "Domain-Owned Data Products",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "6ee8d993659bb8baf9bad3cb2ef074599795681227bf578950ad4ba603474ce2",
+      "svgSha256": "a83503bedb6bfcb0a648c6c71f46ebd0d34dc7709e1338f3526061d000df4ef3"
+    },
+    {
+      "id": "data-drill-across",
+      "sourceId": "drill-across",
+      "title": "Drill Across",
+      "family": "Analytical structure",
+      "sourceSha256": "8de1516114e9140d61f2eac98bbff33b80b7b6e1095d7baaf2521aa3b01728c0",
+      "svgSha256": "4689dcd2ac832a3b2dd6bd01ab77ce1df50a971fe3754b2b712bf454aa0d8cb7"
+    },
+    {
+      "id": "data-dynamic-masking",
+      "sourceId": "dynamic-masking",
+      "title": "Dynamic Masking",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "d591f7e986363b08ae3292e70411df3bfb6fe9b7401c5450d9ca5d3a676c52f3",
+      "svgSha256": "7ddab02199ab509727fccb80dc06c2388bd2d11446eba642366c6aeabc54a651"
+    },
+    {
+      "id": "data-early-results-with-corrections",
+      "sourceId": "early-results-with-corrections",
+      "title": "Early Results with Corrections",
+      "family": "Streaming & event processing",
+      "sourceSha256": "57b4b5e7554175d3f22c4c175c6dfae373ae7fd0496eeb97473de6244e01b162",
+      "svgSha256": "e8c1f937709d7301a6b98287d7f019a0215c77c05fe6d1ad09fcecb2933ce44f"
+    },
+    {
+      "id": "data-effective-dated-records",
+      "sourceId": "effective-dated-records",
+      "title": "Effective-Dated Records",
+      "family": "Time & history",
+      "sourceSha256": "a80ad704a5bc739fe3fa785bf3a984afe21ba1398c5312b62b1feebee3e35c5b",
+      "svgSha256": "33a617513e5392f63fc1523d0bb75006d7caaee25bb3dbb9b0133412c9b2f482"
+    },
+    {
+      "id": "data-end-to-end-canary-records",
+      "sourceId": "end-to-end-canary-records",
+      "title": "End-to-End Canary Records",
+      "family": "Quality & observability",
+      "sourceSha256": "34a382a986546aa5279c2f579b9a47cfa5ea744fec9386bfd0d176ace9ef0b81",
+      "svgSha256": "f81340bde6edd17579bc5a1728f535d3312552036b8596766ad42284f02cd332"
+    },
+    {
+      "id": "data-entity-resolution",
+      "sourceId": "entity-resolution",
+      "title": "Entity Resolution",
+      "family": "Identity & relationships",
+      "sourceSha256": "e0d322342faf7b8d81c4c00272c21da02f47782abb66b5c59da0dac601db9b64",
+      "svgSha256": "978be1343b7bc25988de2c2329371f15182c962d0ce2e8415019a0d829bf62b1"
+    },
+    {
+      "id": "data-event-sourcing",
+      "sourceId": "event-sourcing",
+      "title": "Event Sourcing",
+      "family": "Time & history",
+      "sourceSha256": "94b102db9744dcf39a3a95d3869bebb526ec64540e2cd2c50b8dcdc99499fe6a",
+      "svgSha256": "5984cdc323ec20955f88f39fe32061e82c1b144ed0a4d4203f55b691074807d3"
+    },
+    {
+      "id": "data-event-time-processing",
+      "sourceId": "event-time-processing",
+      "title": "Event-Time Processing",
+      "family": "Streaming & event processing",
+      "sourceSha256": "117a8964a8baa0c18bb81076da4234592df935560b160152eaf405c6e1cffc68",
+      "svgSha256": "37ceb683aca2756706f49dc211a971b53722dc4fef8b6b9db783eb88b01abf5c"
+    },
+    {
+      "id": "data-expand-migrate-contract",
+      "sourceId": "expand-migrate-contract",
+      "title": "Expand–Migrate–Contract",
+      "family": "Contracts & evolution",
+      "sourceSha256": "e02fefc0c9008ac48059563eb40a6f3bbab26ff1a0b89937e43d97cc1666e61a",
+      "svgSha256": "83fb0a0c69cc4a7bd3f576cde543e5e6ae634dd8f8ce95c79a41f4cd6c69856b"
+    },
+    {
+      "id": "data-explicit-data-contracts",
+      "sourceId": "explicit-data-contracts",
+      "title": "Explicit Data Contracts",
+      "family": "Contracts & evolution",
+      "sourceSha256": "8d6c309c1be425637aeba10a914dbfae267fa2699030e519709b8ba831db21b4",
+      "svgSha256": "3e52ddad2985ce511fecf530f84fa8342f2788d24f517bab85b08305c83fb6b1"
+    },
+    {
+      "id": "data-exponential-backoff-with-jitter",
+      "sourceId": "exponential-backoff-with-jitter",
+      "title": "Exponential Backoff with Jitter",
+      "family": "Execution & recovery",
+      "sourceSha256": "d56fda307affa84d7400ceb23fdedb0689ba261df4e0f6352aa3de3b64d2607c",
+      "svgSha256": "6f7a59ce610b92bc1d20d26cfa146bdee632924f2d2f382c232a45f86eb383d3"
+    },
+    {
+      "id": "data-factless-fact-tables",
+      "sourceId": "factless-fact-tables",
+      "title": "Factless Fact Tables",
+      "family": "Analytical structure",
+      "sourceSha256": "034f6d871162ee6c2d0e5d85e9810648c21aad83a5aec649078d13ac7db6223c",
+      "svgSha256": "8c02992d631d10bd38ffe167c063be6a26f2e607fffc5a8cc2bbe4180db614ea"
+    },
+    {
+      "id": "data-federated-governance",
+      "sourceId": "federated-governance",
+      "title": "Federated Governance",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "eb4b24dc554ff2570276f1fbfd94a06a00779d99ef85cc49a891e043aa04a6ba",
+      "svgSha256": "4af09e64474019c4039d3b1f2cbd7c2023f75893ef0ecd7ca22078420e96a8f7"
+    },
+    {
+      "id": "data-freshness-monitoring",
+      "sourceId": "freshness-monitoring",
+      "title": "Freshness Monitoring",
+      "family": "Quality & observability",
+      "sourceSha256": "801c97124be3568148eeeaaa466c7ba49177b71e83c0395eff9d37a6d244a0f0",
+      "svgSha256": "68613fe8afee59fd3e07a6aafb357041d8eae41390d048fd6e1b3087b6ed8b45"
+    },
+    {
+      "id": "data-full-snapshot-extraction",
+      "sourceId": "full-snapshot-extraction",
+      "title": "Full Snapshot Extraction",
+      "family": "Capture & synchronization",
+      "sourceSha256": "a9f2cd4f1c29364ca1d27b40a36c37f93b8187861c8ef2e8ed304d1a93e37777",
+      "svgSha256": "ec65cc02975719a49ea7e6e7d7aa504aaa06742eaf29edb6f1f6e9288b083be3"
+    },
+    {
+      "id": "data-golden-records",
+      "sourceId": "golden-records",
+      "title": "Golden Records",
+      "family": "Identity & relationships",
+      "sourceSha256": "7b08bf26524ed9c1f19386c26e11910079dca03400b910baa25b621a91909915",
+      "svgSha256": "1f6827b1548e6c129f5df2b9890c44683a776a8baef047302099f034ab93f4e7"
+    },
+    {
+      "id": "data-graph-relationships",
+      "sourceId": "graph-relationships",
+      "title": "Graph Relationships",
+      "family": "Identity & relationships",
+      "sourceSha256": "41ea688a8ab03846afbb45cf022776b442cc44197ef05e24cf4f0eeb1d48de5e",
+      "svgSha256": "dda21651ad14bd00a9bc73d9fd27691015aefccb7abb49341bef13daf11ae2c8"
+    },
+    {
+      "id": "data-half-open-time-intervals",
+      "sourceId": "half-open-time-intervals",
+      "title": "Half-Open Time Intervals",
+      "family": "Time & history",
+      "sourceSha256": "017b7fd4fbc15cf1f1c98c6fcfc14574bb81b6b6106453c0e5d30fcc9ac5666e",
+      "svgSha256": "21dff6f0329b70b6a2adff41deab7902c08776ce57ccbc47e4f191bc6335b42b"
+    },
+    {
+      "id": "data-historical-restatement",
+      "sourceId": "historical-restatement",
+      "title": "Historical Restatement",
+      "family": "Time & history",
+      "sourceSha256": "61925e00b568ad4c08a429f5fab967d7e9d27b389ed07545d179392a6b11edad",
+      "svgSha256": "3450956426e28448a701831c12f4fb77737b0e4cd0a2dbb7d73de81732f40fe9"
+    },
+    {
+      "id": "data-horizontal-sharding",
+      "sourceId": "horizontal-sharding",
+      "title": "Horizontal Sharding",
+      "family": "Storage & access",
+      "sourceSha256": "e32883fd47757b0304cf872f26fded36282004609dc6fb5c28dceef83cb7a8ff",
+      "svgSha256": "b0aed6dde49960d9e9b2c5b378753aa077bd181017bdd6942a88158f2160a54d"
+    },
+    {
+      "id": "data-hot-cold-tiering",
+      "sourceId": "hot-cold-tiering",
+      "title": "Hot–Cold Tiering",
+      "family": "Storage & access",
+      "sourceSha256": "e352038a9017a2bbd314c1b0e978eb55c48848ad6dcd5bef946439d20dfaf4d7",
+      "svgSha256": "f32db10cf70c8d17c89916d61179576affb45a3e9d19a995990d226d49070416"
+    },
+    {
+      "id": "data-hybrid-slowly-changing-dimensions",
+      "sourceId": "hybrid-slowly-changing-dimensions",
+      "title": "Hybrid Slowly Changing Dimensions",
+      "family": "Time & history",
+      "sourceSha256": "9f9010cb55e99eaa1024fcd883b29854016fe072bafcc315db06a93f70cc8d27",
+      "svgSha256": "cd0aa5cc8b96aa3c992946a10b1b5719ab9865255f3865adb276fb0eea253a2f"
+    },
+    {
+      "id": "data-idempotent-writes",
+      "sourceId": "idempotent-writes",
+      "title": "Idempotent Writes",
+      "family": "Execution & recovery",
+      "sourceSha256": "2bbc606be528386b27a3c5217ff1663fc90df9e011880c5aec37078f91233463",
+      "svgSha256": "6a7c396fdf0d2d662abe84135cfc9b184bf903f79231670803c4c1453d68cc23"
+    },
+    {
+      "id": "data-identity-crosswalks",
+      "sourceId": "identity-crosswalks",
+      "title": "Identity Crosswalks",
+      "family": "Identity & relationships",
+      "sourceSha256": "38252bb0185178c5d71f7d4cca817f1b983e21a548a8a6302462624e110ca6b4",
+      "svgSha256": "e84caca685014dd794905a9b05fafdbb5b1f3cfd9bf9122eb50094998b97f7c1"
+    },
+    {
+      "id": "data-incremental-replacement",
+      "sourceId": "incremental-replacement",
+      "title": "Incremental Replacement",
+      "family": "Contracts & evolution",
+      "sourceSha256": "4d7ff6746567eb353ad137e1900998e9b86393fc637ed3e401bcff08541afc8d",
+      "svgSha256": "27c4794f36b06ee835a1b2d72b2d01f603ee5d39ac0b4542164520f1328fde79"
+    },
+    {
+      "id": "data-incremental-transformations",
+      "sourceId": "incremental-transformations",
+      "title": "Incremental Transformation",
+      "family": "Transformation & refinement",
+      "sourceSha256": "d6ab0779d3c70854d5dc96d6f6cb7432dc26eda55908bc0b1c78c9d94d36e75d",
+      "svgSha256": "4f648081ac9b0e3c9801b6e294e90684e9d96fadeb668f021c5354e5a05b50a1"
+    },
+    {
+      "id": "data-inferred-dimension-members",
+      "sourceId": "inferred-dimension-members",
+      "title": "Inferred Dimension Members",
+      "family": "Time & history",
+      "sourceSha256": "bfb21d501edf2cf8dc7db3eac504c9498489d2d92317a26d6cc69f0e58c3fe31",
+      "svgSha256": "39b01b3af1423185d16cf2d45540d84dab0387b1425c56127bac2c41445ed4fe"
+    },
+    {
+      "id": "data-junk-dimensions",
+      "sourceId": "junk-dimensions",
+      "title": "Junk Dimensions",
+      "family": "Analytical structure",
+      "sourceSha256": "fa24e90f379d551b5d8b100697556e3b6b24d78e0ee8b5864acf7b270f47bec7",
+      "svgSha256": "76c1a5cd245008789ce139f3eadba7096dacac9c3ec8bde4ca360a9a45e14fd9"
+    },
+    {
+      "id": "data-keep-previous-values-scd-type-3",
+      "sourceId": "keep-previous-values-scd-type-3",
+      "title": "Keep Previous Values — SCD Type 3",
+      "family": "Time & history",
+      "sourceSha256": "537f75dccb7976cd0c260842bba87f7ff1b222f75da83e42a1224b56f6b4afaa",
+      "svgSha256": "457b073d0a3d91a78295c6d9abf234c052770faf5efc2db1249ec42557a72ae3"
+    },
+    {
+      "id": "data-keyset-pagination",
+      "sourceId": "keyset-pagination",
+      "title": "Keyset Pagination",
+      "family": "Capture & synchronization",
+      "sourceSha256": "e040a6d44a5b95f6c9da27ce8442104e49a77a87c0b601babdd6fb1abba16df9",
+      "svgSha256": "534054e9f0b01eed0de585ae88fa3b0582dc348fbdde9044dd360aa21e382787"
+    },
+    {
+      "id": "data-leases-with-fencing-tokens",
+      "sourceId": "leases-with-fencing-tokens",
+      "title": "Leases with Fencing Tokens",
+      "family": "Execution & recovery",
+      "sourceSha256": "f793dcd72eaee57844ed397320a5a3a717e2b6becfd9ad278a12d8f3ea9ff859",
+      "svgSha256": "8b24e8fc49225098539db60011d16189fbfcc627f8e807cea74e34e5a4f56b01"
+    },
+    {
+      "id": "data-location-aware-placement",
+      "sourceId": "location-aware-placement",
+      "title": "Location-Aware Placement",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "391e09e9b2669fbc0a41fdc7d75edf7bbdcefd932da30e934fb49e97b76f5385",
+      "svgSha256": "280b17542ed60409e0ccee49d29d8a62eeaef9a4f3b608ad65d80e95be614bad"
+    },
+    {
+      "id": "data-log-based-change-data-capture",
+      "sourceId": "log-based-change-data-capture",
+      "title": "Log-Based Change Data Capture",
+      "family": "Capture & synchronization",
+      "sourceSha256": "f3041aea7ff3c426218a826344ca059e1e1d8b0b8ed80526b2b5cb6f15b76662",
+      "svgSha256": "d6e11c5a85b674b8fbc3c8d1ea780d54679aec5796fa9f380f57466cc0b63e6f"
+    },
+    {
+      "id": "data-lookback-recalculation",
+      "sourceId": "lookback-recalculation",
+      "title": "Lookback Recalculation",
+      "family": "Transformation & refinement",
+      "sourceSha256": "eb146480ce7fa7c48b3659d45e6a0b11a0b970f12e77a15c42878962852d5af0",
+      "svgSha256": "ec52ea0869bf1e14b1b20a740071f073aa4775b37757f42899dd50e80b3844f3"
+    },
+    {
+      "id": "data-make-units-explicit",
+      "sourceId": "make-units-explicit",
+      "title": "Make Units Explicit",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "83406e8ee384d1a04265b0057d6c8fc236d54d4c4fcf06d3cfe7b9567a6a9a98",
+      "svgSha256": "0172a23f3b661511bc9c3c9700d3a06753bfd45378c21fa1ea32f0ebc01363a4"
+    },
+    {
+      "id": "data-manifest-based-file-ingestion",
+      "sourceId": "manifest-based-file-ingestion",
+      "title": "Manifest-Based File Ingestion",
+      "family": "Capture & synchronization",
+      "sourceSha256": "14afed7fa3f930509b043dc8f390469e701c43dd7db26b0fb152deb05ac69a4a",
+      "svgSha256": "c78a37aad698aac368fcba32947fa5121353f0b462396fb9fb1d049945dd25a2"
+    },
+    {
+      "id": "data-materialized-paths",
+      "sourceId": "materialized-paths",
+      "title": "Materialized Paths",
+      "family": "Identity & relationships",
+      "sourceSha256": "aee93d62705540971bceada749a222dccf1398e1ac2e9ca3f5aa9606ed15c476",
+      "svgSha256": "ac6d3a30265cb5c27a87bcc0db3806c4befe777f47ef83f4375af9bd06d91c68"
+    },
+    {
+      "id": "data-materialized-views",
+      "sourceId": "materialized-views",
+      "title": "Materialized Views",
+      "family": "Storage & access",
+      "sourceSha256": "33a665383fb2cbbda6f3702f5d36c823855de78c5981d798521cbafa436bc1b9",
+      "svgSha256": "15005ed0f04021e660417aa98875bafc8a63b1bcd6a2822db8b5cf9ec0b6a2c8"
+    },
+    {
+      "id": "data-merge-and-upsert",
+      "sourceId": "merge-and-upsert",
+      "title": "Merge and Upsert",
+      "family": "Transformation & refinement",
+      "sourceSha256": "9d697ebdf0f814ae107636c09b8e5789eabaeef40b2b75135d2668630537327c",
+      "svgSha256": "3ab78d6829f07bdb15b9cee4789c0530c595950b585a92e6a436681334135da0"
+    },
+    {
+      "id": "data-metadata-driven-pipelines",
+      "sourceId": "metadata-driven-pipelines",
+      "title": "Metadata-Driven Pipelines",
+      "family": "Transformation & refinement",
+      "sourceSha256": "7f22c3bdcf6e0cd7d26b8bdab4c8bb9fd00f9965761a90b8659199b1ffa7143f",
+      "svgSha256": "aa9a7b130df9ab8fa398b27b228a832344d07e30d9343e2869202e596567f712"
+    },
+    {
+      "id": "data-microbatch-processing",
+      "sourceId": "microbatch-processing",
+      "title": "Microbatch Processing",
+      "family": "Streaming & event processing",
+      "sourceSha256": "aeca15f074d71eec322b6de95bfe5fbd55a34175eeb973dd591aa4c590fb377c",
+      "svgSha256": "8cc88a5a6b14f514521c647d8146836ef28d95975f5e29a1b94a77f3bf878c49"
+    },
+    {
+      "id": "data-mini-dimensions",
+      "sourceId": "mini-dimensions",
+      "title": "Mini-Dimensions",
+      "family": "Time & history",
+      "sourceSha256": "1473f03075a34fe2bf4cb2f9d4c055d7d69957071a70191ea6db449aa8fb9634",
+      "svgSha256": "935fb356f7384a7cdb86274661462a185e441717ec55808e65a96cde3910bf46"
+    },
+    {
+      "id": "data-model-around-business-processes",
+      "sourceId": "model-around-business-processes",
+      "title": "Model Around Business Processes",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "98cea1ed6661092a8840d50756b73229eb3e86b55b2acc1ae57879ad46bb044b",
+      "svgSha256": "ad640418e6052dbc30b264b61c15f1f51e53f1c129ad72a75d6cd91caaffcf0c"
+    },
+    {
+      "id": "data-model-lifecycle-states-explicitly",
+      "sourceId": "model-lifecycle-states-explicitly",
+      "title": "Model Lifecycle States Explicitly",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "0a50d72a8875090d80eb1930430aa01c2a9792a63bb56e83ec5f4d6d70cada15",
+      "svgSha256": "e7f6ba7d2bcfaea8949d7a1fa5048e1a787564b921f67de2d67e3df58f845119"
+    },
+    {
+      "id": "data-named-dataset-stewardship",
+      "sourceId": "named-dataset-stewardship",
+      "title": "Named Dataset Stewardship",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "2727bcfcd14750045e706ed1c39e9b21316335adda0e853ff9adaaef1450e5e4",
+      "svgSha256": "d01361ae1788819c932fccaf45f3c59eca3eda448e5351406d5a6f2838044438"
+    },
+    {
+      "id": "data-namespace-identifiers",
+      "sourceId": "namespace-identifiers",
+      "title": "Namespaced Identifiers",
+      "family": "Identity & relationships",
+      "sourceSha256": "ea9a61b74aada69539ef264cc94f146005a8c0ac6f11cc5ce5c2a9db31301b61",
+      "svgSha256": "6e65c1bec5e76c26d808098f5b0635cd3a6e7dbfc92a0e79a828a880cf124f24"
+    },
+    {
+      "id": "data-natural-keys",
+      "sourceId": "natural-keys",
+      "title": "Natural Keys",
+      "family": "Identity & relationships",
+      "sourceSha256": "62e053f0468c11722b31bc9a5e25f8a3b78f9a1f88670cb1b496e54806b57183",
+      "svgSha256": "4f4a8d79dbc8812d99bf83377fc55901a4a36a8345c5949f29166365662d9d37"
+    },
+    {
+      "id": "data-normalized-relations",
+      "sourceId": "normalized-relations",
+      "title": "Normalized Relations",
+      "family": "Identity & relationships",
+      "sourceSha256": "6e09c568c84dca42efe387f736a07bec3b9d0f9564e0579602a5e555c08c18d5",
+      "svgSha256": "25c09741f74cc139bb1516e8923432b73842619bd3e4a5198bdaeaa2c7b8457f"
+    },
+    {
+      "id": "data-operational-service-objectives",
+      "sourceId": "operational-service-objectives",
+      "title": "Operational Service Objectives",
+      "family": "Quality & observability",
+      "sourceSha256": "ba8569b3143c2ef99e75873d1dc7af23ce6cdfbc02279319e989d4c870d73867",
+      "svgSha256": "e7be2ae23e01dcc56d14714c9e4f27623133a814f4ff5daae98abfffcd3a78dc"
+    },
+    {
+      "id": "data-overlapping-extraction-windows",
+      "sourceId": "overlapping-extraction-windows",
+      "title": "Overlapping Extraction Windows",
+      "family": "Capture & synchronization",
+      "sourceSha256": "2ffd275667b325b0a7b5e12d15016bff051f35e6cd572f0f85ffc4bf304d15ac",
+      "svgSha256": "812a081a7b3e82927119ae264f4b44a311cbe91794bbf3499d85257a5934e4c8"
+    },
+    {
+      "id": "data-overwrite-attributes-scd-type-1",
+      "sourceId": "overwrite-attributes-scd-type-1",
+      "title": "Overwrite Attributes — SCD Type 1",
+      "family": "Time & history",
+      "sourceSha256": "1d55c0da42e457231d18fb6fc420960e929edcf97d7753dfac6f8c2a338a95ac",
+      "svgSha256": "78d840bd9931120956ee81bced926070ae8fcab86aa5c8b1f5e9fda76360c62b"
+    },
+    {
+      "id": "data-parallel-run-comparison",
+      "sourceId": "parallel-run-comparison",
+      "title": "Parallel-Run Comparison",
+      "family": "Contracts & evolution",
+      "sourceSha256": "69e0885bdeaafdf9b00408d23ca6df841114d71415a423acb871b58ea8d7d3fa",
+      "svgSha256": "2f688366086a8ce4ad9c4edaf5b50839e293760b18565b705ab3995c75e9c146"
+    },
+    {
+      "id": "data-partition-by-access-pattern",
+      "sourceId": "partition-by-access-pattern",
+      "title": "Partition by Access Pattern",
+      "family": "Storage & access",
+      "sourceSha256": "de50b6ee3e03b1af8dedb210658ef911da959c03d43f5b78ec602a84eb1ead21",
+      "svgSha256": "a2115c9c331f0723f0f90eed0b2825082ab9d947c3f588dde79ea721ae1fa7d1"
+    },
+    {
+      "id": "data-partition-replacement",
+      "sourceId": "partition-replacement",
+      "title": "Partition Replacement",
+      "family": "Transformation & refinement",
+      "sourceSha256": "4618bfeb7c201c5016efda7e29ba22fcda57dd36c063c73e96cf3b941f907607",
+      "svgSha256": "a3d1b1fb0e8272cdfe6dff66b8c769f0cf831d73f4f79096244f3931bb7c7f1d"
+    },
+    {
+      "id": "data-party-role-modeling",
+      "sourceId": "party-role-modeling",
+      "title": "Party–Role Modeling",
+      "family": "Identity & relationships",
+      "sourceSha256": "76f7fb913a33541e982b07b47deab520a8d92c067ad96700ec99fceccb47fc14",
+      "svgSha256": "1148e8056abe43d3dcfed3a68e593ba2a86b2b66b7d56c73a347daedfc77c654"
+    },
+    {
+      "id": "data-per-key-ordering",
+      "sourceId": "per-key-ordering",
+      "title": "Per-Key Ordering",
+      "family": "Streaming & event processing",
+      "sourceSha256": "182ffff18085c65a84d125c30f12ffa9fde36b9608d31edbba319eb8a2a90e79",
+      "svgSha256": "a7e3e12132ce90d29793e802a6eadf678ec015909523ac3576d5d73ad0042684"
+    },
+    {
+      "id": "data-periodic-snapshots",
+      "sourceId": "periodic-snapshots",
+      "title": "Periodic Snapshots",
+      "family": "Time & history",
+      "sourceSha256": "dc678acabacdb67b00b710a6c7603948d39a3aabaff1eca988955b64b913537c",
+      "svgSha256": "f40ba41e7e5ca2408960fb062505d0d7fe2d1495284e44b6a90070ce65fafc41"
+    },
+    {
+      "id": "data-policy-as-code",
+      "sourceId": "policy-as-code",
+      "title": "Policy as Code",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "1aa9183cee53c3a82474b16f0f275e2888bf5c83b18f07de0e21a0bdab3f1358",
+      "svgSha256": "80a54859662e925071aab4cc35a73d0f941988132efb564e33b77d09c37cf6f9"
+    },
+    {
+      "id": "data-predicate-projection-pushdown",
+      "sourceId": "predicate-projection-pushdown",
+      "title": "Predicate and Projection Pushdown",
+      "family": "Storage & access",
+      "sourceSha256": "08c90c28e09fa79689e8814225129f84633854b7ea3243ed41ff4dd939c76b4a",
+      "svgSha256": "eca6b7dcdd36b3a7788e8bd57109910cb6fb2cb824664414605563374e096fe8"
+    },
+    {
+      "id": "data-preserve-raw-inputs",
+      "sourceId": "preserve-raw-inputs",
+      "title": "Preserve Raw Inputs",
+      "family": "Transformation & refinement",
+      "sourceSha256": "a06b1cf30fba336257f4d6e6579ae9e0c7bd03987ac2a1bc1ad4ca9fadbeaff0",
+      "svgSha256": "fc44d441611ca79bb9999d7d07b25217fc64bad786a750ae4fde9944bf1cdccb"
+    },
+    {
+      "id": "data-progressive-refinement",
+      "sourceId": "progressive-refinement",
+      "title": "Progressive Refinement",
+      "family": "Transformation & refinement",
+      "sourceSha256": "88dbbcbaa1728b71f0b3e3ec947f94a023ec64cf45211b10e9ba8536e2e797f9",
+      "svgSha256": "1a266c39d64bd7ff7355f9ca763047f496cbb948e96de2a4519e2622deac001a"
+    },
+    {
+      "id": "data-property-based-data-tests",
+      "sourceId": "property-based-data-tests",
+      "title": "Property-Based Data Tests",
+      "family": "Quality & observability",
+      "sourceSha256": "51a08183a663eac5fb668061f68442bcb7c04539838f4653f88ef8f4450e84a6",
+      "svgSha256": "f6037436a0c271ffa9df593a6012d77b711cfdbc25e66079079aec7b16aacbe6"
+    },
+    {
+      "id": "data-publication-quality-gates",
+      "sourceId": "publication-quality-gates",
+      "title": "Publication Quality Gates",
+      "family": "Quality & observability",
+      "sourceSha256": "955b87f7c05900147592181d6ef83aa18e441ee1d83853c747ad84fee7f4ac14",
+      "svgSha256": "85fd46b31b21dd5b8e3e20001ae1407cd9683e446ea619996edc049a2c304e53"
+    },
+    {
+      "id": "data-publish-subscribe-distribution",
+      "sourceId": "publish-subscribe-distribution",
+      "title": "Publish–Subscribe Distribution",
+      "family": "Capture & synchronization",
+      "sourceSha256": "1614c86ba7a1deca68a5b2ba9612e01150e9c9a0e00c38c8c19f0376b3bcc1a5",
+      "svgSha256": "831cd969ece42676ee0841f9fb7fb0e8b7ace728d0047aab876212f593c98e2a"
+    },
+    {
+      "id": "data-published-deprecation-windows",
+      "sourceId": "published-deprecation-windows",
+      "title": "Published Deprecation Windows",
+      "family": "Contracts & evolution",
+      "sourceSha256": "bc00487c16d849ff7238096498ad38a263b490f7eaa03b6fd30441c83104f6fd",
+      "svgSha256": "7114a0be4f3402402d681d73577dfd658d0a005d8da772a89342743d2e04723b"
+    },
+    {
+      "id": "data-quality-gates",
+      "sourceId": "quality-gates",
+      "title": "Quality Gates",
+      "family": "Quality & observability",
+      "sourceSha256": "a73ab91869d781079508c5a1ded2b4349798e3f40d0ad8899f41717c4087936f",
+      "svgSha256": "be19efd3789374896ea3a5d5b68423c9a785cab88de0ab004dc474b29255c5cc"
+    },
+    {
+      "id": "data-quarantine-invalid-records",
+      "sourceId": "quarantine-invalid-records",
+      "title": "Quarantine Invalid Records",
+      "family": "Quality & observability",
+      "sourceSha256": "d5bc92f509a2b7da2f66e59c3c0ea6e9ea63eca9dbd40daabaa8ccc69c5c60ed",
+      "svgSha256": "79a3c23c78912c76d3f18e1e6160b24216729a882d5febbf601670ad398c5015"
+    },
+    {
+      "id": "data-read-replicas",
+      "sourceId": "read-replicas",
+      "title": "Read Replicas",
+      "family": "Storage & access",
+      "sourceSha256": "319424f635c4eb7a38f62683455682a9a080ad47943477186c1d9a53fd170e5a",
+      "svgSha256": "53f35c250b5093d23683b1b31c09fa83a350f8d4e0df8d7bd48d4ce9e799390f"
+    },
+    {
+      "id": "data-recorded-time-history",
+      "sourceId": "recorded-time-history",
+      "title": "Recorded-Time History",
+      "family": "Time & history",
+      "sourceSha256": "ddd395ae83b794b469ed824123b94c8d7b95cfe11e42d480826402ef5e27b702",
+      "svgSha256": "516631bd12657ab863b1c0ca6bfc5b85e33d2a5a0454be2b157a38b0eba1b4d5"
+    },
+    {
+      "id": "data-reference-data-enrichment",
+      "sourceId": "reference-data-enrichment",
+      "title": "Reference-Data Enrichment",
+      "family": "Transformation & refinement",
+      "sourceSha256": "5da2451d0df17c002de078d5cbbdb4b48fd13c86c980fcff779d51234dd67b0b",
+      "svgSha256": "a61f256862796e65f0748f14536e6a90f69e5e5c3a3cee6eaf0b6f1488563218"
+    },
+    {
+      "id": "data-referential-integrity-checks",
+      "sourceId": "referential-integrity-checks",
+      "title": "Referential Integrity Checks",
+      "family": "Quality & observability",
+      "sourceSha256": "e0fdbde1d198e43a8d49de36015080aa486ba6b7bb18303eda4b011fde7eb1ec",
+      "svgSha256": "fc09ef422561658e011c52cc1d9891b88f4a14ab363ec55a7bea6e6f8d041003"
+    },
+    {
+      "id": "data-relationships-with-attributes",
+      "sourceId": "relationships-with-attributes",
+      "title": "Relationships with Attributes",
+      "family": "Identity & relationships",
+      "sourceSha256": "a484b8d18d3371b3ad0b457e2c0d7cd12f00067b9eb4221ca06ef998deec752e",
+      "svgSha256": "41acfcee858fd58f6d0f4747f6dc5781c7ae34574d07f218224e58726b9ee5ba"
+    },
+    {
+      "id": "data-replayable-backfills",
+      "sourceId": "replayable-backfills",
+      "title": "Replayable Backfills",
+      "family": "Execution & recovery",
+      "sourceSha256": "72e217702bf62707edb53a96027f1c5d39c43a94fa82cfa6dee310bfdb8fe671",
+      "svgSha256": "bf81582378da3ab7f170539d94b773b140d0023f70dcfe68ecdeb1f62055f199"
+    },
+    {
+      "id": "data-representative-test-fixtures",
+      "sourceId": "representative-test-fixtures",
+      "title": "Representative Test Fixtures",
+      "family": "Quality & observability",
+      "sourceSha256": "f77e334740a9cca01077fcc56c973087ed6d1824eb0bf3cde00cccae6c8e3e0e",
+      "svgSha256": "6c06069dbe58da16ef5f4a364533ae18d971a8b36bec54478b9555bcdab86925"
+    },
+    {
+      "id": "data-representative-text-fixtures",
+      "sourceId": "representative-text-fixtures",
+      "title": "Representative Text Fixtures",
+      "family": "Quality & observability",
+      "sourceSha256": "a020640a9bce72ab38e8f3b1706c6d51ae00b7bd55ec97a260ae7fe3b0ecf789",
+      "svgSha256": "2546ecc78814809a20ff0f3f944d5a43661102fdd3ef957e50025693851fa8b8"
+    },
+    {
+      "id": "data-reshape-at-boundaries",
+      "sourceId": "reshape-at-boundaries",
+      "title": "Reshape at Boundaries",
+      "family": "Transformation & refinement",
+      "sourceSha256": "0141e2fba06b5f18f01d4e908a1ca82b43722748a23f6ee35bc338ece56430b3",
+      "svgSha256": "61b5ddf7b832b8306f7ce19cdf71265020dbe092498b7b4ee7bd822fde4d7980"
+    },
+    {
+      "id": "data-result-caching",
+      "sourceId": "result-caching",
+      "title": "Result Caching",
+      "family": "Storage & access",
+      "sourceSha256": "b0893b5b3ba1030015ca694fa5972c1fc74f26ecf07efbe3c2890a1fe95590d7",
+      "svgSha256": "bc44920b42ef93314acb26bddd1e26c11723436b50853ce36229cd4f5d49ecb3"
+    },
+    {
+      "id": "data-retain-original-values-scd-type-0",
+      "sourceId": "retain-original-values-scd-type-0",
+      "title": "Retain Original Values — SCD Type 0",
+      "family": "Time & history",
+      "sourceSha256": "7e01b0f2119f36698d73f5d61b2647caa53cf028983f7d0cd966e9de1b9b35cc",
+      "svgSha256": "1fe126c827dac061d3f3d9a0812fce2e489588d08c9355b1bdcf65c4af4d76f1"
+    },
+    {
+      "id": "data-reusable-intermediate-models",
+      "sourceId": "reusable-intermediate-models",
+      "title": "Reusable Intermediate Models",
+      "family": "Transformation & refinement",
+      "sourceSha256": "19f0cef02ec0af2564b8cfce0eead6e7d35a1ecce3b0d4a36a6d9cfe49365589",
+      "svgSha256": "3ed203d1aaca0bf6598142c3651378f003061c3a50e0eb591820ed168b05d80e"
+    },
+    {
+      "id": "data-role-playing-dimensions",
+      "sourceId": "role-playing-dimensions",
+      "title": "Role-Playing Dimensions",
+      "family": "Analytical structure",
+      "sourceSha256": "2ad0fc0dd4d666e12e8b887b1bd5af9a6093a9a4f37aa0daedf788c83534b63e",
+      "svgSha256": "3f0e6d1af694b5bc374e48a0537a05c17f49dff41ccba544b496a25c9c093e45"
+    },
+    {
+      "id": "data-row-and-column-level-access",
+      "sourceId": "row-and-column-level-access",
+      "title": "Row- and Column-Level Access",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "f13cdf336cb9d91ac9d88e0e509b588a5f9670206356a6feda9b476792a710c2",
+      "svgSha256": "cd0a6199874711ec1f6bd307b2bafdbb35c33cf524c591492ddeacea842d935c"
+    },
+    {
+      "id": "data-run-ledgers",
+      "sourceId": "run-ledgers",
+      "title": "Run Ledgers",
+      "family": "Execution & recovery",
+      "sourceSha256": "994080cec42dd9f3c338ed4055a68956dc26bc462a7267bb6801ee3c1f1afdd3",
+      "svgSha256": "188e56c035b776ead77f057e1a188a5da3c070136eb77aeb778759b557444d3e"
+    },
+    {
+      "id": "data-schema-registries",
+      "sourceId": "schema-registries",
+      "title": "Schema Registries",
+      "family": "Contracts & evolution",
+      "sourceSha256": "3aa7b8ada7b1258d9e97d11a509c01e071a666bd75c6ecd9f7743958419fd130",
+      "svgSha256": "2c131704521d7aca81c0088205d87dc9b1a3f7203ada0abcd3ebf2d43604ea54"
+    },
+    {
+      "id": "data-schema-validation-boundaries",
+      "sourceId": "schema-validation-boundaries",
+      "title": "Schema Validation at Boundaries",
+      "family": "Quality & observability",
+      "sourceSha256": "b457aa5c9e169053347ba717b06cfe8a79f1c6d7026d8d32553d73f0ccdffce0",
+      "svgSha256": "8df3da3933c10bebdf33fed547b01dd51a68ed92abba8fec981fda6df9dad657"
+    },
+    {
+      "id": "data-secondary-access-paths",
+      "sourceId": "secondary-access-paths",
+      "title": "Secondary Access Paths",
+      "family": "Storage & access",
+      "sourceSha256": "e09c5432552b3df496d28caf2da8fb801817c476774ff249198fa3c625893d7e",
+      "svgSha256": "72d59099bff13a5f6d6d727a9d645596240067fc887359c2e889956808b134e6"
+    },
+    {
+      "id": "data-segmented-quality-checks",
+      "sourceId": "segmented-quality-checks",
+      "title": "Segmented Quality Checks",
+      "family": "Quality & observability",
+      "sourceSha256": "4d077d5de9cecca134f0921105d6b7160e14a12e8f5cbad8741652505bbf1c21",
+      "svgSha256": "8d1290bd9fec6e2096e85d087cfa16b23f371d60b88b49ebcbc27b5778eb1d1a"
+    },
+    {
+      "id": "data-self-service-data-discovery",
+      "sourceId": "self-service-data-discovery",
+      "title": "Self-Service Data Discovery",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "bdf76c61a0cff0bb6866fb70ae62b77ac66c2ed01500be9090d5930762c49b5d",
+      "svgSha256": "896bff41cdf84a3684c883a0ddb94f47483637c8b5dfa74aa8d3504948cc4e31"
+    },
+    {
+      "id": "data-sensitive-data-segregation",
+      "sourceId": "sensitive-data-segregation",
+      "title": "Sensitive-Data Segregation",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "a1ceeaaf01a36b831406ec3e02038b62c1de12701522c10581ad3172b85a4f6e",
+      "svgSha256": "69b9db64f46dc1ee8e785e9c000112603b0e6700409c28df74dd4b4f67e12079"
+    },
+    {
+      "id": "data-separate-backfill-from-live-processing",
+      "sourceId": "separate-backfill-from-live-processing",
+      "title": "Separate Backfill from Live Processing",
+      "family": "Execution & recovery",
+      "sourceSha256": "13668a4e1a8d6aaf2ee177d6311df66d4637a47e7d335904dc431972a081033b",
+      "svgSha256": "7bfea646a1eb6eba15557eb91d33233159250071b90f2ce7a6008f8124a35adf"
+    },
+    {
+      "id": "data-separate-cleaning-business-logic",
+      "sourceId": "separate-cleaning-business-logic",
+      "title": "Separate Cleaning from Business Logic",
+      "family": "Transformation & refinement",
+      "sourceSha256": "bc6fe80ec164694906017a4e777ebb39d3418a06302aa9767369ba128a3cc4ad",
+      "svgSha256": "0d1b9b6dc5824f02c216e02524aff70dba3b91df6032fb037c9ad6f534d45b1b"
+    },
+    {
+      "id": "data-separate-definitions-from-instances",
+      "sourceId": "separate-definitions-from-instances",
+      "title": "Separate Definitions from Instances",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "8bd147966a7f817f7abafff088c03713717057f3c07b4b2189c6cceaef4a6577",
+      "svgSha256": "0e15e48992e073501ef30fc2324bd8d4e54865ba0494a5211f01ce5536d9204f"
+    },
+    {
+      "id": "data-separate-entities-from-events",
+      "sourceId": "separate-entities-from-events",
+      "title": "Separate Entities from Events",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "829b72b2b3123fd08c2c1f70b1297c0f9559971295d89cf87fe9e97bc617a26e",
+      "svgSha256": "8d3b7d26fdd7c2d75952b40985efa00e113b1793b3fbb60c1dde996a1d0f9367"
+    },
+    {
+      "id": "data-separate-source-facts-from-derived-interpretations",
+      "sourceId": "separate-source-facts-from-derived-interpretations",
+      "title": "Separate Source Facts from Derived Interpretations",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "e9e4498db03b6727760ebd3bd06cef40e2cc7a63733fe6d78fa30bff2863b337",
+      "svgSha256": "b10120f5132f72bd2827dc85f24fc0260281323ea8ae6ad38e89702e1177db0c"
+    },
+    {
+      "id": "data-session-windows",
+      "sourceId": "session-windows",
+      "title": "Session Windows",
+      "family": "Streaming & event processing",
+      "sourceSha256": "928363a0705f14d77c3106fa199ab4562896ce8592948c1b3446231cca85eae4",
+      "svgSha256": "f6b8caab0706927d22e63509bb3e6df53e44de2f59f61501fe476d8c51a62eb6"
+    },
+    {
+      "id": "data-shadow-pipelines",
+      "sourceId": "shadow-pipelines",
+      "title": "Shadow Pipelines",
+      "family": "Contracts & evolution",
+      "sourceSha256": "22dfcd6a17e2a82294b7f321243e8fdd9a95c09dd24db41946efe7fad7389acf",
+      "svgSha256": "dd3f794c35d040681aa808c49529ed38acf988e34ef55400007ffa291575b687"
+    },
+    {
+      "id": "data-shared-business-vocabulary",
+      "sourceId": "shared-business-vocabulary",
+      "title": "Shared Business Vocabulary",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "2cb81881220e773cbac7bf6ea7946bfbf00ed183c4567f4cd91043786d96852b",
+      "svgSha256": "4cb588fba5987a0814e64ed320934987eb216cf691a63ca386968695dce3b879"
+    },
+    {
+      "id": "data-shared-metric-definitions",
+      "sourceId": "shared-metric-definitions",
+      "title": "Shared Metric Definitions",
+      "family": "Meaning & boundaries",
+      "sourceSha256": "ba2fd98222b47eb9b71e822be678695136428353536eef7e43cd19b7dba7e9c7",
+      "svgSha256": "05b79f2ad85bc17bc942dc88e370520d493c8e488a028f1f3c6e0e9b0735a3c5"
+    },
+    {
+      "id": "data-skew-splitting",
+      "sourceId": "skew-splitting",
+      "title": "Skew Splitting",
+      "family": "Storage & access",
+      "sourceSha256": "cc2ce96a6fe22019929d132b7bc3ab98cf720a642179876681638fbed60da03e",
+      "svgSha256": "1ca25c65545e533bd221b77706923c712b32405e77658496483fec22dd4cb78e"
+    },
+    {
+      "id": "data-sliding-windows",
+      "sourceId": "sliding-windows",
+      "title": "Sliding Windows",
+      "family": "Streaming & event processing",
+      "sourceSha256": "42f373440cf43e349c35d273f6005a9f771a3492e6055789fc7e7491ebf5226c",
+      "svgSha256": "a356c56f1c9134b1b7f261bb179e390aa11c982908c3947378e805bfab3e955b"
+    },
+    {
+      "id": "data-small-file-compaction",
+      "sourceId": "small-file-compaction",
+      "title": "Small-File Compaction",
+      "family": "Storage & access",
+      "sourceSha256": "43cc622b2ef4e63d8e3b737db48890ff1f40bae8bfe898a6eb04a14fc619d34e",
+      "svgSha256": "a89b019998faac87b9ba9af5904ec9793d177e8b0190777d666dd6da679a0135"
+    },
+    {
+      "id": "data-snapshot-then-stream",
+      "sourceId": "snapshot-then-stream",
+      "title": "Snapshot Then Stream",
+      "family": "Capture & synchronization",
+      "sourceSha256": "58a68737b044e602d549ef9fc62fb777377d7cc916c402a92718474f7074812a",
+      "svgSha256": "b75925a54e4068f19d93910117ac47ae0be92c15276d31fc72817de722e1ff1d"
+    },
+    {
+      "id": "data-snowflake-schema",
+      "sourceId": "snowflake-schema",
+      "title": "Snowflake Schema",
+      "family": "Analytical structure",
+      "sourceSha256": "0790d7f08a47eca071c3cb1240bbcc541e6b46aed9d9d7b8d66bb57aaa85754f",
+      "svgSha256": "97e72c30d46faef14546beada4bd0f2b543789cfe6cf1aba6d9b9db36fa1f62e"
+    },
+    {
+      "id": "data-source-to-target-reconciliation",
+      "sourceId": "source-to-target-reconciliation",
+      "title": "Source-to-Target Reconciliation",
+      "family": "Quality & observability",
+      "sourceSha256": "a6a485acf67e8e8f47b8349069aad0014a26658b78ba80dc173aa1c086c4b8ed",
+      "svgSha256": "7d6218b2754748943ba9fa7848c51c367dab24bee90c6146b4de3fac225cae3d"
+    },
+    {
+      "id": "data-stable-logical-interfaces",
+      "sourceId": "stable-logical-interfaces",
+      "title": "Stable Logical Interfaces",
+      "family": "Contracts & evolution",
+      "sourceSha256": "3024128d188943ad716b555e103144cd68b7068fdc0c0b04e0a7a006f560773d",
+      "svgSha256": "b63f8f4018c2c0fde9b546593de4b47b4e5114f461bff6d825a8bd9d990403fd"
+    },
+    {
+      "id": "data-standardize-at-staging",
+      "sourceId": "standardize-at-staging",
+      "title": "Standardize at Staging",
+      "family": "Transformation & refinement",
+      "sourceSha256": "c79543b020757b2ef6c6f28e8d3c5eba76adcd6d0895e27f41b556acfda11134",
+      "svgSha256": "738a54f6ea30475044b26c69675b56d9be73e579ca4ebc8c297ca27b1ac4cace"
+    },
+    {
+      "id": "data-star-schema",
+      "sourceId": "star-schema",
+      "title": "Star Schema",
+      "family": "Analytical structure",
+      "sourceSha256": "14a57772f845ddb94819a1f65766f519b887ac1293ba86b381b1c4f04b1c2a73",
+      "svgSha256": "d1217fbf4e0365357f85a5076644e5c0cdd20c511ff7418f5ccd07e08fa4741f"
+    },
+    {
+      "id": "data-state-expiration",
+      "sourceId": "state-expiration",
+      "title": "State Expiration",
+      "family": "Streaming & event processing",
+      "sourceSha256": "09160d3e650dcda0fe90ec8dcaeb943b33616d3c31e44cfe3faaac91df189b64",
+      "svgSha256": "2a7fa157228245d791b293bbc179c98fff15735bd71238bef93e8f3616fd4192"
+    },
+    {
+      "id": "data-stateful-stream-deduplication",
+      "sourceId": "stateful-stream-deduplication",
+      "title": "Stateful Stream Deduplication",
+      "family": "Streaming & event processing",
+      "sourceSha256": "7dd44e8c4743de5621c15819551d405251e3c767d783a2cd2133b883e2ea3d50",
+      "svgSha256": "55e06973e1cef9e6c87f50ea8fb66e448287c19202f50341a93eda3af09bda9f"
+    },
+    {
+      "id": "data-store-additive-components",
+      "sourceId": "store-additive-components",
+      "title": "Store Additive Components",
+      "family": "Analytical structure",
+      "sourceSha256": "68c5b2cebbef032fec865a79c4c2cee3820ca8194ae415de49965d2743d8df2d",
+      "svgSha256": "84bf01eb52090d14fa225c66abc05d7875a8733a9c99dcb733befe23d8796d1a"
+    },
+    {
+      "id": "data-stream-table-enrichment",
+      "sourceId": "stream-table-enrichment",
+      "title": "Stream–Table Enrichment",
+      "family": "Streaming & event processing",
+      "sourceSha256": "17ccfb7181faaf4af383d5fdd9efeb9a00692dab9f1ddc6bfabc1fb66af665f9",
+      "svgSha256": "43b3b6d71882c8653be9a59cb683b39adb6e577a46ef43b30d0e3c6b6768ad58"
+    },
+    {
+      "id": "data-supertype-subtype-modeling",
+      "sourceId": "supertype-subtype-modeling",
+      "title": "Supertype–Subtype Modeling",
+      "family": "Identity & relationships",
+      "sourceSha256": "ca16e8c166e4e8239b0e965202b5795f83979cf5804a42b3cfc98671c1810eb1",
+      "svgSha256": "c7cf9287304bf21c47f0dca32a986853f10e7af8fc952dc00a0d55f4c3719d69"
+    },
+    {
+      "id": "data-surrogate-keys",
+      "sourceId": "surrogate-keys",
+      "title": "Surrogate Keys",
+      "family": "Identity & relationships",
+      "sourceSha256": "ad44726081ce1e8dd477a23cd67015b4dc9ae72a7e2d7eec2553564049e50265",
+      "svgSha256": "125c81725b43a8a576b9572e5a6d695eaa4c0d8843338e568f9b0e158e8e8be7"
+    },
+    {
+      "id": "data-tokenization",
+      "sourceId": "tokenization",
+      "title": "Tokenization",
+      "family": "Ownership & lifecycle",
+      "sourceSha256": "75d80e1c0251bffa98afe758439d6245184514a662782e5f2a720be1fc7818fc",
+      "svgSha256": "be430dee406d3f8e8827373063eac31d2c326b11e1710f7e3343274f17cce529"
+    },
+    {
+      "id": "data-tolerant-readers",
+      "sourceId": "tolerant-readers",
+      "title": "Tolerant Readers",
+      "family": "Contracts & evolution",
+      "sourceSha256": "387de45a3e3ac4794125e6f1934591d02b25a6b6088f877b958cda4c9efa9c25",
+      "svgSha256": "89ace713b2e382a8fdc0ae0be1e4187de155747df863a79d1829fd0a54e61b4d"
+    },
+    {
+      "id": "data-transaction-fact-tables",
+      "sourceId": "transaction-fact-tables",
+      "title": "Transaction Fact Tables",
+      "family": "Analytical structure",
+      "sourceSha256": "fea20838c30ec1341c9ef608cd81dd550d29b168c437ec8543425f9d5fbfed5d",
+      "svgSha256": "e563e135e8b60e036f66f24657f8fcfecae12482a1e807d32716ee303c7ba615"
+    },
+    {
+      "id": "data-transactional-consume-process-publish",
+      "sourceId": "transactional-consume-process-publish",
+      "title": "Transactional Consume–Process–Publish",
+      "family": "Execution & recovery",
+      "sourceSha256": "2f70081e04cd451217f926740166e8f232244b2b33ab9cd10cb5bd022200f957",
+      "svgSha256": "0759815f90042f78534b416ecee7aa5bd46177ea1761749d05b716d1d7ced5ed"
+    },
+    {
+      "id": "data-transactional-inbox",
+      "sourceId": "transactional-inbox",
+      "title": "Transactional Inbox",
+      "family": "Execution & recovery",
+      "sourceSha256": "40336009689d93ef3ffa50c09b1a2be50d8482bd3fa64e99c8710d99388ad451",
+      "svgSha256": "203d001ccc3e813168113fa189626a22cd42775c4b464f37037ac85c79e54538"
+    },
+    {
+      "id": "data-transactional-outbox",
+      "sourceId": "transactional-outbox",
+      "title": "Transactional Outbox",
+      "family": "Capture & synchronization",
+      "sourceSha256": "ec3d7f6531e01e13abdb78f44eae65260a6e7c2d4640af7160c5076144196bb4",
+      "svgSha256": "9943b301b0f418aa4d0eacc0e7caeec42b6c15c9971781bf919d032699a0fee7"
+    },
+    {
+      "id": "data-transformation-unit-tests",
+      "sourceId": "transformation-unit-tests",
+      "title": "Transformation Unit Tests",
+      "family": "Quality & observability",
+      "sourceSha256": "01f68e7902da3c4a49474d3421e5caba0f24f9381e67a90fa367479e99d6489a",
+      "svgSha256": "98fb5861ab80f96d6d885f307011c46811eace498645783649170e860e96b5bd"
+    },
+    {
+      "id": "data-trigger-based-change-capture",
+      "sourceId": "trigger-based-change-capture",
+      "title": "Trigger-Based Change Capture",
+      "family": "Capture & synchronization",
+      "sourceSha256": "b59e356804c800c6eb8ef102e10c63fb5a1d7945246e6dcf7c6f0f43b28bf518",
+      "svgSha256": "5de08e37918c5a48668cb94ed51a9c29e481f4bffc67ff02f2ec3256fa3b0c3b"
+    },
+    {
+      "id": "data-tumbling-windows",
+      "sourceId": "tumbling-windows",
+      "title": "Tumbling Windows",
+      "family": "Streaming & event processing",
+      "sourceSha256": "3504bec713a1e2ea58c3e930292772901e442c7a5ab3eb108bb5b3b1ca8d021a",
+      "svgSha256": "98378e0366c88d531c80ef6f2d38cac662ba3ed8528016bbe384567bd93bbcbb"
+    },
+    {
+      "id": "data-version-dimension-rows-scd-type-2",
+      "sourceId": "version-dimension-rows-scd-type-2",
+      "title": "Version Dimension Rows — SCD Type 2",
+      "family": "Time & history",
+      "sourceSha256": "5dfe05c22d7842a67d41ef5f8eb27841f6fa97cb1f7ea649798d2dce731a79b3",
+      "svgSha256": "c47fb6a84682c12a6a3d0d9cff51143389f09c52b377e4daa3d40139b98271c7"
+    },
+    {
+      "id": "data-version-transformation-logic",
+      "sourceId": "version-transformation-logic",
+      "title": "Version Transformation Logic",
+      "family": "Contracts & evolution",
+      "sourceSha256": "3717180508236356908e4892fe18f23c376fd893f4ee16ade7a63d73108d7d38",
+      "svgSha256": "485865e3f4f2f6e16ac839190648c22670131350f04cb84d8d3b8f41d5c22b95"
+    },
+    {
+      "id": "data-versioned-dataset-interface",
+      "sourceId": "versioned-dataset-interface",
+      "title": "Versioned Dataset Interfaces",
+      "family": "Contracts & evolution",
+      "sourceSha256": "7032614c62cf465a4cc259bad3c133fff32e4d8ccbb277e4a6a7eb000ba1a994",
+      "svgSha256": "ac4753e5969d733147505c1504728b5ab710d8b9d2d6c7817d79cfb9866e6f44"
+    },
+    {
+      "id": "data-vertical-partitioning",
+      "sourceId": "vertical-partitioning",
+      "title": "Vertical Partitioning",
+      "family": "Storage & access",
+      "sourceSha256": "f972b9d425c6e1338ba97006fff50155731d1482e396bcf059e7230d468ce066",
+      "svgSha256": "ab6cf275c8756da6f31517d4095dc8bcc0823f47188e5ddd6159f3a3e728e098"
+    },
+    {
+      "id": "data-volume-monitoring",
+      "sourceId": "volume-monitoring",
+      "title": "Volume Monitoring",
+      "family": "Quality & observability",
+      "sourceSha256": "9f0796353303f0920364bca221a8235b30beaa1cc172d75e3de965c2a55634a7",
+      "svgSha256": "b2f7ed55664244af62253b82b30e61afc1e29425752c9c6f498c14b4b40af622"
+    },
+    {
+      "id": "data-watermarks",
+      "sourceId": "watermarks",
+      "title": "Watermarks",
+      "family": "Streaming & event processing",
+      "sourceSha256": "56459ac7d8225a979913781c9d4270a39737fa00773b2e1420a4a038db039cec",
+      "svgSha256": "449b23bfb10ba1e06a6b3c9ba358c2edd9e6047611fb1196058c40124ad57831"
+    },
+    {
+      "id": "data-workload-isolation",
+      "sourceId": "workload-isolation",
+      "title": "Workload Isolation",
+      "family": "Execution & recovery",
+      "sourceSha256": "17df44b148c3009baf796aeaa05d3f5a1a39202260a391c8bbc4c20a2bb76178",
+      "svgSha256": "426165a7f715e536021761d958b78e2cde502f9011ef20e11714fa3bfe94b922"
+    }
+  ],
+  "groups": [
+    {
+      "id": "data-engineering-ownership-lifecycle",
+      "title": "Ownership & lifecycle"
+    },
+    {
+      "id": "data-engineering-time-history",
+      "title": "Time & history"
+    },
+    {
+      "id": "data-engineering-contracts-evolution",
+      "title": "Contracts & evolution"
+    },
+    {
+      "id": "data-engineering-identity-relationships",
+      "title": "Identity & relationships"
+    },
+    {
+      "id": "data-engineering-analytical-structure",
+      "title": "Analytical structure"
+    },
+    {
+      "id": "data-engineering-streaming-event-processing",
+      "title": "Streaming & event processing"
+    },
+    {
+      "id": "data-engineering-execution-recovery",
+      "title": "Execution & recovery"
+    },
+    {
+      "id": "data-engineering-meaning-boundaries",
+      "title": "Meaning & boundaries"
+    },
+    {
+      "id": "data-engineering-storage-access",
+      "title": "Storage & access"
+    },
+    {
+      "id": "data-engineering-quality-observability",
+      "title": "Quality & observability"
+    },
+    {
+      "id": "data-engineering-transformation-refinement",
+      "title": "Transformation & refinement"
+    },
+    {
+      "id": "data-engineering-capture-synchronization",
+      "title": "Capture & synchronization"
+    }
+  ]
+}
