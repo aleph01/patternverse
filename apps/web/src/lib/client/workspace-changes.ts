@@ -1,5 +1,12 @@
 export type WorkspaceTopic =
-  'entities' | 'saved' | 'ratings' | 'practice-runs' | 'situations' | 'workspace' | 'mira-sessions';
+  | 'entities'
+  | 'saved'
+  | 'ratings'
+  | 'practice-runs'
+  | 'situations'
+  | 'workspace'
+  | 'mira-sessions'
+  | 'widgets';
 
 export type WorkspaceChange = Readonly<{
   origin: 'local' | 'sync' | 'restore';
@@ -14,6 +21,7 @@ export const WORKSPACE_DATA_TOPICS = [
   'practice-runs',
   'situations',
   'workspace',
+  'widgets',
 ] as const satisfies readonly WorkspaceTopic[];
 
 /** Invalidation only: never put answers, credentials, or private records in events. */

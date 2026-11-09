@@ -1,11 +1,36 @@
 import type { CompiledEntity } from '@patternverse/compiler';
 
-export type VerseAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type VerseAccent =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
+  | 17
+  | 18
+  | 19
+  | 20
+  | 21
+  | 22
+  | 23
+  | 24
+  | 25
+  | 26;
 
 // Editorial identities take precedence over the fallback for personal/future Verses.
-// Therapy and creativity share the purple family, but not the same shade.
 export const COMMONS_VERSE_ACCENTS: Readonly<Record<string, VerseAccent>> = {
-  wellbeing: 1,
+  'problem-solving': 1,
   'software-engineering': 2,
   learning: 3,
   'decision-making': 4,
@@ -14,6 +39,23 @@ export const COMMONS_VERSE_ACCENTS: Readonly<Record<string, VerseAccent>> = {
   creativity: 7,
   collaboration: 8,
   'ai-usage': 9,
+  statistics: 10,
+  architecture: 11,
+  business: 12,
+  filmmaking: 13,
+  'machine-learning': 14,
+  music: 15,
+  pedagogy: 16,
+  photography: 17,
+  'standup-comedy': 18,
+  writing: 19,
+  'graphic-design': 20,
+  'agentic-coding': 21,
+  'data-engineering': 22,
+  engineering: 23,
+  'organizational-design': 24,
+  'data-visualization': 25,
+  parenting: 26,
 };
 
 /** Assigns a stable palette slot without adding visual metadata to the corpus schema. */
@@ -23,6 +65,7 @@ export const verseAccent = (verseId: string): VerseAccent => {
     (current, character) => (Math.imul(current, 47) + (character.codePointAt(0) ?? 0)) >>> 0,
     0,
   );
+  // Keep fallback identities stable for existing personal Verses.
   return ((hash % 9) + 1) as VerseAccent;
 };
 

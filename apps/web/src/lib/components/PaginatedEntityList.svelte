@@ -4,24 +4,30 @@
   import { paginationFor } from '$lib/pagination';
   import EntityList from './EntityList.svelte';
   import { readLibraryPreferences } from '$lib/client/library-preferences';
+  import { libraryEntryKey } from '@patternverse/workspace/library';
   import type { LibraryCollections } from '$lib/library-collections';
+  import type { EntryBrowseSnapshot } from '$lib/client/library-browse-snapshot';
 
   let {
     items,
     compact = false,
     layout = 'list',
     cardsOnMobile = false,
+    showType = false,
     label = 'Entries',
     collectionContext,
     collections,
+    broaderMatchKeys,
   }: {
     items: readonly EntitySummary[];
     compact?: boolean;
     layout?: 'list' | 'cards';
     cardsOnMobile?: boolean;
+    showType?: boolean;
     label?: string;
     collectionContext?: Pick<EntitySummary, 'sourceId' | 'id'>;
     collections?: LibraryCollections;
+    broaderMatchKeys?: ReadonlySet<string>;
   } = $props();
 
   let requestedPage = $state(1);
@@ -30,8 +36,20 @@
     pageSize = readLibraryPreferences().pageSize;
   });
   let region: HTMLDivElement;
+  export function captureState(): EntryBrowseSnapshot {
+    return { page: pagination.page };
+  }
+  export function restoreState(snapshot: EntryBrowseSnapshot) {
+    requestedPage = snapshot.page;
+  }
   const pagination = $derived(paginationFor(items.length, requestedPage, pageSize));
   const visibleItems = $derived(items.slice(pagination.start, pagination.end));
+  const strictItems = $derived(
+    visibleItems.filter((item) => !broaderMatchKeys?.has(libraryEntryKey(item))),
+  );
+  const broaderItems = $derived(
+    visibleItems.filter((item) => broaderMatchKeys?.has(libraryEntryKey(item))),
+  );
 
   $effect(() => {
     // If local content changes, keep the selected page inside the new bounds.
@@ -47,15 +65,30 @@
 </script>
 
 <div class="paginated-entries" bind:this={region} tabindex="-1" role="region" aria-label={label}>
-  <EntityList
-    items={visibleItems}
-    {compact}
-    {layout}
-    {cardsOnMobile}
-    startAt={pagination.start + 1}
-    {collectionContext}
-    {collections}
-  />
+  {#if strictItems.length}<EntityList
+      items={strictItems}
+      {compact}
+      {layout}
+      {cardsOnMobile}
+      {showType}
+      startAt={pagination.start + 1}
+      {collectionContext}
+      {collections}
+    />{/if}
+
+  {#if broaderItems.length}
+    <h3 class="broader-heading">Broader matches</h3>
+    <EntityList
+      items={broaderItems}
+      {compact}
+      {layout}
+      {cardsOnMobile}
+      {showType}
+      startAt={pagination.start + strictItems.length + 1}
+      {collectionContext}
+      {collections}
+    />
+  {/if}
 
   {#if pagination.pageCount > 1}
     <div class="pagination-footer">
@@ -97,6 +130,11 @@
 </div>
 
 <style>
+  .broader-heading {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 650;
+  }
   .paginated-entries {
     scroll-margin-top: 1.5rem;
     min-width: 0;

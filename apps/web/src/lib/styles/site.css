@@ -10,8 +10,16 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  /* Keep the viewport steady while nested horizontal shelves remain scrollable. */
+  overscroll-behavior-x: none;
+}
+
 html {
-  scroll-behavior: smooth;
+  /* Route changes and history restoration must settle before the next paint. */
+  scroll-behavior: auto;
+  font-size: calc(100% * var(--text-scale));
 }
 
 body {
@@ -92,8 +100,6 @@ footer {
 
 .site-utilities a[aria-current='page'] {
   color: var(--green-dark);
-  text-decoration: underline;
-  text-underline-offset: 0.4em;
 }
 
 .about-link:hover,

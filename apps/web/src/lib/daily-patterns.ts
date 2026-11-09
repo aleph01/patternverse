@@ -8,6 +8,7 @@ export type DailyPattern = {
   readonly title: string;
   readonly summary: string;
   readonly url: string;
+  readonly verseId?: string;
   readonly verseTitle?: string;
 };
 
@@ -30,14 +31,19 @@ export const dailyPatternDateLabel = (day: string): string =>
     month: 'long',
   }).format(new Date(`${day}T12:00:00Z`));
 
-/** A fixed shuffled deck, advanced three places daily; no storage or daily deployment needed. */
+/** Rotate through distinct verses and their patterns; no storage or daily deployment needed. */
 export const selectDailyPatterns = <T extends DailyPattern>(
   entries: readonly T[],
   day: string,
 ): T[] => {
   const eligible = new Map<string, T>();
   for (const entry of entries) {
-    if (entry.sourceId === 'commons' && entry.type === 'pattern' && entry.status === 'published') {
+    if (
+      entry.sourceId === 'commons' &&
+      entry.type === 'pattern' &&
+      entry.status === 'published' &&
+      entry.verseId
+    ) {
       eligible.set(`${entry.sourceId}:${entry.id}`, entry);
     }
   }
@@ -55,9 +61,21 @@ export const selectDailyPatterns = <T extends DailyPattern>(
   if (deck.length === 0) return [];
   const ordinal = Math.floor(Date.parse(`${day}T00:00:00Z`) / 86_400_000);
   if (!Number.isFinite(ordinal)) throw new Error(`Invalid daily pattern date: ${day}`);
-  const start = (((ordinal * 3) % deck.length) + deck.length) % deck.length;
-  return Array.from(
-    { length: Math.min(3, deck.length) },
-    (_, index) => deck[(start + index) % deck.length]!,
-  );
+
+  const byVerse = new Map<string, T[]>();
+  for (const entry of deck) {
+    const patterns = byVerse.get(entry.verseId!) ?? [];
+    patterns.push(entry);
+    byVerse.set(entry.verseId!, patterns);
+  }
+  const verses = [...byVerse.values()];
+  const count = Math.min(3, verses.length);
+  const modulo = (value: number, length: number) => ((value % length) + length) % length;
+  return Array.from({ length: count }, (_, index) => {
+    const slot = ordinal * count + index;
+    const patterns = verses[modulo(slot, verses.length)]!;
+    // Advance a verse's own deck once per appearance, even when verse sizes differ.
+    const appearance = Math.floor(slot / verses.length);
+    return patterns[modulo(appearance, patterns.length)]!;
+  });
 };

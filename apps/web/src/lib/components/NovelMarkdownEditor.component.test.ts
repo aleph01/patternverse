@@ -29,6 +29,22 @@ afterEach(() => {
 });
 
 describe('rich-text editor mount boundary', () => {
+  it('preserves widget configuration while editing surrounding prose', async () => {
+    const value =
+      'Before.\n\n```patternverse-widget\n{\n  "src": "coin-sampling.html",\n  "title": "Coin sampling",\n  "fallback": "Samples vary."\n}\n```\n\nAfter.';
+    render(NovelMarkdownEditor, { value, onchange: vi.fn() });
+    await waitFor(() => expect(instances.editors).toHaveLength(1));
+    const editor = instances.editors[0];
+    await act(() => {
+      editor.commands.setTextSelection(1);
+      editor.commands.insertContent('Edited ');
+    });
+    const saved = editor.getMarkdown();
+    expect(saved).toContain('```patternverse-widget');
+    expect(saved).toContain('"src": "coin-sampling.html"');
+    expect(saved).toContain('"fallback": "Samples vary."');
+    expect(saved).toContain('After.');
+  });
   it('retains the same instance, selection and undo history when layout and disabled props change', async () => {
     const onchange = vi.fn();
     const view = render(NovelMarkdownEditor, { value: 'Original.', onchange });

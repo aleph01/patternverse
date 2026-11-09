@@ -9,7 +9,19 @@ import {
 describe('release feature configuration', () => {
   it('requires an explicit sign-in-only opt-in and enabled workspace sync', () => {
     expect(isDropboxSignInOnlyEnabled(true, { VITE_RELEASE_PROFILE: 'full' })).toBe(false);
-    expect(isDropboxSignInOnlyEnabled(false, { VITE_DROPBOX_SIGN_IN_ONLY: 'true' })).toBe(false);
+    expect(isDropboxSignInOnlyEnabled(false, { DEV: false })).toBe(false);
+    expect(
+      isDropboxSignInOnlyEnabled(false, {
+        VITE_DROPBOX_SIGN_IN_ONLY: 'true',
+        VITE_WORKSPACE_DROPBOX_SYNC: 'false',
+      }),
+    ).toBe(false);
+    expect(
+      isDropboxSignInOnlyEnabled(false, {
+        VITE_DROPBOX_SIGN_IN_ONLY: 'true',
+        VITE_FEATURE_DROPBOX_SYNC: 'false',
+      }),
+    ).toBe(false);
     expect(
       isDropboxSignInOnlyEnabled(false, {
         VITE_FEATURE_DROPBOX_SYNC: 'true',
@@ -23,7 +35,7 @@ describe('release feature configuration', () => {
     guidedExercises: false,
     standalonePatterns: true,
     advancedModels: false,
-    dropboxSync: false,
+    dropboxSync: true,
   };
   const allOn = {
     voice: true,
@@ -65,19 +77,21 @@ describe('release feature configuration', () => {
     );
   });
 
-  it('does not enable expanded workspace sync implicitly in any profile', () => {
+  it('enables encrypted workspace sync by default in public, full and desktop builds', () => {
     for (const environment of [
       { DEV: false },
       { DEV: true },
       { VITE_RELEASE_PROFILE: 'full' },
       { VITE_FEATURE_DROPBOX_SYNC: 'true' },
     ]) {
-      expect(isWorkspaceDropboxSyncEnabled(false, environment)).toBe(false);
-      expect(isWorkspaceDropboxSyncEnabled(true, environment)).toBe(false);
+      expect(isWorkspaceDropboxSyncEnabled(false, environment)).toBe(true);
+      expect(isWorkspaceDropboxSyncEnabled(true, environment)).toBe(true);
+      expect(isDropboxSignInOnlyEnabled(false, environment)).toBe(false);
+      expect(isDropboxSignInOnlyEnabled(true, environment)).toBe(false);
     }
   });
 
-  it('requires both Dropbox and the explicit workspace sync opt-in', () => {
+  it('honors explicit Dropbox and workspace-sync opt-outs', () => {
     expect(
       isWorkspaceDropboxSyncEnabled(false, {
         VITE_RELEASE_PROFILE: 'core',
@@ -86,7 +100,7 @@ describe('release feature configuration', () => {
       }),
     ).toBe(true);
     expect(isWorkspaceDropboxSyncEnabled(false, { VITE_WORKSPACE_DROPBOX_SYNC: 'true' })).toBe(
-      false,
+      true,
     );
     expect(
       isWorkspaceDropboxSyncEnabled(true, {

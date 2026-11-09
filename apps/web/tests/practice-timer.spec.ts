@@ -27,7 +27,7 @@ test('one compact timer stays reachable across steps without disturbing writing'
   const dock = page.getByRole('complementary', { name: 'Practice timers' });
   await expect(dock.getByRole('button', { name: 'Pause timer' })).toBeVisible();
   await expect(widget).toHaveCount(1);
-  await page.getByRole('button', { name: 'Continue ↓', exact: true }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true }).click();
   const field = page.getByRole('textbox', { name: 'Your response', exact: true });
   await expect(field).toBeVisible();
   await field.fill('I want to give this thought a little more room.');
@@ -83,7 +83,7 @@ test('preview retains blocking behavior and clears timers on restart', async ({ 
   await expect(page.getByText('✓ No issues', { exact: true })).toBeVisible();
   await page.getByRole('tab', { name: 'Preview', exact: true }).click();
   await page.getByRole('button', { name: 'Run preview', exact: true }).click();
-  const next = page.getByRole('button', { name: 'Continue ↓', exact: true });
+  const next = page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true });
   await expect(next).toBeDisabled();
   await page.getByRole('button', { name: 'Start timer' }).click();
   await expect(next).toBeDisabled();

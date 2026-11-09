@@ -3,7 +3,7 @@
 :input focus text
 :output decision
 
-!choose decision {
+decision = !choose {
     :option begin "Yes, begin gently"
     :option stop "Not now"
     :option support "I need immediate help"

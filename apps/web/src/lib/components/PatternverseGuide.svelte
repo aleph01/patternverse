@@ -23,7 +23,10 @@
             Browse by verse, open a collection, or search by title and keyword. Follow related
             patterns to explore an idea further.
           </p>
-          <a href={resolve('/library')}><span class="field-guide-link-label">Explore</span> <span aria-hidden="true">→</span></a>
+          <a href={resolve('/library')}
+            ><span class="field-guide-link-label">Explore</span>
+            <span aria-hidden="true">→</span></a
+          >
         </div>
       </section>
       <section class="field-guide-row" id="try-a-practice" aria-labelledby="practice-heading">
@@ -46,7 +49,8 @@
             practices using Pattern Language.
           </p>
           <a href={resolve('/about/pattern-language')}
-            ><span class="field-guide-link-label">About Pattern Language</span> <span aria-hidden="true">→</span></a
+            ><span class="field-guide-link-label">About Pattern Language</span>
+            <span aria-hidden="true">→</span></a
           >
         </div>
       </section>
@@ -60,8 +64,9 @@
       <p class="field-guide-eyebrow">On your home screen</p>
       <h3 id="install-heading">install once.<br />keep it close.</h3>
       <p>
-        Install Patternverse from your browser to open it like an app and keep the core library
-        available offline.
+        Install Patternverse from your browser to open it like an app. Choose “Download library for
+        offline use” in My workspace → Settings → Offline access to keep the full library available
+        offline.
       </p>
       <details>
         <summary>How to install</summary>
@@ -92,10 +97,6 @@
     background: var(--paper);
     color: var(--ink);
     scroll-margin-top: 1rem;
-  }
-  .field-guide-inner {
-    max-width: 68rem;
-    margin-inline: auto;
   }
   .field-guide p {
     margin: 0;

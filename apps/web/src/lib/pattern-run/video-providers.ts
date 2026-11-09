@@ -34,7 +34,11 @@ interface SDKWindow extends Window {
     Player: new (
       element: HTMLIFrameElement,
       options: {
-        events: { onReady(): void; onStateChange(event: { data: number }): void; onError(): void };
+        events: {
+          onReady(): void;
+          onStateChange(event: { data: number }): void;
+          onError(event?: { data: number }): void;
+        };
       },
     ) => YoutubePlayer;
   };
@@ -95,12 +99,15 @@ async function connectYoutube(
         );
       },
       onStateChange(event) {
+        if (events.active()) events.state?.(event.data);
         if (event.data === 0) events.run(() => events.position(yt.getCurrentTime(), true));
       },
-      onError() {
+      onError(event) {
         events.fail(
           new Error(
-            'YouTube could not play this video. It may be unavailable or embedding may be disabled.',
+            event?.data === 153
+              ? 'YouTube could not verify this browser’s origin (error 153). Open the official recording on YouTube.'
+              : `YouTube could not play this video${event?.data ? ` (error ${event.data})` : ''}. It may be unavailable or embedding may be disabled.`,
           ),
         );
       },

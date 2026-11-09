@@ -17,7 +17,7 @@ it('binds text and both rating presentations without resetting drafts on disable
   const number = screen.getByRole('spinbutton', { name: 'Your rating' });
   expect(number.getAttribute('min')).toBe('-2');
   expect(number.getAttribute('max')).toBe('5');
-  const range = screen.getByRole('slider', { name: /Low — High/ });
+  const range = screen.getByRole('slider', { name: 'Your rating' });
   expect(range.getAttribute('step')).toBe('any');
   await fireEvent.input(text, { target: { value: 'Unfinished thought' } });
   await fireEvent.input(number, { target: { value: '-1' } });

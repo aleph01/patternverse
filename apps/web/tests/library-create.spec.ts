@@ -1,3 +1,4 @@
+import { selectLibraryScope } from './helpers/library';
 import { expect, test } from '@playwright/test';
 
 test('moves creation to workspace and finds the private pattern in the library', async ({
@@ -13,7 +14,7 @@ test('moves creation to workspace and finds the private pattern in the library',
   );
 
   // Creation stays accessible when a new user's personal library has no results.
-  await page.getByRole('button', { name: /^My library/ }).click();
+  await selectLibraryScope(page, 'saved');
   await expect(page.getByRole('heading', { name: 'Nothing saved yet' })).toBeVisible();
   await page
     .getByRole('navigation', { name: 'Main navigation' })
@@ -39,7 +40,7 @@ test('moves creation to workspace and finds the private pattern in the library',
   await expect(page.getByText('Saved “My library starting point” as draft.')).toBeVisible();
 
   await page.goto('/library');
-  await page.getByRole('button', { name: /^My library/ }).click();
+  await selectLibraryScope(page, 'saved');
   const saved = page.getByRole('link', { name: /My library starting point/ });
   await expect(saved).toBeVisible();
   await expect(saved).toHaveAttribute('href', '/editor?id=my-library-starting-point');

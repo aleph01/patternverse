@@ -31,6 +31,9 @@ export type EditorValues = {
   /** Compatibility input for callers importing old records, never a YAML authoring mode. */
   practice?: PracticeDefinition;
   languagePracticeSource?: string;
+  /** Separate practice records, edited and saved with their parent pattern. */
+  linkedPractices?: EditorValues[];
+  originalPracticeIds?: string[];
 };
 
 export type EditorValidation =
@@ -62,7 +65,19 @@ export const parseEditorList = (value: string): string[] =>
 
 const optionalText = (value: string): string | undefined => value.trim() || undefined;
 
-export const editorValuesFromEntity = (entity: RawEntity): EditorValues => {
+export const editorValuesFromEntity = (
+  entity: RawEntity,
+  catalog: readonly RawEntity[] = [],
+): EditorValues => {
+  const linked =
+    entity.type === 'pattern'
+      ? catalog.filter(
+          (candidate) =>
+            candidate.type === 'practice' &&
+            candidate.sourceId === entity.sourceId &&
+            candidate.implements?.includes(entity.id),
+        )
+      : [];
   const parsedPractice = parsePracticeFromBody(entity.body);
   const parsedLanguage = parseLanguagePracticeFromBody(parsedPractice.articleBody);
   const hasValidPractice = parsedPractice.errors.length === 0;
@@ -91,12 +106,20 @@ export const editorValuesFromEntity = (entity: RawEntity): EditorValues => {
       ? (parsedLanguage.source ??
         (parsedPractice.practice ? legacyPracticeSource(parsedPractice.practice) : undefined))
       : undefined,
+    ...(linked.length
+      ? {
+          linkedPractices: linked.map((practice) => editorValuesFromEntity(practice)),
+          originalPracticeIds: linked.map((practice) => practice.id),
+        }
+      : {}),
   };
 };
 
 export const editorSignature = (values: EditorValues): string => JSON.stringify(values);
 
 export const validateEditorValues = (values: EditorValues): EditorValidation => {
+  if (values.linkedPractices?.length && values.type !== 'pattern')
+    return { success: false, errors: ['Only a pattern can own a list of practice drafts.'] };
   if (values.practice && values.languagePracticeSource !== undefined)
     return { success: false, errors: ['Choose one practice format, not both.'] };
   if (

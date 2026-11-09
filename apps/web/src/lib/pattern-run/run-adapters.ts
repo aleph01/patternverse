@@ -9,7 +9,7 @@ import {
 } from '$lib/mira/guided';
 import {
   applySourceAction,
-  restoreSourceRun,
+  resumeSourceRun,
   rewindSourceRun,
   startSourceRun,
 } from '$lib/pattern-runtime/source';
@@ -27,9 +27,13 @@ export const practiceRunPorts: PracticeRunPorts = {
   applyTechnique: applyStandaloneAction,
   rewindSource: rewindSourceRun,
   rewindTechnique: rewindStandaloneRun,
-  restoreSource: restoreSourceRun,
+  // The controller checks the saved pattern identity before this history-only port.
+  restoreSource: (_source, checkpoint) => resumeSourceRun(checkpoint),
   loadHistory: async (id) => (await getLocalWorkspace()).getPracticeRun(id),
-  freeAvailable: freeGuidedAiAvailable,
+  freeAvailable: (id, run) =>
+    run && new TextEncoder().encode(JSON.stringify(run.saved)).byteLength > 190 * 1024
+      ? Promise.resolve(false)
+      : freeGuidedAiAvailable(id),
   connectionReady: async () =>
     Boolean((await createPrivateMiraStore().loadSettings()).openRouterKey.trim()),
   fulfillFree: fulfillFreeGuidedStep,

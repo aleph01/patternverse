@@ -1,11 +1,24 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
+  let { newTab = false }: { newTab?: boolean } = $props();
 </script>
 
 <nav class="legal-links" aria-label="Legal information">
-  <a href={resolve('/impressum')}>legal notice</a>
-  <a href={resolve('/privacy')}>privacy</a>
-  <a href={resolve('/legal')}>safety &amp; use</a>
+  <a
+    href={resolve('/impressum')}
+    target={newTab ? '_blank' : undefined}
+    rel={newTab ? 'noopener noreferrer' : undefined}>legal notice</a
+  >
+  <a
+    href={resolve('/privacy')}
+    target={newTab ? '_blank' : undefined}
+    rel={newTab ? 'noopener noreferrer' : undefined}>privacy</a
+  >
+  <a
+    href={resolve('/legal')}
+    target={newTab ? '_blank' : undefined}
+    rel={newTab ? 'noopener noreferrer' : undefined}>safety &amp; use</a
+  >
 </nav>
 
 <style>

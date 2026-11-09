@@ -15,8 +15,9 @@ mod form;
 mod looping;
 mod realization;
 mod refinement;
-mod selection;
+pub(crate) mod selection;
 mod semantic;
+mod shuffle;
 mod timer;
 use collection::CollectionFrame;
 use looping::LoopFrame;
@@ -50,6 +51,8 @@ pub struct CollectionContinuation {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", content = "payload")]
 pub enum Request {
+    #[serde(rename = "interaction.widget")]
+    Widget(crate::widgets::Interaction),
     #[serde(rename = "interaction.form")]
     Form(crate::compiler::Form<String>),
     #[serde(rename = "interaction.timer")]
@@ -79,7 +82,12 @@ pub enum Request {
     #[serde(rename = "interaction.rate")]
     Rate { prompt: String, rating: Rating },
     #[serde(rename = "agent.generate")]
-    Generate { prompt: String, contract: Contract },
+    Generate {
+        prompt: String,
+        contract: Contract,
+        #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+        context: BTreeMap<String, Value>,
+    },
     #[serde(rename = "agent.turn")]
     Turn { prompt: String },
     #[serde(rename = "interaction.choose")]
@@ -119,6 +127,7 @@ impl Request {
     /// Return the stable wire discriminator used to match Host handlers and fixture replies.
     pub fn kind(&self) -> &'static str {
         match self {
+            Self::Widget(_) => "interaction.widget",
             Self::Form(_) => "interaction.form",
             Self::Timer { .. } => "interaction.timer",
             Self::Classify { .. } => "semantic.classify",
@@ -158,6 +167,7 @@ pub struct LoopContext {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", content = "value", rename_all = "snake_case")]
 pub enum Fulfillment {
+    Widget(serde_json::Value),
     Form(BTreeMap<String, Value>),
     Timer(TimerResult),
     Classified(String),
@@ -382,7 +392,13 @@ pub struct Transition {
 /// Rebuild a versioned run from accepted history and compare every saved state field.
 /// Rejects executable tampering or unreproducible state; replay performs no Host I/O.
 fn restore(saved: SavedRun) -> Result<RunState, Error> {
-    if saved.version != 4 {
+    if saved.version
+        != if saved.pattern.snapshot_id.starts_with("m4-v3:") {
+            5
+        } else {
+            4
+        }
+    {
         return Err(Error::InvalidSnapshot);
     }
     saved.pattern.verify().map_err(|_| Error::InvalidSnapshot)?;
@@ -475,6 +491,9 @@ fn start_checked(
         ));
     }
     let mut bindings = vec![None; pattern.binding_count];
+    for (id, value) in &pattern.constants {
+        bindings[id.0] = Some(value.clone());
+    }
     for input in &pattern.inputs {
         let value = inputs
             .get(&input.name)
@@ -484,7 +503,11 @@ fn start_checked(
     }
     let state = RunState {
         inner: SavedRun {
-            version: 4,
+            version: if pattern.snapshot_id.starts_with("m4-v3:") {
+                5
+            } else {
+                4
+            },
             pattern,
             run_id,
             inputs,
@@ -557,6 +580,13 @@ fn evaluate(expr: &Expr<(BindingId, Option<Field>)>, state: &SavedRun) -> Result
 /// Commit an immutable binding to its permitted scope and emit a binding trace.
 /// Rejects duplicate assignments, missing slots, and collection scope leaks.
 fn bind(result: &mut Transition, id: BindingId, value: Value) -> Result<(), Error> {
+    let value = if let Some(expected) = result.state.inner.pattern.binding_types.get(&id.0) {
+        value
+            .into_expected(expected)
+            .ok_or(Error::ContractViolation)?
+    } else {
+        value
+    };
     if result.state.inner.refinement.is_some() {
         if !refinement::definition(&result.state.inner)?
             .locals
@@ -828,9 +858,7 @@ fn drive(result: &mut Transition) -> Result<(), Error> {
                 collection::begin(result, &node, c)?;
                 continue;
             }
-            Instruction::Form { form, .. } => {
-                Request::Form(form.clone().try_map(|parts| render(&parts, state))?)
-            }
+            Instruction::Form { form, .. } => Request::Form(form::request(form, state)?),
             Instruction::Ask { prompt, .. } => Request::Ask {
                 prompt: render(prompt, state)?,
             },
@@ -842,6 +870,15 @@ fn drive(result: &mut Transition) -> Result<(), Error> {
                 prompt: render(prompt, state)?,
                 rating: rating.clone(),
             },
+            Instruction::Shuffle {
+                binding,
+                expression,
+            } => {
+                let value = shuffle::value(expression, &node, state)?;
+                bind(result, *binding, value)?;
+                advance_pc(&mut result.state.inner)?;
+                continue;
+            }
             Instruction::Derive {
                 binding,
                 expression,
@@ -891,11 +928,22 @@ fn drive(result: &mut Transition) -> Result<(), Error> {
                 result.state.inner.pc = selected.0;
                 continue;
             }
+            Instruction::Generate { widget:Some((package,export)), prompt,context,.. } => {
+                let inputs=context.iter().map(|(key,expr)|Ok((key.clone(),evaluate(expr,state)?))).collect::<Result<BTreeMap<_,_>,Error>>()?;
+                Request::Widget(crate::widgets::prepare(package.clone(),export,inputs,render(prompt,state)?).map_err(|_|Error::ContractViolation)?)
+            },
             Instruction::Generate {
-                contract, prompt, ..
+                contract,
+                prompt,
+                context,
+                ..
             } => Request::Generate {
                 prompt: render(prompt, state)?,
                 contract: contract.clone(),
+                context: context
+                    .iter()
+                    .map(|(key, expr)| Ok((key.clone(), evaluate(expr, state)?)))
+                    .collect::<Result<_, Error>>()?,
             },
             Instruction::Turn { prompt, .. } => Request::Turn {
                 prompt: render(prompt, state)?,
@@ -1091,6 +1139,9 @@ pub fn transition(state: &RunState, event: Event) -> Result<Transition, Error> {
     if let Fulfillment::SelectedMany(keys) = &mut receipt.result {
         keys.sort();
     }
+    if let Fulfillment::Form(fields) = &mut receipt.result {
+        form::normalize(fields);
+    }
     if let Some(old) = state
         .ledger()
         .iter()
@@ -1156,9 +1207,11 @@ pub fn transition(state: &RunState, event: Event) -> Result<Transition, Error> {
         return Ok(result);
     }
     let (binding, value) = match (&node.instruction, &pending.request, &receipt.result) {
-        (Instruction::Form { binding, form }, Request::Form(_), Fulfillment::Form(answer)) => {
-            (Some(*binding), form::answer(form, answer)?)
-        }
+        (
+            Instruction::Form { binding, form },
+            Request::Form(offered),
+            Fulfillment::Form(answer),
+        ) => (Some(*binding), form::answer(form, offered, answer, inner)?),
         (
             Instruction::Timer { binding, timer, .. },
             Request::Timer { .. },
@@ -1211,11 +1264,12 @@ pub fn transition(state: &RunState, event: Event) -> Result<Transition, Error> {
             Request::Rate { .. },
             Fulfillment::Rating(number),
         ) => {
-            if !number.is_finite() || *number < rating.min || *number > rating.max {
+            if !rating.accepts(*number) {
                 return Err(Error::ContractViolation);
             }
             (Some(*binding), Value::Number(*number))
         }
+        (Instruction::Generate{binding,widget:Some(_),..},Request::Widget(interaction),Fulfillment::Widget(json))=>(Some(*binding),interaction.accept_json(json).map_err(|_|Error::ContractViolation)?),
         (
             Instruction::Generate {
                 binding, contract, ..

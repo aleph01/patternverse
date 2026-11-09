@@ -19,10 +19,26 @@ export type LibraryVerse = Readonly<{
   id: string;
   sourceId: string;
   title: string;
+  summary?: string;
   itemKeys: readonly string[];
 }>;
 export type LibraryCategory = BrowsableLibraryType | 'all';
 export type LibraryScope = 'saved' | 'explore';
+
+/** An honest offline fallback; full-text ranking is restored when the public corpus arrives. */
+export const librarySummaryDocuments = (
+  entries: readonly EntitySummary[],
+): readonly LibrarySearchDocument[] =>
+  entries.map((entry) => ({
+    ...entry,
+    id: libraryEntryKey(entry),
+    entityId: entry.id,
+    aliases: [],
+    tags: [],
+    body: '',
+    collectionNames: entry.collectionNames ?? [],
+    verseNames: entry.verseNames ?? [],
+  }));
 
 export function initialLibraryCategory(types: readonly EntityType[]): LibraryCategory {
   return types.length === 1 && isBrowsableLibraryType(types[0]) ? types[0] : 'all';
@@ -44,7 +60,7 @@ export function createWorkspaceLibraryCatalog(input: {
     createPersonalSource(personal, commons),
     {
       id: 'commons',
-      name: 'Patternverse commons',
+      name: 'Commons',
       readonly: true,
       entries: commons,
       searchDocuments: commonsSearchDocuments,
@@ -78,10 +94,17 @@ export function createWorkspaceLibraryCatalog(input: {
   for (const verse of verses)
     if (!verseMembers.has(verse.key)) verseMembers.set(verse.key, new Set(verse.itemKeys));
   const collectionNames = new Map<string, readonly string[]>();
+  const verseNames = new Map<string, readonly string[]>();
+  for (const entry of commons) {
+    const key = libraryEntryKey(entry);
+    if (entry.collectionNames) collectionNames.set(key, entry.collectionNames);
+    if (entry.verseNames) verseNames.set(key, entry.verseNames);
+  }
   for (const document of library.searchDocuments) {
     const key = libraryRefKey({ sourceId: document.sourceId, entityId: document.entityId });
     // Preserve the old first-document lookup, including source identity.
     if (!collectionNames.has(key)) collectionNames.set(key, document.collectionNames);
+    if (!verseNames.has(key)) verseNames.set(key, document.verseNames);
   }
   const counts = {
     total: library.entries.length,
@@ -94,13 +117,14 @@ export function createWorkspaceLibraryCatalog(input: {
     verses,
     verseMembers,
     collectionNames,
+    verseNames,
     counts,
     editorHref,
   };
 }
 export type WorkspaceLibraryCatalog = ReturnType<typeof createWorkspaceLibraryCatalog>;
 
-/** Pure website projection; does not reinterpret search or rating semantics. */
+/** Pure website projection; apply every active filter before the fallback threshold. */
 export function workspaceLibraryView(
   catalog: WorkspaceLibraryCatalog,
   input: {
@@ -124,29 +148,29 @@ export function workspaceLibraryView(
   const mine = new Set(
     catalog.library.entries.filter((entry) => isInMyLibrary(entry, savedKeys)).map(libraryEntryKey),
   );
-  // Navigation depends on the full library, never the current search/category/rating filter.
-  const visibleVerses =
-    input.scope === 'explore'
-      ? catalog.verses
-      : catalog.verses.filter((verse) => verse.itemKeys.some((key) => mine.has(key)));
+  // Navigation reflects library membership, independently of search, type and rating filters.
+  const onlyMine = input.showControls && input.scope === 'saved';
+  const visibleVerses = onlyMine
+    ? catalog.verses.filter((verse) => verse.itemKeys.some((key) => mine.has(key)))
+    : catalog.verses;
   const selectedVerse =
-    input.scope === 'saved' &&
-    input.selectedVerse !== 'all' &&
-    !visibleVerses.some((verse) => verse.key === input.selectedVerse)
+    onlyMine && !visibleVerses.some((verse) => verse.key === input.selectedVerse)
       ? 'all'
       : input.selectedVerse;
   const verseMembers =
     selectedVerse === 'all' ? null : (catalog.verseMembers.get(selectedVerse) ?? new Set<string>());
-  const matches = catalog.search
-    .search(input.query)
-    .filter(
-      (entry) =>
-        (!input.showControls || input.scope === 'explore' || mine.has(libraryEntryKey(entry))) &&
-        (input.category === 'all' || entry.type === input.category) &&
-        (!verseMembers || verseMembers.has(libraryEntryKey(entry))) &&
-        (!input.showControls ||
-          matchesLibraryRating(ratings.get(libraryEntryKey(entry)) ?? null, input.ratingFilter)),
-    );
+  const groups = catalog.search.searchWithFallback(
+    input.query,
+    {},
+    (entry) =>
+      (!input.showControls || input.scope === 'explore' || mine.has(libraryEntryKey(entry))) &&
+      (input.category === 'all' || entry.type === input.category) &&
+      (!verseMembers || verseMembers.has(libraryEntryKey(entry))) &&
+      (!input.showControls ||
+        matchesLibraryRating(ratings.get(libraryEntryKey(entry)) ?? null, input.ratingFilter)),
+  );
+  const matches = [...groups.strict, ...groups.broader];
+  const broaderMatchKeys = new Set(groups.broader.map(libraryEntryKey));
   const ordered =
     input.query.trim() || input.featuredRank.size === 0
       ? matches
@@ -160,24 +184,33 @@ export function workspaceLibraryView(
   const results = ordered.map((entry): EntitySummary => ({
     ...entry,
     collectionNames: catalog.collectionNames.get(libraryEntryKey(entry)),
+    verseNames: catalog.verseNames.get(libraryEntryKey(entry)),
     url:
       entry.sourceId === 'personal'
         ? `${catalog.editorHref}?id=${encodeURIComponent(entry.id)}`
         : `/${entry.type}/${entry.id}`,
   }));
   const visibleResults = input.limit === undefined ? results : results.slice(0, input.limit);
-  const resultLabel = `${visibleResults.length}${visibleResults.length < results.length ? ` of ${results.length}` : ''} ${
-    input.query.trim()
-      ? results.length === 1
-        ? 'match'
-        : 'matches'
-      : results.length === 1
-        ? 'entry'
-        : 'entries'
-  }`;
+  const countLabel = (shown: number, total: number, label: string) =>
+    `${shown}${shown < total ? ` of ${total}` : ''} ${label}${total === 1 ? '' : 'es'}`;
+  const shownBroader = visibleResults.filter((entry) =>
+    broaderMatchKeys.has(libraryEntryKey(entry)),
+  ).length;
+  const resultLabel = groups.broader.length
+    ? `${countLabel(visibleResults.length - shownBroader, groups.strict.length, 'match')} · ${countLabel(shownBroader, groups.broader.length, 'broader match')}`
+    : `${visibleResults.length}${visibleResults.length < results.length ? ` of ${results.length}` : ''} ${
+        input.query.trim()
+          ? results.length === 1
+            ? 'match'
+            : 'matches'
+          : results.length === 1
+            ? 'entry'
+            : 'entries'
+      }`;
   return {
     results,
     visibleResults,
+    broaderMatchKeys,
     visibleVerses,
     selectedVerse,
     resultLabel,

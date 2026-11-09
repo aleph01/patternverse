@@ -6,6 +6,7 @@
     scale = {},
     presentation = 'number',
     disabled = false,
+    onchange,
   }: {
     value?: number | null;
     id: string;
@@ -13,6 +14,7 @@
     scale?: { min?: number; max?: number; low?: string; high?: string };
     presentation?: 'number' | 'range';
     disabled?: boolean;
+    onchange?: (value: number | null) => void;
   } = $props();
 </script>
 
@@ -30,6 +32,13 @@
     max={scale.max ?? 10}
     step="any"
     bind:value
+    aria-label={label}
+    oninput={(event) =>
+      onchange?.(
+        Number.isFinite(event.currentTarget.valueAsNumber)
+          ? event.currentTarget.valueAsNumber
+          : null,
+      )}
     {disabled}
   />
 {:else}
@@ -38,7 +47,14 @@
     type="number"
     min={Number(scale.min ?? 0)}
     max={Number(scale.max ?? 10)}
+    step="any"
     bind:value
+    oninput={(event) =>
+      onchange?.(
+        Number.isFinite(event.currentTarget.valueAsNumber)
+          ? event.currentTarget.valueAsNumber
+          : null,
+      )}
     {disabled}
   />
 {/if}

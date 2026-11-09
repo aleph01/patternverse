@@ -4,8 +4,11 @@
   import { collectionItemHref } from '$lib/collection-navigation';
   import SaveToLibrary from './SaveToLibrary.svelte';
 
-  let { collection, items }: { collection: EntitySummary; items: readonly EntitySummary[] } =
-    $props();
+  let {
+    collection,
+    items,
+    card = false,
+  }: { collection: EntitySummary; items: readonly EntitySummary[]; card?: boolean } = $props();
   const uid = $props.id();
   let expanded = $state(false);
   let showAll = $state(false);
@@ -21,10 +24,10 @@
   const label = $derived(
     `${expanded ? 'Hide' : 'Show'} ${items.length} ${noun} in ${collection.title}`,
   );
-  const visibleItems = $derived(showAll ? items : items.slice(0, 4));
+  const visibleItems = $derived(card && !showAll ? items.slice(0, 4) : items);
 </script>
 
-<div class="collection-expansion">
+<div class="collection-expansion" class:card-count={card} class:list-count={!card}>
   <button
     type="button"
     class="collection-count"
@@ -34,7 +37,9 @@
     disabled={!items.length}
     onclick={() => (expanded = !expanded)}
   >
-    <span>{items.length}</span>
+    <span
+      >{items.length}{#if card}<span class="count-noun">{` ${noun}`}</span>{/if}</span
+    >
     {#if expanded}<ChevronUp size={16} aria-hidden="true" />{:else}<ChevronDown
         size={16}
         aria-hidden="true"
@@ -95,6 +100,41 @@
     font-size: 0.8rem;
     font-variant-numeric: tabular-nums;
     cursor: pointer;
+  }
+  .count-noun {
+    display: none;
+  }
+  @media (min-width: 801px) {
+    .list-count {
+      margin: 0;
+    }
+    .list-count .collection-count {
+      position: absolute;
+      top: 1.4rem;
+      right: 0.25rem;
+      gap: 10px;
+      padding-inline: 8px;
+      font-weight: 650;
+    }
+    .list-count .collection-contents {
+      margin: 0 0 1.25rem;
+      padding: 0 0 0 13px;
+      border-top: 0;
+      border-left: 2px solid var(--green-dark);
+      border-radius: 0;
+      background: transparent;
+    }
+    .card-count .collection-count {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 60px;
+      color: var(--green-dark);
+      font-weight: 650;
+    }
+    .card-count .count-noun {
+      display: inline;
+    }
   }
   .collection-count:hover:not(:disabled),
   .collection-count[aria-expanded='true'] {

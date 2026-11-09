@@ -143,7 +143,7 @@ describe('continuous executable pattern worksheet', () => {
     render(Runner, { data });
     const field = await screen.findByRole('textbox', { name: 'Your response' });
     await fireEvent.input(field, { target: { value: 'I want the first version to be perfect.' } });
-    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Next step ↓' }));
     const current = await screen.findByRole('heading', { name: 'Try another frame' });
     expect(screen.getByRole('heading', { name: 'Name the situation' })).toBeTruthy();
     expect(screen.getByText('Describe what feels stuck.')).toBeTruthy();
@@ -169,14 +169,14 @@ describe('continuous executable pattern worksheet', () => {
     await fireEvent.input(await screen.findByRole('textbox', { name: 'Your response' }), {
       target: { value: 'My previous response' },
     });
-    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Next step ↓' }));
     await screen.findByRole('heading', { name: 'A moment to review.' });
     expect(screen.getAllByText('My previous response')).toHaveLength(1);
     expect(screen.queryByRole('textbox')).toBeNull();
     expect(screen.getByText('This reflection was not saved to Mira.')).toBeTruthy();
   });
 
-  it('edits in place by clicking an answer while leaving the current step open', async () => {
+  it('edits a completed step in place while leaving the current step open', async () => {
     engine.start.mockResolvedValue(
       makeRun(second, [{ effect: first, result: { kind: 'text', value: 'Original answer' } }]),
     );
@@ -187,7 +187,7 @@ describe('continuous executable pattern worksheet', () => {
     render(Runner, { data });
     const next = await screen.findByRole('textbox', { name: 'Your response' });
     await fireEvent.input(next, { target: { value: 'Draft for step two' } });
-    await fireEvent.click(screen.getByText('Original answer'));
+    await fireEvent.click(screen.getByRole('button', { name: 'Edit step 1: Name the situation' }));
     await waitFor(() =>
       expect(
         (screen.getByRole('textbox', { name: 'Edit your response' }) as HTMLTextAreaElement).value,
@@ -271,7 +271,7 @@ describe('continuous executable pattern worksheet', () => {
     render(Runner, { data });
     const friend = await screen.findByRole('textbox', { name: /Friend response/ });
     await fireEvent.input(friend, { target: { value: 'Unfinished friend response' } });
-    await fireEvent.click(screen.getByText('Original situation'));
+    await fireEvent.click(screen.getByRole('button', { name: 'Edit step 1: Name the judgment' }));
     const situation = await screen.findByRole('textbox', { name: /Situation/ });
     await waitFor(() =>
       expect((situation as HTMLTextAreaElement).value).toBe('Original situation'),
@@ -388,7 +388,7 @@ describe('continuous executable pattern worksheet', () => {
     await fireEvent.input(await screen.findByRole('textbox', { name: 'Your response' }), {
       target: { value: 'Keep my draft' },
     });
-    await fireEvent.click(screen.getByText('Original answer'));
+    await fireEvent.click(screen.getByRole('button', { name: 'Edit step 1: Name the situation' }));
     await fireEvent.input(await screen.findByRole('textbox', { name: 'Edit your response' }), {
       target: { value: 'Discard this change' },
     });
@@ -403,9 +403,9 @@ describe('continuous executable pattern worksheet', () => {
   it('does not advance an empty answer', async () => {
     render(Runner, { data });
     await screen.findByRole('textbox', { name: 'Your response' });
-    expect((screen.getByRole('button', { name: 'Continue ↓' }) as HTMLButtonElement).disabled).toBe(
-      true,
-    );
+    expect(
+      (screen.getByRole('button', { name: 'Next step ↓' }) as HTMLButtonElement).disabled,
+    ).toBe(true);
     expect(engine.apply).not.toHaveBeenCalled();
   });
 
@@ -433,7 +433,7 @@ describe('continuous executable pattern worksheet', () => {
     );
     render(Runner, { data });
     await fireEvent.click(await screen.findByRole('button', { name: 'Start timer' }));
-    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Next step ↓' }));
     await screen.findByRole('heading', { name: 'Try another frame' });
     expect(screen.getByRole('button', { name: 'Pause timer' })).toBeTruthy();
     const dock = screen.getByRole('complementary', { name: 'Practice timers' });
@@ -441,7 +441,7 @@ describe('continuous executable pattern worksheet', () => {
     expect(document.querySelectorAll('.timer-widget')).toHaveLength(1);
     expect(screen.queryByRole('button', { name: 'Start timer' })).toBeNull();
     expect(screen.getByText(/Continued with timer/)).toBeTruthy();
-    expect(screen.getAllByRole('button', { name: 'Continue ↓' })).toHaveLength(1);
+    expect(screen.getAllByRole('button', { name: 'Next step ↓' })).toHaveLength(1);
     expect(engine.apply).toHaveBeenCalledTimes(1);
     expect(engine.apply.mock.calls[0]?.[1].Fulfill.result).toMatchObject({
       kind: 'timer',

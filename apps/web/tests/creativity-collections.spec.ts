@@ -1,8 +1,10 @@
 import { expect, test } from '@playwright/test';
+import { selectLibraryCategory } from './helpers/library';
 
 test('offers two flat creativity collections with useful starting techniques', async ({ page }) => {
   await page.goto('/verse/creativity');
-  const collections = page.locator('.verse-groups .paginated-entries[aria-label="Collections"]');
+  await selectLibraryCategory(page, 'Collections');
+  const collections = page.getByRole('region', { name: 'Library results', exact: true });
   await expect(collections.getByRole('link')).toHaveCount(2);
   await expect(
     collections.getByRole('link', { name: /See the Problem Differently/ }),

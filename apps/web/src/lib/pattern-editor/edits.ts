@@ -11,8 +11,10 @@ import {
   type SourcePatch,
 } from './blocks';
 import type { Paths, SourceAttribute, SourceStatement } from './types';
+import { optionalQuestionPatches } from './structured-edits';
 
 export interface BlockFieldsDraft {
+  optional: boolean;
   prompt: string;
   range: string;
   options: { value: string; label: string }[];
@@ -28,6 +30,7 @@ export function blockFieldsDraft(statement: SourceStatement): BlockFieldsDraft {
   const attr = (name: string, fallback: string) =>
     statement.attributes.find((a) => a.name === name)?.args[0]?.value ?? fallback;
   return {
+    optional: attr('required', 'true') === 'false',
     prompt: promptText(statement),
     range: statement.argument?.value ?? '0..10',
     options: statement.attributes
@@ -76,6 +79,8 @@ export function editBlockFields(
   draft: BlockFieldsDraft,
 ): BlockEdit {
   const patches: SourcePatch[] = [];
+  if (statement.kind === 'ask' && draft.optional !== original.optional)
+    patches.push(...optionalQuestionPatches(source, statement, draft.optional));
   if (draft.prompt !== original.prompt) patches.push(promptPatch(statement, draft.prompt));
   if (statement.kind === 'rate' && statement.argument && draft.range !== original.range)
     patches.push({ span: statement.argument.span, replacement: draft.range });
@@ -87,8 +92,16 @@ export function editBlockFields(
       ...attributePatches(
         statement,
         statement.attributes.filter((a) => a.name === 'option'),
-        draft.options.map((o) => `:option ${o.value} ${JSON.stringify(o.label)}`),
-        original.options.map((o) => `:option ${o.value} ${JSON.stringify(o.label)}`),
+        draft.options.map((o) =>
+          statement.argument?.value === 'selection_bullets'
+            ? `- ${o.value}: ${JSON.stringify(o.label)}`
+            : `:option ${o.value} ${JSON.stringify(o.label)}`,
+        ),
+        original.options.map((o) =>
+          statement.argument?.value === 'selection_bullets'
+            ? `- ${o.value}: ${JSON.stringify(o.label)}`
+            : `:option ${o.value} ${JSON.stringify(o.label)}`,
+        ),
       ),
     );
   const timerFields = ['duration', 'adjustable', 'blocking', 'sticky', 'min', 'max'] as const;

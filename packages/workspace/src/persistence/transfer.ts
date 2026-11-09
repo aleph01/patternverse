@@ -33,7 +33,22 @@ export function createWorkspaceTransferOperations(
       database.favorites.where('workspaceId').equals(workspace.id).toArray(),
       database.usefulness.where('workspaceId').equals(workspace.id).toArray(),
     ]);
+    const widgetLocks = await database.widgetLocks
+      .where('workspaceId')
+      .equals(workspace.id)
+      .toArray();
+    const widgetDrafts = await database.widgetDrafts
+      .where('workspaceId')
+      .equals(workspace.id)
+      .toArray();
+    const widgetReleases = await database.widgetReleases
+      .where('workspaceId')
+      .equals(workspace.id)
+      .toArray();
     return {
+      ...(widgetLocks.length ? { widgetLocks } : {}),
+      ...(widgetDrafts.length ? { widgetDrafts } : {}),
+      ...(widgetReleases.length ? { widgetReleases } : {}),
       workspace: {
         id: workspace.id,
         name: workspace.name,
@@ -61,6 +76,10 @@ export function createWorkspaceTransferOperations(
         database.usefulness,
         database.practiceRuns,
         database.situations,
+        database.widgetDrafts,
+        database.widgetReleases,
+        database.widgetInstallations,
+        database.widgetLocks,
       ],
       async () => {
         const live = await database.workspaces.get(workspace.id);
@@ -103,6 +122,10 @@ export function createWorkspaceTransferOperations(
         database.usefulness,
         database.practiceRuns,
         database.situations,
+        database.widgetDrafts,
+        database.widgetReleases,
+        database.widgetInstallations,
+        database.widgetLocks,
       ],
       async () => {
         const live = await database.workspaces.get(local.id);
@@ -144,6 +167,30 @@ export function createWorkspaceTransferOperations(
           live.name !== expected.workspace.name
         )
           throw new LocalSyncConflictError();
+        for (const key of ['widgetDrafts', 'widgetReleases', 'widgetLocks'] as const) {
+          const writes = conditionalRecordWrites<
+            | import('../widgets.js').WidgetDraft
+            | import('../widgets.js').WidgetRelease
+            | import('../widgets.js').WidgetDependencyLock
+          >(
+            expected[key] ?? current[key] ?? [],
+            desired[key] ?? current[key] ?? [],
+            current[key] ?? [],
+            (row) => row.id,
+          );
+          for (const write of writes) {
+            if (
+              key === 'widgetReleases' &&
+              write.before &&
+              write.after &&
+              JSON.stringify((write.before as import('../widgets.js').WidgetRelease).package) !==
+                JSON.stringify((write.after as import('../widgets.js').WidgetRelease).package)
+            )
+              throw new LocalSyncConflictError();
+            if (!write.after) await database[key].delete(write.key);
+            else await database[key].put(write.after as never);
+          }
+        }
         const timestamp = now();
         for (const write of entities) {
           if (!write.after) await database.entities.delete(write.key);
@@ -212,6 +259,10 @@ export function createWorkspaceTransferOperations(
         database.usefulness,
         database.practiceRuns,
         database.situations,
+        database.widgetDrafts,
+        database.widgetReleases,
+        database.widgetInstallations,
+        database.widgetLocks,
         database.recoveryBackups,
       ],
       async () => {
@@ -229,6 +280,19 @@ export function createWorkspaceTransferOperations(
         await database.usefulness.where('workspaceId').equals(live.id).delete();
         await database.practiceRuns.where('workspaceId').equals(live.id).delete();
         await database.situations.where('workspaceId').equals(live.id).delete();
+        await database.widgetLocks.where('workspaceId').equals(live.id).delete();
+        await database.widgetLocks.bulkAdd(
+          (backup.widgetLocks ?? []).map((row) => ({ ...row, workspaceId: live.id })),
+        );
+        await database.widgetDrafts.where('workspaceId').equals(live.id).delete();
+        await database.widgetReleases.where('workspaceId').equals(live.id).delete();
+        await database.widgetInstallations.where('workspaceId').equals(live.id).delete();
+        await database.widgetDrafts.bulkAdd(
+          (backup.widgetDrafts ?? []).map((row) => ({ ...row, workspaceId: live.id })),
+        );
+        await database.widgetReleases.bulkAdd(
+          (backup.widgetReleases ?? []).map((row) => ({ ...row, workspaceId: live.id })),
+        );
         await database.entities.bulkAdd(
           backup.entities.map((entity) =>
             storedFromRaw(entity, {

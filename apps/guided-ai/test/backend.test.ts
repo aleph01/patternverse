@@ -125,6 +125,9 @@ describe('public guided AI admission and bounded inference', () => {
     const broken = JSON.parse(JSON.stringify(payload.saved));
     broken.manager.accepted = [{ run_id: 'test', event: 'Cancel' }];
     expect((await handler(request({ ...payload, saved: broken }), adapters)).status).toBe(422);
+    const changedData = JSON.parse(JSON.stringify(payload.saved));
+    changedData.manager.snapshot.data = { 'commons:forged': { records: [] } };
+    expect((await handler(request({ ...payload, saved: changedData }), adapters)).status).toBe(422);
     expect(adapters.infer).not.toHaveBeenCalled();
   });
 

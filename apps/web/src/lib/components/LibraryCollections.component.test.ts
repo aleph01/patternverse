@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { SavedLibraryEntry } from '@patternverse/workspace';
 import type { EntitySummary } from '$lib/server/commons';
 import WorkspaceLibrary from './WorkspaceLibrary.svelte';
+import { notifyWorkspaceChanged } from '$lib/client/workspace-changes';
 
 const local = vi.hoisted(() => ({ saved: [] as SavedLibraryEntry[] }));
 vi.mock('$lib/client/workspace', () => ({
@@ -20,6 +21,7 @@ vi.mock('$lib/client/workspace', () => ({
         (entry) => entry.ref.sourceId !== ref.sourceId || entry.ref.entityId !== ref.entityId,
       );
       if (saved) local.saved.push({ ref, workspaceId: 'mine', createdAt: '2026-10-08' });
+      notifyWorkspaceChanged({ origin: 'local', topics: ['saved'] });
     },
   }),
 }));
@@ -72,10 +74,109 @@ const props = {
 };
 
 describe('Inline collection browsing', () => {
+  it('shows a bookmarked collection member when switching to My library and after reopening', async () => {
+    const view = render(WorkspaceLibrary, props);
+    await fireEvent.click(
+      screen.getByRole('button', { name: 'Show 6 patterns in First collection' }),
+    );
+    const contents = screen.getByRole('region', { name: 'First collection contents' });
+    const save = within(contents).getAllByRole('button', { name: 'Add to my library' })[0];
+    await waitFor(() => expect((save as HTMLButtonElement).disabled).toBe(false));
+    await fireEvent.click(save);
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: /^My library/ }).textContent).toContain('1'),
+    );
+    await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
+    expect(screen.getByRole('link', { name: /Pattern 1/ })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'All' }).getAttribute('aria-pressed')).toBe('true');
+    expect(local.saved.map((entry) => entry.ref.entityId)).toEqual(['pattern-0']);
+    await fireEvent.click(screen.getByRole('button', { name: 'Patterns' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
+    expect(screen.getByRole('button', { name: 'Collections' }).getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+    await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
+    expect(screen.getByRole('button', { name: 'Patterns' }).getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+    view.unmount();
+    render(WorkspaceLibrary, props);
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: /^My library/ }).hasAttribute('disabled')).toBe(
+        false,
+      ),
+    );
+    await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
+    expect(screen.getByRole('link', { name: /Pattern 1/ })).toBeTruthy();
+  });
+
+  it('expands every pattern at once in list view and keeps collection links in authored order', async () => {
+    localStorage.setItem('patternverse:library-layout', 'list');
+    render(WorkspaceLibrary, props);
+    const toggle = await screen.findByRole('button', {
+      name: 'Show 6 patterns in First collection',
+    });
+    await fireEvent.click(toggle);
+    const contents = screen.getByRole('region', { name: 'First collection contents' });
+    expect(
+      within(contents)
+        .getAllByRole('link')
+        .map((link) => link.getAttribute('href')),
+    ).toEqual(patterns.map((item) => `${item.url}?collection=commons%3AFirst+collection`));
+    expect(within(contents).queryByRole('button', { name: /Show all/ })).toBeNull();
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    await fireEvent.click(toggle);
+    expect(screen.queryByRole('region', { name: 'First collection contents' })).toBeNull();
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('searches patterns from the collections-first default and restores browsing when cleared', async () => {
+    const view = render(WorkspaceLibrary, props);
+    await screen.findByRole('link', { name: /First collection/ });
+    expect(screen.getByRole('button', { name: 'Collections' }).getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+    const input = screen.getByRole('searchbox');
+    await fireEvent.input(input, { target: { value: 'Pattern 6' } });
+    const results = within(screen.getByRole('region', { name: 'Library results' }));
+    expect(results.getAllByRole('link')).toHaveLength(1);
+    expect(results.getByRole('link', { name: /Pattern 6/ }).getAttribute('href')).toBe(
+      '/pattern/pattern-5',
+    );
+    expect(screen.getByRole('button', { name: 'All' }).getAttribute('aria-pressed')).toBe('true');
+    expect(view.container.querySelector('.card-grid, .mobile-cards')).toBeNull();
+    expect(results.getByText('pattern')).toBeTruthy();
+    await fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));
+    expect(screen.getByRole('button', { name: 'Collections' }).getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+    expect(view.container.querySelector('.card-grid')).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: 'Show 6 patterns in First collection' }),
+    ).toBeTruthy();
+  });
+
+  it('opens matching collections directly and lets search categories change without altering browsing', async () => {
+    render(WorkspaceLibrary, { ...props, query: 'collection' });
+    const results = within(screen.getByRole('region', { name: 'Library results' }));
+    expect(results.getAllByRole('link')).toHaveLength(3);
+    expect(results.queryByRole('button', { name: /Show .*patterns in/ })).toBeNull();
+    await fireEvent.click(screen.getByRole('button', { name: 'Patterns' }));
+    await screen.findByRole('heading', { name: 'No matching patterns' });
+    await fireEvent.click(screen.getByRole('button', { name: 'Collections' }));
+    expect(
+      within(screen.getByRole('region', { name: 'Library results' })).getAllByRole('link'),
+    ).toHaveLength(3);
+    await fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));
+    await fireEvent.input(screen.getByRole('searchbox'), { target: { value: 'Pattern 6' } });
+    expect(screen.getByRole('button', { name: 'All' }).getAttribute('aria-pressed')).toBe('true');
+    expect(screen.getByRole('link', { name: /Pattern 6/ })).toBeTruthy();
+  });
+
   it('reveals ordered, contextual contents, keeps multiple collections open across layouts, and shows all on request', async () => {
     const view = render(WorkspaceLibrary, props);
     const first = screen.getByRole('button', { name: 'Show 6 patterns in First collection' });
-    expect(first.textContent?.trim()).toBe('6');
+    expect(first.textContent?.trim()).toBe('6 patterns');
     expect(first.getAttribute('aria-expanded')).toBe('false');
     expect(first.closest('a')).toBeNull();
     expect(screen.queryByRole('region', { name: 'First collection contents' })).toBeNull();
@@ -124,10 +225,11 @@ describe('Inline collection browsing', () => {
     ];
     render(WorkspaceLibrary, props);
     await waitFor(() =>
-      expect(screen.getByRole('button', { name: /^My library/ }).getAttribute('aria-pressed')).toBe(
-        'true',
+      expect(screen.getByRole('button', { name: /^My library/ }).hasAttribute('disabled')).toBe(
+        false,
       ),
     );
+    await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
     await fireEvent.click(
       screen.getByRole('button', { name: 'Show 6 patterns in First collection' }),
     );

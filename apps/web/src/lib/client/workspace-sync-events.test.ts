@@ -29,6 +29,7 @@ it.each([
   ['deletePracticeRun', 'practice-runs'],
   ['createSituation', 'situations'],
   ['updateSituation', 'situations'],
+  ['deleteSituation', 'situations'],
   ['moveSituation', 'situations'],
 ] as const)('classifies %s as a %s local write exactly once', async (method, topic) => {
   const listener = vi.fn();

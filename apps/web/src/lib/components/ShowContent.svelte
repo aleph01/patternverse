@@ -6,8 +6,15 @@
   import PatternImage from './PatternImage.svelte';
   import PatternVideo from './PatternVideo.svelte';
   import PatternShow from './PatternShow.svelte';
-  let { effect, runningAllowed = true }: { effect: GuidedEffect; runningAllowed?: boolean } =
-    $props();
+  let {
+    effect,
+    runningAllowed = true,
+    collapseDetails = false,
+  }: {
+    effect: GuidedEffect;
+    runningAllowed?: boolean;
+    collapseDetails?: boolean;
+  } = $props();
   const view = $derived(effect.request.payload.view);
   const image = $derived(effect.request.payload.image);
   const video = $derived(effect.request.payload.video);
@@ -23,7 +30,7 @@
     markdown={typeof text === 'string' ? text : ''}
     {runningAllowed}
   />
-{:else if isShowView(view)}<PatternShow {view} />
+{:else if isShowView(view)}<PatternShow {view} {collapseDetails} />
 {:else if typeof text === 'string'}<p class="show-text">{text}</p>{/if}
 
 <style>

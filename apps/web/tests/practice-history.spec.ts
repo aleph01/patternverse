@@ -8,7 +8,7 @@ test('saves only with consent, searches answers, reopens a checkpoint and keeps 
   await page
     .getByLabel('How are you currently phrasing the decision?')
     .fill('Should we launch our small version?');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(page.getByRole('heading', { name: 'Clarify the outcome' })).toBeVisible();
   await page.goto('/my?pane=history');
   await expect(page.getByText('Your first run belongs here.')).toBeVisible();
@@ -19,7 +19,7 @@ test('saves only with consent, searches answers, reopens a checkpoint and keeps 
   await page
     .getByLabel('How are you currently phrasing the decision?')
     .fill('Should we launch before the conference?');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(page.getByRole('heading', { name: 'Clarify the outcome' })).toBeVisible();
   await expect(page.getByText('Saved on this device', { exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Practice history →', exact: true }).click();
@@ -48,7 +48,7 @@ test('saves only with consent, searches answers, reopens a checkpoint and keeps 
   await page
     .getByLabel('What would a good outcome give you?')
     .fill('Useful feedback without new hosting costs.');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(
     page.getByRole('heading', { name: 'Separate facts from assumptions' }),
   ).toBeVisible();

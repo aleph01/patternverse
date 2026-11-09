@@ -48,6 +48,23 @@ async function start(f: ReturnType<typeof fixture>) {
 }
 
 describe('OpenRouter sign-in', () => {
+  it('returns a Bearings connection to its own connection page', async () => {
+    const f = fixture();
+    const authorization = new URL(
+      await beginOpenRouterConnection({
+        callbackUrl: 'https://patternverse.org/auth/openrouter/callback?app=bearings',
+        returnUrl: 'https://patternverse.org/auth/openrouter/connect?app=bearings',
+        storage: f.storage,
+        now: 1000,
+      }),
+    );
+    expect(authorization.searchParams.get('key_label')).toBe('Patternverse Bearings');
+    const url = new URL(authorization.searchParams.get('callback_url')!);
+    url.searchParams.set('code', 'single-use-code');
+    expect(await finishOpenRouterConnection({ ...f, url, now: 2000 })).toBe(
+      '/auth/openrouter/connect?connected=1&app=bearings',
+    );
+  });
   it('returns a practice connection to its dedicated tab without sending answers or navigating the practice', async () => {
     const f = fixture();
     const auth = new URL(

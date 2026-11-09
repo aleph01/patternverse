@@ -6,6 +6,8 @@ export interface VideoPlaybackEvents {
   allowed(): boolean;
   attach(player: VideoPlayer): boolean;
   ready(): void;
+  /** Optional native YouTube state observer for synchronized musical timelines. */
+  state?(state: number): void;
   run(action: () => unknown): void;
   position(seconds: number, ended?: boolean): Promise<void>;
   every(milliseconds: number, callback: () => void): void;

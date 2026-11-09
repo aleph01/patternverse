@@ -1,0 +1,15 @@
+/* Saved kinds retain their original identifiers for existing notebooks and backups. */
+.bearings .writing-surface {
+  --cell-fill: var(--bearings-paper);
+  --cell-ink: var(--bearings-ink);
+  --cell-rule: var(--bearings-line);
+  --cell-edge: transparent;
+  --cell-edge-width: 1px;
+  --cell-edge-style: solid;
+  --cell-accent: var(--bearings-ink);
+  --cell-tint: var(--bearings-surface);
+}
+.bearings .writing-surface[data-kind='note'] {
+  --cell-fill: color-mix(in srgb, var(--bearings-ink) 4.5%, var(--bearings-paper));
+  --cell-ink: color-mix(in srgb, var(--bearings-ink) 76%, var(--bearings-paper));
+}

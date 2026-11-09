@@ -125,11 +125,11 @@ export function legacyPracticeSource(practice: PracticeDefinition): string {
       if (block.type === 'markdown') lines.push(`  !show {\n${literal(block.content)}\n  }`);
       else if (block.type === 'text-input')
         lines.push(
-          `  !ask ${fieldName(block.id)} {\n    :required ${block.required}\n    :multiline ${block.multiline}\n${block.placeholder !== undefined ? `    :placeholder ${JSON.stringify(block.placeholder)}\n` : ''}${literal(block.label)}\n  }`,
+          `  ${fieldName(block.id)} = !ask${block.required ? '' : ' [optional]'} {\n${block.multiline ? '' : '    :multiline false\n'}${block.placeholder !== undefined ? `    :placeholder ${JSON.stringify(block.placeholder)}\n` : ''}${literal(block.label)}\n  }`,
         );
       else
         lines.push(
-          `  !timer ${fieldName(block.id)} {\n    :duration ${block.defaultDurationSeconds}\n    :adjustable ${block.userAdjustable}\n${block.userAdjustable ? '    :min 1\n    :max 86400\n' : ''}    :blocking false\n    :persistent ${block.persistent ?? false}\n${literal(block.label ?? 'Take a pause.')}\n  }`,
+          `  ${fieldName(block.id)} = !timer {\n    :duration ${block.defaultDurationSeconds}\n    :adjustable ${block.userAdjustable}\n${block.userAdjustable ? '    :min 1\n    :max 86400\n' : ''}    :blocking false\n    :persistent ${block.persistent ?? false}\n${literal(block.label ?? 'Take a pause.')}\n  }`,
         );
     }
     lines.push('}', '');

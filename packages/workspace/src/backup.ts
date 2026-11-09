@@ -7,6 +7,8 @@ import {
 import { decode, encode } from 'cborg';
 import type { LocalWorkspaceData } from './ownership.js';
 import { parseSituation } from './situations.js';
+import { validateSituationGraph } from './situation-graph.js';
+import { parseWidgetDraft, parseWidgetRelease, parseWidgetDependencyLock } from './widgets.js';
 import { parsePracticeRun } from './practice-history.js';
 
 export const MAX_WORKSPACE_BACKUP_BYTES = 50 * 1024 * 1024;
@@ -106,7 +108,20 @@ export function parseWorkspaceBackup(value: unknown): WorkspaceBackup {
       throw new Error('Mixed workspace ownership in backup.');
     return situation;
   });
+  const widgetLocks = rows(r.widgetLocks ?? []).map(parseWidgetDependencyLock);
+  const widgetDrafts = rows(r.widgetDrafts ?? []).map(parseWidgetDraft);
+  const widgetReleases = rows(r.widgetReleases ?? []).map(parseWidgetRelease);
+  for (const row of [...widgetDrafts, ...widgetReleases, ...widgetLocks])
+    if (row.workspaceId !== workspace.id) throw Error('Mixed widget ownership in backup.');
+  unique(widgetLocks.map((r) => r.id));
+  for (const lock of widgetLocks)
+    if (lock.releaseIds.some((id) => !widgetReleases.some((r) => r.id === id)))
+      throw Error('Widget lock refers to a missing release.');
+  unique(widgetDrafts.map((r) => r.id));
+  unique(widgetReleases.map((r) => r.id));
+  unique(widgetReleases.map((r) => r.reference));
   unique(situations.map((s) => s.id));
+  validateSituationGraph(situations);
   unique(entities.map((e) => e.id));
   unique(favorites.map((f) => entityRefKey(f.ref)));
   unique(usefulness.map((u) => entityRefKey(u.ref)));
@@ -123,6 +138,9 @@ export function parseWorkspaceBackup(value: unknown): WorkspaceBackup {
     usefulness,
     practiceRuns,
     situations,
+    ...(widgetLocks.length ? { widgetLocks } : {}),
+    ...(widgetDrafts.length ? { widgetDrafts } : {}),
+    ...(widgetReleases.length ? { widgetReleases } : {}),
   };
 }
 

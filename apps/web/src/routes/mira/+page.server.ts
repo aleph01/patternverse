@@ -38,7 +38,7 @@ export const load: PageServerLoad = async () => {
         };
       }),
     patterns: corpus.entities
-      .filter((entity) => entity.type === 'pattern')
+      .filter((entity) => entity.type === 'pattern' || entity.type === 'practice')
       .map((entity) => ({
         ...summarizeEntity(entity),
         hasPractice: Boolean(entity.practice || entity.languagePracticeSource),

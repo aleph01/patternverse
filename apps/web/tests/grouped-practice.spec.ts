@@ -10,7 +10,7 @@ test('shows grouped decision questions and keeps prior work visible at narrow an
   await page
     .getByLabel('How are you currently phrasing the decision?')
     .fill('Should we build a new app?');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(page.getByRole('heading', { name: 'Clarify the outcome' })).toBeVisible();
   await expect(page.getByLabel('What problem are you trying to solve?')).toBeVisible();
   await expect(page.getByLabel('What would a good outcome give you?')).toBeVisible();
@@ -18,7 +18,7 @@ test('shows grouped decision questions and keeps prior work visible at narrow an
   await page
     .getByLabel('What problem are you trying to solve?')
     .fill('People cannot find the information they need.');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(page.getByRole('heading', { name: 'Separate facts from assumptions' })).toHaveCount(
     0,
   );
@@ -27,7 +27,7 @@ test('shows grouped decision questions and keeps prior work visible at narrow an
   await page
     .getByLabel('What would a good outcome give you?')
     .fill('Useful information at the right moment.');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(
     page.getByRole('heading', { name: 'Separate facts from assumptions' }),
   ).toBeVisible();
@@ -55,11 +55,11 @@ test('the editor previews the same migrated source with required and optional fi
     await page.getByRole('tab', { name: 'Preview', exact: true }).click();
   await page.getByRole('button', { name: 'Run preview', exact: true }).click();
   await page.getByLabel('What are you finding hard to start?').fill('Write the first paragraph.');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await page.getByLabel('What is one very small first action?').fill('Open the document.');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(page.getByText('optional', { exact: true }).last()).toBeVisible();
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(
     page.getByText(
       'Practice complete. Your test answers remain visible until you restart or leave.',

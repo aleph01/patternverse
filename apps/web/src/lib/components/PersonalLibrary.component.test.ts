@@ -35,7 +35,10 @@ beforeEach(() => {
   local.ratingsUnavailable = false;
   window.localStorage.clear();
 });
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
 
 const commons: EntitySummary[] = ['observer', 'builder'].map((id) => ({
   id,
@@ -63,6 +66,68 @@ const props = {
 };
 
 describe('My library and Explore', () => {
+  it('opens a linked Commons Verse in Explore with personal members and colliding Verse IDs', async () => {
+    local.saved = [
+      {
+        ref: { sourceId: 'commons', entityId: 'builder' },
+        workspaceId: 'mine',
+        createdAt: '2026-10-21',
+      },
+    ];
+    local.entities = [
+      {
+        id: 'software',
+        sourceId: 'personal',
+        type: 'verse',
+        title: 'My software',
+        status: 'draft',
+        body: '',
+      },
+      {
+        id: 'private-software',
+        sourceId: 'personal',
+        type: 'pattern',
+        title: 'Private software pattern',
+        status: 'draft',
+        body: '',
+        verses: ['software'],
+      },
+      {
+        id: 'private-builder',
+        sourceId: 'personal',
+        type: 'pattern',
+        title: 'Private Commons member',
+        status: 'draft',
+        body: '',
+        verses: ['building'],
+      },
+    ];
+    render(WorkspaceLibrary, {
+      ...props,
+      selectedVerse: 'commons:building',
+      commonsVerses: [
+        ...props.commonsVerses,
+        { id: 'building', sourceId: 'commons', title: 'Building', itemKeys: ['commons:observer'] },
+      ],
+    });
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: 'Commons' }).getAttribute('aria-pressed')).toBe(
+        'true',
+      ),
+    );
+    await screen.findByRole('link', { name: /Private Commons member/ });
+    expect(screen.getByRole('link', { name: /Observer/ })).toBeTruthy();
+    expect(screen.queryByRole('link', { name: /Private software pattern/ })).toBeNull();
+    await fireEvent.click(screen.getByRole('button', { name: 'Change verse' }));
+    await fireEvent.click(screen.getByRole('button', { name: /^Software$/ }));
+    expect(screen.getAllByRole('link')).toHaveLength(1);
+    expect(screen.getByRole('link', { name: /Observer/ })).toBeTruthy();
+    await fireEvent.click(screen.getByRole('button', { name: 'Change verse' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'My software · Mine' }));
+    expect(screen.getAllByRole('link')).toHaveLength(1);
+    expect(screen.getByRole('link', { name: /Private software pattern/ })).toBeTruthy();
+  });
+
   it('keeps legacy concepts and practices out of browsing and search without hiding private patterns', async () => {
     const base: RawEntity = {
       id: 'legacy',
@@ -86,7 +151,7 @@ describe('My library and Explore', () => {
     });
     expect(screen.getAllByRole('link')).toHaveLength(1);
     expect(screen.queryByRole('link', { name: /Old concept|Old practice/ })).toBeNull();
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
     expect(screen.getAllByRole('link')).toHaveLength(1);
     expect(local.entities).toHaveLength(3);
   });
@@ -103,9 +168,9 @@ describe('My library and Explore', () => {
     await fireEvent.click(within(form).getByRole('button', { name: 'Clear search' }));
     expect((search as HTMLInputElement).value).toBe('');
     expect(document.activeElement).toBe(search);
-    expect(screen.getByRole('button', { name: 'Software' }).getAttribute('aria-pressed')).toBe(
-      'true',
-    );
+    expect(
+      screen.getByRole('button', { name: 'Software', hidden: true }).getAttribute('aria-pressed'),
+    ).toBe('true');
     expect(screen.getAllByRole('link')).toHaveLength(1);
     expect(within(form).queryByRole('button')).toBeNull();
     await fireEvent.input(search, { target: { value: 'no matches' } });
@@ -146,7 +211,7 @@ describe('My library and Explore', () => {
         false,
       ),
     );
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
     await chooseRating('Useful or better');
     expect(screen.getAllByRole('link')).toHaveLength(2);
     await chooseRating('Very useful only');
@@ -156,11 +221,11 @@ describe('My library and Explore', () => {
     await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
     expect(screen.getByRole('link', { name: /Builder/ })).toBeTruthy();
     expect(screen.queryByRole('link', { name: /Observer/ })).toBeNull();
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
     await fireEvent.click(screen.getByRole('button', { name: 'Software' }));
     expect(screen.getAllByRole('link')).toHaveLength(1);
     await fireEvent.input(screen.getByRole('searchbox'), { target: { value: 'Observer' } });
-    await fireEvent.click(screen.getByRole('button', { name: 'List' }));
+    expect(screen.queryByRole('group', { name: 'Library view' })).toBeNull();
     expect(screen.getByRole('link', { name: /Observer/ })).toBeTruthy();
     expect(screen.getByRole('button', { name: /^Your rating:/ }).textContent).toContain('Useful +');
   });
@@ -219,12 +284,12 @@ describe('My library and Explore', () => {
     await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
     expect(screen.getByRole('searchbox').getAttribute('placeholder')).toBe('Search your library');
     expect((screen.getByRole('searchbox') as HTMLInputElement).value).toBe('Observer');
-    expect(screen.getByRole('button', { name: 'Software' }).getAttribute('aria-pressed')).toBe(
-      'true',
-    );
+    expect(
+      screen.getByRole('button', { name: 'Software', hidden: true }).getAttribute('aria-pressed'),
+    ).toBe('true');
     expect(screen.getAllByRole('link')).toHaveLength(1);
     expect(screen.queryByText('In my library')).toBeNull();
-    await fireEvent.click(screen.getByRole('button', { name: 'List' }));
+    expect(screen.queryByRole('group', { name: 'Library view' })).toBeNull();
     expect(view.container.querySelector('.card-grid')).toBeNull();
     expect(screen.queryByRole('button', { name: /Remove .*my library/ })).toBeNull();
     local.saved = [];
@@ -232,7 +297,7 @@ describe('My library and Explore', () => {
     await waitFor(() => expect(screen.queryByRole('link')).toBeNull());
   });
 
-  it('defaults to My library with existing favorites and private patterns, without source collisions', async () => {
+  it('opens an explicitly requested My library with saved and private patterns, without source collisions', async () => {
     local.saved = [
       {
         ref: { sourceId: 'commons', entityId: 'builder' },
@@ -252,22 +317,25 @@ describe('My library and Explore', () => {
         verses: ['software'],
       },
     ];
-    render(WorkspaceLibrary, props);
+    render(WorkspaceLibrary, { ...props, scope: 'saved' });
     await waitFor(() =>
-      expect(screen.getByRole('button', { name: /^My library/ }).getAttribute('aria-pressed')).toBe(
-        'true',
+      expect(screen.getByRole('button', { name: /^My library/ }).hasAttribute('disabled')).toBe(
+        false,
       ),
+    );
+    expect(screen.getByRole('button', { name: /^My library/ }).getAttribute('aria-pressed')).toBe(
+      'true',
     );
     expect(screen.getAllByRole('link')).toHaveLength(2);
     expect(screen.getByRole('link', { name: /My Observer/ })).toBeTruthy();
     expect(screen.queryByRole('link', { name: /commons Observer/ })).toBeNull();
     await fireEvent.click(screen.getByRole('button', { name: 'Software' }));
     expect(screen.getAllByRole('link')).toHaveLength(1);
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
     expect(screen.getAllByRole('link')).toHaveLength(2);
   });
 
-  it('shows only verses containing a saved pattern or collection in My library, independently of search and category filters', async () => {
+  it('shows only populated library verses in desktop and mobile navigation, independently of search and category', async () => {
     const collection: EntitySummary = {
       id: 'methods',
       sourceId: 'commons',
@@ -284,6 +352,7 @@ describe('My library and Explore', () => {
     }));
     render(WorkspaceLibrary, {
       ...props,
+      scope: 'saved',
       initialTypes: ['pattern'],
       commons: [...commons, collection],
       commonsSearchDocuments: [
@@ -311,9 +380,12 @@ describe('My library and Explore', () => {
       ],
     });
     await waitFor(() =>
-      expect(screen.getByRole('button', { name: /^My library/ }).getAttribute('aria-pressed')).toBe(
-        'true',
+      expect(screen.getByRole('button', { name: /^My library/ }).hasAttribute('disabled')).toBe(
+        false,
       ),
+    );
+    expect(screen.getByRole('button', { name: /^My library/ }).getAttribute('aria-pressed')).toBe(
+      'true',
     );
     const sidebar = within(screen.getByRole('complementary', { name: 'Browse verses' }));
     expect(sidebar.getByRole('button', { name: 'Software' })).toBeTruthy();
@@ -324,25 +396,87 @@ describe('My library and Explore', () => {
       Array.from((screen.getByLabelText('Verse') as HTMLSelectElement).options).map(
         ({ text }) => text,
       ),
-    ).toEqual(['All verses', 'Software', 'Methods']);
+    ).toEqual(['All verses', 'Methods', 'Software']);
+    await fireEvent.click(screen.getByRole('button', { name: 'Patterns' }));
+    expect(sidebar.getByRole('button', { name: 'Methods' })).toBeTruthy();
     await fireEvent.input(screen.getByRole('searchbox'), {
       target: { value: 'No matching title' },
     });
     expect(sidebar.getByRole('button', { name: 'Methods' })).toBeTruthy();
     expect(sidebar.getByRole('button', { name: 'Software' })).toBeTruthy();
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
     expect(sidebar.getByRole('button', { name: 'Building' })).toBeTruthy();
     expect(sidebar.getByRole('button', { name: 'Empty verse' })).toBeTruthy();
     await fireEvent.click(sidebar.getByRole('button', { name: 'Building' }));
     await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
     await waitFor(() =>
-      expect(sidebar.getByRole('button', { name: 'All verses' }).getAttribute('aria-pressed')).toBe(
-        'true',
-      ),
+      expect((screen.getByLabelText('Verse') as HTMLSelectElement).value).toBe('all'),
     );
+    expect(sidebar.queryByRole('button', { name: 'Building', hidden: true })).toBeNull();
+    await fireEvent.click(
+      within(screen.getByRole('search')).getByRole('button', { name: 'Clear search' }),
+    );
+    expect(screen.getByRole('link', { name: /Observer/ })).toBeTruthy();
   });
 
-  it('removes a verse when its last saved entry is removed and resets that verse filter', async () => {
+  it.each([false, true])(
+    'hides areas without saved or owned content (mobile picker: %s)',
+    async (mobileCollections) => {
+      vi.stubGlobal(
+        'matchMedia',
+        vi.fn(() => ({
+          matches: mobileCollections,
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+        })),
+      );
+      local.saved = [
+        {
+          ref: { sourceId: 'commons', entityId: 'observer' },
+          workspaceId: 'mine',
+          createdAt: '2026-11-03',
+        },
+      ];
+      local.entities = [
+        {
+          id: 'private',
+          sourceId: 'personal',
+          title: 'My private pattern',
+          type: 'pattern',
+          status: 'draft',
+          body: '',
+          verses: ['writing'],
+        },
+      ];
+      render(WorkspaceLibrary, {
+        ...props,
+        mobileCollections,
+        scope: 'saved',
+        commonsVerses: [
+          {
+            id: 'software-engineering',
+            sourceId: 'commons',
+            title: 'Software',
+            itemKeys: ['commons:observer'],
+          },
+          { id: 'business', sourceId: 'commons', title: 'Business', itemKeys: ['commons:builder'] },
+          { id: 'writing', sourceId: 'commons', title: 'Writing', itemKeys: [] },
+          { id: 'cooking', sourceId: 'commons', title: 'Cooking', itemKeys: [] },
+        ],
+      });
+      await screen.findByRole('link', { name: /My private pattern/ });
+      const areas = within(screen.getByRole('navigation', { name: 'Verse Areas' }));
+      expect(areas.getByRole('button', { name: 'Science & Technology' })).toBeTruthy();
+      expect(areas.getByRole('button', { name: 'Arts & Design' })).toBeTruthy();
+      expect(areas.queryByRole('button', { name: 'Work & Organizations' })).toBeNull();
+      expect(areas.queryByRole('button', { name: 'Everyday Life' })).toBeNull();
+      await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
+      expect(areas.getByRole('button', { name: 'Work & Organizations' })).toBeTruthy();
+      expect(areas.getByRole('button', { name: 'Everyday Life' })).toBeTruthy();
+    },
+  );
+
+  it('removes empty verses and resets the selection as saved content is removed', async () => {
     local.saved = commons.map(({ id }) => ({
       ref: { sourceId: 'commons', entityId: id },
       workspaceId: 'mine',
@@ -350,29 +484,33 @@ describe('My library and Explore', () => {
     }));
     render(WorkspaceLibrary, {
       ...props,
+      scope: 'saved',
       commonsVerses: [
         ...props.commonsVerses,
         { id: 'building', sourceId: 'commons', title: 'Building', itemKeys: ['commons:builder'] },
       ],
     });
     await waitFor(() =>
-      expect(screen.getByRole('button', { name: /^My library/ }).getAttribute('aria-pressed')).toBe(
-        'true',
+      expect(screen.getByRole('button', { name: /^My library/ }).hasAttribute('disabled')).toBe(
+        false,
       ),
+    );
+    expect(screen.getByRole('button', { name: /^My library/ }).getAttribute('aria-pressed')).toBe(
+      'true',
     );
     await fireEvent.click(screen.getByRole('button', { name: 'Software' }));
     local.saved = local.saved.filter(({ ref }) => ref.entityId !== 'observer');
     notifyWorkspaceChanged({ origin: 'local', topics: WORKSPACE_DATA_TOPICS });
-    await waitFor(() => expect(screen.queryByRole('button', { name: 'Software' })).toBeNull());
-    expect(screen.getByRole('button', { name: 'All verses' }).getAttribute('aria-pressed')).toBe(
-      'true',
-    );
+    await waitFor(() => expect(screen.queryByRole('link', { name: /Observer/ })).toBeNull());
+    expect(screen.queryByRole('button', { name: 'Software', hidden: true })).toBeNull();
+    expect((screen.getByLabelText('Verse') as HTMLSelectElement).value).toBe('all');
     expect(screen.getByRole('link', { name: /Builder/ })).toBeTruthy();
     local.saved = [];
     notifyWorkspaceChanged({ origin: 'local', topics: WORKSPACE_DATA_TOPICS });
     await waitFor(() =>
-      expect(screen.queryByRole('complementary', { name: 'Browse verses' })).toBeNull(),
+      expect(screen.getByRole('heading', { name: 'Nothing saved yet' })).toBeTruthy(),
     );
+    expect(screen.queryByRole('complementary', { name: 'Browse verses' })).toBeNull();
     expect(screen.queryByLabelText('Verse')).toBeNull();
   });
 
@@ -418,6 +556,7 @@ describe('My library and Explore', () => {
     expect(screen.getByRole('link', { name: /Private observer/ }).getAttribute('href')).toBe(
       '/editor?id=observer',
     );
+    await fireEvent.click(screen.getByRole('button', { name: 'Change verse' }));
     await fireEvent.click(screen.getByRole('button', { name: 'Software' }));
     expect(screen.getAllByRole('link')).toHaveLength(1);
     expect(screen.getByRole('link', { name: /Observer/ }).getAttribute('href')).toBe(
@@ -432,7 +571,7 @@ describe('My library and Explore', () => {
         false,
       ),
     );
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    await fireEvent.click(screen.getByRole('button', { name: 'Commons' }));
     local.entities = [
       {
         id: 'private',
@@ -456,11 +595,11 @@ describe('My library and Explore', () => {
     ];
     notifyWorkspaceChanged({ origin: 'sync', topics: ['entities'] });
     await screen.findByRole('link', { name: /Private idea/ });
-    expect(screen.getByRole('button', { name: 'Explore' }).getAttribute('aria-pressed')).toBe(
+    expect(screen.getByRole('button', { name: 'Commons' }).getAttribute('aria-pressed')).toBe(
       'true',
     );
-    await fireEvent.click(screen.getByRole('button', { name: 'Patterns' }));
     await fireEvent.input(screen.getByRole('searchbox'), { target: { value: 'Nebula methods' } });
+    await fireEvent.click(screen.getByRole('button', { name: 'Patterns' }));
     expect(screen.getAllByRole('link')).toHaveLength(1);
     expect(screen.getByRole('link', { name: /Private idea/ })).toBeTruthy();
     local.entities = local.entities.filter((entry) => entry.id !== 'methods');

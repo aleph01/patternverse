@@ -33,7 +33,7 @@ describe('public legal notices', () => {
     );
     expect(screen.getByRole('main').getAttribute('lang')).toBe('en');
     expect(screen.getByRole('heading', { name: 'Website operator' })).toBeTruthy();
-    expect(screen.getByText('Last updated: 2 October 2026')).toBeTruthy();
+    expect(screen.getByText('Last updated: 23 October 2026')).toBeTruthy();
     expect(screen.getByRole('link', { name: 'privacy' }).getAttribute('href')).toBe('/privacy');
   });
 
@@ -46,13 +46,18 @@ describe('public legal notices', () => {
     ).toBeTruthy();
     expect(screen.getByText(/not a guarantee of complete anonymity/)).toBeTruthy();
     expect(screen.getByText(/no automatic time-based deletion/)).toBeTruthy();
-    expect(screen.getByRole('link', { name: /State Commissioner/ })).toBeTruthy();
+    expect(
+      screen
+        .getByRole('link', { name: /directory of supervisory authorities/ })
+        .getAttribute('href'),
+    ).toBe('https://www.edpb.europa.eu/about-edpb/our-members_en');
   });
 
-  it('offers crisis contacts and preserves statutory rights rather than a blanket waiver', () => {
+  it('offers EU emergency guidance and preserves statutory rights rather than a blanket waiver', () => {
     render(Safety);
     expect(screen.getByRole('link', { name: '112' }).getAttribute('href')).toBe('tel:112');
-    expect(screen.getByRole('link', { name: '116 123' }).getAttribute('href')).toBe('tel:116123');
+    expect(screen.getByText(/In the European Union/)).toBeTruthy();
+    expect(screen.getByText(/emergency number for your location/)).toBeTruthy();
     expect(screen.getByRole('main').getAttribute('lang')).toBe('en');
     expect(screen.getByText(/not a person, doctor, or psychotherapist/)).toBeTruthy();
     expect(screen.getByText(/Statutory liability rules apply/)).toBeTruthy();

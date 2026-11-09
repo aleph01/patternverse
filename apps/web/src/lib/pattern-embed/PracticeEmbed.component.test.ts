@@ -67,7 +67,10 @@ it('does not silently restart or accept an invalid transferred checkpoint', asyn
 
 it('confirms single-line responses with Enter without native form submission', async () => {
   render(PracticeEmbed, {
-    source: source.replace(':multiline true', ':multiline false'),
+    source: source.replace(
+      'current-decision = !ask {',
+      'current-decision = !ask {\n:multiline false',
+    ),
     title: 'Define the Decision',
   });
   const input = await screen.findByLabelText('How are you currently phrasing the decision?');

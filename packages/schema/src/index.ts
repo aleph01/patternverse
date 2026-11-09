@@ -55,6 +55,28 @@ const commonMetadataShape = {
   aliases: z.array(z.string().trim().min(1)).optional(),
   tags: z.array(z.string().trim().min(1)).optional(),
   attribution: z.string().trim().min(1).optional(),
+  libraries: z
+    .array(
+      z
+        .object({
+          id: entityIdSchema,
+          src: z
+            .string()
+            .min(1)
+            .max(240)
+            .refine(
+              (value) =>
+                !value.startsWith('/') &&
+                !value.includes('\\') &&
+                !value.includes(':') &&
+                value.endsWith('.json'),
+              'Library sources must be relative local JSON files.',
+            ),
+        })
+        .strict(),
+    )
+    .max(64)
+    .optional(),
   copied_from: copiedFromSchema.optional(),
 };
 

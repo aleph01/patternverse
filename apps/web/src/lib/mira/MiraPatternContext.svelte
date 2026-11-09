@@ -26,7 +26,7 @@
 <section class="selected-pattern" aria-label="Selected pattern">
   <div class="pattern-heading">
     <div>
-      <span class="eyebrow">Selected pattern</span>
+      <span class="eyebrow">Selected {pattern.type === 'practice' ? 'practice' : 'pattern'}</span>
       <h2>{pattern.title}</h2>
     </div>
     <button type="button" onclick={onremove} aria-label="Remove selected library pattern"
@@ -44,7 +44,9 @@
     </div>
   </details>
   <div class="pattern-links">
-    <a href={returnHref}>Back to pattern <ArrowUpRight size={14} /></a>
+    <a href={returnHref}
+      >Back to {pattern.type === 'practice' ? 'practice' : 'pattern'} <ArrowUpRight size={14} /></a
+    >
     {#if practiceHref}<a href={practiceHref}>Try yourself <ArrowUpRight size={14} /></a>{/if}
   </div>
 </section>

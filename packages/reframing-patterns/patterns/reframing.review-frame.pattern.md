@@ -16,60 +16,60 @@ classifier frame_signal -> FrameSignal {
 }
 signal = frame ?~ frame_signal
 ?match signal {
-    :case evidence -> evidence
-    :case constraint -> constraint
-    :case solution -> solution
-    :case form -> form
-    :case agency -> agency
-    :case emotion -> emotion
-    :case tradeoff -> tradeoff
-    :case no_clear_signal -> unsure
+  :case evidence {
+    finding = !use reframing.verify-statement {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case constraint {
+    finding = !use reframing.remove-constraints {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case solution {
+    finding = !use reframing.detect-baked-solution {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case form {
+    form_finding = !use reframing.identify-problem-form {
+        :with frame
+    }
+    candidate_frame = form_finding.candidate_frame
+    -> end
+  }
+  :case agency {
+    finding = !use reframing.locate-problem {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case emotion {
+    finding = !use reframing.inspect-emotion {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case tradeoff {
+    finding = !use reframing.break-tradeoff {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case no_clear_signal {
+    candidate_frame = frame
+    !show {
+        No single framing trap stands out yet. The current statement can remain provisional.
+    }
+    -> end
+  }
 }
-evidence:
-!use reframing.verify-statement as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-constraint:
-!use reframing.remove-constraints as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-solution:
-!use reframing.detect-baked-solution as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-form:
-!use reframing.identify-problem-form as form_finding {
-    :with frame
-}
-= candidate_frame form_finding.candidate_frame
--> end
-agency:
-!use reframing.locate-problem as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-emotion:
-!use reframing.inspect-emotion as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-tradeoff:
-!use reframing.break-tradeoff as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-unsure:
-= candidate_frame frame
-!show {
-    No single framing trap stands out yet. The current statement can remain provisional.
-}
--> end

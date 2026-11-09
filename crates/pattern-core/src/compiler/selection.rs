@@ -27,9 +27,7 @@ pub(super) fn check(
     prompt: Vec<CheckedPart>,
 ) -> Result<CheckedStep, Diagnostic> {
     let binding = required_binding(b)?;
-    let (selection, options, element_type) = selection_parameters(b, symbols)?;
-    validate_presentation(&selection, b)?;
-    validate_element_type(&selection, &element_type, b)?;
+    let (selection, options, element_type) = contract(b, symbols)?;
     let ty = if selection.mode == SelectionMode::Single {
         Type::Choice
     } else {
@@ -47,6 +45,17 @@ pub(super) fn check(
         selection,
         prompt,
     })
+}
+
+/// Share the checked selection contract with atomic form fields.
+pub(super) fn contract(
+    b: &Block,
+    symbols: &Scope,
+) -> Result<(Selection, CheckedOptions, Type), Diagnostic> {
+    let (selection, options, element_type) = selection_parameters(b, symbols)?;
+    validate_presentation(&selection, b)?;
+    validate_element_type(&selection, &element_type, b)?;
+    Ok((selection, options, element_type))
 }
 
 /// Parse flags, presentation hints and one source without declaring the result binding.

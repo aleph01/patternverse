@@ -1,24 +1,36 @@
 import { expect, test } from '@playwright/test';
+import { libraryVerseControl, searchLibrary, selectLibraryCategory } from './helpers/library';
 
-test('browses the NLP collection inside Therapy and reads patterns with optional practices', async ({
+test('browses the NLP collection inside Therapy & Wellbeing and reads patterns with optional practices', async ({
   page,
 }) => {
-  await page.goto('/verse/therapy');
-  await page.getByRole('heading', { level: 2, name: 'Collections', exact: true }).click();
-  await page.getByRole('link', { name: 'Neuro-Linguistic Programming', exact: true }).click();
-  await expect(page).toHaveURL(/\/collection\/neuro-linguistic-programming$/);
+  await page.goto('/');
   await expect(
-    page.getByRole('heading', { level: 1, name: 'Neuro-Linguistic Programming' }),
+    page.getByRole('heading', { name: 'Therapy & Wellbeing', exact: true }),
   ).toBeVisible();
-  await expect(page.getByText('14 entries · Author-defined order')).toBeVisible();
+  await expect(page.locator('a[href="/verse/wellbeing"]')).toHaveCount(0);
+  await page.goto('/verse/wellbeing');
+  await expect(page).toHaveURL('/library?verse=commons%3Atherapy');
+  await expect(libraryVerseControl(page, 'Therapy & Wellbeing')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await selectLibraryCategory(page, 'Collections');
+  await page.locator('a[href="/collection/neuro-linguistic-programming"]').click();
+  // Wide-library cards expand a dialog; phone cards open the collection page.
+  await expect(
+    page.getByRole('heading', { name: 'NLP: Sleight of Mouth', exact: true }).last(),
+  ).toBeVisible();
   await page.getByRole('link', { name: /Find the Positive Intention/ }).click();
-  await expect(page).toHaveURL(/\/pattern\/find-the-positive-intention$/);
+  await expect(page).toHaveURL(
+    /\/pattern\/find-the-positive-intention\?collection=commons%3Aneuro-linguistic-programming$/,
+  );
   const article = page.getByRole('article', { name: 'Find the Positive Intention article' });
   await expect(
     article.getByRole('heading', { name: 'What the objection is protecting' }),
   ).toBeVisible();
   await expect(article).toContainText(
-    'Understanding a motive is being used to excuse harm or override a boundary.',
+    'Understanding an intention also leaves responsibility intact.',
   );
   await expect(article).toContainText('Robert Dilts');
   await expect(page.getByRole('link', { name: 'Try this pattern', exact: true })).toHaveAttribute(
@@ -36,19 +48,11 @@ test('browses the NLP collection inside Therapy and reads patterns with optional
 
 test('discovers the collection and imported patterns through library search', async ({ page }) => {
   await page.goto('/library');
-  const all = page
-    .getByRole('navigation', { name: 'Library categories' })
-    .getByRole('button', { name: 'All', exact: true });
-  // A slow development build can paint server controls before hydration attaches their events.
-  await expect(async () => {
-    await all.click();
-    await expect(all).toHaveAttribute('aria-pressed', 'true', { timeout: 500 });
-  }).toPass();
-  const search = page.getByRole('searchbox', { name: /Search/ }).first();
-  await search.fill('NLP');
-  await expect(page.getByRole('link', { name: /Neuro-Linguistic Programming/ })).toBeVisible();
+  await selectLibraryCategory(page, 'All');
+  await searchLibrary(page, 'NLP');
+  await expect(page.locator('a[href="/collection/neuro-linguistic-programming"]')).toBeVisible();
   await expect(page.getByRole('link', { name: /Find the Positive Intention/ })).toBeVisible();
-  await search.fill('Reality Strategy');
+  await searchLibrary(page, 'Reality Strategy');
   await page.getByRole('link', { name: /Inspect How You Know/ }).click();
   await expect(page).toHaveURL(/\/pattern\/inspect-how-you-know$/);
   await expect(page.getByRole('article', { name: 'Inspect How You Know article' })).toContainText(

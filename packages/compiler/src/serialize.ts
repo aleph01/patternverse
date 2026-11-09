@@ -16,6 +16,7 @@ export const entityMetadata = (entity: RawEntity): Entity => {
     ...('verses' in entity ? { verses: entity.verses } : {}),
     attribution: entity.attribution,
     copied_from: entity.copied_from,
+    libraries: entity.libraries,
   };
 
   switch (entity.type) {

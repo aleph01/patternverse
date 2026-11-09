@@ -69,6 +69,7 @@ const execute = (value: Record<string, unknown>): StandaloneRun =>
 describe('legacy import compatibility, not a second execution engine', () => {
   it('preserves grouped questions, flags, placeholders, literal prose and persistent timers', () => {
     const source = legacyPracticeSource(practice);
+    expect(source).toContain('optional = !ask [optional]');
     const run = execute({ operation: 'start', source, root_id: 'legacy-import', inputs: {} });
     const effect = run.view.pending!;
     expect(effect.request.kind).toBe('interaction.form');

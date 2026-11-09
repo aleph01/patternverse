@@ -29,6 +29,7 @@ pub(crate) use looping::Loop;
 pub use selection::{Selection, SelectionMode};
 mod image;
 mod show;
+mod shuffle;
 mod timer;
 mod video;
 pub use image::Image;
@@ -37,7 +38,7 @@ pub use video::{Video, VideoProvider};
 mod form;
 pub use form::{Form, FormBlock};
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, PartialOrd, Ord)]
 pub struct BindingId(pub usize);
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct NodeId(pub usize);
@@ -78,7 +79,7 @@ struct CheckedCollection {
 enum CheckedStep {
     Form {
         binding: String,
-        form: Form<Vec<CheckedPart>>,
+        form: Form<Vec<CheckedPart>, CheckedOptions>,
     },
     ShowCollection {
         source: CheckedExpr,
@@ -133,6 +134,10 @@ enum CheckedStep {
         binding: String,
         expression: CheckedExpr,
     },
+    Shuffle {
+        binding: String,
+        expression: CheckedExpr,
+    },
     Branch {
         arms: Vec<(CheckedExpr, NodeId)>,
         otherwise: NodeId,
@@ -146,9 +151,11 @@ enum CheckedStep {
     Jump(NodeId),
     End,
     Generate {
+        widget: Option<(crate::widgets::Package, String)>,
         binding: String,
         contract: Contract,
         prompt: Vec<CheckedPart>,
+        context: Vec<(String, CheckedExpr)>,
     },
     Turn {
         binding: Option<String>,
@@ -182,15 +189,19 @@ struct Symbol {
     value_type: Type,
     span: Span,
     id: BindingId,
+    choices: Option<BTreeSet<String>>,
 }
 
 /// Can only be obtained through validation, not assembled with unchecked fields.
 #[derive(Clone, Debug)]
 pub struct ValidatedPattern {
+    widgets: crate::widgets::Packages,
+    constants: BTreeMap<String, Value>,
     flows: BTreeMap<String, CompiledPattern>,
     message_handler: Option<String>,
     dependencies: BTreeMap<String, Dependency>,
     source: String,
+    annotated: bool,
     title: Option<String>,
     symbols: Scope,
     inputs: Vec<String>,
@@ -241,6 +252,46 @@ pub struct Rating {
     pub low: Option<String>,
     pub high: Option<String>,
 }
+impl Rating {
+    /// Parse the shared standalone and grouped numeric rating contract.
+    fn check(b: &Block) -> Check<Self> {
+        let attrs = attributes(b, &["prefer", "low", "high"])?;
+        let (range, span) = b
+            .argument
+            .as_ref()
+            .ok_or_else(|| err("Rating requires low..high", b.span.clone()))?;
+        let (lo, hi) = range
+            .split_once("..")
+            .ok_or_else(|| err("Expected low..high", span.clone()))?;
+        let finite = |s: &str| {
+            s.parse::<f64>()
+                .ok()
+                .filter(|n| n.is_finite())
+                .ok_or_else(|| err("Rating bounds must be finite numbers", span.clone()))
+        };
+        let min = finite(lo)?;
+        let max = finite(hi)?;
+        if min > max {
+            return Err(err("Rating minimum exceeds maximum", span.clone()));
+        }
+        let prefer = attrs
+            .get("prefer")
+            .map(|a| name(&arity(a, 1)?[0]))
+            .transpose()?;
+        let label = |key| attrs.get(key).map(|a| quoted(&arity(a, 1)?[0])).transpose();
+        Ok(Self {
+            min,
+            max,
+            prefer,
+            low: label("low")?,
+            high: label("high")?,
+        })
+    }
+    /// Accept only finite numbers within the authored inclusive bounds.
+    pub(crate) fn accepts(&self, number: f64) -> bool {
+        number.is_finite() && number >= self.min && number <= self.max
+    }
+}
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub(crate) enum Case {
     Enum(String),
@@ -266,7 +317,7 @@ impl Case {
 pub(crate) enum Instruction {
     Form {
         binding: BindingId,
-        form: Form<Vec<Part>>,
+        form: Form<Vec<Part>, Options>,
     },
     ShowCollection {
         source: CompiledExpr,
@@ -320,6 +371,10 @@ pub(crate) enum Instruction {
         binding: BindingId,
         expression: CompiledExpr,
     },
+    Shuffle {
+        binding: BindingId,
+        expression: CompiledExpr,
+    },
     Branch {
         arms: Vec<(CompiledExpr, NodeId)>,
         otherwise: NodeId,
@@ -331,9 +386,13 @@ pub(crate) enum Instruction {
     },
     Jump(NodeId),
     Generate {
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        widget: Option<(crate::widgets::Package, String)>,
         binding: BindingId,
         contract: Contract,
         prompt: Vec<Part>,
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        context: Vec<(String, CompiledExpr)>,
     },
     Turn {
         binding: Option<BindingId>,
@@ -380,6 +439,12 @@ pub(crate) struct Input {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CompiledPattern {
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub(crate) widgets: crate::widgets::Packages,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub(crate) constants: BTreeMap<BindingId, Value>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub(crate) binding_types: BTreeMap<usize, Type>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub(crate) flows: BTreeMap<String, CompiledPattern>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub(crate) message_handler: Option<String>,
@@ -402,6 +467,9 @@ pub(crate) struct Dependency {
     pub outputs: BTreeMap<String, Type>,
 }
 impl CompiledPattern {
+    /// Borrow the exact widget packages frozen into this compiled pattern.
+    pub fn widget_packages(&self)->&crate::widgets::Packages{&self.widgets}
+
     /// Project declared input names and types for a Host's explicit input form.
     pub fn input_types(&self) -> BTreeMap<String, Type> {
         self.inputs
@@ -423,12 +491,35 @@ impl CompiledPattern {
     }
     /// Recompile exact source and pinned interfaces, rejecting any serialized IR mismatch.
     pub(crate) fn verify(&self) -> Result<(), Vec<Diagnostic>> {
-        let rebuilt = compile_with_dependencies(&self.source, self.dependencies.clone())?;
+        let data = self.data_libraries();
+        let rebuilt = if !self.widgets.is_empty() {
+            compile_with_widget_environment(&self.source,self.dependencies.clone(),&data,&self.widgets)?
+        } else if data.is_empty() {
+            compile_with_dependencies(&self.source, self.dependencies.clone())?
+        } else {
+            compile_with_environment(&self.source, self.dependencies.clone(), &data)?
+        };
         if &rebuilt == self {
             Ok(())
         } else {
             Err(vec![err("Compiled source mismatch", 0..0)])
         }
+    }
+    /// Recover frozen resources for deterministic inspection and verification.
+    pub(crate) fn data_libraries(&self) -> BTreeMap<String, crate::data::DataLibrary> {
+        self.constants
+            .values()
+            .filter_map(|value| match value {
+                Value::Catalog { schema, records } => Some((
+                    schema.reference.library.clone(),
+                    crate::data::DataLibrary {
+                        record_type: *schema.record_type.clone(),
+                        records: records.iter().map(Value::to_json).collect(),
+                    },
+                )),
+                _ => None,
+            })
+            .collect()
     }
     /// Borrow the content-derived identity of this source and its dependency interfaces.
     pub fn snapshot_id(&self) -> &str {
@@ -479,6 +570,8 @@ pub fn validate(parsed: ParsedPattern) -> Result<ValidatedPattern, Vec<Diagnosti
 pub fn lower(checked: ValidatedPattern) -> CompiledPattern {
     let mut binding_count = checked.symbols.len();
     let mut next_node = checked.steps.len();
+    let mut binding_types = BTreeMap::new();
+    let annotated = checked.annotated || checked.symbols.language == 3;
     let nodes = checked
         .steps
         .into_iter()
@@ -486,18 +579,63 @@ pub fn lower(checked: ValidatedPattern) -> CompiledPattern {
         .map(|(i, (step, span))| Node {
             id: NodeId(i),
             span,
-            instruction: lower_step(step, &checked.symbols, &mut binding_count, &mut next_node),
+            instruction: lower_step(
+                step,
+                &checked.symbols,
+                &mut binding_count,
+                &mut next_node,
+                &mut binding_types,
+            ),
         })
         .collect();
+    let annotated = annotated
+        || binding_types.values().any(Type::contains_optional)
+        || checked.dependencies.values().any(|dependency| {
+            dependency
+                .inputs
+                .values()
+                .chain(dependency.outputs.values())
+                .any(Type::contains_optional)
+        });
     let id = |n: &str| checked.symbols[n].id;
     let snapshot_id = format!(
-        "m4-v1:{:x}",
-        Sha256::digest(
-            serde_json::to_vec(&("pattern-core-m4-v1", &checked.source, &checked.dependencies))
-                .expect("source and interfaces serialize")
-        )
+        "{}:{:x}",
+        if annotated { "m4-v3" } else { "m4-v1" },
+        Sha256::digest(if !checked.widgets.is_empty() {
+            serde_json::to_vec(&("pattern-core-widget-v1",&checked.source,&checked.dependencies,&checked.constants,&checked.widgets)).expect("widget environment serializes")
+        } else if checked.constants.is_empty() {
+            serde_json::to_vec(&(
+                if annotated {
+                    "pattern-core-m4-v3"
+                } else {
+                    "pattern-core-m4-v1"
+                },
+                &checked.source,
+                &checked.dependencies,
+            ))
+            .expect("source and interfaces serialize")
+        } else {
+            serde_json::to_vec(&(
+                "pattern-core-data-v1",
+                &checked.source,
+                &checked.dependencies,
+                &checked.constants,
+            ))
+            .expect("data and source serialize")
+        })
     );
     CompiledPattern {
+        widgets: checked.widgets.clone(),
+        constants: checked
+            .constants
+            .iter()
+            .map(|(key, value)| (id(key), value.clone()))
+            .collect(),
+        binding_types: if annotated {
+            binding_types
+        } else {
+            BTreeMap::new()
+        },
         flows: checked.flows,
         message_handler: checked.message_handler,
         output_types: checked
@@ -541,9 +679,93 @@ type Check<T> = Result<T, Diagnostic>;
 /// Keeping this order preserves which diagnostic is reported first.
 fn check(
     parsed: ParsedPattern,
-    mut dependencies: BTreeMap<String, Dependency>,
+    dependencies: BTreeMap<String, Dependency>,
 ) -> Check<ValidatedPattern> {
-    let flows = procedures::compile(&parsed, &mut dependencies)?;
+    check_with_data(parsed, dependencies, &BTreeMap::new())
+}
+
+/// Compile a source against explicitly supplied immutable reference resources.
+///
+/// # Errors
+/// Reports invalid source, missing resources and malformed resource data.
+pub fn compile_with_data(
+    source: &str,
+    data: &BTreeMap<String, crate::data::DataLibrary>,
+) -> Result<CompiledPattern, Vec<Diagnostic>> {
+    compile_with_environment(source, BTreeMap::new(), data)
+}
+
+/// Compile with host-resolved executable dependencies and frozen reference data.
+pub(crate) fn compile_with_environment(
+    source: &str,
+    dependencies: BTreeMap<String, Dependency>,
+    data: &BTreeMap<String, crate::data::DataLibrary>,
+) -> Result<CompiledPattern, Vec<Diagnostic>> {
+    compile_with_widget_environment(source,dependencies,data,&BTreeMap::new())
+}
+/// Compile source with host-supplied data and immutable local widget packages.
+///
+/// # Errors
+/// Returns source diagnostics for invalid syntax, imports, inputs and widget contracts.
+pub fn compile_with_widgets(source:&str,data:&BTreeMap<String,crate::data::DataLibrary>,widgets:&crate::widgets::Packages)->Result<CompiledPattern,Vec<Diagnostic>>{
+    compile_with_widget_environment(source,BTreeMap::new(),data,widgets)
+}
+/// Compile with explicit child interfaces, reference data and local widget packages.
+///
+/// # Errors
+/// Returns parser or checker diagnostics before lowering an invalid program.
+pub(crate) fn compile_with_widget_environment(source:&str,dependencies:BTreeMap<String,Dependency>,data:&BTreeMap<String,crate::data::DataLibrary>,widgets:&crate::widgets::Packages)->Result<CompiledPattern,Vec<Diagnostic>>{
+    syntax::parse(source).and_then(|p|check_with_widgets(p,dependencies,data,widgets).map_err(|e|vec![e])).map(lower)
+}
+/// Parse package contract types using the ordinary language type parser.
+///
+/// # Errors
+/// Returns an explanatory error when the type expression is unsupported or malformed.
+pub fn widget_type(source:&str)->Result<Type,String>{
+    semantic::declared_type(&Word{text:source.into(),quoted:false,span:0..source.len()},&Scope::default()).map_err(|e|e.message)
+}
+
+/// Check source and declare imported catalogue constants before authored bindings.
+fn check_with_data(
+    parsed: ParsedPattern,
+    dependencies: BTreeMap<String, Dependency>,
+    data: &BTreeMap<String, crate::data::DataLibrary>,
+) -> Check<ValidatedPattern> {
+    check_with_widgets(parsed,dependencies,data,&BTreeMap::new())
+}
+/// Resolve declared widget imports, validate their packages and check the source environment.
+fn check_with_widgets(parsed:ParsedPattern,mut dependencies:BTreeMap<String,Dependency>,data:&BTreeMap<String,crate::data::DataLibrary>,packages:&crate::widgets::Packages)->Check<ValidatedPattern>{
+    if packages.iter().any(|(key,p)|key!=&p.reference()){return Err(err("Widget package key does not match its identity",0..0));}
+    let mut resolved=BTreeMap::new();
+    for import in syntax::package_imports(&parsed.declarations)? {
+        let prefix=format!("{}@",import.artifact);
+        let package=packages.values().filter(|p|p.reference().starts_with(&prefix)&&(p.manifest.version==import.revision||(!import.revision.contains('.')&&p.manifest.version.starts_with(&format!("{}.",import.revision))))).max_by_key(|p|p.manifest.version.split('.').map(|v|v.parse::<u32>().unwrap_or(0)).collect::<Vec<_>>()).ok_or_else(||err(format!("Missing installed widget package {}@{}",import.artifact,import.revision),import.span.clone()))?;
+        package.validate().map_err(|e|err(e,import.span))?;
+        resolved.insert(import.alias,package.clone());
+    }
+    let mut constants = syntax::data_imports(&parsed.declarations)?
+        .into_iter()
+        .map(|import| {
+            let library = data.get(&import.resource).ok_or_else(|| {
+                err(
+                    format!("Missing data library {}", import.resource),
+                    import.span.clone(),
+                )
+            })?;
+            Ok((
+                import.alias,
+                library
+                    .materialize(&import.resource)
+                    .map_err(|message| err(message, import.span))?,
+            ))
+        })
+        .collect::<Check<BTreeMap<_, _>>>()?;
+    for (alias,package) in &resolved {
+        let values=package.manifest.exports.iter().filter(|(_,e)|e.kind=="data").map(|(name,_)|package.data(name).map(|(v,_)|(name.clone(),v))).collect::<Result<BTreeMap<_,_>,_>>().map_err(|e|err(e,0..0))?;
+        if constants.insert(alias.clone(),Value::Record(values)).is_some(){return Err(err("Duplicate import alias",0..0));}
+    }
+    let annotated = uses_annotations(&parsed) || !constants.is_empty() || !resolved.is_empty();
+    let flows = procedures::compile(&parsed, &mut dependencies, data,packages)?;
     let message_handler = procedures::handler(&parsed, &flows)?;
     for import in syntax::imports(&parsed.declarations)? {
         if dependencies
@@ -564,7 +786,8 @@ fn check(
         inputs,
         output_words,
         title,
-    } = check_declarations(&parsed.declarations)?;
+    } = check_declarations(&parsed.declarations, &parsed.source, &constants)?;
+    symbols.widgets=resolved.clone();
     symbols.classifiers =
         std::sync::Arc::new(semantic::classifiers(&parsed.classifiers, &symbols)?);
     let indexed = index_statements(parsed.statements, parsed.source.len())?;
@@ -578,10 +801,13 @@ fn check(
         parsed.source.len(),
     )?;
     Ok(ValidatedPattern {
+        widgets: resolved.values().map(|p|(p.reference(),p.clone())).collect(),
+        constants,
         flows,
         message_handler,
         dependencies,
         source: parsed.source,
+        annotated,
         title,
         symbols,
         inputs,
@@ -589,6 +815,37 @@ fn check(
         steps,
         diagnostics,
     })
+}
+
+/// Detect additive annotation syntax only in parsed code positions, preserving old snapshot identities.
+fn uses_annotations(parsed: &ParsedPattern) -> bool {
+    /// Walk executable binding positions without inspecting authored prose.
+    fn statements(items: &[Statement]) -> bool {
+        items.iter().any(|statement| match statement {
+            Statement::Derive { binding, .. } => binding.text.contains(':'),
+            Statement::Block(block) => {
+                block
+                    .binding
+                    .as_ref()
+                    .is_some_and(|binding| binding.text.contains(':'))
+                    || block
+                        .attributes
+                        .iter()
+                        .any(|a| a.name == "returns" && a.raw.contains('['))
+                    || statements(&block.statements)
+            }
+            _ => false,
+        })
+    }
+    parsed.declarations.iter().any(|a| match a.name.as_str() {
+        "input" => a.raw.contains(':') || a.raw.contains('[') || a.raw.contains('{'),
+        "output" => a.raw.contains(':'),
+        "function" => a
+            .raw
+            .split_once("=>")
+            .is_some_and(|(signature, _)| signature.contains('[')),
+        _ => false,
+    }) || statements(&parsed.statements)
 }
 
 struct Declarations {
@@ -599,9 +856,28 @@ struct Declarations {
 }
 
 /// Validate header declarations and assign input symbols; defer output-name checks.
-fn check_declarations(declarations: &[Attribute]) -> Check<Declarations> {
+fn check_declarations(
+    declarations: &[Attribute],
+    source: &str,
+    constants: &BTreeMap<String, Value>,
+) -> Check<Declarations> {
     let mut symbols = Scope::default();
+    symbols.source = std::sync::Arc::new(source.into());
+    symbols.language = declarations
+        .iter()
+        .find(|a| a.name == "language")
+        .and_then(|a| a.args.first())
+        .and_then(|w| w.text.parse().ok())
+        .unwrap_or(1);
     symbols.enums = std::sync::Arc::new(semantic::enums(declarations)?);
+    let mut references = BTreeMap::new();
+    for (alias, value) in constants {
+        declare(&mut symbols, alias.clone(), value.value_type(), 0..0)?;
+        if let Value::Catalog { schema, .. } = value {
+            references.insert(alias.clone(), schema.reference.clone());
+        }
+    }
+    symbols.references = std::sync::Arc::new(references);
     let mut inputs = vec![];
     let mut output_words = vec![];
     let mut language = false;
@@ -610,14 +886,14 @@ fn check_declarations(declarations: &[Attribute]) -> Check<Declarations> {
         match a.name.as_str() {
             "language" => {
                 let w = &arity(a, 1)?[0];
-                if language || w.quoted || !matches!(w.text.as_str(), "1" | "2") {
+                if language || w.quoted || !matches!(w.text.as_str(), "1" | "2" | "3") {
                     return Err(err(
-                        "Declare ':language 1' or ':language 2' exactly once",
+                        "Declare ':language 1', ':language 2', or ':language 3' exactly once",
                         a.span.clone(),
                     ));
                 }
                 language = true;
-                symbols.language = if w.text == "2" { 2 } else { 1 };
+                symbols.language = w.text.parse().unwrap();
             }
             "title" => {
                 if title.is_some() {
@@ -625,12 +901,42 @@ fn check_declarations(declarations: &[Attribute]) -> Check<Declarations> {
                 }
                 title = Some(quoted(&arity(a, 1)?[0])?);
             }
+            "input"
+                if a.raw.contains(':')
+                    || a.raw.contains('[')
+                    || a.raw.contains('{')
+                    || symbols.language == 3 =>
+            {
+                let (key, annotation) = interface_words(a, true)?;
+                let key_name = name(&key)?;
+                let ty = semantic::declared_type(&annotation.unwrap(), &symbols)?;
+                if symbols
+                    .expected_outputs
+                    .get(&key_name)
+                    .is_some_and(|expected| expected != &ty)
+                {
+                    return Err(err(
+                        "An input exported as an output must retain its declared input type",
+                        a.span.clone(),
+                    ));
+                }
+                declare(&mut symbols, key_name.clone(), ty, key.span)?;
+                inputs.push(key_name);
+            }
             "input" => {
                 let args = arity(a, 2)?;
                 let key = name(&args[0])?;
                 let ty = semantic::declared_type(&args[1], &symbols)?;
                 declare(&mut symbols, key.clone(), ty, args[0].span.clone())?;
                 inputs.push(key);
+            }
+            "output" if a.raw.contains(':') || symbols.language == 3 => {
+                let (key, annotation) = interface_words(a, false)?;
+                if let Some(annotation) = annotation {
+                    let ty = semantic::declared_type(&annotation, &symbols)?;
+                    symbols.expected_outputs.insert(name(&key)?, ty);
+                }
+                output_words.push(key);
             }
             "output" => output_words.push(arity(a, 1)?[0].clone()),
             "import" | "function" | "enum" => {}
@@ -645,10 +951,22 @@ fn check_declarations(declarations: &[Attribute]) -> Check<Declarations> {
     if !language {
         return Err(err("Missing ':language 1' declaration", 0..0));
     }
-    symbols.functions = std::sync::Arc::new(expression::functional::definitions(
-        declarations,
-        symbols.language,
-    )?);
+    symbols.functions = std::sync::Arc::new(if !symbols.references.is_empty() {
+        expression::functional::definitions_with_references(
+            declarations,
+            symbols.language,
+            &symbols.enums,
+            &symbols.references,
+        )?
+    } else if symbols.enums.is_empty() {
+        expression::functional::definitions(declarations, symbols.language)?
+    } else {
+        expression::functional::definitions_with_enums(
+            declarations,
+            symbols.language,
+            &symbols.enums,
+        )?
+    });
 
     Ok(Declarations {
         symbols,
@@ -665,6 +983,7 @@ struct StatementIndex {
 
 /// Resolve labels to executable positions and reject empty or dangling entry paths.
 fn index_statements(statements: Vec<Statement>, source_end: usize) -> Check<StatementIndex> {
+    let statements = syntax::structured::flatten(statements)?;
     let mut labels = BTreeMap::new();
     let mut executable = vec![];
     for statement in statements {
@@ -684,7 +1003,10 @@ fn index_statements(statements: Vec<Statement>, source_end: usize) -> Check<Stat
         }
     }
     let count = executable.len();
-    if let Some((_, span)) = labels.values().find(|(target, _)| *target == count) {
+    if let Some((_, (_, span))) = labels
+        .iter()
+        .find(|(name, (target, _))| *target == count && !name.starts_with('$'))
+    {
         return Err(err("Label has no following statement", span.clone()));
     }
     if count == 0 {
@@ -727,8 +1049,13 @@ fn check_flow(
 ) -> Check<CheckedBody> {
     let StatementIndex { labels, executable } = indexed;
     let count = executable.len();
-    let input_names: BTreeSet<_> = inputs.iter().cloned().collect();
+    let input_names: BTreeSet<_> = inputs
+        .iter()
+        .chain(symbols.references.keys())
+        .cloned()
+        .collect();
     let seed = Flow {
+        present: BTreeSet::new(),
         definite: input_names.clone(),
         possible: input_names,
     };
@@ -739,13 +1066,15 @@ fn check_flow(
     let mut steps = vec![];
     let mut diagnostics = vec![];
     for (index, statement) in executable.into_iter().enumerate() {
+        let implicit_join =
+            matches!(&statement, Statement::Jump { target, .. } if target.text.starts_with('$'));
         let span = statement.span();
         let reachable = incoming[index].is_some();
         let mut flow = incoming[index]
             .clone()
             .or_else(|| dead_incoming[index].clone())
             .unwrap_or_else(|| seed.clone());
-        if !reachable {
+        if !reachable && !implicit_join {
             diagnostics.push(Diagnostic {
                 severity: Severity::Warning,
                 code: "S_UNREACHABLE".into(),
@@ -756,6 +1085,7 @@ fn check_flow(
             });
         }
         let mut local = symbols.visible(&flow.definite);
+        local.present = flow.present.clone();
         let step = match statement {
             Statement::Block(b) if b.kind == "refine" => {
                 refinement::check(b, &mut local, &flow.possible, dependencies)?
@@ -775,15 +1105,7 @@ fn check_flow(
                 expression,
                 expression_offset,
                 ..
-            } => {
-                let key = name(&binding)?;
-                let (expression, ty) = check_expression(&expression, expression_offset, &local)?;
-                declare(&mut local, key.clone(), ty, binding.span)?;
-                CheckedStep::Derive {
-                    binding: key,
-                    expression,
-                }
-            }
+            } => shuffle::derivation(binding, &expression, expression_offset, &mut local)?,
             Statement::Jump { target: w, .. } => {
                 if w.text == "end" {
                     CheckedStep::End
@@ -805,6 +1127,34 @@ fn check_flow(
                 ))
             }
         };
+        match &step {
+            CheckedStep::Choose {
+                binding, options, ..
+            }
+            | CheckedStep::Select {
+                binding,
+                options,
+                selection:
+                    Selection {
+                        mode: SelectionMode::Single,
+                        ..
+                    },
+                ..
+            } => {
+                if let CheckedOptions::Static(options) = options {
+                    local.get_mut(binding).unwrap().choices =
+                        Some(options.iter().map(|c| c.value.clone()).collect());
+                }
+            }
+            CheckedStep::Derive {
+                binding,
+                expression,
+            } => {
+                let choices = choice_ids(expression, &local);
+                local.get_mut(binding).unwrap().choices = choices;
+            }
+            _ => {}
+        }
         merge_statement_bindings(&local, symbols, &mut flow)?;
         if reachable {
             if matches!(step, CheckedStep::End) {
@@ -820,19 +1170,22 @@ fn check_flow(
             let next = successors(&step, index);
             // Only authored jumps/branches to end may enter the synthetic terminal.
             if next.contains(&count)
-                && !matches!(
-                    step,
-                    CheckedStep::Branch { .. } | CheckedStep::Match { .. } | CheckedStep::Jump(_)
-                )
+                && (implicit_join
+                    || !matches!(
+                        step,
+                        CheckedStep::Branch { .. }
+                            | CheckedStep::Match { .. }
+                            | CheckedStep::Jump(_)
+                    ))
             {
                 return Err(err("Execution falls off the Pattern; add '-> end'", span));
             }
-            for dest in next {
-                merge(&mut incoming[dest], &flow);
+            for (dest, next_flow) in successor_flows(&step, index, &flow) {
+                merge(&mut incoming[dest], &next_flow);
             }
         } else {
-            for dest in successors(&step, index) {
-                merge(&mut dead_incoming[dest], &flow);
+            for (dest, next_flow) in successor_flows(&step, index, &flow) {
+                merge(&mut dead_incoming[dest], &next_flow);
             }
         }
         steps.push((step, span));
@@ -849,7 +1202,18 @@ fn check_flow(
     }
     // Every output must have a concrete global type even if all explicit ends were unreachable.
     for key in outputs {
-        lookup(symbols, key, 0..0)?;
+        let symbol = lookup(symbols, key, 0..0)?;
+        if let Some(expected) = symbols.expected_outputs.get(key) {
+            if symbol.value_type != *expected {
+                return Err(err(
+                    format!(
+                        "Output '{key}' must have type {expected}, found {:?}",
+                        symbol.value_type
+                    ),
+                    symbol.span.clone(),
+                ));
+            }
+        }
     }
     steps.push((CheckedStep::End, source_end..source_end));
     Ok(CheckedBody { steps, diagnostics })
@@ -883,6 +1247,11 @@ fn merge_statement_bindings(local: &Scope, symbols: &mut Scope, flow: &mut Flow)
                     .push((old.span.clone(), "Other branch assignment".into()));
                 return Err(e);
             }
+            let merged = match (&old.choices, &symbol.choices) {
+                (Some(a), Some(b)) => Some(a.union(b).cloned().collect()),
+                _ => None,
+            };
+            symbols.get_mut(key).unwrap().choices = merged;
         } else {
             let mut symbol = symbol.clone();
             symbol.id = BindingId(symbols.len());
@@ -911,13 +1280,29 @@ fn arity(attr: &Attribute, n: usize) -> Check<&[Word]> {
 }
 /// Require an unquoted identifier that is not an expression keyword.
 fn name(word: &Word) -> Check<String> {
+    let text = word.text.as_str();
     if !word.quoted
-        && syntax::is_identifier(&word.text)
-        && !["true", "false", "not", "and", "or", "count"].contains(&word.text.as_str())
+        && syntax::is_identifier(text)
+        && !["true", "false", "not", "and", "or", "count"].contains(&text)
     {
-        Ok(word.text.clone())
+        Ok(text.into())
     } else {
         Err(err("Expected an unquoted binding name", word.span.clone()))
+    }
+}
+/// Extract an annotated binding name without relaxing ordinary identifiers or choice IDs.
+fn binding_name(word: &Word) -> Check<String> {
+    if let Some((key, ty)) = word.text.split_once(':') {
+        if ty.trim().is_empty() {
+            return Err(err("Binding annotations require a type", word.span.clone()));
+        }
+        name(&Word {
+            text: key.trim().into(),
+            quoted: word.quoted,
+            span: word.span.clone(),
+        })
+    } else {
+        name(word)
     }
 }
 /// Parse a supported unquoted structural type, bounding recursive list-type text.
@@ -962,6 +1347,15 @@ fn quoted(word: &Word) -> Check<String> {
 }
 /// Allocate an immutable symbol, rejecting duplicates with the original declaration span.
 fn declare(symbols: &mut Scope, key: String, ty: Type, span: Span) -> Check<()> {
+    let expected = binding_expectation(&key, &span, symbols)?;
+    let ty = if let Some(expected) = expected {
+        if !expected.accepts_type(&ty) {
+            return Err(err(format!("Expected {expected}, found {ty}"), span));
+        }
+        expected
+    } else {
+        ty
+    };
     if symbols.enums.contains_key(&key) {
         return Err(err("Bindings cannot shadow an enum type name", span));
     }
@@ -981,6 +1375,7 @@ fn declare(symbols: &mut Scope, key: String, ty: Type, span: Span) -> Check<()> 
             value_type: ty,
             span,
             id,
+            choices: None,
         },
     );
     Ok(())
@@ -1018,7 +1413,13 @@ fn check_template(block: &Block, symbols: &Scope) -> Check<Vec<CheckedPart>> {
                 TemplatePart::Literal(text) => specification.push_str(&text),
                 TemplatePart::Reference { path, span } => {
                     let key = path.join(".");
-                    let ((name, field), _) = resolved(&path, span, symbols)?;
+                    let ((name, field), ty) = resolved(&path, span.clone(), symbols)?;
+                    if ty.contains_optional() {
+                        return Err(err(
+                            "Check optional values for None before interpolation",
+                            span,
+                        ));
+                    }
                     specification.push_str(&format!("{{{{{key}}}}}"));
                     inputs.push((key, name, field));
                 }
@@ -1040,7 +1441,13 @@ fn check_template(block: &Block, symbols: &Scope) -> Check<Vec<CheckedPart>> {
         .map(|part| match part {
             TemplatePart::Literal(s) => Ok(CheckedPart::Literal(s)),
             TemplatePart::Reference { path, span } => {
-                let ((name, field), _) = resolved(&path, span, symbols)?;
+                let ((name, field), ty) = resolved(&path, span.clone(), symbols)?;
+                if ty.contains_optional() {
+                    return Err(err(
+                        "Check optional values for None before interpolation",
+                        span,
+                    ));
+                }
                 Ok(CheckedPart::Reference(name, field))
             }
         })
@@ -1082,7 +1489,7 @@ fn required_binding(block: &Block) -> Check<String> {
     block
         .binding
         .as_ref()
-        .map(name)
+        .map(binding_name)
         .transpose()?
         .ok_or_else(|| {
             err(
@@ -1111,6 +1518,7 @@ fn check_block(
     ) {
         return semantic::check(b, symbols);
     }
+    if b.kind == "widget" {return check_widget(b,symbols);}
     if b.kind == "use" {
         return check_use(b, symbols, dependencies);
     }
@@ -1120,7 +1528,13 @@ fn check_block(
         "video" => return video::check(&b, prompt),
         "image" => return image::check(&b, prompt),
         "ask" => {
-            attributes(&b, &[])?;
+            let attrs = attributes(&b, &["required"])?;
+            if let Some(required) = attrs.get("required") {
+                let value = &arity(required, 1)?[0];
+                if value.quoted || value.text != "false" {
+                    return Err(err("Standalone text questions permit empty answers; use a form for a required field", required.span.clone()));
+                }
+            }
             let binding = required_binding(&b)?;
             declare(
                 symbols,
@@ -1131,37 +1545,7 @@ fn check_block(
             CheckedStep::Ask { binding, prompt }
         }
         "rate" => {
-            let attrs = attributes(&b, &["prefer", "low", "high"])?;
-            let (range, span) = b
-                .argument
-                .as_ref()
-                .ok_or_else(|| err("Rating requires low..high", b.span.clone()))?;
-            let (lo, hi) = range
-                .split_once("..")
-                .ok_or_else(|| err("Expected low..high", span.clone()))?;
-            let finite = |s: &str| {
-                s.parse::<f64>()
-                    .ok()
-                    .filter(|n| n.is_finite())
-                    .ok_or_else(|| err("Rating bounds must be finite numbers", span.clone()))
-            };
-            let min = finite(lo)?;
-            let max = finite(hi)?;
-            if min > max {
-                return Err(err("Rating minimum exceeds maximum", span.clone()));
-            }
-            let prefer = attrs
-                .get("prefer")
-                .map(|a| name(&arity(a, 1)?[0]))
-                .transpose()?;
-            let label = |key| attrs.get(key).map(|a| quoted(&arity(a, 1)?[0])).transpose();
-            let rating = Rating {
-                min,
-                max,
-                prefer,
-                low: label("low")?,
-                high: label("high")?,
-            };
+            let rating = Rating::check(&b)?;
             let binding = required_binding(&b)?;
             declare(
                 symbols,
@@ -1176,21 +1560,70 @@ fn check_block(
             }
         }
         "agent" => {
-            let attrs = attributes(&b, &["returns", "min", "max"])?;
-            let binding = b.binding.as_ref().map(name).transpose()?;
+            let mut config = b.clone();
+            config.attributes.retain(|a| a.name != "context");
+            let attrs = attributes(&config, &["returns", "min", "max"])?;
+            let mut context = vec![];
+            for attribute in b.attributes.iter().filter(|a| a.name == "context") {
+                let word = &arity(attribute, 1)?[0];
+                if word.quoted
+                    || syntax::reference(&word.text, word.span.start).is_err()
+                    || context.iter().any(|(key, _)| key == &word.text)
+                    || context.len() >= 8
+                {
+                    return Err(err(
+                        "Agent contexts must be unique binding paths (maximum eight)",
+                        attribute.span.clone(),
+                    ));
+                }
+                context.push((
+                    word.text.clone(),
+                    check_expression(&word.text, word.span.start, symbols)?.0,
+                ));
+            }
+            let binding = b.binding.as_ref().map(binding_name).transpose()?;
             if let Some(returns) = attrs.get("returns") {
                 let binding = required_binding(&b)?;
-                let ty = value_type(&arity(returns, 1)?[0])?;
-                if matches!(ty, Type::List(_)) {
+                let ty = semantic::declared_type(
+                    &Word {
+                        text: returns.raw.trim().to_owned(),
+                        quoted: false,
+                        span: returns.span.clone(),
+                    },
+                    symbols,
+                )?;
+                if matches!(ty, Type::Catalog(_)) {
                     return Err(err(
-                        "Agent return contracts do not yet support lists",
+                        "Models cannot construct reference libraries",
                         returns.span.clone(),
                     ));
                 }
-                let min = bound(attrs.get("min"))?;
-                let max = bound(attrs.get("max"))?;
-                if (min.is_some() || max.is_some()) && ty != Type::Choices {
-                    return Err(err(":min/:max are supported only for choices", b.span));
+                let list_bound = |attribute: Option<&&Attribute>| -> Check<Option<usize>> {
+                    attribute
+                        .map(|a| {
+                            let word = &arity(a, 1)?[0];
+                            if word.quoted {
+                                return Err(err("Expected an integer count", word.span.clone()));
+                            }
+                            word.text.parse::<usize>().map_err(|_| {
+                                err("Expected a nonnegative integer count", word.span.clone())
+                            })
+                        })
+                        .transpose()
+                };
+                let min = if matches!(ty, Type::List(_)) {
+                    list_bound(attrs.get("min"))?
+                } else {
+                    bound(attrs.get("min"))?
+                };
+                let max = if matches!(ty, Type::List(_)) {
+                    list_bound(attrs.get("max"))?
+                } else {
+                    bound(attrs.get("max"))?
+                };
+                if (min.is_some() || max.is_some()) && !matches!(ty, Type::Choices | Type::List(_))
+                {
+                    return Err(err(":min/:max require a list or choices", b.span));
                 }
                 if matches!((min,max),(Some(a),Some(z)) if a>z) {
                     return Err(err(":min must not exceed :max", b.span));
@@ -1202,6 +1635,7 @@ fn check_block(
                     b.binding.as_ref().unwrap().span.clone(),
                 )?;
                 CheckedStep::Generate {
+                    widget: None,
                     binding,
                     contract: Contract {
                         returns: ty,
@@ -1209,8 +1643,15 @@ fn check_block(
                         max,
                     },
                     prompt,
+                    context,
                 }
             } else {
+                if !context.is_empty() {
+                    return Err(err(
+                        ":context requires an explicit return contract",
+                        b.span.clone(),
+                    ));
+                }
                 if attrs.contains_key("min") || attrs.contains_key("max") {
                     return Err(err(":min/:max require ':returns choices'", b.span));
                 }
@@ -1313,35 +1754,120 @@ fn resolved(
     symbols: &Scope,
 ) -> Check<((String, Option<Field>), Type)> {
     let mut ty = lookup(symbols, &path[0], span.clone())?.value_type.clone();
-    for field in &path[1..] {
-        ty = match ty {
-            Type::Choice if matches!(field.as_str(), "value" | "label") => Type::Text,
-            Type::Record(fields) => fields
-                .get(field)
-                .cloned()
-                .ok_or_else(|| err(format!("Unknown field '{field}'"), span.clone()))?,
-            _ => return Err(err(format!("Unknown field '{field}'"), span)),
-        };
+    let mut fields = Vec::new();
+    for prefix in 1..=path.len() {
+        if symbols.present.contains(&path[..prefix]) {
+            if let Type::Optional(inner) = ty {
+                ty = *inner;
+                fields.push("$present".into());
+            }
+        }
+        if let Some(field) = path.get(prefix) {
+            ty = match ty {
+                Type::Choice if matches!(field.as_str(), "value" | "label") => Type::Text,
+                Type::Record(types) => types
+                    .get(field)
+                    .cloned()
+                    .ok_or_else(|| err(format!("Unknown field '{field}'"), span.clone()))?,
+                _ => {
+                    return Err(err(
+                        format!(
+                            "Unknown field '{field}'; optional values require a presence guard"
+                        ),
+                        span,
+                    ))
+                }
+            };
+            fields.push(field.clone());
+        }
     }
-    let field = if path.len() > 1 {
-        Some(Field(path[1..].to_vec()))
-    } else {
-        None
-    };
+    let field = (!fields.is_empty()).then_some(Field(fields));
     Ok(((path[0].clone(), field), ty))
 }
 /// Parse and type-check an expression against currently available symbols.
 fn check_expression(source: &str, offset: usize, symbols: &Scope) -> Check<(CheckedExpr, Type)> {
+    check_expression_expected(source, offset, symbols, None)
+}
+
+/// Check a pure expression with a declared contextual type before allocating its binding.
+fn check_expression_expected(
+    source: &str,
+    offset: usize,
+    symbols: &Scope,
+    expected: Option<&Type>,
+) -> Check<(CheckedExpr, Type)> {
     let expression = semantic::literals(
-        expression::parse_version(source, offset, symbols.language)?,
+        expression::parse_with_enums(source, offset, symbols.language, &symbols.enums)?,
         symbols,
     )?;
     let resolve = |path: &[String], span| resolved(path, span, symbols);
-    if symbols.functions.is_empty() {
+    if expected.is_some() {
+        expression::check_with_expected(expression, &symbols.functions, &resolve, expected)
+    } else if symbols.functions.is_empty() {
         expression::check(expression, &resolve)
     } else {
         expression::check_with_functions(expression, &symbols.functions, &resolve)
     }
+}
+
+/// Split a public interface declaration with optional colon notation while preserving UTF-8 source spans.
+fn interface_words(a: &Attribute, input: bool) -> Check<(Word, Option<Word>)> {
+    let raw = a.raw.trim();
+    let parts = raw
+        .split_once(':')
+        .filter(|(key, _)| syntax::is_identifier(key.trim()));
+    let (key, ty) = if let Some((key, ty)) = parts {
+        (key.trim(), Some(ty.trim()))
+    } else if input {
+        let split = raw
+            .find(char::is_whitespace)
+            .ok_or_else(|| err("Input requires a declared type", a.span.clone()))?;
+        (&raw[..split], Some(raw[split..].trim()))
+    } else {
+        (raw, None)
+    };
+    let key_word = Word {
+        text: key.into(),
+        quoted: false,
+        span: a.raw_offset..a.raw_offset + key.len(),
+    };
+    name(&key_word)?;
+    let annotation = ty.map(|ty| Word {
+        text: ty.into(),
+        quoted: false,
+        span: a.raw_offset + raw.len() - ty.len()..a.raw_offset + raw.len(),
+    });
+    Ok((key_word, annotation))
+}
+
+/// Resolve a binding annotation and public output constraint without changing lexical scope.
+fn binding_expectation(key: &str, span: &Span, symbols: &Scope) -> Check<Option<Type>> {
+    let annotation = symbols
+        .source
+        .get(span.clone())
+        .and_then(|text| text.split_once(':'))
+        .filter(|(name, _)| name.trim() == key)
+        .map(|(_, ty)| {
+            semantic::declared_type(
+                &Word {
+                    text: ty.trim().into(),
+                    quoted: false,
+                    span: span.clone(),
+                },
+                symbols,
+            )
+        })
+        .transpose()?;
+    let output = symbols.expected_outputs.get(key);
+    if let (Some(annotation), Some(output)) = (&annotation, output) {
+        if annotation != output {
+            return Err(err(
+                format!("Binding annotation {annotation} differs from declared output {output}"),
+                span.clone(),
+            ));
+        }
+    }
+    Ok(annotation.or_else(|| output.cloned()))
 }
 
 /// Parse a nonnegative collection bound that fits an unsigned 32-bit integer.
@@ -1374,6 +1900,7 @@ fn check_collection(
     }
     let attrs = attributes(&b, &["min", "max", "from", "as"])?;
     let mut local = outer.clone();
+    local.expected_outputs.clear();
     let mut reserved = possible.clone();
     reserved.insert(binding.clone());
     let mode = if let Some(from) = attrs.get("from") {
@@ -1440,10 +1967,7 @@ fn check_collection(
                 check_block(child, &mut local, dependencies)?
             }
             Statement::Derive { binding, expression, expression_offset, .. } => {
-                let key = name(&binding)?;
-                let (expression, ty) = check_expression(&expression, expression_offset, &local)?;
-                declare(&mut local, key.clone(), ty, binding.span)?;
-                CheckedStep::Derive { binding: key, expression }
+                shuffle::derivation(binding, &expression, expression_offset, &mut local)?
             }
             Statement::Yield { expression, expression_offset, .. }
                 if index + 1 == statement_count => {
@@ -1498,12 +2022,14 @@ fn check_collection(
 }
 #[derive(Clone)]
 struct Flow {
+    present: BTreeSet<Vec<String>>,
     definite: BTreeSet<String>,
     possible: BTreeSet<String>,
 }
 /// Intersect definitely assigned bindings and union possibly assigned bindings at a join.
 fn merge(slot: &mut Option<Flow>, flow: &Flow) {
     if let Some(old) = slot {
+        old.present = old.present.intersection(&flow.present).cloned().collect();
         old.definite = old.definite.intersection(&flow.definite).cloned().collect();
         old.possible.extend(flow.possible.iter().cloned());
     } else {
@@ -1597,6 +2123,14 @@ fn case(source: &str, offset: usize, ty: &Type) -> Check<Case> {
         _ => Err(err("Case type does not match the subject", span)),
     }
 }
+
+/// Return the proven finite catalogue of a scalar choice, including immutable aliases.
+fn choice_ids(expression: &CheckedExpr, symbols: &Scope) -> Option<BTreeSet<String>> {
+    match &expression.kind {
+        Kind::Reference((name, None)) => symbols.get(name)?.choices.clone(),
+        _ => None,
+    }
+}
 /// Validate branch/match arms, scalar types, unique cases, and a final fallback.
 fn control(
     b: &Block,
@@ -1615,7 +2149,10 @@ fn control(
     let subject = if is_match {
         let (s, span) = b.argument.as_ref().unwrap();
         let (e, ty) = check_expression(s, span.start, symbols)?;
-        if matches!(ty, Type::Choices | Type::List(_) | Type::Record(_)) {
+        if matches!(
+            ty,
+            Type::Choices | Type::List(_) | Type::Record(_) | Type::Optional(_)
+        ) {
             return Err(err("Match requires a scalar subject", span.clone()));
         }
         Some((e, ty))
@@ -1663,6 +2200,26 @@ fn control(
                 ));
             }
             otherwise = cases.first().map(|(_, target)| *target);
+        } else if let Some((expression, Type::Choice)) = &subject {
+            if let Some(offered) = choice_ids(expression, symbols) {
+                let covered: BTreeSet<_> = cases
+                    .iter()
+                    .filter_map(|(case, _)| {
+                        if let Case::Choice(id) = case {
+                            Some(id.clone())
+                        } else {
+                            None
+                        }
+                    })
+                    .collect();
+                if covered != offered {
+                    return Err(err(
+                        "Choice match must cover exactly every offered ID or include a final :else",
+                        b.span.clone(),
+                    ));
+                }
+                otherwise = cases.first().map(|(_, target)| *target);
+            }
         }
     }
     let otherwise =
@@ -1681,6 +2238,59 @@ fn control(
         })
     }
 }
+/// Propagate direct optional-presence guards along each forward control-flow edge.
+fn successor_flows(step: &CheckedStep, index: usize, flow: &Flow) -> Vec<(usize, Flow)> {
+    let CheckedStep::Branch { arms, otherwise } = step else {
+        return successors(step, index)
+            .into_iter()
+            .map(|dest| (dest, flow.clone()))
+            .collect();
+    };
+    let mut remaining = flow.clone();
+    let mut result = Vec::new();
+    for (condition, dest) in arms {
+        let mut branch = remaining.clone();
+        if let Kind::Binary(
+            op @ (expression::Binary::Equal | expression::Binary::NotEqual),
+            left,
+            right,
+        ) = &condition.kind
+        {
+            let absent = |expr: &CheckedExpr| {
+                matches!(
+                    &expr.kind,
+                    Kind::Literal(Value::Optional { value: None, .. })
+                )
+            };
+            let reference = if absent(left) {
+                Some(right)
+            } else if absent(right) {
+                Some(left)
+            } else {
+                None
+            };
+            if let Some(Expr {
+                kind: Kind::Reference((name, field)),
+                ..
+            }) = reference.map(Box::as_ref)
+            {
+                let mut path = vec![name.clone()];
+                if let Some(field) = field {
+                    path.extend(field.0.iter().filter(|s| s.as_str() != "$present").cloned());
+                }
+                if *op == expression::Binary::NotEqual {
+                    branch.present.insert(path);
+                } else {
+                    remaining.present.insert(path);
+                }
+            }
+        }
+        result.push((dest.0, branch));
+    }
+    result.push((otherwise.0, remaining));
+    result
+}
+
 /// Enumerate successor instruction indices for forward definite-assignment analysis.
 fn successors(step: &CheckedStep, index: usize) -> Vec<usize> {
     match step {
@@ -1709,7 +2319,11 @@ fn lower_step(
     symbols: &Scope,
     next_binding: &mut usize,
     next_node: &mut usize,
+    binding_types: &mut BTreeMap<usize, Type>,
 ) -> Instruction {
+    for symbol in symbols.values() {
+        binding_types.insert(symbol.id.0, symbol.value_type.clone());
+    }
     let id = |name: &str| symbols[name].id;
     let template = |parts: Vec<CheckedPart>| {
         parts
@@ -1775,12 +2389,16 @@ fn lower_step(
             expression,
             &|(n, f): (String, Option<Field>)| (id(&n), f),
         )),
-        CheckedStep::Refine(body) => refinement::lower(*body, symbols, next_binding, next_node),
+        CheckedStep::Refine(body) => {
+            refinement::lower(*body, symbols, next_binding, next_node, binding_types)
+        }
         CheckedStep::Propose(expression) => Instruction::Propose(expression::lower(
             expression,
             &|(n, f): (String, Option<Field>)| (id(&n), f),
         )),
-        CheckedStep::Loop(body) => looping::lower(*body, symbols, next_binding, next_node),
+        CheckedStep::Loop(body) => {
+            looping::lower(*body, symbols, next_binding, next_node, binding_types)
+        }
         CheckedStep::Repeat(expression) => Instruction::Repeat(expression::lower(
             expression,
             &|(n, f): (String, Option<Field>)| (id(&n), f),
@@ -1840,7 +2458,13 @@ fn lower_step(
                     Node {
                         id: node,
                         span,
-                        instruction: lower_step(step, &scope, next_binding, next_node),
+                        instruction: lower_step(
+                            step,
+                            &scope,
+                            next_binding,
+                            next_node,
+                            binding_types,
+                        ),
                     }
                 })
                 .collect();
@@ -1867,7 +2491,13 @@ fn lower_step(
         },
         CheckedStep::Form { binding, form } => Instruction::Form {
             binding: id(&binding),
-            form: form.map(template),
+            form: form.map(template, |options| match options {
+                CheckedOptions::Static(c) => Options::Static(c),
+                CheckedOptions::Dynamic(source) => Options::Dynamic(expression::lower(
+                    source,
+                    &|(n, f): (String, Option<Field>)| (id(&n), f),
+                )),
+            }),
         },
         CheckedStep::Ask { binding, prompt } => Instruction::Ask {
             binding: id(&binding),
@@ -1886,6 +2516,15 @@ fn lower_step(
             binding,
             expression,
         } => Instruction::Derive {
+            binding: id(&binding),
+            expression: expression::lower(expression, &|(n, f): (String, Option<Field>)| {
+                (id(&n), f)
+            }),
+        },
+        CheckedStep::Shuffle {
+            binding,
+            expression,
+        } => Instruction::Shuffle {
             binding: id(&binding),
             expression: expression::lower(expression, &|(n, f): (String, Option<Field>)| {
                 (id(&n), f)
@@ -1916,13 +2555,25 @@ fn lower_step(
         CheckedStep::Jump(to) => Instruction::Jump(to),
         CheckedStep::End => Instruction::End,
         CheckedStep::Generate {
+            widget,
             binding,
             contract,
             prompt,
+            context,
         } => Instruction::Generate {
+            widget,
             binding: id(&binding),
             contract,
             prompt: template(prompt),
+            context: context
+                .into_iter()
+                .map(|(key, expr)| {
+                    (
+                        key,
+                        expression::lower(expr, &|(n, f): (String, Option<Field>)| (id(&n), f)),
+                    )
+                })
+                .collect(),
         },
         CheckedStep::Turn { binding, prompt } => Instruction::Turn {
             binding: binding.map(|n| id(&n)),
@@ -2013,7 +2664,14 @@ fn check_use(
             .inputs
             .get(&key)
             .ok_or_else(|| err(format!("Unknown child input '{key}'"), attr.span.clone()))?;
-        let (expr, ty) = check_expression(expression, offset, symbols)?;
+        let (expr, ty) = check_expression_expected(expression, offset, symbols, Some(expected))
+            .map_err(|mut error| {
+                if error.code == "E002" {
+                    error.message =
+                        format!("Type mismatch for child input '{key}': {}", error.message);
+                }
+                error
+            })?;
         if &ty != expected {
             return Err(err(
                 format!("Type mismatch for child input '{key}'"),
@@ -2040,4 +2698,30 @@ fn check_use(
         inputs: inputs.into_iter().collect(),
         outputs: dependency.outputs.clone(),
     })
+}
+
+/// Type-check one widget call and bind its closed output record before lowering.
+fn check_widget(b:Block,symbols:&mut Scope)->Check<CheckedStep>{
+    let binding=required_binding(&b)?;
+    let target=b.argument.as_ref().ok_or_else(||err("Widget requires alias.export",b.span.clone()))?;
+    let (alias,export)=target.0.split_once('.').ok_or_else(||err("Widget requires alias.export",target.1.clone()))?;
+    let package=symbols.widgets.get(alias).cloned().ok_or_else(||err("Unknown widget import",target.1.clone()))?;
+    let definition=package.definition(export).map_err(|e|err(e,b.span.clone()))?;
+    let mut context=Vec::new();let mut seen=BTreeSet::new();
+    for a in &b.attributes {
+        if a.name!="with" {return Err(err("Widgets accept :with inputs",a.span.clone()));}
+        let (key,raw)=a.raw.split_once('=').map(|(k,v)|(k.trim(),v.trim())).unwrap_or((a.raw.trim(),a.raw.trim()));
+        let field=definition.inputs.get(key).ok_or_else(||err(format!("Unknown widget input {key}"),a.span.clone()))?;
+        if !seen.insert(key.to_owned()){return Err(err("Duplicate widget input",a.span.clone()));}
+        let (expr,ty)=check_expression(raw,a.raw_offset+a.raw.find(raw).unwrap_or(0),symbols)?;
+        let expected=widget_type(&field.value_type).map_err(|e|err(e,a.span.clone()))?;
+        if !expected.accepts_type(&ty){return Err(err(format!("Widget input {key} expects {expected}"),a.span.clone()));}
+        if let Ok(raw)=serde_json::from_str::<serde_json::Value>(raw){let value=Value::from_json(&raw,&expected).map_err(|e|err(e,a.span.clone()))?;field.check(&value,&BTreeMap::new()).map_err(|e|err(e,a.span.clone()))?;}
+        context.push((key.into(),expr));
+    }
+    for (key,field) in &definition.inputs {if !seen.contains(key){package.default_value(field).map_err(|_|err(format!("Missing widget input {key}"),b.span.clone()))?;}}
+    let returns=Type::Record(definition.outputs.iter().map(|(k,f)|widget_type(&f.value_type).map(|t|(k.clone(),t))).collect::<Result<_,_>>().map_err(|e|err(e,b.span.clone()))?);
+    let prompt=check_template(&b,symbols)?;
+    declare(symbols,binding.clone(),returns.clone(),b.binding.as_ref().unwrap().span.clone())?;
+    Ok(CheckedStep::Generate{widget:Some((package,export.into())),binding,contract:Contract{returns,min:None,max:None},prompt,context})
 }

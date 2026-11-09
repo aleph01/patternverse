@@ -64,6 +64,39 @@ export function answerFor(effect: GuidedEffect, result: unknown): string {
       ? `Timer completed · ${formatTimerSeconds(value.duration_seconds)}`
       : `Continued with timer · ${formatTimerSeconds(value.elapsed_seconds)} of ${formatTimerSeconds(value.duration_seconds)} elapsed`;
   }
+  if (effect.request.kind === 'interaction.widget') {
+    const show = (value: unknown): string =>
+      Array.isArray(value)
+        ? value.map(show).join(', ')
+        : value && typeof value === 'object'
+          ? 'label' in value
+            ? String(value.label)
+            : Object.entries(value)
+                .map(([k, v]) => `${k}: ${show(v)}`)
+                .join('; ')
+          : String(value ?? '');
+    const payload = effect.request.payload as {
+      definition?: { outputs?: Record<string, { from?: string }> };
+      inputs?: Record<string, { value?: { value: string; label: string }[] }>;
+    };
+    const values =
+      result.value && typeof result.value === 'object'
+        ? { ...(result.value as Record<string, unknown>) }
+        : {};
+    for (const [key, field] of Object.entries(payload.definition?.outputs ?? {})) {
+      if (!field.from) continue;
+      const catalogue = payload.inputs?.[field.from]?.value;
+      if (!Array.isArray(catalogue)) continue;
+      const normalized = (v: unknown) => {
+        const id = (v as { value?: string })?.value;
+        return catalogue.find((c) => c.value === id) ?? v;
+      };
+      values[key] = Array.isArray(values[key])
+        ? (values[key] as unknown[]).map(normalized)
+        : normalized(values[key]);
+    }
+    return show(values);
+  }
   const optionLabel = (value: string): string =>
     optionsFor(effect).find((option) => option.value === value)?.label ?? value;
   if (Array.isArray(result.value))

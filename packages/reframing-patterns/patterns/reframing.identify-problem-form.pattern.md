@@ -17,36 +17,36 @@ form = frame ?~ problem_form
     One tentative reading of this statement is {{form}}. A statement can fit more than one form; use this only to choose a useful next question.
 }
 ?match form {
-    :case pain -> pain
-    :case goal -> goal
-    :case solution -> solution
-    :case specified -> specified
-    :case mixed -> mixed
+  :case pain {
+    pain_frame = !use reframing.frame-problem {
+        :with problem = frame
+    }
+    candidate_frame = pain_frame.frame
+    -> end
+  }
+  :case goal {
+    goal_frame = !use reframing.rethink-goal {
+        :with frame
+    }
+    candidate_frame = goal_frame.candidate_frame
+    -> end
+  }
+  :case solution {
+    solution_frame = !use reframing.detect-baked-solution {
+        :with frame
+    }
+    candidate_frame = solution_frame.candidate_frame
+    -> end
+  }
+  :case specified {
+    candidate_frame = frame
+    -> end
+  }
+  :case mixed {
+    mixed_frame = !use reframing.frame-problem {
+        :with problem = frame
+    }
+    candidate_frame = mixed_frame.frame
+    -> end
+  }
 }
-pain:
-!use reframing.frame-problem as pain_frame {
-    :with problem = frame
-}
-= candidate_frame pain_frame.frame
--> end
-goal:
-!use reframing.rethink-goal as goal_frame {
-    :with frame
-}
-= candidate_frame goal_frame.candidate_frame
--> end
-solution:
-!use reframing.detect-baked-solution as solution_frame {
-    :with frame
-}
-= candidate_frame solution_frame.candidate_frame
--> end
-specified:
-= candidate_frame frame
--> end
-mixed:
-!use reframing.frame-problem as mixed_frame {
-    :with problem = frame
-}
-= candidate_frame mixed_frame.frame
--> end

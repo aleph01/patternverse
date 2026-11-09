@@ -20,7 +20,11 @@ const checkpointSchema = z.object({
   technique_id: z.string(),
   revision: z.number().int().min(0).max(128),
   manager: z.object({
-    snapshot: z.object({ root_name: z.string(), sources: z.record(z.string(), z.string()) }),
+    snapshot: z.object({
+      root_name: z.string(),
+      sources: z.record(z.string(), z.string()),
+      data: z.record(z.string(), z.unknown()).optional(),
+    }),
     accepted: z.array(z.unknown()).max(128),
     limits: z.object({
       max_runs: z.number().int().min(1).max(1000),
@@ -62,6 +66,14 @@ export function admit(
     )
   )
     throw new Error('Practice revision mismatch');
+  const canonical = (value: unknown): string =>
+    JSON.stringify(value, (_key, value: unknown) =>
+      value && typeof value === 'object' && !Array.isArray(value)
+        ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)))
+        : value,
+    );
+  if (canonical(saved.manager.snapshot.data ?? {}) !== canonical(practice.data ?? {}))
+    throw new Error('Practice data revision mismatch');
   const restored = responseSchema.parse(
     invoke(
       practice.transport,

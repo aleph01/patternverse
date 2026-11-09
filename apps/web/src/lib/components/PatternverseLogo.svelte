@@ -21,10 +21,10 @@
     align-items: center;
     gap: 0.35rem;
     white-space: nowrap;
-    font-family: Baskerville, 'Iowan Old Style', Georgia, serif;
+    font-family: var(--font-sans);
     font-size: 1.28rem;
-    font-weight: 400;
-    letter-spacing: -0.045em;
+    font-weight: 800;
+    letter-spacing: -0.05em;
     line-height: 1;
   }
 

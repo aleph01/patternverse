@@ -222,11 +222,12 @@ describe('standalone practice orchestration', () => {
     const f = fixture({ needsAi: true, inputNames: ['problem'], source: null });
     f.ports.connectionReady.mockResolvedValue(false);
     await f.controller.initialize(null);
-    expect(await f.controller.begin({ problem: 'context' })).toBe(false);
+    expect(await f.controller.begin({ problem: 'context' })).toBe(true);
+    expect(f.state.openRouterConnected).toBe(false);
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
     expect(f.state.connectionChecked).toBe(true);
     f.ports.connectionReady.mockResolvedValue(true);
     await f.controller.checkConnection();
-    await f.controller.begin({ problem: 'context' });
     const model = run(effect('language.realize'));
     f.ports.applyTechnique.mockResolvedValueOnce(model);
     f.ports.fulfillModel.mockRejectedValueOnce(new Error('No credits'));
@@ -238,6 +239,70 @@ describe('standalone practice orchestration', () => {
     await f.controller.retryAi();
     expect(f.ports.fulfillModel).toHaveBeenCalledTimes(2);
     expect(f.state.run?.view.status).toBe('Completed');
+  });
+
+  it('finishes a non-AI path while the connection status is still being checked', async () => {
+    const status = deferred<boolean>();
+    const f = fixture({ needsAi: true });
+    f.ports.connectionReady.mockReturnValue(status.promise);
+    const initializing = f.controller.initialize(null);
+    await vi.waitFor(() => expect(f.state.run?.view.pending?.request.kind).toBe('interaction.ask'));
+    expect(f.state.startReady).toBe(true);
+    expect(f.state.openRouterConnected).toBeNull();
+    await f.controller.apply({ Fulfill: {} }, 'root');
+    expect(f.state.run?.view.status).toBe('Completed');
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
+    expect(f.ports.fulfillFree).not.toHaveBeenCalled();
+    status.resolve(false);
+    await initializing;
+    expect(f.state.openRouterConnected).toBe(false);
+    expect(f.state.run?.view.status).toBe('Completed');
+  });
+
+  it('preserves a later AI step while disconnected, and a status refresh never submits it', async () => {
+    const f = fixture({ needsAi: true });
+    f.ports.connectionReady.mockResolvedValue(false);
+    await f.controller.initialize(null);
+    const waiting = run(effect('agent.generate'));
+    f.ports.applySource.mockResolvedValueOnce(waiting).mockResolvedValue(run(null, 'Completed'));
+    await f.controller.apply({ Fulfill: {} }, 'root');
+    expect(f.state.run).toBe(waiting);
+    expect(f.state.connectionIssue).toBe('connection');
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
+    f.ports.connectionReady.mockResolvedValue(true);
+    await f.controller.checkConnection();
+    expect(f.state.openRouterConnected).toBe(true);
+    expect(f.state.run).toBe(waiting);
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
+    await f.controller.retryAi();
+    expect(f.ports.fulfillModel).toHaveBeenCalledOnce();
+    expect(f.state.run?.view.status).toBe('Completed');
+  });
+
+  it('keeps free-provider readiness separate from the actual OpenRouter connection', async () => {
+    const f = fixture({ needsAi: true });
+    f.ports.connectionReady.mockResolvedValue(false);
+    f.ports.freeAvailable.mockResolvedValue(true);
+    await f.controller.initialize(null);
+    await f.controller.chooseAi('free');
+    expect(f.state.connectionReady).toBe(true);
+    expect(f.state.openRouterConnected).toBe(false);
+    expect(f.state.aiProvider).toBe('free');
+    expect(f.ports.fulfillFree).not.toHaveBeenCalled();
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
+  });
+
+  it('restores an AI-assisted history without requiring a connection or redispatching its model step', async () => {
+    const f = fixture({ needsAi: true });
+    const waiting = run(effect('agent.generate'));
+    f.ports.connectionReady.mockResolvedValue(false);
+    f.ports.restoreSource.mockResolvedValue(waiting);
+    await f.controller.initialize('history-id');
+    expect(f.state.run).toBe(waiting);
+    expect(f.state.savedRunId).toBe('history-id');
+    expect(f.state.openRouterConnected).toBe(false);
+    expect(f.ports.startSource).not.toHaveBeenCalled();
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
   });
 
   it('waits for free-AI consent, with no automatic paid fallback on failure', async () => {
@@ -252,8 +317,9 @@ describe('standalone practice orchestration', () => {
     f.ports.fulfillFree.mockRejectedValueOnce(new Error('Free quota exhausted'));
     await f.controller.initialize(null);
     expect(f.state.freeAvailable).toBe(true);
-    expect(f.state.connectionReady).toBe(false);
-    expect(f.ports.connectionReady).not.toHaveBeenCalled();
+    expect(f.state.connectionReady).toBe(true);
+    expect(f.state.openRouterConnected).toBe(true);
+    expect(f.ports.connectionReady).toHaveBeenCalledOnce();
     await f.controller.chooseAi('free');
     expect(f.ports.fulfillFree).not.toHaveBeenCalled();
     await f.controller.begin({ problem: 'context' });
@@ -279,6 +345,31 @@ describe('standalone practice orchestration', () => {
     expect(f.ports.fulfillFree).not.toHaveBeenCalled();
     await f.controller.retryAi();
     expect(f.ports.fulfillFree).toHaveBeenCalledTimes(1);
+  });
+
+  it('collects a declared AI practice description independently of connection status and still waits for free-provider consent', async () => {
+    const f = fixture({ needsAi: true });
+    f.ports.connectionReady.mockResolvedValue(false);
+    f.ports.freeAvailable.mockResolvedValue(true);
+    await f.controller.initialize(null);
+    expect(f.state.run?.view.pending?.request.kind).toBe('interaction.ask');
+    expect(f.ports.connectionReady).toHaveBeenCalledOnce();
+    expect(f.ports.freeAvailable).toHaveBeenCalledOnce();
+    expect(f.state.openRouterConnected).toBe(false);
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
+    const model = run(effect('agent.generate'));
+    f.ports.applySource.mockResolvedValueOnce(model).mockResolvedValue(run(null, 'Completed'));
+    await f.controller.apply({ Fulfill: {} }, 'root');
+    expect(f.state.run).toBe(model);
+    expect(f.state.freeAvailable).toBe(true);
+    expect(f.ports.fulfillFree).not.toHaveBeenCalled();
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
+    await f.controller.chooseAi('free');
+    expect(f.ports.fulfillFree).not.toHaveBeenCalled();
+    await f.controller.retryAi();
+    expect(f.ports.fulfillFree).toHaveBeenCalledTimes(1);
+    expect(f.ports.fulfillModel).not.toHaveBeenCalled();
+    expect(f.state.run?.view.status).toBe('Completed');
   });
 
   it.each([{ desktop: true }, { sourceId: 'personal', needsAi: true }])(

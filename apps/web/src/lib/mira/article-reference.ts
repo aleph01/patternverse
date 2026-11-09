@@ -8,6 +8,7 @@ export type MiraArticleReference = Readonly<{
   body: string;
   html: string;
   standaloneHref: string | null;
+  practiceSource?: string;
 }>;
 export const articleReferenceKey = (pattern: { sourceId: string; id: string }) =>
   `${pattern.sourceId}:${pattern.id}`;
@@ -16,6 +17,7 @@ export const articleReferenceKey = (pattern: { sourceId: string; id: string }) =
 export function createArticleReferenceLoader(ports: {
   publicReference: (id: string) => Promise<unknown>;
   personalReference: (id: string) => Promise<MiraArticleReference | undefined>;
+  practiceWorksheet?: (source: string) => Promise<{ body: string; html: string }>;
 }) {
   const cache = new Map<string, Promise<MiraArticleReference>>();
   return (pattern: MiraPatternSummary): Promise<MiraArticleReference> => {
@@ -42,10 +44,20 @@ export function createArticleReferenceLoader(ports: {
         !(
           record.standaloneHref === null ||
           record.standaloneHref === `/pattern/${pattern.id}/run` ||
-          record.standaloneHref === `/pattern/${pattern.id}/practice`
-        )
+          record.standaloneHref === `/pattern/${pattern.id}/practice` ||
+          (pattern.type === 'practice' && record.standaloneHref === `/practice/${pattern.id}/run`)
+        ) ||
+        (record.practiceSource !== undefined && typeof record.practiceSource !== 'string')
       )
         throw new Error('The selected pattern article could not be verified.');
+      if (pattern.type === 'practice' && record.practiceSource && ports.practiceWorksheet) {
+        const worksheet = await ports.practiceWorksheet(record.practiceSource);
+        return {
+          ...record,
+          body: `${record.body}\n\n${worksheet.body}`.trim(),
+          html: `${record.html}\n${worksheet.html}`,
+        } as MiraArticleReference;
+      }
       return record as MiraArticleReference;
     })();
     cache.set(key, pending);

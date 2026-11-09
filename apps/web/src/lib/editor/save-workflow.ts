@@ -12,6 +12,7 @@ export type EditorSaveWorkspace = Pick<
   LocalWorkspace,
   'listEntities' | 'createEntity' | 'updateEntity'
 >;
+type PracticeSaveWorkspace = EditorSaveWorkspace & Pick<LocalWorkspace, 'savePatternWithPractices'>;
 export type AcceptedEditorSave = Readonly<{
   entity: RawEntity;
   values: EditorValues;
@@ -59,10 +60,11 @@ export function createEditorSaveWorkflow(ports: Ports) {
       ports.started();
       ports.busyChanged(true);
 
-      if (values.languagePracticeSource !== undefined) {
+      for (const draft of [values, ...(values.linkedPractices ?? [])]) {
+        if (draft.languagePracticeSource === undefined) continue;
         let inspection: Inspection;
         try {
-          inspection = await ports.inspect(values.languagePracticeSource);
+          inspection = await ports.inspect(draft.languagePracticeSource);
         } catch {
           if (!disposed)
             ports.failed([
@@ -74,7 +76,9 @@ export function createEditorSaveWorkflow(ports: Ports) {
         if (!inspection.structure) {
           ports.failed(
             inspection.diagnostics.length
-              ? inspection.diagnostics.map((item) => item.message)
+              ? inspection.diagnostics.map((item) =>
+                  draft === values ? item.message : `${draft.title || 'Practice'}: ${item.message}`,
+                )
               : ['The practice could not be validated. Your unsaved source is still here.'],
           );
           return;
@@ -86,13 +90,54 @@ export function createEditorSaveWorkflow(ports: Ports) {
         ports.failed(validation.errors);
         return;
       }
+      const practices = [];
+      for (const draft of values.linkedPractices ?? []) {
+        const result = validateEditorValues({
+          ...draft,
+          verses: draft.verses || values.verses,
+          implements: [
+            ...new Set([
+              ...draft.implements
+                .split(/[\n,]/)
+                .map((id) => id.trim())
+                .filter(Boolean),
+              validation.entity.id,
+            ]),
+          ].join('\n'),
+        });
+        if (!result.success) {
+          ports.failed(result.errors.map((error) => `${draft.title || 'Practice'}: ${error}`));
+          return;
+        }
+        if (result.entity.type !== 'practice') {
+          ports.failed(['Attached exercises must be practices.']);
+          return;
+        }
+        practices.push(result.entity);
+      }
       const personal = await workspace.listEntities();
       if (disposed) return;
       ports.catalogChanged(personal);
       assertVerseHome(validation.entity, personal, commons);
 
       const entity = validation.entity;
-      if (editingId) {
+      let savedCatalog: readonly RawEntity[] = [];
+      if (values.linkedPractices !== undefined || values.originalPracticeIds?.length) {
+        if (entity.type !== 'pattern')
+          throw new Error('Only patterns can save attached practice drafts.');
+        if (editingId && editingId !== entity.id)
+          throw new Error('Entity IDs are stable and cannot be changed during an update.');
+        const groupWorkspace = workspace as Partial<PracticeSaveWorkspace>;
+        if (!groupWorkspace.savePatternWithPractices)
+          throw new Error('Saving attached practices is unavailable. Your drafts are still here.');
+        savedCatalog = await groupWorkspace.savePatternWithPractices({
+          pattern: entity,
+          practices,
+          originalPracticeIds: values.originalPracticeIds ?? [],
+          create: !editingId,
+        });
+        persisted = savedCatalog.find((record) => record.id === entity.id)!;
+      } else if (editingId) {
         persisted = await workspace.updateEntity(editingId, () => entity);
       } else {
         const { sourceId, sourcePath, ...input } = entity;
@@ -102,7 +147,7 @@ export function createEditorSaveWorkflow(ports: Ports) {
       }
       // A write that already started may finish after unmount; never publish it into a new editor.
       if (disposed) return;
-      const normalized = editorValuesFromEntity(persisted);
+      const normalized = editorValuesFromEntity(persisted, savedCatalog);
       ports.accepted({
         entity: persisted,
         values: normalized,

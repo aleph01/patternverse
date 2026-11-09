@@ -33,7 +33,6 @@ test('explains the current library with library links and install instructions',
     path: testInfo.outputPath('patternverse-field-guide.png'),
     fullPage: true,
   });
-
 });
 
 test('keeps the field guide readable at narrow widths', async ({ page }) => {
@@ -123,9 +122,9 @@ test('keeps home and guide navigation readable at narrow widths without an About
         .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
         .toBeLessThanOrEqual(width);
       const menu = page.getByRole('navigation', { name: 'Main navigation' });
-      await expect(menu.getByRole('link')).toHaveCount(3);
+      await expect(menu.getByRole('link')).toHaveCount(2);
       await expect(menu.getByRole('link', { name: 'about', exact: true })).toHaveCount(0);
-      for (const name of ['library', 'apps', 'workspace']) {
+      for (const name of ['library', 'workspace']) {
         await expect(menu.getByRole('link', { name, exact: true })).toBeVisible();
       }
     }

@@ -72,8 +72,10 @@ fn unavailable<T>(reason: &str) -> Result<T, Vec<Diagnostic>> {
 }
 /// Recover checked authored steps using the existing parser and pinned dependencies.
 fn checked(pattern: &CompiledPattern) -> Result<ValidatedPattern, Vec<Diagnostic>> {
-    syntax::parse(&pattern.source)
-        .and_then(|p| check(p, pattern.dependencies.clone()).map_err(|e| vec![e]))
+    syntax::parse(&pattern.source).and_then(|p| {
+        check_with_widgets(p, pattern.dependencies.clone(), &pattern.data_libraries(),&pattern.widgets)
+            .map_err(|e| vec![e])
+    })
 }
 /// Identify realized wording in a checked template without executing its effects.
 fn ai_parts(parts: &[CheckedPart]) -> bool {
@@ -85,14 +87,17 @@ fn ai_parts(parts: &[CheckedPart]) -> bool {
 fn reject_ai(steps: &[(CheckedStep, Span)]) -> Result<(), Vec<Diagnostic>> {
     for (step, _) in steps {
         let ai = match step {
-            CheckedStep::Generate { .. }
+            CheckedStep::Generate { widget: None, .. }
             | CheckedStep::Realize { .. }
             | CheckedStep::Suggest { .. }
             | CheckedStep::Classify { .. }
             | CheckedStep::Turn { .. } => true,
             CheckedStep::Form { form, .. } => form.blocks.iter().any(|block| match block {
                 FormBlock::Show { content } => ai_parts(content),
-                FormBlock::Ask { prompt, .. } | FormBlock::Timer { prompt, .. } => ai_parts(prompt),
+                FormBlock::Ask { prompt, .. }
+                | FormBlock::Timer { prompt, .. }
+                | FormBlock::Rate { prompt, .. }
+                | FormBlock::Select { prompt, .. } => ai_parts(prompt),
             }),
             CheckedStep::Ask { prompt, .. }
             | CheckedStep::Rate { prompt, .. }
@@ -484,6 +489,7 @@ impl Writer<'_> {
                 continue;
             }
             match step {
+                CheckedStep::Generate{widget:Some(_),..} => return unavailable("custom widget requires interactive presentation"),
                 CheckedStep::Form { binding, form } => {
                     self.sections += 1;
                     out.push_str(&format!("## {}. {}\n\n", self.sections, inline(form.title.as_deref().unwrap_or("Questions"))));
@@ -495,6 +501,18 @@ impl Writer<'_> {
                             if let Some(hint) = placeholder { out.push_str(&format!("Hint: {}\n\n", inline(hint))); }
                         }
                         FormBlock::Timer { prompt, timer, .. } => { out.push_str(&format!("{}\n\n", self.text(prompt, context))); out.push_str(&self.timer(timer)); }
+                        FormBlock::Rate { id, prompt, rating } => {
+                            context.names.insert(format!("{binding}.{id}"), format!("“{}”", label(id)));
+                            out.push_str(&format!("{}\n\n**Rating:** [Enter a number from {} to {}.]\n\n", self.text(prompt, context), rating.min, rating.max));
+                            if let Some(low) = &rating.low { out.push_str(&format!("{}: {}\n\n", rating.min, inline(low))); }
+                            if let Some(high) = &rating.high { out.push_str(&format!("{}: {}\n\n", rating.max, inline(high))); }
+                        }
+                        FormBlock::Select { id, prompt, options, selection } => {
+                            let field = format!("{binding}.{id}");
+                            context.names.insert(field.clone(), format!("“{}”", label(id)));
+                            let instruction = if selection.mode == SelectionMode::Single { "Choose exactly one.".into() } else { format!("Choose at least {} and at most {} options.", selection.min, selection.max.map_or("all available".into(), |n| n.to_string())) };
+                            out.push_str(&format!("{}\n\n{}\n\n{}\n", self.text(prompt, context), instruction, self.options(options, &field, context)?));
+                        }
                     }}
                 }
                 CheckedStep::Ask { prompt, .. } => out.push_str(&format!("{}\n\n**Your answer:**\n\n[Write here.]\n\n", self.text(prompt, context))),
@@ -522,6 +540,12 @@ impl Writer<'_> {
                     };
                     out.push_str(&format!("{}\n\n{}\n\n{}\n", self.text(prompt, context), instruction, self.options(options, binding, context)?));
                     if selection.mode == SelectionMode::Rank { out.push_str("**Your order:**\n\n1. [First item.]\n2. [Next item — extend as needed.]\n\n"); }
+                }
+                CheckedStep::Shuffle { binding, expression } => {
+                    self.notice("Shuffle the listed items once and keep that order throughout this workbook.", true);
+                    let items = if let Some(value) = Self::evaluate(expression, context) { self.value(&value) } else { self.words(expression, context)? };
+                    out.push_str(&format!("**{}:** Shuffle {} and write down the resulting order.\n\n", label(binding), items));
+                    context.names.insert(binding.clone(), format!("your shuffled {}", label(binding)));
                 }
                 CheckedStep::Derive { binding, expression } => {
                     if let Some(value) = Self::evaluate(expression, context) { out.push_str(&format!("**{}:** {}\n\n", label(binding), self.value(&value))); context.values.insert(binding.clone(), value); }
@@ -596,7 +620,7 @@ impl Writer<'_> {
                 }
                 CheckedStep::Propose(expr) => out.push_str(&format!("Review {} as the proposed wording before deciding whether to keep it.\n\n", self.words(expr, context)?)),
                 CheckedStep::Branch { .. } | CheckedStep::Match { .. } => unreachable!(),
-                CheckedStep::Generate { .. } | CheckedStep::Realize { .. } | CheckedStep::Suggest { .. } | CheckedStep::Classify { .. } | CheckedStep::Turn { .. } => unreachable!("AI admission runs before projection"),
+                CheckedStep::Generate { widget: None, .. } | CheckedStep::Realize { .. } | CheckedStep::Suggest { .. } | CheckedStep::Classify { .. } | CheckedStep::Turn { .. } => unreachable!("AI admission runs before projection"),
             }
             index += 1;
         }

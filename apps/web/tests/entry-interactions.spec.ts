@@ -1,14 +1,11 @@
 import { expect, test } from '@playwright/test';
+import { searchLibrary, selectLibraryCategory } from './helpers/library';
 
 test('Verse collections reuse library hover and keyboard-focus colors', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/library');
-  await page
-    .getByRole('navigation', { name: 'Library categories' })
-    .getByRole('button', { name: 'Collections', exact: true })
-    .click();
-  await page
-    .getByRole('searchbox', { name: /Search (the catalog|my library)/ })
-    .fill('GoF Design Patterns');
+  await selectLibraryCategory(page, 'Collections');
+  await searchLibrary(page, 'GoF Design Patterns');
   const libraryLink = page.locator('.pattern-feed a[href="/collection/gof-design-patterns"]');
   await libraryLink.hover();
   await expect(libraryLink).toHaveCSS('background-color', 'rgb(251, 254, 252)');
@@ -20,7 +17,8 @@ test('Verse collections reuse library hover and keyboard-focus colors', async ({
   await expect(libraryLink.locator('h3')).toHaveCSS('color', 'rgb(0, 122, 77)');
 
   await page.goto('/verse/software-engineering');
-  const collections = page.locator('.verse-groups section[aria-labelledby="collection-heading"]');
+  await selectLibraryCategory(page, 'Collections');
+  const collections = page.locator('#library');
   await collections.getByRole('button', { name: 'List', exact: true }).click();
   const link = collections.locator('a[href="/collection/gof-design-patterns"]');
   const row = collections.locator('li:has(a[href="/collection/gof-design-patterns"])');

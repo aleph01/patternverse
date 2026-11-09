@@ -28,11 +28,11 @@ const ports: Ports = {
 };
 
 /** The platform boundary never falls back across local and ZDR cloud providers. */
-async function requestModelText(
+export async function requestModelText(
   messages: readonly Message[],
   desktop: boolean,
   signal: AbortSignal,
-  adapters: Ports,
+  adapters: Ports = ports,
 ): Promise<string> {
   signal.throwIfAborted();
   const settings = await adapters.loadSettings();

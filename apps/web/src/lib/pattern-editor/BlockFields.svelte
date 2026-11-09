@@ -8,6 +8,7 @@
     statement,
     structure,
     disabled = false,
+    insideForm = false,
     oncommit,
     onpending,
   }: {
@@ -15,6 +16,7 @@
     statement: SourceStatement;
     structure: Structure;
     disabled?: boolean;
+    insideForm?: boolean;
     oncommit: (source: string) => Promise<boolean>;
     onpending: (pending: boolean) => void;
   } = $props();
@@ -28,15 +30,28 @@
     min = $state('0.5'),
     max = $state('5');
   let durationError = $state('');
+  let optional = $state(false);
   let initial = $state('');
   const snapshot = () =>
-    JSON.stringify({ prompt, range, options, duration, adjustable, blocking, sticky, min, max });
+    JSON.stringify({
+      prompt,
+      range,
+      options,
+      duration,
+      adjustable,
+      blocking,
+      sticky,
+      min,
+      max,
+      optional,
+    });
   const dirty = $derived(Boolean(initial) && snapshot() !== initial);
   $effect(() => {
     const item = statement;
     untrack(() => {
       const values = blockFieldsDraft(item);
       prompt = values.prompt;
+      optional = values.optional;
       range = values.range;
       options = values.options;
       duration = String(values.duration);
@@ -55,6 +70,7 @@
     durationError = '';
     const values = JSON.parse(initial);
     prompt = values.prompt;
+    optional = values.optional;
     range = values.range;
     options = values.options;
     duration = values.duration;
@@ -76,13 +92,7 @@
   }
 </script>
 
-<form
-  class="block-fields"
-  onsubmit={(event) => {
-    event.preventDefault();
-    void apply();
-  }}
->
+<div class="block-fields">
   <label
     ><span>{statement.kind === 'show' ? 'Display content' : 'Prompt'}</span><textarea
       rows="3"
@@ -93,6 +103,9 @@
   {#if statement.binding}<p class="binding">
       Response name <code>{statement.binding.value}</code> <small>Rename in Source</small>
     </p>{/if}
+  {#if insideForm && statement.kind === 'ask'}<label class="check">
+      <input type="checkbox" bind:checked={optional} {disabled} /> Answer is optional
+    </label>{/if}
   {#if statement.kind === 'rate'}<label
       ><span>Rating range</span><input bind:value={range} {disabled} placeholder="0..10" /></label
     >{/if}
@@ -175,10 +188,10 @@
   {#if dirty}<div class="draft-actions">
       <span>Unapplied block changes</span><button type="button" {disabled} onclick={discard}
         >Discard</button
-      ><button type="submit" class="apply" {disabled}>Apply changes</button>
+      ><button type="button" class="apply" {disabled} onclick={apply}>Apply changes</button>
     </div>{/if}
   {#if durationError}<p class="duration-error" role="alert">{durationError}</p>{/if}
-</form>
+</div>
 
 <style>
   .block-fields {

@@ -8,14 +8,21 @@
   let connected = $state(false);
   let message = $state('Opening OpenRouter…');
   let failed = $state(false);
+  let bearings = $state(false);
 
   async function connect() {
     failed = false;
     message = 'Opening OpenRouter…';
     try {
       const authorization = await beginOpenRouterConnection({
-        callbackUrl: new URL(resolve('/auth/openrouter/callback'), location.origin).href,
-        returnUrl: new URL(resolve('/auth/openrouter/connect'), location.origin).href,
+        callbackUrl: new URL(
+          `${resolve('/auth/openrouter/callback')}${bearings ? '?app=bearings' : ''}`,
+          location.origin,
+        ).href,
+        returnUrl: new URL(
+          `${resolve('/auth/openrouter/connect')}${bearings ? '?app=bearings' : ''}`,
+          location.origin,
+        ).href,
         storage: sessionStorage,
       });
       location.assign(authorization);
@@ -26,6 +33,7 @@
   }
 
   onMount(() => {
+    bearings = new URLSearchParams(location.search).get('app') === 'bearings';
     if (new URLSearchParams(location.search).get('connected') !== '1') {
       void connect();
       return;
@@ -36,7 +44,9 @@
         connected = Boolean(settings.openRouterKey.trim());
         failed = !connected;
         message = connected
-          ? 'Return to your practice tab and retry the step. Your answers are still there.'
+          ? bearings
+            ? 'Return to your Bearings tab. Your notes and prompts are still there.'
+            : 'Return to your practice tab and retry the step. Your answers are still there.'
           : 'No OpenRouter connection was found. Try connecting again.';
       })
       .catch(() => {
@@ -66,7 +76,9 @@
         sign-in.
       </p>
       <button type="button" onclick={() => window.close()}>Close this tab</button>
-      <a href={`${resolve('/mira')}?panel=settings`}>Manage connection and model</a>
+      {#if bearings}<a href={resolve('/apps/bearings')}>Return to Bearings</a>{:else}<a
+          href={`${resolve('/mira')}?panel=settings`}>Manage connection and model</a
+        >{/if}
     {:else if failed}
       <button type="button" onclick={connect}>Connect with OpenRouter</button>
     {/if}

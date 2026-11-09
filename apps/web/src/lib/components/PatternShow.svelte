@@ -1,10 +1,23 @@
 <script lang="ts">
-  import { groupsFor, layoutPanel, type ShowView } from '$lib/pattern-run/show-view';
-  let { view }: { view: ShowView } = $props();
+  import { detailFields, groupsFor, layoutPanel, type ShowView } from '$lib/pattern-run/show-view';
+  let { view, collapseDetails = false }: { view: ShowView; collapseDetails?: boolean } = $props();
   const id = $props.id();
 </script>
 
-<section class="pattern-show" aria-label={`Show ${view.spec.source}`}>
+{#snippet attributes(fields: [string, string][])}
+  <dl>
+    {#each fields as [key, value] (key)}<div>
+        <dt>{key.replaceAll('_', ' ')}</dt>
+        <dd>{value || '—'}</dd>
+      </div>{/each}
+  </dl>
+{/snippet}
+
+<section
+  class="pattern-show"
+  class:compact={collapseDetails}
+  aria-label={`Show ${view.spec.source}`}
+>
   {#each view.warnings as warning, index (index)}<p class="show-warning" role="status">
       {warning}
     </p>{/each}
@@ -137,16 +150,22 @@
         {#if group.label !== null}<h4>{view.spec.group}: {group.label}</h4>{/if}
         <ol class="show-items" class:ranked={view.spec.order !== null || spatial}>
           {#each group.items as item, itemIndex (itemIndex)}
-            <li>
+            {@const fields = detailFields(item)}
+            <li class:collapsible={collapseDetails && fields.length > 0}>
               {#if spatial}<span class="show-key">{panel.items.indexOf(item) + 1}</span>{/if}
               <div>
-                <p class="show-item-label">{item.label}</p>
-                <dl>
-                  {#each Object.entries(item.fields) as [key, value] (key)}<div>
-                      <dt>{key}</dt>
-                      <dd>{value || '—'}</dd>
-                    </div>{/each}
-                </dl>
+                {#if collapseDetails && fields.length > 0}
+                  <details class="show-item-details">
+                    <summary>
+                      <span class="show-item-label">{item.label}</span>
+                      <span class="show-chevron" aria-hidden="true">›</span>
+                    </summary>
+                    <div class="show-detail-content">{@render attributes(fields)}</div>
+                  </details>
+                {:else}
+                  <p class="show-item-label">{item.label}</p>
+                  {#if fields.length > 0}{@render attributes(fields)}{/if}
+                {/if}
               </div>
             </li>
           {/each}
@@ -289,6 +308,58 @@
   .show-items li > div {
     min-width: 0;
   }
+  .compact {
+    padding: 0.75rem 1rem;
+  }
+  .compact h3 {
+    margin-bottom: 0.6rem;
+  }
+  .show-items li.collapsible {
+    padding: 0;
+  }
+  .collapsible > div {
+    width: 100%;
+  }
+  .show-item-details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    list-style: none;
+    cursor: pointer;
+  }
+  .show-item-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .show-item-details summary:focus-visible {
+    outline: 2px solid var(--focus, #005fcc);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .show-chevron {
+    flex-shrink: 0;
+    color: var(--show-accent);
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  .show-item-details[open] .show-chevron {
+    transform: rotate(90deg);
+  }
+  .show-detail-content {
+    padding-bottom: 0.75rem;
+  }
+  .show-item-details dl {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0;
+  }
+  .show-item-details dl div {
+    display: block;
+  }
+  .show-item-details dt {
+    max-width: none;
+  }
   .show-item-label {
     font-size: 0.95rem;
     font-weight: 700;
@@ -313,9 +384,12 @@
   }
   dt {
     font-weight: 650;
+    flex-shrink: 0;
+    max-width: 40%;
   }
   dd {
     margin: 0;
+    min-width: 0;
   }
   .show-relations {
     font-size: 0.85rem;

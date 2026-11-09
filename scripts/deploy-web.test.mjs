@@ -74,6 +74,71 @@ test('failed builds never reach the upload step', async () => {
   assert.equal(calls, 1);
 });
 
+test('prebuilt publication scans and uploads without rebuilding or recompiling', async () => {
+  const recorded = recorder();
+  await runDeployment({
+    ...recorded,
+    args: ['--prebuilt'],
+    env: {
+      CI: 'true',
+      CLOUDFLARE_API_TOKEN: 'fixture',
+      CLOUDFLARE_ACCOUNT_ID: 'fixture-account',
+      GITHUB_SHA: 'verified-revision',
+    },
+  });
+  assert.equal(recorded.calls.length, 2);
+  const [scan, upload] = recorded.calls;
+  assert.equal(scan[0], process.execPath);
+  assert.match(scan[1][0], /check-public-build\.mjs$/);
+  assert.equal(scan[1][1], 'apps/web/build');
+  assert.equal(scan[2].env.CLOUDFLARE_API_TOKEN, undefined);
+  assert.equal(scan[2].env.CLOUDFLARE_ACCOUNT_ID, undefined);
+  assert.equal(upload[0], process.execPath);
+  assert.deepEqual(upload[1].slice(1), [
+    'pages',
+    'deploy',
+    'build',
+    '--project-name',
+    'patternverse',
+    '--branch',
+    'main',
+    '--commit-hash',
+    'verified-revision',
+  ]);
+  assert.equal(upload[2].env.CLOUDFLARE_API_TOKEN, 'fixture');
+});
+
+test('a failed prebuilt scan stops publication without rebuilding', async () => {
+  const calls = [];
+  await assert.rejects(
+    runDeployment({
+      args: ['--prebuilt'],
+      env: {},
+      log: () => {},
+      run: async (...args) => {
+        calls.push(args);
+        throw new Error('Public build rejected');
+      },
+    }),
+    /Public build rejected/,
+  );
+  assert.equal(calls.length, 1);
+  assert.match(calls[0][1][0], /check-public-build\.mjs$/);
+});
+
+test('prebuilt mode requires CI credentials and rejects conflicting build options', async () => {
+  const recorded = recorder();
+  await assert.rejects(
+    runDeployment({ ...recorded, args: ['--prebuilt'], env: { CI: 'true' } }),
+    /Configure/,
+  );
+  await assert.rejects(
+    runDeployment({ ...recorded, args: ['--prebuilt', '--build-only'], env: {} }),
+    /either --build-only or --prebuilt/,
+  );
+  assert.equal(recorded.calls.length, 0);
+});
+
 test('missing CI credentials and unknown flags fail before running any commands', async () => {
   const recorded = recorder();
   await assert.rejects(runDeployment({ ...recorded, args: [], env: { CI: 'true' } }), /Configure/);

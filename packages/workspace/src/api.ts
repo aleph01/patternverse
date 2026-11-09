@@ -1,4 +1,11 @@
-import type { EntityRef, EntityStatus, RawEntity, Usefulness } from '@patternverse/schema';
+import type {
+  EntityRef,
+  EntityStatus,
+  RawEntity,
+  RawPatternEntity,
+  RawPracticeEntity,
+  Usefulness,
+} from '@patternverse/schema';
 import type { WorkspaceBackup } from './backup.js';
 import type { PracticeRunInput, SavedPracticeRun } from './practice-history.js';
 import type {
@@ -8,7 +15,9 @@ import type {
   WorkspaceFavorite,
   WorkspaceUsefulness,
 } from './ownership.js';
-import type { Situation } from './situations.js';
+import type { Situation, SituationPriority } from './situations.js';
+import type { BearingsNotebook } from './bearings.js';
+import type { SituationConnectionChange, SituationMapPosition } from './situation-graph.js';
 
 export const PERSONAL_SOURCE_ID = 'personal' as const;
 export const DEFAULT_WORKSPACE_DATABASE = 'patternverse-workspace-v1';
@@ -26,14 +35,41 @@ export type WorkspaceOptions = {
   readonly now?: () => Date;
 };
 
-export type LocalWorkspace = {
+export type LocalWorkspace = import('./widgets.js').WidgetOperations & {
+  /** Save a pattern and its practice drafts together; removed practices are unlinked, never deleted. */
+  readonly savePatternWithPractices: (input: {
+    pattern: RawPatternEntity;
+    practices: readonly RawPracticeEntity[];
+    originalPracticeIds: readonly string[];
+    create: boolean;
+  }) => Promise<readonly RawEntity[]>;
   readonly listSituations: () => Promise<readonly Situation[]>;
-  readonly createSituation: (title: string) => Promise<Situation>;
-  readonly updateSituation: (
+  readonly createSituation: (
+    title: string,
+    parent?: Readonly<{ id: string; revision: number }>,
+    mapPosition?: SituationMapPosition,
+  ) => Promise<Situation>;
+  readonly changeSituationConnection: (
+    change: SituationConnectionChange,
+  ) => Promise<readonly Situation[]>;
+  readonly positionSituationOnMap: (
     id: string,
-    content: { title: string; context: string },
+    position: SituationMapPosition | null,
     revision: number,
   ) => Promise<Situation>;
+  readonly updateSituation: (
+    id: string,
+    content: {
+      title: string;
+      context: string;
+      notebook?: BearingsNotebook;
+      /** Omit to preserve the priority, or pass null to clear it. */
+      priority?: SituationPriority | null;
+    },
+    revision: number,
+  ) => Promise<Situation>;
+  /** Delete only the revision the user reviewed, preserving newer edits from another window. */
+  readonly deleteSituation: (id: string, revision: number) => Promise<void>;
   /** Move a single entry before another (or to the end), using the latest queue. */
   readonly moveSituation: (id: string, beforeId: string | null) => Promise<readonly Situation[]>;
   readonly listPracticeRuns: () => Promise<readonly SavedPracticeRun[]>;

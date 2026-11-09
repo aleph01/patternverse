@@ -1,3 +1,4 @@
+import { librarySearchInput, searchLibrary, selectLibraryScope } from './helpers/library';
 import { expect, test } from '@playwright/test';
 
 test('filters personal ratings with search, verses, and saved scope', async ({
@@ -18,10 +19,11 @@ test('filters personal ratings with search, verses, and saved scope', async ({
   await page.goto('/library');
   if (testInfo.project.name === 'mobile-chromium')
     await page.getByRole('button', { name: 'Filter library' }).click();
-  const scope = page.getByRole('navigation', { name: 'Library scope' });
-  await scope.getByRole('button', { name: /^(Explore|Commons)$/ }).click();
+  await selectLibraryScope(page, 'explore');
   const trigger = page.getByRole('button', { name: /^Your rating:/ });
   async function choose(label: string) {
+    if (!(await trigger.isVisible()))
+      await page.getByRole('button', { name: 'Filter library' }).click();
     await trigger.click();
     await page
       .getByRole('group', { name: 'Your rating', exact: true })
@@ -55,24 +57,25 @@ test('filters personal ratings with search, verses, and saved scope', async ({
   await choose('Useful or better');
   if (testInfo.project.name === 'mobile-chromium') {
     await page
-      .getByRole('combobox', { name: 'Verse', exact: true })
-      .selectOption({ label: 'Software Engineering' });
+      .getByRole('group', { name: 'Choose one Verse', exact: true })
+      .getByRole('button', { name: 'Software Engineering', exact: true })
+      .click();
   } else {
     await page
       .getByRole('complementary', { name: 'Browse verses' })
       .getByRole('button', { name: 'Software Engineering', exact: true })
       .click();
   }
-  await page.getByRole('searchbox').fill('Builder');
+  await searchLibrary(page, 'Builder');
   await expect(results.getByRole('link')).toHaveCount(1);
-  await scope.getByRole('button', { name: /^My library/ }).click();
+  await selectLibraryScope(page, 'saved');
   await expect(results).toHaveCount(0);
-  await scope.getByRole('button', { name: /^(Explore|Commons)$/ }).click();
+  await selectLibraryScope(page, 'explore');
   await expect(results.getByRole('link', { name: /Builder/ })).toBeVisible();
   await choose('Any rating');
-  await expect(page.getByRole('searchbox')).toHaveValue('Builder');
+  await expect(librarySearchInput(page)).toHaveValue('Builder');
   await expect(trigger).toContainText('Your rating');
-  await page.getByRole('searchbox').fill('');
+  await searchLibrary(page, '');
   await choose('Useful or better');
   if (testInfo.project.name === 'chromium')
     await page
@@ -86,7 +89,7 @@ test('filters personal ratings with search, verses, and saved scope', async ({
   if (testInfo.project.name === 'mobile-chromium')
     await page.getByRole('button', { name: 'Filter library' }).click();
   await expect(trigger).toContainText('Your rating');
-  await scope.getByRole('button', { name: /^(Explore|Commons)$/ }).click();
+  await selectLibraryScope(page, 'explore');
   await choose('Very useful only');
   await expect(results.getByRole('link', { name: /Observer/ })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(

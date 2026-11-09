@@ -1,15 +1,22 @@
 # Pattern Markdown core
 
-Portable Rust compiler and runtime migrated from Mira into Patternverse. The
-engine and its therapy-pattern fixtures are tested here, but the Patternverse
-web companion does **not yet execute** these programs. Native and web hosts
-must explicitly connect to this crate before guided exercises become available.
+Portable Rust compiler and runtime shared by Patternverse website practices,
+source/editor previews, Mira, and the bounded inline worksheet host. See the
+[current language reference](../../docs/pattern-markdown/README.md) and
+[readable authoring conventions](../../docs/pattern-markdown/readability.md).
 
 Production function docs are enforced for this crate. Run `cargo test --locked`,
 `cargo fmt --check`, and `cargo clippy --locked --all-targets -- -D warnings`
 from this directory.
 
 ## What works
+
+- Canonical `name = ...` bindings, local structured `?match` / `?branch` arms,
+  exhaustive static-choice matching, and `[optional]` form questions. Local decisions
+  lower to the existing forward graph; old source and saved-run semantics remain.
+- Atomic grouped forms with typed record results, text fields, displays, and timers.
+- Pure helpers, records/lists, pipelines, `each`, typed semantic AI, named flows,
+  active-pattern message handlers, and compiled participant-controlled refinement.
 
 - Chumsky directive/argument/reference parsing with explicit line/block structure,
   UTF-8 byte spans, parsed AST, semantic validation, validated AST and lowered nodes.
@@ -50,7 +57,7 @@ from this directory.
   support restart recovery without dispatching historical effects. Scripted scenarios,
   property tests and process-exit fixtures exercise the same runtime. See the
   [persistence protocol](../../docs/pattern-markdown/persistence.md).
-- The approved `!refine` semantic frame remains in `refine.rs` for subsequent integration.
+- The participant-controlled `!refine` frame executes compiled bodies through the same runtime.
 
 ## Development harness
 
@@ -95,13 +102,10 @@ cargo clippy --manifest-path crates/pattern-core/Cargo.toml --offline --all-targ
 
 ## Deliberate limits
 
-This core delivers **M5, not the complete language**. M6's separate native Host provides
-encrypted persistence for bundled preview examples; M7 adds desktop session-attached
-[inline widgets](../../docs/pattern-markdown/inline-chat.md). Record literals/input schemas,
-compiled refine, the library and editor
-remain later work. Unsupported directives fail closed instead of silently changing
-meaning. Attributes precede body content. Markdown is dedented and source escapes
-are resolved; a future UI Host must render it safely.
+Hosts explicitly choose supported effects and own model requests, presentation,
+storage, and delivery. Unsupported syntax fails compilation. An unsupported host
+interaction remains pending instead of being skipped. Attributes precede body text;
+generated content remains data and must be rendered safely by the host.
 
 Compiled IDs include the compiler schema version, exact source and resolved child
 interfaces/revisions. Executable snapshot IDs pin the exact root/dependency sources. Node
@@ -121,6 +125,5 @@ The memory store is not durable. The plaintext atomic file adapter exists only i
 support and uses isolated synthetic fixtures. No app data is read or migrated. Test-only
 dependencies are proptest, insta, tempfile and fs2; production dependencies are unchanged.
 
-The standalone refinement frame retains its existing development serialization;
-its frame must be driven by compiled bodies in this runtime, never by a second Host
+The refinement frame is driven by compiled bodies in this runtime, never by a second Host
 interpreter. See the [checkpoint](../../docs/pattern-migration/checkpoint.md).

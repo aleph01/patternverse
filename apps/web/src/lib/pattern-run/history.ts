@@ -3,7 +3,7 @@ import type { PatternRun } from '$lib/pattern-runtime/types';
 import { serializeSourceRun } from '$lib/pattern-runtime/source';
 import { answerFor, promptFor } from './view';
 import { executionStepKey } from './revisit';
-import { formAnswers, formBlocks, formTimerEffect } from './form';
+import { formAnswers, formBlocks, formTimerEffect, formAnswerText } from './form';
 
 export type PracticeIdentity = Pick<
   PracticeRunInput,
@@ -51,10 +51,8 @@ export function practiceSnapshot(
           id: `${responseId}:${block.id}`,
           prompt: `${prefix}${block.prompt}`,
           answer:
-            block.type === 'ask'
-              ? value?.type === 'text'
-                ? value.value
-                : ''
+            block.type !== 'timer'
+              ? formAnswerText(block, value)
               : answerFor(formTimerEffect(effect, block), {
                   value:
                     value?.type === 'record'

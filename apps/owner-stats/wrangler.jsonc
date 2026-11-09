@@ -1,0 +1,41 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "patternverse-owner-stats",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-23",
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    "COLLECTION_ENABLED": "true",
+    "COLLECTION_MODE": "edge",
+    "OWNER_EMAIL": "contact@patternverse.org",
+    "ACCESS_TEAM_DOMAIN": "snowy-butterfly-6cf2.cloudflareaccess.com",
+    "ACCESS_AUD": "e0d12f841b52b3ee6ed21443bb570c0a4077e8ccfb6c8f9fd3111022987942de",
+  },
+  "d1_databases": [
+    {
+      "binding": "STATS",
+      "database_name": "patternverse-usage",
+      "database_id": "ecd91dce-cf8b-4bf2-ac03-907f1ead5617",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "routes": [
+    { "pattern": "patternverse.org/*", "zone_name": "patternverse.org" },
+    { "pattern": "www.patternverse.org/*", "zone_name": "patternverse.org" },
+    { "pattern": "patternverse.org/owner/*", "zone_name": "patternverse.org" },
+    { "pattern": "patternverse.org/api/usage", "zone_name": "patternverse.org" },
+    { "pattern": "www.patternverse.org/owner/*", "zone_name": "patternverse.org" },
+    { "pattern": "www.patternverse.org/api/usage", "zone_name": "patternverse.org" },
+  ],
+  "observability": { "enabled": false },
+  "ratelimits": [
+    {
+      "name": "USAGE_LIMITER",
+      "namespace_id": "7421901",
+      "simple": { "limit": 120, "period": 60 },
+    },
+  ],
+  "triggers": { "crons": ["15 0 * * *"] },
+  "build": { "command": "pnpm --filter @patternverse/owner-stats build" },
+}

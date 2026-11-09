@@ -67,7 +67,7 @@ describe('NLP reading, discovery and method metadata', () => {
       for (const query of [p.title, p.source.canonical_pattern])
         expect(search.search(query, { type: 'pattern' }).map((e) => e.id)).toContain(p.id);
     }
-    for (const query of ['NLP', 'Neuro-Linguistic Programming', 'Sleight of Mouth'])
+    for (const query of ['NLP', 'NLP -- Sleight of Mouth', 'Sleight of Mouth'])
       expect(search.search(query, { type: 'pattern' }).map((e) => e.id)).toEqual(
         expect.arrayContaining(metadata.patterns.map((p) => p.id)),
       );

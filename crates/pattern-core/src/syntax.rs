@@ -6,7 +6,8 @@ use std::ops::Range;
 mod functional;
 mod imports;
 mod semantic;
-pub use imports::{imports, Import};
+pub(crate) mod structured;
+pub use imports::{data_imports, imports, package_imports, DataImport, Import};
 
 pub type Span = Range<usize>;
 
@@ -291,7 +292,7 @@ fn header(line: &str, offset: usize, span: Span) -> Result<(Block, bool), Vec<Di
         let start = rest_offset + 2 + value.len() - value.trim_start().len();
         self::reference(reference, start).map_err(|e| vec![e])?;
         block.argument = Some((reference.into(), start..start + reference.len()));
-    } else if line.starts_with('!') && kind == "use" {
+    } else if line.starts_with('!') && matches!(kind, "use" | "widget") {
         let tokens = words(rest, rest_offset)?;
         if tokens.len() != 3
             || tokens.iter().any(|w| w.quoted)
@@ -324,7 +325,9 @@ fn header(line: &str, offset: usize, span: Span) -> Result<(Block, bool), Vec<Di
             block.argument = Some((rest.into(), rest_offset..rest_offset + rest.len()));
         }
     } else {
-        let binding = if matches!(kind, "choose" | "rank") {
+        let binding = if kind == "ask" {
+            question_header(rest, rest_offset, &mut block)?
+        } else if matches!(kind, "choose" | "rank") {
             selection_header(rest, rest_offset, &mut block)?
         } else {
             rest
@@ -357,6 +360,37 @@ fn header(line: &str, offset: usize, span: Span) -> Result<(Block, bool), Vec<Di
         }
     }
     Ok((block, explicit))
+}
+
+/// Normalize the optional-question marker to the existing required-field contract.
+fn question_header<'a>(
+    rest: &'a str,
+    offset: usize,
+    block: &mut Block,
+) -> Result<&'a str, Vec<Diagnostic>> {
+    let Some(open) = rest.find('[') else {
+        return Ok(rest);
+    };
+    if rest[open..].trim() != "[optional]" {
+        return Err(vec![Diagnostic::error(
+            "P026",
+            "Question parameters support [optional]",
+            offset + open..offset + rest.len(),
+        )]);
+    }
+    let span = offset + open..offset + rest.len();
+    block.attributes.push(Attribute {
+        name: "required".into(),
+        args: vec![Word {
+            text: "false".into(),
+            quoted: false,
+            span: span.clone(),
+        }],
+        raw: "false".into(),
+        raw_offset: span.start,
+        span,
+    });
+    Ok(rest[..open].trim_end())
 }
 
 /// Normalize the compact refinement header to the existing attribute-oriented AST.
@@ -594,6 +628,7 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
     let mut errors = vec![];
     let mut offset = 0;
     let mut extended_syntax = false;
+    let mut typed_syntax = false;
     let mut legacy_headers = true;
     let mut lines = source.split_inclusive('\n').peekable();
     while let Some(line) = lines.next() {
@@ -605,13 +640,37 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
                     || boundary(line.trim())))
                 || matches!(
                     block.kind.as_str(),
-                    "collect" | "?loop" | "refine" | "each" | "flow" | "form"
+                    "collect"
+                        | "?loop"
+                        | "refine"
+                        | "each"
+                        | "flow"
+                        | "form"
+                        | "?match"
+                        | "?branch"
+                        | "arm_case"
+                        | "arm_when"
+                        | "arm_else"
                 )
         });
-        if extended_syntax && in_flow && functional::is_pure_line(line.trim()) {
+        let annotation_in_prose = stack.last().is_some_and(|(block, explicit)| {
+            !explicit
+                && !matches!(
+                    block.kind.as_str(),
+                    "collect" | "each" | "?loop" | "refine" | "flow"
+                )
+                && functional::binding_in(line.trim(), true)
+                    .is_some_and(|(name, _)| name.contains(':'))
+        });
+        if extended_syntax
+            && in_flow
+            && !annotation_in_prose
+            && functional::is_pure_line(line.trim(), typed_syntax)
+        {
             while functional::needs_more(&raw)
                 || lines.peek().is_some_and(|line| {
                     line.trim_start().starts_with("|>")
+                        || line.trim_start().starts_with("??")
                         || (raw.trim_start().starts_with("type ")
                             && line.trim_start().starts_with('|'))
                 })
@@ -631,7 +690,7 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
                 && (((boundary(trimmed)
                     || (extended_syntax
                         && (!legacy_headers || !source[block.span.start..].starts_with('!'))
-                        && functional::binding(trimmed).is_some()))
+                        && functional::binding_in(trimmed, false).is_some()))
                     && !trimmed.starts_with('~'))
                     || trimmed == "}")
         }) {
@@ -642,7 +701,16 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
             if stack.last().is_some_and(|(b, _)| {
                 !matches!(
                     b.kind.as_str(),
-                    "ask" | "show" | "collect" | "?loop" | "refine" | "each" | "flow"
+                    "ask"
+                        | "show"
+                        | "collect"
+                        | "?loop"
+                        | "refine"
+                        | "each"
+                        | "flow"
+                        | "arm_case"
+                        | "arm_when"
+                        | "arm_else"
                 )
             }) {
                 errors.push(Diagnostic::error("P021", "Realization is allowed only as standalone content or inside !ask/!show; it cannot be nested", span));
@@ -678,7 +746,17 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
         if stack.last().is_some_and(|(block, _)| {
             !matches!(
                 block.kind.as_str(),
-                "collect" | "?loop" | "refine" | "each" | "flow" | "form"
+                "collect"
+                    | "?loop"
+                    | "refine"
+                    | "each"
+                    | "flow"
+                    | "form"
+                    | "?match"
+                    | "?branch"
+                    | "arm_case"
+                    | "arm_when"
+                    | "arm_else"
             )
         }) {
             let (block, explicit) = stack.last_mut().unwrap();
@@ -744,6 +822,16 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
             } else {
                 errors.push(Diagnostic::error("P016", "Unexpected closing brace", span));
             }
+        } else if trimmed.starts_with(':')
+            && trimmed.ends_with('{')
+            && stack
+                .last()
+                .is_some_and(|(b, _)| matches!(b.kind.as_str(), "?match" | "?branch"))
+        {
+            match structured::arm(trimmed, start, span) {
+                Ok(block) => stack.push((block, true)),
+                Err(e) => errors.extend(e),
+            }
         } else if trimmed.starts_with(':') {
             if let Some((block, _)) = stack.last_mut() {
                 if !block.statements.is_empty() {
@@ -768,11 +856,12 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
                 match attribute(trimmed, start, span) {
                     Ok(a) => {
                         if a.name == "language"
-                            && a.args
-                                .first()
-                                .is_some_and(|w| !w.quoted && matches!(w.text.as_str(), "1" | "2"))
+                            && a.args.first().is_some_and(|w| {
+                                !w.quoted && matches!(w.text.as_str(), "1" | "2" | "3")
+                            })
                         {
                             extended_syntax = true;
+                            typed_syntax = true;
                             legacy_headers = a.args[0].text == "1";
                         }
                         declarations.push(a);
@@ -862,9 +951,10 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
                 });
             }
         } else if extended_syntax
-            && functional::binding(trimmed).is_some_and(|(_, rhs)| !functional::effectful(rhs))
+            && functional::binding_in(trimmed, typed_syntax)
+                .is_some_and(|(_, rhs)| !functional::effectful(rhs))
         {
-            let (name, expression) = functional::binding(trimmed).unwrap();
+            let (name, expression) = functional::binding_in(trimmed, typed_syntax).unwrap();
             append_statement(
                 Statement::Derive {
                     binding: Word {
@@ -881,13 +971,14 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
             );
         } else if trimmed.starts_with('!')
             || trimmed.starts_with('?')
-            || (extended_syntax && functional::binding(trimmed).is_some())
+            || (extended_syntax && functional::binding_in(trimmed, typed_syntax).is_some())
         {
-            let parsed_header = if extended_syntax && functional::binding(trimmed).is_some() {
-                functional::header(trimmed, start, span.clone())
-            } else {
-                header(trimmed, start, span.clone())
-            };
+            let parsed_header =
+                if extended_syntax && functional::binding_in(trimmed, typed_syntax).is_some() {
+                    functional::header(trimmed, start, span.clone(), typed_syntax)
+                } else {
+                    header(trimmed, start, span.clone())
+                };
             match parsed_header {
                 Ok((block, explicit)) => {
                     if block.kind == "form" && !explicit {
@@ -900,7 +991,18 @@ pub fn parse(source: &str) -> Result<ParsedPattern, Vec<Diagnostic>> {
                         continue;
                     }
                     if matches!(block.kind.as_str(), "collect" | "?loop" | "refine" | "each")
-                        && (!explicit || stack.iter().any(|(b, _)| b.kind != "flow"))
+                        && (!explicit
+                            || stack.iter().any(|(b, _)| {
+                                !matches!(
+                                    b.kind.as_str(),
+                                    "flow"
+                                        | "?match"
+                                        | "?branch"
+                                        | "arm_case"
+                                        | "arm_when"
+                                        | "arm_else"
+                                )
+                            }))
                     {
                         errors.push(Diagnostic::error(
                             "P017",

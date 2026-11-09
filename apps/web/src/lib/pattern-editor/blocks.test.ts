@@ -10,7 +10,7 @@ import {
   endInsertion,
   moveRule,
   newBlock,
-  newPaths,
+  legacyPaths as newPaths,
   patchSource,
   promptPatch,
   removePath,
@@ -55,7 +55,7 @@ describe('compiler-backed block source editing', () => {
     const changed = patchSource(start, [promptPatch(statement, 'What helps today?')]);
     valid(changed);
     expect(changed.slice(0, prefix.length)).toBe(prefix);
-    expect(changed).toContain(':option explore "Explore options"');
+    expect(changed).toContain('- explore: "Explore options"');
     expect(changed.endsWith('\n-> end\n')).toBe(true);
     expect(sliceSource(start, statement.span)).toContain('What would help?');
   });

@@ -7,6 +7,7 @@ export interface BindingInspection {
   slot: number;
   value_type: unknown;
   span: SourceSpan;
+  choice_ids?: string[];
 }
 export interface StructureStep {
   kind: string;
@@ -36,6 +37,7 @@ export interface SourceStatement {
   argument: SourceField | null;
   body: SourceField | null;
   attributes: SourceAttribute[];
+  children?: SourceStatement[];
 }
 export interface PathArm {
   attribute: SourceSpan;
@@ -80,6 +82,13 @@ export interface SourceDiagnostic {
 export interface Inspection {
   diagnostics: SourceDiagnostic[];
   structure: Structure | null;
+}
+
+/** An explicitly selected fixture reply, validated by the same runtime as real replies. */
+export interface PreviewMockResult {
+  kind: string;
+  label: string;
+  result: unknown;
 }
 
 /** Mira's byte-to-DOM selection conversion, preserving accents and surrogate pairs. */

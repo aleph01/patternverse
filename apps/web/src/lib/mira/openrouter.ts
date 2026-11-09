@@ -170,12 +170,10 @@ export function createOpenRouterReplyProvider(options: OpenRouterOptions): Reply
           model,
           messages: [
             { role: 'system', content: system },
-            ...effect.messages
-              .slice(-24)
-              .map((message) => ({
-                role: message.role,
-                content: conversationMessageText(message),
-              })),
+            ...effect.messages.slice(-24).map((message) => ({
+              role: message.role,
+              content: conversationMessageText(message),
+            })),
           ],
           stream: true,
           max_tokens: 4096,

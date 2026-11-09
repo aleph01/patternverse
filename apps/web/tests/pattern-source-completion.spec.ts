@@ -29,7 +29,7 @@ test('completion keeps keyboard selection, dismissal, insertion and undo/redo', 
   await field.fill('  !as');
   await field.press('Control+Space');
   await field.press('Tab');
-  const inserted = '  !ask response {\n    What comes to mind?\n  }';
+  const inserted = '  response = !ask {\n    What comes to mind?\n  }';
   await expect(field).toHaveValue(inserted);
   expect(
     await field.evaluate((element: HTMLTextAreaElement) =>
@@ -56,7 +56,7 @@ test('completion replaces a full token, reuses compiler fields and stays out of 
   await field.press('Control+Space');
   await page.getByRole('option', { name: /!ask Ask for text/ }).click();
   await expect(field).toHaveValue(
-    ':language 1\n:title "café 🙂"\n  !ask response {\n    What comes to mind?\n  }\n-> end',
+    ':language 1\n:title "café 🙂"\n  response = !ask {\n    What comes to mind?\n  }\n-> end',
   );
   expect(
     await field.evaluate((element: HTMLTextAreaElement) =>

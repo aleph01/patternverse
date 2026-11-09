@@ -1,22 +1,27 @@
 //! Functional surface forms normalized to the existing immutable flow AST.
 use super::*;
 
-/// Recognize a canonical immutable binding, never equality or an arbitrary Markdown sentence.
-pub(super) fn binding(line: &str) -> Option<(&str, &str)> {
+/// Recognize a canonical immutable binding, with additive optional type annotations.
+pub(super) fn binding_in(line: &str, typed: bool) -> Option<(&str, &str)> {
     let (name, rhs) = line.split_once('=')?;
     let name = name.trim();
     let rhs = rhs.trim();
-    (is_identifier(name) && !rhs.starts_with('=')).then_some((name, rhs))
+    let valid = is_identifier(name)
+        || (typed
+            && name
+                .split_once(':')
+                .is_some_and(|(key, ty)| is_identifier(key.trim()) && !ty.trim().is_empty()));
+    (valid && !rhs.starts_with('=')).then_some((name, rhs))
 }
 
 /// Identify pure expression statements whose literals may span multiple source lines.
-pub(super) fn is_pure_line(line: &str) -> bool {
+pub(super) fn is_pure_line(line: &str, typed: bool) -> bool {
     line.starts_with("fn ")
         || line.starts_with("-> yield ")
         || line.starts_with("-> propose ")
         || line.starts_with("-> repeat ")
         || line.starts_with("type ")
-        || binding(line).is_some_and(|(_, rhs)| !effectful(rhs))
+        || binding_in(line, typed).is_some_and(|(_, rhs)| !effectful(rhs))
 }
 
 /// Keep effectful right-hand sides out of the pure-expression grammar.
@@ -54,6 +59,8 @@ pub(super) fn needs_more(source: &str) -> bool {
         || source.trim_end().ends_with('=')
         || source.trim_end().ends_with("=>")
         || source.trim_end().ends_with("|>")
+        || source.trim_end().ends_with("|>>")
+        || source.trim_end().ends_with("??")
 }
 
 /// Normalize only top-level effect bindings; effects nested inside pure expressions remain invalid.
@@ -61,10 +68,21 @@ pub(super) fn header(
     line: &str,
     offset: usize,
     span: Span,
+    typed: bool,
 ) -> Result<(Block, bool), Vec<Diagnostic>> {
-    let (name, rhs) = binding(line).unwrap();
+    let (annotated_name, rhs) = binding_in(line, typed).unwrap();
+    let name = annotated_name
+        .split_once(':')
+        .map_or(annotated_name, |(name, _)| name.trim());
     if let Some(block) = super::semantic::binding_header(name, rhs, line, offset, span.clone()) {
-        return block;
+        return block.map(|(mut block, explicit)| {
+            block.binding = Some(Word {
+                text: annotated_name.into(),
+                quoted: false,
+                span: offset..offset + annotated_name.len(),
+            });
+            (block, explicit)
+        });
     }
     let fail = || {
         vec![Diagnostic::error(
@@ -79,9 +97,9 @@ pub(super) fn header(
         let normalized = format!("!refine[{parameters}] {name} = {initial} {{");
         let (mut block, explicit) = super::refinement_header(&normalized, offset, span.clone())?;
         block.binding = Some(Word {
-            text: name.into(),
+            text: annotated_name.into(),
             quoted: false,
-            span: offset..offset + name.len(),
+            span: offset..offset + annotated_name.len(),
         });
         let attribute = block
             .attributes
@@ -101,9 +119,9 @@ pub(super) fn header(
             Block {
                 kind: "each".into(),
                 binding: Some(Word {
-                    text: name.into(),
+                    text: annotated_name.into(),
                     quoted: false,
-                    span: offset..offset + name.len(),
+                    span: offset..offset + annotated_name.len(),
                 }),
                 attributes: vec![
                     Attribute {
@@ -149,15 +167,16 @@ pub(super) fn header(
             | "!agent"
             | "!turn"
             | "!use"
+            | "!widget"
             | "!collect"
             | "!refine"
     ) {
         return Err(fail());
     }
-    let normalized = if kind == "!use" {
+    let normalized = if matches!(kind, "!use" | "!widget") {
         let child = tail.trim_end_matches('{').trim();
         format!(
-            "!use {child} as {name} {}",
+            "{kind} {child} as {name} {}",
             if tail.ends_with('{') { "{" } else { "" }
         )
     } else {
@@ -186,9 +205,9 @@ pub(super) fn header(
         }
     }
     block.binding = Some(Word {
-        text: name.into(),
+        text: annotated_name.into(),
         quoted: false,
-        span: offset..offset + name.len(),
+        span: offset..offset + annotated_name.len(),
     });
     block.span = span;
     Ok((block, explicit))

@@ -30,6 +30,7 @@
     disabled = false,
     runningAllowed = true,
     showContinue = true,
+    confirmLabel = 'Continue ↓',
     docked = false,
     showHint = true,
   }: {
@@ -41,6 +42,7 @@
     disabled?: boolean;
     runningAllowed?: boolean;
     showContinue?: boolean;
+    confirmLabel?: string;
     /** The practice-level dock owns the live widget; this step keeps only its receipt/action. */
     docked?: boolean;
     showHint?: boolean;
@@ -207,7 +209,7 @@
             class="timer-continue"
             type="button"
             disabled={controlsDisabled || !timerCanContinue(config, timer)}
-            onclick={() => onconfirm?.(timerResult(timer!, Date.now()))}>Continue ↓</button
+            onclick={() => onconfirm?.(timerResult(timer!, Date.now()))}>{confirmLabel}</button
           >
         </div>
       {/if}

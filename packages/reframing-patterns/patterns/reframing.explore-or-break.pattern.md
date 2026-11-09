@@ -11,41 +11,41 @@ classifier move -> Move {
 }
 move = frame ?~ move
 ?match move {
-    :case explore -> explore
-    :case break -> break
-    :case uncertain -> uncertain
+  :case explore {
+    finding = !use reframing.look-outside-frame {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case break {
+    finding = !use reframing.rethink-goal {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case uncertain {
+    direction = !choose {
+        :option explore "Explore what may be missing"
+        :option break "Question the frame itself"
+        Which direction seems more useful for {{frame}}?
+    }
+    ?match direction {
+      :case explore {
+        finding = !use reframing.look-outside-frame {
+            :with frame
+        }
+        candidate_frame = finding.candidate_frame
+        -> end
+      }
+      :else {
+        finding = !use reframing.rethink-goal {
+            :with frame
+        }
+        candidate_frame = finding.candidate_frame
+        -> end
+      }
+    }
+  }
 }
-explore:
-!use reframing.look-outside-frame as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-break:
-!use reframing.rethink-goal as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-uncertain:
-!choose direction {
-    :option explore "Explore what may be missing"
-    :option break "Question the frame itself"
-    Which direction seems more useful for {{frame}}?
-}
-?match direction {
-    :case explore -> user_explore
-    :else -> user_break
-}
-user_explore:
-!use reframing.look-outside-frame as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-user_break:
-!use reframing.rethink-goal as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end

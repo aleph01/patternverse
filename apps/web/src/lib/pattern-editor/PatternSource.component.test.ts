@@ -29,7 +29,7 @@ describe('Pattern source completion controls', () => {
       expect(field.getAttribute('aria-activedescendant')).toBe(selected().id);
       await fireEvent.keyDown(field, { key });
       await waitFor(() =>
-        expect(field.value).toBe('  !ask response {\n    What comes to mind?\n  }'),
+        expect(field.value).toBe('  response = !ask {\n    What comes to mind?\n  }'),
       );
       expect(field.value.slice(field.selectionStart).startsWith('What comes')).toBe(true);
       expect(field.selectionStart).toBe(field.selectionEnd);
@@ -62,7 +62,7 @@ describe('Pattern source completion controls', () => {
     await fireEvent.click(option);
     await waitFor(() =>
       expect(field.value).toBe(
-        '# café 🙂\n  !ask response {\n    What comes to mind?\n  }\n-> end',
+        '# café 🙂\n  response = !ask {\n    What comes to mind?\n  }\n-> end',
       ),
     );
     expect(field.value.slice(field.selectionStart).startsWith('What comes')).toBe(true);
@@ -72,7 +72,7 @@ describe('Pattern source completion controls', () => {
     const { field, open } = setup('!as');
     await open();
     await fireEvent.keyDown(field, { key: 'Enter' });
-    await waitFor(() => expect(field.value).toContain('!ask response'));
+    await waitFor(() => expect(field.value).toContain('response = !ask'));
     const inserted = field.value,
       caret = field.selectionStart;
     await fireEvent.keyDown(field, { ctrlKey: true, key: 'z' });
@@ -95,7 +95,7 @@ describe('Pattern source completion controls', () => {
     await fireEvent.compositionEnd(field);
     await open();
     await fireEvent.keyDown(field, { key: 'Enter' });
-    await waitFor(() => expect(field.value).toContain('!ask response'));
+    await waitFor(() => expect(field.value).toContain('response = !ask'));
     expect(onchange).toHaveBeenCalledTimes(2);
   });
 

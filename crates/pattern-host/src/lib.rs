@@ -13,6 +13,7 @@ use std::collections::{BTreeMap, BTreeSet};
 mod core_library;
 pub mod editor;
 mod legacy_library;
+mod opening_library;
 mod readiness_library;
 mod reframing_library;
 pub mod wire;
@@ -81,6 +82,7 @@ pub struct View {
     pub revision: u64,
     pub status: Status,
     pub pending: Option<Effect>,
+    pub handles_messages: bool,
     pub items: Vec<Item>,
     pub outputs: BTreeMap<String, Value>,
 }
@@ -160,8 +162,10 @@ impl SavedRun {
             .map(String::as_str);
         // A catalog revision must not rewrite or strand a participant's existing run.
         // Retired sources are accepted only for exact, replay-validated checkpoints.
-        let previous = pinned
-            .is_some_and(|source| readiness_library::accepts(&run.technique_id, source));
+        let previous = pinned.is_some_and(|source| {
+            readiness_library::accepts(&run.technique_id, source)
+                || opening_library::source(&run.technique_id) == Some(source)
+        });
         if pinned.is_none() || (pinned != current && pinned != legacy && !previous) {
             return Err(HostError::InvalidRun);
         }
@@ -209,6 +213,7 @@ impl SavedRun {
             revision: self.revision,
             status: self.manager.root().status().clone(),
             pending: self.manager.pending().cloned(),
+            handles_messages: self.manager.handles_messages(),
             items,
             outputs: self.manager.root().outputs().clone(),
         })
@@ -269,8 +274,14 @@ impl SavedRun {
 pub(crate) fn catalog_snapshot(id: &str) -> Result<ExecutableSnapshot, HostError> {
     let source = source(id).ok_or(HostError::UnknownTechnique)?;
     let mut patterns = BTreeMap::from([(id.into(), source.into())]);
-    if id.starts_with("reframing.") { patterns.extend(reframing_library::sources()); }
-    ExecutableSnapshot::build(SourceBundle { root: id.into(), patterns }).map_err(|_| HostError::InvalidSource)
+    if id.starts_with("reframing.") {
+        patterns.extend(reframing_library::sources());
+    }
+    ExecutableSnapshot::build(SourceBundle {
+        root: id.into(),
+        patterns,
+    })
+    .map_err(|_| HostError::InvalidSource)
 }
 
 /// Embed exact audited therapy sources; no name-based filesystem or network lookup occurs.
@@ -418,7 +429,9 @@ mod tests {
                         assert!(definition.output.variants.contains(&case.route.to_owned()));
                         Fulfillment::Classified(case.route.into())
                     }
-                    Request::Generate { prompt, contract } => {
+                    Request::Generate {
+                        prompt, contract, ..
+                    } => {
                         prompts.push(prompt);
                         match contract.returns {
                             Type::Text => Fulfillment::Generated(Value::Text(
@@ -519,7 +532,9 @@ mod tests {
                     };
                     Fulfillment::Classified(variant.into())
                 }
-                Request::Generate { prompt, contract } => {
+                Request::Generate {
+                    prompt, contract, ..
+                } => {
                     model_prompts.push(prompt);
                     match contract.returns {
                         Type::Text => Fulfillment::Generated(Value::Text(
@@ -693,6 +708,51 @@ mod tests {
                     })
                     .unwrap();
             }
+        }
+    }
+
+    /// New openings retain support routes while exact older exit receipts still replay.
+    #[test]
+    fn opening_exit_revision_keeps_existing_dbt_runs_and_support_routes() {
+        for (id, support) in [("dbt.pause", "support"), ("dbt.interpersonal", "unsafe")] {
+            let previous = opening_library::source(id).unwrap();
+            let old = legacy_run(id, previous, "previous-opening", BTreeMap::new());
+            let restored = SavedRun::restore(&old.save().unwrap()).unwrap();
+            let pending = restored.view().unwrap().pending.unwrap();
+            let declined = restored
+                .apply(Command {
+                    run_id: pending.run_id,
+                    event: Event::Fulfill(Receipt {
+                        effect_id: pending.effect_id,
+                        result: Fulfillment::Selected("leave".into()),
+                    }),
+                })
+                .unwrap();
+            assert_eq!(declined.view().unwrap().status, Status::Completed);
+            SavedRun::restore(&declined.save().unwrap()).unwrap();
+
+            let current = SavedRun::start(id, "current-opening", BTreeMap::new()).unwrap();
+            let pending = current.view().unwrap().pending.unwrap();
+            let Request::Choose { options, .. } = &pending.request else {
+                panic!("Expected the situation-specific opening");
+            };
+            assert_eq!(options.len(), 2);
+            assert!(!options.iter().any(|option| option.value == "leave"));
+            let supported = current
+                .apply(Command {
+                    run_id: pending.run_id,
+                    event: Event::Fulfill(Receipt {
+                        effect_id: pending.effect_id,
+                        result: Fulfillment::Selected(support.into()),
+                    }),
+                })
+                .unwrap();
+            assert_eq!(supported.view().unwrap().status, Status::Completed);
+            assert_eq!(
+                supported.view().unwrap().outputs["outcome"],
+                Value::Text("support_requested".into())
+            );
+            SavedRun::restore(&supported.save().unwrap()).unwrap();
         }
     }
 

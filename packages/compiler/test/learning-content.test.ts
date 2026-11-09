@@ -35,7 +35,7 @@ beforeAll(async () => {
 });
 
 describe('Learning How to Learn content', () => {
-  it('adds exactly 15 distinct articles in authored order to a collection in the existing Learning verse', () => {
+  it('preserves the 15 original articles in authored order within the existing Learning collection', () => {
     expect(corpus.diagnostics).toEqual([]);
     expect(corpus.unresolvedReferences).toEqual([]);
     expect(metadata.patterns).toHaveLength(15);
@@ -43,9 +43,9 @@ describe('Learning How to Learn content', () => {
     const collection = corpus.entities.find((entity) => entity.id === 'learning-how-to-learn')!;
     expect(collection.type).toBe('collection');
     expect(collection.title).toBe('Learning How to Learn');
-    expect(collection.collectionItems.map((ref) => ref.entityId)).toEqual(
-      metadata.patterns.map((pattern) => pattern.id),
-    );
+    expect(
+      collection.collectionItems.slice(0, metadata.patterns.length).map((ref) => ref.entityId),
+    ).toEqual(metadata.patterns.map((pattern) => pattern.id));
     expect(collection.verseMemberships).toContainEqual({
       sourceId: 'commons',
       entityId: 'learning',
@@ -57,9 +57,12 @@ describe('Learning How to Learn content', () => {
         ...metadata.patterns.map((pattern) => pattern.id),
         'working-memory',
         'reduce-the-first-step',
-        'getting-unstuck',
       ]),
     );
+    expect(verse.verseMembers.map((ref) => ref.entityId)).not.toContain('getting-unstuck');
+    expect(
+      corpus.entities.find((entity) => entity.id === 'getting-unstuck')!.verseMemberships,
+    ).toEqual([{ sourceId: 'commons', entityId: 'creativity' }]);
   });
 
   it.each(metadata.patterns)(

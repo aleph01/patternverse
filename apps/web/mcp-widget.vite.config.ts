@@ -7,7 +7,15 @@ export default defineConfig({
   base: '/mcp/ui/',
   publicDir: false,
   plugins: [svelte({ configFile: false, preprocess: vitePreprocess() })],
-  resolve: { alias: { $lib: fileURLToPath(new URL('./src/lib/', import.meta.url)) } },
+  resolve: {
+    alias: {
+      '$app/paths': fileURLToPath(new URL('./src/internal/mcp-widget/paths.ts', import.meta.url)),
+      '$lib/article-widgets/mount': fileURLToPath(
+        new URL('./src/internal/mcp-widget/article-widgets.ts', import.meta.url),
+      ),
+      $lib: fileURLToPath(new URL('./src/lib/', import.meta.url)),
+    },
+  },
   build: {
     outDir: fileURLToPath(new URL('../mcp/dist/assets/mcp/ui/', import.meta.url)),
     emptyOutDir: true,

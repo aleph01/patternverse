@@ -10,7 +10,9 @@
 >
   <section aria-labelledby="controller-heading">
     <h2 id="controller-heading">1. Data controller and contact</h2>
-    <address>{operator.name}<br />{operator.street}<br />{operator.city}<br />Germany</address>
+    <address>
+      {operator.name}<br />{operator.street}<br />{operator.city}<br />{operator.country}
+    </address>
     <p>Privacy enquiries: <a href={`mailto:${operator.email}`}>{operator.email}</a>.</p>
     <p>
       This notice describes Patternverse and Mira on patternverse.org. External services also have
@@ -47,10 +49,23 @@
     </p>
     <p>
       This storage supports the functions you request, such as session history, your personal
-      workspace, and offline use. Access to necessary device storage is based on Section 25(2),
-      point 2 of the German TDDDG. Where personal data is processed to provide requested functions,
-      the legal basis is Article 6(1)(b) GDPR. No advertising trackers or analytics scripts are
-      embedded in the application code.
+      workspace, and offline use. Storage strictly necessary for these requested functions falls
+      under Article 5(3) of the EU ePrivacy Directive, as implemented by Section 25(2), point 2
+      TDDDG. Where personal data is processed to provide requested functions, the legal basis is
+      Article 6(1)(b) GDPR. No advertising trackers are embedded in the application code.
+    </p>
+    <p>
+      Successful online loads of public reading pages are counted by Patternverse's Cloudflare
+      service, without analytics scripts or cookies. Only daily totals of visits and page views,
+      published page paths, country counts, and broad referrer categories are stored, for 180 days.
+      Country estimates come from Cloudflare's connection metadata; cities and precise visitor
+      locations are not retained. These statistics contain no visitor IDs, IP addresses, user-agent
+      strings, search terms, query strings, fragments, workspace content, practice answers, or Mira
+      conversations. A visit is an online browser page load, not a unique person. Navigation handled
+      inside the app and offline reading are not counted. Do Not Track and Global Privacy Control
+      opt-outs are respected. Cloudflare still processes connection data to deliver and protect
+      requests as explained above. The owner dashboard is private; its email sign-in uses Cloudflare
+      Access and a necessary authentication cookie.
     </p>
     <p>
       Locally stored data remains until you delete it in the application, clear website data in your
@@ -157,6 +172,24 @@
   <section aria-labelledby="contact-data-heading">
     <h2 id="contact-data-heading">6. Email contact</h2>
     <p>
+      Article suggestions use a separate review service when it is available. Proposed wording,
+      comments, the public passages they refer to, the article version, and any optional name or
+      reply email are stored privately in Cloudflare D1 for editorial review. Suggestions are not
+      published automatically. Before submission, drafts are kept in this browser’s local storage;
+      names and reply email addresses are excluded from that local draft. Clearing this site’s
+      browser data removes local drafts. Submitted contributions are retained while needed for
+      review, follow-up, and the editorial decision record. Contact us about removal of a submitted
+      contribution using its reference number. Cloudflare processes connection data and applies a
+      transient abuse rate limit; the review service does not log request bodies or addresses.
+    </p>
+    <p>
+      You can also contact us through the contribution form when it is available. Your optional
+      name, reply email address, and message are sent through Cloudflare Email Service to our
+      contact inbox so we can respond. The form does not create a separate submissions database.
+      Cloudflare also processes technical connection and delivery data under its service policies.
+      The email handling and retention described below apply to these messages as well.
+    </p>
+    <p>
       When you contact us, your sender address, message content, and technical email data are
       processed to handle your enquiry. The domain address is forwarded through Squarespace and its
       forwarding service Mailgun to a Google/Gmail mailbox. Please do not send conversation logs,
@@ -195,9 +228,10 @@
       Use the contact above to exercise these rights. The operator cannot remotely access or delete
       data stored exclusively on your device. For your own accounts with external services, you can
       also use their privacy contacts. You have the right to lodge a complaint with a data
-      protection supervisory authority, in particular the
-      <a href="https://www.baden-wuerttemberg.datenschutz.de/"
-        >State Commissioner for Data Protection and Freedom of Information Baden-Württemberg</a
+      protection supervisory authority, particularly in the EU Member State where you live or work,
+      or where the alleged infringement occurred. Contact details are available in the
+      <a href="https://www.edpb.europa.eu/about-edpb/our-members_en"
+        >European Data Protection Board's directory of supervisory authorities</a
       >.
     </p>
     <p>

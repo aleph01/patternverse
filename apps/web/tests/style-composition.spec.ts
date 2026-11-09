@@ -18,12 +18,12 @@ test('keeps shared shell geometry stable across feature navigation and Mira retu
       };
     });
   const baseline = await geometry();
-  for (const destination of ['apps', 'workspace', 'library']) {
+  for (const destination of ['workspace', 'library']) {
     await page
       .getByRole('navigation', { name: 'Main navigation' })
       .getByRole('link', { name: destination, exact: true })
       .click();
-    await expect(page).toHaveURL(destination === 'workspace' ? '/my' : `/${destination}`);
+    await expect(page).toHaveURL(destination === 'workspace' ? '/my' : '/library');
     await expect(header).toBeVisible();
     expect(await geometry()).toEqual(baseline);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(

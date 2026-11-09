@@ -33,6 +33,88 @@ afterEach(() => {
   Reflect.deleteProperty(HTMLDialogElement.prototype, 'showModal');
   Reflect.deleteProperty(HTMLDialogElement.prototype, 'close');
 });
+it('renames from the queue with the title selected and preserves the context after reopening', async () => {
+  const entry = await state.workspace!.createSituation('Creative work');
+  await state.workspace!.updateSituation(
+    entry.id,
+    { title: entry.title, context: 'Keep my notes.' },
+    entry.revision,
+  );
+  render(Situations);
+  await fireEvent.click(await screen.findByRole('button', { name: 'Rename: Creative work' }));
+  const title = (await screen.findByRole('textbox', { name: /^Situation$/ })) as HTMLInputElement;
+  expect(document.activeElement).toBe(title);
+  expect(title.selectionStart).toBe(0);
+  expect(title.selectionEnd).toBe(title.value.length);
+  await fireEvent.input(title, { target: { value: '  A gentler start  ' } });
+  await fireEvent.click(screen.getByRole('button', { name: 'Done' }));
+  await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+  await waitFor(() =>
+    expect(document.activeElement).toBe(
+      screen.getByRole('button', { name: 'Rename: A gentler start' }),
+    ),
+  );
+  cleanup();
+  render(Situations);
+  await fireEvent.click(
+    await screen.findByRole('button', { name: 'Open notebook: A gentler start' }),
+  );
+  expect(await screen.findByRole('textbox', { name: 'Context · optional' })).toHaveProperty(
+    'value',
+    'Keep my notes.',
+  );
+});
+
+it('shows reorder controls only for multiple entries and deletes down to an empty queue', async () => {
+  await state.workspace!.createSituation('Creative work');
+  render(Situations);
+  await screen.findByRole('button', { name: 'Open notebook: Creative work' });
+  expect(screen.queryByRole('button', { name: /^Reorder:/ })).toBeNull();
+  expect(screen.queryByText('Drag to reorder')).toBeNull();
+  await fireEvent.input(screen.getByRole('textbox', { name: 'New situation' }), {
+    target: { value: 'Conversations' },
+  });
+  await fireEvent.click(screen.getByRole('button', { name: 'Add' }));
+  await screen.findByRole('button', { name: 'Reorder: Conversations' });
+  expect(screen.getAllByRole('button', { name: /^Reorder:/ })).toHaveLength(2);
+  const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
+  await fireEvent.click(screen.getByRole('button', { name: 'Delete: Creative work' }));
+  await waitFor(() =>
+    expect(screen.queryByRole('button', { name: 'Open notebook: Creative work' })).toBeNull(),
+  );
+  expect(confirm).toHaveBeenCalledWith(
+    'Delete “Creative work” and its context? This cannot be undone.',
+  );
+  expect(screen.queryByRole('button', { name: /^Reorder:/ })).toBeNull();
+  expect(screen.queryByText('Drag to reorder')).toBeNull();
+  expect(document.activeElement).toBe(
+    screen.getByRole('button', { name: 'Open notebook: Conversations' }),
+  );
+  await fireEvent.click(screen.getByRole('button', { name: 'Delete: Conversations' }));
+  await screen.findByText('Leave a situation here to return to later.');
+  expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'New situation' }));
+  expect(await state.workspace!.listSituations()).toEqual([]);
+});
+
+it('keeps the entry when deletion is cancelled or storage fails and allows retry', async () => {
+  await state.workspace!.createSituation('Creative work');
+  const remove = vi.spyOn(state.workspace!, 'deleteSituation');
+  const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+  render(Situations);
+  const button = await screen.findByRole('button', { name: 'Delete: Creative work' });
+  await fireEvent.click(button);
+  expect(remove).not.toHaveBeenCalled();
+  confirm.mockReturnValue(true);
+  remove.mockRejectedValueOnce(new Error('Storage unavailable.'));
+  await fireEvent.click(button);
+  expect(await screen.findByRole('alert')).toHaveProperty('textContent', 'Storage unavailable.');
+  expect(await state.workspace!.listSituations()).toHaveLength(1);
+  expect(button).toHaveProperty('disabled', false);
+  await fireEvent.click(button);
+  await screen.findByText('Leave a situation here to return to later.');
+  expect(screen.queryByRole('alert')).toBeNull();
+});
+
 it('adds situations, reorders both ways, saves context on close, and retains it after reopening the workspace', async () => {
   render(Situations);
   await screen.findByText('Leave a situation here to return to later.');

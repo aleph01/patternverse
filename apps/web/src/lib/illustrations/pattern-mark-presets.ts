@@ -1,8 +1,9 @@
 import overrides from './pattern-icon-overrides.json';
-import { ICON_GENERATOR_VERSION, generatePatternIcon } from './pattern-icons';
-import { generatePatternMark, parseMarkProject, type PatternMarkSpec } from './pattern-marks';
+import { ICON_GENERATOR_VERSION } from './pattern-icons';
+import { parseMarkProject, type PatternMarkSpec } from './pattern-marks';
+import { patternGraphicForPattern, type PatternGraphic } from './pattern-graphics';
 const saved = parseMarkProject(JSON.stringify(overrides)).marks;
-/** Defaults use identity only: titles and inferred subject matter never select a family. */
+/** Archived grid-tool recipes; public graphics are authored in pattern-graphics.json. */
 export function defaultPatternMark(patternId: string, title: string): PatternMarkSpec {
   return {
     ...(saved.find((s) => s.patternId === patternId) ?? {
@@ -14,9 +15,6 @@ export function defaultPatternMark(patternId: string, title: string): PatternMar
     title: title.trim().slice(0, 160) || patternId,
   };
 }
-/** Application IDs follow the content schema, not the more restrictive studio recipe format. */
-export function patternIconForPattern(patternId: string, title: string) {
-  return saved.some((s) => s.patternId === patternId)
-    ? generatePatternMark(defaultPatternMark(patternId, title))
-    : generatePatternIcon(patternId);
-}
+/** The optional title is retained for existing callers; renaming cannot change the artwork. */
+export const patternIconForPattern: (patternId: string, title?: string) => PatternGraphic =
+  patternGraphicForPattern;

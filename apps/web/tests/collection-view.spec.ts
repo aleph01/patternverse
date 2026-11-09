@@ -97,3 +97,55 @@ test('aligns the collection heading and entries on wide screens and stacks the s
     path: `/tmp/patternverse-collection-layout-${isMobile ? 'mobile' : 'wide'}.png`,
   });
 });
+
+test('uses a list without a view switch on tablets and preserves the current page when resized', async ({
+  page,
+}, testInfo) => {
+  await page.addInitScript(() => localStorage.setItem('patternverse:library-layout', 'cards'));
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto('/collection/gof-design-patterns');
+  const view = page.getByRole('group', { name: 'Collection view', exact: true });
+  const entries = page.getByRole('region', { name: 'Collection entries', exact: true });
+  const feed = entries.locator('.pattern-feed');
+  await expect(view).toBeHidden();
+  await expect(feed).not.toHaveClass(/card-grid/);
+  await entries.getByRole('button', { name: 'Go to page 2' }).click();
+  await expect(entries.getByRole('status')).toContainText('21–23 of 23 entries');
+  const links = await entries
+    .getByRole('link')
+    .evaluateAll((elements) => elements.map((element) => element.getAttribute('href')));
+  for (const width of [601, 820, 1024, 1100]) {
+    await page.setViewportSize({ width, height: 1024 });
+    await expect(view).toBeHidden();
+    await expect(feed).not.toHaveClass(/card-grid/);
+    await expect(entries.getByRole('status')).toContainText('21–23 of 23 entries');
+    expect(
+      await entries
+        .getByRole('link')
+        .evaluateAll((elements) => elements.map((element) => element.getAttribute('href'))),
+    ).toEqual(links);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  }
+  expect(await page.evaluate(() => localStorage.getItem('patternverse:library-layout'))).toBe(
+    'cards',
+  );
+  await page.reload();
+  await expect(view).toBeHidden();
+  await expect(feed).not.toHaveClass(/card-grid/);
+  await feed.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: testInfo.outputPath('tablet-collection-list.png') });
+  for (const width of [1101, 600]) {
+    await page.setViewportSize({ width, height: 1024 });
+    await expect(view).toBeVisible();
+    await expect(view.getByRole('button', { name: 'Cards', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(feed).toHaveClass(/card-grid/);
+  }
+  expect(await page.evaluate(() => localStorage.getItem('patternverse:library-layout'))).toBe(
+    'cards',
+  );
+});

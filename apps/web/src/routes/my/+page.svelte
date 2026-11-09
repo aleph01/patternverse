@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+  import { resolve } from '$app/paths';
+  import WidgetSettings from '$lib/widgets/WidgetSettings.svelte';
   import { onMount } from 'svelte';
   import PersonalWorkspace from '$lib/components/PersonalWorkspace.svelte';
   import SyncAndBackup from '$lib/components/SyncAndBackup.svelte';
@@ -7,7 +10,15 @@
   import Situations from '$lib/components/Situations.svelte';
   import PracticeHistory from '$lib/components/PracticeHistory.svelte';
   import { page } from '$app/state';
-  import { LockKeyhole, Folder, Cloud, Settings, NotebookPen, ListOrdered } from '@lucide/svelte';
+  import {
+    LockKeyhole,
+    Folder,
+    Cloud,
+    Settings,
+    NotebookPen,
+    ListOrdered,
+    Blocks,
+  } from '@lucide/svelte';
   import {
     isDropboxSignInOnlyEnabled,
     isWorkspaceDropboxSyncEnabled,
@@ -16,17 +27,25 @@
   let { data } = $props();
 
   let desktop = $state(false);
-  let pane = $state<'content' | 'situations' | 'history' | 'sync' | 'settings'>('content');
+  let pane = $state<'content' | 'situations' | 'history' | 'sync' | 'settings' | 'widgets'>(
+    'content',
+  );
   $effect(() => {
     const requested = page.url.searchParams.get('pane');
     if (
       requested === 'history' ||
       requested === 'situations' ||
       requested === 'sync' ||
-      requested === 'settings'
+      requested === 'settings' ||
+      requested === 'widgets'
     )
       pane = requested;
+    else pane = 'content';
   });
+  function selectPane(next: typeof pane) {
+    pane = next;
+    void goto(resolve(`/my?pane=${next}`), { keepFocus: true, noScroll: true });
+  }
   const features = $derived(resolveReleaseFeatures(desktop));
   const workspaceSync = $derived(isWorkspaceDropboxSyncEnabled(desktop));
   const dropboxSignInOnly = $derived(isDropboxSignInOnlyEnabled(desktop));
@@ -55,27 +74,29 @@
         <button
           aria-pressed={pane === 'content'}
           onclick={() => {
-            pane = 'content';
+            selectPane('content');
           }}><Folder size={16} aria-hidden="true" />Your content</button
         ><button
           aria-pressed={pane === 'situations'}
           onclick={() => {
-            pane = 'situations';
-          }}><ListOrdered size={16} aria-hidden="true" />situations</button
+            selectPane('situations');
+          }}><ListOrdered size={16} aria-hidden="true" />Situations</button
         ><button
           aria-pressed={pane === 'history'}
           onclick={() => {
-            pane = 'history';
+            selectPane('history');
           }}><NotebookPen size={16} aria-hidden="true" />Practice history</button
         ><button
           aria-pressed={pane === 'sync'}
           onclick={() => {
-            pane = 'sync';
+            selectPane('sync');
           }}><Cloud size={16} aria-hidden="true" />Sync & backup</button
+        ><button aria-pressed={pane === 'widgets'} onclick={() => selectPane('widgets')}
+          ><Blocks size={16} aria-hidden="true" />Widgets</button
         ><button
           aria-pressed={pane === 'settings'}
           onclick={() => {
-            pane = 'settings';
+            selectPane('settings');
           }}><Settings size={16} aria-hidden="true" />Settings</button
         >
       </nav>
@@ -100,7 +121,8 @@
               Clearing this browser’s data can remove your work. Download a workspace backup below
               to keep a copy of your content.
             </p>
-          </section>{/if}<WorkspaceBackup />{:else}<WorkspaceSettings />{/if}
+          </section>{/if}<WorkspaceBackup />{:else if pane === 'widgets'}<WidgetSettings
+        />{:else}<WorkspaceSettings />{/if}
     </div>
   </div>
 </main>

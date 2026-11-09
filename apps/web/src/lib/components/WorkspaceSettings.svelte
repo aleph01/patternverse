@@ -4,6 +4,13 @@
   import { getLocalWorkspace } from '$lib/client/workspace';
   import { subscribeWorkspaceChanges } from '$lib/client/workspace-changes';
   import { createWorkspaceRefresh } from '$lib/client/workspace-refresh';
+  import { readFontSize, saveFontSize, type FontSize } from '$lib/client/text-preferences';
+  import {
+    pwaState,
+    offlineDownload,
+    downloadOfflineLibrary,
+    cancelOfflineDownload,
+  } from '$lib/client/pwa';
   import {
     readLibraryPreferences,
     saveLibraryPreferences,
@@ -12,6 +19,7 @@
 
   let name = $state('');
   let storedName = $state('');
+  let fontSize = $state<FontSize>('standard');
   let preferences = $state<LibraryPreferences>({ layout: 'cards', pageSize: 20 });
   let ready = $state(false);
   let saving = $state(false);
@@ -23,6 +31,7 @@
   });
   onMount(() => {
     preferences = readLibraryPreferences();
+    fontSize = readFontSize();
     const reader = createWorkspaceRefresh({
       read: async () => (await getLocalWorkspace()).getWorkspace(),
       apply: (workspace) => {
@@ -57,6 +66,7 @@
       const workspace = await getLocalWorkspace();
       name = storedName = (await workspace.renameWorkspace(name)).name;
       saveLibraryPreferences(preferences);
+      saveFontSize(fontSize);
       message = 'Settings saved on this device.';
     } catch (cause) {
       error = cause instanceof Error ? cause.message : 'Settings could not be saved.';
@@ -78,6 +88,12 @@
     <fieldset disabled={!ready || saving}>
       <label>Workspace name<input bind:value={name} required maxlength="120" /></label>
       <label
+        >Font size<select bind:value={fontSize}
+          ><option value="small">Small</option><option value="standard">Standard (default)</option
+          ><option value="large">Large</option></select
+        ></label
+      >
+      <label
         >Default library view<select bind:value={preferences.layout}
           ><option value="cards">Cards</option><option value="list">List</option></select
         ></label
@@ -92,6 +108,31 @@
   </form>
   {#if message}<p role="status">{message}</p>{/if}
   {#if error}<p role="alert">{error}</p>{/if}
+  {#if $pwaState.offlineReady}
+    <section class="offline-settings" aria-labelledby="offline-settings-title">
+      <h3 id="offline-settings-title">Offline access</h3>
+      <p>
+        Pages you open are saved automatically. Download the full library to read unvisited articles
+        offline on this device.
+      </p>
+      {#if $offlineDownload.state === 'downloading'}
+        <p role="status">Saving library: {$offlineDownload.completed} / {$offlineDownload.total}</p>
+        <button type="button" onclick={cancelOfflineDownload}>Pause download</button>
+      {:else if $offlineDownload.state === 'complete'}
+        <p role="status">Library available offline</p>
+      {:else}
+        {#if $offlineDownload.state === 'paused'}<p role="status">
+            Download paused. Reconnect or free some storage, then resume.
+          </p>{/if}
+        <button type="button" onclick={downloadOfflineLibrary}>
+          {$offlineDownload.state === 'paused'
+            ? 'Resume offline download'
+            : 'Download library for offline use'}
+        </button>
+      {/if}
+      <p>Clearing this browser’s data can remove saved pages and downloads.</p>
+    </section>
+  {/if}
   <div class="mira-settings-link">
     <h3>Mira settings</h3>
     <p>AI connections and conversation preferences are managed separately in Mira.</p>
@@ -148,7 +189,8 @@
     font-weight: 700;
     cursor: pointer;
   }
-  .mira-settings-link {
+  .mira-settings-link,
+  .offline-settings {
     border-top: 1px solid #e2e4df;
     padding-top: 1.4rem;
     margin-top: 2rem;

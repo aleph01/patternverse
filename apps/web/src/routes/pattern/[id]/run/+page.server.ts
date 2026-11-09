@@ -4,7 +4,10 @@ import { THERAPY_LIBRARY } from '$lib/mira/therapy-library';
 import { REFRAMING_LIBRARY } from '$lib/pattern-run/reframing-library';
 import { patternAiReason } from '$lib/pattern-run/ai-reason';
 import { loadCommons } from '$lib/server/commons';
-import { hasStandaloneSourcePractice } from '$lib/pattern-run/source-practice';
+import {
+  hasStandaloneSourcePractice,
+  sourcePracticeNeedsAi,
+} from '$lib/pattern-run/source-practice';
 
 /** Pre-render one focused runner for each bundled, publicly documented technique. */
 export const entries: EntryGenerator = async () => {
@@ -31,6 +34,9 @@ export const load: PageServerLoad = async ({ params }) => {
   if (!pattern) error(404, 'This pattern is not available.');
   const source = hasStandaloneSourcePractice(pattern) ? pattern.languagePracticeSource : null;
   if (!technique && !source) error(404, 'This pattern does not have a standalone run.');
+  const needsAi =
+    sourcePracticeNeedsAi(pattern) ||
+    Boolean(technique && 'needsAi' in technique && technique.needsAi);
 
   return {
     pattern: {
@@ -45,11 +51,8 @@ export const load: PageServerLoad = async ({ params }) => {
     modality: technique?.modality ?? '',
     languagePracticeSource: source ?? null,
     isTherapy: pattern.verseMemberships.some((ref) => ref.entityId === 'therapy'),
-    needsAi: Boolean(technique && 'needsAi' in technique && technique.needsAi === true),
-    aiReason:
-      technique && 'needsAi' in technique && technique.needsAi === true
-        ? patternAiReason(technique.id)
-        : null,
+    needsAi,
+    aiReason: needsAi ? patternAiReason(technique?.id ?? pattern.id) : null,
     inputNames: technique && 'inputNames' in technique ? technique.inputNames : [],
   };
 };

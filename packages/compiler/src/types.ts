@@ -10,6 +10,7 @@ export type DiagnosticSeverity = 'error' | 'warning';
 
 export type DiagnosticCode =
   | 'io-error'
+  | 'invalid-data-library'
   | 'invalid-manifest'
   | 'missing-content-directory'
   | 'empty-content-directory'
@@ -19,6 +20,8 @@ export type DiagnosticCode =
   | 'unknown-field'
   | 'invalid-wiki-link'
   | 'invalid-practice-block'
+  | 'invalid-widget-block'
+  | 'invalid-video-block'
   | 'multiple-practice-blocks'
   | 'practice-block-on-non-practice'
   | 'duplicate-id'
@@ -91,7 +94,13 @@ export type SearchDocument = {
   readonly collectionNames: readonly string[];
 };
 
+export type DataLibrary = Readonly<{
+  record_type: unknown;
+  records: readonly Record<string, unknown>[];
+}>;
+
 export type CompiledCorpus = {
+  readonly libraries?: Readonly<Record<string, DataLibrary>>;
   readonly schemaVersion: 1;
   readonly sources: readonly PatternverseSource[];
   readonly entities: readonly CompiledEntity[];
@@ -101,6 +110,7 @@ export type CompiledCorpus = {
 };
 
 export type LoadedCorpus = {
+  readonly libraries?: Readonly<Record<string, DataLibrary>>;
   readonly manifest?: PatternverseSourceManifest;
   readonly source?: PatternverseSource;
   readonly entities: readonly ParsedEntity[];

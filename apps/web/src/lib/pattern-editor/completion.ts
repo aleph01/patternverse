@@ -75,13 +75,19 @@ export function completions(
     const [name, ...fields] = (scope.subject ?? '').split('.');
     let type = names.get(name!);
     for (const field of fields) type = recordFields(type)?.[field];
-    const variants = typeof type === 'string' ? context.enums.get(type) : enumVariants(type);
+    const lineStart = source.lastIndexOf('\n', position - 1) + 1;
+    const choiceIds =
+      fields.length === 0 && checked?.source.slice(0, lineStart) === source.slice(0, lineStart)
+        ? checked?.structure.bindings.find((binding) => binding.name === name)?.choice_ids
+        : undefined;
+    const variants =
+      (typeof type === 'string' ? context.enums.get(type) : enumVariants(type)) ?? choiceIds;
     const prefix = token.includes('.') ? token.slice(0, token.lastIndexOf('.') + 1) : '';
     options = (variants ?? []).map((variant) =>
-      item(prefix + variant, prefix + variant, 'Enum case'),
+      item(prefix + variant, prefix + variant, choiceIds ? 'Offered choice ID' : 'Enum case'),
     );
-  } else if (/!(choose|rank|refine)(?:\s+[\w-]+)?\s*\[[^\]]*$/.test(line)) {
-    const kind = line.match(/!(choose|rank|refine)\b/)![1];
+  } else if (/!(ask|choose|rank|refine)(?:\s+[\w-]+)?\s*\[[^\]]*$/.test(line)) {
+    const kind = line.match(/!(ask|choose|rank|refine)\b/)![1];
     const supplied = line
       .slice(line.lastIndexOf('[') + 1)
       .split(',')
@@ -117,9 +123,12 @@ export function completions(
         item(name, name, 'Binding · compiler checks availability'),
       );
       if (!ref) {
-        const bound = /^\s*[\w-]+\s*=/.test(line);
+        const bound = /^\s*[\w-]+(?:\s*:\s*[^=\n]+)?\s*=/.test(line);
         options.push(...commandSnippets(bound));
-        options.push(...pureFunctionSuggestions(/\|>\s*\w*$/.test(line)));
+        options.push(...pureFunctionSuggestions(/\|>>?\s*\w*$/.test(line)));
+        options.push(
+          item('??', '?? ¦fallback', 'Use a fallback only when an optional value is None'),
+        );
         options.push(
           ...context.helpers.map((name) => item(name, `${name}(¦)`, 'Declared pure helper')),
         );

@@ -101,7 +101,9 @@ export async function messagePatternContexts(
     seen.add(key);
     const pattern = patterns.find(
       (entry) =>
-        entry.type === 'pattern' && entry.sourceId === ref.sourceId && entry.id === ref.entityId,
+        (entry.type === 'pattern' || entry.type === 'practice') &&
+        entry.sourceId === ref.sourceId &&
+        entry.id === ref.entityId,
     );
     if (!pattern)
       throw new Error(

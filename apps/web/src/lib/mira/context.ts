@@ -1,6 +1,6 @@
 import { entityRefSchema } from '@patternverse/schema';
 
-/** A library pattern selected for future use in a Mira conversation. */
+/** A library pattern or practice selected for use in a Mira conversation. */
 export type MiraPatternContext = Readonly<{ sourceId: string; entityId: string }>;
 
 /** Keep source identity in the URL; titles are resolved from the library, never trusted from it. */
@@ -30,7 +30,7 @@ export type MiraPatternSummary = Readonly<{
   aliases?: readonly string[];
 }>;
 
-/** Only an exact source-qualified pattern match may populate the companion context. */
+/** Only an exact source-qualified pattern or practice may populate the companion context. */
 export function findMiraPattern(
   context: MiraPatternContext | null,
   entries: readonly MiraPatternSummary[],
@@ -39,7 +39,7 @@ export function findMiraPattern(
   return (
     entries.find(
       (entry) =>
-        entry.type === 'pattern' &&
+        (entry.type === 'pattern' || entry.type === 'practice') &&
         entry.sourceId === context.sourceId &&
         entry.id === context.entityId,
     ) ?? null

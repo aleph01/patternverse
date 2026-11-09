@@ -9,7 +9,7 @@
 .verse-list article {
   min-height: 460px;
   color: var(--ink);
-  background: var(--verse-rest, var(--paper));
+  background: color-mix(in srgb, var(--verse-rest, var(--paper)) 35%, var(--paper));
   box-shadow: 0 0 0 1px var(--ink);
   transition:
     color 180ms ease,
@@ -29,62 +29,84 @@
 
 .verse-accent-1 {
   --verse-rest: var(--verse-1-rest);
-  --verse-active: var(--verse-1-active);
-  --verse-active-ink: var(--ink);
 }
 
 .verse-accent-2 {
   --verse-rest: var(--verse-2-rest);
-  --verse-active: var(--verse-2-active);
-  --verse-active-ink: white;
 }
 
 .verse-accent-3 {
   --verse-rest: var(--verse-3-rest);
-  --verse-active: var(--verse-3-active);
-  --verse-active-ink: var(--ink);
 }
 
 .verse-accent-4 {
   --verse-rest: var(--verse-4-rest);
-  --verse-active: var(--verse-4-active);
-  --verse-active-ink: var(--ink);
 }
 
 .verse-accent-5 {
   --verse-rest: var(--verse-5-rest);
-  --verse-active: var(--verse-5-active);
-  --verse-active-ink: white;
 }
 
 .verse-accent-6 {
   --verse-rest: var(--verse-6-rest);
-  --verse-active: var(--verse-6-active);
-  --verse-active-ink: white;
 }
 
 .verse-accent-7 {
   --verse-rest: var(--verse-7-rest);
-  --verse-active: var(--verse-7-active);
-  --verse-active-ink: white;
 }
 
 .verse-accent-8 {
   --verse-rest: var(--verse-8-rest);
-  --verse-active: var(--verse-8-active);
-  --verse-active-ink: white;
 }
 
 .verse-accent-9 {
   --verse-rest: var(--verse-9-rest);
-  --verse-active: var(--verse-9-active);
-  --verse-active-ink: var(--ink);
+}
+
+.verse-accent-10 {
+  --verse-rest: var(--verse-10-rest);
+}
+
+.verse-accent-11 {
+  --verse-rest: var(--verse-11-rest);
+}
+
+.verse-accent-12 {
+  --verse-rest: var(--verse-12-rest);
+}
+
+.verse-accent-13 {
+  --verse-rest: var(--verse-13-rest);
+}
+
+.verse-accent-14 {
+  --verse-rest: var(--verse-14-rest);
+}
+
+.verse-accent-15 {
+  --verse-rest: var(--verse-15-rest);
+}
+
+.verse-accent-16 {
+  --verse-rest: var(--verse-16-rest);
+}
+
+.verse-accent-17 {
+  --verse-rest: var(--verse-17-rest);
+}
+
+.verse-accent-18 {
+  --verse-rest: var(--verse-18-rest);
+}
+
+.verse-accent-19 {
+  --verse-rest: var(--verse-19-rest);
 }
 
 .verse-list article:hover,
 .verse-list article:focus-within {
-  color: var(--verse-active-ink);
-  background: var(--verse-active);
+  color: var(--ink);
+  background: var(--verse-rest, var(--paper));
 }
 
 .verse-list h3 {
@@ -150,4 +172,32 @@
   align-items: end;
   justify-content: space-between;
   gap: 2rem;
+}
+
+.verse-accent-20 {
+  --verse-rest: var(--verse-20-rest);
+}
+
+.verse-accent-21 {
+  --verse-rest: var(--verse-21-rest);
+}
+
+.verse-accent-22 {
+  --verse-rest: var(--verse-22-rest);
+}
+
+.verse-accent-23 {
+  --verse-rest: var(--verse-23-rest);
+}
+
+.verse-accent-24 {
+  --verse-rest: var(--verse-24-rest);
+}
+
+.verse-accent-25 {
+  --verse-rest: var(--verse-25-rest);
+}
+
+.verse-accent-26 {
+  --verse-rest: var(--verse-26-rest);
 }

@@ -160,6 +160,7 @@ export function createPublicLibrary(
         definition = inspect({
           root: chosen.root,
           patterns: { ...dependencySources, [chosen.root]: chosen.source },
+          data: corpus.libraries,
         });
       } catch {
         throw new PublicLibraryError(
@@ -176,6 +177,7 @@ export function createPublicLibrary(
         source: definition.sources[definition.root]!,
         revision: definition.revision,
         snapshotId: definition.snapshot_id,
+        ...(definition.data ? { data: definition.data } : {}),
         inputs: definition.inputs,
         outputs: definition.outputs,
         dependencies: Object.entries(definition.sources)

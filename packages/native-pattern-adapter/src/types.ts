@@ -31,7 +31,11 @@ export type PatternValue =
       type: 'list';
       value: Readonly<{ element_type: PatternType; items: readonly PatternValue[] }>;
     }>
-  | Readonly<{ type: 'record'; value: Readonly<Record<string, PatternValue>> }>;
+  | Readonly<{ type: 'record'; value: Readonly<Record<string, PatternValue>> }>
+  | Readonly<{
+      type: 'optional';
+      value: Readonly<{ element_type: PatternType; value: PatternValue | null }>;
+    }>;
 export type PatternType =
   | 'text'
   | 'number'
@@ -39,6 +43,7 @@ export type PatternType =
   | 'choice'
   | 'choices'
   | Readonly<{ list: PatternType }>
+  | Readonly<{ optional: PatternType }>
   | Readonly<{ record: Readonly<Record<string, PatternType>> }>
   | Readonly<{ enum: Readonly<{ name: string; variants: readonly string[] }> }>;
 export type PatternInputs = Readonly<Record<string, PatternValue>>;

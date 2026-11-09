@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Identify Limiting Beliefs — belief library</title>
+    <style>
+      /* Isolated article documents repeat the shared Patternverse token values. */
+      :root {
+        color-scheme: light;
+        --font-sans:
+          Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --ink: #181814;
+        --paper: #fff;
+        --muted: #62655f;
+        --green-dark: #007a4d;
+        --mint: #dff8ea;
+        --entry-hover-background: #fbfefc;
+        --focus-color: #1557ff;
+        font-family: var(--font-sans);
+        color: var(--ink);
+        background: var(--paper);
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 4px 0 8px;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        border-radius: 0;
+      }
+      button:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid var(--focus-color);
+        outline-offset: 3px;
+      }
+      #pv-belief-browser {
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+      }
+      p {
+        margin: 0;
+      }
+      h3,
+      h4,
+      h5 {
+        color: var(--ink);
+      }
+      .pv-modes {
+        display: flex;
+        gap: 24px;
+        border-bottom: 1px solid var(--ink);
+        margin-bottom: 24px;
+      }
+      .pv-modes button {
+        min-height: 44px;
+        border: 0;
+        border-bottom: 3px solid transparent;
+        padding: 8px 0 12px;
+        background: transparent;
+        font-size: 0.875rem;
+        font-weight: 800;
+      }
+      .pv-modes button[aria-selected='true'] {
+        color: var(--green-dark);
+        border-bottom-color: var(--green-dark);
+      }
+      .pv-overview-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 750;
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+        margin: 0;
+      }
+      .pv-secondary {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      .pv-categories {
+        display: flex;
+        flex-direction: column;
+      }
+      .pv-category {
+        display: flex;
+        width: 100%;
+        gap: 14px;
+        align-items: center;
+        text-align: left;
+        border: 0;
+        border-top: 1px solid var(--ink);
+        padding: 18px 4px;
+        background: var(--paper);
+      }
+      .pv-category:last-child {
+        border-bottom: 1px solid var(--ink);
+      }
+      .pv-category:hover {
+        background: var(--entry-hover-background);
+        color: var(--green-dark);
+      }
+      .pv-number {
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        min-width: 21px;
+        align-self: flex-start;
+        padding-top: 3px;
+      }
+      .pv-category-copy {
+        flex: 1;
+        min-width: 0;
+      }
+      .pv-category-title {
+        display: block;
+        font-size: 1rem;
+        font-weight: 750;
+        line-height: 1.4;
+      }
+      .pv-pattern {
+        display: block;
+        font-size: 0.8125rem;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .pv-count {
+        font-size: 0.75rem;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .pv-chevron {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        color: var(--green-dark);
+        font: 400 25px/1 var(--font-sans);
+        transition: transform 140ms ease;
+        flex-shrink: 0;
+      }
+      .pv-back {
+        display: inline-flex;
+        min-height: 44px;
+        gap: 7px;
+        align-items: center;
+        background: transparent;
+        border: 0;
+        padding: 3px 0;
+        color: var(--green-dark);
+        font-size: 0.8125rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+      .pv-section-header {
+        margin-bottom: 24px;
+      }
+      .pv-section-header h3 {
+        font-size: 1.625rem;
+        margin-bottom: 8px;
+      }
+      .pv-description {
+        color: var(--muted);
+        font-size: 0.875rem;
+        margin-top: 8px;
+        max-width: 65ch;
+      }
+      .pv-family {
+        margin-top: 32px;
+      }
+      .pv-family:first-of-type {
+        margin-top: 0;
+      }
+      .pv-family > h4 {
+        font-size: 1.125rem;
+        font-weight: 750;
+        line-height: 1.3;
+        margin: 0 0 7px;
+      }
+      .pv-family-description {
+        font-size: 0.8125rem;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+      .pv-subfamily {
+        margin-top: 22px;
+      }
+      .pv-subfamily > h5 {
+        font-size: 0.8125rem;
+        font-weight: 750;
+        margin: 0 0 8px;
+      }
+      .pv-belief {
+        border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+      }
+      .pv-belief:last-child {
+        border-bottom: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+      }
+      .pv-belief summary {
+        display: flex;
+        min-height: 48px;
+        align-items: flex-start;
+        gap: 14px;
+        list-style: none;
+        padding: 16px 4px;
+        cursor: pointer;
+      }
+      .pv-belief summary::-webkit-details-marker {
+        display: none;
+      }
+      .pv-belief summary::marker {
+        content: '';
+      }
+      .pv-belief summary:hover {
+        color: var(--green-dark);
+        background: var(--entry-hover-background);
+      }
+      .pv-statement {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.9375rem;
+      }
+      .pv-belief summary .pv-chevron {
+        margin-top: 1px;
+      }
+      .pv-belief[open] > summary .pv-chevron {
+        transform: rotate(90deg);
+      }
+      .pv-belief[open] > summary {
+        color: var(--green-dark);
+        font-weight: 750;
+      }
+      .pv-belief-content {
+        background: var(--entry-hover-background);
+        border-left: 3px solid var(--green-dark);
+        margin: 0 0 16px;
+        padding: 16px 20px 20px;
+        color: var(--ink);
+      }
+      .pv-detail-label {
+        font-size: 0.75rem;
+        font-weight: 800;
+        margin: 0 0 6px;
+      }
+      .pv-meaning,
+      .pv-reading {
+        font-size: 0.875rem;
+      }
+      .pv-form-labels {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .pv-form-label {
+        font-size: 0.75rem;
+        color: var(--green-dark);
+        background: var(--mint);
+        padding: 2px 7px;
+      }
+      .pv-detail-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 24px;
+        margin-top: 20px;
+      }
+      .pv-detail-block {
+        min-width: 0;
+        margin-top: 20px;
+      }
+      .pv-detail-grid .pv-detail-block {
+        margin-top: 0;
+      }
+      .pv-belief-content ul {
+        padding: 0 0 0 18px;
+        margin: 0;
+      }
+      .pv-belief-content li {
+        padding-left: 2px;
+        font-size: 0.875rem;
+        margin: 6px 0;
+      }
+      .pv-reading {
+        margin-top: 12px;
+      }
+      .pv-reading strong {
+        font-weight: 750;
+      }
+      .pv-scope {
+        font-size: 0.8125rem;
+        color: var(--muted);
+      }
+      .pv-domain-section {
+        margin-top: 28px;
+      }
+      .pv-domain-section > h4 {
+        font-size: 0.875rem;
+        font-weight: 750;
+        margin: 0 0 10px;
+      }
+      .pv-context-path {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 5px;
+        font-weight: 400;
+      }
+      .pv-footer {
+        margin-top: 24px;
+        padding-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 0.75rem;
+      }
+      .pv-sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      @media (max-width: 560px) {
+        .pv-category {
+          gap: 8px;
+          padding: 16px 2px;
+        }
+        .pv-category-title {
+          font-size: 0.9375rem;
+        }
+        .pv-detail-grid {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 18px;
+        }
+        .pv-belief-content {
+          padding: 14px;
+        }
+        .pv-section-header h3 {
+          font-size: 1.375rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pv-chevron {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pv-belief-browser">
+      <section class="pv-shell" aria-label="Identify Limiting Beliefs">
+        <div class="pv-modes" role="tablist" aria-label="Browse beliefs">
+          <button
+            id="pv-theme-tab"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="pv-belief-panel"
+            data-mode="theme"
+          >
+            By theme
+          </button>
+          <button
+            id="pv-structure-tab"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="pv-belief-panel"
+            data-mode="structure"
+          >
+            By structure
+          </button>
+        </div>
+        <div id="pv-belief-panel" role="tabpanel" aria-labelledby="pv-theme-tab"></div>
+        <p class="pv-sr" id="pv-belief-status" role="status" aria-live="polite"></p>
+        <footer class="pv-footer">
+          <span>185 statements · library 0.8</span><span>Prewritten reference library</span>
+        </footer>
+      </section>
+    </div>
+    <script type="application/json" id="pv-belief-data">
+      <!-- BELIEF_LIBRARY -->
+    </script>
+    <script>
+      (() => {
+        const root = document.getElementById('pv-belief-browser');
+        const data = JSON.parse(document.getElementById('pv-belief-data').textContent);
+        const panel = root.querySelector('#pv-belief-panel');
+        const status = root.querySelector('#pv-belief-status');
+        const beliefs = new Map(data.beliefs.map((b) => [b.id, b]));
+        const domains = new Map(data.domains.map((d) => [d.id, d]));
+        const forms = new Map(data.forms.map((f) => [f.id, f]));
+        const families = new Map(data.domains.flatMap((d) => d.families.map((f) => [f.id, f])));
+        const subfamilies = new Map(
+          data.domains.flatMap((d) =>
+            d.families.flatMap((f) => f.subfamilies.map((s) => [s.id, s])),
+          ),
+        );
+        const validIds = new Set(beliefs.keys());
+        let state = {
+          mode: 'theme',
+          categories: { theme: null, structure: null },
+          openIds: new Set(),
+        };
+        const esc = (value) =>
+          String(value).replace(
+            /[&<>"']/g,
+            (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
+          );
+        const chevron = '<span class="pv-chevron" aria-hidden="true">›</span>';
+        const list = (items) =>
+          '<ul>' + items.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ul>';
+        function details(b, showPath = false) {
+          const paths = showPath
+            ? '<span class="pv-context-path">' +
+              esc(families.get(b.family).title) +
+              ' · ' +
+              esc(subfamilies.get(b.subfamily).title) +
+              '</span>'
+            : '';
+          const meanings = b.readings.length
+            ? '<div class="pv-detail-block"><p class="pv-detail-label">Possible readings</p><p class="pv-scope">These readings can overlap. The wording alone does not select one.</p>' +
+              b.readings
+                .map(
+                  (r) =>
+                    '<div class="pv-reading"><strong>' +
+                    esc(r.label) +
+                    '</strong><p>' +
+                    esc(r.content) +
+                    '</p>' +
+                    (r.confirmation ? '<p class="pv-scope">Requires further context.</p>' : '') +
+                    '</div>',
+                )
+                .join('') +
+              '</div>'
+            : '';
+          const open = b.open.length
+            ? '<div class="pv-detail-block"><p class="pv-detail-label">Meaning depends on</p><p class="pv-scope">' +
+              esc(b.open.join(' · ')) +
+              '.</p></div>'
+            : '';
+          const limits = b.notEntailed.length
+            ? '<div class="pv-detail-block"><p class="pv-detail-label">This statement does not establish</p>' +
+              list(b.notEntailed) +
+              '</div>'
+            : '';
+          return (
+            '<details class="pv-belief" data-belief="' +
+            b.id +
+            '"' +
+            (state.openIds.has(b.id) ? ' open' : '') +
+            '><summary><span class="pv-statement">' +
+            esc(b.statement) +
+            paths +
+            '</span>' +
+            chevron +
+            '</summary><div class="pv-belief-content"><p class="pv-detail-label">What this expresses</p><p class="pv-meaning">' +
+            esc(b.meaning) +
+            '</p><div class="pv-form-labels" aria-label="Statement forms">' +
+            b.forms
+              .map((id) => '<span class="pv-form-label">' + esc(forms.get(id).title) + '</span>')
+              .join('') +
+            '</div>' +
+            meanings +
+            '<div class="pv-detail-grid"><div class="pv-detail-block"><p class="pv-detail-label">Other wordings</p>' +
+            list(b.variants) +
+            '</div><div class="pv-detail-block"><p class="pv-detail-label">Questions for clarification</p>' +
+            list(b.questions) +
+            '</div></div>' +
+            open +
+            limits +
+            '<div class="pv-detail-block"><p class="pv-detail-label">Context matters</p><p class="pv-scope">' +
+            esc(b.context) +
+            '</p></div></div></details>'
+          );
+        }
+        function overview() {
+          const theme = state.mode === 'theme';
+          const items = theme ? data.domains : data.forms;
+          return (
+            '<div class="pv-overview-title"><h3>' +
+            (theme ? 'Choose a theme' : 'Choose a structure') +
+            '</h3><span class="pv-secondary">' +
+            items.length +
+            ' ' +
+            (theme ? 'themes' : 'forms') +
+            '</span></div><div class="pv-categories">' +
+            items
+              .map(
+                (c, i) =>
+                  '<button type="button" class="pv-category" data-category="' +
+                  c.id +
+                  '"><span class="pv-number">' +
+                  String(i + 1).padStart(2, '0') +
+                  '</span><span class="pv-category-copy"><span class="pv-category-title">' +
+                  esc(c.title) +
+                  '</span>' +
+                  (!theme ? '<span class="pv-pattern">' + esc(c.pattern) + '</span>' : '') +
+                  '</span><span class="pv-count">' +
+                  c.count +
+                  ' <span aria-hidden="true">beliefs</span><span class="pv-sr">statements</span></span>' +
+                  chevron +
+                  '</button>',
+              )
+              .join('') +
+            '</div>' +
+            (theme
+              ? ''
+              : '<p class="pv-secondary" style="margin-top:14px">A statement can appear under more than one structure.</p>')
+          );
+        }
+        function selected() {
+          const theme = state.mode === 'theme';
+          const c = (theme ? domains : forms).get(state.categories[state.mode]);
+          const back =
+            '<button type="button" class="pv-back" data-action="back"><span aria-hidden="true">←</span> All ' +
+            (theme ? 'themes' : 'structures') +
+            '</button>';
+          let body = '';
+          if (theme) {
+            body = c.families
+              .map(
+                (f) =>
+                  '<section class="pv-family" aria-label="' +
+                  esc(f.title) +
+                  '"><h4>' +
+                  esc(f.title) +
+                  '</h4><p class="pv-family-description">' +
+                  esc(f.description) +
+                  '</p>' +
+                  f.subfamilies
+                    .map(
+                      (s) =>
+                        '<section class="pv-subfamily" aria-label="' +
+                        esc(s.title) +
+                        '"><h5>' +
+                        esc(s.title) +
+                        '</h5>' +
+                        s.ids.map((id) => details(beliefs.get(id))).join('') +
+                        '</section>',
+                    )
+                    .join('') +
+                  '</section>',
+              )
+              .join('');
+          } else {
+            body = data.domains
+              .map((d) => {
+                const rows = data.beliefs.filter(
+                  (b) => b.domain === d.id && b.forms.includes(c.id),
+                );
+                return rows.length
+                  ? '<section class="pv-domain-section" aria-label="' +
+                      esc(d.title) +
+                      '"><h4>' +
+                      esc(d.title) +
+                      '</h4>' +
+                      rows.map((b) => details(b, true)).join('') +
+                      '</section>'
+                  : '';
+              })
+              .join('');
+          }
+          return (
+            back +
+            '<header class="pv-section-header"><h3>' +
+            esc(c.title) +
+            '</h3><p class="pv-secondary">' +
+            c.count +
+            ' statements' +
+            (theme ? ' · ' + c.families.length + ' families' : ' · ' + esc(c.pattern)) +
+            '</p>' +
+            (!theme ? '<p class="pv-description">' + esc(c.description) + '</p>' : '') +
+            '</header><div class="pv-content-list">' +
+            body +
+            '</div>'
+          );
+        }
+        function render() {
+          root
+            .querySelectorAll('[data-mode]')
+            .forEach((b) => b.setAttribute('aria-selected', String(b.dataset.mode === state.mode)));
+          panel.setAttribute(
+            'aria-labelledby',
+            state.mode === 'theme' ? 'pv-theme-tab' : 'pv-structure-tab',
+          );
+          panel.innerHTML = state.categories[state.mode] ? selected() : overview();
+        }
+        root.addEventListener('click', (e) => {
+          const mode = e.target.closest('button[data-mode]');
+          if (mode) {
+            state.mode = mode.dataset.mode;
+            render();
+            status.textContent = 'Browsing by ' + state.mode + '.';
+            return;
+          }
+          const category = e.target.closest('button[data-category]');
+          if (category) {
+            state.categories[state.mode] = category.dataset.category;
+            render();
+            const c = (state.mode === 'theme' ? domains : forms).get(category.dataset.category);
+            status.textContent = c.title + ', ' + c.count + ' statements.';
+            panel.querySelector('[data-action="back"]').focus({ preventScroll: true });
+            return;
+          }
+          const back = e.target.closest('button[data-action="back"]');
+          if (back) {
+            const previous = state.categories[state.mode];
+            state.categories[state.mode] = null;
+            render();
+            status.textContent = 'All ' + (state.mode === 'theme' ? 'themes' : 'structures') + '.';
+            const target = panel.querySelector('[data-category="' + previous + '"]');
+            if (target) target.focus({ preventScroll: true });
+          }
+        });
+        root.querySelector('.pv-modes').addEventListener('keydown', (e) => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+          e.preventDefault();
+          const mode = e.key === 'Home' || e.key === 'ArrowLeft' ? 'theme' : 'structure';
+          state.mode = mode;
+          render();
+          root.querySelector('[data-mode="' + mode + '"]').focus();
+          status.textContent = 'Browsing by ' + mode + '.';
+        });
+        root.addEventListener(
+          'toggle',
+          (e) => {
+            const el = e.target;
+            if (!el.matches || !el.matches('details[data-belief]') || !root.contains(el)) return;
+            const was = state.openIds.has(el.dataset.belief);
+            if (was === el.open) return;
+            if (el.open) state.openIds.add(el.dataset.belief);
+            else state.openIds.delete(el.dataset.belief);
+          },
+          true,
+        );
+        render();
+      })();
+    </script>
+  </body>
+</html>

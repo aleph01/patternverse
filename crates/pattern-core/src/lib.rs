@@ -4,6 +4,7 @@
 //! M5 adds an atomic Host persistence boundary, replay and scripted restart scenarios.
 //! Refinement remains a tested semantic frame until body compilation is added.
 pub mod compiler;
+pub mod data;
 mod expression;
 pub mod host;
 pub mod library;
@@ -14,6 +15,9 @@ pub mod runtime;
 pub mod scenario;
 pub mod semantic;
 pub mod show;
+mod shuffle;
 pub mod snapshot;
 pub mod syntax;
 pub mod value;
+
+pub mod widgets;

@@ -11,15 +11,9 @@
   <section class="legal-notice" aria-labelledby="emergency-heading">
     <h2 id="emergency-heading">In immediate danger</h2>
     <p>
-      Mira is not a crisis or emergency service. If you or someone else is in immediate danger, call <a
-        href="tel:112">112</a
-      > in Germany. Outside Germany, contact your local emergency service.
-    </p>
-    <p>
-      For a confidential conversation during an emotional crisis, you can reach
-      <a href="https://www.telefonseelsorge.de/telefon/">TelefonSeelsorge</a> free of charge in
-      Germany at <a href="tel:116123">116 123</a>, <a href="tel:08001110111">0800 1110111</a>, or
-      <a href="tel:08001110222">0800 1110222</a>. In immediate danger, call the emergency service.
+      Mira is not a crisis or emergency service. If you or someone else is in immediate danger,
+      contact local emergency services. In the European Union, call <a href="tel:112">112</a> free of
+      charge. Elsewhere, use the emergency number for your location.
     </p>
   </section>
   <section aria-labelledby="reflection-heading">

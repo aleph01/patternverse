@@ -112,7 +112,7 @@ outageTest(
       };
     });
     await ready(page, `${outageServer.origin}/my`);
-    await expect(page.locator('footer')).toContainText('available offline');
+    await expect(page.locator('footer')).not.toContainText('offline');
     // Prime the actual runtime page cache; do not fake a worker or cache response.
     await page.reload();
     await expect(page.getByText(/^No personal verses yet\./)).toBeVisible();

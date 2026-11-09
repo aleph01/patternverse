@@ -12,6 +12,8 @@
   } from '$lib/mira/article-reference';
   import { readableArticleSource } from '$lib/mira/article-source';
   import { renderMarkdownPreview } from '$lib/client/markdown-preview';
+  import { exportWorksheet, inspectWorksheet } from '$lib/worksheet/export';
+  import { parseLanguagePracticeFromBody } from '@patternverse/compiler/practice';
   import { downloadText } from '$lib/client/download';
   import MiraMark from '$lib/mira/MiraMark.svelte';
   import { ChevronLeft, History, Settings2, BookOpen, ChevronDown } from '@lucide/svelte';
@@ -435,7 +437,12 @@
       lifecycle.signal.throwIfAborted();
       const entity = await workspace.getEntity(id);
       lifecycle.signal.throwIfAborted();
-      if (!entity || entity.type !== 'pattern' || entity.sourceId !== 'personal') return undefined;
+      if (
+        !entity ||
+        (entity.type !== 'pattern' && entity.type !== 'practice') ||
+        entity.sourceId !== 'personal'
+      )
+        return undefined;
       const body = readableArticleSource(entity.body);
       return {
         sourceId: entity.sourceId,
@@ -445,7 +452,15 @@
         body,
         html: await renderMarkdownPreview(body),
         standaloneHref: null,
+        ...(entity.type === 'practice'
+          ? { practiceSource: parseLanguagePracticeFromBody(entity.body).source }
+          : {}),
       };
+    },
+    practiceWorksheet: async (source) => {
+      if (!(await inspectWorksheet({ source })).available) return { body: '', html: '' };
+      const worksheet = await exportWorksheet({ source });
+      return { body: worksheet.markdown, html: await renderMarkdownPreview(worksheet.markdown) };
     },
   });
   async function displayArticleReference(pattern: MiraPatternSummary) {
@@ -476,14 +491,17 @@
     activePattern?.sourceId === 'personal'
       ? `${resolve('/editor')}?id=${encodeURIComponent(activePattern.id)}`
       : activePattern
-        ? resolve('/[type=entityType]/[id]', { type: 'pattern', id: activePattern.id })
+        ? resolve('/[type=entityType]/[id]', {
+            type: activePattern.type === 'practice' ? 'practice' : 'pattern',
+            id: activePattern.id,
+          })
         : resolve('/library'),
   );
   const activePracticeHref = $derived(
     canRunStandalonePattern(features, true, false) && activeReference?.standaloneHref
       ? resolve(
           activeReference.standaloneHref as
-            `/pattern/${string}/run` | `/pattern/${string}/practice`,
+            `/pattern/${string}/run` | `/pattern/${string}/practice` | `/practice/${string}/run`,
         )
       : undefined,
   );
@@ -494,7 +512,10 @@
     selectedPattern?.sourceId === 'personal'
       ? `${resolve('/editor')}?id=${encodeURIComponent(selectedPattern.id)}`
       : selectedPattern
-        ? resolve('/[type=entityType]/[id]', { type: 'pattern', id: selectedPattern.id })
+        ? resolve('/[type=entityType]/[id]', {
+            type: selectedPattern.type === 'practice' ? 'practice' : 'pattern',
+            id: selectedPattern.id,
+          })
         : resolve('/'),
   );
   afterNavigate(() => {

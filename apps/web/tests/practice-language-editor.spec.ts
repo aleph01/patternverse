@@ -34,7 +34,7 @@ test('authors, validates, previews and restores a private language practice', as
   await field.press('Control+Space');
   await expect(page.getByRole('listbox', { name: 'Pattern suggestions' })).toBeVisible();
   await field.press('Enter');
-  await expect(field).toHaveValue(/!ask response/);
+  await expect(field).toHaveValue(/response = !ask/);
   await field.fill('!show {{missing}}');
   await expect(field).toHaveAttribute('aria-invalid', 'true');
   await page.getByRole('button', { name: 'Save pattern', exact: true }).click();

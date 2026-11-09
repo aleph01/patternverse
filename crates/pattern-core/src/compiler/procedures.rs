@@ -5,6 +5,8 @@ use super::*;
 pub(super) fn compile(
     parsed: &ParsedPattern,
     dependencies: &mut BTreeMap<String, Dependency>,
+    data: &BTreeMap<String, crate::data::DataLibrary>,
+    widgets: &crate::widgets::Packages,
 ) -> Check<BTreeMap<String, CompiledPattern>> {
     if parsed.flows.len() > 32 {
         return Err(err("At most 32 local flows may be declared", 0..0));
@@ -24,6 +26,8 @@ pub(super) fn compile(
             dependencies,
             &mut compiled,
             &mut BTreeSet::new(),
+            data,
+            widgets,
         )?;
     }
     Ok(compiled)
@@ -56,6 +60,8 @@ fn visit(
     dependencies: &mut BTreeMap<String, Dependency>,
     compiled: &mut BTreeMap<String, CompiledPattern>,
     stack: &mut BTreeSet<String>,
+    data: &BTreeMap<String, crate::data::DataLibrary>,
+    widgets: &crate::widgets::Packages,
 ) -> Check<()> {
     if compiled.contains_key(name) {
         return Ok(());
@@ -67,7 +73,7 @@ fn visit(
     let mut calls = BTreeMap::new();
     crate::snapshot::dependencies(&parsed.statements, &mut calls);
     for child in calls.keys().filter(|child| sources.contains_key(*child)) {
-        visit(child, sources, dependencies, compiled, stack)?;
+        visit(child, sources, dependencies, compiled, stack, data,widgets)?;
     }
     // Only referenced interfaces are retained, avoiding dependency cycles through unrelated flows.
     for import in syntax::imports(&parsed.declarations)? {
@@ -79,7 +85,7 @@ fn visit(
         .map(|(name, value)| (name.clone(), value.clone()))
         .collect();
     let pattern =
-        compile_with_dependencies(&sources[name], interfaces).map_err(|e| e[0].clone())?;
+        compile_with_widget_environment(&sources[name], interfaces, data,widgets).map_err(|e| e[0].clone())?;
     dependencies.insert(name.into(), pattern.interface());
     compiled.insert(name.into(), pattern);
     stack.remove(name);

@@ -78,6 +78,9 @@ const kinds: Record<string, string> = {
   usefulness: 'Rating',
   'practice-runs': 'Practice responses',
   situations: 'Situation',
+  'widget-drafts': 'Widget draft',
+  'widget-locks': 'widget dependency locks',
+  'widget-releases': 'Widget version',
   sessions: 'Mira conversation',
   workspace: 'Workspace',
 };
@@ -131,7 +134,7 @@ function retryable(error: RemoteCorpusError): boolean {
   );
 }
 
-/** Opt-in workspace entry point. Uses the existing planner, journal and recoverable
+/** Workspace entry point. Uses the existing planner, journal and recoverable
  * database adapter for both phrase-encrypted and sign-in-only archives.
  */
 export async function syncWorkspaceWithDropbox(input: {

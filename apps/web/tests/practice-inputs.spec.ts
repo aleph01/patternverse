@@ -71,7 +71,7 @@ test('runner selection drafts survive editing and canceling an earlier text resp
 }, info) => {
   await page.goto('/pattern/cbt-thinking-patterns/run');
   await page.getByLabel('Your response').fill('A friend did not reply.');
-  await page.getByRole('button', { name: 'Continue ↓', exact: true }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true }).click();
   const checkbox = page.getByRole('checkbox', { name: 'Mind reading', exact: true });
   await checkbox.press('Space');
   await page.getByRole('button', { name: /^Edit step 1:/ }).click();
@@ -83,7 +83,7 @@ test('runner selection drafts survive editing and canceling an earlier text resp
     path: `/tmp/patternverse-input-runner-${info.project.name}.png`,
     fullPage: true,
   });
-  await page.getByRole('button', { name: 'Continue ↓', exact: true }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true }).click();
   await expect(page.getByRole('textbox', { name: 'Your response' })).toBeVisible();
   await expect(page.getByText('Mind reading', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

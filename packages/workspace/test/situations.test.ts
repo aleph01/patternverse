@@ -13,6 +13,45 @@ const storage = () => ({
   IDBKeyRange,
   databaseName: crypto.randomUUID(),
 });
+it('persists deletion, preserves remaining order and rejects stale deletes and writes to deleted notebooks', async () => {
+  const options = storage();
+  const a = createIndexedDbWorkspace(options),
+    b = createIndexedDbWorkspace(options);
+  try {
+    const first = await a.createSituation('Creative work');
+    const second = await a.createSituation('Conversations');
+    const third = await a.createSituation('A decision');
+    const updated = await b.updateSituation(
+      second.id,
+      { title: second.title, context: 'New notes' },
+      second.revision,
+    );
+    await expect(a.deleteSituation(second.id, second.revision)).rejects.toThrow('another window');
+    expect((await a.listSituations())[1]).toEqual(updated);
+    await a.deleteSituation(second.id, updated.revision);
+    expect((await b.listSituations()).map((s) => s.id)).toEqual([first.id, third.id]);
+    await expect(
+      b.updateSituation(second.id, { title: 'Stale draft', context: '' }, updated.revision),
+    ).rejects.toThrow('not found');
+    await a.moveSituation(third.id, first.id);
+    const fourth = await b.createSituation('A new situation');
+    expect((await a.listSituations()).map((s) => s.id)).toEqual([third.id, first.id, fourth.id]);
+  } finally {
+    a.close();
+    b.close();
+  }
+  const reopened = createIndexedDbWorkspace(options);
+  try {
+    expect((await reopened.listSituations()).map((s) => s.title)).toEqual([
+      'A decision',
+      'Creative work',
+      'A new situation',
+    ]);
+  } finally {
+    reopened.close();
+  }
+});
+
 it('persists ordered situations and context, appends concurrent additions, and rejects stale notebook writes', async () => {
   const options = storage();
   const a = createIndexedDbWorkspace(options),

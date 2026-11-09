@@ -13,9 +13,11 @@ export const collectionKey = libraryEntryKey;
 export function collectionItemHref(
   url: string,
   collection: Pick<EntitySummary, 'sourceId' | 'id'>,
+  verse?: string | null,
 ): string {
   const target = new URL(url, 'https://patternverse.invalid');
   target.searchParams.set('collection', collectionKey(collection));
+  if (verse) target.searchParams.set('verse', verse);
   return `${target.pathname}${target.search}${target.hash}`;
 }
 

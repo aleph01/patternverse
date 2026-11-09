@@ -99,6 +99,7 @@ export async function saveRevisitedStep(
 export function supportsStepEditing(effect: PatternEffect): boolean {
   return [
     'interaction.form',
+    'interaction.widget',
     'interaction.ask',
     'interaction.rate',
     'interaction.choose',

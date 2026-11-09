@@ -3,7 +3,7 @@
 :input frame text
 :output stakeholders
 
-!agent stakeholders {
+stakeholders = !agent {
     :returns choices
     :min 1
     :max 6

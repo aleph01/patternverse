@@ -38,6 +38,8 @@ export type PracticeRunState = Readonly<{
   reviewIds: readonly string[];
   retained: readonly RetainedStep[];
   aiBusy: boolean;
+  startReady: boolean;
+  openRouterConnected: boolean | null;
   connectionChecked: boolean;
   connectionReady: boolean;
   connectionBusy: boolean;
@@ -58,6 +60,8 @@ export function initialPracticeRunState(): PracticeRunState {
     reviewIds: [],
     retained: [],
     aiBusy: false,
+    startReady: false,
+    openRouterConnected: null,
     connectionChecked: false,
     connectionReady: false,
     connectionBusy: false,
@@ -89,7 +93,7 @@ export type PracticeRunPorts = Readonly<{
       }
     | undefined
   >;
-  freeAvailable: (patternId: string) => Promise<boolean>;
+  freeAvailable: (patternId: string, run?: PatternRun | null) => Promise<boolean>;
   connectionReady: () => Promise<boolean>;
   fulfillFree: (id: string, run: PatternRun, signal: AbortSignal) => Promise<unknown>;
   fulfillModel: (effect: PatternEffect, desktop: boolean, signal: AbortSignal) => Promise<unknown>;
@@ -149,7 +153,12 @@ export function createPracticeRunController(options: {
         replace,
         message: (cause) => {
           const failure = ports.failure(cause, definition.desktop, fallback);
-          update(failure);
+          update({
+            ...failure,
+            ...(failure.connectionReady === false && !definition.desktop
+              ? { openRouterConnected: false }
+              : {}),
+          });
           return failure.error;
         },
       },
@@ -157,17 +166,15 @@ export function createPracticeRunController(options: {
   }
 
   async function continueAiSteps(signal: AbortSignal, definition: PracticeRunDefinition) {
-    if (
-      !definition.desktop &&
-      !state.aiProvider &&
-      !definition.needsAi &&
-      modelKinds.has(state.run?.view.pending?.request.kind ?? '')
-    ) {
-      const freeAvailable =
-        definition.sourceId === 'commons' ? await ports.freeAvailable(definition.patternId) : false;
+    if (!modelKinds.has(state.run?.view.pending?.request.kind ?? '')) return;
+    if (!definition.desktop) {
+      await checkConnection(true, true);
       signal.throwIfAborted();
-      update({ freeAvailable });
-      if (freeAvailable) return;
+      if (!state.aiProvider && state.freeAvailable) return;
+      if (!state.connectionReady) {
+        update({ connectionIssue: 'connection' });
+        return;
+      }
     }
     for (
       let count = 0;
@@ -203,7 +210,7 @@ export function createPracticeRunController(options: {
   }
 
   async function begin(inputs: Readonly<Record<string, string>> = {}) {
-    if (disposed || state.working || !state.connectionReady) return false;
+    if (disposed || state.working || !state.startReady) return false;
     const definition = options.definition();
     if (definition.inputNames.some((name) => !inputs[name]?.trim())) {
       update({ error: 'Add a short starting description before beginning.' });
@@ -267,21 +274,19 @@ export function createPracticeRunController(options: {
       async (signal) => {
         const freeAvailable =
           discoverFree && definition.sourceId === 'commons'
-            ? await ports.freeAvailable(definition.patternId)
+            ? await ports.freeAvailable(definition.patternId, state.run)
             : state.freeAvailable;
         signal.throwIfAborted();
-        const ready =
-          provider === 'free'
-            ? true
-            : freeAvailable && !provider
-              ? false
-              : await ports.connectionReady();
-        return { freeAvailable, ready };
+        const connected = definition.desktop ? false : await ports.connectionReady();
+        signal.throwIfAborted();
+        const ready = definition.desktop || provider === 'free' || connected;
+        return { freeAvailable, ready, connected };
       },
-      ({ freeAvailable, ready }) => {
+      ({ freeAvailable, ready, connected }) => {
         update({
           freeAvailable,
           connectionReady: ready,
+          openRouterConnected: connected,
           ...(ready && state.connectionIssue === 'connection' ? { connectionIssue: null } : {}),
         });
       },
@@ -291,8 +296,7 @@ export function createPracticeRunController(options: {
           cause instanceof Error ? cause.message : 'Could not check the connection.',
       },
     );
-    if (accepted && !state.run && state.connectionReady && definition.inputNames.length === 0)
-      void begin();
+    return accepted;
   }
 
   function leaveEdit() {
@@ -309,11 +313,19 @@ export function createPracticeRunController(options: {
     async initialize(historyId: string | null) {
       const definition = options.definition();
       if (disposed) return;
-      if (definition.desktop || !definition.needsAi) {
-        update({ connectionChecked: true, connectionReady: true });
-        if (historyId) await restoreHistory(historyId);
-        else if (definition.inputNames.length === 0) await begin();
-      } else await checkConnection(true);
+      update({ startReady: true });
+      if (definition.desktop || !definition.needsAi)
+        update({ connectionChecked: true, connectionReady: definition.desktop });
+      if (historyId) await restoreHistory(historyId);
+      else if (definition.inputNames.length === 0) await begin();
+      // Status discovery never starts a model request or prevents non-AI work.
+      if (
+        !disposed &&
+        !definition.desktop &&
+        state.openRouterConnected === null &&
+        (definition.needsAi || modelKinds.has(state.run?.view.pending?.request.kind ?? ''))
+      )
+        await checkConnection(true);
     },
     async chooseAi(provider: 'free' | 'openrouter') {
       if (disposed || state.working) return;

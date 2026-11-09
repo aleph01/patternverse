@@ -7,10 +7,12 @@
     definition,
     compact = false,
     explainUnavailable = false,
+    label = 'Open worksheet',
   }: {
     definition: WorksheetDefinition;
     compact?: boolean;
     explainUnavailable?: boolean;
+    label?: string;
   } = $props();
   let open = $state(false);
   const eligibility = worksheetEligibility(() => definition);
@@ -19,7 +21,7 @@
 {#if eligibility.available}<button
     type="button"
     class:compact
-    aria-label="Open worksheet"
+    aria-label={label}
     title="Worksheet"
     onclick={() => (open = true)}
     ><FileText size={18} strokeWidth={1.7} /><span>Worksheet</span></button

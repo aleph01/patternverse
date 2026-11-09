@@ -1,4 +1,5 @@
 <script lang="ts">
+  import WidgetBlockPicker from '$lib/widgets/WidgetBlockPicker.svelte';
   import { Plus, MessageSquare, ChevronDown, Code } from '@lucide/svelte';
   import { onDestroy, untrack } from 'svelte';
   import { inspectSource } from './bridge';
@@ -6,6 +7,7 @@
   import VideoFields from './VideoFields.svelte';
   import BlockFields from './BlockFields.svelte';
   import PathsEditor from './PathsEditor.svelte';
+  import StructuredBlock from './StructuredBlock.svelte';
   import type { Inspection, SourceSpan, SourceStatement } from './types';
   import {
     blockNames,
@@ -35,6 +37,7 @@
     onreveal: (span: SourceSpan) => void;
     onpendingchange: (pending: boolean) => void;
   } = $props();
+  let addingWidget = $state(false);
   let busy = $state(false),
     error = $state(''),
     selected = $state<string | null>(null),
@@ -151,7 +154,17 @@
       {#each statements as statement (key(statement))}
         {@const itemKey = key(statement)}
         {@const group = paths.find((p) => p.control.start === statement.span.start)}
-        {#if group}<PathsEditor
+        {#if statement.kind === 'form' || (['?match', '?branch'].includes(statement.kind) && statement.children?.length)}
+          <StructuredBlock
+            {source}
+            {statement}
+            {structure}
+            disabled={locked || (anyPending && !pending[itemKey])}
+            oncommit={commit}
+            {onreveal}
+            onpending={(value) => setPending(itemKey, value)}
+          />
+        {:else if group}<PathsEditor
             {source}
             paths={group}
             {structure}
@@ -232,6 +245,10 @@
               onclick={() => add(kind as BlockKind)}>{blockNames[kind]}</button
             >{/each}<button
             type="button"
+            disabled={locked || anyPending}
+            onclick={() => (addingWidget = !addingWidget)}>Widget</button
+          ><button
+            type="button"
             disabled={locked || anyPending || !responses.length}
             onclick={() => {
               addingPaths = !addingPaths;
@@ -239,6 +256,14 @@
             }}>Paths</button
           >
         </div>{/if}
+      {#if addingWidget}<WidgetBlockPicker
+          {source}
+          oninsert={commit}
+          oncancel={() => {
+            addingWidget = false;
+            menu = false;
+          }}
+        />{/if}
       {#if addingPaths}<div class="new-paths">
           <label for={`${id}-response`}>Route based on an earlier response</label><select
             id={`${id}-response`}

@@ -234,7 +234,9 @@
             {#if historyCanResume(selected, commonsEntities)}<a
                 class="primary"
                 href={resolve(
-                  `/${selected.patternType}/${selected.patternRef.entityId}/run?history=${encodeURIComponent(selected.id)}`,
+                  selected.patternRef.sourceId === 'personal'
+                    ? `/my/practice?id=${encodeURIComponent(selected.patternRef.entityId)}&history=${encodeURIComponent(selected.id)}`
+                    : `/${selected.patternType}/${selected.patternRef.entityId}/run?history=${encodeURIComponent(selected.id)}`,
                 )}>Continue practice →</a
               >{/if}<button disabled={history.busy} onclick={actions.toggleRename}
               ><Pencil size={14} aria-hidden="true" />Rename</button

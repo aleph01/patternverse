@@ -6,6 +6,7 @@ use crate::{
 use chumsky::{prelude::*, Stream};
 use serde::{Deserialize, Serialize};
 pub mod functional;
+mod lambda;
 use std::collections::BTreeMap;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -27,6 +28,7 @@ pub enum Binary {
     NotEqual,
     And,
     Or,
+    Coalesce,
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Expr<R> {
@@ -35,12 +37,17 @@ pub struct Expr<R> {
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Kind<R> {
+    Absent,
+    Coerce(Box<Expr<R>>, Type),
     List(Vec<Expr<R>>, Option<Type>),
     Record(BTreeMap<String, Expr<R>>),
     Call(String, Vec<Expr<R>>),
+    MapPipe(String, Vec<Expr<R>>),
     Parameter(usize, Vec<String>, Type),
     Invoke(Box<Expr<R>>, Vec<Expr<R>>),
     Transform(String, Box<Expr<R>>, Vec<Expr<R>>, Type),
+    Lambda(Vec<String>, Box<Expr<R>>),
+    InlineTransform(String, Box<Expr<R>>, Vec<Expr<R>>, Vec<Expr<R>>, Type),
     Literal(Value),
     Reference(R),
     Unary(Unary, Box<Expr<R>>),
@@ -68,8 +75,11 @@ fn keyword(word: &'static str) -> impl Parser<char, (), Error = Simple<char>> + 
         .padded()
 }
 /// Build the precedence-aware expression grammar with non-associative comparisons.
-fn parser() -> impl Parser<char, Expr<Vec<String>>, Error = Simple<char>> {
-    recursive(|expression| {
+fn parser(
+    language: u32,
+    enums: BTreeMap<String, crate::value::EnumType>,
+) -> impl Parser<char, Expr<Vec<String>>, Error = Simple<char>> {
+    recursive(move |expression| {
         let number = text::int(10)
             .chain::<char, _, _>(just('.').chain(text::digits(10)).or_not().flatten())
             .chain::<char, _, _>(
@@ -109,7 +119,7 @@ fn parser() -> impl Parser<char, Expr<Vec<String>>, Error = Simple<char>> {
         let reference = identifier()
             .separated_by(just('.'))
             .at_least(1)
-            .map(|path: Vec<String>| match path.as_slice() {
+            .map(move |path: Vec<String>| match path.as_slice() {
                 [v] if v == "true" => Kind::Literal(Value::Boolean(true)),
                 [v] if v == "false" => Kind::Literal(Value::Boolean(false)),
                 _ => Kind::Reference(path),
@@ -133,7 +143,7 @@ fn parser() -> impl Parser<char, Expr<Vec<String>>, Error = Simple<char>> {
             .then(
                 just(':')
                     .padded()
-                    .ignore_then(functional::type_parser())
+                    .ignore_then(functional::type_parser(language, enums.clone()))
                     .or_not(),
             )
             .map_with_span(|(items, annotation), span| Expr {
@@ -221,9 +231,24 @@ fn parser() -> impl Parser<char, Expr<Vec<String>>, Error = Simple<char>> {
         ))
         .padded();
         // Comparisons are non-associative: a < b < c needs explicit boolean clauses.
-        let compare = sum
+        // Absence fallback binds below arithmetic and above comparisons, right to left.
+        let coalesce = recursive(|fallback| {
+            sum.clone()
+                .then(
+                    just("??")
+                        .padded()
+                        .to(Binary::Coalesce)
+                        .then(fallback)
+                        .or_not(),
+                )
+                .map(|(left, right)| match right {
+                    Some(pair) => binary(left, pair),
+                    None => left,
+                })
+        });
+        let compare = coalesce
             .clone()
-            .then(comparison.then(sum).or_not())
+            .then(comparison.then(coalesce).or_not())
             .map(|(left, right)| match right {
                 Some(pair) => binary(left, pair),
                 None => left,
@@ -248,23 +273,48 @@ fn parser() -> impl Parser<char, Expr<Vec<String>>, Error = Simple<char>> {
             .padded()
             .then(
                 expression
+                    .clone()
                     .separated_by(just(',').padded())
                     .delimited_by(just('(').padded(), just(')').padded())
                     .or_not(),
             )
             .map_with_span(|(name, args), span| (name, args.unwrap_or_default(), span));
-        boolean
-            .then(just("|>").padded().ignore_then(stage).repeated())
+        let pipeline = boolean
+            .then(
+                just("|>>")
+                    .to(true)
+                    .or(just("|>").to(false))
+                    .padded()
+                    .then(stage)
+                    .repeated(),
+            )
             .foldl(
-                |value, (name, mut args, span): (String, Vec<Expr<Vec<String>>>, Span)| {
+                |value: Expr<Vec<String>>, (mapping, (name, mut args, span))| {
                     let start = value.span.start;
                     args.insert(0, value);
                     Expr {
-                        kind: Kind::Call(name, args),
+                        kind: if mapping {
+                            Kind::MapPipe(name, args)
+                        } else {
+                            Kind::Call(name, args)
+                        },
                         span: start..span.end,
                     }
                 },
-            )
+            );
+        let lambda_parameters = identifier().padded().map(|name| vec![name]).or(identifier()
+            .padded()
+            .separated_by(just(',').padded())
+            .at_least(1)
+            .delimited_by(just('(').padded(), just(')').padded()));
+        lambda_parameters
+            .then_ignore(just("=>").padded())
+            .then(expression)
+            .map_with_span(|(names, body), span| Expr {
+                kind: Kind::Lambda(names, Box::new(body)),
+                span,
+            })
+            .or(pipeline)
     })
     .then_ignore(end())
 }
@@ -276,7 +326,7 @@ pub fn parse(source: &str, offset: usize) -> Result<Expr<Vec<String>>, Diagnosti
     parse_version(source, offset, 1)
 }
 
-/// Parse functional expressions under language one or the earlier language-two compatibility spelling.
+/// Parse functional expressions under supported, backward-compatible language tags.
 ///
 /// # Errors
 /// Rejects unknown syntax and complexity excesses; declaration validation owns language versions.
@@ -284,6 +334,16 @@ pub fn parse_version(
     source: &str,
     offset: usize,
     language: u32,
+) -> Result<Expr<Vec<String>>, Diagnostic> {
+    parse_with_enums(source, offset, language, &BTreeMap::new())
+}
+
+/// Parse versioned expressions using declared enum types and bounded source complexity.
+pub(crate) fn parse_with_enums(
+    source: &str,
+    offset: usize,
+    language: u32,
+    enums: &BTreeMap<String, crate::value::EnumType>,
 ) -> Result<Expr<Vec<String>>, Diagnostic> {
     // Bound recursive parser work for authoring input (not a production import quota).
     let mut quoted = false;
@@ -305,7 +365,7 @@ pub fn parse_version(
             continue;
         }
         outside.push(if c == '"' { ' ' } else { c });
-        if matches!(language, 1 | 2) {
+        if matches!(language, 1..=3) {
             if c == '<' {
                 type_depth += 1;
             } else if c == '>' {
@@ -320,7 +380,7 @@ pub fn parse_version(
                 too_complex |= depth > 16;
             }
             ')' | ']' | '}' => depth = depth.saturating_sub(1),
-            '+' | '-' | '*' | '<' | '>' | '=' | '!' => operators += 1,
+            '+' | '-' | '*' | '<' | '>' | '=' | '!' | '?' => operators += 1,
             _ => {}
         }
     }
@@ -336,7 +396,7 @@ pub fn parse_version(
             offset..offset + source.len(),
         ));
     }
-    let parsed = parser()
+    let parsed = parser(language, enums.clone())
         .parse(Stream::from_iter(
             offset + source.len()..offset + source.len(),
             source
@@ -369,7 +429,17 @@ pub fn check_with_functions<R: Clone>(
     functions: &functional::Functions,
     resolve: &impl Fn(&[String], Span) -> Result<(R, Type), Diagnostic>,
 ) -> Result<(Expr<R>, Type), Diagnostic> {
-    let checked = check_inner(expr, functions, &[], resolve)?;
+    check_with_expected(expr, functions, resolve, None)
+}
+
+/// Check contextual types while bounding expanded expression size and helper depth.
+pub(crate) fn check_with_expected<R: Clone>(
+    expr: Expr<Vec<String>>,
+    functions: &functional::Functions,
+    resolve: &impl Fn(&[String], Span) -> Result<(R, Type), Diagnostic>,
+    expected: Option<&Type>,
+) -> Result<(Expr<R>, Type), Diagnostic> {
+    let checked = check_inner_expected(expr, functions, &[], resolve, expected)?;
     if functional::requires_v2(&checked.0) && !functional::within_limits(&checked.0) {
         return Err(Diagnostic::error(
             "E002",
@@ -385,9 +455,27 @@ fn check_inner<R: Clone>(
     expr: Expr<Vec<String>>,
     functions: &functional::Functions,
     parameters: &[(String, Type)],
-    resolve: &impl Fn(&[String], Span) -> Result<(R, Type), Diagnostic>,
+    resolve: &dyn Fn(&[String], Span) -> Result<(R, Type), Diagnostic>,
+) -> Result<(Expr<R>, Type), Diagnostic> {
+    check_inner_expected(expr, functions, parameters, resolve, None)
+}
+
+/// Check one expression recursively, applying declared contextual types without scalar coercion.
+fn check_inner_expected<R: Clone>(
+    expr: Expr<Vec<String>>,
+    functions: &functional::Functions,
+    parameters: &[(String, Type)],
+    resolve: &dyn Fn(&[String], Span) -> Result<(R, Type), Diagnostic>,
+    expected: Option<&Type>,
 ) -> Result<(Expr<R>, Type), Diagnostic> {
     let span = expr.span;
+    let contextual = expected.map(|ty| {
+        if let Type::Optional(inner) = ty {
+            inner.as_ref()
+        } else {
+            ty
+        }
+    });
     let fail = || {
         Diagnostic::error(
             "E002",
@@ -397,19 +485,52 @@ fn check_inner<R: Clone>(
     };
     let (kind, ty) = match expr.kind {
         Kind::Call(name, args) => {
-            return functional::check_call(name, args, span, functions, parameters, resolve)
+            let (expr, ty) =
+                functional::check_call(name, args, span.clone(), functions, parameters, resolve)?;
+            (expr.kind, ty)
+        }
+        Kind::MapPipe(name, args) => {
+            let (expr, ty) =
+                lambda::check_map_pipe(name, args, span.clone(), functions, parameters, resolve)?;
+            (expr.kind, ty)
+        }
+        Kind::Absent => {
+            let Some(Type::Optional(inner)) = expected else {
+                return Err(Diagnostic::error(
+                    "E002",
+                    "None needs an expected Optional[T] type",
+                    span,
+                ));
+            };
+            (
+                Kind::Literal(Value::Optional {
+                    element_type: *inner.clone(),
+                    value: None,
+                }),
+                expected.unwrap().clone(),
+            )
         }
         Kind::List(items, annotation) => {
-            let checked = items
-                .into_iter()
-                .map(|item| check_inner(item, functions, parameters, resolve))
-                .collect::<Result<Vec<_>, _>>()?;
-            let ty = annotation
+            let element = annotation.or_else(|| match contextual {
+                Some(Type::List(inner)) => Some(*inner.clone()),
+                _ => None,
+            });
+            let mut checked = Vec::new();
+            for item in items {
+                checked.push(check_inner_expected(
+                    item,
+                    functions,
+                    parameters,
+                    resolve,
+                    element.as_ref(),
+                )?);
+            }
+            let ty = element
                 .or_else(|| checked.first().map(|(_, ty)| ty.clone()))
                 .ok_or_else(|| {
                     Diagnostic::error(
                         "E002",
-                        "Empty lists need an element annotation, e.g. []:text",
+                        "Empty lists need an expected list[T] type or an element annotation",
                         span.clone(),
                     )
                 })?;
@@ -425,10 +546,21 @@ fn check_inner<R: Clone>(
             )
         }
         Kind::Record(fields) => {
+            let field_types = match contextual {
+                Some(Type::Record(fields)) => Some(fields),
+                _ => None,
+            };
             let fields = fields
                 .into_iter()
                 .map(|(name, expr)| {
-                    check_inner(expr, functions, parameters, resolve).map(|value| (name, value))
+                    check_inner_expected(
+                        expr,
+                        functions,
+                        parameters,
+                        resolve,
+                        field_types.and_then(|fields| fields.get(&name)),
+                    )
+                    .map(|value| (name, value))
                 })
                 .collect::<Result<BTreeMap<_, _>, _>>()?;
             let ty = Type::Record(
@@ -442,7 +574,10 @@ fn check_inner<R: Clone>(
                 ty,
             )
         }
-        Kind::Parameter(..) | Kind::Invoke(..) | Kind::Transform(..) => return Err(fail()),
+        Kind::Lambda(..) => return Err(Diagnostic::error("E003", "Inline lambdas are only supported as callbacks to map, filter, fold, reduce, find, any, and all", span)),
+        Kind::Parameter(..) | Kind::Invoke(..) | Kind::Transform(..) | Kind::InlineTransform(..) | Kind::Coerce(..) => {
+            return Err(fail())
+        }
         Kind::Literal(v) => {
             let ty = v.value_type();
             (Kind::Literal(v), ty)
@@ -454,16 +589,25 @@ fn check_inner<R: Clone>(
                 .find(|(_, (name, _))| path.first() == Some(name))
             {
                 let ty = functional::field_type(ty, &path[1..]).ok_or_else(fail)?;
-                return Ok((
-                    Expr {
-                        kind: Kind::Parameter(index, path[1..].into(), ty.clone()),
-                        span,
-                    },
-                    ty,
-                ));
+                (Kind::Parameter(index, path[1..].into(), ty.clone()), ty)
+            } else {
+                match resolve(&path, span.clone()) {
+                    Ok((r, ty)) => (Kind::Reference(r), ty),
+                    Err(_) if path == ["None"] => {
+                        return check_inner_expected(
+                            Expr {
+                                kind: Kind::Absent,
+                                span,
+                            },
+                            functions,
+                            parameters,
+                            resolve,
+                            expected,
+                        );
+                    }
+                    Err(error) => return Err(error),
+                }
             }
-            let (r, ty) = resolve(&path, span.clone())?;
-            (Kind::Reference(r), ty)
         }
         Kind::Unary(op, expr) => {
             let (e, ty) = check_inner(*expr, functions, parameters, resolve)?;
@@ -475,9 +619,80 @@ fn check_inner<R: Clone>(
             };
             (Kind::Unary(op, Box::new(e)), out)
         }
+        Kind::Binary(Binary::Coalesce, a, b) => {
+            let absent = matches!(&a.kind, Kind::Absent)
+                || matches!(&a.kind, Kind::Reference(path) if path == &["None"]
+                    && !parameters.iter().any(|(name, _)| name == "None")
+                    && resolve(path, a.span.clone()).is_err());
+            let ((a, ta), (b, tb)) = if absent {
+                let (b, tb) = check_inner_expected(*b, functions, parameters, resolve, contextual)?;
+                if matches!(tb, Type::Optional(_)) {
+                    return Err(fail());
+                }
+                let ta = Type::Optional(Box::new(tb.clone()));
+                (
+                    check_inner_expected(*a, functions, parameters, resolve, Some(&ta))?,
+                    (b, tb),
+                )
+            } else {
+                let (a, ta) = check_inner(*a, functions, parameters, resolve)?;
+                let Type::Optional(inner) = &ta else {
+                    return Err(fail());
+                };
+                let b = check_inner_expected(*b, functions, parameters, resolve, Some(inner))?;
+                ((a, ta), b)
+            };
+            if ta != Type::Optional(Box::new(tb.clone())) {
+                return Err(fail());
+            }
+            (Kind::Binary(Binary::Coalesce, Box::new(a), Box::new(b)), tb)
+        }
         Kind::Binary(op, a, b) => {
-            let (a, ta) = check_inner(*a, functions, parameters, resolve)?;
-            let (b, tb) = check_inner(*b, functions, parameters, resolve)?;
+            let is_absent = |expr: &Expr<Vec<String>>| match &expr.kind {
+                Kind::Absent => true,
+                Kind::Reference(path) if path == &["None"] => {
+                    !parameters.iter().any(|(name, _)| name == "None")
+                        && resolve(path, expr.span.clone()).is_err()
+                }
+                _ => false,
+            };
+            let none_a = is_absent(&a);
+            let none_b = is_absent(&b);
+            if none_a && none_b && matches!(op, Binary::Equal | Binary::NotEqual) {
+                return Ok((
+                    Expr {
+                        kind: Kind::Literal(Value::Boolean(op == Binary::Equal)),
+                        span,
+                    },
+                    Type::Boolean,
+                ));
+            }
+            let ((a, ta), (b, tb)) = if none_a || none_b {
+                if !matches!(op, Binary::Equal | Binary::NotEqual) {
+                    return Err(fail());
+                }
+                let (other, ty) =
+                    check_inner(if none_a { *b } else { *a }, functions, parameters, resolve)?;
+                if !matches!(ty, Type::Optional(_)) {
+                    return Err(fail());
+                }
+                let absent = Expr {
+                    kind: Kind::Absent,
+                    span: span.clone(),
+                };
+                let checked_none =
+                    check_inner_expected(absent, functions, parameters, resolve, Some(&ty))?;
+                if none_a {
+                    (checked_none, (other, ty))
+                } else {
+                    ((other, ty), checked_none)
+                }
+            } else {
+                (
+                    check_inner(*a, functions, parameters, resolve)?,
+                    check_inner(*b, functions, parameters, resolve)?,
+                )
+            };
             let ty = match op {
                 Binary::Add | Binary::Subtract | Binary::Multiply
                     if ta == Type::Number && tb == ta =>
@@ -496,43 +711,107 @@ fn check_inner<R: Clone>(
             (Kind::Binary(op, Box::new(a), Box::new(b)), ty)
         }
     };
-    Ok((Expr { kind, span }, ty))
+    let expression = Expr {
+        kind,
+        span: span.clone(),
+    };
+    if let Some(expected) = expected {
+        if !expected.accepts_type(&ty) {
+            return Err(Diagnostic::error(
+                "E002",
+                format!("Expected {expected}, found {ty} (no implicit coercion)"),
+                span,
+            ));
+        }
+        if expected != &ty {
+            return Ok((
+                Expr {
+                    kind: Kind::Coerce(Box::new(expression), expected.clone()),
+                    span,
+                },
+                expected.clone(),
+            ));
+        }
+    }
+    Ok((expression, ty))
 }
 /// Replace resolved reference representations while preserving operators and source spans.
 pub fn lower<R, S>(expr: Expr<R>, resolve: &impl Fn(R) -> S) -> Expr<S> {
+    lower_references(expr, &|reference, span| Expr {
+        kind: Kind::Reference(resolve(reference)),
+        span,
+    })
+}
+
+/// Replace references with checked expressions while retaining lexical parameter scopes.
+fn lower_references<R, S>(expr: Expr<R>, resolve: &impl Fn(R, Span) -> Expr<S>) -> Expr<S> {
     Expr {
-        span: expr.span,
+        span: expr.span.clone(),
         kind: match expr.kind {
-            Kind::List(items, ty) => {
-                Kind::List(items.into_iter().map(|e| lower(e, resolve)).collect(), ty)
-            }
+            Kind::Absent => Kind::Absent,
+            Kind::Coerce(e, ty) => Kind::Coerce(Box::new(lower_references(*e, resolve)), ty),
+            Kind::List(items, ty) => Kind::List(
+                items
+                    .into_iter()
+                    .map(|e| lower_references(e, resolve))
+                    .collect(),
+                ty,
+            ),
             Kind::Record(fields) => Kind::Record(
                 fields
                     .into_iter()
-                    .map(|(n, e)| (n, lower(e, resolve)))
+                    .map(|(n, e)| (n, lower_references(e, resolve)))
                     .collect(),
             ),
-            Kind::Call(name, args) => {
-                Kind::Call(name, args.into_iter().map(|e| lower(e, resolve)).collect())
-            }
+            Kind::Call(name, args) => Kind::Call(
+                name,
+                args.into_iter()
+                    .map(|e| lower_references(e, resolve))
+                    .collect(),
+            ),
+            Kind::MapPipe(name, args) => Kind::MapPipe(
+                name,
+                args.into_iter()
+                    .map(|e| lower_references(e, resolve))
+                    .collect(),
+            ),
             Kind::Parameter(index, path, ty) => Kind::Parameter(index, path, ty),
             Kind::Invoke(body, args) => Kind::Invoke(
-                Box::new(lower(*body, resolve)),
-                args.into_iter().map(|e| lower(e, resolve)).collect(),
+                Box::new(lower_references(*body, resolve)),
+                args.into_iter()
+                    .map(|e| lower_references(e, resolve))
+                    .collect(),
             ),
             Kind::Transform(name, body, args, ty) => Kind::Transform(
                 name,
-                Box::new(lower(*body, resolve)),
-                args.into_iter().map(|e| lower(e, resolve)).collect(),
+                Box::new(lower_references(*body, resolve)),
+                args.into_iter()
+                    .map(|e| lower_references(e, resolve))
+                    .collect(),
+                ty,
+            ),
+            Kind::Lambda(names, body) => {
+                Kind::Lambda(names, Box::new(lower_references(*body, resolve)))
+            }
+            Kind::InlineTransform(name, body, args, captures, ty) => Kind::InlineTransform(
+                name,
+                Box::new(lower_references(*body, resolve)),
+                args.into_iter()
+                    .map(|e| lower_references(e, resolve))
+                    .collect(),
+                captures
+                    .into_iter()
+                    .map(|e| lower_references(e, resolve))
+                    .collect(),
                 ty,
             ),
             Kind::Literal(v) => Kind::Literal(v),
-            Kind::Reference(r) => Kind::Reference(resolve(r)),
-            Kind::Unary(op, e) => Kind::Unary(op, Box::new(lower(*e, resolve))),
+            Kind::Reference(r) => return resolve(r, expr.span),
+            Kind::Unary(op, e) => Kind::Unary(op, Box::new(lower_references(*e, resolve))),
             Kind::Binary(op, a, b) => Kind::Binary(
                 op,
-                Box::new(lower(*a, resolve)),
-                Box::new(lower(*b, resolve)),
+                Box::new(lower_references(*a, resolve)),
+                Box::new(lower_references(*b, resolve)),
             ),
         },
     }
@@ -540,6 +819,23 @@ pub fn lower<R, S>(expr: Expr<R>, resolve: &impl Fn(R) -> S) -> Expr<S> {
 /// Compare values recursively; choice equality uses stable values rather than display labels.
 fn equal(a: &Value, b: &Value) -> bool {
     match (a, b) {
+        (
+            Value::Optional {
+                element_type: a_ty,
+                value: a,
+            },
+            Value::Optional {
+                element_type: b_ty,
+                value: b,
+            },
+        ) => {
+            a_ty == b_ty
+                && match (a, b) {
+                    (Some(a), Some(b)) => equal(a, b),
+                    (None, None) => true,
+                    _ => false,
+                }
+        }
         (Value::Choice(a), Value::Choice(b)) => a.value == b.value,
         (Value::Choices(a), Value::Choices(b)) => {
             a.iter().map(|c| &c.value).eq(b.iter().map(|c| &c.value))
@@ -588,6 +884,10 @@ fn eval_inner<R>(
     fuel.work(1)?;
     let invalid = || "Invalid typed expression".to_string();
     let value = match &expr.kind {
+        Kind::Absent | Kind::Lambda(..) | Kind::MapPipe(..) => return Err(invalid()),
+        Kind::Coerce(expr, ty) => eval_inner(expr, resolve, parameters, fuel)?
+            .into_expected(ty)
+            .ok_or_else(invalid)?,
         Kind::List(items, Some(ty)) => Value::List {
             element_type: ty.clone(),
             items: items
@@ -621,7 +921,10 @@ fn eval_inner<R>(
             functional::builtin(name, args, fuel)?
         }
         Kind::Transform(name, body, args, ty) => {
-            functional::transform(name, body, args, ty, resolve, parameters, fuel)?
+            functional::transform(name, body, args, &[], ty, resolve, parameters, fuel)?
+        }
+        Kind::InlineTransform(name, body, args, captures, ty) => {
+            functional::transform(name, body, args, captures, ty, resolve, parameters, fuel)?
         }
         Kind::Literal(v) => v.clone(),
         Kind::Reference(r) => resolve(r)?,
@@ -634,6 +937,17 @@ fn eval_inner<R>(
         },
         Kind::Binary(op, a, b) => {
             let a = eval_inner(a, resolve, parameters, fuel)?;
+            if *op == Binary::Coalesce {
+                let Value::Optional { value, .. } = a else {
+                    return Err(invalid());
+                };
+                let value = match value {
+                    Some(value) => *value,
+                    None => eval_inner(b, resolve, parameters, fuel)?,
+                };
+                fuel.value(&value)?;
+                return Ok(value);
+            }
             if *op == Binary::And && a == Value::Boolean(false) {
                 return Ok(a);
             }

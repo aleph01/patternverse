@@ -47,6 +47,7 @@ export function freshName(source: string, base: string): string {
 }
 
 export const blockNames: Record<string, string> = {
+  widget: 'Widget',
   ask: 'Question',
   show: 'Text / summary',
   video: 'Video',
@@ -64,7 +65,8 @@ export function editableStatement(statement: SourceStatement): boolean {
     !(statement.kind === 'show' && statement.argument) &&
     !(
       statement.kind === 'choose' &&
-      (statement.argument || statement.attributes.some((a) => a.name === 'from'))
+      ((statement.argument && statement.argument.value !== 'selection_bullets') ||
+        statement.attributes.some((a) => a.name === 'from'))
     )
   );
 }
@@ -104,7 +106,7 @@ export function newBlock(source: string, kind: BlockKind): string {
   );
   switch (kind) {
     case 'ask':
-      return `!ask ${name} {\n  Write your question here.\n}\n`;
+      return `${name} = !ask {\n  Write your question here.\n}\n`;
     case 'image':
       return '!image {\n  :url "https://example.com/decision-tree.png"\n  :alt "A decision tree showing three possible next steps."\n  Explore this image.\n}\n';
     case 'video':
@@ -112,11 +114,11 @@ export function newBlock(source: string, kind: BlockKind): string {
     case 'show':
       return '!show {\n  Write instructions or a summary here.\n}\n';
     case 'choose':
-      return `!choose ${name} {\n  :option explore "Explore options"\n  :option plan "Make a plan"\n  :option unsure "Not sure yet"\n  What would help?\n}\n`;
+      return `${name} = !choose {\n  What would help?\n  - explore: "Explore options"\n  - plan: "Make a plan"\n  - unsure: "Not sure yet"\n}\n`;
     case 'rate':
-      return `!rate ${name} 0..10 {\n  How clear is your next step?\n}\n`;
+      return `${name} = !rate 0..10 {\n  How clear is your next step?\n}\n`;
     case 'timer':
-      return `!timer ${name} {\n  :duration 60\n  :adjustable false\n  :blocking true\n  Take a quiet pause.\n}\n`;
+      return `${name} = !timer {\n  :duration 60\n  :adjustable false\n  :blocking true\n  Take a quiet pause.\n}\n`;
   }
 }
 export interface ResponseOption {
@@ -179,7 +181,7 @@ export function endInsertion(structure: Structure): SourceSpan | undefined {
 }
 
 /** Create ordinary language source; this format is not stored or executed as a second schema. */
-export function newPaths(source: string, response: ResponseOption): string {
+export function legacyPaths(source: string, response: ResponseOption): string {
   const one = freshName(source, 'path_first');
   const two = freshName(source + ' ' + one, 'path_second');
   const otherwise = freshName(source + ' ' + one + ' ' + two, 'path_otherwise');
@@ -226,4 +228,27 @@ export function moveRule(source: string, paths: Paths, index: number): string {
     { span: current, replacement: sliceSource(source, prior) },
     { span: prior, replacement: sliceSource(source, current) },
   ]);
+}
+
+/** Generate local arms directly; the Rust compiler validates every resulting edit. */
+export function newPaths(source: string, response: ResponseOption): string {
+  const exact = response.type !== 'number';
+  const ids = response.choices.map((c) => JSON.stringify(c.value));
+  const cases = exact
+    ? ids.length
+      ? ids
+      : response.type === 'boolean'
+        ? ['true', 'false']
+        : ['"first"', '"second"']
+    : [`${response.name} >= 8`, `${response.name} >= 4`];
+  const arms = cases.map((condition, index) => {
+    const content = index < 2 ? newBlock(source + ` path_response_${index}`, 'ask').trimEnd() : '';
+    return `  :${exact ? 'case' : 'when'} ${condition} {\n${content
+      .split('\n')
+      .filter(Boolean)
+      .map((line) => '    ' + line)
+      .join('\n')}\n  }`;
+  });
+  if (!exact || (!ids.length && response.type !== 'boolean')) arms.push('  :else {\n  }');
+  return `?${exact ? 'match ' + response.name : 'branch'} {\n${arms.join('\n')}\n}\n`;
 }

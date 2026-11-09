@@ -83,6 +83,83 @@ function fixture(overrides: Partial<Parameters<typeof createWorkspaceLibraryCata
 }
 const keys = (entries: readonly EntitySummary[]) => entries.map(libraryEntryKey);
 
+describe('filtered broader search results', () => {
+  const query = 'compare difficult options';
+  function searchFixture() {
+    const commons = [
+      { ...entry('strict'), title: 'Compare difficult options' },
+      { ...entry('strict-collection-1', 'collection'), title: 'Compare difficult options' },
+      { ...entry('strict-collection-2', 'collection'), title: 'Compare difficult options' },
+      { ...entry('partial'), title: 'Compare options' },
+      { ...entry('partial-collection', 'collection'), title: 'Difficult options' },
+      { ...entry('weak'), title: 'Options' },
+    ];
+    return fixture({
+      commons,
+      commonsSearchDocuments: commons.map(document),
+      commonsVerses: [
+        {
+          id: 'chosen',
+          sourceId: 'commons',
+          title: 'Chosen',
+          itemKeys: ['commons:strict', 'commons:partial'],
+        },
+      ],
+    });
+  }
+
+  it.each([
+    { scope: 'saved', savedEntries: [saved('strict'), saved('partial')] },
+    { selectedVerse: 'commons:chosen' },
+    { category: 'pattern' },
+    {
+      ratingFilter: 'very',
+      ratings: [rating('strict', 2), rating('partial', 2), rating('partial-collection', 1)],
+    },
+  ] satisfies Partial<Parameters<typeof workspaceLibraryView>[1]>[])(
+    'counts strict results and filters both groups within %j',
+    (filters) => {
+      const catalog = searchFixture();
+      const unfiltered = workspaceLibraryView(catalog, { ...defaults, query });
+      expect(unfiltered.results).toHaveLength(3);
+      expect(unfiltered.broaderMatchKeys.size).toBe(0);
+      const view = workspaceLibraryView(catalog, { ...defaults, query, ...filters });
+      expect(keys(view.results)).toEqual(['commons:strict', 'commons:partial']);
+      expect([...view.broaderMatchKeys]).toEqual(['commons:partial']);
+      expect(view.resultLabel).toBe('1 match · 1 broader match');
+    },
+  );
+
+  it('retains strict ranking before broader matches and counts both when a limit cuts the second group', () => {
+    const commons = [
+      { ...entry('strict'), title: 'Compare difficult options' },
+      ...Array.from({ length: 4 }, (_, i) => ({
+        ...entry(`partial-${i}`),
+        title: 'Compare options',
+      })),
+    ];
+    const catalog = fixture({ commons, commonsSearchDocuments: commons.map(document) });
+    const view = workspaceLibraryView(catalog, { ...defaults, query, limit: 2 });
+    expect(keys(view.results).slice(0, 1)).toEqual(
+      catalog.search.search(query).map(libraryEntryKey),
+    );
+    expect(view.results).toHaveLength(5);
+    expect(view.visibleResults).toHaveLength(2);
+    expect(view.resultLabel).toBe('1 match · 1 of 4 broader matches');
+  });
+
+  it('reports broader-only results without claiming there are no matches', () => {
+    const view = workspaceLibraryView(searchFixture(), {
+      ...defaults,
+      query: 'how can I compare these options',
+      category: 'pattern',
+    });
+    expect(view.results.length).toBeGreaterThan(0);
+    expect(view.broaderMatchKeys.size).toBe(view.results.length);
+    expect(view.resultLabel).toBe('0 matches · 2 broader matches');
+  });
+});
+
 describe('workspace library catalog', () => {
   it('shares the existing browse/search policy without changing stored legacy records', () => {
     const commons = [entry('kept'), entry('old', 'concept'), entry('old-practice', 'practice')];
@@ -252,7 +329,7 @@ describe('workspace library display', () => {
     });
     expect(keys(view.results)).toEqual(['commons:shared']);
     expect(view.myLibraryCount).toBe(2);
-    expect(view.visibleVerses.map((v) => v.key)).toEqual(['commons:software']);
+    expect(view.visibleVerses.map((verse) => verse.key)).toEqual(['commons:software']);
   });
   it('useful includes very useful, while very useful excludes useful, negative and unrated', () => {
     const catalog = fixture();
@@ -278,10 +355,43 @@ describe('workspace library display', () => {
       ratingFilter: 'very',
     });
     expect(view.results).toEqual([]);
-    expect(view.visibleVerses.map((v) => v.title)).toEqual(['Software']);
+    expect(view.visibleVerses.map((verse) => verse.key)).toEqual(['commons:software']);
     expect(view.emptyLibrary).toBe(false);
   });
-  it('resets an unavailable saved verse without filtering away the remaining library', () => {
+  it('uses source-qualified saved and owned members to find populated verses', () => {
+    const catalog = fixture({
+      personal: [
+        {
+          id: 'software',
+          sourceId: 'personal',
+          title: 'My software',
+          type: 'verse',
+          status: 'draft',
+          body: '',
+        },
+        personalPattern,
+        {
+          id: 'empty-private',
+          sourceId: 'personal',
+          title: 'Empty private verse',
+          type: 'verse',
+          status: 'draft',
+          body: '',
+        },
+      ],
+    });
+    const view = workspaceLibraryView(catalog, {
+      ...defaults,
+      scope: 'saved',
+      savedEntries: [saved('builder'), saved('shared', 'another-source'), saved('missing')],
+    });
+    expect(view.visibleVerses.map((verse) => verse.key)).toEqual([
+      'personal:software',
+      'commons:building',
+    ]);
+    expect(view.myLibraryCount).toBe(2);
+  });
+  it('hides verses without library content and resets an unavailable selection', () => {
     const catalog = fixture();
     const view = workspaceLibraryView(catalog, {
       ...defaults,
@@ -290,6 +400,7 @@ describe('workspace library display', () => {
       savedEntries: [saved('builder')],
     });
     expect(view.selectedVerse).toBe('all');
+    expect(view.visibleVerses.map((verse) => verse.key)).toEqual(['commons:building']);
     expect(keys(view.results)).toEqual(['commons:builder']);
     const empty = workspaceLibraryView(catalog, {
       ...defaults,
@@ -298,6 +409,7 @@ describe('workspace library display', () => {
     });
     expect(empty.visibleVerses).toEqual([]);
     expect(empty.selectedVerse).toBe('all');
+    expect(empty.results).toEqual([]);
     expect(empty.emptyLibrary).toBe(true);
   });
   it('retains empty or unknown verse filters in Explore', () => {

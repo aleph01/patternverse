@@ -51,7 +51,9 @@ describe('Portable grid-icon recipes', () => {
     expect(similarSavedMarks(spec, [spec, ...matches])).not.toContain(spec);
   });
   it('supports content IDs and titles beyond the private studio recipe limits', () => {
-    expect(patternIconForPattern('a'.repeat(240), 'Long title '.repeat(50)).cells).toHaveLength(9);
+    expect(patternIconForPattern('a'.repeat(240), 'Long title '.repeat(50)).motif).toBe(
+      'unassigned',
+    );
     expect(patternIconForPattern('observer', 'Long title '.repeat(50))).toEqual(
       patternIconForPattern('observer', 'Observer'),
     );

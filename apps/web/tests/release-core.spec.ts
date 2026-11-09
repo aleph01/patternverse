@@ -1,3 +1,4 @@
+import { openLibrarySearch } from './helpers/library';
 import { expect, test } from '@playwright/test';
 
 test('keeps chat and local practice selectors available while hiding advanced Mira tools', async ({
@@ -33,22 +34,61 @@ test('keeps chat and local practice selectors available while hiding advanced Mi
   await expect(page.getByText('Voice control', { exact: true })).toHaveCount(0);
 });
 
-test('hides Dropbox while preserving the personal workspace', async ({ page }) => {
-  await page.goto('/my');
+test('offers encrypted Dropbox workspace sync in the public release without starting an upload', async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  await page.route('https://*.dropboxapi.com/**', (route) => {
+    requests.push(route.request().url());
+    return route.abort();
+  });
+  await page.addInitScript(() => {
+    sessionStorage.setItem(
+      'patternverse:dropbox:connection:v1',
+      JSON.stringify({
+        accessToken: 'synthetic-test-token',
+        accountId: 'synthetic-account',
+        displayName: 'Test account',
+        expiresAt: '2100-01-01T00:00:00.000Z',
+      }),
+    );
+  });
+  await page.goto('/my?pane=sync');
   await expect(page.getByRole('heading', { name: 'your workspace.' })).toBeVisible();
-  await expect(page.getByRole('button', { name: /connect dropbox/i })).toHaveCount(0);
-  await expect(page.getByText('Sync and backup', { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Dropbox connected', exact: true })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Encrypted cross-device sync', exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Workspace content, saved responses, ratings and conversations', {
+      exact: false,
+    }),
+  ).toBeVisible();
+  await expect(page.getByLabel('Sync phrase', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Sync now', exact: true })).toBeVisible();
+  await expect(page.getByRole('switch', { name: /Automatic Dropbox sync/ })).toHaveCount(0);
+  expect(requests).toEqual([]);
+});
+
+test('offers Dropbox connection and rejects unsolicited callbacks in the public release', async ({
+  page,
+}) => {
+  await page.goto('/my?pane=sync');
+  await expect(page.getByRole('button', { name: 'Connect Dropbox', exact: true })).toBeVisible();
+  await expect(page.getByText('Dropbox sync is available soon.', { exact: false })).toHaveCount(0);
   await page.goto('/auth/dropbox/callback?code=synthetic-code&state=synthetic-state');
-  await expect(page.getByText('Dropbox sync is unavailable in this release.')).toBeVisible();
+  await expect(
+    page.getByText('The Dropbox authorization response is incomplete.', { exact: true }),
+  ).toBeVisible();
   await expect(page).toHaveURL(/\/auth\/dropbox\/callback$/);
 });
 
 test('keeps browsing and editing patterns available', async ({ page }) => {
   await page.goto('/library');
-  await expect(page.getByRole('heading', { name: 'your library.' })).toBeVisible();
+  await openLibrarySearch(page);
   await page.goto('/editor?type=pattern');
   await expect(page.getByRole('textbox', { name: 'Title', exact: true })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Save', exact: true }).first()).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Save pattern', exact: true })).toBeVisible();
 });
 
 test('keeps the CBT collection and its practices available without AI', async ({ page }) => {
@@ -79,7 +119,7 @@ test('keeps the CBT collection and its practices available without AI', async ({
   await page.goto('/collection/cbt');
   await expect(
     page.locator('section[aria-labelledby="collection-items-heading"] .feed-copy h3'),
-  ).toHaveCount(11);
+  ).toHaveCount(12);
 });
 
 test('offers public standalone practice without sending creativity patterns to mira', async ({

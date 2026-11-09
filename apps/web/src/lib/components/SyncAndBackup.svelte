@@ -8,7 +8,7 @@
   import WorkspaceSyncReview from './WorkspaceSyncReview.svelte';
   import WorkspaceSyncUpgrade from './WorkspaceSyncUpgrade.svelte';
 
-  // Opt in only from a private/test host until real-account upgrade/rollback validation.
+  // The host selects encrypted workspace sync by default; other archive modes remain explicit.
   let {
     compact = false,
     workspaceSync = false,

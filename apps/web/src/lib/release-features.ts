@@ -31,18 +31,18 @@ export function resolveReleaseFeatures(
     guidedExercises: enabled('guidedExercises'),
     standalonePatterns: environment[setting.standalonePatterns] === 'false' ? false : true,
     advancedModels: enabled('advancedModels'),
-    dropboxSync: enabled('dropboxSync'),
+    dropboxSync: environment[setting.dropboxSync] === 'false' ? false : true,
   };
 }
 
-/** Expanded workspace sync stays opt-in, including in full/desktop builds. */
+/** Full workspace sync is the default; deployments can explicitly retain the legacy adapter. */
 export function isWorkspaceDropboxSyncEnabled(
   desktop: boolean,
   environment: ReleaseEnvironment = import.meta.env,
 ): boolean {
   return (
     resolveReleaseFeatures(desktop, environment).dropboxSync &&
-    environment.VITE_WORKSPACE_DROPBOX_SYNC === 'true'
+    environment.VITE_WORKSPACE_DROPBOX_SYNC !== 'false'
   );
 }
 

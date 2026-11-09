@@ -25,19 +25,36 @@ let downloadStatus = { state: 'idle', completed: 0, total: DOWNLOADS.length };
 const UPDATE_CHECK = new URL(`${base}/__navigation_update_check__`, ORIGIN).href;
 let updateCheck: Promise<void> | undefined;
 let lastUrgentUpdate = 0;
+const finishInstalling = async () => {
+  const installing = worker.registration.installing;
+  if (!installing || installing.state !== 'installing') return;
+  await new Promise<void>((resolve) => {
+    const finish = () => {
+      clearTimeout(timeout);
+      installing.removeEventListener('statechange', changed);
+      resolve();
+    };
+    const changed = () => {
+      if (installing.state !== 'installing') finish();
+    };
+    const timeout = setTimeout(finish, 15_000);
+    installing.addEventListener('statechange', changed);
+    changed();
+  });
+};
 const checkForUpdate = (urgent = false): Promise<void> => {
   if (updateCheck) return urgent ? updateCheck.then(() => checkForUpdate(true)) : updateCheck;
   updateCheck = (async () => {
     try {
       if (urgent) {
-        if (
-          Date.now() - lastUrgentUpdate < 60_000 ||
-          worker.registration.waiting ||
-          worker.registration.installing
-        )
+        if (worker.registration.installing) {
+          await finishInstalling();
           return;
+        }
+        if (Date.now() - lastUrgentUpdate < 60_000 || worker.registration.waiting) return;
         lastUrgentUpdate = Date.now();
         await worker.registration.update();
+        await finishInstalling();
         return;
       }
       const cache = await caches.open(PRECACHE);
@@ -313,6 +330,10 @@ worker.addEventListener('install', (event) => {
     (async () => {
       await (await caches.open(PRECACHE)).addAll(INSTALL);
       await navigation.install();
+      // New visits should use the deployed worker without an update prompt.
+      // Activation preserves existing tabs' release bindings and cached resources;
+      // those tabs keep their current document until they choose to reload.
+      void worker.skipWaiting();
     })(),
   );
 });
@@ -387,7 +408,11 @@ worker.addEventListener('message', (event) => {
             ? event.data.version
             : await navigation.clientVersion(id);
         if (requested !== version) {
-          event.source?.postMessage({ type: 'UPDATE_REQUIRED', version });
+          event.source?.postMessage({
+            type: 'UPDATE_REQUIRED',
+            version,
+            reason: 'offline-download',
+          });
           return;
         }
         await downloadLibrary();
@@ -400,12 +425,6 @@ worker.addEventListener('message', (event) => {
       (async () => {
         const id = event.source && 'id' in event.source ? event.source.id : '';
         await clientBindings.get(id);
-        const requested =
-          typeof event.data.version === 'string'
-            ? event.data.version
-            : await navigation.clientVersion(id);
-        if (id && requested !== version)
-          event.source?.postMessage({ type: 'UPDATE_REQUIRED', version });
         await pruneRetiredCaches();
         if (!downloadController) {
           const complete = await (await caches.open(OFFLINE)).match(COMPLETE);
@@ -479,7 +498,7 @@ worker.addEventListener('fetch', (event) => {
         const response = await navigation.respond(request, release);
         if (response?.headers.has('x-patternverse-update-required') && event.clientId) {
           const client = await worker.clients.get(event.clientId);
-          client?.postMessage({ type: 'UPDATE_REQUIRED', version });
+          client?.postMessage({ type: 'UPDATE_REQUIRED', version, reason: 'navigation' });
         }
         if (response) return response;
         // Unknown/dynamic routes and explicit no-store requests retain their exact

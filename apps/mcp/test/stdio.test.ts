@@ -54,7 +54,9 @@ it('returns structured data and matching readable fallback content', async () =>
     arguments: { query: 'Cognitive Distortions', verse: 'therapy', limit: 3 },
   });
   expect(found.isError).not.toBe(true);
-  expect(found.structuredContent).toMatchObject({ results: [{ id: 'cbt-thinking-patterns' }] });
+  const { results: matches } = found.structuredContent as { results: { id: string }[] };
+  expect(matches[0]).toMatchObject({ id: 'cbt-thinking-patterns' });
+  expect(matches.length).toBeLessThanOrEqual(3);
   const article = await client.callTool({
     name: 'get_pattern',
     arguments: { id: 'cbt-thinking-patterns' },

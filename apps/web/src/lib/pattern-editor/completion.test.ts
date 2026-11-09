@@ -8,6 +8,25 @@ function suggest(source: string, checked?: CheckedSource) {
 const labels = (source: string, checked?: CheckedSource) =>
   suggest(source, checked).items.map((item) => item.label);
 describe('local Pattern completion', () => {
+  it('preserves type annotations when completing a bound action', () => {
+    const source = ':language 1\nanswer: Optional[text] = !as';
+    const options = suggest(source);
+    const choice = options.items.find((item) => item.label === '!ask')!;
+    expect(applyCompletion(source, options, choice).source).toBe(
+      ':language 1\nanswer: Optional[text] = !ask {\n  What comes to mind?\n}',
+    );
+    expect(labels(':language 1\n:input topic: text\nvalue: text = topic')).toContain('topic');
+    expect(labels(':language 1\nnotes: list[text] = []\nvalue = not')).toContain('notes');
+  });
+  it('offers optional question parameters and local branch templates', () => {
+    const source = 'notes = !ask [o';
+    expect(completions(source, source.length).items.map((item) => item.label)).toEqual([
+      'optional',
+    ]);
+    const branch = '?br';
+    expect(completions(branch, branch.length).items[0]?.insert).toContain(':when');
+    expect(completions(branch, branch.length).items[0]?.insert).not.toContain('-> label');
+  });
   it('offers grouped forms and field flags without leaking sibling field bindings', () => {
     expect(labels('reflection = !fo')).toEqual(['!form']);
     expect(labels('reflection = !form {\n:ti')).toEqual([':title']);
@@ -138,7 +157,7 @@ describe('local Pattern completion', () => {
       options,
       options.items.find((item) => item.label === '!ask')!,
     );
-    expect(next.source).toContain('  !ask response {\n    What comes to mind?\n  }\n-> end');
+    expect(next.source).toContain('  response = !ask {\n    What comes to mind?\n  }\n-> end');
     expect(next.source.slice(next.caret)).toMatch(/^What comes/);
   });
 });

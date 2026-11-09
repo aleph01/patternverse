@@ -1,6 +1,6 @@
 import { beforeAll, expect, it } from 'vitest';
 import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { createHttpEndpoint } from '../src/http.js';
 import { libraryFromSnapshot } from '../src/snapshot.js';
 import { INLINE_PRACTICE_ID, WIDGET_URI, WIDGET_MIME } from '../src/widget.js';
@@ -17,6 +17,18 @@ beforeAll(async () => {
     await readFile(new URL('../dist/widget-resource.json', import.meta.url), 'utf8'),
   );
   endpoint = createHttpEndpoint(libraryFromSnapshot(snapshot), widget);
+});
+
+it('builds standalone worksheet assets without the website article-example runtime or content', async () => {
+  const directory = new URL('../dist/assets/mcp/ui/assets/', import.meta.url);
+  const scripts = (await readdir(directory)).filter((name) => name.endsWith('.js'));
+  expect(scripts.length).toBeGreaterThan(0);
+  for (const name of scripts) {
+    const source = await readFile(new URL(name, directory), 'utf8');
+    expect(source).not.toContain('article-widget-source');
+    expect(source).not.toContain('widget-host/frame.htm');
+    expect(source).not.toContain('stats-base-rates.html');
+  }
 });
 
 it.each(['2026-07-28', '2025-11-25'])(

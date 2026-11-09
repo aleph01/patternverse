@@ -6,6 +6,7 @@
   "dependencies": {
     "@lucide/svelte": "1.21.0",
     "@modelcontextprotocol/ext-apps": "^2.0.3",
+    "@observablehq/plot": "0.6.17",
     "@patternverse/companion-core": "workspace:*",
     "@patternverse/compiler": "workspace:*",
     "@patternverse/guided-ai": "workspace:*",
@@ -13,6 +14,7 @@
     "@patternverse/schema": "workspace:*",
     "@patternverse/sync-domain": "workspace:*",
     "@patternverse/workspace": "workspace:*",
+    "@speed-highlight/core": "1.2.24",
     "@tauri-apps/api": "2.11.1",
     "@tiptap/core": "3.30.5",
     "@tiptap/extension-placeholder": "3.30.5",
@@ -20,6 +22,7 @@
     "@tiptap/markdown": "3.30.5",
     "@tiptap/pm": "3.30.5",
     "@tiptap/starter-kit": "3.30.5",
+    "@tonejs/midi": "2.0.28",
     "rehype-sanitize": "6.0.0",
     "rehype-stringify": "10.0.1",
     "remark-gfm": "4.0.1",
@@ -27,14 +30,16 @@
     "remark-rehype": "11.1.2",
     "tiptap-extension-global-drag-handle": "0.1.18",
     "unified": "11.0.5",
-    "unist-util-visit": "5.1.0"
+    "unist-util-visit": "5.1.0",
+    "vexflow": "4.2.5"
   },
   "scripts": {
     "dev": "vite dev",
     "studio": "vite --config illustration-studio.vite.config.ts",
     "show:demo": "vite --config show-demo.vite.config.ts",
-    "build": "vite build && node ../../scripts/check-public-build.mjs build",
-    "preview": "vite preview",
+    "build:dataviz-widgets": "node scripts/build-dataviz-widgets.mjs",
+    "build": "node ../../scripts/build-public-web.mjs",
+    "preview": "PATTERNVERSE_PUBLIC_BUILD=true vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run",
     "test:e2e": "playwright test"
@@ -45,6 +50,7 @@
     "@sveltejs/kit": "2.70.2",
     "@sveltejs/vite-plugin-svelte": "7.2.0",
     "@testing-library/svelte": "^5.4.2",
+    "@types/hast": "3.0.5",
     "@types/mdast": "4.0.4",
     "fake-indexeddb": "6.2.5",
     "fast-check": "4.9.0",

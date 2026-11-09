@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../node_modules/wrangler/config-schema.json",
+  "name": "patternverse-contribution-review-preview",
+  "main": "preview.ts",
+  "compatibility_date": "2026-08-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "SUBMISSIONS_ENABLED": "false",
+    "OWNER_EMAIL": "preview@example.com",
+    "ACCESS_TEAM_DOMAIN": "unused.invalid",
+    "ACCESS_AUD": "unused",
+    "ALLOWED_ORIGINS": "http://127.0.0.1:8793,http://localhost:8793,http://127.0.0.1:4199,http://patternverse.org",
+  },
+  "d1_databases": [
+    {
+      "binding": "INBOX",
+      "database_name": "patternverse-review-preview",
+      "database_id": "00000000-0000-0000-0000-000000000001",
+    },
+  ],
+  "rules": [{ "type": "Text", "globs": ["**/*.sql"], "fallthrough": true }],
+  "observability": { "enabled": false },
+}

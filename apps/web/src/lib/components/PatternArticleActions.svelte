@@ -1,8 +1,11 @@
 <script lang="ts">
   /* eslint-disable svelte/no-navigation-without-resolve -- Both links are resolved by the article page. */
+  import type { Snippet } from 'svelte';
   import { Play, MessageCircle, ArrowUpRight, ArrowRight } from '@lucide/svelte';
   import WorksheetButton from './WorksheetButton.svelte';
   import CollectionBrowser from './CollectionBrowser.svelte';
+  import PracticeMatrix from './PracticeMatrix.svelte';
+  import type { PracticeAction } from '$lib/practice-options';
   import type { EntityRef } from '@patternverse/schema';
   import type { CollectionOverview } from '$lib/collection-navigation';
   import type { WorksheetDefinition } from '$lib/worksheet/export';
@@ -16,6 +19,8 @@
     worksheetDefinition,
     article,
     collectionOverviews = [],
+    practices = [],
+    navigation,
   } = $props<{
     title: string;
     tryHref?: string;
@@ -25,68 +30,86 @@
     worksheetDefinition?: WorksheetDefinition;
     article?: EntityRef;
     collectionOverviews?: readonly CollectionOverview[];
+    practices?: readonly PracticeAction[];
+    navigation?: Snippet;
   }>();
   const workbook = worksheetEligibility(() => worksheetDefinition);
-  const hasShortcuts = $derived(Boolean(tryHref || miraHref || workbook.available));
+  const multiplePractices = $derived(practices.length > 1);
+  const hasShortcuts = $derived(
+    Boolean(multiplePractices || tryHref || miraHref || workbook.available),
+  );
 </script>
 
 {#snippet shortcuts()}
   <nav class="shortcuts" aria-label="Pattern shortcuts">
-    {#if tryHref}<a
+    {#if multiplePractices}<a
+        class="try-yourself"
+        href="#try-pattern-heading"
+        aria-label={`Choose from ${practices.length} practices`}
+        ><Play size={18} strokeWidth={1.7} /><span>Practices ({practices.length})</span></a
+      >
+    {:else if tryHref}<a
         class="try-yourself"
         href={tryHref}
         aria-label="Try this pattern yourself"
         title="Try yourself"><Play size={18} strokeWidth={1.7} /><span>Try yourself</span></a
       >{/if}
-    {#if miraHref}<a href={miraHref} aria-label="Explore this pattern with mira" title="With mira"
-        ><MessageCircle size={18} strokeWidth={1.7} /><span>With mira</span></a
+    {#if !multiplePractices && miraHref}<a
+        href={miraHref}
+        aria-label="Explore this pattern with mira"
+        title="With mira"><MessageCircle size={18} strokeWidth={1.7} /><span>With mira</span></a
       >{/if}
-    {#if worksheetDefinition && workbook.available}<WorksheetButton
+    {#if !multiplePractices && worksheetDefinition && workbook.available}<WorksheetButton
         definition={worksheetDefinition}
         compact
       />{/if}
   </nav>
 {/snippet}
 
-{#if compact && (hasShortcuts || collectionOverviews.length)}
+{#if compact && (hasShortcuts || collectionOverviews.length || navigation)}
   <CollectionBrowser
     overviews={collectionOverviews}
     {article}
     {title}
+    {navigation}
     actions={hasShortcuts ? shortcuts : undefined}
   />
 {:else if !compact}
   <section class="article-actions" aria-labelledby="try-pattern-heading">
     <h2 id="try-pattern-heading">try this pattern</h2>
-    <div class="choices">
-      {#if tryHref || description}
-        <div class="choice">
-          <div class="choice-heading">
-            <Play size={18} strokeWidth={1.7} />
-            <h3>By yourself</h3>
+    {#if multiplePractices}
+      <PracticeMatrix {practices} />
+    {:else}
+      <div class="choices">
+        {#if tryHref || description}
+          <div class="choice">
+            <div class="choice-heading">
+              <Play size={18} strokeWidth={1.7} />
+              <h3>By yourself</h3>
+            </div>
+            <p>{description}</p>
+            {#if tryHref}<a href={tryHref}>Try this pattern <ArrowRight size={16} /></a>{/if}
           </div>
-          <p>{description}</p>
-          {#if tryHref}<a href={tryHref}>Try this pattern <ArrowRight size={16} /></a>{/if}
-        </div>
-      {/if}
-      {#if miraHref}
-        <div class="choice">
-          <div class="choice-heading">
-            <MessageCircle size={18} strokeWidth={1.7} />
-            <h3>With mira</h3>
+        {/if}
+        {#if miraHref}
+          <div class="choice">
+            <div class="choice-heading">
+              <MessageCircle size={18} strokeWidth={1.7} />
+              <h3>With mira</h3>
+            </div>
+            <p>Explore what this pattern means for your situation in a reflective conversation.</p>
+            <a href={miraHref}>Open in mira <ArrowUpRight size={16} /></a>
           </div>
-          <p>Explore what this pattern means for your situation in a reflective conversation.</p>
-          <a href={miraHref}>Open in mira <ArrowUpRight size={16} /></a>
-        </div>
-      {/if}
-      {#if worksheetDefinition && workbook.available}
-        <div class="choice">
-          <div class="choice-heading"><h3>In your own editor</h3></div>
-          <p>Take a blank worksheet into Notion, a document, or wherever you prefer to write.</p>
-          <WorksheetButton definition={worksheetDefinition} />
-        </div>
-      {/if}
-    </div>
+        {/if}
+        {#if worksheetDefinition && workbook.available}
+          <div class="choice">
+            <div class="choice-heading"><h3>In your own editor</h3></div>
+            <p>Take a blank worksheet into Notion, a document, or wherever you prefer to write.</p>
+            <WorksheetButton definition={worksheetDefinition} />
+          </div>
+        {/if}
+      </div>
+    {/if}
   </section>
 {/if}
 
@@ -144,7 +167,7 @@
     outline-offset: 3px;
   }
   .article-actions {
-    max-width: 760px;
+    width: min(94%, 760px);
     margin: 2.5rem auto 3rem;
     padding-block: 1.6rem;
     border-block: 1px solid #dfe2dc;

@@ -38,6 +38,22 @@ async function legacy(method: string, params = {}) {
   return JSON.parse(body.startsWith('event:') ? body.split('data: ')[1]!.split('\n')[0]! : body);
 }
 
+it('publishes the complete declared catalogue with the validated belief practice', async () => {
+  const definition = library.getPractice('identify-limiting-beliefs');
+  expect(definition.source).toContain(':import beliefs from "commons:limiting-beliefs"');
+  const resource = definition.data?.['commons:limiting-beliefs'] as { records: { id: string }[] };
+  expect(resource.records).toHaveLength(185);
+  expect(new Set(resource.records.map((record) => record.id)).size).toBe(185);
+  const response = await legacy('tools/call', {
+    name: 'get_practice',
+    arguments: { id: 'identify-limiting-beliefs' },
+  });
+  expect(response.result.isError).not.toBe(true);
+  expect(response.result.structuredContent.data['commons:limiting-beliefs'].records).toHaveLength(
+    185,
+  );
+});
+
 it('serves the SDK HTTP client with the same tools, articles, and validated definitions', async () => {
   const client = new Client(
     { name: 'http-test', version: '1' },

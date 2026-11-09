@@ -22,6 +22,14 @@ export function compilePublicSnapshot(
       return publicEntry;
     });
   const ids = new Set(entities.map((entry) => entry.id));
+  const resourceIds = new Set(
+    entities.flatMap((entry) =>
+      (entry.libraries ?? []).map((library) => `${entry.sourceId}:${library.id}`),
+    ),
+  );
+  const libraries = Object.fromEntries(
+    Object.entries(original.libraries ?? {}).filter(([id]) => resourceIds.has(id)),
+  );
   const corpus: CompiledCorpus = {
     schemaVersion: 1,
     sources: [],
@@ -32,6 +40,7 @@ export function compilePublicSnapshot(
     ),
     unresolvedReferences: [],
     diagnostics: [],
+    ...(Object.keys(libraries).length ? { libraries } : {}),
   };
   const definitions: Record<string, DefinitionInspection> = {};
   const library = createPublicLibrary(corpus, dependencySources, (bundle) => {

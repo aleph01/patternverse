@@ -6,7 +6,13 @@ import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { initSync, editor } from '$lib/mira/engine/pattern_wasm.js';
 import PracticeBlockEditor from './PracticeBlockEditor.svelte';
 import type { Inspection } from './types';
-import { newBlock, newPaths, responseOptions, endInsertion, patchSource } from './blocks';
+import {
+  newBlock,
+  legacyPaths as newPaths,
+  responseOptions,
+  endInsertion,
+  patchSource,
+} from './blocks';
 
 beforeAll(() =>
   initSync({
@@ -76,8 +82,8 @@ describe('synchronized practice block editing', () => {
     await fireEvent.click(screen.getByRole('button', { name: 'Apply changes' }));
     await waitFor(() => expect(view.onchange).toHaveBeenCalledTimes(1));
     const candidate = view.onchange.mock.calls[0][0];
-    expect(candidate).toContain(':option explore "Explore another possibility"');
-    expect(candidate).toContain(':option option_2 "New option"');
+    expect(candidate).toContain('- explore: "Explore another possibility"');
+    expect(candidate).toContain('- option: "New option"');
     expect(inspect(candidate).structure!.bindings[0].name).toBe('choice');
   });
   it('validates timer changes before committing and can recover from a rejected duration', async () => {
@@ -85,8 +91,8 @@ describe('synchronized practice block editing', () => {
     const view = setup(source);
     await fireEvent.click(screen.getByRole('button', { name: /Take a quiet pause/ }));
     await fireEvent.input(screen.getByLabelText('Duration (minutes)'), { target: { value: '0' } });
-    // Submit programmatically so compiler validation also covers bypassed browser constraints.
-    await fireEvent.submit(screen.getByLabelText('Duration (minutes)').closest('form')!);
+    // Applying validates the entered value independently of browser constraints.
+    await fireEvent.click(screen.getByRole('button', { name: 'Apply changes' }));
     await waitFor(() => expect(screen.getByRole('alert').textContent).toContain('valid minutes'));
     expect(view.onchange).not.toHaveBeenCalled();
     await fireEvent.input(screen.getByLabelText('Duration (minutes)'), {

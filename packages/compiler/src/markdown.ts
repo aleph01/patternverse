@@ -13,6 +13,8 @@ import { parse as parseYaml } from 'yaml';
 
 import { diagnosticsFromZodError } from './diagnostics.js';
 import { legacyPracticeSource, parseLegacyPracticeYaml } from './legacy-practice.js';
+import { ARTICLE_WIDGET_LANGUAGE, parseArticleWidget } from './article-widget.js';
+import { ARTICLE_VIDEO_LANGUAGE, parseArticleVideo } from './article-video.js';
 import type {
   AuthoredWikiLink,
   CompilerDiagnostic,
@@ -34,6 +36,7 @@ const allowedFieldsByType = {
     'tags',
     'verses',
     'attribution',
+    'libraries',
     'copied_from',
   ]),
   concept: new Set([
@@ -46,6 +49,7 @@ const allowedFieldsByType = {
     'tags',
     'verses',
     'attribution',
+    'libraries',
     'copied_from',
   ]),
   practice: new Set([
@@ -58,6 +62,7 @@ const allowedFieldsByType = {
     'tags',
     'verses',
     'attribution',
+    'libraries',
     'copied_from',
     'implements',
     'duration_minutes',
@@ -72,6 +77,7 @@ const allowedFieldsByType = {
     'tags',
     'verses',
     'attribution',
+    'libraries',
     'copied_from',
     'items',
   ]),
@@ -84,6 +90,7 @@ const allowedFieldsByType = {
     'aliases',
     'tags',
     'attribution',
+    'libraries',
     'copied_from',
   ]),
 } satisfies Record<string, ReadonlySet<string>>;
@@ -168,6 +175,26 @@ const parseBody = (
   });
 
   visit(tree, 'code', (node: Code) => {
+    if (node.lang === ARTICLE_VIDEO_LANGUAGE && !parseArticleVideo(node.value)) {
+      diagnostics.push({
+        code: 'invalid-video-block',
+        severity: 'error',
+        file: sourcePath,
+        line: node.position?.start.line,
+        message:
+          'Article videos require a supported HTTPS YouTube URL, a title, and an optional nonnegative integer start_seconds.',
+      });
+    }
+    if (node.lang === ARTICLE_WIDGET_LANGUAGE && !parseArticleWidget(node.value)) {
+      diagnostics.push({
+        code: 'invalid-widget-block',
+        severity: 'error',
+        file: sourcePath,
+        line: node.position?.start.line,
+        message:
+          'Widget blocks require JSON with a local .html filename in src, a title, fallback text, and an optional height from 200 to 1200.',
+      });
+    }
     if (node.lang === 'patternverse-practice' || node.lang === 'patternverse-language')
       practiceBlocks.push(node);
   });

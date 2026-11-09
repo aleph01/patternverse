@@ -5,7 +5,7 @@
 :output options
 :output selected_frame
 
-!agent options {
+options = !agent {
     :returns choices
     :min 3
     :max 6
@@ -17,7 +17,7 @@
     Do not give a list of solutions or cosmetic paraphrases.
     Include a concise, distinct label for each option. Phrase interpretations as possibilities.
 }
-!choose selected_frame {
+selected_frame = !choose {
     :from options
 
     Which framing is most worth testing now? You can select a hypothesis without committing to it as truth.

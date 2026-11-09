@@ -8,7 +8,7 @@ import {
   editableStatement,
   endInsertion,
   newBlock,
-  newPaths,
+  legacyPaths as newPaths,
   patchSource,
   removePath,
   responseOptions,

@@ -9,6 +9,8 @@ pub struct Binding {
     pub slot: usize,
     pub value_type: Type,
     pub span: Span,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub choice_ids: Option<BTreeSet<String>>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -55,7 +57,13 @@ impl CompiledPattern {
     /// Returns diagnostics if the compiled value's source or pinned interfaces are invalid.
     pub fn inspect(&self) -> Result<Inspection, Vec<Diagnostic>> {
         let parsed = syntax::parse(&self.source)?;
-        let checked = check(parsed.clone(), self.dependencies.clone()).map_err(|e| vec![e])?;
+        let checked = check_with_widgets(
+            parsed.clone(),
+            self.dependencies.clone(),
+            &self.data_libraries(),
+            &self.widgets,
+        )
+        .map_err(|e| vec![e])?;
         let steps = outline(&checked.steps, &self.source);
         let source_statements = authoring::statements(&parsed.statements, &self.source);
         let paths = authoring::paths(&checked.steps, &steps, &source_statements, &self.source);
@@ -87,6 +95,7 @@ fn bindings(symbols: &Scope) -> Vec<Binding> {
             slot: symbol.id.0,
             value_type: symbol.value_type.clone(),
             span: symbol.span.clone(),
+            choice_ids: symbol.choices.clone(),
         })
         .collect()
 }
@@ -122,8 +131,9 @@ fn outline(steps: &[(CheckedStep, Span)], source: &str) -> Vec<Step> {
                     },
                     Some(binding),
                 ),
-                CheckedStep::Generate { binding, .. } => ("generate", Some(binding)),
+                CheckedStep::Generate { binding, widget, .. } => (if widget.is_some(){"widget"}else{"generate"}, Some(binding)),
                 CheckedStep::Derive { binding, .. } => ("derive", Some(binding)),
+                CheckedStep::Shuffle { binding, .. } => ("shuffle", Some(binding)),
                 CheckedStep::Use { binding, .. } => ("use", Some(binding)),
                 CheckedStep::Collect(body) => (
                     if matches!(body.mode, CheckedCollectionMode::Mapped { .. })
@@ -225,6 +235,9 @@ fn step_text(step: &CheckedStep, source: &str) -> String {
             )
         }
         CheckedStep::Derive { expression, .. } => return source[expression.span.clone()].into(),
+        CheckedStep::Shuffle { expression, .. } => {
+            return format!("shuffle({})", &source[expression.span.clone()])
+        }
         CheckedStep::Match { subject, .. } => return source[subject.span.clone()].into(),
         CheckedStep::Loop(body) => {
             return body.max.map_or_else(

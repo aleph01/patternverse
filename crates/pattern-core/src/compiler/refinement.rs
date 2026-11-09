@@ -77,6 +77,7 @@ pub(super) fn check(
         ));
     }
     let mut scope = outer.clone();
+    scope.expected_outputs.clear();
     declare(
         &mut scope,
         alias.clone(),
@@ -131,16 +132,13 @@ fn check_body(
         let span = statement.span();
         let step = match statement {
             Statement::Propose { expression, expression_offset, .. } if index + 1 == count && legacy_next.is_none() => {
-                let (expression, ty) = check_expression(&expression, expression_offset, scope)?;
+                let (expression, ty) = check_expression_expected(&expression, expression_offset, scope, Some(&Type::Text))?;
                 if ty != Type::Text { return Err(err("Proposed candidate must be text", span)); }
                 CheckedStep::Propose(expression)
             }
             Statement::Block(child) if !child.kind.starts_with('?') && !matches!(child.kind.as_str(), "collect" | "refine") => check_block(child, scope, dependencies)?,
             Statement::Derive { binding, expression, expression_offset, .. } => {
-                let key = name(&binding)?;
-                let (expression, ty) = check_expression(&expression, expression_offset, scope)?;
-                declare(scope, key.clone(), ty, binding.span)?;
-                CheckedStep::Derive { binding: key, expression }
+                shuffle::derivation(binding, &expression, expression_offset, scope)?
             }
             _ => return Err(err("Refinement bodies are straight-line and end with -> propose text; use a child Pattern for nested control flow", span)),
         };
@@ -177,6 +175,7 @@ pub(super) fn lower(
     symbols: &Scope,
     next_binding: &mut usize,
     next_node: &mut usize,
+    binding_types: &mut BTreeMap<usize, Type>,
 ) -> Instruction {
     let initial = expression::lower(body.initial, &|(name, field): (String, Option<Field>)| {
         (symbols[&name].id, field)
@@ -198,7 +197,7 @@ pub(super) fn lower(
             Node {
                 id,
                 span,
-                instruction: lower_step(step, &scope, next_binding, next_node),
+                instruction: lower_step(step, &scope, next_binding, next_node, binding_types),
             }
         })
         .collect();

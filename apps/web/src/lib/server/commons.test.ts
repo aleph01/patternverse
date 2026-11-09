@@ -137,7 +137,7 @@ describe('Commons build snapshots', () => {
     });
     const { loadCommons } = await import('./commons');
     await expect(loadCommons()).rejects.toThrow(
-      'Patternverse commons could not be loaded:\n\n' +
+      'Commons could not be loaded:\n\n' +
         'ERROR invalid-entity\npatterns/example.md:line 3\nField: title\n' +
         '  Invalid title\n  Suggestion: Supply a title.\n\n' +
         'WARNING unresolved-reference\n  Missing related pattern',
@@ -207,11 +207,21 @@ describe('Commons build snapshots', () => {
     expect(homeData.verses.map(({ id }) => id)).toEqual(
       corpus.entities.filter(({ type }) => type === 'verse').map(({ id }) => id),
     );
-    expect(libraryData.entities).toEqual(workspaceData.entities);
-    expect(libraryData.entities).toEqual(editorData.entities);
-    expect(libraryData.searchDocuments.map(({ id }) => id)).toEqual(
-      corpus.searchDocuments.map(({ id }) => id),
+    const summaries = libraryData.entities.map(({ collectionNames, verseNames, ...entity }) => {
+      expect(Array.isArray(collectionNames)).toBe(true);
+      expect(Array.isArray(verseNames)).toBe(true);
+      return entity;
+    });
+    expect(summaries).toEqual(workspaceData.entities);
+    expect(summaries).toEqual(editorData.entities);
+    const { librarySearchAsset } = await import('./library-search');
+    expect(JSON.parse(librarySearchAsset(corpus).body).map(({ id }: { id: string }) => id)).toEqual(
+      corpus.searchDocuments
+        .filter(({ type }) => type === 'pattern' || type === 'collection')
+        .map(({ id }) => id),
     );
+    expect(libraryData.searchAsset).toEqual(librarySearchAsset(corpus).asset);
+    expect(libraryData).not.toHaveProperty('searchDocuments');
     expect(JSON.stringify(corpus)).toBe(before);
     expect(await loadCommons()).toBe(corpus);
     expect(mocks.compile).toHaveBeenCalledTimes(1);

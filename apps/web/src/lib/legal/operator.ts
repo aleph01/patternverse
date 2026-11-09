@@ -3,7 +3,7 @@ export const operator = {
   name: 'Julian Eger-Benninger',
   street: 'Rintheimer Hauptstr. 62',
   city: '76131 Karlsruhe',
-  country: 'Deutschland',
+  country: 'Germany',
   email: 'contact@patternverse.org',
-  updated: '2026-10-02',
+  updated: '2026-10-23',
 } as const;

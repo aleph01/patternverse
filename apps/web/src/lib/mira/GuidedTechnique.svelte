@@ -7,6 +7,8 @@
   import PatternTimer from '$lib/components/PatternTimer.svelte';
   import PracticeTimerDock from '$lib/components/PracticeTimerDock.svelte';
   import PatternForm from '$lib/components/PatternForm.svelte';
+  import WidgetStep from '$lib/widgets/WidgetStep.svelte';
+  import type { WidgetInteraction } from '$lib/widgets/library';
   import PracticeResponse from '$lib/components/PracticeResponse.svelte';
   import ShowContent from '$lib/components/ShowContent.svelte';
   import { answerFor, promptFor, optionsFor } from '$lib/pattern-run/view';
@@ -202,8 +204,8 @@
     }
   }
   function fulfill(
-    kind: 'selected' | 'text' | 'selected_many' | 'ranked' | 'timer' | 'form',
-    value: string | string[] | PatternTimerResult | FormAnswers,
+    kind: 'selected' | 'text' | 'selected_many' | 'ranked' | 'timer' | 'form' | 'widget',
+    value: unknown,
   ) {
     if (!pending || (typeof value === 'string' && !value.trim())) return;
     void apply(
@@ -287,7 +289,13 @@
       {#if pending && active}
         <div class="mira-guided-step">
           <p>{promptFor(pending)}</p>
-          {#if pending.request.kind === 'interaction.form'}
+          {#if pending.request.kind === 'interaction.widget'}
+            {#key pending.effect_id}<WidgetStep
+                interaction={pending.request.payload as WidgetInteraction}
+                disabled={working || run.view.status === 'Paused'}
+                onconfirm={(value) => fulfill('widget', value)}
+              />{/key}
+          {:else if pending.request.kind === 'interaction.form'}
             {#key pending.effect_id}<PatternForm
                 effect={pending}
                 {timers}

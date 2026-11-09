@@ -14,11 +14,6 @@
       href={resolve('/library')}
       aria-current={page.url.pathname === '/library' ? 'page' : undefined}>library</a
     >
-    <a
-      class="mira-nav-link"
-      href={resolve('/apps')}
-      aria-current={page.url.pathname.startsWith('/apps') ? 'page' : undefined}>apps</a
-    >
     <a href={resolve('/my')} aria-current={page.url.pathname === '/my' ? 'page' : undefined}
       >workspace</a
     >

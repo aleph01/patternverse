@@ -1,5 +1,8 @@
 <script lang="ts">
+  import WidgetStep from '$lib/widgets/WidgetStep.svelte';
+  import type { WidgetInteraction } from '$lib/widgets/library';
   import { untrack } from 'svelte';
+  import type { Snippet } from 'svelte';
   import type { PatternEffect } from '$lib/pattern-runtime/types';
   import { optionsFor } from '$lib/pattern-run/view';
   import TextInput from '$lib/practice-inputs/TextInput.svelte';
@@ -17,8 +20,11 @@
     dockedTimerIds = [],
     onTimerChange,
     onSave,
+    submitLabel,
     onCancel,
     onDraftChange,
+    intent = 'edit',
+    assistance,
   }: {
     effect: PatternEffect;
     initialResult: unknown;
@@ -27,8 +33,11 @@
     dockedTimerIds?: readonly string[];
     onTimerChange: (id: string, state: TimerSessionState) => void;
     onSave: (result: unknown) => void;
+    submitLabel?: string;
     onCancel: () => void;
     onDraftChange: (result: unknown) => void;
+    intent?: 'edit' | 'respond';
+    assistance?: Snippet<[string, string]>;
   } = $props();
   const initial = untrack(() => initialResult) as { kind?: string; value?: unknown } | null;
   let text = $state(typeof initial?.value === 'string' ? initial.value : '');
@@ -53,6 +62,28 @@
     ]),
   );
   const instance = $props.id();
+  let form = $state<PatternForm>();
+  export function getDraft(): unknown {
+    return interaction.request.kind === 'interaction.form'
+      ? form?.getDraft()
+      : { kind: 'text', value: text };
+  }
+  export function setTextAnswer(id: string, value: string, expected = ''): boolean {
+    if (interaction.request.kind === 'interaction.form')
+      return form?.setTextAnswer(id, value, expected) ?? false;
+    if (
+      disabled ||
+      interaction.request.kind !== 'interaction.ask' ||
+      id !== 'response' ||
+      (expected === '' ? !!text.trim() : text !== expected)
+    )
+      return false;
+    text = value;
+    return true;
+  }
+  const confirmLabel = $derived(
+    submitLabel ?? (intent === 'respond' ? 'Continue' : 'Save changes'),
+  );
   function move(index: number, delta: -1 | 1) {
     order = moveSelection(order, index, delta);
   }
@@ -72,14 +103,25 @@
   });
 </script>
 
-{#if interaction.request.kind === 'interaction.form'}
+{#if interaction.request.kind === 'interaction.widget'}
+  <WidgetStep
+    interaction={interaction.request.payload as unknown as WidgetInteraction}
+    initialDraft={initial?.value ?? null}
+    {disabled}
+    {confirmLabel}
+    onchange={(value) => onDraftChange({ kind: 'widget', value })}
+    onconfirm={(value) => onSave({ kind: 'widget', value })}
+  />
+{:else if interaction.request.kind === 'interaction.form'}
   <PatternForm
+    bind:this={form}
+    {assistance}
     effect={interaction}
     initialAnswers={initialResult}
     {disabled}
     {timers}
     {dockedTimerIds}
-    confirmLabel="Save changes"
+    {confirmLabel}
     {onTimerChange}
     onConfirm={(_, value) => onSave({ kind: 'form', value })}
     onDraftChange={(value) => onDraftChange({ kind: 'form', value })}
@@ -98,9 +140,10 @@
       bind:value={text}
       {disabled}
     />
+    {#if assistance}{@render assistance('response', text)}{/if}
     <div class="pattern-run-actions">
       <button class="pattern-run-primary" type="submit" disabled={disabled || !text.trim()}
-        >Save changes</button
+        >{confirmLabel}</button
       >
     </div>
   </form>
@@ -118,7 +161,7 @@
       class="pattern-run-primary"
       type="button"
       disabled={disabled || rating === null || !Number.isFinite(rating)}
-      onclick={() => onSave({ kind: 'rating', value: rating })}>Save changes</button
+      onclick={() => onSave({ kind: 'rating', value: rating })}>{confirmLabel}</button
     >
   </div>
 {:else if interaction.request.kind === 'interaction.choose' || interaction.request.kind === 'interaction.select'}
@@ -165,7 +208,7 @@
             Number(interaction.request.payload.min ?? 0),
             Number(interaction.request.payload.max ?? choices.length),
           ))}
-      onclick={() => onSave(selection())}>Save changes</button
+      onclick={() => onSave(selection())}>{confirmLabel}</button
     >
   </div>
 {:else if interaction.request.kind === 'interaction.timer'}
@@ -178,10 +221,10 @@
     onconfirm={(value) => onSave({ kind: 'timer', value })}
   />
 {/if}
-<div class="edit-footer">
-  <button class="cancel" type="button" {disabled} onclick={onCancel}>Cancel</button>
-  <p>Your later answers will stay where they are.</p>
-</div>
+{#if intent === 'edit'}<div class="edit-footer">
+    <button class="cancel" type="button" {disabled} onclick={onCancel}>Cancel</button>
+    <p>Your later answers will stay where they are.</p>
+  </div>{/if}
 
 <style>
   .edit-footer {

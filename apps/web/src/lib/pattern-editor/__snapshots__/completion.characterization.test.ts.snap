@@ -53,12 +53,10 @@ exports[`completion compatibility contract > preserves boundCommands suggestions
 }",
     },
     {
-      "caret": 96,
+      "caret": 59,
       "source": "result = !form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     What comes to mind?
   }
 }",
@@ -136,6 +134,10 @@ exports[`completion compatibility contract > preserves boundCommands suggestions
       "source": "result = ~ Restate {{original}} without changing meaning.",
     },
     {
+      "caret": 17,
+      "source": "result = shuffle(items)",
+    },
+    {
       "caret": 14,
       "source": "result = trim(value)",
     },
@@ -175,6 +177,34 @@ exports[`completion compatibility contract > preserves boundCommands suggestions
       "caret": 14,
       "source": "result = fold(value, 0, helper)",
     },
+    {
+      "caret": 16,
+      "source": "result = reduce(value, helper)",
+    },
+    {
+      "caret": 13,
+      "source": "result = sum(value)",
+    },
+    {
+      "caret": 13,
+      "source": "result = min(value)",
+    },
+    {
+      "caret": 13,
+      "source": "result = max(value)",
+    },
+    {
+      "caret": 15,
+      "source": "result = first(value)",
+    },
+    {
+      "caret": 14,
+      "source": "result = last(value)",
+    },
+    {
+      "caret": 18,
+      "source": "result = distinct(value)",
+    },
   ],
   "set": {
     "from": 9,
@@ -190,9 +220,7 @@ exports[`completion compatibility contract > preserves boundCommands suggestions
         "detail": "Grouped questions · one record",
         "insert": "!form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     ¦What comes to mind?
   }
 }",
@@ -281,6 +309,11 @@ exports[`completion compatibility contract > preserves boundCommands suggestions
         "label": "~",
       },
       {
+        "detail": "Shuffle once per run; add a text seed for a pure call",
+        "insert": "shuffle(¦items)",
+        "label": "shuffle",
+      },
+      {
         "detail": "Pure function",
         "insert": "trim(¦value)",
         "label": "trim",
@@ -330,6 +363,41 @@ exports[`completion compatibility contract > preserves boundCommands suggestions
         "insert": "fold(¦value, 0, helper)",
         "label": "fold",
       },
+      {
+        "detail": "Pure function",
+        "insert": "reduce(¦value, helper)",
+        "label": "reduce",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "sum(¦value)",
+        "label": "sum",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "min(¦value)",
+        "label": "min",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "max(¦value)",
+        "label": "max",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "first(¦value)",
+        "label": "first",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "last(¦value)",
+        "label": "last",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "distinct(¦value)",
+        "label": "distinct",
+      },
     ],
     "to": 9,
   },
@@ -342,12 +410,16 @@ exports[`completion compatibility contract > preserves branchAttributes suggesti
     {
       "caret": 16,
       "source": "?branch {
-:when condition -> label",
+:when condition {
+  
+}",
     },
     {
-      "caret": 24,
+      "caret": 22,
       "source": "?branch {
-:else -> label",
+:else {
+  
+}",
     },
   ],
   "set": {
@@ -355,12 +427,16 @@ exports[`completion compatibility contract > preserves branchAttributes suggesti
     "items": [
       {
         "detail": "Attribute",
-        "insert": ":when ¦condition -> label",
+        "insert": ":when ¦condition {
+  
+}",
         "label": ":when",
       },
       {
         "detail": "Attribute",
-        "insert": ":else -> label",
+        "insert": ":else {
+  
+}",
         "label": ":else",
       },
     ],
@@ -373,8 +449,8 @@ exports[`completion compatibility contract > preserves caseInsensitive suggestio
 {
   "edits": [
     {
-      "caret": 18,
-      "source": "!ask response {
+      "caret": 20,
+      "source": "response = !ask {
   What comes to mind?
 }",
     },
@@ -384,7 +460,7 @@ exports[`completion compatibility contract > preserves caseInsensitive suggestio
     "items": [
       {
         "detail": "Ask for text",
-        "insert": "!ask response {
+        "insert": "response = !ask {
   ¦What comes to mind?
 }",
         "label": "!ask",
@@ -695,18 +771,16 @@ exports[`completion compatibility contract > preserves commands suggestions and 
 {
   "edits": [
     {
-      "caret": 18,
-      "source": "!ask response {
+      "caret": 20,
+      "source": "response = !ask {
   What comes to mind?
 }",
     },
     {
-      "caret": 98,
-      "source": "!form reflection {
+      "caret": 63,
+      "source": "reflection = !form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     What comes to mind?
   }
 }",
@@ -731,8 +805,8 @@ exports[`completion compatibility contract > preserves commands suggestions and 
 }",
     },
     {
-      "caret": 69,
-      "source": "!timer pause {
+      "caret": 71,
+      "source": "pause = !timer {
   :duration 60
   :adjustable false
   :blocking true
@@ -740,28 +814,28 @@ exports[`completion compatibility contract > preserves commands suggestions and 
 }",
     },
     {
-      "caret": 23,
-      "source": "!rate rating 0..10 {
+      "caret": 25,
+      "source": "rating = !rate 0..10 {
   How strong is it?
 }",
     },
     {
-      "caret": 19,
-      "source": "!choose choice {
+      "caret": 21,
+      "source": "choice = !choose {
   Choose what fits.
   - first: "First option"
   - second: "Second option"
 }",
     },
     {
-      "caret": 31,
-      "source": "!rank ordered [from=items] {
+      "caret": 33,
+      "source": "ordered = !rank [from=items] {
   Arrange these in your order.
 }",
     },
     {
-      "caret": 52,
-      "source": "!collect entries {
+      "caret": 54,
+      "source": "entries = !collect {
   :max 3
   response = !ask {
     What would you add?
@@ -771,7 +845,7 @@ exports[`completion compatibility contract > preserves commands suggestions and 
     },
     {
       "caret": 73,
-      "source": "!refine[rounds=4] review = wording {
+      "source": "review = !refine[rounds=4] wording {
   :as current
   edited = !ask {
     How would you change {{current}}?
@@ -780,21 +854,21 @@ exports[`completion compatibility contract > preserves commands suggestions and 
 }",
     },
     {
-      "caret": 38,
-      "source": "!agent suggestion {
+      "caret": 40,
+      "source": "suggestion = !agent {
   :returns text
   Prepare a short suggestion.
 }",
     },
     {
-      "caret": 19,
-      "source": "!turn response {
+      "caret": 21,
+      "source": "response = !turn {
   Reflect briefly.
 }",
     },
     {
-      "caret": 5,
-      "source": "!use helper as result {
+      "caret": 14,
+      "source": "result = !use helper {
   :with topic
 }",
     },
@@ -805,8 +879,13 @@ exports[`completion compatibility contract > preserves commands suggestions and 
     {
       "caret": 7,
       "source": "?match value {
-  :case variant -> label
-  :else -> end
+  :case variant {
+    !show {
+      Continue here.
+    }
+  }
+  :else {
+  }
 }",
     },
     {
@@ -816,6 +895,15 @@ exports[`completion compatibility contract > preserves commands suggestions and 
     What follows from {{state}}?
   }
   -> repeat next
+}",
+    },
+    {
+      "caret": 18,
+      "source": "?branch {
+  :when condition {
+  }
+  :else {
+  }
 }",
     },
     {
@@ -851,6 +939,10 @@ exports[`completion compatibility contract > preserves commands suggestions and 
 }",
     },
     {
+      "caret": 8,
+      "source": "shuffle(items)",
+    },
+    {
       "caret": 5,
       "source": "trim(value)",
     },
@@ -874,32 +966,22 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       "caret": 6,
       "source": "clamp(value, 0, 10)",
     },
-    {
-      "caret": 7,
-      "source": "concat(value, "text")",
-    },
-    {
-      "caret": 4,
-      "source": "map(value, helper)",
-    },
   ],
   "set": {
     "from": 0,
     "items": [
       {
         "detail": "Ask for text",
-        "insert": "!ask response {
+        "insert": "response = !ask {
   ¦What comes to mind?
 }",
         "label": "!ask",
       },
       {
         "detail": "Grouped questions · one record",
-        "insert": "!form reflection {
+        "insert": "reflection = !form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     ¦What comes to mind?
   }
 }",
@@ -929,7 +1011,7 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       },
       {
         "detail": "Countdown timer",
-        "insert": "!timer pause {
+        "insert": "pause = !timer {
   :duration 60
   :adjustable false
   :blocking true
@@ -939,14 +1021,14 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       },
       {
         "detail": "Ask for a rating",
-        "insert": "!rate rating 0..10 {
+        "insert": "rating = !rate 0..10 {
   ¦How strong is it?
 }",
         "label": "!rate",
       },
       {
         "detail": "Participant choice",
-        "insert": "!choose choice {
+        "insert": "choice = !choose {
   ¦Choose what fits.
   - first: "First option"
   - second: "Second option"
@@ -955,14 +1037,14 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       },
       {
         "detail": "Participant ranking",
-        "insert": "!rank ordered [from=items] {
+        "insert": "ordered = !rank [from=items] {
   ¦Arrange these in your order.
 }",
         "label": "!rank",
       },
       {
         "detail": "Collect explicit results",
-        "insert": "!collect entries {
+        "insert": "entries = !collect {
   :max 3
   response = !ask {
     ¦What would you add?
@@ -973,7 +1055,7 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       },
       {
         "detail": "Participant review of wording",
-        "insert": "!refine[rounds=4] review = wording {
+        "insert": "review = !refine[rounds=4] wording {
   :as current
   edited = !ask {
     ¦How would you change {{current}}?
@@ -984,7 +1066,7 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       },
       {
         "detail": "Generate a typed value",
-        "insert": "!agent suggestion {
+        "insert": "suggestion = !agent {
   :returns text
   ¦Prepare a short suggestion.
 }",
@@ -992,14 +1074,14 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       },
       {
         "detail": "Conversational reply",
-        "insert": "!turn response {
+        "insert": "response = !turn {
   ¦Reflect briefly.
 }",
         "label": "!turn",
       },
       {
         "detail": "Call a pinned pattern",
-        "insert": "!use ¦helper as result {
+        "insert": "result = !use ¦helper {
   :with topic
 }",
         "label": "!use",
@@ -1012,8 +1094,13 @@ exports[`completion compatibility contract > preserves commands suggestions and 
       {
         "detail": "Branch by value",
         "insert": "?match ¦value {
-  :case variant -> label
-  :else -> end
+  :case variant {
+    !show {
+      Continue here.
+    }
+  }
+  :else {
+  }
 }",
         "label": "?match",
       },
@@ -1026,6 +1113,16 @@ exports[`completion compatibility contract > preserves commands suggestions and 
   -> repeat next
 }",
         "label": "?loop",
+      },
+      {
+        "detail": "Ordered local rules",
+        "insert": "?branch {
+  :when ¦condition {
+  }
+  :else {
+  }
+}",
+        "label": "?branch",
       },
       {
         "detail": "Declare a semantic classifier",
@@ -1065,6 +1162,11 @@ exports[`completion compatibility contract > preserves commands suggestions and 
         "label": "events",
       },
       {
+        "detail": "Shuffle once per run; add a text seed for a pure call",
+        "insert": "shuffle(¦items)",
+        "label": "shuffle",
+      },
+      {
         "detail": "Pure function",
         "insert": "trim(¦value)",
         "label": "trim",
@@ -1093,16 +1195,6 @@ exports[`completion compatibility contract > preserves commands suggestions and 
         "detail": "Pure function",
         "insert": "clamp(¦value, 0, 10)",
         "label": "clamp",
-      },
-      {
-        "detail": "Pure function",
-        "insert": "concat(¦value, "text")",
-        "label": "concat",
-      },
-      {
-        "detail": "Pure function",
-        "insert": "map(¦value, helper)",
-        "label": "map",
       },
     ],
     "to": 0,
@@ -1517,18 +1609,16 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
 {
   "edits": [
     {
-      "caret": 39,
-      "source": "fn clean(s: text) -> !ask response {
+      "caret": 41,
+      "source": "fn clean(s: text) -> response = !ask {
   What comes to mind?
 }",
     },
     {
-      "caret": 119,
-      "source": "fn clean(s: text) -> !form reflection {
+      "caret": 84,
+      "source": "fn clean(s: text) -> reflection = !form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     What comes to mind?
   }
 }",
@@ -1553,8 +1643,8 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
 }",
     },
     {
-      "caret": 90,
-      "source": "fn clean(s: text) -> !timer pause {
+      "caret": 92,
+      "source": "fn clean(s: text) -> pause = !timer {
   :duration 60
   :adjustable false
   :blocking true
@@ -1562,28 +1652,28 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
 }",
     },
     {
-      "caret": 44,
-      "source": "fn clean(s: text) -> !rate rating 0..10 {
+      "caret": 46,
+      "source": "fn clean(s: text) -> rating = !rate 0..10 {
   How strong is it?
 }",
     },
     {
-      "caret": 40,
-      "source": "fn clean(s: text) -> !choose choice {
+      "caret": 42,
+      "source": "fn clean(s: text) -> choice = !choose {
   Choose what fits.
   - first: "First option"
   - second: "Second option"
 }",
     },
     {
-      "caret": 52,
-      "source": "fn clean(s: text) -> !rank ordered [from=items] {
+      "caret": 54,
+      "source": "fn clean(s: text) -> ordered = !rank [from=items] {
   Arrange these in your order.
 }",
     },
     {
-      "caret": 73,
-      "source": "fn clean(s: text) -> !collect entries {
+      "caret": 75,
+      "source": "fn clean(s: text) -> entries = !collect {
   :max 3
   response = !ask {
     What would you add?
@@ -1593,7 +1683,7 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
     },
     {
       "caret": 94,
-      "source": "fn clean(s: text) -> !refine[rounds=4] review = wording {
+      "source": "fn clean(s: text) -> review = !refine[rounds=4] wording {
   :as current
   edited = !ask {
     How would you change {{current}}?
@@ -1602,21 +1692,21 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
 }",
     },
     {
-      "caret": 59,
-      "source": "fn clean(s: text) -> !agent suggestion {
+      "caret": 61,
+      "source": "fn clean(s: text) -> suggestion = !agent {
   :returns text
   Prepare a short suggestion.
 }",
     },
     {
-      "caret": 40,
-      "source": "fn clean(s: text) -> !turn response {
+      "caret": 42,
+      "source": "fn clean(s: text) -> response = !turn {
   Reflect briefly.
 }",
     },
     {
-      "caret": 26,
-      "source": "fn clean(s: text) -> !use helper as result {
+      "caret": 35,
+      "source": "fn clean(s: text) -> result = !use helper {
   :with topic
 }",
     },
@@ -1627,8 +1717,13 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
     {
       "caret": 28,
       "source": "fn clean(s: text) -> ?match value {
-  :case variant -> label
-  :else -> end
+  :case variant {
+    !show {
+      Continue here.
+    }
+  }
+  :else {
+  }
 }",
     },
     {
@@ -1638,6 +1733,15 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
     What follows from {{state}}?
   }
   -> repeat next
+}",
+    },
+    {
+      "caret": 39,
+      "source": "fn clean(s: text) -> ?branch {
+  :when condition {
+  }
+  :else {
+  }
 }",
     },
     {
@@ -1673,6 +1777,10 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
 }",
     },
     {
+      "caret": 29,
+      "source": "fn clean(s: text) -> shuffle(items)",
+    },
+    {
       "caret": 26,
       "source": "fn clean(s: text) -> trim(value)",
     },
@@ -1696,32 +1804,22 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       "caret": 27,
       "source": "fn clean(s: text) -> clamp(value, 0, 10)",
     },
-    {
-      "caret": 28,
-      "source": "fn clean(s: text) -> concat(value, "text")",
-    },
-    {
-      "caret": 25,
-      "source": "fn clean(s: text) -> map(value, helper)",
-    },
   ],
   "set": {
     "from": 21,
     "items": [
       {
         "detail": "Ask for text",
-        "insert": "!ask response {
+        "insert": "response = !ask {
   ¦What comes to mind?
 }",
         "label": "!ask",
       },
       {
         "detail": "Grouped questions · one record",
-        "insert": "!form reflection {
+        "insert": "reflection = !form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     ¦What comes to mind?
   }
 }",
@@ -1751,7 +1849,7 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       },
       {
         "detail": "Countdown timer",
-        "insert": "!timer pause {
+        "insert": "pause = !timer {
   :duration 60
   :adjustable false
   :blocking true
@@ -1761,14 +1859,14 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       },
       {
         "detail": "Ask for a rating",
-        "insert": "!rate rating 0..10 {
+        "insert": "rating = !rate 0..10 {
   ¦How strong is it?
 }",
         "label": "!rate",
       },
       {
         "detail": "Participant choice",
-        "insert": "!choose choice {
+        "insert": "choice = !choose {
   ¦Choose what fits.
   - first: "First option"
   - second: "Second option"
@@ -1777,14 +1875,14 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       },
       {
         "detail": "Participant ranking",
-        "insert": "!rank ordered [from=items] {
+        "insert": "ordered = !rank [from=items] {
   ¦Arrange these in your order.
 }",
         "label": "!rank",
       },
       {
         "detail": "Collect explicit results",
-        "insert": "!collect entries {
+        "insert": "entries = !collect {
   :max 3
   response = !ask {
     ¦What would you add?
@@ -1795,7 +1893,7 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       },
       {
         "detail": "Participant review of wording",
-        "insert": "!refine[rounds=4] review = wording {
+        "insert": "review = !refine[rounds=4] wording {
   :as current
   edited = !ask {
     ¦How would you change {{current}}?
@@ -1806,7 +1904,7 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       },
       {
         "detail": "Generate a typed value",
-        "insert": "!agent suggestion {
+        "insert": "suggestion = !agent {
   :returns text
   ¦Prepare a short suggestion.
 }",
@@ -1814,14 +1912,14 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       },
       {
         "detail": "Conversational reply",
-        "insert": "!turn response {
+        "insert": "response = !turn {
   ¦Reflect briefly.
 }",
         "label": "!turn",
       },
       {
         "detail": "Call a pinned pattern",
-        "insert": "!use ¦helper as result {
+        "insert": "result = !use ¦helper {
   :with topic
 }",
         "label": "!use",
@@ -1834,8 +1932,13 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
       {
         "detail": "Branch by value",
         "insert": "?match ¦value {
-  :case variant -> label
-  :else -> end
+  :case variant {
+    !show {
+      Continue here.
+    }
+  }
+  :else {
+  }
 }",
         "label": "?match",
       },
@@ -1848,6 +1951,16 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
   -> repeat next
 }",
         "label": "?loop",
+      },
+      {
+        "detail": "Ordered local rules",
+        "insert": "?branch {
+  :when ¦condition {
+  }
+  :else {
+  }
+}",
+        "label": "?branch",
       },
       {
         "detail": "Declare a semantic classifier",
@@ -1887,6 +2000,11 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
         "label": "events",
       },
       {
+        "detail": "Shuffle once per run; add a text seed for a pure call",
+        "insert": "shuffle(¦items)",
+        "label": "shuffle",
+      },
+      {
         "detail": "Pure function",
         "insert": "trim(¦value)",
         "label": "trim",
@@ -1915,16 +2033,6 @@ exports[`completion compatibility contract > preserves functionReturn suggestion
         "detail": "Pure function",
         "insert": "clamp(¦value, 0, 10)",
         "label": "clamp",
-      },
-      {
-        "detail": "Pure function",
-        "insert": "concat(¦value, "text")",
-        "label": "concat",
-      },
-      {
-        "detail": "Pure function",
-        "insert": "map(¦value, helper)",
-        "label": "map",
       },
     ],
     "to": 21,
@@ -2005,9 +2113,9 @@ exports[`completion compatibility contract > preserves indentedCommand suggestio
 {
   "edits": [
     {
-      "caret": 34,
+      "caret": 36,
       "source": "# café 🙂
-	  !ask response {
+	  response = !ask {
 	    What comes to mind?
 	  }",
     },
@@ -2017,7 +2125,7 @@ exports[`completion compatibility contract > preserves indentedCommand suggestio
     "items": [
       {
         "detail": "Ask for text",
-        "insert": "!ask response {
+        "insert": "response = !ask {
   ¦What comes to mind?
 }",
         "label": "!ask",
@@ -2072,15 +2180,13 @@ value = !ask {
 }",
     },
     {
-      "caret": 146,
+      "caret": 109,
       "source": ":input secret text
 flow helper {
 :input topic text
 value = !form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     What comes to mind?
   }
 }",
@@ -2188,6 +2294,13 @@ flow helper {
 value = ~ Restate {{original}} without changing meaning.",
     },
     {
+      "caret": 67,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = shuffle(items)",
+    },
+    {
       "caret": 64,
       "source": ":input secret text
 flow helper {
@@ -2257,6 +2370,48 @@ flow helper {
 :input topic text
 value = fold(value, 0, helper)",
     },
+    {
+      "caret": 66,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = reduce(value, helper)",
+    },
+    {
+      "caret": 63,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = sum(value)",
+    },
+    {
+      "caret": 63,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = min(value)",
+    },
+    {
+      "caret": 63,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = max(value)",
+    },
+    {
+      "caret": 65,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = first(value)",
+    },
+    {
+      "caret": 64,
+      "source": ":input secret text
+flow helper {
+:input topic text
+value = last(value)",
+    },
   ],
   "set": {
     "from": 59,
@@ -2277,9 +2432,7 @@ value = fold(value, 0, helper)",
         "detail": "Grouped questions · one record",
         "insert": "!form {
   :title "Reflect"
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
     ¦What comes to mind?
   }
 }",
@@ -2368,6 +2521,11 @@ value = fold(value, 0, helper)",
         "label": "~",
       },
       {
+        "detail": "Shuffle once per run; add a text seed for a pure call",
+        "insert": "shuffle(¦items)",
+        "label": "shuffle",
+      },
+      {
         "detail": "Pure function",
         "insert": "trim(¦value)",
         "label": "trim",
@@ -2416,6 +2574,36 @@ value = fold(value, 0, helper)",
         "detail": "Pure function",
         "insert": "fold(¦value, 0, helper)",
         "label": "fold",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "reduce(¦value, helper)",
+        "label": "reduce",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "sum(¦value)",
+        "label": "sum",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "min(¦value)",
+        "label": "min",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "max(¦value)",
+        "label": "max",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "first(¦value)",
+        "label": "first",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "last(¦value)",
+        "label": "last",
       },
     ],
     "to": 59,
@@ -2505,12 +2693,16 @@ exports[`completion compatibility contract > preserves matchAttributes suggestio
     {
       "caret": 21,
       "source": "?match value {
-:case variant -> label",
+:case variant {
+  
+}",
     },
     {
-      "caret": 29,
+      "caret": 27,
       "source": "?match value {
-:else -> label",
+:else {
+  
+}",
     },
   ],
   "set": {
@@ -2518,12 +2710,16 @@ exports[`completion compatibility contract > preserves matchAttributes suggestio
     "items": [
       {
         "detail": "Attribute",
-        "insert": ":case ¦variant -> label",
+        "insert": ":case ¦variant {
+  
+}",
         "label": ":case",
       },
       {
         "detail": "Attribute",
-        "insert": ":else -> label",
+        "insert": ":else {
+  
+}",
         "label": ":else",
       },
     ],
@@ -2563,6 +2759,14 @@ exports[`completion compatibility contract > preserves ordinaryAlternatives sugg
       "caret": 15,
       "source": "value = filter(value, helper)",
     },
+    {
+      "caret": 14,
+      "source": "value = first(value)",
+    },
+    {
+      "caret": 13,
+      "source": "value = find(value, helper)",
+    },
   ],
   "set": {
     "from": 8,
@@ -2571,6 +2775,16 @@ exports[`completion compatibility contract > preserves ordinaryAlternatives sugg
         "detail": "Pure function",
         "insert": "filter(¦value, helper)",
         "label": "filter",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "first(¦value)",
+        "label": "first",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "find(¦value, helper)",
+        "label": "find",
       },
     ],
     "to": 10,
@@ -2597,6 +2811,14 @@ exports[`completion compatibility contract > preserves pipelineAlternatives sugg
       "source": "value = original |> filter(helper)",
     },
     {
+      "caret": 25,
+      "source": "value = original |> first",
+    },
+    {
+      "caret": 25,
+      "source": "value = original |> find(helper)",
+    },
+    {
       "caret": 29,
       "source": "value = original |> filter ~ Criteria",
     },
@@ -2608,6 +2830,16 @@ exports[`completion compatibility contract > preserves pipelineAlternatives sugg
         "detail": "Pure function",
         "insert": "filter(¦helper)",
         "label": "filter",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "first",
+        "label": "first",
+      },
+      {
+        "detail": "Pure function",
+        "insert": "find(¦helper)",
+        "label": "find",
       },
       {
         "detail": "AI suggestion · not participant choice",
@@ -2941,9 +3173,9 @@ exports[`completion compatibility contract > preserves refineTransitions suggest
 exports[`completion compatibility contract > preserves replacement ranges inside a token and exact pinned imports 1`] = `
 {
   "edit": {
-    "caret": 27,
+    "caret": 29,
     "source": "# 🙂
-  !ask response {
+  response = !ask {
     What comes to mind?
   }
 -> end",
@@ -2964,7 +3196,7 @@ exports[`completion compatibility contract > preserves replacement ranges inside
     "items": [
       {
         "detail": "Ask for text",
-        "insert": "!ask response {
+        "insert": "response = !ask {
   ¦What comes to mind?
 }",
         "label": "!ask",

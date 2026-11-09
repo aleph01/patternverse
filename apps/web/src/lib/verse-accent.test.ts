@@ -1,3 +1,4 @@
+import { readdirSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -16,17 +17,26 @@ describe('Verse accent assignment', () => {
     expect(verseAccentClass('constructor')).toMatch(/^verse-accent-[1-9]$/);
   });
 
-  it('gives all nine Commons Verses distinct, intentional palette slots', () => {
-    const accents = Object.keys(COMMONS_VERSE_ACCENTS).map(verseAccent);
-    expect(accents).toHaveLength(9);
-    expect(new Set(accents).size).toBe(9);
+  it('gives every Commons Verse its own intentional palette slot, including drafts', () => {
+    const verseIds = readdirSync(new URL('../../../../content/verses/', import.meta.url))
+      .filter((name) => name.endsWith('.md'))
+      .map((name) => name.slice(0, -3));
+    expect(Object.keys(COMMONS_VERSE_ACCENTS).sort()).toEqual(verseIds.sort());
+    const accents = verseIds.map(verseAccent);
+    expect(new Set(accents).size).toBe(verseIds.length);
     expect(verseAccent('therapy')).toBe(5);
     expect(verseAccent('creativity')).toBe(7);
     expect(verseAccent('learning')).toBe(3);
   });
 
   it('gives a collection the same accent as its Verse page, not its own ID', () => {
-    for (const verseId of ['therapy', 'software-engineering', 'creativity', 'ai-usage']) {
+    for (const verseId of [
+      'therapy',
+      'parenting',
+      'software-engineering',
+      'creativity',
+      'ai-usage',
+    ]) {
       const verse = { type: 'verse' as const, id: verseId, verseMemberships: [] };
       const collection = {
         type: 'collection' as const,

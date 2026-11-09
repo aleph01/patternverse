@@ -36,12 +36,7 @@
   }
 </script>
 
-<form
-  onsubmit={(event) => {
-    event.preventDefault();
-    void apply();
-  }}
->
+<div class="media-fields">
   <label>Video URL<input type="url" bind:value={draft.url} {disabled} /></label>
   <label>Title<input bind:value={draft.title} {disabled} /></label>
   <div class="times">
@@ -67,12 +62,12 @@
           draft = JSON.parse(initial);
         }}>Discard</button
       >
-      <button type="submit" {disabled}>Apply changes</button>
+      <button type="button" {disabled} onclick={apply}>Apply changes</button>
     </div>{/if}
-</form>
+</div>
 
 <style>
-  form {
+  .media-fields {
     padding: 2px 14px 14px;
     font-size: 13px;
   }

@@ -9,8 +9,13 @@ use std::{
 pub(super) struct Scope {
     values: BTreeMap<String, Symbol>,
     pub language: u32,
+    pub widgets: crate::widgets::Packages,
+    pub source: Arc<String>,
+    pub expected_outputs: BTreeMap<String, Type>,
+    pub present: BTreeSet<Vec<String>>,
     pub functions: Arc<expression::functional::Functions>,
     pub enums: Arc<BTreeMap<String, crate::value::EnumType>>,
+    pub references: Arc<BTreeMap<String, crate::data::ReferenceType>>,
     pub classifiers: Arc<BTreeMap<String, crate::semantic::Classifier>>,
 }
 impl Default for Scope {
@@ -19,8 +24,13 @@ impl Default for Scope {
         Self {
             values: BTreeMap::new(),
             language: 1,
+            widgets: BTreeMap::new(),
+            source: Arc::default(),
+            expected_outputs: BTreeMap::new(),
+            present: BTreeSet::new(),
             functions: Arc::default(),
             enums: Arc::default(),
+            references: Arc::default(),
             classifiers: Arc::default(),
         }
     }

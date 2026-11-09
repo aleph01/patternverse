@@ -5,19 +5,31 @@
   import SaveToLibrary from './SaveToLibrary.svelte';
   import PatternIcon from '$lib/illustrations/PatternIcon.svelte';
   import { patternIconForPattern } from '$lib/illustrations/pattern-mark-presets';
+  import PatternShareButton from '$lib/sharing/PatternShareButton.svelte';
+  import type { PatternShare } from '$lib/sharing/types';
 
   let {
     entity,
     verses,
     practiceHref,
+    compact = false,
+    typeLabel,
+    share,
   }: {
     entity: CompiledEntity;
     verses: readonly EntitySummary[];
     practiceHref?: string;
+    compact?: boolean;
+    typeLabel?: string;
+    share?: PatternShare | null;
   } = $props();
 </script>
 
-<header class="entity-hero">
+<header
+  class="entity-hero"
+  class:reader-header={compact}
+  id={compact ? 'article-overview' : undefined}
+>
   {#if practiceHref}
     <!-- eslint-disable svelte/no-navigation-without-resolve -- practiceHref is resolved by the page loader. -->
     <a class="entity-practice-shortcut" href={practiceHref}
@@ -27,16 +39,19 @@
   {/if}
   <div class="entity-header-top">
     <div class="entity-kicker">
-      <span>{entity.type}</span>
+      <span>{typeLabel ?? entity.type}</span>
       <span aria-hidden="true">·</span>
-      <span>Patternverse commons</span>
+      <span>Commons</span>
       {#if entity.status === 'draft'}
         <strong class="draft-label">Draft</strong>
       {/if}
     </div>
-    {#if entity.type === 'pattern' || entity.type === 'collection'}
-      <SaveToLibrary sourceId={entity.sourceId} entityId={entity.id} />
-    {/if}
+    <div class="header-actions">
+      {#if share}{#key `${entity.sourceId}:${entity.id}`}<PatternShareButton {share} />{/key}{/if}
+      {#if entity.type === 'pattern' || entity.type === 'collection'}
+        <SaveToLibrary sourceId={entity.sourceId} entityId={entity.id} />
+      {/if}
+    </div>
   </div>
   <div class="entity-title-row">
     <h1>{entity.title}</h1>
@@ -59,6 +74,46 @@
 </header>
 
 <style>
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .entity-hero.reader-header {
+    grid-area: header;
+    min-height: 0;
+    padding: 0 0 1.75rem;
+    scroll-margin-top: 1.5rem;
+  }
+  .reader-header .entity-header-top {
+    margin-bottom: 1.25rem;
+  }
+  .reader-header .entity-title-row {
+    gap: 1.25rem;
+  }
+  .reader-header h1 {
+    max-width: 24ch;
+    font-size: clamp(2.25rem, 4.2vw, 3.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.055em;
+    overflow-wrap: anywhere;
+  }
+  .reader-header .entity-summary {
+    max-width: 52ch;
+    margin-top: 1rem;
+    font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+    line-height: 1.45;
+  }
+  .reader-header .verse-links {
+    margin-top: 1.25rem;
+  }
+  .reader-header .entity-pattern-icon {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
   .entity-header-top {
     display: flex;
     align-items: center;

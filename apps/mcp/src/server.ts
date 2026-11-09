@@ -76,6 +76,7 @@ const practiceOutput = z.object({
   source: z.string(),
   revision: z.string(),
   snapshotId: z.string(),
+  data: z.record(z.string(), z.unknown()).optional(),
   inputs: z.record(z.string(), z.unknown()),
   outputs: z.record(z.string(), z.unknown()),
   dependencies: z.array(z.object({ name: z.string(), source: z.string() })),

@@ -101,6 +101,7 @@ impl WorkbookContext {
                     Binary::NotEqual => "is not",
                     Binary::And => "AND",
                     Binary::Or => "OR",
+                    Binary::Coalesce => "or, if absent,",
                 };
                 if matches!(op, Binary::And | Binary::Or) {
                     format!("({a}) {word} ({b})")

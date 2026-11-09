@@ -69,13 +69,14 @@ export function historyCanResume(
   return (
     run.status === 'in-progress' &&
     !!run.checkpoint &&
-    run.patternRef.sourceId === 'commons' &&
-    commons.some(
-      (e) =>
-        e.id === run.patternRef.entityId &&
-        e.type === run.patternType &&
-        e.sourceId === run.patternRef.sourceId,
-    )
+    (run.patternRef.sourceId === 'personal' ||
+      (run.patternRef.sourceId === 'commons' &&
+        commons.some(
+          (e) =>
+            e.id === run.patternRef.entityId &&
+            e.type === run.patternType &&
+            e.sourceId === run.patternRef.sourceId,
+        )))
   );
 }
 

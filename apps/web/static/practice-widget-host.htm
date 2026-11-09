@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; frame-src about:; base-uri 'none'; form-action 'none'"
+    />
+    <style>
+      html,
+      body,
+      iframe {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border: 0;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Trusted intermediary: this document never executes authored source. Its frame policy also
+      // constrains self-navigation by the opaque-origin child, independently of the child's CSP.
+      if (parent !== window) {
+        let frame = null,
+          initialized = false,
+          loaded = false;
+        addEventListener('message', (event) => {
+          if (
+            event.source === parent &&
+            event.data?.type === 'widget-mount' &&
+            !initialized &&
+            event.ports[0]
+          ) {
+            if (typeof event.data.source !== 'string' || event.data.source.length > 1048576) return;
+            initialized = true;
+            const port = event.ports[0],
+              api = event.data.api;
+            frame = document.createElement('iframe');
+            frame.sandbox = 'allow-scripts';
+            frame.title = event.data.title || 'Practice widget';
+            const policy =
+              "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'\">";
+            // The inherited policy cannot be relaxed by authored meta elements.
+            frame.srcdoc = policy + event.data.source;
+            frame.addEventListener('load', () => {
+              if (loaded) {
+                frame.remove();
+                parent.postMessage({ type: 'widget-host-error' }, location.origin);
+              }
+              loaded = true;
+            });
+            const ready = (e) => {
+              if (e.source !== frame.contentWindow || e.data?.type !== 'widget-frame-ready') return;
+              removeEventListener('message', ready);
+              frame.contentWindow.postMessage({ type: 'widget-init', api }, '*', [port]);
+            };
+            addEventListener('message', ready);
+            document.body.append(frame);
+          }
+        });
+        parent.postMessage({ type: 'widget-host-ready' }, location.origin);
+      }
+    </script>
+  </body>
+</html>

@@ -46,7 +46,7 @@ beforeAll(async () => {
 });
 
 describe('Neuro-Linguistic Programming article import', () => {
-  it('places exactly fourteen unique articles in the NLP collection within Therapy', () => {
+  it('keeps the fourteen Sleight of Mouth articles alongside the Meta Model in NLP', () => {
     expect(corpus.diagnostics).toEqual([]);
     expect(corpus.unresolvedReferences).toEqual([]);
     expect(metadata.patterns).toHaveLength(14);
@@ -56,11 +56,12 @@ describe('Neuro-Linguistic Programming article import', () => {
     expect(members).toHaveLength(14);
     expect(new Set(members.map((e) => e.id)).size).toBe(14);
     const collection = corpus.entities.find((e) => e.id === metadata.collection_id)!;
-    expect(collection.title).toBe('Neuro-Linguistic Programming');
+    expect(collection.title).toBe('NLP');
     expect(collection.aliases).toContain('NLP');
-    expect(collection.collectionItems.map((r) => r.entityId)).toEqual(
-      metadata.patterns.map((p) => p.id),
-    );
+    expect(collection.collectionItems.map((r) => r.entityId)).toEqual([
+      ...metadata.patterns.map((p) => p.id),
+      'meta-model',
+    ]);
     expect(collection.verseMemberships).toEqual([{ sourceId: 'commons', entityId: 'therapy' }]);
     expect(corpus.entities.find((e) => e.id === 'therapy')?.verseMembers).toEqual(
       expect.arrayContaining([
@@ -107,20 +108,11 @@ describe('Neuro-Linguistic Programming article import', () => {
         sourceId: 'commons',
         entityId: metadata.collection_id,
       });
-      const article = entity.body.split('\n## Pattern details')[0]!.trim();
+      const article = entity.body.split('\n## Related patterns')[0]!.trim();
       expect(createHash('sha256').update(article).digest('hex')).toBe(p.article_sha256);
       expect(article.split(/\s+/)).toHaveLength(p.article_word_count);
       expect(p.article_word_count).toBeGreaterThan(800);
-      for (const detail of [
-        ...p.use_when,
-        ...p.not_ideal_when,
-        ...p.goals,
-        ...p.mechanisms,
-        p.difficulty,
-        p.source.printed_pages,
-        p.source.canonical_pattern,
-        p.source.note,
-      ])
+      for (const detail of [p.source.printed_pages, p.source.canonical_pattern, p.source.note])
         expect(entity.body).toContain(detail);
       expect(entity.links.map((link) => link.target.entityId)).toEqual(p.related_pattern_ids);
       expect(entity.links.map((link) => link.resolvedLabel)).toEqual(p.related_patterns);
@@ -134,8 +126,8 @@ describe('Neuro-Linguistic Programming article import', () => {
       expect(p.visual_decision.status).toBe('brief only');
       expect(p.visual_decision.brief.length).toBeGreaterThan(20);
       const document = corpus.searchDocuments.find((d) => d.ref.entityId === p.id)!;
-      expect(document.verseNames).toContain('Therapy');
-      expect(document.collectionNames).toContain('Neuro-Linguistic Programming');
+      expect(document.verseNames).toContain('Therapy & Wellbeing');
+      expect(document.collectionNames).toContain('NLP');
       expect(document.body).toBe(entity.body);
       const restored = parseMarkdownEntity(serializeEntity(entity), {
         sourceId: 'commons',

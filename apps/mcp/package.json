@@ -5,6 +5,8 @@
   "type": "module",
   "description": "Read-only MCP access to published Patternverse Commons over stdio and HTTP",
   "scripts": {
+    "eval:beliefs": "node scripts/evaluate-beliefs.mjs",
+    "eval:self-acceptability": "node scripts/evaluate-self-acceptability.mjs",
     "build": "node scripts/build.mjs",
     "start": "node dist/index.js",
     "check": "tsc -p tsconfig.json --noEmit",

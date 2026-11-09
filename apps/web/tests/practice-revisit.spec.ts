@@ -3,10 +3,10 @@ import { expect, test } from '@playwright/test';
 test.beforeEach(async ({ page }) => {
   await page.goto('/pattern/define-the-decision-before-comparing-options/run');
   await page.getByLabel('How are you currently phrasing the decision?').fill('Should we rebuild?');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await page.getByLabel('What problem are you trying to solve?').fill('Slow discovery');
   await page.getByLabel('What would a good outcome give you?').fill('Faster useful feedback');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await page.getByLabel('Which constraints are genuinely fixed?').fill('An unfinished constraint');
 });
 

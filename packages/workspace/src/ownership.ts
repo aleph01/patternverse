@@ -37,6 +37,9 @@ export type WorkspaceUsefulness = Readonly<{
  * Device identity, provider connections, Mira history and secrets are excluded.
  */
 export type LocalWorkspaceData = Readonly<{
+  widgetLocks?: readonly import('./widgets.js').WidgetDependencyLock[];
+  widgetDrafts?: readonly import('./widgets.js').WidgetDraft[];
+  widgetReleases?: readonly import('./widgets.js').WidgetRelease[];
   workspace: Omit<PersonalWorkspaceMetadata, 'owner'>;
   entities: readonly RawEntity[];
   /** Legacy archive field name: contains saved library references, not a separate favorites list. */

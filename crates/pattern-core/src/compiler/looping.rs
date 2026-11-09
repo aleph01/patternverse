@@ -37,6 +37,7 @@ pub(super) fn check(
         .ok_or_else(|| err("Loop requires an initial value", b.span.clone()))?;
     let (initial, state_type) = check_expression(source, span.start, outer)?;
     let mut scope = outer.clone();
+    scope.expected_outputs.clear();
     declare(
         &mut scope,
         binding.clone(),
@@ -51,14 +52,11 @@ pub(super) fn check(
         let step = match statement {
             Statement::Block(child) if !child.kind.starts_with('?') && !matches!(child.kind.as_str(), "collect" | "use") => check_block(child, &mut scope, dependencies)?,
             Statement::Derive { binding, expression, expression_offset, .. } => {
-                let key = name(&binding)?;
-                let (expression, ty) = check_expression(&expression, expression_offset, &scope)?;
-                declare(&mut scope, key.clone(), ty, binding.span)?;
-                CheckedStep::Derive { binding: key, expression }
+                shuffle::derivation(binding, &expression, expression_offset, &mut scope)?
             }
             Statement::Repeat { expression, expression_offset, .. } if index + 1 == count => {
                 if !yields_to_user { return Err(err("Each repeated iteration must wait for a user interaction", span)); }
-                let (expression, ty) = check_expression(&expression, expression_offset, &scope)?;
+                let (expression, ty) = check_expression_expected(&expression, expression_offset, &scope, Some(&state_type))?;
                 if ty != state_type { return Err(err("Repeated state must have the initial value's type", span)); }
                 CheckedStep::Repeat(expression)
             }
@@ -104,6 +102,7 @@ pub(super) fn lower(
     symbols: &Scope,
     next_binding: &mut usize,
     next_node: &mut usize,
+    binding_types: &mut BTreeMap<usize, Type>,
 ) -> Instruction {
     let initial = expression::lower(body.initial, &|(name, field): (String, Option<Field>)| {
         (symbols[&name].id, field)
@@ -125,7 +124,7 @@ pub(super) fn lower(
             Node {
                 id,
                 span,
-                instruction: lower_step(step, &scope, next_binding, next_node),
+                instruction: lower_step(step, &scope, next_binding, next_node, binding_types),
             }
         })
         .collect();

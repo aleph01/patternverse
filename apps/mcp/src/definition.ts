@@ -1,8 +1,13 @@
 import { readFile } from 'node:fs/promises';
 import { z } from 'zod';
 
-export type SourceBundle = { root: string; patterns: Record<string, string> };
+export type SourceBundle = {
+  root: string;
+  patterns: Record<string, string>;
+  data?: Readonly<Record<string, unknown>>;
+};
 const inspectionSchema = z.object({
+  data: z.record(z.string(), z.unknown()).optional(),
   root: z.string(),
   snapshot_id: z.string(),
   revision: z.string(),
@@ -25,6 +30,10 @@ export async function loadDefinitionInspector(): Promise<InspectDefinition> {
   });
   return (bundle) =>
     inspectionSchema.parse(
-      JSON.parse(bridge.editor(JSON.stringify({ operation: 'inspect_bundle', bundle }))),
+      JSON.parse(
+        bridge.editor(
+          JSON.stringify({ operation: 'inspect_bundle', bundle, data: bundle.data ?? {} }),
+        ),
+      ),
     );
 }

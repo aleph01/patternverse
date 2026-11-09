@@ -57,7 +57,32 @@ export type LibrarySearchResult = LibraryEntry & {
 
 export type LibrarySearch = {
   readonly search: (query: string, filters?: LibraryFilters) => readonly LibrarySearchResult[];
+  readonly searchWithFallback: (
+    query: string,
+    filters?: LibraryFilters,
+    accept?: (entry: LibraryEntry) => boolean,
+  ) => LibrarySearchGroups;
 };
+
+export type LibrarySearchGroups = {
+  readonly strict: readonly LibrarySearchResult[];
+  readonly broader: readonly LibrarySearchResult[];
+};
+
+// Only fallback queries drop English conversational filler. Strict search and
+// indexed content keep every term, including negations such as "not"/"without".
+const fallbackFiller = new Set(
+  (
+    'a an the i me my we us our you your he him his she her it its they them their ' +
+    'am is are was were be been being do does did have has had can could would should ' +
+    'will shall may might must how what when where who which why that this these those ' +
+    'and or but if then than as at by for from in into of on to with about please'
+  ).split(' '),
+);
+const tokenizeQuery: (query: string) => string[] = MiniSearch.getDefault('tokenize');
+const queryTerms = (query: string): string[] => [
+  ...new Set(tokenizeQuery(query).map((term) => term.toLowerCase())),
+];
 
 /** Stable identity for browsing; keep this encoding compatible with saved refs and ratings. */
 export const libraryEntryKey = (entry: Pick<LibraryEntry, 'sourceId' | 'id'>): string =>
@@ -193,7 +218,7 @@ export const mergeLibraryEntries = (
     createPersonalSource(personal, commons),
     {
       id: 'commons',
-      name: 'Patternverse commons',
+      name: 'Commons',
       readonly: true,
       entries: commons,
       searchDocuments: [],
@@ -209,42 +234,79 @@ const matchesFilters = (
 
 export const createLibrarySearch = (library: Library): LibrarySearch => {
   const entries = new Map(library.entries.map((entry) => [libraryEntryKey(entry), entry] as const));
-  const index = new MiniSearch<LibrarySearchDocument>({
-    fields: ['title', 'aliases', 'tags', 'summary', 'body', 'verseNames', 'collectionNames'],
-    storeFields: ['sourceId', 'type'],
-    searchOptions: {
-      boost: { title: 5, aliases: 4, tags: 3, summary: 2, verseNames: 1.5, collectionNames: 1.5 },
-      prefix: true,
-      fuzzy: 0.2,
-    },
-  });
-  index.addAll(library.searchDocuments);
+  let index: MiniSearch<LibrarySearchDocument> | undefined;
+  const getIndex = () => {
+    if (index) return index;
+    index = new MiniSearch<LibrarySearchDocument>({
+      fields: ['title', 'aliases', 'tags', 'summary', 'body', 'verseNames', 'collectionNames'],
+      storeFields: ['sourceId', 'type'],
+      searchOptions: {
+        boost: { title: 5, aliases: 4, tags: 3, summary: 2, verseNames: 1.5, collectionNames: 1.5 },
+        prefix: true,
+        fuzzy: 0.2,
+      },
+    });
+    index.addAll(library.searchDocuments);
+    return index;
+  };
+
+  const search: LibrarySearch['search'] = (query, filters = {}) => {
+    const normalizedQuery = query.trim();
+    if (!normalizedQuery) {
+      return library.entries
+        .filter((entry) => matchesFilters(entry, filters))
+        .map((entry) => ({ ...entry, score: 0, terms: [] }));
+    }
+
+    return getIndex()
+      .search(normalizedQuery, {
+        combineWith: 'AND',
+        filter: (result) =>
+          matchesFilters(
+            {
+              sourceId: String(result.sourceId),
+              type: result.type as EntityType,
+            },
+            filters,
+          ),
+      })
+      .flatMap((result) => {
+        const entry = entries.get(String(result.id));
+        return entry ? [{ ...entry, score: result.score, terms: result.terms ?? [] }] : [];
+      });
+  };
 
   return {
-    search: (query, filters = {}) => {
-      const normalizedQuery = query.trim();
-      if (!normalizedQuery) {
-        return library.entries
-          .filter((entry) => matchesFilters(entry, filters))
-          .map((entry) => ({ ...entry, score: 0, terms: [] }));
-      }
+    search,
+    searchWithFallback: (query, filters = {}, accept = () => true) => {
+      const strict = search(query, filters).filter(accept);
+      const groups = { strict, broader: [] as LibrarySearchResult[] };
+      // Do not build the index for browsing or change single-term searches.
+      const tokens = queryTerms(query);
+      if (strict.length >= 3 || tokens.length < 2) return groups;
+      const meaningful = tokens.filter((term) => !fallbackFiller.has(term));
+      if (meaningful.length < 2) return groups;
 
-      return index
-        .search(normalizedQuery, {
-          combineWith: 'AND',
-          filter: (result) =>
-            matchesFilters(
-              {
-                sourceId: String(result.sourceId),
-                type: result.type as EntityType,
-              },
-              filters,
-            ),
-        })
+      const minimumCoverage = Math.max(2, Math.ceil(meaningful.length / 2));
+      const seen = new Set(strict.map(libraryEntryKey));
+      groups.broader = getIndex()
+        .search(meaningful.join(' '), { combineWith: 'OR' })
+        // Count original query terms, not the number of fuzzy/prefix expansions.
+        .filter((result) => new Set(result.queryTerms).size >= minimumCoverage)
+        .sort(
+          (left, right) =>
+            new Set(right.queryTerms).size - new Set(left.queryTerms).size ||
+            right.score - left.score,
+        )
         .flatMap((result) => {
           const entry = entries.get(String(result.id));
-          return entry ? [{ ...entry, score: result.score, terms: result.terms ?? [] }] : [];
+          if (!entry || !matchesFilters(entry, filters) || !accept(entry)) return [];
+          const key = libraryEntryKey(entry);
+          if (seen.has(key)) return [];
+          seen.add(key);
+          return [{ ...entry, score: result.score, terms: result.terms ?? [] }];
         });
+      return groups;
     },
   };
 };

@@ -114,7 +114,7 @@ describe('Paginated entity browsing', () => {
     expect(screen.queryByRole('region', { name: 'Library results' })).toBeNull();
     await fireEvent.click(
       within(screen.getByRole('navigation', { name: 'Library scope' })).getByRole('button', {
-        name: 'Explore',
+        name: 'Commons',
       }),
     );
     expect(screen.getByRole('status').textContent).toContain('page 1 of 3');

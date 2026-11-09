@@ -36,12 +36,7 @@
   }
 </script>
 
-<form
-  onsubmit={(event) => {
-    event.preventDefault();
-    void apply();
-  }}
->
+<div class="media-fields">
   <label>Image URL<input type="url" bind:value={draft.url} {disabled} /></label>
   <label>Alternative text<textarea rows="2" bind:value={draft.alt} {disabled}></textarea></label>
   <p class="hint">Describe the image’s meaning, or leave this empty for a decorative image.</p>
@@ -57,12 +52,12 @@
           draft = JSON.parse(initial);
         }}>Discard</button
       >
-      <button type="submit" {disabled}>Apply changes</button>
+      <button type="button" {disabled} onclick={apply}>Apply changes</button>
     </div>{/if}
-</form>
+</div>
 
 <style>
-  form {
+  .media-fields {
     padding: 2px 14px 14px;
     font-size: 13px;
   }

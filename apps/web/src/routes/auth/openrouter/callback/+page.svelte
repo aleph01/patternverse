@@ -7,8 +7,10 @@
   import { createPrivateMiraStore } from '$lib/mira/private-store';
 
   let message = $state('Connecting OpenRouter…');
+  let bearings = $state(false);
   onMount(() => {
     const url = new URL(window.location.href);
+    bearings = url.searchParams.get('app') === 'bearings';
     // Remove single-use authorization data from history before any network request.
     window.history.replaceState(window.history.state, '', window.location.pathname);
     void finishOpenRouterConnection({
@@ -41,6 +43,8 @@
     <p>patternverse / AI connection</p>
     <h1 id="openrouter-heading">Connect with OpenRouter</h1>
     <p role="status">{message}</p>
-    <a href={`${resolve('/mira')}?panel=settings`}>Return to Mira settings</a>
+    {#if bearings}<a href={resolve('/apps/bearings')}>Return to Bearings</a>{:else}<a
+        href={`${resolve('/mira')}?panel=settings`}>Return to Mira settings</a
+      >{/if}
   </section>
 </main>

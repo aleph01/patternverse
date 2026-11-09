@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { libraryVerseControl, searchLibrary, selectLibraryScope } from './helpers/library';
 
 test('chooses an entity type before showing its matching editor', async ({ page }) => {
   await page.goto('/editor');
@@ -192,20 +193,20 @@ test('searches personal and Commons knowledge together with source and type filt
   await expect(page.getByText('Saved “My Momentum Reset” as draft.')).toBeVisible();
 
   await page.goto('/library');
-  await page.getByRole('searchbox').fill('my momentum reset');
+  await searchLibrary(page, 'my momentum reset');
   await expect(page.locator('#library')).toContainText('My Momentum Reset');
   await expect(page.locator('#library')).toContainText('1 match');
-  await page.getByRole('button', { name: /^My library/ }).click();
+  await selectLibraryScope(page, 'saved');
   await expect(page.locator('#library')).toContainText('My Momentum Reset');
-  await page.getByRole('searchbox').fill('creative reframing');
+  await searchLibrary(page, 'creative reframing');
   await expect(page.locator('#library')).toContainText('No matching patterns');
-  await page.getByRole('button', { name: 'Explore', exact: true }).click();
+  await selectLibraryScope(page, 'explore');
   await expect(page.locator('#library')).toContainText('Creative Reframing');
   await expect(page.getByRole('button', { name: 'Concepts', exact: true })).toHaveCount(0);
 
   await page.goto('/verse/creativity');
-  await expect(page.locator('.verse-groups')).toContainText('My Momentum Reset');
-  await expect(page.locator('.verse-groups')).toContainText('includes mine');
+  await expect(page.locator('#library')).toContainText('My Momentum Reset');
+  await expect(libraryVerseControl(page, 'Creativity')).toHaveAttribute('aria-pressed', 'true');
 });
 
 test('edits collection references without manual ordering and blocks invalid saves', async ({

@@ -110,18 +110,7 @@ pub(super) fn answer(
         | (SelectionMode::Rank, Fulfillment::Ranked(keys)) => keys.as_slice(),
         _ => return Err(Error::WrongResult),
     };
-    if !bounds.contains(&keys.len()) || keys.iter().collect::<BTreeSet<_>>().len() != keys.len() {
-        return Err(Error::ContractViolation);
-    }
-    let indices = keys
-        .iter()
-        .map(|key| {
-            offered
-                .iter()
-                .position(|choice| &choice.value == key)
-                .ok_or(Error::UnknownChoice)
-        })
-        .collect::<Result<Vec<_>, _>>()?;
+    let indices=choice_indices(offered,keys,bounds)?;
     let (resolved, values, element_type) = items(options, selection, state)?;
     if resolved != offered {
         return Err(Error::InvalidSnapshot);
@@ -147,4 +136,21 @@ pub(super) fn answer(
             items,
         })
     }
+}
+
+/// Shared frozen-catalogue validation for ordinary selections and custom widget adapters.
+pub(crate) fn choice_indices(offered:&[Choice],keys:&[String],bounds:std::ops::RangeInclusive<usize>)->Result<Vec<usize>,Error>{
+    if !bounds.contains(&keys.len()) || keys.iter().collect::<BTreeSet<_>>().len() != keys.len() {
+        return Err(Error::ContractViolation);
+    }
+    keys
+        .iter()
+        .map(|key| {
+            offered
+                .iter()
+                .position(|choice| &choice.value == key)
+                .ok_or(Error::UnknownChoice)
+        })
+        .collect::<Result<Vec<_>, _>>()
+
 }

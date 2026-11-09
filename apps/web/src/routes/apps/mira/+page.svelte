@@ -167,7 +167,7 @@
 </script>
 
 <svelte:head
-  ><title>mira — Apps — Patternverse</title><meta
+  ><title>mira — Patternverse</title><meta
     name="description"
     content="Start a conversation, return to your sessions, or learn how to use mira."
   /></svelte:head
@@ -175,7 +175,7 @@
 <!-- eslint-disable svelte/no-navigation-without-resolve -- Base routes are resolved before encoded query parameters are appended. -->
 <main class="apps-page mira-landing">
   <div class="landing-top">
-    <a href={resolve('/apps')}><ArrowLeft size={18} /> Apps</a><a
+    <a href={resolve('/#home-apps')}><ArrowLeft size={18} /> Meet mira</a><a
       href={`${resolve('/mira')}?panel=settings`}
       aria-label="mira settings"><Settings2 size={22} /></a
     >

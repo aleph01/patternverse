@@ -1,4 +1,10 @@
 import { Dexie, type EntityTable } from 'dexie';
+import type {
+  WidgetDraft,
+  WidgetRelease,
+  WidgetInstallation,
+  WidgetDependencyLock,
+} from '../widgets.js';
 import type { SavedPracticeRun } from '../practice-history.js';
 import type { Situation } from '../situations.js';
 import { DEFAULT_WORKSPACE_DATABASE, type WorkspaceOptions } from '../api.js';
@@ -11,6 +17,10 @@ import {
 } from './records.js';
 
 export type WorkspaceDatabase = Dexie & {
+  widgetLocks: EntityTable<WidgetDependencyLock, 'id'>;
+  widgetDrafts: EntityTable<WidgetDraft, 'id'>;
+  widgetReleases: EntityTable<WidgetRelease, 'id'>;
+  widgetInstallations: EntityTable<WidgetInstallation, 'identity'>;
   entities: EntityTable<StoredPersonalEntity, 'id'>;
   usefulness: EntityTable<UsefulnessRecord, 'refKey'>;
   workspaces: EntityTable<StoredWorkspace, 'id'>;
@@ -53,5 +63,13 @@ export const createDatabase = (options: WorkspaceOptions): WorkspaceDatabase => 
   database.version(3).stores({ practiceRuns: 'id, workspaceId, updatedAt, status' });
   database.version(4).stores({ recoveryBackups: 'key' });
   database.version(5).stores({ situations: 'id, workspaceId, position' });
+  database
+    .version(6)
+    .stores({
+      widgetDrafts: 'id,workspaceId,updatedAt',
+      widgetReleases: 'id,workspaceId,reference,widgetId',
+      widgetInstallations: 'identity,workspaceId',
+    });
+  database.version(7).stores({ widgetLocks: 'id,workspaceId' });
   return database;
 };

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import WidgetStep from '$lib/widgets/WidgetStep.svelte';
+  import type { WidgetInteraction } from '$lib/widgets/library';
   import ShowContent from '$lib/components/ShowContent.svelte';
   import { onMount } from 'svelte';
   import PatternForm from '$lib/components/PatternForm.svelte';
@@ -75,7 +77,7 @@
     };
   });
 
-  async function confirm(kind: 'form', value: FormAnswers) {
+  async function confirm(kind: 'form' | 'widget', value: unknown) {
     if (!run || !pending || working || !active) return;
     const current = run;
     const effect = pending;
@@ -132,7 +134,13 @@
       <section class="step current" aria-label="Current practice step" aria-busy={working}>
         <h2>{promptFor(pending)}</h2>
         {#key pending.effect_id}
-          {#if pending.request.kind === 'interaction.form'}
+          {#if pending.request.kind === 'interaction.widget'}
+            <WidgetStep
+              interaction={pending.request.payload as unknown as WidgetInteraction}
+              disabled={working}
+              onconfirm={(value) => confirm('widget', value)}
+            />
+          {:else if pending.request.kind === 'interaction.form'}
             <PatternForm
               effect={pending}
               {timers}

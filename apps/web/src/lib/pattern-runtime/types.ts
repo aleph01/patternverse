@@ -14,6 +14,7 @@ export type PatternView = Readonly<{
   revision: number;
   status: 'Waiting' | 'Paused' | 'Completed' | 'Cancelled' | 'Failed';
   pending: PatternEffect | null;
+  handles_messages?: boolean;
   items: readonly Readonly<{ effect: PatternEffect; result: unknown | null }>[];
   outputs: Readonly<Record<string, unknown>>;
 }>;

@@ -16,9 +16,11 @@ pub struct Timer {
     pub sticky: bool,
 }
 
+/// Preserve the historical timer placement when older sources omit the option.
 fn sticky_default() -> bool {
     true
 }
+/// Omit the historical placement default from serialized timer contracts.
 fn is_sticky(value: &bool) -> bool {
     *value
 }

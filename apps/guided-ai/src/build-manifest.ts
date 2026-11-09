@@ -16,8 +16,17 @@ for (const entry of corpus.entities) {
     continue;
   if (entry.languagePracticeSource) {
     const sources = { 'editor.preview': entry.languagePracticeSource };
-    inspect({ root: 'editor.preview', patterns: sources });
-    practices[entry.id] = { transport: 'source', root: 'editor.preview', sources };
+    const definition = inspect({
+      root: 'editor.preview',
+      patterns: sources,
+      data: corpus.libraries ?? {},
+    });
+    practices[entry.id] = {
+      transport: 'source',
+      root: 'editor.preview',
+      sources,
+      ...(Object.keys(definition.data ?? {}).length ? { data: definition.data } : {}),
+    };
   } else {
     const technique = [...THERAPY_LIBRARY, ...REFRAMING_LIBRARY].find(
       (item) => item.slug === entry.id,

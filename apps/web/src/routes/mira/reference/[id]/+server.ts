@@ -9,13 +9,18 @@ import { REFRAMING_LIBRARY } from '$lib/pattern-run/reframing-library';
 
 export const prerender = true;
 export const entries = async () =>
-  (await loadCommons()).entities.filter((e) => e.type === 'pattern').map(({ id }) => ({ id }));
+  (await loadCommons()).entities
+    .filter((e) => e.type === 'pattern' || e.type === 'practice')
+    .map(({ id }) => ({ id }));
 
 /** Public Commons only. Private workspace material is resolved on the user's device. */
 export const GET: RequestHandler = async ({ params }) => {
   const corpus = await loadCommons();
   const entity = corpus.entities.find(
-    (e) => e.type === 'pattern' && e.id === params.id && e.sourceId === 'commons',
+    (e) =>
+      (e.type === 'pattern' || e.type === 'practice') &&
+      e.id === params.id &&
+      e.sourceId === 'commons',
   );
   if (!entity) error(404, 'Pattern article unavailable.');
   const bundled = [...THERAPY_LIBRARY, ...REFRAMING_LIBRARY].some((t) => t.slug === entity.id);
@@ -29,10 +34,17 @@ export const GET: RequestHandler = async ({ params }) => {
       omitSections: ['With mira', 'Executable Pattern Markdown'],
     }),
     standaloneHref:
-      bundled || hasStandaloneSourcePractice(entity)
-        ? `/pattern/${entity.id}/run`
-        : entity.practice
-          ? `/pattern/${entity.id}/practice`
-          : null,
+      entity.type === 'practice'
+        ? entity.languagePracticeSource
+          ? `/practice/${entity.id}/run`
+          : null
+        : bundled || hasStandaloneSourcePractice(entity)
+          ? `/pattern/${entity.id}/run`
+          : entity.practice
+            ? `/pattern/${entity.id}/practice`
+            : null,
+    ...(entity.type === 'practice' && entity.languagePracticeSource
+      ? { practiceSource: entity.languagePracticeSource }
+      : {}),
   });
 };

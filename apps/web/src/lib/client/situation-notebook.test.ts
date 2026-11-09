@@ -36,6 +36,7 @@ function fixture() {
     ...entry,
     id,
     ...content,
+    priority: content.priority === null ? undefined : (content.priority ?? entry.priority),
     revision: revision + 1,
   }));
   const notebook = createSituationNotebook({ save, saved, changed });

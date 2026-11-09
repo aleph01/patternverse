@@ -10,54 +10,49 @@ classifier strategy -> Strategy {
     :case tradeoff "An either-or choice is central to the frame."
     :fallback general
 }
-!ask problem {
+problem = !ask {
     What problem feels stuck? A short, provisional description is enough.
 }
-!use reframing.frame-problem as framed {
+framed = !use reframing.frame-problem {
     :with problem
 }
-!use reframing.review-frame as reviewed {
+reviewed = !use reframing.review-frame {
     :with frame = framed.frame
 }
 strategy = framed.frame ?~ strategy
 ?match strategy {
-    :case outside -> outside
-    :case goal -> goal
-    :case tradeoff -> tradeoff
-    :case general -> general
+  :case outside {
+    lens = !use reframing.look-outside-frame {
+        :with frame = framed.frame
+    }
+    additional = lens.candidate_frame
+  }
+  :case goal {
+    lens = !use reframing.rethink-goal {
+        :with frame = framed.frame
+    }
+    additional = lens.candidate_frame
+  }
+  :case tradeoff {
+    lens = !use reframing.break-tradeoff {
+        :with frame = framed.frame
+    }
+    additional = lens.candidate_frame
+  }
+  :case general {
+    additional = framed.frame
+  }
 }
-outside:
-!use reframing.look-outside-frame as lens {
-    :with frame = framed.frame
-}
-= additional lens.candidate_frame
--> options
-goal:
-!use reframing.rethink-goal as lens {
-    :with frame = framed.frame
-}
-= additional lens.candidate_frame
--> options
-tradeoff:
-!use reframing.break-tradeoff as lens {
-    :with frame = framed.frame
-}
-= additional lens.candidate_frame
--> options
-general:
-= additional framed.frame
--> options
-options:
-= observations concat(reviewed.candidate_frame, concat(" Another possibility: ", additional))
-!use reframing.generate-real-options as alternatives {
+observations = concat(reviewed.candidate_frame, concat(" Another possibility: ", additional))
+alternatives = !use reframing.generate-real-options {
     :with frame = framed.frame
     :with observations
 }
-= selected_frame alternatives.selected_frame
-!use reframing.validate-frame as validation {
+selected_frame = alternatives.selected_frame
+validation = !use reframing.validate-frame {
     :with frame = selected_frame.label
 }
-= validation_plan validation.validation_plan
+validation_plan = validation.validation_plan
 !show {
     You selected one frame to test: {{selected_frame.label}}
 

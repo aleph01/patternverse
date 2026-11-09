@@ -1,17 +1,13 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
   import PatternverseGuide from '$lib/components/PatternverseGuide.svelte';
+  import DailyPatterns from '$lib/components/DailyPatterns.svelte';
+  import HomeVerses from '$lib/components/HomeVerses.svelte';
+  import HomeApps from '$lib/components/HomeApps.svelte';
+  import HomeChatGPT from '$lib/components/HomeChatGPT.svelte';
   import HeroTileArtwork from '$lib/illustrations/HeroTileArtwork.svelte';
-  import { verseAccentClass } from '$lib/verse-accent';
 
   let { data } = $props();
-
-  const VERSE_PREVIEW_LIMIT = 16;
-  let versesExpanded = $state(false);
-  let visibleVerses = $derived(
-    versesExpanded ? data.verses : data.verses.slice(0, VERSE_PREVIEW_LIMIT),
-  );
-  let hiddenVerseCount = $derived(Math.max(0, data.verses.length - VERSE_PREVIEW_LIMIT));
 </script>
 
 <svelte:head>
@@ -49,39 +45,13 @@
     </div>
   </section>
 
-  <section class="verses" aria-labelledby="verses-heading">
-    <div class="section-heading">
-      <p>Broad lenses</p>
-      <h2 id="verses-heading">Verses</h2>
-    </div>
-    <div class="verse-list" id="verse-grid">
-      {#each visibleVerses as verse (`${verse.sourceId}:${verse.id}`)}
-        <article class={verseAccentClass(verse.id)}>
-          <a
-            class="verse-tile"
-            href={resolve('/[type=entityType]/[id]', { type: verse.type, id: verse.id })}
-          >
-            <h3>{verse.title}</h3>
-            <p>{verse.summary}</p>
-            <span class="verse-note">Patternverse commons</span>
-          </a>
-        </article>
-      {/each}
-    </div>
-    {#if hiddenVerseCount > 0}
-      <div class="verse-disclosure">
-        <button
-          type="button"
-          aria-controls="verse-grid"
-          aria-expanded={versesExpanded}
-          onclick={() => (versesExpanded = !versesExpanded)}
-        >
-          {versesExpanded ? 'Show fewer Verses' : `Show all ${data.verses.length} Verses`}
-        </button>
-        {#if !versesExpanded}<span>{hiddenVerseCount} more</span>{/if}
-      </div>
-    {/if}
-  </section>
+  <DailyPatterns candidates={data.dailyPatterns} initialDay={data.dailyPatternDay} />
+
+  <HomeVerses verses={data.verses} />
+
+  <HomeApps />
+
+  <HomeChatGPT />
 
   <PatternverseGuide />
 </main>

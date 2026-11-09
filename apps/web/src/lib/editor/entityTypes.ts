@@ -13,7 +13,7 @@ const ENTITY_TYPE_DETAILS: readonly EditorEntityTypeOption[] = [
     type: 'pattern',
     label: 'pattern',
     pluralLabel: 'patterns',
-    description: 'A reusable approach, with an optional interactive practice.',
+    description: 'A reusable approach, with optional interactive practices.',
   },
   {
     type: 'concept',

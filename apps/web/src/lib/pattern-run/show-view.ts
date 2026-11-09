@@ -15,6 +15,15 @@ export type ShowItem = {
   coordinates: number[];
   group: string | null;
 };
+/** The label already displays its source field; keep the remaining attributes once. */
+export function detailFields(item: ShowItem): [string, string][] {
+  const labelKey = ['name', 'title', 'label', 'idea', 'text', 'id'].find((key) =>
+    Object.hasOwn(item.fields, key),
+  );
+  return Object.entries(item.fields).filter(
+    ([key, value]) => key !== labelKey || value !== item.label,
+  );
+}
 export type ShowEdge = { from: string; to: string; cyclic: boolean };
 export type ShowPanel = {
   label: string | null;

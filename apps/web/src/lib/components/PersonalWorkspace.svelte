@@ -333,7 +333,7 @@
   {/if}
   {#if tab === 'verse' || tab === 'collection'}
     <details class="commons-readonly">
-      <summary>Patternverse commons · read-only</summary>
+      <summary>Commons · read-only</summary>
       <p>
         You can use these in your library. Their names, descriptions and contents cannot be changed
         here.

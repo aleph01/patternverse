@@ -1,9 +1,14 @@
 .pattern-run {
+  --notebook-paper: #f5f4ee;
+  --notebook-surface: #fffefa;
+  --notebook-line: #dedfd4;
+  --paper: var(--notebook-surface);
+  --border: var(--notebook-line);
   /* The site's generic main clipping creates a non-scrolling sticky container. */
   overflow: visible;
   min-height: 100dvh;
-  background: #fff;
-  color: #181814;
+  background: var(--notebook-paper);
+  color: var(--ink);
 }
 .pattern-run-header {
   display: flex;
@@ -12,6 +17,7 @@
   min-height: 5rem;
   padding: 1rem clamp(1rem, 4vw, 4rem);
   border-bottom: 1px solid #deded9;
+  background: var(--notebook-surface);
 }
 .pattern-run-brand {
   display: inline-flex;
@@ -35,12 +41,19 @@
   text-decoration: underline;
 }
 .pattern-run-layout {
-  width: min(100%, 800px);
+  position: relative;
+  width: min(100%, 760px);
   margin: 0 auto;
+}
+.pattern-run-layout.with-step-map {
+  width: min(100%, 1050px);
 }
 .pattern-run-stage {
   min-width: 0;
-  padding: 3rem 2rem 2rem 5.5rem;
+  padding: 3rem 2rem 2rem;
+}
+.with-step-map .pattern-run-stage {
+  margin-right: 254px;
 }
 .pattern-run-worksheet-heading {
   margin-bottom: 2.75rem;
@@ -58,6 +71,23 @@
 .pattern-run-worksheet-heading > p {
   margin: 0;
   line-height: 1.6;
+}
+.pattern-run-worksheet-heading .pattern-run-notebook-label {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 1rem;
+  color: var(--green-dark);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.pattern-run-notebook-label::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  background: var(--green);
 }
 .pattern-run-worksheet-heading .pattern-run-step-count {
   margin-top: 1rem;
@@ -98,7 +128,7 @@
   resize: vertical;
   border: 1px solid #aeb7ae;
   border-radius: 6px;
-  background: #fff;
+  background: var(--notebook-surface);
   color: #181814;
   font-size: 1rem;
   line-height: 1.6;
@@ -277,6 +307,23 @@
   font-size: 0.8125rem;
   line-height: 1.5;
 }
+.pattern-run .pattern-form {
+  gap: 1.5rem;
+}
+.pattern-run .pattern-form > button {
+  justify-self: end;
+  min-height: 44px;
+  font-size: 0.875rem;
+}
+.pattern-run .pattern-form textarea,
+.pattern-run .pattern-form input {
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.pattern-run .pattern-form label {
+  font-size: 0.875rem;
+}
 .pattern-run-privacy {
   margin: 1.5rem 0 1rem;
   padding-top: 1rem;
@@ -291,6 +338,8 @@
   white-space: pre-wrap;
 }
 .pattern-run-completion {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--notebook-line);
   scroll-margin-top: calc(var(--practice-timer-space, 0px) + 1.5rem);
 }
 .pattern-run-completion h2:focus {
@@ -372,6 +421,15 @@
   }
   .pattern-run-next-hint {
     text-align: left;
+  }
+}
+
+@media (max-width: 900px) {
+  .pattern-run-layout.with-step-map {
+    width: min(100%, 760px);
+  }
+  .with-step-map .pattern-run-stage {
+    margin-right: 0;
   }
 }
 

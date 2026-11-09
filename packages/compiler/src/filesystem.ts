@@ -1,5 +1,5 @@
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, join, relative } from 'node:path';
+import { mkdir, readdir, readFile, realpath, stat, writeFile } from 'node:fs/promises';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 
 import { sourceManifestSchema } from '@patternverse/schema';
 import { parse as parseYaml } from 'yaml';
@@ -110,7 +110,57 @@ export const loadCorpus = async (options: LoadCorpusOptions): Promise<LoadedCorp
     }),
   );
 
+  const libraries: Record<string, import('./types.js').DataLibrary> = {};
+  const contentRoot = await realpath(options.contentDirectory);
+  for (const result of parseResults) {
+    const entity = result.entity;
+    if (!entity) continue;
+    for (const library of entity.libraries ?? []) {
+      const key = `${entity.sourceId}:${library.id}`;
+      try {
+        if (Object.hasOwn(libraries, key)) throw new Error(`Duplicate data library ${key}`);
+        const file = await realpath(
+          resolve(dirname(options.manifestPath), dirname(entity.sourcePath!), library.src),
+        );
+        if (!file.startsWith(contentRoot + sep) || (await stat(file)).size > 1_048_576)
+          throw new Error('Data library must stay within content and not exceed 1 MiB.');
+        const value: unknown = JSON.parse(await readFile(file, 'utf8'));
+        if (!value || typeof value !== 'object' || Array.isArray(value))
+          throw new Error('Data library must be an object.');
+        const data = value as Record<string, unknown>;
+        if (
+          Object.keys(data).some((key) => !['record_type', 'records'].includes(key)) ||
+          !data.record_type ||
+          !Array.isArray(data.records) ||
+          data.records.length > 1000
+        )
+          throw new Error('Data library requires record_type and up to 1000 records.');
+        const ids = new Set<string>();
+        for (const record of data.records) {
+          if (
+            !record ||
+            typeof record !== 'object' ||
+            typeof record.id !== 'string' ||
+            !record.id.trim() ||
+            record.id.length > 128 ||
+            ids.has(record.id)
+          )
+            throw new Error('Data ids must be unique, nonblank text of at most 128 characters.');
+          ids.add(record.id);
+        }
+        libraries[key] = data as unknown as import('./types.js').DataLibrary;
+      } catch (error) {
+        diagnostics.push({
+          code: 'invalid-data-library',
+          severity: 'error',
+          file: entity.sourcePath,
+          message: error instanceof Error ? error.message : 'Could not load data library.',
+        });
+      }
+    }
+  }
   return {
+    ...(Object.keys(libraries).length ? { libraries } : {}),
     manifest: manifestResult.data,
     source: {
       id: manifestResult.data.id,
@@ -132,8 +182,17 @@ export const loadAndCompileCorpus = async (
     loaded.source ? [loaded.source] : [],
     compileOptions,
   );
+  const providers = new Set(
+    compiled.entities.flatMap((entity) =>
+      (entity.libraries ?? []).map((library) => `${entity.sourceId}:${library.id}`),
+    ),
+  );
+  const libraries = Object.fromEntries(
+    Object.entries(loaded.libraries ?? {}).filter(([id]) => providers.has(id)),
+  );
   return {
     ...compiled,
+    ...(Object.keys(libraries).length ? { libraries } : {}),
     diagnostics: [...loaded.diagnostics, ...compiled.diagnostics],
   };
 };

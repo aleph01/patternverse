@@ -5,6 +5,15 @@ const commons = { sourceId: 'commons', id: 'abc-diary', type: 'pattern', title: 
 const personal = { sourceId: 'personal', id: 'abc-diary', type: 'pattern', title: 'My ABC diary' };
 
 describe('Mira pattern context', () => {
+  it('selects an exact practice reference independently of its parent pattern', () => {
+    const practice = { ...commons, id: 'quick-check', type: 'practice', title: 'Quick check' };
+    expect(
+      findMiraPattern({ sourceId: 'commons', entityId: 'quick-check' }, [commons, practice]),
+    ).toEqual(practice);
+    expect(
+      findMiraPattern({ sourceId: 'personal', entityId: 'quick-check' }, [commons, practice]),
+    ).toBeNull();
+  });
   it('round-trips a source-qualified library reference', () => {
     const reference = { sourceId: 'commons', entityId: 'abc-diary' };
     expect(parseMiraPatternQuery(new URLSearchParams(miraPatternQuery(reference)))).toEqual(

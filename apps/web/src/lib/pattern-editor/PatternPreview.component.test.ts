@@ -2,10 +2,12 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { cleanup, fireEvent, render, screen } from '@testing-library/svelte';
-import { afterEach, beforeAll, expect, it } from 'vitest';
+import { afterEach, beforeAll, expect, it, vi } from 'vitest';
 import { initSync } from '$lib/mira/engine/pattern_wasm.js';
 import { inspectSource } from './bridge';
 import PatternPreview from './PatternPreview.svelte';
+
+vi.mock('$lib/widgets/library', () => ({ widgetPackages: async () => ({}) }));
 
 beforeAll(() =>
   initSync({

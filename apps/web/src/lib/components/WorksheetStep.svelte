@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { Check, ChevronDown, Pencil } from '@lucide/svelte';
 
   let {
     number,
@@ -7,6 +8,9 @@
     completed = false,
     editing = false,
     reviewSuggested = false,
+    collapsed = false,
+    summary = '',
+    onToggle,
     id,
     children,
     onEdit,
@@ -17,186 +21,197 @@
     completed?: boolean;
     editing?: boolean;
     reviewSuggested?: boolean;
+    collapsed?: boolean;
+    summary?: string;
+    onToggle?: () => void;
     id: string;
     children: Snippet;
     onEdit?: () => void;
     editDisabled?: boolean;
   } = $props();
+  const folded = $derived(completed && collapsed && !editing);
 </script>
 
-<!-- The heading button provides keyboard access; clicking non-control content also opens the step. -->
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions, a11y_click_events_have_key_events -->
 <section
-  class:editable={Boolean(onEdit) && !editDisabled}
-  onclick={(event) => {
-    if (
-      onEdit &&
-      !editDisabled &&
-      event.target instanceof Element &&
-      !event.target.closest('button, a, input, textarea, select')
-    )
-      onEdit();
-  }}
   class="worksheet-step"
   class:completed
   class:current={!completed || editing}
+  class:collapsed={folded}
   {id}
   aria-labelledby={`${id}-heading`}
 >
-  <span class="worksheet-marker" aria-hidden="true"
-    >{completed && !editing ? '✓' : String(number).padStart(2, '0')}</span
-  >
-  <p class="worksheet-label">
-    {String(number).padStart(2, '0')} · {editing
-      ? 'editing'
-      : reviewSuggested
-        ? 'review suggested'
-        : completed
-          ? 'completed'
-          : 'current step'}
-  </p>
-  <h2 id={`${id}-heading`} tabindex="-1">
-    {#if onEdit && !editing}<button
-        class="edit-step"
-        type="button"
-        disabled={editDisabled}
-        aria-label={`Edit step ${number}: ${heading}`}
-        onclick={onEdit}
-        ><span>{heading}</span><span class="edit-hint" aria-hidden="true">Edit ↗</span></button
-      >
-    {:else}{heading}{/if}
-  </h2>
-  {@render children()}
+  <div class="worksheet-step-heading">
+    <span class="worksheet-marker" aria-hidden="true">
+      {#if completed && !editing}<Check size={14} />{:else}{String(number).padStart(2, '0')}{/if}
+    </span>
+    <div class="worksheet-step-title">
+      <h2 id={`${id}-heading`} tabindex="-1">{heading}</h2>
+      <p class="worksheet-label">
+        Step {number} · {editing
+          ? 'editing'
+          : reviewSuggested
+            ? 'review suggested'
+            : completed
+              ? 'completed'
+              : "You're here"}
+      </p>
+    </div>
+    {#if completed && !editing}
+      <div class="worksheet-step-controls">
+        {#if onEdit}<button
+            class="edit-step"
+            type="button"
+            disabled={editDisabled}
+            aria-label={`Edit step ${number}: ${heading}`}
+            onclick={onEdit}><Pencil size={13} aria-hidden="true" /><span>Edit</span></button
+          >{/if}
+        {#if onToggle}<button
+            class="fold-step"
+            type="button"
+            aria-label={`${folded ? 'Expand' : 'Collapse'} step ${number}: ${heading}`}
+            aria-expanded={!folded}
+            aria-controls={`${id}-content`}
+            onclick={onToggle}><ChevronDown size={16} aria-hidden="true" /></button
+          >{/if}
+      </div>
+    {/if}
+  </div>
+  {#if folded && summary}<p class="worksheet-step-summary">{summary}</p>{/if}
+  <div class="worksheet-step-content" id={`${id}-content`} hidden={folded}>
+    {@render children()}
+  </div>
 </section>
 
 <style>
-  .editable {
-    cursor: pointer;
-  }
-  .editable:hover {
-    background: #f4f6f2;
-  }
-  .edit-step {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: inherit;
-    font: inherit;
-    letter-spacing: inherit;
-    text-align: left;
-    cursor: pointer;
-  }
-  .edit-step:focus-visible {
-    outline: 2px solid #00865c;
-    outline-offset: 4px;
-  }
-  .edit-step:disabled {
-    cursor: default;
-  }
-  .edit-hint {
-    flex-shrink: 0;
-    white-space: nowrap;
-    color: #00865c;
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0;
-  }
   .worksheet-step {
     position: relative;
     min-width: 0;
-    margin: 0 0 1.75rem;
-    padding: 0 0 1.75rem;
-    border-bottom: 1px solid #deded9;
+    margin: 0;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--notebook-line);
     overflow-wrap: anywhere;
     scroll-margin-top: calc(var(--practice-timer-space, 0px) + 1.5rem);
   }
-  .worksheet-step::before {
-    position: absolute;
-    content: '';
-    left: -2.5rem;
-    top: 1rem;
-    bottom: -2.75rem;
-    width: 1px;
-    background: #d3d8d3;
-  }
-  .worksheet-step:last-child::before {
-    bottom: 0;
+  .worksheet-step-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
   .worksheet-marker {
-    position: absolute;
-    left: -3.5rem;
-    top: 0;
-    z-index: 1;
+    flex-shrink: 0;
     display: grid;
     place-items: center;
-    width: 2rem;
-    height: 2rem;
+    width: 28px;
+    height: 28px;
+    margin-top: 1px;
     border-radius: 50%;
-    background: #00865c;
-    color: white;
-    font-size: 0.8125rem;
-    font-weight: 700;
+    background: var(--mint);
+    color: var(--green-dark);
+    font-size: 0.6875rem;
+    font-weight: 600;
   }
-  .worksheet-label {
-    margin: 0 0 0.5rem;
-    color: #00865c;
-    font-size: 0.75rem;
-    font-weight: 750;
-    line-height: 1.5;
-    letter-spacing: 0.035em;
-    text-transform: uppercase;
+  .current .worksheet-marker {
+    background: var(--green);
+    color: var(--ink);
+  }
+  .worksheet-step-title {
+    flex: 1;
+    min-width: 0;
   }
   h2 {
-    margin: 0 0 1rem;
-    color: #181814;
-    font-size: 1.375rem;
-    font-weight: 750;
-    line-height: 1.3;
+    margin: 0;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.35;
     letter-spacing: -0.025em;
     white-space: pre-line;
   }
   h2:focus {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 4px;
+  }
+  h2:focus:not(:focus-visible) {
     outline: none;
   }
-  .current {
-    padding: 1.25rem;
-    border: 1px solid #00865c;
-    border-radius: 6px;
-    background: #e7f6ed;
-  }
   .current h2 {
-    font-size: 1.625rem;
+    font-size: 1.375rem;
   }
-  .current .worksheet-marker {
-    background: #181814;
+  .worksheet-label {
+    margin: 0.375rem 0 0;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
   }
-  .current::before {
-    left: calc(-2.5rem - 1px);
+  .worksheet-step-controls {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.25rem;
+    margin-top: -7px;
   }
-  .current .worksheet-marker {
-    left: calc(-3.5rem - 1px);
+  .worksheet-step-controls button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.375rem;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--green-dark);
+    font: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+  .worksheet-step-controls button:hover:not(:disabled) {
+    background: var(--mint);
+  }
+  .worksheet-step-controls button:focus-visible {
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: 3px;
+  }
+  .worksheet-step-controls button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .fold-step[aria-expanded='true'] :global(svg) {
+    transform: rotate(180deg);
+  }
+  .worksheet-step-content {
+    margin: 1.25rem 0 0 40px;
+  }
+  .worksheet-step-summary {
+    margin: 0.75rem 0 0 40px;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
   }
   @media (max-width: 680px) {
-    .worksheet-marker,
-    .worksheet-step::before {
-      display: none;
-    }
     .worksheet-step {
+      padding: 1.5rem 0;
       scroll-margin-top: calc(var(--practice-timer-space, 0px) + 1rem);
     }
-    .current {
-      padding: 0.875rem;
+    .worksheet-step-content {
+      margin-left: 0;
     }
-    h2 {
-      font-size: 1.25rem;
+    .worksheet-step-heading {
+      flex-wrap: wrap;
+      gap: 0.625rem;
+    }
+    .worksheet-step-controls {
+      margin: 0 0 0 38px;
+      flex-basis: calc(100% - 38px);
+      justify-content: flex-end;
+    }
+    .worksheet-step-summary {
+      margin-left: 0;
     }
     .current h2 {
-      font-size: 1.375rem;
+      font-size: 1.25rem;
     }
   }
 </style>

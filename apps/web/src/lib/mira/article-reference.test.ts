@@ -14,6 +14,30 @@ const record: MiraArticleReference = {
   standaloneHref: '/pattern/same-id/run',
 };
 describe('source-qualified article references', () => {
+  it('grounds a practice conversation in that practice’s blank worksheet', async () => {
+    const practice = { ...summary, type: 'practice', id: 'quick-check', title: 'Quick check' };
+    const worksheet = vi.fn(async (source: string) => ({
+      body: `Question from ${source}`,
+      html: '<p>Practice question</p>',
+    }));
+    const load = createArticleReferenceLoader({
+      publicReference: async () => ({
+        ...record,
+        id: practice.id,
+        title: practice.title,
+        standaloneHref: '/practice/quick-check/run',
+        practiceSource: 'quick-source',
+      }),
+      personalReference: async () => undefined,
+      practiceWorksheet: worksheet,
+    });
+    const reference = await load(practice);
+    expect(reference.body).toContain('Question from quick-source');
+    expect(reference.standaloneHref).toBe('/practice/quick-check/run');
+    expect(worksheet).toHaveBeenCalledWith('quick-source');
+    await load(practice);
+    expect(worksheet).toHaveBeenCalledTimes(1);
+  });
   it('caches public articles without crossing into personal records', async () => {
     const publicReference = vi.fn().mockResolvedValue(record);
     const privateRecord = {

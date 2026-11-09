@@ -4,6 +4,22 @@ import { sourceSelection } from './types';
 import { starterPractice, legacyPracticeSource } from './source';
 
 describe('practice source helpers', () => {
+  it('highlights each pipe as a complete operator and preserves the source', () => {
+    const source = 'cleaned = notes |>> trim |> count';
+    const tokens = highlightSource(source);
+    expect(tokens.map((token) => token.text).join('')).toBe(source);
+    expect(tokens.filter((token) => token.text.startsWith('|'))).toEqual([
+      { text: '|>>', kind: 'directive' },
+      { text: '|>', kind: 'directive' },
+    ]);
+  });
+  it('highlights optional values without changing annotated source', () => {
+    const source = ':language 1\nnote: Optional[text] = None\n-> end';
+    const tokens = highlightSource(source);
+    expect(tokens.map((token) => token.text).join('')).toBe(source);
+    expect(tokens.find((token) => token.text === 'None')?.kind).toBe('directive');
+    expect(tokens.find((token) => token.text === 'Optional')?.kind).toBe('directive');
+  });
   it('keeps every source character in highlighting, including markup-like text', () => {
     const source =
       ':language 1\nanswer = !ask {\n<script>Café 🙂</script>\n}\n!show {{answer}}\n-> end';
@@ -46,8 +62,10 @@ describe('practice source helpers', () => {
       ],
     });
     expect(source).toContain('step_step = !form');
-    expect(source).toContain('!ask text');
-    expect(source).toContain(':required true');
+    expect(source).toContain('text = !ask');
+    expect(source).not.toContain(':required true');
+    expect(source).not.toContain(':multiline true');
+    expect(source).toContain('time = !timer');
     expect(source).toContain(':persistent true');
     expect(source).toContain(':duration 60');
     expect(source).toContain(':blocking false');

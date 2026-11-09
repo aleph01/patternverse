@@ -51,7 +51,7 @@ describe('AI Usage reading and search', () => {
     },
   );
 
-  it('finds all six patterns by title, verse, collection, and the reconciled title alias', () => {
+  it('finds all eight patterns by title, verse, collection, and the reconciled title alias', () => {
     const search = createLibrarySearch(
       createLibrary([
         {

@@ -1,20 +1,10 @@
-import { loadCommons, summarizeEntity } from '$lib/server/commons';
+import { loadCommons } from '$lib/server/commons';
+import { libraryBrowsingData, librarySearchAsset } from '$lib/server/library-search';
 
 export const load = async () => {
   const corpus = await loadCommons();
   return {
-    entities: corpus.entities.map(summarizeEntity),
-    verses: corpus.entities
-      .filter((entity) => entity.type === 'verse')
-      .map((entity) => ({
-        id: entity.id,
-        sourceId: entity.sourceId,
-        title: entity.title,
-        itemKeys: entity.verseMembers.map((ref) => `${ref.sourceId}:${ref.entityId}`),
-      })),
-    searchDocuments: corpus.searchDocuments.map((document) => ({
-      ...document,
-      entityId: document.ref.entityId,
-    })),
+    ...libraryBrowsingData(corpus),
+    searchAsset: librarySearchAsset(corpus).asset,
   };
 };

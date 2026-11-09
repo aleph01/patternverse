@@ -158,6 +158,7 @@ fn run() -> Result<(), String> {
             break;
         };
         match &pending.request {
+            Request::Widget(widget)=>println!("{}\nWidget {}: enter a JSON output record.",widget.prompt,widget.definition.name),
             Request::Form(form) => println!("{}\nEnter a JSON object mapping field IDs to tagged Values:", serde_json::to_string_pretty(form).map_err(|e| e.to_string())?),
             Request::Refine { review } => println!("{}\nReview choices: {:?}. Enter a decision name, or edit:your wording", review.candidate, review.choices),
             Request::Classify{definition,input,context}=>println!("CLASSIFY {}\nInput: {input:?}\nContext: {context:?}\nEnter a declared variant: {:?}",definition.name,definition.output.variants),
@@ -166,7 +167,7 @@ fn run() -> Result<(), String> {
             Request::Timer { prompt, timer } => println!("{prompt}\nTimer: {} seconds; adjustable {} ({}–{}); blocking {}. Enter a host-reported result JSON with duration_seconds, elapsed_seconds, completed:", timer.duration_seconds, timer.adjustable, timer.min_seconds, timer.max_seconds, timer.blocking),
             Request::Realize { specification, inputs } => println!("REALIZE\nSpecification: {specification}\nInputs: {inputs:?}\nEnter fixture wording:"),
             Request::Rate{prompt,rating}=>println!("{prompt}\nEnter a number from {} through {}:",rating.min,rating.max),
-            Request::Generate{prompt,contract}=>println!("AI fixture request: {prompt}\nContract: {contract:?}\nEnter a tagged Value JSON object:"),
+            Request::Generate{prompt,contract,context}=>println!("AI fixture request: {prompt}\nContract: {contract:?}\nContext: {context:?}\nEnter a tagged Value JSON object:"),
             Request::Turn{prompt}=>println!("AI turn fixture request: {prompt}\nEnter response text:"),
             Request::Choose{prompt,options,..}=>{
                 println!("{prompt}");for choice in options {println!("  {} — {}",choice.value,choice.label);}println!("Enter a choice value:");
@@ -222,6 +223,7 @@ fn run() -> Result<(), String> {
                     continue;
                 }
             },
+            Request::Widget(_) => match serde_json::from_str(input){Ok(value)=>Fulfillment::Widget(value),Err(_)=>{eprintln!("Enter a valid JSON widget output record.");continue;}},
             Request::Ask { .. } => Fulfillment::Text(input.into()),
             Request::Timer { .. } => match serde_json::from_str(input) {
                 Ok(value) => Fulfillment::Timer(value),

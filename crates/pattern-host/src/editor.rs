@@ -14,7 +14,8 @@ use std::collections::BTreeMap;
 
 const ROOT: &str = "editor.preview";
 const MAX_SOURCE: usize = 64 * 1024;
-const MAX_CHECKPOINT: usize = 2 * 1024 * 1024;
+const MAX_CHECKPOINT: usize = 8 * 1024 * 1024;
+type DataLibraries = BTreeMap<String, pattern_core::data::DataLibrary>;
 
 fn preview_limits() -> ManagerLimits {
     ManagerLimits {
@@ -27,22 +28,44 @@ fn preview_limits() -> ManagerLimits {
 #[derive(Deserialize)]
 #[serde(tag = "operation", rename_all = "snake_case", deny_unknown_fields)]
 enum Request {
+    ValidateWidget { package: pattern_core::widgets::Package },
+    PrepareWidget {package:pattern_core::widgets::Package, export:String, #[serde(default)] inputs:BTreeMap<String,serde_json::Value>, #[serde(default)] prompt:String},
+    ValidateWidgetOutput {interaction:pattern_core::widgets::Interaction,outputs:serde_json::Value},
+    WidgetImports { source: String },
+    DataImports {
+        source: String,
+    },
+    ValidateData {
+        data: DataLibraries,
+    },
     InspectBundle {
         bundle: SourceBundle,
+        #[serde(default)]
+        data: DataLibraries,
     },
     Worksheet {
         source: Option<String>,
         technique_id: Option<String>,
+        #[serde(default)]
+        data: DataLibraries,
     },
     WorksheetAvailability {
         source: Option<String>,
         technique_id: Option<String>,
+        #[serde(default)]
+        data: DataLibraries,
     },
     Inspect {
         source: String,
+        #[serde(default)] widgets: pattern_core::widgets::Packages,
+        #[serde(default)]
+        data: DataLibraries,
     },
     Start {
         source: String,
+        #[serde(default)] widgets: pattern_core::widgets::Packages,
+        #[serde(default)]
+        data: DataLibraries,
         root_id: String,
         inputs: BTreeMap<String, Value>,
     },
@@ -93,24 +116,29 @@ fn restore(saved: serde_json::Value) -> Result<SavedRun, String> {
     Ok(current)
 }
 
-fn check_source(source: &str) -> Result<compiler::CompiledPattern, String> {
+fn check_source(source: &str, data: &DataLibraries) -> Result<compiler::CompiledPattern, String> {
     if source.len() > MAX_SOURCE {
         return Err("Practice source exceeds 64 KiB".into());
     }
-    compiler::compile(source).map_err(|errors| serde_json::to_string(&errors).unwrap_or_default())
+    compiler::compile_with_data(source, data)
+        .map_err(|errors| serde_json::to_string(&errors).unwrap_or_default())
 }
 
 fn worksheet_snapshot(
     source: Option<String>,
     technique_id: Option<String>,
+    data: DataLibraries,
 ) -> Result<ExecutableSnapshot, String> {
     match (source, technique_id) {
         (Some(source), None) => {
-            check_source(&source)?;
-            ExecutableSnapshot::build(SourceBundle {
-                root: ROOT.into(),
-                patterns: BTreeMap::from([(ROOT.into(), source)]),
-            })
+            check_source(&source, &data)?;
+            ExecutableSnapshot::build_with_data(
+                SourceBundle {
+                    root: ROOT.into(),
+                    patterns: BTreeMap::from([(ROOT.into(), source)]),
+                },
+                data,
+            )
             .map_err(|_| "Worksheet source could not compile".into())
         }
         (None, Some(id)) => {
@@ -127,7 +155,39 @@ pub fn execute(request: &str) -> Result<String, String> {
     }
     let request: Request = serde_json::from_str(request).map_err(|_| "Invalid editor request")?;
     let run = match request {
-        Request::InspectBundle { bundle } => {
+        Request::ValidateWidget{package}=>{package.validate()?;return Ok("true".into());},
+        Request::PrepareWidget{package,export,inputs,prompt}=>{
+            package.validate()?;let definition=package.definition(&export)?;
+            let typed=inputs.into_iter().map(|(k,v)|{let field=definition.inputs.get(&k).ok_or("Unknown widget input")?;Ok((k,Value::from_json(&v,&compiler::widget_type(&field.value_type)?)?))}).collect::<Result<_,String>>()?;
+            return serde_json::to_string(&pattern_core::widgets::prepare(package,&export,typed,prompt)?).map_err(|e|e.to_string());
+        },
+        Request::ValidateWidgetOutput{interaction,outputs}=>{let frozen=pattern_core::widgets::prepare(interaction.package, &interaction.export, interaction.inputs, interaction.prompt)?; return serde_json::to_string(&frozen.accept_json(&outputs)?).map_err(|e|e.to_string());},
+        Request::WidgetImports { source } => {
+            if source.len()>MAX_SOURCE{return Err("Practice source exceeds 64 KiB".into());}
+            let parsed=pattern_core::syntax::parse(&source).map_err(|_|"Invalid practice source")?;
+            let imports=pattern_core::syntax::package_imports(&parsed.declarations).map_err(|e|e.message)?;
+            return serde_json::to_string(&imports.into_iter().map(|i|format!("{}@{}",i.artifact,i.revision)).collect::<Vec<_>>()).map_err(|e|e.to_string());
+        }
+        Request::DataImports { source } => {
+            if source.len() > MAX_SOURCE {
+                return Err("Practice source exceeds 64 KiB".into());
+            }
+            let parsed =
+                pattern_core::syntax::parse(&source).map_err(|_| "Invalid practice source")?;
+            let imports =
+                pattern_core::syntax::data_imports(&parsed.declarations).map_err(|e| e.message)?;
+            return serde_json::to_string(
+                &imports.into_iter().map(|i| i.resource).collect::<Vec<_>>(),
+            )
+            .map_err(|_| "Could not inspect imports".into());
+        }
+        Request::ValidateData { data } => {
+            for (name, library) in data {
+                library.materialize(&name)?;
+            }
+            return Ok("true".into());
+        }
+        Request::InspectBundle { bundle, data } => {
             if bundle.root.is_empty()
                 || bundle.root.len() > 128
                 || bundle.patterns.len() > 128
@@ -138,7 +198,7 @@ pub fn execute(request: &str) -> Result<String, String> {
                 return Err("Definition bundle exceeds inspection limits".into());
             }
             let root = bundle.root.clone();
-            let snapshot = ExecutableSnapshot::build(bundle)
+            let snapshot = ExecutableSnapshot::build_with_data(bundle, data)
                 .map_err(|_| "Definition bundle could not compile")?;
             let structure = snapshot
                 .root()
@@ -146,21 +206,27 @@ pub fn execute(request: &str) -> Result<String, String> {
                 .map_err(|_| "Could not inspect definition bundle")?;
             // A definition projection, never a run or checkpoint. The shared core
             // selects the exact transitive closure and validates every contract.
-            return serde_json::to_string(&serde_json::json!({
+            let mut result = serde_json::json!({
                 "snapshot_id": snapshot.id(),
                 "revision": structure.revision,
                 "inputs": structure.inputs,
                 "outputs": structure.outputs,
                 "sources": snapshot.sources(),
                 "root": root,
-            }))
-            .map_err(|_| "Could not serialize definition inspection".into());
+            });
+            if !snapshot.data().is_empty() {
+                result["data"] =
+                    serde_json::to_value(snapshot.data()).map_err(|_| "Invalid data resources")?;
+            }
+            return serde_json::to_string(&result)
+                .map_err(|_| "Could not serialize definition inspection".into());
         }
         Request::Worksheet {
             source,
             technique_id,
+            data,
         } => {
-            let snapshot = worksheet_snapshot(source, technique_id)?;
+            let snapshot = worksheet_snapshot(source, technique_id, data)?;
             let worksheet = snapshot
                 .worksheet()
                 .map_err(|_| "Could not project worksheet")?;
@@ -170,8 +236,9 @@ pub fn execute(request: &str) -> Result<String, String> {
         Request::WorksheetAvailability {
             source,
             technique_id,
+            data,
         } => {
-            let result = worksheet_snapshot(source, technique_id)?.worksheet();
+            let result = worksheet_snapshot(source, technique_id, data)?.worksheet();
             let value = match result {
                 Ok(_) => serde_json::json!({"available": true}),
                 Err(errors) => {
@@ -181,13 +248,13 @@ pub fn execute(request: &str) -> Result<String, String> {
             return serde_json::to_string(&value)
                 .map_err(|_| "Could not inspect workbook availability".into());
         }
-        Request::Inspect { source } => {
+        Request::Inspect { source, data, widgets } => {
             if source.len() > MAX_SOURCE {
                 return Err("Practice source exceeds 64 KiB".into());
             }
-            let result = match compiler::compile(&source) {
+            let result = match compiler::compile_with_widgets(&source, &data,&widgets) {
                 Ok(compiled) => {
-                    serde_json::json!({"diagnostics":compiled.diagnostics(), "structure":compiled.inspect().map_err(|_| "Could not inspect source")?})
+                    serde_json::json!({"diagnostics":compiled.diagnostics(), "structure":compiled.inspect().map_err(|_| "Could not inspect source")?,"widgets":compiled.widget_packages()})
                 }
                 Err(errors) => serde_json::json!({"diagnostics":errors,"structure":null}),
             };
@@ -195,17 +262,23 @@ pub fn execute(request: &str) -> Result<String, String> {
         }
         Request::Start {
             source,
+            widgets,
+            data,
             root_id,
             inputs,
         } => {
-            check_source(&source)?;
+            compiler::compile_with_widgets(&source,&data,&widgets).map_err(|e|serde_json::to_string(&e).unwrap_or_default())?;
             if root_id.is_empty() || root_id.len() > 128 {
                 return Err("Invalid preview identity".into());
             }
-            let snapshot = ExecutableSnapshot::build(SourceBundle {
-                root: ROOT.into(),
-                patterns: BTreeMap::from([(ROOT.into(), source)]),
-            })
+            let snapshot = ExecutableSnapshot::build_with_widgets(
+                SourceBundle {
+                    root: ROOT.into(),
+                    patterns: BTreeMap::from([(ROOT.into(), source)]),
+                },
+                data,
+                widgets,
+            )
             .map_err(|_| "Practice could not compile")?;
             let turn = manager::start(snapshot, root_id, inputs, preview_limits())
                 .map_err(|_| "Starting values do not match the declared input types")?;

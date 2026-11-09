@@ -22,6 +22,57 @@ function labels(source: string, inspection: CheckedSource, position = source.len
 }
 
 describe('completion uses the existing compiler projection', () => {
+  it('uses mapping-pipe templates and compiles them with the shipped browser compiler', () => {
+    const prefix = ':language 1\nnotes = ["  Take a pause  ", "Ask   for help"]\n';
+    const source = prefix + 'cleaned = notes |>> trim |>> normalize_whitespace\n-> end';
+    const inspection = checked(source);
+    expect(
+      inspection.structure.bindings.find((binding) => binding.name === 'cleaned')?.value_type,
+    ).toEqual({ list: 'text' });
+    const partial = prefix + 'value = notes |>> tr';
+    const set = completions(partial, partial.length, inspection);
+    expect(set.items.find((item) => item.label === 'trim')?.insert).toBe('trim');
+    const scores = ':language 1\nscores = [1, 12]\nvalue = scores |>> cl';
+    expect(
+      completions(scores, scores.length).items.find((item) => item.label === 'clamp')?.insert,
+    ).toBe('clamp(¦0, 10)');
+    const filter = prefix + 'value = notes |>> fi';
+    expect(
+      completions(filter, filter.length).items.some((item) => item.insert.includes(' ~ ')),
+    ).toBe(false);
+    expect(
+      checked(prefix + 'value = notes\n  |>> trim\n  |> count\n-> end').structure,
+    ).not.toBeNull();
+  });
+  it('suggests and compiles pure list functions and the optional fallback operator', () => {
+    const prefix = ':language 1\nnotes: list[text] = []\n';
+    expect(labels(prefix + 'value = notes |> fir', checked(prefix + '-> end'))).toEqual(['first']);
+    const incomplete = prefix + 'value = first(notes) ??';
+    const set = completions(incomplete, incomplete.length);
+    expect(set.items.find((item) => item.label === '??')?.insert).toBe('?? ¦fallback');
+    const source =
+      ':language 1\n:output value: text\nnotes: list[text] = []\nvalue = first(notes) ?? "No notes yet."\n-> end';
+    expect(checked(source).structure.outputs.value).toBe('text');
+  });
+  it('inspects additive annotations using the shipped browser compiler', () => {
+    const source =
+      ':language 1\n:output notes: list[Optional[text]]\nnotes = [None, "space"]\n-> end';
+    const inspection = checked(source);
+    expect(inspection.structure.outputs.notes).toEqual({ list: { optional: 'text' } });
+    const invalid: Inspection = JSON.parse(
+      editor(
+        JSON.stringify({ operation: 'inspect', source: ':language 1\nnote: text = None\n-> end' }),
+      ),
+    );
+    expect(invalid.diagnostics.some((issue) => issue.severity === 'Error')).toBe(true);
+  });
+  it('offers the compiler-proven static choice IDs inside local match arms', () => {
+    const prefix =
+      ':language 1\nchoice = !choose {\n- yes: "Yes"\n- no: "No"\nChoose.\n}\nalias = choice\n?match alias {\n';
+    const inspection = checked(prefix + ':case yes {\n}\n:case no {\n}\n}\n-> end');
+    expect(labels(prefix + ':case ', inspection)).toEqual(['no', 'yes']);
+    expect(labels(prefix.replace('"Yes"', '"Changed"') + ':case ', inspection)).toEqual([]);
+  });
   it('completes nested record fields without inferring types from source text', () => {
     const prefix = ':language 1\nrecord = {text: "hello", nested: {value: 2}}\n';
     const inspection = checked(prefix + '-> end');

@@ -1,4 +1,13 @@
+import { parseBearingsNotebook, type BearingsNotebook } from './bearings.js';
+import {
+  parseMapPosition,
+  parseSituationLinks,
+  type SituationLink,
+  type SituationMapPosition,
+} from './situation-graph.js';
+
 /** Private queue entries, separate from published patterns and practice runs. */
+export type SituationPriority = 1 | 2 | 3 | 4 | 5;
 export type Situation = Readonly<{
   id: string;
   workspaceId: string;
@@ -8,7 +17,16 @@ export type Situation = Readonly<{
   revision: number;
   createdAt: string;
   updatedAt: string;
+  notebook?: BearingsNotebook;
+  connections?: readonly SituationLink[];
+  mapPosition?: SituationMapPosition;
+  priority?: SituationPriority;
 }>;
+export function parseSituationPriority(value: unknown): SituationPriority {
+  if (!Number.isInteger(value) || Number(value) < 1 || Number(value) > 5)
+    throw new Error('Choose a priority from 1 to 5 (5 is highest).');
+  return value as SituationPriority;
+}
 export function situationContent(title: string, context: string) {
   if (typeof title !== 'string' || !title.trim() || title.trim().length > 180)
     throw new Error('Give your situation a title between 1 and 180 characters.');
@@ -46,6 +64,12 @@ export function parseSituation(value: unknown): Situation {
     revision: Number(row.revision),
     createdAt: timestamp('createdAt'),
     updatedAt: timestamp('updatedAt'),
+    ...(row.notebook === undefined ? {} : { notebook: parseBearingsNotebook(row.notebook) }),
+    ...(row.connections === undefined
+      ? {}
+      : { connections: parseSituationLinks(row.connections, text('id')) }),
+    ...(row.mapPosition === undefined ? {} : { mapPosition: parseMapPosition(row.mapPosition) }),
+    ...(row.priority === undefined ? {} : { priority: parseSituationPriority(row.priority) }),
   };
 }
 export const orderSituations = (items: readonly Situation[]): Situation[] =>

@@ -13,7 +13,7 @@ export default defineConfig({
   webServer: {
     command: 'pnpm build && pnpm preview --host 127.0.0.1',
     url: 'http://127.0.0.1:4173',
-    env: { VITE_RELEASE_PROFILE: 'core' },
+    env: { VITE_RELEASE_PROFILE: 'core', PUBLIC_DROPBOX_APP_KEY: 'browser-test-app-key' },
     reuseExistingServer: false,
   },
 });

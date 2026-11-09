@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { loadAndCompileCorpus, parseMarkdownEntity } from '../src/index.js';
@@ -26,6 +26,51 @@ const read = (path: string) => readFileSync(resolve(repository, path), 'utf8');
 const catalog = JSON.parse(read('packages/reframing-patterns/catalog.json')) as Catalog;
 
 describe('reframing Commons collection', () => {
+  it('provides a readable explanation for every creativity entry, including standalone practices', () => {
+    const expectedHeadings = [
+      'Core idea',
+      'When to use it',
+      'How it works',
+      'Worked examples',
+      'Pitfalls and limits',
+      'Related patterns',
+      'Sources and attribution',
+    ];
+    const entries = ['reframing', 'getting-unstuck'].flatMap((id) => {
+      const parsed = parseMarkdownEntity(read(`content/collections/${id}.md`), {
+        sourceId: 'commons',
+        sourcePath: id,
+      });
+      if (parsed.entity?.type !== 'collection') throw new Error(`Expected collection ${id}`);
+      return parsed.entity.items;
+    });
+    for (const id of entries) {
+      const path = [`content/patterns/${id}.md`, `content/practices/${id}.md`].find((p) =>
+        existsSync(resolve(repository, p)),
+      );
+      expect(path, `missing collection entry ${id}`).toBeDefined();
+      const body = read(path!)
+        .replace(/^---\n[\s\S]*?\n---\n/, '')
+        .split(/^## (?:Executable Pattern Markdown|Practice —)/m)[0]!
+        .replace(/```[\s\S]*?```/g, '')
+        .replace(/!\[[^\]]*\]\([^\n]*\)/g, '');
+      const headings = [...body.matchAll(/^## (.+)$/gm)].map((match) => match[1]);
+      expect(headings, `${id}: shared readable outline`).toEqual(expectedHeadings);
+      const explanation = body.split('## Sources and attribution')[0]!;
+      expect(
+        explanation.split(/\s+/).filter(Boolean).length,
+        `${id}: readable prose`,
+      ).toBeGreaterThanOrEqual(350);
+      const examples = explanation
+        .split('## Worked examples')[1]!
+        .split('## Pitfalls and limits')[0]!;
+      expect(
+        examples.split(/\s+/).filter(Boolean).length,
+        `${id}: worked example`,
+      ).toBeGreaterThanOrEqual(50);
+    }
+  });
+
   it('has a complete, acyclic catalog with exact public source copies', () => {
     expect(catalog.namespace).toBe('reframing');
     expect(catalog.language).toBe(1);
@@ -76,7 +121,11 @@ describe('reframing Commons collection', () => {
       }));
       const declaredOutputs = [...source.matchAll(/^:output (\S+)$/gm)].map((match) => match[1]!);
       const calls = [
-        ...new Set([...source.matchAll(/^!use (reframing\.[a-z-]+)/gm)].map((match) => match[1]!)),
+        ...new Set(
+          [...source.matchAll(/^\s*(?:[\w-]+ = )?!use (reframing\.[a-z-]+)/gm)].map(
+            (match) => match[1]!,
+          ),
+        ),
       ];
       expect(entry.inputs).toEqual(declaredInputs);
       expect(entry.outputs).toEqual(declaredOutputs);
@@ -98,13 +147,18 @@ describe('reframing Commons collection', () => {
       if (parsed.entity?.type !== 'collection') throw new Error(`Expected collection ${id}`);
       return parsed.entity.items;
     });
-    expect(new Set(listed).size).toBe(26);
+    expect(new Set(listed).size).toBe(31);
     expect([...listed].sort()).toEqual(
       [
         ...catalog.patterns.map((entry) => entry.id.replace('.', '-')),
         'creative-reframing',
         'five-alternative-frames',
         'reduce-the-first-step',
+        'abstraction-laddering',
+        'zwicky-box',
+        'productive-thinking-model',
+        'enact-a-possibility-before-committing',
+        'tell-the-story-without-words',
       ].sort(),
     );
     const corpus = await loadAndCompileCorpus({

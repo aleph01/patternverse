@@ -51,7 +51,7 @@
             <PatternIcon icon={patternIconForPattern(pattern.id, pattern.title)} decorative />
           </div>
           <div class="pattern-copy">
-            <span class="verse-label">{pattern.verseTitle ?? 'Patternverse commons'}</span>
+            <span class="verse-label">{pattern.verseTitle ?? 'Commons'}</span>
             <h3>{pattern.title}</h3>
             <p class="summary">{pattern.summary}</p>
             <span class="explore">Explore pattern <span aria-hidden="true">↗</span></span>

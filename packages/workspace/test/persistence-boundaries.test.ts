@@ -69,12 +69,24 @@ describe('persistence composition compatibility', () => {
     expect(PERSONAL_SOURCE_ID).toBe('personal');
     expect(Object.keys(workspace).sort()).toEqual(
       [
+        'widgetDependencyLock',
+        'lockWidgetDependencies',
+        'listWidgetDrafts',
+        'saveWidgetDraft',
+        'removeWidget',
+        'listWidgetReleases',
+        'saveWidgetRelease',
+        'importWidgetPackage',
+        'setWidgetEnabled',
+        'widgetEnabled',
         'applySyncData',
+        'changeSituationConnection',
         'close',
         'createEntity',
         'createSituation',
         'deleteEntity',
         'deletePracticeRun',
+        'deleteSituation',
         'getEntity',
         'getFavorite',
         'getPracticeRun',
@@ -90,11 +102,13 @@ describe('persistence composition compatibility', () => {
         'listUsefulness',
         'moveSituation',
         'mutateEntities',
+        'positionSituationOnMap',
         'readWorkspaceData',
         'renamePracticeRun',
         'renameWorkspace',
         'replaceFromBackup',
         'savePracticeRun',
+        'savePatternWithPractices',
         'setFavorite',
         'setSavedEntry',
         'setUsefulness',
@@ -220,7 +234,7 @@ describe('persistence composition compatibility', () => {
       expect(snapshot.workspace).not.toHaveProperty('owner');
       expect(JSON.stringify(snapshot)).not.toContain('never-export');
       const database = await inspect(options);
-      expect(database.verno).toBe(5);
+      expect(database.verno).toBe(7);
       expect(database.tables.map((table) => table.name).sort()).toEqual([
         'entities',
         'favorites',
@@ -228,6 +242,10 @@ describe('persistence composition compatibility', () => {
         'recoveryBackups',
         'situations',
         'usefulness',
+        'widgetDrafts',
+        'widgetInstallations',
+        'widgetLocks',
+        'widgetReleases',
         'workspaces',
       ]);
       expect(await database.table('entities').get(entity.id)).toEqual(entity);

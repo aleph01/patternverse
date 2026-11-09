@@ -1,3 +1,4 @@
+import { createWidgetOperations } from './persistence/widgets.js';
 import type { LocalWorkspace, WorkspaceOptions } from './api.js';
 import { createDatabase } from './persistence/database.js';
 import { createWorkspaceMetadata } from './persistence/metadata.js';
@@ -9,8 +10,11 @@ import { createWorkspaceTransferOperations } from './persistence/transfer.js';
 import type { PersistenceContext } from './persistence/context.js';
 
 export * from './api.js';
+export * from './widgets.js';
 export * from './conditional-write.js';
 export * from './situations.js';
+export * from './situation-graph.js';
+export * from './bearings.js';
 export * from './library.js';
 export * from './ownership.js';
 export * from './authoring.js';
@@ -29,6 +33,7 @@ export const createIndexedDbWorkspace = (options: WorkspaceOptions = {}): LocalW
 
   return {
     ...createEntityOperations(context),
+    ...createWidgetOperations(context),
     ...createLibraryAnnotationOperations(context),
     ...createPracticeRunOperations(context),
     ...createSituationOperations(context),

@@ -216,7 +216,7 @@ it.each([
   {
     status: 'in-progress' as const,
     checkpoint: 'source',
-    patternRef: { sourceId: 'personal', entityId: 'test-pattern' },
+    patternRef: { sourceId: 'external', entityId: 'test-pattern' },
   },
 ])('does not offer unsupported resume actions (%j)', (patch) => {
   expect(historyCanResume({ ...run, ...patch }, [commonPattern])).toBe(false);
@@ -262,4 +262,18 @@ it('partitions generated catalogs once without losing/repeating records across p
     }),
     { numRuns: 100 },
   );
+});
+
+it('offers private resume through the local practice runner', () => {
+  expect(
+    historyCanResume(
+      {
+        ...run,
+        status: 'in-progress',
+        checkpoint: 'opaque checkpoint',
+        patternRef: { sourceId: 'personal', entityId: 'test-pattern' },
+      },
+      [],
+    ),
+  ).toBe(true);
 });

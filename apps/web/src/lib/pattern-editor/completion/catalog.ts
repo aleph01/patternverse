@@ -3,10 +3,10 @@ import { item, type Completion } from './types';
 /** Templates use a single caret marker; inserted text still goes through the Rust compiler. */
 export function commandSnippets(bound: boolean): Completion[] {
   const snippets = [
-    item('!ask', `!ask${bound ? '' : ' response'} {\n  ¦What comes to mind?\n}`, 'Ask for text'),
+    item('!ask', `${bound ? '' : 'response = '}!ask {\n  ¦What comes to mind?\n}`, 'Ask for text'),
     item(
       '!form',
-      `!form${bound ? '' : ' reflection'} {\n  :title "Reflect"\n  !ask thought {\n    :required true\n    :multiline true\n    ¦What comes to mind?\n  }\n}`,
+      `${bound ? '' : 'reflection = '}!form {\n  :title "Reflect"\n  thought = !ask {\n    ¦What comes to mind?\n  }\n}`,
       'Grouped questions · one record',
     ),
     item(
@@ -18,59 +18,64 @@ export function commandSnippets(bound: boolean): Completion[] {
     item('!show', '!show {\n  ¦Notice this.\n}', 'Display text'),
     item(
       '!timer',
-      `!timer${bound ? '' : ' pause'} {\n  :duration 60\n  :adjustable false\n  :blocking true\n  ¦Take a quiet pause.\n}`,
+      `${bound ? '' : 'pause = '}!timer {\n  :duration 60\n  :adjustable false\n  :blocking true\n  ¦Take a quiet pause.\n}`,
       'Countdown timer',
     ),
     item(
       '!rate',
-      `!rate${bound ? '' : ' rating'} 0..10 {\n  ¦How strong is it?\n}`,
+      `${bound ? '' : 'rating = '}!rate 0..10 {\n  ¦How strong is it?\n}`,
       'Ask for a rating',
     ),
     item(
       '!choose',
-      `!choose${bound ? '' : ' choice'} {\n  ¦Choose what fits.\n  - first: "First option"\n  - second: "Second option"\n}`,
+      `${bound ? '' : 'choice = '}!choose {\n  ¦Choose what fits.\n  - first: "First option"\n  - second: "Second option"\n}`,
       'Participant choice',
     ),
     item(
       '!rank',
-      `!rank${bound ? '' : ' ordered'} [from=items] {\n  ¦Arrange these in your order.\n}`,
+      `${bound ? '' : 'ordered = '}!rank [from=items] {\n  ¦Arrange these in your order.\n}`,
       'Participant ranking',
     ),
     item(
       '!collect',
-      `!collect${bound ? '' : ' entries'} {\n  :max 3\n  response = !ask {\n    ¦What would you add?\n  }\n  -> yield response\n}`,
+      `${bound ? '' : 'entries = '}!collect {\n  :max 3\n  response = !ask {\n    ¦What would you add?\n  }\n  -> yield response\n}`,
       'Collect explicit results',
     ),
     item(
       '!refine',
-      `!refine[rounds=4] ${bound ? '' : 'review = '}wording {\n  :as current\n  edited = !ask {\n    ¦How would you change {{current}}?\n  }\n  -> propose edited\n}`,
+      `${bound ? '' : 'review = '}!refine[rounds=4] wording {\n  :as current\n  edited = !ask {\n    ¦How would you change {{current}}?\n  }\n  -> propose edited\n}`,
       'Participant review of wording',
     ),
     item(
       '!agent',
-      `!agent${bound ? '' : ' suggestion'} {\n  :returns text\n  ¦Prepare a short suggestion.\n}`,
+      `${bound ? '' : 'suggestion = '}!agent {\n  :returns text\n  ¦Prepare a short suggestion.\n}`,
       'Generate a typed value',
     ),
     item(
       '!turn',
-      `!turn${bound ? '' : ' response'} {\n  ¦Reflect briefly.\n}`,
+      `${bound ? '' : 'response = '}!turn {\n  ¦Reflect briefly.\n}`,
       'Conversational reply',
     ),
     item(
       '!use',
-      `!use ¦helper${bound ? '' : ' as result'} {\n  :with topic\n}`,
+      `${bound ? '' : 'result = '}!use ¦helper {\n  :with topic\n}`,
       'Call a pinned pattern',
     ),
     item('~', '~ ¦Restate {{original}} without changing meaning.', 'Realize wording'),
     item(
       '?match',
-      '?match ¦value {\n  :case variant -> label\n  :else -> end\n}',
+      '?match ¦value {\n  :case variant {\n    !show {\n      Continue here.\n    }\n  }\n  :else {\n  }\n}',
       'Branch by value',
     ),
     item(
       '?loop',
       '?loop[4] state = initial {\n  next = !ask {\n    ¦What follows from {{state}}?\n  }\n  -> repeat next\n}',
       'Cancellable interaction loop',
+    ),
+    item(
+      '?branch',
+      '?branch {\n  :when ¦condition {\n  }\n  :else {\n  }\n}',
+      'Ordered local rules',
     ),
     item(
       'classifier',
@@ -130,9 +135,9 @@ export function attributeSuggestions(kind: string, insideForm: boolean): Complet
                 : kind === 'classifier'
                   ? ['context prompt text', 'case answer "¦Meaning"', 'fallback other']
                   : kind === 'match'
-                    ? ['case ¦variant -> label', 'else -> label']
+                    ? ['case ¦variant {\n  \n}', 'else {\n  \n}']
                     : kind === 'branch'
-                      ? ['when ¦condition -> label', 'else -> label']
+                      ? ['when ¦condition {\n  \n}', 'else {\n  \n}']
                       : kind === 'classify' || kind === 'use'
                         ? ['with ¦input']
                         : kind === 'refine'
@@ -161,19 +166,21 @@ export function attributeSuggestions(kind: string, insideForm: boolean): Complet
 
 export function parameterSuggestions(kind: string, supplied: readonly string[]): Completion[] {
   return (
-    kind === 'refine'
-      ? ['rounds=4', 'renewable']
-      : kind === 'rank'
-        ? ['from=items', 'label=label', 'prefer=reorder']
-        : [
-            'multi',
-            'min=1',
-            'max=3',
-            'from=items',
-            'prefer=checklist',
-            'prefer=chips',
-            'prefer=radio',
-          ]
+    kind === 'ask'
+      ? ['optional']
+      : kind === 'refine'
+        ? ['rounds=4', 'renewable']
+        : kind === 'rank'
+          ? ['from=items', 'label=label', 'prefer=reorder']
+          : [
+              'multi',
+              'min=1',
+              'max=3',
+              'from=items',
+              'prefer=checklist',
+              'prefer=chips',
+              'prefer=radio',
+            ]
   )
     .filter((value) => !supplied.includes(value.split('=')[0]))
     .map((value) => item(value, value, 'Optional parameter'));
@@ -182,6 +189,13 @@ export function parameterSuggestions(kind: string, supplied: readonly string[]):
 /** Keep pipeline and ordinary-call templates in the same suggestion order. */
 export function pureFunctionSuggestions(pipeline: boolean): Completion[] {
   const options: Completion[] = [];
+  options.push(
+    item(
+      'shuffle',
+      pipeline ? 'shuffle' : 'shuffle(¦items)',
+      'Shuffle once per run; add a text seed for a pure call',
+    ),
+  );
   options.push(
     ...['trim', 'lowercase', 'normalize_whitespace', 'count', 'flatten'].map((name) =>
       item(name, pipeline ? name : `${name}(¦value)`, 'Pure function'),
@@ -194,6 +208,25 @@ export function pureFunctionSuggestions(pipeline: boolean): Completion[] {
       ['map', 'helper'],
       ['filter', 'helper'],
       ['fold', '0, helper'],
+      ['reduce', 'helper'],
+    ].map(([name, args]) =>
+      item(name!, `${name}(${pipeline ? '¦' : '¦value, '}${args})`, 'Pure function'),
+    ),
+  );
+  options.push(
+    ...['sum', 'min', 'max', 'first', 'last', 'distinct', 'records'].map((name) =>
+      item(name, pipeline ? name : `${name}(¦value)`, 'Pure function'),
+    ),
+    ...[
+      ['join', '", "'],
+      ['split', '","'],
+      ['contains', '"text"'],
+      ['starts_with', '"prefix"'],
+      ['ends_with', '"suffix"'],
+      ['find', 'helper'],
+      ['any', 'helper'],
+      ['all', 'helper'],
+      ['lookup', '"id"'],
     ].map(([name, args]) =>
       item(name!, `${name}(${pipeline ? '¦' : '¦value, '}${args})`, 'Pure function'),
     ),

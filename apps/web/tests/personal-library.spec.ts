@@ -1,3 +1,9 @@
+import {
+  expectLibraryScope,
+  librarySearchInput,
+  searchLibrary,
+  selectLibraryScope,
+} from './helpers/library';
 import { expect, test } from '@playwright/test';
 
 test('saves from the article, retaining saved scope, verse, search, and desktop layout', async ({
@@ -10,7 +16,7 @@ test('saves from the article, retaining saved scope, verse, search, and desktop 
   await expect(results).toBeVisible();
   if (testInfo.project.name === 'chromium')
     await expect(results.getByRole('button', { name: /my library/i })).toHaveCount(0);
-  await page.getByRole('searchbox').fill('Observer');
+  await searchLibrary(page, 'Observer');
   await results.getByRole('link', { name: /Observer/ }).click();
   const header = page.locator('.entity-hero');
   const bookmark = header.getByRole('button', { name: 'Add to my library', exact: true });
@@ -44,27 +50,25 @@ test('saves from the article, retaining saved scope, verse, search, and desktop 
   await page.reload();
   await expect(saved).toBeEnabled();
   await page.goto('/library');
-  const scope = page.getByRole('navigation', { name: 'Library scope' });
-  await expect(scope.getByRole('button', { name: /^My library/ })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
+  await expectLibraryScope(page, 'explore');
+  await selectLibraryScope(page, 'saved');
   if (testInfo.project.name === 'mobile-chromium') {
     await page.getByRole('button', { name: 'Filter library' }).click();
     await page
-      .getByRole('combobox', { name: 'Verse', exact: true })
-      .selectOption({ label: 'Software Engineering' });
+      .getByRole('group', { name: 'Choose one Verse', exact: true })
+      .getByRole('button', { name: 'Software Engineering', exact: true })
+      .click();
   } else {
     await page
       .getByRole('complementary', { name: 'Browse verses' })
       .getByRole('button', { name: 'Software Engineering', exact: true })
       .click();
   }
-  await page.getByRole('searchbox').fill('Observer');
+  await searchLibrary(page, 'Observer');
   await expect(results.getByRole('link')).toHaveCount(1);
-  await scope.getByRole('button', { name: /^(Explore|Commons)$/ }).click();
-  await expect(page.getByRole('searchbox')).toHaveValue('Observer');
-  await scope.getByRole('button', { name: /^My library/ }).click();
+  await selectLibraryScope(page, 'explore');
+  await expect(librarySearchInput(page)).toHaveValue('Observer');
+  await selectLibraryScope(page, 'saved');
   if (testInfo.project.name === 'chromium') {
     for (const mode of ['List', 'Cards']) {
       await page
@@ -83,7 +87,7 @@ test('saves from the article, retaining saved scope, verse, search, and desktop 
   await remove.click();
   await expect(bookmark).toHaveAttribute('aria-pressed', 'false');
   await page.goto('/library');
-  await scope.getByRole('button', { name: /^My library/ }).click();
+  await selectLibraryScope(page, 'saved');
   await expect(page.getByRole('heading', { name: 'Nothing saved yet' })).toBeVisible();
   await expect(page.getByRole('button', { name: /favorite/i })).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
@@ -104,7 +108,7 @@ test('opens a collection before saving, without saving every member', async ({
     .getByRole('navigation', { name: 'Library categories' })
     .getByRole('button', { name: 'Collections', exact: true })
     .click();
-  await page.getByRole('searchbox').fill('GoF Design Patterns');
+  await searchLibrary(page, 'GoF Design Patterns');
   const results = page.getByRole('region', { name: 'Library results' });
   await expect(results.getByRole('button', { name: /my library/i })).toHaveCount(0);
   await results.getByRole('link', { name: /GoF Design Patterns/ }).click();
@@ -119,10 +123,8 @@ test('opens a collection before saving, without saving every member', async ({
   await page.goto('/library');
   if (testInfo.project.name === 'mobile-chromium')
     await page.getByRole('button', { name: 'Filter library' }).click();
-  await expect(page.getByRole('button', { name: /^My library/ })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
+  await expectLibraryScope(page, 'explore');
+  await selectLibraryScope(page, 'saved');
   await page
     .getByRole('navigation', { name: 'Library categories' })
     .getByRole('button', { name: 'Collections', exact: true })
@@ -132,7 +134,11 @@ test('opens a collection before saving, without saving every member', async ({
     .getByRole('navigation', { name: 'Library categories' })
     .getByRole('button', { name: 'Patterns', exact: true })
     .click();
-  await expect(results).toHaveCount(0);
+  if (testInfo.project.name === 'mobile-chromium') {
+    await expect(
+      results.getByRole('button', { name: 'GoF Design Patterns 23 patterns', exact: true }),
+    ).toBeVisible();
+  } else await expect(results).toHaveCount(0);
   await page
     .getByRole('navigation', { name: 'Library categories' })
     .getByRole('button', { name: 'All', exact: true })

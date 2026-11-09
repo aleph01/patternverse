@@ -1,3 +1,4 @@
+import { libraryScopeControl, searchLibrary } from './helpers/library';
 import { expect, test } from '@playwright/test';
 
 const selectedIds = (page: import('@playwright/test').Page) =>
@@ -8,7 +9,7 @@ const selectedIds = (page: import('@playwright/test').Page) =>
 test('daily editorial trio is stable, uses native icons, and adapts to mobile', async ({
   page,
   isMobile,
-}) => {
+}, testInfo) => {
   // Deliberately different from the prerender/build date: the static site must update itself.
   await page.clock.install({ time: new Date('2026-12-04T12:00:00Z') });
   await page.goto('/');
@@ -20,6 +21,8 @@ test('daily editorial trio is stable, uses native icons, and adapts to mobile', 
   await expect(section).toContainText('Three ideas to explore. A fresh selection every day.');
   const ids = await selectedIds(page);
   expect(new Set(ids).size).toBe(3);
+  const verses = await section.locator('.verse-label').allTextContents();
+  expect(new Set(verses).size).toBe(3);
   const links = await section
     .locator('.pattern-link')
     .evaluateAll((items) => items.map((item) => item.getAttribute('href')));
@@ -44,6 +47,7 @@ test('daily editorial trio is stable, uses native icons, and adapts to mobile', 
     expect(boxes[2]!.y).toBeGreaterThan(boxes[1]!.y);
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await section.screenshot({ path: testInfo.outputPath('daily-patterns.png') });
 
   const nativePaths = await section
     .locator('article')
@@ -62,8 +66,11 @@ test('daily editorial trio is stable, uses native icons, and adapts to mobile', 
     await page.goto(href!);
     await expect(page.locator('h1')).toBeVisible();
   }
+  // The compact mobile library omits icons; compare against the full library card.
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/library');
-  await page.getByRole('searchbox', { name: /Search (the catalog|my library)/ }).fill(title);
+  await expect(libraryScopeControl(page)).toBeEnabled();
+  await searchLibrary(page, title);
   const libraryCard = page
     .locator('.pattern-feed .feed-row')
     .filter({ has: page.getByRole('heading', { name: title, exact: true }) });

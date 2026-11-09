@@ -1,10 +1,57 @@
 /*
+  Cache-Control: no-transform
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: no-referrer
   Permissions-Policy: camera=(), geolocation=(), microphone=(self)
   Content-Security-Policy: frame-ancestors 'none'
 
+# Update discovery must not inherit the CDN's default JavaScript cache lifetime.
+/service-worker.js
+  Cache-Control: no-cache, max-age=0, must-revalidate, no-transform
+  Cloudflare-CDN-Cache-Control: no-store
+
+/_app/version.json
+  Cache-Control: no-store, no-transform
+
 /auth/*
   Cache-Control: no-store
   X-Robots-Tag: noindex, nofollow
+
+/owner/*
+  Cache-Control: private, no-store
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/library/search/*
+  Cache-Control: public, max-age=31536000, immutable, no-transform
+
+# Only the inert widget host may be framed. Its own restrictive CSP is in the HTML.
+/widget-host/*
+  ! X-Frame-Options
+  ! Content-Security-Policy
+  X-Robots-Tag: noindex, nofollow
+
+# Only published, ephemeral sharing presentations may be embedded on other sites.
+/embed/card/*
+  ! X-Frame-Options
+  ! Content-Security-Policy
+  X-Robots-Tag: noindex, nofollow
+
+/embed/practice/*
+  ! X-Frame-Options
+  ! Content-Security-Policy
+  X-Robots-Tag: noindex, nofollow
+
+# Preserve offline fingerprints on pages with public contact links.
+/contribute
+  Cache-Control: no-transform
+
+/privacy
+  Cache-Control: no-transform
+
+/impressum
+  Cache-Control: no-transform
+
+# Preserve literal code examples and their offline fingerprints.
+/pattern/adapter
+  Cache-Control: no-transform

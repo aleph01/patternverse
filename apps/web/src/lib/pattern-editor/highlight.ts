@@ -1,7 +1,7 @@
 /** Mira's cosmetic token layer. Compilation remains exclusively in Rust. */
 export function highlightSource(source: string): { text: string; kind: string }[] {
   const expression =
-    /(^[\t ]*#[^\n]*|\{\{[^}\n]*\}\}|"(?:\\.|[^"\\])*"|\[[^\]\n]*\]|^[\t ]*- [\w-]+:|[!?][\w-]+|\?~|~|^[\t ]*:[\w-]+|^[\t ]*[\w-]+:|^[\t ]*[\w-]+[\t ]*=(?!=)|^[\t ]*=|->|=>|\|>|\b(?:type|classifier|fn|flow|events|on|each|in|yield|true|false)\b)/gm;
+    /(^[\t ]*#[^\n]*|\{\{[^}\n]*\}\}|"(?:\\.|[^"\\])*"|\[[^\]\n]*\]|^[\t ]*- [\w-]+:|\?\?|[!?][\w-]+|\?~|~|^[\t ]*:[\w-]+|^[\t ]*[\w-]+:|^[\t ]*[\w-]+[\t ]*=(?!=)|^[\t ]*=|->|=>|\|>>?|\b(?:_|type|classifier|fn|flow|events|on|each|in|yield|true|false|None|Optional)\b)/gm;
   const tokens: { text: string; kind: string }[] = [];
   let start = 0;
   for (const match of source.matchAll(expression)) {

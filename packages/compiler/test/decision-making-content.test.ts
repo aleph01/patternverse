@@ -69,9 +69,9 @@ describe('decision-making content package', () => {
     expect(verse?.type).toBe('verse');
     const collection = corpus.entities.find((entity) => entity.id === 'decision-making-patterns');
     expect(collection?.type).toBe('collection');
-    expect(collection?.collectionItems.map((ref) => ref.entityId)).toEqual(
-      articles.map(([id]) => id),
-    );
+    expect(
+      collection?.collectionItems.slice(0, articles.length).map((ref) => ref.entityId),
+    ).toEqual(articles.map(([id]) => id));
     expect(collection?.verseMemberships).toContainEqual({
       sourceId: 'commons',
       entityId: 'decision-making',

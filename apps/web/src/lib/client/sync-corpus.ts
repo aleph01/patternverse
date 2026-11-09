@@ -60,6 +60,9 @@ export async function syncSnapshotToCorpus(
     for (const [prefix, rows] of [
       ['practice-runs', data.practiceRuns],
       ['situations', data.situations],
+      ['widget-locks', data.widgetLocks ?? []],
+      ['widget-drafts', data.widgetDrafts ?? []],
+      ['widget-releases', data.widgetReleases ?? []],
     ] as const) {
       for (const row of rows) {
         const portable = Object.fromEntries(
@@ -98,6 +101,9 @@ export async function corpusToSyncSnapshot(
     practiceRuns: [],
     situations: [],
     sessions: [],
+    widgetDrafts: [],
+    widgetReleases: [],
+    widgetLocks: [],
   };
   let name = identity.name;
   const prefixes: Record<string, string> = {
@@ -106,6 +112,9 @@ export async function corpusToSyncSnapshot(
     usefulness: 'usefulness',
     'practice-runs': 'practiceRuns',
     situations: 'situations',
+    'widget-locks': 'widgetLocks',
+    'widget-drafts': 'widgetDrafts',
+    'widget-releases': 'widgetReleases',
     sessions: 'sessions',
   };
   for (const file of createCorpusSnapshot(corpus).files) {

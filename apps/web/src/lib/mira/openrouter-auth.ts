@@ -25,7 +25,8 @@ function safeReturn(url: URL, origin: string): string {
   }
   if (/\/auth\/openrouter\/connect\/?$/.test(url.pathname)) {
     // The practice stays in its original tab. Only connection state travels through OAuth.
-    url.search = '?connected=1';
+    url.search =
+      url.searchParams.get('app') === 'bearings' ? '?connected=1&app=bearings' : '?connected=1';
     url.hash = '';
   } else if (/\/mira\/?$/.test(url.pathname)) {
     url.searchParams.set('panel', 'settings');
@@ -71,7 +72,11 @@ export async function beginOpenRouterConnection({
   authorization.searchParams.set('code_challenge_method', 'S256');
   authorization.searchParams.set(
     'key_label',
-    /\/mira\/?$/.test(new URL(returnUrl).pathname) ? 'Patternverse Mira' : 'Patternverse practices',
+    new URL(returnUrl).searchParams.get('app') === 'bearings'
+      ? 'Patternverse Bearings'
+      : /\/mira\/?$/.test(new URL(returnUrl).pathname)
+        ? 'Patternverse Mira'
+        : 'Patternverse practices',
   );
   return authorization.href;
 }

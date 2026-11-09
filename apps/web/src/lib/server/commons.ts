@@ -31,7 +31,7 @@ const compileCommons = async (includeDrafts: boolean): Promise<CompiledCorpus> =
 
   if (hasErrors(corpus.diagnostics)) {
     throw new Error(
-      `Patternverse commons could not be loaded:\n\n${corpus.diagnostics.map(formatDiagnostic).join('\n\n')}`,
+      `Commons could not be loaded:\n\n${corpus.diagnostics.map(formatDiagnostic).join('\n\n')}`,
     );
   }
 
@@ -68,6 +68,7 @@ export type EntitySummary = {
   readonly status: CompiledEntity['status'];
   readonly url: string;
   readonly collectionNames?: readonly string[];
+  readonly verseNames?: readonly string[];
   readonly collectionItems?: readonly EntityRef[];
 };
 

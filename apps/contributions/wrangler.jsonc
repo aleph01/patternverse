@@ -1,0 +1,28 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "patternverse-contributions",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    // Enable only after the sender domain and destination mailbox are verified.
+    "ENABLED": "false",
+    "FROM_EMAIL": "contributions@patternverse.org",
+    "ALLOWED_ORIGINS": "https://patternverse.org,https://www.patternverse.org",
+  },
+  "send_email": [{ "name": "EMAIL", "destination_address": "contact@patternverse.org" }],
+  "ratelimits": [
+    {
+      "name": "CONTACT_LIMITER",
+      "namespace_id": "7421902",
+      "simple": { "limit": 3, "period": 60 },
+    },
+  ],
+  "routes": [
+    { "pattern": "patternverse.org/api/contribute*", "zone_name": "patternverse.org" },
+    { "pattern": "www.patternverse.org/api/contribute*", "zone_name": "patternverse.org" },
+  ],
+  "observability": { "enabled": false },
+}

@@ -113,7 +113,7 @@
 }
 
 .markdown-body {
-  font-size: clamp(1.05rem, 1.35vw, 1.23rem);
+  font-size: clamp(1.05rem, calc(1.35vw * var(--text-scale)), 1.23rem);
   line-height: 1.72;
 }
 
@@ -161,6 +161,34 @@
   height: auto;
 }
 
+.markdown-body .content-photo {
+  margin: 2.4em 0;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.content-photo > a {
+  display: block;
+}
+
+.content-photo img {
+  display: block;
+  width: auto;
+  margin: 0 auto;
+}
+
+.content-photo figcaption {
+  padding: 1rem 1.2rem;
+  border-top: 1px solid var(--ink);
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.content-photo .figure-credit {
+  display: block;
+  margin-top: 0.5em;
+}
+
 .markdown-body .content-diagram {
   margin: 2.4em 0;
   border: 1px solid var(--ink);
@@ -182,6 +210,17 @@
   width: 720px;
   max-width: none;
   margin: 0 auto;
+}
+
+/* Authored compact companions keep chart labels readable without cropping on phones. */
+.diagram-scroll picture {
+  display: block;
+}
+
+.markdown-body .diagram-scroll picture img {
+  width: 100%;
+  min-width: 340px;
+  max-width: none;
 }
 
 .content-diagram figcaption {
@@ -227,6 +266,43 @@
 .markdown-body pre code {
   padding: 0;
   background: transparent;
+}
+
+.markdown-body pre.syntax-highlighted {
+  color: #252c28;
+  background: #f4f5f2;
+  border: 1px solid #dfe4dd;
+}
+
+.markdown-body pre.syntax-highlighted:focus-visible {
+  outline: 2px solid #00855b;
+  outline-offset: 3px;
+}
+
+.syntax-highlighted .syntax-kwd {
+  color: #7a2d89;
+}
+.syntax-highlighted .syntax-str,
+.syntax-highlighted .syntax-esc {
+  color: #176043;
+}
+.syntax-highlighted .syntax-func,
+.syntax-highlighted .syntax-var {
+  color: #174a8b;
+}
+.syntax-highlighted .syntax-class,
+.syntax-highlighted .syntax-type {
+  color: #7b4218;
+}
+.syntax-highlighted .syntax-num,
+.syntax-highlighted .syntax-bool {
+  color: #8a3b22;
+}
+.syntax-highlighted .syntax-cmnt {
+  color: #626962;
+}
+.syntax-highlighted .syntax-oper {
+  color: #48564c;
 }
 
 .markdown-body table {

@@ -6,7 +6,11 @@
   "exports": {
     ".": "./src/index.ts",
     "./references": "./src/compile.ts",
-    "./practice": "./src/practice.ts"
+    "./markdown": "./src/markdown.ts",
+    "./serialize": "./src/serialize.ts",
+    "./practice": "./src/practice.ts",
+    "./article-widget": "./src/article-widget.ts",
+    "./article-video": "./src/article-video.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",

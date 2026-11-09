@@ -33,7 +33,7 @@ physical-sensation treatment. Planning never creates calendar events or notifica
 ## Sources and execution
 
 `patterns/` contains the active version-1 Pattern Markdown programs. Their content
-release is version 2.1.0, with Worry Time at 2.2.0 (DBT 1.1.0); the language and checkpoint formats have not
+release is version 2.1.0, with Worry Time at 2.2.0 (DBT 1.2.0); the language and checkpoint formats have not
 changed.
 `content/patterns/` contains exact readable source copies plus scope/source notes.
 `content/collections/cbt.md` defines curated order.
@@ -42,6 +42,10 @@ changed.
 Rust owns branching, reply validation, checkpoints, and replay. After editing a source
 or host catalog, rebuild the checked-in browser engine with `pnpm build:pattern-wasm`.
 Run the native host tests and browser tests to verify source/catalog parity.
+
+The DBT 1.1.0 opening choices are preserved in `legacy/opening-choices/` for
+existing saved runs. New openings omit redundant exit choices; situation-specific
+safety and support routes remain available.
 
 ## Retired content and existing private runs
 

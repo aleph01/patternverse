@@ -14,7 +14,8 @@ const pattern = (id: string, overrides: Partial<DailyPattern> = {}): DailyPatter
   title: id,
   summary: 'A useful idea.',
   url: `/pattern/${id}`,
-  verseTitle: 'Creativity',
+  verseId: `verse-${id}`,
+  verseTitle: `Verse ${id}`,
   ...overrides,
 });
 const candidates = Array.from({ length: 23 }, (_, index) => pattern(`pattern-${index}`));
@@ -39,7 +40,7 @@ describe('daily discovery', () => {
     expect(
       ids(
         selectDailyPatterns(
-          candidates.map((entry) => ({ ...entry, title: 'Renamed' })),
+          candidates.map((entry) => ({ ...entry, title: 'Renamed', verseTitle: 'Renamed verse' })),
           '2026-10-04',
         ),
       ),
@@ -57,17 +58,62 @@ describe('daily discovery', () => {
       pattern('concept', { type: 'concept' }),
       pattern('practice', { type: 'practice' }),
       pattern('private', { sourceId: 'my-workspace' }),
+      pattern('unassigned', { verseId: undefined }),
+      pattern('empty-verse', { verseId: '' }),
     ];
     expect(selectDailyPatterns(entries, '2026-10-04')).toEqual([pattern('public')]);
   });
 
-  it('changes daily with no consecutive-day repeats when there are at least six patterns', () => {
+  it('changes daily with no consecutive-day repeats when there are at least six verses', () => {
     const today = selectDailyPatterns(candidates, '2026-10-04');
     const tomorrow = selectDailyPatterns(candidates, '2026-10-05');
     expect(tomorrow).not.toEqual(today);
     expect(tomorrow.some((entry) => today.some((previous) => previous.id === entry.id))).toBe(
       false,
     );
+  });
+
+  it('selects three distinct verses every day even when one verse dominates the library', () => {
+    const entries = [
+      ...Array.from({ length: 24 }, (_, index) =>
+        pattern(`creativity-${index}`, { verseId: 'creativity', verseTitle: 'Creativity' }),
+      ),
+      pattern('learning', { verseId: 'learning', verseTitle: 'Learning' }),
+      pattern('design', { verseId: 'design', verseTitle: 'Design' }),
+      pattern('music', { verseId: 'music', verseTitle: 'Music' }),
+    ];
+    const featured = new Set<string>();
+    for (let offset = 0; offset < 40; offset += 1) {
+      const day = new Date(Date.UTC(2026, 9, 4 + offset)).toISOString().slice(0, 10);
+      const selection = selectDailyPatterns(entries, day);
+      expect(selection).toHaveLength(3);
+      expect(new Set(selection.map((entry) => entry.verseId)).size).toBe(3);
+      expect(selectDailyPatterns([...entries].reverse(), day)).toEqual(selection);
+      selection.forEach((entry) => featured.add(entry.id));
+    }
+    expect(featured.size).toBe(entries.length);
+  });
+
+  it('uses verse IDs even when different verses share a title', () => {
+    const entries = candidates.slice(0, 3).map((entry) => ({ ...entry, verseTitle: 'Same name' }));
+    expect(selectDailyPatterns(entries, '2026-10-04')).toHaveLength(3);
+  });
+
+  it('shows only one pattern per available verse and rotates through all their patterns', () => {
+    for (const verseCount of [1, 2, 3]) {
+      const entries = Array.from({ length: 12 }, (_, index) =>
+        pattern(`p-${index}`, { verseId: `verse-${index % verseCount}` }),
+      );
+      const featured = new Set<string>();
+      for (let offset = 0; offset < 12; offset += 1) {
+        const day = new Date(Date.UTC(2026, 9, 4 + offset)).toISOString().slice(0, 10);
+        const selection = selectDailyPatterns(entries, day);
+        expect(selection).toHaveLength(verseCount);
+        expect(new Set(selection.map((entry) => entry.verseId)).size).toBe(verseCount);
+        selection.forEach((entry) => featured.add(entry.id));
+      }
+      expect(featured.size).toBe(entries.length);
+    }
   });
 
   it('eventually features every eligible pattern, including when the deck size divides by three', () => {

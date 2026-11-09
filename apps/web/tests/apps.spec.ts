@@ -13,10 +13,10 @@ test('a CBT checklist and cached pattern page work offline', async ({ page, cont
   await page
     .getByLabel('Exercise response')
     .fill('One mistake means the whole effort was worthless.');
-  await page.getByRole('button', { name: 'Continue ↓', exact: true }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true }).click();
   await page.getByLabel('All-or-nothing thinking', { exact: true }).check();
   await page.getByLabel('Disqualifying or discounting the positive', { exact: true }).check();
-  await page.getByRole('button', { name: 'Continue ↓', exact: true }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true }).click();
   await expect(page.getByLabel('Exercise response')).toBeVisible();
   await page.getByRole('link', { name: 'mira home' }).click();
   await expect(page.locator('.landing-session')).toHaveCount(1);
@@ -95,10 +95,10 @@ test('a library technique opens for review and runs with checklist choices witho
   await page.getByRole('button', { name: 'Start selected exercise' }).click();
   await page.getByRole('button', { name: 'Yes, begin gently' }).click();
   await page.getByLabel('Exercise response').fill('I always get everything wrong.');
-  await page.getByRole('button', { name: 'Continue ↓', exact: true }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true }).click();
   await page.getByLabel('All-or-nothing thinking').check();
   await page.getByLabel('Overgeneralization').check();
-  await page.getByRole('button', { name: 'Continue ↓', exact: true }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/, exact: true }).click();
   await expect(page.getByLabel('Exercise response')).toBeVisible();
   await page.reload();
   await page.getByRole('button', { name: 'Close pattern and practice selector' }).click();

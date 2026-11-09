@@ -1,8 +1,11 @@
 <script lang="ts">
+  import WidgetStep from '$lib/widgets/WidgetStep.svelte';
+  import type { WidgetInteraction } from '$lib/widgets/library';
+  import type { WidgetPackage } from '@patternverse/workspace';
   import { onMount } from 'svelte';
   import TextInput from '$lib/practice-inputs/TextInput.svelte';
   import RatingInput from '$lib/practice-inputs/RatingInput.svelte';
-  import type { Inspection } from './types';
+  import type { Inspection, PreviewMockResult } from './types';
   import { applySourcePreview, inputValues, startSourcePreview } from './bridge';
   import type { PatternRun as StandaloneRun } from '$lib/pattern-runtime/types';
   import { answerFor, promptFor } from '$lib/pattern-run/view';
@@ -19,11 +22,25 @@
     inspection,
     checking = false,
     disabled = false,
+    autoStart = false,
+    initialInputs = {},
+    mockResults = [],
+    heading = 'Preview',
+    isolated = false,
+    widgets = undefined,
+    data = undefined,
   }: {
     source: string;
     inspection: Inspection | null;
     checking?: boolean;
     disabled?: boolean;
+    autoStart?: boolean;
+    initialInputs?: Readonly<Record<string, string>>;
+    mockResults?: readonly PreviewMockResult[];
+    heading?: string;
+    isolated?: boolean;
+    widgets?: Record<string, WidgetPackage>;
+    data?: Record<string, unknown>;
   } = $props();
   let run = $state<StandaloneRun | null>(null),
     pinnedSource = $state(''),
@@ -52,6 +69,19 @@
   const ready = $derived(Boolean(inspection?.structure) && !checking && !disabled);
   const changed = $derived(Boolean(run) && pinnedSource !== source);
   const id = $props.id();
+  const mockChoices = $derived(
+    mockResults.filter((sample) => sample.kind === pending?.request.kind),
+  );
+  const review = $derived(
+    pending?.request.payload.review as
+      { candidate: string; choices: string[]; at_checkpoint: boolean } | undefined,
+  );
+  const reviewLabels: Record<string, string> = {
+    Accept: 'Keep this wording',
+    Revise: 'Revise the wording',
+    Continue: 'Allow another revision batch',
+    Finish: 'Finish without keeping it',
+  };
   onMount(() => () => {
     lifecycle.dispose();
     run = null;
@@ -64,11 +94,20 @@
       rating = Number(scale.min ?? 0);
     }
   });
+  $effect(() => {
+    if (autoStart && ready && !run && !working && !error) void start();
+  });
   async function start() {
     if (!ready || working) return;
     const snapshot = source;
     await lifecycle.execute(
-      () => startSourcePreview(snapshot, inputValues(inspection!.structure!.inputs, inputs)),
+      () =>
+        startSourcePreview(
+          snapshot,
+          inputValues(inspection!.structure!.inputs, { ...initialInputs, ...inputs }),
+          undefined,
+          { isolated, widgets, data },
+        ),
       (next) => {
         run = next;
         pinnedSource = snapshot;
@@ -87,6 +126,13 @@
     );
   }
   function fulfill(kind: string, value: unknown) {
+    if (kind === 'text' && run?.view.handles_messages && pending) {
+      void action(
+        { Message: { effect_id: pending.effect_id, message_id: crypto.randomUUID(), text: value } },
+        pending.run_id,
+      );
+      return;
+    }
     if (pending)
       void action(
         { Fulfill: { effect_id: pending.effect_id, result: { kind, value } } },
@@ -108,7 +154,7 @@
 
 <div class="preview">
   <header>
-    <strong>Preview</strong>
+    <strong>{heading}</strong>
     <div>
       {#if run && current}<button
           type="button"
@@ -118,7 +164,15 @@
           type="button"
           disabled={working || disabled}
           onclick={() => action('Resume', run!.view.root_id)}>Resume</button
-        >{/if}<button type="button" disabled={!ready || working} onclick={start}
+        >{/if}
+      {#if run && (current || run.view.status === 'Paused')}
+        <button
+          type="button"
+          disabled={working || disabled}
+          onclick={() => action('Cancel', run!.view.root_id)}>End run</button
+        >
+      {/if}
+      <button type="button" disabled={!ready || working} onclick={start}
         >{run ? 'Restart' : 'Run preview'}</button
       >
     </div>
@@ -142,7 +196,7 @@
           <label class="starting-input"
             ><span>{name} <small>({typeof type === 'string' ? type : 'typed JSON'})</small></span
             ><input
-              value={inputs[name] ?? ''}
+              value={inputs[name] ?? initialInputs[name] ?? ''}
               oninput={(event) => (inputs[name] = event.currentTarget.value)}
             /></label
           >
@@ -200,7 +254,14 @@
           <span class="eyebrow">{run.view.status === 'Paused' ? 'paused' : 'current step'}</span>
           <PracticeMarkdownPreview markdown={promptFor(pending)} />
           {#key pending.effect_id}
-            {#if pending.request.kind === 'interaction.form'}
+            {#if pending.request.kind === 'interaction.widget'}
+              <WidgetStep
+                interaction={pending.request.payload as unknown as WidgetInteraction}
+                preview={isolated}
+                disabled={!current || working || disabled}
+                onconfirm={(value) => fulfill('widget', value)}
+              />
+            {:else if pending.request.kind === 'interaction.form'}
               <PatternForm
                 effect={pending}
                 {timers}
@@ -257,22 +318,66 @@
                 onchange={(state) => (timers[pending!.effect_id] = state)}
                 onconfirm={(result) => fulfill('timer', result)}
               />
+            {:else if pending.request.kind === 'interaction.refine' && review}
+              <blockquote class="review-candidate">{review.candidate}</blockquote>
+              <div class="review-actions">
+                {#each review.choices as choice (choice)}
+                  <button
+                    type="button"
+                    disabled={!current || working || disabled}
+                    onclick={() => fulfill('reviewed', choice)}
+                    >{reviewLabels[choice] ?? choice}</button
+                  >
+                {/each}
+              </div>
+              <details>
+                <summary>Edit wording directly</summary>
+                <label for={`${id}-edit`}>Your wording</label>
+                <textarea
+                  id={`${id}-edit`}
+                  bind:value={answer}
+                  disabled={!current || working || disabled}></textarea>
+                <button
+                  type="button"
+                  disabled={!current || working || disabled || !answer.trim()}
+                  onclick={() => fulfill('edited', answer)}>Use my wording</button
+                >
+              </details>
             {:else}
               <p class="quiet">
-                This step requests <code>{pending.request.kind}</code>. Supply a mock result below;
-                no model or external action will run.
+                {#if mockChoices.length}Choose a sample model reply to continue. No AI call is made.
+                {:else}This step requests <code>{pending.request.kind}</code>. Supply a mock result
+                  below; no model or external action will run.{/if}
               </p>
-              <label for={`${id}-mock`}>Mock result (tagged JSON)</label><textarea
-                id={`${id}-mock`}
-                rows="4"
-                bind:value={mock}
-                disabled={!current || working || disabled}
-                placeholder={'{"kind":"generated","value":{"type":"text","value":"Test reply"}}'}
-              ></textarea><button
-                type="button"
-                disabled={!current || working || disabled}
-                onclick={manualResult}>Submit mock result</button
-              >
+              {#if mockChoices.length}
+                <div class="mock-choices" aria-label="Sample model replies">
+                  {#each mockChoices as sample (sample.label)}
+                    <button
+                      type="button"
+                      disabled={!current || working || disabled}
+                      onclick={() =>
+                        action(
+                          { Fulfill: { effect_id: pending!.effect_id, result: sample.result } },
+                          pending!.run_id,
+                        )}>{sample.label}</button
+                    >
+                  {/each}
+                </div>
+              {/if}
+              <details open={!mockChoices.length}>
+                <summary>Supply a mock result</summary>
+                <label for={`${id}-mock`}>Mock result (tagged JSON)</label><textarea
+                  id={`${id}-mock`}
+                  rows="4"
+                  bind:value={mock}
+                  disabled={!current || working || disabled}
+                  placeholder={'{"kind":"generated","value":{"type":"text","value":"Test reply"}}'}
+                ></textarea><button
+                  type="button"
+                  disabled={!current || working || disabled}
+                  onclick={manualResult}>Submit mock result</button
+                >
+              </details>
             {/if}
           {/key}
           {#if pending.loop_context}<button
@@ -400,6 +505,28 @@
   }
   .error {
     color: #a43229;
+  }
+  .review-candidate {
+    margin: 14px 0;
+    padding: 14px;
+    border-left: 3px solid var(--green-dark, #007a4d);
+    background: #f3f6f0;
+    white-space: pre-wrap;
+  }
+  .review-actions,
+  .mock-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  details {
+    margin-top: 16px;
+    font-size: 13px;
+  }
+  summary {
+    cursor: pointer;
+    padding: 8px 0;
   }
   .changed {
     background: #f6f1e6;

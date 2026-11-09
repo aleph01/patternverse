@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sort to reveal order — interactive comparison</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font:
+          14px/1.6 system-ui,
+          sans-serif;
+        color: #252822;
+        background: #fff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 4px 0 8px;
+        background: #fff;
+      }
+      p {
+        margin: 0;
+      }
+      .context {
+        color: #60645e;
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+      fieldset {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        border: 0;
+        padding: 0;
+        margin: 0 0 12px;
+      }
+      legend {
+        font-size: 12px;
+        margin-bottom: 7px;
+        padding: 0;
+      }
+      label {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 11px;
+        border: 1px solid #a5aaa2;
+        cursor: pointer;
+      }
+      label:has(:checked) {
+        border-color: #007a4d;
+        background: #edf6f1;
+      }
+      input {
+        margin: 0;
+        accent-color: #007a4d;
+      }
+      label:has(:focus-visible),
+      summary:focus-visible {
+        outline: 2px solid #007a4d;
+        outline-offset: 3px;
+      }
+      #chart {
+        width: 100%;
+        min-height: 340px;
+      }
+      #chart svg {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      #readout {
+        min-height: 3.2em;
+        margin: 10px 0 12px;
+        font-size: 13px;
+      }
+      details {
+        border-top: 1px solid #d8dcd5;
+        padding-top: 10px;
+      }
+      summary {
+        cursor: pointer;
+        font-size: 12px;
+      }
+      details p {
+        margin: 10px 0;
+        font-size: 12px;
+        color: #60645e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      caption {
+        text-align: left;
+        padding: 8px 0;
+      }
+      th,
+      td {
+        text-align: left;
+        border-bottom: 1px solid #e3e6e0;
+        padding: 5px 0;
+        font-weight: 400;
+      }
+      thead th {
+        color: #60645e;
+      }
+      td,
+      th:last-child {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="context">Support requests · one fictional week · 525 tickets</p>
+    <fieldset>
+      <legend>Order categories</legend>
+      <label><input type="radio" name="order" value="alphabetical" checked /> Alphabetical</label>
+      <label><input type="radio" name="order" value="descending" /> Highest first</label>
+    </fieldset>
+    <div id="chart"></div>
+    <p id="readout" role="status" aria-live="polite" aria-atomic="true">
+      Alphabetical order makes categories easy to find by name. Switch to Highest first to compare
+      their rank.
+    </p>
+    <details>
+      <summary>Data and text description</summary>
+      <p>
+        Billing has the most tickets (124), followed by Subscription (97) and Delivery (83).
+        Feedback has the fewest (28). All eight categories, their counts, the zero baseline, and the
+        color stay fixed; only row order changes.
+      </p>
+      <table id="counts">
+        <caption>
+          Fictional support requests, 525 tickets in total
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Tickets</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- DATA_ROWS -->
+        </tbody>
+      </table>
+    </details>
+    <!-- PLOT_SCRIPT -->
+  </body>
+</html>

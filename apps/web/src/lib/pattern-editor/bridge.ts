@@ -1,12 +1,22 @@
 import { executePatternRequest } from '$lib/pattern-runtime/wasm';
 import type { Inspection } from './types';
+import type { SourceRunOptions } from '$lib/pattern-runtime/source';
 // Compatibility aliases: existing editor consumers use the same neutral runtime.
 export {
   startSourceRun as startSourcePreview,
   applySourceAction as applySourcePreview,
 } from '$lib/pattern-runtime/source';
-export async function inspectSource(source: string): Promise<Inspection> {
-  return (await executePatternRequest('source', { operation: 'inspect', source })) as Inspection;
+export async function inspectSource(
+  source: string,
+  options: SourceRunOptions = {},
+): Promise<Inspection> {
+  return (await executePatternRequest('source', {
+    operation: 'inspect',
+    source,
+    ...(options.isolated ? { data: {}, widgets: {} } : {}),
+    ...(options.data ? { data: options.data } : {}),
+    ...(options.widgets ? { widgets: options.widgets } : {}),
+  })) as Inspection;
 }
 
 /** Explicit input conversion copied from Mira; Rust validates every resulting value. */

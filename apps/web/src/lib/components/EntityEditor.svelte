@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { beforeNavigate } from '$app/navigation';
   import { onMount, tick } from 'svelte';
   import { Maximize2, Minimize2, LockKeyhole, ChevronDown } from '@lucide/svelte';
@@ -22,6 +23,7 @@
   import EntityTypeChooser from './EntityTypeChooser.svelte';
   import NovelMarkdownEditor from './NovelMarkdownEditor.svelte';
   import PracticeLanguageEditor from '$lib/pattern-editor/PracticeLanguageEditor.svelte';
+  import PatternPracticesEditor from './PatternPracticesEditor.svelte';
   import WorksheetButton from './WorksheetButton.svelte';
   import { starterPractice } from '$lib/pattern-editor/source';
   import { inspectSource } from '$lib/pattern-editor/bridge';
@@ -37,7 +39,9 @@
   let editingId = $state<string>();
   let ready = $state(false);
   let saving = $state(false);
-  let practicePending = $state(false);
+  let embeddedPracticePending = $state(false);
+  let linkedPracticePending = $state(false);
+  const practicePending = $derived(embeddedPracticePending || linkedPracticePending);
   let savedSignature = $state('');
   let errors = $state<readonly string[]>([]);
   let message = $state('');
@@ -56,6 +60,10 @@
   const selectedTypeOption = $derived(selectedType ? getEditorEntityType(selectedType) : undefined);
   const centeredEditor = $derived(selectedType === 'pattern');
   const guidedVerseCreation = $derived(selectedType === 'verse');
+  const practiceCount = $derived(
+    (values.languagePracticeSource !== undefined || values.practice ? 1 : 0) +
+      (values.linkedPractices?.length ?? 0),
+  );
   const dirty = $derived(
     ready &&
       Boolean(selectedType) &&
@@ -172,7 +180,7 @@
             errors = [`The personal entity “${requestedId}” was not found in this browser.`];
           } else {
             editingId = entity.id;
-            values = editorValuesFromEntity(entity);
+            values = editorValuesFromEntity(entity, entities);
             selectedType = entity.type;
           }
         } else {
@@ -247,7 +255,11 @@
       editingId = saved.entity.id;
       // A delayed save must not replace newer writing, even if a child reports it after disabling.
       if (editorSignature(values) === saved.submittedSignature) values = saved.values;
-      else values.id = saved.entity.id; // Keep the persisted identity for the next update.
+      else {
+        values.id = saved.entity.id; // Keep persisted identities when a late child edit remains dirty.
+        if (saved.values.originalPracticeIds)
+          values.originalPracticeIds = saved.values.originalPracticeIds;
+      }
       savedSignature = saved.signature;
       message = `Saved “${saved.entity.title}” as ${personalStatusLabel(saved.entity.status)}.`;
       window.history.replaceState({}, '', `/editor?id=${encodeURIComponent(saved.entity.id)}`);
@@ -497,27 +509,18 @@
           {/if}
         {/snippet}
         {#if values.type === 'pattern' || (values.type === 'practice' && (values.practice || values.languagePracticeSource !== undefined))}
-          <details
-            class="editor-practice-disclosure"
-            open={Boolean(values.practice) || values.languagePracticeSource !== undefined}
-          >
+          <details class="editor-practice-disclosure" open={practiceCount > 0}>
             <summary>
               <span class="editor-practice-summary-copy">
-                <strong>Interactive practice</strong>
+                <strong>Interactive practices</strong>
                 <small>
-                  {values.practice || values.languagePracticeSource !== undefined
-                    ? 'A guided practice is attached to this pattern.'
-                    : 'Add an optional step-by-step practice to this pattern.'}
+                  {practiceCount
+                    ? `${practiceCount} ${practiceCount === 1 ? 'practice is' : 'practices are'} attached to this pattern.`
+                    : 'Add optional step-by-step practices to this pattern.'}
                 </small>
               </span>
-              <span
-                class:enabled={Boolean(values.practice) ||
-                  values.languagePracticeSource !== undefined}
-                class="editor-practice-status"
-              >
-                {values.practice || values.languagePracticeSource !== undefined
-                  ? 'enabled'
-                  : 'optional'}
+              <span class:enabled={practiceCount > 0} class="editor-practice-status">
+                {practiceCount ? `${practiceCount} enabled` : 'optional'}
               </span>
               <span class="editor-practice-chevron" aria-hidden="true"></span>
             </summary>
@@ -540,13 +543,13 @@
                 source={values.languagePracticeSource}
                 disabled={!ready || !workspace || saving}
                 onchange={(source) => (values.languagePracticeSource = source)}
-                onpendingchange={(pending) => (practicePending = pending)}
+                onpendingchange={(pending) => (embeddedPracticePending = pending)}
               />
               <WorksheetButton
                 definition={{ source: values.languagePracticeSource }}
                 explainUnavailable
               />
-            {:else}
+            {:else if !values.linkedPractices?.length}
               <div class="language-practice-toolbar">
                 <span
                   >Write questions, choices, ratings, timers, and displays in Pattern Language.</span
@@ -558,6 +561,20 @@
                 >
               </div>
             {/if}
+            {#if values.type === 'pattern'}
+              <PatternPracticesEditor
+                practices={values.linkedPractices ?? []}
+                title={values.title}
+                hasEmbedded={values.languagePracticeSource !== undefined ||
+                  Boolean(values.practice)}
+                disabled={!ready || !workspace || saving}
+                onchange={(practices) => {
+                  values.linkedPractices = practices;
+                  values.originalPracticeIds ??= [];
+                }}
+                onpendingchange={(pending) => (linkedPracticePending = pending)}
+              />
+            {/if}
           </details>
         {/if}
         {@render optionalFields()}
@@ -567,6 +584,11 @@
     <div class="editor-footer">
       <span>{dirty ? 'Unsaved changes' : editingId ? 'Saved on this device' : 'Not saved yet'}</span
       >
+      {#if editingId && !dirty && !practicePending && values.languagePracticeSource}
+        <a href={resolve(`/my/practice?id=${encodeURIComponent(editingId)}`)}
+          >Run saved practice →</a
+        >
+      {/if}
       {@render saveButton()}
     </div>
   {/if}

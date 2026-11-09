@@ -1,39 +1,37 @@
 import { expect, test } from '@playwright/test';
+import { searchLibrary, selectLibraryCategory } from './helpers/library';
 
 // Server hydration markers differ from client-created nodes; compare the actual vector markup.
 const vectorMarkup = (html: string) => html.replace(/<!--.*?-->/gs, '');
 
-test('uses the same grid icon in cards, lists, search and article headers, with text-only mobile', async ({
+test('uses the same concept graphic in cards, lists, search and article headers, with text-only mobile', async ({
   page,
 }, testInfo) => {
   const mobile = testInfo.project.name === 'mobile-chromium';
   await page.goto('/library');
-  await page
-    .getByRole('navigation', { name: 'Library categories' })
-    .getByRole('button', { name: 'Patterns', exact: true })
-    .click();
+  await selectLibraryCategory(page, 'Patterns');
   // A pattern can now live beyond the first browsing page; search across the whole library.
-  await page.getByRole('searchbox', { name: /Search (the catalog|my library)/ }).fill('Observer');
-  const observer = page.locator('#library .pattern-feed').getByRole('link', { name: /Observer/ });
+  await searchLibrary(page, 'Observer');
+  const observer = page
+    .getByRole('region', { name: 'Library results', exact: true })
+    .getByRole('link', { name: /Observer/ });
   await expect(observer).toHaveCount(1);
   const icon = observer.locator('.pattern-icon');
-  await expect(icon).toHaveAttribute('data-icon-version', '1');
-  await expect(icon).toHaveAttribute('viewBox', '0 0 72 72');
-  await expect(icon).toHaveAttribute('aria-hidden', 'true');
-  expect(await icon.locator('circle,line,polygon,filter,[id]').count()).toBe(0);
-  const shapeCount = await icon
-    .locator('path')
-    .evaluateAll((paths) =>
-      paths.reduce((count, path) => count + (path.getAttribute('d')!.match(/M/g) ?? []).length, 0),
-    );
-  expect(shapeCount).toBeGreaterThanOrEqual(3);
-  expect(shapeCount).toBeLessThanOrEqual(7);
-  const geometry = vectorMarkup(await icon.innerHTML());
-  await page.getByRole('searchbox', { name: /Search (the catalog|my library)/ }).fill('Observer');
-  await expect(observer).toBeVisible();
-  expect(vectorMarkup(await icon.innerHTML())).toBe(geometry);
-  if (mobile) await expect(icon).toBeHidden();
+  let geometry: string | undefined;
+  if (mobile) await expect(icon).toHaveCount(0);
   else {
+    await expect(icon).toHaveAttribute('data-icon-version', '2');
+    await expect(icon).toHaveAttribute('data-pattern-graphic', 'observer');
+    await expect(icon).toHaveAttribute('viewBox', '0 0 96 96');
+    await expect(icon).toHaveAttribute('aria-hidden', 'true');
+    expect(await icon.locator('circle,line,polygon,filter,[id]').count()).toBe(0);
+    const shapeCount = await icon.locator('path').count();
+    expect(shapeCount).toBeGreaterThanOrEqual(3);
+    expect(shapeCount).toBeLessThanOrEqual(32);
+    geometry = vectorMarkup(await icon.innerHTML());
+    await searchLibrary(page, 'Observer');
+    await expect(observer).toBeVisible();
+    expect(vectorMarkup(await icon.innerHTML())).toBe(geometry);
     await expect(icon).toBeVisible();
     await page
       .getByRole('group', { name: 'Library view' })
@@ -43,8 +41,11 @@ test('uses the same grid icon in cards, lists, search and article headers, with 
     expect(vectorMarkup(await icon.innerHTML())).toBe(geometry);
   }
   await observer.click();
-  await expect(page).toHaveURL(/\/pattern\/observer$/);
+  await expect(page).toHaveURL((url) => url.pathname === '/pattern/observer');
   const headerIcon = page.locator('.entity-pattern-icon .pattern-icon');
+  await expect(headerIcon).toHaveAttribute('data-icon-version', '2');
+  await expect(headerIcon).toHaveAttribute('data-pattern-graphic', 'observer');
+  geometry ??= vectorMarkup(await headerIcon.innerHTML());
   expect(vectorMarkup(await headerIcon.innerHTML())).toBe(geometry);
   if (mobile) await expect(headerIcon).toBeHidden();
   else await expect(headerIcon).toBeVisible();

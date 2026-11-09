@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Identify Needs — needs library</title>
+    <style>
+      /* NEEDS_STYLES */
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 4px 0 8px;
+        background: #fff;
+      }
+      #need-tags-design .nt-widget {
+        --nt-ink: #181814;
+        --nt-muted: #62655f;
+        --nt-accent: #007a4d;
+        --nt-line: #d8ddd8;
+        --nt-focus: #1557ff;
+        max-width: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        font-size: 16px;
+        overflow-wrap: anywhere;
+      }
+      #need-tags-design .nt-head {
+        padding: 0 0 24px;
+      }
+      #need-tags-design .nt-top {
+        margin-bottom: 8px;
+      }
+      #need-tags-design h2 {
+        font-size: 24px;
+        font-weight: 750;
+      }
+      #need-tags-design .nt-search-wrap {
+        padding: 0 0 20px;
+      }
+      #need-tags-design .nt-browser {
+        padding: 8px 0 16px;
+        border-top-color: var(--nt-ink);
+      }
+      #need-tags-design .nt-area-button {
+        min-height: 56px;
+        cursor: pointer;
+      }
+      #need-tags-design .nt-area-name {
+        font-weight: 650;
+      }
+      #need-tags-design .nt-tags {
+        padding: 0 0 16px;
+      }
+      #need-tags-design .nt-flat-tags {
+        padding-left: 27px;
+      }
+      #need-tags-design .nt-tag {
+        min-height: 44px;
+        cursor: pointer;
+      }
+      #need-tags-design .nt-tag[aria-expanded='true'] {
+        color: #fff;
+        background: var(--nt-accent);
+      }
+      #need-tags-design .nt-detail {
+        margin: 0 0 16px;
+        padding: 18px 20px;
+        border: 0;
+        border-left: 3px solid var(--nt-accent);
+      }
+      #need-tags-design .nt-detail-title {
+        font-size: 16px;
+        font-weight: 750;
+      }
+      #need-tags-design .nt-detail p {
+        font-size: 14px;
+        color: var(--nt-ink);
+      }
+      #need-tags-design .nt-detail ul {
+        font-size: 14px;
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+      #need-tags-design .nt-related {
+        margin-top: 12px;
+        color: var(--nt-muted);
+        font-size: 12px;
+      }
+      #need-tags-design .nt-sub {
+        font-size: 14px;
+      }
+      #need-tags-design .nt-view-label {
+        font-size: 12px;
+      }
+      #need-tags-design .nt-view-switch button {
+        min-height: 40px;
+        cursor: pointer;
+      }
+      #need-tags-design .nt-attribution {
+        border-top: 1px solid var(--nt-line);
+        padding-top: 16px;
+        font-size: 11px;
+        color: var(--nt-muted);
+      }
+      #need-tags-design .nt-empty {
+        font-size: 14px;
+        padding: 16px 0;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+      }
+      @media (max-width: 420px) {
+        #need-tags-design .nt-flat-tags {
+          padding-left: 0;
+        }
+        #need-tags-design .nt-branches {
+          padding-left: 0;
+        }
+        #need-tags-design .nt-view-row {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="need-tags-design">
+      <main class="nt-widget" id="needs-library">
+        <header class="nt-head">
+          <p class="nt-top">Words for what matters</p>
+          <h2>Explore needs</h2>
+          <p class="nt-sub">
+            Open a word to explore its meaning. No need to find one perfect label.
+          </p>
+        </header>
+        <div class="nt-search-wrap">
+          <label class="nt-search"
+            ><input type="search" aria-label="Search all needs" placeholder="Find a need…"
+          /></label>
+          <div class="nt-view-row">
+            <span class="nt-view-label"></span>
+            <div class="nt-view-switch" role="group" aria-label="View detail">
+              <button type="button" data-view="simple" aria-pressed="true">Simple</button>
+              <button type="button" data-view="detailed" aria-pressed="false">Detailed</button>
+            </div>
+          </div>
+        </div>
+        <div class="nt-browser"></div>
+        <p class="sr-only" role="status" aria-live="polite"></p>
+        <footer class="nt-attribution">
+          Vocabulary adapted from the CNVC Needs Inventory.<br />© 2005 Center for Nonviolent
+          Communication · www.cnvc.org · cnvc@cnvc.org · +1.505-244-4041.<br />Descriptions and
+          browsing groups by Patternverse. A reflective vocabulary, not an assessment.
+        </footer>
+      </main>
+    </div>
+    <script type="application/json" id="needs-data">
+      <!-- NEEDS_LIBRARY -->
+    </script>
+    <script type="application/json" id="needs-starters">
+      <!-- NEEDS_STARTERS -->
+    </script>
+    <script>
+      (() => {
+        const { records } = JSON.parse(document.getElementById('needs-data').textContent);
+        const starters = JSON.parse(document.getElementById('needs-starters').textContent);
+        const root = document.getElementById('needs-library');
+        const needs = records.filter((r) => r.kind === 'need');
+        const areas = records.filter((r) => r.kind === 'category' && !r.parent_ids.length);
+        const expanded = new Set([areas[0].id]);
+        let view = 'simple',
+          query = '',
+          detail = null;
+        const esc = (s) =>
+          String(s).replace(
+            /[&<>"']/g,
+            (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
+          );
+        const groups = (area) =>
+          records.filter((r) => r.kind === 'category' && r.parent_ids.includes(area));
+        const members = (group) => needs.filter((n) => n.parent_ids.includes(group));
+        const meaning = (entries, key) => {
+          const n = entries.find((n) => n.id === detail);
+          if (!n) return '';
+          return `<section class="nt-detail" id="meaning-${key}" aria-label="${esc(n.label)} meaning"><h3 class="nt-detail-title">${esc(n.label)}</h3><p>${esc(n.description)}</p><p class="nt-related">Possible ways someone might express this:</p><ul>${n.recognition_cues.map((cue) => `<li>${esc(cue)}</li>`).join('')}</ul>${n.aliases.length ? `<p class="nt-related">Related search terms: ${n.aliases.map(esc).join(' · ')}. These are not necessarily synonyms.</p>` : ''}</section>`;
+        };
+        const tags = (entries, key) =>
+          `<div class="nt-tags">${entries.map((n) => `<button type="button" class="nt-tag" data-need="${esc(n.id)}" data-key="${key}" aria-expanded="${n.id === detail}"${n.id === detail ? ` aria-controls="meaning-${key}"` : ''}><span>${esc(n.label)}</span><span aria-hidden="true">${n.id === detail ? '−' : '+'}</span></button>`).join('')}</div>${meaning(entries, key)}`;
+        function render() {
+          const active = root.contains(document.activeElement) ? document.activeElement : null;
+          const focusId = active?.dataset.need || active?.dataset.area;
+          const focusKey = active?.dataset.key;
+          root
+            .querySelectorAll('[data-view]')
+            .forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+          const q = query.trim().toLocaleLowerCase();
+          let html;
+          if (q) {
+            const matches = needs.filter((n) =>
+              [n.label, n.description, ...n.aliases, ...n.recognition_cues]
+                .join(' ')
+                .toLocaleLowerCase()
+                .includes(q),
+            );
+            root.querySelector('.nt-view-label').textContent =
+              `${matches.length} of ${needs.length} needs`;
+            html = matches.length
+              ? tags(matches, 'search')
+              : '<p class="nt-empty">No matching needs. Try another word, or use your own wording in the practice.</p>';
+          } else {
+            root.querySelector('.nt-view-label').textContent =
+              view === 'simple'
+                ? `${Object.values(starters).flat().length} starting words · 8 areas`
+                : `All ${needs.length} needs · 8 areas`;
+            html = areas
+              .map((area) => {
+                const subgroups = groups(area.id);
+                const entries =
+                  view === 'simple'
+                    ? starters[area.id].map((id) => needs.find((n) => n.id === id))
+                    : needs.filter((n) => subgroups.some((g) => n.parent_ids.includes(g.id)));
+                const open = expanded.has(area.id);
+                return `<section class="nt-area"><button type="button" class="nt-area-button" data-area="${area.id}" aria-expanded="${open}" aria-controls="children-${area.id}"><span class="nt-chevron ${open ? 'open' : ''}" aria-hidden="true"></span><span class="nt-area-name">${esc(area.label)}</span><span class="nt-area-total">${entries.length}</span></button>${open ? `<div id="children-${area.id}">${view === 'simple' ? `<div class="nt-flat-tags">${tags(entries, area.id)}</div>` : `<div class="nt-branches">${subgroups.map((g) => `<section class="nt-group"><h3 class="nt-group-heading">${esc(g.label)}</h3>${tags(members(g.id), g.id)}</section>`).join('')}</div>`}</div>` : `<div id="children-${area.id}" hidden></div>`}</section>`;
+              })
+              .join('');
+          }
+          root.querySelector('.nt-browser').innerHTML = html;
+          if (focusId) {
+            const targets = [...root.querySelectorAll('[data-need], [data-area]')];
+            const target = targets.find(
+              (b) => (b.dataset.need || b.dataset.area) === focusId && b.dataset.key === focusKey,
+            );
+            (target || root.querySelector('input')).focus({ preventScroll: true });
+          }
+        }
+        root.querySelector('input').addEventListener('input', (e) => {
+          query = e.target.value;
+          render();
+          root.querySelector('[role="status"]').textContent =
+            root.querySelector('.nt-view-label').textContent;
+        });
+        root.addEventListener('click', (e) => {
+          const button = e.target.closest('button');
+          if (!button) return;
+          const d = button.dataset;
+          if (d.view) view = d.view;
+          else if (d.area) expanded.has(d.area) ? expanded.delete(d.area) : expanded.add(d.area);
+          else if (d.need) detail = detail === d.need ? null : d.need;
+          render();
+        });
+        render();
+      })();
+    </script>
+  </body>
+</html>

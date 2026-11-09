@@ -1,6 +1,9 @@
+// @vitest-environment jsdom
+
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { parseMarkdownEntity } from '@patternverse/compiler';
 import { THERAPY_LIBRARY } from './therapy-library';
 
 describe('public therapy library', () => {
@@ -44,7 +47,17 @@ describe('public therapy library', () => {
     expect(existsSync(resolve(root, 'content/collections/act.md'))).toBe(false);
     expect(existsSync(resolve(root, 'content/collections/therapy-library.md'))).toBe(false);
     const files = readdirSync(resolve(root, 'content/patterns'));
-    expect(files.filter((file) => file.startsWith('act-'))).toEqual([]);
+    const retiredActArticles = files.filter((file) => {
+      if (!file.startsWith('act-')) return false;
+      const parsed = parseMarkdownEntity(
+        readFileSync(resolve(root, 'content/patterns', file), 'utf8'),
+        { sourceId: 'commons', sourcePath: file },
+      );
+      expect(parsed.diagnostics.filter(({ severity }) => severity === 'error')).toEqual([]);
+      expect(parsed.entity).toBeDefined();
+      return parsed.entity?.type === 'pattern' && parsed.entity.verses?.includes('therapy');
+    });
+    expect(retiredActArticles).toEqual([]);
     expect(files.filter((file) => file.startsWith('cbt-')).sort()).toEqual(
       THERAPY_LIBRARY.map((item) => `${item.slug}.md`).sort(),
     );

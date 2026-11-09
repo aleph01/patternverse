@@ -83,7 +83,13 @@ describe('Pattern feed', () => {
     await fireEvent.input(screen.getByRole('searchbox'), { target: { value: 'Hidden' } });
     await waitFor(() => expect(screen.getByText('No matching patterns')).toBeTruthy());
     expect(screen.queryByRole('link')).toBeNull();
-    await fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));
+    await fireEvent.click(
+      within(
+        screen
+          .getByRole('heading', { name: 'No matching patterns' })
+          .closest('.library-empty') as HTMLElement,
+      ).getByRole('button', { name: 'Clear search' }),
+    );
     await fireEvent.click(screen.getByRole('button', { name: /^My library/ }));
     expect(screen.queryByRole('link')).toBeNull();
     expect(local.entities).toHaveLength(3);
@@ -95,7 +101,10 @@ describe('Pattern feed', () => {
     expect(screen.getByRole('heading', { name: 'Nothing saved yet' })).toBeTruthy();
     expect(screen.queryByRole('button', { name: 'Clear search' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'Clear filters' })).toBeNull();
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    const empty = screen
+      .getByRole('heading', { name: 'Nothing saved yet' })
+      .closest('.library-empty') as HTMLElement;
+    await fireEvent.click(within(empty).getByRole('button', { name: 'Browse Commons' }));
     expect(screen.getByRole('link', { name: /Observer/ })).toBeTruthy();
   });
   it('shows collections and patterns within a selected Verse, without the Verse itself', async () => {
@@ -133,12 +142,20 @@ describe('Pattern feed', () => {
     });
     const results = () => within(screen.getByRole('region', { name: 'Library results' }));
     await waitFor(() => expect(results().getAllByRole('link')).toHaveLength(3));
-    expect(results().queryByRole('link', { name: /Software Engineering/ })).toBeNull();
+    expect(
+      screen
+        .getByRole('region', { name: 'Library results' })
+        .querySelector('a[href="/verse/software"]'),
+    ).toBeNull();
     await fireEvent.click(screen.getByRole('button', { name: 'Software Engineering' }));
     expect(results().getAllByRole('link')).toHaveLength(2);
     expect(results().getByRole('link', { name: /Observer/ })).toBeTruthy();
     expect(results().getByRole('link', { name: /GoF Design Patterns/ })).toBeTruthy();
-    expect(results().queryByRole('link', { name: /Software Engineering/ })).toBeNull();
+    expect(
+      screen
+        .getByRole('region', { name: 'Library results' })
+        .querySelector('a[href="/verse/software"]'),
+    ).toBeNull();
     await fireEvent.click(
       within(screen.getByRole('navigation', { name: 'Library categories' })).getByRole('button', {
         name: 'Collections',
@@ -207,7 +224,13 @@ describe('Pattern feed', () => {
     expect(screen.queryByRole('link', { name: /Observer/ })).toBeNull();
     await fireEvent.input(screen.getByRole('searchbox'), { target: { value: 'Observer' } });
     expect(screen.queryByRole('link')).toBeNull();
-    await fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));
+    await fireEvent.click(
+      within(
+        screen
+          .getByRole('heading', { name: 'No matching patterns' })
+          .closest('.library-empty') as HTMLElement,
+      ).getByRole('button', { name: 'Clear search' }),
+    );
     expect(
       within(screen.getByRole('navigation', { name: 'Library categories' }))
         .getByRole('button', { name: 'Patterns' })
@@ -352,14 +375,26 @@ describe('Pattern feed', () => {
     await waitFor(() =>
       expect(screen.getByRole('button', { name: 'My software · Mine' })).toBeTruthy(),
     );
-    await fireEvent.click(screen.getByRole('button', { name: 'Explore' }));
+    await fireEvent.click(
+      within(screen.getByRole('navigation', { name: 'Library scope' })).getByRole('button', {
+        name: 'Commons',
+      }),
+    );
     await fireEvent.click(screen.getByRole('button', { name: 'Software Engineering' }));
     expect(screen.getByRole('link', { name: /commons Observer/ })).toBeTruthy();
-    expect(screen.queryByRole('link', { name: /Software Engineering/ })).toBeNull();
+    expect(
+      screen
+        .getByRole('region', { name: 'Library results' })
+        .querySelector('a[href="/verse/software"]'),
+    ).toBeNull();
     expect(screen.queryByRole('link', { name: /My observer/ })).toBeNull();
     await fireEvent.click(screen.getByRole('button', { name: 'My software · Mine' }));
     expect(screen.getByRole('link', { name: /My observer/ })).toBeTruthy();
-    expect(screen.queryByRole('link', { name: /My software/ })).toBeNull();
+    expect(
+      screen
+        .getByRole('region', { name: 'Library results' })
+        .querySelector('a[href="/editor?id=software"]'),
+    ).toBeNull();
     expect(screen.queryByRole('link', { name: /commons Observer/ })).toBeNull();
     await fireEvent.click(screen.getByRole('button', { name: 'Shared verse' }));
     expect(screen.getByRole('link', { name: /Builder/ })).toBeTruthy();

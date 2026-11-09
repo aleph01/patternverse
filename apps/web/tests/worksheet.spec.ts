@@ -82,7 +82,7 @@ test('downloads both formats and offers a manual-copy fallback', async ({ page }
   }
 });
 
-test('catalog workbooks preserve readiness and safety exits without route numbers', async ({
+test('catalog workbooks preserve the current authored questions without source paths', async ({
   page,
 }) => {
   await page.goto('/pattern/cbt-thought-record');
@@ -91,14 +91,11 @@ test('catalog workbooks preserve readiness and safety exits without route number
     .getByRole('button', { name: 'Open worksheet' })
     .click();
   const dialog = page.getByRole('dialog');
-  await expect(
-    dialog.getByText('Workbook with manual instructions', { exact: true }),
-  ).toBeVisible();
+  await expect(dialog.getByText('Complete workbook', { exact: true })).toBeVisible();
   const document = dialog.getByRole('region', { name: 'Worksheet content' });
-  await expect(document).toContainText('emergency care');
+  await expect(document).toContainText('Describe a manageable, recent situation');
   await expect(document).toContainText('positive evidence');
-  await expect(document).toContainText('Complete the matching section below');
-  await expect(document).toContainText('Yes, begin gently');
+  await expect(document).toContainText('Nothing has been scheduled or carried out for you.');
   await expect(document).not.toContainText('Route ');
   await expect(document).not.toContainText('readiness.decision.value');
 });
@@ -121,6 +118,7 @@ test('the editor exports conditional tables and hides AI-dependent or ambiguous 
   await page.getByLabel('Title', { exact: true }).fill('Workbook review');
   await page.locator('.editor-practice-disclosure summary').click();
   await page.getByRole('button', { name: 'Add practice', exact: true }).click();
+  await page.getByRole('tab', { name: 'Source', exact: true }).click();
   const editor = page.getByRole('textbox', { name: 'Practice source', exact: true });
   await editor.fill(source);
   await page.getByRole('button', { name: 'Open worksheet' }).click();

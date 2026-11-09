@@ -1,0 +1,16 @@
+{
+  "name": "@patternverse/contributions",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "dev": "wrangler dev --port 8792"
+  },
+  "devDependencies": {
+    "@types/node": "22.18.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  }
+}

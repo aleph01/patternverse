@@ -1,10 +1,21 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { withNavigationCache } from '../../scripts/navigation-adapter.mjs';
+
+const publicBuild = process.env.PATTERNVERSE_PUBLIC_BUILD === 'true';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: vitePreprocess(),
   kit: {
+    // Dev, type checks and Vitest regenerate files here. A public build must
+    // keep its server/client manifests and startup identifier together.
+    outDir: publicBuild ? '.svelte-kit/production' : '.svelte-kit',
+    files: {
+      routes: publicBuild ? 'src/.public-routes' : 'src/routes',
+    },
+    // The client registers a release-specific URL in the existing worker scope.
+    serviceWorker: { register: false },
     // Static pages receive hashes for their generated bootstrap scripts, not unsafe-inline.
     csp: {
       mode: 'auto',
@@ -44,11 +55,13 @@ const config = {
         'form-action': ['self'],
       },
     },
-    adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      strict: true,
-    }),
+    adapter: withNavigationCache(
+      adapter({
+        pages: 'build',
+        assets: 'build',
+        strict: true,
+      }),
+    ),
   },
 };
 

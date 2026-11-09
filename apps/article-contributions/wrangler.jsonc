@@ -1,0 +1,44 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "patternverse-article-contributions",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-25",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    // Enable only after the database migration and owner Access routes are verified.
+    "SUBMISSIONS_ENABLED": "true",
+    "OWNER_EMAIL": "contact@patternverse.org",
+    "ACCESS_TEAM_DOMAIN": "snowy-butterfly-6cf2.cloudflareaccess.com",
+    "ACCESS_AUD": "e0d12f841b52b3ee6ed21443bb570c0a4077e8ccfb6c8f9fd3111022987942de",
+    "ALLOWED_ORIGINS": "https://patternverse.org,https://www.patternverse.org",
+  },
+  "d1_databases": [
+    {
+      "binding": "INBOX",
+      "database_name": "patternverse-contributions",
+      "database_id": "8a64ffc1-e2c9-4d2d-8498-bb6ff4d55b35",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "ratelimits": [
+    {
+      "name": "SUBMISSION_LIMITER",
+      "namespace_id": "7421903",
+      "simple": { "limit": 5, "period": 60 },
+    },
+  ],
+  "routes": [
+    { "pattern": "patternverse.org/api/article-contributions*", "zone_name": "patternverse.org" },
+    {
+      "pattern": "www.patternverse.org/api/article-contributions*",
+      "zone_name": "patternverse.org",
+    },
+    { "pattern": "patternverse.org/owner/contributions*", "zone_name": "patternverse.org" },
+    { "pattern": "www.patternverse.org/owner/contributions*", "zone_name": "patternverse.org" },
+  ],
+  "build": { "command": "pnpm --filter @patternverse/article-contributions build" },
+  // Contributions contain private messages and contact details; do not log requests.
+  "observability": { "enabled": false },
+}

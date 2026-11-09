@@ -38,6 +38,29 @@ pub(super) fn enums(declarations: &[Attribute]) -> Check<BTreeMap<String, EnumTy
 
 /// Resolve scalar/named enum contracts without changing existing structural type spellings.
 pub(super) fn declared_type(word: &Word, symbols: &Scope) -> Check<Type> {
+    if !word.quoted && !symbols.enums.is_empty() {
+        if let Ok(ty) = expression::functional::parse_type_with_references(
+            &word.text,
+            word.span.clone(),
+            symbols.language,
+            &symbols.enums,
+            &symbols.references,
+        ) {
+            return Ok(ty);
+        }
+    }
+    if symbols.language == 3 || word.text.contains('[') || word.text.contains('{') {
+        if word.quoted {
+            return Err(err("Type names must not be quoted", word.span.clone()));
+        }
+        return expression::functional::parse_type_with_references(
+            &word.text,
+            word.span.clone(),
+            symbols.language,
+            &symbols.enums,
+            &symbols.references,
+        );
+    }
     if !word.quoted {
         if let Some(ty) = symbols.enums.get(&word.text) {
             return Ok(Type::Enum(ty.clone()));
@@ -277,9 +300,22 @@ pub(super) fn check(b: Block, symbols: &mut Scope) -> Check<CheckedStep> {
 
 /// Turn qualified enum constants into literals before ordinary lexical reference resolution.
 pub(super) fn literals(expression: Expr<Vec<String>>, symbols: &Scope) -> Check<Expr<Vec<String>>> {
+    literals_scoped(expression, symbols, &[])
+}
+
+/// Resolve enum literals while respecting explicit lambda parameter shadowing.
+fn literals_scoped(
+    expression: Expr<Vec<String>>,
+    symbols: &Scope,
+    bound: &[String],
+) -> Check<Expr<Vec<String>>> {
     let span = expression.span;
     let kind = match expression.kind {
-        Kind::Reference(path) if path.len() == 2 && symbols.enums.contains_key(&path[0]) => {
+        Kind::Reference(path)
+            if path.len() == 2
+                && symbols.enums.contains_key(&path[0])
+                && !bound.contains(&path[0]) =>
+        {
             let ty = &symbols.enums[&path[0]];
             if !ty.variants.contains(&path[1]) {
                 return Err(err("Unknown enum variant", span));
@@ -289,27 +325,38 @@ pub(super) fn literals(expression: Expr<Vec<String>>, symbols: &Scope) -> Check<
         Kind::List(items, ty) => Kind::List(
             items
                 .into_iter()
-                .map(|e| literals(e, symbols))
+                .map(|e| literals_scoped(e, symbols, bound))
                 .collect::<Check<_>>()?,
             ty,
         ),
         Kind::Record(fields) => Kind::Record(
             fields
                 .into_iter()
-                .map(|(key, e)| Ok((key, literals(e, symbols)?)))
+                .map(|(key, e)| Ok((key, literals_scoped(e, symbols, bound)?)))
                 .collect::<Check<_>>()?,
         ),
         Kind::Call(name, args) => Kind::Call(
             name,
             args.into_iter()
-                .map(|e| literals(e, symbols))
+                .map(|e| literals_scoped(e, symbols, bound))
                 .collect::<Check<_>>()?,
         ),
-        Kind::Unary(op, e) => Kind::Unary(op, Box::new(literals(*e, symbols)?)),
+        Kind::MapPipe(name, args) => Kind::MapPipe(
+            name,
+            args.into_iter()
+                .map(|e| literals_scoped(e, symbols, bound))
+                .collect::<Check<_>>()?,
+        ),
+        Kind::Lambda(names, body) => {
+            let mut nested = bound.to_vec();
+            nested.extend(names.iter().cloned());
+            Kind::Lambda(names, Box::new(literals_scoped(*body, symbols, &nested)?))
+        }
+        Kind::Unary(op, e) => Kind::Unary(op, Box::new(literals_scoped(*e, symbols, bound)?)),
         Kind::Binary(op, a, b) => Kind::Binary(
             op,
-            Box::new(literals(*a, symbols)?),
-            Box::new(literals(*b, symbols)?),
+            Box::new(literals_scoped(*a, symbols, bound)?),
+            Box::new(literals_scoped(*b, symbols, bound)?),
         ),
         other => other,
     };

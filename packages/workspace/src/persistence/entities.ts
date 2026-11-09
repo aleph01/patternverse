@@ -7,7 +7,13 @@ export function createEntityOperations(
   context: PersistenceContext,
 ): Pick<
   LocalWorkspace,
-  'getEntity' | 'listEntities' | 'createEntity' | 'updateEntity' | 'deleteEntity' | 'mutateEntities'
+  | 'getEntity'
+  | 'listEntities'
+  | 'createEntity'
+  | 'updateEntity'
+  | 'deleteEntity'
+  | 'mutateEntities'
+  | 'savePatternWithPractices'
 > {
   const { database, metadata, now } = context;
   const getEntity = async (id: string): Promise<RawEntity | undefined> => {
@@ -118,5 +124,78 @@ export function createEntityOperations(
     );
   };
 
-  return { getEntity, listEntities, createEntity, updateEntity, deleteEntity, mutateEntities };
+  const savePatternWithPractices: LocalWorkspace['savePatternWithPractices'] = async (input) => {
+    const workspace = await metadata();
+    return database.transaction('rw', database.entities, async () => {
+      const pattern = asPersonalEntity(input.pattern);
+      if (pattern.type !== 'pattern') throw new Error('Choose a pattern for these practices.');
+      const existingPattern = await database.entities.get(pattern.id);
+      if (
+        input.create
+          ? Boolean(existingPattern)
+          : existingPattern?.workspaceId !== workspace.id || existingPattern.type !== 'pattern'
+      )
+        throw new Error(
+          input.create
+            ? 'A personal entity with this pattern ID already exists.'
+            : 'The personal pattern no longer exists.',
+        );
+      const originals = new Set(input.originalPracticeIds);
+      const practices = input.practices.map(asPersonalEntity);
+      const ids = new Set(practices.map((practice) => practice.id));
+      if (ids.size !== practices.length || ids.has(pattern.id))
+        throw new Error('Every practice needs its own unique ID.');
+      const timestamp = now();
+      const writes: RawEntity[] = [pattern];
+      for (const practice of practices) {
+        if (practice.type !== 'practice' || !practice.implements?.includes(pattern.id))
+          throw new Error('Every attached practice must implement this pattern.');
+        const existing = await database.entities.get(practice.id);
+        if (originals.has(practice.id)) {
+          const current =
+            existing?.workspaceId === workspace.id ? rawFromStored(existing) : undefined;
+          if (current?.type !== 'practice' || !current.implements?.includes(pattern.id))
+            throw new Error(
+              'An attached practice changed or was removed. Reopen the editor before saving.',
+            );
+        } else if (existing)
+          throw new Error('A personal entity with this practice ID already exists.');
+        writes.push(practice);
+      }
+      // Unlink against the current record, preserving other patterns and the practice's history.
+      for (const id of originals) {
+        if (ids.has(id)) continue;
+        const stored = await database.entities.get(id);
+        if (!stored || stored.workspaceId !== workspace.id) continue;
+        const practice = rawFromStored(stored);
+        if (practice.type !== 'practice')
+          throw new Error('An attached practice changed type. Reopen the editor before saving.');
+        writes.push({
+          ...practice,
+          implements: practice.implements?.filter((id) => id !== pattern.id),
+        });
+      }
+      for (const entity of writes) {
+        const existing = await database.entities.get(entity.id);
+        await database.entities.put(
+          storedFromRaw(entity, {
+            workspaceId: workspace.id,
+            createdAt: existing?.createdAt ?? timestamp,
+            updatedAt: timestamp,
+          }),
+        );
+      }
+      return [pattern, ...practices];
+    });
+  };
+
+  return {
+    getEntity,
+    listEntities,
+    createEntity,
+    updateEntity,
+    deleteEntity,
+    mutateEntities,
+    savePatternWithPractices,
+  };
 }

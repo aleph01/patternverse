@@ -1,3 +1,4 @@
+import { searchLibrary } from './helpers/library';
 import { expect, test } from '@playwright/test';
 
 test('keeps verse selection separate from the ordered content tabs', async ({ page }, testInfo) => {
@@ -30,7 +31,7 @@ test('keeps verse selection separate from the ordered content tabs', async ({ pa
   await categories.getByRole('button', { name: 'All', exact: true }).click();
   await expect(results.locator('a[href="/collection/gof-design-patterns"]')).toBeVisible();
   // The All tab spans more than one page, while search still considers every entry.
-  await page.getByRole('searchbox', { name: /Search (the catalog|my library)/ }).fill('Observer');
+  await searchLibrary(page, 'Observer');
   await expect(results.getByRole('link', { name: /Observer/ })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,

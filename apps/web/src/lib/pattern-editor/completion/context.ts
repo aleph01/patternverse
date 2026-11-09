@@ -77,11 +77,11 @@ export function contextAt(source: string, position: number) {
     if (flow) flows.push(flow[1]!);
     const imported = line.match(/^:import\s+"[^"\n]+"\s+as\s+([\w.-]+)/);
     if (imported) imports.push(imported[1]!);
-    const input = line.match(/^:input\s+([\w-]+)\s+(\w+)/);
+    const input = line.match(/^:input\s+([\w-]+)(?:\s*:\s*|\s+)(\w+)/);
     if (input) current.names.set(input[1]!, input[2]);
     const binding = line.match(
       new RegExp(
-        `^(?:(${identifier})\\s*=(?!=)|=\\s+(${identifier})\\s|!(?:ask|form|timer|rate|choose|rank|agent|turn|collect)\\s+(${identifier})(?=\\s|$))`,
+        `^(?:(${identifier})(?:\\s*:\\s*[^=\\n]+)?\\s*=(?!=)|=\\s+(${identifier})\\s|!(?:ask|form|timer|rate|choose|rank|agent|turn|collect)\\s+(${identifier})(?=\\s|$))`,
       ),
     );
     const name = binding?.[1] ?? binding?.[2] ?? binding?.[3];
@@ -107,10 +107,12 @@ export function contextAt(source: string, position: number) {
                     : classifier
                       ? 'classifier'
                       : 'expression'));
-    const isBody = isProseScope(kind);
+    const arm = line.match(/^:(case|when|else)\b/);
+    const scopeKind = arm ? `arm_${arm[1]}` : kind;
+    const isBody = isProseScope(scopeKind);
     if (line.endsWith('{') || isBody) {
       const nested: Scope = {
-        kind,
+        kind: scopeKind,
         names: new Map(),
         pending: name,
         ...(!line.endsWith('{') ? { subject: 'implicit' } : {}),

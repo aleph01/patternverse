@@ -2,14 +2,14 @@
 use super::*;
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct Form<P> {
+pub struct Form<P, O = Vec<Choice>> {
     pub title: Option<String>,
-    pub blocks: Vec<FormBlock<P>>,
+    pub blocks: Vec<FormBlock<P, O>>,
 }
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case")]
-pub enum FormBlock<P> {
+pub enum FormBlock<P, O = Vec<Choice>> {
     Show {
         content: P,
     },
@@ -20,6 +20,17 @@ pub enum FormBlock<P> {
         multiline: bool,
         placeholder: Option<String>,
     },
+    Rate {
+        id: String,
+        prompt: P,
+        rating: Rating,
+    },
+    Select {
+        id: String,
+        prompt: P,
+        options: O,
+        selection: Selection,
+    },
     Timer {
         id: String,
         prompt: P,
@@ -28,9 +39,13 @@ pub enum FormBlock<P> {
     },
 }
 
-impl<P> Form<P> {
+impl<P, O> Form<P, O> {
     /// Transform templates while preserving field contracts and authored ordering.
-    pub(crate) fn map<Q>(self, mut map: impl FnMut(P) -> Q) -> Form<Q> {
+    pub(crate) fn map<Q, R>(
+        self,
+        mut map: impl FnMut(P) -> Q,
+        mut options: impl FnMut(O) -> R,
+    ) -> Form<Q, R> {
         Form {
             title: self.title,
             blocks: self
@@ -64,16 +79,33 @@ impl<P> Form<P> {
                         timer,
                         persistent,
                     },
+                    FormBlock::Rate { id, prompt, rating } => FormBlock::Rate {
+                        id,
+                        prompt: map(prompt),
+                        rating,
+                    },
+                    FormBlock::Select {
+                        id,
+                        prompt,
+                        options: source,
+                        selection,
+                    } => FormBlock::Select {
+                        id,
+                        prompt: map(prompt),
+                        options: options(source),
+                        selection,
+                    },
                 })
                 .collect(),
         }
     }
 
     /// Render templates with the same fallible evaluator used by standalone interactions.
-    pub(crate) fn try_map<Q, E>(
+    pub(crate) fn try_map<Q, R, E>(
         self,
         mut map: impl FnMut(P) -> Result<Q, E>,
-    ) -> Result<Form<Q>, E> {
+        mut options: impl FnMut(O, &mut Selection) -> Result<R, E>,
+    ) -> Result<Form<Q, R>, E> {
         Ok(Form {
             title: self.title,
             blocks: self
@@ -108,6 +140,22 @@ impl<P> Form<P> {
                             timer,
                             persistent,
                         },
+                        FormBlock::Rate { id, prompt, rating } => FormBlock::Rate {
+                            id,
+                            prompt: map(prompt)?,
+                            rating,
+                        },
+                        FormBlock::Select {
+                            id,
+                            prompt,
+                            options: source,
+                            mut selection,
+                        } => FormBlock::Select {
+                            id,
+                            prompt: map(prompt)?,
+                            options: options(source, &mut selection)?,
+                            selection,
+                        },
                     })
                 })
                 .collect::<Result<_, E>>()?,
@@ -133,7 +181,7 @@ pub(super) fn check(b: &Block, symbols: &mut Scope) -> Check<CheckedStep> {
     let attrs = attributes(b, &["title"])?;
     if b.argument.is_some() || b.body.iter().any(|line| !line.text.trim().is_empty()) {
         return Err(err(
-            "!form contains only !show, !ask and !timer blocks",
+            "!form contains only !show, !ask, !rate, !choose and !timer blocks",
             b.span.clone(),
         ));
     }
@@ -155,7 +203,9 @@ pub(super) fn check(b: &Block, symbols: &mut Scope) -> Check<CheckedStep> {
             ));
         };
         // No hidden AI calls or intra-form dependencies: the whole record commits together.
-        if !child.statements.is_empty() || child.argument.is_some() {
+        if !child.statements.is_empty()
+            || (child.argument.is_some() && !matches!(child.kind.as_str(), "rate" | "choose"))
+        {
             return Err(err(
                 "Form fields cannot contain nested effects",
                 child.span.clone(),
@@ -229,14 +279,58 @@ pub(super) fn check(b: &Block, symbols: &mut Scope) -> Check<CheckedStep> {
                     Some((id, Timer::output_type())),
                 )
             }
+            "rate" => {
+                let id = required_binding(child)?;
+                let rating = Rating::check(child)?;
+                (
+                    FormBlock::Rate {
+                        id: id.clone(),
+                        prompt,
+                        rating,
+                    },
+                    Some((id, Type::Number)),
+                )
+            }
+            "choose" => {
+                let id = required_binding(child)?;
+                let (selection, options, _) = selection::contract(child, symbols)?;
+                let ty = if selection.mode == SelectionMode::Single {
+                    Type::Choice
+                } else {
+                    Type::List(Box::new(Type::Choice))
+                };
+                (
+                    FormBlock::Select {
+                        id: id.clone(),
+                        prompt,
+                        options,
+                        selection,
+                    },
+                    Some((id, ty)),
+                )
+            }
             _ => {
                 return Err(err(
-                    "!form supports only !show, !ask and !timer",
+                    "!form supports only !show, !ask, !rate, !choose and !timer",
                     child.span.clone(),
                 ))
             }
         };
         if let Some((id, ty)) = field {
+            let mut local = symbols.clone();
+            local.expected_outputs.clear();
+            let expected = binding_expectation(&id, &child.binding.as_ref().unwrap().span, &local)?;
+            let ty = if let Some(expected) = expected {
+                if !expected.accepts_type(&ty) {
+                    return Err(err(
+                        format!("Expected {expected}, found {ty}"),
+                        child.span.clone(),
+                    ));
+                }
+                expected
+            } else {
+                ty
+            };
             if fields.insert(id, ty).is_some() {
                 return Err(err("Duplicate form field", child.span.clone()));
             }

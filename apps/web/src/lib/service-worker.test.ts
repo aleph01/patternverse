@@ -77,7 +77,11 @@ async function setup() {
     get: vi.fn(async () => client),
   };
   const skipWaiting = vi.fn(async () => {});
-  const registration = { update: vi.fn(async () => {}), waiting: null, installing: null };
+  const registration: {
+    update: ReturnType<typeof vi.fn<() => Promise<void>>>;
+    waiting: ServiceWorker | null;
+    installing: ServiceWorker | null;
+  } = { update: vi.fn(async () => {}), waiting: null, installing: null };
   const network = vi.fn(async (request: Request | string) => networkResponse(request));
   vi.stubGlobal('fetch', network);
   vi.stubGlobal('caches', {
@@ -133,7 +137,7 @@ async function setup() {
       data: { ...(data.type === 'DOWNLOAD_OFFLINE' ? { version: 'new' } : {}), ...data },
       source: client,
     });
-  return { stores, open, clients, client, network, skipWaiting, dispatch, message };
+  return { stores, open, clients, client, network, skipWaiting, registration, dispatch, message };
 }
 
 beforeEach(() => vi.resetModules());
@@ -157,7 +161,56 @@ describe('service worker offline lifecycle', () => {
         (url) => !url.includes('__navigation_'),
       ),
     ).toEqual([`${origin}/offline.html`]);
+    expect(app.skipWaiting).toHaveBeenCalledOnce();
+  });
+
+  it('does not activate an update whose required installation resources fail', async () => {
+    const app = await setup();
+    app.network.mockRejectedValue(new Error('Offline'));
+    await expect(app.dispatch('install')).rejects.toThrow('Offline');
     expect(app.skipWaiting).not.toHaveBeenCalled();
+  });
+
+  it('waits for the arriving document’s worker to install before retrying its page data', async () => {
+    const app = await setup();
+    const installing = new EventTarget() as ServiceWorker;
+    Object.defineProperty(installing, 'state', { value: 'installing', writable: true });
+    app.registration.installing = installing;
+    await app.message({ type: 'CLIENT_VERSION', version: 'next' });
+    let completed = false;
+    const request = app
+      .dispatch('fetch', {
+        request: new Request(`${origin}/library/__data.json`),
+        clientId: app.client.id,
+      })
+      .then((response) => {
+        completed = true;
+        return response;
+      });
+    await vi.waitFor(() => expect(app.network).toHaveBeenCalled());
+    expect(completed).toBe(false);
+    const body = `Network: ${origin}/library/__data.json`;
+    await (
+      await app.open('patternverse-precache-next')
+    ).put(
+      `${origin}/__navigation_manifest__`,
+      new Response(
+        JSON.stringify({
+          version: 'next',
+          manifest: {
+            pages: {
+              '/library/__data.json': createHash('sha256').update(body).digest('base64'),
+            },
+            redirects: {},
+          },
+        }),
+      ),
+    );
+    Object.defineProperty(installing, 'state', { value: 'installed' });
+    installing.dispatchEvent(new Event('statechange'));
+    const response = await request;
+    expect(response!.status).toBe(200);
+    expect(await response!.text()).toBe(body);
   });
 
   it('captures a first visit and its page data/assets without downloading unrelated pages', async () => {
@@ -429,12 +482,30 @@ describe('service worker offline lifecycle', () => {
     expect(app.client.postMessage).toHaveBeenLastCalledWith({
       type: 'UPDATE_REQUIRED',
       version: 'new',
+      reason: 'offline-download',
     });
     expect(app.network).not.toHaveBeenCalled();
-    await app.message({ type: 'OFFLINE_STATUS' });
+    app.client.postMessage.mockClear();
+    await app.message({ type: 'OFFLINE_STATUS', version: 'old' });
+    expect(app.client.postMessage).toHaveBeenCalledOnce();
     expect(app.client.postMessage).toHaveBeenLastCalledWith(
       expect.objectContaining({ type: 'OFFLINE_DOWNLOAD', version: 'new' }),
     );
+  });
+
+  it('offers recovery only when an old tab requests unavailable page data', async () => {
+    const app = await setup();
+    await app.message({ type: 'CLIENT_VERSION', version: 'old' });
+    const response = await app.dispatch('fetch', {
+      request: new Request(`${origin}/library/__data.json`),
+      clientId: app.client.id,
+    });
+    expect(response!.status).toBe(503);
+    expect(app.client.postMessage).toHaveBeenLastCalledWith({
+      type: 'UPDATE_REQUIRED',
+      version: 'new',
+      reason: 'navigation',
+    });
   });
 
   it('retains old chunks for open tabs but never serves another snapshot’s page data', async () => {

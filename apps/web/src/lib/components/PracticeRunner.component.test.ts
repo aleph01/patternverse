@@ -72,11 +72,11 @@ describe('shared Rust-backed practice runner', () => {
     expect(screen.queryByRole('heading', { name: 'Wait' })).toBeNull();
     const answer = screen.getByRole('textbox', { name: 'Your answer' });
     await fireEvent.input(answer, { target: { value: '   ' } });
-    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await fireEvent.click(screen.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }));
     expect(screen.getByRole('alert').textContent).toContain('Please answer');
     expect(screen.queryByRole('heading', { name: 'Wait' })).toBeNull();
     await fireEvent.input(answer, { target: { value: 'A private answer' } });
-    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await fireEvent.click(screen.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }));
     await screen.findByRole('heading', { name: 'Wait' });
     expect(screen.getByRole('heading', { name: 'Write' })).toBeTruthy();
     expect(screen.getByText('A private answer')).toBeTruthy();
@@ -86,7 +86,7 @@ describe('shared Rust-backed practice runner', () => {
     await waitFor(() =>
       expect(document.activeElement).toBe(screen.getByRole('heading', { name: 'Wait' })),
     );
-    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await fireEvent.click(screen.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }));
     await screen.findByRole('heading', { name: 'A moment to review.' });
     expect(screen.getByText('A private answer')).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Return to pattern' }).getAttribute('href')).toBe(
@@ -106,7 +106,7 @@ describe('shared Rust-backed practice runner', () => {
     await fireEvent.input(screen.getByRole('textbox', { name: 'Your answer' }), {
       target: { value: 'Continue' },
     });
-    await fireEvent.click(screen.getByRole('button', { name: 'Continue ↓' }));
+    await fireEvent.click(screen.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }));
     const step = await screen.findByRole('region', { name: 'Wait' });
     expect(within(step).getByText('1 min')).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Pause timer' })).toBeTruthy();

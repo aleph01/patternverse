@@ -23,6 +23,8 @@ pub struct SourceStatement {
     pub argument: Option<SourceField>,
     pub body: Option<SourceField>,
     pub attributes: Vec<SourceAttribute>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub children: Vec<SourceStatement>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -63,6 +65,18 @@ fn word(word: &Word) -> SourceField {
     }
 }
 
+/// Renaming an annotated binding must leave its type annotation intact.
+fn binding_word(value: &Word) -> SourceField {
+    let name = value
+        .text
+        .split_once(':')
+        .map_or(value.text.as_str(), |(name, _)| name.trim());
+    SourceField {
+        value: name.into(),
+        span: value.span.start..value.span.start + name.len(),
+    }
+}
+
 /// Preserve exact source bytes. Unknown/advanced statements receive source-only fields.
 pub(super) fn statements(statements: &[Statement], source: &str) -> Vec<SourceStatement> {
     statements
@@ -70,9 +84,17 @@ pub(super) fn statements(statements: &[Statement], source: &str) -> Vec<SourceSt
         .map(|statement| {
             let (kind, binding, argument, body, attributes) = match statement {
                 Statement::Block(block) => {
-                    let body = if block.statements.is_empty() && !block.body.is_empty() {
-                        let span = block.body.first().unwrap().span.start
-                            ..block.body.last().unwrap().span.end;
+                    let content = block
+                        .body
+                        .iter()
+                        .find(|line| !line.text.trim().is_empty())
+                        .zip(block.body.iter().rfind(|line| !line.text.trim().is_empty()));
+                    let body = if let (true, Some((first, last))) =
+                        (block.statements.is_empty(), content)
+                    {
+                        // Blank lines may precede attributes. They are not an editable
+                        // prompt range: a prompt edit must never erase intervening metadata.
+                        let span = first.span.start..last.span.end;
                         Some(SourceField {
                             value: source[span.clone()].into(),
                             span,
@@ -92,7 +114,7 @@ pub(super) fn statements(statements: &[Statement], source: &str) -> Vec<SourceSt
                     };
                     (
                         block.kind.clone(),
-                        block.binding.as_ref().map(word),
+                        block.binding.as_ref().map(binding_word),
                         block.argument.as_ref().map(|(value, span)| SourceField {
                             value: value.clone(),
                             span: span.clone(),
@@ -123,6 +145,10 @@ pub(super) fn statements(statements: &[Statement], source: &str) -> Vec<SourceSt
                 argument,
                 body,
                 attributes,
+                children: match statement {
+                    Statement::Block(block) => self::statements(&block.statements, source),
+                    _ => vec![],
+                },
             }
         })
         .collect()

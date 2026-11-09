@@ -1,19 +1,19 @@
 :language 1
 :title "Downward Arrow"
 :output outcome
-!ask thought {
+thought = !ask {
     Choose a manageable automatic thought. What went through your mind?
 }
-!ask meaning {
+meaning = !ask {
     If that thought were true, what would it mean to you about yourself, other people, or the world?
 }
-!ask deeper {
+deeper = !ask {
     If that meaning were true, what would be significant about it? You can stop or write that you have gone far enough.
 }
-!ask belief {
+belief = !ask {
     What tentative rule, assumption, or belief seems to be showing up? Leave it uncertain if nothing useful emerges.
 }
-!ask response {
+response = !ask {
     How could you respond to that belief with accuracy and compassion? A belief is not a verdict about you. Stop here if it brings up overwhelming material.
 }
 !show {
@@ -27,5 +27,5 @@
 
     You can leave this here or return later. Nothing has been scheduled or carried out for you.
 }
-= outcome "reflected"
+outcome = "reflected"
 -> end

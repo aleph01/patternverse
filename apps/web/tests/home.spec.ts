@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { libraryVerseControl, openLibrarySearch } from './helpers/library';
 
 test('introduces Patternverse and directs pattern browsing to the library', async ({ page }) => {
   await page.goto('/');
@@ -8,15 +9,15 @@ test('introduces Patternverse and directs pattern browsing to the library', asyn
   );
   await expect(page.getByRole('search')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Verses' })).toBeVisible();
-  await expect(page.locator('.daily-patterns')).toHaveCount(0);
+  await expect(page.locator('.daily-patterns article')).toHaveCount(3);
   await expect(page.getByRole('heading', { name: 'Patterns', exact: true })).toHaveCount(0);
-  await expect(page.locator('main a[href^="/pattern/"]')).toHaveCount(0);
+  await expect(page.locator('.daily-patterns a[href^="/pattern/"]')).toHaveCount(3);
   await page
     .locator('.hero')
     .getByRole('link', { name: /Browse the library/ })
     .click();
   await expect(page).toHaveURL('/library');
-  await expect(page.getByRole('heading', { name: 'your library.' })).toBeVisible();
+  await openLibrarySearch(page);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
@@ -62,7 +63,6 @@ test('shows the explanation after verses while keeping the hero focused on brows
   await hero.getByRole('link', { name: /What is the Patternverse/ }).click();
   await expect(page).toHaveURL('/#home-about');
   await expect(about.getByRole('heading', { level: 2 })).toBeInViewport();
-
 });
 
 test('makes the complete Verse tile navigable without implying an authored order', async ({
@@ -74,18 +74,7 @@ test('makes the complete Verse tile navigable without implying an authored order
   const link = tile.getByRole('link');
   await expect(tile.locator(':scope > span')).toHaveCount(0);
   await link.click({ position: { x: 12, y: 12 } });
-  await expect(page).toHaveURL('/verse/collaboration');
-});
-
-test('reuses a Verse preview color on its detail page', async ({ page }) => {
-  await page.goto('/');
-
-  const tile = page.locator('.verse-list article').filter({ hasText: 'Decision Making' });
-  const previewColor = await tile.evaluate((element) => getComputedStyle(element).backgroundColor);
-  await tile.getByRole('link').click();
-  const pageColor = await page
-    .locator('.verse-page .entity-hero')
-    .evaluate((element) => getComputedStyle(element).backgroundColor);
-
-  expect(pageColor).toBe(previewColor);
+  await expect(page).toHaveURL('/library?verse=commons%3Acollaboration');
+  await expect(libraryVerseControl(page, 'Collaboration')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('region', { name: 'Selected Verse' })).toHaveCount(0);
 });

@@ -14,7 +14,6 @@ const metadata = JSON.parse(
     original_practice_sha256: string;
     migrated_practice_sha256: string;
     migrated_body_sha256: string;
-    supplement_heading: string;
   };
   patterns: {
     id: string;
@@ -47,11 +46,11 @@ beforeAll(async () => {
 });
 
 describe('AI Usage integration', () => {
-  it('organizes six distinct articles in one collection and verse without duplicating the existing pattern', () => {
+  it('organizes eight distinct articles in one collection and verse without duplicating the existing pattern', () => {
     expect(corpus.diagnostics).toEqual([]);
     expect(corpus.unresolvedReferences).toEqual([]);
-    expect(metadata.patterns).toHaveLength(6);
-    expect(new Set(metadata.patterns.map((p) => p.id)).size).toBe(6);
+    expect(metadata.patterns).toHaveLength(8);
+    expect(new Set(metadata.patterns.map((p) => p.id)).size).toBe(8);
     expect(corpus.entities.filter((e) => e.id === 'expose-the-decisive-unknown')).toEqual([]);
     const collection = corpus.entities.find((e) => e.id === 'thinking-with-language-models')!;
     expect(collection.collectionItems.map((r) => r.entityId)).toEqual(
@@ -81,21 +80,24 @@ describe('AI Usage integration', () => {
         entityId: 'thinking-with-language-models',
       });
 
-      let supplied: string;
-      if (p.id === metadata.reconciliation.id) {
-        const heading = `## ${metadata.reconciliation.supplement_heading}\n\n`;
-        supplied = article.body
-          .slice(
-            article.body.indexOf(heading) + heading.length,
-            article.body.indexOf('\n## Practice —'),
-          )
-          .replace(/^### /gm, '## ');
-      } else {
-        supplied = article.body.split('\n## Related patterns')[0]!;
-        expect(article.practice).toBeUndefined();
-        expect(article.implementedByPractices).toEqual([]);
-        expect(article.body).not.toContain('patternverse-practice');
+      let supplied = article.body.split('\n## Related patterns')[0]!;
+      expect(article.practice).toBeUndefined();
+      expect(article.implementedByPractices).toEqual([]);
+      expect(article.body).not.toContain('patternverse-practice');
+      if (p.id !== metadata.reconciliation.id) {
+        expect(article.languagePracticeSource).toBeUndefined();
       }
+      const headings = [
+        'The core idea',
+        'Why it works',
+        'How to use it',
+        'A worked example',
+        'When it helps—and where it falls short',
+        'Related patterns',
+      ];
+      const positions = headings.map((heading) => article.body.indexOf(`## ${heading}\n`));
+      expect(positions.every((position) => position >= 0)).toBe(true);
+      expect(positions).toEqual([...positions].sort((a, b) => a - b));
       expect(article.body.split(image(p))).toHaveLength(2);
       supplied = supplied.replace(`\n\n${image(p)}`, '').trim();
       expect(supplied).toBe(p.article_markdown);
@@ -127,7 +129,7 @@ describe('AI Usage integration', () => {
     },
   );
 
-  it('keeps the original decisive-unknown prose, practice, URL, and Decision Making membership', () => {
+  it('keeps the decisive-unknown worksheet, canonical identity, alias, and Decision Making membership', () => {
     const p = metadata.patterns.find((p) => p.id === metadata.reconciliation.id)!;
     const entity = corpus.entities.find((e) => e.id === p.id)!;
     expect(entity.title).toBe('Look for the Decisive Unknown');
@@ -145,17 +147,9 @@ describe('AI Usage integration', () => {
       metadata.reconciliation.migrated_practice_sha256,
     );
 
-    const start = entity.body.indexOf(`## ${metadata.reconciliation.supplement_heading}\n\n`);
-    const end = entity.body.indexOf('\n## Practice —', start);
-    const extraLinks =
-      '\n\n' +
-      p.related_patterns
-        .slice(2)
-        .map((r) => `- [[${r.id}|${r.title}]] — ${r.relationship}`)
-        .join('\n');
-    const original = (entity.body.slice(0, start) + entity.body.slice(end + 1))
-      .replace(extraLinks, '')
-      .trim();
-    expect(hash(original)).toBe(metadata.reconciliation.migrated_body_sha256);
+    expect(entity.body).toContain('## Why it works');
+    expect(entity.body).not.toContain('## Using this pattern with language models');
+    expect(entity.body).toContain('## Practice — Find the Question That Could Flip the Decision');
+    expect(p.article_markdown).toContain('The same reasoning applies outside AI.');
   });
 });

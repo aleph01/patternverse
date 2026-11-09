@@ -21,6 +21,40 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/my?pane=situations');
 });
 
+test('queue controls rename and delete, with reorder handles only for multiple situations', async ({
+  page,
+}) => {
+  await add(page, 'Creative work');
+  await expect(page.getByRole('button', { name: /^Reorder:/ })).toHaveCount(0);
+  await expect(page.getByText('Drag to reorder', { exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Rename: Creative work' }).click();
+  const title = page.getByLabel('Situation', { exact: true });
+  await expect(title).toBeFocused();
+  await title.fill('A gentler start');
+  await page.getByRole('button', { name: 'Done', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Rename: A gentler start' })).toBeFocused();
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Open notebook: A gentler start' })).toBeVisible();
+  await add(page, 'Conversations');
+  await expect(page.getByRole('button', { name: /^Reorder:/ })).toHaveCount(2);
+  page.once('dialog', (dialog) => dialog.dismiss());
+  await page.getByRole('button', { name: 'Delete: A gentler start' }).click();
+  await expect(titles(page)).toHaveText(['A gentler start', 'Conversations']);
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.getByRole('button', { name: 'Delete: A gentler start' }).click();
+  await expect(titles(page)).toHaveText(['Conversations']);
+  await expect(page.getByRole('button', { name: /^Reorder:/ })).toHaveCount(0);
+  await expect(page.getByText('Drag to reorder', { exact: true })).toHaveCount(0);
+  await page.reload();
+  await expect(titles(page)).toHaveText(['Conversations']);
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.getByRole('button', { name: 'Delete: Conversations' }).click();
+  await expect(page.getByText('Leave a situation here to return to later.')).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'New situation' })).toBeFocused();
+  await page.reload();
+  await expect(page.getByText('Leave a situation here to return to later.')).toBeVisible();
+});
+
 test('adds notebooks, autosaves normalized titles and context, restores focus and survives reload', async ({
   page,
 }, testInfo) => {
@@ -81,11 +115,13 @@ test('empty titles keep drafts open, and correction can be saved without losing 
 
 test('navigation flushes a draft before the debounce and revisiting loads it', async ({ page }) => {
   await page.goto('/library');
+  // Let the initial page hydrate so the link and Back exercise client-side navigation.
+  await page.waitForLoadState('networkidle');
   await page
     .locator('.site-utilities')
     .getByRole('link', { name: 'workspace', exact: true })
     .click();
-  await page.getByRole('button', { name: 'situations', exact: true }).click();
+  await page.getByRole('button', { name: 'Situations', exact: true }).click();
   await add(page, 'Creative work');
   await page.getByRole('button', { name: 'Open notebook: Creative work' }).click();
   await page.getByLabel('Context · optional').fill('Notes before changing the page.');
@@ -98,7 +134,7 @@ test('navigation flushes a draft before the debounce and revisiting loads it', a
     .locator('.site-utilities')
     .getByRole('link', { name: 'workspace', exact: true })
     .click();
-  await page.getByRole('button', { name: 'situations', exact: true }).click();
+  await page.getByRole('button', { name: 'Situations', exact: true }).click();
   await page.getByRole('button', { name: 'Open notebook: Creative work' }).click();
   await expect(page.getByLabel('Context · optional')).toHaveValue(
     'Notes before changing the page.',

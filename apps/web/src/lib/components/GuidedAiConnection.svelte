@@ -7,12 +7,14 @@
     error = '',
     onCheck,
     checkLabel,
+    atStep = false,
   }: {
     reason?: 'connection' | 'credits' | 'free-limit';
     checking?: boolean;
     error?: string;
     onCheck: () => void;
     checkLabel?: string;
+    atStep?: boolean;
   } = $props();
 </script>
 
@@ -22,7 +24,9 @@
       ? 'Free AI limit reached for today.'
       : reason === 'credits'
         ? 'Your OpenRouter limit has been reached.'
-        : 'Connect with OpenRouter'}
+        : atStep
+          ? 'Connect with OpenRouter to continue this step'
+          : 'Connect with OpenRouter'}
   </h2>
   <p>
     {reason === 'free-limit'

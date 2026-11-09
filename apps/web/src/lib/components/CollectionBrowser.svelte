@@ -17,11 +17,13 @@
     article,
     title,
     actions,
+    navigation,
   }: {
     overviews: readonly CollectionOverview[];
     article?: EntityRef;
     title?: string;
     actions?: Snippet;
+    navigation?: Snippet;
   } = $props();
   const id = $props.id();
   let mounted = $state(false);
@@ -105,10 +107,60 @@
   }}
 />
 
-{#if selected || title || actions}
+{#snippet paging()}
+  {#if selected}
+    <nav class="collection-paging" aria-label="Previous and next in collection">
+      {#if previous}
+        <a
+          href={collectionItemHref(
+            previous.url,
+            selected.collection,
+            mounted ? page.url.searchParams.get('verse') : null,
+          )}
+          aria-label={`Previous pattern: ${previous.title}`}
+          title={previous.title}
+          onclick={() => close(false)}><ChevronLeft size={18} aria-hidden="true" /></a
+        >
+      {:else}
+        <button type="button" disabled aria-label="Previous pattern"
+          ><ChevronLeft size={18} aria-hidden="true" /></button
+        >
+      {/if}
+      {#if next}
+        <a
+          href={collectionItemHref(
+            next.url,
+            selected.collection,
+            mounted ? page.url.searchParams.get('verse') : null,
+          )}
+          aria-label={`Next pattern: ${next.title}`}
+          title={next.title}
+          onclick={() => close(false)}><ChevronRight size={18} aria-hidden="true" /></a
+        >
+      {:else}
+        <button type="button" disabled aria-label="Next pattern"
+          ><ChevronRight size={18} aria-hidden="true" /></button
+        >
+      {/if}
+    </nav>
+  {/if}
+{/snippet}
+
+{#if selected || title || actions || navigation}
   <div class="collection-browser">
-    <div class="reading-actions" role="group" aria-label="Pattern navigation and actions">
-      {#if selected}
+    <div
+      class="reading-actions"
+      class:with-breadcrumbs={Boolean(navigation)}
+      role="group"
+      aria-label="Pattern navigation and actions"
+    >
+      {#if navigation}
+        <div class="breadcrumb-controls">{@render navigation()}</div>
+        <div class="breadcrumb-secondary">
+          {@render paging()}
+          {#if actions}<div class="pattern-actions">{@render actions()}</div>{/if}
+        </div>
+      {:else if selected}
         <div class="collection-controls">
           <button
             class="collection-tab"
@@ -125,35 +177,10 @@
             <span class="position">{position} / {selected.items.length}</span>
             <ChevronDown size={16} aria-hidden="true" />
           </button>
-          <nav class="collection-paging" aria-label="Previous and next in collection">
-            {#if previous}
-              <a
-                href={collectionItemHref(previous.url, selected.collection)}
-                aria-label={`Previous pattern: ${previous.title}`}
-                title={previous.title}
-                onclick={() => close(false)}><ChevronLeft size={18} aria-hidden="true" /></a
-              >
-            {:else}
-              <button type="button" disabled aria-label="Previous pattern"
-                ><ChevronLeft size={18} aria-hidden="true" /></button
-              >
-            {/if}
-            {#if next}
-              <a
-                href={collectionItemHref(next.url, selected.collection)}
-                aria-label={`Next pattern: ${next.title}`}
-                title={next.title}
-                onclick={() => close(false)}><ChevronRight size={18} aria-hidden="true" /></a
-              >
-            {:else}
-              <button type="button" disabled aria-label="Next pattern"
-                ><ChevronRight size={18} aria-hidden="true" /></button
-              >
-            {/if}
-          </nav>
+          {@render paging()}
         </div>
       {:else if title}<span class="reading-title">{title}</span>{/if}
-      {#if actions}<div class="pattern-actions">{@render actions()}</div>{/if}
+      {#if actions && !navigation}<div class="pattern-actions">{@render actions()}</div>{/if}
     </div>
 
     {#if selected && expanded}
@@ -221,6 +248,34 @@
 {/if}
 
 <style>
+  .breadcrumb-controls {
+    flex: 1;
+    min-width: 0;
+  }
+  .breadcrumb-secondary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  @media (max-width: 800px) {
+    .breadcrumb-controls {
+      flex-basis: 100%;
+    }
+    .breadcrumb-secondary {
+      width: 100%;
+    }
+    .breadcrumb-secondary .pattern-actions {
+      flex: 1;
+      min-width: 0;
+      width: auto;
+      margin-left: auto;
+    }
+    .breadcrumb-secondary:empty {
+      display: none;
+    }
+  }
+
   .reading-actions {
     display: flex;
     flex-wrap: wrap;

@@ -1,4 +1,7 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-navigation-without-resolve -- Summary URLs are compiled or resolved by the personal library; collectionItemHref preserves their base path. */
+  import { onMount } from 'svelte';
+  import { ArrowRight } from '@lucide/svelte';
   import type { EntitySummary } from '$lib/server/commons';
   import PatternIcon from '$lib/illustrations/PatternIcon.svelte';
   import { patternIconForPattern } from '$lib/illustrations/pattern-mark-presets';
@@ -11,6 +14,7 @@
     compact = false,
     layout = 'list',
     cardsOnMobile = false,
+    showType = false,
     startAt = 1,
     collectionContext,
     collections,
@@ -19,12 +23,41 @@
     compact?: boolean;
     layout?: 'list' | 'cards';
     cardsOnMobile?: boolean;
+    showType?: boolean;
     startAt?: number;
     collectionContext?: Pick<EntitySummary, 'sourceId' | 'id'>;
     collections?: LibraryCollections;
   } = $props();
   const itemHref = (item: EntitySummary) =>
     collectionContext ? collectionItemHref(item.url, collectionContext) : item.url;
+  let desktop = $state(false);
+
+  onMount(() => {
+    if (typeof window.matchMedia !== 'function') return;
+    const media = window.matchMedia('(min-width: 801px)');
+    const update = () => {
+      desktop = media.matches;
+    };
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  });
+
+  const isDesktopCollectionCard = (item: EntitySummary) =>
+    desktop &&
+    layout === 'cards' &&
+    item.type === 'collection' &&
+    collections?.has(`${item.sourceId}:${item.id}`);
+  const countLabel = (members: readonly EntitySummary[]) =>
+    `${members.length} ${
+      members.every((item) => item.type === 'pattern')
+        ? members.length === 1
+          ? 'pattern'
+          : 'patterns'
+        : members.length === 1
+          ? 'item'
+          : 'items'
+    }`;
 </script>
 
 {#if compact}
@@ -55,12 +88,35 @@
     start={startAt}
   >
     {#each items as item (`${item.sourceId}:${item.id}`)}
-      <li class:expandable={collections?.has(`${item.sourceId}:${item.id}`)}>
+      <li
+        class:expandable={collections?.has(`${item.sourceId}:${item.id}`)}
+        class:collection-card={item.type === 'collection'}
+      >
         <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
         <a class="feed-row" href={itemHref(item)}>
           <div class="feed-copy">
+            {#if item.verseNames?.length || item.sourceId === 'personal' || item.status === 'draft'}
+              <div class="feed-card-meta">
+                {#each [...new Set(item.verseNames ?? [])] as verse (verse)}
+                  <span class="feed-verse">{verse}</span>
+                {/each}
+                {#if item.sourceId === 'personal' || item.status === 'draft'}
+                  <span class="feed-provenance">
+                    {item.sourceId === 'personal' ? 'Mine' : ''}{item.status === 'draft'
+                      ? item.sourceId === 'personal'
+                        ? ' · Draft'
+                        : 'Draft'
+                      : ''}
+                  </span>
+                {/if}
+              </div>
+            {/if}
             <p class="feed-meta">
-              {layout === 'cards' ? item.type : (item.collectionNames?.[0] ?? item.type)}<span>
+              {showType || layout === 'cards'
+                ? item.type
+                : (item.collectionNames?.[0] ?? item.type)}<span>
+                {#if showType && item.collectionNames?.length}
+                  · {item.collectionNames[0]}{/if}
                 · {item.sourceId === 'commons' ? 'commons' : 'Mine'}{item.status === 'draft'
                   ? ' · Draft'
                   : ''}</span
@@ -72,12 +128,31 @@
           {#if item.type === 'pattern'}<span class="feed-mark" aria-hidden="true"
               ><PatternIcon icon={patternIconForPattern(item.id, item.title)} decorative /></span
             >{/if}
+          {#if item.type === 'collection' && !collections?.has(`${item.sourceId}:${item.id}`)}
+            <span class="feed-collection-count">
+              {item.collectionItems?.length ?? 0}
+              {(item.collectionItems?.length ?? 0) === 1 ? 'item' : 'items'}
+              <span aria-hidden="true">→</span>
+            </span>
+          {/if}
         </a>
         {#if collections?.has(`${item.sourceId}:${item.id}`)}
-          <CollectionExpansion
-            collection={item}
-            items={collections.get(`${item.sourceId}:${item.id}`) ?? []}
-          />
+          {#if isDesktopCollectionCard(item)}
+            <a
+              href={itemHref(item)}
+              class="collection-page-link"
+              aria-label={`Open ${item.title} collection`}
+            >
+              <span>{countLabel(collections.get(`${item.sourceId}:${item.id}`) ?? [])}</span
+              ><ArrowRight size={18} aria-hidden="true" />
+            </a>
+          {:else}
+            <CollectionExpansion
+              collection={item}
+              items={collections.get(`${item.sourceId}:${item.id}`) ?? []}
+              card={layout === 'cards'}
+            />
+          {/if}
         {/if}
       </li>
     {/each}
@@ -94,6 +169,14 @@
   .pattern-feed li {
     border-bottom: 1px solid #deded8;
   }
+  @media (min-width: 801px) {
+    .pattern-feed:not(.card-grid) > .expandable {
+      position: relative;
+    }
+    .pattern-feed:not(.card-grid) > .expandable > .feed-row {
+      padding-right: 6rem;
+    }
+  }
   .feed-row {
     display: flex;
     align-items: center;
@@ -105,6 +188,28 @@
   }
   .feed-copy {
     min-width: 0;
+  }
+  .collection-page-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 68px;
+    margin: 0 20px;
+    padding: 0 0 8px;
+    border: 0;
+    border-top: 1px solid #deded8;
+    color: var(--green-dark);
+    background: transparent;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .feed-card-meta,
+  .feed-collection-count {
+    display: none;
   }
   .feed-meta {
     margin: 0 0 0.5rem;
@@ -220,8 +325,108 @@
     background: var(--entry-hover-background);
   }
   @container (min-width: 690px) {
-    .card-grid {
+    .card-grid,
+    .card-grid:has(.expandable) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 801px) {
+    .card-grid {
+      row-gap: 24px;
+    }
+    .card-grid:has(.expandable) {
+      align-items: stretch;
+    }
+    .card-grid li {
+      display: flex;
+      flex-direction: column;
+      min-height: 380px;
+    }
+    .card-grid .feed-row {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 0;
+      min-height: 380px;
+      border-radius: 4px;
+      background: var(--paper);
+    }
+    .card-grid .feed-copy {
+      padding-bottom: 28px;
+    }
+    .card-grid .feed-meta {
+      display: none;
+    }
+    .card-grid .feed-card-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .feed-verse {
+      padding: 5px 8px;
+      border-radius: 3px;
+      color: var(--green-dark);
+      background: var(--mint);
+      font-size: 0.7rem;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+    .feed-provenance {
+      color: var(--muted);
+      font-size: 0.7rem;
+      line-height: 1.4;
+    }
+    .card-grid h3 {
+      font-size: 1.3rem;
+      line-height: 1.22;
+      letter-spacing: -0.035em;
+      overflow-wrap: break-word;
+    }
+    .card-grid .feed-summary {
+      margin-top: 14px;
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+    .card-grid .feed-mark {
+      position: static;
+      align-self: flex-end;
+      flex: 0 0 60px;
+      width: 60px;
+      height: 60px;
+      margin-top: auto;
+    }
+    .card-grid li.collection-card {
+      border-radius: 4px;
+      box-shadow:
+        0 5px 0 -2px var(--paper),
+        0 6px 0 -2px #deded8,
+        0 10px 0 -4px var(--paper),
+        0 11px 0 -4px #deded8;
+    }
+    .card-grid .expandable .feed-row {
+      flex: 1;
+      min-height: 300px;
+    }
+    .card-grid .expandable :global(.collection-expansion) {
+      margin: 0 20px;
+      padding-bottom: 8px;
+      border-top: 1px solid #deded8;
+    }
+    .card-grid .feed-collection-count {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 60px;
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid #deded8;
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      font-weight: 650;
     }
   }
   @media (prefers-reduced-motion: reduce) {

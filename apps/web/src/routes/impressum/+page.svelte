@@ -15,7 +15,7 @@
       {operator.name}<br />
       {operator.street}<br />
       {operator.city}<br />
-      Germany
+      {operator.country}
     </address>
     <p>Patternverse and Mira are operated by {operator.name} as an individual.</p>
   </section>

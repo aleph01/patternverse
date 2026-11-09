@@ -1,7 +1,7 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
-  import { onMount } from 'svelte';
-  import { Bookmark, Library, Search, SlidersHorizontal, X } from '@lucide/svelte';
+  import { onMount, tick, type Snippet } from 'svelte';
+  import { Search, X } from '@lucide/svelte';
   import type { EntityType } from '@patternverse/schema';
   import type { RawEntity, SavedLibraryEntry } from '@patternverse/workspace';
   import {
@@ -12,22 +12,35 @@
     isInMyLibrary,
   } from '@patternverse/workspace/library';
   import { getLocalWorkspace } from '$lib/client/workspace';
+  import { loadLibrarySearch } from '$lib/client/library-search';
+  import type { LibrarySearchAsset } from '$lib/library-search-asset';
   import type { EntitySummary } from '$lib/server/commons';
   import EntityList from './EntityList.svelte';
   import PaginatedEntityList from './PaginatedEntityList.svelte';
+  import type {
+    DesktopLibrarySnapshot,
+    EntryBrowseSnapshot,
+  } from '$lib/client/library-browse-snapshot';
   import LibraryViewSwitch from './LibraryViewSwitch.svelte';
+  import LibraryScopeSwitch from './LibraryScopeSwitch.svelte';
   import MobileLibraryCollections from './MobileLibraryCollections.svelte';
   import MobileLibraryResults from './MobileLibraryResults.svelte';
+  import MobileLibrarySearch from './MobileLibrarySearch.svelte';
+  import MobileLibraryVerses from './MobileLibraryVerses.svelte';
+  import DesktopLibraryVerses from './DesktopLibraryVerses.svelte';
   import { subscribeWorkspaceChanges } from '$lib/client/workspace-changes';
   import { createWorkspaceRefresh } from '$lib/client/workspace-refresh';
   import type { LibraryRatingFilter } from '$lib/client/library-ratings';
   import LibraryRatingFilterControl from './LibraryRatingFilter.svelte';
   import type { WorkspaceUsefulness } from '@patternverse/workspace';
   import { libraryCollections } from '$lib/library-collections';
+  import { groupVersesByArea } from '$lib/verse-areas';
+  import { collectionItemHref } from '$lib/collection-navigation';
   import {
     createWorkspaceLibraryCatalog,
     workspaceLibraryView,
     initialLibraryCategory,
+    librarySummaryDocuments,
     type LibraryVerse,
     type LibraryCategory,
     type LibraryScope,
@@ -36,9 +49,12 @@
   const defaultTypes: readonly BrowsableLibraryType[] = ['pattern', 'collection'];
   let {
     commons,
-    commonsSearchDocuments,
+    commonsSearchDocuments = [],
+    searchAsset,
     commonsVerses = [],
     query = $bindable(''),
+    selectedVerse = $bindable('all'),
+    scope = $bindable<LibraryScope>('explore'),
     initialTypes = defaultTypes,
     limit,
     eyebrow = 'From your unified library',
@@ -48,11 +64,15 @@
     featuredIds = [],
     viewAllHref,
     viewAllLabel = 'View the full library →',
+    intro,
   }: {
     commons: readonly EntitySummary[];
-    commonsSearchDocuments: readonly LibrarySearchDocument[];
+    commonsSearchDocuments?: readonly LibrarySearchDocument[];
+    searchAsset?: LibrarySearchAsset;
     commonsVerses?: readonly LibraryVerse[];
     query?: string;
+    selectedVerse?: string;
+    scope?: LibraryScope;
     initialTypes?: readonly EntityType[];
     limit?: number;
     eyebrow?: string;
@@ -62,21 +82,94 @@
     featuredIds?: readonly string[];
     viewAllHref?: string;
     viewAllLabel?: string;
+    intro?: Snippet;
   } = $props();
 
   let personal = $state<readonly RawEntity[]>([]);
+  let loadedSearch = $state<{
+    path: string;
+    documents: readonly LibrarySearchDocument[];
+  }>();
+  let searchState = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
+  let searchRequestPath = '';
+  const searchIncomplete = $derived(
+    Boolean(searchAsset && loadedSearch?.path !== searchAsset.path),
+  );
+  const publicSearchDocuments = $derived(
+    searchAsset
+      ? loadedSearch?.path === searchAsset.path
+        ? loadedSearch.documents
+        : librarySummaryDocuments(commons)
+      : commonsSearchDocuments,
+  );
+  async function ensureSearch(retry = false) {
+    const asset = searchAsset;
+    if (!asset || loadedSearch?.path === asset.path) return;
+    if (
+      searchRequestPath === asset.path &&
+      (searchState === 'loading' || (searchState === 'error' && !retry))
+    )
+      return;
+    searchRequestPath = asset.path;
+    searchState = 'loading';
+    try {
+      const documents = await loadLibrarySearch(asset);
+      if (searchAsset?.path !== asset.path) return;
+      loadedSearch = { path: asset.path, documents };
+      searchState = 'ready';
+    } catch {
+      if (searchAsset?.path === asset.path) searchState = 'error';
+    }
+  }
+  $effect(() => {
+    // Includes queries restored by SvelteKit snapshots, without stealing focus.
+    if (query.trim()) void ensureSearch();
+  });
   let ready = $state(false);
   let message = $state('');
   let savedEntries = $state<readonly SavedLibraryEntry[]>([]);
-  let scope = $state<LibraryScope>('explore');
-  let scopeChosen = false;
   let ratingFilter = $state<LibraryRatingFilter>('any');
   let ratingsAvailable = $state(false);
   let ratings = $state<readonly WorkspaceUsefulness[]>([]);
   const collections = $derived(libraryCollections(commons, personal));
   type Layout = 'list' | 'cards';
   let layout = $state<Layout>('cards');
-  let selectedVerse = $state('all');
+  let resultList = $state<{
+    captureState: () => EntryBrowseSnapshot;
+    restoreState: (snapshot: EntryBrowseSnapshot) => void;
+  }>();
+  let pendingRestore = $state<EntryBrowseSnapshot | null>(null);
+  export function captureDesktopState(): DesktopLibrarySnapshot | null {
+    if (typeof window === 'undefined' || !window.matchMedia('(min-width: 801px)').matches)
+      return null;
+    return {
+      query,
+      scope,
+      category: browseCategory,
+      browseCategories: { ...browseCategories },
+      searchCategory,
+      ratingFilter,
+      layout,
+      entries: resultList?.captureState() ?? null,
+    };
+  }
+  export function restoreDesktopState(snapshot: DesktopLibrarySnapshot) {
+    if (!window.matchMedia('(min-width: 801px)').matches) return;
+    query = snapshot.query;
+    scope = snapshot.scope;
+    if (snapshot.browseCategories) browseCategories = { ...snapshot.browseCategories };
+    else browseCategories[snapshot.scope] = snapshot.category;
+    searchCategory = snapshot.searchCategory ?? 'all';
+    ratingFilter = snapshot.ratingFilter;
+    layout = snapshot.layout;
+    pendingRestore = snapshot.entries;
+  }
+  $effect(() => {
+    if (!ready || !resultList || !pendingRestore) return;
+    const snapshot = pendingRestore;
+    pendingRestore = null;
+    void tick().then(() => resultList?.restoreState(snapshot));
+  });
   let searchInput = $state<HTMLInputElement>();
   let narrowScreen = $state(false);
   const mobileView = $derived(mobileCollections && showControls && narrowScreen);
@@ -84,6 +177,15 @@
   let selectedCollection = $state('all');
   const uid = $props.id();
   const filterPanelId = uid + '-filters';
+  let mobileResultsAnchor: HTMLDivElement | undefined;
+  let mobileNavigationIdentity = '';
+  async function chooseVerse(key: string, fromPicker = false) {
+    if (selectedVerse === key) return;
+    selectedVerse = key;
+    selectedCollection = 'all';
+    await tick();
+    if (fromPicker) mobileResultsAnchor?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
   function clearSearch() {
     query = '';
     searchInput?.focus({ preventScroll: true });
@@ -95,14 +197,35 @@
   // Both are mount-time configuration; interaction owns the category state afterward.
   // svelte-ignore state_referenced_locally
   const initialCategory = initialLibraryCategory(initialTypes);
-  let activeCategory = $state<LibraryCategory>(initialCategory);
+  // Search starts across entry types while keeping the user's browse category intact.
+  // Commons starts with the configured category; My library starts with every saved type.
+  // svelte-ignore state_referenced_locally
+  let browseCategories = $state<Record<LibraryScope, LibraryCategory>>({
+    explore: initialCategory,
+    saved: showControls ? 'all' : initialCategory,
+  });
+  const browseCategory = $derived(browseCategories[scope]);
+  const defaultBrowseCategory = $derived(
+    scope === 'saved' && showControls ? 'all' : initialCategory,
+  );
+  let searchCategory = $state<LibraryCategory>('all');
+  const searching = $derived(Boolean(query.trim()));
+  const activeCategory = $derived(searching ? searchCategory : browseCategory);
+  function chooseCategory(category: LibraryCategory) {
+    if (searching) searchCategory = category;
+    else browseCategories[scope] = category;
+    selectedCollection = 'all';
+  }
+  $effect(() => {
+    if (!searching) searchCategory = 'all';
+  });
   // svelte-ignore state_referenced_locally
   const featuredRank = new Map(featuredIds.map((id, index) => [id, index] as const));
 
   const catalog = $derived(
     createWorkspaceLibraryCatalog({
       commons,
-      commonsSearchDocuments,
+      commonsSearchDocuments: publicSearchDocuments,
       commonsVerses,
       personal,
       editorHref: resolve('/editor'),
@@ -116,7 +239,7 @@
       selectedVerse,
       query,
       category: activeCategory,
-      initialCategory,
+      initialCategory: defaultBrowseCategory,
       ratingFilter,
       showControls,
       featuredRank,
@@ -124,12 +247,17 @@
     }),
   );
   const visibleVerses = $derived(view.visibleVerses);
+  $effect(() => {
+    if (ready && selectedVerse !== view.selectedVerse) selectedVerse = view.selectedVerse;
+  });
+  const visibleVerseAreas = $derived(groupVersesByArea(visibleVerses));
   const myLibraryCount = $derived(view.myLibraryCount);
   const emptyLibrary = $derived(view.emptyLibrary);
   const hasSearchOrFilters = $derived(view.hasSearchOrFilters);
   const results = $derived(view.results);
   const visibleResults = $derived(view.visibleResults);
   const resultLabel = $derived(view.resultLabel);
+  const broaderMatchKeys = $derived(view.broaderMatchKeys);
   const collectionView = $derived(
     workspaceLibraryView(catalog, {
       savedEntries,
@@ -160,42 +288,104 @@
           ?.some((member) => mine.has(libraryEntryKey(member))),
     );
   });
-  const collectionContext = $derived(
-    mobileCollectionEntries.find((entry) => libraryEntryKey(entry) === selectedCollection),
-  );
   const mobileCollectionSearch = $derived(
     workspaceLibraryView(catalog, {
       savedEntries,
       ratings,
       scope: 'explore',
-      selectedVerse,
-      query,
-      category: activeCategory,
+      selectedVerse: 'all',
+      query: activeCategory === 'collection' ? '' : query,
+      category: 'pattern',
       initialCategory,
-      ratingFilter,
+      ratingFilter: activeCategory === 'collection' ? 'any' : ratingFilter,
       showControls,
       featuredRank,
     }),
   );
-  const displayedResults = $derived.by(() => {
-    if (!mobileView || !collectionContext) return visibleResults;
-    // A saved collection can contain unsaved patterns. Keep its authored order and source identity.
+  const mobileCollectionItems = $derived.by(() => {
+    const savedKeys = savedLibraryKeys(savedEntries);
     const matches = new Map(
       mobileCollectionSearch.results.map((entry) => [libraryEntryKey(entry), entry]),
     );
-    return (collections.get(libraryEntryKey(collectionContext)) ?? []).flatMap((entry) => {
-      const match = matches.get(libraryEntryKey(entry));
-      return match ? [match] : [];
-    });
+    return new Map(
+      mobileCollectionEntries.map((collection) => {
+        const key = libraryEntryKey(collection);
+        // Saving a collection keeps its full contents available; otherwise show only saved/owned members.
+        const wholeCollection = scope === 'explore' || isInMyLibrary(collection, savedKeys);
+        const items = (collections.get(key) ?? []).flatMap((member) => {
+          // Collection browsing includes every authored member type. Direct pattern
+          // searches and rating results still use their filtered matches.
+          const match =
+            activeCategory === 'collection' ||
+            (member.type === 'collection' && !query.trim() && ratingFilter === 'any')
+              ? member
+              : matches.get(libraryEntryKey(member));
+          return match && (wholeCollection || isInMyLibrary(match, savedKeys)) ? [match] : [];
+        });
+        return [key, items] as const;
+      }),
+    );
   });
+  const mobileShownCollections = $derived(
+    !searching && activeCategory === 'collection' ? visibleResults : [],
+  );
+  const mobileStandaloneResults = $derived.by(() => {
+    if (activeCategory === 'collection') return searching ? visibleResults : [];
+    if (activeCategory !== 'pattern') return visibleResults;
+    if (query.trim() || ratingFilter !== 'any') {
+      // Direct searches/ratings expose every match, even when its collection is collapsed.
+      const matches = new Map(
+        (searching
+          ? visibleResults
+          : [...visibleResults, ...[...mobileCollectionItems.values()].flat()]
+        ).map((entry) => [libraryEntryKey(entry), entry]),
+      );
+      return [...matches.values()].map((entry) => {
+        const context = mobileCollectionEntries.find((collection) =>
+          mobileCollectionItems
+            .get(libraryEntryKey(collection))
+            ?.some((item) => libraryEntryKey(item) === libraryEntryKey(entry)),
+        );
+        return context ? { ...entry, url: collectionItemHref(entry.url, context) } : entry;
+      });
+    }
+    return visibleResults;
+  });
+  const mobileResultType = $derived(
+    activeCategory === 'collection'
+      ? 'collection'
+      : activeCategory === 'pattern'
+        ? 'pattern'
+        : 'entry',
+  );
+  const mobileHasResults = $derived(
+    mobileShownCollections.length > 0 || mobileStandaloneResults.length > 0,
+  );
   function chooseCollection(key: string) {
-    scopeChosen = true;
-    selectedCollection = key;
-    activeCategory = 'pattern';
+    selectedCollection = selectedCollection === key ? 'all' : key;
   }
   $effect(() => {
     if (selectedVerse !== view.selectedVerse) selectedVerse = view.selectedVerse;
-    if (mobileView && selectedCollection !== 'all' && !collectionContext)
+    const identity = JSON.stringify([
+      mobileView,
+      scope,
+      activeCategory,
+      selectedVerse,
+      query,
+      ratingFilter,
+    ]);
+    if (identity !== mobileNavigationIdentity) {
+      mobileNavigationIdentity = identity;
+      if (mobileView)
+        selectedCollection = mobileShownCollections[0]
+          ? libraryEntryKey(mobileShownCollections[0])
+          : 'all';
+    }
+    if (
+      mobileView &&
+      selectedCollection !== 'all' &&
+      !mobileShownCollections.some((entry) => libraryEntryKey(entry) === selectedCollection)
+    )
       selectedCollection = 'all';
   });
   onMount(() => {
@@ -209,7 +399,6 @@
     return () => media.removeEventListener('change', update);
   });
   onMount(() => {
-    let initialized = false;
     const reader = createWorkspaceRefresh({
       read: async () => {
         const localWorkspace = await getLocalWorkspace();
@@ -228,8 +417,7 @@
         message = ratingsAvailable
           ? ''
           : 'Your ratings are unavailable in this browser. You can still browse the library.';
-        if (!initialized && !scopeChosen) scope = myLibraryCount ? 'saved' : 'explore';
-        initialized = true;
+        // Loading local data must preserve the user's current or restored scope.
       },
       failed: () => {
         ratingsAvailable = false;
@@ -253,7 +441,6 @@
     };
   });
   function chooseScope(next: LibraryScope) {
-    scopeChosen = true;
     scope = next;
     selectedCollection = 'all';
   }
@@ -266,6 +453,11 @@
   id="library"
   aria-labelledby="library-heading"
 >
+  {#if intro}
+    <div class:feed-layout={showControls && !mobileCollections && visibleVerses.length > 0}>
+      <div class="library-intro">{@render intro()}</div>
+    </div>
+  {/if}
   <div class="section-heading split-heading" class:visually-hidden={showControls}>
     <div>
       <p>{eyebrow}</p>
@@ -276,100 +468,102 @@
     </span>
   </div>
 
-  <div class:feed-layout={showControls && visibleVerses.length > 0}>
-    {#if showControls && visibleVerses.length}
+  <div class:feed-layout={showControls && !mobileCollections && visibleVerses.length > 0}>
+    {#if showControls && !mobileCollections && visibleVerses.length}
       <aside class="verse-sidebar" aria-label="Browse verses">
-        <h3>Verses</h3>
-        <button
-          class:chosen={selectedVerse === 'all'}
-          aria-pressed={selectedVerse === 'all'}
-          onclick={() => (selectedVerse = 'all')}>All verses</button
-        >{#each visibleVerses as verse (verse.key)}<button
-            class:chosen={selectedVerse === verse.key}
-            aria-pressed={selectedVerse === verse.key}
-            onclick={() => (selectedVerse = verse.key)}
-            >{verse.title}{verse.sourceId === 'personal' ? ' · Mine' : ''}</button
-          >{/each}
+        <DesktopLibraryVerses
+          verses={visibleVerses}
+          selected={selectedVerse}
+          onselect={chooseVerse}
+        />
       </aside>
     {/if}
     <div class="feed-main">
       {#if showControls}
-        <nav class="library-scopes" class:mobile-navigation={mobileView} aria-label="Library scope">
-          <button
-            type="button"
-            disabled={!ready}
-            aria-pressed={scope === 'saved'}
-            class:active={scope === 'saved'}
-            onclick={() => chooseScope('saved')}
-            >{#if mobileView}<Bookmark size={18} aria-hidden="true" />{/if}My library
-            <span>{myLibraryCount}</span></button
-          >
-          <button
-            type="button"
-            disabled={!ready}
-            aria-pressed={scope === 'explore'}
-            class:active={scope === 'explore'}
-            onclick={() => chooseScope('explore')}
-            >{#if mobileView}<Library
-                size={18}
-                aria-hidden="true"
-              />Commons{:else}Explore{/if}</button
-          >
-        </nav>
+        {#if !mobileView}
+          <div class="library-scope-control">
+            <LibraryScopeSwitch
+              {scope}
+              {ready}
+              savedCount={myLibraryCount}
+              onselect={chooseScope}
+            />
+          </div>
+        {/if}
         <div class="library-tools">
-          <form class="library-search" role="search" onsubmit={(event) => event.preventDefault()}>
-            <label for="library-search-input"
-              >{scope === 'saved' ? 'Search my library' : 'Search the catalog'}</label
-            >
-            <div class="search-field">
-              <span class="search-icon" aria-hidden="true"><Search size={18} /></span>
-              <input
-                id="library-search-input"
-                type="search"
-                placeholder={mobileView
-                  ? 'Search patterns…'
-                  : scope === 'saved'
-                    ? 'Search your library'
-                    : 'Search by title, purpose, or keyword'}
-                bind:this={searchInput}
-                bind:value={query}
-                onkeydown={(event) => {
-                  if (event.key === 'Escape' && !event.isComposing && query) {
-                    event.preventDefault();
-                    clearSearch();
-                  }
-                }}
-              />
-              {#if query}
-                <button
-                  class="search-clear"
-                  type="button"
-                  aria-label="Clear search"
-                  onclick={clearSearch}><X size={18} aria-hidden="true" /></button
-                >
-              {/if}
-            </div>
-          </form>
-
           {#if mobileView}
-            <button
-              class="mobile-filter-toggle"
-              type="button"
-              aria-label="Filter library"
-              aria-expanded={mobileFiltersOpen}
-              aria-controls={filterPanelId}
-              onclick={() => (mobileFiltersOpen = !mobileFiltersOpen)}
-              ><SlidersHorizontal size={20} aria-hidden="true" /></button
-            >
+            <MobileLibrarySearch
+              bind:query
+              {scope}
+              {ready}
+              bind:filtersOpen={mobileFiltersOpen}
+              {filterPanelId}
+              statusId={searchIncomplete && searchState !== 'idle'
+                ? `${uid}-search-status`
+                : undefined}
+              onscopechange={chooseScope}
+              onsearchfocus={() => void ensureSearch()}
+            />
           {:else}
-            <LibraryViewSwitch bind:layout mobileVisible />
+            <form class="library-search" role="search" onsubmit={(event) => event.preventDefault()}>
+              <label for="library-search-input"
+                >{scope === 'saved' ? 'Search my library' : 'Search the catalog'}</label
+              >
+              <div class="search-field">
+                <div class="search-input-wrap">
+                  <span class="search-icon" aria-hidden="true"><Search size={18} /></span>
+                  <input
+                    id="library-search-input"
+                    type="search"
+                    placeholder={scope === 'saved'
+                      ? 'Search your library'
+                      : 'Search by title, purpose, or keyword'}
+                    bind:this={searchInput}
+                    bind:value={query}
+                    onfocus={() => void ensureSearch()}
+                    aria-describedby={searchIncomplete && searchState !== 'idle'
+                      ? `${uid}-search-status`
+                      : undefined}
+                    onkeydown={(event) => {
+                      if (event.key === 'Escape' && !event.isComposing && query) {
+                        event.preventDefault();
+                        clearSearch();
+                      }
+                    }}
+                  />
+                  {#if query}
+                    <button
+                      class="search-clear"
+                      type="button"
+                      aria-label="Clear search"
+                      onclick={clearSearch}><X size={18} aria-hidden="true" /></button
+                    >
+                  {/if}
+                </div>
+              </div>
+            </form>
+            {#if !searching}<LibraryViewSwitch bind:layout mobileVisible />{/if}
           {/if}
         </div>
-        {#if visibleVerses.length}<label class="mobile-verses"
+        {#if searchIncomplete && searchState !== 'idle'}
+          <p id={`${uid}-search-status`} class="library-message" role="status">
+            {searchState === 'error'
+              ? 'Full library search is unavailable. You can search titles, summaries, and your own content. Reconnect and retry.'
+              : 'Loading full library search… Showing title and summary matches and your own content.'}
+            {#if searchState === 'error'}
+              <button type="button" onclick={() => void ensureSearch(true)}
+                >Retry full search</button
+              >
+            {/if}
+          </p>
+        {/if}
+        {#if !mobileCollections && visibleVerses.length}<label class="mobile-verses"
             >Verse<select bind:value={selectedVerse}
               ><option value="all">All verses</option
-              >{#each visibleVerses as verse (verse.key)}<option value={verse.key}
-                  >{verse.title}{verse.sourceId === 'personal' ? ' · Mine' : ''}</option
+              >{#each visibleVerseAreas as group (group.area.id)}<optgroup label={group.area.title}>
+                  {#each group.verses as verse (verse.key)}<option value={verse.key}
+                      >{verse.title}{verse.sourceId === 'personal' ? ' · Mine' : ''}</option
+                    >{/each}</optgroup
                 >{/each}</select
             ></label
           >{/if}
@@ -384,96 +578,136 @@
                 type="button"
                 class:active={activeCategory === 'all'}
                 aria-pressed={activeCategory === 'all'}
-                onclick={() => {
-                  activeCategory = 'all';
-                  selectedCollection = 'all';
-                }}>All</button
+                onclick={() => chooseCategory('all')}>All</button
               >
               {#each typeOptions as option (option.value)}
                 <button
                   type="button"
                   class:active={activeCategory === option.value}
                   aria-pressed={activeCategory === option.value}
-                  onclick={() => {
-                    activeCategory = option.value;
-                    selectedCollection = 'all';
-                  }}>{option.label}</button
+                  onclick={() => chooseCategory(option.value)}>{option.label}</button
                 >
               {/each}
             </nav>
             <LibraryRatingFilterControl bind:value={ratingFilter} available={ratingsAvailable} />
           </div>
         </div>
-        {#if mobileView && mobileCollectionEntries.length}
-          <MobileLibraryCollections
-            items={mobileCollectionEntries}
-            {collections}
-            selected={selectedCollection}
-            allSummary={scope === 'saved' ? 'Browse your saved patterns' : 'Explore the Commons'}
-            onselect={chooseCollection}
+        {#if mobileCollections && visibleVerses.length}
+          <MobileLibraryVerses
+            verses={visibleVerses}
+            selected={selectedVerse}
+            onselect={chooseVerse}
           />
         {/if}
       {/if}
 
-      <div class="library-results-heading" aria-live="polite">
-        {#if mobileView}<h3>
-            {collectionContext?.title ??
-              (scope === 'saved'
-                ? 'My library'
+      <div bind:this={mobileResultsAnchor} class="library-results-heading" aria-live="polite">
+        {#if mobileView}
+          <h3>
+            {searching
+              ? 'Search results'
+              : activeCategory === 'collection'
+                ? 'Collections'
                 : activeCategory === 'pattern'
-                  ? 'Patterns in the Commons'
-                  : 'Library entries')}
+                  ? 'Patterns'
+                  : 'Entries'}
           </h3>
-          <span
-            >{displayedResults.length} {displayedResults.length === 1 ? 'entry' : 'entries'}</span
-          >{#if selectedCollection !== 'all'}<button
-              class="mobile-view-all"
-              type="button"
-              onclick={() => chooseCollection('all')}>View all</button
-            >{/if}{:else}<p>{resultLabel}</p>{/if}
+          <span>
+            {#if searching && broaderMatchKeys.size}{resultLabel}{:else}{mobileShownCollections.length +
+                mobileStandaloneResults.length}
+              {mobileShownCollections.length + mobileStandaloneResults.length === 1
+                ? mobileResultType
+                : mobileResultType === 'entry'
+                  ? 'entries'
+                  : `${mobileResultType}s`}{/if}
+          </span>
+        {:else}<p>{resultLabel}</p>{/if}
         {#if query.trim()}<span>for “{query.trim()}”</span>{/if}
         {#if showControls && ratingFilter !== 'any'}<span
             >· {ratingFilter === 'useful' ? 'Useful or better' : 'Very useful only'}</span
           >{/if}
       </div>
 
-      {#if displayedResults.length > 0}
+      {#if mobileView ? mobileHasResults : visibleResults.length > 0}
         {#if mobileView}
-          <MobileLibraryResults items={displayedResults} {collectionContext} />
+          <div role="region" aria-label="Library results">
+            <MobileLibraryCollections
+              items={mobileShownCollections}
+              collections={mobileCollectionItems}
+              selected={selectedCollection}
+              onselect={chooseCollection}
+            />
+            {#if mobileStandaloneResults.length}
+              <MobileLibraryResults
+                items={mobileStandaloneResults}
+                label={activeCategory === 'all'
+                  ? 'Entries'
+                  : activeCategory === 'collection'
+                    ? 'Collections'
+                    : 'Patterns'}
+                showType={searching}
+                {broaderMatchKeys}
+              />
+            {/if}
+          </div>
         {:else if showControls}
           {#key JSON.stringify([query, scope, activeCategory, selectedVerse, ratingFilter])}
             <PaginatedEntityList
+              bind:this={resultList}
               items={visibleResults}
-              {layout}
-              cardsOnMobile
+              layout={searching ? 'list' : layout}
+              cardsOnMobile={!searching}
+              showType={searching}
               label="Library results"
-              {collections}
+              collections={searching ? undefined : collections}
+              {broaderMatchKeys}
             />
           {/key}
         {:else}
-          <EntityList items={visibleResults} />
+          <EntityList
+            items={visibleResults.filter((entry) => !broaderMatchKeys.has(libraryEntryKey(entry)))}
+          />
+          {#if visibleResults.some((entry) => broaderMatchKeys.has(libraryEntryKey(entry)))}
+            <h3>Broader matches</h3>
+            <EntityList
+              items={visibleResults.filter((entry) => broaderMatchKeys.has(libraryEntryKey(entry)))}
+            />
+          {/if}
         {/if}
+      {:else if ready && searchIncomplete && query.trim()}
+        <p class="library-message">
+          No matches in the available titles, summaries, or personal content.
+        </p>
       {:else if ready}
         <div class="library-empty">
           <div class="library-empty-content">
-            <h3>{emptyLibrary ? 'Nothing saved yet' : 'No matching patterns'}</h3>
+            <h3>
+              {emptyLibrary
+                ? 'Nothing saved yet'
+                : searching && activeCategory === 'all'
+                  ? 'No matching results'
+                  : activeCategory === 'collection'
+                    ? 'No matching collections'
+                    : 'No matching patterns'}
+            </h3>
             <p>
               {emptyLibrary
-                ? 'Find something useful in Explore, then use the bookmark to keep it in your library.'
+                ? 'Find something useful in the Commons, then use the bookmark to keep it in your library.'
                 : 'Try a different word, or clear your filters to see more of your library.'}
             </p>
             <div class="library-empty-actions">
               {#if showControls && emptyLibrary}<button
                   class="library-empty-explore"
                   type="button"
-                  onclick={() => chooseScope('explore')}>Explore</button
+                  onclick={() => chooseScope('explore')}>Browse Commons</button
                 >{/if}
               {#if hasSearchOrFilters || selectedCollection !== 'all'}<button
                   class="library-empty-clear"
                   type="button"
                   onclick={() => {
                     query = '';
-                    activeCategory = initialCategory;
+                    browseCategories[scope] = defaultBrowseCategory;
+                    searchCategory = 'all';
                     selectedVerse = 'all';
                     selectedCollection = 'all';
                     ratingFilter = 'any';
@@ -508,37 +742,8 @@
     clip-path: inset(50%);
     white-space: nowrap;
   }
-  .library-scopes {
-    display: flex;
-    gap: 1.5rem;
-    border-bottom: 1px solid #deded8;
-    margin: 0 0 1.4rem;
-    padding: 0;
-  }
-  .library-scopes button {
-    background: transparent;
-    border: 0;
-    border-bottom: 3px solid transparent;
-    min-height: 48px;
-    padding: 0.6rem 0.3rem;
-    font: inherit;
-    font-size: 0.95rem;
-    font-weight: 650;
-    cursor: pointer;
-    color: var(--ink);
-  }
-  .library-scopes button.active {
-    border-bottom-color: var(--green-dark);
-    color: var(--green-dark);
-    font-weight: 750;
-  }
-  .library-scopes span {
-    display: inline-block;
-    background: #f0f1ee;
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-    margin-left: 0.3rem;
-    font-size: 0.75rem;
+  .library-scope-control {
+    margin-bottom: 1.4rem;
   }
   .feed-library {
     max-width: 1280px;
@@ -565,39 +770,19 @@
   }
   .feed-layout {
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
+    grid-template-columns: clamp(210px, 22vw, 252px) minmax(0, 1fr);
     gap: 1.5rem;
+  }
+  .library-intro {
+    grid-column: -2 / -1;
+    min-width: 0;
   }
   .feed-main {
     min-width: 0;
     container-type: inline-size;
   }
-  .verse-sidebar h3 {
-    margin: 0 0 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 750;
-  }
-  .verse-sidebar button {
-    display: block;
-    width: 100%;
-    text-align: left;
-    border: 0;
-    background: transparent;
-    color: var(--muted);
-    padding: 0.75rem 0.65rem;
-    font: inherit;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    cursor: pointer;
-  }
-  .verse-sidebar button:hover {
-    color: var(--ink);
-    background: #f7f7f3;
-  }
-  .verse-sidebar button.chosen {
-    background: var(--mint);
-    color: var(--ink);
-    font-weight: 700;
+  .verse-sidebar {
+    min-width: 0;
   }
   .mobile-verses {
     display: none;
@@ -620,6 +805,11 @@
   }
   .search-field {
     position: relative;
+  }
+  .search-input-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
   }
   .search-icon {
     position: absolute;
@@ -721,35 +911,14 @@
     padding-bottom: 2rem;
     background: var(--paper);
   }
+  .mobile-collection-library .feed-main {
+    container-type: normal;
+  }
   .mobile-collection-library .library-tools {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    margin: 0;
-  }
-  .mobile-collection-library .library-search > label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-  }
-  .mobile-collection-library .library-search input {
-    border-color: #d7d7d0;
-    border-radius: 5px;
-    background: var(--paper);
-  }
-  .mobile-filter-toggle {
-    display: grid;
-    place-items: center;
-    flex: 0 0 44px;
-    min-height: 48px;
-    padding: 0;
-    border: 1px solid #deded8;
-    border-radius: 5px;
-    color: var(--ink);
-    background: var(--paper);
-    cursor: pointer;
+    margin: 0.75rem 0 0;
   }
   .mobile-filter-panel {
     padding: 1rem;
@@ -766,7 +935,7 @@
     flex-wrap: wrap;
     gap: 0.35rem 0.75rem;
     margin: 1.3rem 0 0;
-    text-transform: lowercase;
+    scroll-margin-top: calc(96px + env(safe-area-inset-top));
   }
   .mobile-collection-library .library-results-heading h3 {
     margin: 0;
@@ -777,59 +946,6 @@
   .mobile-collection-library .library-results-heading span {
     font-size: 0.72rem;
     color: var(--muted);
-  }
-  .mobile-view-all {
-    margin-left: auto;
-    min-height: 44px;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    color: var(--green-dark);
-    background: transparent;
-    cursor: pointer;
-  }
-  .library-scopes.mobile-navigation {
-    position: fixed;
-    z-index: 5;
-    inset: auto 0 0;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0;
-    padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom));
-    border-top: 1px solid #deded8;
-    border-bottom: 0;
-    background: var(--paper);
-  }
-  .library-scopes.mobile-navigation button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    max-width: 240px;
-    gap: 0.25rem;
-    min-height: 52px;
-    padding: 0.4rem;
-    border: 0;
-    border-radius: 5px;
-    color: var(--muted);
-    font-size: 0.72rem;
-    font-weight: 650;
-  }
-  .library-scopes.mobile-navigation button:last-child {
-    order: -1;
-  }
-  .library-scopes.mobile-navigation button.active {
-    color: var(--green-dark);
-    background: var(--mint);
-    font-weight: 750;
-  }
-  .library-scopes.mobile-navigation span {
-    display: none;
-  }
-  :global(body:has(.mobile-navigation)) {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom));
   }
   @media (max-width: 800px) {
     .library-filters {

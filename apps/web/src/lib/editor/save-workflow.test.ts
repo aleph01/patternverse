@@ -415,6 +415,76 @@ beforeAll(() =>
   }),
 );
 describe('existing compiler and private workspace integration', () => {
+  it('validates every attached practice before atomically saving and reopening the complete pattern', async () => {
+    const test = setup();
+    const workspace = createIndexedDbWorkspace({
+      indexedDB,
+      IDBKeyRange,
+      databaseName: `multi-practice-save-${crypto.randomUUID()}`,
+    });
+    test.ports.workspace = () => workspace;
+    test.ports.inspect.mockImplementation(
+      async (text) =>
+        JSON.parse(editor(JSON.stringify({ operation: 'inspect', source: text }))) as Inspection,
+    );
+    const first = {
+      ...emptyEditorValues('practice'),
+      id: 'quick-check',
+      title: 'Quick check',
+      durationMinutes: '2',
+      languagePracticeSource: source,
+    };
+    const second = {
+      ...emptyEditorValues('practice'),
+      id: 'decision-brief',
+      title: 'Decision brief',
+      summary: 'Explore the boundaries.',
+      languagePracticeSource: '!show {{missing}}',
+    };
+    test.state.values.linkedPractices = [first, second];
+    test.state.values.originalPracticeIds = [];
+    test.state.values.languagePracticeSource = source;
+    const workflow = createEditorSaveWorkflow(test.ports);
+    try {
+      await workflow.save();
+      expect(test.ports.failed.mock.calls[0][0].join(' ')).toContain('Decision brief');
+      expect(await workspace.listEntities()).toEqual([]);
+      second.languagePracticeSource = source.replace('What helps?', 'What are the boundaries?');
+      await workflow.save();
+      expect(await workspace.listEntities()).toHaveLength(3);
+      const reopened = editorValuesFromEntity(
+        (await workspace.getEntity('test-pattern'))!,
+        await workspace.listEntities(),
+      );
+      expect(reopened.body).toBe('Keep this article.');
+      expect(reopened.languagePracticeSource).toBe(source);
+      expect(reopened.linkedPractices?.map((practice) => practice.id).sort()).toEqual([
+        'decision-brief',
+        'quick-check',
+      ]);
+      expect(reopened.originalPracticeIds?.sort()).toEqual(['decision-brief', 'quick-check']);
+      expect(
+        reopened.linkedPractices?.find((practice) => practice.id === 'decision-brief'),
+      ).toMatchObject({
+        summary: 'Explore the boundaries.',
+        languagePracticeSource: second.languagePracticeSource,
+      });
+      test.state.values = reopened;
+      test.state.values.linkedPractices = reopened.linkedPractices?.filter(
+        (practice) => practice.id === 'quick-check',
+      );
+      await workflow.save();
+      expect(await workspace.getEntity('decision-brief')).toMatchObject({ implements: [] });
+      expect(await workspace.getEntity('quick-check')).toMatchObject({
+        implements: ['test-pattern'],
+        duration_minutes: 2,
+      });
+    } finally {
+      workflow.dispose();
+      workspace.close();
+    }
+  });
+
   it('validates and saves real Pattern Language without changing the article or public source', async () => {
     const test = setup();
     const workspace = createIndexedDbWorkspace({

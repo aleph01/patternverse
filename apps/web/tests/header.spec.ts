@@ -8,7 +8,7 @@ test('keeps navigation typography and alignment consistent at desktop and phone 
     await page.goto('/');
     const navigation = page.getByRole('navigation', { name: 'Main navigation' });
     const links = navigation.getByRole('link');
-    await expect(links).toHaveText(['library', 'apps', 'about']);
+    await expect(links).toHaveText(['library', 'workspace']);
     const styles = await links.evaluateAll((elements) =>
       elements.map((element) => {
         const css = getComputedStyle(element);
@@ -46,7 +46,7 @@ test('retains the active-page indicator without changing label size', async ({ p
   expect(new Set(sizes).size).toBe(1);
 });
 
-test('keeps the same header layout when navigating between Apps and other pages', async ({
+test('keeps the same header layout when navigating between mira and other pages', async ({
   page,
 }) => {
   for (const width of [1440, 700, 390, 320]) {
@@ -57,7 +57,12 @@ test('keeps the same header layout when navigating between Apps and other pages'
       header.evaluate((element) => {
         const rect = (node: Element) => {
           const r = node.getBoundingClientRect();
-          return { x: r.x, y: r.y, width: r.width, height: r.height };
+          return {
+            x: r.x,
+            y: r.y - element.getBoundingClientRect().y,
+            width: r.width,
+            height: r.height,
+          };
         };
         return {
           header: rect(element),
@@ -66,12 +71,12 @@ test('keeps the same header layout when navigating between Apps and other pages'
         };
       });
     const baseline = await geometry();
-    for (const destination of ['apps', 'library', 'about', 'apps']) {
+    for (const destination of ['library', 'workspace', 'library']) {
       const navigation = page.getByRole('navigation', { name: 'Main navigation' });
       await navigation.getByRole('link', { name: destination, exact: true }).click();
-      await expect(page).toHaveURL(new RegExp(`/${destination}$`));
+      await expect(page).toHaveURL(destination === 'workspace' ? '/my' : '/library');
       await expect(navigation).toBeVisible();
-      for (const label of ['library', 'apps', 'about']) {
+      for (const label of ['library', 'workspace']) {
         await expect(navigation.getByRole('link', { name: label, exact: true })).toBeVisible();
       }
       expect(await geometry()).toEqual(baseline);

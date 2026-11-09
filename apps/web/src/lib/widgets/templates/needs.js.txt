@@ -1,0 +1,139 @@
+const api = await widget.ready();
+const root = document.getElementById('needs-root');
+const options = api.inputs.options,
+  allowed = new Map(options.map((o) => [o.value, o]));
+const data = api.presentation.options || {},
+  groups = data.groups || [],
+  items = data.items || {},
+  starters = data.starterIdsByArea || {};
+const areas = groups.filter((g) => !g.parent_ids?.length),
+  subgroups = (area) => groups.filter((g) => g.parent_ids?.includes(area));
+const members = (group) =>
+  options.filter((o) => (data.memberships?.[o.value] || []).includes(group));
+const areaNeeds = (area) =>
+  options.filter((o) =>
+    subgroups(area).some((g) => (data.memberships?.[o.value] || []).includes(g.id)),
+  );
+const selected = new Set(
+  (api.draft?.needs || []).map((o) => o.value).filter((id) => allowed.has(id)),
+);
+const expanded = new Set(areas.slice(0, 1).map((a) => a.id));
+let view = api.inputs.initial_view || 'simple',
+  query = '',
+  detail = null,
+  update = 0;
+const esc = (s) =>
+  String(s).replace(
+    /[&<>"']/g,
+    (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
+  );
+const starterIds = new Set(Object.values(starters).flat());
+const offeredStarters = options.filter((o) => starterIds.has(o.value));
+const tag = (o) =>
+  `<button type="button" class="nt-tag" data-need="${esc(o.value)}" aria-pressed="${selected.has(o.value)}"><span aria-hidden="true">${selected.has(o.value) ? '✓' : '+'}</span><span>${esc(o.label)}</span></button>`;
+root.innerHTML =
+  '<div class="nt-search-wrap"><label class="nt-search"><input type="search" aria-label="Search needs" placeholder="Find a need…"></label><div class="nt-view-row"><span class="nt-view-label"></span><div class="nt-view-switch" role="group" aria-label="View detail"><button type="button" data-view="simple">Simple</button><button type="button" data-view="detailed">Detailed</button></div></div></div><div class="nt-browser"></div><section class="nt-detail" aria-label="Need meaning" hidden></section><section class="nt-selection" aria-label="Selected needs"></section>';
+function render() {
+  const active = root.contains(document.activeElement) ? document.activeElement : null;
+  const focus = active
+    ? ['need', 'area', 'remove', 'clear']
+        .map((key) => [key, active.dataset[key]])
+        .find(([, value]) => value !== undefined)
+    : null;
+  root
+    .querySelectorAll('[data-view]')
+    .forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+  root.querySelector('.nt-view-label').textContent =
+    view === 'simple' && offeredStarters.length
+      ? `${offeredStarters.length} starting options`
+      : `All ${options.length} needs`;
+  const q = query.trim().toLowerCase();
+  let html = '';
+  if (q) {
+    const pool = view === 'simple' && offeredStarters.length ? offeredStarters : options;
+    const matches = pool.filter((o) =>
+      [o.label, ...(items[o.value]?.aliases || []), items[o.value]?.description || '']
+        .join(' ')
+        .toLowerCase()
+        .includes(q),
+    );
+    html = `<div class="nt-tags">${matches.map(tag).join('')}</div>${!matches.length ? '<p class="nt-empty">No matching needs.</p>' : ''}${view === 'simple' && pool.length < options.length ? '<button type="button" data-view="detailed" class="nt-more">Search all needs</button>' : ''}`;
+  } else if (!areas.length) {
+    html = `<div class="nt-tags">${options.map(tag).join('')}</div>`;
+  } else
+    html = areas
+      .map((a) => {
+        const all = areaNeeds(a.id);
+        if (!all.length) return '';
+        const open = expanded.has(a.id),
+          initial = (starters[a.id] || []).map((id) => allowed.get(id)).filter(Boolean);
+        const visible = view === 'simple' && initial.length ? initial : all;
+        return `<section class="nt-area"><button type="button" class="nt-area-button" data-area="${esc(a.id)}" aria-expanded="${open}"><span class="nt-chevron ${open ? 'open' : ''}" aria-hidden="true"></span><span class="nt-area-name">${esc(a.label)}</span><span class="nt-area-total">${visible.length}</span></button>${
+          open
+            ? view === 'simple'
+              ? `<div class="nt-tags nt-flat-tags">${visible.map(tag).join('')}</div>`
+              : `<div class="nt-branches">${subgroups(a.id)
+                  .map((g) => {
+                    const choices = members(g.id);
+                    return choices.length
+                      ? `<section class="nt-group"><h3 class="nt-group-heading">${esc(g.label)}</h3><div class="nt-tags">${choices.map(tag).join('')}</div></section>`
+                      : '';
+                  })
+                  .join('')}</div>`
+            : ''
+        }</section>`;
+      })
+      .join('');
+  root.querySelector('.nt-browser').innerHTML = html;
+  const detailEl = root.querySelector('.nt-detail');
+  detailEl.hidden = !detail;
+  detailEl.innerHTML = detail
+    ? `<div class="nt-detail-title">${esc(allowed.get(detail).label)}</div><p>${esc(items[detail]?.description || '')}</p>`
+    : '';
+  const chosen = options.filter((o) => selected.has(o.value)),
+    hidden = chosen.filter((o) => !starterIds.has(o.value));
+  root.querySelector('.nt-selection').innerHTML =
+    `<div class="nt-selection-head"><span>Your selection · ${chosen.length}</span>${chosen.length ? '<button type="button" class="nt-clear" data-clear="true">Clear all</button>' : ''}</div><div class="nt-selected-tags">${chosen.map((o) => `<button type="button" class="nt-remove" data-remove="${esc(o.value)}" aria-label="Remove ${esc(o.label)}">${esc(o.label)} ×</button>`).join('') || '<span class="nt-empty">Select any tags that feel relevant.</span>'}</div>${view === 'simple' && hidden.length && offeredStarters.length ? `<p class="nt-kept-note">${hidden.length} choices from Detailed kept in your selection.</p>` : ''}`;
+  if (focus) {
+    const [key, value] = focus;
+    const target = Array.from(root.querySelectorAll(`[data-${key}]`)).find(
+      (b) => b.dataset[key] === value,
+    );
+    (target || root.querySelector('input')).focus({ preventScroll: true });
+  }
+}
+async function send() {
+  const revision = ++update;
+  const result = await widget.setDraft({ needs: options.filter((o) => selected.has(o.value)) });
+  if (revision !== update) return;
+  if (!result.valid) root.querySelector('.nt-selection').setAttribute('aria-invalid', 'true');
+  else root.querySelector('.nt-selection').removeAttribute('aria-invalid');
+}
+root.querySelector('input').addEventListener('input', (e) => {
+  query = e.target.value;
+  render();
+});
+root.addEventListener('click', (e) => {
+  const button = e.target.closest('button');
+  if (!button) return;
+  const d = button.dataset;
+  let changed = false;
+  if (d.need) {
+    if (!allowed.has(d.need)) return;
+    selected.has(d.need) ? selected.delete(d.need) : selected.add(d.need);
+    detail = d.need;
+    changed = true;
+  } else if (d.remove) {
+    selected.delete(d.remove);
+    changed = true;
+  } else if (d.clear) {
+    selected.clear();
+    detail = null;
+    changed = true;
+  } else if (d.area) expanded.has(d.area) ? expanded.delete(d.area) : expanded.add(d.area);
+  else if (d.view) view = d.view;
+  render();
+  if (changed) void send();
+});
+render();
+void send();

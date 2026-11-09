@@ -1,7 +1,14 @@
 import type { PatternEffect, PatternRun } from './types';
 import { executePatternRequest } from './wasm';
+import type { WidgetPackage } from '@patternverse/workspace';
 
 const MAX_CHECKPOINT_BYTES = 2 * 1024 * 1024;
+
+export interface SourceRunOptions {
+  isolated?: boolean;
+  widgets?: Record<string, WidgetPackage>;
+  data?: Record<string, unknown>;
+}
 
 function checkpoint(value: string): unknown {
   if (new TextEncoder().encode(value).byteLength > MAX_CHECKPOINT_BYTES)
@@ -18,9 +25,18 @@ async function execute(request: Record<string, unknown>): Promise<PatternRun> {
 export function startSourceRun(
   source: string,
   inputs: Record<string, unknown> = {},
-  rootId = crypto.randomUUID(),
+  rootId: string = crypto.randomUUID(),
+  options: Readonly<SourceRunOptions> = {},
 ): Promise<PatternRun> {
-  return execute({ operation: 'start', source, root_id: rootId, inputs });
+  return execute({
+    operation: 'start',
+    source,
+    root_id: rootId,
+    inputs,
+    ...(options.isolated ? { data: {}, widgets: {} } : {}),
+    ...(options.data ? { data: options.data } : {}),
+    ...(options.widgets ? { widgets: options.widgets } : {}),
+  });
 }
 
 export function applySourceAction(
@@ -57,4 +73,21 @@ export function serializeSourceRun(run: PatternRun): string {
 /** Replay-validate in Rust and require the exact pinned practice, without dispatching effects. */
 export async function restoreSourceRun(source: string, serialized: string): Promise<PatternRun> {
   return execute({ operation: 'restore', source, saved: checkpoint(serialized) });
+}
+
+/** History owns an already-associated checkpoint. Resume its pinned source, not
+ * the article's latest revision. Rust still rebuilds and replay-validates every
+ * saved source, resource and receipt; this is only extraction of transport metadata.
+ * Explicit handoffs/embeds continue to use restoreSourceRun's exact-source check.
+ */
+export async function resumeSourceRun(serialized: string): Promise<PatternRun> {
+  const saved = checkpoint(serialized) as {
+    manager?: { snapshot?: { root_name?: unknown; sources?: Record<string, unknown> } };
+  } | null;
+  const snapshot = saved?.manager?.snapshot;
+  const source =
+    typeof snapshot?.root_name === 'string' ? snapshot.sources?.[snapshot.root_name] : undefined;
+  if (typeof source !== 'string')
+    throw new Error('This checkpoint does not include its practice source.');
+  return execute({ operation: 'restore', source, saved });
 }

@@ -13,39 +13,39 @@ classifier outside_lens -> OutsideLens {
 }
 lens = frame ?~ outside_lens
 ?match lens {
-    :case hammer -> hammer
-    :case time -> time
-    :case influence -> influence
-    :case properties -> properties
-    :case uncertain -> uncertain
+  :case hammer {
+    finding = !use reframing.escape-hammer {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case time {
+    finding = !use reframing.expand-time-window {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case influence {
+    finding = !use reframing.find-hidden-influence {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case properties {
+    finding = !use reframing.find-hidden-properties {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case uncertain {
+    finding = !use reframing.find-hidden-influence {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
 }
-hammer:
-!use reframing.escape-hammer as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-time:
-!use reframing.expand-time-window as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-influence:
-!use reframing.find-hidden-influence as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-properties:
-!use reframing.find-hidden-properties as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-uncertain:
-!use reframing.find-hidden-influence as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end

@@ -41,11 +41,15 @@ fn error(pattern: &str, message: impl Into<String>) -> BuildError {
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 struct SnapshotData {
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    widgets: crate::widgets::Packages,
     version: u32,
     id: String,
     root_name: String,
     root_revision: String,
     sources: BTreeMap<String, String>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    data: BTreeMap<String, crate::data::DataLibrary>,
     patterns: BTreeMap<String, CompiledPattern>,
 }
 /// Exact root source and transitive dependency closure, with content-derived identity.
@@ -58,10 +62,14 @@ impl<'de> Deserialize<'de> for ExecutableSnapshot {
     /// Rebuild executable code from saved sources and reject mismatching snapshot metadata.
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let saved = SnapshotData::deserialize(deserializer)?;
-        let rebuilt = Self::build(SourceBundle {
-            root: saved.root_name.clone(),
-            patterns: saved.sources.clone(),
-        })
+        let rebuilt = Self::build_with_widgets(
+            SourceBundle {
+                root: saved.root_name.clone(),
+                patterns: saved.sources.clone(),
+            },
+            saved.data.clone(),
+            saved.widgets.clone(),
+        )
         .map_err(serde::de::Error::custom)?;
         if rebuilt.inner != saved {
             return Err(serde::de::Error::custom(
@@ -78,6 +86,36 @@ impl ExecutableSnapshot {
     /// # Errors
     /// Rejects missing or cyclic dependencies, invalid patterns, name mismatches, and graph limits.
     pub fn build(bundle: SourceBundle) -> Result<Self, BuildError> {
+        Self::build_with_data(bundle, BTreeMap::new())
+    }
+
+    /// Freeze a source closure and its host-supplied reference resources together.
+    ///
+    /// # Errors
+    /// Rejects invalid or oversized sources, resources, imports and dependency graphs.
+    pub fn build_with_data(
+        bundle: SourceBundle,
+        data: BTreeMap<String, crate::data::DataLibrary>,
+    ) -> Result<Self, BuildError> {
+        Self::build_with_widgets(bundle,data,BTreeMap::new())
+    }
+    /// Freeze the source closure, reference data and widget packages into one replayable snapshot.
+    ///
+    /// # Errors
+    /// Rejects oversized or invalid resources, imports and dependency graphs.
+    pub fn build_with_widgets(bundle:SourceBundle,data:BTreeMap<String,crate::data::DataLibrary>,widgets:crate::widgets::Packages)->Result<Self,BuildError>{
+        if widgets.len()>64 || serde_json::to_vec(&widgets).map_err(|_|error(&bundle.root,"Invalid widgets"))?.len()>4*1024*1024 {return Err(error(&bundle.root,"Widget package limit exceeded"));}
+        if data.len() > 64
+            || serde_json::to_vec(&data)
+                .map_err(|_| error(&bundle.root, "Invalid data resources"))?
+                .len()
+                > 2 * 1024 * 1024
+        {
+            return Err(error(
+                &bundle.root,
+                "Data resources exceed 64 libraries / 2 MiB",
+            ));
+        }
         let mut compiled = BTreeMap::new();
         visit(
             &bundle.root,
@@ -85,30 +123,67 @@ impl ExecutableSnapshot {
             &mut vec![],
             &mut compiled,
             &mut BTreeMap::new(),
+            &data,
+            &widgets,
         )?;
         let root_revision = compiled[&bundle.root].snapshot_id().to_owned();
         let sources: BTreeMap<_, _> = compiled
             .keys()
             .map(|name| (name.clone(), bundle.patterns[name].clone()))
             .collect();
+        let used = sources
+            .values()
+            .map(|source| {
+                syntax::parse(source).map_err(|diagnostics| BuildError {
+                    pattern: bundle.root.clone(),
+                    diagnostics,
+                })
+            })
+            .collect::<Result<Vec<_>, _>>()?
+            .into_iter()
+            .map(|parsed| {
+                syntax::data_imports(&parsed.declarations).map_err(|diagnostic| BuildError {
+                    pattern: bundle.root.clone(),
+                    diagnostics: vec![diagnostic],
+                })
+            })
+            .collect::<Result<Vec<_>, _>>()?
+            .into_iter()
+            .flatten()
+            .map(|i| i.resource)
+            .collect::<std::collections::BTreeSet<_>>();
+        let data = data
+            .into_iter()
+            .filter(|(key, _)| used.contains(key))
+            .collect::<BTreeMap<_, _>>();
+        let widgets=compiled.values().flat_map(|p|p.widgets.clone()).collect::<BTreeMap<_,_>>();
         let id = format!(
             "executable-m4-v1:{:x}",
             Sha256::digest(
-                serde_json::to_vec(&("executable-m4-v1", &bundle.root, &sources))
-                    .expect("source strings serialize")
+                if !widgets.is_empty() {
+                    serde_json::to_vec(&("executable-widgets-v1",&bundle.root,&sources,&data,&widgets))
+                } else if data.is_empty() {
+                    serde_json::to_vec(&("executable-m4-v1", &bundle.root, &sources))
+                } else {
+                    serde_json::to_vec(&("executable-data-v1", &bundle.root, &sources, &data))
+                }
+                .expect("source strings serialize")
             )
         );
         let patterns = compiled
             .into_values()
             .map(|p| (p.snapshot_id().to_owned(), p))
             .collect();
+        let version=if !widgets.is_empty(){3}else if data.is_empty(){1}else{2};
         Ok(Self {
             inner: SnapshotData {
-                version: 1,
+                widgets,
+                version,
                 id,
                 root_name: bundle.root,
                 root_revision,
                 sources,
+                data,
                 patterns,
             },
         })
@@ -125,6 +200,11 @@ impl ExecutableSnapshot {
     pub fn sources(&self) -> &BTreeMap<String, String> {
         &self.inner.sources
     }
+    /// Borrow the exact resource closure used by this snapshot.
+    pub fn data(&self) -> &BTreeMap<String, crate::data::DataLibrary> {
+        &self.inner.data
+    }
+
     /// Iterate over compiled patterns in revision-key order.
     pub fn patterns(&self) -> impl Iterator<Item = &CompiledPattern> {
         self.inner
@@ -165,6 +245,8 @@ fn visit(
     stack: &mut Vec<String>,
     compiled: &mut BTreeMap<String, CompiledPattern>,
     heights: &mut BTreeMap<String, usize>,
+    data: &BTreeMap<String, crate::data::DataLibrary>,
+    widgets: &crate::widgets::Packages,
 ) -> Result<(), BuildError> {
     if stack.iter().any(|item| item == name) {
         return Err(error(
@@ -225,7 +307,7 @@ fn visit(
                 )],
             });
         }
-        visit(&child, sources, stack, compiled, heights)?;
+        visit(&child, sources, stack, compiled, heights, data,widgets)?;
         height = height.max(heights[&child] + 1);
         if height > 64 {
             return Err(error(name, "Dependency graph exceeds 64 levels"));
@@ -233,7 +315,7 @@ fn visit(
         interfaces.insert(child.clone(), compiled[&child].interface());
     }
     let pattern =
-        compiler::compile_with_dependencies(source, interfaces).map_err(|diagnostics| {
+        compiler::compile_with_widget_environment(source, interfaces, data,widgets).map_err(|diagnostics| {
             BuildError {
                 pattern: name.into(),
                 diagnostics,

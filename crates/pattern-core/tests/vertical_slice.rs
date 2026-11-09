@@ -237,7 +237,7 @@ fn inputs_are_explicit_typed_and_cannot_be_rebound() {
         assert!(runtime::start(compiler::compile(SOURCE).unwrap(), "test".into(), inputs).is_err());
     }
     let errors =
-        compiler::compile(&SOURCE.replace("!agent themes", "!agent situation")).unwrap_err();
+        compiler::compile(&SOURCE.replace("themes = !agent", "situation = !agent")).unwrap_err();
     assert_eq!(errors[0].secondary.len(), 1);
     assert!(compiler::compile(&SOURCE.replace(":output theme", ":output missing")).is_err());
     assert!(compiler::compile(&SOURCE.replace("{{situation}}", "{{themes}}")).is_err());

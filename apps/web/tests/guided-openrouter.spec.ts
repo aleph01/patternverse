@@ -66,7 +66,7 @@ test('a credit limit pauses the AI step, retains answers, and retries only on re
   await page.goto('/pattern/reframing-rapid-reframe/run');
   await connect(page, context);
   await page.getByLabel('Your response').fill('We need an app to reach more people.');
-  await page.getByRole('button', { name: 'Continue ↓' }).click();
+  await page.getByRole('button', { name: /^(?:Next step|Continue) ↓$/ }).click();
   await expect(
     page.getByRole('heading', { name: 'Your OpenRouter limit has been reached.' }),
   ).toBeVisible();
