@@ -37,22 +37,22 @@ The exact source below is bundled in the guided practice; displaying it does not
 :language 1
 :title "Exposure"
 :output outcome
-!ask situation {
+situation = !ask {
     What objectively safe, everyday situation are you avoiding? Do not choose real danger, abuse, traumatic memories, medical risks, or anything that disregards another person's consent.
 }
-!ask ladder {
+ladder = !ask {
     List a few possible approach steps from easier to harder. You may add rough difficulty ratings from 0 to 100. Keep the steps voluntary and manageable.
 }
-!ask first {
+first = !ask {
     Which easiest step feels workable? What do you predict will happen, and what would you like to learn?
 }
-!ask plan {
+plan = !ask {
     When and where might you try that step? What appropriate support would help? Do not remove genuine safety precautions or change prescribed treatment.
 }
-!ask observed {
+observed = !ask {
     If you have tried the step, what actually happened? Otherwise, leave a plan for what to observe. Learning matters more than forcing anxiety to drop.
 }
-!ask next {
+next = !ask {
     Would you repeat, make the step smaller, pause, or seek qualified support? You control the pace. If distress is overwhelming or this involves trauma, OCD, or physical symptoms, seek professional guidance.
 }
 !show {
@@ -67,6 +67,6 @@ The exact source below is bundled in the guided practice; displaying it does not
 
     You can leave this here or return later. Nothing has been scheduled or carried out for you.
 }
-= outcome "reflected"
+outcome = "reflected"
 -> end
 ```

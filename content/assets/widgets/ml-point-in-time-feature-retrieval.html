@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Point-in-time feature retrieval explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 14%;
+      }
+      .selection {
+        font-weight: 700;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Replay one fictional feature lookup from an archive retained through 10:30 UTC on 12 May 2026.
+      Event time describes the snapshot; ready time is when that particular version first became
+      available to the prediction path.
+    </p>
+    <form aria-label="Historical retrieval settings">
+      <div>
+        <label for="entity">Entity key</label
+        ><select id="entity">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C · no history</option>
+        </select>
+      </div>
+      <div>
+        <label for="cutoff">Decision time · UTC</label
+        ><select id="cutoff">
+          <option>08:00</option>
+          <option>08:30</option>
+          <option>09:00</option>
+          <option>09:02</option>
+          <option>09:40</option>
+          <option>09:45</option>
+          <option>09:47</option>
+          <option selected>10:00</option>
+          <option>10:10</option>
+          <option>10:15</option>
+          <option>10:25</option>
+        </select>
+      </div>
+      <div>
+        <label for="ttl">Maximum feature age · minutes</label
+        ><select id="ttl">
+          <option>10</option>
+          <option>15</option>
+          <option>30</option>
+          <option selected>60</option>
+          <option>120</option>
+        </select>
+      </div>
+      <div>
+        <label for="arrival">Late F02 availability</label
+        ><select id="arrival">
+          <option value="late">10:20 · original delay</option>
+          <option value="early">09:35 · earlier arrival</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="interpretation" class="note"></p>
+    <svg
+      id="mechanism"
+      role="img"
+      aria-label="Candidate records, two clocks, and the selected historical value"
+    ></svg>
+    <table id="comparison-table">
+      <caption>
+        Three computed retrieval rules · same retained archive
+      </caption>
+      <thead>
+        <tr>
+          <th>Rule</th>
+          <th>Row / value</th>
+          <th>What it checks</th>
+        </tr>
+      </thead>
+      <tbody id="comparison"></tbody>
+    </table>
+    <details id="record-tables">
+      <summary>Inspect all seven records and exclusion reasons</summary>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Row</th>
+            <th>Key / value</th>
+            <th>Event / ready</th>
+            <th>Historical eligibility</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and scope</summary>
+      <p>
+        These are fictional scalar snapshots, not raw events to sum. Times share one date and UTC
+        timezone; all comparisons include equality. Maximum age is decision time minus event time,
+        not time since arrival. Original and corrected versions are retained. Ready time is assumed
+        to be first availability on the actual prediction path; an upstream ingestion timestamp may
+        be too early.
+      </p>
+      <p>
+        Within eligible rows, choose latest event time, then latest ready time, then highest source
+        revision. The archive requires unique key/event/ready/revision combinations. This policy is
+        deterministic and is not an audit of actual cache hits, outages, or online fallback
+        behavior. A missing match returns null and preserves the decision row; no zero filling
+        occurs.
+      </p>
+      <p>
+        Event-only retrieval intentionally ignores availability but still applies entity, event
+        cutoff, and maximum age. Latest-in-archive intentionally ignores both the decision cutoff
+        and maximum age, while keeping the entity key. Every archive row is known by the fixed 10:30
+        retrieval time. No model is trained, no accuracy is calculated, and no feature-store API is
+        executed.
+      </p>
+    </details>
+    <script>
+      const minutes = (value) => {
+          const [h, m] = value.split(':').map(Number);
+          return h * 60 + m;
+        },
+        clock = (value) =>
+          String(Math.floor(value / 60)).padStart(2, '0') +
+          ':' +
+          String(value % 60).padStart(2, '0');
+      const original = [
+        { id: 'F01', entity: 'A', event: 540, ready: 542, revision: 1, value: 40 },
+        { id: 'F02', entity: 'A', event: 570, ready: 620, revision: 1, value: 70 },
+        { id: 'F03', entity: 'A', event: 585, ready: 587, revision: 1, value: 50 },
+        { id: 'F04', entity: 'A', event: 585, ready: 610, revision: 2, value: 65 },
+        { id: 'F05', entity: 'A', event: 605, ready: 606, revision: 1, value: 90 },
+        { id: 'F06', entity: 'B', event: 598, ready: 599, revision: 1, value: 999 },
+        { id: 'F07', entity: 'A', event: 480, ready: 481, revision: 1, value: 20 },
+      ];
+      function makeRecords(arrival) {
+        return original.map((row) => ({
+          ...row,
+          ready: row.id === 'F02' && arrival === 'early' ? 575 : row.ready,
+        }));
+      }
+      function rank(a, b) {
+        return b.event - a.event || b.ready - a.ready || b.revision - a.revision;
+      }
+      function verifyArchive(records) {
+        const seen = new Set();
+        for (const row of records) {
+          if (![row.event, row.ready, row.revision].every(Number.isInteger))
+            throw new Error('Archive clocks and revision must be non-null integers');
+          const key = JSON.stringify([row.entity, row.event, row.ready, row.revision]);
+          if (seen.has(key)) throw new Error('Ambiguous duplicate key/event/ready/revision');
+          seen.add(key);
+        }
+      }
+      function retrieve(records, entity, cutoff, ttl, mode = 'known') {
+        verifyArchive(records);
+        const candidates = records.filter(
+          (row) =>
+            row.entity === entity &&
+            (mode === 'latest' ||
+              (row.event <= cutoff &&
+                cutoff - row.event <= ttl &&
+                (mode === 'event' || row.ready <= cutoff))),
+        );
+        return [...candidates].sort(rank)[0] ?? null;
+      }
+      function reason(row, entity, cutoff, ttl, selected) {
+        if (row.entity !== entity) return 'Different entity';
+        if (row.event > cutoff) return 'Future event';
+        if (row.ready > cutoff) return 'Available later';
+        if (cutoff - row.event > ttl) return 'Too old';
+        return row.id === selected?.id ? 'SELECTED' : 'Eligible, older';
+      }
+      function buildReport(entity, cutoff, ttl, arrival) {
+        const records = makeRecords(arrival),
+          known = retrieve(records, entity, cutoff, ttl),
+          eventOnly = retrieve(records, entity, cutoff, ttl, 'event'),
+          latest = retrieve(records, entity, cutoff, ttl, 'latest');
+        return {
+          entity,
+          cutoff,
+          ttl,
+          arrival,
+          known,
+          eventOnly,
+          latest,
+          eligible: records.filter(
+            (row) =>
+              row.entity === entity &&
+              row.event <= cutoff &&
+              row.ready <= cutoff &&
+              cutoff - row.event <= ttl,
+          ).length,
+          rows: records.map((row) => ({
+            ...row,
+            age: cutoff - row.event,
+            reason: reason(row, entity, cutoff, ttl, known),
+          })),
+        };
+      }
+      const $ = (s) => document.querySelector(s),
+        escapeHTML = (value) =>
+          String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;'),
+        show = (row) => (row ? row.id + ' = ' + row.value : 'null · no match'),
+        svgt = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="var(--ink)"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          escapeHTML(value) +
+          '</text>',
+        rect = (x, y, w, h, fill) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          w +
+          '" height="' +
+          h +
+          '" rx="7" fill="' +
+          fill +
+          '"/>';
+      let report;
+      function draw(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          top = mobile ? 94 : 110,
+          step = mobile ? 108 : 47,
+          footer = top + (mobile ? Math.ceil(r.rows.length / 2) : r.rows.length) * step + 12,
+          h = footer + 110;
+        let s =
+          svgt(0, 25, 18, 'Two clocks, one historical decision.', true) +
+          svgt(
+            0,
+            49,
+            14,
+            'Key ' + r.entity + ' · cutoff ' + clock(r.cutoff) + ' · age ≤ ' + r.ttl + ' min',
+          );
+        if (mobile) s += svgt(0, 76, 12, 'Event and ready times must both be ≤ cutoff.');
+        else
+          s +=
+            svgt(10, 88, 13, 'Row · key · value', true) +
+            svgt(185, 88, 13, 'Event time', true) +
+            svgt(320, 88, 13, 'Ready time', true) +
+            svgt(458, 88, 13, 'Historical eligibility', true);
+        r.rows.forEach((row, i) => {
+          const x = mobile ? (i % 2) * 168 : 0,
+            y = top + (mobile ? Math.floor(i / 2) : i) * step,
+            selected = row.id === r.known?.id;
+          s += rect(
+            x,
+            y,
+            mobile ? 160 : w,
+            mobile ? 98 : 39,
+            selected ? 'var(--band)' : 'var(--panel)',
+          );
+          if (mobile)
+            s +=
+              svgt(
+                x + 8,
+                y + 21,
+                13,
+                row.id + ' · ' + row.entity + ' · value ' + row.value,
+                selected,
+              ) +
+              svgt(x + 8, y + 43, 12, 'Event ' + clock(row.event)) +
+              svgt(x + 8, y + 62, 12, 'Ready ' + clock(row.ready)) +
+              svgt(x + 8, y + 83, 12, row.reason, selected);
+          else
+            s +=
+              svgt(10, y + 25, 14, row.id + ' · ' + row.entity + ' · ' + row.value, selected) +
+              svgt(185, y + 25, 14, clock(row.event)) +
+              svgt(320, y + 25, 14, clock(row.ready)) +
+              svgt(458, y + 25, 14, row.reason, selected);
+        });
+        s +=
+          rect(0, footer, w, 90, 'var(--panel)') +
+          svgt(12, footer + 26, 17, 'Historical result: ' + show(r.known), true) +
+          svgt(
+            12,
+            footer + 53,
+            14,
+            r.eligible +
+              ' eligible snapshot' +
+              (r.eligible === 1 ? '' : 's') +
+              '; keep this decision row.',
+          ) +
+          svgt(
+            12,
+            footer + 76,
+            12,
+            r.known
+              ? 'Choose newest event, then ready time and revision.'
+              : 'Missing remains null; it is not a zero value.',
+          );
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        $('#mechanism').innerHTML = s;
+      }
+      function render() {
+        report = buildReport(
+          $('#entity').value,
+          minutes($('#cutoff').value),
+          Number($('#ttl').value),
+          $('#arrival').value,
+        );
+        const r = report;
+        $('output').textContent =
+          'Known at ' +
+          clock(r.cutoff) +
+          ': ' +
+          show(r.known) +
+          '. Event cutoff only: ' +
+          show(r.eventOnly) +
+          '. Latest in archive: ' +
+          show(r.latest) +
+          '.';
+        $('#interpretation').textContent = r.known
+          ? 'Selected snapshot age: ' +
+            (r.cutoff - r.known.event) +
+            ' minutes. Readiness is checked separately; archive query time stays fixed at 10:30.'
+          : 'No eligible snapshot. The decision row is retained with null; define a separate missing-value or fallback policy.';
+        draw(r);
+        const comparisons = [
+          ['Historical replay', r.known, 'Key, event cutoff, ready cutoff, age'],
+          ['Event cutoff only', r.eventOnly, 'Key, event cutoff, age; ignores ready time'],
+          ['Latest in archive', r.latest, 'Key only; ignores decision cutoff and age'],
+        ];
+        $('#comparison').innerHTML = comparisons
+          .map(
+            ([label, row, note]) =>
+              '<tr><th scope="row">' +
+              label +
+              '</th><td>' +
+              show(row) +
+              '</td><td>' +
+              note +
+              '</td></tr>',
+          )
+          .join('');
+        $('#data').innerHTML = r.rows
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '<small>rev ' +
+              row.revision +
+              '</small></th><td>' +
+              row.entity +
+              ' / ' +
+              row.value +
+              '</td><td>Event ' +
+              clock(row.event) +
+              '<br/>Ready ' +
+              clock(row.ready) +
+              '</td><td>' +
+              row.reason +
+              (row.entity === r.entity && row.event <= r.cutoff
+                ? '<small>Event age ' + row.age + ' min</small>'
+                : '') +
+              '</td></tr>',
+          )
+          .join('');
+      }
+      $('form').addEventListener('submit', (e) => e.preventDefault());
+      $('form').addEventListener('input', render);
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

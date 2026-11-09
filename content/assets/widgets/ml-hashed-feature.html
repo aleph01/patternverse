@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hashed feature bucket explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #ffffff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 16px;
+      }
+      label {
+        display: block;
+        font-weight: 650;
+      }
+      textarea,
+      select,
+      button {
+        display: block;
+        width: 100%;
+        margin: 6px 0;
+        min-height: 44px;
+        padding: 10px;
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+        color: var(--ink);
+        background: var(--paper);
+        font: inherit;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 180px;
+      }
+      button {
+        cursor: pointer;
+        font-weight: 650;
+      }
+      :is(textarea, select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .help,
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .help {
+        display: block;
+        font-weight: 400;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+        font-weight: 650;
+        min-height: 3em;
+      }
+      .legend {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 14px;
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .swatch {
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .swatch.shared {
+        background: var(--shared);
+        border: 2px solid var(--shared-line);
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 8px 0 16px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        margin: 12px 0 16px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 7px 5px;
+        border-bottom: 1px solid var(--line);
+      }
+      th:first-child,
+      td:first-child {
+        overflow-wrap: anywhere;
+        max-width: 160px;
+      }
+      td:nth-child(2) {
+        font-variant-numeric: tabular-nums;
+      }
+      summary {
+        cursor: pointer;
+        padding: 8px 0;
+        font-weight: 650;
+      }
+      code {
+        font-size: 0.95em;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+        textarea {
+          min-height: 180px;
+        }
+        th,
+        td {
+          padding: 7px 3px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b6cbbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --shared: #473820;
+          --shared-line: #e0b875;
+          --accent: #a7d8b8;
+        }
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Give a changing set of categories a fixed number of places. Shared cards reveal which names
+      become indistinguishable in this unsigned feature.
+    </p>
+    <form aria-label="Hashed feature controls">
+      <label for="categories"
+        >Channel names
+        <span class="help" id="names-help"
+          >One per line; up to 12 distinct names of 48 characters. Blank lines and repeated names
+          are ignored.</span
+        >
+        <textarea id="categories" aria-describedby="names-help" maxlength="650" spellcheck="false">
+email
+search
+social
+referral
+direct
+affiliate</textarea>
+      </label>
+      <div>
+        <label for="buckets"
+          >Number of buckets
+          <select id="buckets">
+            <option value="2">2 buckets</option>
+            <option value="4" selected>4 buckets</option>
+            <option value="8">8 buckets</option>
+            <option value="16">16 buckets</option>
+          </select>
+        </label>
+        <p class="help">
+          More buckets can separate these collisions. Changing the bucket count also changes the
+          model's mapping contract.
+        </p>
+        <button type="reset">Reset inputs</button>
+      </div>
+    </form>
+    <output id="result" aria-live="polite" aria-atomic="true"></output>
+    <div class="legend" aria-label="Bucket legend">
+      <span><i class="swatch" aria-hidden="true"></i>Empty or single category</span>
+      <span><i class="swatch shared" aria-hidden="true"></i>Shared: two or more</span>
+    </div>
+    <svg role="img" aria-label="Category assignments by bucket"></svg>
+    <p class="note">
+      A bucket containing three categories contributes three colliding pairs. The cards and table
+      show the same mapping. No model is trained here, so collision counts do not measure prediction
+      quality.
+    </p>
+    <table>
+      <caption>
+        How each category is assigned
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Feature key</th>
+          <th scope="col">Hash integer</th>
+          <th scope="col">Bucket</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <details>
+      <summary>The fixed rule in this example</summary>
+      <p>
+        Names are trimmed and normalized to Unicode NFC; case is preserved. Each becomes
+        <code>channel=name</code>. FNV-1a hashes its UTF-8 bytes to an unsigned 32-bit integer. The
+        bucket is the remainder after dividing that integer by the bucket count.
+      </p>
+      <p>
+        This unsigned teaching hasher is not scikit-learn's signed MurmurHash3. Identical rules give
+        identical assignments. All calculations happen locally in this example.
+      </p>
+    </details>
+    <script>
+      const form = document.querySelector('form');
+      const result = document.querySelector('#result');
+      const chart = document.querySelector('svg');
+      const table = document.querySelector('tbody');
+      const encoder = new TextEncoder();
+      const ns = 'http://www.w3.org/2000/svg';
+
+      function hashKey(key) {
+        let hash = 2166136261;
+        for (const byte of encoder.encode(key)) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
+        return hash;
+      }
+
+      function svgNode(tag, attributes, value) {
+        const node = document.createElementNS(ns, tag);
+        for (const [key, content] of Object.entries(attributes))
+          node.setAttribute(key, String(content));
+        if (value !== undefined) node.textContent = value;
+        return node;
+      }
+
+      function draw(groups) {
+        chart.replaceChildren();
+        chart.append(svgNode('title', {}, 'Categories grouped into ' + groups.length + ' buckets'));
+        chart.append(
+          svgNode(
+            'desc',
+            {},
+            groups
+              .map((names, i) => 'Bucket ' + i + ': ' + (names.join(', ') || 'empty'))
+              .join('; '),
+          ),
+        );
+        const narrow = window.innerWidth < 500;
+        const width = narrow ? 328 : 680;
+        const columns = narrow ? 2 : Math.min(4, groups.length);
+        const gap = 12;
+        const cellWidth = (width - gap * (columns - 1)) / columns;
+        const maxNames = Math.max(1, ...groups.map((names) => names.length));
+        const cellHeight = Math.max(94, 58 + maxNames * 20);
+        const rows = Math.ceil(groups.length / columns);
+        chart.setAttribute('viewBox', '0 0 ' + width + ' ' + rows * (cellHeight + gap));
+        groups.forEach((names, index) => {
+          const x = (index % columns) * (cellWidth + gap);
+          const y = Math.floor(index / columns) * (cellHeight + gap) + 2;
+          const shared = names.length > 1;
+          const group = svgNode('g', { 'data-bucket': index });
+          group.append(
+            svgNode('rect', {
+              x: x + 1,
+              y,
+              width: cellWidth - 2,
+              height: cellHeight - 2,
+              rx: 8,
+              fill: shared ? 'var(--shared, #edf5f0)' : 'var(--panel, #f1f2ef)',
+              stroke: shared ? 'var(--shared-line, #00855b)' : 'var(--line, #a6aca3)',
+              'stroke-width': shared ? 2 : 1,
+            }),
+          );
+          group.append(
+            svgNode(
+              'text',
+              {
+                x: x + 12,
+                y: y + 24,
+                fill: 'var(--ink, #252c28)',
+                'font-family': 'system-ui, sans-serif',
+                'font-size': 14,
+                'font-weight': 700,
+              },
+              'Bucket ' + index + (shared ? ' · shared' : ''),
+            ),
+          );
+          chart.append(group);
+          const visible = names.length ? names : ['empty'];
+          visible.forEach((name, i) => {
+            const maxLength = narrow ? 17 : 19;
+            const label = name.length > maxLength ? name.slice(0, maxLength - 1) + '…' : name;
+            const text = svgNode(
+              'text',
+              {
+                x: x + 12,
+                y: y + 49 + i * 20,
+                fill: 'var(--ink, #252c28)',
+                'font-family': 'system-ui, sans-serif',
+                'font-size': 14,
+              },
+              label,
+            );
+            text.append(svgNode('title', {}, name));
+            group.append(text);
+            if (typeof text.getComputedTextLength === 'function') {
+              let shortened = label;
+              while (text.getComputedTextLength() > cellWidth - 24 && shortened.length > 1) {
+                shortened = shortened.replace(/…$/, '').slice(0, -1);
+                text.firstChild.textContent = shortened + '…';
+              }
+            }
+          });
+        });
+      }
+
+      function update() {
+        const names = [
+          ...new Set(
+            document
+              .querySelector('#categories')
+              .value.split(/\r?\n/)
+              .map((name) => name.trim().normalize('NFC'))
+              .filter(Boolean),
+          ),
+        ];
+        const count = Number(document.querySelector('#buckets').value);
+        chart.replaceChildren();
+        table.replaceChildren();
+        if (names.length > 12 || names.some((name) => [...name].length > 48)) {
+          result.textContent =
+            'Use at most 12 distinct names, each no longer than 48 characters. Shorten the list to calculate assignments.';
+          return;
+        }
+        if (![2, 4, 8, 16].includes(count)) {
+          result.textContent = 'Choose 2, 4, 8, or 16 buckets.';
+          return;
+        }
+        const groups = Array.from({ length: count }, () => []);
+        for (const name of names) {
+          const key = 'channel=' + name;
+          const hash = hashKey(key);
+          const bucket = hash % count;
+          groups[bucket].push(name);
+          const row = document.createElement('tr');
+          for (const value of [key, hash, bucket]) {
+            const cell = document.createElement('td');
+            cell.textContent = String(value);
+            row.append(cell);
+          }
+          table.append(row);
+        }
+        const occupied = groups.filter((names) => names.length > 0).length;
+        const pairs = groups.reduce(
+          (sum, names) => sum + (names.length * (names.length - 1)) / 2,
+          0,
+        );
+        result.textContent =
+          names.length +
+          (names.length === 1 ? ' category · ' : ' categories · ') +
+          count +
+          ' buckets · ' +
+          occupied +
+          ' occupied · ' +
+          pairs +
+          (pairs === 1 ? ' colliding pair.' : ' colliding pairs.') +
+          (names.length ? '' : ' Add a name to see an assignment.');
+        draw(groups);
+      }
+
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', update);
+      form.addEventListener('change', update);
+      form.addEventListener('reset', () => setTimeout(update, 0));
+      window.addEventListener('resize', update);
+      update();
+    </script>
+  </body>
+</html>

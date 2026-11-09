@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "behavioral"
   - "chain-of-responsibility"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 A keyboard shortcut can belong to the focused text field, its enclosing panel, the current window, or the application. The code that detects the shortcut should not need a complete list of every component that might handle it. The right receiver depends on the current context.
 
+## Core idea
+
 Chain of Responsibility gives the request a path through candidate handlers. Each handler decides whether it can handle the request; otherwise it passes the request onward. The sender knows the entry point rather than the eventual receiver.
 
-![A shortcut moves outward only when a candidate passes. Handling stops propagation; the application is a fallback.](/diagrams/gof/chain-of-responsibility.svg "A shortcut moves outward only when a candidate passes. Handling stops propagation; the application is a fallback.")
+![A close event first reaches the focused text field, which declines it. The window handles it, so the application handler is not reached. If every handler declines, the request has an explicit unhandled result.](../assets/software-engineering/gof/chain-of-responsibility.svg "For this close event, the window handles the request. Processing stops before the application handler.")
 
-### Routing by opportunity
+## How it works
 
 In the classic form, each handler has a reference to its successor. An equivalent arrangement can store handlers in an ordered collection and iterate through them. The defining relationship is the sequence of opportunities to handle a request, not whether objects are linked by pointers.
 
 The stopping rule is central. A handler may return handled, pass, or an explicit failure. Those outcomes mean different things. A handler that cannot handle a request should not silently convert that into success; a handler that encounters an actual error may need to stop rather than pass.
 
 Some modern middleware designs let every stage perform work and then continue. They resemble the chain structure, but the original routing intent emphasizes allowing a request to find a suitable receiver. Being explicit about which variant is used prevents confusion between fallback routing and an all-stage pipeline.
+
+## Worked example
 
 ### Keyboard events through a component hierarchy
 
@@ -38,6 +43,50 @@ Ordering encodes priority. The nearest context normally gets the first chance, w
 
 A clear terminal policy also matters. An unhandled shortcut may be ignored, reported, or delegated to the platform. An accidentally broken successor link should not be indistinguishable from deliberate no-op behavior when diagnostics are needed.
 
+### A small implementation
+
+The first handler that accepts a keyboard event ends the search. An explicit boolean result distinguishes handled from unhandled; processing order is part of the behavior.
+
+```python
+class Handler:
+    def __init__(self, action, successor=None):
+        self.action = action
+        self.successor = successor
+
+    def handle(self, event):
+        if self.action(event):
+            return True
+        if self.successor is not None:
+            return self.successor.handle(event)
+        return False
+
+
+actions = []
+
+
+def text_field(event):
+    if event == "copy":
+        actions.append("copy selection")
+        return True
+    return False
+
+
+def window(event):
+    if event == "close":
+        actions.append("close window")
+        return True
+    return False
+
+
+chain = Handler(text_field, Handler(window))
+print(chain.handle("close"), actions)
+print(chain.handle("unknown"))
+# True ['close window']
+# False
+```
+
+The text field declines close, so the request reaches the window. An unknown event reaches the end and returns False. This is first-match handling; a pipeline that requires every stage to run needs a different continuation contract. A cyclic successor graph would require prevention or detection.
+
 ### Resolving a setting from several sources
 
 A command-line tool reads a setting from command-line arguments, then environment variables, then a configuration file, then a default. Each provider can report whether it has a value. A resolver sends the lookup through this ordered chain until one provider supplies the setting.
@@ -48,7 +97,14 @@ The distinction between missing and invalid is essential. An absent command-line
 
 The result can also include provenance so the tool can explain why a value was selected. Chain of Responsibility hides receiver selection from ordinary clients, but it need not hide that selection from diagnostics or user-facing explanations.
 
-### Flexible routing creates a configuration obligation
+## When to use it
+
+- The appropriate receiver depends on context or runtime configuration.
+- Candidate handlers need a deliberate fallback order.
+
+Consider a simpler design when the receiver is fixed and direct delegation is clearer, or when several independent listeners must all receive the same event.
+
+## Tradeoffs and common mistakes
 
 The pattern helps when handlers vary, when receiver selection depends on context, or when fallback order is meaningful. It can reduce coupling between a sender and the specific component that ultimately responds.
 
@@ -58,38 +114,12 @@ Cycles, duplicate handlers, or overly broad first handlers can prevent later can
 
 If the appropriate receiver is already known, direct delegation is simpler. If all subscribers should receive an event, a chain with early stopping is usually the wrong model. The intended delivery relationship should determine the design.
 
-### Neighboring designs
-
-Observer distributes a notification to interested subscribers. Chain of Responsibility routes a request through candidates according to a continuation policy. A broadcast and a fallback search are different communication patterns, even when both use a list of callbacks.
-
-Command represents a request as a value or object. A command can travel through a chain, but packaging the action and choosing its receiver are separate concerns. Decorator adds responsibilities around a component, often with guaranteed nested delegation. A chain handler can choose not to delegate because it has handled the request.
-
-The pattern is strongest when it makes a real priority or fallback rule explicit. A chain should reveal who gets a chance, what counts as handling, and what happens when no candidate can respond.
-
-## Pattern details
-
-**Category:** Behavioral · **Difficulty:** Intermediate
-
-### Use when
-
-- The appropriate receiver depends on context or runtime configuration
-- Candidate handlers need a deliberate fallback order
-
-### Not ideal when
-
-- The receiver is fixed and direct delegation is clearer
-- Several independent listeners must all receive the same event
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
 ## Related patterns
 
-[[observer|Observer]] · [[command|Command]] · [[decorator|Decorator]]
+[[observer|Observer]] distributes a notification to interested subscribers. Chain of Responsibility routes a request through candidates according to a continuation policy. A broadcast and a fallback search are different communication patterns, even when both use a list of callbacks.
 
-## Source
+[[command|Command]] represents a request as a value or object. A command can travel through a chain, but packaging the action and choosing its receiver are separate concerns. [[decorator|Decorator]] adds responsibilities around a component, often with guaranteed nested delegation. A chain handler can choose not to delegate because it has handled the request.
 
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
+## Sources
 
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+Chain of Responsibility is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

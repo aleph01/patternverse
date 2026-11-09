@@ -48,31 +48,6 @@ Inspect How You Know is useful when a conclusion feels obvious but its basis is 
 
 The result can be a clearer account of uncertainty. The unanswered message remains unanswered, but the explanation is recognized as provisional. The manager retains a promising observation while improving the way morale is assessed. The teacher recognizes evidence of competence without needing a global verdict on their ability. Confidence becomes easier to revise because the path supporting it is visible, and new information has somewhere specific to enter.
 
-## Pattern details
-
-### Use when
-
-- A conclusion feels certain but its evidence is unclear.
-- An ambiguous measure is doing too much work in an argument.
-
-### Goals
-
-- Distinguish observation from inference.
-- Calibrate confidence and identify useful checks.
-
-### Mechanisms
-
-- evidence tracing
-- metacognitive inquiry
-
-### Not ideal when
-
-- Inquiry becomes an impossible demand for certainty or an adversarial demand for proof.
-
-### Difficulty
-
-medium
-
 ## Related patterns
 
 - [[look-for-the-exception|Look for the Exception]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Reality Strategy; chapter 4, printed pages 89–
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask belief {
+belief = !ask {
     Name the belief
 
     Choose an everyday belief or prediction you would like to examine. Write it as a specific claim.
 }
-!ask evidence {
+evidence = !ask {
     Describe how you know
 
     What observations, statements, memories, images, or feelings support it? Label the source of each.
 }
-!ask inference {
+inference = !ask {
     Separate observation from inference
 
     Which parts were directly observed, and which are interpretations, assumptions, or recollections that may be incomplete?
 }
-!ask confidence {
+confidence = !ask {
     Choose proportionate confidence
 
     How strongly does the available evidence support this particular claim? You do not need certainty or a numeric score.
 }
-!ask unknown {
+unknown = !ask {
     Name the remaining uncertainty
 
     What is genuinely unknown, and what would count as relevant evidence against the claim? Feelings matter without proving every interpretation.
 }
-!ask next {
+next = !ask {
     Set one bounded check
 
     If useful, choose one reasonable check and a stopping point. Avoid repeated reassurance-seeking or an endless search for certainty; leaving uncertainty open is also an option.

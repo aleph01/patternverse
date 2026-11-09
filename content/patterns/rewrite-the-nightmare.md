@@ -102,24 +102,24 @@ Write an alternative dream, then rehearse it with a timer. The timer defaults to
 :language 1
 :title "Rewrite the Nightmare"
 :output outcome
-!ask dream {
+dream = !ask {
     Capture the dream
 
     Choose one recurring or memorable nightmare that feels manageable to work with while awake. Briefly describe what happens, especially the part you would like to change. You do not need to record every disturbing detail.
 
     This is an educational self-help adaptation, not a full treatment program. You can pause or end at any point. If engaging with the dream feels overwhelming, leave it here and consider working with a clinician.
 }
-!ask turning_point {
+turning_point = !ask {
     Find the turning point
 
     Where could this dream begin to go differently? It might be the moment you become trapped, someone appears, you lose control, or something terrible seems about to happen.
 }
-!ask alternative {
+alternative = !ask {
     Change what happens
 
     What would you prefer to happen next? You can make the change realistic, impossible, serious, strange, or playful. A locked door could open, you could fly, someone could help, or the threatening place could become familiar. Choose something that makes the scene feel more manageable to imagine.
 }
-!ask revised_dream {
+revised_dream = !ask {
     Write the new version
 
     Retell the dream briefly, replacing the original sequence with your alternative. Keep only enough of the original to establish the situation. Give the changed section enough detail to imagine it as a scene. There is no psychologically correct ending to discover.
@@ -135,7 +135,7 @@ rehearsal = !form {
 
         Copy this version into a notebook or document if you want it available for later rehearsal.
     }
-    !timer countdown {
+    countdown = !timer {
         :duration 600
         :adjustable true
         :min 60
@@ -150,6 +150,6 @@ rehearsal = !form {
 
     Nothing has been scheduled for you.
 }
-= outcome "rehearsed"
+outcome = "rehearsed"
 -> end
 ```

@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Active learning label-budget explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Two classifiers start with the same labels: score 0 is negative and 100 is positive. Each
+      round buys one new label for each strategy, then refits both cutoffs.
+    </p>
+    <form aria-label="Active learning settings">
+      <label for="truth"
+        >True cutoff (simulator only)
+        <select id="truth">
+          <option value="35">35</option>
+          <option value="63" selected>63</option>
+          <option value="79">79</option>
+        </select>
+      </label>
+      <label for="seed"
+        >Random-selection seed
+        <input id="seed" type="number" value="2026" min="0" max="99999" step="1" required />
+      </label>
+    </form>
+    <div class="actions">
+      <button type="button" id="next">Query next label</button>
+      <button type="button" id="all">Run six rounds</button>
+      <button type="button" id="reset">Reset inputs</button>
+    </div>
+    <output id="result" aria-live="polite" aria-atomic="true"></output>
+    <svg role="img" aria-label="Fitted cutoffs and remaining possibilities"></svg>
+    <p class="note">
+      Shading shows cutoffs consistent with the revealed labels; it is not a confidence interval.
+      The solid line is the fitted cutoff. The dashed line is the simulator's truth, hidden from
+      query selection and fitting.
+    </p>
+    <div class="history">
+      <table>
+        <caption>
+          Labels bought in each round
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Round</th>
+            <th scope="col">Uncertainty: score / label</th>
+            <th scope="col">Random: score / label</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <details>
+      <summary>The exact learning and evaluation rules</summary>
+      <p>
+        The pool contains integer scores 1–99. The simulator labels a score positive when it is at
+        least the true cutoff. The classifier fits the midpoint between the largest revealed
+        negative score and the smallest revealed positive score, then predicts positive at or above
+        that midpoint.
+      </p>
+      <p>
+        Uncertainty selection requests the remaining score closest to that midpoint, breaking ties
+        toward the lower score. Random selection samples without replacement using a seeded
+        pseudorandom generator. Both strategies use the same initial labels, model family, and query
+        budget.
+      </p>
+      <p>
+        Evaluation uses 200 separate scores: 0.25, 0.75, …, 99.75. Neither their labels nor the
+        simulator's true cutoff are passed to selection or fitting. The results describe one
+        noiseless, one-dimensional scenario, not a benchmark for real datasets. Change the seed and
+        scenario to inspect other runs.
+      </p>
+      <p>
+        The starting labels are free only inside this comparison. A real project must also budget
+        for its initial labels, independent evaluation labels, annotation review, and computation.
+      </p>
+    </details>
+    <script>
+      const form = document.querySelector('form');
+      const output = document.querySelector('output');
+      const chart = document.querySelector('svg');
+      const history = document.querySelector('tbody');
+      const next = document.querySelector('#next');
+      const all = document.querySelector('#all');
+      const ns = 'http://www.w3.org/2000/svg';
+      const testScores = Array.from({ length: 200 }, (_, i) => (i + 0.5) / 2);
+      let session;
+
+      function fit(labels) {
+        const low = Math.max(...labels.filter((item) => item.y === 0).map((item) => item.x));
+        const high = Math.min(...labels.filter((item) => item.y === 1).map((item) => item.x));
+        return { low, high, cutoff: (low + high) / 2 };
+      }
+      function choose(model, pool, strategy, random) {
+        if (strategy === 'random') return pool[Math.floor(random() * pool.length)];
+        return pool.reduce((best, x) =>
+          Math.abs(x - model.cutoff) < Math.abs(best - model.cutoff) ? x : best,
+        );
+      }
+      function randomGenerator(seed) {
+        let state = seed >>> 0;
+        return () => {
+          state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+          return state / 4294967296;
+        };
+      }
+      function startSession(truth, seed) {
+        const state = () => ({
+          labels: [
+            { x: 0, y: 0 },
+            { x: 100, y: 1 },
+          ],
+          pool: Array.from({ length: 99 }, (_, i) => i + 1),
+          queries: [],
+        });
+        return {
+          truth,
+          seed,
+          round: 0,
+          random: randomGenerator(seed),
+          active: state(),
+          baseline: state(),
+        };
+      }
+      function queryOne(state, strategy, random, oracle) {
+        const model = fit(state.labels);
+        const x = choose(model, state.pool, strategy, random);
+        const y = oracle(x);
+        state.pool.splice(state.pool.indexOf(x), 1);
+        state.labels.push({ x, y });
+        state.queries.push({ x, y });
+      }
+      function correctCount(model, scores, oracle) {
+        return scores.filter((x) => Number(x >= model.cutoff) === oracle(x)).length;
+      }
+      function advance(current) {
+        if (current.round >= 6) return;
+        const oracle = (x) => Number(x >= current.truth);
+        queryOne(current.active, 'uncertainty', current.random, oracle);
+        queryOne(current.baseline, 'random', current.random, oracle);
+        current.round += 1;
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS(ns, tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(current) {
+        const narrow = window.innerWidth < 500;
+        const width = narrow ? 328 : 680;
+        const pad = narrow ? 18 : 30;
+        const scale = (x) => pad + ((width - 2 * pad) * x) / 100;
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', '0 0 ' + width + ' 370');
+        chart.append(
+          node('title', {}, 'Two fitted classifiers after ' + current.round + ' query rounds'),
+        );
+        chart.append(
+          node(
+            'desc',
+            {},
+            'Shaded intervals contain cutoffs consistent with revealed labels. Solid lines show fitted cutoffs; dashed lines show the simulator truth.',
+          ),
+        );
+        for (const [index, [name, state]] of [
+          ['Uncertainty selection', current.active],
+          ['Random selection', current.baseline],
+        ].entries()) {
+          const y = index * 184;
+          const model = fit(state.labels);
+          const correct = correctCount(model, testScores, (x) => Number(x >= current.truth));
+          const text = (x, top, size, value, bold = false) =>
+            chart.append(
+              node(
+                'text',
+                {
+                  x,
+                  y: top,
+                  'font-size': size,
+                  'font-family': 'system-ui, sans-serif',
+                  'font-weight': bold ? 700 : 400,
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          chart.append(
+            node('rect', {
+              x: 0,
+              y: y + 2,
+              width,
+              height: 174,
+              rx: 8,
+              fill: 'var(--panel, #f1f2ef)',
+            }),
+          );
+          text(12, y + 27, 17, name, true);
+          text(12, y + 51, 14, 'Possible cutoff: (' + model.low + ', ' + model.high + ']');
+          text(12, y + 74, 14, 'Fitted cutoff: ' + model.cutoff);
+          text(
+            12,
+            y + 97,
+            14,
+            'Test: ' + correct + '/200 correct (' + (correct / 2).toFixed(1) + '%)',
+          );
+          chart.append(
+            node('rect', {
+              x: scale(model.low),
+              y: y + 112,
+              width: scale(model.high) - scale(model.low),
+              height: 26,
+              fill: 'var(--band, #edf5f0)',
+            }),
+          );
+          chart.append(
+            node('line', {
+              x1: pad,
+              x2: width - pad,
+              y1: y + 133,
+              y2: y + 133,
+              stroke: 'var(--line, #a6aca3)',
+            }),
+          );
+          chart.append(
+            node('line', {
+              x1: scale(current.truth),
+              x2: scale(current.truth),
+              y1: y + 106,
+              y2: y + 142,
+              stroke: 'var(--ink, #252c28)',
+              'stroke-width': 2,
+              'stroke-dasharray': '4 3',
+            }),
+          );
+          chart.append(
+            node('line', {
+              x1: scale(model.cutoff),
+              x2: scale(model.cutoff),
+              y1: y + 110,
+              y2: y + 138,
+              stroke: 'var(--accent, #00855b)',
+              'stroke-width': 3,
+            }),
+          );
+          for (const tick of [0, 25, 50, 75, 100]) {
+            text(scale(tick), y + 160, 13, String(tick));
+            chart.lastChild.setAttribute('text-anchor', 'middle');
+          }
+        }
+      }
+      function render() {
+        const oracle = (x) => Number(x >= session.truth);
+        const activeCorrect = correctCount(fit(session.active.labels), testScores, oracle);
+        const randomCorrect = correctCount(fit(session.baseline.labels), testScores, oracle);
+        output.textContent =
+          'Round ' +
+          session.round +
+          '/6 · ' +
+          (session.round + 2) +
+          ' training labels per strategy. Test correct: uncertainty ' +
+          activeCorrect +
+          '/200; random ' +
+          randomCorrect +
+          '/200.';
+        draw(session);
+        history.replaceChildren();
+        session.active.queries.forEach((q, i) => {
+          const random = session.baseline.queries[i];
+          const row = document.createElement('tr');
+          for (const value of [i + 1, q.x + ' / ' + q.y, random.x + ' / ' + random.y]) {
+            const cell = document.createElement('td');
+            cell.textContent = String(value);
+            row.append(cell);
+          }
+          history.append(row);
+        });
+        next.disabled = all.disabled = session.round >= 6;
+      }
+      function configure() {
+        history.replaceChildren();
+        chart.replaceChildren();
+        const seed = Number(document.querySelector('#seed').value);
+        if (!form.checkValidity() || !Number.isInteger(seed)) {
+          output.textContent = 'Enter an integer seed from 0 to 99999 to start a comparison.';
+          session = undefined;
+          next.disabled = all.disabled = true;
+          return;
+        }
+        session = startSession(Number(document.querySelector('#truth').value), seed);
+        render();
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      next.addEventListener('click', () => {
+        if (session) {
+          advance(session);
+          render();
+        }
+      });
+      all.addEventListener('click', () => {
+        if (session) {
+          while (session.round < 6) advance(session);
+          render();
+        }
+      });
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () => {
+        if (session) draw(session);
+      });
+      configure();
+    </script>
+  </body>
+</html>

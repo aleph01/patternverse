@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Behavioral test suite explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th:first-child,
+      td:first-child {
+        width: 52%;
+      }
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      small {
+        display: block;
+        margin-top: 6px;
+      }
+      #bias-value {
+        font-variant-numeric: tabular-nums;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Seven fictional sentiment cases check known labels, stable scores, and non-increasing scores.
+      The rules below are handwritten, not trained models. Each setting reruns actual predictions
+      and assertions.
+    </p>
+    <form aria-label="Behavioral test settings">
+      <div>
+        <label for="model">Prediction rule</label
+        ><select id="model">
+          <option value="lexicon" selected>Word sum · ignores negation</option>
+          <option value="negation">Word sum · immediate negation</option>
+          <option value="constant">Constant score 0.25</option>
+        </select>
+      </div>
+      <div>
+        <label for="bias">Name shortcut weight: <span id="bias-value">1.00</span></label
+        ><input id="bias" type="range" min="0" max="2" step="0.25" value="1" />
+      </div>
+      <div>
+        <label for="tolerance">Invariance tolerance · absolute score difference</label
+        ><select id="tolerance">
+          <option value="0">0.00 · exact equality</option>
+          <option value="0.02" selected>0.02</option>
+          <option value="0.2">0.20</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <svg role="img" aria-label="Three different expectations applied to actual predictions"></svg>
+    <p id="interpretation" class="note"></p>
+    <div class="history">
+      <table>
+        <caption>
+          All seven assertions · full inputs and computed outputs
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Case and expectation</th>
+            <th scope="col">Observed and result</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <details>
+      <summary>Exact predictor and test rules</summary>
+      <p>
+        Lowercase text and extract tokens matching a–z. The word sum uses good/great = +1 and
+        bad/awful = −1. Other words have weight zero. Immediate-negation mode reverses a sentiment
+        token's weight only if the preceding token is not. The shortcut adds the selected weight per
+        mira token and subtracts it per noor token. Map the sum to s = 1 / (1 + exp(−sum)); classify
+        positive when s ≥ 0.5, negative otherwise. The constant rule returns 0.25 for every input
+        and ignores the disabled name setting.
+      </p>
+      <p>
+        Three labeled tests expect positive for good, negative for bad, and negative for not good.
+        Two invariance pairs add Mira's attribution to good or Noor's attribution to bad; pass when
+        |after − before| ≤ tolerance. Two directional pairs replace good with not good or append a
+        second negative statement to bad; pass when after ≤ before. Numerical comparisons allow
+        1e-12 for floating-point roundoff.
+      </p>
+      <p>
+        The positive score is constructed, not a calibrated probability. Expected labels and
+        relationships are fixed for these simple overall-sentiment cases; no oracle for arbitrary
+        language is claimed. Non-increasing permits no change, so constant and negation-blind rules
+        can pass it. A loose tolerance can hide a shortcut. No population accuracy, demographic
+        fairness, learned capability, or production certification is measured.
+      </p>
+    </details>
+    <script>
+      const suite = [
+        {
+          id: 'mft-good',
+          type: 'MFT',
+          before: 'The service is good.',
+          label: 1,
+          expect: 'Positive label',
+        },
+        {
+          id: 'mft-bad',
+          type: 'MFT',
+          before: 'The service is bad.',
+          label: 0,
+          expect: 'Negative label',
+        },
+        {
+          id: 'mft-not',
+          type: 'MFT',
+          before: 'The service is not good.',
+          label: 0,
+          expect: 'Negative label',
+        },
+        {
+          id: 'inv-mira',
+          type: 'INV',
+          before: 'The service is good.',
+          after: 'Mira says the service is good.',
+          expect: 'Absolute score difference ≤ tolerance',
+        },
+        {
+          id: 'inv-noor',
+          type: 'INV',
+          before: 'The service is bad.',
+          after: 'Noor says the service is bad.',
+          expect: 'Absolute score difference ≤ tolerance',
+        },
+        {
+          id: 'dir-not',
+          type: 'DIR',
+          before: 'The service is good.',
+          after: 'The service is not good.',
+          expect: 'After score ≤ before score',
+        },
+        {
+          id: 'dir-negative',
+          type: 'DIR',
+          before: 'The service is bad.',
+          after: 'The service is bad. The support is awful.',
+          expect: 'After score ≤ before score',
+        },
+      ];
+      const weights = { good: 1, great: 1, bad: -1, awful: -1 };
+      const form = document.querySelector('form'),
+        chart = document.querySelector('svg');
+      let results;
+      function predict(text, mode, bias) {
+        if (mode === 'constant') return 0.25;
+        const tokens = text.toLowerCase().match(/[a-z]+/g) || [];
+        let sum = 0;
+        tokens.forEach((token, i) => {
+          let value = Object.hasOwn(weights, token) ? weights[token] : 0;
+          if (mode === 'negation' && tokens[i - 1] === 'not') value = -value;
+          sum += value;
+          if (token === 'mira') sum += bias;
+          if (token === 'noor') sum -= bias;
+        });
+        return 1 / (1 + Math.exp(-sum));
+      }
+      function runSuite(mode, bias, tolerance) {
+        return suite.map((test) => {
+          const before = predict(test.before, mode, bias),
+            after = test.after === undefined ? null : predict(test.after, mode, bias),
+            delta = after === null ? null : after - before;
+          const pass =
+            test.type === 'MFT'
+              ? Number(before >= 0.5) === test.label
+              : test.type === 'INV'
+                ? Math.abs(delta) <= tolerance + 1e-12
+                : delta <= 1e-12;
+          return { ...test, beforeScore: before, afterScore: after, delta, pass };
+        });
+      }
+      function counts(rows) {
+        return Object.fromEntries(
+          ['MFT', 'INV', 'DIR'].map((type) => {
+            const r = rows.filter((test) => test.type === type);
+            return [type, { passed: r.filter((test) => test.pass).length, total: r.length }];
+          }),
+        );
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(rows, tolerance) {
+        const narrow = innerWidth < 600;
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', narrow ? '0 0 328 810' : '0 0 680 270');
+        chart.append(
+          node('title', {}, 'Known label, invariance, and direction are different tests'),
+        );
+        chart.append(
+          node(
+            'desc',
+            {},
+            'One case from each test family, calculated using the selected rule. Full inputs and all seven assertions appear in the table.',
+          ),
+        );
+        ['mft-not', 'inv-mira', 'dir-not'].forEach((id, i) => {
+          const r = rows.find((test) => test.id === id),
+            g = node('g', {
+              transform: 'translate(' + (narrow ? 0 : i * 232) + ',' + (narrow ? i * 275 : 0) + ')',
+            });
+          chart.append(g);
+          g.append(
+            node('rect', {
+              width: narrow ? 328 : 216,
+              height: 260,
+              rx: 8,
+              fill: 'var(--panel, #f1f2ef)',
+            }),
+          );
+          const text = (y, size, value, bold = false) =>
+            g.append(
+              node(
+                'text',
+                {
+                  x: 12,
+                  y,
+                  'font-size': size,
+                  'font-weight': bold ? 700 : 400,
+                  'font-family': 'system-ui, sans-serif',
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          text(28, 17, ['Known label', 'Stable score', 'Non-increasing score'][i], true);
+          if (i === 0) {
+            text(66, 16, '“not good”');
+            text(98, 15, 'Expected: negative');
+            text(133, 17, 'Score: ' + r.beforeScore.toFixed(4), true);
+            text(163, 15, 'Label: ' + (r.beforeScore >= 0.5 ? 'positive' : 'negative'));
+          } else {
+            text(66, 15, i === 1 ? '“good” → “Mira: good”' : '“good” → “not good”');
+            text(100, 17, r.beforeScore.toFixed(4) + ' → ' + r.afterScore.toFixed(4), true);
+            text(
+              133,
+              16,
+              (i === 1 ? '|Δs|: ' : 'Δs: ') + (i === 1 ? Math.abs(r.delta) : r.delta).toFixed(4),
+            );
+            text(163, 15, i === 1 ? 'Limit: ' + tolerance.toFixed(4) : 'Expected: Δs ≤ 0');
+          }
+          text(208, 20, r.pass ? 'PASS' : 'FAIL', true);
+          text(
+            239,
+            13,
+            ['Simple negation case', 'Score stability, not label', 'Equal scores are allowed'][i],
+          );
+        });
+      }
+      function configure() {
+        const mode = document.querySelector('#model').value,
+          bias = Number(document.querySelector('#bias').value),
+          tolerance = Number(document.querySelector('#tolerance').value);
+        document.querySelector('#bias-value').textContent = bias.toFixed(2);
+        document.querySelector('#bias').disabled = mode === 'constant';
+        results = runSuite(mode, bias, tolerance);
+        const c = counts(results);
+        document.querySelector('output').textContent =
+          'Label tests: ' +
+          c.MFT.passed +
+          '/3 · Invariance: ' +
+          c.INV.passed +
+          '/2 · Direction: ' +
+          c.DIR.passed +
+          '/2. Selected cases, not deployment accuracy.';
+        document.querySelector('#interpretation').textContent =
+          mode === 'constant'
+            ? 'The constant rule passes every relational check but fails the positive labeled case. Passing consistency checks does not establish useful predictions.'
+            : 'Non-increasing allows no movement. Increasing the invariance tolerance changes the assertion, not the predictions. Passing these seven cases does not establish general language understanding.';
+        draw(results, tolerance);
+        const tbody = document.querySelector('tbody');
+        tbody.replaceChildren();
+        results.forEach((r) => {
+          const tr = document.createElement('tr'),
+            input = document.createElement('td'),
+            observed = document.createElement('td');
+          const label = document.createElement('strong');
+          label.textContent =
+            { MFT: 'Label', INV: 'Invariance', DIR: 'Direction' }[r.type] + ' · ' + r.id;
+          input.append(label);
+          const sample = document.createElement('small');
+          sample.textContent = r.before + (r.after ? ' → ' + r.after : '');
+          input.append(sample);
+          const expected = document.createElement('small');
+          expected.textContent = r.expect + (r.type === 'INV' ? ' ' + tolerance.toFixed(2) : '');
+          input.append(expected);
+          observed.textContent =
+            r.beforeScore.toFixed(4) +
+            (r.afterScore === null
+              ? ' · ' + (r.beforeScore >= 0.5 ? 'positive' : 'negative')
+              : ' → ' + r.afterScore.toFixed(4) + ' · Δs ' + r.delta.toFixed(4));
+          const status = document.createElement('strong');
+          status.style.display = 'block';
+          status.textContent = r.pass ? 'PASS' : 'FAIL';
+          observed.append(status);
+          tr.append(input, observed);
+          tbody.append(tr);
+        });
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () => {
+        if (results) draw(results, Number(document.querySelector('#tolerance').value));
+      });
+      configure();
+    </script>
+  </body>
+</html>

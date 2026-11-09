@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Delayed labels and cohort evaluation explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #ranking th:first-child {
+        width: 45%;
+      }
+      #vectors th:first-child {
+        width: 42%;
+      }
+      #history {
+        font-size: 13px;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+
+      #records td:first-child,
+      #records th:first-child {
+        width: 18%;
+      }
+      #records td:last-child,
+      #records th:last-child {
+        width: 35%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Join fixed fictional predictions with labels available at the chosen checkpoint. Cohorts
+      retain prediction dates; future and missing labels do not enter their error rates. All
+      requests use model M1 and transform T1.
+    </p>
+    <form>
+      <div>
+        <label for="day">Audit checkpoint</label
+        ><select id="day">
+          <option value="3">Day 3</option>
+          <option value="4">Day 4</option>
+          <option value="5" selected>Day 5</option>
+          <option value="6">Day 6</option>
+          <option value="7">Day 7</option>
+          <option value="8">Day 8</option>
+        </select>
+      </div>
+      <div>
+        <label for="timing">Label availability</label
+        ><select id="timing">
+          <option value="delayed">Delayed labels</option>
+          <option value="complete">All at minimum age</option>
+        </select>
+      </div>
+      <div>
+        <label for="slice">Ticket slice</label
+        ><select id="slice">
+          <option value="all">All tickets</option>
+          <option value="routine">Routine only</option>
+          <option value="complex">Complex only</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="mechanism"></div>
+    <p id="interpretation" class="note"></p>
+    <table id="slices">
+      <caption>
+        Day 3 prediction cohort · coverage by selected slice
+      </caption>
+      <thead>
+        <tr>
+          <th>Slice</th>
+          <th>Eligible</th>
+          <th>Usable labels</th>
+          <th>Coverage</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <details id="state">
+      <summary>Inspect joined records and evidence policy</summary>
+      <p id="policy"></p>
+      <p id="join-notes"></p>
+      <table id="records">
+        <caption>
+          Prediction records · unavailable outcomes remain hidden
+        </caption>
+        <thead>
+          <tr>
+            <th>ID · cohort</th>
+            <th>Slice · prediction</th>
+            <th>Label used</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and optional detail</summary>
+      <p>
+        There are six Day 1 predictions and six Day 3 predictions. Each cohort has two routine and
+        four complex cases. All have model M1 and transform T1. A cohort becomes eligible at
+        prediction day + 2, including equality; this is a minimum-age policy, not proof that every
+        outcome is complete. Integer days denote UTC boundaries. This example has no sliding-window
+        overlap or changing model weights.
+      </p>
+      <p>
+        Original label arrivals for R01–R06 are Days 3, 3, 4, 3, 3, 3. For R07–R12 they are Days 4,
+        4, 6, 6, 7, and never. Early labels in the newer cohort are withheld from metrics until Day
+        5 eligibility. Alternate timing releases every known fixture outcome at its cohort's minimum
+        age. It cannot create real missing labels; it is a hypothetical timing comparison. One label
+        with unmatched ID X99 arrives on Day 4 and is reported separately, never joined by position.
+      </p>
+      <p>
+        Error rate = wrong predictions / usable joined labels. Coverage = usable joined labels /
+        eligible predictions. Zero denominators display N/A. The policy waits for cohort
+        eligibility, then requires at least four labels before treating observed error above 25% as
+        an investigation signal. A below-limit result also needs at least 80% coverage to say no
+        configured breach; otherwise evidence is insufficient. Equality at both thresholds passes.
+        Coverage remains visible even when an observed breach triggers investigation.
+      </p>
+      <p>
+        These fixed thresholds are teaching rules with no statistical confidence guarantee.
+        Duplicate prediction or label IDs are rejected rather than arbitrarily resolved. Later
+        unavailable labels cannot affect an earlier report. No labels are imputed, no causal effect
+        is estimated, and no alerts, requests, retraining or deployments are sent. Reset restores
+        Day 5, delayed labels and all tickets, and closes optional explanations.
+      </p>
+    </details>
+    <script>
+      const predictions = Array.from({ length: 12 }, (_, i) => ({
+        id: 'R' + String(i + 1).padStart(2, '0'),
+        day: i < 6 ? 1 : 3,
+        slice: i % 6 < 2 ? 'routine' : 'complex',
+        prediction: i % 2,
+        model: 'M1',
+        transform: 'T1',
+      }));
+      const outcomes = [0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0],
+        arrivals = [3, 3, 4, 3, 3, 3, 4, 4, 6, 6, 7, null];
+      const labels = predictions
+        .map((p, i) => ({ id: p.id, y: outcomes[i], ready: arrivals[i] }))
+        .concat([{ id: 'X99', y: 1, ready: 4 }]);
+      const days = [3, 4, 5, 6, 7, 8],
+        timings = ['delayed', 'complete'],
+        sliceNames = ['all', 'routine', 'complex'];
+      const minAge = 2,
+        minLabels = 4,
+        minCoverage = 0.8,
+        errorLimit = 0.25;
+      const $ = (id) => document.getElementById(id),
+        percent = (x) => (x === null ? 'N/A' : (100 * x).toFixed(1) + '%');
+      let report;
+      function unique(rows) {
+        const ids = new Set();
+        for (const r of rows) {
+          if (ids.has(r.id)) throw new Error('Duplicate record ID');
+          ids.add(r.id);
+        }
+        return ids;
+      }
+      function snapshot(day, timing, slice, preds = predictions, events = labels) {
+        if (!days.includes(day) || !timings.includes(timing) || !sliceNames.includes(slice))
+          throw new Error('Unsupported setting');
+        const ids = unique(preds);
+        unique(events);
+        const byId = new Map(preds.map((p) => [p.id, p]));
+        const available = events
+          .map((l) => ({
+            ...l,
+            ready: timing === 'complete' && byId.has(l.id) ? byId.get(l.id).day + minAge : l.ready,
+          }))
+          .filter((l) => l.ready !== null && l.ready <= day);
+        const joined = new Map(available.filter((l) => ids.has(l.id)).map((l) => [l.id, l]));
+        const rows = preds
+          .filter((p) => slice === 'all' || p.slice === slice)
+          .map((p) => {
+            const eligible = p.day + minAge <= day,
+              label = eligible ? joined.get(p.id) : undefined;
+            return {
+              ...p,
+              eligible,
+              label: label ? label.y : null,
+              error: label ? Number(label.y !== p.prediction) : null,
+            };
+          });
+        const cohorts = [1, 3].map((cohort) =>
+          summarize(
+            rows.filter((p) => p.day === cohort),
+            cohort,
+            day,
+          ),
+        );
+        return {
+          day,
+          timing,
+          slice,
+          rows,
+          cohorts,
+          orphanLabels: available.filter((l) => !ids.has(l.id)).length,
+          slices: ['routine', 'complex']
+            .filter((s) => slice === 'all' || slice === s)
+            .map((s) => ({
+              ...summarize(
+                rows.filter((r) => r.day === 3 && r.slice === s),
+                3,
+                day,
+              ),
+              name: s,
+            })),
+        };
+      }
+      function summarize(rows, cohort, day) {
+        const eligible = rows.filter((r) => r.eligible),
+          labeled = eligible.filter((r) => r.label !== null),
+          errors = labeled.reduce((s, r) => s + r.error, 0),
+          rate = labeled.length ? errors / labeled.length : null,
+          coverage = eligible.length ? labeled.length / eligible.length : null;
+        let status;
+        if (day < cohort + minAge) status = 'Waiting for age';
+        else if (labeled.length < minLabels) status = 'Too few labels';
+        else if (rate > errorLimit) status = 'Investigate';
+        else if (coverage < minCoverage) status = 'Incomplete coverage';
+        else status = 'No configured breach';
+        return {
+          cohort,
+          total: rows.length,
+          eligible: eligible.length,
+          labeled: labeled.length,
+          errors,
+          rate,
+          coverage,
+          status,
+          rows,
+        };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 840 : 510;
+        const text = (x, y, s, size = 16, c = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${c}">${s}</text>`;
+        const line = (x1, y1, x2, y2, c = '#a6aca3') =>
+          `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}"/>`;
+        let out = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Prediction cohorts, usable labels, coverage and observed error at the selected audit time"><rect width="${width}" height="${height}" fill="#fff"/><g font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400">`;
+        out +=
+          text(0, 24, 'Labels return to prediction cohorts', mobile ? 17 : 21) +
+          text(0, 51, `Audit Day ${r.day} · M1 / T1 · ${r.slice} tickets`, 15, '#626962');
+        out +=
+          text(0, 78, 'Green: usable label · ?: outcome not used', mobile ? 13 : 16) +
+          line(0, 99, width, 99);
+        const panel = (c, x, y) => {
+          let s =
+            text(x, y, `Predicted Day ${c.cohort}`, 19) +
+            text(x, y + 27, `Eligible from Day ${c.cohort + minAge}`, 14, '#626962');
+          const start = x + 10,
+            span = 280;
+          s += `<rect x="${start + ((c.cohort + minAge - 1) * span) / 7}" y="${y + 42}" width="${((8 - c.cohort - minAge) * span) / 7}" height="20" fill="#f1f2ef"/>`;
+          s += line(start, y + 62, start + span, y + 62);
+          for (let d = 1; d <= 8; d++)
+            s += text(start + ((d - 1) * span) / 7 - 3, y + 83, String(d), 12, '#626962');
+          s += `<line x1="${start + ((r.day - 1) * span) / 7}" x2="${start + ((r.day - 1) * span) / 7}" y1="${y + 37}" y2="${y + 68}" stroke="#252c28" stroke-dasharray="3 3"/>`;
+          for (let i = 0; i < c.rows.length; i++) {
+            const row = c.rows[i],
+              usable = row.label !== null;
+            s +=
+              `<rect x="${x + i * 43}" y="${y + 109}" width="36" height="32" fill="${usable ? '#edf5f0' : '#f1f2ef'}" stroke="${usable ? '#00855b' : '#a6aca3'}"/>` +
+              text(
+                x + 13 + i * 43,
+                y + 131,
+                usable ? String(row.label) : '?',
+                16,
+                usable ? '#00855b' : '#626962',
+              ) +
+              text(x + 4 + i * 43, y + 161, row.id.slice(1), 12, '#626962');
+          }
+          s += text(x, y + 194, `Usable labels ${c.labeled}/${c.eligible} eligible`, 16);
+          s += text(x, y + 222, `Coverage ${percent(c.coverage)}`, 16, '#00855b');
+          s += `<rect x="${x}" y="${y + 235}" width="290" height="10" fill="#f1f2ef"/><rect x="${x}" y="${y + 235}" width="${290 * (c.coverage || 0)}" height="10" fill="#00855b"/>`;
+          s +=
+            text(x, y + 275, `Errors ${c.errors}/${c.labeled} · ${percent(c.rate)}`, 17) +
+            text(x, y + 304, c.status, 16);
+          return s;
+        };
+        if (mobile) {
+          out += panel(r.cohorts[0], 0, 133) + line(0, 460, 328, 460) + panel(r.cohorts[1], 0, 493);
+        } else {
+          out +=
+            panel(r.cohorts[0], 0, 139) + line(337, 120, 337, 458) + panel(r.cohorts[1], 355, 139);
+        }
+        out += text(
+          0,
+          mobile ? 831 : 499,
+          'Timeline: days 1–8 · dashed mark: audit day',
+          mobile ? 12 : 14,
+          '#626962',
+        );
+        return out + '</g></svg>';
+      }
+      function render() {
+        report = snapshot(Number($('day').value), $('timing').value, $('slice').value);
+        const latest = report.cohorts[1];
+        document.querySelector('output').textContent =
+          `Day ${report.day}: recent cohort has ${latest.labeled}/${latest.eligible} usable labels, error ${percent(latest.rate)}, coverage ${percent(latest.coverage)}. ${latest.status}.`;
+        $('mechanism').innerHTML = mechanismGraphic(report, innerWidth <= 520);
+        $('interpretation').textContent =
+          latest.eligible === 0
+            ? 'The recent cohort has not reached its minimum age. Any early labels stay outside its quality metric.'
+            : latest.labeled === 0
+              ? 'There are no usable labels for this selected cohort and slice. N/A is missing evidence, not zero error.'
+              : 'Error uses labeled cases only; coverage uses all eligible predictions in the selected cohort and slice. An observed breach can warrant investigation while coverage is still incomplete.';
+        $('slices').querySelector('tbody').innerHTML = report.slices
+          .map(
+            (s) =>
+              `<tr><th scope="row">${s.name}</th><td>${s.eligible}</td><td>${s.labeled}</td><td>${percent(s.coverage)}</td></tr>`,
+          )
+          .join('');
+        $('policy').textContent =
+          'Minimum age 2 days; minimum count 4 labels; error limit 25%; coverage requirement 80% for a below-limit result. These are illustrative mechanical rules, not confidence guarantees.';
+        $('join-notes').textContent =
+          `Unmatched available label records: ${report.orphanLabels}. They are excluded. Labels join by ID, not arrival order. Future and unavailable labels cannot enter the report.`;
+        $('records').querySelector('tbody').innerHTML = report.rows
+          .map(
+            (row) =>
+              `<tr><th scope="row">${row.id} · Day ${row.day}</th><td>${row.slice} · ${row.prediction}</td><td>${row.label === null ? '—' : row.label}</td><td>${!row.eligible ? 'Age wait' : row.label === null ? 'Pending' : row.error ? 'Wrong' : 'Correct'}</td></tr>`,
+          )
+          .join('');
+      }
+      function reset() {
+        $('day').value = '5';
+        $('timing').value = 'delayed';
+        $('slice').value = 'all';
+        for (const d of document.querySelectorAll('details')) d.open = false;
+        render();
+      }
+      for (const id of ['day', 'timing', 'slice']) $(id).addEventListener('change', render);
+      $('reset').addEventListener('click', reset);
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

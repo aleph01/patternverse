@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One action in two orders</title><style>
+:root{color-scheme:only light;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#252c28;background:#fff}*{box-sizing:border-box}body{margin:0;padding:16px}svg{width:100%;height:auto;display:block;max-height:340px}svg text{fill:#252c28;font:18px Helvetica Neue,Helvetica,Arial,sans-serif}button{font:inherit;border:1px solid #a6aca3;border-radius:5px;background:white;padding:8px 13px;color:inherit}button:focus-visible,input:focus-visible{outline:2px solid #00855b;outline-offset:3px}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}label{display:flex;gap:8px;align-items:center;flex:1;min-width:150px}input{width:100%;accent-color:#00855b}p{font-size:14px;line-height:1.5;margin:12px 0 0}.note{color:#56635b;font-size:12px}output{font-variant-numeric:tabular-nums;min-width:3em}@media(max-width:400px){body{padding:8px}svg text{font-size:21px}}
+</style></head><body data-study="reverse-motion"><svg viewBox="0 0 640 330" role="img" aria-labelledby="study-title study-desc"></svg><div class="controls"><button id="play" aria-pressed="false">Play</button><button id="start">Reset</button><label>Position <input type="range" min="0" max="1000" value="0" aria-label="Sequence position"></label><output>0%</output></div><p id="explain">The left shows invented fragments moving apart. The right reads the same positions in reverse, so the fragments assemble.</p><p class="note">Illustrative scenario, not a documented film setup. Starts paused; drag the slider to inspect any position.</p><script>
+const svg=document.querySelector('svg'), range=document.querySelector('input'), play=document.querySelector('#play'), label=document.querySelector('output');
+const R=(x,y,w,h,fill='none',stroke='#a6aca3')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+fill+'" stroke="'+stroke+'"/>';
+const P=(d,fill='none',stroke='#00855b')=>'<path d="'+d+'" fill="'+fill+'" stroke="'+stroke+'"/>';
+const C=(x,y,r,fill='#00855b')=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+fill+'"/>';
+const T=(x,y,s)=>'<text x="'+x+'" y="'+y+'">'+s+'</text>';
+const person=(x,y)=>'<g transform="translate('+x+' '+y+') scale(.75)">'+P('M-7-76C-15-79-15-92-7-96C1-100 10-95 10-88L15-84 10-81C10-75 5-72 0-73L-1-67C9-64 13-55 14-43L5-38 3-28 10-2 1 0-8-23-10-1-19 0-18-32-20-52C-21-63-15-68-8-69Z','#252c28','none')+'</g>';
+const camera=(x,y)=>R(x-13,y-9,21,18,'#252c28','none')+P('M'+(x+8)+' '+(y-6)+'l12-6v24l-12-6Z','#252c28','none');
+const view=(x,y,w=290,h=185)=>R(x,y,w,h,'#fff');
+const rotate=(x,y,a,body)=>'<g transform="translate('+x+' '+y+') rotate('+a+')">'+body+'</g>';
+function draw(){
+ const t=Number(range.value)/1000, q=Math.sin(t*Math.PI), id=document.body.dataset.study; let s='';
+ if(id==='dolly-zoom'){
+  s=T(25,30,'Camera moves away; lens zooms in');
+  const d=2+2*t, bg=22*d/(d+8)*5;
+  s+=view(25,52,590,202)+R(70,80,48,174,'#edf5f0')+R(520,80,48,174,'#edf5f0')+C(445,146,bg,'#edf5f0')+P('M445 '+(146-bg*.7)+'V146L'+(445+bg*.5)+' 146','none','#252c28')+person(260,224)+T(25,288,'Distance: '+d.toFixed(1)+' m')+T(330,288,'Lens: '+(24*d/2).toFixed(0)+' mm');
+ }else if(id==='reverse-motion'){
+  for(let k=0;k<2;k++){
+   const v=k?1-t:t,x=25+k*325;
+   s+=T(x,30,k?'Reversed order':'Recorded order')+view(x,52)+P('M'+(x+10)+' 226H'+(x+280),'none','#a6aca3');
+   for(let j=0;j<8;j++){const a=j*Math.PI/4,px=x+145+Math.cos(a)*105*v,py=165+Math.sin(a)*30*v+45*v; s+=rotate(px,py,j*45+v*130,P('M-10-10L13-8 8 12-8 9Z','#edf5f0'));}
+  }
+ }else if(id==='slit-scan'){
+  s=T(25,28,'During one open exposure')+R(465,47,8,85,'#252c28')+R(466,77,6,22,'#00855b')+camera(75+t*270,88)+P('M110 115H390')+T(490,95,'Opening')+T(25,165,'Accumulated light in this frame')+view(25,179,590,116);
+  for(let j=0;j<=Math.round(t*20);j++){const a=14+j*4;s+=R(320-a,235-a*.36,a*2,a*.72,'none','#00855b');}
+ }else if(id==='hidden-cut'){
+  s=T(25,28,'One continuous-looking view')+view(25,50,590,224)+R(40,62,560,200,t<.5?'#f1f2ef':'#edf5f0')+R(t<.5?110:445,105,65,125,'#fff')+person(320,235);
+  const x=-650+t*1310; s+=R(x,50,650,224,'#252c28','none')+T(25,307,t<.49?'Shot A':t>.51?'Shot B':'The join is hidden now');
+ }else if(id==='bullet-time'){
+  for(let k=0;k<2;k++){
+   const x=25+k*325,step=Math.min(5,Math.floor(t*6)),angle=step*Math.PI/3,bt=k?step/5:.35;
+   s+=T(x,28,k?'Staggered exposures':'Same instant')+view(x,50)+person(x+145,208)+C(x+145+90*Math.sin(angle),85+70*bt,12)+T(x,278,'Viewpoint '+(step+1)+' of 6');
+  }
+ }else if(id==='rotating-set'||id==='gimbal'){
+  const a=(id==='gimbal'?Math.sin(t*Math.PI*2)*18:t*90);
+  for(let k=0;k<2;k++){
+   const x=170+k*325;
+   s+=T(x-145,28,k?'Room-attached camera':'Studio-fixed camera')+view(x-145,50);
+   s+=rotate(x,146,k?-a:0,P('M-125 20H125','none','#a6aca3'));
+   s+=rotate(x,146,k?0:a,R(-72,-65,144,130,'#edf5f0')+R(-28,-45,56,40,'#fff'));
+   if(id==='rotating-set')s+=rotate(x,146,k?-a:0,P('M0-30V45M-9 35L0 45 9 35'));
+  }
+  s+=T(25,285,id==='gimbal'?'Gray line: studio horizon':'Green arrow: direction of gravity');
+ }else if(id==='body-camera'){
+  const offset=Math.sin(t*Math.PI*2)*65;
+  for(let k=0;k<2;k++){
+   const x=25+k*325;s+=T(x,28,k?'Body-attached camera':'Room-fixed camera')+view(x,50);
+   for(let j=0;j<3;j++)s+=R(x+35+j*78-(k?offset:0),85,24,115,'#edf5f0');
+   s+=person(x+145+(k?0:offset),217);
+  }
+ }else if(id==='crowd-variation'){
+  for(let k=0;k<2;k++){
+   const x=25+k*325;s+=T(x,28,k?'Varied phase and pace':'Same phase and pace')+view(x,50);
+   for(let j=0;j<6;j++){
+    const phase=t*(k?1+j*.07:1)+(k?j*.14:0), px=x+35+(j%3)*90,py=118+Math.floor(j/3)*89;
+    const stride=Math.sin(phase*12)*12;s+=C(px,py-30,7,'#252c28')+R(px-6,py-21,12,23,'#252c28','none')+P('M'+(px-6)+' '+py+'l'+(-stride)+' 20h7l'+stride+'-16 5 16h7l-7-20Z','#00855b','none');
+   }
+  }
+ }else if(id==='cheated-contact'){
+  const reach=Math.max(0,1-Math.abs(t-.48)*2.08), rx=t>.48?(t-.48)*22:0;
+  s=T(25,28,'Overhead: separation in depth')+view(25,50)+rotate(170,220,-90,camera(0,0))+C(170+rx,102,19,'#252c28')+P('M75 170L'+(90+80*reach)+' '+(170-30*reach),'none','#00855b')+C(90+80*reach,170-30*reach,7)+T(350,28,'Camera view: overlap')+view(350,50)+person(495+rx,203)+P('M370 137H'+(385+110*reach),'none','#00855b')+C(385+110*reach,137,8);
+ }else if(id==='creative-geography'){
+  const second=t>=.5;s=T(25,28,second?'Location B: inside':'Location A: outside')+view(25,50,590,217)+R(40,65,560,187,second?'#edf5f0':'#f1f2ef')+R(291,78,77,174,'#fff')+person(230+t*190,238)+T(25,303,'The action continues across a cut at the doorway.');
+ }else if(id==='bleach-comparison'){
+  for(let k=0;k<2;k++){
+   const x=25+k*325;s+=T(x,28,k?'Less color, more contrast':'Starting graphic')+view(x,50);
+   s+='<g '+(k?'style="filter:saturate('+(1-t*.8)+') contrast('+(1+t*.65)+')"':'')+'>'+R(x+1,51,288,183,'#b5cbbd','none')+R(x+30,86,76,123,'#568772','none')+C(x+204,122,44,'#e7c58d')+person(x+158,220)+'</g>';
+  }
+ }
+ svg.innerHTML='<title id="study-title">'+document.title+'</title><desc id="study-desc">'+document.querySelector('#explain').textContent+'</desc>'+s;
+ label.value=Math.round(t*100)+'%';
+}
+let running=false, previous;
+function stop(){running=false;play.textContent='Play';play.setAttribute('aria-pressed','false');previous=undefined;}
+play.addEventListener('click',()=>{if(running){stop();return;} if(+range.value===1000)range.value=0;running=true;play.textContent='Pause';play.setAttribute('aria-pressed','true');requestAnimationFrame(tick);});
+function tick(now){if(!running)return;if(previous!==undefined)range.value=Math.min(1000,+range.value+(now-previous)/7);previous=now;draw();if(+range.value>=1000)stop();else requestAnimationFrame(tick);}
+range.addEventListener('input',()=>{stop();draw();});
+document.querySelector('#start').addEventListener('click',()=>{stop();range.value=0;draw();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+draw();
+</script></body></html>

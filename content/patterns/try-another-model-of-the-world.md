@@ -48,31 +48,6 @@ Try Another Model of the World helps when people mistake their own conventions f
 
 Returning to the quiet colleague, the appropriate result is greater curiosity rather than a new certainty that they secretly approved. They may have disliked the proposal, needed time, or been occupied with another issue. The added models identify what is still unknown and how it might be clarified. They also reduce the chance that an unverified interpretation will shape the next interaction as though the colleague had already stated it.
 
-## Pattern details
-
-### Use when
-
-- A behavior seems to have only one possible interpretation.
-- Different roles or conventions produce recurring misunderstanding.
-
-### Goals
-
-- Understand the logic behind another position.
-- Identify interpretations that require clarification.
-
-### Mechanisms
-
-- perspective taking
-- interpretive model comparison
-
-### Not ideal when
-
-- Imagined perspectives become stereotypes or replace asking the actual person.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[inspect-how-you-know|Inspect How You Know]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Model of the World; chapter 2, printed pages 55â
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask facts {
+facts = !ask {
     Separate the event and interpretation
 
     Describe an everyday disagreement or ambiguous behavior. What did you observe, and how are you interpreting it?
 }
-!ask model {
+model = !ask {
     Notice your own model
 
     What expectations, priorities, or conventions make your interpretation seem natural to you?
 }
-!ask alternative {
+alternative = !ask {
     Imagine another possible model
 
     What different priorities or experience could make the same event look different? Treat this as a possibility, not a diagnosis or stereotype.
 }
-!ask difference {
+difference = !ask {
     Compare the questions
 
     What would seem important within that model? Which facts stay the same, and what remains unknown?
 }
-!ask limits {
+limits = !ask {
     Keep evidence and boundaries
 
     Which claims can be checked? What boundary or unacceptable consequence remains even if you understand the other position?
 }
-!ask next {
+next = !ask {
     Invite correction
 
     What respectful question could you ask, or what bounded observation could help clarify the person's actual view? Do not assume you now know their motives.

@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shadow deployment evidence explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 17%;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Twelve fictional requests always receive incumbent predictions. Replay copies through a
+      separate FIFO worker pool; only timely shadow results can join the comparison. Fixed
+      predictions are fixture data, not a trained model.
+    </p>
+    <form aria-label="Shadow deployment settings">
+      <div>
+        <label for="mirror">Mirror selection</label
+        ><select id="mirror">
+          <option value="all">All twelve requests</option>
+          <option value="odd">Odd IDs · six requests</option>
+          <option value="quarter">IDs 1, 5, 9 · three requests</option>
+          <option value="off">Off</option>
+        </select>
+      </div>
+      <div>
+        <label for="workers">Isolated shadow workers</label
+        ><select id="workers">
+          <option value="1">1</option>
+          <option value="2" selected>2</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <div>
+        <label for="deadline">Shadow deadline · milliseconds</label
+        ><select id="deadline">
+          <option>60</option>
+          <option>100</option>
+          <option selected>150</option>
+          <option>500</option>
+        </select>
+      </div>
+      <div>
+        <label for="labels">Label snapshot</label
+        ><select id="labels">
+          <option value="partial">Ten labels available</option>
+          <option value="complete">All twelve labels available</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="interpretation" class="note"></p>
+    <svg
+      id="mechanism"
+      role="img"
+      aria-label="Incumbent response path and isolated shadow comparison path"
+    ></svg>
+    <table id="metrics-table">
+      <caption>
+        Observed counts · predictions are compared on identical request IDs
+      </caption>
+      <thead>
+        <tr>
+          <th>Measure</th>
+          <th>Count / denominator</th>
+        </tr>
+      </thead>
+      <tbody id="metrics"></tbody>
+    </table>
+    <table id="summary-table">
+      <caption>
+        Where timely labeled comparisons remain
+      </caption>
+      <thead>
+        <tr>
+          <th>Slice</th>
+          <th>Mirrored</th>
+          <th>On time</th>
+          <th>Labeled pairs</th>
+        </tr>
+      </thead>
+      <tbody id="summary"></tbody>
+    </table>
+    <details id="record-tables">
+      <summary>Inspect all requests and worker timings</summary>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Live / shadow / label</th>
+            <th>Shadow timing · ms</th>
+            <th>Evidence</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and scope</summary>
+      <p>
+        Requests arrive every 25 ms, starting at zero. Incumbent latency alternates 20 and 25 ms,
+        with unlimited independent incumbent capacity. Shadow workers are identical, non-preemptive,
+        and take the fixed service durations listed in the records. Copies use an unbounded FIFO
+        queue; ties choose the lowest numbered worker. End-to-end shadow latency includes queue
+        wait. Equality at the deadline is accepted.
+      </p>
+      <p>
+        A deadline miss makes a result unusable for the collector but does not cancel queued or
+        running work. All scheduled work eventually runs. Worker-milliseconds sum shadow service
+        durations and are not a monetary cost or an end-to-end latency. No retries, network,
+        batching, logging failures, crashes, or resource contention are simulated. Real deployments
+        need bounded admission and isolation; the assumed unbounded queue is a teaching
+        simplification.
+      </p>
+      <p>
+        Odd-ID and three-ID selections are fixed illustrative subsets, not random samples. Partial
+        labels hide R08 and R10. A labeled pair requires both an on-time shadow result and an
+        available label; disagreement needs no label. Empty denominators are undefined. No user
+        receives a shadow prediction, and the fixed incumbent latency remains unchanged only because
+        complete isolation is assumed.
+      </p>
+      <p>
+        This local replay sends no requests, trains no model, and estimates no business effect.
+        Shadow inference, tools, and logging in a real system must have production side effects
+        disabled.
+      </p>
+    </details>
+    <script>
+      const serviceTimes = [30, 40, 25, 35, 45, 50, 55, 60, 90, 120, 180, 240];
+      const incumbentPredictions = [0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0];
+      const candidatePredictions = [0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1];
+      const truth = [0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0];
+      function makeRequests(labelSnapshot) {
+        return serviceTimes.map((service, i) => ({
+          id: 'R' + String(i + 1).padStart(2, '0'),
+          index: i + 1,
+          arrival: i * 25,
+          group: i < 8 ? 'Routine' : 'Complex',
+          incumbent: incumbentPredictions[i],
+          candidate: candidatePredictions[i],
+          incumbentLatency: i % 2 ? 25 : 20,
+          service,
+          label: labelSnapshot === 'partial' && [7, 9].includes(i) ? null : truth[i],
+        }));
+      }
+      function selected(index, mirror) {
+        return (
+          mirror === 'all' ||
+          (mirror === 'odd' && index % 2 === 1) ||
+          (mirror === 'quarter' && (index - 1) % 4 === 0)
+        );
+      }
+      function simulate(requests, mirror, workerCount, deadline) {
+        const free = Array(workerCount).fill(0);
+        return [...requests]
+          .sort((a, b) => a.arrival - b.arrival || a.index - b.index)
+          .map((request) => {
+            if (!selected(request.index, mirror))
+              return {
+                ...request,
+                mirrored: false,
+                start: null,
+                finish: null,
+                wait: null,
+                elapsed: null,
+                worker: null,
+                onTime: false,
+              };
+            let worker = 0;
+            free.forEach((time, i) => {
+              if (time < free[worker]) worker = i;
+            });
+            const start = Math.max(request.arrival, free[worker]),
+              finish = start + request.service,
+              elapsed = finish - request.arrival;
+            free[worker] = finish;
+            return {
+              ...request,
+              mirrored: true,
+              start,
+              finish,
+              wait: start - request.arrival,
+              elapsed,
+              worker: worker + 1,
+              onTime: elapsed <= deadline,
+            };
+          });
+      }
+      function summarize(rows) {
+        const mirrored = rows.filter((row) => row.mirrored),
+          timely = mirrored.filter((row) => row.onTime),
+          pairs = timely.filter((row) => row.label !== null);
+        return {
+          n: rows.length,
+          mirrored: mirrored.length,
+          onTime: timely.length,
+          misses: mirrored.length - timely.length,
+          disagreements: timely.filter((row) => row.incumbent !== row.candidate).length,
+          pairs: pairs.length,
+          incumbentErrors: pairs.filter((row) => row.incumbent !== row.label).length,
+          candidateErrors: pairs.filter((row) => row.candidate !== row.label).length,
+        };
+      }
+      function buildReport(mirror, workers, deadline, labels) {
+        const rows = simulate(makeRequests(labels), mirror, workers, deadline),
+          totals = summarize(rows),
+          work = rows.filter((row) => row.mirrored).reduce((n, row) => n + row.service, 0);
+        return {
+          mirror,
+          workers,
+          deadline,
+          labels,
+          rows,
+          ...totals,
+          work,
+          shadowUserResponses: 0,
+          liveResponses: rows.length,
+          liveMax: Math.max(...rows.map((row) => row.incumbentLatency)),
+          maxWait: Math.max(0, ...rows.filter((row) => row.mirrored).map((row) => row.wait)),
+          maxElapsed: rows.some((row) => row.mirrored)
+            ? Math.max(...rows.filter((row) => row.mirrored).map((row) => row.elapsed))
+            : null,
+          slices: ['Routine', 'Complex'].map((group) => ({
+            group,
+            ...summarize(rows.filter((row) => row.group === group)),
+          })),
+        };
+      }
+      const $ = (s) => document.querySelector(s),
+        ratio = (a, b) =>
+          a + '/' + b + (b ? ' (' + ((100 * a) / b).toFixed(1) + '%)' : ' (undefined)'),
+        svgt = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="var(--ink)"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          value +
+          '</text>',
+        rect = (x, y, w, h, fill) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          w +
+          '" height="' +
+          h +
+          '" rx="7" fill="' +
+          fill +
+          '"/>',
+        arrow = (path) =>
+          '<path d="' +
+          path +
+          '" stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#arrow)"/>';
+      let report;
+      function draw(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          h = mobile ? 620 : 365;
+        let s =
+          '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="var(--accent)"/></marker></defs>' +
+          svgt(0, 25, 18, 'The incumbent stays in control.', true);
+        if (mobile) {
+          s +=
+            rect(12, 44, 292, 58, 'var(--panel)') +
+            svgt(24, 69, 16, r.n + ' incoming requests', true) +
+            svgt(24, 91, 12, 'Copies carry the same request IDs.') +
+            arrow('M158 102V132') +
+            rect(12, 134, 292, 72, 'var(--band)') +
+            svgt(24, 160, 16, 'Incumbent model', true) +
+            svgt(24, 186, 14, r.liveResponses + ' responses · max ' + r.liveMax + ' ms') +
+            arrow('M158 206V236') +
+            rect(12, 238, 292, 62, 'var(--band)') +
+            svgt(24, 264, 16, 'Responses reach users', true) +
+            svgt(24, 287, 13, r.liveResponses + ' incumbent · 0 shadow') +
+            arrow('M304 73H316V391H304') +
+            svgt(12, 334, 13, 'Copy branch · isolated from responses') +
+            rect(12, 348, 292, 90, 'var(--panel)') +
+            svgt(
+              24,
+              374,
+              16,
+              'Shadow · ' + r.workers + ' worker' + (r.workers === 1 ? '' : 's'),
+              true,
+            ) +
+            svgt(24, 400, 14, r.mirrored + ' mirrored · ' + r.onTime + ' on time') +
+            svgt(24, 422, 13, r.misses + ' deadline misses · ' + r.work + ' worker-ms') +
+            arrow('M158 438V468') +
+            rect(12, 470, 292, 92, 'var(--panel)') +
+            svgt(24, 496, 16, 'Offline comparison only', true) +
+            svgt(24, 522, 14, r.pairs + ' timely labeled pairs') +
+            svgt(24, 545, 13, 'Shadow outputs never control a user response.') +
+            svgt(0, 600, 12, 'Isolation and non-cancellation are assumptions here.');
+        } else {
+          s +=
+            rect(0, 52, 158, 70, 'var(--panel)') +
+            svgt(10, 80, 15, r.n + ' live requests', true) +
+            svgt(10, 105, 12, 'Same request IDs') +
+            arrow('M158 86H237') +
+            rect(240, 52, 188, 70, 'var(--band)') +
+            svgt(250, 80, 16, 'Incumbent model', true) +
+            svgt(250, 105, 13, r.liveResponses + ' responses · max ' + r.liveMax + ' ms') +
+            arrow('M428 86H497') +
+            rect(500, 52, 180, 70, 'var(--band)') +
+            svgt(510, 80, 16, 'User responses', true) +
+            svgt(510, 105, 13, 'Incumbent only') +
+            arrow('M199 86V227H237') +
+            svgt(0, 217, 13, 'Copy branch') +
+            rect(240, 181, 188, 99, 'var(--panel)') +
+            svgt(
+              250,
+              207,
+              16,
+              'Shadow · ' + r.workers + ' worker' + (r.workers === 1 ? '' : 's'),
+              true,
+            ) +
+            svgt(250, 234, 13, r.mirrored + ' mirrored · ' + r.onTime + ' on time') +
+            svgt(250, 259, 12, r.misses + ' deadline misses') +
+            arrow('M428 227H497') +
+            rect(500, 181, 180, 99, 'var(--panel)') +
+            svgt(510, 207, 16, 'Offline comparison', true) +
+            svgt(510, 234, 13, r.pairs + ' labeled pairs') +
+            svgt(510, 259, 12, '0 shadow user responses') +
+            svgt(
+              0,
+              321,
+              14,
+              'Deadline ' +
+                r.deadline +
+                ' ms · ' +
+                r.work +
+                ' shadow worker-ms, including late work.',
+            ) +
+            svgt(
+              0,
+              351,
+              12,
+              'Complete isolation is assumed. Timeouts do not cancel queued or running shadow work.',
+            );
+        }
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        $('#mechanism').innerHTML = s;
+      }
+      function render() {
+        report = buildReport(
+          $('#mirror').value,
+          Number($('#workers').value),
+          Number($('#deadline').value),
+          $('#labels').value,
+        );
+        const r = report;
+        $('output').textContent =
+          'Mirrored: ' +
+          r.mirrored +
+          '/' +
+          r.n +
+          '. On time: ' +
+          r.onTime +
+          '/' +
+          r.mirrored +
+          '. Labeled pairs: ' +
+          r.pairs +
+          '. Paired errors: incumbent ' +
+          r.incumbentErrors +
+          '/' +
+          r.pairs +
+          ', shadow ' +
+          r.candidateErrors +
+          '/' +
+          r.pairs +
+          '. Shadow user responses: 0.';
+        $('#interpretation').textContent = r.mirrored
+          ? 'Shadow maximum elapsed: ' +
+            r.maxElapsed +
+            ' ms; maximum queue wait: ' +
+            r.maxWait +
+            ' ms. Work: ' +
+            r.work +
+            ' worker-ms even when results miss the deadline.'
+          : 'Shadow is off. Paired error and disagreement rates are undefined; all twelve incumbent responses remain.';
+        draw(r);
+        const metrics = [
+          ['Incumbent responses', ratio(r.liveResponses, r.n)],
+          ['Mirrored requests', ratio(r.mirrored, r.n)],
+          ['Timely shadow results', ratio(r.onTime, r.mirrored)],
+          ['Shadow deadline misses', ratio(r.misses, r.mirrored)],
+          ['Prediction disagreements', ratio(r.disagreements, r.onTime)],
+          ['Timely labeled pairs', ratio(r.pairs, r.onTime)],
+          ['Incumbent errors · same pairs', ratio(r.incumbentErrors, r.pairs)],
+          ['Shadow errors · same pairs', ratio(r.candidateErrors, r.pairs)],
+        ];
+        $('#metrics').innerHTML = metrics
+          .map(
+            ([label, value]) => '<tr><th scope="row">' + label + '</th><td>' + value + '</td></tr>',
+          )
+          .join('');
+        $('#summary').innerHTML = r.slices
+          .map(
+            (s) =>
+              '<tr><th scope="row">' +
+              s.group +
+              '</th><td>' +
+              s.mirrored +
+              '/' +
+              s.n +
+              '</td><td>' +
+              s.onTime +
+              '/' +
+              s.mirrored +
+              '</td><td>' +
+              s.pairs +
+              '/' +
+              s.onTime +
+              '</td></tr>',
+          )
+          .join('');
+        $('#data').innerHTML = r.rows
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '<small>' +
+              row.group +
+              '</small></th><td>Live ' +
+              row.incumbent +
+              '<br/>Shadow ' +
+              (row.onTime ? row.candidate : 'unusable') +
+              '<br/>Label ' +
+              (row.label === null ? 'pending' : row.label) +
+              '</td><td>Arrive ' +
+              row.arrival +
+              (row.mirrored
+                ? '<br/>Worker ' +
+                  row.worker +
+                  '<br/>Start ' +
+                  row.start +
+                  '; finish ' +
+                  row.finish +
+                  '<br/>Wait ' +
+                  row.wait +
+                  '; elapsed ' +
+                  row.elapsed
+                : '<br/>Not mirrored') +
+              '</td><td>' +
+              (row.mirrored
+                ? row.onTime
+                  ? row.label === null
+                    ? 'On time; label pending'
+                    : 'Labeled pair'
+                  : 'Deadline miss; excluded from pairs'
+                : 'Not mirrored') +
+              '</td></tr>',
+          )
+          .join('');
+      }
+      $('form').addEventListener('submit', (e) => e.preventDefault());
+      $('form').addEventListener('input', render);
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

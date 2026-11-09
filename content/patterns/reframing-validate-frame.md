@@ -14,7 +14,23 @@ verses:
 attribution: "Original Patternverse adaptation inspired by Thomas Wedell-Wedellsborg, What's Your Problem? Not an official implementation."
 ---
 
-A compelling reframe can be just as seductive as the original story. Validate the Frame treats each interpretation as a hypothesis with observable implications. The goal is not to prove the new idea right; it is to learn which frame better predicts what happens, using the smallest reasonable check. This turns reframing from a clever conversation into a guide for action.
+A compelling reframe can be just as seductive as the original story.
+
+## Core idea
+
+Validate the Frame treats each interpretation as a hypothesis with observable implications. The goal is not to prove the new idea right; it is to learn which frame better predicts what happens, using the smallest reasonable check. This turns reframing from a clever conversation into a guide for action.
+
+Different explanations imply different observations. Stating those implications gives a promising idea a way to be corrected by what happens.
+
+## When to use it
+
+Use this pattern after a promising interpretation has emerged and before committing to a response. It is especially helpful when two explanations imply different observations, or when a persuasive story is being treated as settled.
+
+## How it works
+
+A useful validation plan names the frame, its prediction, the proposed observation or limited experiment, and what supporting and disconfirming results would imply. Favor low-cost, reversible steps and existing evidence when possible. Avoid tests that burden other people without consent or that create a high-stakes intervention before uncertainty is reduced.
+
+## Worked examples
 
 Imagine two accounts of abandoned signups:
 
@@ -30,15 +46,17 @@ A workplace example begins with “The team misses dates because planning is poo
 
 In personal life, “I avoid exercise because I lack motivation” competes with “the chosen time conflicts with my actual day.” Trying the same modest activity at two different times for a week might reveal whether timing matters. That does not reduce a person to a metric; it gives them information for the next choice.
 
-A useful validation plan names the frame, its prediction, the proposed observation or limited experiment, and what supporting and disconfirming results would imply. Favor low-cost, reversible steps and existing evidence when possible. Avoid tests that burden other people without consent or that create a high-stakes intervention before uncertainty is reduced.
+## Pitfalls and limits
 
-The chief failure mode is confirmation seeking: selecting a question that can only support the preferred story, or interpreting every result as success. Another is demanding laboratory certainty where a few practical observations would already improve the decision. [[reframing-generate-real-options]] supplies meaningfully different candidates; this pattern compares their consequences in the world. The result may send you back to [[reframing-rapid-reframe]] with a better starting frame.
+The chief failure mode is confirmation seeking: selecting a question that can only support the preferred story, or interpreting every result as success. Another is demanding laboratory certainty where a few practical observations would already improve the decision.
 
 ## Related patterns
 
+[[reframing-generate-real-options]] supplies meaningfully different candidates; this pattern compares their consequences in the world. The result may send you back to [[reframing-rapid-reframe]] with a better starting frame.
+
 [[reframing-rapid-reframe]]
 
-## Source
+## Sources and attribution
 
 Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an original Patternverse procedure, not reproduced book text or an official implementation.
 
@@ -50,19 +68,19 @@ Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an origin
 :input frame text
 :output validation_plan
 
-!agent proposed_plan {
+proposed_plan = !agent {
     :returns text
 
     Frame to test: {{frame}}
     Propose one small, reversible real-world learning step. State what observation would support this frame, what would weaken it, and how the test distinguishes this frame from a plausible alternative.
     Do not ask for more abstract analysis and do not present the frame as established fact.
 }
-!ask next_step {
+next_step = !ask {
     A possible test is: {{proposed_plan}}
 
     What concrete step, if any, would you actually choose to try? You can change or decline the suggestion.
 }
-= validation_plan concat(proposed_plan, concat(" Participant's chosen next step: ", next_step))
+validation_plan = concat(proposed_plan, concat(" Participant's chosen next step: ", next_step))
 !show {
     The frame remains a hypothesis. Your tentative learning plan: {{validation_plan}}
 }

@@ -48,31 +48,6 @@ Look for the Exception helps when words such as always, never, everyone, or impo
 
 The interview history may still contain a real difficulty with unexpected questions. The employee may still need a better way to raise disagreements, and the writer may still find inspiration helpful. The exception does not promise an easy resolution. It allows the next step to be guided by a belief that contains some variation, which is often where the relevant conditions and available choices can be found.
 
-## Pattern details
-
-### Use when
-
-- Absolute language closes down inquiry.
-- Repeated experiences have become an inevitable rule.
-
-### Goals
-
-- Replace unsupported universality with a more conditional account.
-- Discover the conditions behind variation.
-
-### Mechanisms
-
-- counterexample
-- scope testing
-
-### Not ideal when
-
-- An isolated case is being used to deny a strong statistical tendency or repeated harm.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[chunk-down|Chunk Down]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Counter Example; chapter 6, printed pages 167–
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask rule {
+rule = !ask {
     Name the generalization
 
     Choose an everyday claim using words such as 'always', 'never', or 'everyone'. State exactly who, what, and which situations it covers.
 }
-!ask case {
+case = !ask {
     Look for a real exception
 
     Can you recall an actual case within that scope where the claimed relationship did not hold? Write 'none found' if not. Do not invent a reassuring exception.
 }
-!ask conditions {
+conditions = !ask {
     Examine the conditions
 
     If you found one, what differed in timing, context, support, or behavior? If not, what scope or evidence needs clarification?
 }
-!ask tendency {
+tendency = !ask {
     Retain the real difficulty
 
     What recurring pattern, statistical tendency, or harm remains? A single favorable case does not erase repeated problems.
 }
-!ask revision {
+revision = !ask {
     Write a more accurate claim
 
     Can the claim become conditional or more specific? It is fine to keep it if the evidence still supports it.
 }
-!ask next {
+next = !ask {
     Use the variation carefully
 
     What small action or observation follows from the revised understanding? Distinguish an observed exception from a merely possible one.

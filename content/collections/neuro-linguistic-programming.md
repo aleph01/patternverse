@@ -1,18 +1,19 @@
 ---
 id: neuro-linguistic-programming
 type: collection
-title: Neuro-Linguistic Programming
-summary: Fourteen Sleight of Mouth articles for examining beliefs, reframing interpretations, and communicating with care.
+title: "NLP: Sleight of Mouth"
+summary: Language and reflection patterns from Neuro-Linguistic Programming, including Sleight of Mouth and the Meta Model.
 status: published
 aliases:
+  - Neuro-Linguistic Programming
   - NLP
   - Sleight of Mouth
+  - NLP -- Sleight of Mouth
 verses:
   - therapy
 tags:
   - nlp
   - method:nlp
-  - sleight-of-mouth
 items:
   - "find-the-positive-intention"
   - "redefine-the-terms"
@@ -28,10 +29,13 @@ items:
   - "move-up-the-value-hierarchy"
   - "apply-the-rule-to-itself"
   - "put-a-frame-around-the-belief"
-attribution: "Sleight of Mouth concepts: Robert Dilts. The package supplies original explanatory prose and examples with printed-page references."
+  - "meta-model"
+attribution: "Sleight of Mouth concepts: Robert Dilts. Meta Model concepts: Richard Bandler and John Grinder. Articles include original explanatory prose, examples, source notes, and optional self-guided practices."
 ---
 
-This collection brings together fourteen Sleight of Mouth patterns from Neuro-Linguistic Programming (NLP). Each article examines a different aspect of a belief: its language, scope, evidence, purpose, consequences, or context.
+This collection brings together language and reflection patterns from Neuro-Linguistic Programming (NLP).
+
+The fourteen Sleight of Mouth articles examine different aspects of a belief: its language, scope, evidence, purpose, consequences, or context. [[meta-model|The Meta Model]] adds an illustrated overview of deletions, generalizations, and distortions, thirteen detailed question types, worked conversations, a quick reference, and an optional self-guided practice.
 
 The collection treats the patterns as tools for inquiry and communication. Their presence in the source is not evidence that a verbal reframe reliably produces psychological change. A useful alternative interpretation must remain answerable to the facts, the people involved, and the consequences of acting on it.
 

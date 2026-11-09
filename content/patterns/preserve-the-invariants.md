@@ -14,218 +14,72 @@ verses:
   - ai-usage
 ---
 
-Revision sounds simple until the thing being revised has several qualities worth keeping.
+You ask an AI to shorten an article. It removes the example that made the argument understandable. You ask it to simplify a function. The result looks cleaner but treats an empty input differently. You ask for a calmer interface, and the visible keyboard controls disappear.
 
-You ask an LLM to make an article shorter, and it removes the example that made the argument understandable. You ask it to simplify some code, and it changes behavior that was intentionally unusual. You ask it to make a design more playful, and accessibility or information density disappears along the way.
+Each revision improves something you mentioned while damaging something you assumed would remain. The difficulty is often that the request describes the desired change more clearly than the qualities worth keeping.
 
-The model followed the instruction.
+Before revision, make those qualities explicit.
 
-It just did not know which parts of the existing solution were sacred.
+## The core idea
 
-Whenever you ask an LLM to change something, consider stating what **must remain true after the change**.
+An invariant is a property that must remain true while other things change. In AI-assisted work, stating invariants gives revision a boundary: change this aspect while preserving these essential relationships, behaviors, or meanings.
 
-These are the invariants.
+For an article, invariants might include the central claim, uncertainty qualifications, and a particular example. For code, they might include public behavior and error handling. For a design, they might include the visible hierarchy and access to essential actions.
+
+Describe properties rather than freezing every detail. “Keep every paragraph” prevents substantial shortening. “Keep the evidence needed to support the conclusion” leaves room for useful editing.
 
 ![A boundary labeled Invariants remain true surrounds the current artifact, transformation, and revised artifact.](/diagrams/ai-usage/preserve-the-invariants.svg "Transformation happens inside a boundary: the essential properties remain true.")
 
-## Change happens inside a boundary
+## Why it works
 
-Most revision prompts describe the delta:
+A revision request leaves many decisions unspecified. If you ask only for brevity, the model must choose what to remove using the context it has. It may infer different priorities from yours. An explicit preservation requirement supplies information that was previously available only to you.
 
-> Make this more concise.
+Invariants also give you a basis for comparison. Instead of asking whether the new version feels better overall, you can inspect whether each essential property survived. In software, some properties can be checked through tests. In writing, you may need to compare claims and examples directly.
 
-> Refactor this.
+This explanation concerns task clarity and review. An instruction to preserve behavior does not prove that behavior was preserved. The model can overlook a dependency, misunderstand a requirement, or report compliance inaccurately. The invariant defines what to verify; suitable evidence determines whether the revision meets it.
 
-> Make the interface simpler.
+## How to use it
 
-> Rewrite this in a warmer tone.
+Separate the requested change from the preservation requirements. Keep the list short enough to understand, and explain an unusual constraint when its purpose matters.
 
-But a useful revision has two sides:
+> Shorten this article by about a quarter. Preserve the central claim, the distinction between correlation and causation, and the example showing the exception. Reword freely. If the length target conflicts with those requirements, flag the conflict.
 
-**What should change?**
+When a property is testable, identify the check rather than relying on a reassurance:
 
-and
+> Simplify this function. Preserve its public inputs, return values, and documented error behavior. Use the existing behavior tests and point out any case they do not cover.
 
-**What must survive the change?**
+Review the actual result against the list. A short account of what changed can guide that review, but it is not a substitute for inspecting the artifact. If two requirements conflict, decide which one has priority before requesting another revision.
 
-An invariant is anything that belongs to the second category.
+## A worked example
 
-For prose, invariants might include:
+Elias has written an explanation of a small observational study. It distinguishes an association from a causal claim, gives an everyday example, and explains one limitation. He asks the AI to make it concise and accessible.
 
-- preserve the argument,
-- keep the concrete example,
-- retain uncertainty,
-- do not make the tone more promotional.
+The revision reads smoothly. It also changes “was associated with” to “led to,” drops the limitation, and retains a decorative introduction. The changes are individually small, but the conclusion has become stronger than the evidence.
 
-For software:
+Elias makes a second request:
 
-- public behavior must remain unchanged,
-- existing URLs must continue working,
-- do not alter the database schema,
-- preserve keyboard navigation,
-- maintain offline support.
+> Reduce repetition and shorten the introduction. Keep the finding as an association, retain the limitation about the sample, and preserve one concrete example. Do not add factual claims. Show the revised passage first, then list any requirement you could not satisfy.
 
-For product design:
+The new version cuts the introduction and combines two repetitive paragraphs. Elias compares the finding with the supplied study summary and checks that the example still illustrates association without implying causation. The AI's change note says the limitation remains; reading it reveals that the qualification is now too vague. He restores its specific meaning.
 
-- the main action must remain visible without scrolling,
-- advanced users must still have access to detailed controls,
-- mobile and desktop must use the same conceptual workflow.
+The second request helps because it identifies what matters. The final correction still requires human judgment about the source.
 
-These constraints define the safe region within which improvement can occur.
+In interface work, the equivalent might be “reduce visual clutter while keeping the primary action visible without opening a menu.” That requirement permits changes to color, spacing, and secondary controls while protecting a concrete user capability.
 
-## Why ordinary revision prompts drift
+## When it helps—and where it falls short
 
-LLMs do not inherently know which properties of an artifact are intentional.
+Use invariants when an artifact already has valuable qualities, when revisions keep undoing earlier decisions, or when a request such as “simplify” could affect many dimensions at once. They are particularly helpful during repeated editing, refactoring, translation, and redesign.
 
-Imagine a function containing what appears to be unnecessary duplication. You ask:
+One common mistake is making every preference non-negotiable. An overloaded list can leave no room for improvement. Distinguish what must survive from what you merely prefer. Some tasks genuinely require changing an old assumption; preserving it would protect the problem.
 
-> Clean this up.
+Another mistake is treating a broad phrase as a precise invariant. “Keep the quality” gives little guidance. “Keep the counterexample that limits the main claim” is inspectable.
 
-The model notices the duplication and extracts a shared abstraction.
-
-But perhaps the duplication was deliberate because the two paths are expected to evolve independently.
-
-From the surface alone, both interpretations are plausible.
-
-The same thing happens with writing. Repetition might be accidental, or it might provide rhythm. An awkward phrase might be accidental, or it might preserve an important distinction. A long form might be verbosity, or it might be necessary completeness.
-
-The more complex the artifact, the more dangerous the assumption that “improve” has only one dimension.
-
-Stating invariants gives the model a map of the design intent it cannot reliably infer.
-
-## An example in software
-
-Suppose a Svelte application works well, but the frontend has become difficult to maintain.
-
-A weak request would be:
-
-> Refactor this frontend and improve the component structure.
-
-A stronger one might say:
-
-> Refactor the component structure to reduce duplication and clarify responsibilities. Preserve existing visible behavior, routes, keyboard shortcuts, persisted user data, and current API contracts. Do not redesign the UI as part of the refactor.
-
-Notice how much more freedom this actually gives the model.
-
-That may seem paradoxical. Constraints sound restrictive.
-
-But without them, the model must constantly guess whether each change is acceptable. With them, the stable surface is clear, and the model can be aggressive inside the permitted area.
-
-Constraints create a safer space for creativity.
-
-## An example in writing
-
-Suppose an essay has a strong observation but feels meandering.
-
-You might say:
-
-> Cut this by approximately 30%. Preserve the opening anecdote, the distinction between loneliness and solitude, and the ambiguous ending. Remove repetition before removing examples.
-
-Now the model has priorities.
-
-Without those instructions, “shorter” may mean compressing every section equally. With them, shortening becomes a design problem: what can disappear while the identity of the piece remains intact?
-
-That is the heart of this pattern.
-
-## Invariants reveal what the artifact *is*
-
-There is another benefit.
-
-When you identify invariants, you are forced to articulate what makes the current thing itself.
-
-A product may contain hundreds of implementation details, but only a few define its identity.
-
-A story may contain dozens of scenes, yet only certain emotional relationships are essential.
-
-A software system may have complicated internals, while its true contract consists of five observable behaviors.
-
-So invariants are not merely prompting instructions. They are a way of extracting the **stable structure beneath an implementation**.
-
-This is especially valuable in long-running conversations with an LLM. As the artifact evolves, earlier decisions can disappear from the active context or become diluted among later instructions.
-
-A short invariant list acts as a persistent design constitution.
-
-## Not every constraint is an invariant
-
-It is useful to distinguish invariants from goals.
-
-“Make the page load faster” is a goal.
-
-“The page must continue working without JavaScript” is an invariant.
-
-“Make the prose friendlier” is a goal.
-
-“Do not remove the technical terminology” is an invariant.
-
-Goals determine where you want to move.
-
-Invariants define the boundaries you cannot cross.
-
-A strong revision prompt often contains both.
-
-## Beware of too many invariants
-
-If everything must stay the same, nothing can improve.
-
-Users sometimes accumulate constraints after every unsatisfactory iteration until the model has almost no maneuvering room:
-
-- keep the structure,
-- keep every example,
-- keep every phrase I like,
-- preserve the length,
-- change the tone substantially,
-- make it much simpler.
-
-Some combinations are impossible.
-
-Invariants should represent genuinely important properties, not every accidental feature of the current version.
-
-One useful question is:
-
-> If this property changed, would I regard the result as a different thing or as a broken revision?
-
-If yes, it may be an invariant.
-
-If not, it is probably negotiable.
-
-## Invariants can have priorities
-
-Sometimes constraints conflict.
-
-A refactor might preserve perfect backward compatibility but remain unnecessarily complex. A rewritten article might preserve every nuance but fail to become shorter.
-
-Rather than pretending all invariants are absolute, they can be ranked:
-
-**Must preserve**
-- API compatibility
-- stored user data
-
-**Prefer to preserve**
-- existing component boundaries
-- exact keyboard shortcuts
-
-This allows graceful trade-offs when perfection is impossible.
-
-## A pattern for long collaborations
-
-Preserving invariants becomes increasingly important as LLMs move from answering questions to carrying out extended work.
-
-A coding agent may modify dozens of files. A writing assistant may rewrite a chapter repeatedly. A design agent may iterate through many versions.
-
-At that scale, the task is no longer simply “generate something good.”
-
-It becomes:
-
-> Move this system toward a better state without losing the properties that made the previous state valuable.
-
-That is a much richer problem.
-
-And the most useful information you can give the model may not be another instruction about what to change.
-
-It may be a precise statement of what must remain true.
+Preservation can also require tools or expertise beyond the model. Visual inspection, source comparison, accessibility checks, and behavior tests address different properties. Choose checks that match the invariant, and keep uncertainty visible when a property cannot yet be verified.
 
 ## Related patterns
 
-- [[attack-then-repair|Attack, Then Repair]] — Repair weaknesses without removing the proposal’s core advantage.
-- [[use-contrast-not-just-examples|Use Contrast, Not Just Examples]] — Show the boundary between acceptable and broken revisions.
-- [[choose-the-representation-before-solving|Choose the Representation Before Solving]] — Make the stable structure of the artifact inspectable.
+[[attack-then-repair|Attack, Then Repair]] — Repair concrete weaknesses while keeping the qualities worth preserving.
+
+[[use-contrast-not-just-examples|Use Contrast, Not Just Examples]] — Distinguish essential qualities from incidental features of an example.
+
+[[work-in-inspectable-steps|Work in Inspectable Steps]] — Check essential properties at useful points during revision.

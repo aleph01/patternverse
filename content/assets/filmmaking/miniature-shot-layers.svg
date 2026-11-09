@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" role="img" aria-labelledby="title desc" data-film-style="light-editorial" data-view="cutaway-and-frame">
+<title id="title">Build the composite from parts</title>
+<desc id="desc">A low camera photographs a model building on a stage. Viewpoint and lighting suggest full scale; atmosphere and added figures can complete the image. The simplified geometry is not a measured miniature setup. Original conceptual illustration; not a documented film setup.</desc>
+<style>
+:root{color-scheme:only light;--paper:#fff;--ink:#252c28;--line:#a6aca3;--stone:#f1f2ef;--mint:#edf5f0;--green:#00855b;--deep:#00855b}
+svg{background:#fff;color:var(--ink)}
+text{fill:var(--ink);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:26px;font-weight:400;letter-spacing:0}
+.heading{font-size:28px}.small,.caption{font-size:26px}
+.legacy text{font-size:20.222222px}.legacy.compact text{font-size:21.777778px}
+path,rect,circle,ellipse{vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:butt}
+.paper{fill:var(--paper)}.stone{fill:var(--stone)}
+.existing,.wall{fill:var(--stone);stroke:var(--line);stroke-width:1.1}
+.line{fill:none;stroke:var(--ink);stroke-width:1.3}
+.hair,.fine,.leader,.boundary{fill:none;stroke:var(--line);stroke-width:1.1}
+.wall-line{fill:none;stroke:var(--ink);stroke-width:1.8}
+.landscape,.mint,.light{fill:var(--mint)}
+.intervention,.new,.seat{fill:var(--green);stroke:none}
+.outline-green,.accent{fill:none;stroke:var(--green);stroke-width:1.5}
+.glassed,.glassed-line{fill:none;stroke:var(--green);stroke-width:1.2}
+.glass{fill:var(--mint);stroke:var(--green);stroke-width:1.1}
+.dashed{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:5 5}
+.figure,.ink{fill:var(--ink);stroke:none}.figure-accent{fill:var(--green);stroke:none}
+.plan-head{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+.ghost{fill:none;stroke:var(--green);stroke-width:1.2;stroke-dasharray:3 4}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--green)" stroke-width="1.1"/></marker>
+<marker id="arrow-neutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--ink)" stroke-width="1.1"/></marker>
+</defs>
+<rect width="720" height="560" class="paper"/>
+<text x="42" y="53" text-anchor="start" class="heading">A small model. A full-sized world.</text><path d="M170 390L290 280H660L540 390Z" class="stone" /><path d="M170 390V407H540V390M540 407L660 297V280" class="hair" /><path d="M280 330V190H445V330Z" class="existing" /><path d="M445 190L500 160V300L445 330Z" class="mint" /><path d="M280 190L335 160H500L445 190Z" class="paper" stroke="var(--line)"/><path d="M298 213H427" class="hair" /><path d="M298 248H427" class="hair" /><path d="M298 283H427" class="hair" /><path d="M317 205V312" class="hair" /><path d="M361 205V312" class="hair" /><path d="M405 205V312" class="hair" /><path d="M352 330V296H378V330" class="line" /><g transform="translate(110 330) rotate(-14) scale(1)"><path d="M-25-14H9V14H-25ZM9-8L25-14V14L9 8Z" class="figure" /></g><path d="M134 324L280 190M134 324L280 330" class="accent" /><text x="42" y="449" text-anchor="start" class="small">Low camera position</text><path d="M132 421V352" class="hair" /><text x="638" y="444" text-anchor="end" class="small">Model stage</text><text x="42" y="505" text-anchor="start" class="caption">Perspective and light establish scale.</text><text x="42" y="540" text-anchor="start" class="caption">Atmosphere and added figures complete the image.</text>
+</svg>

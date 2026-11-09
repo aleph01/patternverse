@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1260" viewBox="0 0 1400 1260" role="img" aria-labelledby="title desc">
+<title id="title">A request is not yet an agreed handoff</title>
+<desc id="desc">A hypothetical course-booking team requests a course list by Friday, but the programme team has not accepted that commitment. The two teams instead agree that Nadia will supply confirmed session records for one venue and Eli will check that the booking process can use them. Usable records include session identifier, date, venue, and capacity. They check a sample early, review readiness before handoff, and raise uncertainty when it appears. A new venue delay means they reconsider scope or opening date rather than substitute unconfirmed sessions. The flow then shows an early sample check, an accepted handoff of usable records, and an end-to-end booking check before opening. The pilot scope, people, and timing are fictional; the diagram makes no claim about a guaranteed delivery duration.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L9 5 L0 10" fill="none" stroke="#4d626f" stroke-width="1.5"/></marker></defs>
+<rect width="1400" height="1260" fill="#fafbf8"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#152c39">
+<text x="60" y="70" font-size="39" font-weight="700">A request is not yet an agreed handoff</text>
+<text x="60" y="113" font-size="23" fill="#4d626f">Hypothetical course-booking service · Confirm the dependency with both sides</text>
+<rect x="60" y="155" width="1280" height="140" rx="14" fill="#fff0d2" stroke="#8a5a12" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="90" y="195" font-size="21" font-weight="700" fill="#4d626f">UNVERIFIED ASSUMPTION</text>
+<text x="90" y="241" font-size="29">“We need the course list by Friday.”</text>
+<text x="90" y="276" font-size="23">Requested by the booking team; not yet accepted by the programme team.</text>
+<path d="M700 295 V337" fill="none" stroke="#4d626f" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="60" y="350" width="1280" height="365" rx="14" fill="#edf5f2" stroke="#176e65" stroke-width="2.5"/>
+<text x="90" y="396" font-size="29" font-weight="700">What the teams agree instead</text>
+<text x="90" y="445" font-size="21" font-weight="700" fill="#4d626f">WHO SUPPLIES AND WHO ACCEPTS</text>
+<text x="90" y="481" font-size="25">Nadia supplies confirmed records by Tuesday noon (week 2); Eli checks usability.</text>
+<text x="90" y="530" font-size="21" font-weight="700" fill="#4d626f">WHAT THE RECEIVING TEAM NEEDS</text>
+<text x="90" y="566" font-size="25">For the pilot venue: session identifier, date, venue, and capacity.</text>
+<text x="90" y="615" font-size="21" font-weight="700" fill="#4d626f">CHECKS AND EXCEPTIONS</text>
+<text x="90" y="651" font-size="25">Check a sample early; review readiness before handoff; raise uncertainty promptly.</text>
+<text x="90" y="687" font-size="23">If venue confirmation slips, reconsider scope or opening date.</text>
+<text x="60" y="778" font-size="25" font-weight="700">Test the handoff before depending on it for launch</text>
+<rect x="60" y="815" width="400" height="205" rx="14" fill="#edf2f8" stroke="#7090ae" stroke-width="2"/>
+<rect x="500" y="815" width="400" height="205" rx="14" fill="#fff" stroke="#ccd6da" stroke-width="2"/>
+<rect x="940" y="815" width="400" height="205" rx="14" fill="#fff" stroke="#ccd6da" stroke-width="2"/>
+<text x="87" y="859" font-size="25" font-weight="700">1 · Early sample check</text>
+<text x="87" y="906" font-size="24">Week 1: try a record.</text><text x="87" y="943" font-size="24">Find missing fields</text><text x="87" y="980" font-size="24">while changes are easier.</text>
+<text x="527" y="859" font-size="25" font-weight="700">2 · Tuesday handoff</text>
+<text x="527" y="906" font-size="24">Week 2: records arrive.</text><text x="527" y="943" font-size="24">The booking team checks</text><text x="527" y="980" font-size="24">they meet the agreement.</text>
+<text x="967" y="859" font-size="25" font-weight="700">3 · Wednesday check</text>
+<text x="967" y="906" font-size="24">Test a booking through</text><text x="967" y="943" font-size="24">to confirmation before</text><text x="967" y="980" font-size="24">Friday’s opening.</text>
+<path d="M460 918 H487" fill="none" stroke="#4d626f" stroke-width="2.5" marker-end="url(#arrow)"/><path d="M900 918 H927" fill="none" stroke="#4d626f" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="60" y="1091" font-size="27" font-weight="700">A handoff is complete when the next team can use it.</text>
+<text x="60" y="1150" font-size="21" fill="#4d626f">All people, scope, and timing are hypothetical. A sample check does not replace final acceptance.</text>
+<text x="60" y="1188" font-size="21" fill="#4d626f">Early coordination leaves time to change scope, sequence, or expectations.</text>
+</g></svg>

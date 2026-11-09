@@ -46,31 +46,6 @@ Chunk Up is useful when a specific method has become confused with the only legi
 
 The report discussion might end with a continuously updated dashboard and a monthly review of its interpretation. The writer might keep mornings for demanding work and use shorter sessions for revision. These solutions are not guaranteed products of abstraction. They become possible because a concrete arrangement has been understood as a way of achieving a purpose, and therefore as something that can be compared with other arrangements. The category gives the conversation room without relieving it of its responsibilities.
 
-## Pattern details
-
-### Use when
-
-- A preferred method has become the only imaginable solution.
-- A specific result is being treated as a verdict on a whole activity.
-
-### Goals
-
-- Recover alternative ways to achieve a purpose.
-- Find a useful category that connects opposing proposals.
-
-### Mechanisms
-
-- abstraction
-- category expansion
-
-### Not ideal when
-
-- The broader category removes constraints essential to the actual decision.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[chunk-down|Chunk Down]]
@@ -87,32 +62,32 @@ Robert Dilts, Sleight of Mouth, Chunk Up; chapter 3, printed pages 66–67. Sour
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask method {
+method = !ask {
     Name the fixed method
 
     Choose an everyday situation where one particular method seems like the only option. What is that method?
 }
-!ask purpose {
+purpose = !ask {
     Find the broader purpose
 
     What is the method supposed to achieve? Describe the purpose without naming the method again.
 }
-!ask options {
+options = !ask {
     Open up other routes
 
     Name two different ways of serving that purpose. Keep them concrete enough to compare.
 }
-!ask constraints {
+constraints = !ask {
     Retain the important differences
 
     What safety requirements, commitments, resources, or boundaries must every option respect? Shared purpose does not make all methods equivalent.
 }
-!ask compare {
+compare = !ask {
     Compare a workable option
 
     Which alternative seems worth considering, and why? What uncertainty or cost remains?
 }
-!ask next {
+next = !ask {
     Return to something specific
 
     What small action could help you evaluate that alternative? It is fine to retain the original method after considering the others.

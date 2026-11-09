@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feature definition and freshness explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      One feature definition computes merchant A's available order count. Training uses a fixed
+      historical cutoff, while serving reads a simulated published snapshot. Model M1 expects v1 and
+      accepts snapshot ages up to 10 minutes. Those checks are this example's consumer policy.
+    </p>
+    <form>
+      <div>
+        <label for="now">Serving time · UTC</label
+        ><select id="now">
+          <option value="600">10:00</option>
+          <option value="605" selected>10:05</option>
+          <option value="610">10:10</option>
+          <option value="615">10:15</option>
+        </select>
+      </div>
+      <div>
+        <label for="refresh">Online refresh</label
+        ><select id="refresh">
+          <option value="15">Every 15 minutes</option>
+          <option value="5">Every 5 minutes</option>
+          <option value="paused">Paused at 09:45</option>
+        </select>
+      </div>
+      <div>
+        <label for="version">Requested definition</label
+        ><select id="version">
+          <option value="v1">v1 · 60-minute count</option>
+          <option value="v2">v2 · 30-minute count</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect source rows and retrieval contracts</summary>
+      <p>
+        Four fictional order groups occur on 12 May 2026. Times are UTC. Each row's orders share the
+        listed event minute; the row becomes usable one minute later. Both windows exclude the lower
+        boundary and include the cutoff. Rows must also be usable by that cutoff.
+      </p>
+      <table id="events">
+        <caption>
+          Source order groups for merchant A
+        </caption>
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Orders</th>
+            <th>Usable</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="reads">
+        <caption>
+          Same aggregate logic, different cutoffs
+        </caption>
+        <thead>
+          <tr>
+            <th>Read</th>
+            <th>Cutoff</th>
+            <th>Orders</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="checks"></p>
+      <p>
+        Missing versus zero: B has no observation history and returns missing. C has declared
+        observation coverage and no orders, so returns 0. The pure aggregate in this explorer
+        computes both cases; the controls focus on A.
+      </p>
+    </details>
+    <details id="assumptions">
+      <summary>Freshness assumptions and limits</summary>
+      <p>
+        The source has observation coverage from 08:00 through 10:20 for A and C. Available rows are
+        the operational input, not eventual corrected truth. Events are unique; no corrections,
+        duplicates, source outages or retractions are simulated. Refreshes publish instantaneously
+        on UTC clock multiples of 5 or 15 minutes, or remain paused at 09:45. Each simulated
+        snapshot is a complete available count at its refresh cutoff.
+      </p>
+      <p>
+        Model M1 is pinned to v1. The guard requires matching definition identity, a present value
+        and age between 0 and 10 minutes inclusive. The age is serving time minus snapshot cutoff,
+        not time since the last order. Rejected inputs require a declared fallback; this example
+        supplies no model or substitute value. Storage TTL, historical lookback and this consumer
+        age check are separate concepts.
+      </p>
+      <p>
+        This is original teaching code, not a Feast client or benchmark. It computes windows and a
+        latest-value copy in memory. It does not operate a registry, measure latency, train a model
+        or establish predictive accuracy. Sharing code in this example does not prove that separate
+        production engines agree.
+      </p>
+    </details>
+    <script>
+      const definitions = Object.freeze({
+        v1: Object.freeze({ window: 60, name: 'orders_60m_v1' }),
+        v2: Object.freeze({ window: 30, name: 'orders_30m_v2' }),
+      });
+      const sourceEvents = Object.freeze(
+        [
+          { id: 'O1', entity: 'A', event: 550, ready: 551, orders: 4 },
+          { id: 'O2', entity: 'A', event: 575, ready: 576, orders: 3 },
+          { id: 'O3', entity: 'A', event: 588, ready: 589, orders: 5 },
+          { id: 'O4', entity: 'A', event: 603, ready: 604, orders: 8 },
+        ].map(Object.freeze),
+      );
+      const coverage = Object.freeze({
+        A: Object.freeze({ start: 480, end: 620 }),
+        C: Object.freeze({ start: 480, end: 620 }),
+      });
+      function validateEvents(rows) {
+        const ids = new Set();
+        for (const e of rows) {
+          if (
+            !e.id ||
+            ids.has(e.id) ||
+            typeof e.entity !== 'string' ||
+            !Number.isInteger(e.event) ||
+            !Number.isInteger(e.ready) ||
+            e.ready < e.event ||
+            !Number.isInteger(e.orders) ||
+            e.orders < 0
+          )
+            throw new Error('Invalid or duplicate source row');
+          ids.add(e.id);
+        }
+      }
+      function aggregate(entity, version, cutoff, rows = sourceEvents, observed = coverage) {
+        if (!Object.hasOwn(definitions, version) || !Number.isInteger(cutoff) || cutoff < 0)
+          throw new Error('Invalid definition or cutoff');
+        validateEvents(rows);
+        const window = definitions[version].window,
+          c = Object.hasOwn(observed, entity) ? observed[entity] : null;
+        if (!c || cutoff - window < c.start || cutoff > c.end)
+          return { entity, version, cutoff, window, value: null, ids: [] };
+        const eligible = rows.filter(
+          (e) =>
+            e.entity === entity &&
+            e.event > cutoff - window &&
+            e.event <= cutoff &&
+            e.ready <= cutoff,
+        );
+        return {
+          entity,
+          version,
+          cutoff,
+          window,
+          value: eligible.reduce((n, e) => n + e.orders, 0),
+          ids: eligible.map((e) => e.id),
+        };
+      }
+      function materialize(entity, version, at, rows = sourceEvents, observed = coverage) {
+        const value = aggregate(entity, version, at, rows, observed);
+        return value.value === null ? null : { ...value, at };
+      }
+      function guardSnapshot(snapshot, now, expected = 'v1', maxAge = 10) {
+        if (
+          !Number.isInteger(now) ||
+          !Object.hasOwn(definitions, expected) ||
+          !Number.isFinite(maxAge) ||
+          maxAge < 0
+        )
+          throw new Error('Invalid consumer policy');
+        if (!snapshot) return { accepted: false, issues: ['missing'], age: null, feature: null };
+        const age = now - snapshot.at,
+          issues = [];
+        if (snapshot.version !== expected) issues.push('definition');
+        if (age < 0) issues.push('future');
+        else if (age > maxAge) issues.push('stale');
+        if (snapshot.value === null) issues.push('missing');
+        return {
+          accepted: issues.length === 0,
+          issues,
+          age,
+          feature: issues.length === 0 ? snapshot.value : null,
+        };
+      }
+      function buildReport(now = 605, refresh = '15', version = 'v1') {
+        if (
+          ![600, 605, 610, 615].includes(now) ||
+          !['5', '15', 'paused'].includes(refresh) ||
+          !Object.hasOwn(definitions, version)
+        )
+          throw new Error('Invalid explorer controls');
+        const at = refresh === 'paused' ? 585 : Math.floor(now / Number(refresh)) * Number(refresh),
+          snapshot = materialize('A', version, at),
+          history = aggregate('A', version, 580),
+          fresh = aggregate('A', version, now);
+        return {
+          now,
+          refresh,
+          version,
+          window: definitions[version].window,
+          snapshot,
+          history,
+          fresh,
+          guard: guardSnapshot(snapshot, now),
+          difference: fresh.value - snapshot.value,
+        };
+      }
+      const clock = (t) =>
+        String(Math.floor(t / 60)).padStart(2, '0') + ':' + String(t % 60).padStart(2, '0');
+      const sumText = (result) =>
+        result.ids.map((id) => sourceEvents.find((e) => e.id === id).orders).join(' + ') +
+        ' = ' +
+        result.value;
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 740 : 520;
+        const text = (x, y, value, size = 16, color = '#252c28') =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="' +
+          color +
+          '" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">' +
+          value +
+          '</text>';
+        const edge = (d) =>
+          '<path d="' + d + '" fill="none" stroke="#a6aca3" marker-end="url(#arrow)"/>';
+        const result = r.guard.accepted
+          ? 'Ready for M1'
+          : r.guard.issues.includes('definition')
+            ? 'Wrong definition for M1'
+            : 'Too old for M1 · defer';
+        const box = (x, y, w, online) => {
+          const v = online ? r.snapshot : r.history;
+          return (
+            '<rect x="' +
+            x +
+            '" y="' +
+            y +
+            '" width="' +
+            w +
+            '" height="' +
+            (online ? 155 : 142) +
+            '" fill="' +
+            (online ? '#edf5f0' : '#f1f2ef') +
+            '" stroke="#a6aca3"/>' +
+            text(x + 12, y + 28, online ? 'Online snapshot' : 'Historical retrieval', 18) +
+            text(
+              x + 12,
+              y + 58,
+              (online ? 'Published ' : 'Decision ') + clock(v.cutoff),
+              16,
+              '#626962',
+            ) +
+            text(x + 12, y + 99, sumText(v), 24, online ? '#00855b' : '#252c28') +
+            text(
+              x + 12,
+              y + 127,
+              online
+                ? 'Age ' + r.guard.age + ' min at ' + clock(r.now)
+                : 'Window ' + r.window + ' min',
+              14,
+              '#626962',
+            )
+          );
+        };
+        let s =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' +
+          width +
+          ' ' +
+          height +
+          '" role="img" aria-label="Shared feature definition feeding historical retrieval and a published online copy"><defs><marker id="arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L6 3 L0 6" fill="#a6aca3"/></marker></defs><rect width="' +
+          width +
+          '" height="' +
+          height +
+          '" fill="#fff"/>';
+        if (mobile) {
+          s +=
+            text(0, 24, 'Shared definition ' + r.version, 18) +
+            text(0, 50, 'Count available orders over ' + r.window + ' min', 16) +
+            text(0, 75, 'Same logic; different cutoffs.', 14, '#626962');
+          s += edge('M164 86 H4 V191 H18') + edge('M4 191 V387 H18');
+          s +=
+            box(18, 120, 310, false) +
+            box(18, 310, 310, true) +
+            text(18, 496, result, 16, r.guard.accepted ? '#00855b' : '#626962');
+          s += text(0, 536, 'Fresh at ' + clock(r.now) + ' · ' + r.fresh.value + ' orders', 18);
+        } else {
+          s +=
+            text(0, 24, 'One definition · two retrieval paths', 18) +
+            text(0, 58, r.version + ' · count available orders over ' + r.window + ' min', 16);
+          s += edge('M340 78 V106 H155 V136') + edge('M340 106 H515 V136');
+          s +=
+            box(0, 136, 310, false) +
+            box(350, 136, 330, true) +
+            text(0, 320, 'Uses the training row’s cutoff.', 14, '#626962') +
+            text(350, 320, result, 16, r.guard.accepted ? '#00855b' : '#626962');
+          s += text(0, 370, 'Fresh at ' + clock(r.now) + ' · ' + r.fresh.value + ' orders', 18);
+        }
+        const bx = mobile ? 116 : 160,
+          bw = mobile ? 190 : 480,
+          first = mobile ? 574 : 414,
+          second = mobile ? 618 : 458;
+        for (const [label, value, y, color] of [
+          ['Online', r.snapshot.value, first, '#00855b'],
+          ['Fresh', r.fresh.value, second, '#626962'],
+        ])
+          s +=
+            text(0, y, label + ' · ' + value, 16, color) +
+            '<rect x="' +
+            bx +
+            '" y="' +
+            (y - 12) +
+            '" width="' +
+            bw +
+            '" height="12" fill="#f1f2ef"/><rect x="' +
+            bx +
+            '" y="' +
+            (y - 12) +
+            '" width="' +
+            (bw * value) / 20 +
+            '" height="12" fill="' +
+            color +
+            '"/>';
+        s += mobile
+          ? text(0, 684, 'Freshness is a consumer policy.', 14, '#626962') +
+            text(0, 707, 'Counts are inputs, not predictions.', 14, '#626962')
+          : text(0, 500, 'Counts compare inputs, not predictive performance.', 14, '#626962');
+        return s + '</svg>';
+      }
+      let report;
+      function render() {
+        report = buildReport(
+          Number(document.querySelector('#now').value),
+          document.querySelector('#refresh').value,
+          document.querySelector('#version').value,
+        );
+        const r = report;
+        document.querySelector('output').textContent =
+          'Historical 09:40: ' +
+          r.history.value +
+          ' orders. Online ' +
+          clock(r.snapshot.at) +
+          ': ' +
+          r.snapshot.value +
+          ' orders, age ' +
+          r.guard.age +
+          ' min. ' +
+          (r.guard.accepted
+            ? 'Ready for M1.'
+            : r.guard.issues.includes('definition')
+              ? 'Definition mismatch; do not serve M1.'
+              : 'Stale; defer M1.');
+        document.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth <= 520);
+        document.querySelector('#interpretation').textContent = !r.guard.accepted
+          ? (r.guard.issues.includes('definition')
+              ? 'M1 expects the 60-minute definition v1. A valid integer from v2 does not satisfy that contract.'
+              : 'The snapshot exceeds the 10-minute age limit. No model input or zero substitute is supplied.') +
+            (r.guard.issues.includes('definition') && r.guard.issues.includes('stale')
+              ? ' This snapshot is also stale.'
+              : '')
+          : r.difference !== 0
+            ? 'The online copy differs from recomputing the same definition now by ' +
+              Math.abs(r.difference) +
+              ' orders. Its age meets this policy, but that does not make it current.'
+            : 'The online copy equals the fresh recomputation for this cutoff. That agreement is about these inputs, not model accuracy.';
+        document.querySelector('#events tbody').innerHTML = sourceEvents
+          .map(
+            (e) =>
+              '<tr><td>' +
+              clock(e.event) +
+              '</td><td>' +
+              e.orders +
+              '</td><td>' +
+              clock(e.ready) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#reads tbody').innerHTML = [
+          ['Historical', r.history],
+          ['Online copy', r.snapshot],
+          ['Fresh now', r.fresh],
+        ]
+          .map(
+            ([name, v]) =>
+              '<tr><td>' +
+              name +
+              '</td><td>' +
+              clock(v.cutoff) +
+              '</td><td>' +
+              v.value +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#checks').textContent =
+          'Requested ' +
+          definitions[r.version].name +
+          '; M1 expects ' +
+          definitions.v1.name +
+          '. Consumer checks: ' +
+          (r.guard.accepted ? 'passed' : r.guard.issues.join(', ')) +
+          '. Usable M1 feature: ' +
+          (r.guard.feature === null ? 'not supplied' : r.guard.feature + ' orders') +
+          '. Historical missing B: ' +
+          (aggregate('B', r.version, 580).value === null ? 'missing' : 'present') +
+          '; observed empty C: ' +
+          aggregate('C', r.version, 580).value +
+          '.';
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

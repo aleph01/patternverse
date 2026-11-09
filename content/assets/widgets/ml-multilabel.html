@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Multilabel sets and threshold explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Choose labels from supplied fictional scores. Thresholds change decisions without fitting a
+      model. The diagram inspects one ticket; dataset metrics always cover all four fully reviewed
+      tickets.
+    </p>
+    <form>
+      <div>
+        <label for="rule">Selection rule</label
+        ><select id="rule">
+          <option value="threshold">Each label’s threshold</option>
+          <option value="one">Force one highest score</option>
+        </select>
+      </div>
+      <div>
+        <label for="threshold">Shared threshold</label
+        ><select id="threshold">
+          <option value="0.5">0.50</option>
+          <option value="0.3">0.30</option>
+          <option value="0.7">0.70</option>
+        </select>
+      </div>
+      <div>
+        <label for="access">Access threshold</label
+        ><select id="access">
+          <option value="shared">Use shared threshold</option>
+          <option value="0.3">0.30</option>
+          <option value="0.7">0.70</option>
+        </select>
+      </div>
+      <div>
+        <label for="ticket">Inspect ticket</label
+        ><select id="ticket">
+          <option value="C">C · Billing + Delivery</option>
+          <option value="A">A · Billing + Access</option>
+          <option value="B">B · Access</option>
+          <option value="D">D · no listed topic</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="metrics"></p>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect selected-ticket scores and dataset errors</summary>
+      <table id="selected">
+        <caption>
+          Inspected ticket · fixed label order
+        </caption>
+        <thead>
+          <tr>
+            <th>Label</th>
+            <th>Score</th>
+            <th>True</th>
+            <th>Pick</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="encoding"></p>
+      <p id="loss"></p>
+      <table id="counts">
+        <caption>
+          All four tickets · label error counts
+        </caption>
+        <thead>
+          <tr>
+            <th>Label</th>
+            <th>Hits</th>
+            <th>Extra</th>
+            <th>Missed</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="note">
+        Hits are true positives; extra selections are false positives; missed labels are false
+        negatives.
+      </p>
+      <p id="aggregate"></p>
+      <p id="macro"></p>
+      <p id="sets"></p>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and metric definitions</summary>
+      <p>
+        Scores are hand-supplied values strictly between zero and one, not calibrated model
+        probabilities. Each reviewed zero is a known negative. Labels always follow Billing, Access,
+        Delivery order. Scores at or above the selected threshold are included. The forced-one rule
+        ignores thresholds and resolves tied scores by label order.
+      </p>
+      <p>
+        Hamming loss counts wrong binary decisions divided by 12. Exact-set accuracy counts tickets
+        with every label correct divided by four. Micro F1 pools true positives, false positives and
+        false negatives before computing 2 × hits / (2 × hits + extra + missed). Macro F1 averages
+        the three label F1 values. An undefined F1 is reported as N/A; macro F1 is N/A if any label
+        F1 is undefined. All three labels have positives in this dataset.
+      </p>
+      <p>
+        Binary loss uses the supplied scores and reviewed labels, averaged over the inspected
+        ticket’s three labels. Changing thresholds cannot change this loss or the scores. No
+        training, threshold fitting, missing-annotation handling, hierarchy constraints or
+        independent performance experiment runs. An empty prediction means no selected topic, not a
+        proven out-of-vocabulary case or an abstention.
+      </p>
+    </details>
+    <script>
+      const labels = Object.freeze(['Billing', 'Access', 'Delivery']);
+      const tickets = Object.freeze(
+        [
+          { id: 'A', truth: [1, 1, 0], scores: [0.8, 0.4, 0.1] },
+          { id: 'B', truth: [0, 1, 0], scores: [0.6, 0.8, 0.2] },
+          { id: 'C', truth: [1, 0, 1], scores: [0.7, 0.2, 0.6] },
+          { id: 'D', truth: [0, 0, 0], scores: [0.1, 0.3, 0.4] },
+        ].map((r) =>
+          Object.freeze({ ...r, truth: Object.freeze(r.truth), scores: Object.freeze(r.scores) }),
+        ),
+      );
+      const number = (x) => (x === null ? 'N/A' : Number(x.toFixed(3)).toString());
+      const labelSet = (bits) => labels.filter((_, i) => bits[i] === 1).join(' + ') || 'None';
+      function evaluate(rows, thresholds, rule = 'threshold') {
+        if (
+          !Array.isArray(rows) ||
+          !rows.length ||
+          !Array.isArray(thresholds) ||
+          thresholds.length !== 3 ||
+          thresholds.some((v) => !Number.isFinite(v) || v < 0 || v > 1) ||
+          !['threshold', 'one'].includes(rule) ||
+          new Set(rows.map((r) => r.id)).size !== rows.length ||
+          rows.some(
+            (r) =>
+              typeof r.id !== 'string' ||
+              !r.id.trim() ||
+              !Array.isArray(r.truth) ||
+              !Array.isArray(r.scores) ||
+              r.truth.length !== 3 ||
+              r.scores.length !== 3 ||
+              r.truth.some((v) => v !== 0 && v !== 1) ||
+              r.scores.some((v) => !Number.isFinite(v) || v <= 0 || v >= 1),
+          )
+        )
+          throw new Error('Invalid labels, scores, thresholds or selection rule');
+        const perLabel = labels.map((label) => ({ label, tp: 0, fp: 0, fn: 0 }));
+        const predictions = rows.map((row) => {
+          const winner = row.scores.indexOf(Math.max(...row.scores));
+          const predicted = row.scores.map((score, i) =>
+            Number(rule === 'one' ? i === winner : score >= thresholds[i]),
+          );
+          let errors = 0;
+          for (let i = 0; i < 3; i++) {
+            const t = row.truth[i],
+              p = predicted[i];
+            if (t !== p) errors++;
+            if (t && p) perLabel[i].tp++;
+            if (!t && p) perLabel[i].fp++;
+            if (t && !p) perLabel[i].fn++;
+          }
+          const losses = row.scores.map((p, i) => (row.truth[i] ? -Math.log(p) : -Math.log1p(-p)));
+          return {
+            id: row.id,
+            truth: [...row.truth],
+            scores: [...row.scores],
+            predicted,
+            errors,
+            exact: errors === 0,
+            losses,
+            bce: losses.reduce((s, v) => s + v, 0) / 3,
+          };
+        });
+        const total = perLabel.reduce(
+          (s, b) => ({ tp: s.tp + b.tp, fp: s.fp + b.fp, fn: s.fn + b.fn }),
+          { tp: 0, fp: 0, fn: 0 },
+        );
+        const f1 = (b) =>
+          2 * b.tp + b.fp + b.fn === 0 ? null : (2 * b.tp) / (2 * b.tp + b.fp + b.fn);
+        perLabel.forEach((b) => (b.f1 = f1(b)));
+        return {
+          rule,
+          thresholds: [...thresholds],
+          predictions,
+          perLabel,
+          total,
+          errors: total.fp + total.fn,
+          decisions: rows.length * 3,
+          hamming: (total.fp + total.fn) / (rows.length * 3),
+          exactCount: predictions.filter((r) => r.exact).length,
+          exact: predictions.filter((r) => r.exact).length / rows.length,
+          micro: f1(total),
+          macro: perLabel.some((b) => b.f1 === null)
+            ? null
+            : perLabel.reduce((s, b) => s + b.f1, 0) / 3,
+        };
+      }
+      function buildReport(threshold = 0.5, access = 'shared', rule = 'threshold', ticket = 'C') {
+        if (
+          ![0.3, 0.5, 0.7].includes(threshold) ||
+          !['shared', '0.3', '0.7'].includes(access) ||
+          !['threshold', 'one'].includes(rule) ||
+          !tickets.some((r) => r.id === ticket)
+        )
+          throw new Error('Invalid control setting');
+        const thresholds = [threshold, access === 'shared' ? threshold : Number(access), threshold];
+        const r = evaluate(tickets, thresholds, rule);
+        return {
+          ...r,
+          threshold,
+          access,
+          ticket,
+          inspected: r.predictions.find((p) => p.id === ticket),
+        };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 660 : 500,
+          row = r.inspected;
+        const text = (x, y, v, size = 16, color = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">${v}</text>`;
+        const line = (x, y, xx, yy, color = '#a6aca3') =>
+          `<path d="M${x} ${y} L${xx} ${yy}" fill="none" stroke="${color}"/>`;
+        let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Three separate label decisions for one inspected ticket"><rect width="${width}" height="${height}" fill="#fff"/>`;
+        s +=
+          text(0, 24, `Ticket ${row.id} · separate label decisions`, 20) +
+          text(
+            0,
+            52,
+            r.rule === 'one'
+              ? 'Forced one: highest score wins.'
+              : mobile
+                ? 'Gray line = each label’s threshold.'
+                : 'Threshold lines: ' +
+                  labels.map((label, i) => label + ' ' + r.thresholds[i].toFixed(2)).join(' · '),
+            14,
+            '#626962',
+          );
+        if (!mobile)
+          s +=
+            text(0, 90, 'Topic', 14, '#626962') +
+            text(480, 90, 'Value', 14, '#626962') +
+            text(560, 90, 'Decision', 14, '#626962');
+        for (let i = 0; i < 3; i++) {
+          const y = mobile ? 114 + i * 116 : 132 + i * 76,
+            x = mobile ? 0 : 110,
+            bw = mobile ? 230 : 350,
+            by = mobile ? y + 14 : y - 18,
+            chosen = row.predicted[i] === 1,
+            color = chosen ? '#00855b' : '#626962';
+          s += text(0, mobile ? y : y + 4, labels[i], 18);
+          s += `<rect x="${x}" y="${by}" width="${bw}" height="30" fill="#f1f2ef" stroke="#a6aca3"/><rect x="${x}" y="${by}" width="${bw * row.scores[i]}" height="30" fill="${chosen ? '#00855b' : '#b7c8ba'}"/>`;
+          if (r.rule === 'threshold')
+            s += line(
+              x + bw * r.thresholds[i],
+              by - 7,
+              x + bw * r.thresholds[i],
+              by + 37,
+              '#252c28',
+            );
+          s += text(mobile ? 245 : 480, by + 23, row.scores[i].toFixed(2), 20, color);
+          s += text(
+            mobile ? 0 : 560,
+            mobile ? by + 60 : by + 23,
+            (chosen ? 'Include' : 'Omit') +
+              (mobile && r.rule === 'threshold'
+                ? ` · threshold ${r.thresholds[i].toFixed(2)}`
+                : ''),
+            16,
+            color,
+          );
+        }
+        if (mobile)
+          s +=
+            text(0, 485, 'Selected labels', 18) +
+            text(0, 515, labelSet(row.predicted), 20, '#00855b') +
+            text(0, 549, `Prediction [${row.predicted.join(', ')}]`, 16) +
+            text(0, 579, `Reviewed [${row.truth.join(', ')}]`, 16, '#626962');
+        else
+          s +=
+            text(0, 373, 'Selected: ' + labelSet(row.predicted), 22, '#00855b') +
+            text(0, 407, `Prediction [${row.predicted.join(', ')}]`, 18) +
+            text(350, 407, `Reviewed [${row.truth.join(', ')}]`, 18, '#626962');
+        s += text(0, height - 24, 'Supplied scores · no model is trained.', 14, '#626962');
+        return s + '</svg>';
+      }
+      let report = buildReport();
+      function render() {
+        const d = document;
+        report = buildReport(
+          Number(d.querySelector('#threshold').value),
+          d.querySelector('#access').value,
+          d.querySelector('#rule').value,
+          d.querySelector('#ticket').value,
+        );
+        const r = report,
+          row = r.inspected;
+        d.querySelector('#threshold').disabled = r.rule === 'one';
+        d.querySelector('#access').disabled = r.rule === 'one';
+        d.querySelector('output').textContent =
+          `Ticket ${row.id}: ${labelSet(row.predicted)}. Reviewed: ${labelSet(row.truth)}.`;
+        d.querySelector('#metrics').textContent =
+          `All four tickets: Hamming loss ${number(r.hamming)} (${r.errors}/12); exact sets ${r.exactCount}/4; micro F1 ${number(r.micro)}.`;
+        d.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth < 520);
+        d.querySelector('#interpretation').textContent =
+          r.rule === 'one'
+            ? 'Forcing one result can discard valid secondary topics and cannot return an empty set. Threshold controls are inactive; the supplied scores and loss stay unchanged.'
+            : 'Each label has a separate inclusion test. Green choices can coexist; an empty set is also allowed. Inspect dataset errors before treating a threshold change as an improvement.';
+        d.querySelector('#selected tbody').innerHTML = labels
+          .map(
+            (label, i) =>
+              `<tr><td>${label}</td><td>${row.scores[i].toFixed(2)}</td><td>${row.truth[i]}</td><td>${row.predicted[i]}</td></tr>`,
+          )
+          .join('');
+        d.querySelector('#encoding').textContent =
+          `Label order: Billing, Access, Delivery. Reviewed [${row.truth.join(', ')}]; predicted [${row.predicted.join(', ')}]. Scores sum to ${number(row.scores.reduce((s, v) => s + v, 0))}; a sum of one is not required.`;
+        d.querySelector('#loss').textContent =
+          `Inspected ticket’s binary loss: (${row.losses.map(number).join(' + ')}) / 3 = ${number(row.bce)} nats. Threshold changes do not alter this loss.`;
+        d.querySelector('#counts tbody').innerHTML = r.perLabel
+          .map(
+            (b) => `<tr><td>${b.label}</td><td>${b.tp}</td><td>${b.fp}</td><td>${b.fn}</td></tr>`,
+          )
+          .join('');
+        d.querySelector('#aggregate').textContent =
+          `Micro counts: ${r.total.tp} hits, ${r.total.fp} extra, ${r.total.fn} missed. Micro F1 = 2 × ${r.total.tp} / (2 × ${r.total.tp} + ${r.total.fp} + ${r.total.fn}) = ${number(r.micro)}.`;
+        d.querySelector('#macro').textContent =
+          `Per-label F1: ${r.perLabel.map((b) => b.label + ' ' + number(b.f1)).join('; ')}. Their unweighted mean (macro F1) is ${number(r.macro)}.`;
+        d.querySelector('#sets').textContent =
+          `Predicted sets: ${r.predictions.map((row) => row.id + ' = ' + labelSet(row.predicted)).join('; ')}. Exact matches: ${
+            r.predictions
+              .filter((row) => row.exact)
+              .map((row) => row.id)
+              .join(', ') || 'none'
+          }.`;
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

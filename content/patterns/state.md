@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "behavioral"
   - "state"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 An upload can be idle, transferring, paused, completed, or failed. Its start, pause, resume, and cancel methods each inspect a status field. Adding a new state means editing several conditionals, and one forgotten branch lets a completed upload resume.
 
+## Core idea
+
 State organizes behavior around explicit state objects. The upload context delegates an operation to its current state. Each state defines the behavior appropriate to that lifecycle stage, including whether an operation is allowed and which transition follows.
 
-![The upload delegates behavior to its active state. Pause and resume are lifecycle transitions; completion leads to a different valid operation set.](/diagrams/gof/state.svg "The upload delegates behavior to its active state. Pause and resume are lifecycle transitions; completion leads to a different valid operation set.")
+![Idle accepts start and transitions to Transferring. Transferring accepts pause and transitions to Paused. Paused accepts resume and returns to Transferring. Resume is invalid while Idle. This is only a subset of the full upload lifecycle.](../assets/software-engineering/gof/state.svg "Requests delegate to the current state. Transition rules determine which state receives the next request.")
 
-### The same request, different valid behavior
+## How it works
 
 An Upload context retains the upload's data and a reference to its current state. TransferringState may implement pause by stopping further transfer scheduling and transitioning to PausedState. PausedState may implement resume by restarting work and transitioning to TransferringState. CompletedState may reject resume as an invalid operation.
 
 The public upload interface remains stable. Its behavior changes through delegation rather than through repeated status checks in every method. This can put rules that belong together into the same state implementation.
 
 State does not require moving all data into the state objects. Shared upload information, such as destination and bytes transferred, can remain in the context. State objects should contain state-specific behavior and any carefully defined state-local data.
+
+## Worked example
 
 ### An upload with visible transitions
 
@@ -38,6 +43,63 @@ Entry and exit actions also deserve a policy. Entering TransferringState might s
 
 A concise transition table or diagram remains useful even when behavior lives in state objects. It makes the lifecycle visible as a whole, rather than forcing readers to discover every possible transition by searching individual classes.
 
+### A small implementation
+
+The upload delegates requests to its current state. Starting changes Idle to Transferring; pausing changes Transferring to Paused; resuming is valid only in Paused. The example models transitions without starting a network transfer.
+
+```python
+class UploadState:
+    def start(self, upload):
+        raise RuntimeError("Cannot start in this state")
+
+    def pause(self, upload):
+        raise RuntimeError("Cannot pause in this state")
+
+    def resume(self, upload):
+        raise RuntimeError("Cannot resume in this state")
+
+
+class Idle(UploadState):
+    def start(self, upload):
+        upload.state = Transferring()
+
+
+class Transferring(UploadState):
+    def pause(self, upload):
+        upload.state = Paused()
+
+
+class Paused(UploadState):
+    def resume(self, upload):
+        upload.state = Transferring()
+
+
+class Upload:
+    def __init__(self):
+        self.state = Idle()
+
+    def start(self):
+        self.state.start(self)
+
+    def pause(self):
+        self.state.pause(self)
+
+    def resume(self):
+        self.state.resume(self)
+
+
+upload = Upload()
+upload.start()
+upload.pause()
+print(type(upload.state).__name__)
+upload.resume()
+print(type(upload.state).__name__)
+# Paused
+# Transferring
+```
+
+The current state owns which transition a request permits. Unsupported operations fail explicitly through the base state. A real upload also needs completion, cancellation, failure, and coordination with in-flight work. Creating state objects does not make those transitions atomic or persist them.
+
 ### A document approval lifecycle
 
 A document can be a draft, submitted, approved, or archived. Editing a draft changes content. Editing a submitted document may require withdrawing it first. Editing an approved document may create a new revision rather than mutate the approved one.
@@ -48,7 +110,14 @@ The pattern helps when lifecycle rules are substantial and repeated across opera
 
 Persistence also needs care. A stored document should normally record a stable state identifier and relevant domain data, not rely on serializing arbitrary runtime state objects. Reconstruction can map that identifier to the appropriate implementation while checking invariants.
 
-### More explicit behavior, sometimes less visible flow
+## When to use it
+
+- Several operations repeatedly branch on the same lifecycle state.
+- States have distinct behavior and deliberate transitions.
+
+Consider a simpler design when a small transition table or enum remains easier to read, or when the design hides transition rules across too many objects.
+
+## Tradeoffs and common mistakes
 
 State localizes state-specific behavior and can reduce duplicated conditionals. Adding a state may become more focused because its rules have a natural home. Nevertheless, transitions can become scattered if every state changes the context freely.
 
@@ -58,38 +127,12 @@ Avoid state classes that access every internal field of the context through an u
 
 Hierarchical states, parallel regions, and timers can exceed what a hand-built State implementation handles comfortably. A dedicated state-machine representation may be clearer for such systems. The GoF pattern is a way to organize state-dependent behavior, not a complete specification language for every state machine.
 
-### Neighboring designs
-
-Strategy encapsulates an interchangeable algorithm or policy. A context usually receives or selects a strategy according to configuration. State represents a lifecycle condition, and transitions are part of the domain's behavior. Their delegation structures can look similar, but the reason the behavior changes is different.
-
-Memento can capture the current lifecycle state and other data for restoration, provided restoration fits the domain. Template Method fixes an algorithm skeleton and customizes steps through inheritance, rather than changing behavior by switching the current state object.
-
-State works when the lifecycle is real, its operations have meaningfully different behavior, and repeated branching has become difficult to maintain. Keeping the transition model visible is as important as eliminating the conditionals.
-
-## Pattern details
-
-**Category:** Behavioral · **Difficulty:** Intermediate
-
-### Use when
-
-- Several operations repeatedly branch on the same lifecycle state
-- States have distinct behavior and deliberate transitions
-
-### Not ideal when
-
-- A small transition table or enum remains easier to read
-- The design hides transition rules across too many objects
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
 ## Related patterns
 
-[[strategy|Strategy]] · [[memento|Memento]] · [[template-method|Template Method]]
+[[strategy|Strategy]] encapsulates an interchangeable algorithm or policy. A context usually receives or selects a strategy according to configuration. State represents a lifecycle condition, and transitions are part of the domain's behavior. Their delegation structures can look similar, but the reason the behavior changes is different.
 
-## Source
+[[memento|Memento]] can capture the current lifecycle state and other data for restoration, provided restoration fits the domain. [[template-method|Template Method]] fixes an algorithm skeleton and customizes steps through inheritance, rather than changing behavior by switching the current state object.
 
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
+## Sources
 
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+State is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

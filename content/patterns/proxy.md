@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "structural"
   - "proxy"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 An image browser shows thousands of thumbnails. Loading every full-resolution image at startup would make opening a folder slow and consume unnecessary memory. Yet the display code wants an image-like object it can ask to render. Proxy supplies a representative that can respond through the expected interface while controlling when the real subject is accessed.
 
+## Core idea
+
 The same idea appears when the subject is remote, access is restricted, or requests can be served from a cache. The proxy stands between client and subject. Its primary responsibility is mediation: deciding whether, when, or how a call reaches the underlying object.
 
-![The client asks a lazy image proxy to render. The proxy loads its real image on first demand, then delegates.](/diagrams/gof/proxy.svg "The client asks a lazy image proxy to render. The proxy loads its real image on first demand, then delegates.")
+![At folder opening only LazyImage exists and load count is zero. The first render constructs Image and delegates rendering. A later render reuses that same Image, so load count remains one in this single-threaded example.](../assets/software-engineering/gof/proxy.svg "The proxy offers render throughout. It controls when the real image is created and reused.")
 
-### A compatible interface with different access behavior
+## How it works
 
 The client usually sees the subject's useful contract. A proxy may hold a subject reference, enough information to create it, or an address for reaching a remote subject. It can perform work before delegation, replace delegation with an equivalent local result, or defer subject creation.
 
 Compatibility should not imply that every operational property is identical. A remote proxy can preserve method names while introducing latency, timeouts, and network failure. A lazy proxy may fail when first used rather than when constructed. Those differences should remain understandable to callers.
 
 The pattern is therefore most effective when the interface expresses the consequences that matter. It can hide transport details without pretending transport has no consequences.
+
+## Worked example
 
 ### Loading images on demand
 
@@ -38,6 +43,47 @@ Several details remain. If two callers trigger loading concurrently, should only
 
 The file might also change after metadata is read. A proxy that caches dimensions indefinitely could present inconsistent information. A version or invalidation rule may be needed. Lazy access moves work in time; it does not eliminate lifecycle and consistency decisions.
 
+### A small implementation
+
+The client can call render on either an image or its lazy proxy. Creating the proxy does not load image data. The first render creates the subject, and later renders reuse it. The loader is local and records when it runs.
+
+```python
+loads = []
+
+
+class Image:
+    def __init__(self, name):
+        loads.append(name)
+        self.name = name
+
+    def render(self):
+        return f"render {self.name}"
+
+
+class LazyImage:
+    def __init__(self, name):
+        self.name = name
+        self.subject = None
+
+    def render(self):
+        if self.subject is None:
+            self.subject = Image(self.name)
+        return self.subject.render()
+
+
+image = LazyImage("map.png")
+print(len(loads))
+print(image.render())
+print(image.render())
+print(len(loads))
+# 0
+# render map.png
+# render map.png
+# 1
+```
+
+The proxy preserves the useful rendering interface and changes when access occurs. This single-threaded example does not synchronize first access. A concurrent version needs a policy for duplicate loads, failure, retry, and disposal rather than assuming lazy construction automatically handles those concerns.
+
 ### A remote catalog representative
 
 A client application uses a ProductCatalog interface to fetch product information. A RemoteCatalogProxy translates calls into requests to a service and reconstructs results. Callers work with application-level product values rather than network request objects.
@@ -48,7 +94,14 @@ Retry behavior also requires care. Retrying a read may be acceptable under the c
 
 A remote representative can expose asynchronous results, cancellation, and typed failures where appropriate. These do not weaken the pattern. They make the mediation boundary honest about what accessing the subject entails.
 
-### Several reasons to stand between caller and subject
+## When to use it
+
+- Access requires lazy creation or a controlled boundary.
+- A remote or expensive subject needs a local representative.
+
+Consider a simpler design when mediation would make critical latency or failure behavior misleading, or when the proxy bypasses the authoritative enforcement boundary.
+
+## Tradeoffs and common mistakes
 
 A protection proxy checks whether a caller may invoke an operation before delegating. A virtual proxy delays expensive creation. A remote proxy represents a subject elsewhere. A caching proxy returns reusable results when its validity rules permit them.
 
@@ -58,38 +111,12 @@ Combining variants can be reasonable, but wrapper order matters. A cache placed 
 
 A useful review question is whether callers can explain what the proxy may defer, reuse, or reject. If those possibilities are surprising, the access contract needs more work.
 
-### Neighboring designs
-
-Decorator typically adds optional responsibilities to an object. Proxy primarily controls access to a subject. Both may use a compatible wrapper interface, and a caching or logging wrapper can plausibly be discussed from either perspective. The distinction comes from its purpose and ownership.
-
-Adapter intentionally translates into a different expected interface. A remote proxy may use translation internally, but its public role is representing the subject. Facade gives callers a simpler view of a subsystem rather than standing in for one subject.
-
-Proxy is useful when mediation has a clear purpose and a clear promise. The wrapper can reduce client complexity, but its hidden work should never obscure the latency, consistency, authorization, or failure behavior on which correctness depends.
-
-## Pattern details
-
-**Category:** Structural · **Difficulty:** Intermediate
-
-### Use when
-
-- Access requires lazy creation or a controlled boundary
-- A remote or expensive subject needs a local representative
-
-### Not ideal when
-
-- Mediation would make critical latency or failure behavior misleading
-- The proxy bypasses the authoritative enforcement boundary
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
 ## Related patterns
 
-[[decorator|Decorator]] · [[adapter|Adapter]] · [[facade|Facade]]
+[[decorator|Decorator]] typically adds optional responsibilities to an object. Proxy primarily controls access to a subject. Both may use a compatible wrapper interface, and a caching or logging wrapper can plausibly be discussed from either perspective. The distinction comes from its purpose and ownership.
 
-## Source
+[[adapter|Adapter]] intentionally translates into a different expected interface. A remote proxy may use translation internally, but its public role is representing the subject. [[facade|Facade]] gives callers a simpler view of a subsystem rather than standing in for one subject.
 
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
+## Sources
 
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+Proxy is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

@@ -73,9 +73,7 @@ step_1 = !form {
   !show {
 A short reflection, about 3–5 minutes. Choose one everyday self-directed should, must, or ought. You can pause or stop at any point.
   }
-  !ask thought {
-    :required true
-    :multiline true
+  thought = !ask {
 What are you telling yourself you should have done, should do, or should feel?
   }
 }
@@ -85,9 +83,7 @@ step_2 = !form {
   !show {
 Look for the wish, concern, or responsibility within the thought. Include relevant circumstances, such as your health, available time, or what you knew then.
   }
-  !ask meaning {
-    :required true
-    :multiline true
+  meaning = !ask {
 What matters to you here, and what circumstances does the thought leave out?
   }
 }
@@ -99,9 +95,7 @@ Try beginning with “I would like to…”, “I wish I had…”, or “I regr
 
 For example: “I wish I had replied sooner. I can acknowledge the delay and answer now.”
   }
-  !ask revision {
-    :required true
-    :multiline true
+  revision = !ask {
 How could you express the thought more accurately and less harshly?
   }
 }
@@ -111,9 +105,7 @@ step_4 = !form {
   !show {
 Read both versions. Notice any difference in pressure, guilt, or clarity; no change is also useful information. If the new version feels untrue, consider what it misses.
   }
-  !ask reflection {
-    :required true
-    :multiline true
+  reflection = !ask {
 What changes, if anything, when you read the revised version? Adjust it here if needed.
   }
   !show {

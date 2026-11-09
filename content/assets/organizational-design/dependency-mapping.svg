@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">See the dependencies between unit plans</title>
+  <desc id="desc">Procurement's approved contractor list enables operations to test repair scheduling and the service desk to prepare call routing. Both contributions are needed for pilot readiness. Arrows run from prerequisite to dependent work. The shared procurement prerequisite is highlighted and explicitly marked requested, not yet agreed. This is a hypothetical housing-association example, not a Crossrail or UK Space Agency map, and the diagram has no time scale or critical-path calculation.</desc>
+  <rect width="1200" height="760" fill="#F6F4EF"/>
+  <g font-family="Arial, sans-serif">
+    <text x="60" y="62" font-size="32" font-weight="700" fill="#183343">See the dependencies between unit plans.</text>
+    <text x="60" y="105" font-size="24" fill="#52646D">Arrows run from a prerequisite to the work it enables.</text>
+    <g fill="#FFFFFF" stroke="#D7DDD9" stroke-width="2">
+      <rect x="450" y="180" width="300" height="160" rx="18"/>
+      <rect x="450" y="430" width="300" height="160" rx="18"/>
+      <rect x="840" y="305" width="300" height="165" rx="18"/>
+    </g>
+    <rect x="60" y="180" width="300" height="190" rx="18" fill="#DCEDE8" stroke="#176E69" stroke-width="3"/>
+    <g text-anchor="middle" font-size="27" font-weight="700">
+      <text x="210" y="229" fill="#176E69">Procurement</text>
+      <text x="600" y="229" fill="#183343">Operations</text>
+      <text x="600" y="479" fill="#183343">Service desk</text>
+      <text x="990" y="354" fill="#183343">Pilot readiness</text>
+    </g>
+    <g text-anchor="middle" fill="#183343" font-size="25">
+      <text x="210" y="272">Approved</text>
+      <text x="210" y="306">contractor list</text>
+      <text x="600" y="273">Test repair</text>
+      <text x="600" y="307">scheduling</text>
+      <text x="600" y="523">Prepare call</text>
+      <text x="600" y="557">routing</text>
+      <text x="990" y="400">Both contributions</text>
+      <text x="990" y="434">usable</text>
+    </g>
+    <text x="210" y="345" text-anchor="middle" font-size="20" fill="#52646D">Requested; not yet agreed</text>
+    <path d="M360 260H450M360 315H400V510H450" fill="none" stroke="#176E69" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M450 260L436 253V267ZM450 510L436 503V517Z" fill="#176E69"/>
+    <path d="M750 260H790V355H840M750 510H800V425H840" fill="none" stroke="#52646D" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M840 355L826 348V362ZM840 425L826 418V432Z" fill="#52646D"/>
+    <text x="60" y="655" font-size="24" fill="#183343">One unconfirmed prerequisite affects two workstreams and the shared pilot.</text>
+    <text x="60" y="731" font-size="20" fill="#52646D">Illustrative housing-association pilot. A map records reliance; it does not confirm commitments.</text>
+  </g>
+</svg>

@@ -1,10 +1,14 @@
 ---
 id: therapy
 type: verse
-title: Therapy
-summary: Patterns, concepts, and practices concerned with psychological change and emotional wellbeing.
+title: Therapy & Wellbeing
+summary: Patterns and practices for psychological change, emotional wellbeing, and sustainable everyday action.
+aliases:
+  - Therapy
+  - Wellbeing
 status: published
 ---
 
-Therapy contains approaches for understanding psychological difficulties, developing new responses,
-and practising meaningful change.
+Therapy & Wellbeing brings together approaches for understanding psychological difficulties,
+developing new responses, and practising meaningful change. It also explores how rest, attention,
+energy, and self-knowledge help make useful action sustainable.

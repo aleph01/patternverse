@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Class weights and fitted scores explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #ranking th:first-child {
+        width: 45%;
+      }
+      #vectors th:first-child {
+        width: 42%;
+      }
+      #history {
+        font-size: 13px;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Fit one constant score per input group on 1,000 invented training records. Changing the defect
+      weight refits the scores exactly; changing the threshold changes decisions only. The original
+      records stay fixed.
+    </p>
+    <form>
+      <div>
+        <label for="weight">Defect weight · ordinary weight is 1</label
+        ><select id="weight">
+          <option value="1">1 · no rebalancing</option>
+          <option value="3">3 · partial rebalancing</option>
+          <option value="9" selected>9 · equal total class weight</option>
+          <option value="27">27 · defects dominate total weight</option>
+        </select>
+      </div>
+      <div>
+        <label for="threshold">Flag a score at least</label
+        ><select id="threshold">
+          <option value="0.5">0.50</option>
+          <option value="0.8">0.80</option>
+          <option value="0.9">0.90</option>
+          <option value="0.95">0.95</option>
+          <option value="1">1.00 · no flags in this example</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="mechanism"></div>
+    <p id="interpretation" class="note"></p>
+    <table id="metrics">
+      <caption>
+        Decisions on original training records · unweighted counts
+      </caption>
+      <thead>
+        <tr>
+          <th>Fitted model</th>
+          <th>Recall</th>
+          <th>Precision</th>
+          <th>False alarms</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <details id="state">
+      <summary>Inspect fitted scores, losses and repeated records</summary>
+      <table id="scores">
+        <caption>
+          Scores from the fitted objective · not deployment risk estimates
+        </caption>
+        <thead>
+          <tr>
+            <th>Input group</th>
+            <th>Ordinary / defect</th>
+            <th>No weights</th>
+            <th>Selected weights</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="losses"></p>
+      <p id="repetition"></p>
+      <table id="copies">
+        <caption>
+          Repeated appearances versus unique records
+        </caption>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Original records</th>
+            <th>Row uses</th>
+            <th>Unique IDs</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p>
+        Every defect record is repeated exactly the selected integer number of times. Original IDs
+        are preserved. This deterministic teaching calculation is not random oversampling or
+        synthetic data generation.
+      </p>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and optional calculation</summary>
+      <p>
+        The three input groups are fixed before fitting. Counts (ordinary, defect) are Low (810,10),
+        Middle (81,20), High (9,70). Each group has an independent constant score q. Fit by
+        minimizing binary log loss with no regularization. With defect weight r and ordinary weight
+        one, q = r × defects / (ordinary + r × defects). This is the exact optimum, not an iterative
+        neural training simulation.
+      </p>
+      <p>
+        The weighted mean loss is the sum of weighted negative natural-log probabilities divided by
+        total weight. All displayed losses use the selected weights so the comparison uses one
+        objective. Multiplying every weight by a common positive constant leaves this normalized
+        objective unchanged. Uniform integer repetition gives the same objective here; other
+        learners, regularization, random samplers and optimization settings need not behave
+        identically.
+      </p>
+      <p>
+        Metrics count original records, not weighted or repeated appearances. Recall = detected
+        defects / all defects; precision = detected defects / all flags. Precision is N/A if nothing
+        is flagged. Scores and drawing labels round; decisions use full precision and include
+        equality at the threshold. No held-out or future performance is measured, no calibration is
+        fitted, and threshold changes do not refit scores. Reset closes both optional explanations.
+      </p>
+    </details>
+    <script>
+      const groups = [
+        { name: 'Low', ordinary: 810, defects: 10 },
+        { name: 'Middle', ordinary: 81, defects: 20 },
+        { name: 'High', ordinary: 9, defects: 70 },
+      ];
+      const weights = [1, 3, 9, 27],
+        thresholds = [0.5, 0.8, 0.9, 0.95, 1];
+      const records = groups.flatMap((g, bin) => [
+        ...Array.from({ length: g.ordinary }, (_, i) => ({ id: `O${bin}-${i}`, bin, y: 0 })),
+        ...Array.from({ length: g.defects }, (_, i) => ({ id: `D${bin}-${i}`, bin, y: 1 })),
+      ]);
+      const $ = (id) => document.getElementById(id);
+      const fmt = (n, d = 3) => n.toFixed(d);
+      const percent = (n) => (n === null ? 'N/A' : (100 * n).toFixed(1) + '%');
+      let report;
+      function fit(data, r) {
+        if (!Number.isFinite(r) || r <= 0) throw new Error('Weight must be positive');
+        const counts = groups.map(() => ({ ordinary: 0, defects: 0 }));
+        for (const row of data) counts[row.bin][row.y ? 'defects' : 'ordinary']++;
+        return counts.map((g) => (r * g.defects) / (g.ordinary + r * g.defects));
+      }
+      function metrics(data, scores, t) {
+        let tp = 0,
+          fp = 0,
+          tn = 0,
+          fn = 0;
+        for (const row of data) {
+          const flag = scores[row.bin] >= t;
+          if (row.y) {
+            if (flag) tp++;
+            else fn++;
+          } else {
+            if (flag) fp++;
+            else tn++;
+          }
+        }
+        return {
+          tp,
+          fp,
+          tn,
+          fn,
+          recall: tp / (tp + fn),
+          precision: tp + fp ? tp / (tp + fp) : null,
+          accuracy: (tp + tn) / data.length,
+        };
+      }
+      function logLoss(data, scores, r) {
+        let total = 0,
+          mass = 0;
+        for (const row of data) {
+          const w = row.y ? r : 1;
+          total -= w * Math.log(row.y ? scores[row.bin] : 1 - scores[row.bin]);
+          mass += w;
+        }
+        return total / mass;
+      }
+      function repeatPositives(data, r) {
+        if (!Number.isInteger(r) || r < 1) throw new Error('Positive integer repetitions required');
+        return data.flatMap((row) => Array.from({ length: row.y ? r : 1 }, () => ({ ...row })));
+      }
+      function buildReport(r, t) {
+        if (!weights.includes(r) || !thresholds.includes(t)) throw new Error('Unsupported setting');
+        const plain = fit(records, 1),
+          weighted = fit(records, r),
+          repeated = repeatPositives(records, r),
+          repeatFit = fit(repeated, 1);
+        return {
+          weight: r,
+          threshold: t,
+          plain,
+          weighted,
+          original: metrics(records, plain, t),
+          selected: metrics(records, weighted, t),
+          ordinaryMass: 900,
+          defectMass: 100 * r,
+          plainLoss: logLoss(records, plain, r),
+          weightedLoss: logLoss(records, weighted, r),
+          repeatedLoss: logLoss(repeated, weighted, 1),
+          repeatFit,
+          appearances: repeated.length,
+          unique: new Set(repeated.map((x) => x.id)).size,
+        };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 820 : 540;
+        const text = (x, y, s, size = 16, c = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${c}">${s}</text>`;
+        const line = (x1, y1, x2, y2, c = '#a6aca3') =>
+          `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}"/>`;
+        let out = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Original class counts, changed class influence and fitted group scores"><rect width="${width}" height="${height}" fill="#fff"/><g font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400">`;
+        out += text(0, 24, 'Same records, different influence', mobile ? 18 : 21);
+        const bar = (x, y, w, neg, pos, label) =>
+          text(x, y, label, 17) +
+          text(x, y + 26, `${neg} ordinary · ${pos} defect`, 14, '#626962') +
+          `<rect x="${x}" y="${y + 40}" width="${w}" height="20" fill="#00855b"/><rect x="${x}" y="${y + 40}" width="${(w * neg) / (neg + pos)}" height="20" fill="#a6aca3"/>`;
+        if (mobile) {
+          out += bar(0, 65, 312, 900, 100, 'Original record counts');
+          out += bar(0, 170, 312, r.ordinaryMass, r.defectMass, 'Total training weight');
+        } else {
+          out += bar(0, 66, 310, 900, 100, 'Original record counts');
+          out += bar(365, 66, 310, r.ordinaryMass, r.defectMass, 'Total training weight');
+        }
+        const top = mobile ? 288 : 181;
+        out +=
+          line(0, top - 16, width, top - 16) +
+          text(0, top + 8, 'Gray: no weights · Green: selected weights', mobile ? 13 : 16);
+        out += text(0, top + 33, `Fitted scores · threshold ${fmt(r.threshold, 2)}`, 15);
+        for (let i = 0; i < 3; i++) {
+          const g = groups[i],
+            y = top + 72 + i * (mobile ? 140 : 86),
+            x = mobile ? 10 : 255,
+            w = mobile ? 302 : 405;
+          if (mobile) {
+            out +=
+              text(0, y, g.name + ' signal', 17) +
+              text(0, y + 23, `${g.ordinary} ordinary · ${g.defects} defect`, 14, '#626962');
+          } else {
+            out +=
+              text(0, y, g.name + ' signal', 17) +
+              text(0, y + 24, `${g.ordinary} ordinary · ${g.defects} defect`, 14, '#626962');
+          }
+          const py = mobile ? y + 48 : y + 4;
+          out +=
+            line(x, py, x + w, py) +
+            `<line x1="${x + r.threshold * w}" y1="${py - 14}" x2="${x + r.threshold * w}" y2="${py + 14}" stroke="#626962" stroke-dasharray="3 3"/>`;
+          out +=
+            line(x + r.plain[i] * w, py, x + r.weighted[i] * w, py, '#00855b') +
+            `<circle cx="${x + r.plain[i] * w}" cy="${py}" r="5" fill="#a6aca3"/><circle cx="${x + r.weighted[i] * w}" cy="${py}" r="4" fill="#00855b"/>`;
+          out += text(mobile ? 0 : 255, py + 34, `${fmt(r.plain[i])} → ${fmt(r.weighted[i])}`, 16);
+        }
+        const end = mobile ? 790 : 516;
+        out += text(
+          0,
+          end,
+          'Score axis: 0 to 1 · line marks threshold',
+          mobile ? 13 : 15,
+          '#626962',
+        );
+        return out + '</g></svg>';
+      }
+      function render() {
+        report = buildReport(Number($('weight').value), Number($('threshold').value));
+        document.querySelector('output').textContent =
+          `Defect weight ${report.weight}; threshold ${fmt(report.threshold, 2)}. Selected fit: recall ${percent(report.selected.recall)}, precision ${percent(report.selected.precision)}, ${report.selected.fp} false alarms. Training records only.`;
+        $('mechanism').innerHTML = mechanismGraphic(report, innerWidth <= 520);
+        $('interpretation').textContent =
+          'Weight changes the fitted objective, not the original class counts. Higher recall can require more false alarms. None of these scores or training metrics establishes future performance.';
+        $('metrics').querySelector('tbody').innerHTML = [
+          ['No weights', report.original],
+          ['Selected weights', report.selected],
+        ]
+          .map(
+            ([n, m]) =>
+              `<tr><th scope="row">${n}</th><td>${percent(m.recall)}</td><td>${percent(m.precision)}</td><td>${m.fp}</td></tr>`,
+          )
+          .join('');
+        $('scores').querySelector('tbody').innerHTML = groups
+          .map(
+            (g, i) =>
+              `<tr><th scope="row">${g.name}</th><td>${g.ordinary} / ${g.defects}</td><td>${fmt(report.plain[i], 6)}</td><td>${fmt(report.weighted[i], 6)}</td></tr>`,
+          )
+          .join('');
+        $('losses').textContent =
+          `Under the selected weights, normalized mean log loss is ${fmt(report.plainLoss, 6)} nats for the unweighted fit and ${fmt(report.weightedLoss, 6)} nats for the selected fit. These losses use the same weighted objective; the lower value is a fitting result.`;
+        const gap = Math.max(...report.repeatFit.map((v, i) => Math.abs(v - report.weighted[i])));
+        const agreement =
+          gap === 0 ? 'identical scores' : `a maximum score difference of ${gap.toPrecision(3)}`;
+        $('repetition').textContent =
+          `Include each defect ${report.weight} time${report.weight === 1 ? '' : 's'} in total: ${report.appearances.toLocaleString('en-US')} row appearances, ${report.unique.toLocaleString('en-US')} unique IDs. The repeated-record fit gives ${agreement}; its mean loss is ${fmt(report.repeatedLoss, 6)} nats.`;
+        $('copies').querySelector('tbody').innerHTML =
+          `<tr><th scope="row">Ordinary</th><td>900</td><td>900</td><td>900</td></tr><tr><th scope="row">Defect</th><td>100</td><td>${100 * report.weight}</td><td>100</td></tr>`;
+      }
+      function reset() {
+        $('weight').value = '9';
+        $('threshold').value = '0.5';
+        for (const d of document.querySelectorAll('details')) d.open = false;
+        render();
+      }
+      for (const id of ['weight', 'threshold']) $(id).addEventListener('change', render);
+      $('reset').addEventListener('click', reset);
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

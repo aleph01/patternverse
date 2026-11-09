@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canary rollout and rollback explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 17%;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #history-table {
+        font-size: 13px;
+      }
+      #history-table th:first-child {
+        width: 16%;
+      }
+      #history-table th:nth-child(3) {
+        width: 36%;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 24%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Expand, hold, or roll back.</strong> This fictional replay routes distinct requests,
+      evaluates each window, and counts exposure before recovery. Changing inputs starts a fresh
+      replay.
+    </p>
+    <form>
+      <div>
+        <label for="scenario">Candidate behavior</label
+        ><select id="scenario">
+          <option value="serving" selected>Serving failure from window 2</option>
+          <option value="quality">Quality regression from window 2</option>
+          <option value="healthy">Healthy fixture</option>
+        </select>
+      </div>
+      <div>
+        <label for="start">Initial candidate share</label
+        ><select id="start">
+          <option value="10" selected>10%</option>
+          <option value="25">25%</option>
+        </select>
+      </div>
+      <div>
+        <label for="labels">Quality labels</label
+        ><select id="labels">
+          <option value="ready" selected>All successful responses labeled</option>
+          <option value="pending">Not yet available</option>
+        </select>
+      </div>
+      <div>
+        <label for="minimum">Minimum candidate requests per window</label
+        ><select id="minimum">
+          <option value="10" selected>10 requests</option>
+          <option value="30">30 requests</option>
+        </select>
+      </div>
+      <div>
+        <label for="lag">Rollback lag</label
+        ><select id="lag">
+          <option value="0" selected>No additional window</option>
+          <option value="1">One additional window</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <p id="interpretation"></p>
+    <table id="history-table">
+      <caption>
+        Per-window evidence and decisions
+      </caption>
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Routing</th>
+          <th>Candidate evidence</th>
+          <th>Gate</th>
+        </tr>
+      </thead>
+      <tbody id="history"></tbody>
+    </table>
+    <table id="metrics-table">
+      <caption>
+        Exposure across the replay
+      </caption>
+      <thead>
+        <tr>
+          <th>Quantity</th>
+          <th>Computed value</th>
+        </tr>
+      </thead>
+      <tbody id="metrics"></tbody>
+    </table>
+    <details id="record-tables">
+      <summary>Inspect candidate requests</summary>
+      <p class="note">
+        Every candidate request appears here, including failures and any rollback-lag window.
+        Incumbent counts remain in the window table.
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Request</th>
+            <th>Serving</th>
+            <th>Quality</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and exact rules</summary>
+      <p>
+        Each window has 100 distinct requests with buckets 0–99. A bucket below the current
+        percentage receives the candidate response; all others receive the incumbent. These
+        deterministic buckets illustrate routing, not randomized causal inference. The schedule is
+        10 → 25 → 50 → 100%, or 25 → 50 → 100%. Windows have equal request counts, not measured
+        durations.
+      </p>
+      <p>
+        Incumbent serving failures occur at request positions 50 and 100. Otherwise, incumbent
+        predictions are wrong at positions divisible by 20. The healthy candidate has no serving
+        failures and is wrong at positions divisible by 20. Serving-failure behavior fails positions
+        3, 13, 23, … from window 2 onward. Quality-regression behavior instead makes predictions
+        wrong at positions divisible by 5 from window 2 onward. Truth is position modulo 2; a wrong
+        prediction flips that binary label. All outcomes are synthetic.
+      </p>
+      <p>
+        At each boundary: roll back if candidate serving failures exceed 5% of candidate requests,
+        or observed prediction errors exceed 10% of labeled successful candidate responses.
+        Otherwise hold if candidate requests are below the chosen minimum, or quality labels are
+        missing. Otherwise advance; a passing 100% window promotes. Equality passes. A known breach
+        takes priority over insufficient evidence. These mechanical gates perform no significance
+        test.
+      </p>
+      <p>
+        Labels, when ready, cover every successful response. Serving failures have no prediction and
+        never count as correct predictions. Zero labeled outcomes have an undefined quality rate.
+        Lag adds one full window at the failing share, using the same fault rules, before routing
+        future requests to the incumbent. No lag is added for a hold or promotion.
+      </p>
+      <p>
+        A hold ends this replay at its first inconclusive gate; a real hold would keep exposing
+        traffic unless stopped separately. Rollback is assumed to succeed with warm, compatible
+        incumbent capacity. There are no retries, in-flight requests, shared-state effects, capacity
+        limits, or automatic repairs. Exposure is requests, not unique people or a measure of harm.
+        No ML model is trained here.
+      </p>
+    </details>
+    <script>
+      const $ = (selector) => document.querySelector(selector);
+      function makeWindow(index, share, scenario, labels, lag = false) {
+        const rows = Array.from({ length: 100 }, (_, offset) => {
+          const position = offset + 1,
+            candidate = offset < share,
+            truth = position % 2;
+          const failed = candidate
+            ? scenario === 'serving' && index >= 2 && position % 10 === 3
+            : position % 50 === 0;
+          const wrong =
+            candidate && scenario === 'quality' && index >= 2
+              ? position % 5 === 0
+              : position % 20 === 0;
+          return {
+            index,
+            position,
+            id: 'W' + index + '-' + String(position).padStart(3, '0'),
+            candidate,
+            failed,
+            truth,
+            prediction: failed ? null : wrong ? 1 - truth : truth,
+            label: labels === 'ready' && !failed ? truth : null,
+            lag,
+          };
+        });
+        const selected = rows.filter((r) => r.candidate),
+          control = rows.filter((r) => !r.candidate),
+          labeled = selected.filter((r) => r.label !== null);
+        return {
+          index,
+          share,
+          lag,
+          rows,
+          n: selected.length,
+          control: control.length,
+          failures: selected.filter((r) => r.failed).length,
+          controlFailures: control.filter((r) => r.failed).length,
+          successful: selected.filter((r) => !r.failed).length,
+          labeled: labeled.length,
+          wrong: labeled.filter((r) => r.prediction !== r.label).length,
+        };
+      }
+      function decide(w, minimum) {
+        if (w.n > 0 && w.failures / w.n > 0.05)
+          return { decision: 'ROLL BACK', reason: 'Serving failures above 5%' };
+        if (w.labeled > 0 && w.wrong / w.labeled > 0.1)
+          return { decision: 'ROLL BACK', reason: 'Prediction errors above 10%' };
+        if (w.n < minimum) return { decision: 'HOLD', reason: 'Too few candidate requests' };
+        if (w.labeled !== w.successful || !w.labeled)
+          return { decision: 'HOLD', reason: 'Quality labels unavailable' };
+        return {
+          decision: w.share === 100 ? 'PROMOTE' : 'ADVANCE',
+          reason: 'Both gates pass; evidence present',
+        };
+      }
+      function simulate(scenario = 'serving', start = 10, labels = 'ready', minimum = 10, lag = 0) {
+        const stages = start === 10 ? [10, 25, 50, 100] : [25, 50, 100],
+          windows = [];
+        for (const share of stages) {
+          const w = makeWindow(windows.length + 1, share, scenario, labels);
+          Object.assign(w, decide(w, minimum));
+          windows.push(w);
+          if (w.decision !== 'ADVANCE') break;
+        }
+        const last = windows[windows.length - 1],
+          decision = last.decision;
+        if (decision === 'ROLL BACK' && lag) {
+          const extra = makeWindow(last.index + 1, last.share, scenario, labels, true);
+          Object.assign(extra, { decision: 'RECOVER', reason: 'Rollback lag; no expansion' });
+          windows.push(extra);
+        }
+        const rows = windows.flatMap((w) => w.rows),
+          selected = rows.filter((r) => r.candidate),
+          labeled = selected.filter((r) => r.label !== null);
+        return {
+          scenario,
+          start,
+          labels,
+          minimum,
+          lag,
+          windows,
+          decision,
+          last,
+          nextShare: decision === 'ROLL BACK' ? 0 : decision === 'HOLD' ? last.share : 100,
+          total: rows.length,
+          exposed: selected.length,
+          failures: selected.filter((r) => r.failed).length,
+          labeled: labeled.length,
+          wrong: labeled.filter((r) => r.prediction !== r.label).length,
+          lagExposure: windows.filter((w) => w.lag).reduce((n, w) => n + w.n, 0),
+          controlFailures: rows.filter((r) => !r.candidate && r.failed).length,
+        };
+      }
+      function ratio(n, d) {
+        return n + '/' + d + (d ? ' (' + ((100 * n) / d).toFixed(1) + '%)' : ' (undefined)');
+      }
+      function diagram(r) {
+        const mobile = innerWidth < 520,
+          w = mobile ? 328 : 680,
+          h = mobile ? 620 : 300,
+          bw = mobile ? 328 : 208;
+        const text = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          value +
+          '</text>';
+        const box = (x, y, lines) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          bw +
+          '" height="140" rx="8" fill="var(--panel)"/>' +
+          lines
+            .map((s, i) => text(x + 12, y + 27 + 29 * i, i === 0 ? 17 : 14, s, i === 0))
+            .join('');
+        const first = r.windows[0],
+          last = r.last;
+        const evidence =
+          last.failures / last.n > 0.05
+            ? last.failures + '/' + last.n + ' serving failures'
+            : last.labeled
+              ? last.wrong + '/' + last.labeled + ' predictions wrong'
+              : 'Quality labels unavailable';
+        let s =
+          '<title id="flow-title">Real exposure, an evidence gate, and the next routing decision</title><desc id="flow-desc">' +
+          r.exposed +
+          ' candidate requests have already been served. ' +
+          r.decision +
+          '. The next candidate share is ' +
+          r.nextShare +
+          ' percent.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/></marker></defs>';
+        const nodes = [
+          [
+            'Start with ' + r.start + '%',
+            first.n + ' candidate requests',
+            first.control + ' incumbent requests',
+            'Both serve real users',
+          ],
+          [
+            'Window ' + last.index + ' · ' + last.share + '%',
+            evidence,
+            r.decision,
+            last.decision === 'HOLD' ? 'Keep share; stop replay' : 'Boundary check complete',
+          ],
+          [
+            'Next requests: ' + r.nextShare + '%',
+            r.nextShare === 0
+              ? 'Incumbent serves all'
+              : r.nextShare === 100
+                ? 'Candidate serves all'
+                : 'Keep current split',
+            r.lagExposure
+              ? r.lagExposure + ' more during rollback lag'
+              : 'No added rollback exposure',
+            r.decision === 'ROLL BACK'
+              ? 'Prior effects remain'
+              : r.decision === 'HOLD'
+                ? 'No permission to expand'
+                : 'Continue monitoring',
+          ],
+        ];
+        nodes.forEach((lines, i) => {
+          const x = mobile ? 0 : 236 * i,
+            y = mobile ? 180 * i : 0;
+          s += box(x, y, lines);
+          if (i < 2)
+            s +=
+              '<path d="' +
+              (mobile
+                ? 'M 164 ' + (y + 148) + ' V ' + (y + 170)
+                : 'M ' + (x + 213) + ' 70 H ' + (x + 230)) +
+              '" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>';
+        });
+        const y = mobile ? 540 : 180;
+        s +=
+          '<rect x="0" y="' +
+          y +
+          '" width="' +
+          w +
+          '" height="80" rx="8" fill="var(--band)"/>' +
+          text(
+            12,
+            y + 29,
+            mobile ? 17 : 20,
+            r.exposed + ' candidate requests already served',
+            true,
+          ) +
+          text(
+            12,
+            y + 59,
+            14,
+            r.total + ' total requests · ' + r.failures + ' candidate serving failures',
+          );
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        $('#mechanism').innerHTML = s;
+      }
+      let report;
+      function render() {
+        report = simulate(
+          $('#scenario').value,
+          Number($('#start').value),
+          $('#labels').value,
+          Number($('#minimum').value),
+          Number($('#lag').value),
+        );
+        const r = report;
+        $('output').textContent =
+          r.decision +
+          '. Candidate exposure: ' +
+          r.exposed +
+          '/' +
+          r.total +
+          '. Candidate serving failures: ' +
+          r.failures +
+          '. Next candidate share: ' +
+          r.nextShare +
+          '%.';
+        $('#history').innerHTML = r.windows
+          .map(
+            (w) =>
+              '<tr><td>' +
+              w.index +
+              (w.lag ? '<small>Lag</small>' : '') +
+              '</td><td>' +
+              w.n +
+              ' new<br>' +
+              w.control +
+              ' old</td><td>Serving: ' +
+              ratio(w.failures, w.n) +
+              '<br>Quality: ' +
+              ratio(w.wrong, w.labeled) +
+              '<small>Incumbent serving: ' +
+              ratio(w.controlFailures, w.control) +
+              '</small></td><td><strong>' +
+              w.decision +
+              '</strong><small>' +
+              w.reason +
+              '</small></td></tr>',
+          )
+          .join('');
+        $('#metrics').innerHTML = [
+          ['Candidate exposure', ratio(r.exposed, r.total)],
+          ['Incumbent requests', String(r.total - r.exposed)],
+          ['Candidate serving failures', ratio(r.failures, r.exposed)],
+          ['Labeled candidate prediction errors', ratio(r.wrong, r.labeled)],
+          ['Extra candidate requests during rollback lag', String(r.lagExposure)],
+          ['Future candidate share', r.nextShare + '%'],
+        ]
+          .map(([k, v]) => '<tr><th scope="row">' + k + '</th><td>' + v + '</td></tr>')
+          .join('');
+        $('#interpretation').textContent =
+          r.decision === 'ROLL BACK'
+            ? 'The ' +
+              r.last.reason.toLowerCase() +
+              ' gate stops expansion. ' +
+              r.lagExposure +
+              ' additional candidate requests arrive during rollback lag. Future requests return to the incumbent; the ' +
+              r.exposed +
+              ' prior candidate requests are not undone.'
+            : r.decision === 'HOLD'
+              ? 'Evidence is incomplete: ' +
+                r.last.reason.toLowerCase() +
+                '. This replay stops here. In a real hold, the current ' +
+                r.nextShare +
+                '% share would keep serving traffic until a separate stop or decision.'
+              : 'Every scheduled window passed the fixture gates. This is permission under the stated policy, not proof of safety, statistical significance, or business improvement.';
+        $('#data').innerHTML = r.windows
+          .flatMap((w) => w.rows.filter((row) => row.candidate))
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              (row.lag ? '<small>Lag</small>' : '') +
+              '</th><td>' +
+              (row.failed ? 'Failed' : 'Responded') +
+              '</td><td>' +
+              (row.failed
+                ? 'No prediction'
+                : row.label === null
+                  ? 'Label pending'
+                  : 'Prediction ' +
+                    row.prediction +
+                    '; truth ' +
+                    row.label +
+                    (row.prediction === row.label ? ' — correct' : ' — wrong')) +
+              '</td></tr>',
+          )
+          .join('');
+        diagram(r);
+      }
+      $('form').addEventListener('submit', (event) => event.preventDefault());
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        $('#record-tables').open = false;
+        render();
+      });
+      addEventListener('resize', () => diagram(report));
+      render();
+    </script>
+  </body>
+</html>

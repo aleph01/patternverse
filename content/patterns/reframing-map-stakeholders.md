@@ -14,9 +14,25 @@ verses:
 attribution: "Original Patternverse adaptation inspired by Thomas Wedell-Wedellsborg, What's Your Problem? Not an official implementation."
 ---
 
-A problem can look simple because the first telling includes only the speaker and one visible obstacle. In practice, different people may experience the difficulty, shape it, make decisions about it, or bear the cost of a proposed change. Map Stakeholders asks whose perspective is already inside the frame and whose is missing. It is a lightweight map, not an organizational chart.
+A problem can look simple because the first telling includes only the speaker and one visible obstacle. In practice, different people may experience the difficulty, shape it, make decisions about it, or bear the cost of a proposed change.
+
+## Core idea
+
+Map Stakeholders asks whose perspective is already inside the frame and whose is missing. It is a lightweight map, not an organizational chart.
+
+Restoring omitted roles can reveal a missing decision, dependency, or affected perspective before a remedy is aimed at the most visible person.
+
+## When to use it
+
+Reach for this pattern when a sentence repeatedly says “they,” when decisions happen elsewhere, or when a proposed fix would change life for people who have not been consulted. It is particularly useful before interpreting an interpersonal conflict or a cross-team process.
+
+## How it works
 
 Start with roles rather than blame. Who encounters the problem? Who decides? Who controls a resource or rule? Who is affected even though they are absent from the conversation? A person can hold several roles, and an important group may have no formal authority. The map is provisional: “possibly affected” is safer than inventing someone’s motives. It can also reveal that the person presented as the cause has little power over the process.
+
+## Worked examples
+
+![A release is connected to developers implementing, a product owner changing scope, reviewers approving, support handling defects, and customers waiting. The labels describe roles rather than assign blame.](../assets/creativity/reframing-map-stakeholders.svg "Map what each group does or experiences before deciding where the delay originates. A role map suggests people to consult; it does not establish the cause.")
 
 Consider “The developers are delaying our release.” A map might include developers implementing changes, a product owner changing requirements, reviewers who approve releases, support staff who handle defects, and customers waiting for a feature. The next question may not be “How do we make developers work faster?” but “Where does work wait, and who can change that handoff?” The map has widened the frame without deciding who is at fault.
 
@@ -24,17 +40,17 @@ In a family, “Dad refuses help with appointments” might involve Dad, relativ
 
 For a product, “Users ignore the accessibility settings” may omit people who need those settings, the team choosing defaults, the staff writing help content, and the device platform that exposes controls. Mapping those roles could shift attention from “users fail to find the feature” to “the default experience may need to work before anyone searches for a setting.”
 
-## Signals and limits
+## Pitfalls and limits
 
-Reach for this pattern when a sentence repeatedly says “they,” when decisions happen elsewhere, or when a proposed fix would change life for people who have not been consulted. It is particularly useful before interpreting an interpersonal conflict or a cross-team process. The common mistake is to turn the map into an accusation list or to treat a hypothesized absent perspective as known. Ask affected people where possible.
-
-[[reframing-locate-problem]] examines where agency and causation sit in the wording; this pattern first makes the cast visible. [[reframing-find-hidden-influence]] looks beyond the cast for incentives or conditions. A stakeholder map can help both, but it is not itself a causal explanation.
+The common mistake is to turn the map into an accusation list or to treat a hypothesized absent perspective as known. Ask affected people where possible.
 
 ## Related patterns
 
+[[reframing-locate-problem]] examines where agency and causation sit in the wording; this pattern first makes the cast visible. [[reframing-find-hidden-influence]] looks beyond the cast for incentives or conditions. A stakeholder map can help both, but it is not itself a causal explanation.
+
 [[reframing-locate-problem]] · [[reframing-find-hidden-influence]]
 
-## Source
+## Sources and attribution
 
 Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an original Patternverse procedure, not reproduced book text or an official implementation.
 
@@ -46,7 +62,7 @@ Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an origin
 :input frame text
 :output stakeholders
 
-!agent stakeholders {
+stakeholders = !agent {
     :returns choices
     :min 1
     :max 6

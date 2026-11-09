@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Embedding lookup and learning explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #ranking th:first-child {
+        width: 45%;
+      }
+      #vectors th:first-child {
+        width: 42%;
+      }
+      #history {
+        font-size: 13px;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Look up a title's vector, score one fixed reader context, and learn from a labeled
+      interaction. The starting vectors are fictional; gradient updates are computed. This is one
+      training example at a time, not an evaluated recommender.
+    </p>
+    <form>
+      <div>
+        <label for="item">Title for the next example</label
+        ><select id="item">
+          <option value="0">0 · Hiking Guide</option>
+          <option value="1" selected>1 · Camp Cooking</option>
+          <option value="2">2 · Desk Lighting</option>
+          <option value="3">3 · Weekend Trails</option>
+          <option value="4">New title · shared UNK</option>
+        </select>
+      </div>
+      <div>
+        <label for="target">Observed feedback</label
+        ><select id="target">
+          <option value="1">Clicked · target 1</option>
+          <option value="0">Not clicked · target 0</option>
+        </select>
+      </div>
+      <div>
+        <label for="metric">Retrieval scoring rule</label
+        ><select id="metric">
+          <option value="dot">Dot product</option>
+          <option value="cosine">Cosine similarity</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions">
+      <button id="step" type="button">Learn one step</button
+      ><button id="ten" type="button">Learn ten steps</button
+      ><button id="reset" type="button">Reset inputs</button>
+    </div>
+    <p class="note">
+      Changing controls preserves the current rows. Context q = (1, 0) and learning rate = 1 stay
+      fixed. Training always uses the dot-product click model; the scoring selector changes
+      retrieval only. Twelve updates maximum; reset restores all starting values.
+    </p>
+    <output aria-live="polite"></output>
+    <div id="mechanism"></div>
+    <p id="interpretation" class="note"></p>
+    <table id="ranking">
+      <caption>
+        Known titles ranked against q · no held-out evaluation
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Dot score</th>
+          <th scope="col">Cosine score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <details id="state">
+      <summary>Inspect the current vectors and update history</summary>
+      <p>
+        UNK is a shared, reserved zero row. It is not an independently learned vector for each new
+        title, is excluded from known-title retrieval, and cannot be updated here. Mathematical
+        cosine is N/A for a zero-length vector. Displayed coordinates and scores round; calculations
+        use full precision.
+      </p>
+      <table id="vectors">
+        <caption>
+          Current table · coordinates rounded to six decimals
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID · title</th>
+            <th scope="col">First coordinate</th>
+            <th scope="col">Second coordinate</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="history">
+        <caption>
+          Applied updates · loss in nats
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Step · ID · target</th>
+            <th scope="col">Row before → after</th>
+            <th scope="col">Loss before → after</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </details>
+    <details id="assumptions">
+      <summary>Exact training rule and assumptions</summary>
+      <p>
+        For the selected vector e and fixed q = (1, 0), score z = q · e and model probability p =
+        1/(1 + exp(−z)). Binary log loss is −ln(p) for target 1 and −ln(1 − p) for target 0. Natural
+        logs give nats. Each plain gradient step uses e ← e − (p − target)q with learning rate 1,
+        without regularization or a learned context. Only the selected known row changes. The
+        displayed next-step preview is not applied until a learning button is pressed.
+      </p>
+      <p>
+        Dot product sums matching coordinate products. Cosine divides that dot product by both
+        lengths. Retrieval ranks known titles by the selected score, descending, breaking ties by
+        ID. Switching metrics does not retrain or normalize stored vectors. Starting points, title
+        names, feedback and context are synthetic. A non-click assumes an observed exposure. No
+        click data is fetched, no text encoder runs, and no calibrated probability, held-out
+        recommendation quality, privacy guarantee or semantic interpretation is established.
+      </p>
+    </details>
+    <script>
+      const names = ['Hiking Guide', 'Camp Cooking', 'Desk Lighting', 'Weekend Trails', 'UNK'];
+      const initialVectors = [
+        [1, 0],
+        [0, 1],
+        [-1, 0],
+        [4, 3],
+        [0, 0],
+      ];
+      const context = [1, 0],
+        limit = 12;
+      let vectors, history, report;
+      const $ = (s) => document.querySelector(s);
+      const fmt = (n) => String(Number(n.toFixed(3)));
+      const pair = (e) => '(' + e.map(fmt).join(', ') + ')';
+      const dot = (a, b) => a.reduce((sum, n, i) => sum + n * b[i], 0);
+      function cosine(a, b) {
+        const denominator = Math.hypot(...a) * Math.hypot(...b);
+        return denominator ? dot(a, b) / denominator : null;
+      }
+      const sigmoid = (z) => (z >= 0 ? 1 / (1 + Math.exp(-z)) : Math.exp(z) / (1 + Math.exp(z)));
+      const loss = (e, target) => {
+        const z = dot(context, e);
+        return Math.max(z, 0) - target * z + Math.log1p(Math.exp(-Math.abs(z)));
+      };
+      function gradientStep(e, target) {
+        const p = sigmoid(dot(context, e)),
+          gradient = context.map((q) => (p - target) * q),
+          next = e.map((value, i) => value - gradient[i]);
+        return {
+          before: e.slice(),
+          after: next,
+          gradient,
+          pBefore: p,
+          pAfter: sigmoid(dot(context, next)),
+          lossBefore: loss(e, target),
+          lossAfter: loss(next, target),
+        };
+      }
+      function buildReport(id, target, metric) {
+        if (
+          !Number.isInteger(id) ||
+          id < 0 ||
+          id >= names.length ||
+          ![0, 1].includes(target) ||
+          !['dot', 'cosine'].includes(metric)
+        )
+          throw new Error('Unsupported setting');
+        const e = vectors[id].slice(),
+          z = dot(context, e);
+        const ranking = vectors.slice(0, 4).map((v, i) => ({
+          id: i,
+          name: names[i],
+          dot: dot(context, v),
+          cosine: cosine(context, v),
+        }));
+        ranking.sort((a, b) => {
+          const av = a[metric],
+            bv = b[metric];
+          if (av === null) return bv === null ? a.id - b.id : 1;
+          if (bv === null) return -1;
+          return bv - av || a.id - b.id;
+        });
+        return {
+          id,
+          target,
+          metric,
+          e,
+          z,
+          p: sigmoid(z),
+          loss: loss(e, target),
+          updates: history.length,
+          ranking,
+          next: id < 4 && history.length < limit ? gradientStep(e, target) : null,
+        };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 825 : 500;
+        const t = (x, y, size, value, anchor = 'start') =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400" font-size="' +
+          size +
+          '" fill="#252c28" text-anchor="' +
+          anchor +
+          '">' +
+          value +
+          '</text>';
+        let s =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="' +
+          width +
+          '" height="' +
+          height +
+          '" viewBox="0 0 ' +
+          width +
+          ' ' +
+          height +
+          '" role="img" aria-labelledby="lookup-title lookup-desc"><title id="lookup-title">An ID selects a row whose coordinates can learn</title><desc id="lookup-desc">Selected ' +
+          names[r.id] +
+          ', vector ' +
+          pair(r.e) +
+          ', dot score ' +
+          fmt(r.z) +
+          ', model probability ' +
+          r.p.toFixed(3) +
+          ', training loss ' +
+          r.loss.toFixed(3) +
+          ' nats. ' +
+          (r.next
+            ? 'The next step would change this row to ' + pair(r.next.after) + '.'
+            : 'No next update is available.') +
+          '</desc><rect width="' +
+          width +
+          '" height="' +
+          height +
+          '" fill="#fff"/>';
+        s += t(0, 28, 24, mobile ? 'Look up a row.' : 'Look up a row. Learn from a target.');
+        if (mobile) s += t(0, 57, 24, 'Learn from a target.');
+        s += t(0, mobile ? 88 : 60, 16, 'Fixed context q = (1, 0)');
+        const tableTop = mobile ? 132 : 105,
+          rowsTop = tableTop + 40;
+        s += t(0, tableTop, 20, 'Embedding table · 2 coordinates');
+        s +=
+          t(8, tableTop + 28, 14, 'ID') +
+          t(42, tableTop + 28, 14, 'Title') +
+          t(211, tableTop + 28, 14, 'First', 'middle') +
+          t(284, tableTop + 28, 14, 'Second', 'middle');
+        vectors.forEach((e, i) => {
+          const y = rowsTop + i * 40;
+          s +=
+            '<rect x="0" y="' +
+            y +
+            '" width="328" height="40" fill="' +
+            (i === r.id ? '#edf5f0' : '#fff') +
+            '" stroke="' +
+            (i === r.id ? '#00855b' : '#a6aca3') +
+            '" stroke-width="1"/>';
+          s +=
+            t(8, y + 26, 14, i) +
+            t(42, y + 26, 14, names[i]) +
+            t(211, y + 26, 18, fmt(e[0]), 'middle') +
+            t(284, y + 26, 18, fmt(e[1]), 'middle');
+        });
+        const x = mobile ? 0 : 364,
+          top = mobile ? 414 : 105;
+        s += t(x, top + 24, 21, (r.id === 4 ? 'Unknown ID' : 'ID ' + r.id) + ' · ' + names[r.id]);
+        s += t(x, top + 58, 19, 'Selected e = ' + pair(r.e));
+        s += t(
+          x,
+          top + 91,
+          17,
+          'Dot: 1 × ' + fmt(r.e[0]) + ' + 0 × ' + fmt(r.e[1]) + ' = ' + fmt(r.z),
+        );
+        s += t(x, top + 124, 19, 'Model p = ' + r.p.toFixed(3));
+        s += t(x, top + 157, 17, r.target ? 'Target: clicked (1)' : 'Target: not clicked (0)');
+        s += t(x, top + 190, 19, 'Loss = ' + r.loss.toFixed(3) + ' nats');
+        s += t(x, top + 222, 16, 'Applied updates: ' + r.updates + '/12');
+        const preview = mobile ? 685 : 400;
+        s += t(0, preview, 20, 'Next step · preview');
+        if (r.next) {
+          s += t(0, preview + 35, 21, 'Next e = ' + pair(r.next.after));
+          s += t(
+            mobile ? 0 : 364,
+            mobile ? preview + 70 : preview + 35,
+            16,
+            'p ' + r.next.pAfter.toFixed(3) + ' · loss ' + r.next.lossAfter.toFixed(3) + ' nats',
+          );
+          s += t(
+            0,
+            mobile ? preview + 111 : preview + 72,
+            15,
+            'Learning rate 1; context stays fixed.',
+          );
+        } else {
+          s += t(
+            0,
+            preview + 35,
+            17,
+            r.id === 4 ? 'Unknown row: updates disabled.' : 'Update limit reached; reset to learn.',
+          );
+          s += t(
+            0,
+            preview + 70,
+            16,
+            r.id === 4
+              ? 'No independently learned new-title row.'
+              : 'Reset restores the starting table.',
+          );
+        }
+        return s + '</svg>';
+      }
+      function render() {
+        report = buildReport(
+          Number($('#item').value),
+          Number($('#target').value),
+          $('#metric').value,
+        );
+        const r = report;
+        $('output').textContent =
+          names[r.id] +
+          ' · updates ' +
+          r.updates +
+          '/12. Dot ' +
+          r.z.toFixed(3) +
+          '; model p ' +
+          r.p.toFixed(3) +
+          '; loss ' +
+          r.loss.toFixed(3) +
+          ' nats.';
+        $('#mechanism').innerHTML = mechanismGraphic(r, innerWidth < 520);
+        $('#step').disabled = $('#ten').disabled = !r.next;
+        $('#interpretation').textContent =
+          r.id === 4
+            ? 'This unknown title shares the reserved zero row. Its mathematical cosine is N/A; it has no independently learned ID representation.'
+            : r.next
+              ? 'The preview is the next update, not an applied change. Learning changes this selected row only; lower loss on this example is not held-out recommendation quality.'
+              : 'The twelve-update teaching limit is reached. Reset to restore the starting table.';
+        $('#ranking caption').textContent =
+          'Known titles · ranked by ' +
+          (r.metric === 'dot' ? 'dot product' : 'cosine') +
+          ' against q';
+        $('#ranking tbody').innerHTML = r.ranking
+          .map(
+            (item) =>
+              '<tr><th scope="row">' +
+              item.name +
+              '</th><td>' +
+              item.dot.toFixed(3) +
+              '</td><td>' +
+              (item.cosine === null ? 'N/A' : item.cosine.toFixed(3)) +
+              '</td></tr>',
+          )
+          .join('');
+        $('#vectors tbody').innerHTML = vectors
+          .map(
+            (v, i) =>
+              '<tr><th scope="row">' +
+              (i + ' · ' + names[i]) +
+              '</th><td>' +
+              v[0].toFixed(6) +
+              '</td><td>' +
+              v[1].toFixed(6) +
+              '</td></tr>',
+          )
+          .join('');
+        $('#history tbody').innerHTML = history.length
+          ? history
+              .map(
+                (h, i) =>
+                  '<tr><th scope="row">' +
+                  (i + 1) +
+                  ' · ' +
+                  h.id +
+                  ' · ' +
+                  h.target +
+                  '</th><td>' +
+                  pair(h.before) +
+                  ' → ' +
+                  pair(h.after) +
+                  '</td><td>' +
+                  h.lossBefore.toFixed(6) +
+                  ' → ' +
+                  h.lossAfter.toFixed(6) +
+                  '</td></tr>',
+              )
+              .join('')
+          : '<tr><td colspan="3">No updates applied.</td></tr>';
+      }
+      function learn(count) {
+        const id = Number($('#item').value),
+          target = Number($('#target').value);
+        if (id === 4) return;
+        for (let i = 0; i < count && history.length < limit; i++) {
+          const update = gradientStep(vectors[id], target);
+          vectors[id] = update.after.slice();
+          history.push({ id, target, ...update });
+        }
+        render();
+      }
+      function reset() {
+        vectors = initialVectors.map((v) => v.slice());
+        history = [];
+        $('form').reset();
+        $('#state').open = false;
+        $('#assumptions').open = false;
+        render();
+      }
+      $('form').addEventListener('submit', (event) => event.preventDefault());
+      $('form').addEventListener('change', render);
+      $('#step').addEventListener('click', () => learn(1));
+      $('#ten').addEventListener('click', () => learn(10));
+      $('#reset').addEventListener('click', reset);
+      addEventListener('resize', () => {
+        $('#mechanism').innerHTML = mechanismGraphic(report, innerWidth < 520);
+      });
+      reset();
+    </script>
+  </body>
+</html>

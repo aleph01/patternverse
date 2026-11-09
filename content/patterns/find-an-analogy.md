@@ -48,31 +48,6 @@ Find an Analogy is useful when direct explanation has become repetitive or a rel
 
 The best result is a clearer question about the original situation. The client can ask how the page should sequence attention. The team can ask which parts of the destination remain stable and which parts of the route require updating. The writer can distinguish useful exploration from avoidance. The analogy has done its work when the reader can return to the concrete problem and see a relationship that was previously difficult to name.
 
-## Pattern details
-
-### Use when
-
-- Direct explanation keeps repeating without understanding.
-- An abstract relationship is hard to picture.
-
-### Goals
-
-- Make a neglected relationship understandable.
-- Return to the original case with a more useful question.
-
-### Mechanisms
-
-- relational mapping
-- model comparison
-
-### Not ideal when
-
-- A vivid metaphor is being substituted for evidence about the actual case.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[chunk-up|Chunk Up]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Analogy; chapter 3, printed pages 68–72. Sourc
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask situation {
+situation = !ask {
     Name the relationship
 
     Describe an everyday situation and the relationship you want to understand, such as repetition and improvement or preparation and uncertainty.
 }
-!ask analogy {
+analogy = !ask {
     Find a familiar comparison
 
     Choose another situation you know well that has a similar relationship. An ordinary example is enough.
 }
-!ask mapping {
+mapping = !ask {
     Map what corresponds
 
     Which elements and relationships match between the situations? Explain the match in plain language.
 }
-!ask breaks {
+breaks = !ask {
     Find where it stops matching
 
     Which important facts, stakes, or people differ? A vivid comparison is not evidence that the situations work the same way.
 }
-!ask insight {
+insight = !ask {
     Keep only the useful insight
 
     What question or possibility does the analogy suggest? Check it against facts in the original situation.
 }
-!ask next {
+next = !ask {
     Return to the real situation
 
     What concrete question, observation, or small action could test that possibility without relying on the analogy as proof?

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 470" role="img" aria-labelledby="work-in-inspectable-steps-title work-in-inspectable-steps-desc">
+<title id="work-in-inspectable-steps-title">Work in Inspectable Steps</title>
+<desc id="work-in-inspectable-steps-desc">Three work stages are separated by inspect-and-steer checkpoints; the overall goal spans the entire sequence.</desc>
+<style>:root{--paper:#fff;--surface:#fff;--ink:#181814;--line:#007a4d;--highlight:#dff8ea;color-scheme:light dark}text{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;font-size:16px;fill:var(--ink)}@media(prefers-color-scheme:dark){:root{--paper:#181814;--surface:#242420;--ink:#fff;--line:#05ce78;--highlight:#163b2b}}</style>
+<defs><marker id="work-in-inspectable-steps-arrow" viewBox="0 0 8 10" refX="7" refY="5" markerWidth="6" markerHeight="7" orient="auto"><path d="M1 1L7 5L1 9" fill="none" stroke="var(--line)" stroke-width="1.5"/></marker></defs>
+<rect width="720" height="470" fill="var(--paper)"/>
+<rect x="44" y="48" width="632" height="62" fill="var(--highlight)" stroke="var(--ink)" stroke-width="1.5"/>
+<text x="360" y="85" text-anchor="middle">Shared goal, accepted decisions, essential constraints</text>
+<g fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5">
+<rect x="44" y="175" width="150" height="82"/>
+<rect x="285" y="175" width="150" height="82"/>
+<rect x="526" y="175" width="150" height="82"/>
+<path d="M239 194L261 216L239 238L217 216Z" fill="var(--highlight)"/>
+<path d="M480 194L502 216L480 238L458 216Z" fill="var(--highlight)"/>
+</g>
+<text x="119" y="222" text-anchor="middle">Outline</text>
+<text x="360" y="222" text-anchor="middle">Sample</text>
+<text x="601" y="210" text-anchor="middle">Complete<tspan x="601" dy="24">and review</tspan></text>
+<g fill="none" stroke="var(--line)" stroke-width="2" marker-end="url(#work-in-inspectable-steps-arrow)">
+<path d="M194 216H210"/><path d="M261 216H277"/>
+<path d="M435 216H451"/><path d="M502 216H518"/>
+<path d="M239 238V325H119V265"/>
+<path d="M480 238V325H360V265"/>
+</g>
+<text x="239" y="151" text-anchor="middle">Inspect</text>
+<text x="480" y="151" text-anchor="middle">Inspect</text>
+<text x="179" y="357" text-anchor="middle">Steer if needed</text>
+<text x="420" y="357" text-anchor="middle">Steer if needed</text>
+<text x="360" y="422" text-anchor="middle">Choose checkpoints where feedback can change the next step.</text>
+</svg>

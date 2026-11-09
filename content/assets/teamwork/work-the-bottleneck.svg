@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1080" viewBox="0 0 1400 1080" role="img" aria-labelledby="title desc">
+<title id="title">Work the Bottleneck: improve the stage that limits delivery</title>
+<desc id="desc">Hypothetical guide-production workflow with demand for ten comparable guides per week. Baseline capacities are drafting twelve, technical review four, and publishing eight guides per week, limiting sustained delivery to at most four. Raising drafting capacity to eighteen leaves delivery limited to four by review. An alternative intervention protects review time, improves inputs, and adds a qualified reviewer; capacities then become twelve, ten, and eight, so publishing limits delivery to at most eight. If ten guides continue to be released each week, the publication queue grows by two per week in this simplified model. Amber dashed borders and the word constraint identify the limiting stage. These are illustrative capacity ceilings after startup, not measured results or guaranteed forecasts.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#617783" stroke-width="1.5"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#152c39}.body{font-size:21px}.small{font-size:18px}.label{font-size:23px;font-weight:700}.muted{fill:#4d626f}.rate{font-size:36px;font-weight:700}</style>
+<rect width="1400" height="1080" fill="#fafbf8"/>
+<text x="52" y="66" font-size="39" font-weight="700">Improve the stage that limits delivery</text>
+<text x="52" y="109" class="body muted">Hypothetical guide-production capacities · Demand: 10 comparable guides per week</text>
+<rect x="52" y="143" width="30" height="25" rx="4" fill="#fff0d2" stroke="#8a5a12" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="96" y="163" class="small">Constraint: the smallest capacity in this example</text>
+<text x="700" y="163" class="small muted">All rates are guides per week.</text>
+
+<rect x="40" y="200" width="1320" height="220" rx="15" fill="#ffffff" stroke="#ccd6da"/>
+<text x="64" y="238" class="label" >1. Existing workflow</text>
+<rect x="70" y="264" width="240" height="113" rx="10" fill="#edf5f2" stroke="#93aca6" stroke-width="2" />
+<text x="190" y="292" class="body" text-anchor="middle">Draft</text>
+<text x="190" y="332" class="rate" text-anchor="middle">12</text>
+<text x="190" y="362" class="small muted" text-anchor="middle">Available capacity</text>
+<line x1="320" y1="320" x2="380" y2="320" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="400" y="264" width="240" height="113" rx="10" fill="#fff0d2" stroke="#8a5a12" stroke-width="2" stroke-dasharray="7 4"/>
+<text x="520" y="292" class="body" text-anchor="middle">Technical review</text>
+<text x="520" y="332" class="rate" text-anchor="middle">4</text>
+<text x="520" y="362" class="small muted" text-anchor="middle">CONSTRAINT</text>
+<line x1="650" y1="320" x2="710" y2="320" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="730" y="264" width="240" height="113" rx="10" fill="#edf5f2" stroke="#93aca6" stroke-width="2" />
+<text x="850" y="292" class="body" text-anchor="middle">Publish</text>
+<text x="850" y="332" class="rate" text-anchor="middle">8</text>
+<text x="850" y="362" class="small muted" text-anchor="middle">Available capacity</text>
+<line x1="980" y1="320" x2="1040" y2="320" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1200" y="290" class="small muted" text-anchor="middle">Delivery ceiling</text>
+<text x="1200" y="335" class="rate" text-anchor="middle">At most 4</text>
+<text x="1200" y="364" class="small muted" text-anchor="middle">guides / week</text>
+<text x="70" y="405" class="small muted" >If 10 drafts reach review each week, the review queue grows by 6 per week.</text>
+<rect x="40" y="445" width="1320" height="220" rx="15" fill="#ffffff" stroke="#ccd6da"/>
+<text x="64" y="483" class="label" >2. Add drafting capacity</text>
+<rect x="70" y="509" width="240" height="113" rx="10" fill="#edf5f2" stroke="#93aca6" stroke-width="2" />
+<text x="190" y="537" class="body" text-anchor="middle">Draft</text>
+<text x="190" y="577" class="rate" text-anchor="middle">18</text>
+<text x="190" y="607" class="small muted" text-anchor="middle">Available capacity</text>
+<line x1="320" y1="565" x2="380" y2="565" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="400" y="509" width="240" height="113" rx="10" fill="#fff0d2" stroke="#8a5a12" stroke-width="2" stroke-dasharray="7 4"/>
+<text x="520" y="537" class="body" text-anchor="middle">Technical review</text>
+<text x="520" y="577" class="rate" text-anchor="middle">4</text>
+<text x="520" y="607" class="small muted" text-anchor="middle">CONSTRAINT</text>
+<line x1="650" y1="565" x2="710" y2="565" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="730" y="509" width="240" height="113" rx="10" fill="#edf5f2" stroke="#93aca6" stroke-width="2" />
+<text x="850" y="537" class="body" text-anchor="middle">Publish</text>
+<text x="850" y="577" class="rate" text-anchor="middle">8</text>
+<text x="850" y="607" class="small muted" text-anchor="middle">Available capacity</text>
+<line x1="980" y1="565" x2="1040" y2="565" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1200" y="535" class="small muted" text-anchor="middle">Delivery ceiling</text>
+<text x="1200" y="580" class="rate" text-anchor="middle">At most 4</text>
+<text x="1200" y="609" class="small muted" text-anchor="middle">guides / week</text>
+<text x="70" y="650" class="small muted" >Review still limits delivery. Faster drafting does not increase the delivery ceiling.</text>
+<rect x="40" y="690" width="1320" height="220" rx="15" fill="#ffffff" stroke="#ccd6da"/>
+<text x="64" y="728" class="label" >3. Improve review: better inputs, protected time, and qualified help</text>
+<rect x="70" y="754" width="240" height="113" rx="10" fill="#edf5f2" stroke="#93aca6" stroke-width="2" />
+<text x="190" y="782" class="body" text-anchor="middle">Draft</text>
+<text x="190" y="822" class="rate" text-anchor="middle">12</text>
+<text x="190" y="852" class="small muted" text-anchor="middle">Available capacity</text>
+<line x1="320" y1="810" x2="380" y2="810" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="400" y="754" width="240" height="113" rx="10" fill="#edf5f2" stroke="#93aca6" stroke-width="2" />
+<text x="520" y="782" class="body" text-anchor="middle">Technical review</text>
+<text x="520" y="822" class="rate" text-anchor="middle">10</text>
+<text x="520" y="852" class="small muted" text-anchor="middle">Available capacity</text>
+<line x1="650" y1="810" x2="710" y2="810" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="730" y="754" width="240" height="113" rx="10" fill="#fff0d2" stroke="#8a5a12" stroke-width="2" stroke-dasharray="7 4"/>
+<text x="850" y="782" class="body" text-anchor="middle">Publish</text>
+<text x="850" y="822" class="rate" text-anchor="middle">8</text>
+<text x="850" y="852" class="small muted" text-anchor="middle">CONSTRAINT</text>
+<line x1="980" y1="810" x2="1040" y2="810" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1200" y="780" class="small muted" text-anchor="middle">Delivery ceiling</text>
+<text x="1200" y="825" class="rate" text-anchor="middle">At most 8</text>
+<text x="1200" y="854" class="small muted" text-anchor="middle">guides / week</text>
+<text x="70" y="895" class="small muted" >Publishing now limits delivery. Releasing 10 per week would grow its queue by 2 per week.</text>
+<text x="52" y="953" class="label" >Reassess the workflow whenever its limiting stage changes.</text>
+<text x="52" y="993" class="small muted" >Simplified steady flow after startup: comparable items, fixed capacities, no rework or variability.</text>
+<text x="52" y="1024" class="small muted" >Ceilings are not forecasts. Actual results also depend on staffing, readiness, demand, quality, and workload.</text>
+</svg>

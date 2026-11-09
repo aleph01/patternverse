@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coin sampling explorer</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 16px; color: #20251f; background: #fff; font: 16px/1.5 system-ui, sans-serif; }
+      .controls { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+      select, button { min-height: 40px; padding: 6px 12px; font: inherit; border: 1px solid #586653; border-radius: 4px; background: #fff; color: inherit; }
+      button { cursor: pointer; }
+      button:first-of-type { background: #245b40; color: #fff; }
+      :focus-visible { outline: 3px solid #26734b; outline-offset: 3px; }
+      output { display: block; min-height: 3em; margin-top: 16px; font-weight: 650; }
+      svg { width: 100%; height: auto; max-height: 230px; overflow: visible; }
+      .axis { stroke: #bbc3b7; }
+      .expected { stroke: #6a7166; stroke-dasharray: 5 4; }
+      .observed { stroke: #176442; stroke-width: 2; fill: none; }
+      text { font: 12px system-ui, sans-serif; fill: #4c5548; }
+      p { font-size: 14px; margin: 8px 0; }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <label for="batch">Coins per batch</label>
+      <select id="batch">
+        <option value="10">10</option>
+        <option value="100" selected>100</option>
+        <option value="1000">1,000</option>
+      </select>
+      <button id="toss" type="button">Toss coins</button>
+      <button id="clear" type="button">Clear</button>
+    </div>
+    <output id="summary" aria-live="polite">No tosses yet. Choose a batch size, then toss the coins.</output>
+    <svg viewBox="0 0 560 230" role="img" aria-labelledby="chart-title chart-desc">
+      <title id="chart-title">Running proportion of heads</title>
+      <desc id="chart-desc">The solid line shows the proportion of heads after each toss. The dashed horizontal line marks the expected 50 percent.</desc>
+      <line class="axis" x1="48" y1="20" x2="48" y2="190" />
+      <line class="axis" x1="48" y1="190" x2="540" y2="190" />
+      <line class="expected" x1="48" y1="105" x2="540" y2="105" />
+      <text x="40" y="25" text-anchor="end">100%</text>
+      <text x="40" y="109" text-anchor="end">50%</text>
+      <text x="40" y="194" text-anchor="end">0%</text>
+      <text x="48" y="214">First toss</text>
+      <text id="last" x="540" y="214" text-anchor="end">Latest toss</text>
+      <path id="line" class="observed" />
+    </svg>
+    <p>Each simulated coin has a 50% chance of heads. Larger samples tend to give a more stable estimate; a new batch can still move it away from 50%.</p>
+    <p id="limit">Up to 10,000 tosses per run. Clear to start again.</p>
+    <script>
+      const batch = document.querySelector('#batch');
+      const summary = document.querySelector('#summary');
+      const toss = document.querySelector('#toss');
+      const line = document.querySelector('#line');
+      const last = document.querySelector('#last');
+      let heads = 0;
+      const proportions = [];
+      toss.addEventListener('click', () => {
+        const count = Math.min(Number(batch.value), 10000 - proportions.length);
+        for (let i = 0; i < count; i += 1) {
+          heads += Math.random() < 0.5 ? 1 : 0;
+          proportions.push(heads / (proportions.length + 1));
+        }
+        const total = proportions.length;
+        summary.textContent = `${heads.toLocaleString()} heads in ${total.toLocaleString()} tosses · ${(100 * heads / total).toFixed(1)}% heads`;
+        line.setAttribute('d', proportions.map((p, i) => `${i ? 'L' : 'M'}${48 + 492 * i / Math.max(total - 1, 1)},${190 - 170 * p}`).join(' '));
+        last.textContent = `Toss ${total.toLocaleString()}`;
+        toss.disabled = total >= 10000;
+      });
+      document.querySelector('#clear').addEventListener('click', () => {
+        heads = 0;
+        proportions.length = 0;
+        line.removeAttribute('d');
+        last.textContent = 'Latest toss';
+        summary.textContent = 'No tosses yet. Choose a batch size, then toss the coins.';
+        toss.disabled = false;
+      });
+    </script>
+  </body>
+</html>

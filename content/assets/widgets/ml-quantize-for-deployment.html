@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Deployment quantization explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      #fits-table,
+      #data-table {
+        font-size: 13px;
+      }
+      #fits-table th:first-child {
+        width: 34%;
+      }
+      #fits-table th:nth-child(2) {
+        width: 22%;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        padding: 12px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font:
+          13px/1.6 ui-monospace,
+          monospace;
+      }
+      #weights-table,
+      #input-table,
+      #scores-table,
+      #agreement-table {
+        font-size: 13px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Smaller numbers, changed decisions?</strong> A fictional two-output linear model. This
+      example packs parameters, decodes them, and runs integer dot products with floating-point
+      output scaling and biases. It runs no deployment converter or latency benchmark.
+    </p>
+    <form id="controls">
+      <div>
+        <label for="wbits">Weight precision</label
+        ><select id="wbits">
+          <option value="4">4-bit symmetric</option>
+          <option value="8">8-bit symmetric</option>
+        </select>
+      </div>
+      <div>
+        <label for="abits">Input precision</label
+        ><select id="abits">
+          <option value="8">8-bit unsigned</option>
+          <option value="4">4-bit unsigned</option>
+        </select>
+      </div>
+      <div>
+        <label for="granularity">Weight scale granularity</label
+        ><select id="granularity">
+          <option value="tensor">One shared scale</option>
+          <option value="channel">One scale per output</option>
+        </select>
+      </div>
+      <div>
+        <label for="calibration">Range used to calibrate inputs</label
+        ><select id="calibration">
+          <option value="narrow">Narrow: 0–1</option>
+          <option value="covered">Wider coverage: 0–2</option>
+          <option value="outlier">With large outlier: 0–8</option>
+        </select>
+      </div>
+      <div>
+        <label for="record">Input to inspect</label
+        ><select id="record">
+          <option value="D2">D2: close A decision</option>
+          <option value="D1">D1: small input</option>
+          <option value="D3">D3: high second feature</option>
+          <option value="D4">D4: close B decision</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button type="button" id="reset">Reset inputs</button></div>
+    <output aria-live="polite"></output
+    ><svg id="mechanism" role="img" aria-labelledby="diagram-title diagram-desc"></svg>
+    <p id="storage" class="equation"></p>
+    <p id="agreement" class="note"></p>
+    <table id="scores-table">
+      <caption>
+        Selected input scores; larger wins, ties choose A
+      </caption>
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Float</th>
+          <th>Quantized path</th>
+          <th>Integer sum</th>
+        </tr>
+      </thead>
+      <tbody id="scores-data"></tbody>
+    </table>
+    <details id="values">
+      <summary>Inspect every rounded and clipped value</summary>
+      <table id="input-table">
+        <caption>
+          Selected input values; zero point 0
+        </caption>
+        <thead>
+          <tr>
+            <th>Feature / input</th>
+            <th>Code</th>
+            <th>Restored</th>
+            <th>Clipped?</th>
+          </tr>
+        </thead>
+        <tbody id="input-data"></tbody>
+      </table>
+      <table id="weights-table">
+        <caption>
+          Weights after reading the packed parameter record
+        </caption>
+        <thead>
+          <tr>
+            <th>Weight / original</th>
+            <th>Code</th>
+            <th>Scale</th>
+            <th>Restored</th>
+          </tr>
+        </thead>
+        <tbody id="weights-data"></tbody>
+      </table>
+    </details>
+    <details id="bytes">
+      <summary>Inspect packed bytes and storage accounting</summary>
+      <pre id="byte-values"></pre>
+      <p>
+        The custom record stores six signed weight codes, then little-endian FP32 weight scales, two
+        FP32 biases, and one FP32 input scale, without alignment padding. Two 4-bit codes share a
+        byte, low nibble first; 8-bit codes occupy a byte each. Fixed zero points are implicit.
+        Shape, bit widths, and layout are provided out of band, not stored in this record. The FP32
+        comparison stores only six weights and two biases (32 bytes).
+      </p>
+      <p>
+        This is a teaching format, not a valid LiteRT or ONNX model file. Graph metadata, headers,
+        runtime buffers, activation storage, and allocator overhead are excluded. Parameter bytes
+        cannot predict peak memory or latency.
+      </p>
+    </details>
+    <details id="data">
+      <summary>Inspect calibration data, all inputs, and arithmetic assumptions</summary>
+      <pre id="calibration-values"></pre>
+      <table id="agreement-table">
+        <caption>
+          Agreement on four fictional inputs; no ground-truth labels
+        </caption>
+        <thead>
+          <tr>
+            <th>Input / values</th>
+            <th>Float winner</th>
+            <th>Quantized winner</th>
+            <th>Clipped inputs</th>
+          </tr>
+        </thead>
+        <tbody id="agreement-data"></tbody>
+      </table>
+      <p>
+        Weights are A = (0.12,−0.08,0.04), B = (2,−1.5,0.5), with biases 0.05 and −0.4. Original
+        weights, biases, and fixture inputs are stored as FP32. Max-absolute weights determine
+        scales; per-output scales divide each row's maximum by 7 or 127, while the shared scale
+        divides the tensor maximum. Signed codes use symmetric ranges −7…7 or −127…127, leaving the
+        most negative bit pattern unused.
+      </p>
+      <p>
+        Calibration values are nonnegative and real zero must map to code zero. The input scale is
+        the fixture maximum divided by 15 or 255. No evaluation input chooses a scale. Round the
+        quotient to nearest, ties to even; then add the zero point and clamp. Clipping counts cases
+        where the rounded code exceeds the allowed range. All model zero points are zero.
+      </p>
+      <p>
+        Scales and biases are written to FP32 and read back before quantizing or computing outputs.
+        Integer codes are packed and decoded before use. Sums fit signed 32-bit integers here (the
+        general three-term bound is 3 × 127 × 255 = 97,155). The browser accumulates exact small
+        integers and performs divisions, float comparisons, and output rescaling in JavaScript
+        binary64 arithmetic. It does not emulate native FP32 kernels, bias quantization, or output
+        requantization.
+      </p>
+      <p>
+        The local number line shows the first A weight on five neighboring codes. Aggregate
+        agreement is with the floating-point reference on these four inputs, not task accuracy or an
+        unseen-data estimate. Per-channel scales can improve this fixture without establishing a
+        general quality guarantee.
+      </p>
+    </details>
+    <script>
+      const f32 = (x) => Math.fround(x),
+        asF32 = (row) => row.map(f32),
+        weights = [
+          [0.12, -0.08, 0.04],
+          [2, -1.5, 0.5],
+        ].map(asF32),
+        biases = asF32([0.05, -0.4]);
+      const inputs = [
+        { id: 'D1', x: asF32([0.2, 0.1, 0]) },
+        { id: 'D2', x: asF32([0.465, 0.4, 0.2]) },
+        { id: 'D3', x: asF32([1, 2, 0.5]) },
+        { id: 'D4', x: asF32([0.6, 0.5, 0.2]) },
+      ];
+      const calibrationSets = {
+        narrow: [
+          [0, 0, 0],
+          [0.25, 0.5, 0.75],
+          [1, 0.75, 0.25],
+        ].map(asF32),
+        covered: [
+          [0, 0, 0],
+          [0.25, 0.5, 0.75],
+          [0.9, 2, 0.4],
+        ].map(asF32),
+        outlier: [
+          [0, 0, 0],
+          [0.25, 0.5, 0.75],
+          [0.9, 8, 0.4],
+        ].map(asF32),
+      };
+      function roundEven(x) {
+        const lo = Math.floor(x),
+          fraction = x - lo;
+        return fraction < 0.5 ? lo : fraction > 0.5 ? lo + 1 : lo % 2 === 0 ? lo : lo + 1;
+      }
+      function quantize(value, scale, zero, minimum, maximum) {
+        if (!Number.isFinite(value) || !Number.isFinite(scale) || !(scale > 0))
+          throw new Error('Values must be finite and scale positive.');
+        const raw = roundEven(value / scale) + zero,
+          q = Math.max(minimum, Math.min(maximum, raw));
+        return {
+          value,
+          raw,
+          q,
+          restored: (q - zero) * scale,
+          clipped: q !== raw,
+          error: (q - zero) * scale - value,
+        };
+      }
+      function pack(codes, bits) {
+        const bytes = new Uint8Array(Math.ceil((codes.length * bits) / 8)),
+          mask = (1 << bits) - 1;
+        codes.forEach((q, i) => {
+          const raw = q & mask;
+          if (bits === 8) bytes[i] = raw;
+          else bytes[i >> 1] |= raw << ((i % 2) * 4);
+        });
+        return bytes;
+      }
+      function unpack(bytes, bits, count, signed = true) {
+        return Array.from({ length: count }, (_, i) => {
+          const raw = bits === 8 ? bytes[i] : (bytes[i >> 1] >> ((i % 2) * 4)) & 15;
+          return signed && raw >= 1 << (bits - 1) ? raw - (1 << bits) : raw;
+        });
+      }
+      function serialize(codes, bits, scales, bias, inputScale) {
+        const codeBytes = pack(codes, bits),
+          bytes = new Uint8Array(codeBytes.length + 4 * (scales.length + bias.length + 1));
+        bytes.set(codeBytes);
+        const view = new DataView(bytes.buffer);
+        let offset = codeBytes.length;
+        for (const v of [...scales, ...bias, inputScale]) {
+          view.setFloat32(offset, v, true);
+          offset += 4;
+        }
+        return bytes;
+      }
+      function decode(bytes, bits, channels) {
+        const codeLength = Math.ceil((6 * bits) / 8),
+          view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+        let offset = codeLength;
+        const read = () => {
+          const v = view.getFloat32(offset, true);
+          offset += 4;
+          return v;
+        };
+        return {
+          codes: unpack(bytes, bits, 6),
+          scales: Array.from({ length: channels }, read),
+          biases: [read(), read()],
+          inputScale: read(),
+        };
+      }
+      const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0),
+        winner = (scores) => (scores[1] > scores[0] ? 'B' : 'A');
+      function convert(wbits, abits, granularity, calibration) {
+        const wmax = 2 ** (wbits - 1) - 1,
+          amax = 2 ** abits - 1,
+          channels = granularity === 'channel' ? 2 : 1,
+          scales = (
+            channels === 2
+              ? weights.map((row) => Math.max(...row.map(Math.abs)))
+              : [Math.max(...weights.flat().map(Math.abs))]
+          ).map((v) => f32(v / wmax)),
+          calibrationData = calibrationSets[calibration],
+          inputScale = f32(Math.max(...calibrationData.flat()) / amax),
+          qweights = weights.map((row, c) =>
+            row.map((v) => quantize(v, scales[channels === 2 ? c : 0], 0, -wmax, wmax).q),
+          ),
+          bytes = serialize(qweights.flat(), wbits, scales, biases, inputScale),
+          decoded = decode(bytes, wbits, channels);
+        return {
+          wbits,
+          abits,
+          granularity,
+          calibration,
+          channels,
+          wmax,
+          amax,
+          calibrationData,
+          bytes: Array.from(bytes),
+          weightBytes: Math.ceil((6 * wbits) / 8),
+          ...decoded,
+          qweights: [decoded.codes.slice(0, 3), decoded.codes.slice(3)],
+        };
+      }
+      function evaluate(model, row) {
+        const x = row.x.map((v) => quantize(v, model.inputScale, 0, 0, model.amax)),
+          qx = unpack(
+            pack(
+              x.map((v) => v.q),
+              model.abits,
+            ),
+            model.abits,
+            3,
+            false,
+          ),
+          accumulators = model.qweights.map((w) => dot(w, qx));
+        if (accumulators.some((v) => !Number.isInteger(v) || v < -(2 ** 31) || v > 2 ** 31 - 1))
+          throw new Error('Accumulator overflow.');
+        const floatScores = weights.map((w, c) => dot(w, row.x) + biases[c]),
+          scores = accumulators.map(
+            (acc, c) =>
+              acc * model.inputScale * model.scales[model.channels === 2 ? c : 0] + model.biases[c],
+          );
+        return {
+          ...row,
+          xValues: x,
+          qx,
+          accumulators,
+          floatScores,
+          scores,
+          floatWinner: winner(floatScores),
+          quantizedWinner: winner(scores),
+          clipped: x.filter((v) => v.clipped).length,
+          maxScoreError: Math.max(...scores.map((v, c) => Math.abs(v - floatScores[c]))),
+        };
+      }
+      function compute(wbits, abits, granularity, calibration, record) {
+        const model = convert(wbits, abits, granularity, calibration),
+          results = inputs.map((row) => evaluate(model, row)),
+          selected = results.find((row) => row.id === record);
+        return {
+          wbits,
+          abits,
+          granularity,
+          calibration,
+          record,
+          model,
+          results,
+          selected,
+          agreement: results.filter((row) => row.floatWinner === row.quantizedWinner).length,
+        };
+      }
+      const num = (n) => (Math.abs(n) < 1e-12 ? 0 : n).toFixed(4),
+        scale = (n) => n.toFixed(6),
+        vec = (v) => '(' + v.map(num).join(', ') + ')';
+      function draw(r) {
+        const m = innerWidth <= 420,
+          w = m ? 328 : 680,
+          h = m ? 900 : 800,
+          s = r.selected,
+          p = r.model;
+        const text = (x, y, size, t, b = false, anchor = 'start') =>
+            '<text x="' +
+            x +
+            '" y="' +
+            y +
+            '" font-size="' +
+            size +
+            '" text-anchor="' +
+            anchor +
+            '"' +
+            (b ? ' font-weight="700"' : '') +
+            '>' +
+            t +
+            '</text>',
+          box = (y, height) =>
+            '<rect x="0" y="' +
+            y +
+            '" width="' +
+            w +
+            '" height="' +
+            height +
+            '" rx="8" fill="var(--panel)" stroke="var(--line)"/>';
+        let svg =
+          '<title id="diagram-title">Rounding weights and inputs changes a small model output</title><desc id="diagram-desc">Computed input codes, weight codes and scales, a local quantization grid for the first A weight, integer accumulators, floating-point output scores, and prediction agreement.</desc>';
+        svg +=
+          box(0, m ? 145 : 110) +
+          text(14, 29, 18, 'Input ' + s.id + ' → ' + p.abits + '-bit codes', true) +
+          text(14, 61, 14, 'x = ' + vec(s.x)) +
+          text(
+            14,
+            91,
+            14,
+            'qx = (' + s.qx.join(', ') + ')' + (m ? '' : '; input scale ' + scale(p.inputScale)),
+          );
+        if (m) svg += text(14, 121, 13, 'Input scale ' + scale(p.inputScale) + ', zero point 0.');
+        const wy = m ? 175 : 140;
+        svg +=
+          text(w / 2 - 6, wy - 8, 22, '↓') +
+          box(wy, 140) +
+          text(
+            14,
+            wy + 28,
+            17,
+            p.wbits + '-bit weights · ' + (p.channels === 2 ? 'two scales' : 'shared scale'),
+            true,
+          ) +
+          text(
+            14,
+            wy + 58,
+            13,
+            'sA = ' + scale(p.scales[0]) + '; sB = ' + scale(p.scales[p.channels === 2 ? 1 : 0]),
+          ) +
+          text(14, wy + 88, 14, 'A codes: (' + p.qweights[0].join(', ') + ')') +
+          text(14, wy + 118, 14, 'B codes: (' + p.qweights[1].join(', ') + ')');
+        const gy = wy + 180,
+          sw = p.scales[0],
+          q = p.qweights[0][0],
+          first = Math.max(-p.wmax, Math.min(p.wmax - 4, q - 2)),
+          ticks = Array.from({ length: 5 }, (_, i) => first + i),
+          lo = (first - 0.5) * sw,
+          hi = (first + 4.5) * sw,
+          X = (v) => 40 + ((v - lo) / (hi - lo)) * (w - 80),
+          original = weights[0][0],
+          restored = q * sw;
+        svg +=
+          text(0, gy, 16, 'First A weight: ' + num(original) + ' → ' + num(restored), true) +
+          '<line x1="40" y1="' +
+          (gy + 92) +
+          '" x2="' +
+          (w - 40) +
+          '" y2="' +
+          (gy + 92) +
+          '" stroke="var(--line)"/>';
+        ticks.forEach((t) => {
+          const x = X(t * sw);
+          svg +=
+            '<line x1="' +
+            x +
+            '" y1="' +
+            (gy + 85) +
+            '" x2="' +
+            x +
+            '" y2="' +
+            (gy + 99) +
+            '" stroke="var(--muted)"/>' +
+            text(x, gy + 55, 11, 'q=' + t, false, 'middle') +
+            text(x, gy + 124, 11, num(t * sw), false, 'middle');
+        });
+        svg +=
+          '<line x1="' +
+          X(original) +
+          '" y1="' +
+          (gy + 73) +
+          '" x2="' +
+          X(restored) +
+          '" y2="' +
+          (gy + 92) +
+          '" stroke="var(--accent)" stroke-width="2"/><path d="M ' +
+          X(original) +
+          ' ' +
+          (gy + 65) +
+          ' l 6 7 l -6 7 l -6 -7 Z" fill="var(--ink)"/><circle cx="' +
+          X(restored) +
+          '" cy="' +
+          (gy + 92) +
+          '" r="5" fill="var(--accent)"/>' +
+          text(0, gy + 160, 13, 'Diamond: original; circle: reconstructed.');
+        const fy = gy + 205;
+        svg +=
+          box(fy, m ? 195 : 150) +
+          text(14, fy + 29, 17, 'Scores: float → quantized', true) +
+          text(
+            14,
+            fy + 61,
+            14,
+            'A sum ' + s.accumulators[0] + ': ' + num(s.floatScores[0]) + ' → ' + num(s.scores[0]),
+          ) +
+          text(
+            14,
+            fy + 92,
+            14,
+            'B sum ' + s.accumulators[1] + ': ' + num(s.floatScores[1]) + ' → ' + num(s.scores[1]),
+          ) +
+          text(
+            14,
+            fy + 124,
+            15,
+            'Winner: float ' + s.floatWinner + ' → quantized ' + s.quantizedWinner,
+            true,
+          );
+        if (m) svg += text(14, fy + 161, 13, 'Scores above: float → quantized path.');
+        const ry = fy + (m ? 229 : 184);
+        svg +=
+          text(0, ry, 14, 'Selected input coordinates clipped: ' + s.clipped) +
+          text(0, ry + 29, 14, 'Agreement with float reference: ' + r.agreement + '/4') +
+          text(0, h - 18, 13, 'No task-accuracy or latency estimate.');
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      let report;
+      function render() {
+        report = compute(
+          +document.querySelector('#wbits').value,
+          +document.querySelector('#abits').value,
+          document.querySelector('#granularity').value,
+          document.querySelector('#calibration').value,
+          document.querySelector('#record').value,
+        );
+        const s = report.selected,
+          p = report.model;
+        document.querySelector('output').textContent =
+          s.id +
+          '. Float winner ' +
+          s.floatWinner +
+          '. Quantized winner ' +
+          s.quantizedWinner +
+          '. Agreement ' +
+          report.agreement +
+          '/4. Clipped inputs ' +
+          s.clipped +
+          '.';
+        document.querySelector('#storage').textContent =
+          'Toy parameters: ' +
+          p.bytes.length +
+          ' bytes versus 32 FP32 bytes. Weight codes ' +
+          p.weightBytes +
+          ' + weight scales ' +
+          p.channels * 4 +
+          ' + biases 8 + input scale 4. Actual packed record; no graph or runtime overhead counted.';
+        document.querySelector('#agreement').textContent =
+          'The selected input only changes inspection. All four inputs use the same converted parameters and calibration scale. Agreement is not accuracy.';
+        document.querySelector('#scores-data').innerHTML = ['A', 'B']
+          .map(
+            (name, c) =>
+              '<tr><th scope="row">' +
+              name +
+              '</th><td>' +
+              num(s.floatScores[c]) +
+              '</td><td>' +
+              num(s.scores[c]) +
+              '</td><td>' +
+              s.accumulators[c] +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#input-data').innerHTML = s.xValues
+          .map(
+            (v, j) =>
+              '<tr><th scope="row">x' +
+              (j + 1) +
+              ' / ' +
+              num(v.value) +
+              '</th><td>' +
+              v.q +
+              '</td><td>' +
+              num(v.restored) +
+              '</td><td>' +
+              (v.clipped ? 'Yes' : 'No') +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#weights-data').innerHTML = weights
+          .flatMap((row, c) =>
+            row.map((v, j) => {
+              const sw = p.scales[p.channels === 2 ? c : 0];
+              return (
+                '<tr><th scope="row">' +
+                ['A', 'B'][c] +
+                (j + 1) +
+                ' / ' +
+                num(v) +
+                '</th><td>' +
+                p.qweights[c][j] +
+                '</td><td>' +
+                scale(sw) +
+                '</td><td>' +
+                num(p.qweights[c][j] * sw) +
+                '</td></tr>'
+              );
+            }),
+          )
+          .join('');
+        const hex = p.bytes.map((v) => v.toString(16).padStart(2, '0'));
+        document.querySelector('#byte-values').textContent = Array.from(
+          { length: Math.ceil(hex.length / 8) },
+          (_, i) => hex.slice(i * 8, i * 8 + 8).join(' '),
+        ).join(String.fromCharCode(10));
+        document.querySelector('#calibration-values').textContent =
+          'Calibration inputs (separate from D1–D4):' +
+          String.fromCharCode(10) +
+          p.calibrationData.map(vec).join(String.fromCharCode(10)) +
+          String.fromCharCode(10) +
+          'Input scale: ' +
+          scale(p.inputScale);
+        document.querySelector('#agreement-data').innerHTML = report.results
+          .map(
+            (v) =>
+              '<tr><th scope="row">' +
+              v.id +
+              '<small>' +
+              vec(v.x) +
+              '</small></th><td>' +
+              v.floatWinner +
+              '</td><td>' +
+              v.quantizedWinner +
+              '</td><td>' +
+              v.clipped +
+              '</td></tr>',
+          )
+          .join('');
+        draw(report);
+      }
+      document.querySelector('form').addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        render();
+      });
+      addEventListener('resize', () => draw(report));
+      render();
+    </script>
+  </body>
+</html>

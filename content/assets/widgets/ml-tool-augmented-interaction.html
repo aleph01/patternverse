@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tool interaction and retry walkthrough</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #record-table th:first-child {
+        width: 16%;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      th,
+      td {
+        overflow-wrap: anywhere;
+        vertical-align: top;
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font:
+          13px/1.6 ui-monospace,
+          monospace;
+      }
+      #rank-table th:first-child {
+        width: 31%;
+      }
+      #rank-table th:nth-child(2) {
+        width: 37%;
+      }
+      .example-card {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+
+      #rank-table th:first-child {
+        width: 15%;
+      }
+      #rank-table th:nth-child(2) {
+        width: 30%;
+      }
+
+      #state-table th:first-child {
+        width: 52%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>A request is checked before it changes state.</strong> Run a fictional equipment
+      reservation through local application and service rules. Model proposals are scripted. This
+      page computes gates, stock changes, receipts, and retry deduplication; no language model or
+      network service runs.
+    </p>
+    <form>
+      <div>
+        <label for="quantity">Tripods requested</label
+        ><select id="quantity">
+          <option value="0">0 — invalid argument</option>
+          <option value="1">1</option>
+          <option value="3" selected>3</option>
+          <option value="6">6 — exceeds stock</option>
+        </select>
+      </div>
+      <div>
+        <label for="actor">Simulated user role</label
+        ><select id="actor">
+          <option value="clerk" selected>Clerk — may reserve</option>
+          <option value="viewer">Viewer — lookup only</option>
+        </select>
+      </div>
+      <div>
+        <label for="confirmed">Request confirmation</label
+        ><select id="confirmed">
+          <option value="yes" selected>Confirmed for this request</option>
+          <option value="no">Not confirmed</option>
+        </select>
+      </div>
+      <div>
+        <label for="delivery">First successful write response</label
+        ><select id="delivery">
+          <option value="normal" selected>Delivered</option>
+          <option value="lost">Lost after commit</option>
+        </select>
+      </div>
+      <div>
+        <label for="limit">Maximum write attempts</label
+        ><select id="limit">
+          <option value="1">1 — no retry</option>
+          <option value="2" selected>2 — allow one retry</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions">
+      <button id="replay" type="button">Replay from start</button
+      ><button id="next" type="button">Next event</button
+      ><button id="finish" type="button">Show complete run</button
+      ><button id="reset" type="button">Reset inputs</button>
+    </div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <h2>Client observation and simulated server state</h2>
+    <p class="note">
+      Both views are exposed for teaching. A real client cannot inspect hidden server state just
+      because a response timed out. The initial lookup can become stale; this sequential fixture has
+      no competing clients.
+    </p>
+    <table id="state-table">
+      <thead>
+        <tr>
+          <th>Client observation</th>
+          <th>Simulated server state</th>
+        </tr>
+      </thead>
+      <tbody id="state-data"></tbody>
+    </table>
+    <h2>Executed event trace</h2>
+    <p class="note">
+      Replay reveals only events reached so far. Changing any input recomputes a fresh run from five
+      available tripods and an empty reservation ledger.
+    </p>
+    <div id="trace"></div>
+    <details id="contract">
+      <summary>Inspect the proposal, host envelope, and last observed result</summary>
+      <pre id="payload"></pre>
+    </details>
+    <details id="assumptions">
+      <summary>Execution rules and limits</summary>
+      <p>
+        The scripted model requests reserve_inventory with exactly item="tripod" and an integer
+        quantity from 1 to 10. The host validates that contract, requires the clerk role and
+        confirmation, and attaches the key demo-17 to the checked request. The role and confirmation
+        selectors simulate policy; they are not authentication or real consent for a real booking.
+      </p>
+      <p>
+        One read-only lookup always runs first and counts as one tool attempt. Rejected host
+        proposals cause no write attempts. The service rejects quantities above current stock. A
+        successful write atomically reduces stock and stores its result under the request key. A
+        retry with the same key and identical item/quantity returns the stored reservation; changed
+        parameters under that key are rejected. State is in-memory and sequential, not durable or
+        concurrent.
+      </p>
+      <p>
+        The loss setting drops only the first successful write response, after commit. Error
+        responses are delivered. One or two write attempts are allowed; a second attempt occurs only
+        after that simulated loss. UNKNOWN means the client lacks a receipt. The simulator exposes
+        the committed reservation separately; the client does not infer it. No general retry
+        scheduler, backoff, reconciliation API, rollback, prompt-injection defense, real identity
+        service, network, model selection, or generated reply is simulated.
+      </p>
+      <p>
+        The same key applies only to this one logical request and its retry. Every changed input
+        starts an independent fixture with an empty ledger; reusing demo-17 across different real
+        operations would be incorrect. The two write attempts use exactly the same immutable
+        envelope. Stop after a terminal receipt, a policy gate, or the attempt budget. Total tool
+        attempts = one lookup + executed write attempts.
+      </p>
+    </details>
+    <script>
+      'use strict';
+      const requestKey = 'demo-17';
+      const makeServer = () => ({ available: 5, reservationCount: 0, ledger: {} });
+      const makeProposal = (quantity) => ({
+        name: 'reserve_inventory',
+        arguments: { item: 'tripod', quantity },
+      });
+      function validateProposal(p) {
+        if (!p || p.name !== 'reserve_inventory') return 'UNKNOWN_TOOL';
+        const a = p.arguments;
+        if (
+          !a ||
+          typeof a !== 'object' ||
+          Array.isArray(a) ||
+          Object.keys(a).sort().join(',') !== 'item,quantity' ||
+          a.item !== 'tripod' ||
+          !Number.isInteger(a.quantity) ||
+          a.quantity < 1 ||
+          a.quantity > 10
+        )
+          return 'INVALID';
+        return 'VALID';
+      }
+      function reserve(server, a) {
+        if (
+          !a ||
+          typeof a.request_key !== 'string' ||
+          !a.request_key ||
+          validateProposal({
+            name: 'reserve_inventory',
+            arguments: { item: a.item, quantity: a.quantity },
+          }) !== 'VALID'
+        )
+          return { status: 'INVALID' };
+        const fingerprint = JSON.stringify([a.item, a.quantity]);
+        if (Object.hasOwn(server.ledger, a.request_key)) {
+          const prior = server.ledger[a.request_key];
+          if (prior.fingerprint !== fingerprint) return { status: 'KEY_CONFLICT' };
+          return { ...prior.result, replayed: true };
+        }
+        if (a.quantity > server.available)
+          return { status: 'OUT_OF_STOCK', available: server.available };
+        server.available -= a.quantity;
+        server.reservationCount++;
+        const result = {
+          status: 'SUCCESS',
+          reservation_id: 'R' + server.reservationCount,
+          quantity: a.quantity,
+          remaining: server.available,
+        };
+        server.ledger[a.request_key] = { fingerprint, result };
+        return { ...result, replayed: false };
+      }
+      function compute(quantity, actor, confirmed, delivery, limit) {
+        const server = makeServer(),
+          proposal = makeProposal(quantity),
+          envelope = { ...proposal.arguments, request_key: requestKey },
+          events = [];
+        let client = 'LOOKUP_READY',
+          observed = null,
+          writeAttempts = 0,
+          lookup = null;
+        function record(title, detail) {
+          events.push({
+            title,
+            detail,
+            client,
+            observed: observed ? { ...observed } : null,
+            available: server.available,
+            reservations: server.reservationCount,
+            writeAttempts,
+            toolAttempts: 1 + writeAttempts,
+          });
+        }
+        lookup = { item: 'tripod', available: server.available };
+        record(
+          '1. Read inventory',
+          'get_inventory(tripod) returned available=5. This is a read-only result.',
+        );
+        client = 'PROPOSED';
+        record(
+          '2. Propose a call',
+          'Scripted proposal: reserve_inventory({item:tripod, quantity:' +
+            quantity +
+            '}). No reservation yet.',
+        );
+        const validity = validateProposal(proposal);
+        if (validity !== 'VALID') {
+          client = validity;
+          record(
+            '3. Host rejects arguments',
+            'Quantity must be an integer from 1 to 10. No write executed.',
+          );
+        } else if (actor !== 'clerk') {
+          client = 'DENIED';
+          record(
+            '3. Host denies permission',
+            'A viewer may look up inventory but may not reserve it. No write executed.',
+          );
+        } else if (!confirmed) {
+          client = 'NEEDS_CONFIRMATION';
+          record(
+            '3. Host waits for confirmation',
+            'This fictional policy requires confirmation for the exact request. No write executed.',
+          );
+        } else {
+          client = 'APPROVED';
+          record(
+            '3. Host checks pass',
+            'Valid arguments, clerk permission, and confirmation. Host attaches request key demo-17.',
+          );
+          for (let attempt = 1; attempt <= limit; attempt++) {
+            writeAttempts++;
+            const result = reserve(server, envelope);
+            if (attempt === 1 && delivery === 'lost' && result.status === 'SUCCESS') {
+              client = 'UNKNOWN';
+              observed = null;
+              record(
+                '4. Write commits; response is lost',
+                'The server created R1, but the client received no receipt. A timeout does not prove failure.',
+              );
+              if (attempt === limit) break;
+            } else {
+              observed = result;
+              client = result.status;
+              record(
+                attempt === 1
+                  ? '4. Tool result delivered'
+                  : '5. Retry returns the same reservation',
+                result.status === 'SUCCESS'
+                  ? result.replayed
+                    ? 'Same key and parameters: return R1 again without changing stock.'
+                    : 'Service reserved ' +
+                      quantity +
+                      ' tripod(s), returned R1, and left ' +
+                      server.available +
+                      ' available.'
+                  : 'Service rejected the request: ' + result.status + '. Stock is unchanged.',
+              );
+              break;
+            }
+          }
+        }
+        return {
+          quantity,
+          actor,
+          confirmed,
+          delivery,
+          limit,
+          proposal,
+          envelope,
+          lookup,
+          events,
+          final: events[events.length - 1],
+        };
+      }
+      const esc = (s) =>
+        String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+      let report,
+        cursor = Infinity;
+      function draw(r, s) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          h = mobile ? 1020 : 590,
+          cw = mobile ? 328 : 330;
+        const rect = (x, y, height) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          cw +
+          '" height="' +
+          height +
+          '" rx="8" fill="var(--panel)" stroke="var(--accent)"/>';
+        const text = (x, y, size, str, b = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (b ? ' font-weight="700"' : '') +
+          '>' +
+          esc(str) +
+          '</text>';
+        let svg =
+          '<title id="flow-title">A tool request passes through the application and returns an observed result</title><desc id="flow-desc">Scripted model proposal, host checks, local service execution, and result delivery are separate stages. The result can inform a later model turn; no language model runs here.</desc>';
+        const x2 = mobile ? 0 : 350,
+          y2 = mobile ? 220 : 0,
+          x3 = mobile ? 0 : 350,
+          y3 = mobile ? 440 : 245,
+          x4 = 0,
+          y4 = mobile ? 660 : 245;
+        svg +=
+          rect(0, 0, 180) +
+          text(12, 29, 17, '1. Model proposes', true) +
+          text(12, 66, 14, 'reserve_inventory') +
+          text(12, 98, 14, 'item: tripod · quantity: ' + r.quantity) +
+          text(12, 140, 13, 'Scripted proposal; no model runs.');
+        svg +=
+          rect(x2, y2, 180) +
+          text(x2 + 12, y2 + 29, 17, '2. Application checks', true) +
+          text(x2 + 12, y2 + 66, 14, 'Arguments → permission → confirmation') +
+          text(x2 + 12, y2 + 98, 14, 'Attach key: demo-17') +
+          text(x2 + 12, y2 + 140, 13, 'The application controls execution.');
+        svg +=
+          rect(x3, y3, 180) +
+          text(x3 + 12, y3 + 29, 17, '3. Tool executes locally', true) +
+          text(x3 + 12, y3 + 66, 14, 'Available stock: ' + s.available) +
+          text(x3 + 12, y3 + 98, 14, 'Reservations created: ' + s.reservations) +
+          text(x3 + 12, y3 + 140, 13, 'A repeated key does not repeat the write.');
+        svg +=
+          rect(x4, y4, 180) +
+          text(x4 + 12, y4 + 29, 17, '4. Return observation', true) +
+          text(x4 + 12, y4 + 66, 14, 'Client: ' + s.client, true) +
+          text(
+            x4 + 12,
+            y4 + 98,
+            14,
+            s.observed && s.observed.reservation_id
+              ? 'Receipt: ' + s.observed.reservation_id
+              : 'No reservation receipt observed',
+          ) +
+          text(x4 + 12, y4 + 140, 13, 'Result can inform the next model turn.');
+        if (mobile)
+          svg += text(155, 209, 22, '↓') + text(155, 429, 22, '↓') + text(155, 649, 22, '↓');
+        else
+          svg +=
+            text(333, 90, 22, '→') +
+            text(507, 225, 22, '↓') +
+            text(333, 335, 22, '←') +
+            text(2, 225, 22, '↑');
+        const y = mobile ? 905 : 495;
+        svg +=
+          text(0, y, 16, 'Proposed ≠ executed ≠ observed', true) +
+          text(
+            0,
+            y + 33,
+            14,
+            'Tool attempts: ' + s.toolAttempts + '; write attempts: ' + s.writeAttempts,
+          ) +
+          text(
+            0,
+            y + 66,
+            13,
+            mobile
+              ? 'Only a delivered result is a client observation.'
+              : 'The service can commit even when its acknowledgement is lost.',
+          );
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      function render() {
+        report = compute(
+          +document.querySelector('#quantity').value,
+          document.querySelector('#actor').value,
+          document.querySelector('#confirmed').value === 'yes',
+          document.querySelector('#delivery').value,
+          +document.querySelector('#limit').value,
+        );
+        const shown = Math.min(cursor, report.events.length),
+          s = report.events[shown - 1];
+        document.querySelector('output').textContent =
+          'Event ' +
+          shown +
+          '/' +
+          report.events.length +
+          '. Client: ' +
+          s.client +
+          '. Server: ' +
+          s.available +
+          ' available, ' +
+          s.reservations +
+          ' reservation(s). ' +
+          s.toolAttempts +
+          ' tool attempts.';
+        document.querySelector('#state-data').innerHTML =
+          '<tr><td><strong>' +
+          s.client +
+          '</strong><small>' +
+          (s.observed
+            ? 'Observed result: ' + esc(JSON.stringify(s.observed))
+            : 'No reservation receipt') +
+          '</small><small>Initial lookup: 5 available</small></td><td>' +
+          s.available +
+          ' available<br>' +
+          s.reservations +
+          ' reservation(s)<small>' +
+          s.writeAttempts +
+          ' write attempt(s)</small></td></tr>';
+        document.querySelector('#trace').innerHTML = report.events
+          .slice(0, shown)
+          .map(
+            (e) =>
+              '<div class="example-card"><strong>' +
+              esc(e.title) +
+              '</strong><p>' +
+              esc(e.detail) +
+              '</p><small>Client ' +
+              e.client +
+              ' · server ' +
+              e.available +
+              ' available · ' +
+              e.toolAttempts +
+              ' tool attempt(s)</small></div>',
+          )
+          .join('');
+        document.querySelector('#payload').textContent = JSON.stringify(
+          {
+            scripted_proposal: shown >= 2 ? report.proposal : null,
+            host_envelope: s.writeAttempts ? report.envelope : null,
+            last_observed_result: s.observed,
+          },
+          null,
+          2,
+        );
+        document.querySelector('#next').disabled = shown === report.events.length;
+        document.querySelector('#finish').disabled = shown === report.events.length;
+        draw(report, s);
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelector('form').addEventListener('change', () => {
+        cursor = Infinity;
+        render();
+      });
+      document.querySelector('#replay').addEventListener('click', () => {
+        cursor = 1;
+        render();
+      });
+      document.querySelector('#next').addEventListener('click', () => {
+        cursor = Math.min(cursor + 1, report.events.length);
+        render();
+      });
+      document.querySelector('#finish').addEventListener('click', () => {
+        cursor = Infinity;
+        render();
+      });
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        cursor = Infinity;
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

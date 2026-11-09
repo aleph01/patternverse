@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="840" viewBox="0 0 1080 840" role="img" aria-labelledby="title desc" data-systemic-style="light-editorial">
+<title id="title">Checking that produces less information</title>
+<desc id="desc">A fictional homework exchange: Asha asks about progress; Leo answers briefly and turns away; Asha asks again and moves closer; Leo stops answering. Each event includes an invented first-person account. The green return arrow highlights Asha's account that less information prompts renewed checking. Arrows represent the reconstructed sequence, not proven causes or equal responsibility.</desc>
+<defs>
+<marker id="gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#a6aca3" stroke-width="1.25"/></marker>
+<marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#00855b" stroke-width="1.5"/></marker>
+</defs>
+<style>
+:root{color-scheme:only light;--paper:#ffffff;--ink:#252c28;--secondary:#a6aca3;--neutral:#f1f2ef;--mint:#edf5f0;--accent:#00855b}
+svg{background:#ffffff;color:var(--ink)}
+text{fill:var(--ink);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:400;letter-spacing:0}
+path,rect{vector-effect:non-scaling-stroke;stroke-linecap:butt;stroke-linejoin:round}
+.paper{fill:var(--paper)}.episode{fill:var(--neutral);stroke:var(--secondary);stroke-width:1}
+.sequence{fill:none;stroke:var(--secondary);stroke-width:1.25}
+.return{fill:none;stroke:var(--accent);stroke-width:1.5}
+</style>
+<rect width="1080" height="840" class="paper"/>
+<text x="540" y="46" font-size="27" text-anchor="middle">Asha and Leo · reconstructed episode</text><path d="M480 210H620" class="sequence" marker-end="url(#gray)"/><path d="M810 320V470" class="sequence" marker-end="url(#gray)"/><path d="M620 580H480" class="sequence" marker-end="url(#gray)"/><path d="M100 580H42V210H100" class="return" marker-end="url(#green)"/><g data-participant="Asha"><rect x="100" y="100" width="380" height="220" class="episode"/><text x="122" y="134" font-size="24" text-anchor="start">Asha</text><text x="122" y="179" font-size="28" text-anchor="start">asks about homework</text><text x="122" y="264" font-size="24" text-anchor="start">“I need to know</text><text x="122" y="297" font-size="24" text-anchor="start">where he is up to.”</text></g><g data-participant="Leo"><rect x="620" y="100" width="380" height="220" class="episode"/><text x="642" y="134" font-size="24" text-anchor="start">Leo</text><text x="642" y="179" font-size="28" text-anchor="start">answers briefly,</text><text x="642" y="221" font-size="28" text-anchor="start">turns away</text><text x="642" y="264" font-size="24" text-anchor="start">“It feels like</text><text x="642" y="297" font-size="24" text-anchor="start">an inspection.”</text></g><g data-participant="Asha"><rect x="620" y="470" width="380" height="220" class="episode"/><text x="642" y="504" font-size="24" text-anchor="start">Asha</text><text x="642" y="549" font-size="28" text-anchor="start">asks again, moves closer</text><text x="642" y="634" font-size="24" text-anchor="start">“He is ignoring it.”</text></g><g data-participant="Leo"><rect x="100" y="470" width="380" height="220" class="episode"/><text x="122" y="504" font-size="24" text-anchor="start">Leo</text><text x="122" y="549" font-size="28" text-anchor="start">stops answering</text><text x="122" y="634" font-size="24" text-anchor="start">“I need space.”</text></g><path d="M46 746H94" class="return" marker-end="url(#green)"/><text x="112" y="754" font-size="24" text-anchor="start">Green traces the return to checking.</text><text x="46" y="803" font-size="24" text-anchor="start">Arrows show a reconstructed sequence, not proven causes.</text>
+</svg>

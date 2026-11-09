@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Training and serving transform parity explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #ranking th:first-child {
+        width: 45%;
+      }
+      #vectors th:first-child {
+        width: 42%;
+      }
+      #history {
+        font-size: 13px;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+
+      #records td:first-child,
+      #records th:first-child {
+        width: 18%;
+      }
+      #records td:last-child,
+      #records th:last-child {
+        width: 35%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Send the same raw request through the saved training transform and a selected serving path.
+      Numeric state is fitted from the stated records; the model coefficients are fictional and
+      fixed. No model is trained or evaluated for accuracy.
+    </p>
+    <form>
+      <div>
+        <label for="request">Raw request</label
+        ><select id="request">
+          <option value="express">20 km · express</option>
+          <option value="standard">20 km · standard</option>
+          <option value="missing">Missing distance · express</option>
+          <option value="unknown">20 km · unknown drone service</option>
+        </select>
+      </div>
+      <div>
+        <label for="mode">Serving transform</label
+        ><select id="mode">
+          <option value="batch" selected>Refit numeric state on live batch</option>
+          <option value="shared">Reuse saved T1 artifact</option>
+          <option value="vocabulary">Reverse category slot mapping</option>
+          <option value="double">Apply normalization twice</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="mechanism"></div>
+    <p id="interpretation" class="note"></p>
+    <details id="state">
+      <summary>Inspect feature positions, state and model calculation</summary>
+      <table id="features">
+        <caption>
+          Features passed to the same model
+        </caption>
+        <thead>
+          <tr>
+            <th>Position · meaning</th>
+            <th>Saved T1 path</th>
+            <th>Serving path</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="artifacts">
+        <caption>
+          Actual transform settings
+        </caption>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Saved T1</th>
+            <th>Serving</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="calculation"></p>
+      <p id="batch"></p>
+      <p id="identity"></p>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and optional calculation</summary>
+      <p>
+        Training rows are (0 km, standard), (0 km, express), (20 km, standard), (20 km, express).
+        Fit a numeric mean and population standard deviation, ignoring missing numeric values. A
+        constant feature uses scale one. T1 has mean 10 km, scale 10 km, and vocabulary [standard,
+        express] in first-occurrence order. Vocabulary and feature order stay fixed at serving
+        unless the deliberate reversal is selected. A missing distance is imputed with the active
+        state's mean; a new service maps to its reserved unknown slot.
+      </p>
+      <p>
+        The live-batch error refits numeric statistics on the request's distance plus a second
+        request at 40 km. Null is excluded from fitting. It keeps T1's vocabulary. Double
+        normalization applies the saved numeric normalization to its own already-normalized result;
+        this is an intentional unit/representation error. It does not repeat category lookup.
+      </p>
+      <p>
+        Feature order is [z, slot 0, slot 1, unknown]. The model expects standard in slot 0, express
+        in slot 1, and score s = z + 0 × slot 0 + 2 × slot 1 − unknown − 2. Model p = 1/(1 +
+        exp(−s)); flag when p ≥ 0.5. The coefficients and policies are teaching choices, not learned
+        weights or calibrated deployment probabilities.
+      </p>
+      <p>
+        Feature parity uses absolute tolerance 10⁻¹² plus relative tolerance 10⁻⁹ times the
+        saved-path magnitude. State comparison checks mean, scale and vocabulary; operation
+        comparison also checks double normalization. A match on one vector does not certify all
+        inputs or artifact compatibility. Reset restores the deliberately mismatched default and
+        closes optional details.
+      </p>
+    </details>
+    <script>
+      const training = [
+        { distance: 0, service: 'standard' },
+        { distance: 0, service: 'express' },
+        { distance: 20, service: 'standard' },
+        { distance: 20, service: 'express' },
+      ];
+      const requests = {
+        express: { distance: 20, service: 'express' },
+        standard: { distance: 20, service: 'standard' },
+        missing: { distance: null, service: 'express' },
+        unknown: { distance: 20, service: 'drone' },
+      };
+      const modes = ['batch', 'shared', 'vocabulary', 'double'];
+      const modeNames = {
+        batch: 'Live-batch refit',
+        shared: 'Saved T1 artifact',
+        vocabulary: 'Reversed vocabulary',
+        double: 'Double normalization',
+      };
+      const featureNames = ['z_distance', 'slot 0 · standard', 'slot 1 · express', 'unknown slot'];
+      const $ = (id) => document.getElementById(id),
+        fmt = (n, d = 3) => n.toFixed(d);
+      let report;
+      function fitNumeric(values) {
+        const valid = values.filter((v) => v !== null && Number.isFinite(v));
+        if (!valid.length) throw new Error('At least one finite distance required');
+        const mean = valid.reduce((s, v) => s + v, 0) / valid.length,
+          variance = valid.reduce((s, v) => s + (v - mean) ** 2, 0) / valid.length;
+        return { mean, scale: Math.sqrt(variance) || 1 };
+      }
+      const saved = {
+        ...fitNumeric(training.map((r) => r.distance)),
+        vocabulary: [...new Set(training.map((r) => r.service))],
+      };
+      function transform(raw, state, twice = false) {
+        const x = raw.distance === null ? state.mean : raw.distance;
+        if (!Number.isFinite(x)) throw new Error('Invalid distance');
+        let z = (x - state.mean) / state.scale;
+        if (twice) z = (z - state.mean) / state.scale;
+        const slot = state.vocabulary.indexOf(raw.service);
+        return {
+          imputed: x,
+          features: [z, Number(slot === 0), Number(slot === 1), Number(slot < 0)],
+        };
+      }
+      function model(features) {
+        const score = features[0] + 2 * features[2] - features[3] - 2;
+        const p = 1 / (1 + Math.exp(-score));
+        return { score, p, flag: p >= 0.5 };
+      }
+      function withinTolerance(a, b) {
+        return Math.abs(a - b) <= 1e-12 + 1e-9 * Math.abs(a);
+      }
+      function buildReport(request, mode) {
+        if (!Object.hasOwn(requests, request) || !modes.includes(mode))
+          throw new Error('Unsupported setting');
+        const raw = { ...requests[request] },
+          state = { ...saved, vocabulary: [...saved.vocabulary] };
+        if (mode === 'batch') Object.assign(state, fitNumeric([raw.distance, 40]));
+        if (mode === 'vocabulary') state.vocabulary.reverse();
+        const reference = transform(raw, saved),
+          serving = transform(raw, state, mode === 'double');
+        return {
+          request,
+          mode,
+          raw,
+          state,
+          reference: { ...reference, ...model(reference.features) },
+          serving: { ...serving, ...model(serving.features) },
+          featureMatch: reference.features.every((v, i) => withinTolerance(v, serving.features[i])),
+          stateMatch: JSON.stringify(saved) === JSON.stringify(state),
+          operationMatch: mode !== 'double',
+        };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 770 : 470;
+        const text = (x, y, s, size = 16, c = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${c}">${s}</text>`;
+        const line = (x1, y1, x2, y2, c = '#a6aca3') =>
+          `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}"/>`;
+        const raw =
+          (r.raw.distance === null ? 'Missing distance' : r.raw.distance + ' km') +
+          ' · ' +
+          r.raw.service;
+        let out = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Same raw request transformed by saved and serving paths before the same model"><rect width="${width}" height="${height}" fill="#fff"/><g font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400">`;
+        out +=
+          text(0, 24, 'Same request, same model', mobile ? 19 : 21) +
+          text(0, 53, raw, 17) +
+          text(0, 80, 'Change preprocessing; observe feature parity', mobile ? 14 : 16, '#626962') +
+          line(0, 100, width, 100);
+        const panel = (path, state, x, y, label, green) => {
+          const c = green ? '#00855b' : '#252c28';
+          let s = text(x, y, label, 18, c);
+          s += text(
+            x,
+            y + 29,
+            `Mean ${fmt(state.mean, 1)} km · scale ${fmt(state.scale, 1)} km`,
+            14,
+            '#626962',
+          );
+          s += text(x, y + 54, `Slots: ${state.vocabulary.join(', ')}`, 14, '#626962');
+          s += line(x + 14, y + 68, x + 14, y + 90);
+          s += text(x + 26, y + 87, 'Apply transform', 14);
+          s += text(x, y + 121, '[' + path.features.map((v) => fmt(v, 1)).join(', ') + ']', 18, c);
+          s += text(x, y + 148, '[z, slot 0, slot 1, unknown]', 14, '#626962');
+          s += line(x + 14, y + 161, x + 14, y + 183);
+          s += text(x + 26, y + 181, 'Same fixed model M1', 14);
+          s += text(x, y + 219, `Score ${fmt(path.score)} · p ${fmt(path.p)}`, 17, c);
+          s += text(
+            x,
+            y + 249,
+            path.flag ? 'Flag at threshold 0.5' : 'No flag at threshold 0.5',
+            15,
+          );
+          return s;
+        };
+        if (mobile) {
+          out +=
+            panel(r.reference, saved, 0, 135, 'Saved training path · T1', true) +
+            line(0, 410, 328, 410) +
+            panel(r.serving, r.state, 0, 447, modeNames[r.mode], false);
+        } else {
+          out +=
+            panel(r.reference, saved, 0, 140, 'Saved training path · T1', true) +
+            line(337, 120, 337, 411) +
+            panel(r.serving, r.state, 355, 140, modeNames[r.mode], false);
+        }
+        out += text(
+          0,
+          mobile ? 749 : 451,
+          'Feature parity: ' +
+            (r.featureMatch ? 'match on this request' : 'mismatch on this request'),
+          mobile ? 15 : 17,
+          r.featureMatch ? '#00855b' : '#252c28',
+        );
+        return out + '</g></svg>';
+      }
+      function render() {
+        report = buildReport($('request').value, $('mode').value);
+        document.querySelector('output').textContent =
+          `Feature parity ${report.featureMatch ? 'matches' : 'differs'}. Saved-path p ${fmt(report.reference.p)}; serving p ${fmt(report.serving.p)}. Model weights unchanged.`;
+        $('mechanism').innerHTML = mechanismGraphic(report, innerWidth <= 520);
+        $('interpretation').textContent =
+          report.mode === 'shared'
+            ? 'The saved artifact and single-application rule produce the same vector on this request. This is parity evidence, not an accuracy or calibration result.'
+            : report.featureMatch
+              ? 'These vectors happen to match on this request, despite a difference in state or operations. A single matching fixture does not establish compatible releases.'
+              : 'The serving path changes features before the same weights see them. Restore compatible operations and fitted state; matching raw field names and vector length is insufficient.';
+        $('features').querySelector('tbody').innerHTML = featureNames
+          .map(
+            (name, i) =>
+              `<tr><th scope="row">${i} · ${name}</th><td>${fmt(report.reference.features[i], 6)}</td><td>${fmt(report.serving.features[i], 6)}</td></tr>`,
+          )
+          .join('');
+        $('artifacts').querySelector('tbody').innerHTML = [
+          ['Mean (km)', fmt(saved.mean, 6), fmt(report.state.mean, 6)],
+          ['Scale (km)', fmt(saved.scale, 6), fmt(report.state.scale, 6)],
+          ['Vocabulary', saved.vocabulary.join(', '), report.state.vocabulary.join(', ')],
+          ['Numeric passes', '1', report.mode === 'double' ? '2' : '1'],
+        ]
+          .map(
+            (row) => `<tr><th scope="row">${row[0]}</th><td>${row[1]}</td><td>${row[2]}</td></tr>`,
+          )
+          .join('');
+        const missingPolicy =
+          report.raw.distance === null
+            ? `Missing distance is filled with ${fmt(report.reference.imputed, 1)} km on the saved path and ${fmt(report.serving.imputed, 1)} km on serving.`
+            : `Observed distance ${fmt(report.raw.distance, 1)} km enters both numeric transforms; no imputation is applied.`;
+        $('calculation').textContent =
+          `Saved-path score ${fmt(report.reference.score, 6)} gives p ${fmt(report.reference.p, 6)}. Serving score ${fmt(report.serving.score, 6)} gives p ${fmt(report.serving.p, 6)}. Flags are ${report.reference.flag ? 'yes' : 'no'} and ${report.serving.flag ? 'yes' : 'no'}, using p ≥ 0.5. ${missingPolicy}`;
+        $('batch').textContent =
+          report.mode === 'batch'
+            ? `Serving refits on [${report.raw.distance === null ? 'missing' : report.raw.distance}, 40] km, excluding missing values. These requests never refit T1.`
+            : 'Training statistics remain frozen; no serving-batch values are fitted in this mode.';
+        $('identity').textContent =
+          `Fitted state ${report.stateMatch ? 'matches' : 'differs'}; operation count ${report.operationMatch ? 'matches' : 'differs'}. Feature comparison uses the stated numeric tolerance.`;
+      }
+      function reset() {
+        $('request').value = 'express';
+        $('mode').value = 'batch';
+        for (const d of document.querySelectorAll('details')) d.open = false;
+        render();
+      }
+      for (const id of ['request', 'mode']) $(id).addEventListener('change', render);
+      $('reset').addEventListener('click', reset);
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

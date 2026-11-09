@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Self-supervised target and loss explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      svg {
+        max-width: 440px;
+        margin: 0 auto 14px;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-size: 14px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Raw words supply the targets. A tiny count model is fitted to five training lines, then scored
+      on a different query. It learns no neural embeddings and measures no intent-classification
+      performance.
+    </p>
+    <form aria-label="Self-supervised objective settings">
+      <div>
+        <label for="objective">Pretraining objective</label>
+        <select id="objective">
+          <option value="causal" selected>Next token · previous-word counts</option>
+          <option value="masked">Masked token · neighbor counts</option>
+        </select>
+      </div>
+      <div>
+        <label for="query">Held-out query</label>
+        <select id="query">
+          <option value="0" selected>the parcel arrived safely</option>
+          <option value="1">the refund arrived late</option>
+        </select>
+      </div>
+      <div>
+        <label for="position">Target position</label>
+        <select id="position">
+          <option value="0">1 · the</option>
+          <option value="1">2 · parcel</option>
+          <option value="2">3 · arrived</option>
+          <option value="3" selected>4 · safely</option>
+        </select>
+      </div>
+      <div>
+        <label for="alpha">Smoothing per word</label>
+        <select id="alpha">
+          <option value="0.5">0.5</option>
+          <option value="1" selected>1 · add-one</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button type="button" id="reset">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <svg role="img" aria-label="Generated input, target, and count-based prediction"></svg>
+    <p id="context" class="note"></p>
+    <div class="history">
+      <table>
+        <caption>
+          Prediction distribution for this context
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Word</th>
+            <th scope="col">Observed count</th>
+            <th scope="col">Probability</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <details>
+      <summary>Training data and exact rules</summary>
+      <p>The training corpus is the following five lines. Both query sentences are excluded.</p>
+      <pre>
+the parcel arrived late
+the parcel arrived late
+the parcel arrived early
+the refund arrived safely
+the refund arrived quickly</pre>
+      <p>
+        Tokenization splits these fixed lowercase sentences on spaces. All four words of each line
+        become targets: 20 targets and eight vocabulary words. [BOS] and [EOS] are context markers,
+        never targets. Duplicate lines contribute duplicate counts.
+      </p>
+      <p>
+        Next-token inputs are prefixes with no future tokens; this miniature predictor uses only the
+        immediately preceding word. Masked-token inputs contain one [MASK]; this predictor uses only
+        the immediate left and right words. It does not read the hidden target. Training and query
+        use the same context rules.
+      </p>
+      <p>
+        For each vocabulary word, probability = (observed count + smoothing) / (context total +
+        smoothing × 8). For an unseen context the probabilities are uniform. Target loss =
+        −ln(target probability), in nats. The table sums to one before display rounding.
+      </p>
+      <p>
+        These objectives condition on different information, so their losses are not a ranking of
+        representation quality. No downstream head is trained. The query target is used to score the
+        prediction only; it is not added to training.
+      </p>
+    </details>
+    <script>
+      const trainingLines = [
+        'the parcel arrived late',
+        'the parcel arrived late',
+        'the parcel arrived early',
+        'the refund arrived safely',
+        'the refund arrived quickly',
+      ];
+      const queries = ['the parcel arrived safely', 'the refund arrived late'];
+      const sentences = trainingLines.map((line) => line.split(' '));
+      const vocabulary = [...new Set(sentences.flat())].sort();
+      const form = document.querySelector('form');
+      const chart = document.querySelector('svg');
+      const output = document.querySelector('output');
+      function makeExample(tokens, index, mode) {
+        const left = index ? tokens[index - 1] : '[BOS]';
+        const right = index + 1 < tokens.length ? tokens[index + 1] : '[EOS]';
+        return {
+          target: tokens[index],
+          input:
+            mode === 'causal'
+              ? tokens.slice(0, index).join(' ') || '[BOS]'
+              : tokens.map((token, i) => (i === index ? '[MASK]' : token)).join(' '),
+          context: mode === 'causal' ? [left] : [left, right],
+        };
+      }
+      function fit(lines, mode) {
+        const examples = lines.flatMap((tokens) =>
+          tokens.map((_, i) => makeExample(tokens, i, mode)),
+        );
+        const counts = new Map();
+        for (const example of examples) {
+          const key = JSON.stringify(example.context);
+          if (!counts.has(key)) counts.set(key, new Map());
+          const row = counts.get(key);
+          row.set(example.target, (row.get(example.target) || 0) + 1);
+        }
+        return { examples, counts };
+      }
+      function score(model, tokens, index, mode, alpha) {
+        const example = makeExample(tokens, index, mode);
+        if (!vocabulary.includes(example.target)) throw Error('Target outside fixed vocabulary');
+        const counts = model.counts.get(JSON.stringify(example.context)) || new Map();
+        const total = [...counts.values()].reduce((a, b) => a + b, 0);
+        const distribution = vocabulary.map((word) => ({
+          word,
+          count: counts.get(word) || 0,
+          probability: ((counts.get(word) || 0) + alpha) / (total + alpha * vocabulary.length),
+        }));
+        const probability = distribution.find((item) => item.word === example.target).probability;
+        return {
+          ...example,
+          total,
+          distribution,
+          probability,
+          loss: -Math.log(probability),
+          observed: counts.get(example.target) || 0,
+          denominator: total + alpha * vocabulary.length,
+        };
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(result) {
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', '0 0 328 300');
+        chart.append(node('title', {}, 'Input and target derived from the held-out raw query'));
+        const text = (x, y, size, value, bold = false) =>
+          chart.append(
+            node(
+              'text',
+              {
+                x,
+                y,
+                'font-family': 'system-ui, sans-serif',
+                'font-size': size,
+                'font-weight': bold ? 700 : 400,
+                fill: 'var(--ink, #252c28)',
+              },
+              value,
+            ),
+          );
+        chart.append(
+          node('rect', { width: 328, height: 112, rx: 8, fill: 'var(--panel, #f1f2ef)' }),
+        );
+        text(12, 28, 18, 'What the predictor may see', true);
+        const parts = result.input.split(' ');
+        const lineOne = parts.slice(0, 3).join(' '),
+          lineTwo = parts.slice(3).join(' ');
+        text(12, 60, 18, lineOne, true);
+        if (lineTwo) text(12, 87, 18, lineTwo, true);
+        text(12, 143, 18, 'Target from raw text: ' + result.target, true);
+        chart.append(
+          node('rect', { y: 164, width: 328, height: 128, rx: 8, fill: 'var(--panel, #f1f2ef)' }),
+        );
+        text(12, 194, 17, 'Count-model target probability', true);
+        text(12, 229, 27, (100 * result.probability).toFixed(1) + '%', true);
+        text(12, 261, 17, 'Target loss: ' + result.loss.toFixed(3) + ' nats');
+        chart.append(
+          node('rect', { x: 122, y: 212, width: 190, height: 18, fill: 'var(--line, #a6aca3)' }),
+        );
+        chart.append(
+          node('rect', {
+            x: 122,
+            y: 212,
+            width: 190 * result.probability,
+            height: 18,
+            fill: 'var(--accent, #00855b)',
+          }),
+        );
+      }
+      function render() {
+        const mode = document.querySelector('#objective').value;
+        const tokens = queries[Number(document.querySelector('#query').value)].split(' ');
+        const position = Number(document.querySelector('#position').value);
+        [...document.querySelector('#position').options].forEach(
+          (option, i) => (option.textContent = i + 1 + ' · ' + tokens[i]),
+        );
+        const alpha = Number(document.querySelector('#alpha').value);
+        const model = fit(sentences, mode);
+        const result = score(model, tokens, position, mode, alpha);
+        output.textContent =
+          model.examples.length +
+          ' training targets · ' +
+          vocabulary.length +
+          ' words. Query target “' +
+          result.target +
+          '”: ' +
+          (100 * result.probability).toFixed(1) +
+          '% probability; ' +
+          result.loss.toFixed(3) +
+          ' nats.';
+        draw(result);
+        document.querySelector('#context').textContent =
+          'Predictor context: ' +
+          result.context.join(' / ') +
+          '. Target count ' +
+          result.observed +
+          '; context total ' +
+          result.total +
+          '. Calculation: (' +
+          result.observed +
+          ' + ' +
+          alpha +
+          ') / (' +
+          result.total +
+          ' + ' +
+          alpha +
+          ' × ' +
+          vocabulary.length +
+          ').';
+        const tbody = document.querySelector('tbody');
+        tbody.replaceChildren();
+        for (const item of result.distribution) {
+          const row = document.createElement('tr');
+          for (const value of [
+            item.word + (item.word === result.target ? ' ← target' : ''),
+            item.count,
+            (100 * item.probability).toFixed(1) + '%',
+          ]) {
+            const td = document.createElement('td');
+            td.textContent = String(value);
+            row.append(td);
+          }
+          tbody.append(row);
+        }
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', render);
+      form.addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        render();
+      });
+      render();
+    </script>
+  </body>
+</html>

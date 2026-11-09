@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cascade routing, recall and work explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Route eight fictional parts through a cheap gate and a later detector. Supplied scores and
+      predictions do not change with the gate. Work costs are invented service demands, not observed
+      runtime.
+    </p>
+    <form>
+      <div>
+        <label for="threshold">Continue if gate score is at least</label
+        ><select id="threshold">
+          <option value="0.3">0.30</option>
+          <option value="0">0.00 · pass all</option>
+          <option value="0.1">0.10</option>
+          <option value="0.6">0.60</option>
+        </select>
+      </div>
+      <div>
+        <label for="mode">Supplied stage 2 answers</label
+        ><select id="mode">
+          <option value="matching">Match all eight labels</option>
+          <option value="errors">Miss B; falsely flag E</option>
+        </select>
+      </div>
+      <div>
+        <label for="gate">Gate work per part</label
+        ><select id="gate">
+          <option value="1">1 ms</option>
+          <option value="3">3 ms</option>
+        </select>
+      </div>
+      <div>
+        <label for="later">Stage 2 work per part</label
+        ><select id="later">
+          <option value="12">12 ms</option>
+          <option value="4">4 ms</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="work"></p>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect routes, final predictions and work</summary>
+      <table id="routes">
+        <caption>
+          Gate decisions · all eight parts
+        </caption>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Score</th>
+            <th>Route</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="predictions">
+        <caption>
+          Reviewed labels and supplied predictions
+        </caption>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>True</th>
+            <th>Later</th>
+            <th>Final</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="note">
+        Later lists offline supplied answers for every part, including stopped cases. Those answers
+        are not executed on stopped cases in the simulated cascade. One means defect; zero means
+        ordinary.
+      </p>
+      <p id="counts"></p>
+      <p id="conditional"></p>
+      <p id="equation"></p>
+      <p id="breakeven"></p>
+      <p id="paths"></p>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and limits</summary>
+      <p>
+        Continue when score ≥ threshold; equality passes. Stopped parts receive ordinary (zero).
+        Survivors receive their supplied later-stage answer. Gate scores are ranking signals, not
+        calibrated probabilities. All labels are known for evaluation and never determine the gate.
+      </p>
+      <p>
+        Work is the sum of gate calls times gate cost and later calls times later cost. Costs are
+        constant supplied milliseconds per part. The comparison runs the later model alone on every
+        part, without the gate. Common preprocessing, networking, queues, parallel execution and
+        batching are excluded. Sequential path work is not measured response latency or a throughput
+        estimate.
+      </p>
+      <p>
+        Recall is detected defects divided by all four reviewed defects. Gate retention is passed
+        defects divided by all defects; conditional later recall is detected defects divided by
+        passed defects. A zero denominator displays N/A. The matching-answer option is deliberately
+        perfect on these eight invented rows, not a claim about an actual detector. No model is
+        trained, called or timed.
+      </p>
+    </details>
+    <script>
+      const parts = Object.freeze(
+        [
+          { id: 'A', truth: 1, score: 0.9, later: 1 },
+          { id: 'B', truth: 1, score: 0.7, later: 1 },
+          { id: 'C', truth: 1, score: 0.5, later: 1 },
+          { id: 'D', truth: 1, score: 0.2, later: 1 },
+          { id: 'E', truth: 0, score: 0.8, later: 0 },
+          { id: 'F', truth: 0, score: 0.4, later: 0 },
+          { id: 'G', truth: 0, score: 0.1, later: 0 },
+          { id: 'H', truth: 0, score: 0.05, later: 0 },
+        ].map(Object.freeze),
+      );
+      const number = (v) => (v === null ? 'N/A' : Number(v.toFixed(3)).toString());
+      const ratio = (a, b) => (b === 0 ? null : a / b);
+      const names = (rows) => rows.map((p) => p.id).join(' ') || 'None';
+      function evaluate(rows, threshold, gateCost, laterCost) {
+        if (
+          !Array.isArray(rows) ||
+          !rows.length ||
+          !Number.isFinite(threshold) ||
+          threshold < 0 ||
+          threshold > 1 ||
+          !Number.isFinite(gateCost) ||
+          gateCost <= 0 ||
+          !Number.isFinite(laterCost) ||
+          laterCost <= 0 ||
+          new Set(rows.map((p) => p.id)).size !== rows.length ||
+          rows.some(
+            (p) =>
+              typeof p.id !== 'string' ||
+              !p.id.trim() ||
+              ![0, 1].includes(p.truth) ||
+              ![0, 1].includes(p.later) ||
+              !Number.isFinite(p.score) ||
+              p.score < 0 ||
+              p.score > 1,
+          )
+        )
+          throw new Error('Invalid rows, gate or work costs');
+        const cells = rows.map((p) => ({
+            ...p,
+            passed: p.score >= threshold,
+            final: p.score >= threshold ? p.later : 0,
+          })),
+          passed = cells.filter((p) => p.passed),
+          stopped = cells.filter((p) => !p.passed),
+          positives = cells.filter((p) => p.truth === 1),
+          retained = passed.filter((p) => p.truth === 1),
+          found = cells.filter((p) => p.final === 1 && p.truth === 1),
+          earlyMisses = stopped.filter((p) => p.truth === 1),
+          lateMisses = passed.filter((p) => p.truth === 1 && p.final === 0),
+          falseAlarms = cells.filter((p) => p.truth === 0 && p.final === 1),
+          baselineFound = cells.filter((p) => p.truth === 1 && p.later === 1);
+        const gateWork = cells.length * gateCost,
+          laterWork = passed.length * laterCost,
+          totalWork = gateWork + laterWork,
+          baselineWork = cells.length * laterCost;
+        return {
+          threshold,
+          gateCost,
+          laterCost,
+          cells,
+          passed,
+          stopped,
+          positives,
+          retained,
+          found,
+          earlyMisses,
+          lateMisses,
+          falseAlarms,
+          baselineFound,
+          retention: ratio(retained.length, positives.length),
+          conditionalRecall: ratio(found.length, retained.length),
+          recall: ratio(found.length, positives.length),
+          baselineRecall: ratio(baselineFound.length, positives.length),
+          precision: ratio(found.length, cells.filter((p) => p.final === 1).length),
+          gateWork,
+          laterWork,
+          totalWork,
+          baselineWork,
+          savedWork: baselineWork - totalWork,
+          meanWork: totalWork / cells.length,
+          continuedPathWork: passed.length ? gateCost + laterCost : null,
+          passFraction: passed.length / cells.length,
+          breakEvenFraction: 1 - gateCost / laterCost,
+        };
+      }
+      function buildReport(threshold = 0.3, mode = 'matching', gateCost = 1, laterCost = 12) {
+        if (
+          ![0, 0.1, 0.3, 0.6].includes(threshold) ||
+          !['matching', 'errors'].includes(mode) ||
+          ![1, 3].includes(gateCost) ||
+          ![4, 12].includes(laterCost)
+        )
+          throw new Error('Invalid control setting');
+        const rows = parts.map((p) => ({
+          ...p,
+          later:
+            mode === 'errors' && p.id === 'B' ? 0 : mode === 'errors' && p.id === 'E' ? 1 : p.later,
+        }));
+        return { ...evaluate(rows, threshold, gateCost, laterCost), mode };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 730 : 550;
+        const text = (x, y, v, size = 16, color = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">${v}</text>`;
+        const line = (x, y, xx, yy) =>
+          `<path d="M${x} ${y} L${xx} ${yy}" fill="none" stroke="#a6aca3"/>`;
+        const chips = (rows, x, y) =>
+          rows.length
+            ? rows
+                .map((p, i) => {
+                  const w = mobile ? 32 : 36,
+                    gap = mobile ? 8 : 6;
+                  return (
+                    `<rect x="${x + i * (w + gap)}" y="${y}" width="${w}" height="36" fill="${p.truth ? '#edf5f0' : '#f1f2ef'}" stroke="${p.truth ? '#00855b' : '#a6aca3'}"/>` +
+                    text(
+                      x + i * (w + gap) + w / 2 - 5,
+                      y + 24,
+                      p.id,
+                      16,
+                      p.truth ? '#00855b' : '#252c28',
+                    )
+                  );
+                })
+                .join('')
+            : text(x, y + 24, 'None', 16, '#626962');
+        let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="A gate divides parts into later inspection and irreversible early exits"><rect width="${width}" height="${height}" fill="#fff"/>`;
+        s +=
+          text(0, 24, 'Gate, then inspect survivors', 20) +
+          text(0, 52, `Continue if score ≥ ${r.threshold.toFixed(2)}`, 16) +
+          text(
+            0,
+            78,
+            mobile
+              ? 'Green = reviewed defect, not an input.'
+              : 'Green cells = reviewed defects for evaluation, not gate inputs.',
+            14,
+            '#626962',
+          );
+        s +=
+          text(0, 118, `Stage 1 · all ${r.cells.length} parts`, 18) +
+          text(
+            0,
+            146,
+            `${number(r.gateCost)} ms each · ${number(r.gateWork)} ms work`,
+            16,
+            '#626962',
+          ) +
+          chips(r.cells, 0, 164);
+        const leftY = mobile ? 274 : 288,
+          rightX = mobile ? 0 : 370,
+          rightY = mobile ? 460 : 288;
+        if (mobile)
+          s +=
+            line(156, 214, 156, 238) +
+            line(156, 238, 318, 238) +
+            line(318, 238, 318, 444) +
+            line(318, 258, 300, 258) +
+            line(318, 444, 156, 444);
+        else
+          s +=
+            line(165, 214, 165, 246) +
+            line(160, 246, 530, 246) +
+            line(160, 246, 160, 266) +
+            line(530, 246, 530, 266);
+        s +=
+          text(0, leftY, `Stage 2 · ${r.passed.length} parts`, 18) +
+          text(
+            0,
+            leftY + 28,
+            `${number(r.laterCost)} ms each · ${number(r.laterWork)} ms work`,
+            16,
+            '#626962',
+          ) +
+          chips(r.passed, 0, leftY + 48) +
+          text(
+            0,
+            leftY + 112,
+            'Flagged: ' + names(r.cells.filter((p) => p.final === 1)),
+            16,
+            '#00855b',
+          );
+        s +=
+          text(rightX, rightY, `Stopped · ${r.stopped.length} parts`, 18) +
+          text(rightX, rightY + 28, 'Set ordinary; skip stage 2', 16, '#626962') +
+          chips(r.stopped, rightX, rightY + 48) +
+          text(rightX, rightY + 122, 'Missed here: ' + names(r.earlyMisses), 16, '#00855b');
+        const costY = mobile ? 640 : 467;
+        s +=
+          text(
+            0,
+            costY,
+            `Work: ${number(r.gateWork)} + ${number(r.laterWork)} = ${number(r.totalWork)} ms`,
+            20,
+          ) +
+          text(
+            0,
+            costY + 31,
+            `Defects found: ${r.found.length}/${r.positives.length} · later alone ${r.baselineFound.length}/${r.positives.length}`,
+            16,
+          );
+        s += text(
+          0,
+          height - 20,
+          mobile
+            ? 'Early exits can hide recoverable defects.'
+            : 'Later stages cannot recover cases discarded before reaching them.',
+          14,
+          '#626962',
+        );
+        return s + '</svg>';
+      }
+      let report = buildReport();
+      function render() {
+        const d = document;
+        report = buildReport(
+          Number(d.querySelector('#threshold').value),
+          d.querySelector('#mode').value,
+          Number(d.querySelector('#gate').value),
+          Number(d.querySelector('#later').value),
+        );
+        const r = report;
+        d.querySelector('output').textContent =
+          `${r.passed.length}/8 reach stage 2; ${r.found.length}/4 defects found. Later model alone: ${r.baselineFound.length}/4.`;
+        d.querySelector('#work').textContent =
+          `Total work ${number(r.totalWork)} ms versus ${number(r.baselineWork)} ms later-only. ${r.savedWork >= 0 ? 'Saved' : 'Extra'} work: ${number(Math.abs(r.savedWork))} ms.`;
+        d.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth < 520);
+        d.querySelector('#interpretation').textContent =
+          `Stopped defects: ${names(r.earlyMisses)}. Missed by stage 2 after passing: ${names(r.lateMisses)}. False alarms: ${names(r.falseAlarms)}. The routed system’s result includes both early and later decisions.`;
+        d.querySelector('#routes tbody').innerHTML = r.cells
+          .map(
+            (p) =>
+              `<tr><td>${p.id}</td><td>${p.score.toFixed(2)}</td><td>${p.passed ? 'Continue' : 'Stop'}</td></tr>`,
+          )
+          .join('');
+        d.querySelector('#predictions tbody').innerHTML = r.cells
+          .map(
+            (p) =>
+              `<tr><td>${p.id}</td><td>${p.truth}</td><td>${p.later}</td><td>${p.final}</td></tr>`,
+          )
+          .join('');
+        d.querySelector('#counts').textContent =
+          `Final counts: ${r.found.length} true positives, ${r.falseAlarms.length} false positives, ${r.earlyMisses.length + r.lateMisses.length} false negatives. Recall ${number(r.recall)}; precision ${number(r.precision)}.`;
+        d.querySelector('#conditional').textContent =
+          `Gate retention: ${r.retained.length}/${r.positives.length} = ${number(r.retention)}. Later recall among retained positives: ${r.found.length}/${r.retained.length} = ${number(r.conditionalRecall)}. ${r.retained.length ? `Their product is ${number(r.retention * r.conditionalRecall)}, the final recall.` : 'No positive survived; conditional recall is undefined.'}`;
+        d.querySelector('#equation').textContent =
+          `Work: 8 × ${r.gateCost} + ${r.passed.length} × ${r.laterCost} = ${r.totalWork} ms. Mean work per input: ${number(r.meanWork)} ms.`;
+        d.querySelector('#breakeven').textContent =
+          `For these constant costs, saving work requires pass fraction < 1 − gate cost / later cost = ${number(r.breakEvenFraction)}. Current pass fraction: ${number(r.passFraction)}. Equality would mean equal total work, not a saving.`;
+        d.querySelector('#paths').textContent =
+          `Stopped path work: ${r.gateCost} ms. Continued path work: ${number(r.continuedPathWork)} ms. Later-only path work: ${r.laterCost} ms. These exclude queues and other overhead and do not measure latency.`;
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

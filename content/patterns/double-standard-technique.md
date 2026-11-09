@@ -76,20 +76,15 @@ judgment = !form {
     !show {
         Choose one specific situation where you are judging yourself more harshly than you would judge someone you care about. You can skip any question or stop at any time. No AI is used.
     }
-    !ask situation {
-        :required false
-        :multiline true
+    situation = !ask [optional] {
         :placeholder "For example: I needed to rest and left several tasks unfinished."
         What happened? Describe one specific situation.
     }
-    !ask thought {
-        :required false
-        :multiline true
+    thought = !ask [optional] {
         :placeholder "Write the actual words of the self-critical thought."
         What are you saying about yourself?
     }
-    !ask before {
-        :required false
+    before = !ask [optional] {
         :multiline false
         :placeholder "A number from 0 to 100, or leave blank."
         How much do you believe that thought? (0–100)
@@ -110,9 +105,7 @@ friend = !form {
 
         If you left either question blank, imagine your friend expressing the same self-judgment in the situation you chose.
     }
-    !ask response {
-        :required false
-        :multiline true
+    response = !ask [optional] {
         :placeholder "Speak directly to them using “you.” Acknowledge the difficulty and explain how you see it."
         What would you honestly say to them?
     }
@@ -126,14 +119,10 @@ credibility = !form {
 
         Keep the parts you believe. Include any real responsibility without condemning the whole person.
     }
-    !ask check {
-        :required false
-        :multiline true
+    check = !ask [optional] {
         Why is your response true? What would you change if you were being polite rather than honest?
     }
-    !ask objection {
-        :required false
-        :multiline true
+    objection = !ask [optional] {
         :placeholder "If a different rule appears, ask what justifies it. You do not have to resolve every objection."
         Is there a reason you think this would apply to them but not to you?
     }
@@ -149,20 +138,15 @@ inclusion = !form {
 
         The ratings are observations, not a score. No change is a valid result.
     }
-    !ask fair {
-        :required false
-        :multiline true
+    fair = !ask [optional] {
         Write a response to yourself, using “I.”
     }
-    !ask after {
-        :required false
+    after = !ask [optional] {
         :multiline false
         :placeholder "A number from 0 to 100, or leave blank."
         How much do you believe the original self-critical thought now? (0–100)
     }
-    !ask next {
-        :required false
-        :multiline true
+    next = !ask [optional] {
         :placeholder "Perhaps rest, acknowledge an effort, repair a mistake, ask for help, or take no further action today."
         What would fit this fairer response now?
     }
@@ -208,6 +192,6 @@ inclusion = !form {
 
     Keep the wording that feels true. You do not have to force yourself to feel better. Copy anything you want to keep into a notebook or document. Nothing has been scheduled or carried out for you.
 }
-= outcome "reflected"
+outcome = "reflected"
 -> end
 ```

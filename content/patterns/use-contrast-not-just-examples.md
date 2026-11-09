@@ -14,231 +14,80 @@ verses:
   - ai-usage
 ---
 
-Suppose you want an LLM to write in a style you find understated.
+You ask an AI to make a paragraph warmer. It adds enthusiasm, praise, and exclamation marks. That is not what you meant. You wanted the message to acknowledge a difficult situation while remaining calm and direct.
 
-You provide an example.
+You could keep searching for a better adjective. Another approach is to show two nearby versions and explain why one fits while the other goes too far.
 
-The model sees short sentences, concrete nouns, little ornament, and dry humor. Which of those characteristics matters? Perhaps all of them. Perhaps only one.
+Many preferences become easier to communicate when their boundaries are visible.
 
-An example demonstrates what belongs inside a category.
+## The core idea
 
-It does not always reveal the category's boundary.
+Pair a desired example with a nearby but unsuitable example, then name the difference that matters. Contrast helps communicate a distinction that a broad label or a positive example alone leaves ambiguous.
 
-Contrast does.
+The useful comparison is often between two plausible answers: concise and abrupt, restrained and flat, playful and distracting. An obviously terrible example usually teaches less because it does not expose the boundary you are struggling to describe.
 
-Instead of only showing what you want, show what is **nearby but wrong**.
-
-The difference between the two often communicates more than either example alone.
+A three-part set can show both sides: **too little → target → too much**. The goal is to make your criterion observable while leaving room for a different result that satisfies it.
 
 ![Three neighboring examples: Too little, Target, and Too much. The target is distinguished by the amount of useful detail, not decoration.](/diagrams/ai-usage/use-contrast-not-just-examples.svg "Show the target and its neighboring boundaries; name the distinction that matters.")
 
-## Categories are defined by boundaries
+## Why it works
 
-Consider these instructions:
+An example contains many properties at once. A dashboard you like may have a dark background, rounded cards, short labels, and a strong hierarchy. Without explanation, the model has to infer which properties are relevant. It might copy the colors when you care about the order in which information becomes visible.
 
-> Keep the prose emotionally restrained.
+Contrast supplies another point of comparison. If two examples share their palette but differ in hierarchy, your explanation can identify hierarchy as the relevant feature. The prompt now carries more information about your preference.
 
-That phrase admits many interpretations.
+It also helps you clarify your own judgment. Explaining why a nearby alternative misses the mark often reveals a more useful criterion than “make it professional.”
 
-Now add two examples:
+This is a practical account of communicating preferences, not a guarantee that the model will generalize correctly. It may still imitate wording, overemphasize a superficial difference, or apply the distinction outside its useful context.
 
-**Wanted:**
+## How to use it
 
-> He looked at the empty chair for a moment, then carried both cups back to the kitchen.
+Choose examples that isolate the distinction as far as possible. State what is important and what is incidental:
 
-**Not wanted:**
+> Version A is close to the tone I want. Version B is too effusive. The difference that matters is the amount of praise, not sentence length. Write a new version for this situation without reusing either example's wording.
 
-> The empty chair struck him with the unbearable weight of everything he had lost.
+For an abstract task, compare the level of thinking:
 
-Suddenly “emotionally restrained” is much more concrete.
+> “Batch independent writes” describes a reusable approach. “Call this particular function” describes one implementation. I want patterns at the first level, with implementation examples afterward.
 
-The distinction is not “do not write about emotion.” The first example is full of emotion. The difference lies in how explicitly it is named and amplified.
+If the output still misses, use that result as the next contrast. Identify one meaningful difference rather than adding a stack of vague adjectives.
 
-Contrast reveals that boundary.
+Check the new answer in its actual context. A sentence can match your example's tone yet omit information the reader needs. Contrast communicates a dimension of quality; it does not replace the rest of the task brief.
 
-## Why positive examples can mislead
+## A worked example
 
-A single example contains many properties that are incidental.
+A support team wants help drafting a message about a delayed delivery. “Write a friendly apology” produces an upbeat note thanking the customer for their “amazing patience” and describing the team's excitement about resolving the issue. The facts are present, but the tone feels inappropriate.
 
-Imagine showing an LLM a dashboard you like. It contains:
+The editor provides two short examples:
 
-- a dark background,
-- three columns,
-- large numbers,
-- small labels,
-- rounded cards,
-- a particular typography,
-- restrained use of color.
+> Close to the target: “Your order has been delayed. We expect to dispatch it on Thursday, and we'll send tracking details when it leaves.”
+>
+> Too effusive: “Thank you so much for your incredible patience! We're thrilled to get your order moving very soon!”
 
-You may actually care about the information hierarchy.
+Then she explains:
 
-The model may infer that you care about dark mode and cards.
+> Acknowledge the inconvenience directly, give the next concrete step, and avoid praise or excitement. The examples show tone only; use the actual order details below and do not invent a dispatch date.
 
-The problem is underdetermination: many rules could explain the same example.
+The revision becomes calmer and more useful. It still says “we guarantee” before a date that is only an estimate. The editor corrects that against the order information. Matching tone has not ensured factual accuracy.
 
-A contrasting example removes possibilities.
+For a second customer, the circumstances are different: the replacement date is unknown. The team keeps the same distinction but supplies different facts. The resulting message acknowledges the delay and promises an update by a specific time without pretending that delivery itself is scheduled.
 
-> I like A because the hierarchy is obvious even though it contains a lot of information. I dislike B because every metric has equal visual weight. The card shapes and colors are irrelevant.
+The pattern transfers because the team has named the underlying relationship between tone, acknowledgment, and concrete information, rather than treating one approved sentence as a universal template.
 
-Now the signal becomes much clearer.
+## When it helps—and where it falls short
 
-In machine-learning terms, you have supplied both positive and negative evidence.
+Use contrast when feedback such as “cleaner,” “more natural,” “deeper,” or “less corporate” repeatedly fails. It is useful for writing, visual hierarchy, explanation depth, classification boundaries, and deciding what counts as an example of a concept.
 
-In ordinary language: you have shown the model where the line is.
+A common mistake is choosing examples that differ in too many ways. If the wanted version is short, warm, factual, and informal while the unwanted one is long, cold, inaccurate, and formal, the intended lesson remains unclear. Explain the relevant difference explicitly.
 
-## Contrast can be subtle
+Another is accidental overfitting. The model may reproduce your example's phrasing or layout even when the new situation requires something else. Ask for a fresh application, then inspect whether the principle survived.
 
-The most informative negative example is not always something obviously bad.
-
-Compare:
-
-> Write a friendly email.
-
-A poor contrasting example might be openly hostile. That teaches very little. The model already understands that hostility is not friendliness.
-
-A better contrast is something close to the target:
-
-**Wanted:** warm, concise, direct.
-
-**Too far:** warm but overly enthusiastic and full of exclamation marks.
-
-The narrower the distinction, the more useful the contrast can become.
-
-This is especially important for qualities such as:
-
-- understated versus flat,
-- rigorous versus academic,
-- playful versus silly,
-- concise versus abrupt,
-- simple versus simplistic,
-- confident versus overconfident,
-- poetic versus ornate,
-- informal versus sloppy.
-
-These are fuzzy boundaries. Definitions help, but contrasts make the differences visible.
-
-## Contrast in technical tasks
-
-The pattern is not limited to style.
-
-Suppose you are extracting reusable patterns from books.
-
-You might tell the model:
-
-> A pattern should be a reusable response to a recurring situation.
-
-Then provide contrast:
-
-**Pattern:** “Separate reversible from irreversible decisions.”
-
-**Not a pattern:** “Jeff Bezos calls some decisions two-way doors.”
-
-The first describes transferable knowledge.
-
-The second is an anecdotal attribution.
-
-Or:
-
-**Pattern:** “Batch independent database writes.”
-
-**Not a pattern:** “Use `executemany()` in Python.”
-
-The first expresses a broadly reusable strategy.
-
-The second is one implementation.
-
-These pairs teach the conceptual level you want.
-
-## Contrast as debugging
-
-Contrast is also a powerful way to correct an LLM after an unsatisfactory result.
-
-Suppose the model generates six product ideas and they all feel like minor feature additions.
-
-Instead of saying:
-
-> Make them more innovative.
-
-you can identify the boundary:
-
-> These are feature ideas: they extend the current product while keeping the same basic interaction model. I want concept ideas: approaches that could change how the user performs the task entirely.
-
-Then give one example of each.
-
-That is much more informative than an adjective like “innovative.”
-
-Many difficult prompt iterations become easier once the user stops searching for a better adjective and instead shows a pair of neighboring cases.
-
-## Contrastive sets
-
-Sometimes one pair is not enough.
-
-You can build a small contrastive set:
-
-**Too little**  
-The article is only a definition and a few bullets.
-
-**Target**  
-The article develops a mental model, gives concrete examples, explains limitations, and remains readable.
-
-**Too much**  
-The article becomes an academic survey with citations for every sentence and excessive theoretical background.
-
-Now the desired region has boundaries on both sides.
-
-This “too little / target / too much” structure is particularly useful when controlling:
-
-- length,
-- technical depth,
-- humor,
-- formality,
-- visual density,
-- abstraction,
-- creativity,
-- assertiveness.
-
-## Why the pattern works
-
-Words such as “clean,” “professional,” “natural,” “elegant,” and “deep” describe large semantic territories.
-
-People often believe these instructions are precise because they know what the words mean *to themselves*. The model has access only to the words and surrounding context.
-
-Contrast externalizes the distinction.
-
-Rather than trying to define “not too polished but still professional” perfectly, you can demonstrate:
-
-> This feels too corporate. This feels too casual. Aim between them, closer to the second.
-
-Contrast converts tacit preference into observable structure.
-
-## Don't overfit the examples
-
-There is a danger.
-
-If examples are too detailed or the instruction implies exact imitation, the model may reproduce surface characteristics rather than infer the underlying distinction.
-
-The remedy is to name the difference explicitly:
-
-> The important distinction is the amount of emotional interpretation, not sentence length or subject matter.
-
-Examples plus explanation are usually stronger than examples alone.
-
-The goal is not copying.
-
-It is discrimination.
-
-When you need an LLM to understand a subtle category, especially one that you find difficult to define, do not only ask:
-
-> Can I show you what I mean?
-
-Ask:
-
-> Can I show you what I mean—and what I almost mean, but don't?
-
-That second example may carry more information than the first.
+For exact requirements, use exact rules. A defined data format, a maximum length, or an observable behavior should be stated directly. Contrast is especially valuable for fuzzy boundaries; it need not carry constraints that can be expressed more clearly in another form.
 
 ## Related patterns
 
-- [[preserve-the-invariants|Preserve the Invariants]] — Separate essential qualities from incidental features.
-- [[choose-the-representation-before-solving|Choose the Representation Before Solving]] — Use a comparison format when it reveals the important boundary.
-- [[reframing-generate-real-options|Generate Real Options]] — Distinguish conceptually different options from cosmetic variations.
+[[preserve-the-invariants|Preserve the Invariants]] — Identify which qualities matter across different examples or revisions.
+
+[[draft-the-prompt-together|Draft the Prompt Together]] — Turn a tacit preference into a clearer instruction.
+
+[[choose-the-representation-before-solving|Choose the Representation Before Solving]] — Use a comparison when it exposes the relevant boundary.

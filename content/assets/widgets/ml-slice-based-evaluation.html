@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slice-based evaluation comparison explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      #comparison,
+      #records table {
+        table-layout: fixed;
+      }
+      #comparison th:first-child,
+      #comparison td:first-child {
+        width: 30%;
+      }
+      #records table {
+        font-size: 13px;
+      }
+      #records th:first-child,
+      #records td:first-child {
+        width: 12%;
+      }
+      #records th:nth-child(2),
+      #records td:nth-child(2) {
+        width: 46%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Compare two fixed prediction sets on the same 20 fictional labeled tickets, one per customer.
+      Slicing and display filters change the report, never the records or predictions.
+    </p>
+    <form aria-label="Slice evaluation settings">
+      <div>
+        <label for="view">Slice view</label
+        ><select id="view">
+          <option value="device" selected>Device</option>
+          <option value="language">Language</option>
+          <option value="intersection">Device × language</option>
+          <option value="overlap">Overlapping conditions</option>
+        </select>
+      </div>
+      <div>
+        <label for="metric">Metric</label
+        ><select id="metric">
+          <option value="accuracy" selected>Accuracy · all rows</option>
+          <option value="recall">Recall · positive labels only</option>
+        </select>
+      </div>
+      <div>
+        <label for="minimum">Minimum rows shown · display filter</label
+        ><select id="minimum">
+          <option value="0" selected>0 · include empty slices</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="25">25 · above this dataset's size</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <p id="coverage" class="note"></p>
+    <svg role="img" aria-label="Accuracy or recall by slice for fixed models A and B"></svg>
+    <p class="note">
+      Bars run from 0% to 100%. A is green; B is gray. N/A means no denominator, never zero
+      performance. Displaying fewer slices does not resolve hidden groups.
+    </p>
+    <div class="history">
+      <table id="comparison">
+        <caption>
+          Computed fractions and nominal 95% Wilson intervals
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Slice and rows</th>
+            <th scope="col">A</th>
+            <th scope="col">B</th>
+          </tr>
+        </thead>
+        <tbody id="metrics"></tbody>
+      </table>
+    </div>
+    <details id="records">
+      <summary>Inspect all 20 fixed records</summary>
+      <table>
+        <caption>
+          Label 1 = needs escalation; A/B are stored predicted labels
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Device / language</th>
+            <th scope="col">Label</th>
+            <th scope="col">A</th>
+            <th scope="col">B</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Metric and uncertainty assumptions</summary>
+      <p>
+        No model is trained or called. Each unique row has a verified synthetic label and two
+        preassigned binary predictions. Accuracy is (TP + TN) / rows. Positive recall is TP / (TP +
+        FN); its denominator can be smaller than the row count. Slice membership is determined by
+        the attributes in the records, including crossed and overlapping conditions. Tablet is a
+        declared category with no records. The overall result always includes all 20 rows,
+        irrespective of view and filter.
+      </p>
+      <p>
+        The interval is the Wilson binomial score interval with z = 1.96: for k successes among n
+        trials, center = (k/n + z²/(2n))/(1 + z²/n) and half-width = z sqrt((k/n)(1 − k/n)/n +
+        z²/(4n²))/(1 + z²/n). Zero denominators show N/A. These illustrative, separate-model
+        intervals assume independent binomial outcomes sampled from a relevant population. The fixed
+        fictional cases do not establish a real population rate.
+      </p>
+      <p>
+        These are not intervals for the paired A/B difference or simultaneous intervals adjusted for
+        searching slices. Overlapping memberships are not independent observations. There is no
+        causal analysis, demographic fairness certification, threshold optimization, or
+        deployment-population estimate. A row-count display filter is not a statistical reliability
+        threshold.
+      </p>
+    </details>
+    <script>
+      const records = [
+        ['Desktop', 'English', 0, 0, 0],
+        ['Desktop', 'English', 1, 1, 1],
+        ['Desktop', 'English', 0, 0, 0],
+        ['Desktop', 'English', 1, 1, 1],
+        ['Desktop', 'English', 0, 0, 0],
+        ['Desktop', 'English', 1, 1, 1],
+        ['Desktop', 'English', 0, 0, 0],
+        ['Desktop', 'English', 1, 1, 1],
+        ['Desktop', 'English', 0, 0, 0],
+        ['Desktop', 'English', 1, 1, 1],
+        ['Desktop', 'English', 0, 0, 1],
+        ['Desktop', 'English', 1, 0, 0],
+        ['Desktop', 'Spanish', 0, 0, 0],
+        ['Desktop', 'Spanish', 1, 1, 1],
+        ['Desktop', 'Spanish', 0, 0, 0],
+        ['Desktop', 'Spanish', 1, 0, 0],
+        ['Mobile', 'English', 0, 0, 0],
+        ['Mobile', 'English', 1, 1, 1],
+        ['Mobile', 'English', 0, 1, 0],
+        ['Mobile', 'Spanish', 1, 0, 1],
+      ].map(([device, language, label, a, b], i) => ({
+        id: 'T' + String(i + 1).padStart(2, '0'),
+        device,
+        language,
+        label,
+        a,
+        b,
+      }));
+      const form = document.querySelector('form'),
+        chart = document.querySelector('svg');
+      let report;
+      function wilson(k, n) {
+        if (!n) return null;
+        const z = 1.96,
+          p = k / n,
+          d = 1 + (z * z) / n,
+          center = (p + (z * z) / (2 * n)) / d,
+          half = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / d;
+        return [Math.max(0, center - half), Math.min(1, center + half)];
+      }
+      function evaluate(rows, key, metric) {
+        let tp = 0,
+          tn = 0,
+          fp = 0,
+          fn = 0;
+        for (const row of rows) {
+          if (row.label === 1) {
+            if (row[key] === 1) tp++;
+            else fn++;
+          } else {
+            if (row[key] === 1) fp++;
+            else tn++;
+          }
+        }
+        const k = metric === 'recall' ? tp : tp + tn,
+          n = metric === 'recall' ? tp + fn : rows.length;
+        return { tp, tn, fp, fn, k, n, rate: n ? k / n : null, interval: wilson(k, n) };
+      }
+      function definitions(view) {
+        if (view === 'language')
+          return ['English', 'Spanish'].map((value) => ({
+            label: value,
+            test: (r) => r.language === value,
+          }));
+        if (view === 'intersection')
+          return ['Desktop', 'Mobile', 'Tablet'].flatMap((device) =>
+            ['English', 'Spanish'].map((language) => ({
+              label: device + ' · ' + language,
+              test: (r) => r.device === device && r.language === language,
+            })),
+          );
+        if (view === 'overlap')
+          return [
+            { label: 'Mobile', test: (r) => r.device === 'Mobile' },
+            { label: 'Spanish', test: (r) => r.language === 'Spanish' },
+            {
+              label: 'Mobile · Spanish',
+              test: (r) => r.device === 'Mobile' && r.language === 'Spanish',
+            },
+          ];
+        return ['Desktop', 'Mobile', 'Tablet'].map((value) => ({
+          label: value,
+          test: (r) => r.device === value,
+        }));
+      }
+      function buildReport(view, metric, minimum) {
+        const all = definitions(view).map((def) => {
+          const rows = records.filter(def.test);
+          return {
+            label: def.label,
+            ids: rows.map((r) => r.id),
+            rows: rows.length,
+            a: evaluate(rows, 'a', metric),
+            b: evaluate(rows, 'b', metric),
+          };
+        });
+        const slices = all.filter((slice) => slice.rows >= minimum);
+        return {
+          metric,
+          minimum,
+          totalSlices: all.length,
+          hidden: all.length - slices.length,
+          overall: {
+            label: 'Overall',
+            rows: records.length,
+            a: evaluate(records, 'a', metric),
+            b: evaluate(records, 'b', metric),
+          },
+          slices,
+          memberships: slices.reduce((s, r) => s + r.rows, 0),
+          unique: new Set(slices.flatMap((s) => s.ids)).size,
+        };
+      }
+      function rate(value) {
+        return value === null ? 'N/A' : (100 * value).toFixed(1) + '%';
+      }
+      function fraction(result) {
+        return result.n
+          ? result.k + '/' + result.n + ' = ' + rate(result.rate)
+          : 'N/A · denominator 0';
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(result) {
+        const narrow = innerWidth < 500,
+          w = narrow ? 328 : 680,
+          h = Math.max(80, result.slices.length * 170);
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        chart.append(node('title', {}, 'Two fixed prediction sets compared on the shown slices'));
+        if (!result.slices.length) {
+          chart.append(
+            node(
+              'text',
+              { x: 12, y: 35, 'font-size': 16, fill: 'var(--ink, #252c28)' },
+              'No slices meet this display filter.',
+            ),
+          );
+          return;
+        }
+        result.slices.forEach((slice, i) => {
+          const g = node('g', { transform: 'translate(0,' + i * 170 + ')' });
+          chart.append(g);
+          g.append(node('rect', { width: w, height: 158, rx: 8, fill: 'var(--panel, #f1f2ef)' }));
+          const text = (y, size, value, bold = false) =>
+            g.append(
+              node(
+                'text',
+                {
+                  x: 12,
+                  y,
+                  'font-size': size,
+                  'font-weight': bold ? 700 : 400,
+                  'font-family': 'system-ui, sans-serif',
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          text(27, 17, slice.label + ' · rows ' + slice.rows, true);
+          for (const [j, key] of ['a', 'b'].entries()) {
+            const r = slice[key],
+              y = j * 57;
+            text(55 + y, 16, key.toUpperCase() + ': ' + fraction(r), true);
+            if (r.n) {
+              g.append(
+                node('rect', {
+                  x: 12,
+                  y: 65 + y,
+                  width: w - 24,
+                  height: 12,
+                  fill: 'var(--line, #a6aca3)',
+                }),
+              );
+              g.append(
+                node('rect', {
+                  x: 12,
+                  y: 65 + y,
+                  width: (w - 24) * r.rate,
+                  height: 12,
+                  fill: key === 'a' ? 'var(--accent, #00855b)' : '#8c938b',
+                }),
+              );
+            }
+          }
+        });
+      }
+      function configure() {
+        report = buildReport(
+          document.querySelector('#view').value,
+          document.querySelector('#metric').value,
+          Number(document.querySelector('#minimum').value),
+        );
+        document.querySelector('output').textContent =
+          'Overall ' +
+          report.metric +
+          ': A ' +
+          fraction(report.overall.a) +
+          '; B ' +
+          fraction(report.overall.b) +
+          '. ' +
+          report.slices.length +
+          '/' +
+          report.totalSlices +
+          ' slices shown; ' +
+          report.hidden +
+          ' hidden.';
+        document.querySelector('#coverage').textContent =
+          'Shown slices: ' +
+          report.memberships +
+          ' memberships across ' +
+          report.unique +
+          ' distinct records. Overall remains all 20 records. Overlap can count a record more than once.';
+        draw(report);
+        const tbody = document.querySelector('#metrics');
+        tbody.replaceChildren();
+        for (const slice of [report.overall, ...report.slices]) {
+          const tr = document.createElement('tr'),
+            name = document.createElement('td');
+          name.textContent = slice.label + ' · rows ' + slice.rows;
+          tr.append(name);
+          for (const key of ['a', 'b']) {
+            const td = document.createElement('td'),
+              r = slice[key];
+            td.textContent = fraction(r);
+            const ci = document.createElement('small');
+            ci.textContent = r.interval
+              ? '95% Wilson: ' + r.interval.map(rate).join(' – ')
+              : 'No measured rate';
+            td.append(ci);
+            const confusion = document.createElement('small');
+            confusion.textContent =
+              'TP ' + r.tp + ' · TN ' + r.tn + ' · FP ' + r.fp + ' · FN ' + r.fn;
+            td.append(confusion);
+            tr.append(td);
+          }
+          tbody.append(tr);
+        }
+      }
+      const data = document.querySelector('#data');
+      records.forEach((r) => {
+        const tr = document.createElement('tr');
+        for (const value of [r.id, r.device + ' / ' + r.language, r.label, r.a, r.b]) {
+          const td = document.createElement('td');
+          td.textContent = value;
+          tr.append(td);
+        }
+        data.append(tr);
+      });
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () => {
+        if (report) draw(report);
+      });
+      configure();
+    </script>
+  </body>
+</html>

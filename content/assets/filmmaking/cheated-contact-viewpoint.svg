@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" role="img" aria-labelledby="title desc" data-film-style="light-editorial" data-view="plan-and-frame">
+<title id="title">Hide the gap in the chosen view</title>
+<desc id="desc">An overhead plan separates an apparent strike from the other performer along the camera viewing direction. The inset shows how their projected shapes overlap; angle, reaction and timing imply contact. Original conceptual illustration; not a documented film setup.</desc>
+<style>
+:root{color-scheme:only light;--paper:#fff;--ink:#252c28;--line:#a6aca3;--stone:#f1f2ef;--mint:#edf5f0;--green:#00855b;--deep:#00855b}
+svg{background:#fff;color:var(--ink)}
+text{fill:var(--ink);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:26px;font-weight:400;letter-spacing:0}
+.heading{font-size:28px}.small,.caption{font-size:26px}
+.legacy text{font-size:20.222222px}.legacy.compact text{font-size:21.777778px}
+path,rect,circle,ellipse{vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:butt}
+.paper{fill:var(--paper)}.stone{fill:var(--stone)}
+.existing,.wall{fill:var(--stone);stroke:var(--line);stroke-width:1.1}
+.line{fill:none;stroke:var(--ink);stroke-width:1.3}
+.hair,.fine,.leader,.boundary{fill:none;stroke:var(--line);stroke-width:1.1}
+.wall-line{fill:none;stroke:var(--ink);stroke-width:1.8}
+.landscape,.mint,.light{fill:var(--mint)}
+.intervention,.new,.seat{fill:var(--green);stroke:none}
+.outline-green,.accent{fill:none;stroke:var(--green);stroke-width:1.5}
+.glassed,.glassed-line{fill:none;stroke:var(--green);stroke-width:1.2}
+.glass{fill:var(--mint);stroke:var(--green);stroke-width:1.1}
+.dashed{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:5 5}
+.figure,.ink{fill:var(--ink);stroke:none}.figure-accent{fill:var(--green);stroke:none}
+.plan-head{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+.ghost{fill:none;stroke:var(--green);stroke-width:1.2;stroke-dasharray:3 4}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--green)" stroke-width="1.1"/></marker>
+<marker id="arrow-neutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--ink)" stroke-width="1.1"/></marker>
+</defs>
+<rect width="720" height="560" class="paper"/>
+<text x="42" y="53" text-anchor="start" class="heading">Depth hides the gap</text><path d="M105 260H539" class="dashed" /><g transform="translate(80 260) rotate(0) scale(1)"><path d="M-25-14H9V14H-25ZM9-8L25-14V14L9 8Z" class="figure" /></g><g transform="translate(294 160) rotate(90) scale(0.7)"><path d="M-40 24Q-33 7-15 6H15Q33 7 40 24V35Q0 49-40 35Z" class="figure" /><ellipse cx="0" cy="0" rx="21" ry="25" class="plan-head"/><path d="M-5-22L0-30L5-22" class="figure" /></g><g transform="translate(456 260) rotate(0) scale(0.8)"><path d="M-40 24Q-33 7-15 6H15Q33 7 40 24V35Q0 49-40 35Z" class="figure" /><ellipse cx="0" cy="0" rx="21" ry="25" class="plan-head"/><path d="M-5-22L0-30L5-22" class="figure" /></g><path d="M281 183Q317 213 343 249L352 254 351 266 338 268Q309 235 273 206Z" class="figure-accent" /><path d="M358 254V266M424 254V266M358 260H424" class="hair" /><text x="389" y="204" text-anchor="middle" class="small">Real gap</text><path d="M389 216V244" class="hair" /><text x="42" y="337" text-anchor="start" class="small">Camera axis</text><path d="M113 313V281" class="hair" /><rect x="426" y="386" width="229" height="114" class="boundary"/><path d="M434 447H520L536 454 532 468H434Z" class="figure-accent" /><path d="M554 416Q584 408 590 434L578 446 584 453 576 465 577 488H550L546 464Q526 455 534 435Z" class="figure" /><text x="42" y="425" text-anchor="start" class="small">In the frame:</text><text x="42" y="460" text-anchor="start" class="small">shapes overlap</text><text x="42" y="540" text-anchor="start" class="caption">Viewpoint, reaction and timing imply contact.</text>
+</svg>

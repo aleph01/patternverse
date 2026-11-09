@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conformal prediction interval explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      A frozen fictional model supplies predictions; held-out calibration outcomes supply absolute
+      errors. Compute the finite-sample rank, form intervals, and check ten different evaluation
+      cases. The new point has no observed outcome.
+    </p>
+    <form aria-label="Conformal prediction settings">
+      <div>
+        <label for="coverage">Target marginal coverage</label
+        ><select id="coverage">
+          <option value="60">60%</option>
+          <option value="70">70%</option>
+          <option value="80">80%</option>
+          <option value="90" selected>90%</option>
+          <option value="95">95%</option>
+        </select>
+      </div>
+      <div>
+        <label for="size">Calibration records · first n of fixed nine</label
+        ><select id="size">
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="9" selected>9</option>
+        </select>
+      </div>
+      <div>
+        <label for="scenario">Separate evaluation outcomes</label
+        ><select id="scenario">
+          <option value="baseline" selected>Fixed routine and complex cases</option>
+          <option value="harder">Harder complex cases</option>
+        </select>
+      </div>
+      <div>
+        <label for="center">New point prediction · minutes</label
+        ><input id="center" type="number" min="0" max="100" step="1" value="40" required />
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <svg
+      id="mechanism"
+      role="img"
+      aria-label="Corrected calibration rank and new-point interval"
+    ></svg>
+    <p id="interpretation" class="note"></p>
+    <svg
+      id="evaluation"
+      role="img"
+      aria-label="Prediction intervals and observed outcomes on ten separate evaluation cases"
+    ></svg>
+    <div class="history">
+      <table id="summary-table">
+        <caption>
+          Observed coverage · fictional evaluation cases only
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Subset</th>
+            <th scope="col">Covered / cases</th>
+            <th scope="col">Observed rate</th>
+          </tr>
+        </thead>
+        <tbody id="summary"></tbody>
+      </table>
+    </div>
+    <details id="record-tables">
+      <summary>Inspect calibration and evaluation records</summary>
+      <table class="data-table">
+        <caption>
+          Calibration records alone determine q · minutes
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Prediction</th>
+            <th scope="col">Outcome</th>
+            <th scope="col">Absolute error</th>
+          </tr>
+        </thead>
+        <tbody id="calibration"></tbody>
+      </table>
+      <table class="data-table">
+        <caption>
+          Separate evaluation · R = routine, C = complex
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID / group</th>
+            <th scope="col">Prediction / outcome</th>
+            <th scope="col">Interval</th>
+            <th scope="col">Covered?</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Exact construction and scope of the guarantee</summary>
+      <p>
+        The base model is frozen and its training data are outside this toy. Nine calibration
+        records C01–C09 have predictions [20,25,30,35,40,45,50,55,60] and outcomes
+        [24,24,37,33,49,42,55,53,64]. Selecting n uses the first n records, changing both sample
+        size and observed errors. Calibration and evaluation IDs do not overlap.
+      </p>
+      <p>
+        Compute each absolute residual, sort numerically, and use one-based rank k = ceil((n+1) ×
+        coverage / 100). When k ≤ n, q is the kth smallest residual. Otherwise q = +infinity, giving
+        an unbounded interval. Endpoints are included; ties can make coverage conservative. No
+        interpolation, rounding of q, or finite cap is applied. All intervals follow the real-valued
+        mathematical rule; negative endpoints are not truncated to zero.
+      </p>
+      <p>
+        Evaluation predictions are 25,30,…,70 minutes. Fixed signed errors are
+        [1,−2,3,−4,5,−6,7,−8,9,12]. The last two records are complex. The harder-complex scenario
+        replaces their errors with 15 and −18. These artificial scenarios demonstrate arithmetic and
+        potential mismatch, not a sampling model or verification of exchangeability. Changing
+        evaluation outcomes or the new point prediction never recalibrates q.
+      </p>
+      <p>
+        For a fixed scoring rule, exchangeable calibration and future examples support a marginal
+        coverage statement that averages over calibration and new observations. This is not a
+        guarantee for each fixed calibration sample, input value, subgroup, or finite batch, and it
+        is not a posterior probability for this particular interval. No uncertainty interval for the
+        measured coverage is estimated. The unknown new point is not counted in evaluation.
+      </p>
+      <p>
+        Evaluation plots use a fixed 0–100 minute axis. Infinite intervals have arrows at both ends
+        and extend beyond the displayed axis. The full real line trivially covers all outcomes but
+        provides no finite planning bound. The base predictions, score family, and labels are
+        synthetic; no external model is called and no model is trained.
+      </p>
+    </details>
+    <script>
+      const calibrationSource = [20, 25, 30, 35, 40, 45, 50, 55, 60].map((prediction, i) => ({
+        id: 'C' + String(i + 1).padStart(2, '0'),
+        prediction,
+        outcome: [24, 24, 37, 33, 49, 42, 55, 53, 64][i],
+      }));
+      const form = document.querySelector('form'),
+        mechanism = document.querySelector('#mechanism'),
+        evaluation = document.querySelector('#evaluation');
+      let report;
+      function threshold(scores, coverage) {
+        const sorted = [...scores].sort((a, b) => a - b),
+          n = sorted.length,
+          k = Math.ceil(((n + 1) * coverage) / 100);
+        return { n, k, scores: sorted, q: k > n ? Infinity : sorted[k - 1], unbounded: k > n };
+      }
+      function calibrate(rows, coverage) {
+        return threshold(
+          rows.map((r) => Math.abs(r.outcome - r.prediction)),
+          coverage,
+        );
+      }
+      function makeEvaluation(scenario) {
+        const errors = [1, -2, 3, -4, 5, -6, 7, -8, 9, 12];
+        if (scenario === 'harder') {
+          errors[8] = 15;
+          errors[9] = -18;
+        }
+        return errors.map((error, i) => ({
+          id: 'E' + String(i + 1).padStart(2, '0'),
+          group: i < 8 ? 'Routine' : 'Complex',
+          prediction: 25 + 5 * i,
+          outcome: 25 + 5 * i + error,
+        }));
+      }
+      function interval(prediction, q) {
+        return { lower: prediction - q, upper: prediction + q, width: 2 * q };
+      }
+      function evaluate(rows, q) {
+        return rows.map((r) => ({
+          ...r,
+          ...interval(r.prediction, q),
+          covered: Math.abs(r.outcome - r.prediction) <= q,
+        }));
+      }
+      function summarize(rows) {
+        return ['All', 'Routine', 'Complex'].map((group) => {
+          const subset = group === 'All' ? rows : rows.filter((r) => r.group === group);
+          return { group, n: subset.length, covered: subset.filter((r) => r.covered).length };
+        });
+      }
+      function buildReport(size, coverage, scenario, center) {
+        const calibration = calibrationSource.slice(0, size),
+          fit = calibrate(calibration, coverage),
+          rows = evaluate(makeEvaluation(scenario), fit.q);
+        return {
+          calibration,
+          coverage,
+          fit,
+          rows,
+          summary: summarize(rows),
+          center,
+          next: interval(center, fit.q),
+        };
+      }
+      function fmt(value) {
+        return value === Infinity ? '∞' : value === -Infinity ? '−∞' : String(value);
+      }
+      function bounds(value) {
+        return '[' + fmt(value.lower) + ', ' + fmt(value.upper) + ']';
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function text(svg, x, y, size, value, bold = false) {
+        svg.append(
+          node(
+            'text',
+            {
+              x,
+              y,
+              'font-size': size,
+              'font-weight': bold ? 700 : 400,
+              'font-family': 'system-ui, sans-serif',
+              fill: 'var(--ink, #252c28)',
+            },
+            value,
+          ),
+        );
+      }
+      function drawMechanism(result) {
+        const narrow = innerWidth < 500,
+          w = narrow ? 328 : 680,
+          cols = narrow ? 3 : 9,
+          cellW = narrow ? 94 : 64,
+          gap = narrow ? 12 : 8,
+          rows = Math.ceil(result.fit.n / cols),
+          rankY = 42 + rows * 62 + 18,
+          newY = rankY + 55,
+          h = newY + 140;
+        mechanism.replaceChildren();
+        mechanism.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        mechanism.append(
+          node('title', {}, 'Sort residuals, select a corrected rank, construct an interval'),
+        );
+        mechanism.append(
+          node(
+            'desc',
+            {},
+            'The selected order statistic sets the interval radius. If the rank exceeds the sample count, the radius is infinite. The new-point outcome is unknown.',
+          ),
+        );
+        text(mechanism, 12, 26, 18, 'Calibration errors · n = ' + result.fit.n, true);
+        result.fit.scores.forEach((score, i) => {
+          const x = 8 + (i % cols) * (cellW + gap),
+            y = 42 + Math.floor(i / cols) * 62;
+          mechanism.append(
+            node('rect', {
+              x,
+              y,
+              width: cellW,
+              height: 52,
+              rx: 6,
+              fill: i + 1 === result.fit.k ? 'var(--band, #edf5f0)' : 'var(--panel, #f1f2ef)',
+            }),
+          );
+          text(mechanism, x + 12, y + 24, 19, String(score), true);
+          text(mechanism, x + 12, y + 44, 12, 'rank ' + (i + 1));
+        });
+        text(
+          mechanism,
+          12,
+          rankY,
+          16,
+          'k = ceil(' + (result.fit.n + 1) + ' × ' + result.coverage + ' / 100) = ' + result.fit.k,
+          true,
+        );
+        text(
+          mechanism,
+          12,
+          rankY + 27,
+          16,
+          result.fit.unbounded
+            ? 'q = ∞ · required rank exceeds n'
+            : 'q = ' + result.fit.q + ' minutes',
+        );
+        mechanism.append(
+          node('rect', {
+            x: 0,
+            y: newY,
+            width: w,
+            height: 128,
+            rx: 8,
+            fill: 'var(--panel, #f1f2ef)',
+          }),
+        );
+        text(mechanism, 12, newY + 28, 17, 'New point prediction: ' + result.center + ' min', true);
+        text(
+          mechanism,
+          12,
+          newY + 59,
+          18,
+          result.fit.unbounded ? 'All real values (−∞, +∞)' : bounds(result.next) + ' minutes',
+          true,
+        );
+        text(
+          mechanism,
+          12,
+          newY + 87,
+          15,
+          'Interval width: ' + fmt(result.next.width) + ' minutes',
+        );
+        text(mechanism, 12, newY + 113, 14, 'Outcome unknown · excluded from evaluation');
+      }
+      function drawEvaluation(result) {
+        const narrow = innerWidth < 500,
+          w = narrow ? 328 : 680,
+          left = narrow ? 52 : 80,
+          pw = w - left - 16,
+          h = 495;
+        evaluation.replaceChildren();
+        evaluation.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        evaluation.append(
+          node('title', {}, 'Intervals and outcomes for ten separate evaluation cases'),
+        );
+        evaluation.append(
+          node(
+            'desc',
+            {},
+            'Lines are prediction intervals. Circles are covered observed outcomes; crosses are misses. R labels routine cases, C labels complex cases. Infinite intervals have arrows extending beyond the plotting axis.',
+          ),
+        );
+        text(evaluation, 12, 25, 18, 'Separate evaluation · 10 cases', true);
+        evaluation.append(
+          node('rect', {
+            x: 0,
+            y: 314,
+            width: w,
+            height: 68,
+            rx: 6,
+            fill: 'var(--panel, #f1f2ef)',
+          }),
+        );
+        for (const [i, row] of result.rows.entries()) {
+          const y = 60 + i * 34,
+            a = left + (pw * Math.max(0, row.lower)) / 100,
+            b = left + (pw * Math.min(100, row.upper)) / 100;
+          text(evaluation, 4, y + 4, 13, row.id + (row.group === 'Routine' ? ' R' : ' C'));
+          evaluation.append(
+            node('line', {
+              x1: a,
+              y1: y,
+              x2: b,
+              y2: y,
+              stroke: 'var(--muted, #626962)',
+              'stroke-width': 3,
+            }),
+          );
+          if (result.fit.unbounded) {
+            evaluation.append(
+              node('path', {
+                d:
+                  'M ' +
+                  (left + 7) +
+                  ' ' +
+                  (y - 5) +
+                  ' L ' +
+                  left +
+                  ' ' +
+                  y +
+                  ' L ' +
+                  (left + 7) +
+                  ' ' +
+                  (y + 5) +
+                  ' M ' +
+                  (left + pw - 7) +
+                  ' ' +
+                  (y - 5) +
+                  ' L ' +
+                  (left + pw) +
+                  ' ' +
+                  y +
+                  ' L ' +
+                  (left + pw - 7) +
+                  ' ' +
+                  (y + 5),
+                fill: 'none',
+                stroke: 'var(--muted, #626962)',
+                'stroke-width': 2,
+              }),
+            );
+          } else
+            for (const x of [a, b])
+              evaluation.append(
+                node('line', {
+                  x1: x,
+                  y1: y - 5,
+                  x2: x,
+                  y2: y + 5,
+                  stroke: 'var(--muted, #626962)',
+                  'stroke-width': 1.5,
+                }),
+              );
+          const x = left + (pw * row.outcome) / 100;
+          if (row.covered)
+            evaluation.append(
+              node('circle', { cx: x, cy: y, r: 5, fill: 'var(--accent, #00855b)' }),
+            );
+          else
+            evaluation.append(
+              node('path', {
+                d:
+                  'M ' +
+                  (x - 5) +
+                  ' ' +
+                  (y - 5) +
+                  ' L ' +
+                  (x + 5) +
+                  ' ' +
+                  (y + 5) +
+                  ' M ' +
+                  (x - 5) +
+                  ' ' +
+                  (y + 5) +
+                  ' L ' +
+                  (x + 5) +
+                  ' ' +
+                  (y - 5),
+                fill: 'none',
+                stroke: '#8c938b',
+                'stroke-width': 2.5,
+              }),
+            );
+        }
+        for (const value of [0, 25, 50, 75, 100])
+          text(
+            evaluation,
+            left + (pw * value) / 100 - (value === 100 ? 19 : 4),
+            409,
+            12,
+            String(value),
+          );
+        text(evaluation, 12, 438, 13, 'Minutes · fixed 0–100 plotting axis');
+        text(evaluation, 12, 462, 13, '● covered outcome · × missed outcome');
+        text(
+          evaluation,
+          12,
+          486,
+          13,
+          result.fit.unbounded
+            ? 'Arrows extend beyond the plotting axis.'
+            : 'R = routine · C = complex · line = interval',
+        );
+      }
+      function cell(row, value) {
+        const td = document.createElement('td');
+        td.textContent = value;
+        row.append(td);
+      }
+      function configure() {
+        const summary = document.querySelector('#summary'),
+          calibration = document.querySelector('#calibration'),
+          data = document.querySelector('#data');
+        for (const el of [summary, calibration, data, mechanism, evaluation]) el.replaceChildren();
+        if (!form.checkValidity()) {
+          report = undefined;
+          document.querySelector('output').textContent =
+            'Enter a whole new-point prediction from 0 to 100 minutes.';
+          document.querySelector('#interpretation').textContent = '';
+          return;
+        }
+        report = buildReport(
+          Number(document.querySelector('#size').value),
+          Number(document.querySelector('#coverage').value),
+          document.querySelector('#scenario').value,
+          Number(document.querySelector('#center').value),
+        );
+        const total = report.summary[0];
+        document.querySelector('output').textContent =
+          'Target: ' +
+          report.coverage +
+          '% · n = ' +
+          report.fit.n +
+          ' · rank ' +
+          report.fit.k +
+          ' · q = ' +
+          fmt(report.fit.q) +
+          ' min. Separate evaluation: ' +
+          total.covered +
+          '/' +
+          total.n +
+          ' covered (' +
+          ((100 * total.covered) / total.n).toFixed(1) +
+          '%).';
+        document.querySelector('#interpretation').textContent = report.fit.unbounded
+          ? 'The required rank is beyond the observed scores. The interval is unbounded: covering every real outcome provides no finite planning bound.'
+          : 'These observed rates describe ten fixed cases. A marginal coverage target is not a guarantee for each subgroup, new point, calibration sample, or finite batch. Changing evaluation outcomes never changes q.';
+        drawMechanism(report);
+        drawEvaluation(report);
+        for (const r of report.summary) {
+          const tr = document.createElement('tr');
+          for (const value of [
+            r.group,
+            r.covered + '/' + r.n,
+            ((100 * r.covered) / r.n).toFixed(1) + '%',
+          ])
+            cell(tr, value);
+          summary.append(tr);
+        }
+        for (const r of report.calibration) {
+          const tr = document.createElement('tr');
+          for (const value of [r.id, r.prediction, r.outcome, Math.abs(r.outcome - r.prediction)])
+            cell(tr, value);
+          calibration.append(tr);
+        }
+        for (const r of report.rows) {
+          const tr = document.createElement('tr');
+          for (const value of [
+            r.id + ' / ' + r.group[0],
+            r.prediction + ' / ' + r.outcome,
+            bounds(r),
+            r.covered ? 'Covered' : 'Missed',
+          ])
+            cell(tr, value);
+          data.append(tr);
+        }
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () => {
+        if (report) {
+          drawMechanism(report);
+          drawEvaluation(report);
+        }
+      });
+      configure();
+    </script>
+  </body>
+</html>

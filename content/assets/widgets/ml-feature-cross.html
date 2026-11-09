@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feature cross interaction explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Fit two small least-squares models to fictional trip durations: separate car and wet
+      indicators, or those indicators plus car × wet. Other targets stay fixed at bike–dry 20,
+      bike–wet 40 and car–dry 30 minutes. Withholding car–wet keeps its target outside both fits.
+    </p>
+    <form>
+      <div>
+        <label for="interaction">Car + wet target</label
+        ><select id="interaction">
+          <option value="-15">35 min · smaller wet effect</option>
+          <option value="0">50 min · same wet effect</option>
+          <option value="10">60 min · larger wet effect</option>
+        </select>
+      </div>
+      <div>
+        <label for="coverage">Training pairs</label
+        ><select id="coverage">
+          <option value="all">All four pairs</option>
+          <option value="withheld">Withhold car + wet</option>
+        </select>
+      </div>
+      <div>
+        <label for="pair">Inspect pair</label
+        ><select id="pair">
+          <option value="car-wet">Car + wet</option>
+          <option value="bike-dry">Bike + dry</option>
+          <option value="bike-wet">Bike + wet</option>
+          <option value="car-dry">Car + dry</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="metrics"></p>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect encoded inputs, coefficients and fitted cells</summary>
+      <p id="encoding"></p>
+      <p>
+        c is 1 for car, otherwise 0. w is 1 for wet, otherwise 0. The product c × w selects car–wet
+        only. Four joint one-hot slots could encode bike–dry, bike–wet, car–dry and car–wet; the
+        fits instead use reference coding [1, c, w, cw]. Arbitrary category ID multiplication is not
+        used.
+      </p>
+      <table id="coefficients">
+        <caption>
+          Fitted coefficients · minutes
+        </caption>
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Separate</th>
+            <th>With cross</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="identified"></p>
+      <table id="cells">
+        <caption>
+          Predictions and supplied targets · minutes
+        </caption>
+        <thead>
+          <tr>
+            <th>Pair</th>
+            <th>Target</th>
+            <th>Separate</th>
+            <th>Cross</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </details>
+    <details id="assumptions">
+      <summary>Fitting assumptions and limits</summary>
+      <p>
+        Each available cell has equal weight. A small linear-equation solver minimizes the sum of
+        squared residuals, with an intercept and no regularization. Mean absolute error is
+        separately reported in minutes: sum the absolute prediction errors and divide by the number
+        of evaluated cells. No noise, trip distribution, causal intervention or real travel dataset
+        is modeled.
+      </p>
+      <p>
+        With all four cells, four crossed coefficients can reproduce four supplied targets exactly.
+        With car–wet withheld, cw is zero in every training row; its coefficient is unidentified.
+        The stated fallback fixes it to zero and fits the remaining three coefficients. This is not
+        a generic minimum-norm or regularized solver default. The remaining rows have full rank for
+        that three-column fit.
+      </p>
+      <p>
+        Only bike/car and dry/wet are supported; unknown category values are rejected. The explorer
+        performs exact indicator crossing, not hashing. Changing the reserved car–wet target while
+        it is withheld cannot change the fitted coefficients. A single synthetic held-out error does
+        not estimate production performance.
+      </p>
+    </details>
+    <script>
+      const pairs = Object.freeze(
+        [
+          { id: 'bike-dry', vehicle: 'bike', weather: 'dry', label: 'Bike + dry' },
+          { id: 'bike-wet', vehicle: 'bike', weather: 'wet', label: 'Bike + wet' },
+          { id: 'car-dry', vehicle: 'car', weather: 'dry', label: 'Car + dry' },
+          { id: 'car-wet', vehicle: 'car', weather: 'wet', label: 'Car + wet' },
+        ].map(Object.freeze),
+      );
+      function encode(vehicle, weather) {
+        if (!['bike', 'car'].includes(vehicle) || !['dry', 'wet'].includes(weather))
+          throw new Error('Unknown category');
+        const c = Number(vehicle === 'car'),
+          w = Number(weather === 'wet');
+        return [1, c, w, c * w];
+      }
+      function makeData(interaction) {
+        if (![-15, 0, 10].includes(interaction)) throw new Error('Invalid target setting');
+        return pairs.map((p) => {
+          const x = encode(p.vehicle, p.weather);
+          return { ...p, y: 20 + 10 * x[1] + 20 * x[2] + interaction * x[3] };
+        });
+      }
+      function solveLinear(matrix, rhs) {
+        const n = rhs.length,
+          a = matrix.map((row, i) => [...row, rhs[i]]);
+        for (let col = 0; col < n; col++) {
+          let pivot = col;
+          for (let row = col + 1; row < n; row++)
+            if (Math.abs(a[row][col]) > Math.abs(a[pivot][col])) pivot = row;
+          if (Math.abs(a[pivot][col]) < 1e-10) throw new Error('Unidentified model columns');
+          [a[col], a[pivot]] = [a[pivot], a[col]];
+          const divisor = a[col][col];
+          for (let j = col; j <= n; j++) a[col][j] /= divisor;
+          for (let row = 0; row < n; row++)
+            if (row !== col) {
+              const factor = a[row][col];
+              for (let j = col; j <= n; j++) a[row][j] -= factor * a[col][j];
+            }
+        }
+        return a.map((row) => row[n]);
+      }
+      function fitModel(rows, withCross) {
+        if (!rows.length) throw new Error('No training rows');
+        const seen = new Set();
+        for (const row of rows) {
+          const x = encode(row.vehicle, row.weather),
+            key = x[1] + ',' + x[2];
+          if (seen.has(key) || !Number.isFinite(row.y))
+            throw new Error('Invalid or duplicate cell');
+          seen.add(key);
+        }
+        const identifiable =
+            !withCross || rows.some((row) => encode(row.vehicle, row.weather)[3] !== 0),
+          columns = withCross && identifiable ? 4 : 3;
+        const normal = Array.from({ length: columns }, () => Array(columns).fill(0)),
+          rhs = Array(columns).fill(0);
+        for (const row of rows) {
+          const x = encode(row.vehicle, row.weather);
+          for (let i = 0; i < columns; i++) {
+            rhs[i] += x[i] * row.y;
+            for (let j = 0; j < columns; j++) normal[i][j] += x[i] * x[j];
+          }
+        }
+        const coefficients = solveLinear(normal, rhs);
+        if (columns === 3) coefficients.push(0);
+        return { coefficients, identifiable, trainingCount: rows.length };
+      }
+      const predict = (model, pair) =>
+        encode(pair.vehicle, pair.weather).reduce(
+          (sum, x, i) => sum + x * model.coefficients[i],
+          0,
+        );
+      function compare(rows, coverage = 'all', selected = 'car-wet') {
+        if (
+          !['all', 'withheld'].includes(coverage) ||
+          !pairs.some((p) => p.id === selected) ||
+          rows.length !== 4 ||
+          new Set(rows.map((p) => p.id)).size !== 4 ||
+          !pairs.every((p) =>
+            rows.some(
+              (row) =>
+                row.id === p.id &&
+                row.vehicle === p.vehicle &&
+                row.weather === p.weather &&
+                Number.isFinite(row.y),
+            ),
+          )
+        )
+          throw new Error('Invalid comparison');
+        const train = rows.filter((row) => coverage === 'all' || row.id !== 'car-wet'),
+          test = rows.filter((row) => !train.includes(row));
+        const separate = fitModel(train, false),
+          crossed = fitModel(train, true);
+        const mae = (model, data) =>
+          data.length
+            ? data.reduce((sum, row) => sum + Math.abs(predict(model, row) - row.y), 0) /
+              data.length
+            : null;
+        const cells = rows.map((row) => ({
+          ...row,
+          training: train.includes(row),
+          separate: predict(separate, row),
+          crossed: predict(crossed, row),
+        }));
+        return {
+          coverage,
+          selected,
+          separate,
+          crossed,
+          cells,
+          inspected: cells.find((row) => row.id === selected),
+          trainingMae: { separate: mae(separate, train), crossed: mae(crossed, train) },
+          heldoutMae: { separate: mae(separate, test), crossed: mae(crossed, test) },
+        };
+      }
+      function buildReport(interaction = -15, coverage = 'all', selected = 'car-wet') {
+        return { ...compare(makeData(interaction), coverage, selected), interaction };
+      }
+      const number = (x) => (Math.abs(x) < 1e-8 ? '0' : Number(x.toFixed(2)).toString());
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 850 : 490;
+        const text = (x, y, value, size = 16, color = '#252c28') =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="' +
+          color +
+          '" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">' +
+          value +
+          '</text>';
+        function panel(x, y, label, key) {
+          let s =
+            text(x, y, label, 18) +
+            text(x + 90, y + 35, 'Dry', 16, '#626962') +
+            text(x + 212, y + 35, 'Wet', 16, '#626962');
+          for (let c = 0; c < 2; c++) {
+            s += text(x, y + 80 + c * 94, c ? 'Car' : 'Bike', 16);
+            for (let w = 0; w < 2; w++) {
+              const cell = r.cells.find(
+                  (row) =>
+                    Number(row.vehicle === 'car') === c && Number(row.weather === 'wet') === w,
+                ),
+                selected = cell.id === r.selected,
+                xx = x + 74 + w * 122,
+                yy = y + 50 + c * 94;
+              s +=
+                '<rect x="' +
+                xx +
+                '" y="' +
+                yy +
+                '" width="118" height="78" fill="' +
+                (selected ? '#edf5f0' : '#fff') +
+                '" stroke="' +
+                (selected ? '#00855b' : '#a6aca3') +
+                '"/>' +
+                text(xx + 10, yy + 31, number(cell[key]), 24, selected ? '#00855b' : '#252c28') +
+                text(
+                  xx + 10,
+                  yy + 60,
+                  (cell.training ? 'Target ' : 'Held out ') + number(cell.y),
+                  14,
+                  '#626962',
+                );
+            }
+          }
+          const dryBike = r.cells.find((row) => row.id === 'bike-dry')[key],
+            wetBike = r.cells.find((row) => row.id === 'bike-wet')[key],
+            dryCar = r.cells.find((row) => row.id === 'car-dry')[key],
+            wetCar = r.cells.find((row) => row.id === 'car-wet')[key];
+          s +=
+            text(x, y + 254, 'Bike wet change: ' + number(wetBike - dryBike) + ' min', 16) +
+            text(x, y + 280, 'Car wet change: ' + number(wetCar - dryCar) + ' min', 16);
+          return s;
+        }
+        let s =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' +
+          width +
+          ' ' +
+          height +
+          '" role="img" aria-label="Two fitted vehicle by weather grids compare additive and crossed models"><rect width="' +
+          width +
+          '" height="' +
+          height +
+          '" fill="#fff"/>';
+        s +=
+          text(
+            0,
+            24,
+            mobile ? 'Fits on synthetic cells' : 'Fits on the same synthetic cells · minutes',
+            18,
+          ) + text(0, 49, 'Green marks the inspected pair.', 14, '#626962');
+        s += panel(0, mobile ? 88 : 84, 'Separate indicators', 'separate');
+        s += panel(mobile ? 0 : 350, mobile ? 435 : 84, 'Add car × wet', 'crossed');
+        const x = encode(r.inspected.vehicle, r.inspected.weather);
+        if (mobile)
+          s +=
+            text(0, 763, 'Inspected ' + r.inspected.label + ' · cw = ' + x[3], 16) +
+            text(0, 791, 'Cross coefficient: ' + number(r.crossed.coefficients[3]) + ' min', 16) +
+            text(
+              0,
+              824,
+              r.coverage === 'all'
+                ? 'Supplied cells are not a test set.'
+                : 'One synthetic pair is held out.',
+              14,
+              '#626962',
+            );
+        else
+          s +=
+            text(0, 418, 'Inspected ' + r.inspected.label + ' · c × w = ' + x[3], 16) +
+            text(0, 447, 'Cross coefficient: ' + number(r.crossed.coefficients[3]) + ' min', 16) +
+            text(
+              0,
+              477,
+              r.coverage === 'all'
+                ? 'Four crossed coefficients fit four cells; held-out evidence is still needed.'
+                : 'The held-out car–wet target is not used to estimate coefficients.',
+              14,
+              '#626962',
+            );
+        return s + '</svg>';
+      }
+      let report;
+      function render() {
+        report = buildReport(
+          Number(document.querySelector('#interaction').value),
+          document.querySelector('#coverage').value,
+          document.querySelector('#pair').value,
+        );
+        const r = report,
+          p = r.inspected,
+          x = encode(p.vehicle, p.weather);
+        document.querySelector('output').textContent =
+          p.label +
+          ': target ' +
+          number(p.y) +
+          ' min; separate ' +
+          number(p.separate) +
+          ' min; cross ' +
+          number(p.crossed) +
+          ' min.';
+        document.querySelector('#metrics').textContent =
+          'Training mean absolute error: separate ' +
+          number(r.trainingMae.separate) +
+          ' min; cross ' +
+          number(r.trainingMae.crossed) +
+          ' min. ' +
+          (r.coverage === 'all'
+            ? 'No held-out pair.'
+            : 'Held-out car + wet error: separate ' +
+              number(r.heldoutMae.separate) +
+              ' min; cross ' +
+              number(r.heldoutMae.crossed) +
+              ' min.');
+        document.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth <= 520);
+        document.querySelector('#interpretation').textContent =
+          r.coverage === 'withheld'
+            ? 'The product is zero in every training row. Its coefficient is unidentified and explicitly set to zero; changing the reserved target cannot change either fit.'
+            : r.interaction === 0
+              ? 'These supplied targets have the same wet-weather change for both vehicles. The fitted product coefficient is zero; adding it changes no predictions.'
+              : 'The crossed fit has four coefficients for four observed cells. Matching every training target here does not establish performance on unseen trips.';
+        document.querySelector('#encoding').textContent =
+          'Inspected ' +
+          p.label +
+          ' → [1, c, w, cw] = [' +
+          x.join(', ') +
+          ']. Pair key: ' +
+          JSON.stringify([
+            ['vehicle', p.vehicle],
+            ['weather', p.weather],
+          ]) +
+          '.';
+        document.querySelector('#coefficients tbody').innerHTML = [
+          'Intercept',
+          'c: car',
+          'w: wet',
+          'cw: car × wet',
+        ]
+          .map(
+            (term, i) =>
+              '<tr><td>' +
+              term +
+              '</td><td>' +
+              number(r.separate.coefficients[i]) +
+              '</td><td>' +
+              number(r.crossed.coefficients[i]) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#identified').textContent = r.crossed.identifiable
+          ? 'All four crossed coefficients are identifiable from these cells. This is an algebraic property, not a precision or generalization guarantee.'
+          : 'The cw coefficient is not estimated: the explicit fallback is 0. Only the other three coefficients are fitted.';
+        document.querySelector('#cells tbody').innerHTML = r.cells
+          .map(
+            (cell) =>
+              '<tr><td>' +
+              cell.label +
+              (cell.training ? '' : ' · held out') +
+              '</td><td>' +
+              number(cell.y) +
+              '</td><td>' +
+              number(cell.separate) +
+              '</td><td>' +
+              number(cell.crossed) +
+              '</td></tr>',
+          )
+          .join('');
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

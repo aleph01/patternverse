@@ -48,31 +48,6 @@ Put a Frame Around the Belief helps when repeated argument about a belief's cont
 
 The planner still needs appropriate preparation, the team still needs to understand price, and the person still needs to judge how safe disagreement is in particular relationships. What changes is that each belief can be considered alongside the conditions sustaining it. This allows a more precise decision about where the rule belongs, where it needs qualification, and what current information might justify revising it.
 
-## Pattern details
-
-### Use when
-
-- A belief feels identical with reality.
-- Repeated debate about its content does not clarify it.
-
-### Goals
-
-- Make a belief available as an object of inquiry.
-- Compare sustaining conditions with the present situation.
-
-### Mechanisms
-
-- contextualization
-- metacognition
-
-### Not ideal when
-
-- An invented psychological explanation would replace consideration of the person’s reasons.
-
-### Difficulty
-
-medium
-
 ## Related patterns
 
 - [[find-the-positive-intention|Find the Positive Intention]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Meta Frame; chapter 8, printed pages 240–242. 
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask belief {
+belief = !ask {
     Name the belief in context
 
     Choose an everyday belief you want to examine. Describe when it feels especially convincing.
 }
-!ask variation {
+variation = !ask {
     Notice when it changes
 
     In what present situations does the belief feel stronger or weaker? Use observations rather than inventing a hidden history.
 }
-!ask function {
+function = !ask {
     Consider a possible function
 
     Could the belief be protecting a concern or organizing a situation? Phrase this tentatively. 'I don't know' is valid; no psychological cause needs to be discovered.
 }
-!ask facts {
+facts = !ask {
     Compare it with current evidence
 
     What does the belief help you notice, and what might it leave out? A proposed function neither proves nor disproves the belief.
 }
-!ask frame {
+frame = !ask {
     Write a contextual version
 
     Can you express the belief as an interpretation that occurs under particular conditions rather than a fact about every situation? Retain real risks and boundaries.
 }
-!ask next {
+next = !ask {
     Choose a present-day check
 
     What small observation, question, or action could help evaluate this frame now? Do not use it to diagnose yourself or someone else.

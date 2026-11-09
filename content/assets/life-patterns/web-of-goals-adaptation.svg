@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="550" viewBox="0 0 960 550" role="img" aria-labelledby="title desc" data-life-pattern="web-of-goals">
+<title id="title">Shared cooking before and after an expense expectation fails</title>
+<desc id="desc">The first panel connects shared cooking with connection, practical skills, and lower expenses. The second keeps connection and practical skills linked while the lower-expenses node is crossed out and its links are dashed. The example does not assume the activity should continue: remaining value and costs still need review.</desc>
+<style>:root{color-scheme:only light}svg{background:#fff}text{font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:400}path,polygon,rect{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="960" height="550" fill="#fff"/>
+<text x="28" y="42" text-anchor="start" font-size="32" fill="#252c28"><tspan x="28" dy="0">When one benefit disappears</tspan></text><text x="28" y="79" text-anchor="start" font-size="22" fill="#252c28"><tspan x="28" dy="0">The activity can retain other value. Its overall cost still needs a review.</tspan></text><g transform="translate(0 110)" data-panel="expected"><text x="30" y="35" text-anchor="start" font-size="26" fill="#252c28"><tspan x="30" dy="0">Expected benefits</tspan></text><path d="M131 110L349 110" fill="none" stroke="#7259b8" stroke-width="2.5"/><path d="M131 110L240 285L349 110" fill="none" stroke="#7259b8" stroke-width="2.5"/><text x="240" y="176" text-anchor="middle" font-size="25" fill="#7259b8"><tspan x="240" dy="0">Shared</tspan><tspan x="240" dy="30">cooking</tspan></text><g data-goal="connection" data-state="possible">
+<rect x="36" y="87" width="190" height="46" rx="8" fill="#fff" stroke="#b9c0b7" stroke-width="1.4"/>
+<text x="131" y="118" text-anchor="middle" font-size="23" fill="#252c28"><tspan x="131" dy="0">Connection</tspan></text>
+
+</g><g data-goal="skills" data-state="possible">
+<rect x="239" y="87" width="220" height="46" rx="8" fill="#fff" stroke="#b9c0b7" stroke-width="1.4"/>
+<text x="349" y="118" text-anchor="middle" font-size="23" fill="#252c28"><tspan x="349" dy="0">Practical skills</tspan></text>
+
+</g><g data-goal="expenses" data-state="possible">
+<rect x="129" y="262" width="222" height="46" rx="8" fill="#fff" stroke="#b9c0b7" stroke-width="1.4"/>
+<text x="240" y="293" text-anchor="middle" font-size="23" fill="#252c28"><tspan x="240" dy="0">Lower expenses</tspan></text>
+
+</g><text x="240" y="353" text-anchor="middle" font-size="21" fill="#596158"><tspan x="240" dy="0">Three purposes worth testing.</tspan></text></g><g transform="translate(480 110)" data-panel="actual"><text x="30" y="35" text-anchor="start" font-size="26" fill="#252c28"><tspan x="30" dy="0">After one month</tspan></text><path d="M131 110L349 110" fill="none" stroke="#7259b8" stroke-width="2.5"/><path d="M131 110L240 285L349 110" fill="none" stroke="#92978f" stroke-width="2.5" stroke-dasharray="7 6"/><text x="240" y="176" text-anchor="middle" font-size="25" fill="#7259b8"><tspan x="240" dy="0">Shared</tspan><tspan x="240" dy="30">cooking</tspan></text><g data-goal="connection" data-state="possible">
+<rect x="36" y="87" width="190" height="46" rx="8" fill="#fff" stroke="#b9c0b7" stroke-width="1.4"/>
+<text x="131" y="118" text-anchor="middle" font-size="23" fill="#252c28"><tspan x="131" dy="0">Connection</tspan></text>
+
+</g><g data-goal="skills" data-state="possible">
+<rect x="239" y="87" width="220" height="46" rx="8" fill="#fff" stroke="#b9c0b7" stroke-width="1.4"/>
+<text x="349" y="118" text-anchor="middle" font-size="23" fill="#252c28"><tspan x="349" dy="0">Practical skills</tspan></text>
+
+</g><g data-goal="expenses" data-state="unavailable">
+<rect x="129" y="262" width="222" height="46" rx="8" fill="#fff" stroke="#92978f" stroke-width="1.4" stroke-dasharray="5 5"/>
+<text x="240" y="293" text-anchor="middle" font-size="23" fill="#737b72"><tspan x="240" dy="0">Lower expenses</tspan></text>
+<path d="M142 299L338 271" fill="none" stroke="#737b72" stroke-width="2"/>
+</g><text x="240" y="353" text-anchor="middle" font-size="21" fill="#596158"><tspan x="240" dy="0">No expense benefit this month.</tspan></text></g><path d="M480 135V490" fill="none" stroke="#d5d9d2" stroke-width="1"/>
+</svg>

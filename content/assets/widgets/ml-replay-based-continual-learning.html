@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Continual replay buffer explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      #fits-table,
+      #data-table {
+        font-size: 13px;
+      }
+      #fits-table th:first-child {
+        width: 34%;
+      }
+      #fits-table th:nth-child(2) {
+        width: 22%;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        padding: 12px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font:
+          13px/1.6 ui-monospace,
+          monospace;
+      }
+      .inspection {
+        margin-top: 16px;
+      }
+      #buffer-table {
+        font-size: 13px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Remember earlier examples while learning the next cohort.</strong> Exact linear
+      gradient updates on fictional data. The historical buffer is frozen during adaptation; there
+      is no held-out evaluation or neural training.
+    </p>
+    <form id="controls">
+      <div>
+        <label for="capacity">Historical memory slots</label
+        ><select id="capacity">
+          <option value="0">0</option>
+          <option value="2">2</option>
+          <option value="4" selected>4</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+      <div>
+        <label for="policy">Memory selection policy</label
+        ><select id="policy">
+          <option value="balanced">Equal cohort quotas</option>
+          <option value="fifo">FIFO: newest history</option>
+          <option value="reservoir">Seeded reservoir</option>
+        </select>
+      </div>
+      <div>
+        <label for="weight">Replay weight ρ</label
+        ><select id="weight">
+          <option value="0">0</option>
+          <option value="0.25">0.25</option>
+          <option value="0.5" selected>0.5</option>
+          <option value="0.75">0.75</option>
+        </select>
+      </div>
+      <div>
+        <label for="updates">New-cohort updates</label
+        ><select id="updates">
+          <option value="1">1</option>
+          <option value="4">4</option>
+          <option value="12" selected>12</option>
+          <option value="40">40</option>
+        </select>
+      </div>
+      <div>
+        <label for="seed">Reservoir illustration seed</label
+        ><select id="seed">
+          <option value="1">1</option>
+          <option value="7" selected>7</option>
+          <option value="19">19</option>
+        </select>
+      </div>
+    </form>
+    <div class="inspection">
+      <label for="cursor">Inspect update</label
+      ><input type="range" id="cursor" min="0" max="12" value="12" step="1" />
+    </div>
+    <div class="actions">
+      <button type="button" id="start">Show start</button
+      ><button type="button" id="previous">Previous update</button
+      ><button type="button" id="next">Next update</button
+      ><button type="button" id="final">Show final</button
+      ><button type="button" id="reset">Reset inputs</button>
+    </div>
+    <output aria-live="polite"></output
+    ><svg id="mechanism" role="img" aria-labelledby="diagram-title diagram-desc"></svg>
+    <p id="control" class="equation"></p>
+    <p id="coverage" class="note"></p>
+    <table id="buffer-table">
+      <caption>
+        Actual retained history; frozen during these updates
+      </caption>
+      <thead>
+        <tr>
+          <th>Slot / ID</th>
+          <th>Cohort</th>
+          <th>Input flags</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody id="buffer-data"></tbody>
+    </table>
+    <details id="gradient">
+      <summary>Inspect the selected gradient update</summary>
+      <p id="step-note"></p>
+      <pre id="step-values"></pre>
+      <table id="gradient-table">
+        <caption>
+          Half squared-error gradients at the weights before this update
+        </caption>
+        <thead>
+          <tr>
+            <th>Weight</th>
+            <th>New g</th>
+            <th>Memory g</th>
+            <th>Used g</th>
+          </tr>
+        </thead>
+        <tbody id="gradient-data"></tbody>
+      </table>
+    </details>
+    <details id="data">
+      <summary>Inspect the fixture and calculation assumptions</summary>
+      <table id="data-table">
+        <caption>
+          Input stream and evaluation prototypes
+        </caption>
+        <thead>
+          <tr>
+            <th>Cohort / IDs</th>
+            <th>Flags</th>
+            <th>Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A1–A4 first</td>
+            <td>(1,0,0)</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>B1–B4 next</td>
+            <td>(0,1,0)</td>
+            <td>−1</td>
+          </tr>
+          <tr>
+            <td>C1 onward</td>
+            <td>(1,1,1)</td>
+            <td>1</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Start from explicit pretrained weights (1,−1,0), with no bias. Initial training is not
+        simulated. Each C update uses a new record ID with identical flags and target. At every
+        step, use the full frozen memory mean, not a sampled replay minibatch. Optimize (1−ρ) × new
+        half squared error + ρ × mean memory half squared error, at learning rate 0.25. With an
+        empty memory the effective replay weight is zero.
+      </p>
+      <p>
+        Old MSE averages original A and B squared errors equally, regardless of buffer contents. New
+        MSE evaluates C. These deterministic prototypes coincide with training inputs; errors are
+        not held-out estimates. The matched current-only control uses learning rate 0.25 ×
+        (1−effective ρ), omitting the memory gradient. It matches the new-data coefficient, not the
+        replay run's overall objective.
+      </p>
+      <p>
+        FIFO keeps the final capacity records of A1–A4 then B1–B4. Equal quotas reserve half the
+        slots for each known historical cohort and keep its newest records. Reservoir fills its
+        slots, then draws an index from the seen prefix and replaces a slot only when that index is
+        below capacity. A Park–Miller seeded generator chooses a reproducible illustrative path; its
+        seeds are not probability estimates. Ideal reservoir coverage below assumes genuinely
+        uniform sampling without replacement.
+      </p>
+      <p>
+        At two slots, 6 of 28 possible uniform subsets omit A and another 6 omit B. At four slots, 2
+        of 70 omit a cohort. Quotas guarantee both only in this known, two-cohort fixture.
+        Historical labels remain valid by assumption; no concept drift, buffer refresh during C,
+        class expansion, privacy mechanism, or production stream is simulated.
+      </p>
+    </details>
+    <details id="history">
+      <summary>Inspect every update's errors</summary>
+      <table id="history-table">
+        <caption>
+          Computed trajectory; zero is the starting model
+        </caption>
+        <thead>
+          <tr>
+            <th>Update</th>
+            <th>Old MSE</th>
+            <th>New MSE</th>
+            <th>Control old MSE</th>
+          </tr>
+        </thead>
+        <tbody id="history-data"></tbody>
+      </table>
+    </details>
+    <script>
+      const historyData = [
+        ...Array.from({ length: 4 }, (_, i) => ({
+          id: 'A' + (i + 1),
+          cohort: 'A',
+          x: [1, 0, 0],
+          y: 1,
+        })),
+        ...Array.from({ length: 4 }, (_, i) => ({
+          id: 'B' + (i + 1),
+          cohort: 'B',
+          x: [0, 1, 0],
+          y: -1,
+        })),
+      ];
+      const dot = (a, b) => a.reduce((sum, v, j) => sum + v * b[j], 0),
+        mean = (rows) => rows.reduce((s, v) => s + v, 0) / rows.length;
+      function choose(n, k) {
+        if (k < 0 || k > n) return 0;
+        let v = 1;
+        for (let j = 1; j <= k; j++) v = (v * (n - j + 1)) / j;
+        return v;
+      }
+      function buildBuffer(capacity, policy, seed) {
+        let state = seed;
+        const random = () => {
+          state = (state * 16807) % 2147483647;
+          return state / 2147483647;
+        };
+        let slots = [];
+        const events = [];
+        historyData.forEach((row, index) => {
+          let draw = null,
+            removed = null,
+            kept = false;
+          if (capacity > 0) {
+            if (policy === 'balanced') {
+              const cohort = slots.filter((r) => r.cohort === row.cohort);
+              if (cohort.length >= capacity / 2) {
+                removed = cohort[0].id;
+                slots = slots.filter((r) => r.id !== removed);
+              }
+              slots.push(row);
+              kept = true;
+            } else if (policy === 'fifo') {
+              slots.push(row);
+              kept = true;
+              if (slots.length > capacity) removed = slots.shift().id;
+            } else if (index < capacity) {
+              slots.push(row);
+              kept = true;
+            } else {
+              draw = Math.floor(random() * (index + 1));
+              if (draw < capacity) {
+                removed = slots[draw].id;
+                slots[draw] = row;
+                kept = true;
+              }
+            }
+          }
+          events.push({
+            id: row.id,
+            seen: index + 1,
+            draw,
+            removed,
+            kept,
+            slots: slots.map((r) => r.id),
+          });
+        });
+        return { slots, events };
+      }
+      function metrics(w) {
+        const a = (w[0] - 1) ** 2,
+          b = (w[1] + 1) ** 2,
+          c = (dot(w, [1, 1, 1]) - 1) ** 2;
+        return { a, b, old: (a + b) / 2, new: c };
+      }
+      function train(buffer, rho, steps, rate = 0.25) {
+        const effective = buffer.length ? rho : 0;
+        let w = [1, -1, 0];
+        const trace = [
+          {
+            step: 0,
+            w: [...w],
+            before: null,
+            newGradient: [0, 0, 0],
+            memoryGradient: [0, 0, 0],
+            gradient: [0, 0, 0],
+            ...metrics(w),
+          },
+        ];
+        for (let step = 1; step <= steps; step++) {
+          const before = [...w],
+            residual = dot(before, [1, 1, 1]) - 1,
+            newGradient = [residual, residual, residual],
+            memoryGradient = [0, 1, 2].map((j) =>
+              buffer.length ? mean(buffer.map((r) => (dot(before, r.x) - r.y) * r.x[j])) : 0,
+            ),
+            gradient = newGradient.map(
+              (v, j) => (1 - effective) * v + effective * memoryGradient[j],
+            );
+          w = before.map((v, j) => v - rate * gradient[j]);
+          trace.push({
+            step,
+            currentId: 'C' + step,
+            w: [...w],
+            before,
+            newGradient,
+            memoryGradient,
+            gradient,
+            ...metrics(w),
+          });
+        }
+        return trace;
+      }
+      function compute(capacity, policy, rho, steps, seed) {
+        const memory = buildBuffer(capacity, policy, seed),
+          effective = memory.slots.length ? rho : 0,
+          trace = train(memory.slots, rho, steps),
+          controlRate = 0.25 * (1 - effective),
+          control = train([], 0, steps, controlRate),
+          currentOnly = train([], 0, steps);
+        return {
+          capacity,
+          policy,
+          rho,
+          steps,
+          seed,
+          effective,
+          memory,
+          trace,
+          controlRate,
+          control,
+          currentOnly,
+          missingProbability: capacity === 0 ? 1 : (2 * choose(4, capacity)) / choose(8, capacity),
+        };
+      }
+      const fmt = (n) => (n > 0 && n < 0.00005 ? n.toExponential(2) : n.toFixed(4)),
+        vec = (x) => '(' + x.map((v) => v.toFixed(4)).join(', ') + ')';
+      function draw(r, cursor) {
+        const m = innerWidth <= 420,
+          w = m ? 328 : 680,
+          h = m ? 970 : 860,
+          s = r.trace[cursor],
+          counts = ['A', 'B'].map((c) => r.memory.slots.filter((v) => v.cohort === c).length);
+        const text = (x, y, size, t, b = false) =>
+            '<text x="' +
+            x +
+            '" y="' +
+            y +
+            '" font-size="' +
+            size +
+            '"' +
+            (b ? ' font-weight="700"' : '') +
+            '>' +
+            t +
+            '</text>',
+          box = (x, y, width, height) =>
+            '<rect x="' +
+            x +
+            '" y="' +
+            y +
+            '" width="' +
+            width +
+            '" height="' +
+            height +
+            '" rx="8" fill="var(--panel)" stroke="var(--line)"/>';
+        let svg =
+          '<title id="diagram-title">A frozen historical memory changes the new update trajectory</title><desc id="diagram-desc">Computed memory contents, weighted gradient mechanism, model weights, old and new mean squared errors, and a current-only control with the same new-data step size.</desc>';
+        svg +=
+          box(0, 0, w, m ? 175 : 132) +
+          text(14, 29, 18, 'Historical memory: ' + r.memory.slots.length + ' records', true) +
+          text(14, 60, 15, 'A: ' + counts[0] + ' slots; B: ' + counts[1] + ' slots');
+        const ids = r.memory.slots.map((v) => v.id);
+        if (m) {
+          svg +=
+            text(14, 91, 14, ids.slice(0, 4).join(' · ') || 'Empty memory') +
+            text(14, 119, 14, ids.slice(4).join(' · ')) +
+            text(14, 149, 14, 'Current C = (1, 1, 1), target 1.');
+        } else
+          svg +=
+            text(14, 89, 14, ids.join(' · ') || 'Empty memory') +
+            text(14, 117, 14, 'Current C = (1, 1, 1), target 1. Buffer frozen during C.');
+        const gy = m ? 205 : 162;
+        svg +=
+          text(w / 2 - 7, gy - 8, 22, '↓') +
+          box(0, gy, w, m ? 140 : 120) +
+          text(14, gy + 29, 18, 'Weighted gradient update', true) +
+          text(
+            14,
+            gy + 60,
+            14,
+            'g = ' + (1 - r.effective) + ' × gnew + ' + r.effective + ' × gmemory',
+          ) +
+          text(14, gy + 91, 14, 'w ← w − 0.25 × g');
+        if (m) svg += text(14, gy + 121, 13, 'Memory mean uses all retained records.');
+        const sy = gy + (m ? 160 : 140);
+        svg += text(0, sy + 27, 17, 'Update ' + cursor + ' of ' + r.steps, true);
+        if (m)
+          svg +=
+            text(0, sy + 56, 14, 'w₁ ' + s.w[0].toFixed(4) + '; w₂ ' + s.w[1].toFixed(4)) +
+            text(0, sy + 81, 14, 'w₃ ' + s.w[2].toFixed(4));
+        else svg += text(0, sy + 56, 14, 'Weights ' + vec(s.w));
+        const py = sy + (m ? 125 : 95),
+          px = m ? 44 : 65,
+          pw = m ? 270 : 570,
+          ph = m ? 235 : 230,
+          max = Math.max(
+            1,
+            ...r.trace.flatMap((v) => [v.old, v.new]),
+            ...r.control.map((v) => v.old),
+          ),
+          X = (t) => px + (t / r.steps) * pw,
+          Y = (v) => py + ph - (v / max) * ph;
+        svg += text(0, py - 17, 14, 'Mean squared error', true);
+        for (const v of [0, max / 2, max]) {
+          svg +=
+            '<line x1="' +
+            px +
+            '" y1="' +
+            Y(v) +
+            '" x2="' +
+            (px + pw) +
+            '" y2="' +
+            Y(v) +
+            '" stroke="var(--line)"/>' +
+            text(0, Y(v) + 4, 12, v.toFixed(1));
+        }
+        for (const t of [0, r.steps / 2, r.steps])
+          svg += text(X(t) - 3, py + ph + 23, 12, String(t));
+        const path = (rows, field) =>
+          rows.map((v, j) => (j ? 'L' : 'M') + ' ' + X(v.step) + ' ' + Y(v[field])).join(' ');
+        svg +=
+          '<path d="' +
+          path(r.trace, 'old') +
+          '" fill="none" stroke="var(--accent)" stroke-width="3"/><path d="' +
+          path(r.trace, 'new') +
+          '" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-dasharray="8 5"/><path d="' +
+          path(r.control, 'old') +
+          '" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-dasharray="2 5"/><line x1="' +
+          X(cursor) +
+          '" y1="' +
+          py +
+          '" x2="' +
+          X(cursor) +
+          '" y2="' +
+          (py + ph) +
+          '" stroke="var(--muted)" stroke-dasharray="3 4"/>';
+        for (const field of ['old', 'new'])
+          svg +=
+            '<circle cx="' + X(cursor) + '" cy="' + Y(s[field]) + '" r="4" fill="var(--ink)"/>';
+        const ly = py + ph + 56;
+        svg +=
+          text(px + pw / 2 - 35, py + ph + 43, 13, 'C updates') +
+          text(0, ly + 21, 13, 'Solid: old MSE · replay') +
+          text(0, ly + 46, 13, 'Dashed: new MSE · replay') +
+          text(0, ly + 71, 13, 'Dotted: old MSE · matched current-only');
+        svg +=
+          text(0, ly + 110, 15, 'Old ' + fmt(s.old) + '; new ' + fmt(s.new), true) +
+          text(0, ly + 139, 13, 'Control old ' + fmt(r.control[cursor].old)) +
+          text(0, h - 17, 13, 'Training-fixture errors; no held-out estimate.');
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      let report, cursor;
+      function render() {
+        const s = report.trace[cursor];
+        document.querySelector('output').textContent =
+          'Update ' +
+          cursor +
+          ' of ' +
+          report.steps +
+          '. Old MSE ' +
+          fmt(s.old) +
+          '. New MSE ' +
+          fmt(s.new) +
+          '.';
+        document.querySelector('#control').textContent =
+          'Matched current-only step size ' +
+          report.controlRate.toFixed(4) +
+          ': old MSE ' +
+          fmt(report.control[cursor].old) +
+          ', new MSE ' +
+          fmt(report.control[cursor].new) +
+          '. Effective replay weight ' +
+          report.effective +
+          '.';
+        document.querySelector('#coverage').textContent =
+          report.policy === 'reservoir'
+            ? 'Ideal uniform reservoir: probability of missing either historical cohort = ' +
+              (100 * report.missingProbability).toFixed(2) +
+              '%. This is not a frequency estimate from the offered seeds.'
+            : report.capacity === 0
+              ? 'Memory is empty; effective replay weight is zero.'
+              : report.policy === 'balanced'
+                ? 'Quotas preserve both known historical cohorts in this fixture.'
+                : 'FIFO retains recent historical records; omitted cohorts receive no direct replay gradient.';
+        document.querySelector('#buffer-data').innerHTML = report.memory.slots.length
+          ? report.memory.slots
+              .map(
+                (r, i) =>
+                  '<tr><th scope="row">' +
+                  (i + 1) +
+                  ' / ' +
+                  r.id +
+                  '</th><td>' +
+                  r.cohort +
+                  '</td><td>(' +
+                  r.x.join(',') +
+                  ')</td><td>' +
+                  r.y +
+                  '</td></tr>',
+              )
+              .join('')
+          : '<tr><td colspan="4">No retained records.</td></tr>';
+        document.querySelector('#step-note').textContent =
+          cursor === 0
+            ? 'Starting weights: no C update has run.'
+            : 'New record ' +
+              s.currentId +
+              '. Old MSE averages A and B equally: A ' +
+              fmt(s.a) +
+              ', B ' +
+              fmt(s.b) +
+              '.';
+        document.querySelector('#step-values').textContent =
+          cursor === 0
+            ? 'w = (1, −1, 0)'
+            : 'Before: ' +
+              vec(s.before) +
+              String.fromCharCode(10) +
+              'Used gradient: ' +
+              vec(s.gradient) +
+              String.fromCharCode(10) +
+              'After: ' +
+              vec(s.w);
+        document.querySelector('#gradient-data').innerHTML = s.gradient
+          .map(
+            (v, j) =>
+              '<tr><th scope="row">w' +
+              (j + 1) +
+              '</th><td>' +
+              fmt(s.newGradient[j]) +
+              '</td><td>' +
+              fmt(s.memoryGradient[j]) +
+              '</td><td>' +
+              fmt(v) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#history-data').innerHTML = report.trace
+          .map(
+            (v, i) =>
+              '<tr><th scope="row">' +
+              i +
+              '</th><td>' +
+              fmt(v.old) +
+              '</td><td>' +
+              fmt(v.new) +
+              '</td><td>' +
+              fmt(report.control[i].old) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#cursor').value = cursor;
+        document.querySelector('#previous').disabled = cursor === 0;
+        document.querySelector('#next').disabled = cursor === report.steps;
+        draw(report, cursor);
+      }
+      function recompute() {
+        report = compute(
+          +document.querySelector('#capacity').value,
+          document.querySelector('#policy').value,
+          +document.querySelector('#weight').value,
+          +document.querySelector('#updates').value,
+          +document.querySelector('#seed').value,
+        );
+        cursor = report.steps;
+        document.querySelector('#cursor').max = report.steps;
+        render();
+      }
+      document.querySelector('form').addEventListener('change', recompute);
+      document.querySelector('#cursor').addEventListener('input', (e) => {
+        cursor = +e.target.value;
+        render();
+      });
+      for (const [id, move] of [
+        ['start', () => 0],
+        ['previous', () => Math.max(0, cursor - 1)],
+        ['next', () => Math.min(report.steps, cursor + 1)],
+        ['final', () => report.steps],
+      ])
+        document.querySelector('#' + id).addEventListener('click', () => {
+          cursor = move();
+          render();
+        });
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        recompute();
+      });
+      addEventListener('resize', () => draw(report, cursor));
+      recompute();
+    </script>
+  </body>
+</html>

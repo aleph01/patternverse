@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "creational"
   - "prototype"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 A diagram editor can duplicate rectangles, connectors, text labels, and plugin-defined shapes. The first implementation checks the selected shape's type and manually reconstructs it. Every new shape requires another branch, and reconstruction sometimes forgets properties such as corner style or custom metadata.
 
+## Core idea
+
 Prototype lets the existing object supply the basis for a new one. The editor asks the selected object to clone itself, or uses an agreed copying mechanism, instead of knowing how every concrete shape is constructed. The resulting object starts from a representative configuration and can then be changed independently.
 
-![A domain-aware copy keeps the template configuration, gives the copy a new identity, and separates mutable annotations.](/diagrams/gof/prototype.svg "A domain-aware copy keeps the template configuration, gives the copy a new identity, and separates mutable annotations.")
+![An original shape is cloned into a new shape with a new identity and an independent label list. Both point to the same immutable style. Updating duplicate labels leaves the original labels unchanged.](../assets/software-engineering/gof/prototype.svg "The clone gets a new identity and its own editable labels. Sharing the immutable style is an explicit copying decision.")
 
-### Copying a meaningful configuration
+## How it works
 
 The pattern is about creation through an existing exemplar. A prototype might be a selected object, a stored template, or a registry entry chosen by name. Clients depend on a duplication contract instead of concrete constructors.
 
 This can reduce coupling to concrete types and preserve elaborate setup that would be tedious to repeat. It does not mean copying is automatically cheaper than construction. A large object graph may be expensive to duplicate, while a fresh constructor may be fast. Performance must be measured separately from the convenience of expressing creation through a template.
 
 The most important design work is defining what a copy means. Should identifiers change? Should nested values be shared? Should observers and caches be copied? Does a clone remain connected to the same external resource? A prototype operation needs answers that fit the domain.
+
+## Worked example
 
 ### Duplicating a shape without duplicating its identity
 
@@ -38,6 +43,39 @@ The client does not need to know these details. Each shape implementation honors
 
 This is more precise than asking for a universal deep copy. Deep-copying everything might duplicate data intended to remain shared, fail on external handles, or mishandle cycles. Domain-aware copying can preserve shared immutable assets while separating the mutable state that defines the new object.
 
+### A small implementation
+
+A shape owns its copying rule. The editor can duplicate it without knowing its constructor details. A new identity is assigned, editable labels are copied, and the immutable style value is deliberately shared.
+
+```python
+from dataclasses import dataclass, field
+from uuid import uuid4
+
+
+@dataclass(frozen=True)
+class Style:
+    fill: str
+
+
+@dataclass
+class Shape:
+    style: Style
+    labels: list[str]
+    identity: str = field(default_factory=lambda: str(uuid4()))
+
+    def clone(self):
+        return Shape(self.style, self.labels.copy())
+
+
+original = Shape(Style("green"), ["Entrance"])
+duplicate = original.clone()
+duplicate.labels.append("Copy")
+print(original.labels, duplicate.labels)
+# ['Entrance'] ['Entrance', 'Copy']
+```
+
+The duplicate has an independent label list and a different identity, while its immutable style can safely remain the same object. A generic shallow copy would share the labels. A blanket deep copy could duplicate data that should remain shared. The clone contract makes those decisions explicit.
+
 ### Templates in a configuration tool
 
 A deployment configuration editor offers starting templates such as a small local worker and a high-throughput worker. Each includes resource limits, environment defaults, monitoring settings, and nested task configuration. A user chooses a template, clones it, and adjusts the copy.
@@ -48,7 +86,14 @@ The copy must avoid retaining secrets, runtime status, or provider-assigned iden
 
 Template changes also raise a product question. Existing clones usually remain independent; changing the prototype does not automatically migrate them. If the desired behavior is live inheritance from a base configuration, Prototype alone does not describe that relationship. The system needs explicit references, versioning, or a merge policy.
 
-### Shallow and deep are incomplete descriptions
+## When to use it
+
+- A configured template is easier to copy than reconstruct.
+- Concrete types should supply their own duplication behavior.
+
+Consider a simpler design when object identity represents an external resource that cannot meaningfully be copied, or when copying would silently preserve shared mutable state.
+
+## Tradeoffs and common mistakes
 
 A shallow copy duplicates the outer object while retaining references to nested objects. This is suitable when the nested values are immutable or intentionally shared. It is dangerous when users expect nested editing to be independent.
 
@@ -56,38 +101,12 @@ A deep copy recursively duplicates reachable content according to its copying ru
 
 That is why Prototype benefits from a written semantic contract. For an editor, duplication may mean new identity, copied authoring state, no runtime subscriptions, and shared immutable assets. For a simulation, it may mean an exact state snapshot with different rules for random-number state and resources.
 
-### When another design is clearer
+## Related patterns
 
 Prototype is useful when exemplar-based creation matches how people work, or when clients should avoid concrete construction knowledge. It is less useful for small plain values whose constructors already express all relevant state. A constructor or explicit conversion function can be easier to review.
 
-Builder assembles a result through steps; Prototype starts from a completed representative. Abstract Factory can provide prototypes from a family or hide cloning behind creation methods. Flyweight deliberately shares state among many objects. Prototype often aims for independent mutable identity, so confusing the two can cause unwanted coupling.
+[[builder|Builder]] assembles a result through steps; Prototype starts from a completed representative. [[abstract-factory|Abstract Factory]] can provide prototypes from a family or hide cloning behind creation methods. [[flyweight|Flyweight]] deliberately shares state among many objects. Prototype often aims for independent mutable identity, so confusing the two can cause unwanted coupling.
 
-The strongest implementation is rarely a magical clone-everything operation. It is a copying boundary that states exactly which aspects of an existing object become the starting point for a new one.
+## Sources
 
-## Pattern details
-
-**Category:** Creational · **Difficulty:** Intermediate
-
-### Use when
-
-- A configured template is easier to copy than reconstruct
-- Concrete types should supply their own duplication behavior
-
-### Not ideal when
-
-- Object identity represents an external resource that cannot meaningfully be copied
-- Copying would silently preserve shared mutable state
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
-## Related patterns
-
-[[builder|Builder]] · [[abstract-factory|Abstract Factory]] · [[flyweight|Flyweight]]
-
-## Source
-
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
-
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+Prototype is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Private training clipping and accounting explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #record-table th:first-child {
+        width: 16%;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      th,
+      td {
+        overflow-wrap: anywhere;
+        vertical-align: top;
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Bound contributions. Perturb the sum. Account for access.</strong> These fictional
+      vectors show one update. The separate ledger bounds the specified randomized mechanism; this
+      public, fixed-noise replay is not private.
+    </p>
+    <form>
+      <div>
+        <label for="clip">L2 clipping bound C</label
+        ><select id="clip">
+          <option value="0.5">0.5</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+      <div>
+        <label for="sigma">Noise multiplier σ</label
+        ><select id="sigma">
+          <option value="0">0 — no noise, no finite bound</option>
+          <option value="2">2</option>
+          <option value="4" selected>4</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+      <div>
+        <label for="accesses">Full-data accesses counted in ledger T</label
+        ><select id="accesses">
+          <option value="1" selected>1 access</option>
+          <option value="4">4 accesses</option>
+          <option value="16">16 accesses</option>
+        </select>
+      </div>
+      <div>
+        <label for="delta">Target δ</label
+        ><select id="delta">
+          <option value="0.00001" selected>0.00001</option>
+          <option value="0.0000001">0.0000001</option>
+        </select>
+      </div>
+      <div>
+        <label for="replay">Public noise replay (standardized z)</label
+        ><select id="replay">
+          <option value="A" selected>A: (0.25, −0.5)</option>
+          <option value="B">B: (−1, 0.75)</option>
+          <option value="zero">Zero: (0, 0)</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <p id="interpretation"></p>
+    <h2>Privacy ledger: randomized mechanism</h2>
+    <p class="note">
+      Four public slots; replace one record; full-batch access (q = 1). Each clipped contribution
+      has norm at most C, so sum sensitivity is 2C. Each access adds fresh, independent Gaussian
+      noise with SD σC per coordinate. Initial parameters and settings are public. Only covered
+      noisy outputs are released.
+    </p>
+    <p class="equation" id="ledger"></p>
+    <table id="metrics-table">
+      <caption>
+        One-update replay and separate accounting
+      </caption>
+      <thead>
+        <tr>
+          <th>Quantity</th>
+          <th>Computed value</th>
+        </tr>
+      </thead>
+      <tbody id="metrics"></tbody>
+    </table>
+    <details id="records">
+      <summary>Inspect all four record contributions</summary>
+      <table id="record-table">
+        <caption>
+          Fictional gradients at the same model state
+        </caption>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Raw / norm</th>
+            <th>Clipped / norm</th>
+          </tr>
+        </thead>
+        <tbody id="record-data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and limits of the calculation</summary>
+      <p>
+        The ledger computes ρ = T × (2C)² / (2(σC)²) = 2T/σ² and ε = ρ + 2√(ρ ln(1/δ)). This is the
+        Gaussian zCDP bound composed across accesses and converted to approximate DP, not the
+        tightest possible ε. Natural logarithms are used. With σ = 0 this general mechanism has no
+        finite DP bound for the chosen δ.
+      </p>
+      <p>
+        T changes the accounting only: the diagram shows the first update, not T training updates.
+        Later accesses must satisfy the same sensitivity bound conditional on earlier noisy states.
+        No sampling amplification, private model selection, or user-level guarantee is included.
+        Settings are not chosen from private data.
+      </p>
+      <p>
+        Replay z values are fixed public examples, not sampled noise. Even the zero replay has the
+        same theoretical ledger when σ is unchanged; a single displayed noise value does not
+        determine a mechanism's guarantee. A production mechanism needs fresh independent,
+        appropriately generated Gaussian randomness and must not release raw gradients or reveal its
+        noise. This page is not a private training tool.
+      </p>
+      <p>
+        Reference:
+        <a href="https://arxiv.org/abs/1605.02065" target="_blank" rel="noopener noreferrer"
+          >Bun and Steinke</a
+        >, Propositions 1.3 and 1.6, Lemma 2.3, and multivariate Lemma 2.5. This replay does not
+        simulate a data distribution or measure model accuracy.
+      </p>
+    </details>
+    <script>
+      'use strict';
+      const raw = [
+        [3, 4],
+        [0, 2],
+        [-2, 0],
+        [0, -0.5],
+      ];
+      const replays = { A: [0.25, -0.5], B: [-1, 0.75], zero: [0, 0] };
+      const fmt = (n) => (Math.abs(n) < 0.00000005 ? '0.0000' : n.toFixed(4));
+      const pair = (v) => '(' + v.map(fmt).join(', ') + ')';
+      function clipVector(v, C) {
+        const norm = Math.hypot(...v);
+        return v.map((x) => x * (norm > C ? C / norm : 1));
+      }
+      function account(C, sigma, T, delta) {
+        const sensitivity = 2 * C,
+          sd = sigma * C;
+        if (!sd) return { sensitivity, sd, rho: null, epsilon: null };
+        const rho = (T * sensitivity * sensitivity) / (2 * sd * sd);
+        return { sensitivity, sd, rho, epsilon: rho + 2 * Math.sqrt(rho * Math.log(1 / delta)) };
+      }
+      function compute(C, sigma, T, delta, replay) {
+        const clipped = raw.map((v) => clipVector(v, C)),
+          sum = clipped.reduce((s, v) => s.map((x, i) => x + v[i]), [0, 0]);
+        const a = account(C, sigma, T, delta),
+          noise = replays[replay].map((x) => x * a.sd),
+          noisySum = sum.map((x, i) => x + noise[i]),
+          mean = noisySum.map((x) => x / 4),
+          update = mean.map((x) => -0.1 * x);
+        return {
+          C,
+          sigma,
+          T,
+          delta,
+          replay,
+          clipped,
+          sum,
+          ...a,
+          noise,
+          noisySum,
+          mean,
+          update,
+          clippedCount: raw.filter((v) => Math.hypot(...v) > C).length,
+        };
+      }
+      let report;
+      function draw(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          h = mobile ? 850 : 465;
+        const card = (x, y, width, height) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          width +
+          '" height="' +
+          height +
+          '" rx="8" fill="var(--panel)" stroke="var(--accent)"/>';
+        const text = (x, y, s, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          s +
+          '"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          String(value)
+            .replace(/(-?\d+)\.0{4}\b/g, '$1')
+            .replace(/(-?\d+\.\d*?[1-9])0+\b/g, '$1') +
+          '</text>';
+        let svg =
+          '<title id="flow-title">One clipped, perturbed model update and its separate privacy ledger</title><desc id="flow-desc">Four fictional gradients are clipped individually. Their sum receives fixed replay noise, then is divided by four and multiplied by minus the learning rate. The privacy ledger applies to fresh random Gaussian noise, not this deterministic replay.</desc>';
+        const cw = mobile ? 328 : 210,
+          x2 = mobile ? 0 : 235,
+          y2 = mobile ? 245 : 0,
+          x3 = mobile ? 0 : 470,
+          y3 = mobile ? 470 : 0;
+        svg +=
+          card(0, 0, cw, 220) +
+          text(12, 29, 17, '1. Clip each record', true) +
+          text(12, 57, 14, 'L2 bound C = ' + r.C);
+        r.clipped.forEach((v, i) => {
+          svg +=
+            text(12, 91 + i * 31, 13, String.fromCharCode(65 + i) + ' ' + pair(raw[i]) + ' →') +
+            text(mobile ? 161 : 92, 107 + i * 31, 13, pair(v));
+        });
+        svg +=
+          card(x2, y2, cw, 200) +
+          text(x2 + 12, y2 + 29, 17, '2. Add noise to sum', true) +
+          text(x2 + 12, y2 + 62, 14, 'Sum ' + pair(r.sum)) +
+          text(x2 + 12, y2 + 94, 14, 'Noise SD = ' + fmt(r.sd)) +
+          text(x2 + 12, y2 + 126, 14, 'Replay ' + pair(r.noise)) +
+          text(x2 + 12, y2 + 165, 14, 'Result ' + pair(r.noisySum), true);
+        svg +=
+          card(x3, y3, cw, 170) +
+          text(x3 + 12, y3 + 29, 17, '3. Divide and update', true) +
+          text(x3 + 12, y3 + 62, 14, 'Mean ' + pair(r.mean)) +
+          text(x3 + 12, y3 + 94, 14, 'w = −0.10 × mean') +
+          text(x3 + 12, y3 + 133, 14, pair(r.update), true);
+        const ly = mobile ? 685 : 270;
+        svg +=
+          card(0, ly, w, 145) +
+          text(
+            12,
+            ly + 28,
+            17,
+            mobile
+              ? 'Ledger: T = ' + r.T + '; full batch'
+              : 'Separate ledger: ' + r.T + ' full-batch ' + (r.T === 1 ? 'access' : 'accesses'),
+            true,
+          ) +
+          text(12, ly + 59, 14, 'Replace one record → sensitivity 2C = ' + fmt(r.sensitivity));
+        svg +=
+          text(
+            12,
+            ly + 91,
+            14,
+            r.epsilon === null
+              ? 'No noise: no finite DP bound'
+              : 'ρ = ' + fmt(r.rho) + '; ε bound = ' + fmt(r.epsilon),
+            true,
+          ) + text(12, ly + 121, 13, 'δ = ' + r.delta + '; fresh Gaussian randomness required.');
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      function render() {
+        const val = (id) => document.getElementById(id).value;
+        report = compute(
+          +val('clip'),
+          +val('sigma'),
+          +val('accesses'),
+          +val('delta'),
+          val('replay'),
+        );
+        const r = report;
+        document.querySelector('output').textContent =
+          'REPLAY update: ' +
+          pair(r.update) +
+          '. ' +
+          (r.epsilon === null
+            ? 'NO FINITE DP BOUND (σ = 0).'
+            : 'Randomized mechanism ε bound: ' + fmt(r.epsilon) + ' at δ = ' + r.delta + '.');
+        document.querySelector('#interpretation').textContent =
+          r.clippedCount +
+          ' of 4 gradients clipped. The diagram shows one update. T = ' +
+          r.T +
+          ' changes the ledger only. Fixed replay values provide no privacy.';
+        document.querySelector('#ledger').textContent =
+          r.epsilon === null
+            ? 'σ = 0: the Gaussian privacy calculation is undefined; do not report a finite ε.'
+            : 'ρ = ' +
+              r.T +
+              ' × ' +
+              fmt(r.sensitivity) +
+              '² / (2 × ' +
+              fmt(r.sd) +
+              '²) = ' +
+              fmt(r.rho) +
+              '. ε = ρ + 2√(ρ ln(1/δ)) = ' +
+              fmt(r.epsilon) +
+              '.';
+        const metrics = [
+          ['Raw gradient sum', pair(raw.reduce((s, v) => s.map((x, i) => x + v[i]), [0, 0]))],
+          ['Clipped gradient sum', pair(r.sum)],
+          ['Gaussian SD on sum / mean', fmt(r.sd) + ' / ' + fmt(r.sd / 4)],
+          ['Fixed replay noise on sum', pair(r.noise)],
+          ['Noisy mean (one update)', pair(r.mean)],
+          ['Parameters from w = (0, 0)', pair(r.update)],
+          ['Accounted accesses / sampling', r.T + ' / full batch, q = 1'],
+          [
+            'ρ / converted ε bound',
+            r.rho === null ? 'Undefined / no finite bound' : fmt(r.rho) + ' / ' + fmt(r.epsilon),
+          ],
+        ];
+        document.querySelector('#metrics').innerHTML = metrics
+          .map((v) => '<tr><th scope="row">' + v[0] + '</th><td>' + v[1] + '</td></tr>')
+          .join('');
+        document.querySelector('#record-data').innerHTML = raw
+          .map(
+            (v, i) =>
+              '<tr><th scope="row">' +
+              String.fromCharCode(65 + i) +
+              '</th><td>' +
+              pair(v) +
+              '<small>norm ' +
+              fmt(Math.hypot(...v)) +
+              '</small></td><td>' +
+              pair(r.clipped[i]) +
+              '<small>norm ' +
+              fmt(Math.hypot(...r.clipped[i])) +
+              '</small></td></tr>',
+          )
+          .join('');
+        draw(r);
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelector('form').addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        render();
+      });
+      addEventListener('resize', () => draw(report));
+      render();
+    </script>
+  </body>
+</html>

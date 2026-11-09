@@ -131,10 +131,10 @@ The exact source below is bundled in the guided practice; displaying it does not
 :language 1
 :title "Identify Cognitive Distortions"
 :output outcome
-!ask thought {
+thought = !ask {
     Describe a manageable everyday situation and the thought that came up. Write the thought in your own words.
 }
-!choose patterns [multi, min=0, prefer=checklist] {
+patterns = !choose [multi, min=0, prefer=checklist] {
     Which thinking habits might be influencing this thought? Choose any that seem relevant, or none. Selecting a habit does not mean your thought is wrong.
     - catastrophizing: "Catastrophizing"
     - mind-reading: "Mind reading"
@@ -148,10 +148,10 @@ The exact source below is bundled in the guided practice; displaying it does not
     - labeling: "Labeling"
     - personalization: "Personalization or excessive responsibility"
 }
-!ask examine {
+examine = !ask {
     Could the thinking habits you selected be affecting how you see the situation? What supports your thought, and what gives you reason to question it? Include any real difficulties or important context. If you selected none, you can still examine the thought.
 }
-!ask balanced {
+balanced = !ask {
     Taking that evidence and context into account, how could you express the thought more accurately? Include any positive evidence you may have dismissed, without ignoring real difficulties.
 }
 !show {
@@ -164,6 +164,6 @@ The exact source below is bundled in the guided practice; displaying it does not
 
     You can leave this here or return later. Nothing has been scheduled or carried out for you.
 }
-= outcome "reflected"
+outcome = "reflected"
 -> end
 ```

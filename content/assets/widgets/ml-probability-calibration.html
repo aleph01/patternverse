@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Probability calibration fitting explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      th:first-child,
+      td:first-child {
+        width: 34%;
+      }
+      #raw-records table {
+        font-size: 13px;
+      }
+      #raw-records th:first-child,
+      #raw-records td:first-child {
+        width: 28%;
+      }
+      #raw-records th:nth-child(2),
+      #raw-records td:nth-child(2) {
+        width: 12%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      A fictional frozen model has logits −ln(9) and +ln(9), giving 10% and 90% raw issue
+      probabilities. Fit one bounded temperature on 20 calibration cases, then evaluate on 20
+      different cases. No base model is trained.
+    </p>
+    <form aria-label="Probability calibration settings">
+      <div>
+        <label for="low">Calibration positives · 10 low-score cases</label
+        ><input id="low" type="number" min="0" max="10" step="1" value="2" required />
+      </div>
+      <div>
+        <label for="high">Calibration positives · 10 high-score cases</label
+        ><input id="high" type="number" min="0" max="10" step="1" value="8" required />
+      </div>
+      <div>
+        <label for="scenario">Separate evaluation outcomes · low/high positives</label
+        ><select id="scenario">
+          <option value="moderate" selected>3/10 and 7/10 · less extreme</option>
+          <option value="aligned">1/10 and 9/10 · raw already aligned</option>
+          <option value="reversed">8/10 and 2/10 · opposite ordering</option>
+        </select>
+      </div>
+      <div>
+        <label for="bins">Equal-width reliability bins</label
+        ><select id="bins">
+          <option value="1">1 · pool every case</option>
+          <option value="2">2</option>
+          <option value="5" selected>5</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <p id="fitting" class="note"></p>
+    <svg
+      role="img"
+      aria-label="Evaluation reliability diagram before and after fitted temperature scaling"
+    ></svg>
+    <p class="note">
+      Positive-event reliability: x = mean predicted issue probability; y = observed positive
+      fraction. The diagonal is ideal agreement. Empty bins have no point. Raw uses gray circles;
+      mapped uses green square outlines. These are tiny synthetic counts, with no population
+      guarantee.
+    </p>
+    <div class="history">
+      <table id="metrics-table">
+        <caption>
+          Separate evaluation · lower Brier/log loss is better
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Metric</th>
+            <th scope="col">Raw</th>
+            <th scope="col">Mapped</th>
+          </tr>
+        </thead>
+        <tbody id="metrics"></tbody>
+      </table>
+    </div>
+    <p id="interpretation" class="note"></p>
+    <details open>
+      <summary>Inspect nonempty evaluation bins</summary>
+      <table>
+        <caption>
+          Bin counts, mean probabilities, and observed fractions
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Output / bin / cases</th>
+            <th scope="col">Mean probability</th>
+            <th scope="col">Positive fraction</th>
+          </tr>
+        </thead>
+        <tbody id="reliability"></tbody>
+      </table>
+    </details>
+    <details id="raw-records">
+      <summary>Inspect all calibration and evaluation records</summary>
+      <table>
+        <caption>
+          CAL identifiers fit T; EVAL identifiers only evaluate it. Label 1 = issue.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">y</th>
+            <th scope="col">Raw p</th>
+            <th scope="col">Mapped p</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Exact fitting, metric, and binning assumptions</summary>
+      <p>
+        Each split has ten low-logit and ten high-logit cases, with distinct IDs. Each group has the
+        selected number of positive labels, followed by negative labels. Base logits are fixed at
+        ±ln(9). The mapping is p = sigmoid(z/T) with a shared positive T constrained to [0.25, 10].
+        The base model's original fitting data are outside this toy.
+      </p>
+      <p>
+        For these equal-magnitude logits, calibration negative log-likelihood depends only on q, the
+        fraction of calibration labels matching the sign prediction (negative for the low group,
+        positive for the high group). Its unconstrained optimum has high-group probability q. Clip q
+        to [sigmoid(ln(9)/10), sigmoid(ln(9)/0.25)], then solve T = ln(9) / log(q/(1−q)). This is
+        the exact bounded optimum for this special dataset, not a general fitting algorithm.
+        Boundary optima are reported. Evaluation labels and bin counts are never supplied to
+        fitting.
+      </p>
+      <p>
+        Brier loss is mean (p−y)²; log loss is mean −y ln(p) − (1−y) ln(1−p), in nats. Accuracy uses
+        p ≥ 0.5. The decision count uses p &gt; 0.85 (strictly positive benefit for a visit costing
+        85 and preventing loss 100 under the article's assumptions), allowing 1e-12 roundoff at the
+        boundary.
+      </p>
+      <p>
+        For B equal-width bins use [j/B,(j+1)/B), including 1 in the last bin, with 1e-12 roundoff
+        when assigning boundary probabilities. Each point uses that bin's mean positive-class
+        probability and fraction of positive labels. Binned error is sum over nonempty bins of (bin
+        cases / total cases) × absolute difference between those two means. It is not top-label
+        multiclass ECE. One broad bin can cancel opposing errors. Changing bins never changes T,
+        individual predictions, or proper losses.
+      </p>
+      <p>
+        Scores are not guaranteed to transfer between the synthetic calibration and evaluation
+        scenarios. Twenty cases per split are too few to certify population calibration. There is no
+        uncertainty interval, subgroup guarantee, class-prior correction, arbitrary-logit optimizer,
+        or external model call. One temperature cannot fit every asymmetric pattern or reverse a
+        wrong ordering.
+      </p>
+    </details>
+    <script>
+      const L = Math.log(9),
+        TMIN = 0.25,
+        TMAX = 10;
+      const scenarios = { moderate: [3, 7], aligned: [1, 9], reversed: [8, 2] };
+      const form = document.querySelector('form'),
+        chart = document.querySelector('svg');
+      let report;
+      function sigmoid(value) {
+        return 1 / (1 + Math.exp(-value));
+      }
+      function makeRecords(low, high, prefix) {
+        return [low, high].flatMap((positives, g) =>
+          Array.from({ length: 10 }, (_, i) => ({
+            id: prefix + '-' + (g ? 'H' : 'L') + String(i + 1).padStart(2, '0'),
+            z: g ? L : -L,
+            y: Number(i < positives),
+          })),
+        );
+      }
+      function fitTemperature(rows) {
+        const q = rows.reduce((s, r) => s + (r.z > 0 ? r.y : 1 - r.y), 0) / rows.length;
+        const minQ = sigmoid(L / TMAX),
+          maxQ = sigmoid(L / TMIN),
+          fittedQ = Math.max(minQ, Math.min(maxQ, q));
+        const temperature = Math.max(TMIN, Math.min(TMAX, L / Math.log(fittedQ / (1 - fittedQ))));
+        return {
+          temperature,
+          q,
+          fittedQ,
+          bound: q <= minQ ? 'upper' : q >= maxQ ? 'lower' : 'interior',
+        };
+      }
+      function reliability(predictions, count) {
+        const bins = Array.from({ length: count }, (_, i) => ({
+          index: i,
+          n: 0,
+          pSum: 0,
+          ySum: 0,
+        }));
+        for (const row of predictions) {
+          const i = Math.min(count - 1, Math.floor(row.p * count + 1e-12));
+          bins[i].n++;
+          bins[i].pSum += row.p;
+          bins[i].ySum += row.y;
+        }
+        return bins
+          .filter((b) => b.n)
+          .map((b) => ({ ...b, mean: b.pSum / b.n, fraction: b.ySum / b.n }));
+      }
+      function score(rows, temperature, bins) {
+        const predictions = rows.map((r) => ({ ...r, p: sigmoid(r.z / temperature) }));
+        const groups = reliability(predictions, bins),
+          n = predictions.length;
+        return {
+          predictions,
+          bins: groups,
+          brier: predictions.reduce((s, r) => s + (r.p - r.y) ** 2, 0) / n,
+          logLoss:
+            predictions.reduce(
+              (s, r) => s - r.y * Math.log(r.p) - (1 - r.y) * Math.log(1 - r.p),
+              0,
+            ) / n,
+          correct: predictions.filter((r) => Number(r.p >= 0.5) === r.y).length,
+          actions: predictions.filter((r) => r.p > 0.85 + 1e-12).length,
+          binnedError: groups.reduce((s, g) => s + (g.n / n) * Math.abs(g.mean - g.fraction), 0),
+        };
+      }
+      function buildReport(low, high, scenario, bins) {
+        const calibration = makeRecords(low, high, 'CAL'),
+          evaluation = makeRecords(...scenarios[scenario], 'EVAL'),
+          fit = fitTemperature(calibration);
+        return {
+          calibration,
+          evaluation,
+          fit,
+          binCount: bins,
+          raw: score(evaluation, 1, bins),
+          mapped: score(evaluation, fit.temperature, bins),
+          calRaw: score(calibration, 1, 2).logLoss,
+          calMapped: score(calibration, fit.temperature, 2).logLoss,
+        };
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(result) {
+        const narrow = innerWidth < 500,
+          w = narrow ? 328 : 680,
+          h = narrow ? 360 : 355,
+          left = narrow ? 60 : 74,
+          top = 25,
+          pw = narrow ? 245 : 560,
+          ph = 240,
+          bottom = top + ph;
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        chart.append(node('title', {}, 'Reliability on separate evaluation cases'));
+        chart.append(
+          node(
+            'desc',
+            {},
+            'Compare mean positive-class probability with observed event frequency in each nonempty bin. Raw circles are gray; mapped square outlines are green. Points near the diagonal show empirical agreement within those bins.',
+          ),
+        );
+        const text = (x, y, size, value, attrs = {}) =>
+          chart.append(
+            node(
+              'text',
+              {
+                x,
+                y,
+                'font-size': size,
+                'font-family': 'system-ui, sans-serif',
+                fill: 'var(--ink, #252c28)',
+                ...attrs,
+              },
+              value,
+            ),
+          );
+        chart.append(
+          node('rect', { x: left, y: top, width: pw, height: ph, fill: 'var(--panel, #f1f2ef)' }),
+        );
+        chart.append(
+          node('line', {
+            x1: left,
+            y1: bottom,
+            x2: left + pw,
+            y2: top,
+            stroke: 'var(--muted, #626962)',
+            'stroke-dasharray': '5 4',
+            'stroke-width': 1.5,
+          }),
+        );
+        for (const value of [0, 0.5, 1]) {
+          const x = left + pw * value,
+            y = bottom - ph * value;
+          chart.append(
+            node('line', {
+              x1: left,
+              y1: y,
+              x2: left + pw,
+              y2: y,
+              stroke: 'var(--line, #a6aca3)',
+              'stroke-width': 0.5,
+            }),
+          );
+          text(x - 5, bottom + 22, 13, String(value));
+          text(left - 27, y + 4, 13, String(value));
+        }
+        text(left, bottom + 51, 14, 'Mean predicted P(issue)');
+        text(16, 245, 14, 'Observed positive fraction', { transform: 'rotate(-90 16 245)' });
+        for (const key of ['raw', 'mapped'])
+          for (const bin of result[key].bins) {
+            const x = left + pw * bin.mean,
+              y = bottom - ph * bin.fraction;
+            if (key === 'raw')
+              chart.append(node('circle', { cx: x, cy: y, r: 6, fill: '#8c938b' }));
+            else
+              chart.append(
+                node('rect', {
+                  x: x - 7,
+                  y: y - 7,
+                  width: 14,
+                  height: 14,
+                  fill: 'none',
+                  stroke: 'var(--accent, #00855b)',
+                  'stroke-width': 2.5,
+                }),
+              );
+          }
+        chart.append(node('circle', { cx: 18, cy: 338, r: 5, fill: '#8c938b' }));
+        text(30, 343, 14, 'Raw');
+        chart.append(
+          node('rect', {
+            x: 95,
+            y: 332,
+            width: 12,
+            height: 12,
+            fill: 'none',
+            stroke: 'var(--accent, #00855b)',
+            'stroke-width': 2,
+          }),
+        );
+        text(116, 343, 14, 'Mapped');
+        text(narrow ? 215 : 240, 343, 14, 'Dashed: ideal');
+      }
+      function cell(row, value) {
+        const td = document.createElement('td');
+        td.textContent = value;
+        row.append(td);
+      }
+      function configure() {
+        const metrics = document.querySelector('#metrics'),
+          binsTable = document.querySelector('#reliability'),
+          data = document.querySelector('#data');
+        metrics.replaceChildren();
+        binsTable.replaceChildren();
+        data.replaceChildren();
+        chart.replaceChildren();
+        if (!form.checkValidity()) {
+          report = undefined;
+          document.querySelector('output').textContent =
+            'Enter whole positive-label counts from 0 to 10.';
+          document.querySelector('#fitting').textContent = '';
+          document.querySelector('#interpretation').textContent = '';
+          return;
+        }
+        report = buildReport(
+          Number(document.querySelector('#low').value),
+          Number(document.querySelector('#high').value),
+          document.querySelector('#scenario').value,
+          Number(document.querySelector('#bins').value),
+        );
+        document.querySelector('output').textContent =
+          'Fitted T: ' +
+          report.fit.temperature.toFixed(4) +
+          ' · 20 calibration cases; 20 separate evaluation cases. Accuracy: ' +
+          (5 * report.raw.correct).toFixed(1) +
+          '% → ' +
+          (5 * report.mapped.correct).toFixed(1) +
+          '%.';
+        document.querySelector('#fitting').textContent =
+          (report.fit.bound === 'interior'
+            ? 'Interior optimum.'
+            : report.fit.bound === 'upper'
+              ? 'Upper temperature bound reached: T = 10.'
+              : 'Lower temperature bound reached: T = 0.25.') +
+          ' Calibration log loss: ' +
+          report.calRaw.toFixed(4) +
+          ' → ' +
+          report.calMapped.toFixed(4) +
+          '. Bounds [0.25, 10]. Evaluation labels never fit T.';
+        draw(report);
+        const a = report.raw,
+          b = report.mapped;
+        for (const [label, av, bv] of [
+          ['Brier loss', a.brier.toFixed(4), b.brier.toFixed(4)],
+          ['Log loss · nats', a.logLoss.toFixed(4), b.logLoss.toFixed(4)],
+          ['Accuracy · threshold 0.5', a.correct + '/20', b.correct + '/20'],
+          ['Positive-class binned error', a.binnedError.toFixed(4), b.binnedError.toFixed(4)],
+          ['Cases with p > 0.85', a.actions + '/20', b.actions + '/20'],
+        ]) {
+          const tr = document.createElement('tr');
+          for (const value of [label, av, bv]) cell(tr, value);
+          metrics.append(tr);
+        }
+        document.querySelector('#interpretation').textContent =
+          document.querySelector('#scenario').value === 'aligned'
+            ? 'This evaluation set already matches the raw probabilities. A fitted mapping can worsen independent evaluation.'
+            : document.querySelector('#scenario').value === 'reversed'
+              ? 'The evaluation ordering is opposite to the model scores. A positive temperature cannot reverse that ordering.'
+              : 'Mapped probabilities ' +
+                sigmoid(-L / report.fit.temperature).toFixed(4) +
+                ' / ' +
+                sigmoid(L / report.fit.temperature).toFixed(4) +
+                '; evaluation fractions 0.3 / 0.7. Neither low loss nor one good-looking bin establishes population calibration.';
+        for (const key of ['raw', 'mapped'])
+          for (const bin of report[key].bins) {
+            const tr = document.createElement('tr');
+            cell(
+              tr,
+              (key === 'raw' ? 'Raw' : 'Mapped') +
+                ' · bin ' +
+                (bin.index + 1) +
+                '/' +
+                report.binCount +
+                ' · n ' +
+                bin.n,
+            );
+            cell(tr, bin.mean.toFixed(4));
+            cell(tr, bin.fraction.toFixed(4) + ' (' + bin.ySum + '/' + bin.n + ')');
+            binsTable.append(tr);
+          }
+        for (const row of [...report.calibration, ...report.evaluation]) {
+          const tr = document.createElement('tr');
+          for (const value of [
+            row.id,
+            row.y,
+            sigmoid(row.z).toFixed(4),
+            sigmoid(row.z / report.fit.temperature).toFixed(4),
+          ])
+            cell(tr, value);
+          data.append(tr);
+        }
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () => {
+        if (report) draw(report);
+      });
+      configure();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="410" viewBox="0 0 560 410" role="img" aria-labelledby="title desc" data-architecture-style="light-editorial">
+<title id="title">A threshold without a step</title>
+<desc id="desc">Open-sided entrance drawing shows a sheltered landing and a continuous level route through a visible doorway into the interior. Original conceptual drawing; not to scale.</desc>
+<style>
+:root{color-scheme:only light;--paper:#fff;--ink:#252c28;--stone:#f1f2ef;--line:#a6aca3;--mint:#edf5f0;--green:#00855b;--deep:#00855b}
+svg{background:#fff;color:var(--ink)}
+path,rect,circle,ellipse{vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:butt}
+text{fill:var(--ink);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20.222222px;font-weight:400;letter-spacing:0}
+.on-accent{fill:#fff}
+.paper{fill:var(--paper)}.existing{fill:var(--stone);stroke:var(--line);stroke-width:1.1}
+.landscape{fill:var(--mint)}.tree{fill:var(--paper);stroke:var(--ink);stroke-width:1.1}
+.intervention{fill:var(--green);stroke:var(--deep);stroke-width:.8}
+.highlight-plane{fill:var(--mint);stroke:var(--green);stroke-width:1.3}
+.line{fill:none;stroke:var(--ink);stroke-width:1.3}.wall-line{fill:none;stroke:var(--ink);stroke-width:1.8}
+.fine,.leader{fill:none;stroke:var(--line);stroke-width:1.1}
+.boundary{fill:none;stroke:var(--line);stroke-width:1.1}.disturbed{fill:url(#hatch);stroke:var(--line);stroke-width:.8}
+.path-surface{fill:var(--stone);stroke:none}.route{fill:none;stroke:var(--green);stroke-width:1.4}
+.outline-green{fill:none;stroke:var(--deep);stroke-width:1.6}
+.wall{fill:var(--stone);stroke:var(--line);stroke-width:1}
+.room{fill:var(--paper);stroke:var(--ink);stroke-width:1.6}
+.garden,.retained{fill:var(--mint);stroke:var(--line);stroke-width:.8}
+.new,.seat,.shade{fill:var(--green);stroke:var(--deep);stroke-width:.8}
+.flow{fill:none;stroke:var(--green);stroke-width:1.4}
+.thermal,.retained-line{fill:none;stroke:var(--deep);stroke-width:1.6}
+.glass{fill:var(--mint);stroke:var(--deep);stroke-width:1}
+.service{fill:var(--paper);stroke:var(--deep);stroke-width:1.2}
+.light{fill:var(--mint)}
+.person{fill:var(--ink);stroke:none}.plan-head{fill:var(--paper);stroke:var(--ink);stroke-width:1.1}
+.warning{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:5 4}
+.dashed{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:5 4}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.1"/></marker>
+<pattern id="hatch" patternUnits="userSpaceOnUse" width="9" height="9"><path d="M-2 2L2 -2M0 9L9 0M7 11L11 7" stroke="var(--line)" stroke-width=".7"/></pattern>
+</defs>
+<rect width="560" height="410" class="paper"/>
+<path d="M215 169.25L495 295.25L345 362.75L65 236.75Z" class="boundary"/><path d="M345 236.75L475 295.25L345 353.75L215 295.25Z" class="path-surface"/><path d="M355 241.25L321 256.55L321 156.55L355 141.25Z" class="existing"/><path d="M321 256.55L311 252.05L311 152.05L321 156.55Z" class="existing"/><path d="M345 136.75L355 141.25L321 156.55L311 152.05Z" class="paper"/><path d="M345 136.75L355 141.25L321 156.55L311 152.05Z" class="line"/><path d="M355,241.25L355,141.25M321,256.55L321,156.55M311,252.05L311,152.05" class="fine"/><path d="M259 284.45L225 299.75L225 199.75L259 184.45Z" class="existing"/><path d="M225 299.75L215 295.25L215 195.25L225 199.75Z" class="existing"/><path d="M249 179.95L259 184.45L225 199.75L215 195.25Z" class="paper"/><path d="M249 179.95L259 184.45L225 199.75L215 195.25Z" class="line"/><path d="M259,284.45L259,184.45M225,299.75L225,199.75M215,295.25L215,195.25" class="fine"/><path d="M345 136.75L355 141.25L225 199.75L215 195.25Z" class="existing"/><path d="M321 256.55L259 284.45L259 284.45L321 256.55Z" class="paper"/><path d="M259 284.45L249 279.95L249 279.95L259 284.45Z" class="paper"/><path d="M311 252.05L321 256.55L259 284.45L249 279.95Z" class="paper"/><path d="M311 252.05L321 256.55L259 284.45L249 279.95Z" class="line"/><path d="M321,256.55L321,256.55M259,284.45L259,284.45M249,279.95L249,279.95" class="fine"/><path d="M321 256.55L321 256.55L321 171.55L321 171.55Z" class="line"/><path d="M285 108.75L355 140.25L225 198.75L155 167.25Z" class="highlight-plane"/><path d="M138 202.1L400 320" class="route" marker-end="url(#arrow)"/><text x="42" y="75" text-anchor="start">Shelter at the door</text><text x="280" y="382" text-anchor="middle">One level through the threshold.</text>
+</svg>
+

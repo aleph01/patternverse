@@ -140,19 +140,13 @@ step_1 = !form {
   !show {
 Before making a meaningful decision, record the choice and its serious alternatives. Keep this lightweight; not every trivial choice needs a journal.
   }
-  !ask decision {
-    :required true
-    :multiline true
+  decision = !ask {
 What are you deciding?
   }
-  !ask alternatives {
-    :required true
-    :multiline true
+  alternatives = !ask {
 What were the serious alternatives?
   }
-  !ask current-choice {
-    :required true
-    :multiline true
+  current-choice = !ask {
 What are you currently leaning toward?
   }
 }
@@ -162,9 +156,7 @@ step_2 = !form {
   !show {
 Preserve the reasoning as it stands now, before you know the result.
   }
-  !ask reasoning {
-    :required true
-    :multiline true
+  reasoning = !ask {
 What are the main reasons for your current choice?
   }
 }
@@ -174,24 +166,16 @@ step_3 = !form {
   !show {
 Record what you expect, how confident you are, and what you are least sure about. A rough probability range can help when appropriate; it is not a requirement or a guarantee.
   }
-  !ask expected-outcomes {
-    :required true
-    :multiline true
+  expected-outcomes = !ask {
 What do you think will happen?
   }
-  !ask confidence {
-    :required true
-    :multiline true
+  confidence = !ask {
 How confident are you, and why?
   }
-  !ask uncertainty {
-    :required true
-    :multiline true
+  uncertainty = !ask {
 What is your key uncertainty?
   }
-  !ask change-mind {
-    :required true
-    :multiline true
+  change-mind = !ask {
 What evidence would make another option preferable?
   }
 }
@@ -208,14 +192,10 @@ When reviewing later, answer separately:
 3. Which assumptions were inaccurate?
 4. What should change in future decisions?
   }
-  !ask review-date {
-    :required true
-    :multiline true
+  review-date = !ask {
 When will you review this decision?
   }
-  !ask review-plan {
-    :required true
-    :multiline true
+  review-plan = !ask {
 How will you keep the snapshot and return to it?
   }
 }
@@ -227,9 +207,7 @@ step_5 = !form {
 
 You can review all earlier answers above, including after Finish. If you are reviewing an older snapshot now, use the questions below; otherwise leave this field blank.
   }
-  !ask later-review {
-    :required false
-    :multiline true
+  later-review = !ask [optional] {
 Later review: what happened, was the reasoning sound at the time, which assumptions were inaccurate, and what should change?
   }
 }

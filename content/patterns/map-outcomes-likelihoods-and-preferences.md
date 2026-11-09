@@ -145,9 +145,7 @@ step_1 = !form {
   !show {
 Choose two or three realistic options. An option opens several possible futures; it is not itself the outcome.
   }
-  !ask options {
-    :required true
-    :multiline true
+  options = !ask {
 What are your two or three options?
   }
 }
@@ -159,9 +157,7 @@ For each option, identify three to five meaningful outcomes. Include plausible m
 
 Start your map as **Option | Outcome**. One line per possible outcome is enough.
   }
-  !ask outcome-map {
-    :required true
-    :multiline true
+  outcome-map = !ask {
     :placeholder "Option | Outcome"
 What meaningful outcomes could follow each option?
   }
@@ -174,9 +170,7 @@ Add a **Likelihood** column. Use rough percentages, ranges, or labels such as un
 
 If you use probabilities intended to cover all mutually exclusive outcomes for one option, check that they roughly total 100%. Overlapping outcomes need not add up; avoid pretending they form a complete distribution.
   }
-  !ask likelihood-map {
-    :required true
-    :multiline true
+  likelihood-map = !ask {
     :placeholder "Option | Outcome | Likelihood"
 How likely is each outcome? Use the same option and outcome labels as above.
   }
@@ -189,9 +183,7 @@ Rate desirability independently of likelihood. One possible scale is **+5 = extr
 
 The ratings are scaffolding for thought, not objective measurements. Do not calculate a final score yet.
   }
-  !ask preference-map {
-    :required true
-    :multiline true
+  preference-map = !ask {
     :placeholder "Option | Outcome | Likelihood | Preference"
 How much would you like or dislike each outcome?
   }
@@ -208,9 +200,7 @@ Ask:
 - Which probability estimates drive the decision most strongly?
 - Are there outcomes that matter enormously even if they are uncommon?
   }
-  !ask assumptions {
-    :required true
-    :multiline true
+  assumptions = !ask {
 What assumptions, missing outcomes, or influential estimates become visible?
   }
 }
@@ -222,14 +212,10 @@ Only now, if useful, calculate rough probability-weighted values yourself. Label
 
 The map exposes assumptions; it does not manufacture a mathematically authoritative answer.
   }
-  !ask conclusion {
-    :required true
-    :multiline true
+  conclusion = !ask {
 What does the map clarify, and what still needs judgment?
   }
-  !ask rough-calculation {
-    :required false
-    :multiline true
+  rough-calculation = !ask [optional] {
 Optional rough calculation, with its assumptions and limitations
   }
 }

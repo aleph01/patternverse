@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Knowledge distillation temperature and student explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Train three free student scores for one fictional case. The true label is Delivery. This
+      computes the loss and its gradient; it does not train a neural network or measure
+      generalization.
+    </p>
+    <form aria-label="Distillation settings">
+      <div>
+        <label for="teacher">Teacher scenario</label
+        ><select id="teacher">
+          <option value="aligned" selected>Favors true class · [4, 2, 0]</option>
+          <option value="wrong">Favors wrong class · [0, 4, 2]</option>
+        </select>
+      </div>
+      <div>
+        <label for="temperature">Training temperature</label
+        ><select id="temperature">
+          <option value="1">1</option>
+          <option value="2" selected>2</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <div>
+        <label for="alpha">Teacher weight α</label
+        ><select id="alpha">
+          <option value="0">0 · labels only</option>
+          <option value="0.25">0.25</option>
+          <option value="0.5" selected>0.5 · equal mixture</option>
+          <option value="0.75">0.75</option>
+          <option value="1">1 · teacher only</option>
+        </select>
+      </div>
+    </form>
+    <p class="note">
+      Changing a setting restarts the student at zero logits. Class order: Delivery, Billing,
+      Account.
+    </p>
+    <div class="actions">
+      <button id="one" type="button">Train one step</button
+      ><button id="ten" type="button">Train ten steps</button
+      ><button id="reset" type="button">Reset inputs</button>
+    </div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <svg role="img" aria-label="Teacher and student training distributions"></svg>
+    <div class="history">
+      <table>
+        <caption>
+          Student deployment distribution · T = 1
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Class</th>
+            <th scope="col">Probability</th>
+          </tr>
+        </thead>
+        <tbody id="inference"></tbody>
+      </table>
+    </div>
+    <p id="losses" class="note"></p>
+    <details>
+      <summary>Exact objective and update rules</summary>
+      <p>
+        Teacher logits are fixed throughout a run. The student starts at [0, 0, 0]. Every step
+        subtracts 0.5 times the analytic gradient from each student logit. Runs stop at 20 steps.
+        These are free scores for this single example, with no input features or shared neural
+        weights.
+      </p>
+      <p>
+        At training temperature T, p = softmax(teacher logits / T) and q = softmax(student logits /
+        T). At deployment temperature one, r = softmax(student logits). The true-label index is 0,
+        Delivery.
+      </p>
+      <p>
+        Hard-label CE = −ln(r[0]). Scaled distillation loss = T² × Σ p[i] ln(p[i] / q[i]). Total =
+        (1 − α) × CE + α × scaled distillation loss. Alpha weights the teacher term. All logarithms
+        are natural; losses are for this one example, with no batch averaging.
+      </p>
+      <p>
+        The student-logit gradient is (1 − α) × (r − one-hot Delivery) + α × T × (q − p). The
+        teacher receives no updates. A lower teacher mismatch can coexist with a larger loss against
+        the true label. Training scores here say nothing about held-out accuracy or deployment
+        speed.
+      </p>
+    </details>
+    <script>
+      const classes = ['Delivery', 'Billing', 'Account'];
+      const teachers = { aligned: [4, 2, 0], wrong: [0, 4, 2] };
+      const learningRate = 0.5;
+      const maxSteps = 20;
+      const form = document.querySelector('form');
+      const chart = document.querySelector('svg');
+      const output = document.querySelector('output');
+      let session;
+      function logSoftmax(logits, temperature = 1) {
+        const scaled = logits.map((v) => v / temperature);
+        const maximum = Math.max(...scaled);
+        const normalizer =
+          maximum + Math.log(scaled.reduce((sum, v) => sum + Math.exp(v - maximum), 0));
+        return scaled.map((v) => v - normalizer);
+      }
+      function softmax(logits, temperature = 1) {
+        return logSoftmax(logits, temperature).map(Math.exp);
+      }
+      function measure(logits, teacher, temperature, alpha) {
+        const logP = logSoftmax(teacher, temperature),
+          logQ = logSoftmax(logits, temperature);
+        const p = logP.map(Math.exp),
+          q = logQ.map(Math.exp),
+          r = softmax(logits);
+        const ce = -logSoftmax(logits)[0];
+        const kl = p.reduce((sum, v, i) => sum + v * (logP[i] - logQ[i]), 0);
+        const scaled = temperature * temperature * kl;
+        const total = (1 - alpha) * ce + alpha * scaled;
+        const gradient = r.map(
+          (v, i) => (1 - alpha) * (v - Number(i === 0)) + alpha * temperature * (q[i] - p[i]),
+        );
+        return { p, q, r, ce, kl, scaled, total, gradient };
+      }
+      function startSession(teacher, temperature, alpha) {
+        return { teacher: [...teacher], temperature, alpha, logits: [0, 0, 0], step: 0 };
+      }
+      function advance(state, count = 1) {
+        for (let j = 0; j < count && state.step < maxSteps; j++) {
+          const result = measure(state.logits, state.teacher, state.temperature, state.alpha);
+          state.logits = state.logits.map((v, i) => v - learningRate * result.gradient[i]);
+          state.step++;
+        }
+      }
+      function winner(probabilities) {
+        const highest = Math.max(...probabilities);
+        const winners = probabilities
+          .map((p, i) => (Math.abs(p - highest) < 1e-12 ? classes[i] : null))
+          .filter(Boolean);
+        return winners.length === 1 ? winners[0] : 'Tie';
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(result) {
+        const narrow = innerWidth < 500;
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', narrow ? '0 0 328 420' : '0 0 680 210');
+        chart.append(
+          node('title', {}, 'Teacher and student at training temperature ' + session.temperature),
+        );
+        chart.append(
+          node(
+            'desc',
+            {},
+            'Each bar is a computed probability. Teacher scores are fixed; student scores update by gradient descent. Deployment probabilities are shown separately at temperature one.',
+          ),
+        );
+        for (const [i, values] of [result.p, result.q].entries()) {
+          const group = node('g', {
+            transform: 'translate(' + (narrow ? 0 : i * 352) + ',' + (narrow ? i * 210 : 0) + ')',
+          });
+          chart.append(group);
+          group.append(
+            node('rect', { width: 328, height: 200, rx: 8, fill: 'var(--panel, #f1f2ef)' }),
+          );
+          const text = (x, y, size, value, bold = false) =>
+            group.append(
+              node(
+                'text',
+                {
+                  x,
+                  y,
+                  'font-size': size,
+                  'font-family': 'system-ui, sans-serif',
+                  'font-weight': bold ? 700 : 400,
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          text(
+            12,
+            29,
+            18,
+            (i ? 'Student' : 'Teacher') + ' · training T = ' + session.temperature,
+            true,
+          );
+          values.forEach((value, j) => {
+            const y = 62 + j * 47;
+            text(12, y, 15, classes[j]);
+            group.append(
+              node('rect', {
+                x: 98,
+                y: y - 15,
+                width: 155,
+                height: 20,
+                fill: 'var(--line, #a6aca3)',
+              }),
+            );
+            group.append(
+              node('rect', {
+                x: 98,
+                y: y - 15,
+                width: 155 * value,
+                height: 20,
+                fill: i ? '#8c938b' : 'var(--accent, #00855b)',
+              }),
+            );
+            text(262, y, 14, (100 * value).toFixed(1) + '%');
+          });
+        }
+      }
+      function render() {
+        const result = measure(session.logits, session.teacher, session.temperature, session.alpha);
+        output.textContent =
+          'Step ' +
+          session.step +
+          '/20 · total loss ' +
+          result.total.toFixed(3) +
+          '. At T = 1, top class: ' +
+          winner(result.r) +
+          '.';
+        draw(result);
+        document.querySelector('#losses').textContent =
+          'Hard-label CE: ' +
+          result.ce.toFixed(3) +
+          '. Scaled teacher KL: ' +
+          result.scaled.toFixed(3) +
+          '. Total: ' +
+          result.total.toFixed(3) +
+          '. Student logits: [' +
+          session.logits.map((v) => v.toFixed(3)).join(', ') +
+          '].';
+        const tbody = document.querySelector('#inference');
+        tbody.replaceChildren();
+        result.r.forEach((value, i) => {
+          const tr = document.createElement('tr');
+          for (const item of [classes[i], (100 * value).toFixed(1) + '%']) {
+            const td = document.createElement('td');
+            td.textContent = item;
+            tr.append(td);
+          }
+          tbody.append(tr);
+        });
+        document.querySelector('#one').disabled = document.querySelector('#ten').disabled =
+          session.step >= maxSteps;
+      }
+      function configure() {
+        session = startSession(
+          teachers[document.querySelector('#teacher').value],
+          Number(document.querySelector('#temperature').value),
+          Number(document.querySelector('#alpha').value),
+        );
+        render();
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      document.querySelector('#one').addEventListener('click', () => {
+        advance(session);
+        render();
+      });
+      document.querySelector('#ten').addEventListener('click', () => {
+        advance(session, 10);
+        render();
+      });
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () =>
+        draw(measure(session.logits, session.teacher, session.temperature, session.alpha)),
+      );
+      configure();
+    </script>
+  </body>
+</html>

@@ -14,9 +14,23 @@ verses:
 attribution: "Original Patternverse adaptation inspired by Thomas Wedell-Wedellsborg, What's Your Problem? Not an official implementation."
 ---
 
-People often treat a goal as fixed and define the problem as whatever blocks it. “Make approvals faster” leads to queue dashboards and extra reviewers. “Get promoted” leads to interview preparation and visibility work. Those may be sensible. Rethink the Goal asks what the target is *for*, whether reaching it would produce the desired outcome, and whether another route could serve that outcome better.
+People often treat a goal as fixed and define the problem as whatever blocks it. “Make approvals faster” leads to queue dashboards and extra reviewers. “Get promoted” leads to interview preparation and visibility work. Those may be sensible.
+
+## Core idea
+
+Rethink the Goal asks what the target is *for*, whether reaching it would produce the desired outcome, and whether another route could serve that outcome better.
+
+Separating a target from its purpose allows progress to be judged by the outcome that matters rather than by movement on an inherited metric.
+
+## When to use it
+
+Reach for this pattern when substantial effort is spent improving a process nobody can explain, when a target was inherited from elsewhere, or when success on the stated metric would not obviously resolve the concern.
+
+## How it works
 
 This is not an invitation to question every wish indefinitely. The useful level is usually one or two steps above the immediate target—high enough to reveal alternatives, concrete enough to guide a decision. Three related moves help: surface higher-level goals, inspect the causal link between the goal and those outcomes, and compare alternative paths.
+
+## Worked examples
 
 Consider an approval process:
 
@@ -31,15 +45,17 @@ A personal example begins with “I need a promotion.” The person may want hig
 
 A third example: “I must run every morning” might serve the deeper goal of consistent movement and better energy. If mornings repeatedly fail because of caregiving responsibilities, changing the time or form of activity could be more effective than optimizing the morning routine.
 
-Reach for this pattern when substantial effort is spent improving a process nobody can explain, when a target was inherited from elsewhere, or when success on the stated metric would not obviously resolve the concern. Its misuse is climbing toward vague abstractions such as “I ultimately want happiness.” Such a statement may be meaningful, but it rarely distinguishes next steps. Stop at outcomes that can guide options and observations.
+## Pitfalls and limits
 
-[[reframing-surface-higher-goals]] reveals what the target is meant to achieve; [[reframing-challenge-goal-logic]] tests the assumed link; [[reframing-alternative-paths]] looks for other routes. Rethink the Goal coordinates those questions, then hands promising frames to [[reframing-validate-frame]] rather than continuing to ask “why?” forever.
+Its misuse is climbing toward vague abstractions such as “I ultimately want happiness.” Such a statement may be meaningful, but it rarely distinguishes next steps. Stop at outcomes that can guide options and observations.
 
 ## Related patterns
 
+[[reframing-surface-higher-goals]] reveals what the target is meant to achieve; [[reframing-challenge-goal-logic]] tests the assumed link; [[reframing-alternative-paths]] looks for other routes. Rethink the Goal coordinates those questions, then hands promising frames to [[reframing-validate-frame]] rather than continuing to ask “why?” forever.
+
 [[reframing-surface-higher-goals]] · [[reframing-challenge-goal-logic]] · [[reframing-alternative-paths]]
 
-## Source
+## Sources and attribution
 
 Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an original Patternverse procedure, not reproduced book text or an official implementation.
 
@@ -51,10 +67,10 @@ Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an origin
 :input frame text
 :output candidate_frame
 
-!use reframing.surface-higher-goals as higher {
+higher = !use reframing.surface-higher-goals {
     :with frame
 }
-!choose direction {
+direction = !choose {
     :option logic "Test whether the immediate goal leads to that outcome"
     :option paths "Look for another path to that outcome"
     An underlying outcome might be: {{higher.candidate_frame}}
@@ -62,19 +78,19 @@ Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an origin
     Which question would help now?
 }
 ?match direction {
-    :case logic -> logic
-    :else -> paths
+  :case logic {
+    finding = !use reframing.challenge-goal-logic {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :else {
+    finding = !use reframing.alternative-paths {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
 }
-logic:
-!use reframing.challenge-goal-logic as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-paths:
-!use reframing.alternative-paths as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
 ```

@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Few-shot prompt construction explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #record-table th:first-child {
+        width: 16%;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      th,
+      td {
+        overflow-wrap: anywhere;
+        vertical-align: top;
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font:
+          13px/1.6 ui-monospace,
+          monospace;
+      }
+      #rank-table th:first-child {
+        width: 31%;
+      }
+      #rank-table th:nth-child(2) {
+        width: 37%;
+      }
+      .example-card {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Construct the context; inspect every choice.</strong> Select demonstrations for a
+      fictional library task and see the exact assembled prompt. This page computes word overlap and
+      prompt contents. It does not run a language model, generate a prediction, or measure accuracy.
+    </p>
+    <form>
+      <div>
+        <label for="query">New library request</label
+        ><select id="query">
+          <option value="0" selected>Renew Dune for another week</option>
+          <option value="1">Reserve Dune</option>
+          <option value="2">Find books by Le Guin</option>
+        </select>
+      </div>
+      <div>
+        <label for="shots">Demonstrations to include</label
+        ><select id="shots">
+          <option value="0">0 — zero-shot</option>
+          <option value="1">1 — one-shot</option>
+          <option value="3" selected>3 — few-shot</option>
+          <option value="6">6 — all examples</option>
+        </select>
+      </div>
+      <div>
+        <label for="order">Order of selected demonstrations</label
+        ><select id="order">
+          <option value="ranked" selected>Highest overlap first</option>
+          <option value="reverse">Reverse selected order</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <p id="interpretation"></p>
+    <h2>Exact assembled prompt</h2>
+    <p class="note">
+      The character count measures Unicode code points in this text, including spaces and line
+      breaks. It is not a model-token count, context-limit check, price, or quality score. The final
+      Label field is intentionally unfinished.
+    </p>
+    <pre id="prompt" aria-label="Assembled prompt"></pre>
+    <table id="rank-table">
+      <caption>
+        All six examples, ranked by computed word overlap
+      </caption>
+      <thead>
+        <tr>
+          <th>Example</th>
+          <th>Overlap</th>
+          <th>Prompt position</th>
+        </tr>
+      </thead>
+      <tbody id="rank-data"></tbody>
+    </table>
+    <details id="bank">
+      <summary>Inspect the complete reviewed example bank</summary>
+      <div id="bank-data"></div>
+    </details>
+    <details id="assumptions">
+      <summary>Selection assumptions and limits</summary>
+      <p>
+        Token sets contain lowercased ASCII letter sequences matched by [a-z]+. Punctuation
+        separates words; repeated words count once; common words remain. Jaccard score =
+        intersection size / union size; an empty union gets score zero. Ties use ascending example
+        ID. Select the highest-scoring k, then optionally reverse only that selected set.
+      </p>
+      <p>
+        This lexical heuristic is not semantic retrieval and does not reproduce KATE. Words such as
+        “can” and “I” can create weak matches. Showing every label is a coverage fact, not evidence
+        of better predictions. Zero-shot includes instructions and the new query with no
+        demonstrations. Reversing order preserves selection and character count but changes the
+        prompt sequence.
+      </p>
+      <p>
+        There is no inference engine, learned embedding, model update, response probability, or
+        hidden reference answer in the calculation. The conceptual fixed-model box describes how the
+        prompt could be used elsewhere. Real inference effects need held-out evaluation with a
+        specified model and generation settings. All data here is fictional.
+      </p>
+    </details>
+    <script>
+      'use strict';
+      const bank = [
+        { id: 'D1', input: 'Renew my loan of Dune.', label: 'RENEW' },
+        { id: 'D2', input: 'Can I keep this book for another week?', label: 'RENEW' },
+        { id: 'D3', input: 'Reserve a copy of Dune for me.', label: 'HOLD' },
+        { id: 'D4', input: 'Put me on the waiting list for this title.', label: 'HOLD' },
+        { id: 'D5', input: 'Which shelf has Dune?', label: 'FIND' },
+        { id: 'D6', input: 'Find books by Ursula Le Guin.', label: 'FIND' },
+      ];
+      const queries = [
+        'Can I renew Dune for another week?',
+        'Please reserve Dune for me.',
+        'Where can I find books by Le Guin?',
+      ];
+      const instructions =
+        'Classify a library request. HOLD = reserve a copy; RENEW = extend an existing loan; FIND = locate or discover books. Return exactly one label.';
+      const wordSet = (text) => new Set(text.toLowerCase().match(/[a-z]+/g) || []);
+      function overlap(a, b) {
+        const A = wordSet(a),
+          B = wordSet(b),
+          intersection = [...A].filter((w) => B.has(w)).length,
+          union = new Set([...A, ...B]).size;
+        return { intersection, union, score: union ? intersection / union : 0 };
+      }
+      function compute(index, k, order) {
+        const query = queries[index],
+          ranked = bank
+            .map((e) => ({ ...e, ...overlap(query, e.input) }))
+            .sort((a, b) => b.score - a.score || (a.id < b.id ? -1 : 1));
+        const selected = ranked.slice(0, k);
+        if (order === 'reverse') selected.reverse();
+        const nl = String.fromCharCode(10);
+        const prompt =
+          instructions +
+          (selected.length
+            ? nl +
+              nl +
+              'Examples:' +
+              nl +
+              selected.map((e) => 'Request: ' + e.input + nl + 'Label: ' + e.label).join(nl + nl)
+            : '') +
+          nl +
+          nl +
+          'New request: ' +
+          query +
+          nl +
+          'Label:';
+        const labels = [...new Set(selected.map((e) => e.label))].sort(),
+          missing = ['FIND', 'HOLD', 'RENEW'].filter((l) => !labels.includes(l));
+        return {
+          index,
+          k,
+          order,
+          query,
+          ranked,
+          selected,
+          prompt,
+          characters: [...prompt].length,
+          labels,
+          missing,
+          mode: k === 0 ? 'ZERO-SHOT' : k === 1 ? 'ONE-SHOT' : 'FEW-SHOT',
+        };
+      }
+      let report;
+      const esc = (s) =>
+        String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+      function draw(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          h = mobile ? 810 : 440;
+        const rect = (x, y, width, height) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          width +
+          '" height="' +
+          height +
+          '" rx="8" fill="var(--panel)" stroke="var(--accent)"/>';
+        const text = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          esc(value) +
+          '</text>';
+        let svg =
+          '<title id="flow-title">Demonstration selection and prompt assembly precede inference with fixed weights</title><desc id="flow-desc">The fictional selector ranks six examples by Jaccard word overlap, selects k, and optionally reverses them. The exact prompt combines instructions, selected input-label pairs, and the new query. A conceptual model would condition on that context without updating weights. No model is executed here.</desc>';
+        const cw = mobile ? 328 : 210,
+          x2 = mobile ? 0 : 235,
+          y2 = mobile ? 250 : 0,
+          x3 = mobile ? 0 : 470,
+          y3 = mobile ? 465 : 0;
+        svg +=
+          rect(0, 0, cw, 225) +
+          text(12, 29, 17, '1. Choose examples', true) +
+          text(12, 58, 14, r.k + ' of 6 selected');
+        if (!r.k) svg += text(12, 100, 14, 'No demonstrations.');
+        r.selected.forEach(
+          (e, i) =>
+            (svg += text(12, 89 + i * 23, 14, e.id + ' → ' + e.label + '; ' + e.score.toFixed(4))),
+        );
+        svg +=
+          rect(x2, y2, cw, 190) +
+          text(x2 + 12, y2 + 29, 17, '2. Assemble context', true) +
+          text(x2 + 12, y2 + 64, 14, 'Instructions + ' + r.k + ' examples') +
+          text(x2 + 12, y2 + 96, 14, 'New request follows') +
+          text(x2 + 12, y2 + 128, 14, r.characters + ' characters', true) +
+          text(x2 + 12, y2 + 161, 13, r.labels.length + '/3 labels demonstrated');
+        svg +=
+          rect(x3, y3, cw, 180) +
+          text(x3 + 12, y3 + 29, 17, '3. Use fixed weights', true) +
+          text(x3 + 12, y3 + 64, 15, 'θ is not updated', true) +
+          text(x3 + 12, y3 + 96, 14, 'Response would depend') +
+          text(x3 + 12, y3 + 121, 14, 'on this context.') +
+          text(x3 + 12, y3 + 155, 13, 'Model not executed here.');
+        const y = mobile ? 685 : 285;
+        svg +=
+          rect(0, y, w, 105) +
+          text(12, y + 29, 17, 'Context changes; θ stays fixed', true) +
+          text(
+            12,
+            y + 61,
+            14,
+            mobile
+              ? 'Prompt order: ' + r.order
+              : 'Prompt order: ' +
+                  r.order +
+                  ' · selected labels: ' +
+                  (r.labels.join(', ') || 'none'),
+          ) +
+          text(12, y + 89, 13, 'Selection and character counts do not measure prediction quality.');
+        if (mobile)
+          svg = svg.replace(
+            'Selection and character counts do not measure prediction quality.',
+            'Counts do not measure prediction quality.',
+          );
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      function render() {
+        report = compute(
+          +document.getElementById('query').value,
+          +document.getElementById('shots').value,
+          document.getElementById('order').value,
+        );
+        const r = report;
+        document.querySelector('output').textContent =
+          r.mode +
+          '. Order: ' +
+          (r.selected.map((e) => e.id).join(' → ') || 'none') +
+          '. ' +
+          r.characters +
+          ' characters. Labels demonstrated: ' +
+          r.labels.length +
+          '/3. No model call.';
+        document.querySelector('#prompt').textContent = r.prompt;
+        document.querySelector('#interpretation').textContent =
+          'New request: “' +
+          r.query +
+          '” Missing demonstration labels: ' +
+          (r.missing.join(', ') || 'none') +
+          '. This is not a prediction or a quality score.';
+        document.querySelector('#rank-data').innerHTML = r.ranked
+          .map((e) => {
+            const i = r.selected.findIndex((s) => s.id === e.id);
+            return (
+              '<tr><th scope="row">' +
+              e.id +
+              '<small>' +
+              e.label +
+              '</small></th><td>' +
+              e.intersection +
+              '/' +
+              e.union +
+              '<small>score ' +
+              e.score.toFixed(4) +
+              '</small></td><td>' +
+              (i < 0 ? 'Not included' : String(i + 1)) +
+              '</td></tr>'
+            );
+          })
+          .join('');
+        document.querySelector('#bank-data').innerHTML = bank
+          .map(
+            (e) =>
+              '<div class="example-card"><strong>' +
+              e.id +
+              ' → ' +
+              e.label +
+              '</strong><p>' +
+              esc(e.input) +
+              '</p></div>',
+          )
+          .join('');
+        draw(r);
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelector('form').addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        render();
+      });
+      addEventListener('resize', () => draw(report));
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Federated training round explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 17%;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #history-table,
+      #loss-table,
+      .data-table {
+        font-size: 13px;
+      }
+      #history-table th:first-child {
+        width: 19%;
+      }
+      #history-table th:nth-child(2) {
+        width: 30%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>One starting model, several local learners.</strong> Every displayed update is
+      computed from the fictional records. Compare the shared result with centralized gradient steps
+      using the same objective. All clients run inside this page; there is no privacy protocol.
+    </p>
+    <form>
+      <div>
+        <label for="steps">Local steps per round</label
+        ><select id="steps">
+          <option value="1">1 full-batch step</option>
+          <option value="2" selected>2 full-batch steps</option>
+          <option value="5">5 full-batch steps</option>
+        </select>
+      </div>
+      <div>
+        <label for="feature">Client B feature value x</label
+        ><select id="feature">
+          <option value="2" selected>2 — larger feature values</option>
+          <option value="1">1 — same feature value as A and C</option>
+        </select>
+      </div>
+      <div>
+        <label for="objective">Aggregation objective</label
+        ><select id="objective">
+          <option value="examples" selected>Equal weight per example</option>
+          <option value="clients">Equal weight per client</option>
+        </select>
+      </div>
+      <div>
+        <label for="participants">Participating clients</label
+        ><select id="participants">
+          <option value="all" selected>A, B, and C</option>
+          <option value="AC">A and C only</option>
+          <option value="BC">B and C only</option>
+          <option value="none">None — retain model</option>
+        </select>
+      </div>
+      <div>
+        <label for="rounds">Rounds to attempt</label
+        ><select id="rounds">
+          <option value="1" selected>1 round</option>
+          <option value="3">3 rounds</option>
+          <option value="10">10 rounds</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <p id="interpretation"></p>
+    <table id="metrics-table">
+      <caption>
+        Training results and logical work
+      </caption>
+      <thead>
+        <tr>
+          <th>Quantity</th>
+          <th>Computed value</th>
+        </tr>
+      </thead>
+      <tbody id="metrics"></tbody>
+    </table>
+    <table id="history-table">
+      <caption>
+        Each attempted round
+      </caption>
+      <thead>
+        <tr>
+          <th>Round</th>
+          <th>Local endpoints</th>
+          <th>Shared w</th>
+          <th>All-client loss</th>
+        </tr>
+      </thead>
+      <tbody id="history"></tbody>
+    </table>
+    <table id="loss-table">
+      <caption>
+        Local training losses at the shared model (not held-out performance)
+      </caption>
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>At w=0</th>
+          <th>At final w</th>
+        </tr>
+      </thead>
+      <tbody id="losses"></tbody>
+    </table>
+    <details id="records">
+      <summary>Inspect records and local gradient steps</summary>
+      <table class="data-table">
+        <caption>
+          Fictional calibration records
+        </caption>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Records (x, y)</th>
+          </tr>
+        </thead>
+        <tbody id="record-data"></tbody>
+      </table>
+      <table class="data-table">
+        <caption>
+          Every local full-batch step
+        </caption>
+        <thead>
+          <tr>
+            <th>Client / round / step</th>
+            <th>Before → after</th>
+            <th>Gradient</th>
+          </tr>
+        </thead>
+        <tbody id="step-data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and exact rules</summary>
+      <p>
+        The model is the scalar prediction w × x, with no intercept. Client A holds (1,0), (1,1),
+        (1,1), (1,2); B holds (x,3), (x,5), where x is the feature control; C holds (1,−1), (1,−1).
+        All records are invented and fixed. The local loss is mean half-squared error. Each local
+        step averages x × (w × x − y) over that client's records and subtracts 0.10 times that
+        gradient.
+      </p>
+      <p>
+        Every participating client receives exactly the same starting w for its round. A participant
+        performs the selected number of local full-batch steps, and all return synchronously.
+        Example weighting uses n_client / n_returned; client weighting uses 1 / returned_clients.
+        These correspond to distinct objectives. The fixed participating subset is reused for every
+        attempt; excluded clients do no local training and send no update. No returned updates means
+        retain w and skip the round.
+      </p>
+      <p>
+        The two centralized references perform one global gradient step for each local step in a
+        completed round, starting at zero. One reference uses only the participating clients; the
+        other uses all three. Both use the chosen objective. With no completed rounds the
+        full-population reference stays at zero; the participating reference is undefined when no
+        clients participate. These are counterfactual calculations available because the page
+        contains every invented record; they do not give a real coordinator access to client
+        records. Differences can arise from multiple local steps or a changed participant
+        population; they are not automatically attributable to just one cause.
+      </p>
+      <p>
+        Losses are training objectives, not validation or test scores. Example weighting averages
+        every record equally; client weighting averages each client's mean loss equally. The
+        client-loss table always reports each client's own mean half-squared error so local
+        regressions remain visible. This is a teaching inspection, not an implemented private
+        evaluation protocol.
+      </p>
+      <p>
+        The payload count is logical scalar parameter values: one download and one upload per
+        participating client per completed round. Counts, configuration, evaluation, transport,
+        secure-aggregation messages, retransmissions, and serialization are excluded. It is not a
+        byte or latency estimate. Local example passes count records processed by full-batch
+        gradient steps, not distinct new examples.
+      </p>
+      <p>
+        Clients and record counts are honest; schema, model version, feature meaning, and coordinate
+        system agree. No minibatch randomness, client sampling probabilities, device scheduling,
+        late updates, compression, poisoning, clipping, secure aggregation, or differential privacy
+        is simulated. The page deliberately displays records, local models, and gradients for
+        explanation. Keeping records local in an actual deployment does not make updates private.
+      </p>
+    </details>
+    <script>
+      const $ = (selector) => document.querySelector(selector),
+        eta = 0.1;
+      function makeClients(feature = 2) {
+        return [
+          {
+            id: 'A',
+            records: [
+              { x: 1, y: 0 },
+              { x: 1, y: 1 },
+              { x: 1, y: 1 },
+              { x: 1, y: 2 },
+            ],
+          },
+          {
+            id: 'B',
+            records: [
+              { x: feature, y: 3 },
+              { x: feature, y: 5 },
+            ],
+          },
+          {
+            id: 'C',
+            records: [
+              { x: 1, y: -1 },
+              { x: 1, y: -1 },
+            ],
+          },
+        ];
+      }
+      function gradient(w, records) {
+        return records.reduce((sum, row) => sum + row.x * (w * row.x - row.y), 0) / records.length;
+      }
+      function localLoss(w, records) {
+        return records.reduce((sum, row) => sum + (w * row.x - row.y) ** 2 / 2, 0) / records.length;
+      }
+      function weights(clients, objective) {
+        const total = clients.reduce((n, c) => n + c.records.length, 0);
+        return clients.map((c) => ({
+          id: c.id,
+          value: objective === 'examples' ? c.records.length / total : 1 / clients.length,
+          numerator: objective === 'examples' ? c.records.length : 1,
+          denominator: objective === 'examples' ? total : clients.length,
+        }));
+      }
+      function objectiveLoss(w, clients, objective) {
+        if (!clients.length) return null;
+        const shares = weights(clients, objective);
+        return clients.reduce((sum, c, i) => sum + shares[i].value * localLoss(w, c.records), 0);
+      }
+      function centralStep(w, clients, objective) {
+        const shares = weights(clients, objective);
+        return (
+          w - eta * clients.reduce((sum, c, i) => sum + shares[i].value * gradient(w, c.records), 0)
+        );
+      }
+      function localTrain(w, records, steps) {
+        const trace = [];
+        for (let step = 1; step <= steps; step++) {
+          const before = w,
+            g = gradient(w, records);
+          w -= eta * g;
+          trace.push({ step, before, gradient: g, after: w });
+        }
+        return { w, trace };
+      }
+      function federatedRound(start, clients, steps, objective, round = 1) {
+        const shares = weights(clients, objective),
+          local = clients.map((c) => ({
+            ...localTrain(start, c.records, steps),
+            id: c.id,
+            n: c.records.length,
+          }));
+        return {
+          round,
+          start,
+          success: local.length > 0,
+          end: local.length ? local.reduce((sum, c, i) => sum + shares[i].value * c.w, 0) : start,
+          local,
+          weights: shares,
+        };
+      }
+      function simulate(
+        steps = 2,
+        feature = 2,
+        objective = 'examples',
+        participants = 'all',
+        rounds = 1,
+      ) {
+        const clients = makeClients(feature),
+          ids =
+            participants === 'all'
+              ? ['A', 'B', 'C']
+              : participants === 'AC'
+                ? ['A', 'C']
+                : participants === 'BC'
+                  ? ['B', 'C']
+                  : [],
+          active = clients.filter((c) => ids.includes(c.id));
+        let w = 0,
+          selectedReference = active.length ? 0 : null,
+          fullReference = 0,
+          completed = 0;
+        const history = [];
+        for (let round = 1; round <= rounds; round++) {
+          const result = federatedRound(w, active, steps, objective, round);
+          w = result.end;
+          if (result.success) {
+            completed++;
+            for (let step = 0; step < steps; step++) {
+              selectedReference = centralStep(selectedReference, active, objective);
+              fullReference = centralStep(fullReference, clients, objective);
+            }
+          }
+          history.push({ ...result, loss: objectiveLoss(w, clients, objective) });
+        }
+        return {
+          steps,
+          feature,
+          objective,
+          participants,
+          rounds,
+          clients,
+          active,
+          history,
+          last: history[history.length - 1],
+          w,
+          selectedReference,
+          fullReference,
+          completed,
+          examples: active.reduce((sum, c) => sum + c.records.length, 0),
+          initialLoss: objectiveLoss(0, clients, objective),
+          loss: objectiveLoss(w, clients, objective),
+          clientLosses: clients.map((c) => ({
+            id: c.id,
+            before: localLoss(0, c.records),
+            after: localLoss(w, c.records),
+          })),
+          downloads: active.length * completed,
+          uploads: active.length * completed,
+          examplePasses: active.reduce((sum, c) => sum + c.records.length, 0) * steps * completed,
+        };
+      }
+      const fmt = (value) => (value === null ? 'undefined' : value.toFixed(6)),
+        short = (value) => value.toFixed(5);
+      function diagram(r) {
+        const mobile = innerWidth < 520,
+          width = mobile ? 328 : 680,
+          height = mobile ? 750 : 510,
+          serverX = mobile ? 0 : 230,
+          serverW = mobile ? 328 : 220,
+          clientX = (i) => (mobile ? 28 : i * 236),
+          clientY = (i) => (mobile ? 110 + i * 145 : 130),
+          clientW = mobile ? 276 : 208,
+          clientH = mobile ? 126 : 145,
+          aggregateY = mobile ? 580 : 335;
+        const text = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          value +
+          '</text>';
+        const line = (path, arrow = false) =>
+          '<path d="' +
+          path +
+          '" fill="none" stroke="var(--accent)" stroke-width="2"' +
+          (arrow ? ' marker-end="url(#arrow)"' : '') +
+          '/>';
+        let s =
+          '<title id="flow-title">Local training from one common model followed by weighted aggregation</title><desc id="flow-desc">Attempt ' +
+          r.last.round +
+          ' starts at ' +
+          short(r.last.start) +
+          '. ' +
+          r.active.length +
+          ' clients participate; the shared result is ' +
+          short(r.w) +
+          '. Raw records remain at clients in the illustrated architecture. No privacy mechanism is simulated.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/></marker></defs>';
+        s +=
+          '<rect x="' +
+          serverX +
+          '" y="0" width="' +
+          serverW +
+          '" height="70" rx="8" fill="var(--panel)"/>' +
+          text(serverX + 12, 26, 17, 'Start round ' + r.last.round, true) +
+          text(serverX + 12, 53, 14, 'Shared w ' + short(r.last.start));
+        if (r.active.length && mobile) {
+          s += line('M 164 70 V 88 H 12 V 463');
+          s += line('M 316 173 V ' + (aggregateY - 4), true);
+        }
+        r.clients.forEach((client, i) => {
+          const local = r.last.local.find((c) => c.id === client.id),
+            share = r.last.weights.find((c) => c.id === client.id),
+            x = clientX(i),
+            y = clientY(i);
+          if (local) {
+            if (mobile) {
+              s += line('M 12 ' + (y + 63) + ' H 25', true) + line('M 304 ' + (y + 63) + ' H 316');
+            } else {
+              s +=
+                line('M 340 70 V 100 H ' + (x + 104) + ' V 126', true) +
+                line('M ' + (x + 104) + ' ' + (y + clientH) + ' V ' + (aggregateY - 4), true);
+            }
+          }
+          const lines = [
+            client.id + ' · ' + client.records.length + ' examples',
+            local ? r.steps + ' full-batch steps' : 'Not participating',
+            local ? 'Local w ' + short(local.w) : 'No returned update',
+            local
+              ? 'Weight ' +
+                share.numerator +
+                '/' +
+                share.denominator +
+                ' = ' +
+                share.value.toFixed(3)
+              : 'Aggregation weight 0',
+            'Records remain local',
+          ];
+          s +=
+            '<rect x="' +
+            x +
+            '" y="' +
+            y +
+            '" width="' +
+            clientW +
+            '" height="' +
+            clientH +
+            '" rx="8" fill="var(--panel)"/>' +
+            lines
+              .map((value, j) =>
+                text(
+                  x + 12,
+                  y + (mobile ? 22 : 25) + j * (mobile ? 23 : 26),
+                  j === 0 ? 17 : 14,
+                  value,
+                  j === 0,
+                ),
+              )
+              .join('');
+        });
+        const lines = [
+          r.last.success ? 'Aggregate returned models' : 'No returned updates',
+          r.last.success
+            ? (r.objective === 'examples' ? 'Example' : 'Client') + '-weighted w ' + short(r.w)
+            : 'Retain w ' + short(r.w),
+          r.examples + ' examples · ' + r.active.length + ' participating clients',
+          'Parameter values this round: ' +
+            r.last.local.length +
+            ' down + ' +
+            r.last.local.length +
+            ' up',
+          'Plain averaging adds no privacy guarantee.',
+        ];
+        s +=
+          '<rect x="0" y="' +
+          aggregateY +
+          '" width="' +
+          width +
+          '" height="140" rx="8" fill="var(--band)"/>' +
+          lines
+            .map((value, j) =>
+              text(12, aggregateY + 26 + j * 25, j === 0 ? 17 : mobile ? 13 : 14, value, j === 0),
+            )
+            .join('');
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+        $('#mechanism').innerHTML = s;
+      }
+      let report;
+      function render() {
+        report = simulate(
+          Number($('#steps').value),
+          Number($('#feature').value),
+          $('#objective').value,
+          $('#participants').value,
+          Number($('#rounds').value),
+        );
+        const r = report;
+        $('output').textContent =
+          (r.completed ? 'UPDATED' : 'NO UPDATE') +
+          '. Shared w: ' +
+          fmt(r.w) +
+          '. Centralized returned clients: ' +
+          fmt(r.selectedReference) +
+          '. Centralized all clients: ' +
+          fmt(r.fullReference) +
+          '.';
+        $('#interpretation').textContent = !r.completed
+          ? 'No client participated. The server retains its model; there is no weighted average, no completed round, and no parameter exchange.'
+          : r.participants !== 'all'
+            ? 'Participation changes the training population. The returned-client reference separates local-step effects from missing-client effects; the all-client reference retains the intended full population.'
+            : r.steps === 1
+              ? 'With one full-batch local step, all clients present, and matching objective weights, this round sequence matches the centralized reference. This equality need not hold after multiple local steps.'
+              : 'Several local steps can follow a different path from centralized optimization, especially with different client curvature. Compare the chosen objective and each client loss; an improved average does not ensure improvement for every client.';
+        $('#metrics').innerHTML = [
+          ['Shared model w', fmt(r.w)],
+          ['Centralized w — returned clients', fmt(r.selectedReference)],
+          ['Centralized w — all clients', fmt(r.fullReference)],
+          ['All-client loss — chosen objective', fmt(r.loss)],
+          ['Completed rounds / attempts', r.completed + '/' + r.rounds],
+          ['Logical parameter downloads / uploads', r.downloads + ' / ' + r.uploads],
+          ['Local example passes', String(r.examplePasses)],
+        ]
+          .map(([k, v]) => '<tr><th scope="row">' + k + '</th><td>' + v + '</td></tr>')
+          .join('');
+        $('#history').innerHTML = r.history
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.round +
+              '<small>Start ' +
+              short(row.start) +
+              '</small></th><td>' +
+              (row.local.length
+                ? row.local.map((c) => c.id + ' ' + short(c.w)).join('<br>')
+                : 'None — hold') +
+              '</td><td>' +
+              short(row.end) +
+              '</td><td>' +
+              short(row.loss) +
+              '</td></tr>',
+          )
+          .join('');
+        $('#losses').innerHTML = r.clientLosses
+          .map(
+            (c) =>
+              '<tr><th scope="row">' +
+              c.id +
+              '</th><td>' +
+              fmt(c.before) +
+              '</td><td>' +
+              fmt(c.after) +
+              '</td></tr>',
+          )
+          .join('');
+        $('#record-data').innerHTML = r.clients
+          .map(
+            (c) =>
+              '<tr><th scope="row">' +
+              c.id +
+              '</th><td>' +
+              c.records.map((row) => '(' + row.x + ', ' + row.y + ')').join(', ') +
+              '</td></tr>',
+          )
+          .join('');
+        const traces = r.history.flatMap((row) =>
+          row.local.flatMap((c) =>
+            c.trace.map((step) => ({ ...step, client: c.id, round: row.round })),
+          ),
+        );
+        $('#step-data').innerHTML = traces
+          .map(
+            (step) =>
+              '<tr><th scope="row">' +
+              step.client +
+              ' / ' +
+              step.round +
+              ' / ' +
+              step.step +
+              '</th><td>' +
+              short(step.before) +
+              ' → ' +
+              short(step.after) +
+              '</td><td>' +
+              short(step.gradient) +
+              '</td></tr>',
+          )
+          .join('');
+        diagram(r);
+      }
+      $('form').addEventListener('submit', (event) => event.preventDefault());
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        $('#records').open = false;
+        render();
+      });
+      addEventListener('resize', () => diagram(report));
+      render();
+    </script>
+  </body>
+</html>

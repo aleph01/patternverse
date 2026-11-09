@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Workflow dependency and recovery explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+
+      #attempts th:nth-child(1) {
+        width: 27%;
+      }
+      #attempts th:nth-child(2) {
+        width: 10%;
+      }
+      #attempts th:nth-child(3) {
+        width: 25%;
+      }
+      #attempts th:nth-child(4) {
+        width: 38%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Schedule six fictional steps from snapshot D1. Each attempt uses one execution slot. Durations
+      and evaluation outcomes are teaching inputs, not measured training performance. Release
+      requires both a complete package and a passing evaluation.
+    </p>
+    <form>
+      <div>
+        <label for="slots">Execution slots</label
+        ><select id="slots">
+          <option value="2">Two slots</option>
+          <option value="1">One slot</option>
+        </select>
+      </div>
+      <div>
+        <label for="training">Training execution</label
+        ><select id="training">
+          <option value="success">Succeeds first time</option>
+          <option value="retry">Fails once, then succeeds</option>
+          <option value="fail">Both attempts fail</option>
+        </select>
+      </div>
+      <div>
+        <label for="quality">Evaluation decision</label
+        ><select id="quality">
+          <option value="pass">Passes release criteria</option>
+          <option value="reject">Rejects candidate</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect attempts, artifacts and dependencies</summary>
+      <p>
+        Times are minutes from run start. Work sums the durations of all attempts, including failed
+        ones. A blocked step has no attempt and produces no completed artifact. Evaluation can
+        produce a rejection report successfully.
+      </p>
+      <table id="attempts">
+        <caption>
+          Executed attempts and blocked steps
+        </caption>
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Try</th>
+            <th>Minutes</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="artifacts"></p>
+      <table id="dependencies">
+        <caption>
+          Declared prerequisites
+        </caption>
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Needs</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </details>
+    <details id="assumptions">
+      <summary>Scheduling assumptions and limits</summary>
+      <p>
+        Validate takes 2 minutes; Prepare 3; Train 8 per attempt; Evaluate 4; Package 2; Release 1.
+        Durations are fixed. Slots are identical, each step uses one slot, and there is no startup
+        overhead, queueing from other runs, caching, resuming inside a failed attempt or resource
+        contention. Ready steps start immediately in the listed priority order; Evaluate precedes
+        Package when only one slot is available.
+      </p>
+      <p>
+        Train is allowed at most two attempts with an immediate retry and no backoff. A failed
+        attempt consumes all eight minutes and publishes no model. Other steps do not fail here.
+        Completed upstream outputs remain available within the run. The chosen evaluation decision
+        is a preset report outcome, not a metric calculated from a trained model. Rejecting a model
+        is not an execution failure and triggers no retry.
+      </p>
+      <p>
+        Packaging here only assembles existing artifacts and preserves their prediction behavior. A
+        conversion that changes behavior would need evaluation afterward. Outputs are logical
+        artifact labels only. No files are created, models trained, external services called or
+        releases deployed. A production runner needs durable state, safe publication and idempotent
+        external operations in addition to dependency scheduling.
+      </p>
+    </details>
+    <script>
+      const steps = Object.freeze(
+        [
+          { id: 'validate', label: 'Validate', duration: 2, deps: [], artifact: 'validated D1' },
+          {
+            id: 'prepare',
+            label: 'Prepare',
+            duration: 3,
+            deps: ['validate'],
+            artifact: 'prepared D1 + T1',
+          },
+          { id: 'train', label: 'Train', duration: 8, deps: ['prepare'], artifact: 'candidate M1' },
+          {
+            id: 'evaluate',
+            label: 'Evaluate',
+            duration: 4,
+            deps: ['train'],
+            artifact: 'report Q1',
+          },
+          { id: 'package', label: 'Package', duration: 2, deps: ['train'], artifact: 'package B1' },
+          {
+            id: 'release',
+            label: 'Release',
+            duration: 1,
+            deps: ['evaluate', 'package'],
+            artifact: 'release R1',
+          },
+        ].map((s) => Object.freeze({ ...s, deps: Object.freeze(s.deps) })),
+      );
+      function validateGraph(definition) {
+        if (!Array.isArray(definition) || !definition.length) throw new Error('Empty workflow');
+        const ids = new Set(definition.map((s) => s.id));
+        if (ids.size !== definition.length) throw new Error('Duplicate step');
+        for (const s of definition) {
+          if (
+            !s.id ||
+            !Number.isFinite(s.duration) ||
+            s.duration <= 0 ||
+            !Array.isArray(s.deps) ||
+            s.deps.some((id) => !ids.has(id))
+          )
+            throw new Error('Invalid step or dependency');
+        }
+        const visited = new Set();
+        while (visited.size < definition.length) {
+          const ready = definition.filter(
+            (s) => !visited.has(s.id) && s.deps.every((id) => visited.has(id)),
+          );
+          if (!ready.length) throw new Error('Dependency cycle');
+          ready.forEach((s) => visited.add(s.id));
+        }
+      }
+      function runPipeline(slots = 2, training = 'success', quality = 'pass', definition = steps) {
+        if (
+          ![1, 2].includes(slots) ||
+          !['success', 'retry', 'fail'].includes(training) ||
+          !['pass', 'reject'].includes(quality)
+        )
+          throw new Error('Invalid run controls');
+        validateGraph(definition);
+        const states = Object.fromEntries(
+          definition.map((s) => [
+            s.id,
+            {
+              ...s,
+              deps: [...s.deps],
+              status: 'pending',
+              attempts: [],
+              start: null,
+              end: null,
+              reason: null,
+              produced: null,
+            },
+          ]),
+        );
+        let events = [],
+          time = 0;
+        while (true) {
+          const finished = events.filter((e) => e.end === time);
+          events = events.filter((e) => e.end !== time);
+          for (const e of finished) {
+            const s = states[e.id],
+              failed =
+                s.id === 'train' &&
+                (training === 'fail' || (training === 'retry' && e.attempt === 1));
+            s.attempts.push({
+              attempt: e.attempt,
+              start: e.start,
+              end: e.end,
+              result: failed ? 'Failed' : 'Complete',
+            });
+            s.end = time;
+            if (failed) {
+              s.status = e.attempt < 2 ? 'pending' : 'failed';
+              s.reason = 'Training attempts exhausted';
+            } else {
+              s.status = 'complete';
+              s.reason = null;
+              s.produced =
+                s.artifact +
+                (s.id === 'evaluate' ? ' · ' + (quality === 'pass' ? 'pass' : 'reject') : '');
+            }
+          }
+          let changed = true;
+          while (changed) {
+            changed = false;
+            for (const step of definition) {
+              const s = states[step.id];
+              if (s.status !== 'pending') continue;
+              if (s.deps.some((id) => ['failed', 'blocked'].includes(states[id].status))) {
+                s.status = 'blocked';
+                s.reason = 'Missing successful prerequisite';
+                changed = true;
+              } else if (
+                s.id === 'release' &&
+                quality === 'reject' &&
+                s.deps.every((id) => states[id].status === 'complete')
+              ) {
+                s.status = 'blocked';
+                s.reason = 'Evaluation gate rejected';
+                changed = true;
+              }
+            }
+          }
+          for (const step of definition) {
+            if (events.length >= slots) break;
+            const s = states[step.id];
+            if (s.status === 'pending' && s.deps.every((id) => states[id].status === 'complete')) {
+              s.status = 'running';
+              if (s.start === null) s.start = time;
+              events.push({
+                id: s.id,
+                start: time,
+                end: time + s.duration,
+                attempt: s.attempts.length + 1,
+              });
+            }
+          }
+          if (!events.length) break;
+          time = Math.min(...events.map((e) => e.end));
+        }
+        const nodes = definition.map((s) => states[s.id]);
+        if (nodes.some((s) => s.status === 'pending' || s.status === 'running'))
+          throw new Error('Unresolved workflow');
+        const work = nodes.reduce(
+          (total, s) => total + s.attempts.reduce((sum, a) => sum + a.end - a.start, 0),
+          0,
+        );
+        return {
+          slots,
+          training,
+          quality,
+          nodes,
+          elapsed: time,
+          work,
+          released: states.release?.status === 'complete',
+          attemptCount: nodes.reduce((n, s) => n + s.attempts.length, 0),
+        };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 780 : 410;
+        const text = (x, y, value, size = 16, color = '#252c28') =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="' +
+          color +
+          '" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">' +
+          value +
+          '</text>';
+        const node = (id, x, y, w) => {
+          const s = r.nodes.find((s) => s.id === id),
+            complete = s.status === 'complete',
+            color = complete ? '#00855b' : '#626962',
+            time = s.start === null ? 'No attempt' : s.start + '–' + s.end + ' min',
+            status =
+              s.id === 'evaluate' && complete
+                ? 'Report: ' + r.quality
+                : s.reason === 'Evaluation gate rejected'
+                  ? 'Gate rejected'
+                  : s.status === 'blocked'
+                    ? 'Blocked'
+                    : s.status === 'failed'
+                      ? 'Failed ×' + s.attempts.length
+                      : s.attempts.length > 1
+                        ? 'Done ×' + s.attempts.length
+                        : 'Complete';
+          return (
+            '<rect x="' +
+            x +
+            '" y="' +
+            y +
+            '" width="' +
+            w +
+            '" height="80" fill="' +
+            (id === 'release' && complete
+              ? '#edf5f0'
+              : s.status === 'blocked'
+                ? '#f1f2ef'
+                : '#fff') +
+            '" stroke="#a6aca3"/>' +
+            text(x + 8, y + 23, s.label) +
+            text(x + 8, y + 45, time, 14, '#626962') +
+            text(x + 8, y + 66, status, 14, color)
+          );
+        };
+        const edge = (d) =>
+          '<path d="' + d + '" fill="none" stroke="#a6aca3" marker-end="url(#arrow)"/>';
+        let s =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' +
+          width +
+          ' ' +
+          height +
+          '" role="img" aria-label="Workflow prerequisite graph with computed step times"><defs><marker id="arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L6 3 L0 6" fill="#a6aca3"/></marker></defs><rect width="' +
+          width +
+          '" height="' +
+          height +
+          '" fill="#fff"/>';
+        s +=
+          text(
+            0,
+            24,
+            r.slots + ' ' + (r.slots === 1 ? 'slot' : 'slots') + ' · ' + r.elapsed + ' min elapsed',
+            18,
+          ) + text(0, 48, 'Each step occupies one slot.', 14, '#626962');
+        if (mobile) {
+          s +=
+            edge('M164 156 V188') +
+            edge('M164 268 V300') +
+            edge('M164 380 V412 H77 V444') +
+            edge('M164 412 H251 V444') +
+            edge('M77 524 V556 H164 V588') +
+            edge('M251 524 V556 H164 V588');
+          s +=
+            node('validate', 18, 76, 292) +
+            node('prepare', 18, 188, 292) +
+            node('train', 18, 300, 292) +
+            node('evaluate', 0, 444, 154) +
+            node('package', 174, 444, 154) +
+            node('release', 18, 588, 292);
+          s +=
+            text(0, 716, 'Arrows show prerequisites.', 14, '#626962') +
+            text(0, 739, 'Clocks show scheduled minutes.', 14, '#626962');
+        } else {
+          s +=
+            edge('M96 210 H124') +
+            edge('M220 210 H248') +
+            edge('M344 210 H358 V118 H374') +
+            edge('M358 210 V302 H374') +
+            edge('M504 118 H526 V210 H550') +
+            edge('M504 302 H526 V210 H550');
+          s +=
+            node('validate', 0, 170, 96) +
+            node('prepare', 124, 170, 96) +
+            node('train', 248, 170, 96) +
+            node('evaluate', 374, 78, 130) +
+            node('package', 374, 262, 130) +
+            node('release', 550, 170, 130);
+          s += text(
+            0,
+            384,
+            'Arrows show prerequisites; clocks show scheduled minutes.',
+            14,
+            '#626962',
+          );
+        }
+        return s + '</svg>';
+      }
+      let report;
+      function render() {
+        report = runPipeline(
+          Number(document.querySelector('#slots').value),
+          document.querySelector('#training').value,
+          document.querySelector('#quality').value,
+        );
+        const r = report,
+          train = r.nodes.find((s) => s.id === 'train'),
+          evaluation = r.nodes.find((s) => s.id === 'evaluate');
+        document.querySelector('output').textContent =
+          (r.released
+            ? 'Released at ' + r.elapsed + ' min; '
+            : 'Not released; run ended at ' + r.elapsed + ' min. ') +
+          r.work +
+          ' task-min of work.';
+        document.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth <= 520);
+        document.querySelector('#interpretation').textContent =
+          train.status === 'failed'
+            ? 'Both training attempts failed. No completed model is available; evaluation, packaging and release have no attempts.'
+            : r.quality === 'reject'
+              ? 'Evaluation completed at minute ' +
+                evaluation.end +
+                ' and rejected the candidate. Release is blocked by that report, not by an evaluator crash.'
+              : r.slots === 2
+                ? 'Evaluation and packaging overlap after training. Release waits for the slower evaluation branch; overlap reduces elapsed time without removing work.'
+                : 'One slot runs Evaluate before Package. Their dependencies allow overlap, but slot availability prevents it.';
+        document.querySelector('#attempts tbody').innerHTML = r.nodes
+          .flatMap((s) =>
+            s.attempts.length
+              ? s.attempts.map(
+                  (a) =>
+                    '<tr><td>' +
+                    s.label +
+                    '</td><td>' +
+                    a.attempt +
+                    '</td><td>' +
+                    a.start +
+                    '–' +
+                    a.end +
+                    '</td><td>' +
+                    a.result +
+                    (s.id === 'evaluate'
+                      ? ' · ' + (r.quality === 'pass' ? 'passes' : 'rejects')
+                      : '') +
+                    '</td></tr>',
+                )
+              : ['<tr><td>' + s.label + '</td><td>—</td><td>—</td><td>Blocked</td></tr>'],
+          )
+          .join('');
+        document.querySelector('#dependencies tbody').innerHTML = r.nodes
+          .map(
+            (s) =>
+              '<tr><td>' +
+              s.label +
+              '</td><td>' +
+              (s.deps.length
+                ? s.deps.map((id) => r.nodes.find((n) => n.id === id).label).join(' + ')
+                : 'Snapshot D1') +
+              (s.id === 'release' ? ' + passing report' : '') +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#artifacts').textContent =
+          'Completed artifact labels: ' +
+          r.nodes
+            .filter((s) => s.produced)
+            .map((s) => s.produced)
+            .join('; ') +
+          '.';
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

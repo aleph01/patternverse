@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "structural"
   - "composite"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 A graphics editor can move a rectangle, a text label, or a selected group. Groups can contain other groups. Without a shared structure, every caller starts checking whether the target is a shape or a collection and then repeats the recursion. Features such as moving, rendering, and calculating bounds each reinvent the same distinction.
 
+## Core idea
+
 Composite gives individual objects and containers a common interface for operations that make sense for both. A leaf performs the operation directly. A composite delegates to its children and combines their results where appropriate. Clients can work with a component without first asking which kind it is.
 
-![Groups contain components, including nested groups. A shared move operation follows the part–whole tree.](/diagrams/gof/composite.svg "Groups contain components, including nested groups. A shared move operation follows the part–whole tree.")
+![A gift bundle contains a stationery bundle and a card. The stationery bundle contains a pencil and notebook. Price calls recurse through the same component contract, producing 600 plus 200 equals 800 cents.](../assets/software-engineering/gof/composite.svg "A group delegates to children, including other groups. Leaves and groups share price_cents; they do not need identical child-management operations.")
 
-### A recursive part–whole model
+## How it works
 
 The component contract might include draw, move, and bounds. Rectangle and TextLabel are leaves. Group is a composite that contains components. Because another Group also satisfies the component contract, nesting works naturally.
 
 The common interface does not imply identical implementation. A rectangle moves by updating its position. A group may move all its children or update a group transform. A rectangle's bounds come from its dimensions; a group's bounds enclose its children's bounds.
 
 The value is that callers can express an operation at the level of the selected component. Recursion belongs inside the structure or in a cooperating traversal mechanism rather than spreading through every feature.
+
+## Worked example
 
 ### Grouped objects in an editor
 
@@ -38,6 +43,41 @@ However, transform ownership needs consistency. If a group updates its own trans
 
 Bounds present another real detail. An empty group might have no bounds rather than a rectangle at the origin. A hidden child may or may not contribute. The component contract should define these cases so uniform access does not produce inconsistent meaning.
 
+### A small implementation
+
+A product and a bundle both answer price_cents. The bundle delegates to its children, which can include other bundles. This is an acyclic ownership tree with fixed prices; discounts and shared catalog references would need additional rules.
+
+```python
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Product:
+    name: str
+    cents: int
+
+    def price_cents(self):
+        return self.cents
+
+
+@dataclass(frozen=True)
+class Bundle:
+    children: tuple
+
+    def price_cents(self):
+        return sum(child.price_cents() for child in self.children)
+
+
+pencil = Product("Pencil", 100)
+notebook = Product("Notebook", 500)
+stationery = Bundle((pencil, notebook))
+gift = Bundle((stationery, Product("Card", 200)))
+print(gift.price_cents())
+# 800
+```
+
+Checkout can ask either a leaf product or a nested bundle for its price. It does not inspect types or repeat the recursion. Child-management methods are intentionally absent from Product: sharing one meaningful operation does not require pretending a leaf is a container.
+
 ### Prices in a nested product bundle
 
 A catalog contains individual products and bundles. A bundle may contain products and smaller bundles. Both expose a price operation. An individual product returns its listed price. A bundle calculates a total and applies its own discount rule.
@@ -48,7 +88,14 @@ This example also reveals a limitation. If the same product appears in several b
 
 Pricing policy may also outgrow a simple method. Discounts based on customer status or the whole basket might fit a separate pricing service or Visitor better than methods distributed through the tree. Composite describes structure; it does not require every operation to live inside component classes.
 
-### Uniformity has a boundary
+## When to use it
+
+- A domain contains nested part–whole structures.
+- Clients should treat a leaf and a group uniformly for selected operations.
+
+Consider a simpler design when the relationship is primarily a graph with shared ownership or cycles, or when leaves and groups have almost no meaningful common operations.
+
+## Tradeoffs and common mistakes
 
 Two common interface choices create a tradeoff. A transparent component interface includes child-management operations on all components. Clients can treat everything uniformly, but leaves must reject meaningless operations such as adding a child.
 
@@ -58,38 +105,12 @@ Neither choice is universally correct. For an editor with explicit group control
 
 Deep trees can also make recursive traversal expensive or exceed call-stack limits. Iterative traversal, cached results, and invalidation policies may be needed. A clean model does not remove performance or lifecycle concerns.
 
-### Neighboring designs
-
-Iterator provides a traversal interface for a collection or tree without exposing its internal representation. Composite supplies the tree's uniform part–whole structure. Visitor can add operations over the component types without putting all those operations into the structure itself.
-
-Decorator also wraps objects behind a compatible interface, but normally represents added responsibility around a single wrapped component. Composite primarily represents a group of children. An object can participate in both relationships, provided the roles remain clear.
-
-Composite works best when the domain genuinely contains recursive whole–part relationships and there are important operations shared by leaves and groups. It removes repeated structural distinctions while preserving the semantic differences that matter.
-
-## Pattern details
-
-**Category:** Structural · **Difficulty:** Intermediate
-
-### Use when
-
-- A domain contains nested part–whole structures
-- Clients should treat a leaf and a group uniformly for selected operations
-
-### Not ideal when
-
-- The relationship is primarily a graph with shared ownership or cycles
-- Leaves and groups have almost no meaningful common operations
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
 ## Related patterns
 
-[[iterator|Iterator]] · [[visitor|Visitor]] · [[decorator|Decorator]]
+[[iterator|Iterator]] provides a traversal interface for a collection or tree without exposing its internal representation. Composite supplies the tree's uniform part–whole structure. [[visitor|Visitor]] can add operations over the component types without putting all those operations into the structure itself.
 
-## Source
+[[decorator|Decorator]] also wraps objects behind a compatible interface, but normally represents added responsibility around a single wrapped component. Composite primarily represents a group of children. An object can participate in both relationships, provided the roles remain clear.
 
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
+## Sources
 
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+Composite is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

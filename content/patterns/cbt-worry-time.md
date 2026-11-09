@@ -35,7 +35,7 @@ The exact source below is bundled in the guided practice; displaying it does not
 :language 1
 :title "Worry Time / Stimulus Control for Worry"
 :output outcome
-!timer period {
+period = !timer {
     :duration 600
     :adjustable true
     :min 60
@@ -45,7 +45,7 @@ The exact source below is bundled in the guided practice; displaying it does not
 
     The timer defaults to 10 minutes. Adjust it before starting if you prefer, then continue to write while it runs. You can pause or finish early.
 }
-!ask worries {
+worries = !ask {
     Give your worries some space
 
     Write down the "what if" thoughts on your mind. You can explore several worries. To follow one further, ask: "If that happened, what might happen next? What would I be afraid of then?"
@@ -57,6 +57,6 @@ The exact source below is bundled in the guided practice; displaying it does not
 
     {{worries}}
 }
-= outcome "reflected"
+outcome = "reflected"
 -> end
 ```

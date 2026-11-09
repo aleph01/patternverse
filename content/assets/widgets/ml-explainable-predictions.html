@@ -1,0 +1,206 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Prediction attribution and reference explorer</title><style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --panel: #f1f2ef;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        color: var(--ink);
+        background: #fff;
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      label {
+        display: block;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        font: inherit;
+        color: var(--ink);
+        background: #fff;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        margin: 14px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        padding: 8px 0;
+        color: var(--ink);
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #scores th:first-child {
+        width: 31%;
+      }
+      #records {
+        font-size: 13px;
+      }
+      #records th:first-child {
+        width: 13%;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        button {
+          width: 100%;
+        }
+      }
+    </style></head><body>
+<p>Explain a fixed trip-time model: 10 minutes + 2 minutes per kilometre + 4 minutes during rush hour. Change the trip or its reference. The reference changes attribution, while the model remains M1. These are computed teaching estimates, not observed trip times.</p>
+<form><div><label for="distance">Trip distance</label><select id="distance"><option value="1">1 km</option><option value="5" selected>5 km</option><option value="8">8 km</option></select></div>
+<div><label for="rush">Traffic period</label><select id="rush"><option value="1" selected>Rush hour</option><option value="0">Off-peak</option></select></div>
+<div><label for="reference">Reference trips</label><select id="reference"><option value="S" selected>S — short off-peak</option><option value="M">M — mixed trips</option></select></div></form>
+<button id="reset" type="button">Reset inputs</button><output aria-live="polite"></output><div id="graphic"></div><p id="interpretation"></p>
+<details id="inspection"><summary>Inspect reference rows and exact contribution calculations</summary>
+<table id="background"><caption>Equally weighted fictional reference trips</caption><thead><tr><th>Distance km</th><th>Rush 0/1</th><th>Prediction min</th></tr></thead><tbody></tbody></table><p id="means"></p>
+<p>For each subset, keep those features from the selected trip and replace the others using each reference row. Average the resulting model predictions. This replacement does not condition on the retained features or infer a real-world intervention.</p>
+<table id="subsets"><caption>Values for the four feature subsets</caption><thead><tr><th>Features kept</th><th>Mean model output min</th></tr></thead><tbody></tbody></table>
+<table id="orders"><caption>Credit from both addition orders · minutes</caption><thead><tr><th>Feature</th><th>Distance first</th><th>Rush first</th><th>Mean credit</th></tr></thead><tbody></tbody></table>
+<p id="formula"></p><p id="reconstruction"></p>
+</details><details id="assumptions"><summary>Attribution assumptions and limits</summary>
+<p>The model is fixed and additive, with zero interactions. The two-feature Shapley calculation averages each feature's increment across both addition orders using the declared background-replacement rule. For this model, the exact result is coefficient × (input − reference mean). No SHAP package, surrogate approximation or statistical fitting is run.</p>
+<p>Reference S has trips (1 km, off-peak) and (3 km, off-peak). Reference M has (3 km, off-peak) and (5 km, rush hour). These are chosen backgrounds, not representative population samples. Replacement breaks the association between a retained feature and its missing counterpart. A conditional explanation could allocate credit differently; it is not computed here.</p>
+<p>Every output and contribution uses minutes. Green adds minutes and dark gray removes minutes; neither color signals model quality. The diagram uses a fixed 0–32 minute scale. The decomposition sums exactly for these inputs, but does not establish prediction accuracy, confidence, fairness, real-world causality or feasible advice. Model M1's four-minute rush term is not an estimated benefit of changing departure time.</p></details>
+<script>
+const model=Object.freeze({id:'M1',intercept:10,coefficients:Object.freeze([2,4])});
+const references=Object.freeze({S:Object.freeze([[1,0],[3,0]].map(Object.freeze)),M:Object.freeze([[3,0],[5,1]].map(Object.freeze))});
+const distanceChoices=Object.freeze([1,5,8]);
+function validateTrip(row){if(!Array.isArray(row)||row.length!==2||!Number.isFinite(row[0])||row[0]<0||![0,1].includes(row[1]))throw Error('Nonnegative finite distance and binary rush indicator required');}
+function predict(row){validateTrip(row);const value=model.intercept+model.coefficients[0]*row[0]+model.coefficients[1]*row[1];if(!Number.isFinite(value))throw Error('Finite prediction required');return value;}
+function validateBackground(rows){if(!Array.isArray(rows)||!rows.length)throw Error('Nonempty background required');rows.forEach(validateTrip);}
+function coalition(point,rows,mask){validateTrip(point);validateBackground(rows);if(!Number.isInteger(mask)||mask<0||mask>3)throw Error('Two-feature subset mask required');const result=rows.reduce((s,row)=>s+predict([mask&1?point[0]:row[0],mask&2?point[1]:row[1]]),0)/rows.length;if(!Number.isFinite(result))throw Error('Finite reference average required');return result;}
+function explain(point,rows){
+ validateTrip(point);validateBackground(rows);
+ const values=[0,1,2,3].map(mask=>coalition(point,rows,mask));
+ const distanceFirst={distance:values[1]-values[0],rush:values[3]-values[1]},rushFirst={distance:values[3]-values[2],rush:values[2]-values[0]};
+ const contributions=[(distanceFirst.distance+rushFirst.distance)/2,(distanceFirst.rush+rushFirst.rush)/2],baseline=values[0],prediction=predict(point),reconstructed=baseline+contributions[0]+contributions[1];
+ const mean=[0,1].map(i=>rows.reduce((s,row)=>s+row[i],0)/rows.length);
+ return {point:[...point],mean,values,distanceFirst,rushFirst,contributions,baseline,prediction,reconstructed,residual:prediction-reconstructed,steps:[baseline,baseline+contributions[0],reconstructed]};
+}
+function buildReport(distance=5,rush=1,reference='S'){if(!distanceChoices.includes(distance)||![0,1].includes(rush)||!Object.hasOwn(references,reference))throw Error('Unsupported explorer choice');return {...explain([distance,rush],references[reference]),reference,model:model.id};}
+const number=v=>Number(v.toFixed(6)).toString();
+const signed=v=>v>0?'+'+number(v):number(v);
+const equation=r=>number(r.baseline)+r.contributions.map(v=>(v<0?' − ':' + ')+number(Math.abs(v))).join('')+' = '+number(r.prediction)+' min';
+function mechanismGraphic(r,mobile){
+ const width=mobile?328:680,height=mobile?740:540;
+ const text=(x,y,s,size=16,color='#252c28',anchor='start')=>`<text x="${x}" y="${y}" fill="${color}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" font-size="${size}" text-anchor="${anchor}">${s}</text>`;
+ const line=(x,y,x2,y2,color='#a6aca3')=>`<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${color}"/>`;
+ const labels=['Reference','Distance','Rush hour','Prediction'],starts=[0,r.baseline,r.steps[1],0],ends=[r.baseline,r.steps[1],r.prediction,r.prediction],shown=[number(r.baseline),signed(r.contributions[0]),signed(r.contributions[1]),number(r.prediction)];
+ let out=text(0,25,'Explain the trip estimate',mobile?23:25)+text(0,55,`${r.point[0]} km · ${r.point[1]?'rush hour':'off-peak'} · reference ${r.reference}`,16,'#626962');
+ if(mobile){
+ const x=v=>12+v/32*288;
+ out+=text(0,91,'Output minutes',14,'#626962')+line(12,121,300,121);
+ for(const v of [0,8,16,24,32])out+=line(x(v),116,x(v),126)+text(x(v),111,v,14,'#626962','middle');
+ for(let i=0;i<4;i++){const top=170+i*105,start=starts[i],end=ends[i],change=i===1||i===2,c=change?(end>=start?'#00855b':'#626962'):'#f1f2ef';
+ out+=text(0,top-15,`${labels[i]} ${shown[i]} min`,19);
+ if(start===end)out+=line(x(start),top+9,x(start)+10,top+9,change?'#626962':'#252c28');
+ else out+=`<rect x="${x(Math.min(start,end))}" y="${top}" width="${Math.abs(end-start)/32*288}" height="18" fill="${c}" stroke="${change?c:'#a6aca3'}"/>`;
+ if(i<3)out+=`<line x1="${x(end)}" y1="${top+18}" x2="${x(end)}" y2="${top+65}" stroke="#a6aca3" stroke-dasharray="3 4"/><line x1="${x(end)}" y1="${top+96}" x2="${x(end)}" y2="${top+105}" stroke="#a6aca3" stroke-dasharray="3 4"/>`;
+ }
+ out+=text(0,562,equation(r),22)+text(0,606,`Mean distance: ${number(r.mean[0])} km`,16,'#626962')+text(0,633,`Mean rush indicator: ${number(r.mean[1])}`,16,'#626962')+text(0,682,'Green adds minutes',16,'#00855b')+text(0,710,'Dark gray removes minutes',16,'#626962');
+ }else{
+ const bottom=400,y=v=>bottom-v/32*250,positions=[80,230,380,530],barWidth=80;
+ out+=text(0,117,'Minutes',14,'#626962');
+ for(const v of [0,8,16,24,32])out+=line(45,y(v),650,y(v),'#e2e5df')+text(30,y(v)+5,v,14,'#626962','end');
+ for(let i=0;i<4;i++){const start=starts[i],end=ends[i],change=i===1||i===2,c=change?(end>=start?'#00855b':'#626962'):'#f1f2ef',x=positions[i];
+ if(start===end)out+=line(x,y(start),x+barWidth,y(start),'#626962');
+ else out+=`<rect x="${x}" y="${y(Math.max(start,end))}" width="${barWidth}" height="${Math.abs(end-start)/32*250}" fill="${c}" stroke="${change?c:'#a6aca3'}"/>`;
+ out+=text(x+barWidth/2,y(Math.max(start,end))-11,shown[i],19,'#252c28','middle')+text(x+barWidth/2,427,labels[i],16,'#252c28','middle');
+ if(i<3)out+=`<line x1="${x+barWidth}" y1="${y(end)}" x2="${positions[i+1]}" y2="${y(end)}" stroke="#a6aca3" stroke-dasharray="3 4"/>`;
+ }
+ out+=text(0,462,'Green adds minutes · dark gray removes minutes',16,'#626962')+text(0,493,`Reference mean: ${number(r.mean[0])} km · rush indicator ${number(r.mean[1])}`,16,'#626962')+text(0,529,equation(r),22);
+ }
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Reference prediction plus distance and rush-hour attributions reconstructs the model estimate"><rect width="${width}" height="${height}" fill="#fff"/>${out}</svg>`;
+}
+let report;
+function render(){const d=document;report=buildReport(Number(d.querySelector('#distance').value),Number(d.querySelector('#rush').value),d.querySelector('#reference').value);const r=report;
+ d.querySelector('output').textContent=`Prediction ${number(r.prediction)} min; reference ${number(r.baseline)} min, distance ${signed(r.contributions[0])} min, rush ${signed(r.contributions[1])} min.`;
+ d.querySelector('#graphic').innerHTML=mechanismGraphic(r,innerWidth<520);
+ d.querySelector('#interpretation').textContent='Changing the reference changes the comparison and allocation, not this model’s prediction for the selected trip. Contributions describe model behavior, not verified causes of travel time.';
+ d.querySelector('#background tbody').innerHTML=references[r.reference].map(row=>`<tr><td>${row[0]}</td><td>${row[1]}</td><td>${predict(row)}</td></tr>`).join('');
+ d.querySelector('#means').textContent=`Reference ${r.reference}: mean distance ${number(r.mean[0])} km; mean rush indicator ${number(r.mean[1])}; mean model prediction ${number(r.baseline)} min.`;
+ d.querySelector('#subsets tbody').innerHTML=['Neither','Distance only','Rush only','Both'].map((label,mask)=>`<tr><td>${label}</td><td>${number(r.values[mask])}</td></tr>`).join('');
+ d.querySelector('#orders tbody').innerHTML=[['Distance',r.distanceFirst.distance,r.rushFirst.distance,r.contributions[0]],['Rush hour',r.distanceFirst.rush,r.rushFirst.rush,r.contributions[1]]].map(row=>`<tr>${row.map(v=>`<td>${typeof v==='number'?signed(v):v}</td>`).join('')}</tr>`).join('');
+ d.querySelector('#formula').textContent=`Distance: 2 × (${r.point[0]} − ${number(r.mean[0])}) = ${signed(r.contributions[0])} min. Rush: 4 × (${r.point[1]} − ${number(r.mean[1])}) = ${signed(r.contributions[1])} min.`;
+ d.querySelector('#reconstruction').textContent=`Reconstruction: ${equation(r)}. Prediction minus reconstruction: ${number(r.residual)} min. Equality checks the accounting, not model accuracy or reference suitability.`;
+}
+document.querySelector('form').addEventListener('submit',e=>e.preventDefault());document.querySelectorAll('select').forEach(el=>el.addEventListener('change',render));document.querySelector('#reset').addEventListener('click',()=>{document.querySelector('form').reset();document.querySelectorAll('details').forEach(el=>el.open=false);render();});addEventListener('resize',render);render();
+</script></body></html>

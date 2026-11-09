@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Identify Needs — needs library</title>
+    <style>
+      #need-tags-design {
+  color-scheme: light dark;
+}
+#need-tags-design .nt-stage {
+  padding: 24px 10px 30px;
+  box-sizing: border-box;
+}
+#need-tags-design .nt-widget {
+  --nt-surface: light-dark(#ffffff, #1b211f);
+  --nt-ink: light-dark(#192a23, #edf5ef);
+  --nt-muted: light-dark(#66766d, #a6b9ae);
+  --nt-line: light-dark(#e6ece8, #34433b);
+  --nt-wash: light-dark(#f5f8f6, #222c26);
+  --nt-tag: light-dark(#eef3f0, #2e3b33);
+  --nt-accent: light-dark(#27654d, #a4d8b8);
+  --nt-on: light-dark(#ffffff, #123522);
+  --nt-tint: light-dark(#e9f4ed, #293e30);
+  --nt-focus: light-dark(#3679c8, #9ec9ff);
+  --nt-shadow: light-dark(#233e2c0d, #00000024);
+  --nt-tag-pad: 10px;
+  --nt-tag-radius: 99px;
+  max-width: 690px;
+  margin: auto;
+  box-sizing: border-box;
+  border: 1px solid var(--nt-line);
+  border-radius: 20px;
+  box-shadow: 0 12px 36px var(--nt-shadow);
+  background: var(--nt-surface);
+  color: var(--nt-ink);
+  font:
+    14px/1.5 -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  overflow: clip;
+}
+#need-tags-design .nt-widget * {
+  box-sizing: border-box;
+}
+#need-tags-design h2,
+#need-tags-design h3,
+#need-tags-design p {
+  margin: 0;
+}
+#need-tags-design button,
+#need-tags-design input {
+  font: inherit;
+}
+#need-tags-design button {
+  color: inherit;
+}
+#need-tags-design button:focus-visible {
+  outline: 2px solid var(--nt-focus);
+  outline-offset: 3px;
+}
+#need-tags-design .nt-head {
+  padding: 26px 28px 20px;
+}
+#need-tags-design .nt-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nt-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+#need-tags-design .nt-top svg {
+  width: 14px;
+  height: 14px;
+  color: var(--nt-accent);
+}
+#need-tags-design h2 {
+  font-size: 27px;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+#need-tags-design .nt-sub {
+  color: var(--nt-muted);
+  font-size: 13px;
+}
+#need-tags-design .nt-search-wrap {
+  padding: 0 28px 20px;
+}
+#need-tags-design .nt-search {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 11px 13px;
+  border-radius: 11px;
+  background: var(--nt-wash);
+  border: 1px solid var(--nt-line);
+}
+#need-tags-design .nt-search:focus-within {
+  outline: 2px solid var(--nt-focus);
+  outline-offset: 2px;
+}
+#need-tags-design .nt-search svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-search input {
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--nt-ink);
+  width: 100%;
+  min-width: 0;
+}
+#need-tags-design .nt-search input::placeholder {
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-view-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+#need-tags-design .nt-view-label {
+  font-size: 11px;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-view-switch {
+  display: inline-flex;
+  gap: 3px;
+  background: var(--nt-wash);
+  border: 1px solid var(--nt-line);
+  padding: 3px;
+  border-radius: 9px;
+}
+#need-tags-design .nt-view-switch button {
+  font-size: 12px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  background: transparent;
+  border: 0;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-view-switch button[aria-pressed='true'] {
+  background: var(--nt-surface);
+  color: var(--nt-ink);
+  box-shadow: 0 1px 4px var(--nt-shadow);
+}
+#need-tags-design .nt-flat-tags {
+  padding: 2px 0 18px 27px;
+}
+#need-tags-design .nt-browser {
+  border-top: 1px solid var(--nt-line);
+  padding: 8px 28px 16px;
+}
+#need-tags-design .nt-area {
+  border-bottom: 1px solid var(--nt-line);
+}
+#need-tags-design .nt-area:last-child {
+  border-bottom: 0;
+}
+#need-tags-design .nt-area-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+#need-tags-design .nt-area-button > svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-area-name {
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+}
+#need-tags-design .nt-area-button[aria-expanded='true'] .nt-area-name {
+  color: var(--nt-accent);
+}
+#need-tags-design .nt-area-total {
+  font-size: 11px;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-count {
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: 20px;
+  background: var(--nt-tint);
+  font-size: 11px;
+  color: var(--nt-accent);
+  text-align: center;
+}
+#need-tags-design .nt-branches {
+  margin: 0 0 16px 8px;
+  padding-left: 20px;
+  border-left: 1px solid var(--nt-line);
+}
+#need-tags-design .nt-group {
+  margin-bottom: 9px;
+}
+#need-tags-design .nt-group:last-child {
+  margin-bottom: 0;
+}
+#need-tags-design .nt-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 9px 0 8px;
+  color: var(--nt-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+#need-tags-design .nt-group-heading > span:first-child {
+  flex: 1;
+}
+#need-tags-design .nt-group-hint {
+  display: none;
+  color: var(--nt-muted);
+  font-size: 12px;
+  margin: 0 0 9px;
+}
+#need-tags-design .nt-show-hints .nt-group-hint {
+  display: block;
+}
+#need-tags-design .nt-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0 10px;
+}
+#need-tags-design .nt-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  border: 1px solid transparent;
+  background: var(--nt-tag);
+  color: var(--nt-ink);
+  border-radius: var(--nt-tag-radius);
+  padding: 7px var(--nt-tag-pad);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+  transition:
+    background 0.12s,
+    color 0.12s;
+}
+#need-tags-design .nt-tag span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+#need-tags-design .nt-tag > svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+#need-tags-design .nt-tag:hover {
+  border-color: var(--nt-accent);
+}
+#need-tags-design .nt-tag[aria-pressed='true'] {
+  background: var(--nt-accent);
+  color: var(--nt-on);
+}
+#need-tags-design .nt-tag[aria-pressed='true'] > svg {
+  opacity: 1;
+}
+#need-tags-design .nt-detail {
+  background: var(--nt-wash);
+  padding: 15px 28px;
+  border-top: 1px solid var(--nt-line);
+  min-height: 86px;
+}
+#need-tags-design .nt-detail-title {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+#need-tags-design .nt-detail-title svg {
+  width: 14px;
+  height: 14px;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-detail p {
+  font-size: 12px;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-empty-detail {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--nt-muted);
+  font-size: 12px;
+  padding: 10px 0;
+}
+#need-tags-design .nt-empty-detail svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+#need-tags-design .nt-selection {
+  padding: 16px 28px;
+  border-top: 1px solid var(--nt-line);
+}
+#need-tags-design .nt-selection-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+  font-size: 12px;
+  font-weight: 500;
+}
+#need-tags-design .nt-clear {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--nt-muted);
+  font-size: 11px;
+}
+#need-tags-design .nt-clear:hover {
+  text-decoration: underline;
+}
+#need-tags-design .nt-selected-tags {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+#need-tags-design .nt-remove {
+  background: var(--nt-tint);
+  color: var(--nt-accent);
+  border: 0;
+  padding: 6px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  max-width: 100%;
+  border-radius: var(--nt-tag-radius);
+  font-size: 12px;
+  text-align: left;
+}
+#need-tags-design .nt-remove svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+#need-tags-design .nt-kept-note {
+  font-size: 11px;
+  color: var(--nt-muted);
+  margin-top: 9px;
+}
+#need-tags-design .nt-empty {
+  color: var(--nt-muted);
+  font-size: 12px;
+}
+#need-tags-design .nt-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px 28px;
+  background: var(--nt-wash);
+  border-top: 1px solid var(--nt-line);
+}
+#need-tags-design .nt-footer-note {
+  font-size: 11px;
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-continue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--nt-accent);
+  color: var(--nt-on);
+  padding: 10px 16px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+}
+#need-tags-design .nt-continue svg {
+  width: 15px;
+  height: 15px;
+}
+#need-tags-design .nt-continue:disabled {
+  background: var(--nt-tag);
+  color: var(--nt-muted);
+}
+#need-tags-design .nt-search-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--nt-muted);
+  padding: 12px 0 15px;
+}
+#need-tags-design .nt-search-results .nt-tags {
+  padding: 0 0 12px;
+}
+#need-tags-design .nt-more {
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  color: var(--nt-accent);
+}
+#need-tags-design .nt-review {
+  padding: 20px 0;
+}
+#need-tags-design .nt-review h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+#need-tags-design .nt-review-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--nt-line);
+}
+#need-tags-design .nt-review-item strong {
+  font-weight: 500;
+}
+#need-tags-design .nt-review-item p {
+  font-size: 12px;
+  color: var(--nt-muted);
+  margin-top: 3px;
+}
+#need-tags-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+#need-tags-design [hidden] {
+  display: none !important;
+}
+@media (max-width: 540px) {
+  #need-tags-design .nt-stage {
+    padding: 14px 0 24px;
+  }
+  #need-tags-design .nt-head {
+    padding: 22px 18px 18px;
+  }
+  #need-tags-design h2 {
+    font-size: 25px;
+  }
+  #need-tags-design .nt-search-wrap {
+    padding: 0 18px 18px;
+  }
+  #need-tags-design .nt-search input {
+    font-size: 16px;
+  }
+  #need-tags-design .nt-view-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  #need-tags-design .nt-view-label {
+    font-size: 11px;
+    color: var(--nt-muted);
+  }
+  #need-tags-design .nt-view-switch {
+    display: inline-flex;
+    gap: 3px;
+    background: var(--nt-wash);
+    border: 1px solid var(--nt-line);
+    padding: 3px;
+    border-radius: 9px;
+  }
+  #need-tags-design .nt-view-switch button {
+    font-size: 12px;
+    padding: 5px 11px;
+    border-radius: 6px;
+    background: transparent;
+    border: 0;
+    color: var(--nt-muted);
+  }
+  #need-tags-design .nt-view-switch button[aria-pressed='true'] {
+    background: var(--nt-surface);
+    color: var(--nt-ink);
+    box-shadow: 0 1px 4px var(--nt-shadow);
+  }
+  #need-tags-design .nt-flat-tags {
+    padding: 2px 0 18px 27px;
+  }
+  #need-tags-design .nt-browser {
+    padding: 7px 18px 14px;
+  }
+  #need-tags-design .nt-detail,
+  #need-tags-design .nt-selection {
+    padding: 14px 18px;
+  }
+  #need-tags-design .nt-footer {
+    padding: 15px 18px;
+  }
+  #need-tags-design .nt-branches {
+    padding-left: 13px;
+    margin-left: 7px;
+  }
+  #need-tags-design .nt-tags {
+    padding-left: 0;
+    gap: 7px;
+  }
+  #need-tags-design .nt-area-name {
+    font-size: 13px;
+  }
+  #need-tags-design .nt-tag {
+    font-size: 12px;
+  }
+  #need-tags-design .nt-footer-note {
+    max-width: 125px;
+  }
+}
+@media (pointer: coarse) {
+  #need-tags-design .nt-tag,
+  #need-tags-design .nt-remove,
+  #need-tags-design .nt-clear,
+  #need-tags-design .nt-view-switch button {
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #need-tags-design .nt-tag {
+    transition: none;
+  }
+}
+
+body {
+  margin: 0;
+}
+#need-tags-design .nt-widget {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: none;
+}
+#need-tags-design .nt-search-wrap {
+  padding: 12px 0 18px;
+}
+#need-tags-design .nt-browser {
+  padding-left: 0;
+  padding-right: 0;
+}
+#need-tags-design .nt-selection,
+#need-tags-design .nt-detail {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.nt-chevron {
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  margin: 0 9px 0 2px;
+  flex-shrink: 0;
+}
+.nt-chevron.open {
+  transform: rotate(45deg);
+}
+
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 4px 0 8px;
+        background: #fff;
+      }
+      #need-tags-design .nt-widget {
+        --nt-ink: #181814;
+        --nt-muted: #62655f;
+        --nt-accent: #007a4d;
+        --nt-line: #d8ddd8;
+        --nt-focus: #1557ff;
+        max-width: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        font-size: 16px;
+        overflow-wrap: anywhere;
+      }
+      #need-tags-design .nt-head {
+        padding: 0 0 24px;
+      }
+      #need-tags-design .nt-top {
+        margin-bottom: 8px;
+      }
+      #need-tags-design h2 {
+        font-size: 24px;
+        font-weight: 750;
+      }
+      #need-tags-design .nt-search-wrap {
+        padding: 0 0 20px;
+      }
+      #need-tags-design .nt-browser {
+        padding: 8px 0 16px;
+        border-top-color: var(--nt-ink);
+      }
+      #need-tags-design .nt-area-button {
+        min-height: 56px;
+        cursor: pointer;
+      }
+      #need-tags-design .nt-area-name {
+        font-weight: 650;
+      }
+      #need-tags-design .nt-tags {
+        padding: 0 0 16px;
+      }
+      #need-tags-design .nt-flat-tags {
+        padding-left: 27px;
+      }
+      #need-tags-design .nt-tag {
+        min-height: 44px;
+        cursor: pointer;
+      }
+      #need-tags-design .nt-tag[aria-expanded='true'] {
+        color: #fff;
+        background: var(--nt-accent);
+      }
+      #need-tags-design .nt-detail {
+        margin: 0 0 16px;
+        padding: 18px 20px;
+        border: 0;
+        border-left: 3px solid var(--nt-accent);
+      }
+      #need-tags-design .nt-detail-title {
+        font-size: 16px;
+        font-weight: 750;
+      }
+      #need-tags-design .nt-detail p {
+        font-size: 14px;
+        color: var(--nt-ink);
+      }
+      #need-tags-design .nt-detail ul {
+        font-size: 14px;
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+      #need-tags-design .nt-related {
+        margin-top: 12px;
+        color: var(--nt-muted);
+        font-size: 12px;
+      }
+      #need-tags-design .nt-sub {
+        font-size: 14px;
+      }
+      #need-tags-design .nt-view-label {
+        font-size: 12px;
+      }
+      #need-tags-design .nt-view-switch button {
+        min-height: 40px;
+        cursor: pointer;
+      }
+      #need-tags-design .nt-attribution {
+        border-top: 1px solid var(--nt-line);
+        padding-top: 16px;
+        font-size: 11px;
+        color: var(--nt-muted);
+      }
+      #need-tags-design .nt-empty {
+        font-size: 14px;
+        padding: 16px 0;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+      }
+      @media (max-width: 420px) {
+        #need-tags-design .nt-flat-tags {
+          padding-left: 0;
+        }
+        #need-tags-design .nt-branches {
+          padding-left: 0;
+        }
+        #need-tags-design .nt-view-row {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="need-tags-design">
+      <main class="nt-widget" id="needs-library">
+        <header class="nt-head">
+          <p class="nt-top">Words for what matters</p>
+          <h2>Explore needs</h2>
+          <p class="nt-sub">
+            Open a word to explore its meaning. No need to find one perfect label.
+          </p>
+        </header>
+        <div class="nt-search-wrap">
+          <label class="nt-search"
+            ><input type="search" aria-label="Search all needs" placeholder="Find a need…"
+          /></label>
+          <div class="nt-view-row">
+            <span class="nt-view-label"></span>
+            <div class="nt-view-switch" role="group" aria-label="View detail">
+              <button type="button" data-view="simple" aria-pressed="true">Simple</button>
+              <button type="button" data-view="detailed" aria-pressed="false">Detailed</button>
+            </div>
+          </div>
+        </div>
+        <div class="nt-browser"></div>
+        <p class="sr-only" role="status" aria-live="polite"></p>
+        <footer class="nt-attribution">
+          Vocabulary adapted from the CNVC Needs Inventory.<br />© 2005 Center for Nonviolent
+          Communication · www.cnvc.org · cnvc@cnvc.org · +1.505-244-4041.<br />Descriptions and
+          browsing groups by Patternverse. A reflective vocabulary, not an assessment.
+        </footer>
+      </main>
+    </div>
+    <script type="application/json" id="needs-data">
+      {"record_type":{"record":{"id":"text","kind":"text","label":"text","description":"text","parent_ids":{"list":"text"},"aliases":{"list":"text"},"recognition_cues":{"list":"text"},"source_terms":{"list":"text"}}},"records":[{"id":"area_body","kind":"category","label":"Body and physical well-being","description":"Resources and conditions that sustain the body.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_sustenance","kind":"category","label":"Basic sustenance","description":"What the body requires to stay nourished and sheltered.","parent_ids":["area_body"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"air","kind":"need","label":"Air","description":"Access to air that is safe and comfortable to breathe.","parent_ids":["group_sustenance"],"aliases":["breathing"],"recognition_cues":["I need to breathe more easily.","The air around me feels difficult to breathe."],"source_terms":["air"]},{"id":"food","kind":"need","label":"Food","description":"Enough nourishing food to sustain the body.","parent_ids":["group_sustenance"],"aliases":["nourishment","nutrition"],"recognition_cues":["I have not had enough to eat.","I need food that sustains me."],"source_terms":["food"]},{"id":"water","kind":"need","label":"Water","description":"Enough safe drinking water to stay hydrated.","parent_ids":["group_sustenance"],"aliases":["hydration"],"recognition_cues":["I need something to drink.","I have not been able to get enough water."],"source_terms":["water"]},{"id":"shelter","kind":"need","label":"Shelter","description":"A place that protects the body from exposure and supports everyday living.","parent_ids":["group_sustenance"],"aliases":["housing","a place to stay"],"recognition_cues":["I need somewhere protected to stay.","I need a place where I can live."],"source_terms":["shelter"]},{"id":"group_restoration","kind":"category","label":"Rest and recovery","description":"Pausing effort and restoring physical resources.","parent_ids":["area_body"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"sleep","kind":"need","label":"Sleep","description":"Enough restorative sleep for the body and mind.","parent_ids":["group_restoration"],"aliases":["restorative sleep"],"recognition_cues":["I need an uninterrupted night's sleep.","I am not getting enough sleep."],"source_terms":["rest/sleep"]},{"id":"rest","kind":"need","label":"Rest","description":"Relief from effort and demands, including while awake.","parent_ids":["group_restoration"],"aliases":["a break","recovery"],"recognition_cues":["I need to stop for a while.","I need time without another demand."],"source_terms":["rest/sleep"]},{"id":"group_embodiment","kind":"category","label":"Movement and bodily connection","description":"Opportunities for movement and wanted bodily connection.","parent_ids":["area_body"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"movement","kind":"need","label":"Movement","description":"Opportunities to move the body in ways that suit its abilities and condition.","parent_ids":["group_embodiment"],"aliases":["exercise","physical activity"],"recognition_cues":["My body needs some movement.","I need a change from staying still."],"source_terms":["movement/exercise"]},{"id":"touch","kind":"need","label":"Touch","description":"Physical contact that is wanted, comfortable, and freely agreed to.","parent_ids":["group_embodiment","group_care_and_closeness"],"aliases":["physical contact"],"recognition_cues":["I miss wanted physical contact.","I would like comforting touch that feels right to me."],"source_terms":["touch"]},{"id":"sexual_expression","kind":"need","label":"Sexual expression","description":"Room for wanted sexual experience or expression, with consent and respect for everyone involved.","parent_ids":["group_embodiment"],"aliases":["sexuality","sexual connection"],"recognition_cues":["I miss a part of my sexual life.","I want room for sexuality on terms that feel right to me."],"source_terms":["sexual expression"]},{"id":"area_safety","kind":"category","label":"Safety and stability","description":"Protection from harm and a dependable basis for living.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_protection","kind":"category","label":"Protection from harm","description":"Physical and relational conditions in which vulnerability can be protected.","parent_ids":["area_safety"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"physical_safety","kind":"need","label":"Physical safety","description":"Protection from physical harm and dangerous conditions.","parent_ids":["group_protection"],"aliases":["protection","bodily safety"],"recognition_cues":["I need protection from harm.","I cannot relax while there is a physical threat."],"source_terms":["safety"]},{"id":"emotional_safety","kind":"need","label":"Emotional safety","description":"Conditions in which feelings and vulnerability can be expressed without humiliation, intimidation, or retaliation.","parent_ids":["group_protection","group_care_and_closeness"],"aliases":["relational safety"],"recognition_cues":["I need to be able to speak without being humiliated.","I want to show uncertainty without being threatened."],"source_terms":["safety"]},{"id":"group_continuity","kind":"category","label":"Reliability and continuity","description":"Enough steadiness to make plans and depend on what matters.","parent_ids":["area_safety"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"stability","kind":"need","label":"Stability","description":"Continuity in important living conditions, resources, or relationships.","parent_ids":["group_continuity"],"aliases":["security","steadiness"],"recognition_cues":["Too many foundations of my life are shifting.","I need something dependable to build on."],"source_terms":["stability","security"]},{"id":"predictability","kind":"need","label":"Predictability","description":"Enough consistency and information to anticipate what is likely to happen.","parent_ids":["group_continuity"],"aliases":["consistency","reliability"],"recognition_cues":["I need a clearer sense of what to expect.","The constant changes are hard to plan around."],"source_terms":["consistency"]},{"id":"trust","kind":"need","label":"Trust","description":"Confidence that another person or arrangement is sufficiently honest, reliable, and considerate.","parent_ids":["group_continuity","group_care_and_closeness"],"aliases":["dependability"],"recognition_cues":["I need to know whether I can rely on this.","I want agreements that are followed through."],"source_terms":["trust"]},{"id":"group_dignity_and_fairness","kind":"category","label":"Dignity and fair treatment","description":"Conditions in which people receive respect and equitable consideration.","parent_ids":["area_safety"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"respect","kind":"need","label":"Respect","description":"Being treated by others as a person whose dignity, perspective, and boundaries deserve consideration.","parent_ids":["group_dignity_and_fairness","group_care_and_closeness"],"aliases":["being treated with dignity","consideration"],"recognition_cues":["I need to be treated with basic respect.","I want my boundaries and perspective to count."],"source_terms":["respect/self-respect","consideration"]},{"id":"fairness","kind":"need","label":"Fairness","description":"Equitable consideration of people and their circumstances in access, decisions, and treatment.","parent_ids":["group_dignity_and_fairness","group_participation"],"aliases":["fair treatment","equitable consideration"],"recognition_cues":["I need a fair share of consideration.","I want decisions to take our different circumstances into account."],"source_terms":["equality"]},{"id":"area_connection","kind":"category","label":"Connection and belonging","description":"Being with others in ways that offer recognition, care, and mutual involvement.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_belonging","kind":"category","label":"Having a place with others","description":"Being welcomed into relationships and shared life.","parent_ids":["area_connection"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"belonging","kind":"need","label":"Belonging","description":"A felt sense of having a place among other people.","parent_ids":["group_belonging"],"aliases":["a sense of home","fitting in"],"recognition_cues":["I want to feel that I have a place here.","I miss being part of something with others."],"source_terms":["belonging"]},{"id":"acceptance","kind":"need","label":"Acceptance","description":"Being received as a person without having to hide or earn basic welcome.","parent_ids":["group_belonging"],"aliases":["being accepted"],"recognition_cues":["I want to be welcome as I am.","I need room for parts of me that feel hard to show."],"source_terms":["acceptance"]},{"id":"inclusion","kind":"need","label":"Inclusion and participation","description":"Having access to shared spaces, activities, and decisions, with opportunities to take an active part and influence what happens.","parent_ids":["group_belonging","group_participation"],"aliases":["being included","access","participation","involvement","having a part"],"recognition_cues":["I want to be included in what is happening.","I need a way to take part and influence what we do together."],"source_terms":["inclusion","participation"]},{"id":"companionship","kind":"need","label":"Companionship","description":"Having company and shared everyday experience.","parent_ids":["group_belonging"],"aliases":["company","togetherness"],"recognition_cues":["I miss having someone alongside me.","I would like company in ordinary moments."],"source_terms":["companionship"]},{"id":"community","kind":"need","label":"Community","description":"Connection with a wider network of people who share involvement and mutual concern.","parent_ids":["group_belonging"],"aliases":["shared life","social connection"],"recognition_cues":["I miss a wider circle of people.","I want relationships that connect me to a community."],"source_terms":["community"]},{"id":"group_being_understood","kind":"category","label":"Being understood","description":"Having one's experience noticed, heard, and met with understanding.","parent_ids":["area_connection"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"empathy","kind":"need","label":"Empathy","description":"Having feelings and experience met with an effort to understand them from one's own perspective.","parent_ids":["group_being_understood"],"aliases":["being understood","empathic understanding"],"recognition_cues":["I want someone to understand what this is like for me.","I need understanding before advice."],"source_terms":["empathy","to understand and be understood"]},{"id":"being_heard","kind":"need","label":"Being heard","description":"Having attention given to what one is trying to communicate.","parent_ids":["group_being_understood"],"aliases":["listening","having a voice"],"recognition_cues":["I need someone to listen to what I am saying.","I want my perspective to be taken in."],"source_terms":["communication"]},{"id":"being_seen","kind":"need","label":"Being seen and known","description":"Being recognized as a particular person with a life and experience of one's own.","parent_ids":["group_being_understood"],"aliases":["recognition","being known"],"recognition_cues":["I want someone to notice what I am carrying.","I miss being known beyond the role I fill."],"source_terms":["to see and be seen","to know and be known"]},{"id":"group_care_and_closeness","kind":"category","label":"Care and closeness","description":"Giving and receiving warmth, practical care, and close connection.","parent_ids":["area_connection"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"affection","kind":"need","label":"Affection","description":"Expressions of warmth and fondness that feel welcome.","parent_ids":["group_care_and_closeness"],"aliases":["warmth","tenderness"],"recognition_cues":["I miss warmth between us.","I want affection that feels natural and welcome."],"source_terms":["affection","warmth"]},{"id":"intimacy","kind":"need","label":"Intimacy","description":"Mutually wanted closeness in which something personal can be shared and received.","parent_ids":["group_care_and_closeness"],"aliases":["closeness","emotional intimacy"],"recognition_cues":["I miss feeling close enough to share something personal.","I want a deeper connection that we both welcome."],"source_terms":["intimacy","closeness"]},{"id":"care","kind":"need","label":"Care","description":"Having well-being matter enough to receive attention and nurturing.","parent_ids":["group_care_and_closeness"],"aliases":["nurturing","compassion","caring attention"],"recognition_cues":["I need gentleness with what I am going through.","I want my well-being to matter in how I am treated."],"source_terms":["nurturing","compassion","love"]},{"id":"support","kind":"need","label":"Support","description":"Help, encouragement, or shared effort when a burden is difficult to carry alone.","parent_ids":["group_care_and_closeness","group_continuity"],"aliases":["help","assistance","encouragement"],"recognition_cues":["I need help carrying this.","I want someone in my corner while I try."],"source_terms":["support"]},{"id":"reciprocity","kind":"need","label":"Reciprocity","description":"A relationship in which giving, receiving, and consideration can move in both directions.","parent_ids":["group_care_and_closeness"],"aliases":["mutuality","give and take"],"recognition_cues":["I need care to flow both ways.","I want my needs considered alongside theirs."],"source_terms":["mutuality","consideration"]},{"id":"area_autonomy","kind":"category","label":"Autonomy and freedom","description":"Having a meaningful say in one's life, actions, and personal space.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_agency","kind":"category","label":"Choice and agency","description":"Being able to influence decisions and act with voluntary participation.","parent_ids":["area_autonomy"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"choice","kind":"need","label":"Choice","description":"Having meaningful options and a say in decisions, including being able to agree, decline, or change one's mind without coercion.","parent_ids":["group_agency"],"aliases":["agency","self-direction","consent","voluntary participation","the ability to say no"],"recognition_cues":["I need a real say in this decision.","I need to be able to say no or change my mind without being pressured."],"source_terms":["choice"]},{"id":"freedom","kind":"need","label":"Freedom","description":"Room to act and live without unnecessary external restrictions on movement, activity, or ways of living.","parent_ids":["group_agency"],"aliases":["liberty","freedom from restriction"],"recognition_cues":["I need room to live and move without unnecessary restrictions.","I want fewer external barriers to the life I want to lead."],"source_terms":["freedom"]},{"id":"independence","kind":"need","label":"Independence","description":"Being able to act and manage aspects of life without unwanted dependence or control.","parent_ids":["group_agency"],"aliases":["self-reliance"],"recognition_cues":["I want to do more of this on my own terms.","I need less dependence on someone else's permission."],"source_terms":["independence"]},{"id":"group_personal_room","kind":"category","label":"Personal space and flexibility","description":"Room for boundaries, time alone, and unplanned action.","parent_ids":["area_autonomy"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"privacy","kind":"need","label":"Privacy","description":"Control over access to personal information, experiences, and parts of one's life.","parent_ids":["group_personal_room"],"aliases":["confidentiality","personal boundaries"],"recognition_cues":["I need some things to remain private.","I want a say in who knows this about me."],"source_terms":[]},{"id":"personal_space","kind":"need","label":"Personal space","description":"Enough physical or psychological room to maintain comfortable boundaries.","parent_ids":["group_personal_room"],"aliases":["space","breathing room"],"recognition_cues":["I need more room around me.","I need some distance from other people's demands."],"source_terms":["space"]},{"id":"solitude","kind":"need","label":"Solitude","description":"Time in one's own company, without an obligation to interact.","parent_ids":["group_personal_room"],"aliases":["time alone","alone time"],"recognition_cues":["I need some time by myself.","I want a pause from social interaction."],"source_terms":[]},{"id":"spontaneity","kind":"need","label":"Spontaneity","description":"Room to respond to the moment without everything being planned or prescribed.","parent_ids":["group_personal_room"],"aliases":["flexibility","unplanned time"],"recognition_cues":["I want space for something unplanned.","I need room to follow an impulse that matters to me."],"source_terms":["spontaneity"]},{"id":"area_authenticity","kind":"category","label":"Authenticity and expression","description":"Living and communicating in a way that fits one's experience and values.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_congruence","kind":"category","label":"Being true to oneself","description":"Alignment between experience, values, and action.","parent_ids":["area_authenticity"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"authenticity","kind":"need","label":"Authenticity","description":"Room to be and act as oneself rather than maintain an unwanted performance.","parent_ids":["group_congruence"],"aliases":["being myself","genuineness"],"recognition_cues":["I want to stop pretending to be someone else.","I need room for how I actually feel."],"source_terms":["authenticity"]},{"id":"integrity","kind":"need","label":"Integrity","description":"Acting in ways one can stand behind in relation to one's values and commitments.","parent_ids":["group_congruence"],"aliases":["alignment","living my values"],"recognition_cues":["I want my actions to fit what I believe matters.","I need to be able to stand behind this choice."],"source_terms":["integrity"]},{"id":"self_respect","kind":"need","label":"Self-respect","description":"Treating oneself as someone whose dignity and boundaries matter.","parent_ids":["group_congruence"],"aliases":["self-regard","respecting myself"],"recognition_cues":["I want to act in a way that respects me too.","I need to take my own boundaries seriously."],"source_terms":["respect/self-respect"]},{"id":"group_expression","kind":"category","label":"Speaking and expressing","description":"Making one's experience available through words or other forms.","parent_ids":["area_authenticity"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"self_expression","kind":"need","label":"Self-expression","description":"Opportunities to give form to ideas, feelings, identity, or experience.","parent_ids":["group_expression","group_exploration"],"aliases":["expression","expressing myself"],"recognition_cues":["I have something in me that needs expression.","I want a way to communicate what words alone do not capture."],"source_terms":["self-expression"]},{"id":"honesty","kind":"need","label":"Honesty","description":"Communication that can be truthful about relevant experience, intentions, and circumstances.","parent_ids":["group_expression"],"aliases":["openness","truthfulness"],"recognition_cues":["I need a more truthful conversation.","I want to know where we actually stand."],"source_terms":["honesty"]},{"id":"area_understanding_and_growth","kind":"category","label":"Understanding and growth","description":"Making sense of experience, developing capabilities, and exploring possibilities.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_orientation","kind":"category","label":"Making sense of things","description":"Enough attention and understanding to orient oneself.","parent_ids":["area_understanding_and_growth"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"clarity","kind":"need","label":"Clarity","description":"Information and communication that are specific and unambiguous enough to know what is happening, meant, or expected.","parent_ids":["group_orientation"],"aliases":["clear information","orientation"],"recognition_cues":["I need to know exactly what is being asked.","I need clearer information about what happens next."],"source_terms":["clarity"]},{"id":"understanding","kind":"need","label":"Understanding","description":"Making sense of how or why something works, happens, or connects with other experience.","parent_ids":["group_orientation"],"aliases":["comprehension","making sense"],"recognition_cues":["I know what happened, but I want to understand why.","I need an explanation of how the parts fit together."],"source_terms":["understanding"]},{"id":"awareness","kind":"need","label":"Awareness and presence","description":"Enough contact with the present experience to notice what is happening within and around oneself.","parent_ids":["group_orientation"],"aliases":["presence","consciousness","attention"],"recognition_cues":["I need time to notice what is happening in me.","I want to be more present for this experience."],"source_terms":["awareness","presence","consciousness"]},{"id":"group_capability","kind":"category","label":"Learning and capability","description":"Developing and using abilities in ways that make a difference.","parent_ids":["area_understanding_and_growth"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"learning","kind":"need","label":"Learning and growth","description":"Opportunities to develop new understanding, skills, or ways of responding over time.","parent_ids":["group_capability"],"aliases":["growth","development"],"recognition_cues":["I want opportunities to keep learning.","I need room to develop beyond what I can already do."],"source_terms":["learning","growth"]},{"id":"competence","kind":"need","label":"Competence","description":"Having and being able to use the abilities needed to engage with something that matters.","parent_ids":["group_capability"],"aliases":["mastery","capability"],"recognition_cues":["I need to feel capable of handling what this situation asks of me.","I want to be able to use my abilities successfully."],"source_terms":["competence"]},{"id":"challenge","kind":"need","label":"Challenge","description":"Engagement that stretches one's abilities at a meaningful and workable level.","parent_ids":["group_capability"],"aliases":["stretch","engagement"],"recognition_cues":["I want something that stretches me.","I need more than repeating what I already know."],"source_terms":["challenge"]},{"id":"effectiveness","kind":"need","label":"Effectiveness","description":"Being able to influence outcomes through one's efforts.","parent_ids":["group_capability"],"aliases":["efficacy","impact"],"recognition_cues":["I need my effort to make a difference.","I want a way to influence what happens next."],"source_terms":["efficacy","effectiveness"]},{"id":"group_exploration","kind":"category","label":"Discovery and invention","description":"Encountering possibilities and creating something new.","parent_ids":["area_understanding_and_growth"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"discovery","kind":"need","label":"Discovery","description":"Opportunities to encounter and explore something not yet known.","parent_ids":["group_exploration"],"aliases":["curiosity","exploration"],"recognition_cues":["I want to explore something unfamiliar.","I need room to follow my curiosity."],"source_terms":["discovery"]},{"id":"creativity","kind":"need","label":"Creativity","description":"Room to imagine, combine, and make things in new or personally meaningful ways.","parent_ids":["group_exploration"],"aliases":["invention","making"],"recognition_cues":["I want space to make something my own.","I need room to try a different approach."],"source_terms":["creativity"]},{"id":"stimulation","kind":"need","label":"Stimulation","description":"Enough interest, variety, or sensory and intellectual engagement.","parent_ids":["group_exploration"],"aliases":["variety","interest"],"recognition_cues":["I need something that engages my attention.","I miss variety in what I encounter."],"source_terms":["stimulation"]},{"id":"area_meaning","kind":"category","label":"Meaning and contribution","description":"A sense of significance, direction, and participation in what matters.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_direction","kind":"category","label":"Direction and significance","description":"Having reasons to engage and a sense that one's life matters.","parent_ids":["area_meaning"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"purpose","kind":"need","label":"Purpose","description":"A sense of direction connected to something worth pursuing.","parent_ids":["group_direction"],"aliases":["meaning","direction"],"recognition_cues":["I want a clearer sense of what this is for.","I need a direction that matters to me."],"source_terms":["purpose"]},{"id":"hope","kind":"need","label":"Hope","description":"A sense that worthwhile possibilities remain open.","parent_ids":["group_direction"],"aliases":["possibility","a future to look toward"],"recognition_cues":["I need something worthwhile to look toward.","I want to see possibilities beyond the present difficulty."],"source_terms":["hope"]},{"id":"mattering","kind":"need","label":"Mattering","description":"A sense that one's existence and experience have significance.","parent_ids":["group_direction"],"aliases":["to matter","significance"],"recognition_cues":["I want to feel that my presence matters.","I need my experience to count for something."],"source_terms":["to matter"]},{"id":"group_participation","kind":"category","label":"Taking part and contributing","description":"Being involved in shared activity with dignity and influence.","parent_ids":["area_meaning"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"contribution","kind":"need","label":"Contribution","description":"Opportunities to give something that supports life, people, or a valued undertaking.","parent_ids":["group_participation"],"aliases":["service","making a contribution"],"recognition_cues":["I want something I can offer to be useful.","I need a way to contribute to what matters to me."],"source_terms":["contribution"]},{"id":"cooperation","kind":"need","label":"Cooperation","description":"Working with others toward something shared, with enough coordination and mutual consideration.","parent_ids":["group_participation"],"aliases":["collaboration","teamwork"],"recognition_cues":["I want us to work with each other.","I need shared effort rather than carrying separate struggles."],"source_terms":["cooperation"]},{"id":"appreciation","kind":"need","label":"Appreciation","description":"Having effort, qualities, or contributions noticed and valued.","parent_ids":["group_participation","group_being_understood"],"aliases":["acknowledgment","being valued"],"recognition_cues":["I want the effort I put in to be noticed.","I need acknowledgment of what I have contributed."],"source_terms":["appreciation"]},{"id":"group_life_events","kind":"category","label":"Making room for life events","description":"Acknowledging what has mattered through joy, change, and loss.","parent_ids":["area_meaning"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"celebration","kind":"need","label":"Celebration","description":"Room to recognize and enjoy something valued, achieved, or received.","parent_ids":["group_life_events"],"aliases":["celebration of life","marking milestones"],"recognition_cues":["I want to pause and recognize this good thing.","I need room to enjoy what we have accomplished."],"source_terms":["celebration of life"]},{"id":"mourning","kind":"need","label":"Mourning","description":"Time and space to acknowledge loss and its significance.","parent_ids":["group_life_events"],"aliases":["grieving","grief"],"recognition_cues":["I need room for what I have lost.","I do not want to move on before acknowledging what mattered."],"source_terms":["mourning"]},{"id":"area_play_and_harmony","kind":"category","label":"Play, beauty, and harmony","description":"Enjoyment, renewal, and a sense of fit with one's surroundings.","parent_ids":[],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"group_playfulness","kind":"category","label":"Play and enjoyment","description":"Engaging with pleasure and lightness without needing every moment to be productive.","parent_ids":["area_play_and_harmony"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"play","kind":"need","label":"Play","description":"Room for freely engaging, experimenting, or enjoying an activity for its own sake.","parent_ids":["group_playfulness"],"aliases":["playfulness","fun"],"recognition_cues":["I want time that does not have to achieve something.","I need room to play and experiment."],"source_terms":["play"]},{"id":"joy","kind":"need","label":"Joy","description":"Opportunities to experience and share delight and pleasure.","parent_ids":["group_playfulness"],"aliases":["delight","enjoyment"],"recognition_cues":["I miss moments of delight.","I want room to enjoy being alive."],"source_terms":["joy"]},{"id":"humor","kind":"need","label":"Humor","description":"Room for laughter, lightness, and a playful view of experience.","parent_ids":["group_playfulness"],"aliases":["laughter","lightheartedness"],"recognition_cues":["I need some lightness in the middle of this.","I miss being able to laugh together."],"source_terms":["humor"]},{"id":"group_harmony","kind":"category","label":"Ease and peaceful surroundings","description":"Conditions that allow less strain, friction, and competing demand.","parent_ids":["area_play_and_harmony"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"peace","kind":"need","label":"Peace","description":"Conditions with less conflict, threat, or disturbance.","parent_ids":["group_harmony"],"aliases":["calm","tranquility"],"recognition_cues":["I need a stretch without conflict.","I want quieter conditions in which to settle."],"source_terms":["peace","harmony"]},{"id":"ease","kind":"need","label":"Ease","description":"Being able to engage or rest without excessive strain and friction.","parent_ids":["group_harmony"],"aliases":["relief","comfort"],"recognition_cues":["I need this to take less effort.","I want a little more ease in my day."],"source_terms":["ease"]},{"id":"order","kind":"need","label":"Order","description":"Enough organization and coherence to navigate one's surroundings and activities.","parent_ids":["group_harmony"],"aliases":["structure","organization"],"recognition_cues":["I need things arranged so I can find my way.","I want enough structure to reduce unnecessary confusion."],"source_terms":["order"]},{"id":"group_beauty_and_connection","kind":"category","label":"Beauty and wider connection","description":"Encountering beauty, inspiration, and connection beyond immediate tasks.","parent_ids":["area_play_and_harmony"],"aliases":[],"recognition_cues":[],"source_terms":[]},{"id":"beauty","kind":"need","label":"Beauty","description":"Contact with qualities of form, sound, movement, or experience that feel beautiful.","parent_ids":["group_beauty_and_connection"],"aliases":["aesthetic experience"],"recognition_cues":["I miss being around things I find beautiful.","I want beauty in the spaces I inhabit."],"source_terms":["beauty"]},{"id":"inspiration","kind":"need","label":"Inspiration","description":"Contact with something that opens imagination, energy, or a sense of possibility.","parent_ids":["group_beauty_and_connection"],"aliases":["being inspired"],"recognition_cues":["I need something that sparks my imagination.","I miss contact with what moves me."],"source_terms":["inspiration"]},{"id":"communion","kind":"need","label":"Connection with something larger","description":"A sense of participation in a wider whole, such as nature, humanity, life, or a spiritual tradition.","parent_ids":["group_beauty_and_connection","group_belonging"],"aliases":["communion","spiritual connection","connection with nature"],"recognition_cues":["I want to feel connected beyond my immediate concerns.","I miss a sense of belonging to a larger whole."],"source_terms":["communion"]}]}
+    </script>
+    <script type="application/json" id="needs-starters">
+      {"area_body":["rest","food","movement"],"area_safety":["physical_safety","stability","trust"],"area_connection":["belonging","empathy","care"],"area_autonomy":["choice","independence","personal_space"],"area_authenticity":["authenticity","self_expression","self_respect"],"area_understanding_and_growth":["clarity","learning","competence"],"area_meaning":["purpose","contribution","appreciation"],"area_play_and_harmony":["play","ease","beauty"]}
+    </script>
+    <script>
+      (() => {
+        const { records } = JSON.parse(document.getElementById('needs-data').textContent);
+        const starters = JSON.parse(document.getElementById('needs-starters').textContent);
+        const root = document.getElementById('needs-library');
+        const needs = records.filter((r) => r.kind === 'need');
+        const areas = records.filter((r) => r.kind === 'category' && !r.parent_ids.length);
+        const expanded = new Set([areas[0].id]);
+        let view = 'simple',
+          query = '',
+          detail = null;
+        const esc = (s) =>
+          String(s).replace(
+            /[&<>"']/g,
+            (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
+          );
+        const groups = (area) =>
+          records.filter((r) => r.kind === 'category' && r.parent_ids.includes(area));
+        const members = (group) => needs.filter((n) => n.parent_ids.includes(group));
+        const meaning = (entries, key) => {
+          const n = entries.find((n) => n.id === detail);
+          if (!n) return '';
+          return `<section class="nt-detail" id="meaning-${key}" aria-label="${esc(n.label)} meaning"><h3 class="nt-detail-title">${esc(n.label)}</h3><p>${esc(n.description)}</p><p class="nt-related">Possible ways someone might express this:</p><ul>${n.recognition_cues.map((cue) => `<li>${esc(cue)}</li>`).join('')}</ul>${n.aliases.length ? `<p class="nt-related">Related search terms: ${n.aliases.map(esc).join(' · ')}. These are not necessarily synonyms.</p>` : ''}</section>`;
+        };
+        const tags = (entries, key) =>
+          `<div class="nt-tags">${entries.map((n) => `<button type="button" class="nt-tag" data-need="${esc(n.id)}" data-key="${key}" aria-expanded="${n.id === detail}"${n.id === detail ? ` aria-controls="meaning-${key}"` : ''}><span>${esc(n.label)}</span><span aria-hidden="true">${n.id === detail ? '−' : '+'}</span></button>`).join('')}</div>${meaning(entries, key)}`;
+        function render() {
+          const active = root.contains(document.activeElement) ? document.activeElement : null;
+          const focusId = active?.dataset.need || active?.dataset.area;
+          const focusKey = active?.dataset.key;
+          root
+            .querySelectorAll('[data-view]')
+            .forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+          const q = query.trim().toLocaleLowerCase();
+          let html;
+          if (q) {
+            const matches = needs.filter((n) =>
+              [n.label, n.description, ...n.aliases, ...n.recognition_cues]
+                .join(' ')
+                .toLocaleLowerCase()
+                .includes(q),
+            );
+            root.querySelector('.nt-view-label').textContent =
+              `${matches.length} of ${needs.length} needs`;
+            html = matches.length
+              ? tags(matches, 'search')
+              : '<p class="nt-empty">No matching needs. Try another word, or use your own wording in the practice.</p>';
+          } else {
+            root.querySelector('.nt-view-label').textContent =
+              view === 'simple'
+                ? `${Object.values(starters).flat().length} starting words · 8 areas`
+                : `All ${needs.length} needs · 8 areas`;
+            html = areas
+              .map((area) => {
+                const subgroups = groups(area.id);
+                const entries =
+                  view === 'simple'
+                    ? starters[area.id].map((id) => needs.find((n) => n.id === id))
+                    : needs.filter((n) => subgroups.some((g) => n.parent_ids.includes(g.id)));
+                const open = expanded.has(area.id);
+                return `<section class="nt-area"><button type="button" class="nt-area-button" data-area="${area.id}" aria-expanded="${open}" aria-controls="children-${area.id}"><span class="nt-chevron ${open ? 'open' : ''}" aria-hidden="true"></span><span class="nt-area-name">${esc(area.label)}</span><span class="nt-area-total">${entries.length}</span></button>${open ? `<div id="children-${area.id}">${view === 'simple' ? `<div class="nt-flat-tags">${tags(entries, area.id)}</div>` : `<div class="nt-branches">${subgroups.map((g) => `<section class="nt-group"><h3 class="nt-group-heading">${esc(g.label)}</h3>${tags(members(g.id), g.id)}</section>`).join('')}</div>`}</div>` : `<div id="children-${area.id}" hidden></div>`}</section>`;
+              })
+              .join('');
+          }
+          root.querySelector('.nt-browser').innerHTML = html;
+          if (focusId) {
+            const targets = [...root.querySelectorAll('[data-need], [data-area]')];
+            const target = targets.find(
+              (b) => (b.dataset.need || b.dataset.area) === focusId && b.dataset.key === focusKey,
+            );
+            (target || root.querySelector('input')).focus({ preventScroll: true });
+          }
+        }
+        root.querySelector('input').addEventListener('input', (e) => {
+          query = e.target.value;
+          render();
+          root.querySelector('[role="status"]').textContent =
+            root.querySelector('.nt-view-label').textContent;
+        });
+        root.addEventListener('click', (e) => {
+          const button = e.target.closest('button');
+          if (!button) return;
+          const d = button.dataset;
+          if (d.view) view = d.view;
+          else if (d.area) expanded.has(d.area) ? expanded.delete(d.area) : expanded.add(d.area);
+          else if (d.need) detail = detail === d.need ? null : d.need;
+          render();
+        });
+        render();
+      })();
+    </script>
+  </body>
+</html>

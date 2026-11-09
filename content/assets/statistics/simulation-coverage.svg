@@ -1,0 +1,34 @@
+<svg width="720" height="530" preserveAspectRatio="xMinYMin meet" viewBox="0 0 720 530" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Coverage with Monte Carlo uncertainty</title><desc>The correct known-SE interval covers 1892 of 2000 datasets, 94.60 percent, MCSE 0.51 percentage points. Halving SE covers 1347, 67.35 percent, MCSE 1.05 points. Bars show approximate Monte Carlo 95 percent ranges. Seed 20261025.</desc>
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="720" height="530"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-530)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="720" height="530" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,98%,96%); fill-rule: evenodd;"/>
+			<text x="30" y="495" style="font-family: Helvetica-Bold; font-size: 25px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,990) scale(1,-1)">Check coverage against a known answer</text>
+			<text x="30" y="452.0" style="font-family: Helvetica; font-size: 15px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,904) scale(1,-1)">2,000 Normal datasets; n = 16; true mean 10; known sigma 4.</text>
+			<path d="M 55,190 L 55,400" style="stroke: rgb(87%,87%,83%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="47.772" y="167" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,334) scale(1,-1)">60</text>
+			<path d="M 213.75,190 L 213.75,400" style="stroke: rgb(87%,87%,83%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="206.52199999999996" y="167" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,334) scale(1,-1)">70</text>
+			<path d="M 372.5,190 L 372.5,400" style="stroke: rgb(87%,87%,83%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="365.27200000000005" y="167" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,334) scale(1,-1)">80</text>
+			<path d="M 531.25,190 L 531.25,400" style="stroke: rgb(87%,87%,83%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="524.022" y="167" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,334) scale(1,-1)">90</text>
+			<path d="M 690,190 L 690,400" style="stroke: rgb(87%,87%,83%); stroke-linecap: butt; stroke-width: 0.7;"/>
+			<text x="679.158" y="167" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,334) scale(1,-1)">100</text>
+			<path d="M 610.625,190 L 610.625,400" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 1.5; stroke-dasharray: 4, 4;"/>
+			<text x="55" y="377" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,754) scale(1,-1)">Correct SE: 94.60%</text>
+			<path d="M 588.55005,345 L 619.99995,345" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="604.275" cy="345" r="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="55" y="262" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,524) scale(1,-1)">Half SE: 67.35%</text>
+			<path d="M 139.055747,230 L 204.306753,230" style="stroke: rgb(40%,40%,36%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="171.68125000000003" cy="230" r="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(40%,40%,36%); fill-rule: evenodd;"/>
+			<text x="306.531" y="139" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,278) scale(1,-1)">Coverage, percent</text>
+			<text x="30" y="96" style="font-family: Helvetica; font-size: 15px;fill: rgb(44%,34%,72%); stroke:none;" transform="translate(0,192) scale(1,-1)">Dashed: nominal 95% coverage</text>
+			<text x="30" y="65" style="font-family: Helvetica; font-size: 14px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,130) scale(1,-1)">Bars: approximate 95% Monte Carlo ranges. More replications refine the check, not the dataset.</text>
+		</g>
+	</g>
+</svg>

@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "behavioral"
   - "template-method"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 Several importers perform the same sequence: open a source, read records, normalize them, validate them, write the result, and close resources. CSV and line-oriented text differ mainly in how records are read. Copying the entire workflow into each importer means every validation or cleanup fix must be repeated.
 
+## Core idea
+
 Template Method puts the stable sequence in a base implementation and exposes selected steps for subclasses to customize. The template operation controls the overall algorithm. Specialized methods provide the parts that genuinely vary.
 
-![The base importer owns step order. A format-specific override supplies reading while shared validation and cleanup stay in the workflow.](/diagrams/gof/template-method.svg "The base importer owns step order. A format-specific override supplies reading while shared validation and cleanup stay in the workflow.")
+![Importer.run fixes the order: read records, normalize, validate, and return. LineImporter and SemicolonImporter customize only reading. Both formats receive the same normalization and validation.](../assets/software-engineering/gof/template-method.svg "The base run method owns this sequence. Subclasses customize reading without copying the later checks.")
 
-### A fixed skeleton with deliberate openings
+## How it works
 
 A base Importer might implement run and call read_records, normalize, validate, and write_result in a defined order. Some steps have a shared implementation. Others are abstract or overridable. Optional hooks can support behavior at specific points without requiring every subclass to implement them.
 
 The inversion of control is important: the base algorithm calls the extension, rather than the extension reconstructing the algorithm. This lets a framework preserve invariants such as validation before writing and cleanup after either success or failure.
 
 Whether the language can prevent overriding the template operation varies. A design may use a final method, a non-overridable boundary, or a documented convention. The invariant sequence needs a clear enforcement model rather than an assumption that subclasses will always behave.
+
+## Worked example
 
 ### Importers that share correctness work
 
@@ -38,6 +43,45 @@ Resource cleanup needs to surround the workflow correctly. If read_records raise
 
 The step interface should also avoid hidden prerequisites. If normalize expects a subclass to set an internal field while reading, that dependency should be explicit. Passing records and returning normalized values can be clearer than relying on ambient mutable state between hooks.
 
+### A small implementation
+
+The base importer owns the sequence and the shared validation. Subclasses supply how records are read. Both are in-memory formats here, allowing the code to focus on the template without inventing a file lifecycle.
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Importer(ABC):
+    def run(self, text):
+        records = self.read_records(text)
+        normalized = [record.strip() for record in records]
+        if any(not record for record in normalized):
+            raise ValueError("Empty records are not allowed")
+        return normalized
+
+    @abstractmethod
+    def read_records(self, text):
+        pass
+
+
+class LineImporter(Importer):
+    def read_records(self, text):
+        return text.splitlines()
+
+
+class SemicolonImporter(Importer):
+    def read_records(self, text):
+        return text.split(";")
+
+
+print(LineImporter().run(" Alpha\nBeta "))
+print(SemicolonImporter().run(" Alpha;Beta "))
+# ['Alpha', 'Beta']
+# ['Alpha', 'Beta']
+```
+
+Neither subclass repeats normalization or validation. The semicolon example is a deliberately tiny format, not a CSV parser. When imports use resources, the base workflow also needs a defined cleanup path on exceptions. Overriding the entire run method would bypass the shared sequence.
+
 ### A test harness with constrained variation
 
 A performance harness prepares an environment, runs a workload, records measurements, and tears the environment down. Different benchmark subclasses supply setup details and the workload, while the base harness owns measurement boundaries and reporting.
@@ -48,7 +92,14 @@ Yet the skeleton must fit the benchmark family. If one benchmark needs repeated 
 
 The useful shared sequence is discovered from real commonality. It should not be imposed merely because several operations can be described with generic words such as prepare, run, and finish.
 
-### Inheritance creates obligations
+## When to use it
+
+- Several processes share an invariant sequence with specific variation points.
+- An inheritance-based framework needs constrained extension hooks.
+
+Consider a simpler design when runtime composition fits the variation better than inheritance, or when subclasses must frequently bypass the fixed sequence.
+
+## Tradeoffs and common mistakes
 
 Template Method is useful in frameworks where subclassing is already an intentional extension mechanism and the process order is part of correctness. It can reduce duplication and give users a limited, understandable set of customization points.
 
@@ -60,40 +111,14 @@ Another risk is an override that calls the base operation only under some condit
 
 Runtime variation is awkward when it requires changing an object's subclass. Composition can be a better fit when a user selects a parser or validator dynamically, or when several independent steps need interchangeable policies.
 
-### Neighboring designs
-
-Factory Method often appears as a step within a template: the base workflow creates a collaborator through an overridable method. Factory Method focuses on object creation, while Template Method focuses on the overall sequence.
-
-Strategy moves interchangeable behavior into a collaborator and can replace it through composition. Template Method customizes inherited behavior. A hybrid can keep a stable process while injecting a parser strategy, avoiding a subclass for every independent combination.
-
-State delegates according to a lifecycle condition rather than using a fixed inherited algorithm skeleton. Both can organize conditional behavior, but they expose different forms of variation.
-
-Template Method earns its place when the sequence is stable, meaningful, and worth protecting. The extension points should be few enough to explain and explicit enough that a subclass can implement them without understanding the base class's private machinery.
-
-## Pattern details
-
-**Category:** Behavioral · **Difficulty:** Intermediate
-
-### Use when
-
-- Several processes share an invariant sequence with specific variation points
-- An inheritance-based framework needs constrained extension hooks
-
-### Not ideal when
-
-- Runtime composition fits the variation better than inheritance
-- Subclasses must frequently bypass the fixed sequence
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
 ## Related patterns
 
-[[factory-method|Factory Method]] · [[strategy|Strategy]] · [[state|State]]
+[[factory-method|Factory Method]] often appears as a step within a template: the base workflow creates a collaborator through an overridable method. Factory Method focuses on object creation, while Template Method focuses on the overall sequence.
 
-## Source
+[[strategy|Strategy]] moves interchangeable behavior into a collaborator and can replace it through composition. Template Method customizes inherited behavior. A hybrid can keep a stable process while injecting a parser strategy, avoiding a subclass for every independent combination.
 
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
+[[state|State]] delegates according to a lifecycle condition rather than using a fixed inherited algorithm skeleton. Both can organize conditional behavior, but they expose different forms of variation.
 
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+## Sources
+
+Template Method is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

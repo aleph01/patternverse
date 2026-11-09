@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Adversarial training neighborhood explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      #fits-table,
+      #data-table {
+        font-size: 13px;
+      }
+      #fits-table th:first-child {
+        width: 34%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Train for the neighborhood.</strong> Eight fictional records, three fixed models.
+      Exact continuous attacks and exhaustive model selection; no neural network, PGD iteration,
+      random sampling, or held-out evaluation runs.
+    </p>
+    <form id="controls">
+      <div>
+        <label for="radius">Perturbation budget ε</label
+        ><select id="radius">
+          <option value="0">0</option>
+          <option value="0.1">0.1</option>
+          <option value="0.25" selected>0.25</option>
+          <option value="0.5">0.5</option>
+        </select>
+      </div>
+      <div>
+        <label for="norm">Allowed perturbation shape</label
+        ><select id="norm">
+          <option value="linf">L∞: coordinate box</option>
+          <option value="l2">L2: Euclidean ball</option>
+        </select>
+      </div>
+      <div>
+        <label for="objective">Model selection objective</label
+        ><select id="objective">
+          <option value="robust">Mean worst-case loss</option>
+          <option value="clean">Mean clean loss</option>
+        </select>
+      </div>
+      <div>
+        <label for="model">Model to inspect</label
+        ><select id="model">
+          <option value="auto">Objective winner</option>
+          <option value="fragile">Fragile cue: (0, 5)</option>
+          <option value="both">Both cues: (1, 2)</option>
+          <option value="broad">Broad cue: (1, 0)</option>
+        </select>
+      </div>
+      <div>
+        <label for="record">Record to inspect</label
+        ><select id="record">
+          <option value="P1">P1: positive, typical</option>
+          <option value="P4">P4: positive, exception</option>
+          <option value="N1">N1: negative, typical</option>
+          <option value="N4">N4: negative, exception</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button type="button" id="reset">Reset inputs</button></div>
+    <output aria-live="polite"></output
+    ><svg id="mechanism" role="img" aria-labelledby="diagram-title diagram-desc"></svg>
+    <p id="selection" class="equation"></p>
+    <table id="fits-table">
+      <caption>
+        All candidate models; mean logistic losses
+      </caption>
+      <thead>
+        <tr>
+          <th>Model / weights</th>
+          <th>Clean loss</th>
+          <th>Worst loss</th>
+        </tr>
+      </thead>
+      <tbody id="fits-data"></tbody>
+    </table>
+    <p class="note">
+      A check marks the objective winner. Manually inspecting another model does not change the
+      winner. Model ties use fragile cue, both cues, then broad cue. Losses use natural logarithms.
+    </p>
+    <details id="data">
+      <summary>Inspect the records, exact attacks, and assumptions</summary>
+      <table id="data-table">
+        <caption>
+          Eight distinct records, compressed into repeated rows
+        </caption>
+        <thead>
+          <tr>
+            <th>Record IDs</th>
+            <th>Label</th>
+            <th>(x₁, x₂)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>P1–P3</td>
+            <td>+1</td>
+            <td>(1, 0.2)</td>
+          </tr>
+          <tr>
+            <td>P4</td>
+            <td>+1</td>
+            <td>(−1, 0.2)</td>
+          </tr>
+          <tr>
+            <td>N1–N3</td>
+            <td>−1</td>
+            <td>(−1, −0.2)</td>
+          </tr>
+          <tr>
+            <td>N4</td>
+            <td>−1</td>
+            <td>(1, −0.2)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        x₁ is a broad shape score, x₂ a fine pattern score, and labels are the fictional reference
+        classes. The features range over real numbers with no clipping. The toy radius is in these
+        feature units, not pixel units. Original labels remain the evaluation references; no
+        semantic label checker runs. Some opposite-label neighborhoods overlap at ε = 0.25, making
+        perfect robustness impossible.
+      </p>
+      <p>
+        Score = w·x with zero bias; predict +1 at score ≥ 0, otherwise −1. Signed margin = y ×
+        score. Logistic loss = log(1 + exp(−margin)). Exact L∞ attack: δ = −εy sign(w), with sign(0)
+        = 0. Exact L2 attack: δ = −εy w/‖w‖₂. These attacks minimize signed margin, hence maximize
+        this linear logistic loss.
+      </p>
+      <p>
+        Worst margin = clean margin − ε‖w‖₁ for L∞, or clean margin − ε‖w‖₂ for L2. Robust accuracy
+        counts records correct throughout their entire allowed neighborhood, with the stated score
+        tie rule. This exact result is specific to the linear toy and these records; it is not a
+        population estimate or a neural-network certificate. At zero radius, clean and worst-case
+        quantities coincide.
+      </p>
+    </details>
+    <script>
+      const models = [
+        { id: 'fragile', name: 'Fragile cue', w: [0, 5] },
+        { id: 'both', name: 'Both cues', w: [1, 2] },
+        { id: 'broad', name: 'Broad cue', w: [1, 0] },
+      ];
+      const data = [
+        ...Array.from({ length: 4 }, (_, i) => ({
+          id: 'P' + (i + 1),
+          y: 1,
+          x: [i === 3 ? -1 : 1, 0.2],
+        })),
+        ...Array.from({ length: 4 }, (_, i) => ({
+          id: 'N' + (i + 1),
+          y: -1,
+          x: [i === 3 ? 1 : -1, -0.2],
+        })),
+      ];
+      const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0),
+        loss = (m) => Math.log1p(Math.exp(-m));
+      function attack(row, w, radius, norm) {
+        const length = Math.hypot(...w),
+          dual = norm === 'linf' ? w.reduce((n, v) => n + Math.abs(v), 0) : length;
+        const delta = w.map(
+          (v) => -radius * row.y * (norm === 'linf' ? Math.sign(v) : length ? v / length : 0),
+        );
+        const x = row.x.map((v, i) => v + delta[i]),
+          margin = row.y * dot(w, row.x),
+          worstMargin = margin - radius * dual;
+        return {
+          ...row,
+          delta,
+          perturbed: x,
+          margin,
+          worstMargin,
+          cleanLoss: loss(margin),
+          worstLoss: loss(worstMargin),
+          cleanCorrect: row.y === 1 ? margin >= 0 : margin > 0,
+          robustCorrect: row.y === 1 ? worstMargin >= 0 : worstMargin > 0,
+        };
+      }
+      function compute(radius, norm, objective, choice, record) {
+        const fits = models.map((model) => {
+          const rows = data.map((r) => attack(r, model.w, radius, norm));
+          return {
+            ...model,
+            rows,
+            cleanLoss: rows.reduce((s, r) => s + r.cleanLoss, 0) / rows.length,
+            worstLoss: rows.reduce((s, r) => s + r.worstLoss, 0) / rows.length,
+            cleanAccuracy: rows.filter((r) => r.cleanCorrect).length / rows.length,
+            robustAccuracy: rows.filter((r) => r.robustCorrect).length / rows.length,
+          };
+        });
+        const field = objective === 'clean' ? 'cleanLoss' : 'worstLoss',
+          winner = fits.reduce((a, b) => (b[field] < a[field] ? b : a)),
+          selected = choice === 'auto' ? winner : fits.find((f) => f.id === choice);
+        return {
+          radius,
+          norm,
+          objective,
+          choice,
+          record,
+          data,
+          fits,
+          winner,
+          selected,
+          point: selected.rows.find((r) => r.id === record),
+        };
+      }
+      const f = (n) => (Math.abs(n) < 1e-12 ? 0 : n).toFixed(4),
+        short = (n) => (Math.abs(n) < 1e-12 ? 0 : n).toFixed(2),
+        pct = (n) => Math.round(n * 100) + '%',
+        vector = (x) => '(' + x.map(short).join(', ') + ')';
+      function draw(r) {
+        const m = innerWidth <= 420,
+          w = m ? 328 : 680,
+          h = m ? 750 : 850,
+          s = r.selected,
+          p = r.point;
+        const text = (x, y, size, t, b = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (b ? ' font-weight="700"' : '') +
+          '>' +
+          t +
+          '</text>';
+        let svg =
+          '<title id="diagram-title">A worst-case input in its allowed neighborhood</title><desc id="diagram-desc">Computed selected-model boundary, four unique fictional input locations with counts, allowed perturbation region, exact adversarial point, and signed margins.</desc>';
+        svg +=
+          '<rect x="0" y="0" width="' +
+          w +
+          '" height="' +
+          (m ? 165 : 135) +
+          '" rx="8" fill="var(--panel)" stroke="var(--line)"/>';
+        svg +=
+          text(14, 30, 18, s.name + ': w = (' + s.w.join(', ') + ')', true) +
+          text(14, 62, 15, 'Clean ' + pct(s.cleanAccuracy) + '; robust ' + pct(s.robustAccuracy));
+        svg += text(
+          14,
+          94,
+          14,
+          'Inspected ' + p.id + ': x = ' + vector(p.x) + ', y = ' + (p.y > 0 ? '+1' : '−1'),
+        );
+        svg += text(
+          14,
+          124,
+          14,
+          'Budget ' +
+            r.radius +
+            '; ' +
+            (r.norm === 'linf' ? 'coordinate box (L∞)' : 'Euclidean ball (L2)'),
+        );
+        const left = m ? 28 : 150,
+          top = m ? 225 : 195,
+          side = m ? 280 : 410,
+          scale = side / 3.2,
+          X = (x) => left + (x + 1.6) * scale,
+          Y = (y) => top + (1.6 - y) * scale;
+        svg += text(m ? 0 : 150, top - 28, 14, 'x₂: fine pattern score', true);
+        svg +=
+          '<rect x="' +
+          left +
+          '" y="' +
+          top +
+          '" width="' +
+          side +
+          '" height="' +
+          side +
+          '" fill="var(--paper)" stroke="var(--line)"/>';
+        for (const tick of [-1, 0, 1]) {
+          svg +=
+            '<line x1="' +
+            X(tick) +
+            '" y1="' +
+            top +
+            '" x2="' +
+            X(tick) +
+            '" y2="' +
+            (top + side) +
+            '" stroke="var(--line)"/><line x1="' +
+            left +
+            '" y1="' +
+            Y(tick) +
+            '" x2="' +
+            (left + side) +
+            '" y2="' +
+            Y(tick) +
+            '" stroke="var(--line)"/>';
+          svg +=
+            text(X(tick) - 5, top + side + 23, 12, String(tick)) +
+            text(left - 22, Y(tick) + 4, 12, String(tick));
+        }
+        if (r.norm === 'linf')
+          svg +=
+            '<rect x="' +
+            X(p.x[0] - r.radius) +
+            '" y="' +
+            Y(p.x[1] + r.radius) +
+            '" width="' +
+            2 * r.radius * scale +
+            '" height="' +
+            2 * r.radius * scale +
+            '" fill="var(--band)" fill-opacity="0.65" stroke="var(--accent)"/>';
+        else
+          svg +=
+            '<circle cx="' +
+            X(p.x[0]) +
+            '" cy="' +
+            Y(p.x[1]) +
+            '" r="' +
+            r.radius * scale +
+            '" fill="var(--band)" fill-opacity="0.65" stroke="var(--accent)"/>';
+        const ends =
+          s.w[1] === 0
+            ? [
+                [0, -1.6],
+                [0, 1.6],
+              ]
+            : [
+                [-1.6, (1.6 * s.w[0]) / s.w[1]],
+                [1.6, (-1.6 * s.w[0]) / s.w[1]],
+              ];
+        svg +=
+          '<line x1="' +
+          X(ends[0][0]) +
+          '" y1="' +
+          Y(ends[0][1]) +
+          '" x2="' +
+          X(ends[1][0]) +
+          '" y2="' +
+          Y(ends[1][1]) +
+          '" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 5"/>';
+        for (const row of [data[0], data[3], data[4], data[7]]) {
+          const count = row.id.endsWith('1') ? 3 : 1;
+          svg +=
+            '<circle cx="' +
+            X(row.x[0]) +
+            '" cy="' +
+            Y(row.x[1]) +
+            '" r="5" fill="' +
+            (row.y === 1 ? 'var(--accent)' : 'var(--paper)') +
+            '" stroke="var(--accent)" stroke-width="2"/>';
+          svg += text(
+            X(row.x[0]) + (row.x[0] < 0 ? -38 : 8),
+            Y(row.x[1]) + (row.y === 1 ? -11 : 22),
+            12,
+            (row.y === 1 ? '+' : '−') + ' ×' + count,
+          );
+        }
+        svg +=
+          '<circle cx="' +
+          X(p.x[0]) +
+          '" cy="' +
+          Y(p.x[1]) +
+          '" r="9" fill="none" stroke="var(--ink)"/>';
+        const ax = X(p.perturbed[0]),
+          ay = Y(p.perturbed[1]);
+        svg +=
+          '<line x1="' +
+          X(p.x[0]) +
+          '" y1="' +
+          Y(p.x[1]) +
+          '" x2="' +
+          ax +
+          '" y2="' +
+          ay +
+          '" stroke="var(--ink)" stroke-width="2"/><path d="M ' +
+          ax +
+          ' ' +
+          (ay - 6) +
+          ' l 6 6 l -6 6 l -6 -6 Z" fill="var(--ink)"/>';
+        const by = top + side + 50;
+        svg +=
+          text(m ? 50 : 230, by, 14, 'x₁: broad shape score', true) +
+          text(0, by + 32, 13, 'Dashed: decision boundary. Diamond: attack.') +
+          text(0, by + 57, 13, 'Filled +; open −. Labels show class × count.');
+        svg +=
+          text(0, by + 91, 15, p.id + ' attack δ = ' + vector(p.delta), true) +
+          text(
+            0,
+            by + 118,
+            14,
+            'Signed margin: ' + short(p.margin) + ' → ' + short(p.worstMargin),
+          ) +
+          text(0, by + 145, 14, 'Worst-case point: ' + vector(p.perturbed)) +
+          text(0, h - 17, 13, 'All rates describe these eight records only.');
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      let report;
+      function render() {
+        report = compute(
+          +document.querySelector('#radius').value,
+          document.querySelector('#norm').value,
+          document.querySelector('#objective').value,
+          document.querySelector('#model').value,
+          document.querySelector('#record').value,
+        );
+        const s = report.selected;
+        document.querySelector('output').textContent =
+          s.name +
+          '. Clean ' +
+          pct(s.cleanAccuracy) +
+          '. Robust ' +
+          pct(s.robustAccuracy) +
+          '. Worst loss ' +
+          f(s.worstLoss) +
+          '.';
+        document.querySelector('#selection').textContent =
+          'Objective winner: ' +
+          report.winner.name +
+          '. Selected by ' +
+          (report.objective === 'clean' ? 'mean clean loss.' : 'mean worst-case loss.') +
+          ' Inspected record does not affect fitting.';
+        document.querySelector('#fits-data').innerHTML = report.fits
+          .map(
+            (fit) =>
+              '<tr><th scope="row">' +
+              fit.name +
+              (fit.id === report.winner.id ? ' ✓' : '') +
+              '<small>(' +
+              fit.w.join(', ') +
+              ')</small></th><td>' +
+              f(fit.cleanLoss) +
+              '</td><td>' +
+              f(fit.worstLoss) +
+              '</td></tr>',
+          )
+          .join('');
+        draw(report);
+      }
+      document.querySelector('form').addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        render();
+      });
+      addEventListener('resize', () => draw(report));
+      render();
+    </script>
+  </body>
+</html>

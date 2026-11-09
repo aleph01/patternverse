@@ -19,287 +19,81 @@ verses:
   - ai-usage
 ---
 
-Complex decisions often contain dozens of uncertainties.
+You are choosing between two tools and have accumulated pages of comparison notes. There are still questions about pricing, features, integrations, and future plans. More research is easy to imagine. It is harder to say which answer would actually change your choice.
 
-How much will it cost?
+Often, one uncertainty matters much more than the others. If the tool cannot export your existing material in a usable form, its attractive features may be irrelevant. If it can, the decision may already be straightforward.
 
-Will I enjoy it?
+Looking for the decisive unknown gives research a purpose and a stopping point.
 
-Will demand increase?
+## The core idea
 
-How will the market change?
+A decisive unknown is missing information whose plausible answers would lead to different actions. Focus investigation on those uncertainties before spending effort on details that would not change the decision.
 
-How difficult will implementation be?
+This is a practical application of the value-of-information idea: learning is useful to a decision when it can change what you do enough to justify the cost of obtaining it. You do not need a formal calculation to ask the relevant question:
 
-Will my priorities be the same in two years?
+> If I knew this, what would I do differently?
 
-This can create the impression that you need more information about everything.
-
-Usually you do not.
-
-Some unknowns would barely affect the decision even if resolved completely. Others could flip the answer.
-
-The decisive unknown is the uncertainty whose resolution has the greatest chance of changing what you choose.
-
-Imagine deciding whether to open a café.
-
-You are uncertain about décor, supplier prices, menu design, branding, staffing, foot traffic, rent, customer preferences, and opening hours.
-
-After some analysis, you realize that almost everything depends on one question:
-
-**Is there enough weekday customer traffic at this location to support the required revenue?**
-
-If the answer is clearly yes, several business models become viable. If it is clearly no, optimizing the menu is largely irrelevant.
-
-That is the decisive unknown.
-
-The pattern changes information gathering from:
-
-**What else could I learn?**
-
-to:
-
-**What information would actually change my decision?**
-
-This is a subtle but powerful distinction.
-
-Suppose you are considering accepting a job in another city. You could spend hours researching restaurants, neighborhoods, tax rates, weather, transportation, and cultural events.
-
-But perhaps your decision really turns on whether the employer will permit three days of remote work.
-
-Until that is known, most of the other research has little decision value.
-
-Or imagine choosing between two software architectures. The team has debates about elegance, future extensibility, performance, developer familiarity, and ecosystem maturity. Eventually they realize both architectures would be acceptable unless expected traffic exceeds a particular threshold.
-
-The decisive unknown becomes expected load.
-
-Once found, it concentrates effort.
-
-This pattern is closely related to the formal idea of the **value of information**: information is valuable when obtaining it can change what you do enough to justify the cost of obtaining it.
-
-You do not need to calculate this formally to benefit from the principle.
-
-A useful test is:
-
-**Imagine I knew the answer to this question with certainty. Could it realistically change my choice?**
-
-If the answer is no, the unknown may be interesting but not decisive.
-
-A second test is:
-
-**Could the plausible range of answers cross a decision boundary?**
-
-Suppose an option remains clearly preferable whether a project takes four months, six months, or eight months. Better schedule information is unlikely to change the decision.
-
-But if the project is worthwhile only when it can launch within six months, then schedule uncertainty becomes critical.
-
-This pattern also protects against research as procrastination. Gathering more information feels productive and postpones the discomfort of commitment. Decisive-unknown thinking imposes discipline: after the important uncertainties have been resolved as far as practical, additional research may have very little value.
-
-Of course, some decisions have several decisive unknowns. And sometimes the decisive unknown cannot be resolved cheaply—or at all. Recognizing this is still useful. You can then decide whether to accept uncertainty, protect against downside, preserve optionality, or run a small experiment.
-
-The key is not to eliminate uncertainty.
-
-It is to find the uncertainty that matters.
-
-## Using this pattern with language models
-
-Many weak answers are not caused by poor reasoning. They are caused by one missing fact.
-
-You ask an LLM whether you should use a local database or a cloud database. It gives a nuanced comparison. Halfway through reading it, you realize that the answer changes completely depending on whether the application must work offline.
-
-You ask how to structure a course. The model writes several paragraphs before it becomes clear that the real issue is whether the students already know the prerequisites.
-
-You ask why a system is slow. The model lists twelve possible bottlenecks, but one measurement—whether the delay occurs before or after the database query—would eliminate most of them.
-
-Not all missing information is equally valuable.
-
-The useful question is:
-
-> **Which unknown, if resolved, would most change what we should do?**
-
-Expose that unknown first.
+There may be several decisive unknowns, and resolving one may reveal another. The aim is to identify the most useful next question, rather than reduce every decision to one variable.
 
 ![A decisive question splits the investigation into Answer A leading to Action A and Answer B leading to Action B.](/diagrams/ai-usage/look-for-the-decisive-unknown.svg "Ask the question whose different answers lead to different next actions.")
 
-### From missing information to valuable information
+## Why it works
 
-When context is incomplete, a common prompting strategy is:
+A list of unknowns treats every gap as something that could be researched. Connecting each gap to an action distinguishes interesting information from information with practical consequences.
 
-> Ask me any questions you need.
+With AI, this matters because generating more questions, comparisons, and explanations is easy. A model can continue elaborating while the underlying decision remains untouched. Asking it to show different actions for different answers makes that connection available for inspection.
 
-That is better than guessing, but it has a weakness. The model may produce a long interview:
+The benefit is primarily a change in how you allocate attention and effort. The model does not gain access to missing facts simply because it identifies a question. A plausible estimate of demand, compatibility, or user behavior is still an estimate. Real evidence must come from a suitable source, observation, or experiment.
 
-- What is your budget?
-- What framework are you using?
-- How many users?
-- What is your deadline?
-- What platforms?
-- What is your preferred design style?
-- What are your performance requirements?
+A question can also be decisive without being answerable. Recognizing that boundary helps you choose whether to test, preserve options, protect against downside, or accept the remaining uncertainty.
 
-Some of these questions may matter. Others may not affect the answer at all.
+## How to use it
 
-A better approach asks the model to reason about the **value of information**.
+State the options, your current preference, and the criteria that matter. Ask the model to connect uncertainties to decision boundaries:
 
-> What is the single missing fact that would most change your recommendation?
+> I am leaning toward option A for these reasons. Which unanswered questions could realistically make B preferable? For each, show an answer that favors A and an answer that favors B. Mark any assumptions about my priorities.
 
-Now the model is not merely looking for absent details. It is estimating which uncertainty is decision-relevant.
+Check those branches yourself. If both answers lead to the same action, the question may deserve less research. If the model invents a crisp threshold for a vague preference, treat it as a proposal to examine.
 
-That is a more powerful operation.
+Then choose a proportionate way to learn: inspect a contract, contact a provider, measure a workload, run a small trial, or ask someone with relevant experience. Include the cost and delay. Better information is not automatically worth obtaining.
 
-### A technical example
+Record what would change your mind before looking at the result. This helps prevent an inconvenient answer from quietly becoming “not quite enough evidence.”
 
-Suppose an application occasionally loses user edits.
+## A worked example
 
-There are dozens of possible causes:
+Nora needs a tool for a research archive. The AI produces a comparison covering search, tagging, visual design, mobile access, and collaboration. Tool A looks preferable, but she keeps requesting more detail because moving the archive would take several days.
 
-- failed network requests,
-- race conditions,
-- stale state,
-- database errors,
-- autosave timing,
-- multiple tabs,
-- optimistic updates,
-- browser storage problems.
+She asks:
 
-The model could immediately generate a large debugging checklist.
+> Which missing fact could change this choice? Show the different actions it would lead to. My priorities are preserving source links and being able to leave the tool later.
 
-But suppose the decisive unknown is:
+The model identifies export fidelity. It suggests that if exported notes preserve source links and attachments, A remains viable; if they do not, Nora should investigate B or keep her current system. This is a decision branch she recognizes as meaningful. Theme customization would not have changed her choice either way.
 
-> Are the lost edits visible in the network request payload?
+Rather than accepting the model's claim that export is supported, Nora imports twenty representative notes into a trial account, exports them, and opens them elsewhere. Plain text survives, but several attachment links do not. She investigates whether that is a correctable setting or a limitation before migrating anything else.
 
-If **no**, the problem is probably upstream in client state or autosave logic.
+The decisive unknown has replaced an open-ended comparison with a bounded test. It has not answered every question about the tool, and the sample cannot establish that every unusual note will survive. It does reveal a problem worth addressing before a costly move.
 
-If **yes**, attention shifts downstream toward transport, backend processing, or persistence.
+The same reasoning applies outside AI. Someone considering a job in another city may discover that the decision depends on a remote-work arrangement. Asking the employer can be more useful than another evening comparing neighborhoods.
 
-One observation divides the search space.
+## When it helps—and where it falls short
 
-That is a decisive unknown.
+Use this pattern when research keeps expanding, a decision feels blocked by many unknowns, or an AI comparison is becoming detailed without becoming actionable. It is useful before experiments, purchases, architecture choices, and commitments with meaningful switching costs.
 
-A good LLM interaction might therefore begin:
+Do not mistake an unresolved preference for a missing fact. If the choice depends on whether you value flexibility more than convenience, additional product information may not settle it. Clarify the priority instead.
 
-> Before suggesting fixes, identify the observation that would split the plausible causes most sharply.
+Avoid false precision. A business decision rarely hinges on a perfectly known demand threshold; costs, uncertainty, and consequences interact. Several plausible scenarios can be more honest than one invented number.
 
-Now the model becomes an information-gathering partner rather than a speculation engine.
+Finally, stop when further information is unlikely to change the next action enough to justify its cost. Some uncertainty will remain. The pattern supports a defensible decision under that uncertainty, rather than promising certainty before you act.
 
-### Decision trees are hiding everywhere
+## Related patterns
 
-Many questions that look like ordinary requests are actually incomplete decision trees.
+[[prefer-the-smallest-useful-experiment|Prefer the Smallest Useful Experiment]] — Test the missing fact with a proportionate experiment.
 
-Consider:
+[[run-a-premortem|Run a Premortem]] — Surface consequential uncertainties by imagining concrete failure scenarios.
 
-> Should I build this feature?
+[[separate-exploration-from-selection|Separate Exploration from Selection]] — Distinguish missing possibilities from missing evidence.
 
-The answer may depend on whether users are already attempting the underlying task manually.
-
-If they are, the feature may solve an observed problem.
-
-If they are not, the problem may be hypothetical.
-
-That unknown may be more important than implementation cost, UI design, or technical elegance.
-
-A useful mental model is:
-
-**Possible worlds → missing observation → worlds separate → better action**
-
-The best next question is often the one that divides plausible worlds into groups that lead to different actions.
-
-### Why this matters with LLMs
-
-Language models are unusually capable of filling gaps.
-
-That is one of their strengths.
-
-It is also one reason missing context can be hard to notice.
-
-If you omit an important assumption, the response usually does not collapse. The model supplies a plausible assumption and continues smoothly.
-
-The resulting answer may therefore sound more certain and complete than the underlying information warrants.
-
-Asking for the decisive unknown interrupts this process.
-
-Instead of silently completing the problem, the model inspects the uncertainty surrounding it.
-
-This is especially valuable whenever plausible assumptions lead to different actions.
-
-### Example: choosing a tool
-
-Imagine asking:
-
-> Which note-taking system should I use?
-
-The model could compare Notion, Obsidian, Apple Notes, Logseq, and others.
-
-But perhaps the decisive unknown is:
-
-> Do you want to organize information manually, or do you want the system to work even if you barely organize anything?
-
-That preference may change the recommendation more than dozens of feature comparisons.
-
-Notice that this is not merely “ask more questions.”
-
-It is **find the branching variable**.
-
-### Example: explaining something
-
-The same pattern applies outside decisions.
-
-Suppose someone says:
-
-> I don't understand monads.
-
-The model could launch into a detailed tutorial.
-
-But the decisive unknown might be what exactly is failing:
-
-- the category theory vocabulary,
-- the motivation,
-- the type signatures,
-- the relationship to familiar programming constructs,
-- or the laws.
-
-An answer aimed at the wrong gap can be technically excellent and practically useless.
-
-Asking:
-
-> Which distinction should we clarify to determine what part is actually confusing?
-
-can dramatically shorten the path to understanding.
-
-### Decisive does not mean certain
-
-The model may be wrong about which unknown matters most.
-
-Treat its proposal as a hypothesis.
-
-Sometimes two or three unknowns have similar information value. In that case, it can be useful to ask for a small ranked set and explain how each answer would change the next step.
-
-For example:
-
-> Identify the three highest-value unknowns. For each one, show how different answers would change your recommendation.
-
-That makes the reasoning inspectable.
-
-### When not to use it
-
-The pattern is unnecessary when the cost of gathering information exceeds the cost of trying something.
-
-If changing a button label takes thirty seconds, there is little reason to conduct an elaborate uncertainty analysis. Make the change and observe what happens.
-
-This connects naturally to **Smallest Useful Experiment**: sometimes the best way to resolve the decisive unknown is not another question but a cheap experiment.
-
-The pattern is most useful when:
-
-- the decision is expensive or difficult to reverse,
-- there are many plausible explanations,
-- context is incomplete,
-- the model is producing broad generic advice,
-- additional data is available but expensive to collect,
-- or you feel that the conversation contains lots of information but still lacks one crucial piece.
-
-The goal is not to eliminate uncertainty.
-
-It is to find the uncertainty worth eliminating.
+[[choose-the-representation-before-solving|Choose the Representation Before Solving]] — Make the answers and their different actions visible as branches.
 
 ## Practice — Find the Question That Could Flip the Decision
 
@@ -333,13 +127,6 @@ Finish the exercise with one sentence:
 
 If no unknown could realistically change the choice, further research may not be the thing you need. The next step may simply be to decide.
 
-## Related patterns
-
-[[prefer-the-smallest-useful-experiment|Prefer the Smallest Useful Experiment]] · [[run-a-premortem|Run a Premortem]]
-
-- [[separate-exploration-from-selection|Separate Exploration from Selection]] — Distinguish a lack of possibilities from a lack of information.
-- [[choose-the-representation-before-solving|Choose the Representation Before Solving]] — Represent the question as branches that lead to different actions.
-
 ```patternverse-language
 :language 1
 :title "Find the Question That Could Flip the Decision"
@@ -352,9 +139,7 @@ step_1 = !form {
   !show {
 Write your current leading option, even if it is provisional. You need a choice to compare possible new information against.
   }
-  !ask leading-option {
-    :required true
-    :multiline true
+  leading-option = !ask {
 What option are you currently leaning toward?
   }
 }
@@ -364,9 +149,7 @@ step_2 = !form {
   !show {
 List the major things you are uncertain about. Avoid researching them yet.
   }
-  !ask unknowns {
-    :required true
-    :multiline true
+  unknowns = !ask {
 What are the major unknowns?
   }
 }
@@ -378,9 +161,7 @@ For each unknown, ask: **If I learned the answer with certainty, could that real
 
 Mark each as **No effect / Might matter / Could flip the decision**.
   }
-  !ask impact {
-    :required true
-    :multiline true
+  impact = !ask {
 How would you classify each unknown's effect on the decision?
   }
 }
@@ -392,14 +173,10 @@ Take the unknowns marked **Could flip the decision**. Some decisions have severa
 
 For each, identify the plausible range of answers and the point at which your choice would change.
   }
-  !ask range {
-    :required true
-    :multiline true
+  range = !ask {
 What range of answers is plausible for the decisive unknowns?
   }
-  !ask boundary {
-    :required true
-    :multiline true
+  boundary = !ask {
 At what point would your choice change?
   }
 }
@@ -409,19 +186,13 @@ step_5 = !form {
   !show {
 Information has decision value when it changes what you do enough to justify obtaining it. Some uncertainty cannot be eliminated; you may instead protect downside or preserve optionality.
   }
-  !ask better-information {
-    :required true
-    :multiline true
+  better-information = !ask {
 Can you obtain better information, and how?
   }
-  !ask information-cost {
-    :required true
-    :multiline true
+  information-cost = !ask {
 What would obtaining it cost in time, effort, money, or delay?
   }
-  !ask small-test {
-    :required true
-    :multiline true
+  small-test = !ask {
 Could a small experiment answer it?
   }
 }
@@ -433,9 +204,7 @@ Finish with one sentence: **Before deciding, the most valuable thing for me to l
 
 If the crucial uncertainty cannot be resolved, say what you will preserve, protect, or knowingly leave uncertain.
   }
-  !ask learning-priority {
-    :required true
-    :multiline true
+  learning-priority = !ask {
 What is the most valuable thing to learn before deciding, and why?
   }
 }

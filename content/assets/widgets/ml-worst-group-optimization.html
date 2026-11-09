@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Worst-group objective explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #record-table th:first-child {
+        width: 16%;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      th,
+      td {
+        overflow-wrap: anywhere;
+        vertical-align: top;
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font:
+          13px/1.6 ui-monospace,
+          monospace;
+      }
+      #rank-table th:first-child {
+        width: 31%;
+      }
+      #rank-table th:nth-child(2) {
+        width: 37%;
+      }
+      .example-card {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+
+      #rank-table th:first-child {
+        width: 15%;
+      }
+      #rank-table th:nth-child(2) {
+        width: 30%;
+      }
+
+      #state-table th:first-child {
+        width: 52%;
+      }
+
+      #distribution th:first-child {
+        width: 34%;
+      }
+      #distribution th:nth-child(2) {
+        width: 22%;
+      }
+      #distribution th:nth-child(3) {
+        width: 18%;
+      }
+      #distribution th:nth-child(4) {
+        width: 26%;
+      }
+      #distribution {
+        font-size: 13px;
+      }
+      code {
+        overflow-wrap: anywhere;
+      }
+
+      #fits-table {
+        font-size: 13px;
+      }
+      #fits-table th:first-child {
+        width: 34%;
+      }
+      #fits-table th:nth-child(2) {
+        width: 16%;
+      }
+      #data-table {
+        font-size: 13px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Fit the same records to three different objectives.</strong> This fictional
+      service-desk model predicts one handling time for everyone: ŷ = 5 + θ minutes. The page
+      computes group statistics, exact scalar minimizers, loss curves, and mixture projections. It
+      does not train a neural network or measure held-out performance.
+    </p>
+    <form>
+      <div>
+        <label for="count">Group B training records</label
+        ><select id="count">
+          <option value="10" selected>10 of 100</option>
+          <option value="20">20 of 100</option>
+          <option value="50">50 of 100</option>
+        </select>
+      </div>
+      <div>
+        <label for="spread">Group B spread around 7 minutes</label
+        ><select id="spread">
+          <option value="0">±0 minutes — variance 0</option>
+          <option value="1" selected>±1 minute — variance 1</option>
+          <option value="2">±2 minutes — variance 4</option>
+          <option value="3">±3 minutes — variance 9</option>
+        </select>
+      </div>
+      <div>
+        <label for="method">Selected training objective</label
+        ><select id="method">
+          <option value="erm">Sample-average loss (ERM)</option>
+          <option value="balanced">Equal group weighting</option>
+          <option value="worst" selected>Maximum group mean loss</option>
+        </select>
+      </div>
+      <div>
+        <label for="mixture">Hypothetical group B share</label
+        ><select id="mixture">
+          <option value="0.1">10%</option>
+          <option value="0.5">50%</option>
+          <option value="0.8" selected>80%</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <p class="note">
+      The plot's dot is the selected fit on the worst-loss curve. Curves use the current fictional
+      training groups. “Projected mean” only reweights those fitted group losses under the
+      hypothetical share; it assumes unchanged within-group data and does not refit or evaluate on
+      future observations.
+    </p>
+    <table id="fits-table">
+      <caption>
+        All three fitted models — MSE in minutes squared
+      </caption>
+      <thead>
+        <tr>
+          <th>Fit</th>
+          <th>θ</th>
+          <th>Mean</th>
+          <th>Worst</th>
+        </tr>
+      </thead>
+      <tbody id="fits-data"></tbody>
+    </table>
+    <h2>Selected fit, group by group</h2>
+    <table id="group-table">
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>Records</th>
+          <th>Mean loss</th>
+        </tr>
+      </thead>
+      <tbody id="group-data"></tbody>
+    </table>
+    <p id="projection"></p>
+    <details id="data">
+      <summary>Inspect the complete fictional data, compressed by repeated value</summary>
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Count</th>
+            <th>Minutes (count × value)</th>
+          </tr>
+        </thead>
+        <tbody id="data-values"></tbody>
+      </table>
+      <p>
+        The compressed counts describe every one of the 100 records. Each group-B half has the same
+        number of records. Group labels define training losses; the constant predictor uses no group
+        label at inference.
+      </p>
+    </details>
+    <details id="assumptions">
+      <summary>Objectives, exact fitting, and limits</summary>
+      <p>
+        Every A record has target 5 minutes. Half of B has target 7 − s and half 7 + s, where s is
+        the selected spread. Prediction is 5 + θ for all records. Squared error is (prediction −
+        target)². Group mean loss divides by that group's count; sample mean divides total loss by
+        100. Variance here uses the group's count as denominator, not count minus one.
+      </p>
+      <p>
+        Compute each group's mean residual m_g relative to 5 and variance v_g from the actual
+        records. Its mean loss is (θ − m_g)² + v_g. The average-loss optimum is the pooled mean
+        residual. The equal-group optimum is (m_A + m_B)/2. To minimize the maximum of these two
+        quadratics exactly, evaluate their individual minima and their intersection, and choose the
+        candidate with lowest maximum loss. Exact ties use smaller θ. This solves this specific
+        convex constant-predictor problem; it is not an iterative group-DRO training algorithm.
+      </p>
+      <p>
+        The hypothetical mixture score is (1 − π_B)L_A + π_B L_B for each already fitted model.
+        Changing π_B changes this calculation only. It does not create evaluation data or establish
+        population generalization. Counts change the sample-average objective and estimation
+        support; the specified maximum-group objective does not weight groups by count.
+      </p>
+      <p>
+        All offered groups are nonempty and all labels are correct by fixture construction. There
+        are no confidence intervals, missing groups, learned features, subgroup intersections,
+        gradient updates, adaptive adversarial-weight dynamics, regularization, or neural-network
+        results in this simulation. High within-B variance is an unavoidable loss floor only for
+        this constant predictor, not proof of inherently unpredictable outcomes.
+      </p>
+    </details>
+    <script>
+      'use strict';
+      const baseline = 5;
+      const methods = [
+        { id: 'erm', label: 'Mean loss (ERM)', short: 'Average' },
+        { id: 'balanced', label: 'Equal-group weight', short: 'Equal groups' },
+        { id: 'worst', label: 'Worst-group loss', short: 'Worst group' },
+      ];
+      function makeData(countB, spread) {
+        return [
+          ...Array.from({ length: 100 - countB }, (_, i) => ({
+            id: 'A' + (i + 1),
+            group: 'A',
+            y: 5,
+          })),
+          ...Array.from({ length: countB }, (_, i) => ({
+            id: 'B' + (i + 1),
+            group: 'B',
+            y: 7 + (i < countB / 2 ? -spread : spread),
+          })),
+        ];
+      }
+      function summarize(data, group) {
+        const rows = data.filter((r) => r.group === group),
+          n = rows.length;
+        if (!n) return null;
+        const mean = rows.reduce((s, r) => s + r.y - baseline, 0) / n;
+        const variance = rows.reduce((s, r) => s + (r.y - baseline - mean) ** 2, 0) / n;
+        return { group, n, mean, variance };
+      }
+      const curveLoss = (theta, g) => (theta - g.mean) ** 2 + g.variance;
+      function evaluate(theta, data) {
+        const a = data.filter((r) => r.group === 'A'),
+          b = data.filter((r) => r.group === 'B');
+        const loss = (rows) =>
+          rows.reduce((s, r) => s + (baseline + theta - r.y) ** 2, 0) / rows.length;
+        const lossA = loss(a),
+          lossB = loss(b);
+        return {
+          theta,
+          prediction: baseline + theta,
+          lossA,
+          lossB,
+          mean: (a.length * lossA + b.length * lossB) / data.length,
+          balanced: (lossA + lossB) / 2,
+          worst: Math.max(lossA, lossB),
+        };
+      }
+      function compute(countB, spread, method, mixture) {
+        if (
+          !Number.isInteger(countB) ||
+          countB <= 0 ||
+          countB >= 100 ||
+          countB % 2 ||
+          !Number.isFinite(spread) ||
+          spread < 0 ||
+          !methods.some((m) => m.id === method) ||
+          !Number.isFinite(mixture) ||
+          mixture < 0 ||
+          mixture > 1
+        )
+          return { error: 'Invalid fixture configuration; both groups need nonzero support.' };
+        const data = makeData(countB, spread),
+          a = summarize(data, 'A'),
+          b = summarize(data, 'B');
+        const pooled = data.reduce((s, r) => s + r.y - baseline, 0) / data.length;
+        const balanced = (a.mean + b.mean) / 2,
+          candidates = [a.mean, b.mean];
+        if (a.mean !== b.mean)
+          candidates.push(
+            (b.mean * b.mean + b.variance - a.mean * a.mean - a.variance) / (2 * (b.mean - a.mean)),
+          );
+        const worst = candidates
+          .map((t) => evaluate(t, data))
+          .sort((x, y) => x.worst - y.worst || x.theta - y.theta)[0].theta;
+        const values = { erm: pooled, balanced, worst };
+        const fits = methods.map((m) => {
+          const f = { ...m, ...evaluate(values[m.id], data) };
+          return { ...f, projected: (1 - mixture) * f.lossA + mixture * f.lossB };
+        });
+        return {
+          countB,
+          spread,
+          method,
+          mixture,
+          data,
+          groups: [a, b],
+          candidates,
+          fits,
+          selected: fits.find((f) => f.id === method),
+        };
+      }
+      const esc = (s) =>
+        String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+      const fmt = (n) => n.toFixed(4);
+      let report;
+      function draw(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          h = mobile ? 1080 : 660,
+          cw = mobile ? 328 : 210;
+        const text = (x, y, size, s, b = false, anchor = 'start') =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" text-anchor="' +
+          anchor +
+          '"' +
+          (b ? ' font-weight="700"' : '') +
+          '>' +
+          esc(s) +
+          '</text>';
+        let svg =
+          '<title id="flow-title">Three objectives choose different points on the same group-loss curves</title><desc id="flow-desc">Cards report each fitted prediction, sample mean loss, worst-group loss, and a hypothetical mixture projection. Dashed grey and solid green curves are group A and B mean squared losses. The dotted dark curve is their maximum. A vertical marker locates the selected fitted model on that upper envelope.</desc>';
+        r.fits.forEach((f, i) => {
+          const x = mobile ? 0 : i * 235,
+            y = mobile ? i * 210 : 0;
+          svg +=
+            '<rect x="' +
+            x +
+            '" y="' +
+            y +
+            '" width="' +
+            cw +
+            '" height="190" rx="8" fill="var(--panel)" stroke="var(--accent)" stroke-width="' +
+            (f.id === r.method ? 3 : 1) +
+            '"/>' +
+            text(x + 12, y + 29, 17, f.label, true) +
+            text(x + 12, y + 65, 15, 'Prediction: ' + f.prediction.toFixed(2) + ' min', true) +
+            text(x + 12, y + 95, 13, 'Sample mean: ' + fmt(f.mean)) +
+            text(x + 12, y + 124, 13, 'Worst group: ' + fmt(f.worst)) +
+            text(x + 12, y + 153, 13, 'Projected mean: ' + fmt(f.projected)) +
+            text(
+              x + 12,
+              y + 178,
+              12,
+              f.id === r.method ? 'Selected fit' : 'Same records; different objective',
+            );
+        });
+        const left = mobile ? 44 : 55,
+          right = w - 16,
+          top = mobile ? 680 : 260,
+          bottom = mobile ? 920 : 500;
+        const ymax =
+          Math.ceil(
+            Math.max(...r.groups.flatMap((g) => [curveLoss(0, g), curveLoss(2.5, g)])) / 2,
+          ) * 2;
+        const X = (t) => left + ((right - left) * t) / 2.5,
+          Y = (v) => bottom - ((bottom - top) * v) / ymax;
+        for (const v of [0, ymax / 2, ymax])
+          svg +=
+            '<line x1="' +
+            left +
+            '" y1="' +
+            Y(v) +
+            '" x2="' +
+            right +
+            '" y2="' +
+            Y(v) +
+            '" stroke="var(--line)"/>' +
+            text(left - 7, Y(v) + 4, 12, String(v), false, 'end');
+        for (const t of [0, 0.5, 1, 1.5, 2, 2.5])
+          svg += text(
+            X(t),
+            bottom + 20,
+            12,
+            String(t),
+            false,
+            t === 0 ? 'start' : t === 2.5 ? 'end' : 'middle',
+          );
+        svg +=
+          '<line x1="' +
+          left +
+          '" y1="' +
+          top +
+          '" x2="' +
+          left +
+          '" y2="' +
+          bottom +
+          '" stroke="var(--ink)"/>' +
+          text(left, top - 15, 13, 'MSE (minutes²)') +
+          text(left, bottom + 44, 13, 'Shared correction θ (minutes)');
+        const points = (fn) =>
+          Array.from({ length: 101 }, (_, i) => {
+            const t = (2.5 * i) / 100;
+            return X(t).toFixed(2) + ',' + Y(fn(t)).toFixed(2);
+          }).join(' ');
+        svg +=
+          '<polyline points="' +
+          points((t) => curveLoss(t, r.groups[0])) +
+          '" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="7 5"/>';
+        svg +=
+          '<polyline points="' +
+          points((t) => curveLoss(t, r.groups[1])) +
+          '" fill="none" stroke="var(--accent)" stroke-width="2"/>';
+        svg +=
+          '<polyline points="' +
+          points((t) => Math.max(...r.groups.map((g) => curveLoss(t, g)))) +
+          '" fill="none" stroke="var(--ink)" stroke-width="3" stroke-dasharray="2 5"/>';
+        svg +=
+          '<line x1="' +
+          X(r.selected.theta) +
+          '" y1="' +
+          top +
+          '" x2="' +
+          X(r.selected.theta) +
+          '" y2="' +
+          bottom +
+          '" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 5"/><circle cx="' +
+          X(r.selected.theta) +
+          '" cy="' +
+          Y(r.selected.worst) +
+          '" r="5" fill="var(--band)" stroke="var(--ink)" stroke-width="2"/>';
+        const legends = [
+          ['var(--muted)', '7 5', 'Group A mean loss'],
+          ['var(--accent)', '', 'Group B mean loss'],
+          ['var(--ink)', '2 5', 'Maximum group loss'],
+        ];
+        legends.forEach(([color, dash, label], i) => {
+          const x = mobile ? left : left + i * 203,
+            y = mobile ? 982 + i * 25 : 580;
+          svg +=
+            '<line x1="' +
+            x +
+            '" y1="' +
+            (y - 4) +
+            '" x2="' +
+            (x + 22) +
+            '" y2="' +
+            (y - 4) +
+            '" stroke="' +
+            color +
+            '" stroke-width="2"' +
+            (dash ? ' stroke-dasharray="' + dash + '"' : '') +
+            '/>' +
+            text(x + 29, y, 12, label);
+        });
+        svg += text(left, mobile ? 1065 : 630, 12, 'Dot: selected fit on the maximum-loss curve.');
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      function render() {
+        report = compute(
+          +document.querySelector('#count').value,
+          +document.querySelector('#spread').value,
+          document.querySelector('#method').value,
+          +document.querySelector('#mixture').value,
+        );
+        const r = report,
+          s = r.selected;
+        document.querySelector('output').textContent =
+          s.short +
+          '. Prediction ' +
+          s.prediction.toFixed(2) +
+          ' min. Mean MSE ' +
+          fmt(s.mean) +
+          '. Worst MSE ' +
+          fmt(s.worst) +
+          '.';
+        document.querySelector('#fits-data').innerHTML = r.fits
+          .map(
+            (f) =>
+              '<tr><th scope="row">' +
+              f.short +
+              '</th><td>' +
+              f.theta.toFixed(2) +
+              '</td><td>' +
+              fmt(f.mean) +
+              '</td><td>' +
+              fmt(f.worst) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#group-data').innerHTML = r.groups
+          .map(
+            (g, i) =>
+              '<tr><th scope="row">' +
+              g.group +
+              '</th><td>' +
+              g.n +
+              '</td><td>' +
+              fmt(i ? s.lossB : s.lossA) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#projection').textContent =
+          'At a hypothetical B share of ' +
+          Math.round(r.mixture * 100) +
+          '%, this already fitted model has projected mean MSE ' +
+          fmt(s.projected) +
+          '. This reweights the training group losses, assumes unchanged within-group data, and is not a held-out result.';
+        document.querySelector('#data-values').innerHTML = r.groups
+          .map((g) => {
+            const counts = {};
+            r.data
+              .filter((d) => d.group === g.group)
+              .forEach((d) => {
+                counts[d.y] = (counts[d.y] || 0) + 1;
+              });
+            return (
+              '<tr><th scope="row">' +
+              g.group +
+              '</th><td>' +
+              g.n +
+              '</td><td>' +
+              Object.entries(counts)
+                .map(([value, count]) => count + ' × ' + value)
+                .join('; ') +
+              '</td></tr>'
+            );
+          })
+          .join('');
+        draw(r);
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelector('form').addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

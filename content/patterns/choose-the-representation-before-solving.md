@@ -14,209 +14,72 @@ verses:
   - ai-usage
 ---
 
-Some problems are difficult because the answer is difficult.
+A paragraph describes an onboarding flow: users create an account, sometimes import data, may join an existing workspace, and can skip several setup steps. You ask an AI to improve it. The answer contains sensible suggestions, but you still cannot tell whether an invited user can reach the application without creating a second workspace.
 
-Others are difficult because the problem is represented badly.
+The information is present. Its relationships are hard to inspect in prose.
 
-A long paragraph describing a software system may become obvious when converted into a dependency graph. A confusing historical narrative may become clear on a timeline. A product decision may become manageable as a table of alternatives and criteria. A complex workflow may reveal its flaws as a state machine.
+Before asking for a solution, ask what form would make the important structure visible.
 
-Language models make it easy to move directly from a question to prose.
+## The core idea
 
-Sometimes that is exactly the wrong first move.
+Choose a representation that exposes the relationships relevant to the problem, then inspect it before solving. A timeline reveals order and duration. A comparison table aligns recurring attributes. A dependency graph shows what relies on what. A state machine distinguishes allowed transitions from impossible ones.
 
-Before solving the problem, choose the representation that makes the structure visible.
+The sequence is **raw problem → useful representation → inspect → solve**. The intermediate representation is part of the reasoning, because it determines which questions become easy to ask.
+
+Sometimes prose is already the most useful form. The pattern calls for a deliberate choice, not a diagram for every task.
 
 ![A raw problem can become a timeline, graph, matrix, or state machine. A useful view reveals structure that informs the solution.](/diagrams/ai-usage/choose-the-representation-before-solving.svg "Choose the view that exposes the relevant relationship, then inspect it before solving.")
 
-## The hidden power of intermediate representations
+## Why it works
 
-Consider this request:
+A narrative can hide a missing transition, an inconsistent comparison, or a dependency spread across several paragraphs. A suitable representation brings those relationships together. Empty cells, unsupported links, and disconnected states become easier for a reader to notice.
 
-> Help me redesign the onboarding flow. Users create an account, sometimes import existing data, may connect an integration, can skip profile setup, and need to select a workspace before entering the app. Some people are invited to an existing workspace rather than creating one.
+Asking the AI to build that structure also narrows its immediate task. Instead of simultaneously interpreting the situation and proposing a solution, it first makes an account of the situation available for correction. You can challenge that account before a recommendation depends on it.
 
-A model can discuss this in paragraphs.
+This explanation concerns visibility and the opportunity to check intermediate work. A diagram does not establish that its contents are true. A model may omit a branch, invent a relationship, or compress away an important exception. The representation helps only if it preserves the features that matter and you compare it with the source.
 
-But the important structure is not primarily verbal. It concerns states, branches, prerequisites, and transitions.
+## How to use it
 
-A more useful first step might be:
+Start with the relationship you need to understand. Ask about sequence, comparison, dependency, branching, or change over time, then select a suitable form.
 
-> Represent the onboarding flow as states and transitions before suggesting changes.
+> Represent this onboarding flow as states and transitions. Include the invited-user route and failure paths described in the source. Mark unspecified behavior as unknown rather than completing it yourself. Do not propose improvements yet.
 
-Now contradictions become easier to spot:
+Inspect the result for omissions and unsupported assumptions. If the model has invented a mandatory profile step, correct it before requesting a redesign.
 
-- Can a user connect an integration before a workspace exists?
-- What happens if an invited user skips profile setup?
-- Which states are optional?
-- Which transitions can fail?
-- Where can the user resume after interruption?
+Then ask for a solution that refers to the structure:
 
-The representation exposes the problem.
+> Using the corrected flow, identify where a user can become stuck and propose the smallest changes that preserve the workspace rules.
 
-Only afterward does redesign make sense.
+For an argument, the representation might be premises, claims, and evidence. For a decision, it might be a table containing options, criteria, and unknowns. Two complementary views can be useful when one form cannot express the whole problem, but each should answer a specific question.
 
-## Representation determines what becomes easy to see
+## A worked example
 
-Different forms foreground different relationships.
+A small product team asks an AI to simplify its onboarding. The initial response recommends fewer screens, a progress indicator, and clearer button labels. None addresses a recurring support problem: invited users sometimes create an empty workspace before finding the shared one.
 
-A **timeline** makes sequence and duration visible.
+The team supplies the existing flow and asks for a state table. Each row contains a state, the information available there, the actions allowed, and the destination of each action. The model marks several missing transitions as unknown.
 
-A **matrix** makes systematic comparison visible.
+Reviewing the table reveals that “account created” has only one documented next state: “create workspace.” Invitation acceptance appears later, after that step. The interface may look like a sequence of sensible screens, but the representation exposes a mismatch between two user routes.
 
-A **tree** makes branching decisions visible.
+The team corrects one detail the model inferred incorrectly: an invitation can exist before account creation. They add that fact to the table, then ask for a revised route. Invited users can now accept the existing workspace, while people without an invitation continue to workspace creation.
 
-A **graph** makes relationships and dependencies visible.
+Before building anything, the team walks through an expired invitation and a user with several invitations. The first revision did not handle either. The table makes those gaps easier to locate, but the team still has to decide the intended behavior.
 
-A **state machine** makes allowed transitions visible.
+A similar move helps with research writing. Turning a fluent summary into a claim–evidence table can reveal that three paragraphs repeat a claim without adding support. It can also expose a source that was summarized inaccurately. The table guides the check; the original source remains necessary.
 
-A **hierarchy** makes containment and abstraction visible.
+## When it helps—and where it falls short
 
-A **table** makes recurring attributes comparable.
+Use this pattern when information is plentiful but relationships remain unclear: workflows, dependencies, comparisons, arguments, schedules, and systems with branching behavior. It is particularly useful before a large recommendation or redesign.
 
-A **rubric** makes evaluation criteria explicit.
+Avoid representation theater. A matrix that repeats prose in smaller boxes may make nothing easier to inspect. Ask which relationship the new form reveals and whether that relationship matters to the next decision.
 
-A **causal loop** makes feedback visible.
+Every representation leaves something out. A subway map preserves connectivity while simplifying geography. A comparison table can make uncertain judgments look more precise than they are. Keep ambiguity visible and retain the source where nuance matters.
 
-A **map** makes spatial relationships visible.
-
-A **taxonomy** makes categories and boundaries visible.
-
-A **worked example** makes transformation visible.
-
-The question is therefore not merely:
-
-> What information do we have?
-
-It is:
-
-> In what form would the important relationships become easiest to reason about?
-
-## An example: choosing an architecture
-
-Suppose you ask:
-
-> How should this system be architected?
-
-The model might immediately propose services, databases, and APIs.
-
-Instead, ask it first to represent the domain:
-
-> Before proposing an architecture, model the major entities, responsibilities, information flows, and boundaries.
-
-This prevents an implementation vocabulary from arriving too early.
-
-Once the domain structure is visible, the architecture can respond to it.
-
-This matters because premature implementation can distort understanding. If you begin with “Which microservices do we need?”, you have already assumed microservices are the appropriate representation of the system.
-
-Choosing the representation first creates a small pause between **understanding the thing** and **deciding how to build it**.
-
-## An example: understanding an argument
-
-Imagine asking an LLM to analyze a philosophical essay.
-
-A prose summary may simply reproduce the essay at lower resolution.
-
-Instead:
-
-> Represent the central argument as premises, intermediate claims, objections, and conclusions.
-
-Now you can see whether a conclusion actually follows from its premises.
-
-Or ask:
-
-> Create a map showing which claims depend on which others.
-
-The result becomes a structure you can inspect.
-
-Again, the representation performs part of the reasoning.
-
-## Representation is compression
-
-A good representation discards irrelevant detail while preserving important relationships.
-
-That is why it helps.
-
-A subway map does not preserve the exact geography of a city. It preserves connectivity.
-
-A musical score does not preserve the sound of a performance. It preserves a useful structure from which performance can be reconstructed.
-
-A software interface diagram does not preserve every line of code. It preserves components and their relationships.
-
-The art is choosing what information should survive the compression.
-
-An LLM can help with this choice:
-
-> What representation would make the bottleneck in this problem most visible?
-
-That question is often more useful than:
-
-> Solve this.
-
-## Don't force everything into diagrams
-
-The pattern has an obvious failure mode: representation theater.
-
-A simple question does not become deeper because it has been turned into a matrix.
-
-Some tasks are already expressed in the right form. Others depend on nuance that a rigid representation destroys.
-
-For example, a table comparing emotional experiences may falsely imply that fuzzy, contextual qualities are cleanly separable.
-
-Representation is useful when it reveals structure, not when it merely makes an answer look organized.
-
-The test is simple:
-
-> Does this form make a relationship easier to inspect than prose would?
-
-If not, prose may be better.
-
-## Multiple representations can expose different truths
-
-For especially complex problems, one representation may not be enough.
-
-A product can be represented as:
-
-- a user journey,
-- a state machine,
-- a data model,
-- a component hierarchy.
-
-Each view answers a different question.
-
-This is analogous to technical drawings of a physical object. A front view, side view, and cross-section are not competing descriptions. They expose different dimensions.
-
-You can therefore ask:
-
-> Give me two different representations of this problem and explain what each makes visible that the other hides.
-
-This can be surprisingly powerful.
-
-## Why LLMs make this pattern practical
-
-Humans often avoid restructuring information because doing so takes time.
-
-Turning notes into a taxonomy, building a comparison matrix, or drawing a dependency map can require significant manual effort.
-
-An LLM dramatically lowers that cost.
-
-That means representation can become an ordinary reasoning step rather than something reserved for formal analysis.
-
-The workflow becomes:
-
-**Raw problem → useful representation → inspect structure → solve**
-
-The important insight is that the second step is not cosmetic formatting.
-
-It is part of thinking.
-
-Often, a problem that appears difficult in prose becomes almost mechanical once represented correctly.
-
-And sometimes the greatest contribution an LLM can make is not supplying an answer.
-
-It is helping you discover what shape the problem should have before you try to answer it.
+If producing and maintaining the representation costs more than the problem warrants, use a lighter form. A short list of dependencies may do the work of a complex graph. The useful form is the one that improves the next judgment without creating unnecessary upkeep.
 
 ## Related patterns
 
-- [[look-for-the-decisive-unknown|Look for the Decisive Unknown]] — A decision tree makes the branching variable visible.
-- [[preserve-the-invariants|Preserve the Invariants]] — Preserve important relationships when compressing information.
-- [[reframing-identify-problem-form|Identify the Problem Form]] — Clarify what kind of problem is being represented.
+[[look-for-the-decisive-unknown|Look for the Decisive Unknown]] — Represent different answers as branches leading to different actions.
+
+[[preserve-the-invariants|Preserve the Invariants]] — Keep important relationships intact when simplifying a representation.
+
+[[work-in-inspectable-steps|Work in Inspectable Steps]] — Inspect an intermediate representation before work depends on it.

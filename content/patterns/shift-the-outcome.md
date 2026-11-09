@@ -48,31 +48,6 @@ Shift the Outcome helps when perfection crowds out exploration, an argument lose
 
 The prototype's confusing interface still needs revision. The meeting still needs decisions, and the musician still needs to finish songs eventually. What changes is the relationship between each activity and the outcome used to assess it. A first test can be judged as a test, a difficult conversation as an attempt at clarification, and an exploratory session as preparation for later selection. That alignment permits a more honest evaluation of both what was gained and what remains to be done.
 
-## Pattern details
-
-### Use when
-
-- Exploratory work is judged as finished performance.
-- A conversation’s working goal has drifted from its purpose.
-
-### Goals
-
-- Align judgment with the activity’s legitimate purpose.
-- Recognize different outcomes without erasing commitments.
-
-### Mechanisms
-
-- goal reframing
-- evaluation criteria
-
-### Not ideal when
-
-- A new goal would obscure a failed commitment or a necessary constraint.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[move-up-the-value-hierarchy|Move Up the Value Hierarchy]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Another Outcome; chapter 2, printed pages 26–3
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask activity {
+activity = !ask {
     Name the activity and outcome
 
     Choose an everyday activity or conversation. What outcome are you currently judging it against?
 }
-!ask stage {
+stage = !ask {
     Check its actual purpose
 
     What stage is this activity at, and what was it reasonably meant to achieve? Distinguish exploration, learning, and finished performance.
 }
-!ask alternative {
+alternative = !ask {
     Consider another legitimate outcome
 
     What additional or different outcome would have been reasonable before you knew the result? Do not invent success after the fact.
 }
-!ask difference {
+difference = !ask {
     Notice what would change
 
     How would that outcome change what you attend to, contribute, or evaluate? Include what still did not work.
 }
-!ask commitments {
+commitments = !ask {
     Keep the original obligations
 
     What promises, safety requirements, or other people's expectations must still be met? Learning does not cancel them.
 }
-!ask next {
+next = !ask {
     Make the purpose explicit
 
     What small next action or conversation would align the activity with an honest outcome, and how could you review it?

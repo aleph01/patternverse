@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Multimodal association and fusion explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Combine fictional damage signals for claim C17. These numbers are supplied teaching inputs: no
+      text or image model runs, and no measured accuracy or probability is shown.
+    </p>
+    <form>
+      <div>
+        <label for="text">Report signal</label
+        ><select id="text">
+          <option value="0.8">0.80 · stronger</option>
+          <option value="0.2">0.20 · weaker</option>
+        </select>
+      </div>
+      <div>
+        <label for="photo">Photo evidence</label
+        ><select id="photo">
+          <option value="0.2">0.20 · weaker</option>
+          <option value="0.8">0.80 · stronger</option>
+          <option value="missing">Missing photo</option>
+        </select>
+      </div>
+      <div>
+        <label for="association">Photo belongs to</label
+        ><select id="association">
+          <option value="same">C17 · same claim</option>
+          <option value="other">C42 · other claim</option></select
+        ><span class="note">Applies only when a photo is present.</span>
+      </div>
+      <div>
+        <label for="weight">Report weight with both inputs</label
+        ><select id="weight">
+          <option value="0.4">0.40 · photo weight 0.60</option>
+          <option value="0.7">0.70 · photo weight 0.30</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect the pairing and calculation</summary>
+      <p id="pairing"></p>
+      <table>
+        <caption>
+          Computed contributions · dimensionless score
+        </caption>
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Signal</th>
+            <th>Weight used</th>
+            <th>Added score</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="formula"></p>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and limits</summary>
+      <p>
+        Signals and weights are invented on a common teaching scale, not learned or calibrated
+        probabilities. Both branches refer to damage for the same claim. With both present, the
+        weights sum to one. A missing photo uses report weight one; it is not replaced with a zero
+        signal. A present photo from another claim blocks scoring before any combination. ID checks
+        cannot verify the photograph's contents.
+      </p>
+      <p>
+        The route is priority review at score ≥ 0.60, otherwise standard review. Neither route is
+        verified correct: there are no outcome labels, training, performance estimates, timing
+        checks or actual encoders. A real fallback and its thresholds need independent evaluation.
+      </p>
+    </details>
+    <script>
+      const threshold = 0.6;
+      function fuse(text, photo, textId, photoId, weight) {
+        if (
+          !Number.isFinite(text) ||
+          text < 0 ||
+          text > 1 ||
+          !Number.isFinite(weight) ||
+          weight < 0 ||
+          weight > 1 ||
+          typeof textId !== 'string' ||
+          !textId.trim() ||
+          (photo !== null &&
+            (!Number.isFinite(photo) ||
+              photo < 0 ||
+              photo > 1 ||
+              typeof photoId !== 'string' ||
+              !photoId.trim())) ||
+          (photo === null && photoId !== null)
+        )
+          throw new Error('Invalid fusion inputs');
+        const mode = photo === null ? 'report-only' : textId === photoId ? 'paired' : 'blocked';
+        const usedWeight = mode === 'report-only' ? 1 : mode === 'paired' ? weight : null;
+        const reportContribution = usedWeight === null ? null : usedWeight * text;
+        const photoContribution =
+          mode === 'paired' ? (1 - weight) * photo : mode === 'report-only' ? 0 : null;
+        const score = mode === 'blocked' ? null : reportContribution + photoContribution;
+        return {
+          text,
+          photo,
+          textId,
+          photoId,
+          weight,
+          mode,
+          usedWeight,
+          reportContribution,
+          photoContribution,
+          score,
+          route: score === null ? null : score >= threshold ? 'Priority review' : 'Standard review',
+        };
+      }
+      function buildReport(text = 0.8, photo = '0.2', association = 'same', weight = 0.4) {
+        if (
+          ![0.2, 0.8].includes(text) ||
+          !['0.2', '0.8', 'missing'].includes(photo) ||
+          !['same', 'other'].includes(association) ||
+          ![0.4, 0.7].includes(weight)
+        )
+          throw new Error('Invalid control setting');
+        return {
+          ...fuse(
+            text,
+            photo === 'missing' ? null : Number(photo),
+            'C17',
+            photo === 'missing' ? null : association === 'same' ? 'C17' : 'C42',
+            weight,
+          ),
+          association,
+        };
+      }
+      const number = (x) => (x === null ? '—' : x.toFixed(2));
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 750 : 510;
+        const text = (x, y, value, size = 16, color = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">${value}</text>`;
+        const line = (x, y, xx, yy, color = '#a6aca3') =>
+          `<path d="M${x} ${y} L${xx} ${yy}" fill="none" stroke="${color}"/>`;
+        const branch = (x, y, photo) => {
+          const missing = photo && r.photo === null,
+            value = photo ? r.photo : r.text,
+            id = photo ? r.photoId : r.textId;
+          let s =
+            text(x, y, photo ? 'Photograph' : 'Written report', 18) +
+            text(x, y + 26, missing ? 'No observation' : `Claim ${id}`, 16, '#626962');
+          if (photo) {
+            s += `<rect x="${x}" y="${y + 43}" width="116" height="66" fill="#f1f2ef" stroke="#a6aca3"/>`;
+            if (!missing)
+              s += `<path d="M${x + 25} ${y + 60} L${x + 65} ${y + 55} L${x + 91} ${y + 74} L${x + 88} ${y + 98} L${x + 28} ${y + 98} Z M${x + 25} ${y + 60} L${x + 52} ${y + 78} L${x + 91} ${y + 74} M${x + 52} ${y + 78} L${x + 52} ${y + 98}" fill="none" stroke="#a6aca3"/>`;
+          } else {
+            s +=
+              `<rect x="${x}" y="${y + 43}" width="116" height="66" fill="#f1f2ef"/>` +
+              text(x + 10, y + 70, '“The box', 14) +
+              text(x + 10, y + 92, 'is crushed.”', 14);
+          }
+          s +=
+            line(x + 132, y + 77, x + 164, y + 77) +
+            text(x + 174, y + 65, 'Branch signal', 14, '#626962') +
+            text(x + 174, y + 98, number(value), 24);
+          return s;
+        };
+        let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Claim association check followed by weighted report and photo contributions"><rect width="${width}" height="${height}" fill="#fff"/>`;
+        s +=
+          text(0, 24, 'Different inputs, one claim', 20) +
+          text(0, 49, 'Supplied signals · no encoder runs', 14, '#626962');
+        s += branch(0, 88, false) + branch(mobile ? 0 : 350, mobile ? 265 : 88, true);
+        const joinY = mobile ? 451 : 277,
+          center = mobile ? 164 : 340;
+        if (mobile) {
+          s +=
+            line(310, 165, 318, 165) +
+            line(318, 165, 318, joinY - 20) +
+            line(310, 342, 318, 342) +
+            line(318, joinY - 20, center, joinY - 20) +
+            line(center, joinY - 20, center, joinY - 8);
+        } else {
+          s +=
+            line(155, 210, 155, joinY - 34) +
+            line(505, 210, 505, joinY - 34) +
+            line(155, joinY - 34, 505, joinY - 34) +
+            line(center, joinY - 34, center, joinY - 8);
+        }
+        s += text(
+          0,
+          joinY,
+          r.mode === 'blocked'
+            ? 'Pairing failed · scoring blocked'
+            : r.mode === 'report-only'
+              ? 'Photo absent · report-only fallback'
+              : 'IDs agree · combine both signals',
+          17,
+          r.mode === 'paired' ? '#00855b' : '#252c28',
+        );
+        const barY = joinY + 62,
+          barWidth = mobile ? 308 : 640;
+        s += text(
+          0,
+          barY - 17,
+          r.score === null
+            ? 'No score for an invalid pair'
+            : `Score ${number(r.score)} · ${r.route}`,
+          18,
+        );
+        s += `<rect x="0" y="${barY}" width="${barWidth}" height="32" fill="#f1f2ef" stroke="#a6aca3"/>`;
+        if (r.score !== null) {
+          s += `<rect x="0" y="${barY}" width="${barWidth * r.reportContribution}" height="32" fill="#00855b"/><rect x="${barWidth * r.reportContribution}" y="${barY}" width="${barWidth * r.photoContribution}" height="32" fill="#b7c8ba"/>`;
+        }
+        s +=
+          line(barWidth * threshold, barY - 8, barWidth * threshold, barY + 42, '#252c28') +
+          text(0, barY + 58, '0', 14, '#626962') +
+          text(barWidth - 24, barY + 58, '1.0', 14, '#626962') +
+          text(barWidth * threshold - 38, barY + 80, '0.60 priority', 14, '#626962');
+        s +=
+          text(
+            0,
+            barY + 113,
+            `Report contribution ${number(r.reportContribution)}`,
+            16,
+            '#00855b',
+          ) +
+          text(
+            mobile ? 0 : 350,
+            barY + (mobile ? 139 : 113),
+            `Photo contribution ${number(r.photoContribution)}`,
+            16,
+          );
+        s += text(
+          0,
+          height - 15,
+          mobile
+            ? 'Routes are not verified outcomes.'
+            : 'Weights and threshold are teaching choices, not measured performance.',
+          14,
+          '#626962',
+        );
+        return s + '</svg>';
+      }
+      let report = buildReport();
+      function render() {
+        const d = document;
+        report = buildReport(
+          Number(d.querySelector('#text').value),
+          d.querySelector('#photo').value,
+          d.querySelector('#association').value,
+          Number(d.querySelector('#weight').value),
+        );
+        const r = report;
+        d.querySelector('output').textContent =
+          r.score === null
+            ? 'Scoring blocked: photo C42 does not belong to claim C17.'
+            : `${r.route}: score ${number(r.score)} (${r.mode === 'paired' ? 'both inputs' : 'report-only fallback'}).`;
+        d.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth < 520);
+        d.querySelector('#interpretation').textContent =
+          r.mode === 'blocked'
+            ? 'A plausible signal cannot repair an invalid association. No contribution or route is computed.'
+            : r.mode === 'report-only'
+              ? 'Absence is not evidence of low damage. This declared fallback uses only the report, with weight one. It needs separate evaluation.'
+              : 'Green is the report contribution; the pale segment is the photo contribution. Their sum is compared with the 0.60 threshold. The route is computed, not validated as correct.';
+        d.querySelector('#pairing').textContent =
+          `Report ID: ${r.textId}. Photo ID: ${r.photoId === null ? 'absent' : r.photoId}. Pairing policy: ${r.mode}.`;
+        d.querySelector('tbody').innerHTML =
+          `<tr><td>Report</td><td>${number(r.text)}</td><td>${number(r.usedWeight)}</td><td>${number(r.reportContribution)}</td></tr><tr><td>Photo</td><td>${number(r.photo)}</td><td>${number(r.mode === 'paired' ? 1 - r.weight : r.mode === 'report-only' ? 0 : null)}</td><td>${number(r.photoContribution)}</td></tr>`;
+        d.querySelector('#formula').textContent =
+          r.mode === 'blocked'
+            ? 'Fusion is not evaluated. Dashes mark unavailable contributions.'
+            : r.mode === 'report-only'
+              ? `Fallback: 1 × ${number(r.text)} = ${number(r.score)}. No photo signal is substituted.`
+              : `${number(r.weight)} × ${number(r.text)} + ${number(1 - r.weight)} × ${number(r.photo)} = ${number(r.score)}. Priority review requires score ≥ 0.60.`;
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

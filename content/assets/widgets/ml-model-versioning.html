@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Model release restoration explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #ranking th:first-child {
+        width: 45%;
+      }
+      #vectors th:first-child {
+        width: 42%;
+      }
+      #history {
+        font-size: 13px;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+
+      #records td:first-child,
+      #records th:first-child {
+        width: 18%;
+      }
+      #records td:last-child,
+      #records th:last-child {
+        width: 35%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Restore a requested release into a system currently running R2. The two manifests bind a
+      distance transform, fixed weights, and a review rule. This teaching calculation uses fictional
+      components; it does not train a model or measure accuracy.
+    </p>
+    <form>
+      <div>
+        <label for="release">Requested release</label
+        ><select id="release">
+          <option value="R1">R1 · earlier release</option>
+          <option value="R2">R2 · current release</option>
+        </select>
+      </div>
+      <div>
+        <label for="scope">Restore scope</label
+        ><select id="scope">
+          <option value="weights">Weights only</option>
+          <option value="transform">Weights + transform</option>
+          <option value="complete">Complete release</option>
+        </select>
+      </div>
+      <div>
+        <label for="distance">Request distance</label
+        ><select id="distance">
+          <option value="10">10 km</option>
+          <option value="20">20 km</option>
+          <option value="30" selected>30 km</option>
+          <option value="40">40 km</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect manifests and loaded components</summary>
+      <p>
+        R1 and R2 are immutable records in this example. The active starting release is always R2.
+        Component IDs are explanatory labels, not cryptographic hashes.
+      </p>
+      <table id="components">
+        <caption>
+          Requested versus assembled release
+        </caption>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Requested</th>
+            <th>Assembled</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="identity"></p>
+      <p>
+        Real manifests also reference inference code, runtime requirements, contracts, training
+        lineage and evaluation evidence. This explorer executes one fixed JavaScript runtime and a
+        fixed raw-input contract; it does not emulate artifact storage or distributed deployment.
+      </p>
+    </details>
+    <details id="assumptions">
+      <summary>Calculation assumptions and limits</summary>
+      <p>
+        Distance is in kilometres. T1 uses mean 10 km and scale 10 km; T2 uses mean 20 km and scale
+        10 km. The normalized value z has no units. W1 computes 20 + 5 × z minutes; W2 computes 24 +
+        4 × z minutes. P1 reviews estimates ≥ 30 minutes; P2 reviews estimates ≥ 32 minutes.
+        Equality triggers review. Constants are chosen, not fitted.
+      </p>
+      <p>
+        The comparison uses the same raw request, exact component IDs, and deterministic formulas.
+        An estimate difference is relative to the requested release, not error against a real
+        delivery outcome. A matching estimate or action cannot establish component identity.
+        Reverting artifacts does not undo earlier actions.
+      </p>
+    </details>
+    <script>
+      const transforms = Object.freeze({
+        T1: Object.freeze({ mean: 10, scale: 10 }),
+        T2: Object.freeze({ mean: 20, scale: 10 }),
+      });
+      const weights = Object.freeze({
+        W1: Object.freeze({ base: 20, slope: 5 }),
+        W2: Object.freeze({ base: 24, slope: 4 }),
+      });
+      const policies = Object.freeze({ P1: 30, P2: 32 });
+      const manifests = Object.freeze({
+        R1: Object.freeze({ transform: 'T1', weights: 'W1', policy: 'P1' }),
+        R2: Object.freeze({ transform: 'T2', weights: 'W2', policy: 'P2' }),
+      });
+      function resolveRelease(ref, aliases) {
+        const id = Object.hasOwn(manifests, ref) ? ref : aliases[ref];
+        if (!Object.hasOwn(manifests, id)) throw new Error('Unknown release');
+        return { id, manifest: { ...manifests[id] } };
+      }
+      function execute(manifest, distance) {
+        if (!Number.isFinite(distance) || distance < 0)
+          throw new Error('Distance must be finite and nonnegative');
+        if (
+          !Object.hasOwn(transforms, manifest.transform) ||
+          !Object.hasOwn(weights, manifest.weights) ||
+          !Object.hasOwn(policies, manifest.policy)
+        )
+          throw new Error('Missing component');
+        const t = transforms[manifest.transform],
+          w = weights[manifest.weights],
+          z = (distance - t.mean) / t.scale,
+          minutes = w.base + w.slope * z,
+          threshold = policies[manifest.policy];
+        return { z, minutes, threshold, review: minutes >= threshold };
+      }
+      function restore(release, scope, distance) {
+        if (
+          !Object.hasOwn(manifests, release) ||
+          !['complete', 'weights', 'transform'].includes(scope)
+        )
+          throw new Error('Unknown restoration');
+        const requested = { ...manifests[release] },
+          assembled = { ...manifests.R2, weights: requested.weights };
+        if (scope !== 'weights') assembled.transform = requested.transform;
+        if (scope === 'complete') assembled.policy = requested.policy;
+        const expected = execute(requested, distance),
+          actual = execute(assembled, distance),
+          matches = Object.keys(requested).every((k) => requested[k] === assembled[k]);
+        return {
+          release,
+          scope,
+          distance,
+          requested,
+          assembled,
+          expected,
+          actual,
+          matches,
+          delta: actual.minutes - expected.minutes,
+        };
+      }
+      const action = (x) => (x.review ? 'Review' : 'No review');
+      const n = (x) => (Number.isInteger(x) ? String(x) : x.toFixed(1));
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 800 : 460;
+        const text = (x, y, s, size = 16, fill = '#252c28') =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="' +
+          fill +
+          '" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">' +
+          s +
+          '</text>';
+        const line = (x, y, xx, yy) =>
+          '<path d="M' + x + ' ' + y + ' L' + xx + ' ' + yy + '" fill="none" stroke="#a6aca3"/>';
+        function chain(x, y, m, v, label, emphasis) {
+          const t = transforms[m.transform],
+            w = weights[m.weights],
+            color = emphasis ? '#00855b' : '#626962';
+          let s = text(x + 26, y, label, 16, color);
+          const gap = mobile ? 58 : 76,
+            top = y + 38;
+          const rows = [
+            [
+              'Transform ' + m.transform,
+              'z = (' + r.distance + ' − ' + t.mean + ') / ' + t.scale + ' = ' + n(v.z),
+            ],
+            [
+              'Weights ' + m.weights,
+              n(w.base) + ' + ' + n(w.slope) + ' × ' + n(v.z) + ' = ' + n(v.minutes) + ' min',
+            ],
+            ['Review rule ' + m.policy, 'Review when estimate ≥ ' + v.threshold + ' min'],
+          ];
+          rows.forEach((row, i) => {
+            const yy = top + i * gap;
+            s +=
+              line(x + 8, yy + 5, x + 8, yy + gap - 7) +
+              '<circle cx="' +
+              (x + 8) +
+              '" cy="' +
+              (yy - 4) +
+              '" r="3" fill="' +
+              color +
+              '"/>' +
+              text(x + 26, yy, row[0]) +
+              text(x + 26, yy + 22, row[1], 14, '#626962');
+          });
+          const end = top + gap * 3;
+          s += text(x + 26, end + 4, n(v.minutes) + ' min · ' + action(v), 22, color);
+          const barWidth = mobile ? 272 : 280;
+          s +=
+            '<rect x="' +
+            (x + 26) +
+            '" y="' +
+            (end + 24) +
+            '" width="' +
+            barWidth +
+            '" height="12" fill="#f1f2ef"/><rect x="' +
+            (x + 26) +
+            '" y="' +
+            (end + 24) +
+            '" width="' +
+            (barWidth * v.minutes) / 40 +
+            '" height="12" fill="' +
+            color +
+            '"/>' +
+            text(x + 26, end + 59, '0', 14, '#626962') +
+            text(x + barWidth - 12, end + 59, '40 min', 14, '#626962');
+          return s;
+        }
+        let s =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' +
+          width +
+          ' ' +
+          height +
+          '" role="img" aria-label="Complete requested release compared with assembled components for the same distance"><rect width="' +
+          width +
+          '" height="' +
+          height +
+          '" fill="#fff"/>';
+        s += text(mobile ? 0 : 220, 24, 'Same request · ' + r.distance + ' km', 18);
+        if (mobile) {
+          s += chain(0, 64, r.requested, r.expected, 'Complete ' + r.release, true);
+          s += text(0, 418, 'Same request reused · ' + r.distance + ' km', 16);
+          s += chain(
+            0,
+            456,
+            r.assembled,
+            r.actual,
+            r.matches ? 'Assembled · matches ' + r.release : 'Assembled · mixed components',
+            r.matches,
+          );
+        } else {
+          s += '<path d="M340 34 V48 H8 V105 M340 48 H358 V105" fill="none" stroke="#a6aca3"/>';
+          s += chain(0, 84, r.requested, r.expected, 'Complete ' + r.release, true);
+          s += chain(
+            350,
+            84,
+            r.assembled,
+            r.actual,
+            r.matches ? 'Assembled · matches ' + r.release : 'Assembled · mixed components',
+            r.matches,
+          );
+        }
+        return s + '</svg>';
+      }
+      let report;
+      function render() {
+        report = restore(
+          document.querySelector('#release').value,
+          document.querySelector('#scope').value,
+          Number(document.querySelector('#distance').value),
+        );
+        const r = report;
+        document.querySelector('output').textContent =
+          'Assembled: ' +
+          n(r.actual.minutes) +
+          ' min, ' +
+          action(r.actual).toLowerCase() +
+          '. Requested ' +
+          r.release +
+          ': ' +
+          n(r.expected.minutes) +
+          ' min, ' +
+          action(r.expected).toLowerCase() +
+          '. ' +
+          (r.matches ? 'All component IDs match.' : 'Component IDs differ.');
+        document.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth <= 520);
+        document.querySelector('#interpretation').textContent = r.matches
+          ? 'The assembled components match the requested manifest. This deterministic fixture also reproduces its estimate and review decision.'
+          : r.delta !== 0
+            ? 'The assembled estimate is ' +
+              n(Math.abs(r.delta)) +
+              ' minutes ' +
+              (r.delta < 0 ? 'below' : 'above') +
+              ' the requested release. Restoring its weights alone does not restore its behavior.'
+            : r.actual.review !== r.expected.review
+              ? 'The estimate matches, but the remaining review rule changes the action. Release identity includes decision configuration.'
+              : 'The estimate and action match on this request, but component IDs still differ. A matching output cannot identify a release.';
+        document.querySelector('#components tbody').innerHTML = ['transform', 'weights', 'policy']
+          .map(
+            (k) =>
+              '<tr><td>' +
+              { transform: 'Transform', weights: 'Weights', policy: 'Review rule' }[k] +
+              '</td><td>' +
+              r.requested[k] +
+              '</td><td>' +
+              r.assembled[k] +
+              (r.requested[k] === r.assembled[k] ? ' · match' : ' · differs') +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#identity').textContent = r.matches
+          ? 'Resolved release: ' + r.release + '.'
+          : 'This assembly is neither a complete requested restore nor a new evaluated release. A real loader can reject the mismatched manifest before serving.';
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

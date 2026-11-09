@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One triangle, different participation</title><style>
+:root{--font-size-base:16px;--foreground:#252c28;--background:#fff;--muted:#f1f2ef;--muted-foreground:#58615b;--border:#cdd3ce;--viz-series-1:#007a4d;--viz-series-2:#9a5938;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;padding:12px;font:16px/1.5 system-ui,sans-serif;color:var(--foreground);background:#fff}
+h3{font-size:1.05rem;line-height:1.4;margin:0}p{margin:.5rem 0}.viz-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:inherit;font-size:.88rem;line-height:1.4;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--foreground);cursor:pointer}
+.btn:hover:not(:disabled),.btn[aria-pressed=true]{background:#eef6f0;border-color:#007a4d}.btn:focus-visible{outline:2px solid #007a4d;outline-offset:3px}.btn:disabled{opacity:.45;cursor:default}
+.btn-primary{border-color:#007a4d}.text-small{font-size:.85rem;color:var(--muted-foreground)}.tabular-nums{font-variant-numeric:tabular-nums}
+@media(max-width:400px){body{padding:8px;font-size:15px}}
+</style></head><body>
+<div id="detriangling-exchanges-v1">
+  <h3>One triangle, different participation</h3>
+  <div class="viz-row" role="group" aria-label="Compare Nora’s participation at the same moment">
+    <button class="btn" type="button" data-story="usual" aria-pressed="true">Carry the complaint</button>
+    <button class="btn" type="button" data-story="different" aria-pressed="false">Detriangling</button>
+  </div>
+  <div class="dt-stage">
+    <span id="dt-step" class="text-small tabular-nums"></span>
+    <h3 id="dt-heading"></h3>
+  </div>
+  <svg id="dt-figure" class="dt-figure" role="img" aria-labelledby="dt-title dt-description">
+    <title id="dt-title">Helen, Ben, and Nora: a relationship triangle</title>
+    <desc id="dt-description">An invented comparison of carrying a complaint and changing one’s participation.</desc>
+    <g id="dt-marks"></g>
+  </svg>
+  <div id="dt-exchange" aria-live="polite"></div>
+  <div class="viz-row">
+    <button class="btn" type="button" id="dt-back">Previous</button>
+    <button class="btn btn-primary" type="button" id="dt-next">Next moment</button>
+  </div>
+  <div class="viz-row text-small dt-legend" aria-label="Diagram key">
+    <span><i class="dt-key dt-tension" aria-hidden="true"></i>Pressure or conflict</span>
+    <span><i class="dt-key dt-alliance" aria-hidden="true"></i>Shared complaint</span>
+    <span><i class="dt-key dt-distance" aria-hidden="true"></i>Distance</span>
+  </div>
+  <span class="text-small">Invented teaching illustration · Lines show the scripted relationships, not measured feelings.</span>
+</div>
+<style>
+  #detriangling-exchanges-v1 {display:grid;gap:calc(var(--font-size-base) * .8);color:var(--foreground);}
+  #detriangling-exchanges-v1 > h3 {padding-right:90px;}
+  #detriangling-exchanges-v1 .dt-stage {display:grid;gap:calc(var(--font-size-base) * .25);}
+  #detriangling-exchanges-v1 .dt-figure {display:block;width:100%;}
+  #detriangling-exchanges-v1 .dt-figure text {fill:var(--foreground);font-family:inherit;font-size:12px;font-weight:400;text-anchor:middle;}
+  #detriangling-exchanges-v1 .dt-figure .dt-name {font-weight:500;}
+  #detriangling-exchanges-v1 #dt-exchange {min-height:calc(var(--font-size-base) * 4);}
+  #detriangling-exchanges-v1 .dt-legend > span {display:inline-flex;align-items:center;gap:calc(var(--font-size-base) * .4);}
+  #detriangling-exchanges-v1 .dt-key {display:inline-block;width:22px;height:0;border-top:2px solid var(--muted-foreground);}
+  #detriangling-exchanges-v1 .dt-tension {border-top:2px dotted var(--viz-series-1);}
+  #detriangling-exchanges-v1 .dt-alliance {border-top:2px solid var(--viz-series-2);}
+  #detriangling-exchanges-v1 .dt-distance {border-top:1px dashed var(--muted-foreground);}
+</style>
+<script>
+(() => {
+  const root=document.getElementById('detriangling-exchanges-v1');
+  const svg=root.querySelector('#dt-figure');
+  const layer=root.querySelector('#dt-marks');
+  const buttons=Array.from(root.querySelectorAll('[data-story]'));
+  const previous=root.querySelector('#dt-back');
+  const next=root.querySelector('#dt-next');
+  const own={kind:'contact',label:['Own','contact']};
+  const invitation={heading:'Helen asks Nora to intervene',exchange:'Helen: “Tell Ben he’s being selfish.” The unanswered-call issue is between Helen and Ben.',left:{kind:'tension',label:['Request to','intervene']},right:own};
+  const stories={
+    usual:[
+      invitation,
+      {heading:'Nora carries Helen’s complaint',exchange:'Nora to Ben: “You should call Mum. You’re upsetting her.”',left:{kind:'alliance',label:['Shared','complaint']},right:{kind:'tension',label:['Pressure','to call']}},
+      {heading:'The siblings begin to argue',exchange:'Ben: “Why are you speaking for her?” The disagreement now includes Nora and Ben.',left:{kind:'alliance',label:['Shared','complaint']},right:{kind:'tension',label:['Sibling','conflict']}},
+      {heading:'Nora reports back; the first issue remains',exchange:'Nora and Helen complain about Ben together. Nora and Ben have less contact; Helen still has no call from him.',left:{kind:'alliance',label:['Report','back']},right:{kind:'distance',label:['Less','contact']}}
+    ],
+    different:[
+      invitation,
+      {heading:'Nora listens and defines her participation',exchange:'Nora: “I can listen, but I won’t ask Ben to call for you.”',left:{kind:'contact',label:['Listens;','declines role']},right:own},
+      {heading:'Helen protests; Nora does not carry the message',exchange:'Helen: “So you’re taking his side.” Nora: “I care about you both. I’m not going to carry messages.”',left:{kind:'tension',label:['Protest','heard']},right:own},
+      {heading:'Nora follows through; the first issue remains',exchange:'Nora keeps her own contact with each and does not relay the complaint. Helen may remain upset; Ben has not called her.',left:own,right:own}
+    ]
+  };
+  let state={article:'detriangling',story:'usual',step:0};
+  function restore(snapshot){
+    const s=snapshot && snapshot.modelContent;
+    if(s && s.article==='detriangling' && Object.hasOwn(stories,s.story) && Number.isInteger(s.step) && s.step>=0 && s.step<4)state={article:'detriangling',story:s.story,step:s.step};
+  }
+  restore(window.openai && window.openai.widgetState);
+  function save(){
+    if(window.openai && typeof window.openai.setWidgetState==='function')Promise.resolve(window.openai.setWidgetState({modelContent:{...state},privateContent:null})).catch(()=>{});
+  }
+  function element(tag,attrs,parent){
+    const n=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    Object.entries(attrs||{}).forEach(([k,v])=>n.setAttribute(k,String(v)));
+    if(parent)parent.appendChild(n);
+    return n;
+  }
+  function label(x,y,lines,cls){
+    const n=element('text',{x,y,class:cls||''},layer);
+    lines.forEach((line,i)=>{const span=element('tspan',{x,dy:i?17:0},n);span.textContent=line;});
+  }
+  function edge(x1,y1,x2,y2,kind){
+    const attrs={x1,y1,x2,y2,stroke:kind==='tension'?'var(--viz-series-1)':kind==='alliance'?'var(--viz-series-2)':'var(--muted-foreground)','stroke-width':kind==='contact'||kind==='distance'?1:2};
+    if(kind==='tension')attrs['stroke-dasharray']='2 4';
+    if(kind==='distance')attrs['stroke-dasharray']='6 5';
+    element('line',attrs,layer);
+  }
+  function person(x,y,name,role,top){
+    element('circle',{cx:x,cy:y,r:22,fill:'var(--muted)',stroke:'var(--border)','stroke-width':1},layer);
+    label(x,y+4,[name[0]],'dt-name');
+    label(x,top?19:302,[name],'dt-name');
+    label(x,top?38:321,[role]);
+  }
+  function draw(){
+    const frame=stories[state.story][state.step];
+    const width=Math.max(280,Math.round(svg.getBoundingClientRect().width||root.getBoundingClientRect().width||600));
+    svg.setAttribute('viewBox','0 0 '+width+' 334');svg.setAttribute('height',334);
+    layer.replaceChildren();
+    const left=width*.23,right=width*.77,mid=width*.5;
+    edge(left+26,75,right-26,75,'distance');
+    edge(left+5,101,mid-23,244,frame.left.kind);
+    edge(right-5,101,mid+23,244,frame.right.kind);
+    label(mid,117,['Call','unresolved']);
+    label(width*.18,188,frame.left.label);
+    label(width*.82,188,frame.right.label);
+    person(left,75,'Helen','Mother',true);
+    person(right,75,'Ben','Adult son',true);
+    person(mid,263,'Nora','Adult daughter',false);
+    root.querySelector('#dt-step').textContent='Moment '+(state.step+1)+' of 4';
+    root.querySelector('#dt-heading').textContent=frame.heading;
+    root.querySelector('#dt-exchange').textContent=frame.exchange;
+    root.querySelector('#dt-description').textContent=frame.heading+'. '+frame.exchange+' Helen–Nora: '+frame.left.label.join(' ')+'. Ben–Nora: '+frame.right.label.join(' ')+'. Helen–Ben: call unresolved. Ordinary contact does not mean agreement.';
+    buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.story===state.story)));
+    previous.disabled=state.step===0;next.disabled=state.step===3;
+  }
+  buttons.forEach(b=>b.addEventListener('click',()=>{state.story=b.dataset.story;draw();save();}));
+  previous.addEventListener('click',()=>{if(state.step>0){state.step--;draw();save();}});
+  next.addEventListener('click',()=>{if(state.step<3){state.step++;draw();save();}});
+  window.addEventListener('openai:set_globals',event=>{if(event.detail && event.detail.globals && event.detail.globals.widgetState){restore(event.detail.globals.widgetState);draw();}});
+  new ResizeObserver(()=>draw()).observe(root);
+  draw();
+})();
+</script>
+
+</body></html>

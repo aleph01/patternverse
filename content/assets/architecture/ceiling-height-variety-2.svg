@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="410" viewBox="0 0 560 410" role="img" aria-labelledby="title desc" data-architecture-style="light-editorial">
+<title id="title">Different scales in one room</title>
+<desc id="desc">Cutaway spatial drawing contrasts a lower canopy over a sitting edge with the taller open volume of the same room. Original conceptual drawing; not to scale.</desc>
+<style>
+:root{color-scheme:only light;--paper:#fff;--ink:#252c28;--stone:#f1f2ef;--line:#a6aca3;--mint:#edf5f0;--green:#00855b;--deep:#00855b}
+svg{background:#fff;color:var(--ink)}
+path,rect,circle,ellipse{vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:butt}
+text{fill:var(--ink);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20.222222px;font-weight:400;letter-spacing:0}
+.on-accent{fill:#fff}
+.paper{fill:var(--paper)}.existing{fill:var(--stone);stroke:var(--line);stroke-width:1.1}
+.landscape{fill:var(--mint)}.tree{fill:var(--paper);stroke:var(--ink);stroke-width:1.1}
+.intervention{fill:var(--green);stroke:var(--deep);stroke-width:.8}
+.highlight-plane{fill:var(--mint);stroke:var(--green);stroke-width:1.3}
+.line{fill:none;stroke:var(--ink);stroke-width:1.3}.wall-line{fill:none;stroke:var(--ink);stroke-width:1.8}
+.fine,.leader{fill:none;stroke:var(--line);stroke-width:1.1}
+.boundary{fill:none;stroke:var(--line);stroke-width:1.1}.disturbed{fill:url(#hatch);stroke:var(--line);stroke-width:.8}
+.path-surface{fill:var(--stone);stroke:none}.route{fill:none;stroke:var(--green);stroke-width:1.4}
+.outline-green{fill:none;stroke:var(--deep);stroke-width:1.6}
+.wall{fill:var(--stone);stroke:var(--line);stroke-width:1}
+.room{fill:var(--paper);stroke:var(--ink);stroke-width:1.6}
+.garden,.retained{fill:var(--mint);stroke:var(--line);stroke-width:.8}
+.new,.seat,.shade{fill:var(--green);stroke:var(--deep);stroke-width:.8}
+.flow{fill:none;stroke:var(--green);stroke-width:1.4}
+.thermal,.retained-line{fill:none;stroke:var(--deep);stroke-width:1.6}
+.glass{fill:var(--mint);stroke:var(--deep);stroke-width:1}
+.service{fill:var(--paper);stroke:var(--deep);stroke-width:1.2}
+.light{fill:var(--mint)}
+.person{fill:var(--ink);stroke:none}.plan-head{fill:var(--paper);stroke:var(--ink);stroke-width:1.1}
+.warning{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:5 4}
+.dashed{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:5 4}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.1"/></marker>
+<pattern id="hatch" patternUnits="userSpaceOnUse" width="9" height="9"><path d="M-2 2L2 -2M0 9L9 0M7 11L11 7" stroke="var(--line)" stroke-width=".7"/></pattern>
+</defs>
+<rect width="560" height="410" class="paper"/>
+<path d="M208 172.25L488 298.25L338 365.75L58 239.75Z" class="boundary"/><path d="M488 298.25L481 301.4L481 161.39999999999998L488 158.25Z" class="existing"/><path d="M481 301.4L201 175.39999999999998L201 35.39999999999998L481 161.39999999999998Z" class="existing"/><path d="M208 32.25L488 158.25L481 161.39999999999998L201 35.39999999999998Z" class="paper"/><path d="M208 32.25L488 158.25L481 161.39999999999998L201 35.39999999999998Z" class="line"/><path d="M488,298.25L488,158.25M481,301.4L481,161.39999999999998M201,175.39999999999998L201,35.39999999999998" class="fine"/><path d="M208 178.55L65 242.9L65 102.9L208 38.55000000000001Z" class="existing"/><path d="M65 242.9L58 239.75L58 99.75L65 102.9Z" class="existing"/><path d="M201 35.39999999999998L208 38.55000000000001L65 102.9L58 99.75Z" class="paper"/><path d="M201 35.39999999999998L208 38.55000000000001L65 102.9L58 99.75Z" class="line"/><path d="M208,178.55L208,38.55000000000001M65,242.9L65,102.9M58,239.75L58,99.75" class="fine"/><path d="M208 98.55000000000001L286 133.65L149 195.3L71 160.2Z" class="highlight-plane"/><path d="M224 224.45L198 236.15L198 218.15L224 206.45Z" class="existing"/><path d="M198 236.15L156 217.25L156 199.25L198 218.15Z" class="existing"/><path d="M182 187.55L224 206.45L198 218.15L156 199.25Z" class="paper"/><path d="M182 187.55L224 206.45L198 218.15L156 199.25Z" class="line"/><path d="M224,224.45L224,206.45M198,236.15L198,218.15M156,217.25L156,199.25" class="fine"/><path d="M384 308.15L346 325.25L346 297.25L384 280.15Z" class="existing"/><path d="M346 325.25L278 294.65L278 266.65L346 297.25Z" class="existing"/><path d="M316 249.55L384 280.15L346 297.25L278 266.65Z" class="paper"/><path d="M316 249.55L384 280.15L346 297.25L278 266.65Z" class="line"/><path d="M384,308.15L384,280.15M346,325.25L346,297.25M278,294.65L278,266.65" class="fine"/><text x="45" y="30" text-anchor="start">Lower sitting edge</text><text x="510" y="30" text-anchor="end">Taller volume</text><text x="280" y="389" text-anchor="middle">Different scales within one room.</text>
+</svg>
+

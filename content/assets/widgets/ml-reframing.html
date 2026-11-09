@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Reframing targets and information explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Fit a constant mean and target-band frequencies to fictional delivery durations with identical
+      recorded inputs. Compare what each output retains. These are computed training summaries, not
+      predictions from a trained delivery model.
+    </p>
+    <form>
+      <div>
+        <label for="sample">Observed deliveries</label
+        ><select id="sample">
+          <option value="balanced">Six · balanced groups</option>
+          <option value="slower">Eight · more slow trips</option>
+        </select>
+      </div>
+      <div>
+        <label for="bands">Target bands</label
+        ><select id="bands">
+          <option value="gap">Three · 0, 15, 25, 40</option>
+          <option value="coarse">Two · 0, 20, 40</option>
+          <option value="fine">Four · 0, 10, 20, 30, 40</option>
+        </select>
+      </div>
+      <div>
+        <label for="deadline">Deadline · minutes</label
+        ><select id="deadline">
+          <option value="25">25 minutes</option>
+          <option value="15">15 minutes</option>
+          <option value="30">30 minutes</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="tail"></p>
+    <div id="graphic"></div>
+    <p id="interpretation"></p>
+    <details id="state">
+      <summary>Inspect observations and fitted quantities</summary>
+      <p id="observations"></p>
+      <table>
+        <caption>
+          Band counts and constant fitted mass
+        </caption>
+        <thead>
+          <tr>
+            <th>Minutes</th>
+            <th>Count</th>
+            <th>Mass</th>
+            <th>Midpoint</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="loss"></p>
+      <p id="reconstruction"></p>
+      <p id="uniform"></p>
+      <p id="observed-tail"></p>
+    </details>
+    <details id="assumptions">
+      <summary>Fitting assumptions and limits</summary>
+      <p>
+        All observations have identical recorded features, so the fitted outputs are constants. The
+        mean minimizes squared error. Band counts divided by sample size give the unregularized
+        categorical frequency fit; empty bands have zero fitted mass. Ranges include their left
+        boundary and exclude their right boundary. Supported durations are 0 ≤ duration &lt; 40
+        minutes.
+      </p>
+      <p>
+        Bounds describe how much fitted band mass could lie at or beyond the deadline. They are not
+        confidence intervals or guarantees about future data. Uniform within-band interpolation and
+        midpoint reconstruction are optional teaching assumptions, not information supplied by the
+        fitted masses. No feature-dependent classifier, calibration, quantile model or
+        generalization experiment runs.
+      </p>
+    </details>
+    <script>
+      const samples = Object.freeze({
+        balanced: Object.freeze([8, 10, 12, 28, 30, 32]),
+        slower: Object.freeze([8, 10, 12, 28, 30, 32, 32, 32]),
+      });
+      const layouts = Object.freeze({
+        gap: Object.freeze([0, 15, 25, 40]),
+        coarse: Object.freeze([0, 20, 40]),
+        fine: Object.freeze([0, 10, 20, 30, 40]),
+      });
+      function fit(values, edges, deadline) {
+        if (
+          !Array.isArray(values) ||
+          !values.length ||
+          !Array.isArray(edges) ||
+          edges.length < 2 ||
+          edges.some((v, i) => !Number.isFinite(v) || (i > 0 && v <= edges[i - 1])) ||
+          !Number.isFinite(deadline) ||
+          values.some((v) => !Number.isFinite(v) || v < edges[0] || v >= edges[edges.length - 1])
+        )
+          throw new Error('Invalid outcomes, bands or deadline');
+        const n = values.length,
+          mean = values.reduce((a, b) => a + b, 0) / n;
+        const bins = edges.slice(0, -1).map((lo, i) => {
+          const hi = edges[i + 1],
+            count = values.filter((v) => v >= lo && v < hi).length;
+          return { lo, hi, count, mass: count / n, midpoint: (lo + hi) / 2 };
+        });
+        let lower = 0,
+          upper = 0,
+          uniform = 0;
+        for (const b of bins) {
+          if (b.lo >= deadline) {
+            lower += b.mass;
+            upper += b.mass;
+            uniform += b.mass;
+          } else if (b.hi > deadline) {
+            upper += b.mass;
+            uniform += (b.mass * (b.hi - deadline)) / (b.hi - b.lo);
+          }
+        }
+        return {
+          values: [...values],
+          edges: [...edges],
+          deadline,
+          n,
+          mean,
+          mse: values.reduce((s, v) => s + (v - mean) ** 2, 0) / n,
+          bins,
+          lower,
+          upper,
+          uniform,
+          midpointMean: bins.reduce((s, b) => s + b.mass * b.midpoint, 0),
+          observedTail: values.filter((v) => v >= deadline).length / n,
+          pointCrosses: mean >= deadline,
+          identified: Math.abs(upper - lower) < 1e-12,
+        };
+      }
+      function buildReport(sample = 'balanced', bands = 'gap', deadline = 25) {
+        if (
+          !Object.hasOwn(samples, sample) ||
+          !Object.hasOwn(layouts, bands) ||
+          ![15, 25, 30].includes(deadline)
+        )
+          throw new Error('Invalid control setting');
+        return { ...fit(samples[sample], layouts[bands], deadline), sample, bands };
+      }
+      const number = (x) => Number(x.toFixed(3)).toString();
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 770 : 530,
+          plotWidth = mobile ? 300 : 300;
+        const text = (x, y, v, size = 16, color = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400">${v}</text>`;
+        const line = (x, y, xx, yy, color = '#a6aca3') =>
+          `<path d="M${x} ${y} L${xx} ${yy}" stroke="${color}" fill="none"/>`;
+        const axis = (x, y) => {
+          let s = line(x, y, x + plotWidth, y);
+          for (const v of [0, 10, 20, 30, 40])
+            s +=
+              line(x + (v / 40) * plotWidth, y, x + (v / 40) * plotWidth, y + 6) +
+              text(x + (v / 40) * plotWidth - (v === 0 ? 0 : 10), y + 25, String(v), 14, '#626962');
+          return s;
+        };
+        let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Same delivery observations fitted as one mean or probabilities over duration bands"><rect width="${width}" height="${height}" fill="#fff"/>`;
+        s +=
+          text(0, 24, 'Same outcomes, different targets', 20) +
+          text(0, 51, 'Fictional delivery durations · minutes', 14, '#626962');
+        s += text(0, 94, 'Observed durations', 18);
+        const fullWidth = mobile ? 300 : 650;
+        const seen = {};
+        for (const v of r.values) {
+          const level = seen[v] || 0;
+          seen[v] = level + 1;
+          s += `<circle cx="${(v / 40) * fullWidth}" cy="${132 - level * 13}" r="4" fill="#626962"/>`;
+        }
+        s +=
+          line(0, 144, fullWidth, 144) +
+          text(0, 168, '0', 14, '#626962') +
+          text(fullWidth - 22, 168, '40', 14, '#626962') +
+          text(0, 196, `Gray line: deadline ${r.deadline} min`, 14, '#626962');
+        const pointY = mobile ? 232 : 239,
+          distY = mobile ? 480 : 239,
+          distX = mobile ? 0 : 350;
+        s +=
+          text(0, pointY, 'Fit one squared-error value', 18) +
+          text(0, pointY + 31, `Mean ${number(r.mean)} min`, 22, '#00855b');
+        const py = pointY + 110;
+        s +=
+          axis(0, py) +
+          line((r.mean / 40) * plotWidth, py - 50, (r.mean / 40) * plotWidth, py, '#00855b') +
+          `<circle cx="${(r.mean / 40) * plotWidth}" cy="${py - 50}" r="5" fill="#00855b"/>`;
+        const dl = (r.deadline / 40) * plotWidth;
+        s +=
+          line(dl, py - 66, dl, py + 5) +
+          text(0, py + 61, `Mean ≥ ${r.deadline}? ${r.pointCrosses ? 'Yes' : 'No'}`, 16) +
+          text(0, py + 87, 'A point is not a tail probability.', 14, '#626962');
+        s += text(distX, distY, 'Fit probability mass by band', 18);
+        const base = distY + 110;
+        for (const b of r.bins) {
+          const xx = distX + (b.lo / 40) * plotWidth,
+            bw = ((b.hi - b.lo) / 40) * plotWidth,
+            h = b.mass * 100;
+          s +=
+            `<rect x="${xx + 1}" y="${base - h}" width="${bw - 2}" height="${h}" fill="#edf5f0" stroke="#00855b"/>` +
+            text(xx + bw / 2 - 14, base - h - 10, number(b.mass), 14, '#00855b');
+        }
+        s +=
+          axis(distX, base) +
+          line(distX + dl, base - 76, distX + dl, base + 5) +
+          text(distX, base + 61, `At least ${r.deadline} min:`, 16) +
+          text(
+            distX,
+            base + 87,
+            r.identified
+              ? `Fitted mass ${number(r.lower)}`
+              : `Mass bounds ${number(r.lower)}–${number(r.upper)}`,
+            18,
+            '#00855b',
+          );
+        s +=
+          text(
+            0,
+            height - 49,
+            mobile
+              ? 'Bar height shows probability mass.'
+              : 'Bar height shows probability mass; widths show duration ranges.',
+            14,
+            '#626962',
+          ) + text(0, height - 22, 'Training summaries are not future reliability.', 14, '#626962');
+        return s + '</svg>';
+      }
+      let report = buildReport();
+      function render() {
+        const d = document;
+        report = buildReport(
+          d.querySelector('#sample').value,
+          d.querySelector('#bands').value,
+          Number(d.querySelector('#deadline').value),
+        );
+        const r = report;
+        d.querySelector('output').textContent =
+          `Mean ${number(r.mean)} min; band masses ${r.bins.map((b) => number(b.mass)).join(', ')}.`;
+        d.querySelector('#tail').textContent = r.identified
+          ? `At least ${r.deadline} min: fitted mass ${number(r.lower)}. The deadline is resolved by these bands.`
+          : `At least ${r.deadline} min: fitted mass bounds ${number(r.lower)} to ${number(r.upper)}. Within-band detail is missing.`;
+        d.querySelector('#graphic').innerHTML = mechanismGraphic(r, innerWidth < 520);
+        d.querySelector('#interpretation').textContent = r.identified
+          ? 'The single mean and the band distribution summarize the same sample differently. The deadline does not split any band with positive mass.'
+          : 'A deadline cuts through a band with positive mass. The bounds retain that ambiguity; the optional uniform calculation adds an assumption.';
+        d.querySelector('#observations').textContent =
+          `Observed durations: ${r.values.join(', ')} minutes. Sample size ${r.n}; all recorded inputs are identical.`;
+        d.querySelector('tbody').innerHTML = r.bins
+          .map(
+            (b) =>
+              `<tr><td>[${b.lo}, ${b.hi})</td><td>${b.count}</td><td>${number(b.mass)}</td><td>${number(b.midpoint)}</td></tr>`,
+          )
+          .join('');
+        d.querySelector('#loss').textContent =
+          `Mean squared error: ${number(r.mse)} minute² on the fitting sample.`;
+        d.querySelector('#reconstruction').textContent =
+          `Midpoint reconstruction: ${r.bins.map((b) => `${number(b.mass)} × ${number(b.midpoint)}`).join(' + ')} = ${number(r.midpointMean)} min. This need not recover the raw mean.`;
+        d.querySelector('#uniform').textContent =
+          `Optional uniform-within-band assumption: mass at least ${r.deadline} = ${number(r.uniform)}. This is interpolated, not identified from the masses when bounds differ.`;
+        d.querySelector('#observed-tail').textContent =
+          `Raw sample fraction at least ${r.deadline} min: ${number(r.observedTail)}. This uses raw durations the bands discard; it is not a future performance estimate.`;
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelectorAll('select').forEach((el) => el.addEventListener('change', render));
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="720" height="820" preserveAspectRatio="xMinYMin meet" viewBox="0 0 720 820" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Common cause, mediator, and collider</title><desc>Common cause C points to training T and passing Y. A mediator M lies on T to Y. A collider S receives arrows from T and Y. Each role requires a different adjustment argument.</desc>
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="720" height="820"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-820)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="720" height="820" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,98%,96%); fill-rule: evenodd;"/>
+			<text x="30" y="780" style="font-family: Helvetica-Bold; font-size: 24px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1560) scale(1,-1)">What role does the third variable play?</text>
+			<text x="30" y="753" style="font-family: Helvetica; font-size: 15px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1506) scale(1,-1)">Arrows state assumptions. The adjustment choice depends on the target.</text>
+			<text x="30" y="702" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1404) scale(1,-1)">Common cause</text>
+			<rect x="37" y="566" width="216" height="44" rx="6" ry="6" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="109.432" y="583" style="font-family: Helvetica; font-size: 16px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,1166) scale(1,-1)">T: training</text>
+			<rect x="467" y="566" width="216" height="44" rx="6" ry="6" style="stroke: rgb(9%,9%,7%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="539.872" y="583" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1166) scale(1,-1)">Y: passes</text>
+			<rect x="252" y="638" width="216" height="44" rx="6" ry="6" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="318.224" y="655" style="font-family: Helvetica; font-size: 16px;fill: rgb(44%,34%,72%); stroke:none;" transform="translate(0,1310) scale(1,-1)">C: prior skill</text>
+			<path d="M 275,638 L 185,610" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="185 610, 193.0632 617.7449, 196.0339 608.1964" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<path d="M 445,638 L 535,610" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="535 610, 523.9661 608.1964, 526.9368 617.7449" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<path d="M 253,588 L 467,588" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="467 588, 457 583, 457 593" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="30" y="535" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1070) scale(1,-1)">Account for C to block this backdoor path.</text>
+			<path d="M 30,505 L 690,505" style="stroke: rgb(83%,83%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="30" y="477" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,954) scale(1,-1)">Mediator</text>
+			<rect x="37" y="341" width="216" height="44" rx="6" ry="6" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="109.432" y="358" style="font-family: Helvetica; font-size: 16px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,716) scale(1,-1)">T: training</text>
+			<rect x="467" y="341" width="216" height="44" rx="6" ry="6" style="stroke: rgb(9%,9%,7%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="539.872" y="358" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,716) scale(1,-1)">Y: passes</text>
+			<rect x="252" y="413" width="216" height="44" rx="6" ry="6" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="320.88" y="430" style="font-family: Helvetica; font-size: 16px;fill: rgb(44%,34%,72%); stroke:none;" transform="translate(0,860) scale(1,-1)">M: practice</text>
+			<path d="M 185,385 L 275,413" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="275 413, 266.9368 405.2551, 263.9661 414.8036" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<path d="M 445,413 L 535,385" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="535 385, 523.9661 383.1964, 526.9368 392.7449" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<path d="M 253,363 L 467,363" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="467 363, 457 358, 457 368" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="30" y="310" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,620) scale(1,-1)">For the total effect, do not block the route through M.</text>
+			<path d="M 30,280 L 690,280" style="stroke: rgb(83%,83%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="30" y="252" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,504) scale(1,-1)">Collider</text>
+			<rect x="37" y="116" width="216" height="44" rx="6" ry="6" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="109.432" y="133" style="font-family: Helvetica; font-size: 16px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,266) scale(1,-1)">T: training</text>
+			<rect x="467" y="116" width="216" height="44" rx="6" ry="6" style="stroke: rgb(9%,9%,7%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="539.872" y="133" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,266) scale(1,-1)">Y: passes</text>
+			<rect x="252" y="188" width="216" height="44" rx="6" ry="6" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="283.528" y="205" style="font-family: Helvetica; font-size: 16px;fill: rgb(44%,34%,72%); stroke:none;" transform="translate(0,410) scale(1,-1)">S: selected for review</text>
+			<path d="M 185,160 L 275,188" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="275 188, 266.9368 180.2551, 263.9661 189.8036" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<path d="M 535,160 L 445,188" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<polygon points="445 188, 456.0339 189.8036, 453.0632 180.2551" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="30" y="85" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,170) scale(1,-1)">Conditioning on S can open a noncausal path.</text>
+		</g>
+	</g>
+</svg>

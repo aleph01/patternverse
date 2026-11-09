@@ -46,31 +46,6 @@ Chunk Down works especially well when a sweeping judgment makes a problem appear
 
 A useful analysis usually travels in both directions. The manager returns from three communication failures to a more informed account of coordination. The presenter returns from a difficult question period to a more accurate account of their capabilities. The larger picture survives, but it contains the variation that was missing before. That variation is often what makes improvement possible, because a person can work with a specific difficulty without treating the whole activity as beyond reach.
 
-## Pattern details
-
-### Use when
-
-- A sweeping claim makes a difficulty appear uniform.
-- A proposed solution is poorly connected to specific failures.
-
-### Goals
-
-- Recover variation within a broad claim.
-- Identify the component that needs a response.
-
-### Mechanisms
-
-- decomposition
-- specificity
-
-### Not ideal when
-
-- Further detail distracts from a demonstrated larger pattern or delays a decision.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[chunk-up|Chunk Up]]
@@ -87,32 +62,32 @@ Robert Dilts, Sleight of Mouth, Chunk Down; chapter 3, printed pages 63–65. So
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask judgment {
+judgment = !ask {
     Start with the broad claim
 
     Write an everyday statement that feels too large to work with, such as 'this project is impossible'.
 }
-!ask event {
+event = !ask {
     Choose one concrete instance
 
     Which particular event or part of the task does the claim refer to? Describe where, when, and what happened.
 }
-!ask parts {
+parts = !ask {
     Separate the components
 
     Break the situation into a few relevant parts. Which parts work, which are difficult, and where do they vary?
 }
-!ask focus {
+focus = !ask {
     Find the actionable part
 
     Which specific part needs attention first? What would count as a small improvement there?
 }
-!ask whole {
+whole = !ask {
     Keep the larger pattern
 
     What wider concern, recurring harm, or constraint must not disappear when you focus on details? You do not need to explain everything.
 }
-!ask next {
+next = !ask {
     Take one focused step
 
     What manageable action, request, or question addresses this part while respecting the larger concern?

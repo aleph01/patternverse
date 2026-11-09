@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Selective prediction risk and coverage explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      A fixed fictional classifier predicts Delivery or Billing for twelve tickets. Accept scores at
+      or above a threshold; defer the rest. Labels are revealed only to measure outcomes here, never
+      used by the gate.
+    </p>
+    <form aria-label="Selective prediction settings">
+      <div>
+        <label for="threshold">Acceptance threshold</label
+        ><select id="threshold">
+          <option value="0">0 · accept all</option>
+          <option value="0.6">0.60</option>
+          <option value="0.7">0.70</option>
+          <option value="0.75">0.75</option>
+          <option value="0.8" selected>0.80</option>
+          <option value="0.85">0.85</option>
+          <option value="0.9">0.90</option>
+          <option value="0.95">0.95</option>
+          <option value="0.97">0.97</option>
+          <option value="1">1 · defer all</option>
+        </select>
+      </div>
+      <div>
+        <label for="scenario">Evaluation outcomes</label
+        ><select id="scenario">
+          <option value="baseline">Original fictional labels</option>
+          <option value="harder">Two more confident mistakes</option>
+        </select>
+      </div>
+      <div>
+        <label for="reviewCost">Cost per reviewed ticket · units</label
+        ><input id="reviewCost" type="number" min="0" max="10" step="1" value="2" required />
+      </div>
+      <div>
+        <label for="capacity">Review capacity · tickets per batch</label
+        ><input id="capacity" type="number" min="0" max="12" step="1" value="4" required />
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="interpretation" class="note"></p>
+    <svg
+      id="mechanism"
+      role="img"
+      aria-label="Threshold gate separates accepted and deferred tickets"
+    ></svg>
+    <svg
+      id="curve"
+      role="img"
+      aria-label="Computed empirical risk versus automation coverage"
+    ></svg>
+    <table id="summary-table">
+      <caption>
+        Fictional evaluation · same threshold for every group
+      </caption>
+      <thead>
+        <tr>
+          <th>Subset</th>
+          <th>Accepted / total</th>
+          <th>Errors / accepted</th>
+        </tr>
+      </thead>
+      <tbody id="summary"></tbody>
+    </table>
+    <p id="cost" class="note"></p>
+    <details id="record-tables">
+      <summary>Inspect all twelve tickets</summary>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID / group</th>
+            <th>Score</th>
+            <th>Prediction / label</th>
+            <th>Gate / error</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and scope</summary>
+      <p>
+        These are fixed synthetic evaluation records, not a fitted model or a statistically valid
+        threshold-selection procedure. All thresholds can be explored for explanation; a deployed
+        threshold needs separate development and evaluation data. Scores are ranking signals, not
+        verified correctness probabilities. Equality is accepted; tied scores move together.
+      </p>
+      <p>
+        Automation coverage is accepted / all; selective risk is errors / accepted, undefined when
+        none are accepted. Neither is conformal set coverage. Review costs assume every deferred
+        ticket receives a correct human resolution, with no delay cost, and every automatic error
+        costs ten units. The full-review cost is hypothetical when demand exceeds capacity. The
+        explorer does not simulate reviewer errors, waiting times, guarantees, or population
+        uncertainty.
+      </p>
+    </details>
+    <script>
+      const scores = [0.99, 0.97, 0.95, 0.9, 0.9, 0.85, 0.8, 0.8, 0.75, 0.7, 0.6, 0.55];
+      const predictions = [
+        'Delivery',
+        'Billing',
+        'Delivery',
+        'Billing',
+        'Delivery',
+        'Billing',
+        'Delivery',
+        'Billing',
+        'Delivery',
+        'Billing',
+        'Delivery',
+        'Billing',
+      ];
+      const baselineLabels = [
+        'Delivery',
+        'Billing',
+        'Billing',
+        'Billing',
+        'Delivery',
+        'Billing',
+        'Billing',
+        'Billing',
+        'Billing',
+        'Billing',
+        'Billing',
+        'Delivery',
+      ];
+      const complexIndices = [2, 6, 8, 11];
+      const thresholds = [0, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 0.97, 1];
+      function makeRecords(scenario) {
+        return scores.map((score, i) => ({
+          id: 'T' + String(i + 1).padStart(2, '0'),
+          group: complexIndices.includes(i) ? 'Complex' : 'Routine',
+          score,
+          prediction: predictions[i],
+          label:
+            scenario === 'harder' && i < 2
+              ? predictions[i] === 'Delivery'
+                ? 'Billing'
+                : 'Delivery'
+              : baselineLabels[i],
+        }));
+      }
+      function measure(records, threshold) {
+        const rows = records.map((r) => ({
+          ...r,
+          accepted: r.score >= threshold,
+          error: r.prediction !== r.label,
+        }));
+        const accepted = rows.filter((r) => r.accepted).length,
+          errors = rows.filter((r) => r.accepted && r.error).length;
+        return {
+          rows,
+          n: rows.length,
+          accepted,
+          errors,
+          deferred: rows.length - accepted,
+          coverage: rows.length ? accepted / rows.length : null,
+          risk: accepted ? errors / accepted : null,
+        };
+      }
+      function summarize(rows) {
+        return ['All', 'Routine', 'Complex'].map((group) => {
+          const subset = rows.filter((r) => group === 'All' || r.group === group);
+          const accepted = subset.filter((r) => r.accepted).length,
+            errors = subset.filter((r) => r.accepted && r.error).length;
+          return {
+            group,
+            n: subset.length,
+            accepted,
+            errors,
+            risk: accepted ? errors / accepted : null,
+          };
+        });
+      }
+      function curvePoints(records) {
+        return thresholds.map((threshold) => ({ threshold, ...measure(records, threshold) }));
+      }
+      function buildReport(threshold, scenario, reviewCost, capacity) {
+        const records = makeRecords(scenario),
+          m = measure(records, threshold);
+        return {
+          ...m,
+          threshold,
+          scenario,
+          reviewCost,
+          capacity,
+          summary: summarize(m.rows),
+          curve: curvePoints(records),
+          fullReviewCost: m.errors * 10 + m.deferred * reviewCost,
+          overCapacity: Math.max(0, m.deferred - capacity),
+        };
+      }
+      const $ = (s) => document.querySelector(s),
+        pct = (x) => (x === null ? 'undefined' : (100 * x).toFixed(1) + '%'),
+        svgt = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="var(--ink)"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          value +
+          '</text>';
+      const rect = (x, y, w, h, fill) =>
+        '<rect x="' +
+        x +
+        '" y="' +
+        y +
+        '" width="' +
+        w +
+        '" height="' +
+        h +
+        '" rx="7" fill="' +
+        fill +
+        '"/>';
+      let report;
+      function drawMechanism(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          cols = mobile ? 3 : 6,
+          cardW = mobile ? 102 : 104,
+          step = mobile ? 112 : 114,
+          startY = 62,
+          rows = Math.ceil(r.n / cols),
+          gateY = startY + rows * 72 + 14,
+          h = gateY + (mobile ? 168 : 124);
+        let s =
+          svgt(0, 25, 18, 'One gate; unchanged predictions.', true) +
+          svgt(0, 48, 13, 'Score ≥ ' + r.threshold.toFixed(2) + ' accepts; ties stay together.');
+        r.rows.forEach((row, i) => {
+          const x = (i % cols) * step,
+            y = startY + Math.floor(i / cols) * 72;
+          s +=
+            rect(x, y, cardW, 62, row.accepted ? 'var(--band)' : 'var(--panel)') +
+            svgt(x + 7, y + 19, 13, row.id + ' · ' + row.score.toFixed(2), true) +
+            svgt(x + 7, y + 40, 12, row.accepted ? 'ACCEPT' : 'DEFER');
+          if (row.accepted && row.error) s += svgt(x + 7, y + 55, 11, 'wrong label');
+        });
+        s +=
+          rect(0, gateY, w, mobile ? 140 : 96, 'var(--panel)') +
+          svgt(
+            12,
+            gateY + 25,
+            16,
+            r.accepted + '/' + r.n + ' automated · ' + pct(r.coverage),
+            true,
+          ) +
+          svgt(12, gateY + 51, 15, 'Errors: ' + r.errors + '/' + r.accepted + ' · ' + pct(r.risk));
+        if (mobile)
+          s +=
+            svgt(12, gateY + 79, 15, r.deferred + ' deferred for review') +
+            svgt(12, gateY + 106, 14, 'Capacity: ' + r.capacity + ' · excess: ' + r.overCapacity);
+        else
+          s += svgt(
+            12,
+            gateY + 78,
+            15,
+            r.deferred + ' deferred · capacity ' + r.capacity + ' · excess ' + r.overCapacity,
+          );
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        $('#mechanism').innerHTML = s;
+      }
+      function drawCurve(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          h = 300,
+          left = 48,
+          right = w - 20,
+          top = 68,
+          bottom = 239,
+          x = (v) => left + v * (right - left),
+          y = (v) => bottom - v * (bottom - top);
+        let s =
+          svgt(0, 25, 18, 'Risk versus automation coverage', true) +
+          svgt(0, 45, 12, 'Errors / accepted · large dot: current gate');
+        for (const tick of [0, 0.5, 1]) {
+          s +=
+            '<line x1="' +
+            left +
+            '" x2="' +
+            right +
+            '" y1="' +
+            y(tick) +
+            '" y2="' +
+            y(tick) +
+            '" stroke="var(--line)"/>' +
+            svgt(0, y(tick) + 4, 12, tick * 100 + '%') +
+            svgt(x(tick), bottom + 20, 12, tick * 100 + '%').replace(
+              '<text ',
+              '<text text-anchor="' + (tick === 1 ? 'end' : tick === 0 ? 'start' : 'middle') + '" ',
+            );
+        }
+        const points = r.curve
+          .filter((p) => p.risk !== null)
+          .sort((a, b) => a.coverage - b.coverage);
+        s +=
+          '<polyline fill="none" stroke="var(--accent)" stroke-width="2" points="' +
+          points.map((p) => x(p.coverage) + ',' + y(p.risk)).join(' ') +
+          '"/>';
+        points.forEach((p) => {
+          s +=
+            '<circle cx="' +
+            x(p.coverage) +
+            '" cy="' +
+            y(p.risk) +
+            '" r="' +
+            (p.threshold === r.threshold ? 6 : 3) +
+            '" fill="var(--accent)"/>';
+        });
+        s += svgt(left, bottom + 43, 12, 'Automation coverage · accepted / all');
+        s += svgt(0, h - 2, 12, 'Zero accepted: risk undefined, omitted from curve.');
+        $('#curve').setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        $('#curve').innerHTML = s;
+      }
+      function render() {
+        if (!$('form').checkValidity()) {
+          report = null;
+          $('output').textContent = 'Enter whole costs from 0 to 10 and capacity from 0 to 12.';
+          for (const id of [
+            '#mechanism',
+            '#curve',
+            '#summary',
+            '#data',
+            '#interpretation',
+            '#cost',
+          ])
+            $(id).innerHTML = '';
+          return;
+        }
+        report = buildReport(
+          Number($('#threshold').value),
+          $('#scenario').value,
+          Number($('#reviewCost').value),
+          Number($('#capacity').value),
+        );
+        const r = report;
+        $('output').textContent =
+          'Automated: ' +
+          r.accepted +
+          '/' +
+          r.n +
+          ' (' +
+          pct(r.coverage) +
+          '). Accepted errors: ' +
+          r.errors +
+          '/' +
+          r.accepted +
+          ' (' +
+          pct(r.risk) +
+          '). Deferred: ' +
+          r.deferred +
+          '.';
+        $('#interpretation').textContent = r.overCapacity
+          ? 'Review demand exceeds capacity by ' +
+            r.overCapacity +
+            ' tickets. Abstention does not resolve this backlog.'
+          : 'Review demand fits the stated batch capacity. Observed rates are not population guarantees.';
+        drawMechanism(r);
+        drawCurve(r);
+        $('#summary').innerHTML = r.summary
+          .map(
+            (g) =>
+              '<tr><th scope="row">' +
+              g.group +
+              '</th><td>' +
+              g.accepted +
+              '/' +
+              g.n +
+              '</td><td>' +
+              g.errors +
+              '/' +
+              g.accepted +
+              ' · ' +
+              pct(g.risk) +
+              '</td></tr>',
+          )
+          .join('');
+        $('#data').innerHTML = r.rows
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '<small>' +
+              row.group +
+              '</small></th><td>' +
+              row.score.toFixed(2) +
+              '</td><td>' +
+              row.prediction +
+              ' / ' +
+              row.label +
+              '</td><td>' +
+              (row.accepted ? 'Accept' : 'Defer') +
+              ' / ' +
+              (row.error ? 'wrong' : 'correct') +
+              '</td></tr>',
+          )
+          .join('');
+        $('#cost').textContent =
+          'If every deferred ticket is reviewed correctly: ' +
+          r.errors +
+          ' automatic errors × 10 + ' +
+          r.deferred +
+          ' reviews × ' +
+          r.reviewCost +
+          ' = ' +
+          r.fullReviewCost +
+          ' cost units. ' +
+          (r.overCapacity ? 'This assumes extra capacity beyond the stated limit.' : '') +
+          ' No reviewer mistakes or delay costs are modeled.';
+      }
+      $('form').addEventListener('submit', (e) => e.preventDefault());
+      $('form').addEventListener('input', render);
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

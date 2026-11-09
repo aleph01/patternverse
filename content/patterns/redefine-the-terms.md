@@ -48,31 +48,6 @@ Redefine the Terms is useful when a single loaded word keeps organizing an entir
 
 The result is often less dramatic than a positive reframe. A person may move from being lazy to repeatedly postponing tasks with unclear starting conditions. A team may move from calling a release disastrous to identifying two serious defects and several successful components. These descriptions are less absolute and more informative. They preserve what went wrong while making it possible to see where a response could begin.
 
-## Pattern details
-
-### Use when
-
-- One word dominates a self-assessment or disagreement.
-- An ambiguous label obscures different practical concerns.
-
-### Goals
-
-- Make descriptions more accurate.
-- Reveal where an effective response could begin.
-
-### Mechanisms
-
-- semantic framing
-- descriptive precision
-
-### Not ideal when
-
-- Softer wording would conceal loss, responsibility, or an important fact.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[chunk-down|Chunk Down]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Redefining; chapter 2, printed pages 49–53. So
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask label {
+label = !ask {
     Notice the loaded word
 
     Write a description or label that is shaping your interpretation, such as 'lazy', 'failure', or 'controlling'. Include the everyday situation.
 }
-!ask facts {
+facts = !ask {
     Keep the observations
 
     What concrete behavior or events led to the label? Separate observations from judgments about a whole person.
 }
-!ask alternatives {
+alternatives = !ask {
     Try more precise descriptions
 
     Write two alternative descriptions that fit the same observations. They do not have to be positive, only more accurate or specific.
 }
-!ask limits {
+limits = !ask {
     Check what the new words hide
 
     Could either description minimize harm, hide responsibility, or contradict the facts? What must remain explicit?
 }
-!ask wording {
+wording = !ask {
     Choose believable language
 
     Write a revised description you can honestly stand behind. Keep the original concern if it is still supported.
 }
-!ask next {
+next = !ask {
     Return to action
 
     What response becomes clearer with this wording? Choose one small action, question, or boundary.

@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weak supervision vote explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      textarea {
+        display: block;
+        width: 100%;
+        min-height: 100px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        resize: vertical;
+      }
+      fieldset {
+        margin: 12px 0;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+      }
+      legend {
+        font-weight: 650;
+      }
+      .toggle {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        min-height: 44px;
+        font-weight: 400;
+      }
+      .toggle input {
+        width: 22px;
+        min-height: 22px;
+        flex: 0 0 22px;
+      }
+      .source-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 14px;
+      }
+      form {
+        display: block;
+      }
+      .matrix {
+        overflow-x: auto;
+        margin-bottom: 12px;
+      }
+      th,
+      td {
+        font-size: 13px;
+      }
+      :is(textarea):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      @media (max-width: 420px) {
+        .source-options {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Three deliberately imperfect text rules vote Refund, Other, or abstain. The assigned weights
+      are teaching choices, not estimated source accuracies.
+    </p>
+    <form aria-label="Weak supervision settings">
+      <label for="ticket">Ticket text</label>
+      <textarea id="ticket" maxlength="500">Refund please; tracking says delivered.</textarea>
+      <fieldset>
+        <legend>Enabled sources</legend>
+        <div class="source-options">
+          <label class="toggle"
+            ><input type="checkbox" id="refund" checked />R: “refund” → Refund · weight 2</label
+          >
+          <label class="toggle"
+            ><input type="checkbox" id="billing" checked />B: “charged twice” → Refund · weight
+            1</label
+          >
+          <label class="toggle"
+            ><input type="checkbox" id="delivery" checked />D: “delivered” → Other · weight 3</label
+          >
+          <label class="toggle"
+            ><input type="checkbox" id="copy" />Add exact copy of R · weight 2</label
+          >
+        </div>
+      </fieldset>
+    </form>
+    <div class="actions"><button type="button" id="reset">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <p id="votes" class="note"></p>
+    <svg role="img" aria-label="Two ways to count weighted source votes"></svg>
+    <p class="note">
+      Refund vote share is a fraction of emitted weight. It is not a probability or an accuracy
+      estimate. Ties stay unresolved; zero emitted weight gives no weak label.
+    </p>
+    <div class="matrix">
+      <table>
+        <caption>
+          Four fixed sample tickets · current sources
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Ticket</th>
+            <th scope="col">R</th>
+            <th scope="col">B</th>
+            <th scope="col">D</th>
+            <th scope="col">R copy</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p id="metrics" class="note"></p>
+    <details>
+      <summary>Exact rules and assumptions</summary>
+      <p>
+        R matches the whole English word “refund”; B matches “charged twice” with one or more
+        whitespace characters between the words; D matches the whole word “delivered”. Matching
+        ignores case. A nonmatch abstains. The copied source runs exactly R's rule; disabling R also
+        disables its copy.
+      </p>
+      <p>
+        The first calculation counts every active column. The second counts the known R family once.
+        Each sums the Refund weight and Other weight, divides Refund weight by total emitted weight,
+        and selects Refund above 50% or Other below 50%. A 50% tie stays unresolved. No votes means
+        no weak label.
+      </p>
+      <p>
+        The sample matrix uses A: “Refund please; tracking says delivered.” B: “Charged twice.
+        Please refund.” C: “Package delivered, thank you.” D: “Where is my parcel?” Coverage,
+        overlap, and conflict use all four rows as their denominator and count active columns,
+        including a copy. They describe these fixed samples, not the editable ticket or population
+        accuracy.
+      </p>
+      <p>
+        This is an aggregation baseline. It does not estimate weights, fit a probabilistic label
+        model, train a downstream classifier, or measure predictive performance. Counting a known
+        exact copy once does not solve unknown source dependencies.
+      </p>
+    </details>
+    <script>
+      const form = document.querySelector('form');
+      const output = document.querySelector('output');
+      const chart = document.querySelector('svg');
+      const tbody = document.querySelector('tbody');
+      const samples = [
+        'Refund please; tracking says delivered.',
+        'Charged twice. Please refund.',
+        'Package delivered, thank you.',
+        'Where is my parcel?',
+      ];
+      const rules = [
+        { id: 'refund', family: 'refund', weight: 2, vote: 1, match: /\brefund\b/i },
+        { id: 'billing', family: 'billing', weight: 1, vote: 1, match: /\bcharged\s+twice\b/i },
+        { id: 'delivery', family: 'delivery', weight: 3, vote: 0, match: /\bdelivered\b/i },
+        { id: 'copy', family: 'refund', weight: 2, vote: 1, match: /\brefund\b/i },
+      ];
+      function labelVotes(text, enabled) {
+        return rules.map((rule) => ({
+          ...rule,
+          value:
+            enabled[rule.id] && (rule.id !== 'copy' || enabled.refund) && rule.match.test(text)
+              ? rule.vote
+              : -1,
+        }));
+      }
+      function aggregate(votes, countCopyOnce) {
+        const seen = new Set();
+        let refund = 0,
+          other = 0;
+        for (const vote of votes) {
+          if (vote.value === -1 || (countCopyOnce && seen.has(vote.family))) continue;
+          seen.add(vote.family);
+          if (vote.value === 1) refund += vote.weight;
+          else other += vote.weight;
+        }
+        const total = refund + other;
+        return {
+          refund,
+          other,
+          total,
+          share: total ? refund / total : null,
+          label: !total
+            ? 'No weak label'
+            : refund === other
+              ? 'Unresolved tie'
+              : refund > other
+                ? 'Refund'
+                : 'Other',
+        };
+      }
+      function analyze(matrix) {
+        let covered = 0,
+          overlapping = 0,
+          conflicting = 0;
+        for (const row of matrix) {
+          const values = row.filter((v) => v.value !== -1).map((v) => v.value);
+          if (values.length) covered++;
+          if (values.length >= 2) overlapping++;
+          if (new Set(values).size > 1) conflicting++;
+        }
+        return { covered, overlapping, conflicting, total: matrix.length };
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(votes) {
+        chart.replaceChildren();
+        const narrow = window.innerWidth < 500;
+        chart.setAttribute('viewBox', narrow ? '0 0 328 360' : '0 0 680 180');
+        chart.append(node('title', {}, 'Weighted vote comparison for the editable ticket'));
+        chart.append(
+          node(
+            'desc',
+            {},
+            'Green is Refund weight, gray is Other weight. Percentages are vote shares, not probabilities.',
+          ),
+        );
+        for (const [i, once] of [false, true].entries()) {
+          const result = aggregate(votes, once);
+          const y = 0;
+          const panel = node('g', {
+            transform: 'translate(' + (narrow ? 0 : i * 352) + ',' + (narrow ? i * 180 : 0) + ')',
+          });
+          chart.append(panel);
+          const text = (top, size, value, bold = false) =>
+            panel.append(
+              node(
+                'text',
+                {
+                  x: 12,
+                  y: y + top,
+                  'font-family': 'system-ui, sans-serif',
+                  'font-size': size,
+                  'font-weight': bold ? 700 : 400,
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          panel.append(
+            node('rect', {
+              x: 0,
+              y: y + 2,
+              width: 328,
+              height: 170,
+              rx: 8,
+              fill: 'var(--panel, #f1f2ef)',
+            }),
+          );
+          text(28, 18, once ? 'Count copy once' : 'Count every column', true);
+          text(54, 14, result.refund + ' Refund weight / ' + result.total + ' total');
+          text(
+            86,
+            23,
+            result.share === null
+              ? 'No weak label'
+              : (100 * result.share).toFixed(1) + '% → ' + result.label,
+            true,
+          );
+          panel.append(
+            node('rect', {
+              x: 12,
+              y: y + 103,
+              width: 304,
+              height: 22,
+              rx: 3,
+              fill: 'var(--line, #a6aca3)',
+            }),
+          );
+          if (result.total) {
+            const green = 304 * result.share;
+            panel.append(
+              node('rect', {
+                x: 12,
+                y: y + 103,
+                width: green,
+                height: 22,
+                fill: 'var(--accent, #00855b)',
+              }),
+            );
+            panel.append(
+              node('rect', {
+                x: 12 + green,
+                y: y + 103,
+                width: 304 - green,
+                height: 22,
+                fill: '#8c938b',
+              }),
+            );
+          }
+          text(151, 13, 'Green: Refund · Gray: Other');
+        }
+      }
+      function render() {
+        const enabled = Object.fromEntries(
+          rules.map((r) => [r.id, document.querySelector('#' + r.id).checked]),
+        );
+        document.querySelector('#copy').disabled = !enabled.refund;
+        const votes = labelVotes(document.querySelector('#ticket').value, enabled);
+        const naive = aggregate(votes, false),
+          grouped = aggregate(votes, true);
+        const describe = (r) =>
+          r.share === null
+            ? 'no weak label'
+            : (100 * r.share).toFixed(1) + '% Refund share → ' + r.label;
+        output.textContent =
+          'Every column: ' + describe(naive) + '. Copy once: ' + describe(grouped) + '.';
+        document.querySelector('#votes').textContent =
+          'This ticket: ' +
+          votes
+            .map(
+              (v, i) =>
+                ['R', 'B', 'D', 'R copy'][i] +
+                ': ' +
+                (v.value === -1 ? 'abstain / disabled' : v.value === 1 ? 'Refund' : 'Other'),
+            )
+            .join(' · ');
+        draw(votes);
+        const matrix = samples.map((s) => labelVotes(s, enabled));
+        tbody.replaceChildren();
+        matrix.forEach((row, i) => {
+          const tr = document.createElement('tr');
+          const heading = document.createElement('th');
+          heading.scope = 'row';
+          heading.textContent = String.fromCharCode(65 + i);
+          tr.append(heading);
+          row.forEach((v) => {
+            const td = document.createElement('td');
+            td.textContent = v.value === -1 ? '—' : v.value === 1 ? 'Refund' : 'Other';
+            tr.append(td);
+          });
+          tbody.append(tr);
+        });
+        const stats = analyze(matrix);
+        document.querySelector('#metrics').textContent =
+          'Fixed samples: coverage ' +
+          stats.covered +
+          '/4; overlap ' +
+          stats.overlapping +
+          '/4; conflict ' +
+          stats.conflicting +
+          '/4. — means abstain or disabled.';
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', render);
+      form.addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        render();
+      });
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Off-policy estimator comparison explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 17%;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #log-table {
+        font-size: 13px;
+      }
+      #log-table th:first-child {
+        width: 22%;
+      }
+      #log-table th:nth-child(2) {
+        width: 26%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Compare models, weighting, and corrections.</strong> This fixed eight-row fictional
+      log is one possible sample, not a statistical guarantee. The reward model is supplied
+      independently of these observed outcomes.
+    </p>
+    <form>
+      <div>
+        <label for="target">Target policy</label
+        ><select id="target">
+          <option value="contextual" selected>Routine → A; Complex → B</option>
+          <option value="A">Always A</option>
+          <option value="B">Always B</option>
+        </select>
+      </div>
+      <div>
+        <label for="model">Reward model</label
+        ><select id="model">
+          <option value="approximate" selected>Approximate predictions</option>
+          <option value="flat">Predict 0.50 everywhere</option>
+          <option value="oracle">Exact toy rewards (simulation only)</option>
+        </select>
+      </div>
+      <div>
+        <label for="propensity">Propensities used in weighting</label
+        ><select id="propensity">
+          <option value="logged" selected>True logged probabilities</option>
+          <option value="uniform">Pretend uniform (incorrect)</option>
+        </select>
+      </div>
+      <div>
+        <label for="coverage">Logging coverage</label
+        ><select id="coverage">
+          <option value="mixed" selected>A: 0.80; B: 0.20</option>
+          <option value="A-only">A only; B never chosen</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <p id="interpretation"></p>
+    <table id="metrics-table">
+      <caption>
+        Estimates from the displayed sample
+      </caption>
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody id="metrics"></tbody>
+    </table>
+    <p class="note" id="diagnostics"></p>
+    <table id="log-table">
+      <caption id="log-caption">
+        Observed log and row calculations
+      </caption>
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>Observed</th>
+          <th>Correction</th>
+          <th>Target / DR row</th>
+        </tr>
+      </thead>
+      <tbody id="data"></tbody>
+    </table>
+    <details id="expectation">
+      <summary>Inspect exact expectations in the synthetic world</summary>
+      <p class="note">
+        Only this toy world provides every action's potential reward. The sample estimators use
+        observed rewards and supplied predictions. The exact expectation below averages over all
+        possible logging-action draws conditional on these eight contexts. It is not a confidence
+        interval or an empirical estimate from additional data.
+      </p>
+      <p id="truth"></p>
+      <table id="expectation-table">
+        <caption>
+          Exact toy expectations under the chosen analysis assumptions
+        </caption>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Expectation</th>
+          </tr>
+        </thead>
+        <tbody id="expectation-data"></tbody>
+      </table>
+      <table class="data-table">
+        <caption>
+          Full potential outcomes (unavailable in a real log)
+        </caption>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>A reward</th>
+            <th>B reward</th>
+          </tr>
+        </thead>
+        <tbody id="potential-data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and exact rules</summary>
+      <p>
+        Eight fixed contexts contain four Routine and four Complex requests. With mixed coverage,
+        the logger independently chooses A with probability 0.80 and B with probability 0.20. The
+        displayed A/A/A/B sequence in each group is one possible realization, not a forced quota.
+        The A-only scenario is a different synthetic collection policy: it assigns probability one
+        to A and zero to B and logs A on every row. Changing the propensity assumption never
+        rewrites the true logged probabilities or actions.
+      </p>
+      <p>
+        Rewards are immediate, complete, and deterministic in the toy world. The approximate reward
+        model predicts Routine A/B as 0.60/0.40 and Complex A/B as 0.30/0.80. The flat model
+        predicts 0.50. The exact toy model copies each row's potential rewards; it is an unrealistic
+        oracle used to expose the estimator identities, not a trained model or a production option.
+      </p>
+      <p>
+        All targets here are fixed deterministic policies. DM averages q(x,target). Weight w is
+        1/p_used on matching rows and zero otherwise. IPS averages w × observed reward over all
+        eight rows. DR averages q(x,target) + w × (observed reward − q(x,observed action)). The
+        correct denominator is the logged chosen-action probability. The deliberately incorrect
+        uniform assumption instead uses 0.50; it is a counterexample, not a recommended correction.
+      </p>
+      <p>
+        Support is checked against true logging probabilities for every target action in these
+        contexts. Missing support blocks IPS and DR; DM remains visible but is labeled model
+        extrapolation. Weight concentration is (sum w)²/sum(w²), zero when there are no matches.
+        These diagnostics do not certify statistical significance.
+      </p>
+      <p>
+        Exact toy expectations use linearity: for each context, sum each possible action's IPS or DR
+        contribution times its true logging probability, then average over contexts. The
+        full-information target mean averages that target's potential rewards. This known toy truth
+        is never fed into the sample estimates except when explicitly selecting the exact toy reward
+        model.
+      </p>
+      <p>
+        No model fitting, uncertainty intervals, policy search, estimated-confounding corrections,
+        repeated users, adaptive assignment, delayed outcomes, or sequential rewards are simulated.
+        Double robustness needs support and appropriate sampling/model assumptions; it cannot
+        restore unobserved actions or guarantee an accurate finite sample.
+      </p>
+    </details>
+    <script>
+      const $ = (selector) => document.querySelector(selector);
+      const fixture = [
+        { id: 'R01', context: 'Routine', potential: { A: 1, B: 0 } },
+        { id: 'R02', context: 'Routine', potential: { A: 1, B: 1 } },
+        { id: 'R03', context: 'Routine', potential: { A: 0, B: 0 } },
+        { id: 'R04', context: 'Routine', potential: { A: 1, B: 1 } },
+        { id: 'R05', context: 'Complex', potential: { A: 0, B: 1 } },
+        { id: 'R06', context: 'Complex', potential: { A: 0, B: 0 } },
+        { id: 'R07', context: 'Complex', potential: { A: 1, B: 1 } },
+        { id: 'R08', context: 'Complex', potential: { A: 0, B: 0 } },
+      ];
+      function targetAction(context, target) {
+        return target === 'contextual' ? (context === 'Routine' ? 'A' : 'B') : target;
+      }
+      function loggingProbabilities(coverage) {
+        return coverage === 'mixed' ? { A: 0.8, B: 0.2 } : { A: 1, B: 0 };
+      }
+      function makeLog(coverage = 'mixed') {
+        const probabilities = loggingProbabilities(coverage);
+        return fixture.map((row, i) => {
+          const action = coverage === 'A-only' ? 'A' : i % 4 === 3 ? 'B' : 'A';
+          return {
+            id: row.id,
+            context: row.context,
+            action,
+            probabilities: { ...probabilities },
+            propensity: probabilities[action],
+            reward: row.potential[action],
+            policy: coverage === 'mixed' ? 'logger-v1' : 'A-only-v1',
+          };
+        });
+      }
+      function makePredictions(model = 'approximate') {
+        return Object.fromEntries(
+          fixture.map((row) => [
+            row.id,
+            model === 'oracle'
+              ? { ...row.potential }
+              : model === 'flat'
+                ? { A: 0.5, B: 0.5 }
+                : row.context === 'Routine'
+                  ? { A: 0.6, B: 0.4 }
+                  : { A: 0.3, B: 0.8 },
+          ]),
+        );
+      }
+      function estimate(log, predictions, target = 'contextual', propensity = 'logged') {
+        const gaps = [
+            ...new Set(
+              log
+                .filter((row) => row.probabilities[targetAction(row.context, target)] === 0)
+                .map((row) => row.context + ' → ' + targetAction(row.context, target)),
+            ),
+          ],
+          supported = gaps.length === 0;
+        const rows = log.map((row) => {
+          const desired = targetAction(row.context, target),
+            baseline = predictions[row.id][desired],
+            observedPrediction = predictions[row.id][row.action],
+            usedPropensity = propensity === 'logged' ? row.propensity : 0.5,
+            weight = row.action === desired ? 1 / usedPropensity : 0,
+            correction = weight * (row.reward - observedPrediction);
+          return {
+            ...row,
+            target: desired,
+            baseline,
+            observedPrediction,
+            usedPropensity,
+            weight,
+            weightedReward: weight * row.reward,
+            correction,
+            drRow: baseline + correction,
+          };
+        });
+        const n = rows.length,
+          dm = rows.reduce((a, r) => a + r.baseline, 0) / n,
+          correction = rows.reduce((a, r) => a + r.correction, 0) / n,
+          weightSum = rows.reduce((a, r) => a + r.weight, 0),
+          squares = rows.reduce((a, r) => a + r.weight ** 2, 0);
+        return {
+          supported,
+          gaps,
+          rows,
+          n,
+          dm,
+          ips: supported ? rows.reduce((a, r) => a + r.weightedReward, 0) / n : null,
+          dr: supported ? dm + correction : null,
+          correction: supported ? correction : null,
+          matches: rows.filter((r) => r.weight > 0).length,
+          maxWeight: Math.max(0, ...rows.map((r) => r.weight)),
+          ess: squares ? weightSum ** 2 / squares : 0,
+          observedMean: rows.reduce((a, r) => a + r.reward, 0) / n,
+        };
+      }
+      function exactExpectation(data, predictions, target, coverage, propensity) {
+        const p = loggingProbabilities(coverage),
+          supported = data.every((row) => p[targetAction(row.context, target)] > 0);
+        let dm = 0,
+          ips = 0,
+          correction = 0,
+          truth = 0;
+        for (const row of data) {
+          const desired = targetAction(row.context, target);
+          dm += predictions[row.id][desired];
+          truth += row.potential[desired];
+          for (const action of ['A', 'B']) {
+            if (!p[action]) continue;
+            const used = propensity === 'logged' ? p[action] : 0.5,
+              w = action === desired ? 1 / used : 0;
+            ips += p[action] * w * row.potential[action];
+            correction += p[action] * w * (row.potential[action] - predictions[row.id][action]);
+          }
+        }
+        return {
+          dm: dm / data.length,
+          ips: supported ? ips / data.length : null,
+          dr: supported ? (dm + correction) / data.length : null,
+          truth: truth / data.length,
+          supported,
+        };
+      }
+      function simulate(
+        target = 'contextual',
+        model = 'approximate',
+        propensity = 'logged',
+        coverage = 'mixed',
+      ) {
+        const predictions = makePredictions(model),
+          result = estimate(makeLog(coverage), predictions, target, propensity);
+        return {
+          ...result,
+          target,
+          model,
+          propensity,
+          coverage,
+          expectation: exactExpectation(fixture, predictions, target, coverage, propensity),
+        };
+      }
+      const fmt = (value) => (value === null ? 'blocked' : value.toFixed(5)),
+        short = (value) => (value === null ? 'blocked' : value.toFixed(3));
+      function diagram(r) {
+        const mobile = innerWidth < 520,
+          width = mobile ? 328 : 680,
+          height = mobile ? 740 : 360,
+          bw = mobile ? 328 : 208;
+        const text = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          value +
+          '</text>';
+        let s =
+          '<title id="flow-title">Combine a target reward prediction with a weighted model-error correction</title><desc id="flow-desc">Direct estimate ' +
+          short(r.dm) +
+          '. ' +
+          (r.supported
+            ? 'Average correction ' +
+              short(r.correction) +
+              ' gives doubly robust estimate ' +
+              short(r.dr) +
+              '.'
+            : 'Missing target support blocks IPS and doubly robust estimates; direct predictions are model extrapolation.') +
+          '</desc>';
+        const cards = [
+          [
+            'Model baseline',
+            'Average target prediction',
+            'DM ' + short(r.dm),
+            r.n + ' fixed contexts',
+          ],
+          r.supported
+            ? [
+                'Correct model errors',
+                'Use observed residuals',
+                'Mean correction ' + short(r.correction),
+                'Weight by target / logger',
+              ]
+            : [
+                'Check target support',
+                r.gaps[0],
+                'Cannot identify correction',
+                'No reweighting repairs this',
+              ],
+          r.supported
+            ? [
+                'Combine the evidence',
+                'DM + mean correction',
+                'DR ' + short(r.dr),
+                'A small log can be unstable',
+              ]
+            : [
+                'Value not identified',
+                'Model predictions remain',
+                'DR blocked',
+                'Need supported feedback',
+              ],
+        ];
+        cards.forEach((lines, i) => {
+          const x = mobile ? 0 : i * 236,
+            y = mobile ? i * 190 : 0;
+          s +=
+            '<rect x="' +
+            x +
+            '" y="' +
+            y +
+            '" width="' +
+            bw +
+            '" height="150" rx="8" fill="var(--panel)"/>' +
+            lines
+              .map((line, j) => text(x + 12, y + 27 + 30 * j, j ? 14 : 17, line, j === 0))
+              .join('');
+          if (i < 2)
+            s += text(mobile ? 154 : x + 214, mobile ? y + 178 : 83, 27, i === 0 ? '+' : '=', true);
+        });
+        const y = mobile ? 570 : 195,
+          row = r.rows[r.rows.length - 1];
+        const lines = r.supported
+          ? [
+              'R08 · ' + row.context + ' · chosen ' + row.action,
+              'q(' +
+                row.action +
+                ') ' +
+                short(row.observedPrediction) +
+                ' · r ' +
+                row.reward +
+                ' · p used ' +
+                short(row.usedPropensity),
+              'Row DR: ' +
+                short(row.baseline) +
+                ' + ' +
+                short(row.weight) +
+                ' × (' +
+                row.reward +
+                ' − ' +
+                short(row.observedPrediction) +
+                ')',
+              '= ' + short(row.drRow) + ' before averaging all eight rows',
+            ]
+          : [
+              'DM is model extrapolation',
+              'The target needs ' + r.gaps[0],
+              'No supported policy-value estimate',
+              'Changing the model cannot create log evidence',
+            ];
+        s +=
+          '<rect x="0" y="' +
+          y +
+          '" width="' +
+          width +
+          '" height="140" rx="8" fill="var(--band)"/>' +
+          lines
+            .map((line, j) => text(12, y + 28 + 30 * j, j === 0 ? 17 : 14, line, j === 0))
+            .join('');
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+        $('#mechanism').innerHTML = s;
+      }
+      let report;
+      function render() {
+        report = simulate(
+          $('#target').value,
+          $('#model').value,
+          $('#propensity').value,
+          $('#coverage').value,
+        );
+        const r = report;
+        $('output').textContent =
+          'DM: ' +
+          fmt(r.dm) +
+          '. IPS: ' +
+          fmt(r.ips) +
+          '. DR: ' +
+          fmt(r.dr) +
+          '. Support: ' +
+          (r.supported ? 'yes' : 'no') +
+          '.';
+        $('#interpretation').textContent = !r.supported
+          ? 'No support for ' +
+            r.gaps.join(', ') +
+            '. IPS and DR are blocked. The direct number is a reward-model projection into unobserved actions, not log-identified evidence.'
+          : r.propensity === 'uniform'
+            ? 'The analysis deliberately uses incorrect uniform weighting probabilities. The true action log stays unchanged. A plausible sample estimate cannot validate those probabilities; inspect exact toy expectations to see bias.'
+            : r.model === 'oracle'
+              ? 'The exact toy model knows all potential outcomes, including unchosen actions. Residuals are zero, so DM and DR equal the full-information fixture mean. This is an oracle demonstration, not a production capability.'
+              : 'The rare R08 observation can make a large correction. These sample values are not their expectations; inspect the synthetic-world comparison to see the distinction. No confidence intervals are calculated.';
+        $('#metrics').innerHTML = [
+          ['Direct (DM)' + (r.supported ? '' : ' — extrapolation'), fmt(r.dm)],
+          ['Importance weighting (IPS)', fmt(r.ips)],
+          ['Doubly robust (DR)', fmt(r.dr)],
+        ]
+          .map(([k, v]) => '<tr><th scope="row">' + k + '</th><td>' + v + '</td></tr>')
+          .join('');
+        $('#diagnostics').textContent =
+          r.n +
+          ' rows; ' +
+          r.matches +
+          ' target matches; max weight ' +
+          short(r.maxWeight) +
+          '; weight concentration ' +
+          short(r.ess) +
+          '. Observed logging-policy mean ' +
+          fmt(r.observedMean) +
+          '. These are diagnostics, not uncertainty bounds.';
+        $('#log-caption').textContent = r.supported
+          ? 'Observed log and row calculations'
+          : 'Row arithmetic only — missing support blocks policy identification';
+        $('#data').innerHTML = r.rows
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '<small>' +
+              row.context +
+              '</small></th><td>' +
+              row.action +
+              '<small>p ' +
+              short(row.propensity) +
+              '</small>Reward ' +
+              row.reward +
+              '</td><td>w ' +
+              short(row.weight) +
+              '<small>Δ ' +
+              short(row.correction) +
+              '</small></td><td>' +
+              row.target +
+              '<small>q ' +
+              short(row.baseline) +
+              '</small>DR ' +
+              (r.supported ? short(row.drRow) : 'blocked') +
+              '</td></tr>',
+          )
+          .join('');
+        $('#truth').textContent =
+          'Full-information target mean: ' +
+          fmt(r.expectation.truth) +
+          '. Known only because this simulation defines unchosen rewards.';
+        $('#expectation-data').innerHTML = [
+          ['DM', r.expectation.dm],
+          ['IPS', r.expectation.ips],
+          ['DR', r.expectation.dr],
+        ]
+          .map(([k, v]) => '<tr><th scope="row">' + k + '</th><td>' + fmt(v) + '</td></tr>')
+          .join('');
+        $('#potential-data').innerHTML = fixture
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '</th><td>' +
+              row.potential.A +
+              '</td><td>' +
+              row.potential.B +
+              '</td></tr>',
+          )
+          .join('');
+        diagram(r);
+      }
+      $('form').addEventListener('submit', (event) => event.preventDefault());
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        $('#expectation').open = false;
+        render();
+      });
+      addEventListener('resize', () => diagram(report));
+      render();
+    </script>
+  </body>
+</html>

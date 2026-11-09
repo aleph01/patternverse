@@ -48,32 +48,6 @@ Change the Frame Size is useful when an event has become overwhelming, a local i
 
 The presentation can be evaluated honestly while remaining one event in a longer history. The maintenance decision can include future work without pretending every future cost is known. The book can remain a substantial ambition while today's task stays small. The pattern makes these combinations possible by showing that the importance of an event partly depends on the context chosen for judging it, and that this context can be reconsidered.
 
-## Pattern details
-
-### Use when
-
-- One event overwhelms a longer history.
-- A local saving may transfer costs elsewhere.
-- A large ambition obscures a manageable next decision.
-
-### Goals
-
-- Choose a context proportionate to the judgment.
-- Reveal costs and options outside the current boundary.
-
-### Mechanisms
-
-- temporal framing
-- system boundary selection
-
-### Not ideal when
-
-- Wider perspective is being used to dismiss a present difficulty.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[follow-the-consequences|Follow the Consequences]]
@@ -90,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Change Frame Size; chapter 2, printed pages 34â€
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask event {
+event = !ask {
     Describe the event
 
     Choose an everyday event and the interpretation you currently give it. What happened?
 }
-!ask frame {
+frame = !ask {
     Notice the current boundary
 
     What time period, people, or part of the situation are you treating as the frame?
 }
-!ask wider {
+wider = !ask {
     Try a wider frame
 
     What changes when you consider a longer time period, more people, or the wider system? Separate known facts from guesses.
 }
-!ask narrower {
+narrower = !ask {
     Try a smaller frame
 
     What is within your influence in the next day or in one particular part of the situation?
 }
-!ask retain {
+retain = !ask {
     Keep what still matters
 
     Which present difficulty, harm, commitment, or boundary remains important in both frames? Perspective should not dismiss it.
 }
-!ask next {
+next = !ask {
     Choose a proportionate response
 
     Which frame is most useful for deciding what to do now, and what small action follows from it?

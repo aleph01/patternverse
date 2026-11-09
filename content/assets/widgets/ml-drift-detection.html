@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Drift Detection input and outcome explorer</title><style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --panel: #f1f2ef;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        color: var(--ink);
+        background: #fff;
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      label {
+        display: block;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        font: inherit;
+        color: var(--ink);
+        background: #fff;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        margin: 14px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        padding: 8px 0;
+        color: var(--ink);
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #scores th:first-child {
+        width: 31%;
+      }
+      #records {
+        font-size: 13px;
+      }
+      #records th:first-child {
+        width: 13%;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        button {
+          width: 100%;
+        }
+      }
+    </style></head><body>
+<p>Compare current channel shares with a 100-ticket reference. M1 always routes web tickets to Billing and app tickets to Access. The input monitor ignores labels; a separate fully labeled calculation shows whether routing accuracy changed. All records and labels are fictional.</p>
+<form><div><label for="scenario">Current scenario</label><select id="scenario"><option value="mix" selected>Channel mix changes</option><option value="errors">More routing errors</option><option value="stable">Stable example</option></select></div>
+<div><label for="count">Current ticket count</label><select id="count"><option value="100" selected>100 tickets</option><option value="20">20 tickets</option></select></div>
+<div><label for="threshold">Alert gap threshold</label><select id="threshold"><option value="10" selected>Above 10 pp</option><option value="60">Above 60 pp</option><option value="70">Above 70 pp</option></select></div></form><button id="reset" type="button">Reset inputs</button>
+<p class="note">pp means percentage points. The input alert requires at least 50 current tickets and a gap strictly above the threshold. These are teaching policies, not calibrated significance or confidence guarantees.</p>
+<output aria-live="polite"></output><p id="interpretation"></p><div id="graphic"></div>
+<details id="inspection"><summary>Inspect distributions, outcomes and generated tickets</summary>
+<table id="shares"><caption>Channel shares · exact window denominators</caption><thead><tr><th>Channel</th><th>Reference</th><th>Current</th><th>Gap pp</th></tr></thead><tbody></tbody></table><p id="calculation"></p>
+<table id="quality"><caption>Separate accuracy calculation · all labels available</caption><thead><tr><th>Window</th><th>Correct</th><th>Tickets</th><th>Accuracy</th></tr></thead><tbody></tbody></table>
+<p>Each window has distinct ticket IDs. Within each channel, the first three tickets out of every four have labels matching M1, except in the more-errors scenario, where only the first two match. The following sample shows the first four current tickets from each channel, not a random sample or the full window.</p>
+<table id="sample"><caption>Eight current records · model route versus reviewed label</caption><thead><tr><th>Channel</th><th>Model route</th><th>Reviewed label</th><th>Correct</th></tr></thead><tbody></tbody></table>
+</details><details id="assumptions"><summary>Monitoring assumptions and limits</summary>
+<p>Reference R always has 100 tickets, with 80 web and 20 app. The mix-change scenario uses 20% web and 80% app in the current window; the other scenarios retain 80% web and 20% app. M1 is a fixed rule, not a trained classifier. Every example ticket has a reviewed label, with no delay or selection bias simulated.</p>
+<p>The statistic is the maximum absolute difference between channel shares, reported in percentage points. It is L-infinity distance on the two-category distribution, multiplied by 100. Comparison uses integer count products to preserve the strict threshold boundary. Fewer than 50 current tickets withholds the input-alert decision even though the descriptive gap remains displayed.</p>
+<p>Gray bars show the reference and green bars show current data. Green does not indicate good performance. This is a window comparison with a practical threshold, not a hypothesis test, ADWIN implementation, uncertainty interval or false-alarm estimate. No sampling randomness, seasonality, serial dependence, missing or unknown categories, joint-feature detection, model retraining or real deployment is simulated. Invalid records are rejected rather than silently excluded.</p></details>
+<script>
+const channels=Object.freeze(['web','app']);
+const model=Object.freeze({id:'M1',routes:Object.freeze({web:0,app:1})});
+const names=Object.freeze(['Billing','Access']);
+const statuses=Object.freeze({investigate:'Investigate input shift','no-breach':'No configured input alert',insufficient:'Insufficient current volume'});
+function route(channel){if(!channels.includes(channel))throw Error('Known channel required');return model.routes[channel];}
+function makeWindow(id,count,webPercent,correctInFour){
+ if(typeof id!=='string'||!id.trim()||!Number.isSafeInteger(count)||count<4||count>10000||![20,80].includes(webPercent)||![2,3].includes(correctInFour))throw Error('Valid example specification required');
+ const webCount=count*webPercent/100;if(!Number.isInteger(webCount)||webCount%4||(count-webCount)%4)throw Error('Fixture channel counts must be multiples of four');
+ return channels.flatMap(channel=>Array.from({length:channel==='web'?webCount:count-webCount},(_,i)=>{const prediction=route(channel);return {id:id+'-'+channel[0]+i,channel,prediction,label:i%4<correctInFour?prediction:1-prediction};}));
+}
+function distribution(rows){
+ if(!Array.isArray(rows)||!rows.length)throw Error('Nonempty ticket window required');const seen=new Set(),counts=[0,0];
+ for(const row of rows){if(!row||typeof row.id!=='string'||!row.id.trim()||seen.has(row.id)||!channels.includes(row.channel))throw Error('Distinct ticket IDs and known channels required');seen.add(row.id);counts[channels.indexOf(row.channel)]++;}
+ return {n:rows.length,counts,shares:counts.map(c=>c/rows.length)};
+}
+function monitor(referenceRows,currentRows,thresholdPP=10,minVolume=50){
+ if(!Number.isInteger(thresholdPP)||thresholdPP<0||thresholdPP>100||!Number.isSafeInteger(minVolume)||minVolume<1)throw Error('Integer percentage-point threshold and positive volume required');
+ const reference=distribution(referenceRows),current=distribution(currentRows),denominator=reference.n*current.n;
+ if(!Number.isSafeInteger(denominator*100))throw Error('Counts exceed exact comparison range');
+ const numerators=reference.counts.map((c,i)=>Math.abs(c*current.n-current.counts[i]*reference.n)),maxNumerator=Math.max(...numerators),gapsPP=numerators.map(v=>100*v/denominator),gapPP=100*maxNumerator/denominator;
+ const sufficient=current.n>=minVolume,aboveThreshold=100*maxNumerator>thresholdPP*denominator;
+ return {reference,current,thresholdPP,minVolume,denominator,numerators,maxNumerator,gapsPP,gapPP,sufficient,aboveThreshold,status:!sufficient?'insufficient':aboveThreshold?'investigate':'no-breach'};
+}
+function accuracy(rows){
+ distribution(rows);let correct=0;
+ for(const row of rows){if(![0,1].includes(row.prediction)||![0,1].includes(row.label))throw Error('Binary predictions and reviewed labels required');correct+=Number(row.prediction===row.label);}
+ return {n:rows.length,correct,errors:rows.length-correct,percent:100*correct/rows.length};
+}
+function buildReport(scenario='mix',count=100,threshold=10){
+ if(!['mix','errors','stable'].includes(scenario)||![20,100].includes(count)||![10,60,70].includes(threshold))throw Error('Unsupported explorer choice');
+ const referenceRows=makeWindow('R',100,80,3),currentRows=makeWindow('C',count,scenario==='mix'?20:80,scenario==='errors'?2:3),result=monitor(referenceRows,currentRows,threshold),referenceQuality=accuracy(referenceRows),currentQuality=accuracy(currentRows);
+ return {scenario,count,threshold,model:model.id,referenceRows,currentRows,monitor:result,referenceQuality,currentQuality,accuracyDeltaPP:currentQuality.percent-referenceQuality.percent};
+}
+const number=v=>Number(v.toFixed(6)).toString();
+function mechanismGraphic(r,mobile){
+ const width=mobile?328:680,height=mobile?760:570,m=r.monitor;
+ const text=(x,y,s,size=16,color='#252c28',anchor='start')=>`<text x="${x}" y="${y}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" font-size="${size}" text-anchor="${anchor}" fill="${color}">${s}</text>`;
+ const line=(x,y,x2,y2,color='#a6aca3')=>`<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${color}"/>`;
+ let out=text(0,25,mobile?'Inputs and outcomes':'Compare inputs, then check outcomes',mobile?24:25)+text(0,55,`Reference 100 · current ${r.count} tickets`,16,'#626962');
+ const start=mobile?64:100,span=mobile?226:280,axisY=mobile?112:123;
+ out+=line(start,axisY,start+span,axisY);
+ for(const v of [0,50,100])out+=line(start+span*v/100,axisY-4,start+span*v/100,axisY+4)+text(start+span*v/100,axisY-11,v+'%',14,'#626962','middle');
+ channels.forEach((channel,i)=>{const y=(mobile?151:170)+i*(mobile?95:100),ref=m.reference.shares[i],cur=m.current.shares[i];
+ out+=text(0,y+12,channel==='web'?'Web':'App',18);
+ out+=`<rect x="${start}" y="${y}" width="${span*ref}" height="13" fill="#8c938b"/><rect x="${start}" y="${y+25}" width="${span*cur}" height="13" fill="#00855b"/>`;
+ out+=text(start+span*ref+7,y+11,number(ref*100)+'%',15,'#626962')+text(start+span*cur+7,y+36,number(cur*100)+'%',15,'#00855b');
+ });
+ if(mobile){
+ out+=text(0,318,'Gray: reference · green: current',15,'#626962')+text(0,362,`Largest share gap ${number(m.gapPP)} pp`,23)+text(0,404,statuses[m.status],21)+text(0,443,`Alert if gap > ${r.threshold} pp`,17)+text(0,474,'Needs at least 50 current tickets',16)+line(0,501,328,501);
+ out+=text(0,540,'Accuracy · all labels provided',19)+text(0,577,`Reference ${r.referenceQuality.correct}/100 = ${number(r.referenceQuality.percent)}%`,17)+text(0,610,`Current ${r.currentQuality.correct}/${r.count} = ${number(r.currentQuality.percent)}%`,17,'#00855b')+text(0,648,`Accuracy change ${number(r.accuracyDeltaPP)} pp`,20)+text(0,698,'Input change and prediction quality',15,'#626962')+text(0,724,'are separate measurements.',15,'#626962');
+ }else{
+ out+=text(440,123,'Accuracy · all labels',20)+text(440,168,`Reference ${r.referenceQuality.correct}/100 = ${number(r.referenceQuality.percent)}%`,16)+text(440,205,`Current ${r.currentQuality.correct}/${r.count} = ${number(r.currentQuality.percent)}%`,16,'#00855b')+text(440,246,`Change ${number(r.accuracyDeltaPP)} pp`,23)+text(440,284,'M1 fixed · teaching labels',15,'#626962');
+ out+=text(0,355,`Largest share gap ${number(m.gapPP)} pp`,25)+text(0,402,statuses[m.status],24)+text(0,442,`Rule: gap > ${r.threshold} pp · current count ≥ 50`,17)+line(0,465,660,465)+text(0,497,'Input change and prediction quality are separate measurements.',17)+text(0,537,'Gray: reference · green: current',15,'#626962');
+ }
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Channel distribution comparison and input alert beside a separate labeled accuracy calculation"><rect width="${width}" height="${height}" fill="#fff"/>${out}</svg>`;
+}
+let report;
+function render(){const d=document;report=buildReport(d.querySelector('#scenario').value,Number(d.querySelector('#count').value),Number(d.querySelector('#threshold').value));const r=report,m=r.monitor;
+ d.querySelector('output').textContent=`Input gap ${number(m.gapPP)} pp: ${statuses[m.status]}. Current accuracy ${number(r.currentQuality.percent)}% (${number(r.accuracyDeltaPP)} pp from reference).`;
+ d.querySelector('#interpretation').textContent=m.status==='insufficient'?'The descriptive gap is available, but this policy withholds the input-alert decision because the current window has fewer than 50 tickets.':r.scenario==='errors'?'Channel shares stayed fixed while labeled accuracy fell. This input monitor cannot detect that changed input–target relationship.':r.scenario==='mix'?'Channel mix changed while accuracy stayed fixed in this constructed example. The threshold controls the input signal, not the model-quality calculation.':'These constructed windows have equal channel shares and equal accuracy. No configured input alert is not a general health guarantee.';
+ d.querySelector('#graphic').innerHTML=mechanismGraphic(r,innerWidth<520);
+ d.querySelector('#shares tbody').innerHTML=channels.map((channel,i)=>`<tr><td>${channel}</td><td>${m.reference.counts[i]}/100 (${number(m.reference.shares[i]*100)}%)</td><td>${m.current.counts[i]}/${r.count} (${number(m.current.shares[i]*100)}%)</td><td>${number(m.gapsPP[i])}</td></tr>`).join('');
+ d.querySelector('#calculation').textContent=`Largest gap = max(${m.gapsPP.map(v=>number(v)).join(', ')}) = ${number(m.gapPP)} pp. Threshold comparison: ${number(m.gapPP)} pp > ${r.threshold} pp is ${m.aboveThreshold?'true':'false'}. Current count ${r.count} ≥ 50 is ${m.sufficient?'true':'false'}. Neither comparison reads labels.`;
+ d.querySelector('#quality tbody').innerHTML=[['Reference',r.referenceQuality],['Current',r.currentQuality]].map(([name,q])=>`<tr><td>${name}</td><td>${q.correct}</td><td>${q.n}</td><td>${number(q.percent)}%</td></tr>`).join('');
+ const sample=channels.flatMap(channel=>r.currentRows.filter(row=>row.channel===channel).slice(0,4));
+ d.querySelector('#sample tbody').innerHTML=sample.map(row=>`<tr><td>${row.channel}</td><td>${names[row.prediction]}</td><td>${names[row.label]}</td><td>${row.prediction===row.label?'Yes':'No'}</td></tr>`).join('');
+}
+document.querySelector('form').addEventListener('submit',e=>e.preventDefault());document.querySelectorAll('select').forEach(el=>el.addEventListener('change',render));document.querySelector('#reset').addEventListener('click',()=>{document.querySelector('form').reset();document.querySelectorAll('details').forEach(el=>el.open=false);render();});addEventListener('resize',render);render();
+</script></body></html>

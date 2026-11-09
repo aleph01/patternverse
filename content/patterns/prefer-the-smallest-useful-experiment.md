@@ -7,6 +7,8 @@ status: published
 aliases:
   - "Smallest Useful Experiment"
   - "Micro-Experiment"
+  - "Try Before You Commit"
+  - "Prototype the Life Change"
 tags:
   - decision-making
   - experimentation
@@ -103,6 +105,14 @@ This prevents you from explaining away the result afterward.
 
 [[separate-reversible-from-irreversible-decisions|Separate Reversible from Irreversible Decisions]] · [[look-for-the-decisive-unknown|Look for the Decisive Unknown]]
 
+## Trying a life change through a partial experience
+
+A couple might travel together before deciding whether to share a home. The trip can reveal how they handle planning, expenses, disagreements, and time alone. It samples some shared routines, while a holiday's novelty and freedom from ordinary work can conceal other difficulties. The useful conclusion names what the experience actually revealed and what remains unknown about everyday life together.
+
+Caring for a dog before considering parenthood is a more distant analogy. It may reveal something about coordinating care and accepting limits on spontaneity, but it cannot establish whether someone wants or would enjoy raising a child. A dog is also a substantial commitment in its own right. Choose pet ownership because both people want and can sustain that responsibility; it is not a disposable trial of parenthood. An existing, mutually agreed dog-sitting arrangement can offer a narrower sample of shared responsibility without pretending to answer the larger question.
+
+[Designing Your Life describes prototyping an experience](https://designingyour.life/insights/how-to-prototype-life-designs/) as trying something firsthand on a limited scale before deciding whether to invest further. The examples here apply that idea to life changes. A useful trial brings some features of the possible future into the present while keeping its limits visible.
+
 ```patternverse-language
 :language 1
 :title "Design a Micro-Experiment"
@@ -115,14 +125,10 @@ step_1 = !form {
   !show {
 Choose a larger decision you feel uncertain about. Complete: **The thing I wish I knew before deciding is: ______.**
   }
-  !ask larger-decision {
-    :required true
-    :multiline true
+  larger-decision = !ask {
 What larger decision are you considering?
   }
-  !ask wish-knew {
-    :required true
-    :multiline true
+  wish-knew = !ask {
 What do you wish you knew before deciding?
   }
 }
@@ -132,9 +138,7 @@ step_2 = !form {
   !show {
 Look for actions that test demand, ability, preference, or feasibility. Generate three ways to learn through action, rather than more speculation.
   }
-  !ask experiments {
-    :required true
-    :multiline true
+  experiments = !ask {
 What are three possible real-world experiments?
   }
 }
@@ -144,9 +148,7 @@ step_3 = !form {
   !show {
 For each experiment estimate effort, cost, risk, and what it would actually teach you. A small action is not useful if it removes the very uncertainty you need to test.
   }
-  !ask test-comparison {
-    :required true
-    :multiline true
+  test-comparison = !ask {
 For each experiment, what are the effort, cost, risk, and likely learning?
   }
 }
@@ -156,9 +158,7 @@ step_4 = !form {
   !show {
 Choose the smallest safe experiment that still exposes you to an important feature of the real decision. Respect consent and genuine constraints; some experiences cannot be meaningfully simulated.
   }
-  !ask chosen-test {
-    :required true
-    :multiline true
+  chosen-test = !ask {
 Which experiment will you try, and what important uncertainty does it preserve?
   }
 }
@@ -173,14 +173,10 @@ Before running it, write:
 
 This makes it harder to explain away an inconvenient result. An experiment provides a sample, not certainty; you do not need to run it during this worksheet.
   }
-  !ask update-rules {
-    :required true
-    :multiline true
+  update-rules = !ask {
 What outcomes would update your belief in each direction?
   }
-  !ask test-plan {
-    :required true
-    :multiline true
+  test-plan = !ask {
 When and how could you run this experiment?
   }
 }

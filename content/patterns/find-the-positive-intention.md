@@ -48,31 +48,6 @@ Find the Positive Intention is especially helpful when discussion keeps returnin
 
 What changes is the shape of the disagreement. Instead of treating another person's position as something to defeat, the participants can compare ways of addressing a concern they now understand more clearly. They may still disagree about acceptable risk, responsibility, or cost. But the disagreement has become easier to examine, because a particular strategy no longer has exclusive ownership of the value it claims to protect.
 
-## Pattern details
-
-### Use when
-
-- An objection repeatedly triggers defensiveness.
-- A shared concern is hidden behind opposing strategies.
-
-### Goals
-
-- Understand the concern behind a response.
-- Compare alternative ways to address the concern.
-
-### Mechanisms
-
-- intention inquiry
-- concern and strategy distinction
-
-### Not ideal when
-
-- Understanding a motive is being used to excuse harm or override a boundary.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[redefine-the-terms|Redefine the Terms]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Intention; chapter 2, printed pages 41–49. Sou
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask situation {
+situation = !ask {
     Name an everyday situation
 
     Describe a response or habit you would like to understand. Stick to what happened, without guessing anyone's hidden motives.
 }
-!ask strategy {
+strategy = !ask {
     Separate the strategy from its effect
 
     What did you or the other person actually do? What impact did it have, including any harm or boundary that matters?
 }
-!ask concern {
+concern = !ask {
     Try a tentative intention
 
     What concern, need, or purpose might this strategy be trying to serve? Write 'possibly' rather than treating it as a fact. 'I don't know' is a valid answer.
 }
-!ask alternative {
+alternative = !ask {
     Find another way
 
     What safer or more workable strategy might serve that concern without repeating the unwanted impact?
 }
-!ask check {
+check = !ask {
     Keep responsibility in view
 
     What facts, consequences, or boundaries must the alternative still respect? A possible intention does not excuse harmful behavior.
 }
-!ask next {
+next = !ask {
     Choose a small next step
 
     What could you try or ask to check this possibility? If it concerns someone else, leave room for them to correct your interpretation.

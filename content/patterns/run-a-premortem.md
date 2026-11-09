@@ -114,9 +114,7 @@ step_1 = !form {
   !show {
 Choose a decision or plan you currently favor. Describe it enough to make the imagined failure specific.
   }
-  !ask plan {
-    :required true
-    :multiline true
+  plan = !ask {
 What decision or plan are you considering?
   }
 }
@@ -128,9 +126,7 @@ Imagine: **It is one year from now, and this decision turned out badly. You regr
 
 Without censoring yourself, write at least five plausible explanations. Look for mechanisms, not just “everything went wrong.”
   }
-  !ask failure-causes {
-    :required true
-    :multiline true
+  failure-causes = !ask {
 What are at least five plausible explanations for the failure?
   }
 }
@@ -140,9 +136,7 @@ step_3 = !form {
   !show {
 Classify each explanation as **preventable**, **partially controllable**, or **largely uncontrollable**. Some risks combine or amplify one another.
   }
-  !ask control {
-    :required true
-    :multiline true
+  control = !ask {
 How would you classify each explanation?
   }
 }
@@ -152,14 +146,10 @@ step_4 = !form {
   !show {
 Select two or three failures that are both plausible and consequential. A premortem improves the plan; it does not make every possible risk a veto.
   }
-  !ask priority-risks {
-    :required true
-    :multiline true
+  priority-risks = !ask {
 Which two or three failure mechanisms deserve attention?
   }
-  !ask protection {
-    :required true
-    :multiline true
+  protection = !ask {
 For each, what could you learn, change, test, or protect against before committing?
   }
 }
@@ -169,9 +159,7 @@ step_5 = !form {
   !show {
 Turn the useful insight into a change: better information, a safety margin, a backup, a test, or a different commitment.
   }
-  !ask modification {
-    :required true
-    :multiline true
+  modification = !ask {
 What is one concrete modification to the current plan?
   }
 }

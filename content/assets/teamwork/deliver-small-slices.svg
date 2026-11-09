@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1120" viewBox="0 0 1400 1120" role="img" aria-labelledby="title desc">
+<title id="title">Deliver Small Slices: one narrow scenario through the necessary parts</title>
+<desc id="desc">Hypothetical workshop-booking service. Component milestones separately complete booking screens, booking rules, records, and confirmations or staff views; a usable reservation requires integration of the necessary parts. A small value slice instead supports one complete scenario: an existing member reserves one place at one free workshop. This slice includes interaction, rules, saved records, and confirmation or staff visibility. Future scope is provisional and reuses working parts. A feedback loop connects the usable slice to observing bookings, discovering that people book for colleagues, and choosing that next capability. This is a scope diagram, not a timeline or estimate. Required quality, accessibility, privacy, and capacity checks apply to the delivered slice.</desc>
+<defs>
+ <pattern id="future" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#f5f7f8"/><circle cx="6" cy="6" r="1" fill="#a9b5be"/></pattern>
+ <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#617783" stroke-width="1.5"/></marker>
+</defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#152c39}.body{font-size:21px}.small{font-size:18px}.label{font-size:24px;font-weight:700}.muted{fill:#4d626f}.white{fill:#ffffff}</style>
+<rect width="1400" height="1120" fill="#fafbf8"/>
+<text x="52" y="66" font-size="39" font-weight="700">A narrow scenario, complete enough to use</text>
+<text x="52" y="108" class="body muted">Hypothetical workshop booking · Deliver a confirmed reservation for one supported case</text>
+<rect x="40" y="150" width="550" height="580" rx="15" fill="#ffffff" stroke="#ccd6da"/>
+<rect x="620" y="150" width="740" height="580" rx="15" fill="#ffffff" stroke="#ccd6da"/>
+
+<text x="64" y="192" class="label" >Components as milestones</text>
+<text x="64" y="226" class="small muted" >Each milestone completes a different part.</text>
+<rect x="70" y="274" width="490" height="57" rx="7" fill="#eef1f2" stroke="#aab8bf"/>
+<text x="92" y="310" class="body" >1. Booking screens</text>
+<rect x="70" y="351" width="490" height="57" rx="7" fill="#eef1f2" stroke="#aab8bf"/>
+<text x="92" y="387" class="body" >2. Capacity and booking rules</text>
+<rect x="70" y="428" width="490" height="57" rx="7" fill="#eef1f2" stroke="#aab8bf"/>
+<text x="92" y="464" class="body" >3. Reservation records</text>
+<rect x="70" y="505" width="490" height="57" rx="7" fill="#eef1f2" stroke="#aab8bf"/>
+<text x="92" y="541" class="body" >4. Confirmations and staff view</text>
+<text x="70" y="630" class="small" >A usable booking needs the necessary parts</text>
+<text x="70" y="658" class="small" >integrated and working together.</text>
+<text x="70" y="698" class="small muted" >Component progress can still support testing.</text>
+<text x="644" y="192" class="label" >One complete value slice</text>
+<text x="644" y="226" class="small muted" >Existing member · One free workshop · One place</text>
+<text x="931" y="264" class="small" text-anchor="middle">FIRST SLICE</text>
+<text x="1086" y="264" class="small" text-anchor="middle">FUTURE SCOPE</text>
+<text x="1241" y="264" class="small" text-anchor="middle">FUTURE SCOPE</text>
+<text x="652" y="315" class="body" >Interaction</text>
+<rect x="861" y="280" width="140" height="57" rx="6" fill="#176e65" stroke="#176e65" />
+<text x="931" y="316" class="small white" text-anchor="middle">Included</text>
+<rect x="1016" y="280" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<rect x="1171" y="280" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<text x="652" y="392" class="body" >Rules</text>
+<rect x="861" y="357" width="140" height="57" rx="6" fill="#176e65" stroke="#176e65" />
+<text x="931" y="393" class="small white" text-anchor="middle">Included</text>
+<rect x="1016" y="357" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<rect x="1171" y="357" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<text x="652" y="469" class="body" >Saved record</text>
+<rect x="861" y="434" width="140" height="57" rx="6" fill="#176e65" stroke="#176e65" />
+<text x="931" y="470" class="small white" text-anchor="middle">Included</text>
+<rect x="1016" y="434" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<rect x="1171" y="434" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<text x="652" y="546" class="body" >Confirmation</text>
+<rect x="861" y="511" width="140" height="57" rx="6" fill="#176e65" stroke="#176e65" />
+<text x="931" y="547" class="small white" text-anchor="middle">Included</text>
+<rect x="1016" y="511" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<rect x="1171" y="511" width="140" height="57" rx="6" fill="url(#future)" stroke="#b3bfc6" stroke-dasharray="5 4"/>
+<text x="861" y="630" class="small" >A member can complete a real reservation.</text>
+<text x="652" y="668" class="small muted" >Later slices extend the working service as needed.</text>
+<text x="652" y="698" class="small muted" >Future scope stays provisional until learning informs it.</text>
+<text x="52" y="784" class="label" >Delivery creates an opportunity to learn and change direction.</text>
+<rect x="52" y="820" width="290" height="106" rx="10" fill="#ffffff" stroke="#93aca6"/>
+<text x="70" y="854" class="label" >Deliver</text>
+<text x="70" y="892" class="small" >One usable booking case</text>
+<line x1="351" y1="873" x2="384" y2="873" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="395" y="820" width="290" height="106" rx="10" fill="#ffffff" stroke="#93aca6"/>
+<text x="413" y="854" class="label" >Observe</text>
+<text x="413" y="892" class="small" >Watch real bookings</text>
+<line x1="694" y1="873" x2="727" y2="873" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="738" y="820" width="290" height="106" rx="10" fill="#ffffff" stroke="#93aca6"/>
+<text x="756" y="854" class="label" >Learn</text>
+<text x="756" y="892" class="small" >People book for colleagues</text>
+<line x1="1037" y1="873" x2="1070" y2="873" stroke="#617783" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1081" y="820" width="290" height="106" rx="10" fill="#ffffff" stroke="#93aca6"/>
+<text x="1099" y="854" class="label" >Choose</text>
+<text x="1099" y="892" class="small" >Add booking for others</text>
+<text x="52" y="979" class="body" >Reduce the range of supported cases while retaining the quality each delivered case needs.</text>
+<text x="52" y="1020" class="small muted" >Scope diagram only: box sizes and positions do not represent time, effort, or guaranteed benefits.</text>
+<text x="52" y="1051" class="small muted" >The first slice retains accessibility, privacy, capacity checks, and a supported cancellation route.</text>
+<text x="52" y="1082" class="small muted" >The feedback and next-slice choice are invented examples; future slices reuse existing working parts.</text>
+</svg>

@@ -94,9 +94,7 @@ step_1 = !form {
   !show {
 Choose a decision you are currently considering. Write the serious options; the same decision may have different switching costs for different options.
   }
-  !ask decision {
-    :required true
-    :multiline true
+  decision = !ask {
 What decision are you considering, and what are the options?
   }
 }
@@ -106,24 +104,16 @@ step_2 = !form {
   !show {
 For each option, consider the costs of being wrong and changing course. A technically reversible choice can still be practically sticky.
   }
-  !ask ease {
-    :required true
-    :multiline true
+  ease = !ask {
 If you dislike the result, how easily could you change course?
   }
-  !ask switching-costs {
-    :required true
-    :multiline true
+  switching-costs = !ask {
 What money, time, reputation, relationship capital, or effort would changing course cost?
   }
-  !ask commitment-period {
-    :required true
-    :multiline true
+  commitment-period = !ask {
 How long would you be committed before you could reconsider?
   }
-  !ask lasting-consequences {
-    :required true
-    :multiline true
+  lasting-consequences = !ask {
 What consequences would remain even after reversing the decision?
   }
 }
@@ -137,14 +127,10 @@ Easy to reverse → decide or test relatively quickly.
 Moderately reversible → gather the most important missing information first.
 Difficult to reverse → slow down, examine failure modes, and look for smaller preliminary experiments.
   }
-  !ask classification {
-    :required true
-    :multiline true
+  classification = !ask {
 How reversible is each option?
   }
-  !ask deliberation {
-    :required true
-    :multiline true
+  deliberation = !ask {
 What response fits that level of reversibility?
   }
 }
@@ -154,9 +140,7 @@ step_4 = !form {
   !show {
 A full commitment sometimes contains a smaller, reversible first move. Keep real safety, legal, and contractual constraints in view.
   }
-  !ask first-step {
-    :required true
-    :multiline true
+  first-step = !ask {
 Can you redesign this decision so that the first step is more reversible than the full commitment?
   }
 }

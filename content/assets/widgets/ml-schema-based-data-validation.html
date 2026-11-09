@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Schema validation contract explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        background: var(--panel);
+        padding: 12px;
+        font-size: 13px;
+        border-radius: 7px;
+      }
+      code {
+        font-family: ui-monospace, monospace;
+      }
+      .data-table th:first-child,
+      .data-table td:first-child {
+        width: 14%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Validate six fictional delivery records against a versioned contract. No model is fitted. Row
+      checks and whole-batch release are separate: any violation holds the batch.
+    </p>
+    <form aria-label="Schema validation settings">
+      <div>
+        <label for="dataset">Input batch</label
+        ><select id="dataset">
+          <option value="source">Original training records</option>
+          <option value="serving">Same records without labels</option>
+          <option value="units">Valid-looking values in metres</option>
+        </select>
+      </div>
+      <div>
+        <label for="environment">Validation environment</label
+        ><select id="environment">
+          <option value="training">Training · label required</option>
+          <option value="serving">Serving · label forbidden</option>
+        </select>
+      </div>
+      <div>
+        <label for="version">Contract version</label
+        ><select id="version">
+          <option value="v1">v1 · standard / express</option>
+          <option value="v2">v2 · also allows drone</option>
+        </select>
+      </div>
+      <div>
+        <label for="normalization">Distance parsing policy</label
+        ><select id="normalization">
+          <option value="strict">Strict · no coercion</option>
+          <option value="decimal">Explicit decimal-string conversion</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="interpretation" class="note"></p>
+    <svg id="mechanism" role="img" aria-label="Schema checks and whole-batch disposition"></svg>
+    <table id="summary-table">
+      <caption>
+        Violations by field · multiple violations may affect one row
+      </caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Violations</th>
+          <th>Rule</th>
+        </tr>
+      </thead>
+      <tbody id="summary"></tbody>
+    </table>
+    <details id="record-tables">
+      <summary>Inspect all records and exact failures</summary>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Row</th>
+            <th>Raw values</th>
+            <th>Findings</th>
+          </tr>
+        </thead>
+        <tbody id="data"></tbody>
+      </table>
+    </details>
+    <details id="contract-details">
+      <summary>Inspect the selected contract</summary>
+      <pre id="contract"></pre>
+    </details>
+    <details>
+      <summary>Assumptions and scope</summary>
+      <p>
+        This small validator implements only the declared required fields, scalar types, inclusive
+        bounds, allowed categories, and no-extra-field policy. It is original teaching code, not a
+        JSON Schema engine or TensorFlow Data Validation. IDs are display metadata outside the
+        feature object. Type failure stops further checks for that field, so null is one type
+        violation, not several range violations.
+      </p>
+      <p>
+        Strict mode never coerces data. Explicit conversion accepts finite signed decimal strings in
+        distance_km only, preserves raw values, and lists every conversion; it does not repair any
+        other field. No rows are silently removed. Every violation holds the whole batch; passing
+        rows are not automatically released.
+      </p>
+      <p>
+        The metres scenario supplies six otherwise conforming numeric values but no unit metadata.
+        The validator cannot infer their physical units. A passing batch is eligible under these
+        checks, not certified meaningful, representative, leakage-free, or ready for every model.
+        Allowing a new category does not update the downstream encoder or model.
+      </p>
+    </details>
+    <script>
+      const original = [
+        {
+          id: 'D01',
+          values: { distance_km: 12, service: 'standard', pickup_hour: 9, delivered_late: 0 },
+        },
+        {
+          id: 'D02',
+          values: { distance_km: '12', service: 'express', pickup_hour: 14, delivered_late: 1 },
+        },
+        {
+          id: 'D03',
+          values: { distance_km: -3, service: 'standard', pickup_hour: 10, delivered_late: 0 },
+        },
+        {
+          id: 'D04',
+          values: { distance_km: 22, service: 'drone', pickup_hour: 16, delivered_late: 1 },
+        },
+        {
+          id: 'D05',
+          values: { distance_km: null, service: 'express', pickup_hour: 24, delivered_late: 0 },
+        },
+        { id: 'D06', values: { distance_km: 5, service: 'standard', pickup_hour: 11 } },
+      ];
+      function makeRecords(dataset) {
+        if (dataset === 'units')
+          return [12, 18, 22, 8, 5, 30].map((distance, i) => ({
+            id: 'U' + String(i + 1).padStart(2, '0'),
+            values: {
+              distance_km: distance,
+              service: i % 2 ? 'express' : 'standard',
+              pickup_hour: 9 + i,
+              delivered_late: i % 2,
+            },
+          }));
+        return original.map((row) => {
+          const values = { ...row.values };
+          if (dataset === 'serving') delete values.delivered_late;
+          return { id: row.id, values };
+        });
+      }
+      function makeContract(version, environment) {
+        const fields = {
+          distance_km: { type: 'number', required: true, min: 0, max: 200, unit: 'km' },
+          service: {
+            type: 'string',
+            required: true,
+            enum: version === 'v2' ? ['standard', 'express', 'drone'] : ['standard', 'express'],
+          },
+          pickup_hour: { type: 'integer', required: true, min: 0, max: 23 },
+        };
+        if (environment === 'training')
+          fields.delivered_late = { type: 'integer', required: true, enum: [0, 1] };
+        return { version, environment, additionalProperties: false, fields };
+      }
+      function normalize(values, policy) {
+        const result = { ...values },
+          changes = [];
+        if (
+          policy === 'decimal' &&
+          typeof result.distance_km === 'string' &&
+          /^-?\d+(?:\.\d+)?$/.test(result.distance_km) &&
+          Number.isFinite(Number(result.distance_km))
+        ) {
+          changes.push({
+            field: 'distance_km',
+            from: result.distance_km,
+            to: Number(result.distance_km),
+          });
+          result.distance_km = Number(result.distance_km);
+        }
+        return { values: result, changes };
+      }
+      function validate(row, contract, policy) {
+        const converted = normalize(row.values, policy),
+          values = converted.values,
+          errors = [];
+        for (const [field, rule] of Object.entries(contract.fields)) {
+          if (!Object.prototype.hasOwnProperty.call(values, field)) {
+            if (rule.required)
+              errors.push({ field, code: 'missing', message: 'required value absent' });
+            continue;
+          }
+          const value = values[field],
+            typeOK =
+              rule.type === 'number'
+                ? typeof value === 'number' && Number.isFinite(value)
+                : rule.type === 'integer'
+                  ? Number.isInteger(value)
+                  : typeof value === 'string';
+          if (!typeOK) {
+            errors.push({
+              field,
+              code: 'type',
+              message:
+                'expected ' +
+                rule.type +
+                '; got ' +
+                (value === null ? 'null' : Array.isArray(value) ? 'array' : typeof value),
+            });
+            continue;
+          }
+          if (rule.min !== undefined && (value < rule.min || value > rule.max))
+            errors.push({
+              field,
+              code: 'range',
+              message: 'outside [' + rule.min + ', ' + rule.max + ']',
+            });
+          if (rule.enum && !rule.enum.includes(value))
+            errors.push({ field, code: 'domain', message: 'not in allowed values' });
+        }
+        for (const field of Object.keys(values))
+          if (!Object.prototype.hasOwnProperty.call(contract.fields, field))
+            errors.push({
+              field,
+              code: 'unexpected',
+              message: 'field not allowed in ' + contract.environment,
+            });
+        return {
+          id: row.id,
+          raw: { ...row.values },
+          values,
+          changes: converted.changes,
+          errors,
+          passed: errors.length === 0,
+        };
+      }
+      function buildReport(dataset, environment, version, policy) {
+        const contract = makeContract(version, environment),
+          rows = makeRecords(dataset).map((row) => validate(row, contract, policy)),
+          passed = rows.filter((row) => row.passed).length,
+          violations = rows.reduce((n, row) => n + row.errors.length, 0),
+          changes = rows.reduce((n, row) => n + row.changes.length, 0);
+        const fields = ['distance_km', 'service', 'pickup_hour', 'delivered_late'];
+        return {
+          dataset,
+          environment,
+          version,
+          policy,
+          contract,
+          rows,
+          n: rows.length,
+          passed,
+          flagged: rows.length - passed,
+          violations,
+          changes,
+          release: violations === 0,
+          summary: fields.map((field) => ({
+            field,
+            count: rows.reduce(
+              (n, row) => n + row.errors.filter((error) => error.field === field).length,
+              0,
+            ),
+          })),
+        };
+      }
+      const $ = (s) => document.querySelector(s),
+        escapeHTML = (value) =>
+          String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;'),
+        svgt = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '" fill="var(--ink)"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          escapeHTML(value) +
+          '</text>',
+        rect = (x, y, w, h, fill) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          w +
+          '" height="' +
+          h +
+          '" rx="7" fill="' +
+          fill +
+          '"/>';
+      let report;
+      function draw(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          cols = mobile ? 2 : 3,
+          step = mobile ? 168 : 230,
+          cardW = mobile ? 160 : 220,
+          startY = 62,
+          gateY = mobile ? 338 : 254,
+          h = mobile ? 490 : 402;
+        let s =
+          svgt(0, 25, 18, 'Same input; explicit expectations.', true) +
+          svgt(
+            0,
+            48,
+            13,
+            r.version +
+              ' · ' +
+              r.environment +
+              ' · ' +
+              (r.policy === 'strict' ? 'strict types' : 'decimal conversion'),
+          );
+        r.rows.forEach((row, i) => {
+          const x = (i % cols) * step,
+            y = startY + Math.floor(i / cols) * 84,
+            names = {
+              distance_km: 'distance',
+              service: 'service',
+              pickup_hour: 'hour',
+              delivered_late: 'label',
+            },
+            first = row.errors[0],
+            value = (field) =>
+              Object.prototype.hasOwnProperty.call(row.values, field)
+                ? JSON.stringify(row.values[field])
+                : 'absent',
+            detail = row.passed
+              ? 'distance = ' + value('distance_km')
+              : row.errors.length > 1
+                ? value(first.field) +
+                  '; ' +
+                  names[row.errors[1].field] +
+                  ' = ' +
+                  value(row.errors[1].field)
+                : 'value = ' + value(first.field);
+          s +=
+            rect(x, y, cardW, 74, row.passed ? 'var(--band)' : 'var(--panel)') +
+            svgt(
+              x + 9,
+              y + 21,
+              13,
+              row.id +
+                (row.passed
+                  ? ' · pass'
+                  : ' · ' +
+                    row.errors.length +
+                    (row.errors.length === 1 ? ' violation' : ' violations')),
+              true,
+            ) +
+            svgt(
+              x + 9,
+              y + 44,
+              13,
+              row.passed ? 'All field checks pass' : names[first.field] + ': ' + first.code,
+            ) +
+            svgt(x + 9, y + 63, 12, detail);
+        });
+        s +=
+          rect(0, gateY, w, 126, 'var(--panel)') +
+          svgt(
+            12,
+            gateY + 26,
+            16,
+            r.passed + '/' + r.n + ' pass · ' + r.flagged + ' flagged',
+            true,
+          ) +
+          svgt(12, gateY + 53, 15, r.violations + ' violations · ' + r.changes + ' conversions') +
+          svgt(12, gateY + 82, 17, r.release ? 'BATCH ELIGIBLE' : 'HOLD WHOLE BATCH', true) +
+          svgt(
+            12,
+            gateY + 107,
+            12,
+            r.release
+              ? 'Only the stated checks have passed.'
+              : 'Passing rows are not released separately.',
+          );
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        $('#mechanism').innerHTML = s;
+      }
+      function render() {
+        report = buildReport(
+          $('#dataset').value,
+          $('#environment').value,
+          $('#version').value,
+          $('#normalization').value,
+        );
+        const r = report;
+        $('output').textContent =
+          'Rows passing: ' +
+          r.passed +
+          '/' +
+          r.n +
+          '. Flagged: ' +
+          r.flagged +
+          '. Violations: ' +
+          r.violations +
+          '. Conversions: ' +
+          r.changes +
+          '. ' +
+          (r.release ? 'Batch eligible under stated checks.' : 'Whole batch held.');
+        $('#interpretation').textContent =
+          r.dataset === 'units'
+            ? 'These distances actually represent metres, but no unit metadata reaches the gate. Their numeric values satisfy the km range: the schema cannot detect this semantic mismatch.'
+            : r.version === 'v2'
+              ? 'The revised contract allows drone; this does not prove the encoder or model can handle it.'
+              : 'Null and absent values differ. Only an explicit parsing policy changes raw decimal strings.';
+        draw(r);
+        const descriptions = {
+          distance_km: 'Finite number · 0–200 km',
+          service: r.version === 'v2' ? 'standard / express / drone' : 'standard / express',
+          pickup_hour: 'Integer · 0–23',
+          delivered_late:
+            r.environment === 'training' ? 'Required integer · 0 or 1' : 'Forbidden in serving',
+        };
+        $('#summary').innerHTML = r.summary
+          .map(
+            (g) =>
+              '<tr><th scope="row">' +
+              g.field +
+              '</th><td>' +
+              g.count +
+              '</td><td>' +
+              descriptions[g.field] +
+              '</td></tr>',
+          )
+          .join('');
+        $('#data').innerHTML = r.rows
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '</th><td><code>' +
+              Object.entries(row.raw)
+                .map(
+                  ([field, value]) => escapeHTML(field) + ' = ' + escapeHTML(JSON.stringify(value)),
+                )
+                .join('<br/>') +
+              '</code></td><td>' +
+              row.errors.map((e) => escapeHTML(e.field + ': ' + e.message)).join('<br/>') +
+              (row.errors.length ? '' : 'Pass checks') +
+              row.changes
+                .map(
+                  (c) =>
+                    '<br/>' +
+                    escapeHTML(
+                      'Converted ' + JSON.stringify(c.from) + ' → ' + c.to + ' in ' + c.field,
+                    ),
+                )
+                .join('') +
+              '</td></tr>',
+          )
+          .join('');
+        $('#contract').textContent = JSON.stringify(r.contract, null, 2);
+      }
+      $('form').addEventListener('submit', (e) => e.preventDefault());
+      $('form').addEventListener('input', render);
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

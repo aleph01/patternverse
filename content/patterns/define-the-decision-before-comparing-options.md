@@ -129,9 +129,7 @@ step_1 = !form {
   !show {
 Write the decision exactly as it currently appears in your mind—for example, “Should I quit my job?”
   }
-  !ask current-decision {
-    :required true
-    :multiline true
+  current-decision = !ask {
 How are you currently phrasing the decision?
   }
 }
@@ -141,14 +139,10 @@ step_2 = !form {
   !show {
 Look behind the proposed action. A useful decision statement says what needs to change and what a good outcome would give you.
   }
-  !ask problem {
-    :required true
-    :multiline true
+  problem = !ask {
 What problem are you trying to solve?
   }
-  !ask outcome {
-    :required true
-    :multiline true
+  outcome = !ask {
 What would a good outcome give you?
   }
 }
@@ -158,19 +152,13 @@ step_3 = !form {
   !show {
 Some constraints are real: budgets, laws, health requirements, deadlines, contracts, or technical dependencies. Others may come from habit or the first formulation of the problem.
   }
-  !ask fixed {
-    :required true
-    :multiline true
+  fixed = !ask {
 Which constraints are genuinely fixed?
   }
-  !ask assumed {
-    :required true
-    :multiline true
+  assumed = !ask {
 Which constraints are you merely assuming?
   }
-  !ask excluded-options {
-    :required true
-    :multiline true
+  excluded-options = !ask {
 What alternatives disappear because of the way you phrased the question?
   }
 }
@@ -182,9 +170,7 @@ Complete: **How might I ______ while preserving/avoiding ______?**
 
 For example: “How might I reduce the amount of exhausting work in my week while preserving financial stability?”
   }
-  !ask new-question {
-    :required true
-    :multiline true
+  new-question = !ask {
 What is your rewritten decision question?
   }
 }
@@ -194,9 +180,7 @@ step_5 = !form {
   !show {
 Generate at least three possible options under the new frame. Do not score or choose yet; this practice is about improving the question.
   }
-  !ask new-options {
-    :required true
-    :multiline true
+  new-options = !ask {
 What are at least three options that the new question makes visible?
   }
 }

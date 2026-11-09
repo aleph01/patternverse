@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Constrained decoding token explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #record-table th:first-child {
+        width: 16%;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      th,
+      td {
+        overflow-wrap: anywhere;
+        vertical-align: top;
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font:
+          13px/1.6 ui-monospace,
+          monospace;
+      }
+      #rank-table th:first-child {
+        width: 31%;
+      }
+      #rank-table th:nth-child(2) {
+        width: 37%;
+      }
+      .example-card {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      h2 {
+        font-size: 19px;
+        margin: 24px 0 10px;
+      }
+
+      #rank-table th:first-child {
+        width: 15%;
+      }
+      #rank-table th:nth-child(2) {
+        width: 30%;
+      }
+
+      #state-table th:first-child {
+        width: 52%;
+      }
+
+      #distribution th:first-child {
+        width: 34%;
+      }
+      #distribution th:nth-child(2) {
+        width: 22%;
+      }
+      #distribution th:nth-child(3) {
+        width: 18%;
+      }
+      #distribution th:nth-child(4) {
+        width: 26%;
+      }
+      #distribution {
+        font-size: 13px;
+      }
+      code {
+        overflow-wrap: anywhere;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Keep legal continuations; then choose.</strong> This finite-language simulator
+      computes token masks, renormalized probabilities, and greedy paths from ten handcrafted
+      tokens. The weights are fictional and constant across steps. No language model, production
+      tokenizer, random sampling, or task-accuracy measurement runs.
+    </p>
+    <form>
+      <div>
+        <label for="prefix">Prefilled prefix</label
+        ><select id="prefix">
+          <option value="0">Empty output</option>
+          <option value="1" selected>After the label key</option>
+          <option value="2">Inside the RENEW value</option>
+          <option value="3">After the HOLD value</option>
+          <option value="4">Complete RENEW object</option>
+          <option value="5">Broken CANCEL prefix</option>
+        </select>
+      </div>
+      <div>
+        <label for="profile">Fictional token weights</label
+        ><select id="profile">
+          <option value="0" selected>Baseline — prose highest</option>
+          <option value="1">Favor combined RENEW token</option>
+        </select>
+      </div>
+      <div>
+        <label for="mode">Decoding constraint</label
+        ><select id="mode">
+          <option value="on" selected>Mask illegal tokens</option>
+          <option value="off">No mask</option>
+        </select>
+      </div>
+      <div>
+        <label for="budget">New token budget</label
+        ><select id="budget">
+          <option value="1">1</option>
+          <option value="3" selected>3</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <h2>Computed final text</h2>
+    <pre id="result" aria-label="Computed final text"></pre>
+    <p id="interpretation"></p>
+    <p class="note">
+      Fictional request: “Can I keep my loan another week?” Human reference: RENEW. This reference
+      is not used by the decoder. An accepted HOLD object illustrates why structure and intended
+      meaning need separate checks.
+    </p>
+    <table id="distribution">
+      <caption>
+        First-step distribution for the selected prefilled prefix
+      </caption>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Base</th>
+          <th>Legal?</th>
+          <th>Effective</th>
+        </tr>
+      </thead>
+      <tbody id="distribution-data"></tbody>
+    </table>
+    <p class="note">
+      “Effective” is the distribution after the selected mask setting. Greedy decoding chooses its
+      largest value, breaking exact ties by ascending token ID. Percentages refer to next-token
+      selection, not answer correctness. Later steps recompute the mask.
+    </p>
+    <h2>Computed greedy trace</h2>
+    <div id="trace"></div>
+    <details id="language">
+      <summary>Inspect the accepted output language</summary>
+      <pre id="language-data"></pre>
+      <p>
+        Exactly these three serializations are accepted, with no whitespace or extra fields. This is
+        a finite language, not a general JSON Schema implementation. A token may contain several
+        characters, including a value and its closing brace.
+      </p>
+    </details>
+    <details id="assumptions">
+      <summary>Masking, probability, and stopping assumptions</summary>
+      <p>
+        For each non-EOS token, append its complete string piece to the current prefix. It is legal
+        if at least one accepted target starts with that result. EOS contributes no characters and
+        is legal only when the current prefix exactly equals an accepted target. Every offered valid
+        prefix has a tokenized path to completion in this handcrafted vocabulary.
+      </p>
+      <p>
+        Base probability is weight divided by total weight. Grammar-retained mass is the sum of base
+        probabilities of legal tokens. With the mask enabled, illegal tokens get zero and legal
+        weights are divided by their sum. If that sum is zero, stop with DEAD_END. With no mask,
+        keep the base distribution, including illegal tokens. Greedy choice uses the highest
+        effective probability. This is not random sampling, beam search, temperature scaling, top-k
+        filtering, or global sequence-conditioned sampling.
+      </p>
+      <p>
+        All ten weights stay constant after every token within a profile. A real language model
+        changes its scores with context. The two profiles are invented distributions, not measured
+        models. The handcrafted string pieces do not reproduce a real tokenizer's byte behavior.
+        Different token paths can produce the same text.
+      </p>
+      <p>
+        The prefilled prefix does not count against the new-token budget. EOS does count as one new
+        token. FINISHED means EOS was emitted; TOKEN_LIMIT means the budget was exhausted without
+        EOS, even if the text already equals an accepted object. DEAD_END means no
+        positive-probability token remains. Accepted text and terminated generation are reported
+        separately. No constraint bypass or automatic repair occurs at a dead end.
+      </p>
+    </details>
+    <script>
+      'use strict';
+      const targets = ['{"label":"HOLD"}', '{"label":"RENEW"}', '{"label":"FIND"}'];
+      const vocabulary = [
+        '{"label":',
+        '"HOLD"',
+        '"RENEW"',
+        '"FIND"',
+        '}',
+        'Sure!',
+        '"RE',
+        'NEW"',
+        '"RENEW"}',
+        null,
+      ];
+      const prefixes = [
+        '',
+        '{"label":',
+        '{"label":"RE',
+        '{"label":"HOLD"',
+        '{"label":"RENEW"}',
+        '{"label":"CANCEL',
+      ];
+      const profiles = [
+        [15, 20, 10, 5, 5, 25, 8, 4, 6, 2],
+        [10, 5, 15, 5, 10, 10, 5, 5, 30, 5],
+      ];
+      const isComplete = (prefix) => targets.includes(prefix);
+      const isViable = (prefix) => targets.some((target) => target.startsWith(prefix));
+      function analyze(prefix, weights, constrained) {
+        const total = weights.reduce((s, w) => s + w, 0);
+        const legal = vocabulary.map((piece) =>
+          piece === null ? isComplete(prefix) : isViable(prefix + piece),
+        );
+        const legalWeight = weights.reduce((s, w, i) => s + (legal[i] ? w : 0), 0);
+        const denominator = constrained ? legalWeight : total;
+        const rows = vocabulary.map((piece, id) => ({
+          id,
+          piece,
+          allowed: legal[id],
+          weight: weights[id],
+          base: total ? weights[id] / total : 0,
+          probability: denominator && (!constrained || legal[id]) ? weights[id] / denominator : 0,
+        }));
+        return {
+          prefix,
+          rows,
+          allowedCount: legal.filter(Boolean).length,
+          grammarMass: total ? legalWeight / total : 0,
+          activeMass: total ? denominator / total : 0,
+          complete: isComplete(prefix),
+          viable: isViable(prefix),
+        };
+      }
+      function choose(rows) {
+        let best = null;
+        for (const r of rows)
+          if (r.probability > 0 && (!best || r.probability > best.probability)) best = r;
+        return best;
+      }
+      function compute(preset, profile, constrained, budget) {
+        const weights = profiles[profile],
+          initial = analyze(prefixes[preset], weights, constrained),
+          trace = [];
+        let text = prefixes[preset],
+          terminated = false,
+          status = 'TOKEN_LIMIT';
+        for (let i = 0; i < budget; i++) {
+          const d = analyze(text, weights, constrained),
+            token = choose(d.rows);
+          if (!token) {
+            status = 'DEAD_END';
+            break;
+          }
+          const before = text;
+          if (token.piece !== null) text += token.piece;
+          trace.push({
+            step: i + 1,
+            id: token.id,
+            piece: token.piece,
+            before,
+            after: text,
+            probability: token.probability,
+            grammarMass: d.grammarMass,
+            accepted: isComplete(text),
+          });
+          if (token.piece === null) {
+            terminated = true;
+            status = 'FINISHED';
+            break;
+          }
+        }
+        return {
+          preset,
+          profile,
+          constrained,
+          budget,
+          initial,
+          trace,
+          text,
+          terminated,
+          status,
+          accepted: isComplete(text),
+          viable: isViable(text),
+        };
+      }
+      const esc = (s) =>
+        String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+      const pct = (n) => (100 * n).toFixed(2) + '%';
+      let report;
+      function draw(r) {
+        const mobile = innerWidth < 500,
+          w = mobile ? 328 : 680,
+          h = mobile ? 930 : 470,
+          cw = mobile ? 328 : 210;
+        const rect = (x, y, height, width = cw) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          width +
+          '" height="' +
+          height +
+          '" rx="8" fill="var(--panel)" stroke="var(--accent)"/>';
+        const text = (x, y, size, s, b = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (b ? ' font-weight="700"' : '') +
+          '>' +
+          esc(s) +
+          '</text>';
+        const first = choose(r.initial.rows),
+          x2 = mobile ? 0 : 235,
+          y2 = mobile ? 250 : 0,
+          x3 = mobile ? 0 : 470,
+          y3 = mobile ? 500 : 0;
+        let svg =
+          '<title id="flow-title">Check the complete token piece, mask, and select a continuation</title><desc id="flow-desc">A finite output language defines legal prefixes. The first-step mask removes disallowed tokens and renormalizes the remaining weights. A greedy trace may finish a structurally valid object without choosing the human reference label.</desc>';
+        svg +=
+          rect(0, 0, 225) +
+          text(12, 29, 17, '1. Track the prefix', true) +
+          text(12, 68, 14, r.initial.prefix || '(empty)') +
+          text(12, 105, 14, r.initial.viable ? 'A completion exists.' : 'No accepted completion.') +
+          text(12, 140, 13, 'Check whole token pieces,') +
+          text(12, 164, 13, 'not just the first character.') +
+          text(12, 202, 13, 'EOS needs a complete object.');
+        svg +=
+          rect(x2, y2, 225) +
+          text(x2 + 12, y2 + 29, 17, '2. Mask + normalize', true) +
+          text(x2 + 12, y2 + 68, 14, r.initial.allowedCount + '/10 grammar-legal tokens') +
+          text(x2 + 12, y2 + 105, 14, 'Retained: ' + pct(r.initial.grammarMass), true) +
+          text(x2 + 12, y2 + 140, 14, r.constrained ? 'Mask enabled' : 'Mask disabled') +
+          text(x2 + 12, y2 + 177, 13, 'Effective distribution') +
+          text(x2 + 12, y2 + 201, 13, 'sums to ' + (r.initial.activeMass > 0 ? '1' : '0') + '.');
+        svg +=
+          rect(x3, y3, 225) +
+          text(x3 + 12, y3 + 29, 17, '3. Greedy selection', true) +
+          text(
+            x3 + 12,
+            y3 + 68,
+            14,
+            first
+              ? 'First: T' + first.id + ' at ' + pct(first.probability)
+              : 'No token can be chosen.',
+          ) +
+          text(x3 + 12, y3 + 105, 14, r.status, true) +
+          text(x3 + 12, y3 + 140, 14, 'New tokens: ' + r.trace.length) +
+          text(x3 + 12, y3 + 176, 14, 'Text accepted: ' + (r.accepted ? 'yes' : 'no')) +
+          text(x3 + 12, y3 + 202, 13, 'EOS emitted: ' + (r.terminated ? 'yes' : 'no'));
+        const y = mobile ? 770 : 300;
+        svg +=
+          rect(0, y, 125, w) +
+          text(12, y + 29, 17, 'Structure and meaning differ', true) +
+          text(12, y + 63, 14, 'Human reference: RENEW') +
+          text(
+            12,
+            y + 94,
+            13,
+            mobile
+              ? 'These token weights do not measure correctness.'
+              : 'A permitted token or accepted object does not establish the right label for the request.',
+          );
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      function render() {
+        report = compute(
+          +document.querySelector('#prefix').value,
+          +document.querySelector('#profile').value,
+          document.querySelector('#mode').value === 'on',
+          +document.querySelector('#budget').value,
+        );
+        const r = report;
+        document.querySelector('output').textContent =
+          r.status +
+          '. ' +
+          r.trace.length +
+          ' new token(s). Text accepted: ' +
+          (r.accepted ? 'yes' : 'no') +
+          '. End token emitted: ' +
+          (r.terminated ? 'yes' : 'no') +
+          '.';
+        document.querySelector('#result').textContent = r.text || '(empty text)';
+        document.querySelector('#interpretation').textContent =
+          r.status === 'DEAD_END'
+            ? 'No positive-probability continuation remains. Constraints stay enabled; no output repair or fallback generation occurs.'
+            : r.status === 'TOKEN_LIMIT'
+              ? 'The new-token budget ended before EOS. ' +
+                (r.accepted
+                  ? 'The text is already an accepted object, but the run has not emitted its end token.'
+                  : 'The text is not an accepted complete object.')
+              : 'EOS was emitted. ' +
+                (r.accepted
+                  ? 'The text belongs to the specified finite language.'
+                  : 'The unconstrained text does not belong to the specified language.');
+        document.querySelector('#distribution-data').innerHTML = r.initial.rows
+          .map(
+            (t) =>
+              '<tr><th scope="row">T' +
+              t.id +
+              '<small><code>' +
+              esc(t.piece === null ? 'EOS' : t.piece) +
+              '</code></small></th><td>' +
+              pct(t.base) +
+              '</td><td>' +
+              (t.allowed ? 'Yes' : 'No') +
+              '</td><td>' +
+              pct(t.probability) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#trace').innerHTML = r.trace.length
+          ? r.trace
+              .map(
+                (t) =>
+                  '<div class="example-card"><strong>' +
+                  t.step +
+                  '. T' +
+                  t.id +
+                  ' · ' +
+                  esc(t.piece === null ? 'EOS' : t.piece) +
+                  '</strong><p>After: <code>' +
+                  esc(t.after || '(empty)') +
+                  '</code></p><small>Effective next-token probability: ' +
+                  pct(t.probability) +
+                  '. Grammar-retained mass before selection: ' +
+                  pct(t.grammarMass) +
+                  '.</small></div>',
+              )
+              .join('')
+          : '<p>No token emitted: dead end at the prefilled prefix.</p>';
+        document.querySelector('#language-data').textContent = targets.join(
+          String.fromCharCode(10),
+        );
+        draw(r);
+      }
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelector('form').addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        render();
+      });
+      addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

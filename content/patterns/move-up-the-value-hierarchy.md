@@ -48,31 +48,6 @@ Move Up the Value Hierarchy is useful when a choice is stalled because one crite
 
 The result is a more accountable trade-off. The team can explain why accurate billing takes precedence over the date, the friend can understand why an uncomfortable conversation is being initiated, and the buyer can judge whether greater reliability justifies the expense. None of these decisions makes the cost disappear. A defensible priority explains why the cost is being accepted and leaves room to reduce it where the situation allows.
 
-## Pattern details
-
-### Use when
-
-- Two legitimate values conflict.
-- One dominant criterion obscures a justified cost.
-
-### Goals
-
-- Make priorities explicit and accountable.
-- Preserve lower-priority values where possible.
-
-### Mechanisms
-
-- value comparison
-- criterion precedence
-
-### Not ideal when
-
-- An appeal to loyalty or generosity is being used to override another person’s boundaries.
-
-### Difficulty
-
-medium
-
 ## Related patterns
 
 - [[shift-the-outcome|Shift the Outcome]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Hierarchy of Criteria; chapter 4, printed pages 
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask choice {
+choice = !ask {
     Name a real trade-off
 
     Describe an everyday choice with competing goals or values. What are the available options?
 }
-!ask criterion {
+criterion = !ask {
     Notice the current criterion
 
     Which value or goal is currently deciding the choice? What does it protect?
 }
-!ask values {
+values = !ask {
     Name the competing values
 
     What other values matter to you in this situation? Use your own priorities, not a ranking imposed by someone else.
 }
-!ask priority {
+priority = !ask {
     Choose a priority for this case
 
     Which value should take precedence here, and why? The answer need not be a universal rule.
 }
-!ask cost {
+cost = !ask {
     Keep the lower-priority concern
 
     What cost, promise, or boundary must still be respected? Choosing one value does not make the others meaningless.
 }
-!ask next {
+next = !ask {
     Find a proportionate action
 
     What concrete option reflects your chosen priority while protecting the other concerns as far as reasonably possible?

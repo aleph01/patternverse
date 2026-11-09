@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Label-preserving augmentation explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      textarea {
+        display: block;
+        width: 100%;
+        min-height: 100px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        resize: vertical;
+      }
+      fieldset {
+        margin: 12px 0;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+      }
+      legend {
+        font-weight: 650;
+      }
+      .toggle {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        min-height: 44px;
+        font-weight: 400;
+      }
+      .toggle input {
+        width: 22px;
+        min-height: 22px;
+        flex: 0 0 22px;
+      }
+      .source-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 14px;
+      }
+      form {
+        display: block;
+      }
+      .matrix {
+        overflow-x: auto;
+        margin-bottom: 12px;
+      }
+      th,
+      td {
+        font-size: 13px;
+      }
+      :is(textarea):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      @media (max-width: 420px) {
+        .source-options {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      pre {
+        font-size: 14px;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      The same transformation can preserve one target and change another. This explorer transforms
+      an actual 8 × 8 array; its targets come from exact synthetic templates, not a trained model.
+    </p>
+    <form aria-label="Augmentation settings">
+      <label for="task"
+        >Target to preserve
+        <select id="task">
+          <option value="presence" selected>Arrow presence</option>
+          <option value="direction">Arrow direction</option>
+        </select>
+      </label>
+      <div class="source-options">
+        <label class="toggle"
+          ><input id="horizontal" type="checkbox" checked />Flip horizontally</label
+        >
+        <label class="toggle"><input id="vertical" type="checkbox" />Flip vertically</label>
+      </div>
+      <label for="contrast"
+        >Foreground contrast: <span id="contrast-value">100%</span>
+        <input id="contrast" type="range" min="0" max="100" step="25" value="100" />
+      </label>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output id="result" aria-live="polite" aria-atomic="true"></output>
+    <svg role="img" aria-label="Original and transformed pixel arrays"></svg>
+    <p id="statistics" class="note"></p>
+    <p class="note">
+      Validity refers only to the selected synthetic target. Positive contrast is detectable exactly
+      in this toy setting; camera noise, perceptual limits, and predictive accuracy are not modeled.
+    </p>
+    <details>
+      <summary>Exact transformation and target rules</summary>
+      <p>
+        The source values are 100 on the arrow and 0 on the background. A horizontal flip reverses
+        column order; a vertical flip reverses row order. Contrast multiplies every value by
+        contrast / 100, with no rounding or clipping.
+      </p>
+      <p>
+        After ignoring positive intensity, the target checker compares the entire array with the
+        exact right and left templates. For presence, either template is “Arrow present” and the
+        blank array is “No arrow”. For direction, the templates are Right and Left; a blank array
+        has undefined direction. Other masks are outside this toy domain.
+      </p>
+      <p>
+        The four possible flip settings are recomputed at the current contrast and deduplicated by
+        their full pixel arrays. A vertically symmetric source means four settings need not create
+        four distinct images. These are views of one original, not independent observations.
+      </p>
+      <p>The original foreground mask is shown below; 1 means foreground and 0 background.</p>
+      <pre>
+00010000
+00011000
+00011100
+11111110
+11111110
+00011100
+00011000
+00010000</pre>
+    </details>
+    <script>
+      const rows = [
+        '00010000',
+        '00011000',
+        '00011100',
+        '11111110',
+        '11111110',
+        '00011100',
+        '00011000',
+        '00010000',
+      ];
+      const original = rows.map((row) => [...row].map(Number).map((v) => v * 100));
+      const form = document.querySelector('form');
+      const chart = document.querySelector('svg');
+      const output = document.querySelector('#result');
+      function transform(grid, horizontal, vertical, contrast) {
+        const sourceRows = vertical ? [...grid].reverse() : grid;
+        return sourceRows.map((row) =>
+          (horizontal ? [...row].reverse() : row).map((value) => (value * contrast) / 100),
+        );
+      }
+      function target(grid, task) {
+        const mask = grid
+          .flat()
+          .map((v) => Number(v > 0))
+          .join('');
+        const right = rows.join('');
+        const left = rows.map((row) => [...row].reverse().join('')).join('');
+        if (!grid.flat().some((v) => v > 0)) return task === 'presence' ? 'No arrow' : 'Undefined';
+        if (mask !== right && mask !== left) return 'Outside toy domain';
+        return task === 'presence' ? 'Arrow present' : mask === right ? 'Right' : 'Left';
+      }
+      function inspect(grid, task, contrast) {
+        const before = target(original, task),
+          after = target(grid, task);
+        const status = ['Undefined', 'Outside toy domain'].includes(after)
+          ? 'unsupported'
+          : before === after
+            ? 'valid'
+            : 'invalid';
+        const changed = grid.flat().filter((v, i) => v !== original.flat()[i]).length;
+        const foreground = grid.flat().filter((v) => v > 0).length;
+        const unique = new Set(
+          [false, true].flatMap((h) =>
+            [false, true].map((v) => JSON.stringify(transform(original, h, v, contrast))),
+          ),
+        ).size;
+        return { before, after, status, changed, foreground, unique };
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(grid, task) {
+        const narrow = innerWidth < 500;
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', narrow ? '0 0 328 600' : '0 0 680 300');
+        chart.append(node('title', {}, 'Original and transformed eight by eight pixel arrays'));
+        chart.append(
+          node(
+            'desc',
+            {},
+            'Colored squares are foreground. Each image has 64 numerical values. Targets are determined by exact templates in this synthetic example.',
+          ),
+        );
+        for (const [i, image] of [original, grid].entries()) {
+          const panel = node('g', {
+            transform: 'translate(' + (narrow ? 0 : i * 352) + ',' + (narrow ? i * 300 : 0) + ')',
+          });
+          chart.append(panel);
+          panel.append(
+            node('rect', { width: 328, height: 292, rx: 8, fill: 'var(--panel, #f1f2ef)' }),
+          );
+          const text = (x, y, size, value, bold = false) =>
+            panel.append(
+              node(
+                'text',
+                {
+                  x,
+                  y,
+                  'font-size': size,
+                  'font-family': 'system-ui, sans-serif',
+                  'font-weight': bold ? 700 : 400,
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          text(12, 29, 19, i ? 'Transformed' : 'Original', true);
+          image.forEach((row, r) =>
+            row.forEach((value, c) => {
+              panel.append(
+                node('rect', {
+                  x: 68 + c * 24,
+                  y: 48 + r * 24,
+                  width: 24,
+                  height: 24,
+                  fill: 'var(--paper, #fff)',
+                  stroke: 'var(--line, #a6aca3)',
+                  'stroke-width': 0.5,
+                }),
+              );
+              panel.append(
+                node('rect', {
+                  x: 68 + c * 24 + 1,
+                  y: 48 + r * 24 + 1,
+                  width: 22,
+                  height: 22,
+                  fill: 'var(--accent, #00855b)',
+                  opacity: value / 100,
+                  'data-value': value,
+                }),
+              );
+            }),
+          );
+          text(12, 273, 18, 'Target: ' + target(image, task), true);
+        }
+      }
+      function render() {
+        const task = document.querySelector('#task').value;
+        const contrast = Number(document.querySelector('#contrast').value);
+        document.querySelector('#contrast-value').textContent = contrast + '%';
+        const grid = transform(
+          original,
+          document.querySelector('#horizontal').checked,
+          document.querySelector('#vertical').checked,
+          contrast,
+        );
+        const result = inspect(grid, task, contrast);
+        output.textContent =
+          'Target: ' +
+          result.before +
+          ' → ' +
+          result.after +
+          '. Copy original label: ' +
+          result.status +
+          '.';
+        document.querySelector('#statistics').textContent =
+          result.changed +
+          '/64 pixels changed; ' +
+          result.foreground +
+          ' foreground pixels remain. Four flip settings at ' +
+          contrast +
+          '% contrast produce ' +
+          result.unique +
+          (result.unique === 1 ? ' unique image.' : ' unique images.');
+        draw(grid, task);
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', render);
+      form.addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        render();
+      });
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

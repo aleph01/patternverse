@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Exploration and propensity logging explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 18%;
+      }
+
+      #record-tables th:first-child,
+      #record-tables td:first-child {
+        width: 17%;
+      }
+      .data-table {
+        font-size: 13px;
+      }
+
+      #log-table {
+        font-size: 13px;
+      }
+      #log-table th:first-child {
+        width: 24%;
+      }
+      #log-table th:nth-child(2) {
+        width: 30%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Randomize, record, reweight.</strong> Replay ten fictional decisions using fixed
+      illustrative draws. Changing exploration changes the chosen actions and their logged
+      probabilities. The target is a separate policy.
+    </p>
+    <form>
+      <div>
+        <label for="epsilon">Exploration probability ε</label
+        ><select id="epsilon">
+          <option value="0">0 — preferred action only</option>
+          <option value="0.1">0.10</option>
+          <option value="0.3" selected>0.30</option>
+          <option value="1">1 — uniform exploration</option>
+        </select>
+      </div>
+      <div>
+        <label for="eligible">Eligible actions</label
+        ><select id="eligible">
+          <option value="ABC" selected>A, B, and C</option>
+          <option value="AB">A and B only</option>
+        </select>
+      </div>
+      <div>
+        <label for="target">Target policy</label
+        ><select id="target">
+          <option value="contextual" selected>Routine → A; Complex → B</option>
+          <option value="A">Always A</option>
+          <option value="B">Always B</option>
+          <option value="C">Always C</option>
+        </select>
+      </div>
+      <div>
+        <label for="cap">Importance-weight cap</label
+        ><select id="cap">
+          <option value="none" selected>No cap</option>
+          <option value="2">2</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <svg id="mechanism" role="img" aria-labelledby="flow-title flow-desc"></svg>
+    <p id="interpretation"></p>
+    <table id="metrics-table">
+      <caption>
+        Estimates and weight diagnostics
+      </caption>
+      <thead>
+        <tr>
+          <th>Quantity</th>
+          <th>Computed value</th>
+        </tr>
+      </thead>
+      <tbody id="metrics"></tbody>
+    </table>
+    <table id="log-table">
+      <caption>
+        The action log and each target contribution
+      </caption>
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>Observed</th>
+          <th>Target / weight</th>
+          <th>Weighted reward</th>
+        </tr>
+      </thead>
+      <tbody id="data"></tbody>
+    </table>
+    <details id="potential">
+      <summary>Inspect synthetic potential outcomes and draws</summary>
+      <p class="note">
+        Only this simulation knows rewards for unchosen actions. The IPS and SNIPS calculations use
+        only the observed-action log. The full-information target mean below is a fixture check, not
+        something real logs reveal.
+      </p>
+      <p id="truth"></p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Draw u</th>
+            <th>A / B / C rewards</th>
+          </tr>
+        </thead>
+        <tbody id="potential-data"></tbody>
+      </table>
+    </details>
+    <details>
+      <summary>Assumptions and exact calculations</summary>
+      <p>
+        All ten contexts and potential rewards are fixed synthetic records. A is always preferred.
+        With K eligible actions, the logger assigns A probability 1 − ε + ε/K and every other
+        eligible action ε/K. Excluded actions have probability zero. A draw u in [0,1) selects from
+        the cumulative distribution in A/B/C order, using left-closed, right-open intervals. These
+        fixed illustrative draws make comparisons reproducible; this replay is not a live
+        randomization service or a statistical experiment.
+      </p>
+      <p>
+        The logger records chosen action, its actual probability, context, eligible actions,
+        decision ID, and policy version v1 before attaching its observed binary reward. All outcomes
+        are immediate and complete; real missing rewards must not be converted to zero. A chosen
+        action can only have positive logging probability.
+      </p>
+      <p>
+        The target is fixed independently of this log. For a deterministic target, weight w is 1/p
+        on a matching row and zero otherwise. Raw IPS = sum(w × reward)/10. Self-normalized IPS =
+        sum(w × reward)/sum(w), undefined when no rows match. Capped IPS = sum(min(w,cap) ×
+        reward)/10; no cap equals raw IPS. Only capped IPS responds to the cap control; the original
+        propensities, raw IPS, SNIPS, and diagnostics remain unchanged.
+      </p>
+      <p>
+        Support is checked for the target action in every fixture context, using the known logger
+        distribution, before reporting any policy-value estimate. If a target action has probability
+        zero, estimates are blocked even if some rows match. Positive support with zero sampled
+        matches instead yields raw IPS zero, undefined SNIPS, and a warning about absent evidence.
+      </p>
+      <p>
+        The weight-concentration diagnostic is (sum w)²/sum(w²), or zero with no matches. It is not
+        a confidence interval or a claim about independent effective observations. Raw IPS may
+        exceed one in a finite sample; SNIPS remains within the observed reward range when defined
+        but can be biased. Capping introduces bias. No confidence intervals, policy training,
+        delayed outcomes, adaptive collection, interference, or long-term effects are modeled. No
+        action leaves this example.
+      </p>
+    </details>
+    <script>
+      const $ = (selector) => document.querySelector(selector);
+      const fixture = [
+        { id: 'R01', context: 'Routine', u: 0.05, rewards: { A: 1, B: 0, C: 0 } },
+        { id: 'R02', context: 'Routine', u: 0.25, rewards: { A: 0, B: 1, C: 0 } },
+        { id: 'R03', context: 'Routine', u: 0.85, rewards: { A: 1, B: 0, C: 1 } },
+        { id: 'R04', context: 'Routine', u: 0.45, rewards: { A: 1, B: 0, C: 0 } },
+        { id: 'R05', context: 'Routine', u: 0.95, rewards: { A: 0, B: 1, C: 0 } },
+        { id: 'R06', context: 'Complex', u: 0.15, rewards: { A: 0, B: 1, C: 0 } },
+        { id: 'R07', context: 'Complex', u: 0.35, rewards: { A: 0, B: 1, C: 1 } },
+        { id: 'R08', context: 'Complex', u: 0.65, rewards: { A: 1, B: 0, C: 0 } },
+        { id: 'R09', context: 'Complex', u: 0.85, rewards: { A: 0, B: 1, C: 0 } },
+        { id: 'R10', context: 'Complex', u: 0.75, rewards: { A: 0, B: 1, C: 1 } },
+      ];
+      function probabilities(epsilon, eligible) {
+        const actions = eligible.split('');
+        return Object.fromEntries(
+          ['A', 'B', 'C'].map((action) => [
+            action,
+            actions.includes(action)
+              ? action === 'A'
+                ? (actions.length - (actions.length - 1) * epsilon) / actions.length
+                : epsilon / actions.length
+              : 0,
+          ]),
+        );
+      }
+      function selectAction(u, p) {
+        let cumulative = 0;
+        for (const action of ['A', 'B', 'C']) {
+          cumulative += p[action];
+          if (u < cumulative) return action;
+        }
+        throw new Error('Draw outside the supplied distribution');
+      }
+      function targetAction(context, target) {
+        return target === 'contextual' ? (context === 'Routine' ? 'A' : 'B') : target;
+      }
+      function makeLog(epsilon, eligible) {
+        const p = probabilities(epsilon, eligible);
+        return fixture.map((row) => {
+          const action = selectAction(row.u, p);
+          return {
+            id: row.id,
+            context: row.context,
+            eligible: eligible.split(''),
+            policy: 'v1',
+            action,
+            propensity: p[action],
+            reward: row.rewards[action],
+          };
+        });
+      }
+      function evaluate(log, p, target, cap = Infinity) {
+        const gaps = [
+          ...new Set(
+            log
+              .filter((row) => p[targetAction(row.context, target)] === 0)
+              .map((row) => row.context + ' → ' + targetAction(row.context, target)),
+          ),
+        ];
+        const rows = log.map((row) => {
+          const desired = targetAction(row.context, target),
+            weight = row.action === desired ? 1 / row.propensity : 0;
+          return {
+            ...row,
+            target: desired,
+            weight,
+            weighted: weight * row.reward,
+            capped: Math.min(weight, cap) * row.reward,
+          };
+        });
+        const weightSum = rows.reduce((n, row) => n + row.weight, 0),
+          rewardSum = rows.reduce((n, row) => n + row.weighted, 0),
+          squares = rows.reduce((n, row) => n + row.weight ** 2, 0),
+          supported = gaps.length === 0;
+        return {
+          supported,
+          gaps,
+          rows,
+          matches: rows.filter((row) => row.weight > 0).length,
+          weightSum,
+          rewardSum,
+          maxWeight: Math.max(0, ...rows.map((row) => row.weight)),
+          ess: squares ? weightSum ** 2 / squares : 0,
+          ips: supported ? rewardSum / log.length : null,
+          snips: supported && weightSum ? rewardSum / weightSum : null,
+          cappedIPS: supported ? rows.reduce((n, row) => n + row.capped, 0) / log.length : null,
+          observedMean: log.reduce((n, row) => n + row.reward, 0) / log.length,
+        };
+      }
+      function simulate(epsilon = 0.3, eligible = 'ABC', target = 'contextual', cap = Infinity) {
+        const p = probabilities(epsilon, eligible),
+          log = makeLog(epsilon, eligible),
+          result = evaluate(log, p, target, cap);
+        return {
+          ...result,
+          epsilon,
+          eligible,
+          target,
+          cap: Number.isFinite(cap) ? cap : null,
+          p,
+          total: log.length,
+        };
+      }
+      const fmt = (value) => (value === null ? 'undefined' : value.toFixed(3));
+      function diagram(r) {
+        const mobile = innerWidth < 520,
+          width = mobile ? 328 : 680,
+          height = mobile ? 730 : 340,
+          bw = mobile ? 328 : 208;
+        const text = (x, y, size, value, bold = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (bold ? ' font-weight="700"' : '') +
+          '>' +
+          value +
+          '</text>';
+        const box = (x, y) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          bw +
+          '" height="170" rx="8" fill="var(--panel)"/>';
+        let s =
+          '<title id="flow-title">Sample an action, log its propensity, and weight its observed reward</title><desc id="flow-desc">' +
+          (r.supported
+            ? 'There are ' +
+              r.matches +
+              ' matching rows. IPS is ' +
+              fmt(r.ips) +
+              ', and self-normalized IPS is ' +
+              fmt(r.snips) +
+              '.'
+            : 'The target has unsupported actions; policy-value estimates are blocked.') +
+          '</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/></marker></defs>';
+        const representative = r.rows.reduce(
+          (best, row) => (row.weight > best.weight ? row : best),
+          r.rows[0],
+        );
+        for (let i = 0; i < 3; i++) {
+          const x = mobile ? 0 : i * 236,
+            y = mobile ? i * 200 : 0;
+          s += box(x, y);
+          if (i === 0) {
+            s += text(x + 12, y + 25, 17, 'Sampling policy', true);
+            ['A', 'B', 'C'].forEach((a, j) => {
+              const yy = y + 52 + j * 33;
+              s +=
+                text(x + 12, yy, 14, a + ' ' + r.p[a].toFixed(3)) +
+                '<rect x="' +
+                (x + 88) +
+                '" y="' +
+                (yy - 11) +
+                '" width="' +
+                (bw - 103) +
+                '" height="12" rx="3" fill="var(--band)"/><rect x="' +
+                (x + 88) +
+                '" y="' +
+                (yy - 11) +
+                '" width="' +
+                (bw - 103) * r.p[a] +
+                '" height="12" rx="3" fill="var(--accent)"/>';
+            });
+            s += text(
+              x + 12,
+              y + 153,
+              14,
+              'ε ' + r.epsilon.toFixed(2) + ' · K ' + r.eligible.length,
+            );
+          } else if (i === 1) {
+            const row = representative;
+            [
+              'Record selected action',
+              row.id + ' · ' + row.context,
+              'Chosen ' + row.action + ' · reward ' + row.reward,
+              'Propensity ' + row.propensity.toFixed(3),
+              'v1 · eligible ' + r.eligible.split('').join('/'),
+            ].forEach(
+              (line, j) => (s += text(x + 12, y + 26 + 30 * j, j ? 14 : 17, line, j === 0)),
+            );
+          } else {
+            const row = representative,
+              lines = r.supported
+                ? [
+                    'Reweight for target',
+                    'Target chooses ' + row.target,
+                    'Weight ' + fmt(row.weight),
+                    'Reward contribution ' + fmt(row.weighted),
+                    r.matches ? 'Rare actions can dominate' : 'No sampled matches',
+                  ]
+                : [
+                    'Check target support',
+                    r.gaps[0],
+                    'Logging probability: zero',
+                    'Cannot evaluate this target',
+                    'No weight repairs support',
+                  ];
+            lines.forEach(
+              (line, j) => (s += text(x + 12, y + 26 + 30 * j, j ? 14 : 17, line, j === 0)),
+            );
+          }
+          if (i < 2)
+            s +=
+              '<path d="' +
+              (mobile
+                ? 'M 164 ' + (y + 178) + ' V ' + (y + 190)
+                : 'M ' + (x + 213) + ' 85 H ' + (x + 230)) +
+              '" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>';
+        }
+        const y = mobile ? 600 : 210;
+        s +=
+          '<rect x="0" y="' +
+          y +
+          '" width="' +
+          width +
+          '" height="100" rx="8" fill="var(--band)"/>' +
+          text(
+            12,
+            y + 27,
+            mobile ? 17 : 20,
+            r.supported
+              ? 'IPS ' + fmt(r.ips) + ' · SNIPS ' + fmt(r.snips)
+              : 'Target has zero support',
+            true,
+          ) +
+          text(
+            12,
+            y + 56,
+            14,
+            r.matches + ' matches / ' + r.total + ' decisions · max weight ' + fmt(r.maxWeight),
+          ) +
+          text(
+            12,
+            y + 84,
+            14,
+            r.supported
+              ? 'Weighted rewards ' + fmt(r.rewardSum) + ' / ' + r.total + ' for IPS'
+              : 'Estimates blocked; not replaced with zero.',
+          );
+        $('#mechanism').setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+        $('#mechanism').innerHTML = s;
+      }
+      let report;
+      function render() {
+        report = simulate(
+          Number($('#epsilon').value),
+          $('#eligible').value,
+          $('#target').value,
+          $('#cap').value === 'none' ? Infinity : Number($('#cap').value),
+        );
+        const r = report;
+        $('output').textContent =
+          'Support: ' +
+          (r.supported ? 'yes' : 'no') +
+          '. Matches: ' +
+          r.matches +
+          '/' +
+          r.total +
+          '. IPS: ' +
+          (r.supported ? fmt(r.ips) : 'blocked') +
+          '. SNIPS: ' +
+          (r.supported ? fmt(r.snips) : 'blocked') +
+          '.';
+        $('#interpretation').textContent = !r.supported
+          ? 'The target requires ' +
+            r.gaps.join(', ') +
+            ', with zero selection probability. Policy-value estimates are blocked; partial matches cannot establish the unsupported policy value.'
+          : !r.matches
+            ? 'The target has positive support but no sampled matches in this replay. Raw IPS is zero and SNIPS is undefined; this is absent evidence, not proof of zero value.'
+            : r.ips > 1
+              ? 'Raw IPS exceeds the binary reward range because a rare matched action carries a large weight. This ten-row replay supplies no confidence guarantee. Capping changes only the capped estimate; it does not repair the sampling design.'
+              : 'These are estimates from ten fixed fictional decisions. Small propensities and concentrated weights make results fragile. Capping trades bias for variance; no statistical significance is calculated.';
+        const estimate = (v) => (!r.supported ? 'Blocked: zero support' : fmt(v));
+        $('#metrics').innerHTML = [
+          ['Raw IPS', estimate(r.ips)],
+          ['Self-normalized IPS', estimate(r.snips)],
+          ['Capped IPS (cap ' + (r.cap === null ? '∞' : r.cap) + ')', estimate(r.cappedIPS)],
+          ['Matching rows', r.matches + '/' + r.total],
+          ['Sum of weights', fmt(r.weightSum)],
+          ['Sum of weighted rewards', fmt(r.rewardSum)],
+          ['Weight concentration diagnostic', fmt(r.ess)],
+          ['Observed logging-policy reward mean', fmt(r.observedMean)],
+        ]
+          .map(([k, v]) => '<tr><th scope="row">' + k + '</th><td>' + v + '</td></tr>')
+          .join('');
+        $('#data').innerHTML = r.rows
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '<small>' +
+              row.context +
+              '</small></th><td>' +
+              row.action +
+              '<small>p ' +
+              row.propensity.toFixed(3) +
+              '</small>Reward ' +
+              row.reward +
+              '</td><td>' +
+              row.target +
+              '<small>w ' +
+              fmt(row.weight) +
+              '</small></td><td>' +
+              fmt(row.weighted) +
+              '</td></tr>',
+          )
+          .join('');
+        $('#truth').textContent =
+          'Synthetic full-information target mean: ' +
+          fmt(
+            fixture.reduce((n, row) => n + row.rewards[targetAction(row.context, r.target)], 0) /
+              fixture.length,
+          ) +
+          '. This value is not used by the logged-data estimators.';
+        $('#potential-data').innerHTML = fixture
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '</th><td>' +
+              row.u.toFixed(2) +
+              '</td><td>' +
+              ['A', 'B', 'C'].map((a) => row.rewards[a]).join(' / ') +
+              '</td></tr>',
+          )
+          .join('');
+        diagram(r);
+      }
+      $('form').addEventListener('submit', (event) => event.preventDefault());
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        $('#potential').open = false;
+        render();
+      });
+      addEventListener('resize', () => diagram(report));
+      render();
+    </script>
+  </body>
+</html>

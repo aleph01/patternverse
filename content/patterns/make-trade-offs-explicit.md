@@ -129,9 +129,7 @@ step_1 = !form {
   !show {
 Take two or three serious options. Focus on real alternatives, not an imagined option that gives you every benefit at once.
   }
-  !ask options {
-    :required true
-    :multiline true
+  options = !ask {
 What are the two or three options?
   }
 }
@@ -143,9 +141,7 @@ For each option, complete several times: **Choosing this gives me ______, but I 
 
 Keep the gains and sacrifices concrete.
   }
-  !ask gains-sacrifices {
-    :required true
-    :multiline true
+  gains-sacrifices = !ask {
 For each option, what do you gain and what do you give up?
   }
 }
@@ -155,9 +151,7 @@ step_3 = !form {
   !show {
 Identify the two or three dimensions that matter most. Do not treat every disadvantage as equally important.
   }
-  !ask dimensions {
-    :required true
-    :multiline true
+  dimensions = !ask {
 Which two or three dimensions dominate this decision?
   }
 }
@@ -169,9 +163,7 @@ Write the decision as an exchange: **How much ______ am I willing to sacrifice f
 
 Examples: salary for free time; convenience for privacy; certainty for potential upside.
   }
-  !ask exchange {
-    :required true
-    :multiline true
+  exchange = !ask {
 What is the central exchange you are considering?
   }
 }
@@ -181,9 +173,7 @@ step_5 = !form {
   !show {
 Do not calculate a final score. Notice which trade-off produces the strongest reaction; it may reveal what the decision is really about. A clear trade-off can remain genuinely difficult.
   }
-  !ask reaction {
-    :required true
-    :multiline true
+  reaction = !ask {
 Which exchange produces the strongest reaction, and what does it tell you about your priorities?
   }
 }

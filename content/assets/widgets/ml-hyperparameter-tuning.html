@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Hyperparameter tuning explorer</title><style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --panel: #f1f2ef;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        color: var(--ink);
+        background: #fff;
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      label {
+        display: block;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        font: inherit;
+        color: var(--ink);
+        background: #fff;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        margin: 14px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        padding: 8px 0;
+        color: var(--ink);
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #scores th:first-child {
+        width: 31%;
+      }
+      #records {
+        font-size: 13px;
+      }
+      #records th:first-child {
+        width: 13%;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        button {
+          width: 100%;
+        }
+      }
+    </style></head><body>
+<p>Fit a ridge model to four fictional training records for each attempted penalty. Select the lowest validation MSE among completed trials. The budget limits which settings are tried; no independent test outcomes are supplied.</p>
+<form><div><label for="budget">Completed trial budget</label><select id="budget"><option value="2" selected>2 candidates</option><option value="4">4 candidates</option></select></div>
+<div><label for="order">Trial order</label><select id="order"><option value="weak" selected>Weaker penalties first</option><option value="strong">Stronger penalties first</option></select></div>
+<div><label for="panel">Validation outcomes</label><select id="panel"><option value="A" selected>Panel A</option><option value="B">Panel B</option></select></div></form>
+<button type="button" id="reset">Reset inputs</button>
+<output aria-live="polite"></output><div id="graphic"></div><p id="interpretation"></p>
+<details id="calculation"><summary>Inspect records, fits and validation errors</summary>
+<p>Inputs and responses are dimensionless. Every model predicts wx with intercept fixed at zero. Fitting minimizes the sum of squared training errors plus λw²; selection minimizes mean squared validation error. These are different quantities.</p>
+<table id="records"><caption>Distinct training and validation records</caption><thead><tr><th>x</th><th>Training y</th><th>Validation y</th></tr></thead><tbody></tbody></table>
+<p id="formula"></p><table id="trials"><caption>Completed trials in execution order</caption><thead><tr><th>λ</th><th>Fitted w</th><th>Train MSE</th><th>Valid MSE</th></tr></thead><tbody></tbody></table>
+<table id="predictions"><caption>Selected model · validation residuals</caption><thead><tr><th>x</th><th>Prediction</th><th>Actual y</th><th>Error²</th></tr></thead><tbody></tbody></table>
+<p id="mse"></p></details>
+<details id="assumptions"><summary>Search assumptions and limits</summary><p>The two trial orders are fixed teaching sequences, not random or adaptive search. Each attempted setting receives the same training records and its exact scalar fit. The budget counts completed fits, not elapsed time. Settings are 0, 2, 8 and 26; a tie selects the smaller λ regardless of execution order.</p><p>Panels A and B are separate constructed validation scenarios, not random resamples or estimates of uncertainty. Their outcomes never enter fitting. No test set, refitting on combined data, preprocessing estimation, cross-validation, Bayesian optimization, early stopping or noisy training is simulated. Zero error on a constructed panel does not establish future performance. Bars use one fixed scale from 0 to 2.5 squared-response units; a dot marks zero, dashes mean untried, and green identifies the selected completed trial.</p></details>
+<script>
+const train = Object.freeze([[-2,-4],[-1,-1],[1,1],[2,4]].map(Object.freeze));
+const panels = Object.freeze({A:Object.freeze([[-2,-2],[-1,-1],[1,1],[2,2]].map(Object.freeze)),B:Object.freeze([[-2,-3],[-1,-1.5],[1,1.5],[2,3]].map(Object.freeze))});
+const settings = Object.freeze([0,2,8,26]);
+function validateRows(rows) {
+ if(!Array.isArray(rows)||!rows.length||rows.some(r=>!Array.isArray(r)||r.length!==2||r.some(v=>!Number.isFinite(v)))) throw Error('Finite input-response pairs required');
+}
+function fit(rows,lambda) {
+ validateRows(rows);
+ if(!Number.isFinite(lambda)||lambda<0) throw Error('Nonnegative finite penalty required');
+ const xy=rows.reduce((s,[x,y])=>s+x*y,0), xx=rows.reduce((s,[x])=>s+x*x,0), denominator=xx+lambda;
+ if(!Number.isFinite(xy)||!Number.isFinite(denominator)||denominator<=0) throw Error('Invalid fitting denominator');
+ const w=xy/denominator;
+ if(!Number.isFinite(w)) throw Error('Invalid coefficient');
+ return {lambda,w,xy,xx};
+}
+function evaluate(model,rows) {
+ validateRows(rows);
+ if(!model||!Number.isFinite(model.w)) throw Error('Finite coefficient required');
+ const residuals=rows.map(([x,y])=>{const prediction=model.w*x,error=prediction-y;return {x,y,prediction,error,squared:error*error};});
+ const mse=residuals.reduce((s,r)=>s+r.squared,0)/rows.length;
+ if(!Number.isFinite(mse)) throw Error('Finite loss required');
+ return {mse,residuals};
+}
+function search(budget=2,order='weak',panel='A') {
+ if(![2,4].includes(budget)||!['weak','strong'].includes(order)||!Object.hasOwn(panels,panel)) throw Error('Unsupported search choice');
+ const sequence=order==='weak'?[...settings]:[...settings].reverse();
+ const trials=sequence.slice(0,budget).map(lambda=>{const model=fit(train,lambda);return {...model,training:evaluate(model,train),validation:evaluate(model,panels[panel])};});
+ const selected=[...trials].sort((a,b)=>a.validation.mse-b.validation.mse||a.lambda-b.lambda)[0];
+ return {budget,order,panel,trials,selected,untried:settings.filter(v=>!trials.some(t=>t.lambda===v))};
+}
+const number=v=>Number(v.toFixed(6)).toString();
+function mechanismGraphic(r,mobile) {
+ const width=mobile?328:680,height=mobile?760:540;
+ const text=(x,y,s,size=16,color='#252c28')=>`<text x="${x}" y="${y}" fill="${color}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" font-size="${size}">${s}</text>`;
+ const line=(x,y,x2,y2,color='#a6aca3')=>`<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="1"/>`;
+ let out=text(0,24,'Fit → validate → select',mobile?22:24)+text(0,52,`${r.budget} completed trials · panel ${r.panel}`,16,'#626962');
+ if(mobile) {
+ out+=text(0,90,'Training fixes each coefficient w')+line(0,105,328,105)+text(0,131,'Validation MSE selects among tried settings',15);
+ for(let i=0;i<4;i++) {const lambda=settings[i],t=r.trials.find(t=>t.lambda===lambda),y=175+i*105,chosen=t&&lambda===r.selected.lambda,c=chosen?'#00855b':'#626962';
+ out+=text(0,y,`λ ${lambda}`,20,chosen?'#00855b':'#252c28')+text(90,y,t?`w ${number(t.w)}`:'Not tried',16,c);
+ if(t){out+=text(0,y+29,`Validation MSE ${number(t.validation.mse)}`,16,c)+`<rect x="0" y="${y+43}" width="328" height="12" fill="#f1f2ef"/>`;
+ out+=t.validation.mse===0?`<circle cx="3" cy="${y+49}" r="3" fill="${c}"/>`:`<rect x="0" y="${y+43}" width="${t.validation.mse/2.5*328}" height="12" fill="${c}"/>`;
+ }else out+=line(0,y+43,328,y+43);
+ }
+ out+=line(0,593,328,593)+text(0,625,`Selected λ ${r.selected.lambda} · w ${number(r.selected.w)}`,21,'#00855b')+text(0,656,`Validation MSE ${number(r.selected.validation.mse)}`,18,'#00855b')+text(0,699,'Independent test evidence stays outside',15)+text(0,723,'this comparison; none is supplied here.',15);
+ }else {
+ out+=text(0,92,'Training records → fit w')+text(345,92,'Validation records → MSE');
+ out+=line(0,110,660,110)+text(0,145,'Setting',15)+text(105,145,'Fitted w',15)+text(235,145,'Validation MSE · lower is better',15);
+ for(let i=0;i<4;i++){const lambda=settings[i],t=r.trials.find(t=>t.lambda===lambda),y=188+i*58,chosen=t&&lambda===r.selected.lambda,c=chosen?'#00855b':'#626962';
+ out+=text(0,y,`λ ${lambda}`,18,chosen?'#00855b':'#252c28')+text(105,y,t?number(t.w):'—',18,c);
+ if(t){out+=text(235,y,number(t.validation.mse),18,c)+`<rect x="330" y="${y-15}" width="300" height="18" fill="#f1f2ef"/>`;
+ out+=t.validation.mse===0?`<circle cx="333" cy="${y-6}" r="3" fill="${c}"/>`:`<rect x="330" y="${y-15}" width="${t.validation.mse/2.5*300}" height="18" fill="${c}"/>`;
+ }else out+=text(235,y,'Not tried',16,c)+line(330,y-6,630,y-6);
+ }
+ out+=line(0,405,660,405)+text(0,442,`Selected λ ${r.selected.lambda} · w ${number(r.selected.w)} · validation MSE ${number(r.selected.validation.mse)}`,22,'#00855b')+text(0,480,'Only completed trials can win. Bars share a 0–2.5 MSE scale.',15,'#626962')+text(0,516,'Independent test evidence stays outside this comparison; none is supplied here.',15);
+ }
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Completed training configurations compared on validation error"><rect width="${width}" height="${height}" fill="#fff"/>${out}</svg>`;
+}
+let report;
+function render(){const d=document;report=search(Number(d.querySelector('#budget').value),d.querySelector('#order').value,d.querySelector('#panel').value);const r=report,s=r.selected;
+ d.querySelector('output').textContent=`${r.budget} completed trials: selected λ ${s.lambda}, fitted w ${number(s.w)}, validation MSE ${number(s.validation.mse)}.`;
+ d.querySelector('#graphic').innerHTML=mechanismGraphic(r,innerWidth<520);
+ d.querySelector('#interpretation').textContent=r.untried.length?`Untried settings: ${r.untried.join(', ')}. The selected setting is best only among the completed trials.`:'All four declared settings were tried. The selected setting is best on this panel, not a verified optimum for deployment.';
+ d.querySelector('#records tbody').innerHTML=train.map(([x,y],i)=>`<tr><td>${x}</td><td>${y}</td><td>${panels[r.panel][i][1]}</td></tr>`).join('');
+ d.querySelector('#formula').textContent=`Selected fit: Σxy = ${s.xy}; Σx² = ${s.xx}; w = ${s.xy} / (${s.xx} + ${s.lambda}) = ${number(s.w)}. Only training responses enter these sums.`;
+ d.querySelector('#trials tbody').innerHTML=r.trials.map(t=>`<tr><td>${t.lambda}</td><td>${number(t.w)}</td><td>${number(t.training.mse)}</td><td>${number(t.validation.mse)}</td></tr>`).join('');
+ d.querySelector('#predictions tbody').innerHTML=s.validation.residuals.map(t=>`<tr><td>${t.x}</td><td>${number(t.prediction)}</td><td>${t.y}</td><td>${number(t.squared)}</td></tr>`).join('');
+ d.querySelector('#mse').textContent=`Validation MSE = (${s.validation.residuals.map(t=>number(t.squared)).join(' + ')}) / 4 = ${number(s.validation.mse)}. Values shown are rounded; selection uses unrounded arithmetic.`;
+}
+document.querySelector('form').addEventListener('submit',e=>e.preventDefault());
+document.querySelectorAll('select').forEach(el=>el.addEventListener('change',render));
+document.querySelector('#reset').addEventListener('click',()=>{document.querySelector('form').reset();document.querySelectorAll('details').forEach(el=>el.open=false);render();});
+addEventListener('resize',render);render();
+</script></body></html>

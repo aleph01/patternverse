@@ -2,7 +2,7 @@
 id: learning-how-to-learn
 type: collection
 title: Learning How to Learn
-summary: Fifteen patterns for remembering, understanding, practicing, and shaping your own learning.
+summary: Sixteen patterns for remembering, understanding, practicing, and shaping your own learning.
 status: published
 verses:
   - learning
@@ -25,15 +25,19 @@ items:
   - re-encode-the-idea
   - map-before-you-learn
   - run-learning-experiments
+  - concept-mapping
 ---
 
 Learning is not only a question of spending more time with the material. What you retrieve,
 compare, explain, practice, and revisit changes the kind of understanding you build.
 
-These fifteen patterns form a repertoire rather than a required sequence. Use retrieval and
+These sixteen patterns form a repertoire rather than a required sequence. Use retrieval and
 spacing when knowledge fades; explanation, contrast, and new representations when understanding
 is fragile; direct practice and focused drills when exercises do not transfer; and mapping or
 small experiments when you need to choose a better learning route.
 
 The examples span languages, music, history, science, art, and everyday skills. Choose the pattern
 that addresses the difficulty in front of you, and return to the others as that difficulty changes.
+
+
+[[concept-mapping]] develops labeled propositions and cross-links around a focus question. Use it to build or check relationships with sources; use [[reconstruct-the-map]] when retrieval before checking is the main learning move.

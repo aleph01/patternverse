@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "creational"
   - "builder"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 A report constructor accepts a title, date range, grouping rule, output format, twelve optional sections, and several layout settings. Call sites contain long argument lists that are difficult to review. Elsewhere, callers construct an empty report and mutate it until it is ready. Between those stages, the report exists in states that should never be published.
 
+## Core idea
+
 Builder treats construction as its own process. A builder receives parts or construction steps, accumulates the information it needs, and produces a finished result. The result can remain focused on what a report is, while the builder handles how a report is assembled.
 
-![Construction state stays in the builder; completion validates it and produces a finished report.](/diagrams/gof/builder.svg "Construction state stays in the builder; completion validates it and produces a finished report.")
+![Title and sections accumulate in ReportBuilder. Build validates required parts, then returns a finished Report with a copied immutable section sequence. Incomplete construction state stays in the builder.](../assets/software-engineering/gof/builder.svg "The builder holds partial choices; build validates them before returning a finished report.")
 
-### Construction has a shape
+## How it works
 
 In the classic form, a director coordinates a sequence of construction steps and a builder decides how those steps contribute to a representation. The same report assembly process might create a printable document or a structured export. The director does not need to know the internal representation of either result.
 
 A common contemporary variant is a fluent builder: methods such as with_title and add_section return the builder so calls can be chained. This can be useful, but chaining is an interface style, not the core pattern. A chain that merely renames constructor parameters may add little beyond named arguments.
 
 The deeper benefit appears when construction has validation, ordering, defaults, derived values, or alternative representations. Builder gives these concerns a separate home and makes the moment of completion explicit.
+
+## Worked example
 
 ### A report with a real completion boundary
 
@@ -38,6 +43,48 @@ Validation timing requires judgment. An impossible date value can be rejected im
 
 Reusing a builder also needs a defined policy. Does build clear its state, return a snapshot, or leave configuration available for another result? Hidden leftover sections can be surprisingly hard to diagnose. A builder that is cheap to construct may be safest as a single-use object.
 
+### A small implementation
+
+ReportBuilder keeps incomplete construction state separate from the immutable Report. Its build method is the completion boundary. This example uses a title and sections; a production report can add its date and currency rules at the same boundary.
+
+```python
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Report:
+    title: str
+    sections: tuple[str, ...]
+
+
+class ReportBuilder:
+    def __init__(self):
+        self.title = ""
+        self.sections = []
+
+    def with_title(self, title):
+        self.title = title.strip()
+        return self
+
+    def add_section(self, text):
+        self.sections.append(text)
+        return self
+
+    def build(self):
+        if not self.title or not self.sections:
+            raise ValueError("A report needs a title and sections")
+        return Report(self.title, tuple(self.sections))
+
+
+builder = ReportBuilder().with_title("Quarterly review")
+report = builder.add_section("Revenue increased").build()
+builder.add_section("Draft note")
+print(report.sections)
+# ('Revenue increased',)
+```
+
+The finished report stores a tuple copied from the builder, so adding another section to the builder does not alter the existing result. Chaining makes this interface convenient; the separate construction state and explicit completion check provide the actual design benefit.
+
 ### One assembly process and two representations
 
 Consider a documentation generator that reads a structured chapter. It visits a title, paragraphs, code examples, and references in a consistent order. An HtmlChapterBuilder turns those steps into HTML elements. A PlainTextChapterBuilder creates text with indentation and readable reference markers.
@@ -48,7 +95,14 @@ This separation is worthwhile only if the construction vocabulary is genuinely s
 
 It also cannot make all outputs equally capable. A plain-text result may deliberately lose layout or interactivity. Those differences should be documented as representation choices rather than hidden as surprising failures.
 
-### Readability without ceremony
+## When to use it
+
+- An object needs several meaningful construction steps.
+- Different representations share a construction process.
+
+Consider a simpler design when a small immutable value can be constructed clearly with named arguments, or when the staged API permits invalid intermediate objects to escape.
+
+## Tradeoffs and common mistakes
 
 Builder helps when call sites should communicate decisions in readable stages, or when construction logic changes independently from finished-object behavior. It can centralize defaults and protect invariants. It is often useful for complex queries, documents, configurations, and composite structures.
 
@@ -58,38 +112,12 @@ An especially common mistake is returning the builder's own mutable internal col
 
 Another is allowing arbitrary method order while relying on undocumented ordering constraints. If add_chart must follow set_currency, the interface should make that requirement clear or defer the dependency resolution until completion. A pleasant-looking fluent API is not a substitute for a coherent construction model.
 
-### Neighboring designs
-
-Abstract Factory supplies compatible products. Builder coordinates assembly of a result; it can use an abstract factory for individual parts. Prototype starts with an existing configured object and copies it, which may be simpler when a useful template already exists.
-
-Facade simplifies access to a subsystem. A builder may feel like a facade over complex construction machinery, but its distinctive responsibility is managing the transition from construction steps to a finished product.
-
-The useful question is whether construction deserves its own lifecycle and vocabulary. When it does, Builder can make that lifecycle explicit. When it does not, a clear constructor often says everything the reader needs.
-
-## Pattern details
-
-**Category:** Creational · **Difficulty:** Intermediate
-
-### Use when
-
-- An object needs several meaningful construction steps
-- Different representations share a construction process
-
-### Not ideal when
-
-- A small immutable value can be constructed clearly with named arguments
-- The staged API permits invalid intermediate objects to escape
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
 ## Related patterns
 
-[[abstract-factory|Abstract Factory]] · [[prototype|Prototype]] · [[facade|Facade]]
+[[abstract-factory|Abstract Factory]] supplies compatible products. Builder coordinates assembly of a result; it can use an abstract factory for individual parts. [[prototype|Prototype]] starts with an existing configured object and copies it, which may be simpler when a useful template already exists.
 
-## Source
+[[facade|Facade]] simplifies access to a subsystem. A builder may feel like a facade over complex construction machinery, but its distinctive responsibility is managing the transition from construction steps to a finished product.
 
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
+## Sources
 
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+Builder is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leakage-safe evaluation split explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Eight fictional customers each have two visits with the same binary label. Both evaluations
+      fit actual ID-lookup and majority-only predictors from training labels. Their scores answer
+      different questions.
+    </p>
+    <form aria-label="Evaluation settings">
+      <div>
+        <label for="question">Intended prediction question</label
+        ><select id="question">
+          <option value="new" selected>Customers unseen at fitting</option>
+          <option value="returning">Known customers' next visits</option>
+        </select>
+      </div>
+      <div>
+        <label for="labels">Customer labels A–H · eight binary digits</label
+        ><input
+          id="labels"
+          type="text"
+          inputmode="numeric"
+          pattern="[01]{8}"
+          minlength="8"
+          maxlength="8"
+          value="01010101"
+          required
+        />
+      </div>
+      <div>
+        <label for="heldout">Whole customers held out</label
+        ><select id="heldout">
+          <option value="last" selected>E–H</option>
+          <option value="first">A–D</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <svg role="img" aria-label="Two fitted evaluations with different customer overlap"></svg>
+    <p id="interpretation" class="note"></p>
+    <div class="history">
+      <table>
+        <caption>
+          Customer labels and whole-customer partition
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Customer</th>
+            <th scope="col">Both-visit label</th>
+            <th scope="col">Group partition</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <details>
+      <summary>Exact data, fitting, and evaluation rules</summary>
+      <p>
+        The dataset has IDs A–H, two visits per ID, and labels from the eight digits above. Visit
+        holdout trains on visit 1 and tests on visit 2 for every ID. Customer holdout puts both
+        visits of the selected four IDs in test and both visits of the remaining IDs in training.
+        Both have eight training rows and eight test rows.
+      </p>
+      <p>
+        The ID learner stores the majority label per training ID and uses the training majority for
+        unknown IDs. The baseline always uses that same training majority. All ties predict zero. No
+        held-out label is used when fitting either predictor; test labels only score the resulting
+        predictions.
+      </p>
+      <p>
+        Changing the prediction question changes the interpretation, not the records or scores. For
+        returning-customer use, visit-1 labels are assumed available before visit 2. Group holdout
+        tests unfamiliar identities, but does not also test future-time drift or feature
+        availability.
+      </p>
+      <p>
+        Both rows from a customer share a label and are dependent. The grouped test has eight rows
+        but only four distinct customers. There is no transferable feature signal, confidence
+        interval, label noise, or population-performance estimate in this tiny example. A perfect
+        score alone cannot diagnose evaluation validity.
+      </p>
+    </details>
+    <script>
+      const ids = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+      const form = document.querySelector('form');
+      const chart = document.querySelector('svg');
+      const output = document.querySelector('output');
+      let comparison;
+      function makeRecords(pattern) {
+        return [...pattern].flatMap((digit, i) =>
+          [1, 2].map((visit) => ({ id: ids[i], visit, label: Number(digit) })),
+        );
+      }
+      function majority(rows) {
+        return Number(rows.reduce((n, r) => n + r.label, 0) > rows.length / 2);
+      }
+      function partition(records, kind, heldout) {
+        if (kind === 'visits')
+          return {
+            train: records.filter((r) => r.visit === 1),
+            test: records.filter((r) => r.visit === 2),
+          };
+        const heldIds = heldout === 'last' ? ids.slice(4) : ids.slice(0, 4);
+        return {
+          train: records.filter((r) => !heldIds.includes(r.id)),
+          test: records.filter((r) => heldIds.includes(r.id)),
+        };
+      }
+      function fit(train) {
+        const byId = new Map();
+        for (const id of new Set(train.map((r) => r.id)))
+          byId.set(id, majority(train.filter((r) => r.id === id)));
+        return { byId, fallback: majority(train) };
+      }
+      function predict(model, id) {
+        return model.byId.has(id) ? model.byId.get(id) : model.fallback;
+      }
+      function evaluate(train, test) {
+        const model = fit(train);
+        const predictions = test.map((r) => ({
+          id: r.id,
+          visit: r.visit,
+          label: r.label,
+          prediction: predict(model, r.id),
+          baseline: model.fallback,
+        }));
+        const trainIds = [...new Set(train.map((r) => r.id))],
+          testIds = [...new Set(test.map((r) => r.id))];
+        return {
+          trainRows: train.length,
+          testRows: test.length,
+          trainIds,
+          testIds,
+          sharedIds: testIds.filter((id) => trainIds.includes(id)),
+          unseenIds: testIds.filter((id) => !trainIds.includes(id)),
+          fallback: model.fallback,
+          predictions,
+          correct: predictions.filter((r) => r.prediction === r.label).length,
+          baselineCorrect: predictions.filter((r) => r.baseline === r.label).length,
+        };
+      }
+      function compare(pattern, heldout) {
+        const records = makeRecords(pattern);
+        const visit = partition(records, 'visits', heldout),
+          group = partition(records, 'groups', heldout);
+        return {
+          records,
+          visits: evaluate(visit.train, visit.test),
+          groups: evaluate(group.train, group.test),
+        };
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function percent(correct, total) {
+        return ((100 * correct) / total).toFixed(1) + '%';
+      }
+      function draw(result) {
+        const narrow = innerWidth < 500;
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', narrow ? '0 0 328 560' : '0 0 680 280');
+        chart.append(node('title', {}, 'Equal row counts, different identity boundaries'));
+        chart.append(
+          node(
+            'desc',
+            {},
+            'Visit holdout shares customers across training and test. Whole-customer holdout separates them. Correctness is calculated from actual fitted predictors.',
+          ),
+        );
+        for (const [i, score] of [result.visits, result.groups].entries()) {
+          const group = node('g', {
+            transform: 'translate(' + (narrow ? 0 : i * 352) + ',' + (narrow ? i * 280 : 0) + ')',
+          });
+          chart.append(group);
+          group.append(
+            node('rect', { width: 328, height: 270, rx: 8, fill: 'var(--panel, #f1f2ef)' }),
+          );
+          const text = (y, size, value, bold = false) =>
+            group.append(
+              node(
+                'text',
+                {
+                  x: 12,
+                  y,
+                  'font-size': size,
+                  'font-family': 'system-ui, sans-serif',
+                  'font-weight': bold ? 700 : 400,
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          text(29, 18, i ? 'Hold out customers' : 'Hold out second visits', true);
+          text(55, 15, score.trainRows + ' train rows · ' + score.testRows + ' test rows');
+          text(81, 16, 'Shared customer IDs: ' + score.sharedIds.length, true);
+          text(108, 14, 'Train IDs: ' + score.trainIds.join(' '));
+          text(132, 14, 'Test IDs: ' + score.testIds.join(' '));
+          text(
+            164,
+            18,
+            'ID lookup: ' + score.correct + '/8 (' + percent(score.correct, score.testRows) + ')',
+            true,
+          );
+          text(
+            191,
+            14,
+            'Majority baseline: ' +
+              score.baselineCorrect +
+              '/8 (' +
+              percent(score.baselineCorrect, score.testRows) +
+              ')',
+          );
+          text(218, 14, 'Unseen test IDs: ' + score.unseenIds.length + '/' + score.testIds.length);
+          group.append(
+            node('rect', { x: 12, y: 240, width: 304, height: 18, fill: 'var(--line, #a6aca3)' }),
+          );
+          group.append(
+            node('rect', {
+              x: 12,
+              y: 240,
+              width: (304 * score.correct) / score.testRows,
+              height: 18,
+              fill: i ? 'var(--accent, #00855b)' : '#8c938b',
+            }),
+          );
+        }
+      }
+      function configure() {
+        const tbody = document.querySelector('tbody');
+        tbody.replaceChildren();
+        chart.replaceChildren();
+        if (!form.checkValidity()) {
+          comparison = undefined;
+          output.textContent = 'Enter exactly eight binary labels using 0 and 1.';
+          document.querySelector('#interpretation').textContent = '';
+          return;
+        }
+        comparison = compare(
+          document.querySelector('#labels').value,
+          document.querySelector('#heldout').value,
+        );
+        const a = comparison.visits,
+          b = comparison.groups;
+        output.textContent =
+          'Visit holdout: ' +
+          a.correct +
+          '/8 correct (' +
+          percent(a.correct, 8) +
+          '); customer holdout: ' +
+          b.correct +
+          '/8 correct (' +
+          percent(b.correct, 8) +
+          '). Both use 8 train and 8 test rows.';
+        document.querySelector('#interpretation').textContent =
+          document.querySelector('#question').value === 'new'
+            ? 'For customers unseen at fitting, visit holdout tests 0 unfamiliar IDs; customer holdout tests 4. Neither design checks future-time availability.'
+            : 'For known customers’ next visits, visit holdout tests 8 familiar IDs, assuming earlier labels were available. Customer holdout answers a different question.';
+        draw(comparison);
+        ids.forEach((id, i) => {
+          const row = document.createElement('tr');
+          for (const value of [
+            id,
+            document.querySelector('#labels').value[i],
+            b.trainIds.includes(id) ? 'Both visits train' : 'Both visits test',
+          ]) {
+            const td = document.createElement('td');
+            td.textContent = value;
+            row.append(td);
+          }
+          tbody.append(row);
+        });
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () => {
+        if (comparison) draw(comparison);
+      });
+      configure();
+    </script>
+  </body>
+</html>

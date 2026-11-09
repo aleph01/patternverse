@@ -1,0 +1,28 @@
+<svg width="360" height="650" preserveAspectRatio="xMinYMin meet" viewBox="0 0 360 650" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink"><title>PCA variance shares depend on measurement scale</title><desc>Four points at plus or minus 100 for x and plus or minus one for y have zero covariance. Raw variance ratio is 10000 to one, so PC1 explains 99.99 percent. Standardization gives the identity covariance matrix, eigenvalues one and one, and tied 50 percent shares.</desc>
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="360" height="650"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-650)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="360" height="650" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,98%,96%); fill-rule: evenodd;"/>
+			<text x="20" y="615" style="font-family: Helvetica-Bold; font-size: 22px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1230) scale(1,-1)">A dominant component can</text>
+			<text x="20" y="584.2" style="font-family: Helvetica-Bold; font-size: 22px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1168) scale(1,-1)">come from scale</text>
+			<text x="20" y="545.4000000000001" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1090) scale(1,-1)">Four observations; zero covariance. Same data, two</text>
+			<text x="20" y="527.2" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1054) scale(1,-1)">variance criteria.</text>
+			<text x="20" y="470" style="font-family: Helvetica-Bold; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,940) scale(1,-1)">Centered raw variables</text>
+			<rect x="20" y="430" width="319.96800319968" height="25" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<rect x="339.96800319968" y="430" width="0.03199680031997332" height="25" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="20" y="402" style="font-family: Helvetica-Bold; font-size: 16px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,804) scale(1,-1)">PC1: 99.99%</text>
+			<text x="20" y="378" style="font-family: Helvetica; font-size: 14px;fill: rgb(44%,34%,72%); stroke:none;" transform="translate(0,756) scale(1,-1)">PC2: 0.01%</text>
+			<text x="20" y="315" style="font-family: Helvetica-Bold; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,630) scale(1,-1)">Unit-variance standardization</text>
+			<rect x="20" y="275" width="160.0" height="25" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<rect x="180.0" y="275" width="160.0" height="25" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="20" y="247" style="font-family: Helvetica-Bold; font-size: 16px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,494) scale(1,-1)">PC1: 50% / PC2: 50%</text>
+			<text x="20" y="150" style="font-family: Helvetica; font-size: 14px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,300) scale(1,-1)">Green: PC1    Purple: PC2</text>
+			<text x="20" y="105" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,210) scale(1,-1)">After standardization the eigenvalues tie:</text>
+			<text x="20" y="84.0" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,168) scale(1,-1)">no unique first direction.</text>
+		</g>
+	</g>
+</svg>

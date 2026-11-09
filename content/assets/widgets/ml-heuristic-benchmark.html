@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Heuristic benchmark comparison explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --panel: #f1f2ef;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        color: var(--ink);
+        background: #fff;
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      label {
+        display: block;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        font: inherit;
+        color: var(--ink);
+        background: #fff;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        margin: 14px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        padding: 8px 0;
+        color: var(--ink);
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #scores th:first-child {
+        width: 31%;
+      }
+      #records {
+        font-size: 13px;
+      }
+      #records th:first-child {
+        width: 13%;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Compare a fixed rule and a candidate on the same 20 fictional deliveries. Changing a penalty
+      changes evaluation; changing the candidate threshold changes its predictions. No model is
+      trained.
+    </p>
+    <form>
+      <div>
+        <label for="baseline">Reference policy</label
+        ><select id="baseline">
+          <option value="rule">Rule: &gt;10 min behind</option>
+          <option value="constant">Always predict on time</option>
+        </select>
+      </div>
+      <div>
+        <label for="threshold">Candidate alert threshold</label
+        ><select id="threshold">
+          <option value="0.30">0.30 — include equality</option>
+          <option value="0.45">0.45 — include equality</option>
+          <option value="0.50" selected>0.50 — include equality</option>
+          <option value="0.90">0.90 — include equality</option>
+        </select>
+      </div>
+      <div>
+        <label for="miss-cost">Cost per missed late delivery</label
+        ><select id="miss-cost">
+          <option value="0">0 units</option>
+          <option value="1">1 unit</option>
+          <option value="2">2 units</option>
+          <option value="5" selected>5 units</option>
+          <option value="10">10 units</option>
+        </select>
+      </div>
+    </form>
+    <button id="reset" type="button">Reset inputs</button>
+    <p class="note">
+      A false alert always costs 1 unit; a correct decision costs 0. Scores are fixed ranking
+      values, not calibrated probabilities. Penalties are assigned, not observed money.
+    </p>
+    <output aria-live="polite"></output>
+    <div id="mechanism"></div>
+    <p id="interpretation" class="note"></p>
+    <table id="scores">
+      <caption>
+        All three policies · same 20 records
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Policy</th>
+          <th scope="col">Correct</th>
+          <th scope="col">Late missed</th>
+          <th scope="col">False alerts</th>
+          <th scope="col">Cost units</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <details id="data">
+      <summary>Inspect the 20 records and predictions</summary>
+      <p>
+        All predictions use information available at 09:00 for a 10:00 delivery promise. Positive
+        minutes mean behind the route plan; negative minutes mean ahead. Truth is eventual delivery
+        lateness. A rule alert requires strictly more than 10 minutes; a candidate alert includes
+        equality with its selected threshold.
+      </p>
+      <table id="records">
+        <caption>
+          Fixed fictional records · alert or no alert
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Minutes behind</th>
+            <th scope="col">Truth</th>
+            <th scope="col">Score</th>
+            <th scope="col">Reference</th>
+            <th scope="col">Candidate</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and exact calculations</summary>
+      <p>
+        Accuracy = correct predictions / 20. Assigned batch cost = missed late deliveries × selected
+        penalty + false alerts × 1. Both policies predict every row; there are no failed predictions
+        or missing labels. Bars share a cost scale whose upper limit is the larger displayed cost or
+        10, whichever is greater. The green segment is missed-delivery cost and the gray segment is
+        false-alert cost; green does not indicate success.
+      </p>
+      <p>
+        The always-on-time reference and the 10-minute rule are fixed in advance. The candidate
+        scores are invented, not fitted. This is descriptive arithmetic on synthetic records, not a
+        confidence interval, a held-out generalization estimate, or a causal estimate of what alerts
+        achieve. Exploring thresholds on the displayed labels cannot validate a final policy. No
+        external requests, deployment costs, capacity limits or review effects are modeled.
+      </p>
+    </details>
+    <script>
+      const records = [
+        [20, 1, 0.9],
+        [15, 1, 0.8],
+        [12, 1, 0.45],
+        [8, 1, 0.35],
+        [18, 0, 0.4],
+        [11, 0, 0.3],
+        [10, 0, 0.25],
+        [9, 0, 0.2],
+        [8, 0, 0.15],
+        [7, 0, 0.12],
+        [6, 0, 0.1],
+        [5, 0, 0.09],
+        [4, 0, 0.08],
+        [3, 0, 0.07],
+        [2, 0, 0.06],
+        [1, 0, 0.05],
+        [0, 0, 0.04],
+        [-1, 0, 0.03],
+        [-2, 0, 0.02],
+        [-3, 0, 0.01],
+      ].map(([behind, late, score], i) => ({
+        id: 'D' + String(i + 1).padStart(2, '0'),
+        behind,
+        late,
+        score,
+      }));
+      const $ = (s) => document.querySelector(s);
+      function evaluatePolicy(rows, predict, missCost) {
+        let correct = 0,
+          missed = 0,
+          falseAlerts = 0,
+          caught = 0;
+        for (const row of rows) {
+          const alert = Boolean(predict(row));
+          if (alert === Boolean(row.late)) correct++;
+          if (row.late && !alert) missed++;
+          if (!row.late && alert) falseAlerts++;
+          if (row.late && alert) caught++;
+        }
+        return {
+          n: rows.length,
+          correct,
+          missed,
+          falseAlerts,
+          caught,
+          accuracy: rows.length ? correct / rows.length : null,
+          cost: missed * missCost + falseAlerts,
+        };
+      }
+      function computeReport(baseline, threshold, missCost) {
+        if (
+          !['rule', 'constant'].includes(baseline) ||
+          ![0.3, 0.45, 0.5, 0.9].includes(threshold) ||
+          ![0, 1, 2, 5, 10].includes(missCost)
+        )
+          throw new Error('Unsupported setting');
+        const policies = {
+          constant: evaluatePolicy(records, () => false, missCost),
+          rule: evaluatePolicy(records, (row) => row.behind > 10, missCost),
+          candidate: evaluatePolicy(records, (row) => row.score >= threshold, missCost),
+        };
+        return {
+          baseline,
+          threshold,
+          missCost,
+          policies,
+          reference: policies[baseline],
+          candidate: policies.candidate,
+        };
+      }
+      function comparisonGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 710 : 440;
+        const text = (x, y, size, value) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400" font-size="' +
+          size +
+          '" fill="#252c28">' +
+          value +
+          '</text>';
+        const maxCost = Math.max(10, r.reference.cost, r.candidate.cost),
+          scale = 280 / maxCost;
+        let s =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="' +
+          width +
+          '" height="' +
+          height +
+          '" viewBox="0 0 ' +
+          width +
+          ' ' +
+          height +
+          '" role="img" aria-labelledby="comparison-title comparison-desc"><title id="comparison-title">Same deliveries, different error costs</title><desc id="comparison-desc">The reference gets ' +
+          r.reference.correct +
+          ' of 20 right, misses ' +
+          r.reference.missed +
+          ' late deliveries, and costs ' +
+          r.reference.cost +
+          ' assigned units. The candidate gets ' +
+          r.candidate.correct +
+          ' right, misses ' +
+          r.candidate.missed +
+          ', and costs ' +
+          r.candidate.cost +
+          ' assigned units. Gray bars count false-alert cost and green bars count missed-delivery cost.</desc><rect width="' +
+          width +
+          '" height="' +
+          height +
+          '" fill="#fff"/>';
+        s +=
+          text(0, 28, 24, 'Compare the error types') +
+          text(0, 56, 16, '20 deliveries · 4 late · same prediction time');
+        function panel(value, name, x, y) {
+          let p =
+            text(x, y + 24, 22, name) +
+            text(
+              x,
+              y + 58,
+              20,
+              value.correct + '/20 correct · ' + Math.round(value.accuracy * 100) + '%',
+            );
+          p +=
+            text(x, y + 88, 17, value.missed + ' late missed') +
+            text(x, y + 116, 17, value.falseAlerts + ' false alerts');
+          p +=
+            '<line x1="' +
+            x +
+            '" y1="' +
+            (y + 164) +
+            '" x2="' +
+            (x + 280) +
+            '" y2="' +
+            (y + 164) +
+            '" stroke="#a6aca3" stroke-width="1"/>';
+          if (value.falseAlerts)
+            p +=
+              '<rect x="' +
+              x +
+              '" y="' +
+              (y + 140) +
+              '" width="' +
+              value.falseAlerts * scale +
+              '" height="24" fill="#8c938b"/>';
+          if (value.missed * r.missCost)
+            p +=
+              '<rect x="' +
+              (x + value.falseAlerts * scale) +
+              '" y="' +
+              (y + 140) +
+              '" width="' +
+              value.missed * r.missCost * scale +
+              '" height="24" fill="#00855b"/>';
+          p +=
+            text(x, y + 197, 23, value.cost + ' cost units') +
+            text(
+              x,
+              y + 225,
+              16,
+              value.missed +
+                ' × ' +
+                r.missCost +
+                ' + ' +
+                value.falseAlerts +
+                ' × 1 = ' +
+                value.cost,
+            );
+          return p;
+        }
+        s += panel(r.reference, r.baseline === 'rule' ? 'Rule benchmark' : 'Always on time', 0, 80);
+        s += panel(
+          r.candidate,
+          'Candidate · score ≥ ' + r.threshold.toFixed(2),
+          mobile ? 0 : 364,
+          mobile ? 350 : 80,
+        );
+        const legend = mobile ? 620 : 350;
+        s +=
+          '<rect x="0" y="' +
+          (legend - 13) +
+          '" width="14" height="14" fill="#8c938b"/>' +
+          text(24, legend, 16, 'False-alert cost');
+        s +=
+          '<rect x="' +
+          (mobile ? 0 : 260) +
+          '" y="' +
+          ((mobile ? legend + 29 : legend) - 13) +
+          '" width="14" height="14" fill="#00855b"/>' +
+          text(mobile ? 24 : 284, mobile ? legend + 29 : legend, 16, 'Missed-delivery cost');
+        s += text(0, mobile ? 682 : 390, 16, 'Shared bar scale: 0–' + maxCost + ' cost units.');
+        if (!mobile)
+          s += text(0, 423, 15, 'Assigned penalties; no deployment benefit is measured.');
+        return s + '</svg>';
+      }
+      let report;
+      function render() {
+        report = computeReport(
+          $('#baseline').value,
+          Number($('#threshold').value),
+          Number($('#miss-cost').value),
+        );
+        const a = report.reference,
+          b = report.candidate,
+          difference = b.cost - a.cost;
+        $('output').textContent =
+          'Reference: ' +
+          a.correct +
+          '/20 correct, ' +
+          a.cost +
+          ' cost units. Candidate: ' +
+          b.correct +
+          '/20 correct, ' +
+          b.cost +
+          ' cost units.';
+        $('#mechanism').innerHTML = comparisonGraphic(report, innerWidth < 520);
+        $('#interpretation').textContent =
+          difference === 0
+            ? 'Assigned costs tie on these records. The error counts can still differ.'
+            : difference > 0
+              ? 'The candidate costs ' +
+                difference +
+                ' more assigned units on these 20 records. A higher accuracy need not mean a lower cost.'
+              : 'The candidate costs ' +
+                -difference +
+                ' fewer assigned units on these 20 records. This computed difference is not evidence of deployment savings.';
+        $('#scores tbody').innerHTML = Object.entries(report.policies)
+          .map(
+            ([key, p]) =>
+              '<tr><th scope="row">' +
+              { constant: 'Always on time', rule: '10-minute rule', candidate: 'Candidate' }[key] +
+              '</th><td>' +
+              p.correct +
+              '/20</td><td>' +
+              p.missed +
+              '</td><td>' +
+              p.falseAlerts +
+              '</td><td>' +
+              p.cost +
+              '</td></tr>',
+          )
+          .join('');
+        const alertName = (v) => (v ? 'Alert' : 'No alert');
+        $('#records tbody').innerHTML = records
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row.id +
+              '</th><td>' +
+              row.behind +
+              '</td><td>' +
+              (row.late ? 'Late' : 'On time') +
+              '</td><td>' +
+              row.score.toFixed(2) +
+              '</td><td>' +
+              alertName(report.baseline === 'rule' && row.behind > 10) +
+              '</td><td>' +
+              alertName(row.score >= report.threshold) +
+              '</td></tr>',
+          )
+          .join('');
+      }
+      $('form').addEventListener('submit', (event) => event.preventDefault());
+      $('form').addEventListener('change', render);
+      $('#reset').addEventListener('click', () => {
+        $('form').reset();
+        $('#data').open = false;
+        $('#assumptions').open = false;
+        render();
+      });
+      addEventListener('resize', () => {
+        $('#mechanism').innerHTML = comparisonGraphic(report, innerWidth < 520);
+      });
+      render();
+    </script>
+  </body>
+</html>

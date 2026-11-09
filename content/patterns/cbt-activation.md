@@ -36,19 +36,19 @@ The exact source below is bundled in the guided practice; displaying it does not
 :language 1
 :title "Behavioral Activation"
 :output outcome
-!ask direction {
+direction = !ask {
     What part of your day could use some care, enjoyment, connection, or meaning?
 }
-!ask activity {
+activity = !ask {
     Choose one small, safe activity that fits your energy and circumstances. Rest and support can also be meaningful choices.
 }
-!ask timing {
+timing = !ask {
     When and where could you try it? Choose a realistic time or an ordinary event to link it to.
 }
-!ask fallback {
+fallback = !ask {
     What might get in the way? What smaller version or support would make it more manageable?
 }
-!ask review {
+review = !ask {
     If you have tried the activity, what did you notice about mood, pleasure, or accomplishment? Otherwise, when could you review it? A lack of improvement is information, not failure.
 }
 !show {
@@ -62,6 +62,6 @@ The exact source below is bundled in the guided practice; displaying it does not
 
     You can leave this here or return later. Nothing has been scheduled or carried out for you.
 }
-= outcome "reflected"
+outcome = "reflected"
 -> end
 ```

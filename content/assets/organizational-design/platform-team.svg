@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">An internal product that delivery teams can use independently</title>
+  <desc id="desc">Checkout, catalog, and account teams each retain ownership of their customer services. They consume shared deployment capability through a self-service interface with supported tasks and clear documentation. A platform team owns the internal product's reliability, support, and roadmap. Consumer feedback and service signals inform its improvements. The illustration is hypothetical, not a Spotify or Netflix organization chart.</desc>
+  <rect width="1200" height="760" fill="#F6F4EF"/>
+  <g font-family="Arial, sans-serif">
+    <text x="60" y="62" font-size="32" font-weight="700" fill="#183343">Shared capability. Less coordination during use.</text>
+    <text x="60" y="105" font-size="24" fill="#52646D">Delivery teams own their services; the platform team owns the shared offering.</text>
+    <g fill="#FFFFFF" stroke="#D7DDD9" stroke-width="2">
+      <rect x="60" y="150" width="300" height="120" rx="16"/>
+      <rect x="450" y="150" width="300" height="120" rx="16"/>
+      <rect x="840" y="150" width="300" height="120" rx="16"/>
+    </g>
+    <g text-anchor="middle" fill="#183343" font-size="28" font-weight="700">
+      <text x="210" y="194">Checkout team</text>
+      <text x="600" y="194">Catalog team</text>
+      <text x="990" y="194">Account team</text>
+    </g>
+    <g text-anchor="middle" fill="#52646D" font-size="23">
+      <text x="210" y="240">Own customer service</text>
+      <text x="600" y="240">Own customer service</text>
+      <text x="990" y="240">Own customer service</text>
+    </g>
+    <path d="M210 270V360M600 270V360M990 270V360" fill="none" stroke="#176E69" stroke-width="4"/>
+    <g fill="#176E69">
+      <path d="M210 270L202 285H218ZM600 270L592 285H608ZM990 270L982 285H998Z"/>
+      <path d="M210 360L202 345H218ZM600 360L592 345H608ZM990 360L982 345H998Z"/>
+    </g>
+    <rect x="60" y="360" width="1080" height="95" rx="14" fill="#DCEDE8"/>
+    <text x="600" y="397" text-anchor="middle" font-size="28" font-weight="700" fill="#176E69">Self-service deployment capability</text>
+    <text x="600" y="434" text-anchor="middle" font-size="23" fill="#183343">Supported tasks · clear interfaces · discoverable documentation</text>
+    <path d="M600 455V500" fill="none" stroke="#898983" stroke-width="3"/>
+    <rect x="250" y="500" width="700" height="120" rx="16" fill="#183343"/>
+    <g text-anchor="middle" fill="#FFFFFF">
+      <text x="600" y="543" font-size="28" font-weight="700">Platform team</text>
+      <text x="600" y="583" font-size="23">Internal product · reliability · support · roadmap</text>
+    </g>
+    <rect x="60" y="660" width="1080" height="60" rx="12" fill="#FFFFFF" stroke="#D7DDD9" stroke-width="2"/>
+    <text x="600" y="698" text-anchor="middle" font-size="23" fill="#52646D">Consumer feedback + service signals → priorities and improvements</text>
+    <text x="60" y="749" font-size="21" fill="#52646D">Connections show consumption and ownership, not reporting lines. Hypothetical arrangement.</text>
+  </g>
+</svg>

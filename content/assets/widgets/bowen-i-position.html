@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The same invitation, two responses</title><style>
+:root{--font-size-base:16px;--foreground:#252c28;--background:#fff;--muted:#f1f2ef;--muted-foreground:#58615b;--border:#cdd3ce;--viz-series-1:#007a4d;--viz-series-2:#9a5938;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;padding:12px;font:16px/1.5 system-ui,sans-serif;color:var(--foreground);background:#fff}
+h3{font-size:1.05rem;line-height:1.4;margin:0}p{margin:.5rem 0}.viz-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:inherit;font-size:.88rem;line-height:1.4;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--foreground);cursor:pointer}
+.btn:hover:not(:disabled),.btn[aria-pressed=true]{background:#eef6f0;border-color:#007a4d}.btn:focus-visible{outline:2px solid #007a4d;outline-offset:3px}.btn:disabled{opacity:.45;cursor:default}
+.btn-primary{border-color:#007a4d}.text-small{font-size:.85rem;color:var(--muted-foreground)}.tabular-nums{font-variant-numeric:tabular-nums}
+@media(max-width:400px){body{padding:8px;font-size:15px}}
+</style></head><body>
+<div id="iposition-exchanges-v1">
+  <h3>The same invitation, two responses</h3>
+  <div class="viz-row" role="group" aria-label="Compare Mara’s participation">
+    <button class="btn" type="button" data-story="yield" aria-pressed="true">Yield, then resent</button>
+    <button class="btn" type="button" data-story="position" aria-pressed="false">Define an I-position</button>
+  </div>
+  <div class="ip-stage">
+    <span id="ip-step" class="text-small tabular-nums"></span>
+    <h3 id="ip-heading"></h3>
+  </div>
+  <svg id="ip-figure" class="ip-figure" role="img" aria-labelledby="ip-svg-title ip-svg-description">
+    <title id="ip-svg-title">Mara and her mother Ellen</title>
+    <desc id="ip-svg-description">A scripted comparison of responding to pressure about a Sunday visit.</desc>
+    <defs><marker id="ip-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--viz-series-1)"></path></marker></defs>
+    <g id="ip-marks"></g>
+  </svg>
+  <div id="ip-exchange" aria-live="polite"></div>
+  <div class="viz-row">
+    <button class="btn" type="button" id="ip-back">Previous</button>
+    <button class="btn btn-primary" type="button" id="ip-next">Next exchange</button>
+  </div>
+  <span class="text-small">Invented teaching example · Ellen’s response remains outside Mara’s control</span>
+</div>
+<style>
+  #iposition-exchanges-v1 {display:grid;gap:calc(var(--font-size-base) * .8);color:var(--foreground);}
+  #iposition-exchanges-v1 > h3 {padding-right:90px;}
+  #iposition-exchanges-v1 .ip-stage {display:grid;gap:calc(var(--font-size-base) * .25);}
+  #iposition-exchanges-v1 .ip-figure {display:block;width:100%;}
+  #iposition-exchanges-v1 .ip-figure text {fill:var(--foreground);font-family:inherit;font-size:12px;font-weight:400;text-anchor:middle;}
+  #iposition-exchanges-v1 .ip-figure .ip-name {font-weight:500;}
+  #iposition-exchanges-v1 #ip-exchange {min-height:calc(var(--font-size-base) * 5);}
+  #iposition-exchanges-v1 .ip-moving {animation:ip-stroke-arrive .35s ease-out both;}
+  @keyframes ip-stroke-arrive {from{stroke-dashoffset:1;}to{stroke-dashoffset:0;}}
+  @media (prefers-reduced-motion:reduce) {#iposition-exchanges-v1 .ip-moving {animation:none;}}
+</style>
+<script>
+(() => {
+  const root=document.getElementById('iposition-exchanges-v1');
+  const svg=root.querySelector('#ip-figure');
+  const layer=root.querySelector('#ip-marks');
+  const buttons=Array.from(root.querySelectorAll('[data-story]'));
+  const previous=root.querySelector('#ip-back');
+  const next=root.querySelector('#ip-next');
+  const stories={
+    yield:[
+      {heading:'The invitation becomes pressure',speaker:'ellen',label:['Requests the','whole afternoon'],exchange:'Ellen: “You must stay all Sunday. Family comes first.”',mara:['Plans noon–2'],ellen:['Wants more time']},
+      {heading:'Mara agrees to end the discomfort',speaker:'mara',label:['Agrees to stay'],exchange:'Mara: “Fine. I’ll stay.” She had promised to help Lea move at two.',mara:['Gives up her plan'],ellen:['Gets agreement']},
+      {heading:'The agreement does not settle Mara’s position',speaker:'ellen',label:['Expects her','to stay'],exchange:'Ellen: “Good. Your sister is staying too.” Mara has not discussed her other commitment.',mara:['Still conflicted'],ellen:['Expects a long visit']},
+      {heading:'Relief is followed by resentment',speaker:null,label:['Mara stays','all afternoon'],exchange:'Mara cancels on Lea and becomes resentful. Ellen still expects future Sunday visits.',mara:['Cancels on Lea'],ellen:['Keeps expectation']}
+    ],
+    position:[
+      {heading:'The same invitation and pressure',speaker:'ellen',label:['Requests the','whole afternoon'],exchange:'Ellen: “You must stay all Sunday. Family comes first.”',mara:['Plans noon–2'],ellen:['Wants more time']},
+      {heading:'Mara defines her own participation',speaker:'mara',label:['States her plan'],exchange:'Mara: “I want to see you, and I’m keeping my promise to help Lea. I’ll come from noon to two.”',mara:['Keeps both plans'],ellen:['Hears her position']},
+      {heading:'The pressure does not disappear',speaker:'ellen',label:['Asks her','to reconsider'],exchange:'Ellen: “Your sister stays longer. Why can’t you?” Mara listens without changing her plan to obtain approval.',mara:['Plan unchanged'],ellen:['Still disappointed']},
+      {heading:'The position becomes conduct',speaker:null,label:['Mara leaves','at two'],exchange:'Mara visits, leaves at two, and remains in ordinary contact afterward. Ellen is still disappointed.',mara:['Helps Lea at two'],ellen:['Still disappointed']}
+    ]
+  };
+  let state={article:'i-position',story:'yield',step:0};
+  function restore(snapshot){
+    const s=snapshot && snapshot.modelContent;
+    if(s && s.article==='i-position' && Object.hasOwn(stories,s.story) && Number.isInteger(s.step) && s.step>=0 && s.step<4)state={article:'i-position',story:s.story,step:s.step};
+  }
+  restore(window.openai && window.openai.widgetState);
+  function save(){
+    if(window.openai && typeof window.openai.setWidgetState==='function')Promise.resolve(window.openai.setWidgetState({modelContent:{...state},privateContent:null})).catch(()=>{});
+  }
+  function element(tag,attrs,parent){
+    const n=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    Object.entries(attrs||{}).forEach(([k,v])=>n.setAttribute(k,String(v)));
+    if(parent)parent.appendChild(n);
+    return n;
+  }
+  function label(x,y,lines,cls){
+    const n=element('text',{x,y,class:cls||''},layer);
+    lines.forEach((line,i)=>{const span=element('tspan',{x,dy:i?17:0},n);span.textContent=line;});
+    return n;
+  }
+  function person(x,name,role,note,active){
+    element('circle',{cx:x,cy:90,r:24,fill:active?'color-mix(in srgb, var(--viz-series-1) 14%, var(--background))':'var(--muted)',stroke:'var(--border)','stroke-width':1},layer);
+    label(x,94,[name[0]],'ip-name');label(x,140,[name],'ip-name');label(x,160,[role]);label(x,195,note);
+  }
+  function draw(animate=false){
+    const frame=stories[state.story][state.step];
+    const width=Math.max(280,Math.round(svg.getBoundingClientRect().width||root.getBoundingClientRect().width||600));
+    svg.setAttribute('viewBox','0 0 '+width+' 240');svg.setAttribute('height',240);
+    layer.replaceChildren();
+    const left=width*.23,right=width*.77,mid=width*.5;
+    if(frame.speaker){
+      const from=frame.speaker==='mara'?left+31:right-31,to=frame.speaker==='mara'?right-31:left+31;
+      element('path',{d:'M'+from+',90 L'+to+',90',fill:'none',stroke:'var(--viz-series-1)','stroke-width':2,'marker-end':'url(#ip-arrow)',pathLength:1,'stroke-dasharray':1,class:animate?'ip-moving':''},layer);
+    }
+    label(mid,26,frame.label);
+    person(left,'Mara','Adult daughter',frame.mara,frame.speaker==='mara');
+    person(right,'Ellen','Mother',frame.ellen,frame.speaker==='ellen');
+    root.querySelector('#ip-step').textContent='Exchange '+(state.step+1)+' of 4';
+    root.querySelector('#ip-heading').textContent=frame.heading;
+    root.querySelector('#ip-exchange').textContent=frame.exchange;
+    root.querySelector('#ip-svg-description').textContent=frame.heading+'. '+frame.exchange+' Mara: '+frame.mara.join(' ')+'. Ellen: '+frame.ellen.join(' ')+'.';
+    buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.story===state.story)));
+    previous.disabled=state.step===0;next.disabled=state.step===3;
+  }
+  buttons.forEach(b=>b.addEventListener('click',()=>{state.story=b.dataset.story;draw(true);save();}));
+  previous.addEventListener('click',()=>{if(state.step>0){state.step--;draw(true);save();}});
+  next.addEventListener('click',()=>{if(state.step<3){state.step++;draw(true);save();}});
+  window.addEventListener('openai:set_globals',event=>{if(event.detail && event.detail.globals && event.detail.globals.widgetState){restore(event.detail.globals.widgetState);draw();}});
+  new ResizeObserver(()=>draw()).observe(root);
+  draw();
+})();
+</script>
+
+</body></html>

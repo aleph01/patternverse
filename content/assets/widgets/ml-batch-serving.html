@@ -1,0 +1,215 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Batch serving publication and lookup explorer</title><style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --panel: #f1f2ef;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        color: var(--ink);
+        background: #fff;
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      label {
+        display: block;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        font: inherit;
+        color: var(--ink);
+        background: #fff;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        margin: 14px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        padding: 8px 0;
+        color: var(--ink);
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #scores th:first-child {
+        width: 31%;
+      }
+      #records {
+        font-size: 13px;
+      }
+      #records th:first-child {
+        width: 13%;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        button {
+          width: 100%;
+        }
+      }
+    </style></head><body>
+<p>Compute a prepared prediction set, then look up a merchant without rerunning the model. R8 uses the 08:00 snapshot and can publish at 08:20 only with all four expected keys. Otherwise R7 remains active. Times are UTC on one fictional day.</p>
+<form><div><label for="time">Consumer lookup time</label><select id="time"><option value="490">08:10 — processing</option><option value="500">08:20 — publish</option><option value="510" selected>08:30</option><option value="600">10:00 — age limit</option><option value="601">10:01 — too old</option></select></div>
+<div><label for="outcome">R8 result completeness</label><select id="outcome"><option value="complete" selected>4 of 4 expected keys</option><option value="missing-B">B missing: 3 of 4 keys</option></select></div>
+<div><label for="entity">Merchant to look up</label><select id="entity"><option value="A" selected>A — changed count</option><option value="C">C — zero orders</option><option value="E">E — no stored row</option></select></div></form>
+<button id="reset" type="button">Reset inputs</button><output aria-live="polite"></output><p id="decision"></p><div id="graphic"></div>
+<details id="inspection"><summary>Inspect input rows, predictions and publication checks</summary>
+<p>The fixed teaching rule predicts 2 items per observed order plus 1 item, with model identity M1 and preprocessing identity T1. Both runs concern demand for the same 12:00–18:00 window. There is no fitted model or measured forecast accuracy.</p>
+<table id="records"><caption>R8 candidate results · not necessarily active</caption><thead><tr><th>Key</th><th>Orders</th><th>Predicted items</th><th>Result</th></tr></thead><tbody></tbody></table>
+<p id="coverage"></p><p id="pointer"></p>
+<table id="lookup"><caption>Consumer reads the active set</caption><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody></tbody></table><p id="formula"></p>
+</details><details id="assumptions"><summary>Publication and age assumptions</summary>
+<p>R7 is already complete: its input cutoff is 07:00 and publication is 07:20. R8 has input cutoff 08:00 and a fixed scheduled finish at 08:20, including its checks. Before that finish it is processing. Afterward, only exact coverage of A, B, C and D activates R8. The active-reference switch is atomic in this in-memory simulation (each reader sees one complete set), with no propagation delay; these are declared application policies, not cloud-service defaults.</p>
+<p>Input-cutoff age = lookup time minus the active run's cutoff. An age of at most 120 minutes is accepted, including equality. Missing rows are reported as missing even when the active run is old. Existing stale values remain inspectable but are not returned as usable predictions. No fallback is silently substituted.</p>
+<p>Candidate predictions are computed immediately for explanation, including before their simulated publication time. They remain separate from the active consumer view. No clocks run automatically, no database is modified, and no actual job, file I/O, retry, storage consistency, runtime benchmark, model training or forecast-quality experiment is executed. Input-cutoff age does not describe every event's age or guarantee freshness within the source snapshot.</p></details>
+<script>
+const expected=Object.freeze(['A','B','C','D']);
+const snapshots=Object.freeze({R7:Object.freeze([['A',3],['B',6],['C',0],['D',1]].map(Object.freeze)),R8:Object.freeze([['A',4],['B',7],['C',0],['D',2]].map(Object.freeze))});
+const model=Object.freeze({id:'M1',transform:'T1',itemsPerOrder:2,baseItems:1,targetStart:720,targetEnd:1080});
+const times=Object.freeze([490,500,510,600,601]);
+function scoreRows(rows){
+ if(!Array.isArray(rows)||!rows.length)throw Error('Nonempty input rows required');
+ const seen=new Set();
+ return rows.map(row=>{if(!Array.isArray(row)||row.length!==2)throw Error('Key and order count required');const [key,orders]=row;
+ if(typeof key!=='string'||!key.trim()||seen.has(key)||!Number.isSafeInteger(orders)||orders<0)throw Error('Unique keys and nonnegative integer orders required');seen.add(key);
+ const prediction=model.itemsPerOrder*orders+model.baseItems;if(!Number.isSafeInteger(prediction))throw Error('Prediction outside safe range');return {key,orders,prediction};});
+}
+function coverage(results,keys){
+ if(!Array.isArray(results)||!Array.isArray(keys)||!keys.length||keys.some(k=>typeof k!=='string'||!k.trim())||new Set(keys).size!==keys.length)throw Error('Unique expected keys required');
+ const seen=new Set(),duplicates=[];
+ for(const r of results){if(!r||typeof r.key!=='string'||!r.key.trim()||!Number.isFinite(r.prediction))throw Error('Identified finite results required');if(seen.has(r.key))duplicates.push(r.key);seen.add(r.key);}
+ const missing=keys.filter(k=>!seen.has(k)),unexpected=[...seen].filter(k=>!keys.includes(k)),present=keys.length-missing.length;
+ return {complete:!missing.length&&!duplicates.length&&!unexpected.length,present,total:keys.length,fraction:present/keys.length,missing,duplicates,unexpected};
+}
+function createRun(id,cutoff,publishedAt,results){
+ if(!['R7','R8'].includes(id)||!Number.isSafeInteger(cutoff)||!Number.isSafeInteger(publishedAt)||cutoff<0||publishedAt<cutoff)throw Error('Valid run identity and times required');
+ return {id,cutoff,publishedAt,model:model.id,transform:model.transform,targetStart:model.targetStart,targetEnd:model.targetEnd,results:results.map(r=>({...r})),check:coverage(results,expected)};
+}
+function lookup(run,key,at,maxAge=120){
+ if(!run||!run.check.complete||typeof key!=='string'||!key.trim()||!Number.isSafeInteger(at)||at<run.publishedAt||!Number.isSafeInteger(maxAge)||maxAge<0)throw Error('Published complete run and valid lookup required');
+ const row=run.results.find(r=>r.key===key),age=at-run.cutoff,publicationAge=at-run.publishedAt,status=!row?'missing':age>maxAge?'stale':'usable';
+ return {key,status,value:status==='usable'?row.prediction:null,stored:row?row.prediction:null,orders:row?row.orders:null,age,publicationAge,maxAge};
+}
+function buildReport(at=510,outcome='complete',entity='A'){
+ if(!times.includes(at)||!['complete','missing-B'].includes(outcome)||!['A','C','E'].includes(entity))throw Error('Unsupported explorer choice');
+ const prior=createRun('R7',420,440,scoreRows(snapshots.R7)),candidate=createRun('R8',480,500,scoreRows(snapshots.R8).filter(r=>outcome==='complete'||r.key!=='B'));
+ const ready=at>=candidate.publishedAt,activated=ready&&candidate.check.complete,active=activated?candidate:prior;
+ return {at,outcome,entity,prior,candidate,ready,activated,active,state:!ready?'processing':activated?'published':'blocked',lookup:lookup(active,entity,at)};
+}
+const clock=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+const quantity=n=>n===1?'1 item':n+' items';
+function mechanismGraphic(r,mobile){
+ const width=mobile?328:680,height=mobile?830:570,c=r.candidate,a=r.active,l=r.lookup;
+ const text=(x,y,s,size=16,color='#252c28')=>`<text x="${x}" y="${y}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" font-size="${size}" fill="${color}">${s}</text>`;
+ const line=(x,y,x2,y2,color='#a6aca3')=>`<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${color}"/>`;
+ const gate=r.state==='processing'?'Processing · R8 not active':r.activated?'4/4 keys · R8 activated':'3/4 keys · R8 blocked';
+ const value=l.status==='usable'?quantity(l.value):l.status==='missing'?'Missing prediction':'Stale · lookup blocked';
+ const note=l.status==='usable'?'Prepared answer; no model call at lookup.':l.status==='missing'?'No stored row; absence is not zero.':`Stored prediction: ${quantity(l.stored)}.`;
+ let out=text(0,25,'Score now, consume later',mobile?23:25)+text(0,55,'Target: 12:00–18:00 · all times UTC',15,'#626962');
+ if(mobile){
+ out+=text(0,98,'Candidate R8 · cutoff 08:00',19)+text(0,125,'Scheduled finish 08:20',15,'#626962');
+ out+=text(0,158,'Key',15)+text(80,158,'Orders',15)+text(172,158,'Predicted items',15);
+ snapshots.R8.forEach(([key,n],i)=>{const y=193+i*36,row=c.results.find(v=>v.key===key);out+=text(0,y,key)+text(80,y,n)+text(172,y,row?row.prediction:'—');});
+ out+=line(0,316,328,316)+text(0,345,gate,18,r.activated?'#00855b':'#626962')+text(0,373,r.activated?'Active reference → R8':'Active reference stays R7',16)+line(0,393,328,393);
+ out+=text(0,429,`Consumer reads ${a.id}`,21)+text(0,461,`Input cutoff ${clock(a.cutoff)}`,16)+text(0,490,`Published ${clock(a.publishedAt)}`,16)+text(0,519,`Lookup ${clock(r.at)} · merchant ${r.entity}`,16)+text(0,560,`Input-cutoff age ${l.age} min`,21,l.status==='usable'?'#00855b':'#252c28');
+ out+=text(0,605,value,22,l.status==='usable'?'#00855b':'#252c28')+text(0,640,`Since publication: ${l.publicationAge} min`,16,'#626962')+text(0,681,'Age policy: at most 120 min',16)+text(0,720,note,15)+text(0,763,'Coverage and age govern this lookup;',15,'#626962')+text(0,787,'neither establishes prediction quality.',15,'#626962');
+ }else{
+ out+=text(0,104,'Candidate R8 · cutoff 08:00',20)+text(0,132,'Scheduled finish 08:20',15,'#626962')+text(0,170,'Key',15)+text(80,170,'Orders',15)+text(175,170,'Predicted items',15);
+ snapshots.R8.forEach(([key,n],i)=>{const y=209+i*38,row=c.results.find(v=>v.key===key);out+=text(0,y,key,18)+text(80,y,n,18)+text(175,y,row?row.prediction:'—',18);});
+ out+=line(0,342,300,342)+text(0,372,gate,18,r.activated?'#00855b':'#626962')+text(0,402,r.activated?'Active reference → R8':'Active reference stays R7',16);
+ out+=`<path d="M305 389 H332 V114 H353" fill="none" stroke="#a6aca3"/>`;
+ out+=text(365,104,`Consumer reads ${a.id}`,21)+text(365,142,`Input cutoff ${clock(a.cutoff)}`,16)+text(365,172,`Published ${clock(a.publishedAt)}`,16)+text(365,202,`Lookup ${clock(r.at)} · merchant ${r.entity}`,16)+text(365,244,`Cutoff age ${l.age} min`,24,l.status==='usable'?'#00855b':'#252c28')+text(365,293,value,22,l.status==='usable'?'#00855b':'#252c28')+text(365,330,`Publication age ${l.publicationAge} min`,16,'#626962')+text(365,365,'Age policy: at most 120 min',16);
+ out+=line(0,440,660,440)+text(0,477,note,17)+text(0,517,'Coverage and age govern this lookup; neither establishes prediction quality.',16,'#626962');
+ }
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Candidate batch results pass a publication check before a consumer reads an active prediction set"><rect width="${width}" height="${height}" fill="#fff"/>${out}</svg>`;
+}
+let report;
+function render(){const d=document;report=buildReport(Number(d.querySelector('#time').value),d.querySelector('#outcome').value,d.querySelector('#entity').value);const r=report,l=r.lookup;
+ d.querySelector('output').textContent=l.status==='usable'?`${clock(r.at)}: merchant ${r.entity} receives ${quantity(l.value)} from ${r.active.id}; input-cutoff age ${l.age} min.`:l.status==='missing'?`${clock(r.at)}: merchant ${r.entity} has no prediction in ${r.active.id}.`:`${clock(r.at)}: merchant ${r.entity}'s ${r.active.id} prediction is stale (${l.age} min); no usable value returned.`;
+ d.querySelector('#decision').textContent=r.state==='processing'?'R8 has not reached its finish time; the active reference remains R7.':r.activated?'R8 has all four expected keys and is published.':'R8 is missing B. The complete-set policy blocks its publication and retains R7.';
+ d.querySelector('#graphic').innerHTML=mechanismGraphic(r,innerWidth<520);
+ d.querySelector('#records tbody').innerHTML=snapshots.R8.map(([key,n])=>{const row=r.candidate.results.find(v=>v.key===key);return `<tr><td>${key}</td><td>${n}</td><td>${row?row.prediction:'—'}</td><td>${row?'Present':'Missing'}</td></tr>`;}).join('');
+ d.querySelector('#coverage').textContent=`R8 coverage: ${r.candidate.check.present} / ${r.candidate.check.total} = ${r.candidate.check.fraction*100}%. Publication requires the exact expected key set, with no duplicates or unexpected keys. Candidate outcomes shown here do not by themselves make R8 active.`;
+ d.querySelector('#pointer').textContent=`Active run ${r.active.id}; model ${r.active.model}; preprocessing ${r.active.transform}; target ${clock(r.active.targetStart)}–${clock(r.active.targetEnd)}. R8 state: ${r.state}.`;
+ d.querySelector('#lookup tbody').innerHTML=[['Merchant',r.entity],['Status',l.status],['Stored predicted items',l.stored===null?'Missing':l.stored],['Usable predicted items',l.value===null?'Not returned':l.value],['Input cutoff',clock(r.active.cutoff)],['Published',clock(r.active.publishedAt)],['Lookup',clock(r.at)],['Cutoff age (min)',l.age],['Since publication (min)',l.publicationAge]].map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+ d.querySelector('#formula').textContent=l.orders===null?'No input row for this merchant is present in the active snapshot; no zero-valued input or prediction is invented.':`Stored prediction = 2 × ${l.orders} orders + 1 = ${quantity(l.stored)}. Input-cutoff age = ${clock(r.at)} − ${clock(r.active.cutoff)} = ${l.age} min. Returning it requires age ≤ 120 min; observed age ${l.age} is ${l.age<=120?'accepted':'too large'}.`;
+}
+document.querySelector('form').addEventListener('submit',e=>e.preventDefault());document.querySelectorAll('select').forEach(el=>el.addEventListener('change',render));
+document.querySelector('#reset').addEventListener('click',()=>{document.querySelector('form').reset();document.querySelectorAll('details').forEach(el=>el.open=false);render();});addEventListener('resize',render);render();
+</script></body></html>

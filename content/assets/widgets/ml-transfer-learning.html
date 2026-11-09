@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Frozen features and fine-tuning explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #ranking th:first-child {
+        width: 45%;
+      }
+      #vectors th:first-child {
+        width: 42%;
+      }
+      #history {
+        font-size: 13px;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Compare a frozen encoder with an adaptable encoder on four invented training rows. Both start
+      with h = x₁ and head weight w = 1. Pretraining is stipulated, not executed; the updates below
+      are computed.
+    </p>
+    <form>
+      <div>
+        <label for="task">Target task</label
+        ><select id="task">
+          <option value="both">Needs both inputs · y = x₁ + x₂</option>
+          <option value="retained">Already retained · y = x₁</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions">
+      <button id="step" type="button">Train one step</button
+      ><button id="ten" type="button">Train ten steps</button
+      ><button id="reset" type="button">Reset inputs</button>
+    </div>
+    <p class="note">
+      Each step uses all four rows and learning rate 0.5. Both models update their heads; only
+      fine-tuning updates the encoder. Forty steps maximum. Changing the task restarts training.
+    </p>
+    <output aria-live="polite"></output>
+    <div id="mechanism"></div>
+    <p id="interpretation" class="note"></p>
+    <details id="state">
+      <summary>Inspect parameters, predictions and the next gradient</summary>
+      <table id="parameters">
+        <caption>
+          Current parameters · rounded to six decimals
+        </caption>
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Encoder a</th>
+            <th>Encoder b</th>
+            <th>Head w</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="predictions">
+        <caption>
+          Four training rows · no held-out evaluation
+        </caption>
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Target</th>
+            <th>Frozen prediction</th>
+            <th>Fine-tuned prediction</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="gradient">
+        <caption>
+          Next loss gradient before applying the update
+        </caption>
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>For a</th>
+            <th>For b</th>
+            <th>For w</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p>
+        Frozen-route encoder gradients are displayed for inspection but are not applied. Gradients
+        are computed from each model's current parameters before any parameter changes in that step.
+      </p>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and calculation</summary>
+      <p>
+        Inputs are (1,0), (−1,0), (0,1), (0,−1). All quantities are dimensionless. Encoder h = a x₁
+        + b x₂; prediction = w h; no biases, regularization, or randomness. Loss is the sum of
+        squared prediction errors divided by eight: half mean squared error over four rows. For each
+        row let r = prediction − target. Average r w x₁, r w x₂, and r h over the four rows to
+        obtain the gradients for a, b, and w. Subtract 0.5 times each permitted gradient
+        simultaneously. Calculations use full precision; labels round.
+      </p>
+      <p>
+        No source dataset is fitted, no training-from-scratch baseline is simulated, and no held-out
+        score is measured. Lower training loss does not establish positive transfer. Reset also
+        closes optional details.
+      </p>
+    </details>
+    <script>
+      const inputs = [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+      ];
+      const initial = { a: 1, b: 0, w: 1 };
+      const limit = 40,
+        rate = 0.5;
+      let frozen = { ...initial },
+        tuned = { ...initial },
+        steps = 0,
+        report;
+      const $ = (id) => document.getElementById(id);
+      function rows(task) {
+        if (!['both', 'retained'].includes(task)) throw new Error('Unsupported task');
+        return inputs.map((x) => ({ x: [...x], y: x[0] + (task === 'both' ? x[1] : 0) }));
+      }
+      function predict(p, x) {
+        return p.w * (p.a * x[0] + p.b * x[1]);
+      }
+      function measure(p, data) {
+        let loss = 0,
+          a = 0,
+          b = 0,
+          w = 0;
+        for (const { x, y } of data) {
+          const h = p.a * x[0] + p.b * x[1],
+            r = p.w * h - y;
+          loss += (r * r) / (2 * data.length);
+          a += (r * p.w * x[0]) / data.length;
+          b += (r * p.w * x[1]) / data.length;
+          w += (r * h) / data.length;
+        }
+        return { loss, gradient: { a, b, w } };
+      }
+      function update(p, data, adapt) {
+        const { gradient: g } = measure(p, data);
+        return {
+          a: p.a - (adapt ? rate * g.a : 0),
+          b: p.b - (adapt ? rate * g.b : 0),
+          w: p.w - rate * g.w,
+        };
+      }
+      function buildReport(task, f = frozen, t = tuned, count = steps) {
+        const data = rows(task);
+        return {
+          task,
+          steps: count,
+          data,
+          frozen: { ...f, ...measure(f, data) },
+          tuned: { ...t, ...measure(t, data) },
+          predictions: data.map((r) => ({ ...r, frozen: predict(f, r.x), tuned: predict(t, r.x) })),
+        };
+      }
+      const fmt = (n, d = 3) => (Math.abs(n) < 0.5 * 10 ** -d ? (0).toFixed(d) : n.toFixed(d));
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 810 : 480;
+        const text = (x, y, s, size = 16, color = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${color}">${s}</text>`;
+        const line = (x1, y1, x2, y2, c = '#a6aca3') =>
+          `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}"/>`;
+        let out = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Encoder direction and training loss for frozen features and fine-tuning"><rect width="${width}" height="${height}" fill="#fff"/><g font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400">`;
+        out += text(0, 24, 'Same starting encoder: h = x₁', mobile ? 17 : 20);
+        out += text(0, 51, 'Head w = 1 · then train on target rows', mobile ? 14 : 16, '#626962');
+        out += text(
+          0,
+          78,
+          `After ${r.steps} computed training step${r.steps === 1 ? '' : 's'}`,
+          15,
+        );
+        const panel = (p, x, y, label, green) => {
+          const c = green ? '#00855b' : '#626962',
+            ox = x + 42,
+            oy = y + 125,
+            scale = 52;
+          let s = text(x, y, label, 19);
+          s += text(
+            x,
+            y + 27,
+            green ? 'Encoder and head can change' : 'Only the head can change',
+            14,
+            '#626962',
+          );
+          s += line(ox - 16, oy, ox + 122, oy) + line(ox, oy + 20, ox, oy - 72);
+          s += text(ox + 116, oy + 23, 'a', 14) + text(ox - 17, oy - 67, 'b', 14);
+          // Direction in encoder-parameter space, with shared scale on both routes.
+          s += `<line x1="${ox}" y1="${oy}" x2="${ox + scale * p.a}" y2="${oy - scale * p.b}" stroke="${c}" stroke-width="2"/><circle cx="${ox + scale * p.a}" cy="${oy - scale * p.b}" r="4" fill="${c}"/>`;
+          s += text(x, y + 177, `a = ${fmt(p.a)} · b = ${fmt(p.b)}`, 15, c);
+          s += text(x, y + 202, `Head w = ${fmt(p.w)}`, 15);
+          s += text(x, y + 239, `Training loss ${fmt(p.loss, 6)}`, 16);
+          s += `<rect x="${x}" y="${y + 255}" width="280" height="12" fill="#f1f2ef"/><rect x="${x}" y="${y + 255}" width="${Math.min(280, 1120 * p.loss)}" height="12" fill="${c}"/>`;
+          s += text(x, y + 289, 'Loss bar: 0 to 0.25 · half MSE', 13, '#626962');
+          return s;
+        };
+        if (mobile) {
+          out +=
+            line(0, 101, 328, 101) +
+            panel(r.frozen, 10, 132, 'Frozen features', false) +
+            line(0, 447, 328, 447) +
+            panel(r.tuned, 10, 478, 'Fine-tuning', true);
+        } else {
+          out +=
+            line(0, 101, 680, 101) +
+            panel(r.frozen, 0, 138, 'Frozen features', false) +
+            line(325, 120, 325, 439) +
+            panel(r.tuned, 355, 138, 'Fine-tuning', true);
+        }
+        return out + '</g></svg>';
+      }
+      function render() {
+        report = buildReport($('task').value);
+        $('mechanism').innerHTML = mechanismGraphic(report, innerWidth <= 520);
+        document.querySelector('output').textContent =
+          `Steps ${steps}/${limit}. Frozen loss ${fmt(report.frozen.loss, 6)}; fine-tuned loss ${fmt(report.tuned.loss, 6)}. Training rows only.`;
+        $('interpretation').textContent =
+          report.task === 'retained'
+            ? 'The starting encoder already preserves everything this target needs. Both routes start at zero loss; extra trainability adds no benefit here.'
+            : 'The frozen encoder maps (0, 1) and (0, −1) to the same feature. Fine-tuning can change that mapping; its lower training loss is not a held-out result.';
+        $('parameters').querySelector('tbody').innerHTML = [
+          ['Frozen', report.frozen],
+          ['Fine-tuned', report.tuned],
+        ]
+          .map(
+            ([name, p]) =>
+              `<tr><th scope="row">${name}</th><td>${fmt(p.a, 6)}</td><td>${fmt(p.b, 6)}</td><td>${fmt(p.w, 6)}</td></tr>`,
+          )
+          .join('');
+        $('predictions').querySelector('tbody').innerHTML = report.predictions
+          .map(
+            (p) =>
+              `<tr><td>(${p.x.join(', ')})</td><td>${p.y}</td><td>${fmt(p.frozen, 6)}</td><td>${fmt(p.tuned, 6)}</td></tr>`,
+          )
+          .join('');
+        $('gradient').querySelector('tbody').innerHTML = [
+          ['Frozen', report.frozen],
+          ['Fine-tuned', report.tuned],
+        ]
+          .map(
+            ([name, p]) =>
+              `<tr><th scope="row">${name}</th><td>${fmt(p.gradient.a, 6)}</td><td>${fmt(p.gradient.b, 6)}</td><td>${fmt(p.gradient.w, 6)}</td></tr>`,
+          )
+          .join('');
+        $('step').disabled = $('ten').disabled = steps >= limit;
+      }
+      function learn(n) {
+        const data = rows($('task').value);
+        for (let i = 0; i < n && steps < limit; i++, steps++) {
+          frozen = update(frozen, data, false);
+          tuned = update(tuned, data, true);
+        }
+        render();
+      }
+      function restart() {
+        frozen = { ...initial };
+        tuned = { ...initial };
+        steps = 0;
+        render();
+      }
+      function reset() {
+        $('task').value = 'both';
+        for (const d of document.querySelectorAll('details')) d.open = false;
+        restart();
+      }
+      $('task').addEventListener('change', restart);
+      $('step').addEventListener('click', () => learn(1));
+      $('ten').addEventListener('click', () => learn(10));
+      $('reset').addEventListener('click', reset);
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

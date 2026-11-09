@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" role="img" aria-labelledby="title desc" data-film-style="light-editorial" data-view="lighting-plan">
+<title id="title">Remove a contribution, retain the key</title>
+<desc id="desc">An overhead lighting plan shows the main light reaching the subject from one side. A matte black flag on the other side intercepts returning light before it reaches the subject. Original conceptual illustration; not a documented film setup.</desc>
+<style>
+:root{color-scheme:only light;--paper:#fff;--ink:#252c28;--line:#a6aca3;--stone:#f1f2ef;--mint:#edf5f0;--green:#00855b;--deep:#00855b}
+svg{background:#fff;color:var(--ink)}
+text{fill:var(--ink);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:26px;font-weight:400;letter-spacing:0}
+.heading{font-size:28px}.small,.caption{font-size:26px}
+.legacy text{font-size:20.222222px}.legacy.compact text{font-size:21.777778px}
+path,rect,circle,ellipse{vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:butt}
+.paper{fill:var(--paper)}.stone{fill:var(--stone)}
+.existing,.wall{fill:var(--stone);stroke:var(--line);stroke-width:1.1}
+.line{fill:none;stroke:var(--ink);stroke-width:1.3}
+.hair,.fine,.leader,.boundary{fill:none;stroke:var(--line);stroke-width:1.1}
+.wall-line{fill:none;stroke:var(--ink);stroke-width:1.8}
+.landscape,.mint,.light{fill:var(--mint)}
+.intervention,.new,.seat{fill:var(--green);stroke:none}
+.outline-green,.accent{fill:none;stroke:var(--green);stroke-width:1.5}
+.glassed,.glassed-line{fill:none;stroke:var(--green);stroke-width:1.2}
+.glass{fill:var(--mint);stroke:var(--green);stroke-width:1.1}
+.dashed{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:5 5}
+.figure,.ink{fill:var(--ink);stroke:none}.figure-accent{fill:var(--green);stroke:none}
+.plan-head{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+.ghost{fill:none;stroke:var(--green);stroke-width:1.2;stroke-dasharray:3 4}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--green)" stroke-width="1.1"/></marker>
+<marker id="arrow-neutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--ink)" stroke-width="1.1"/></marker>
+</defs>
+<rect width="720" height="560" class="paper"/>
+
+
+<!-- All equipment and the subject are drawn from overhead. -->
+<path d="M80 143H656V401H80" class="hair"/>
+<path d="M140 184L342 233 325 294Z" class="stone"/>
+<path d="M140 184L329 254" class="line"/>
+<path d="M645 214L520 247 520 297 645 340Z" class="mint"/>
+<path d="M645 214L523 249" class="accent" marker-end="url(#arrow)"/><path d="M645 340L523 295" class="accent" marker-end="url(#arrow)"/>
+<!-- Top view of a soft source, aimed toward the subject. -->
+<g transform="translate(127 184) rotate(21)"><rect x="-24" y="-40" width="31" height="80" class="paper" stroke="var(--line)"/><path d="M7-40V40" class="line"/></g>
+<!-- Shoulder mass, head and small nose mark establish the true plan view. -->
+<path d="M306 285Q312 269 339 267H377Q404 269 410 285V300Q358 321 306 300Z" class="ink"/>
+<ellipse cx="358" cy="263" rx="23" ry="27" class="paper" stroke="var(--ink)" stroke-width="1.6"/>
+<path d="M352 239L358 230 364 239" class="ink"/>
+<!-- Opaque flag: intercepted light stops at this surface. -->
+<rect x="507" y="210" width="14" height="142" fill="#252c28" stroke="var(--line)" stroke-width=".7"/>
+<path d="M522 210V352" class="accent"/>
+<path d="M538 352H588L609 384" class="hair"/>
+<text x="631" y="436" text-anchor="end" class="small">Black flag</text>
+<text x="42" y="65" class="heading">Keep the main light</text>
+<path d="M42 83H152L144 131" class="hair"/>
+<text x="430" y="65" class="heading">Reduce the bounce</text>
+<path d="M453 83H631V188" class="hair"/>
+<text x="285" y="370" class="small">Subject</text><path d="M355 345V322" class="hair"/>
+<text x="42" y="491" class="caption">The flag intercepts returning light.</text>
+<text x="42" y="530" class="caption">The shadow side receives less fill.</text>
+
+
+</svg>

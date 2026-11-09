@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" role="img" aria-labelledby="title desc" data-film-style="light-editorial" data-view="exposure-series-and-material-response">
+<title id="title">Preserve brightness relationships and use them for illumination</title>
+<desc id="desc">Short, medium and long exposure times contribute different brightness ranges to an HDR light map. Matte and reflective surfaces respond to that environment. Original conceptual illustration; not a documented film setup.</desc>
+<style>
+:root{color-scheme:only light;--paper:#fff;--ink:#252c28;--line:#a6aca3;--stone:#f1f2ef;--mint:#edf5f0;--green:#00855b;--deep:#00855b}
+svg{background:#fff;color:var(--ink)}
+text{fill:var(--ink);font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:26px;font-weight:400;letter-spacing:0}
+.heading{font-size:28px}.small,.caption{font-size:26px}
+.legacy text{font-size:20.222222px}.legacy.compact text{font-size:21.777778px}
+path,rect,circle,ellipse{vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:butt}
+.paper{fill:var(--paper)}.stone{fill:var(--stone)}
+.existing,.wall{fill:var(--stone);stroke:var(--line);stroke-width:1.1}
+.line{fill:none;stroke:var(--ink);stroke-width:1.3}
+.hair,.fine,.leader,.boundary{fill:none;stroke:var(--line);stroke-width:1.1}
+.wall-line{fill:none;stroke:var(--ink);stroke-width:1.8}
+.landscape,.mint,.light{fill:var(--mint)}
+.intervention,.new,.seat{fill:var(--green);stroke:none}
+.outline-green,.accent{fill:none;stroke:var(--green);stroke-width:1.5}
+.glassed,.glassed-line{fill:none;stroke:var(--green);stroke-width:1.2}
+.glass{fill:var(--mint);stroke:var(--green);stroke-width:1.1}
+.dashed{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:5 5}
+.figure,.ink{fill:var(--ink);stroke:none}.figure-accent{fill:var(--green);stroke:none}
+.plan-head{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+.ghost{fill:none;stroke:var(--green);stroke-width:1.2;stroke-dasharray:3 4}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--green)" stroke-width="1.1"/></marker>
+<marker id="arrow-neutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="var(--ink)" stroke-width="1.1"/></marker>
+</defs>
+<rect width="720" height="560" class="paper"/>
+<text x="42" y="49" text-anchor="start">Exposure time</text><text x="136" y="100" text-anchor="middle">Short</text><rect x="42" y="126" width="188" height="116" class="boundary"/><rect x="54" y="138" width="164" height="92" class="existing"/><rect x="175" y="142" width="35" height="73" class="intervention"/><path d="M136 251L360 286" class="hair" /><text x="360" y="100" text-anchor="middle">Medium</text><rect x="266" y="126" width="188" height="116" class="boundary"/><rect x="278" y="138" width="164" height="92" class="existing"/><rect x="399" y="142" width="35" height="73" class="mint"/><path d="M360 251L360 286" class="hair" /><text x="584" y="100" text-anchor="middle">Long</text><rect x="490" y="126" width="188" height="116" class="boundary"/><rect x="502" y="138" width="164" height="92" class="paper"/><rect x="623" y="142" width="35" height="73" class="mint"/><path d="M584 251L360 286" class="hair" /><path d="M360 286V312" class="accent" marker-end="url(#arrow)"/><rect x="179" y="325" width="362" height="57" class="mint"/><text x="360" y="362" text-anchor="middle">HDR light map</text><path d="M360 392L188 431M360 392L532 431" class="hair" /><circle cx="188" cy="456" r="29" class="existing"/><circle cx="532" cy="456" r="29" class="existing"/><rect x="537" y="435" width="10" height="19" class="intervention"/><text x="188" y="532" text-anchor="middle">Matte surface</text><text x="532" y="532" text-anchor="middle">Reflective surface</text>
+</svg>

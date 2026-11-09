@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Multiple-testing explorer</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: #24372f;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-weight: 600;
+      }
+      input,
+      button {
+        font: inherit;
+        min-height: 44px;
+        border: 1px solid #708878;
+        border-radius: 7px;
+        padding: 8px;
+        color: inherit;
+        background: transparent;
+      }
+      input {
+        width: 100%;
+        min-width: 0;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #428362;
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 4em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      text {
+        fill: currentColor;
+        font:
+          14px system-ui,
+          sans-serif;
+      }
+      p {
+        font-size: 14px;
+        margin: 10px 0;
+      }
+      .note {
+        color: #506359;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        grid-column: 1/-1;
+      }
+      .axis {
+        stroke: currentColor;
+        opacity: 0.45;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #19241f;
+          color: #e2ece5;
+        }
+        .note {
+          color: #b4c8bc;
+        }
+        input,
+        button {
+          border-color: #7c9f89;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form aria-label="Multiple-testing explorer controls">
+      <label for="tests"
+        >Independent null tests per experiment<input
+          id="tests"
+          type="number"
+          value="20"
+          min="1"
+          max="200"
+          step="1"
+          required
+      /></label>
+      <div class="actions">
+        <button id="simulate" type="button">Simulate 1,000 experiments</button
+        ><button type="reset">Reset inputs</button>
+      </div>
+    </form>
+    <output id="summary" aria-live="polite"></output
+    ><svg role="img" aria-label="Calculated comparison"></svg>
+    <p class="note">
+      Each simulated null test independently flags with probability 0.05. The calculation assumes
+      every null is true and independence. It illustrates familywise error, not the probability that
+      a selected scientific claim is false. Each run adds 1,000 experiments.
+    </p>
+    <script>
+      const form = document.querySelector('form'),
+        summary = document.querySelector('#summary'),
+        chart = document.querySelector('svg');
+      const num = (id) => Number(document.getElementById(id).value);
+      const fmt = (x, d = 2) =>
+        Number(x).toLocaleString('en', { maximumFractionDigits: d, minimumFractionDigits: d });
+      function bars(items, min = 0, max = 100) {
+        const svgNS = 'http://www.w3.org/2000/svg',
+          narrow = window.innerWidth < 421,
+          row = narrow ? 72 : 45;
+        chart.replaceChildren();
+        const title = document.createElementNS(svgNS, 'title');
+        title.textContent = 'Comparison of calculated quantities';
+        chart.append(title);
+        const desc = document.createElementNS(svgNS, 'desc');
+        desc.textContent = items.map(([name, value]) => name + ': ' + fmt(value)).join('; ');
+        chart.append(desc);
+        const span = max - min || 1,
+          left = narrow ? 10 : 180,
+          right = narrow ? 240 : 500,
+          x = (v) => left + ((right - left) * (v - min)) / span;
+        items.forEach(([name, value], i) => {
+          const y = 24 + i * row,
+            barY = narrow ? y + 20 : y;
+          const t = document.createElementNS(svgNS, 'text');
+          t.setAttribute('x', '8');
+          t.setAttribute('y', String(narrow ? y + 9 : y + 19));
+          t.textContent = name;
+          chart.append(t);
+          const r = document.createElementNS(svgNS, 'rect');
+          r.setAttribute('x', String(Math.min(x(0), x(value))));
+          r.setAttribute('y', String(barY));
+          r.setAttribute('width', String(Math.abs(x(value) - x(0))));
+          r.setAttribute('height', '27');
+          r.setAttribute('fill', ['#43856a', '#6384ad', '#a97937', '#956d9b'][i % 4]);
+          chart.append(r);
+          const v = document.createElementNS(svgNS, 'text');
+          v.setAttribute('x', narrow ? '250' : '515');
+          v.setAttribute('y', String(barY + 19));
+          v.textContent = fmt(value);
+          chart.append(v);
+        });
+        const baseline = document.createElementNS(svgNS, 'line');
+        baseline.setAttribute('x1', String(x(0)));
+        baseline.setAttribute('x2', String(x(0)));
+        baseline.setAttribute('y1', '12');
+        baseline.setAttribute('y2', String(24 + items.length * row));
+        baseline.setAttribute('class', 'axis');
+        chart.append(baseline);
+        chart.setAttribute(
+          'viewBox',
+          '0 0 ' + (narrow ? '340' : '630') + ' ' + String(49 + items.length * row),
+        );
+      }
+      function update() {
+        if (!form.checkValidity()) {
+          summary.textContent = 'Enter values within the labeled limits to calculate the example.';
+          chart.replaceChildren();
+          return;
+        }
+        calculate();
+      }
+      form.addEventListener('submit', (e) => e.preventDefault());
+      form.addEventListener('input', update);
+      form.addEventListener('reset', () => setTimeout(update, 0));
+
+      let experiments = 0,
+        flagged = 0;
+      function calculate() {
+        const m = num('tests'),
+          theory = 100 * (1 - Math.pow(0.95, m));
+        summary.textContent =
+          `At least one false positive: theoretical ${fmt(theory)}%.` +
+          (experiments
+            ? ` Simulated ${fmt((100 * flagged) / experiments)}% across ${fmt(experiments, 0)} experiments.`
+            : ' No simulations yet.');
+        const items = [['Theoretical (%)', theory]];
+        // No simulation estimate exists until at least one experiment has run.
+        if (experiments) items.push(['Simulated (%)', (100 * flagged) / experiments]);
+        bars(items);
+      }
+      document.getElementById('simulate').addEventListener('click', () => {
+        if (!form.checkValidity()) return;
+        const m = num('tests');
+        for (let r = 0; r < 1000; r++) {
+          let hit = false;
+          for (let i = 0; i < m; i++) if (Math.random() < 0.05) hit = true;
+          if (hit) flagged++;
+        }
+        experiments += 1000;
+        calculate();
+      });
+      document.getElementById('tests').addEventListener('input', () => {
+        experiments = 0;
+        flagged = 0;
+        update();
+      });
+      form.addEventListener('reset', () => {
+        experiments = 0;
+        flagged = 0;
+      });
+      update();
+    </script>
+  </body>
+</html>

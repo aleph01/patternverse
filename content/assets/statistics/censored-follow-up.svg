@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="720" height="690" preserveAspectRatio="xMinYMin meet" viewBox="0 0 720 690" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Individual follow-up and Kaplan-Meier survival</title><desc>Six customers: cancellations at months 2, 4, 6; censoring at months 3, 5, 6. Risk sets at events are 6, 4, 2. Survival drops only at events to 5/6, 5/8, 5/16.</desc>
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="720" height="690"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-690)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="720" height="690" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,98%,96%); fill-rule: evenodd;"/>
+			<text x="30" y="650" style="font-family: Helvetica-Bold; font-size: 24px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1300) scale(1,-1)">An unfinished observation still counts</text>
+			<text x="30" y="623" style="font-family: Helvetica; font-size: 15px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1246) scale(1,-1)">Dots are cancellations. Crosses end observation without a cancellation.</text>
+			<text x="52" y="560" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1120) scale(1,-1)">A</text>
+			<path d="M 110,565 L 280,565" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="280" cy="565" r="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,9%,7%); fill-rule: evenodd;"/>
+			<text x="52" y="526" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1052) scale(1,-1)">B</text>
+			<path d="M 110,531 L 365,531" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 360,526 L 370,536" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 360,536 L 370,526" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="52" y="492" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,984) scale(1,-1)">C</text>
+			<path d="M 110,497 L 450,497" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="450" cy="497" r="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,9%,7%); fill-rule: evenodd;"/>
+			<text x="52" y="458" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,916) scale(1,-1)">D</text>
+			<path d="M 110,463 L 535,463" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 530,458 L 540,468" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 530,468 L 540,458" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="52" y="424" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,848) scale(1,-1)">E</text>
+			<path d="M 110,429 L 620,429" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<circle cx="620" cy="429" r="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,9%,7%); fill-rule: evenodd;"/>
+			<text x="52" y="390" style="font-family: Helvetica; font-size: 16px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,780) scale(1,-1)">F</text>
+			<path d="M 110,395 L 620,395" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 615,390 L 625,400" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 615,400 L 625,390" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="106.108" y="350" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,700) scale(1,-1)">0</text>
+			<text x="191.108" y="350" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,700) scale(1,-1)">1</text>
+			<text x="276.108" y="350" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,700) scale(1,-1)">2</text>
+			<text x="361.108" y="350" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,700) scale(1,-1)">3</text>
+			<text x="446.108" y="350" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,700) scale(1,-1)">4</text>
+			<text x="531.108" y="350" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,700) scale(1,-1)">5</text>
+			<text x="616.108" y="350" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,700) scale(1,-1)">6</text>
+			<text x="302.06" y="325" style="font-family: Helvetica; font-size: 15px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,650) scale(1,-1)">Months since entry</text>
+			<text x="30" y="282" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,564) scale(1,-1)">Kaplan-Meier estimate</text>
+			<path d="M 110,70 L 645.5,70" style="stroke: rgb(40%,40%,36%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 110,70 L 110,248.5" style="stroke: rgb(40%,40%,36%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 110,240 L 280,240" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 280,240 L 280,211.666667" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 280,211.666667 L 450,211.666667" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 450,211.666667 L 450,176.25" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 450,176.25 L 620,176.25" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<path d="M 620,176.25 L 620,123.125" style="stroke: rgb(0%,47%,30%); stroke-linecap: butt; stroke-width: 3;"/>
+			<text x="229.475" y="223.66666666666669" style="font-family: Helvetica; font-size: 15px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,447) scale(1,-1)">83.3%</text>
+			<text x="399.475" y="188.25" style="font-family: Helvetica; font-size: 15px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,376) scale(1,-1)">62.5%</text>
+			<text x="569.475" y="135.125" style="font-family: Helvetica; font-size: 15px;fill: rgb(0%,47%,30%); stroke:none;" transform="translate(0,270) scale(1,-1)">31.3%</text>
+			<path d="M 360,206.666667 L 370,216.666667" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 360,216.666667 L 370,206.666667" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 530,171.25 L 540,181.25" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 530,181.25 L 540,171.25" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 615,118.125 L 625,128.125" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<path d="M 615,128.125 L 625,118.125" style="stroke: rgb(44%,34%,72%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="75.77" y="65" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,130) scale(1,-1)">0%</text>
+			<text x="67.986" y="150.0" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,300) scale(1,-1)">50%</text>
+			<text x="60.202" y="235" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,470) scale(1,-1)">100%</text>
+			<text x="106.108" y="45" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,90) scale(1,-1)">0</text>
+			<text x="191.108" y="45" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,90) scale(1,-1)">1</text>
+			<text x="276.108" y="45" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,90) scale(1,-1)">2</text>
+			<text x="361.108" y="45" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,90) scale(1,-1)">3</text>
+			<text x="446.108" y="45" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,90) scale(1,-1)">4</text>
+			<text x="531.108" y="45" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,90) scale(1,-1)">5</text>
+			<text x="616.108" y="45" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,90) scale(1,-1)">6</text>
+			<text x="30" y="15" style="font-family: Helvetica; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,30) scale(1,-1)">At risk just before the cancellations: 6 at month 2; 4 at month 4; 2 at month 6.</text>
+		</g>
+	</g>
+</svg>

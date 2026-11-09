@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decision-focused fitting and regret explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Fit the same one-parameter predictor using MSE or decision regret. Every candidate and
+      feasible subset is evaluated exactly. These are fits to one fictional training case, not
+      held-out performance.
+    </p>
+    <form aria-label="Decision-focused fitting settings">
+      <div>
+        <label for="budget">Capacity budget</label
+        ><select id="budget">
+          <option value="2">2 units</option>
+          <option value="3">3 units</option>
+          <option value="4" selected>4 units</option>
+          <option value="5">5 units</option>
+          <option value="6">6 units</option>
+          <option value="7">7 units</option>
+        </select>
+      </div>
+      <div>
+        <label for="benefit-a">Observed benefit A · needs 2 units</label
+        ><input id="benefit-a" type="number" min="0" max="30" step="1" value="6" required />
+      </div>
+      <div>
+        <label for="benefit-b">Observed benefit B · needs 2 units</label
+        ><input id="benefit-b" type="number" min="0" max="30" step="1" value="5" required />
+      </div>
+      <div>
+        <label for="benefit-c">Observed benefit C · needs 3 units</label
+        ><input id="benefit-c" type="number" min="0" max="30" step="1" value="10" required />
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite" aria-atomic="true"></output>
+    <svg role="img" aria-label="Prediction-error fitting and decision-regret fitting"></svg>
+    <div class="history">
+      <table>
+        <caption>
+          Observed and fitted benefits
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Job</th>
+            <th scope="col">Observed</th>
+            <th scope="col">MSE fit</th>
+            <th scope="col">Regret fit</th>
+          </tr>
+        </thead>
+        <tbody id="predictions"></tbody>
+      </table>
+    </div>
+    <details>
+      <summary>All 21 fitted candidates</summary>
+      <p>
+        The selected parameters minimize their respective training objective. Equal objective values
+        choose the smaller θ.
+      </p>
+      <div class="history">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">θ</th>
+              <th scope="col">MSE</th>
+              <th scope="col">Chosen jobs</th>
+              <th scope="col">Regret</th>
+            </tr>
+          </thead>
+          <tbody id="candidates"></tbody>
+        </table>
+      </div>
+    </details>
+    <details>
+      <summary>Exact model, solver, and assumptions</summary>
+      <p>
+        The predictor is [5.5 + θ, 4.5 + θ, 10.5 + 1.5θ]. The fitting grid is θ = 0, 0.1, …, 2.0.
+        MSE is the mean squared error across all three observed benefits. These scores are a
+        deliberately limited family; neither fit is guaranteed to reproduce the observed values.
+      </p>
+      <p>
+        Jobs require [2, 2, 3] capacity units. Each job is indivisible, benefits add, and not
+        spending all capacity is allowed. The solver enumerates all eight subsets, discards those
+        over budget, and maximizes the sum of predicted benefits. For ties within 0.000000001 it
+        prefers fewer jobs, then alphabetical subset order.
+      </p>
+      <p>
+        Regret is the best true feasible benefit minus the true benefit of the action selected from
+        predictions. The reference optimum is computed using observed benefits with the same
+        constraints. Observed benefits score candidates during fitting; they are not passed into the
+        predicted-benefit decision rule.
+      </p>
+      <p>
+        The displayed benefits are complete labels for every job. There are no hidden
+        counterfactuals, uncertain capacities, job interactions, approximate solves, or held-out
+        examples. No neural optimizer, relaxation, or SPO+ surrogate is simulated. Changing an input
+        refits both objectives.
+      </p>
+    </details>
+    <script>
+      const costs = [2, 2, 3];
+      const names = ['A', 'B', 'C'];
+      const grid = Array.from({ length: 21 }, (_, i) => i / 10);
+      const tolerance = 1e-9;
+      const form = document.querySelector('form');
+      const chart = document.querySelector('svg');
+      const output = document.querySelector('output');
+      let fitted;
+      function predict(theta) {
+        return [5.5 + theta, 4.5 + theta, 10.5 + 1.5 * theta];
+      }
+      function subsets(budget) {
+        return Array.from({ length: 8 }, (_, mask) => {
+          const ids = costs.flatMap((_, i) => (mask & (1 << i) ? [i] : []));
+          return { mask, ids, cost: ids.reduce((sum, i) => sum + costs[i], 0) };
+        }).filter((item) => item.cost <= budget);
+      }
+      function solve(values, budget) {
+        let best;
+        for (const subset of subsets(budget)) {
+          const value = subset.ids.reduce((sum, i) => sum + values[i], 0);
+          if (
+            !best ||
+            value > best.value + tolerance ||
+            (Math.abs(value - best.value) <= tolerance &&
+              (subset.ids.length < best.ids.length ||
+                (subset.ids.length === best.ids.length && subset.mask < best.mask)))
+          )
+            best = { ...subset, value };
+        }
+        return best;
+      }
+      function evaluate(theta, truth, budget, optimum) {
+        const prediction = predict(theta);
+        const action = solve(prediction, budget);
+        const benefit = action.ids.reduce((sum, i) => sum + truth[i], 0);
+        const mse = prediction.reduce((sum, v, i) => sum + (v - truth[i]) ** 2, 0) / 3;
+        return { theta, prediction, action, benefit, mse, regret: optimum - benefit };
+      }
+      function fitBoth(truth, budget) {
+        const oracle = solve(truth, budget);
+        const candidates = grid.map((theta) => evaluate(theta, truth, budget, oracle.value));
+        const best = (key) => candidates.reduce((a, b) => (b[key] < a[key] - tolerance ? b : a));
+        return {
+          truth: [...truth],
+          budget,
+          oracle,
+          candidates,
+          mseFit: best('mse'),
+          decisionFit: best('regret'),
+        };
+      }
+      function actionName(action) {
+        return action.ids.length ? action.ids.map((i) => names[i]).join(' + ') : 'None';
+      }
+      function node(tag, attrs, value) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val));
+        if (value !== undefined) el.textContent = value;
+        return el;
+      }
+      function draw(result) {
+        const narrow = innerWidth < 500;
+        chart.replaceChildren();
+        chart.setAttribute('viewBox', narrow ? '0 0 328 480' : '0 0 680 240');
+        chart.append(node('title', {}, 'Two fits to the same predictor family and training case'));
+        chart.append(
+          node(
+            'desc',
+            {},
+            'Both fits solve the same exact capacity problem. Bars show the true benefit of the action chosen from predictions, relative to the best true feasible benefit.',
+          ),
+        );
+        for (const [i, model] of [result.mseFit, result.decisionFit].entries()) {
+          const group = node('g', {
+            transform: 'translate(' + (narrow ? 0 : i * 352) + ',' + (narrow ? i * 240 : 0) + ')',
+          });
+          chart.append(group);
+          group.append(
+            node('rect', { width: 328, height: 230, rx: 8, fill: 'var(--panel, #f1f2ef)' }),
+          );
+          const text = (y, size, value, bold = false) =>
+            group.append(
+              node(
+                'text',
+                {
+                  x: 12,
+                  y,
+                  'font-size': size,
+                  'font-family': 'system-ui, sans-serif',
+                  'font-weight': bold ? 700 : 400,
+                  fill: 'var(--ink, #252c28)',
+                },
+                value,
+              ),
+            );
+          text(29, 19, i ? 'Fit for decision regret' : 'Fit for prediction MSE', true);
+          text(56, 16, 'Selected θ: ' + model.theta.toFixed(1));
+          text(82, 16, 'Prediction MSE: ' + model.mse.toFixed(4));
+          text(111, 18, 'Choose: ' + actionName(model.action), true);
+          text(141, 18, 'True benefit: ' + model.benefit, true);
+          text(169, 18, 'Regret: ' + model.regret, true);
+          group.append(
+            node('rect', { x: 12, y: 190, width: 304, height: 20, fill: 'var(--line, #a6aca3)' }),
+          );
+          group.append(
+            node('rect', {
+              x: 12,
+              y: 190,
+              width: (304 * model.benefit) / (result.oracle.value || 1),
+              height: 20,
+              fill: i ? 'var(--accent, #00855b)' : '#8c938b',
+            }),
+          );
+        }
+      }
+      function addRow(tbody, values) {
+        const row = document.createElement('tr');
+        for (const value of values) {
+          const td = document.createElement('td');
+          td.textContent = String(value);
+          row.append(td);
+        }
+        tbody.append(row);
+      }
+      function configure() {
+        const table = document.querySelector('#predictions'),
+          candidates = document.querySelector('#candidates');
+        table.replaceChildren();
+        candidates.replaceChildren();
+        chart.replaceChildren();
+        if (!form.checkValidity()) {
+          fitted = undefined;
+          output.textContent = 'Enter whole observed benefits from 0 to 30 for all three jobs.';
+          return;
+        }
+        const truth = ['a', 'b', 'c'].map((name) =>
+          Number(document.querySelector('#benefit-' + name).value),
+        );
+        fitted = fitBoth(truth, Number(document.querySelector('#budget').value));
+        output.textContent =
+          '21 candidates fitted · ' +
+          subsets(fitted.budget).length +
+          ' feasible subsets. Best true benefit: ' +
+          fitted.oracle.value +
+          '. Training regret — MSE fit: ' +
+          fitted.mseFit.regret +
+          '; decision fit: ' +
+          fitted.decisionFit.regret +
+          '.';
+        draw(fitted);
+        names.forEach((name, i) =>
+          addRow(table, [
+            name,
+            truth[i],
+            fitted.mseFit.prediction[i].toFixed(2),
+            fitted.decisionFit.prediction[i].toFixed(2),
+          ]),
+        );
+        fitted.candidates.forEach((model) =>
+          addRow(candidates, [
+            model.theta.toFixed(1),
+            model.mse.toFixed(4),
+            actionName(model.action),
+            model.regret,
+          ]),
+        );
+      }
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('input', configure);
+      form.addEventListener('change', configure);
+      document.querySelector('#reset').addEventListener('click', () => {
+        form.reset();
+        configure();
+      });
+      window.addEventListener('resize', () => {
+        if (fitted) draw(fitted);
+      });
+      configure();
+    </script>
+  </body>
+</html>

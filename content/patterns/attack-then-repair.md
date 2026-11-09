@@ -14,259 +14,72 @@ verses:
   - ai-usage
 ---
 
-An LLM can make an idea sound good remarkably quickly.
+An AI produces a persuasive proposal. The argument flows, the plan has sensible steps, and the conclusion sounds confident. You ask it to improve the answer, and it returns a more polished version. The assumptions remain untouched.
 
-Give it a proposed architecture and it can explain why the architecture is sensible. Give it a business idea and it can articulate its advantages. Give it an argument and it can make the argument clearer and more persuasive.
+A different follow-up changes the task: “Find a concrete situation in which this would fail.” Now the conversation can expose a weakness instead of elaborating the same proposal.
 
-This fluency creates a particular danger: **plausibility can arrive before robustness**.
+Making review a separate phase is useful both for challenging an idea and for auditing a finished artifact against specific requirements.
 
-Once an answer sounds coherent, it becomes tempting to refine its presentation rather than challenge its substance.
+## The core idea
 
-A useful counter-pattern is to make criticism a distinct phase.
+Separate construction, review, and repair. First make something coherent enough to inspect. Then examine it for concrete weaknesses. Finally, address the findings while preserving the qualities that made the original worth pursuing.
 
-First propose.
+The sequence is **propose → attack or audit → repair → check again**. “Attack” means testing a proposal against counterexamples and failure scenarios. An audit can be quieter: checking factual support, completeness, consistency, accessibility, or compliance with an agreed brief.
 
-Then attack.
-
-Then repair.
+Each review pass needs a purpose. Finding an unsupported claim is a different job from checking whether the main action is easy to discover. Separate those lenses when combining them would make findings vague or difficult to act on.
 
 ![A loop moves from Propose to Attack to Repair to Test again. Preserve the valuable core stays at the center.](/diagrams/ai-usage/attack-then-repair.svg "Separate construction, criticism, and repair. Test again while preserving the valuable core.")
 
-## Why criticism should come after construction
+## Why it works
 
-If criticism is introduced too early, it can suppress useful ideas.
+A request to create a convincing answer and a request to find weaknesses have different objectives. Giving review its own prompt makes the criterion explicit and gives you a separate set of findings to assess before anything is rewritten.
 
-Ask a model to devise “an innovative but realistic product idea with no major flaws,” and the constraints fight each other during generation. The result may be safe but uninspired.
+Focused passes also support comparison. A factual audit can identify a claim, its source, and a mismatch. A completeness pass can identify a requirement and where the artifact fails to meet it. Those are more inspectable than a general verdict that the work “looks good.”
 
-Instead:
+Research provides qualified support for iterative feedback: [Self-Refine](https://arxiv.org/abs/2303.17651) reported improvements on its evaluated tasks. However, [research on intrinsic reasoning self-correction](https://arxiv.org/abs/2310.01798) found failures and sometimes worse results without external feedback. These studies do not establish that repeated review by the same model reliably verifies arbitrary work. Sources, tests, and human judgment remain important.
 
-> Propose a bold solution.
+## How to use it
 
-Then:
+Choose the lens from the consequences of being wrong. For a consequential proposal, ask for concrete failure scenarios. For a finished article, start with the brief and the supplied sources.
 
-> Now assume this solution fails. Find the strongest reasons it could fail.
+> Audit this draft for factual support. For each finding, quote the relevant claim, identify the source passage or missing evidence, and explain the mismatch. Do not rewrite yet. Do not invent findings to reach a quota.
 
-Then:
+A separate pass might ask:
 
-> Revise the solution to address the most serious weaknesses without losing the qualities that made the original attractive.
+> Check whether every requirement in the brief is satisfied. Identify omissions with their location and consequence. Keep style preferences separate from unmet requirements.
 
-Each phase has a different objective.
+Triage the findings before repair. Some are valid, some are speculative, and some reflect criteria you did not choose. Revise the supported findings, then recheck the affected parts and any essential properties that could have changed.
 
-Generation tries to build.
+Changing the model or starting a fresh conversation can introduce another perspective, but neither makes the review independent evidence. Give the reviewer the actual artifact and relevant materials.
 
-Attack tries to break.
+## A worked example
 
-Repair tries to preserve value while reducing fragility.
+Lea asks an AI to draft an event information page from an organizer's notes. The result reads well, and a general review returns minor wording suggestions. Before publishing, she runs a focused completeness pass against the notes.
 
-This is different from simply asking:
+The audit identifies that the page gives the date and location but omits the cancellation deadline. It also claims that access instructions are missing, although they appear under a different heading. Lea accepts the first finding and rejects the second after checking the page.
 
-> Improve your answer.
+Next, she requests a factual pass using the organizer's notes. It flags “free admission” because the notes specify free entry for members and a fee for guests. A final pass checks whether a first-time visitor can find the booking action and understand what happens after submitting it.
 
-“Improve” provides no mechanism. Attack and repair provide a process.
+Lea asks for repairs that preserve the concise introduction and the existing booking route. The revised page restores the deadline and corrects the admission statement. She compares the changed passages with the notes and opens the booking form to check its actual behavior.
 
-## Attack the strongest version
+The audit passes have produced concrete corrections, but one also produced a false alarm. The useful outcome comes from connecting findings to evidence and checking the repairs, rather than counting passes or accepting every objection.
 
-Good criticism is not random negativity.
+For a design proposal, the same pattern might expose offline conflicts or an unsupported assumption about user behavior. Repair could preserve the design's main advantage while adding a recovery path or testing the assumption with a small trial.
 
-Suppose the model proposes using a local-first architecture for a collaborative application.
+## When it helps—and where it falls short
 
-A superficial attack might say:
+Use separate review when errors can hide behind fluency, when several criteria matter, or when the work is consequential enough to justify another pass. Writing, research synthesis, plans, designs, and code can all benefit from a suitable lens.
 
-> Synchronization could be complicated.
+Avoid ceremonial criticism: generic caveats, arbitrary issue quotas, and endless requests to “be more critical.” A useful finding changes a decision, identifies a mismatch, or leads to a check. A confident objection can be wrong too.
 
-True, but not especially useful.
+Repeated passes can introduce regressions or consume time without adding evidence. Stop when the relevant criteria have been checked, material findings have been addressed, and remaining uncertainty is explicit. A minor task may need one quick review; a complex artifact may need several different checks.
 
-A stronger attack asks:
-
-- What happens when two devices modify the same object offline?
-- Which data types cannot be merged automatically?
-- What happens if migrations occur while a client has been offline for six months?
-- What consistency guarantees are users actually expecting?
-- Which operations become dangerous if authorization is checked only after synchronization?
-
-Now the critique generates design information.
-
-The point is not to produce objections for their own sake.
-
-It is to search for **failure modes that would change the design**.
-
-## Role reversal can help
-
-One way to strengthen the attack phase is to deliberately switch perspective.
-
-After writing a proposal:
-
-> Review this as a skeptical security engineer.
-
-or:
-
-> Review this as the maintainer who will inherit the system in two years.
-
-or:
-
-> Review this from the perspective of a new user encountering it for the first time.
-
-Different perspectives reveal different failure surfaces.
-
-A founder may notice strategic weakness.
-
-A support agent may notice operational complexity.
-
-A user may notice confusing assumptions.
-
-A database engineer may notice consistency problems.
-
-You do not need theatrical role-playing. The useful part is selecting an adversarial lens that exposes information the original perspective tends to ignore.
-
-## Attack assumptions, not only implementations
-
-Some of the most valuable critiques happen one level above the proposed solution.
-
-Suppose you ask for a feature that automatically categorizes every incoming note.
-
-The model designs a sophisticated classification system.
-
-Attack could focus on accuracy, latency, taxonomy drift, or model costs.
-
-But a deeper challenge might be:
-
-> Why does every note need a category at all?
-
-Perhaps the feature solves the wrong problem.
-
-This is why a strong attack phase looks at several layers:
-
-- **execution:** can this actually work?
-- **failure:** what happens when it goes wrong?
-- **assumptions:** what must be true for this to be useful?
-- **incentives:** how might people respond differently than expected?
-- **edge cases:** where does the model break?
-- **alternatives:** is there a simpler way to achieve the same goal?
-
-The attack phase is most valuable when it is allowed to challenge the frame, not merely polish implementation details.
-
-## Repair is not replacement
-
-After criticism, there is a temptation to discard the original idea entirely.
-
-That is often wasteful.
-
-A proposal usually contains something valuable, or it would not have survived the generation phase.
-
-Repair asks:
-
-> Which weaknesses are fundamental, and which can be addressed while preserving the core advantage?
-
-Suppose a proposed interface relies heavily on keyboard shortcuts. The attack phase reveals that new users may never discover them.
-
-Replacement might remove keyboard shortcuts.
-
-Repair might preserve them while adding discoverability: contextual hints, a command palette, visible shortcut labels, and gradual onboarding.
-
-The resulting system keeps the original strength—speed for experienced users—while addressing the weakness.
-
-This connects closely to **Preserve the Invariants**.
-
-Repair works best when the model knows what qualities of the original solution should survive.
-
-## Don't ask the model to perform a ritual
-
-There is a common weak version of this pattern:
-
-> Critique your answer.
-
-The model dutifully produces three mild caveats:
-
-- it may require resources,
-- implementation details may vary,
-- more testing is needed.
-
-Nothing changes.
-
-The critique has become ceremonial.
-
-A better attack prompt creates stakes:
-
-> Identify three concrete scenarios in which this design would produce a bad outcome. At least one must challenge a core assumption rather than an implementation detail.
-
-Or:
-
-> Try to construct a counterexample that breaks the rule you proposed.
-
-Or:
-
-> What would make us regret this decision six months from now?
-
-These prompts force the critique toward consequences.
-
-## The attack should be proportional
-
-Not every task needs adversarial analysis.
-
-If you ask an LLM to write a birthday message, running a red-team phase is excessive.
-
-The pattern becomes valuable when errors are:
-
-- expensive,
-- hard to notice,
-- difficult to reverse,
-- likely to hide behind plausible reasoning,
-- or capable of propagating into later work.
-
-Architecture, strategy, important writing, research reasoning, product decisions, plans, and complex code are good candidates.
-
-The attack phase can also scale with stakes. A small decision might get one challenge. A consequential design might undergo several attack–repair cycles.
-
-## Iterating the loop
-
-The basic pattern is:
-
-**Propose → Attack → Repair**
-
-But it can repeat:
-
-**Propose → Attack → Repair → Re-attack → Repair**
-
-Each cycle should become more specific.
-
-The first attack might reveal structural weaknesses.
-
-The second can target the repaired areas.
-
-Eventually, additional attacks begin producing minor edge cases rather than meaningful changes. That is a useful stopping signal.
-
-The goal is not an unassailable solution. Such a thing rarely exists.
-
-The goal is a solution that has survived deliberate attempts to expose its weaknesses.
-
-## From agreeable assistant to thinking partner
-
-LLMs are often used in a conversational mode where the user proposes an idea and the model helps develop it.
-
-That collaboration feels productive because progress is visible.
-
-But development and validation are different activities.
-
-A model that only elaborates your ideas can become an extraordinarily sophisticated confirmation machine.
-
-The attack phase changes the relationship.
-
-You are no longer asking:
-
-> Can you help me make this idea work?
-
-You are also asking:
-
-> What would have to be true for this idea *not* to work?
-
-Only then do you return to construction.
-
-The result is not pessimism.
-
-It is better engineering of ideas.
+Preserve the valuable core during repair. Removing every distinctive feature can make a proposal easier to defend while making it less useful. Address the actual failure, then inspect whether the original purpose still survives.
 
 ## Related patterns
 
-- [[preserve-the-invariants|Preserve the Invariants]] — Keep the valuable core while addressing weaknesses.
-- [[run-a-premortem|Run a Premortem]] — Find concrete scenarios that would make the proposal fail.
-- [[prefer-the-smallest-useful-experiment|Prefer the Smallest Useful Experiment]] — Test the repaired proposal rather than relying only on critique.
+[[preserve-the-invariants|Preserve the Invariants]] — Keep the valuable core while addressing supported findings.
+
+[[run-a-premortem|Run a Premortem]] — Use concrete failure scenarios to challenge an untested proposal.
+
+[[work-in-inspectable-steps|Work in Inspectable Steps]] — Place review where its findings can steer subsequent work.

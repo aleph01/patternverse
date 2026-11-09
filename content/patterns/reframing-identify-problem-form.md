@@ -14,9 +14,23 @@ verses:
 attribution: "Original Patternverse adaptation inspired by Thomas Wedell-Wedellsborg, What's Your Problem? Not an official implementation."
 ---
 
-People bring problems in different shapes. “I feel stuck” is a pain point; “I want to work independently” is a goal; “I need a newsletter” is a proposed solution; “This API handles 300 requests per second but must handle 500” is closer to a specified performance problem. Identify the Problem Form notices the shape before choosing a thinking move. The labels are soft routing aids, not diagnoses or permanent categories.
+People bring problems in different shapes. “I feel stuck” is a pain point; “I want to work independently” is a goal; “I need a newsletter” is a proposed solution; “This API handles 300 requests per second but must handle 500” is closer to a specified performance problem.
+
+## Core idea
+
+Identify the Problem Form notices the shape before choosing a thinking move. The labels are soft routing aids, not diagnoses or permanent categories.
+
+Matching the next question to what the statement currently supplies avoids debating a remedy when the concern itself still needs description.
+
+## When to use it
+
+Use this pattern when a group talks past itself because one person is describing distress while another is debating a plan.
+
+## How it works
 
 A pain point usually needs a provisional statement of what is happening. A goal may need an examination of why it matters and which routes could reach it. A solution-first request benefits from recovering the need underneath. A well-specified problem may need a direct test or implementation rather than another round of abstract reframing. Many real statements mix forms, and that is useful information too.
+
+## Worked examples
 
 > **Pain point:** “I feel completely stuck in my career.”  
 > **Next frame:** “I am unsure which part of my current work feels limiting—learning, income, autonomy, or direction.”  
@@ -35,13 +49,15 @@ A pain point usually needs a provisional statement of what is happening. A goal 
 
 A mixed sentence might be “I am overwhelmed, so I need to quit my job.” It contains a painful experience and a proposed remedy. Treating it as only one category would miss the uncertainty: what is causing the overload, and what would quitting change?
 
-Use this pattern when a group talks past itself because one person is describing distress while another is debating a plan. The danger is making the classification more important than the person’s actual concern. If the statement is mixed or ambiguous, say so and choose a modest next question. [[reframing-frame-problem]] serves pain points, [[reframing-detect-baked-solution]] serves solution-first requests, and [[reframing-rethink-goal]] serves goals. The classification simply helps choose among them.
+## Pitfalls and limits
+
+The danger is making the classification more important than the person’s actual concern. If the statement is mixed or ambiguous, say so and choose a modest next question. [[reframing-frame-problem]] serves pain points, [[reframing-detect-baked-solution]] serves solution-first requests, and [[reframing-rethink-goal]] serves goals. The classification simply helps choose among them.
 
 ## Related patterns
 
-[[reframing-frame-problem]] · [[reframing-rethink-goal]] · [[reframing-detect-baked-solution]]
+[[reframing-frame-problem]] makes a pain point discussable. [[reframing-rethink-goal]] examines a target, while [[reframing-detect-baked-solution]] recovers the need inside a proposed remedy.
 
-## Source
+## Sources and attribution
 
 Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an original Patternverse procedure, not reproduced book text or an official implementation.
 
@@ -67,37 +83,37 @@ form = frame ?~ problem_form
     One tentative reading of this statement is {{form}}. A statement can fit more than one form; use this only to choose a useful next question.
 }
 ?match form {
-    :case pain -> pain
-    :case goal -> goal
-    :case solution -> solution
-    :case specified -> specified
-    :case mixed -> mixed
+  :case pain {
+    pain_frame = !use reframing.frame-problem {
+        :with problem = frame
+    }
+    candidate_frame = pain_frame.frame
+    -> end
+  }
+  :case goal {
+    goal_frame = !use reframing.rethink-goal {
+        :with frame
+    }
+    candidate_frame = goal_frame.candidate_frame
+    -> end
+  }
+  :case solution {
+    solution_frame = !use reframing.detect-baked-solution {
+        :with frame
+    }
+    candidate_frame = solution_frame.candidate_frame
+    -> end
+  }
+  :case specified {
+    candidate_frame = frame
+    -> end
+  }
+  :case mixed {
+    mixed_frame = !use reframing.frame-problem {
+        :with problem = frame
+    }
+    candidate_frame = mixed_frame.frame
+    -> end
+  }
 }
-pain:
-!use reframing.frame-problem as pain_frame {
-    :with problem = frame
-}
-= candidate_frame pain_frame.frame
--> end
-goal:
-!use reframing.rethink-goal as goal_frame {
-    :with frame
-}
-= candidate_frame goal_frame.candidate_frame
--> end
-solution:
-!use reframing.detect-baked-solution as solution_frame {
-    :with frame
-}
-= candidate_frame solution_frame.candidate_frame
--> end
-specified:
-= candidate_frame frame
--> end
-mixed:
-!use reframing.frame-problem as mixed_frame {
-    :with problem = frame
-}
-= candidate_frame mixed_frame.frame
--> end
 ```

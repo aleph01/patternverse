@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ensemble error patterns explorer</title>
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --line: #a6aca3;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        background: #fff;
+        color: var(--ink);
+        font:
+          16px/1.5 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      p {
+        margin: 0 0 16px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      form > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        display: block;
+      }
+      select,
+      button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin: 6px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      select {
+        margin-top: auto;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      :is(select, button, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin: 18px 0 12px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 12px 0;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 14px;
+        margin: 12px 0;
+      }
+      caption {
+        text-align: left;
+        font-size: 16px;
+        color: var(--ink);
+        padding: 8px 0;
+      }
+      th,
+      td {
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+        padding: 8px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      #ranking th:first-child {
+        width: 45%;
+      }
+      #vectors th:first-child {
+        width: 42%;
+      }
+      #history {
+        font-size: 13px;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 140px;
+        }
+      }
+
+      #records td:first-child,
+      #records th:first-child {
+        width: 18%;
+      }
+      #records td:last-child,
+      #records th:last-child {
+        width: 35%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Combine three invented forecasts for six cases. The scenarios change how errors align, not how
+      models are trained. The shared-error comparison keeps all three members identical.
+    </p>
+    <form>
+      <div>
+        <label for="scenario">Member error pattern</label
+        ><select id="scenario">
+          <option value="complementary">Complementary · opposing errors</option>
+          <option value="shared">Shared · identical forecasts</option>
+          <option value="poor">Poor member · C overpredicts</option>
+        </select>
+      </div>
+      <div>
+        <label for="method">Combination rule</label
+        ><select id="method">
+          <option value="mean">Equal mean · weights 1, 1, 1</option>
+          <option value="weighted">Weighted mean · weights 2, 1, 1</option>
+          <option value="median">Median · middle forecast</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <div id="mechanism"></div>
+    <p id="interpretation" class="note"></p>
+    <table id="metrics">
+      <caption>
+        Selected scenario · all errors measured in orders
+      </caption>
+      <thead>
+        <tr>
+          <th>Predictor</th>
+          <th>MAE</th>
+          <th>RMSE</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <details id="state">
+      <summary>Inspect predictions and the combination calculation</summary>
+      <p id="calculation"></p>
+      <table id="records">
+        <caption>
+          All six invented cases · predictions in orders
+        </caption>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Actual</th>
+            <th>A / B / C</th>
+            <th>Combined forecast / error</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p>
+        MAE averages absolute errors. RMSE first averages squared errors and then takes the square
+        root; it is also measured in orders. Both summaries use these same six fictional outcomes.
+        No fitted parameters or model-selection data are hidden behind the controls.
+      </p>
+    </details>
+    <details id="assumptions">
+      <summary>Assumptions and optional detail</summary>
+      <p>
+        Actual orders are 10, 20, 30, 40, 50, 60. Complementary signed errors are A (6, −6, 0, 6,
+        −6, 0), B (0, 6, −6, 0, 6, −6), C (−6, 0, 6, −6, 0, 6). In the shared scenario all three use
+        A's errors. In the poor-member scenario A and B have opposing ±2 errors, while C always has
+        error +30. Each forecast is the fictional actual plus its stipulated error. This
+        construction is for explanation, not a predictor allowed to access outcomes in deployment.
+      </p>
+      <p>
+        The equal mean adds forecasts and divides by three. The weighted mean computes (2A + B +
+        C)/4; its nonnegative weights are fixed, not learned here. Median sorts three forecasts and
+        takes the middle one. Neither method selects a member using the actual outcome. Fractional
+        orders are valid numerical forecasts; no rounding or clipping is applied before evaluation.
+      </p>
+      <p>
+        The drawing compares selected errors with the shared-error reference using the same rule.
+        Green highlights the combined row. Cell widths do not encode error magnitude; their signed
+        numbers show direction and size. The predictions and summaries are actually computed from
+        the stated fixtures, but no model training, population uncertainty, calibration, voting
+        classifier, forest or stack is simulated. Reset restores both inputs and closes optional
+        detail.
+      </p>
+    </details>
+    <script>
+      const actual = [10, 20, 30, 40, 50, 60];
+      const patterns = {
+        complementary: [
+          [6, -6, 0, 6, -6, 0],
+          [0, 6, -6, 0, 6, -6],
+          [-6, 0, 6, -6, 0, 6],
+        ],
+        shared: [
+          [6, -6, 0, 6, -6, 0],
+          [6, -6, 0, 6, -6, 0],
+          [6, -6, 0, 6, -6, 0],
+        ],
+        poor: [
+          [2, -2, 2, -2, 2, -2],
+          [-2, 2, -2, 2, -2, 2],
+          [30, 30, 30, 30, 30, 30],
+        ],
+      };
+      const methods = ['mean', 'weighted', 'median'];
+      const names = {
+        complementary: 'Different errors',
+        shared: 'Shared errors',
+        poor: 'Poor member',
+      };
+      const methodNames = { mean: 'Equal mean', weighted: 'Weighted mean', median: 'Median' };
+      const $ = (id) => document.getElementById(id);
+      const fmt = (n, d = 1) => n.toFixed(d);
+      const signed = (n) =>
+        Math.abs(n) < 1e-12 ? '0' : (n > 0 ? '+' : '−') + String(Number(Math.abs(n).toFixed(2)));
+      let report;
+      function dataset(scenario) {
+        if (!Object.hasOwn(patterns, scenario)) throw new Error('Unsupported scenario');
+        return actual.map((y, i) => ({
+          id: 'D' + (i + 1),
+          actual: y,
+          predictions: patterns[scenario].map((errors) => y + errors[i]),
+        }));
+      }
+      function combine(values, method) {
+        if (values.length !== 3 || values.some((v) => !Number.isFinite(v)))
+          throw new Error('Three finite predictions required');
+        if (method === 'mean') return values.reduce((a, b) => a + b, 0) / 3;
+        if (method === 'weighted') return (2 * values[0] + values[1] + values[2]) / 4;
+        if (method === 'median') return [...values].sort((a, b) => a - b)[1];
+        throw new Error('Unsupported rule');
+      }
+      function summarize(errors) {
+        return {
+          mae: errors.reduce((s, e) => s + Math.abs(e), 0) / errors.length,
+          rmse: Math.sqrt(errors.reduce((s, e) => s + e * e, 0) / errors.length),
+        };
+      }
+      function evaluate(scenario, method) {
+        const rows = dataset(scenario).map((row) => {
+          const prediction = combine(row.predictions, method);
+          return { ...row, prediction, error: prediction - row.actual };
+        });
+        const members = [0, 1, 2].map((i) =>
+          summarize(rows.map((row) => row.predictions[i] - row.actual)),
+        );
+        return { scenario, rows, members, combined: summarize(rows.map((row) => row.error)) };
+      }
+      function buildReport(scenario, method) {
+        if (!methods.includes(method)) throw new Error('Unsupported rule');
+        return {
+          scenario,
+          method,
+          selected: evaluate(scenario, method),
+          reference: evaluate('shared', method),
+        };
+      }
+      function mechanismGraphic(r, mobile) {
+        const width = mobile ? 328 : 680,
+          height = mobile ? 820 : 470;
+        const text = (x, y, s, size = 16, c = '#252c28') =>
+          `<text x="${x}" y="${y}" font-size="${size}" fill="${c}">${s}</text>`;
+        const line = (x1, y1, x2, y2) =>
+          `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#a6aca3"/>`;
+        let out = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Signed errors of three forecasts and their combination, compared with shared errors"><rect width="${width}" height="${height}" fill="#fff"/><g font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="400">`;
+        out +=
+          text(0, 24, 'Different mistakes can cancel', mobile ? 18 : 21) +
+          text(0, 51, 'Signed error = forecast − actual', 15, '#626962') +
+          text(0, 78, methodNames[r.method] + ' · six invented cases', 15);
+        const panel = (data, x, y, label) => {
+          let s = text(x, y, label, 19);
+          for (let i = 0; i < 6; i++)
+            s += text(x + 78 + i * 38, y + 32, String(i + 1), 13, '#626962');
+          for (let m = 0; m < 4; m++) {
+            const rowY = y + 46 + (m < 3 ? m * 43 : 3 * 43 + 10),
+              green = m === 3,
+              c = green ? '#00855b' : '#252c28';
+            s += text(x, rowY + 22, green ? 'Blend' : ['A', 'B', 'C'][m], 16, c);
+            for (let i = 0; i < 6; i++) {
+              const error = green
+                ? data.rows[i].error
+                : data.rows[i].predictions[m] - data.rows[i].actual;
+              s += `<rect x="${x + 68 + i * 38}" y="${rowY}" width="32" height="32" fill="${green ? '#edf5f0' : '#f1f2ef'}" stroke="${green ? '#00855b' : '#a6aca3'}"/><text x="${x + 84 + i * 38}" y="${rowY + 22}" text-anchor="middle" font-size="14" fill="${c}">${signed(error)}</text>`;
+            }
+          }
+          s += text(x, y + 265, `Combined MAE ${fmt(data.combined.mae)} orders`, 17, '#00855b');
+          s += text(
+            x,
+            y + 292,
+            `Member MAE: ${data.members.map((m) => fmt(m.mae)).join(' / ')}`,
+            14,
+            '#626962',
+          );
+          return s;
+        };
+        out += line(0, 98, width, 98);
+        if (mobile) {
+          out +=
+            panel(r.selected, 0, 128, names[r.scenario]) +
+            line(0, 444, 328, 444) +
+            panel(r.reference, 0, 477, 'Shared-error reference');
+        } else {
+          out +=
+            panel(r.selected, 0, 135, names[r.scenario]) +
+            line(337, 120, 337, 433) +
+            panel(r.reference, 355, 135, 'Shared-error reference');
+        }
+        out += text(
+          0,
+          mobile ? 805 : 459,
+          'Columns are cases · green row is the combination',
+          mobile ? 12 : 14,
+          '#626962',
+        );
+        return out + '</g></svg>';
+      }
+      function render() {
+        report = buildReport($('scenario').value, $('method').value);
+        document.querySelector('output').textContent =
+          `${methodNames[report.method]}: MAE ${fmt(report.selected.combined.mae)} orders; best member MAE ${fmt(Math.min(...report.selected.members.map((m) => m.mae)))} orders. Six fictional cases only.`;
+        $('mechanism').innerHTML = mechanismGraphic(report, innerWidth <= 520);
+        $('interpretation').textContent =
+          report.scenario === 'complementary'
+            ? 'Opposing errors cancel under equal averaging here. Giving A extra weight leaves some of its error in the result. Exact cancellation was constructed; it is not a generalization claim.'
+            : report.scenario === 'shared'
+              ? 'All three members make the same prediction on each case. Their combination preserves those errors under every offered rule.'
+              : 'One consistently high member pulls the means upward. The median limits this particular outlier, but does not improve on the better members.';
+        $('metrics').querySelector('tbody').innerHTML = [
+          ...report.selected.members.map((m, i) => ({ name: ['A', 'B', 'C'][i], ...m })),
+          { name: 'Combined', ...report.selected.combined },
+        ]
+          .map(
+            (m) =>
+              `<tr><th scope="row">${m.name}</th><td>${fmt(m.mae, 3)}</td><td>${fmt(m.rmse, 3)}</td></tr>`,
+          )
+          .join('');
+        const first = report.selected.rows[0],
+          v = first.predictions;
+        $('calculation').textContent =
+          report.method === 'median'
+            ? `Case D1: sort ${v.join(', ')} to get ${[...v].sort((a, b) => a - b).join(', ')}; the middle forecast is ${fmt(first.prediction)} orders.`
+            : report.method === 'mean'
+              ? `Case D1: (${v.join(' + ')}) / 3 = ${fmt(first.prediction)} orders.`
+              : `Case D1: (2 × ${v[0]} + ${v[1]} + ${v[2]}) / 4 = ${fmt(first.prediction)} orders.`;
+        $('records').querySelector('tbody').innerHTML = report.selected.rows
+          .map(
+            (row) =>
+              `<tr><th scope="row">${row.id}</th><td>${row.actual}</td><td>${row.predictions.join(' / ')}</td><td>${fmt(row.prediction)} / ${signed(row.error)}</td></tr>`,
+          )
+          .join('');
+      }
+      function reset() {
+        $('scenario').value = 'complementary';
+        $('method').value = 'mean';
+        for (const d of document.querySelectorAll('details')) d.open = false;
+        render();
+      }
+      for (const id of ['scenario', 'method']) $(id).addEventListener('change', render);
+      $('reset').addEventListener('click', reset);
+      document.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+      window.addEventListener('resize', render);
+      render();
+    </script>
+  </body>
+</html>

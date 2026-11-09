@@ -1,0 +1,90 @@
+<svg width="720" height="790" preserveAspectRatio="xMinYMin meet" viewBox="0 0 720 790" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Random, future, and new-worker partitions</title><desc>Training partitions preserve eight worker-month records. Random-row MAE is 1, future-month MAE 2, and held-out-worker MAE 20. Each split evaluates a different information boundary.</desc>
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="720" height="790"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-790)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="720" height="790" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,98%,96%); fill-rule: evenodd;"/>
+			<text x="30" y="755" style="font-family: Helvetica-Bold; font-size: 25px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1510) scale(1,-1)">Keep the information boundary</text>
+			<text x="30" y="712.0" style="font-family: Helvetica; font-size: 15px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1424) scale(1,-1)">The same eight records; one training-only prediction rule.</text>
+			<text x="30" y="645" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1290) scale(1,-1)">Random rows</text>
+			<text x="30" y="618" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1236) scale(1,-1)">Mean absolute error: 1.0</text>
+			<text x="233.5155" y="589" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1178) scale(1,-1)">Month 1</text>
+			<text x="345.5155" y="589" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1178) scale(1,-1)">Month 2</text>
+			<text x="457.5155" y="589" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1178) scale(1,-1)">Month 3</text>
+			<text x="569.5155" y="589" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,1178) scale(1,-1)">Month 4</text>
+			<text x="150" y="560" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1120) scale(1,-1)">A</text>
+			<rect x="205" y="550" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="249.216" y="559" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1118) scale(1,-1)">10</text>
+			<rect x="317" y="550" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="361.216" y="559" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1118) scale(1,-1)">11</text>
+			<rect x="429" y="550" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="473.216" y="559" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1118) scale(1,-1)">12</text>
+			<rect x="541" y="550" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="585.216" y="559" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1118) scale(1,-1)">13</text>
+			<text x="150" y="522" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,1044) scale(1,-1)">B</text>
+			<rect x="205" y="512" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="249.216" y="521" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1042) scale(1,-1)">30</text>
+			<rect x="317" y="512" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="361.216" y="521" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1042) scale(1,-1)">31</text>
+			<rect x="429" y="512" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="473.216" y="521" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1042) scale(1,-1)">32</text>
+			<rect x="541" y="512" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="585.216" y="521" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1042) scale(1,-1)">33</text>
+			<text x="30" y="435" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,870) scale(1,-1)">Future months</text>
+			<text x="30" y="408" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,816) scale(1,-1)">Mean absolute error: 2.0</text>
+			<text x="233.5155" y="379" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,758) scale(1,-1)">Month 1</text>
+			<text x="345.5155" y="379" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,758) scale(1,-1)">Month 2</text>
+			<text x="457.5155" y="379" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,758) scale(1,-1)">Month 3</text>
+			<text x="569.5155" y="379" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,758) scale(1,-1)">Month 4</text>
+			<text x="150" y="350" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,700) scale(1,-1)">A</text>
+			<rect x="205" y="340" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="249.216" y="349" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,698) scale(1,-1)">10</text>
+			<rect x="317" y="340" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="361.216" y="349" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,698) scale(1,-1)">11</text>
+			<rect x="429" y="340" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="473.216" y="349" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,698) scale(1,-1)">12</text>
+			<rect x="541" y="340" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="585.216" y="349" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,698) scale(1,-1)">13</text>
+			<text x="150" y="312" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,624) scale(1,-1)">B</text>
+			<rect x="205" y="302" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="249.216" y="311" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,622) scale(1,-1)">30</text>
+			<rect x="317" y="302" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="361.216" y="311" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,622) scale(1,-1)">31</text>
+			<rect x="429" y="302" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="473.216" y="311" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,622) scale(1,-1)">32</text>
+			<rect x="541" y="302" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="585.216" y="311" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,622) scale(1,-1)">33</text>
+			<text x="30" y="225" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,450) scale(1,-1)">New worker</text>
+			<text x="30" y="198" style="font-family: Helvetica; font-size: 14px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,396) scale(1,-1)">Mean absolute error: 20.0</text>
+			<text x="233.5155" y="169" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,338) scale(1,-1)">Month 1</text>
+			<text x="345.5155" y="169" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,338) scale(1,-1)">Month 2</text>
+			<text x="457.5155" y="169" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,338) scale(1,-1)">Month 3</text>
+			<text x="569.5155" y="169" style="font-family: Helvetica; font-size: 13px;fill: rgb(40%,40%,36%); stroke:none;" transform="translate(0,338) scale(1,-1)">Month 4</text>
+			<text x="150" y="140" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,280) scale(1,-1)">A</text>
+			<rect x="205" y="130" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="249.216" y="139" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,278) scale(1,-1)">10</text>
+			<rect x="317" y="130" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="361.216" y="139" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,278) scale(1,-1)">11</text>
+			<rect x="429" y="130" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="473.216" y="139" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,278) scale(1,-1)">12</text>
+			<rect x="541" y="130" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="585.216" y="139" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,278) scale(1,-1)">13</text>
+			<text x="150" y="102" style="font-family: Helvetica-Bold; font-size: 15px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,204) scale(1,-1)">B</text>
+			<rect x="205" y="92" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="249.216" y="101" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,202) scale(1,-1)">30</text>
+			<rect x="317" y="92" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="361.216" y="101" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,202) scale(1,-1)">31</text>
+			<rect x="429" y="92" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="473.216" y="101" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,202) scale(1,-1)">32</text>
+			<rect x="541" y="92" width="104" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="585.216" y="101" style="font-family: Helvetica; font-size: 14px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,202) scale(1,-1)">33</text>
+			<rect x="30" y="40" width="18" height="13" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(0%,47%,30%); fill-rule: evenodd;"/>
+			<text x="56" y="40" style="font-family: Helvetica; font-size: 14px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,80) scale(1,-1)">Training</text>
+			<rect x="260" y="40" width="18" height="13" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(44%,34%,72%); fill-rule: evenodd;"/>
+			<text x="286" y="40" style="font-family: Helvetica; font-size: 14px;fill: rgb(9%,9%,7%); stroke:none;" transform="translate(0,80) scale(1,-1)">Held out</text>
+		</g>
+	</g>
+</svg>

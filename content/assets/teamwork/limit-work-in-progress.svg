@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1000" viewBox="0 0 1280 1000" role="img" aria-labelledby="title desc">
+<title id="title">Limit Work in Progress: finish earlier with the same effort</title>
+<desc id="desc">Hypothetical comparison of one editor producing three guides. Every guide needs three equal work blocks; all requests arrive before block one. Alternating among guides completes A, B, and C at blocks seven, eight, and nine. Finishing one guide before starting the next completes them at blocks three, six, and nine. Both schedules use nine blocks with no switching penalty. Solid blocks are active work, diagonal hatching is waiting after starting, dots are waiting before starting, and a dash means already delivered. The first two guides arrive earlier with a WIP limit of one; the last finishes at the same time.</desc>
+<defs>
+ <pattern id="waiting" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#edf0f2"/><path d="M-2 2L2 -2M0 9L9 0M7 11L11 7" stroke="#8b97a1" stroke-width="1.3"/></pattern>
+ <pattern id="queued" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#f3f6fa"/><circle cx="5" cy="5" r="1.1" fill="#94a2b3"/></pattern>
+</defs>
+<style>text {font-family:Arial,Helvetica,sans-serif;fill:#152c39} .muted {fill:#4d626f} .small {font-size:17px} .body {font-size:20px} .label {font-size:21px;font-weight:700} .active {fill:#ffffff;font-size:20px;font-weight:700}</style>
+<rect width="1280" height="1000" fill="#fafbf8"/>
+<text x="52" y="65" font-size="37" font-weight="700">Finish earlier with the same effort</text>
+<text x="52" y="105" class="body muted">One editor · Three guides · Three equal work blocks per guide</text>
+
+<rect x="52" y="136" width="30" height="24" rx="3" fill="#176e65" stroke="#80919b"/>
+<text x="94" y="155" class="small" >Working</text>
+<rect x="280" y="136" width="30" height="24" rx="3" fill="url(#waiting)" stroke="#80919b"/>
+<text x="322" y="155" class="small" >Started, waiting</text>
+<rect x="580" y="136" width="30" height="24" rx="3" fill="url(#queued)" stroke="#80919b"/>
+<text x="622" y="155" class="small" >Not started, queued</text>
+<text x="945" y="155" class="small" >—  Already delivered</text>
+<rect x="40" y="190" width="1200" height="295" rx="15" fill="#ffffff" stroke="#ccd6da"/>
+<text x="64" y="228" class="label" >Start three; alternate blocks</text>
+<text x="64" y="257" class="small muted" >Up to three guides started but unfinished</text>
+<text x="1010" y="284" class="small muted" >Delivered at</text>
+<text x="275" y="284" class="small muted" text-anchor="middle">1</text>
+<text x="351" y="284" class="small muted" text-anchor="middle">2</text>
+<text x="427" y="284" class="small muted" text-anchor="middle">3</text>
+<text x="503" y="284" class="small muted" text-anchor="middle">4</text>
+<text x="579" y="284" class="small muted" text-anchor="middle">5</text>
+<text x="655" y="284" class="small muted" text-anchor="middle">6</text>
+<text x="731" y="284" class="small muted" text-anchor="middle">7</text>
+<text x="807" y="284" class="small muted" text-anchor="middle">8</text>
+<text x="883" y="284" class="small muted" text-anchor="middle">9</text>
+<text x="64" y="331" class="label" >Guide A</text>
+<rect x="241" y="302" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="275" y="329" class="active" text-anchor="middle">1</text>
+<rect x="317" y="302" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="393" y="302" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="469" y="302" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="503" y="329" class="active" text-anchor="middle">2</text>
+<rect x="545" y="302" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="621" y="302" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="697" y="302" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="731" y="329" class="active" text-anchor="middle">3</text>
+<text x="807" y="329" class="body muted" text-anchor="middle">—</text>
+<text x="883" y="329" class="body muted" text-anchor="middle">—</text>
+<text x="1055" y="330" class="label" >Block 7</text>
+<text x="64" y="384" class="label" >Guide B</text>
+<rect x="241" y="355" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="317" y="355" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="351" y="382" class="active" text-anchor="middle">1</text>
+<rect x="393" y="355" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="469" y="355" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="545" y="355" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="579" y="382" class="active" text-anchor="middle">2</text>
+<rect x="621" y="355" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="697" y="355" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="773" y="355" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="807" y="382" class="active" text-anchor="middle">3</text>
+<text x="883" y="382" class="body muted" text-anchor="middle">—</text>
+<text x="1055" y="383" class="label" >Block 8</text>
+<text x="64" y="437" class="label" >Guide C</text>
+<rect x="241" y="408" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="317" y="408" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="393" y="408" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="427" y="435" class="active" text-anchor="middle">1</text>
+<rect x="469" y="408" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="545" y="408" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="621" y="408" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="655" y="435" class="active" text-anchor="middle">2</text>
+<rect x="697" y="408" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="773" y="408" width="68" height="39" rx="5" fill="url(#waiting)" stroke="#9eabb4"/>
+<rect x="849" y="408" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="883" y="435" class="active" text-anchor="middle">3</text>
+<text x="1055" y="436" class="label" >Block 9</text>
+<text x="64" y="468" class="small muted" >Work block →</text>
+<text x="460" y="468" class="small" >Average time from request to delivery: 8 blocks</text>
+<rect x="40" y="510" width="1200" height="295" rx="15" fill="#ffffff" stroke="#ccd6da"/>
+<text x="64" y="548" class="label" >Limit started work to one</text>
+<text x="64" y="577" class="small muted" >Finish each guide before starting the next</text>
+<text x="1010" y="604" class="small muted" >Delivered at</text>
+<text x="275" y="604" class="small muted" text-anchor="middle">1</text>
+<text x="351" y="604" class="small muted" text-anchor="middle">2</text>
+<text x="427" y="604" class="small muted" text-anchor="middle">3</text>
+<text x="503" y="604" class="small muted" text-anchor="middle">4</text>
+<text x="579" y="604" class="small muted" text-anchor="middle">5</text>
+<text x="655" y="604" class="small muted" text-anchor="middle">6</text>
+<text x="731" y="604" class="small muted" text-anchor="middle">7</text>
+<text x="807" y="604" class="small muted" text-anchor="middle">8</text>
+<text x="883" y="604" class="small muted" text-anchor="middle">9</text>
+<text x="64" y="651" class="label" >Guide A</text>
+<rect x="241" y="622" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="275" y="649" class="active" text-anchor="middle">1</text>
+<rect x="317" y="622" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="351" y="649" class="active" text-anchor="middle">2</text>
+<rect x="393" y="622" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="427" y="649" class="active" text-anchor="middle">3</text>
+<text x="503" y="649" class="body muted" text-anchor="middle">—</text>
+<text x="579" y="649" class="body muted" text-anchor="middle">—</text>
+<text x="655" y="649" class="body muted" text-anchor="middle">—</text>
+<text x="731" y="649" class="body muted" text-anchor="middle">—</text>
+<text x="807" y="649" class="body muted" text-anchor="middle">—</text>
+<text x="883" y="649" class="body muted" text-anchor="middle">—</text>
+<text x="1055" y="650" class="label" >Block 3</text>
+<text x="64" y="704" class="label" >Guide B</text>
+<rect x="241" y="675" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="317" y="675" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="393" y="675" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="469" y="675" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="503" y="702" class="active" text-anchor="middle">1</text>
+<rect x="545" y="675" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="579" y="702" class="active" text-anchor="middle">2</text>
+<rect x="621" y="675" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="655" y="702" class="active" text-anchor="middle">3</text>
+<text x="731" y="702" class="body muted" text-anchor="middle">—</text>
+<text x="807" y="702" class="body muted" text-anchor="middle">—</text>
+<text x="883" y="702" class="body muted" text-anchor="middle">—</text>
+<text x="1055" y="703" class="label" >Block 6</text>
+<text x="64" y="757" class="label" >Guide C</text>
+<rect x="241" y="728" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="317" y="728" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="393" y="728" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="469" y="728" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="545" y="728" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="621" y="728" width="68" height="39" rx="5" fill="url(#queued)" stroke="#b8c6d2"/>
+<rect x="697" y="728" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="731" y="755" class="active" text-anchor="middle">1</text>
+<rect x="773" y="728" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="807" y="755" class="active" text-anchor="middle">2</text>
+<rect x="849" y="728" width="68" height="39" rx="5" fill="#176e65"/>
+<text x="883" y="755" class="active" text-anchor="middle">3</text>
+<text x="1055" y="756" class="label" >Block 9</text>
+<text x="64" y="788" class="small muted" >Work block →</text>
+<text x="460" y="788" class="small" >Average time from request to delivery: 6 blocks</text>
+<text x="52" y="855" class="label" >Same nine work blocks. Earlier delivery of A and B. C finishes at the same time.</text>
+<text x="52" y="897" class="small muted" >Hypothetical illustration: all requests arrive before block 1; guides have equal value and effort.</text>
+<text x="52" y="926" class="small muted" >One editor works one block at a time; no dependencies, interruptions, or switching costs.</text>
+<text x="52" y="955" class="small muted" >Queued work remains visible. A limit of one illustrates this case; it is not a rule for every team.</text>
+</svg>

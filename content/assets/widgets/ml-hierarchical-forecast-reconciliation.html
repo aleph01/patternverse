@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hierarchical forecast reconciliation explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      #fits-table,
+      #data-table {
+        font-size: 13px;
+      }
+      #fits-table th:first-child {
+        width: 34%;
+      }
+      #fits-table th:nth-child(2) {
+        width: 22%;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        padding: 12px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font:
+          13px/1.6 ui-monospace,
+          monospace;
+      }
+      #weights-table,
+      #input-table,
+      #scores-table,
+      #agreement-table {
+        font-size: 13px;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Seven fictional forecasts describe the same next week. Reconcile them into one additive
+      hierarchy. These are fixed inputs, not a fitted forecasting model.
+    </p>
+    <form id="settings">
+      <div>
+        <label for="fixture">Base forecasts</label
+        ><select id="fixture">
+          <option value="disagree">Disagreeing forecasts</option>
+          <option value="coherent">Already coherent</option>
+          <option value="negative">Nonnegative base, negative solution</option>
+        </select>
+      </div>
+      <div>
+        <label for="method">Reconciliation method</label
+        ><select id="method">
+          <option value="bottom">Bottom-up</option>
+          <option value="ols" selected>Equal-weight least squares</option>
+          <option value="diagonal">Diagonal error weights</option>
+          <option value="covariance">Correlated error weights</option>
+        </select>
+      </div>
+      <div>
+        <label for="profile">Assumed error profile</label
+        ><select id="profile">
+          <option value="balanced">Balanced variances</option>
+          <option value="aggregates">More reliable aggregates</option>
+          <option value="leaves">More reliable stores</option>
+        </select>
+      </div>
+      <div>
+        <label for="bounds">Allowed store forecasts</label
+        ><select id="bounds">
+          <option value="free">Unconstrained real values</option>
+          <option value="nonnegative">Nonnegative values</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button id="reset" type="button">Reset inputs</button></div>
+    <output aria-live="polite"></output>
+    <p id="weight-note" class="note"></p>
+    <svg id="mechanism" role="img" aria-labelledby="diagram-title diagram-desc"></svg>
+    <p id="objective"></p>
+    <p id="negative-note" class="note"></p>
+    <table id="forecast-table">
+      <caption>
+        All forecasts, in units for the same next week
+      </caption>
+      <thead>
+        <tr>
+          <th>Series</th>
+          <th>Base</th>
+          <th>After</th>
+          <th>Change</th>
+        </tr>
+      </thead>
+      <tbody id="forecast-data"></tbody>
+    </table>
+    <details id="constraints">
+      <summary>Inspect the three adding-up constraints</summary>
+      <table id="gap-table">
+        <caption>
+          Parent minus children; zero is coherent
+        </caption>
+        <thead>
+          <tr>
+            <th>Constraint</th>
+            <th>Base gap</th>
+            <th>After gap</th>
+            <th>Clipped gap</th>
+          </tr>
+        </thead>
+        <tbody id="gap-data"></tbody>
+      </table>
+      <p>
+        Naive clipping means replacing every negative value in the unconstrained solution with zero
+        independently. It is a comparison only. The nonnegative method instead solves the
+        constrained optimization and rebuilds every aggregate from the stores.
+      </p>
+    </details>
+    <details id="weights">
+      <summary>Inspect summing matrix, error matrix, and solved objective</summary>
+      <pre id="matrix-values"></pre>
+      <p>
+        Each row of S states which stores contribute to a series. W describes assumed base forecast
+        errors, in squared units; it is not a covariance of observed demand. The profiles are
+        invented, not estimated from residuals. For diagonal weights W = D. Correlated weights use W
+        = D + v vᵀ, with v = (2, 1, −1, 1, 1, −1, −1). Positive diagonal D makes each matrix
+        positive definite.
+      </p>
+      <p>
+        The equal-weight method always uses W = I; bottom-up uses only the four store base
+        forecasts. Their outputs ignore the error profile. Other methods minimize Q = (S b − base)ᵀ
+        W⁻¹ (S b − base). The nonnegative option imposes b ≥ 0. Here a small exact face enumeration
+        checks all 16 possible zero-store sets; it is not a scalable production solver.
+      </p>
+    </details>
+    <details id="outcome">
+      <summary>Compare coherence with a hypothetical outcome</summary>
+      <table id="outcome-table">
+        <caption>
+          A deliberately constructed outcome: actual stores equal their base forecasts
+        </caption>
+        <thead>
+          <tr>
+            <th>Diagnostic</th>
+            <th>Base</th>
+            <th>After</th>
+          </tr>
+        </thead>
+        <tbody id="outcome-data"></tbody>
+      </table>
+      <pre id="outcome-values"></pre>
+      <p>
+        This fictional outcome is formed by aggregating the four store base forecasts. It never
+        chooses weights or enters the reconciliation solve. Base store error is zero by
+        construction, so moving a store forecast can only worsen its error here. This is a
+        counterexample to guaranteed per-series improvement, not a measured accuracy estimate or a
+        reason to choose a production method.
+      </p>
+    </details>
+    <p class="note">
+      One forecast origin and horizon; additive, disjoint stores; fixed seven-series order.
+      Computation uses JavaScript binary64 with pivoted linear solves. Small displayed values round
+      to four decimals, while checks and aggregation use unrounded values. Fractional forecasts are
+      expected quantities, not integer orders. No residual estimation, model fitting, intervals,
+      sampling, or future data runs.
+    </p>
+    <script>
+      const names = ['Total', 'North', 'South', 'N1', 'N2', 'S1', 'S2'];
+      const S = [
+        [1, 1, 1, 1],
+        [1, 1, 0, 0],
+        [0, 0, 1, 1],
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1],
+      ];
+      const fixtures = {
+        disagree: [120, 70, 40, 30, 30, 20, 30],
+        coherent: [110, 60, 50, 30, 30, 20, 30],
+        negative: [10, 5, 5, 1, 30, 1, 30],
+      };
+      const profiles = {
+          balanced: [4, 4, 4, 4, 4, 4, 4],
+          aggregates: [1, 2, 2, 16, 16, 16, 16],
+          leaves: [16, 8, 8, 1, 1, 1, 1],
+        },
+        factor = [2, 1, -1, 1, 1, -1, -1];
+      const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0),
+        transpose = (a) => a[0].map((_, j) => a.map((row) => row[j])),
+        multiply = (a, b) => a.map((row) => transpose(b).map((col) => dot(row, col))),
+        mv = (a, x) => a.map((row) => dot(row, x));
+      function solve(a, b) {
+        const n = a.length;
+        if (!n) return [];
+        const rows = a.map((row, i) => [...row, b[i]]);
+        for (let j = 0; j < n; j++) {
+          let pivot = j;
+          for (let i = j + 1; i < n; i++)
+            if (Math.abs(rows[i][j]) > Math.abs(rows[pivot][j])) pivot = i;
+          if (Math.abs(rows[pivot][j]) < 1e-12) throw new Error('Singular system.');
+          [rows[j], rows[pivot]] = [rows[pivot], rows[j]];
+          const v = rows[j][j];
+          for (let k = j; k <= n; k++) rows[j][k] /= v;
+          for (let i = 0; i < n; i++)
+            if (i !== j) {
+              const f = rows[i][j];
+              for (let k = j; k <= n; k++) rows[i][k] -= f * rows[j][k];
+            }
+        }
+        return rows.map((row) => row[n]);
+      }
+      function covariance(method, profile) {
+        return profiles[profile].map((d, i) =>
+          profiles[profile].map((_, j) =>
+            method === 'ols' || method === 'bottom'
+              ? Number(i === j)
+              : (i === j ? d : 0) + (method === 'covariance' ? factor[i] * factor[j] : 0),
+          ),
+        );
+      }
+      function fit(base, W, nonnegative) {
+        const WS = transpose(transpose(S).map((col) => solve(W, col))),
+          H = multiply(transpose(S), WS),
+          rhs = mv(transpose(S), solve(W, base));
+        const unconstrained = solve(H, rhs),
+          objective = (b) => {
+            const delta = mv(S, b).map((v, i) => v - base[i]);
+            return dot(delta, solve(W, delta));
+          };
+        let bottom = unconstrained,
+          active = [],
+          cost = objective(bottom),
+          faces = 1;
+        if (nonnegative) {
+          cost = Infinity;
+          faces = 16;
+          for (let mask = 0; mask < 16; mask++) {
+            const free = [0, 1, 2, 3].filter((i) => !(mask & (1 << i))),
+              candidate = [0, 0, 0, 0],
+              values = solve(
+                free.map((i) => free.map((j) => H[i][j])),
+                free.map((i) => rhs[i]),
+              );
+            if (values.some((v) => v < -1e-9)) continue;
+            free.forEach((i, k) => (candidate[i] = Math.max(0, values[k])));
+            const q = objective(candidate);
+            if (q < cost - 1e-10) {
+              bottom = candidate;
+              cost = q;
+              active = [0, 1, 2, 3].filter((i) => !free.includes(i));
+            }
+          }
+        }
+        return { bottom, unconstrained, cost, active, faces, H, rhs };
+      }
+      const gaps = (y) => [y[0] - y[1] - y[2], y[1] - y[3] - y[4], y[2] - y[5] - y[6]];
+      function compute(fixture, method, profile, bounds) {
+        const base = [...fixtures[fixture]],
+          W = covariance(method, profile),
+          fitted = fit(base, W, bounds === 'nonnegative'),
+          bottom = method === 'bottom' ? base.slice(3) : fitted.bottom,
+          reconciled = mv(S, bottom),
+          free = method === 'bottom' ? reconciled : mv(S, fitted.unconstrained),
+          clipped = free.map((v) => Math.max(0, v)),
+          delta = reconciled.map((v, i) => v - base[i]),
+          Q = dot(delta, solve(W, delta)),
+          truth = mv(S, base.slice(3)),
+          metrics = (y) => ({
+            leafMAE: y.slice(3).reduce((sum, v, i) => sum + Math.abs(v - truth[i + 3]), 0) / 4,
+            allRMSE: Math.sqrt(y.reduce((sum, v, i) => sum + (v - truth[i]) ** 2, 0) / 7),
+          });
+        return {
+          fixture,
+          method,
+          profile,
+          bounds,
+          base,
+          W,
+          bottom,
+          reconciled,
+          free,
+          clipped,
+          delta,
+          Q,
+          active: method === 'bottom' ? [] : fitted.active,
+          faces: method === 'bottom' ? 0 : fitted.faces,
+          H: fitted.H,
+          rhs: fitted.rhs,
+          baseGaps: gaps(base),
+          afterGaps: gaps(reconciled),
+          clipGaps: gaps(clipped),
+          truth,
+          baseMetrics: metrics(base),
+          afterMetrics: metrics(reconciled),
+        };
+      }
+      const num = (n) => (Math.abs(n) < 1e-9 ? 0 : n).toFixed(4),
+        pretty = (n) => (Math.abs(n - Math.round(n)) < 1e-9 ? String(Math.round(n)) : num(n)),
+        vec = (v) => '(' + v.map(pretty).join(', ') + ')';
+      function draw(r) {
+        const mobile = innerWidth <= 420,
+          w = mobile ? 328 : 680,
+          h = mobile ? 1000 : 800;
+        const text = (x, y, size, t, b = false, anchor = 'start') =>
+            '<text x="' +
+            x +
+            '" y="' +
+            y +
+            '" font-size="' +
+            size +
+            '" text-anchor="' +
+            anchor +
+            '"' +
+            (b ? ' font-weight="700"' : '') +
+            '>' +
+            t +
+            '</text>',
+          box = (x, y, width, height) =>
+            '<rect x="' +
+            x +
+            '" y="' +
+            y +
+            '" width="' +
+            width +
+            '" height="' +
+            height +
+            '" rx="8" fill="var(--panel)" stroke="var(--line)"/>',
+          line = (x1, y1, x2, y2) =>
+            '<line x1="' +
+            x1 +
+            '" y1="' +
+            y1 +
+            '" x2="' +
+            x2 +
+            '" y2="' +
+            y2 +
+            '" stroke="var(--line)" stroke-width="2"/>';
+        let svg =
+          '<title id="diagram-title">From disagreeing forecasts to one coherent hierarchy</title><desc id="diagram-desc">Each node shows its base forecast and computed reconciled forecast for the same next week. Three parent-minus-children gaps and a store-error counterexample separate coherence from accuracy.</desc>';
+        svg +=
+          text(0, 25, mobile ? 18 : 22, 'One week. Seven linked forecasts.', true) +
+          text(0, 54, 14, 'Each node: base → reconciled (rounded)');
+        const rootY = 85,
+          regionY = mobile ? 225 : 205,
+          leafY = mobile ? 375 : 325,
+          nodeH = mobile ? 95 : 82;
+        const positions = [
+          [w / 2, rootY],
+          [w / 4, regionY],
+          [(3 * w) / 4, regionY],
+          ...[1, 3, 5, 7].map((k) => [(k * w) / 8, leafY]),
+        ];
+        for (const [a, b] of [
+          [0, 1],
+          [0, 2],
+          [1, 3],
+          [1, 4],
+          [2, 5],
+          [2, 6],
+        ])
+          svg += line(positions[a][0], positions[a][1] + nodeH, positions[b][0], positions[b][1]);
+        positions.forEach(([x, y], i) => {
+          const width =
+            i === 0 ? (mobile ? 160 : 240) : i < 3 ? (mobile ? 150 : 240) : mobile ? 76 : 150;
+          svg +=
+            box(x - width / 2, y, width, nodeH) +
+            text(x, y + 26, mobile ? 14 : 17, names[i], true, 'middle');
+          if (mobile) {
+            svg +=
+              text(x, y + 52, 13, pretty(r.base[i]), false, 'middle') +
+              text(
+                x,
+                y + 78,
+                13,
+                '→ ' + String(Number(r.reconciled[i].toFixed(2))),
+                true,
+                'middle',
+              );
+          } else
+            svg += text(
+              x,
+              y + 58,
+              15,
+              pretty(r.base[i]) + ' → ' + String(Number(r.reconciled[i].toFixed(2))),
+              true,
+              'middle',
+            );
+        });
+        const gy = mobile ? 520 : 465;
+        svg +=
+          box(0, gy, w, 190) +
+          text(14, gy + 29, 17, 'Parent minus children', true) +
+          text(14, gy + 56, 13, 'Before → after reconciliation');
+        ['Total − North − South', 'North − N1 − N2', 'South − S1 − S2'].forEach((label, i) => {
+          svg +=
+            text(14, gy + 88 + i * 36, mobile ? 12 : 15, label) +
+            text(
+              w - 14,
+              gy + 88 + i * 36,
+              mobile ? 13 : 15,
+              pretty(r.baseGaps[i]) + ' → ' + pretty(r.afterGaps[i]),
+              true,
+              'end',
+            );
+        });
+        const ey = gy + 230;
+        svg += text(0, ey, 17, 'Coherent does not mean more accurate', true);
+        if (mobile)
+          svg +=
+            text(0, ey + 32, 14, 'Hypothetical store outcomes equal their') +
+            text(0, ey + 57, 14, 'base forecasts; they do not enter the solve.') +
+            text(
+              0,
+              ey + 97,
+              15,
+              'Store MAE: ' + num(r.baseMetrics.leafMAE) + ' → ' + num(r.afterMetrics.leafMAE),
+              true,
+            );
+        else
+          svg +=
+            text(
+              0,
+              ey + 32,
+              14,
+              'Hypothetical actual stores equal their base forecasts; not used in the solve.',
+            ) +
+            text(
+              0,
+              ey + 67,
+              16,
+              'Store MAE: ' + num(r.baseMetrics.leafMAE) + ' → ' + num(r.afterMetrics.leafMAE),
+              true,
+            );
+        svg += text(0, h - 18, 13, 'Fictional point forecasts; no accuracy guarantee.');
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      let report;
+      function render() {
+        report = compute(
+          document.querySelector('#fixture').value,
+          document.querySelector('#method').value,
+          document.querySelector('#profile').value,
+          document.querySelector('#bounds').value,
+        );
+        const r = report;
+        document.querySelector('output').textContent =
+          'Total ' +
+          num(r.reconciled[0]) +
+          '. Largest adding-up gap ' +
+          num(Math.max(...r.afterGaps.map(Math.abs))) +
+          '. Negative stores ' +
+          r.bottom.filter((v) => v < -1e-9).length +
+          '.';
+        document.querySelector('#weight-note').textContent =
+          r.method === 'bottom'
+            ? 'Bottom-up retains store forecasts. Its forecasts ignore aggregate base forecasts, error profiles, and bounds for these nonnegative fixtures. Q uses identity weights for comparison only.'
+            : r.method === 'ols'
+              ? 'Equal-weight least squares uses W = I. The error profile does not change its result.'
+              : 'The selected error profile supplies fictional weights. Smaller variance usually resists adjustment more; correlations also affect how adjustments are shared.';
+        document.querySelector('#objective').textContent =
+          (r.method === 'bottom'
+            ? 'Bottom-up is not minimizing the all-series objective. '
+            : 'Solved weighted adjustment objective. ') +
+          'Q = ' +
+          num(r.Q) +
+          '. ' +
+          (r.bounds === 'nonnegative' && r.method !== 'bottom'
+            ? 'Active zero stores: ' +
+              (r.active.map((i) => names[i + 3]).join(', ') || 'none') +
+              '. All 16 faces checked.'
+            : 'No nonnegative optimization constraint used.');
+        document.querySelector('#negative-note').textContent =
+          'Unconstrained negative stores: ' +
+          r.free.slice(3).filter((v) => v < -1e-9).length +
+          '. Largest gap after independent clipping: ' +
+          num(Math.max(...r.clipGaps.map(Math.abs))) +
+          '.';
+        document.querySelector('#forecast-data').innerHTML = names
+          .map(
+            (name, i) =>
+              '<tr><th scope="row">' +
+              name +
+              '</th><td>' +
+              num(r.base[i]) +
+              '</td><td>' +
+              num(r.reconciled[i]) +
+              '</td><td>' +
+              num(r.delta[i]) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#gap-data').innerHTML = [
+          'Total − North − South',
+          'North − N1 − N2',
+          'South − S1 − S2',
+        ]
+          .map(
+            (name, i) =>
+              '<tr><th scope="row">' +
+              name +
+              '</th><td>' +
+              num(r.baseGaps[i]) +
+              '</td><td>' +
+              num(r.afterGaps[i]) +
+              '</td><td>' +
+              num(r.clipGaps[i]) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#matrix-values').textContent =
+          'Order: ' +
+          names.join(', ') +
+          String.fromCharCode(10) +
+          'S (columns N1, N2, S1, S2):' +
+          String.fromCharCode(10) +
+          S.map((row) => vec(row)).join(String.fromCharCode(10)) +
+          String.fromCharCode(10) +
+          'W (squared units):' +
+          String.fromCharCode(10) +
+          r.W.map((row) => vec(row)).join(String.fromCharCode(10)) +
+          String.fromCharCode(10) +
+          'Q = ' +
+          num(r.Q);
+        document.querySelector('#outcome-data').innerHTML = [
+          ['Store MAE', r.baseMetrics.leafMAE, r.afterMetrics.leafMAE],
+          ['All-series RMSE', r.baseMetrics.allRMSE, r.afterMetrics.allRMSE],
+        ]
+          .map(
+            (row) =>
+              '<tr><th scope="row">' +
+              row[0] +
+              '</th><td>' +
+              num(row[1]) +
+              '</td><td>' +
+              num(row[2]) +
+              '</td></tr>',
+          )
+          .join('');
+        document.querySelector('#outcome-values').textContent =
+          'Hypothetical actual values in series order:' + String.fromCharCode(10) + vec(r.truth);
+        draw(r);
+      }
+      document.querySelector('#settings').addEventListener('change', render);
+      document.querySelector('#settings').addEventListener('submit', (e) => e.preventDefault());
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('#settings').reset();
+        document.querySelectorAll('details').forEach((el) => (el.open = false));
+        render();
+      });
+      window.addEventListener('resize', () => draw(report));
+      render();
+    </script>
+  </body>
+</html>

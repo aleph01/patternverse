@@ -12,7 +12,6 @@ tags:
   - problem-solving
 verses:
   - creativity
-  - learning
 items:
   - five-alternative-frames
   - reframing-look-outside-frame
@@ -23,6 +22,11 @@ items:
   - reframing-generate-real-options
   - reframing-validate-frame
   - reduce-the-first-step
+  - abstraction-laddering
+  - zwicky-box
+  - productive-thinking-model
+  - enact-a-possibility-before-committing
+  - tell-the-story-without-words
 attribution: "Includes original Patternverse adaptations inspired by Thomas Wedell-Wedellsborg, What's Your Problem? Not an official implementation."
 ---
 
@@ -41,3 +45,11 @@ Use this collection when you want more than another version of the same idea. It
 The order moves from opening possibilities toward action, but these are independent tools. You do not need to use every technique or produce a perfect idea before taking a useful step.
 
 If you are unsure what problem you are trying to solve, begin with [[reframing]]. Together, the two collections support a cycle of reconsidering the problem, finding alternatives, and learning from what happens.
+
+
+## Change the structure of the search
+
+[[abstraction-laddering]] moves toward purpose and returns through different implementations. [[zwicky-box]] recombines alternatives across dimensions, then checks compatibility. [[productive-thinking-model]] connects situation, success criteria, framing, generation, development, and a resource plan when an idea needs a complete path toward action.
+
+
+[[enact-a-possibility-before-committing]] makes an interaction available to observation through a real scene. [[tell-the-story-without-words]] changes representation and invites another person’s interpretation. Both guides support external activities and selected reflection rather than simulated participation.

@@ -7,26 +7,31 @@ status: "published"
 tags:
   - "gof-design-patterns"
   - "object-oriented-design"
-  - "creational"
   - "abstract-factory"
 verses:
   - "software-engineering"
-attribution: "Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package."
+attribution: "Pattern names and original designs: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original Patternverse educational explanations, code, and illustrations."
 ---
+
+## Purpose and problem
 
 A desktop application supports two visual toolkits. Its buttons come from one toolkit, its menus from another, and its dialogs assume the first toolkit's event system. Each component works in isolation, but the assembled interface behaves inconsistently. The problem is no longer choosing a concrete button. It is choosing a coherent family of objects.
 
+## Core idea
+
 Abstract Factory makes that family the unit of selection. A client receives an interface with creation operations for the products it needs. One concrete factory supplies all products for toolkit A; another supplies all products for toolkit B. The client requests buttons, menus, and dialogs through the chosen factory, without naming their concrete classes.
 
-![One family choice supplies a coherent set of widgets rather than independently mixing products.](/diagrams/gof/abstract-factory.svg "One family choice supplies a coherent set of widgets rather than independently mixing products.")
+![The application chooses BrowserWidgets. Its create_button and create_menu operations supply a browser button and browser menu. NativeWidgets is an unused alternative family, not an independently mixed product source.](../assets/software-engineering/gof/abstract-factory.svg "One factory selection governs both product roles. The unused family is a whole alternative, rather than a source to mix in accidentally.")
 
-### Compatibility as an explicit boundary
+## How it works
 
 A factory for interface widgets might expose create_button, create_menu, and create_dialog. Each operation returns the corresponding abstract product contract. A concrete toolkit factory knows the actual classes and any shared platform configuration needed to create them.
 
 This reduces the number of independent choices callers must make. Instead of selecting a button implementation, a menu implementation, and a dialog implementation separately, the application selects one toolkit family at startup. The resulting wiring is easier to inspect and harder to mix accidentally.
 
 The pattern organizes compatibility; it does not automatically prove it. A concrete factory can still be implemented incorrectly. In some languages, types can enforce parts of the family relationship. In others, construction boundaries and integration tests carry more of that responsibility. The design is valuable because it puts the responsibility somewhere identifiable.
+
+## Worked example
 
 ### Switching an interface toolkit
 
@@ -38,6 +43,57 @@ The contracts must remain meaningful across families. If the browser dialog can 
 
 That qualification matters: Abstract Factory is strongest when families really support comparable product roles. It becomes strained when products are grouped only because they happen to share a vendor name.
 
+### A small implementation
+
+The example below selects an entire widget family. The window asks for product roles and never chooses a concrete button and menu independently. Rendering returns strings to make the family relationship visible without a UI toolkit.
+
+```python
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Button:
+    family: str
+
+    def render(self):
+        return f"{self.family} button"
+
+
+@dataclass(frozen=True)
+class Menu:
+    family: str
+
+    def render(self):
+        return f"{self.family} menu"
+
+
+class NativeWidgets:
+    def create_button(self):
+        return Button("native")
+
+    def create_menu(self):
+        return Menu("native")
+
+
+class BrowserWidgets:
+    def create_button(self):
+        return Button("browser")
+
+    def create_menu(self):
+        return Menu("browser")
+
+
+def preferences_window(factory):
+    return [factory.create_button().render(),
+            factory.create_menu().render()]
+
+
+print(preferences_window(BrowserWidgets()))
+# ['browser button', 'browser menu']
+```
+
+Switching to NativeWidgets changes both products through one application-level choice. These small product classes encode the family as data; real toolkits may use entirely different classes behind the same product contracts. The important guarantee to test is that each factory supplies a coherent family.
+
 ### Keeping infrastructure variants together
 
 An application stores blobs and their metadata using one of two infrastructure setups. The first uses an in-memory blob store and metadata repository for local tests. The second uses remote services with shared authentication and naming rules. Selecting repositories independently can create a local metadata record that points to a remote blob, or a remote repository configured with the wrong namespace.
@@ -46,7 +102,14 @@ A StorageFamilyFactory supplies both a BlobStore and a MetadataRepository using 
 
 This factory does not make two writes transactional. If uploading a blob succeeds and writing metadata fails, the application still needs a recovery policy. The family boundary controls construction compatibility, while transaction design controls consistency during use. Keeping these concerns distinct prevents an attractive factory interface from promising more than it can deliver.
 
-### Where extension becomes expensive
+## When to use it
+
+- Several collaborators must belong to the same implementation family.
+- A client should switch a whole platform or provider without mixing variants.
+
+Consider a simpler design when only one independent product varies, or when product families have no meaningful compatibility constraint.
+
+## Tradeoffs and common mistakes
 
 Abstract Factory makes adding another family comparatively straightforward: implement the existing creation interface and supply the new concrete products. Adding another product role is harder. A new create_toolbar operation may require changes to every concrete factory, including local and test families.
 
@@ -56,38 +119,12 @@ Another mistake is building an enormous application-wide factory that creates un
 
 Clients should also avoid escaping the abstraction by inspecting concrete product types. If every operation checks whether a button is native or browser-based, the factory has merely postponed the coupling. Family-specific features may deserve a narrower explicit capability rather than repeated casts.
 
-### Neighboring designs
-
-Factory Method concerns an overridable creation operation and often appears inside an abstract factory's implementation. Abstract Factory's defining feature is the coordinated set of products, not the particular technique used to instantiate them.
-
-Builder organizes the construction of a complex result through stages. It answers how a result is assembled; Abstract Factory answers which compatible family supplies its parts. Bridge separates two independently varying dimensions of a design. A factory can wire the chosen bridge implementation, but creation and ongoing behavioral delegation remain separate responsibilities.
-
-Use Abstract Factory when a single family choice should govern several objects. Its value comes from preserving a relationship among products, not merely from replacing constructors with longer method names.
-
-## Pattern details
-
-**Category:** Creational · **Difficulty:** Intermediate
-
-### Use when
-
-- Several collaborators must belong to the same implementation family
-- A client should switch a whole platform or provider without mixing variants
-
-### Not ideal when
-
-- Only one independent product varies
-- Product families have no meaningful compatibility constraint
-
-### Prerequisites
-
-- Basic familiarity with objects, interfaces, composition, and inheritance
-
 ## Related patterns
 
-[[factory-method|Factory Method]] · [[bridge|Bridge]] · [[builder|Builder]]
+[[factory-method|Factory Method]] concerns an overridable creation operation and often appears inside an abstract factory's implementation. Abstract Factory's defining feature is the coordinated set of products, not the particular technique used to instantiate them.
 
-## Source
+[[builder|Builder]] organizes the construction of a complex result through stages. It answers how a result is assembled; Abstract Factory answers which compatible family supplies its parts. [[bridge|Bridge]] separates two independently varying dimensions of a design. A factory can wire the chosen bridge implementation, but creation and ongoing behavioral delegation remain separate responsibilities.
 
-Canonical names and classification: Gamma, Helm, Johnson, and Vlissides, Design Patterns: Elements of Reusable Object-Oriented Software. Original educational prose and diagrams supplied in the GoF Patternverse article package.
+## Sources
 
-[Canonical GoF reference](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610)
+Abstract Factory is one of the 23 patterns in Gamma, Helm, Johnson, and Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610). The examples, code, and illustrations here are original educational explanations.

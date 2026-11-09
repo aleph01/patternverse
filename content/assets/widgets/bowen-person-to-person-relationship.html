@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A different Sunday conversation</title><style>
+:root{--font-size-base:16px;--foreground:#252c28;--background:#fff;--muted:#f1f2ef;--muted-foreground:#58615b;--border:#cdd3ce;--viz-series-1:#007a4d;--viz-series-2:#9a5938;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;padding:12px;font:16px/1.5 system-ui,sans-serif;color:var(--foreground);background:#fff}
+h3{font-size:1.05rem;line-height:1.4;margin:0}p{margin:.5rem 0}.viz-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:inherit;font-size:.88rem;line-height:1.4;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--foreground);cursor:pointer}
+.btn:hover:not(:disabled),.btn[aria-pressed=true]{background:#eef6f0;border-color:#007a4d}.btn:focus-visible{outline:2px solid #007a4d;outline-offset:3px}.btn:disabled{opacity:.45;cursor:default}
+.btn-primary{border-color:#007a4d}.text-small{font-size:.85rem;color:var(--muted-foreground)}.tabular-nums{font-variant-numeric:tabular-nums}
+@media(max-width:400px){body{padding:8px;font-size:15px}}
+</style></head><body>
+<div id="person-to-person-conversation-v1">
+  <h3>What can this conversation include?</h3>
+  <div class="viz-row" role="group" aria-label="Compare Daniel’s participation at corresponding moments">
+    <button class="btn" type="button" data-story="usual" aria-pressed="true">Familiar conversation</button>
+    <button class="btn" type="button" data-story="different" aria-pressed="false">Different participation</button>
+  </div>
+  <div class="pp-stage">
+    <span id="pp-step" class="text-small tabular-nums"></span>
+    <h3 id="pp-heading"></h3>
+  </div>
+  <svg id="pp-figure" class="pp-figure" role="img" aria-labelledby="pp-title pp-description">
+    <title id="pp-title">Daniel and Peter: the subject of their phone conversation</title>
+    <desc id="pp-description">Highlighted topics show what the invented exchange concerns. Lines point to subjects, not absent people’s responses.</desc>
+    <defs><marker id="pp-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--viz-series-1)"></path></marker></defs>
+    <g id="pp-marks"></g>
+  </svg>
+  <div id="pp-exchange" aria-live="polite"></div>
+  <div class="viz-row">
+    <button class="btn" type="button" id="pp-back">Previous</button>
+    <button class="btn btn-primary" type="button" id="pp-next">Next moment</button>
+  </div>
+  <span class="text-small">Invented teaching illustration · Highlight = subject of this exchange, not closeness or maturity.</span>
+</div>
+<style>
+  #person-to-person-conversation-v1 {display:grid;gap:calc(var(--font-size-base) * .8);color:var(--foreground);}
+  #person-to-person-conversation-v1 > h3 {padding-right:90px;}
+  #person-to-person-conversation-v1 .pp-stage {display:grid;gap:calc(var(--font-size-base) * .25);}
+  #person-to-person-conversation-v1 .pp-figure {display:block;width:100%;}
+  #person-to-person-conversation-v1 .pp-figure text {fill:var(--foreground);font-family:inherit;font-size:12px;font-weight:400;text-anchor:middle;}
+  #person-to-person-conversation-v1 .pp-figure .pp-name {font-weight:500;}
+  #person-to-person-conversation-v1 #pp-exchange {min-height:calc(var(--font-size-base) * 5);}
+</style>
+<script>
+(() => {
+  const root=document.getElementById('person-to-person-conversation-v1');
+  const svg=root.querySelector('#pp-figure');
+  const layer=root.querySelector('#pp-marks');
+  const buttons=Array.from(root.querySelectorAll('[data-story]'));
+  const previous=root.querySelector('#pp-back');
+  const next=root.querySelector('#pp-next');
+  const opening={heading:'The familiar opening',topic:0,exchange:'Peter: “How’s Nina getting on?” Daniel has not yet mentioned his own work decision.'};
+  const stories={
+    usual:[
+      opening,
+      {heading:'Daniel follows the familiar subject',topic:0,exchange:'Daniel: “She’s changed jobs again.” His own concerns stay unmentioned.'},
+      {heading:'A shared complaint carries the conversation',topic:0,exchange:'Peter: “She never sticks at anything.” Daniel: “Exactly.” Neither discusses his own experience.'},
+      {heading:'A comfortable ending; little new knowledge',topic:0,exchange:'They end the call pleasantly. Peter does not know about Daniel’s decision; Daniel has learned little about Peter’s experience.'}
+    ],
+    different:[
+      opening,
+      {heading:'Daniel adds something about his own life',topic:1,exchange:'Daniel: “I spoke to her Friday; she’s fine. I’ve got an update of my own: I’m considering leaving management.”'},
+      {heading:'Disagreement enters the conversation',topic:1,exchange:'Peter: “Throw away a promotion? That’s irresponsible.” Daniel: “I know you disagree. I’m still weighing it. I’m not asking you to decide.”'},
+      {heading:'A little more personal knowledge; no agreement',topic:2,exchange:'Daniel asks about Peter’s job changes. Peter: “I was afraid of losing a steady income.” Peter still disapproves; Daniel has not decided.'}
+    ]
+  };
+  const topics=[['Nina’s life','Not on call'],['Daniel’s','work decision'],['Peter’s','job changes']];
+  let state={article:'person-to-person-relationship',story:'usual',step:0};
+  function restore(snapshot){
+    const s=snapshot && snapshot.modelContent;
+    if(s && s.article===state.article && Object.hasOwn(stories,s.story) && Number.isInteger(s.step) && s.step>=0 && s.step<4)state={article:state.article,story:s.story,step:s.step};
+  }
+  restore(window.openai && window.openai.widgetState);
+  function save(){
+    if(window.openai && typeof window.openai.setWidgetState==='function')Promise.resolve(window.openai.setWidgetState({modelContent:{...state},privateContent:null})).catch(()=>{});
+  }
+  function element(tag,attrs,parent){
+    const n=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    Object.entries(attrs||{}).forEach(([k,v])=>n.setAttribute(k,String(v)));
+    if(parent)parent.appendChild(n);
+    return n;
+  }
+  function label(x,y,lines,cls){
+    const n=element('text',{x,y,class:cls||''},layer);
+    lines.forEach((line,i)=>{const span=element('tspan',{x,dy:i?17:0},n);span.textContent=line;});
+    return n;
+  }
+  function person(x,name,role){
+    label(x,20,[name],'pp-name');label(x,40,[role]);
+    element('circle',{cx:x,cy:78,r:22,fill:'var(--muted)',stroke:'var(--border)','stroke-width':1},layer);
+    label(x,82,[name[0]],'pp-name');
+  }
+  function draw(){
+    const frame=stories[state.story][state.step];
+    const width=Math.max(280,Math.round(svg.getBoundingClientRect().width||root.getBoundingClientRect().width||600));
+    svg.setAttribute('viewBox','0 0 '+width+' 252');svg.setAttribute('height',252);
+    layer.replaceChildren();
+    const left=width*.24,right=width*.76,positions=[width*.17,width*.5,width*.83],focus=positions[frame.topic];
+    for(const x of [left,right])element('path',{d:'M'+x+',104 L'+focus+',179',fill:'none',stroke:'var(--viz-series-1)','stroke-width':2,'marker-end':'url(#pp-arrow)'},layer);
+    person(left,'Daniel','Adult son');person(right,'Peter','Father');
+    topics.forEach((lines,i)=>{
+      const boxWidth=Math.min(160,width*.29),x=positions[i],active=i===frame.topic;
+      element('rect',{x:x-boxWidth/2,y:187,width:boxWidth,height:55,rx:3,fill:active?'color-mix(in srgb, var(--viz-series-1) 12%, var(--background))':'none',stroke:'var(--border)','stroke-width':1},layer);
+      label(x,209,lines,active?'pp-name':'');
+    });
+    root.querySelector('#pp-step').textContent='Moment '+(state.step+1)+' of 4';
+    root.querySelector('#pp-heading').textContent=frame.heading;
+    root.querySelector('#pp-exchange').textContent=frame.exchange;
+    root.querySelector('#pp-description').textContent=frame.heading+'. '+frame.exchange+' Subject of this exchange: '+topics[frame.topic].join(' ')+'. Daniel and Peter are the people on the call. Nina is absent. The highlighted subject is not a measure of relationship quality.';
+    buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.story===state.story)));
+    previous.disabled=state.step===0;next.disabled=state.step===3;
+  }
+  buttons.forEach(b=>b.addEventListener('click',()=>{state.story=b.dataset.story;draw();save();}));
+  previous.addEventListener('click',()=>{if(state.step>0){state.step--;draw();save();}});
+  next.addEventListener('click',()=>{if(state.step<3){state.step++;draw();save();}});
+  window.addEventListener('openai:set_globals',event=>{if(event.detail && event.detail.globals && event.detail.globals.widgetState){restore(event.detail.globals.widgetState);draw();}});
+  new ResizeObserver(()=>draw()).observe(root);
+  draw();
+})();
+</script>
+
+</body></html>

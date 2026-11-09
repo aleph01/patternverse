@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sharing responsibility: two continuations</title><style>
+:root{--font-size-base:16px;--foreground:#252c28;--background:#fff;--muted:#f1f2ef;--muted-foreground:#58615b;--border:#cdd3ce;--viz-series-1:#007a4d;--viz-series-2:#9a5938;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;padding:12px;font:16px/1.5 system-ui,sans-serif;color:var(--foreground);background:#fff}
+h3{font-size:1.05rem;line-height:1.4;margin:0}p{margin:.5rem 0}.viz-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:inherit;font-size:.88rem;line-height:1.4;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--foreground);cursor:pointer}
+.btn:hover:not(:disabled),.btn[aria-pressed=true]{background:#eef6f0;border-color:#007a4d}.btn:focus-visible{outline:2px solid #007a4d;outline-offset:3px}.btn:disabled{opacity:.45;cursor:default}
+.btn-primary{border-color:#007a4d}.text-small{font-size:.85rem;color:var(--muted-foreground)}.tabular-nums{font-variant-numeric:tabular-nums}
+@media(max-width:400px){body{padding:8px;font-size:15px}}
+</style></head><body>
+<div id="overfunctioning-reciprocity-v1">
+  <h3>Who takes over the booking?</h3>
+  <div class="viz-row" role="group" aria-label="Compare participation at the same moment">
+    <button class="btn" type="button" data-story="usual" aria-pressed="true">Familiar response</button>
+    <button class="btn" type="button" data-story="different" aria-pressed="false">Different participation</button>
+  </div>
+  <div class="of-stage">
+    <span id="of-step" class="text-small tabular-nums"></span>
+    <h3 id="of-heading"></h3>
+  </div>
+  <svg id="of-figure" class="of-figure" role="img" aria-labelledby="of-title of-description">
+    <title id="of-title">Maya and Sam: planning a meal with friends</title>
+    <desc id="of-description">An invented comparison of taking over and changing one’s own participation.</desc>
+    <defs><marker id="of-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--viz-series-1)"></path></marker></defs>
+    <g id="of-marks"></g>
+  </svg>
+  <div id="of-exchange" aria-live="polite"></div>
+  <div class="viz-row">
+    <button class="btn" type="button" id="of-back">Previous</button>
+    <button class="btn btn-primary" type="button" id="of-next">Next moment</button>
+  </div>
+  <span class="text-small">Invented teaching illustration · Arrows show exchanges, not measured anxiety or predicted effects.</span>
+</div>
+<style>
+  #overfunctioning-reciprocity-v1 {display:grid;gap:calc(var(--font-size-base) * .8);color:var(--foreground);}
+  #overfunctioning-reciprocity-v1 > h3 {padding-right:90px;}
+  #overfunctioning-reciprocity-v1 .of-stage {display:grid;gap:calc(var(--font-size-base) * .25);}
+  #overfunctioning-reciprocity-v1 .of-figure {display:block;width:100%;}
+  #overfunctioning-reciprocity-v1 .of-figure text {fill:var(--foreground);font-family:inherit;font-size:12px;font-weight:400;text-anchor:middle;}
+  #overfunctioning-reciprocity-v1 .of-figure .of-name {font-weight:500;}
+  #overfunctioning-reciprocity-v1 #of-exchange {min-height:calc(var(--font-size-base) * 5);}
+</style>
+<script>
+(() => {
+  const root=document.getElementById('overfunctioning-reciprocity-v1');
+  const svg=root.querySelector('#of-figure');
+  const layer=root.querySelector('#of-marks');
+  const buttons=Array.from(root.querySelectorAll('[data-story]'));
+  const previous=root.querySelector('#of-back');
+  const next=root.querySelector('#of-next');
+  const opening={heading:'Sam has not chosen a restaurant',speaker:'maya',label:['Asks about','the booking'],exchange:'Tuesday: Maya asks about the table. Sam agreed to book by Wednesday; both have the information and ability to do it.',maya:['Urge to','take over'],sam:['Has not','chosen'],task:['Table unbooked','Wednesday deadline remains']};
+  const stories={
+    usual:[
+      opening,
+      {heading:'Maya directs; Sam defers',speaker:'maya',label:['Options and','reminders'],exchange:'Maya sends three restaurant links and repeated reminders. Sam: “You choose. You’re better at this.”',maya:['Monitors','the booking'],sam:['Defers','the choice'],task:['Table unbooked','Wednesday deadline remains']},
+      {heading:'Maya takes over the task',speaker:'maya',label:['Takes over','the booking'],exchange:'Maya: “Fine, I’ll book it.” Sam stops looking. Maya makes the reservation.',maya:['Chooses','and books'],sam:['Stops','looking'],task:['Table booked','Maya did Sam’s agreed task']},
+      {heading:'The meal is arranged; the pattern persists',speaker:null,label:[],exchange:'Maya is resentful. Sam expects her to handle next time too. The task is done without changing their familiar participation.',maya:['Resentful','after taking over'],sam:['Expects Maya','to handle it'],task:['Table booked','The familiar pattern continues']}
+    ],
+    different:[
+      opening,
+      {heading:'Maya defines what she will do',speaker:'maya',label:['States her','participation'],exchange:'Maya: “I’ll handle dessert. I won’t choose or book the restaurant for you.” Sam’s agreed task remains with him.',maya:['Keeps her','own commitment'],sam:['Still owns','the booking'],task:['Table unbooked','Wednesday deadline remains']},
+      {heading:'An invitation to take over returns',speaker:'sam',label:['Asks Maya','to choose'],exchange:'Sam: “You’re better at this.” Maya: “I can talk through the options for ten minutes. The booking is yours.”',maya:['Offers limited','discussion'],sam:['Still owns','the decision'],task:['Table unbooked','Wednesday deadline remains']},
+      {heading:'Different conduct; the outcome stays open',speaker:null,label:[],exchange:'Sam calls his first choice: it is full. He checks another restaurant. Maya continues with dessert. A table is not yet booked; the deadline remains.',maya:['Does not','take over'],sam:['Checks another','restaurant'],task:['Table still unbooked','Wednesday deadline remains']}
+    ]
+  };
+  let state={article:'overfunctioning-underfunctioning-reciprocity',story:'usual',step:0};
+  function restore(snapshot){
+    const s=snapshot && snapshot.modelContent;
+    if(s && s.article===state.article && Object.hasOwn(stories,s.story) && Number.isInteger(s.step) && s.step>=0 && s.step<4)state={article:state.article,story:s.story,step:s.step};
+  }
+  restore(window.openai && window.openai.widgetState);
+  function save(){
+    if(window.openai && typeof window.openai.setWidgetState==='function')Promise.resolve(window.openai.setWidgetState({modelContent:{...state},privateContent:null})).catch(()=>{});
+  }
+  function element(tag,attrs,parent){
+    const n=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    Object.entries(attrs||{}).forEach(([k,v])=>n.setAttribute(k,String(v)));
+    if(parent)parent.appendChild(n);
+    return n;
+  }
+  function label(x,y,lines,cls){
+    const n=element('text',{x,y,class:cls||''},layer);
+    lines.forEach((line,i)=>{const span=element('tspan',{x,dy:i?17:0},n);span.textContent=line;});
+    return n;
+  }
+  function person(x,name,note,active){
+    element('circle',{cx:x,cy:85,r:23,fill:active?'color-mix(in srgb, var(--viz-series-1) 12%, var(--background))':'var(--muted)',stroke:'var(--border)','stroke-width':1},layer);
+    label(x,89,[name[0]],'of-name');label(x,130,[name],'of-name');label(x,166,note);
+  }
+  function draw(){
+    const frame=stories[state.story][state.step];
+    const width=Math.max(280,Math.round(svg.getBoundingClientRect().width||root.getBoundingClientRect().width||600));
+    svg.setAttribute('viewBox','0 0 '+width+' 266');svg.setAttribute('height',266);
+    layer.replaceChildren();
+    const left=width*.23,right=width*.77,mid=width*.5;
+    if(frame.speaker){
+      const from=frame.speaker==='maya'?left+30:right-30,to=frame.speaker==='maya'?right-30:left+30;
+      element('path',{d:'M'+from+',85 L'+to+',85',fill:'none',stroke:'var(--viz-series-1)','stroke-width':2,'marker-end':'url(#of-arrow)'},layer);
+      label(mid,26,frame.label);
+    }
+    person(left,'Maya',frame.maya,frame.speaker==='maya');
+    person(right,'Sam',frame.sam,frame.speaker==='sam');
+    label(mid,232,frame.task);
+    root.querySelector('#of-step').textContent='Moment '+(state.step+1)+' of 4';
+    root.querySelector('#of-heading').textContent=frame.heading;
+    root.querySelector('#of-exchange').textContent=frame.exchange;
+    root.querySelector('#of-description').textContent=frame.heading+'. '+frame.exchange+' Maya: '+frame.maya.join(' ')+'. Sam: '+frame.sam.join(' ')+'. '+frame.task.join('. ')+'.';
+    buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.story===state.story)));
+    previous.disabled=state.step===0;next.disabled=state.step===3;
+  }
+  buttons.forEach(b=>b.addEventListener('click',()=>{state.story=b.dataset.story;draw();save();}));
+  previous.addEventListener('click',()=>{if(state.step>0){state.step--;draw();save();}});
+  next.addEventListener('click',()=>{if(state.step<3){state.step++;draw();save();}});
+  window.addEventListener('openai:set_globals',event=>{if(event.detail && event.detail.globals && event.detail.globals.widgetState){restore(event.detail.globals.widgetState);draw();}});
+  new ResizeObserver(()=>draw()).observe(root);
+  draw();
+})();
+</script>
+
+</body></html>

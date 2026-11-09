@@ -14,7 +14,23 @@ verses:
 attribution: "Original Patternverse adaptation inspired by Thomas Wedell-Wedellsborg, What's Your Problem? Not an official implementation."
 ---
 
-A frame works like a crop around a photograph. It makes details inside the boundary easier to inspect, but it also hides nearby information. Look Outside the Frame is a deliberate zoom-out before another round of detailed analysis. It searches for four kinds of omission: the solver’s favored tool, events outside the visible time window, wider contextual influences, and overlooked properties of resources already present.
+A frame works like a crop around a photograph. It makes details inside the boundary easier to inspect, but it also hides nearby information.
+
+## Core idea
+
+Look Outside the Frame is a deliberate zoom-out before another round of detailed analysis. It searches for four kinds of omission: the solver’s favored tool, events outside the visible time window, wider contextual influences, and overlooked properties of resources already present.
+
+A boundary determines what enters an explanation. Inspecting nearby context can change the available options before more effort is spent within that boundary.
+
+## When to use it
+
+Reach for this pattern when a discussion has become impressively detailed yet remains stuck, or when every proposed remedy belongs to one discipline.
+
+## How it works
+
+Inspect a few kinds of context the statement leaves out: the favored intervention, the time around the incident, wider conditions, and properties of available resources. Choose an omission that could change the next question, then seek evidence for it.
+
+## Worked examples
 
 Imagine a company says, “New hires keep leaving within six months.” A detailed analysis *inside* that frame might compare exit dates, managers, and job titles. That can be useful. A wider look asks what the frame omitted.
 
@@ -27,15 +43,17 @@ Those four lenses could produce several frames: “We select people for a role d
 
 The move works elsewhere. “I am bad at keeping a writing habit” may look different if the person examines what happens before the planned writing time, the expectation of producing polished work, and the notes already collected. “Our checkout page loses buyers” may involve promises made before the page, delivery conditions outside the interface, or data already present in customer questions.
 
-Reach for this pattern when a discussion has become impressively detailed yet remains stuck, or when every proposed remedy belongs to one discipline. Do not turn zooming out into unlimited speculation. Pick a few plausible omissions and ask what observation would make one matter. Looking outside the frame does not prove that the visible problem is irrelevant; sometimes the original boundary was well chosen.
+## Pitfalls and limits
 
-The four specialist patterns—[[reframing-escape-hammer]], [[reframing-expand-time-window]], [[reframing-find-hidden-influence]], and [[reframing-find-hidden-properties]]—can be used independently. [[reframing-explore-or-break]] helps decide whether this contextual expansion is enough or whether the central goal itself needs reconsideration.
+Do not turn zooming out into unlimited speculation. Pick a few plausible omissions and ask what observation would make one matter. Looking outside the frame does not prove that the visible problem is irrelevant; sometimes the original boundary was well chosen.
 
 ## Related patterns
 
+The four specialist patterns—[[reframing-escape-hammer]], [[reframing-expand-time-window]], [[reframing-find-hidden-influence]], and [[reframing-find-hidden-properties]]—can be used independently. [[reframing-explore-or-break]] helps decide whether this contextual expansion is enough or whether the central goal itself needs reconsideration.
+
 [[reframing-escape-hammer]] · [[reframing-expand-time-window]] · [[reframing-find-hidden-influence]] · [[reframing-find-hidden-properties]]
 
-## Source
+## Sources and attribution
 
 Inspired by Thomas Wedell-Wedellsborg's *What's Your Problem?* This is an original Patternverse procedure, not reproduced book text or an official implementation.
 
@@ -57,40 +75,40 @@ classifier outside_lens -> OutsideLens {
 }
 lens = frame ?~ outside_lens
 ?match lens {
-    :case hammer -> hammer
-    :case time -> time
-    :case influence -> influence
-    :case properties -> properties
-    :case uncertain -> uncertain
+  :case hammer {
+    finding = !use reframing.escape-hammer {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case time {
+    finding = !use reframing.expand-time-window {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case influence {
+    finding = !use reframing.find-hidden-influence {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case properties {
+    finding = !use reframing.find-hidden-properties {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
+  :case uncertain {
+    finding = !use reframing.find-hidden-influence {
+        :with frame
+    }
+    candidate_frame = finding.candidate_frame
+    -> end
+  }
 }
-hammer:
-!use reframing.escape-hammer as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-time:
-!use reframing.expand-time-window as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-influence:
-!use reframing.find-hidden-influence as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-properties:
-!use reframing.find-hidden-properties as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
-uncertain:
-!use reframing.find-hidden-influence as finding {
-    :with frame
-}
-= candidate_frame finding.candidate_frame
--> end
 ```

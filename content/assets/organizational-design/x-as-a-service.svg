@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Routine use through a supported interface</title>
+  <desc id="desc">A consuming team owns its customer outcome, application decisions, and fallback behavior. A supported interface exposes behavior, limits, access, examples, and failure information. The provider owns the capability, interface, maintenance, support, changes, and retirement. Routine use crosses this boundary with little coordination. Feedback, incidents, and new needs have clear support routes; unfamiliar needs can require joint discovery. This is a hypothetical mechanism diagram, not an organization chart of either example.</desc>
+  <rect width="1200" height="760" fill="#F6F4EF"/>
+  <g font-family="Arial, sans-serif">
+    <text x="60" y="62" font-size="32" font-weight="700" fill="#183343">Use the capability without coordinating every task.</text>
+    <text x="60" y="105" font-size="24" fill="#52646D">A supported boundary carries the routine work; people stay responsible.</text>
+    <text x="600" y="177" text-anchor="middle" font-size="25" font-weight="700" fill="#176E69">Routine use through agreed behavior</text>
+    <g fill="#FFFFFF" stroke="#D7DDD9" stroke-width="2">
+      <rect x="60" y="220" width="300" height="270" rx="16"/>
+      <rect x="840" y="220" width="300" height="270" rx="16"/>
+    </g>
+    <rect x="435" y="220" width="330" height="270" rx="16" fill="#DCEDE8"/>
+    <g text-anchor="middle" font-size="27" font-weight="700" fill="#183343">
+      <text x="210" y="270">Consuming team</text>
+      <text x="990" y="270">Providing team</text>
+    </g>
+    <text x="600" y="270" text-anchor="middle" font-size="27" font-weight="700" fill="#176E69">Supported interface</text>
+    <g text-anchor="middle" font-size="23" fill="#52646D">
+      <text x="210" y="334">Customer outcome</text>
+      <text x="210" y="390">Application decisions</text>
+      <text x="210" y="446">Fallback + recovery</text>
+      <text x="990" y="334">Capability + interface</text>
+      <text x="990" y="390">Maintenance + support</text>
+      <text x="990" y="446">Changes + retirement</text>
+    </g>
+    <g text-anchor="middle" font-size="23" fill="#183343">
+      <text x="600" y="334">Behavior + limits</text>
+      <text x="600" y="390">Access + examples</text>
+      <text x="600" y="446">Failure information</text>
+    </g>
+    <g stroke="#176E69" stroke-width="4" fill="none">
+      <path d="M360 340H435M765 340H840M435 395H360M840 395H765"/>
+    </g>
+    <g fill="#176E69">
+      <path d="M435 340L420 332V348ZM840 340L825 332V348ZM360 395L375 387V403ZM765 395L780 387V403Z"/>
+    </g>
+    <rect x="60" y="550" width="1080" height="120" rx="16" fill="#183343"/>
+    <g text-anchor="middle" fill="#FFFFFF">
+      <text x="600" y="595" font-size="27" font-weight="700">Feedback · incidents · new needs</text>
+      <text x="600" y="638" font-size="23">Clear support routes; collaborate when the boundary needs discovery.</text>
+    </g>
+    <text x="60" y="726" font-size="23" fill="#52646D">Less routine coordination. Continuing ownership and support. Hypothetical arrangement.</text>
+  </g>
+</svg>

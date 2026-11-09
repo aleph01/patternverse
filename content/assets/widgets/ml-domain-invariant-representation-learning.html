@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Domain representation tradeoff explorer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 18px;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      label {
+        font-weight: 650;
+      }
+      select,
+      input,
+      button {
+        width: 100%;
+        display: block;
+        min-height: 44px;
+        padding: 10px;
+        margin: 6px 0;
+        font: inherit;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--muted);
+        border-radius: 7px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        width: auto;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      :is(button, input, select, summary):focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        min-height: 3em;
+        margin: 16px 0;
+        font-weight: 650;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      svg text {
+        fill: var(--ink);
+      }
+      .note,
+      details {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      summary {
+        padding: 10px 0;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      caption {
+        text-align: left;
+        font-weight: 650;
+        padding: 12px 0 6px;
+      }
+      th,
+      td {
+        padding: 7px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      .history {
+        overflow-x: auto;
+      }
+      @media (max-width: 420px) {
+        body {
+          padding: 12px;
+        }
+        form {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        .actions button {
+          flex: 1 1 130px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e2ece5;
+          --muted: #b7cdbd;
+          --paper: #19241f;
+          --panel: #23382c;
+          --line: #6d8b77;
+          --band: #345d45;
+          --accent: #a7d8b8;
+        }
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      table {
+        table-layout: fixed;
+      }
+      small {
+        display: block;
+        margin-top: 5px;
+      }
+      table {
+        table-layout: fixed;
+      }
+      .equation {
+        padding: 12px;
+        background: var(--panel);
+        border-radius: 7px;
+      }
+      #fits-table,
+      #data-table {
+        font-size: 13px;
+      }
+      #fits-table th:first-child {
+        width: 34%;
+      }
+      #fits-table th:nth-child(2) {
+        width: 22%;
+      }
+    </style>
+
+    <style id="ml-light-editorial">
+      :root {
+        color-scheme: only light;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        color: #252c28;
+      }
+      label,
+      button,
+      output,
+      summary,
+      caption,
+      th {
+        font-weight: 400;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        border-radius: 0;
+        border-color: #a6aca3;
+        background: #fff;
+        color: #252c28;
+      }
+      svg {
+        color-scheme: only light;
+        background: #fff;
+        --ink: #252c28;
+        --muted: #626962;
+        --paper: #fff;
+        --panel: #f1f2ef;
+        --line: #a6aca3;
+        --band: #edf5f0;
+        --accent: #00855b;
+        --shared: #edf5f0;
+        --shared-line: #00855b;
+      }
+      svg text {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 400 !important;
+        fill: #252c28;
+      }
+      svg text[fill='#fff'],
+      svg text[fill='#ffffff'] {
+        fill: #fff;
+      }
+      svg rect {
+        rx: 0;
+        ry: 0;
+      }
+      svg :is(path, rect, circle, ellipse, line, polyline, polygon) {
+        vector-effect: non-scaling-stroke;
+        stroke-linejoin: round;
+        stroke-linecap: butt;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Keep the task. Hide the camera?</strong> Exact calculations on 16 fictional
+      observations. Choose among four fixed encoders; no neural network is trained.
+    </p>
+    <form id="controls">
+      <div>
+        <label for="scenario">Data relationship</label
+        ><select id="scenario">
+          <option value="aligned">Balanced, shared task rule</option>
+          <option value="prior">Different class proportions</option>
+          <option value="reversed">Reversed target cue rule</option>
+        </select>
+      </div>
+      <div>
+        <label for="weight">Alignment weight λ</label
+        ><select id="weight">
+          <option value="0">0</option>
+          <option value="0.5" selected>0.5</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+      <div>
+        <label for="encoder">Representation choice</label
+        ><select id="encoder">
+          <option value="auto">Choose lowest displayed score</option>
+          <option value="raw">Keep cue and camera</option>
+          <option value="signal">Keep cue only</option>
+          <option value="domain">Keep camera only</option>
+          <option value="constant">Collapse to zero</option>
+        </select>
+      </div>
+      <div>
+        <label for="probe">Domain-classifier rule</label
+        ><select id="probe">
+          <option value="lookup">Lookup from encoded values</option>
+          <option value="constant">Constant source guess</option>
+        </select>
+      </div>
+    </form>
+    <div class="actions"><button type="button" id="reset">Reset inputs</button></div>
+    <output aria-live="polite"></output
+    ><svg id="mechanism" role="img" aria-labelledby="diagram-title diagram-desc"></svg>
+    <p id="score" class="equation"></p>
+    <table id="fits-table">
+      <caption>
+        Finite encoder selection; errors are fractions
+      </caption>
+      <thead>
+        <tr>
+          <th>Encoder</th>
+          <th>Source error</th>
+          <th>Domain error</th>
+          <th>Score J</th>
+        </tr>
+      </thead>
+      <tbody id="fits-data"></tbody>
+    </table>
+    <p class="note">
+      J = source task error − λ × domain error. Minimum wins; ties use cue + camera, cue, camera,
+      then zero. This finite 0–1 score illustrates a tradeoff; DANN trains differentiable losses
+      with gradient reversal.
+    </p>
+    <details id="data">
+      <summary>Inspect the data and fitting assumptions</summary>
+      <table id="data-table">
+        <caption>
+          All 16 records, compressed by repeated input and label
+        </caption>
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Cue q</th>
+            <th>Label y</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody id="data-values"></tbody>
+      </table>
+      <p>
+        Camera marker d is −1 in source and +1 in target. Label 0 means normal; 1 means defect.
+        Every row expands into distinct record IDs.
+      </p>
+      <p>
+        For each encoder, fit the source task head by minimum 0–1 error among constants 0/1 and each
+        coordinate's positive-threshold rule and its complement. Ties use that order, then
+        coordinate order. Target labels never enter fitting, encoding, domain probing, or automatic
+        selection; they are an oracle diagnostic only.
+      </p>
+      <p>
+        Lookup predicts each encoded value's majority domain on these same 16 records (ties choose
+        source). The weak probe always predicts source. Equal domain sizes make chance 50%. Neither
+        is a held-out estimate. Empirical total variation (TV) is half the sum of absolute
+        differences between source and target encoded frequencies. The optimal lookup has accuracy
+        (1 + TV)/2 on this balanced fixture.
+      </p>
+      <p>
+        These fixed encoders cannot establish real transfer, causal features, or a neural
+        optimizer's behavior. The reversed-rule case changes target labels while leaving all
+        observed features unchanged.
+      </p>
+    </details>
+    <script>
+      const encoders = [
+        { id: 'raw', name: 'Cue + camera', map: (r) => [r.q, r.d] },
+        { id: 'signal', name: 'Cue only', map: (r) => [r.q] },
+        { id: 'domain', name: 'Camera only', map: (r) => [r.d] },
+        { id: 'constant', name: 'Zero', map: () => [0] },
+      ];
+      const key = (z) => JSON.stringify(z);
+      function records(scenario) {
+        return ['source', 'target'].flatMap((domain) =>
+          Array.from({ length: 8 }, (_, i) => {
+            const minus = scenario === 'prior' ? (domain === 'source' ? 6 : 2) : 4,
+              q = i < minus ? -1 : 1;
+            return {
+              id: domain[0] + (i + 1),
+              domain,
+              q,
+              d: domain === 'source' ? -1 : 1,
+              y: scenario === 'reversed' && domain === 'target' ? Number(q < 0) : Number(q > 0),
+            };
+          }),
+        );
+      }
+      function fit(data, e, weight, probe) {
+        const src = data.filter((r) => r.domain === 'source'),
+          target = data.filter((r) => r.domain === 'target');
+        const heads = [
+          { name: 'Always normal', run: () => 0 },
+          { name: 'Always defect', run: () => 1 },
+        ];
+        e.map(src[0]).forEach((_, j) => {
+          heads.push(
+            {
+              name:
+                (e.id === 'domain'
+                  ? 'Camera d'
+                  : e.id === 'constant'
+                    ? 'Constant z'
+                    : j === 0
+                      ? 'Cue q'
+                      : 'Camera d') + ' > 0',
+              run: (z) => Number(z[j] > 0),
+            },
+            {
+              name:
+                (e.id === 'domain'
+                  ? 'Camera d'
+                  : e.id === 'constant'
+                    ? 'Constant z'
+                    : j === 0
+                      ? 'Cue q'
+                      : 'Camera d') + ' ≤ 0',
+              run: (z) => Number(z[j] <= 0),
+            },
+          );
+        });
+        const error = (rows, h) => rows.filter((r) => h.run(e.map(r)) !== r.y).length / rows.length;
+        const head = heads.reduce(
+          (best, h) => (error(src, h) < error(src, best) ? h : best),
+          heads[0],
+        );
+        const bins = new Map();
+        for (const r of data) {
+          const k = key(e.map(r));
+          if (!bins.has(k)) bins.set(k, { z: e.map(r), source: 0, target: 0 });
+          bins.get(k)[r.domain]++;
+        }
+        const distribution = [...bins.values()],
+          correct =
+            probe === 'constant'
+              ? src.length
+              : distribution.reduce((n, b) => n + Math.max(b.source, b.target), 0);
+        const sourceError = error(src, head),
+          targetError = error(target, head),
+          domainError = 1 - correct / data.length,
+          tv =
+            distribution.reduce(
+              (sum, b) => sum + Math.abs(b.source / src.length - b.target / target.length),
+              0,
+            ) / 2;
+        return {
+          id: e.id,
+          name: e.name,
+          head: head.name,
+          sourceError,
+          targetError,
+          domainError,
+          tv,
+          score: sourceError - weight * domainError,
+          distribution,
+        };
+      }
+      function compute(scenario, weight, choice, probe, data = records(scenario)) {
+        const fits = encoders.map((e) => fit(data, e, weight, probe));
+        const selected =
+          choice === 'auto'
+            ? fits.reduce((a, b) => (b.score < a.score ? b : a))
+            : fits.find((f) => f.id === choice);
+        return { scenario, weight, choice, probe, data, fits, selected };
+      }
+      const fmt = (n) => n.toFixed(2),
+        pct = (n) => Math.round(n * 100) + '%';
+      function draw(r) {
+        const s = r.selected,
+          m = innerWidth <= 420,
+          w = m ? 328 : 680,
+          h = (m ? 760 : 630) + Math.max(0, s.distribution.length - 2) * 45;
+        const text = (x, y, size, t, b = false) =>
+          '<text x="' +
+          x +
+          '" y="' +
+          y +
+          '" font-size="' +
+          size +
+          '"' +
+          (b ? ' font-weight="700"' : '') +
+          '>' +
+          t +
+          '</text>';
+        const box = (x, y, width, height) =>
+          '<rect x="' +
+          x +
+          '" y="' +
+          y +
+          '" width="' +
+          width +
+          '" height="' +
+          height +
+          '" rx="8" fill="var(--panel)" stroke="var(--line)"/>';
+        let svg =
+          '<title id="diagram-title">A shared cue, two cameras, and two prediction tasks</title><desc id="diagram-desc">Computed encoded counts and task diagnostics from sixteen fictional camera observations.</desc>';
+        svg +=
+          box(0, 0, w, m ? 142 : 115) +
+          text(14, 29, 18, 'Inputs: eight records per camera', true) +
+          text(14, 60, 15, 'Source: (q, −1); target: (q, +1)') +
+          text(14, 88, 14, 'q = −1 or +1; y = normal or defect');
+        if (m) svg += text(14, 119, 13, 'Target labels: evaluation only.');
+        svg += text(w / 2 - 8, m ? 168 : 143, 24, '↓');
+        const ey = m ? 185 : 160;
+        svg +=
+          box(0, ey, w, 95) +
+          text(14, ey + 30, 18, 'Encoder: ' + s.name, true) +
+          text(
+            14,
+            ey + 61,
+            14,
+            s.id === 'raw'
+              ? 'z = (q, d)'
+              : s.id === 'signal'
+                ? 'z = q'
+                : s.id === 'domain'
+                  ? 'z = d'
+                  : 'z = 0 for every observation',
+          );
+        const ry = ey + 118;
+        svg += m
+          ? text(w / 2 - 6, ey + 114, 18, '↓')
+          : text(160, ey + 114, 18, '↓') + text(506, ey + 114, 18, '↓');
+        if (m) {
+          svg +=
+            box(0, ry, w, 110) +
+            text(14, ry + 29, 17, 'Task head: ' + s.head, true) +
+            text(14, ry + 60, 15, 'Source: ' + 8 * (1 - s.sourceError) + '/8 correct') +
+            text(14, ry + 88, 15, 'Target check: ' + 8 * (1 - s.targetError) + '/8 correct');
+          svg +=
+            box(0, ry + 125, w, 92) +
+            text(14, ry + 154, 17, 'Domain classifier', true) +
+            text(
+              14,
+              ry + 184,
+              15,
+              16 * (1 - s.domainError) + '/16 correct (' + pct(1 - s.domainError) + ')',
+            );
+        } else {
+          svg +=
+            box(0, ry, 334, 110) +
+            box(346, ry, 334, 110) +
+            text(14, ry + 28, 17, 'Task: ' + s.head, true) +
+            text(14, ry + 58, 15, 'Source: ' + 8 * (1 - s.sourceError) + '/8 correct') +
+            text(14, ry + 87, 15, 'Target check: ' + 8 * (1 - s.targetError) + '/8 correct') +
+            text(360, ry + 28, 17, 'Domain classifier', true) +
+            text(
+              360,
+              ry + 60,
+              15,
+              16 * (1 - s.domainError) + '/16 correct (' + pct(1 - s.domainError) + ')',
+            );
+        }
+        const by = m ? ry + 249 : ry + 145;
+        svg +=
+          text(0, by, 17, 'Encoded counts by domain', true) +
+          text(0, by + 27, 13, 'S (top) = source; T (bottom) = target.');
+        s.distribution.forEach((b, i) => {
+          const y = by + 60 + i * 45;
+          svg +=
+            text(0, y, 13, 'z=' + key(b.z)) +
+            '<rect x="' +
+            (m ? 104 : 180) +
+            '" y="' +
+            (y - 17) +
+            '" width="' +
+            b.source * (m ? 15 : 35) +
+            '" height="8" fill="var(--accent)"/><rect x="' +
+            (m ? 104 : 180) +
+            '" y="' +
+            (y - 6) +
+            '" width="' +
+            b.target * (m ? 15 : 35) +
+            '" height="8" fill="var(--band)"/>' +
+            text(m ? 238 : 490, y, 13, 'S ' + b.source + ' · T ' + b.target);
+        });
+        svg +=
+          text(
+            0,
+            h - 70,
+            14,
+            'Encoded distributions: ' +
+              (s.tv === 0 ? 'equal.' : s.tv === 1 ? 'disjoint.' : 'partly overlapping.'),
+          ) +
+          text(0, h - 45, 13, 'Domain difference: ' + fmt(s.tv) + ' (0 = equal; 1 = disjoint).') +
+          text(0, h - 20, 13, 'No guarantee of target task accuracy.');
+        const el = document.querySelector('#mechanism');
+        el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        el.innerHTML = svg;
+      }
+      let report;
+      function render() {
+        report = compute(
+          document.querySelector('#scenario').value,
+          +document.querySelector('#weight').value,
+          document.querySelector('#encoder').value,
+          document.querySelector('#probe').value,
+        );
+        const s = report.selected;
+        document.querySelector('output').textContent =
+          s.name +
+          '. Source ' +
+          pct(1 - s.sourceError) +
+          '. Target check ' +
+          pct(1 - s.targetError) +
+          '. Domain classifier ' +
+          pct(1 - s.domainError) +
+          '.';
+        document.querySelector('#score').textContent =
+          'Selected score J = ' +
+          fmt(s.score) +
+          '; λ = ' +
+          report.weight +
+          '. Target labels do not select the encoder.';
+        document.querySelector('#fits-data').innerHTML = report.fits
+          .map(
+            (f) =>
+              '<tr><th scope="row">' +
+              f.name +
+              (f.id === s.id ? ' ✓' : '') +
+              '</th><td>' +
+              fmt(f.sourceError) +
+              '</td><td>' +
+              fmt(f.domainError) +
+              '</td><td>' +
+              fmt(f.score) +
+              '</td></tr>',
+          )
+          .join('');
+        const rows = new Map();
+        for (const r of report.data) {
+          const k = r.domain + ',' + r.q + ',' + r.y;
+          if (!rows.has(k)) rows.set(k, { ...r, n: 0 });
+          rows.get(k).n++;
+        }
+        document.querySelector('#data-values').innerHTML = [...rows.values()]
+          .map(
+            (r) =>
+              '<tr><td>' +
+              r.domain +
+              '</td><td>' +
+              r.q +
+              '</td><td>' +
+              r.y +
+              '</td><td>' +
+              r.n +
+              '</td></tr>',
+          )
+          .join('');
+        draw(report);
+      }
+      document.querySelector('form').addEventListener('change', render);
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('form').reset();
+        document.querySelectorAll('details').forEach((d) => (d.open = false));
+        render();
+      });
+      addEventListener('resize', () => draw(report));
+      render();
+    </script>
+  </body>
+</html>

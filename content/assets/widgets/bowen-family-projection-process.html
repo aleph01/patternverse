@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The same worry, different participation</title><style>
+:root{--font-size-base:16px;--foreground:#252c28;--background:#fff;--muted:#f1f2ef;--muted-foreground:#58615b;--border:#cdd3ce;--viz-series-1:#007a4d;--viz-series-2:#9a5938;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;padding:12px;font:16px/1.5 system-ui,sans-serif;color:var(--foreground);background:#fff}
+h3{font-size:1.05rem;line-height:1.4;margin:0}p{margin:.5rem 0}.viz-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:inherit;font-size:.88rem;line-height:1.4;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--foreground);cursor:pointer}
+.btn:hover:not(:disabled),.btn[aria-pressed=true]{background:#eef6f0;border-color:#007a4d}.btn:focus-visible{outline:2px solid #007a4d;outline-offset:3px}.btn:disabled{opacity:.45;cursor:default}
+.btn-primary{border-color:#007a4d}.text-small{font-size:.85rem;color:var(--muted-foreground)}.tabular-nums{font-variant-numeric:tabular-nums}
+@media(max-width:400px){body{padding:8px;font-size:15px}}
+</style></head><body>
+<div id="family-projection-process-v1">
+  <h3>From a worry to a view of the child</h3>
+  <div class="viz-row" role="group" aria-label="Compare the adults’ participation at the same moment">
+    <button class="btn" type="button" data-story="usual" aria-pressed="true">Familiar response</button>
+    <button class="btn" type="button" data-story="different" aria-pressed="false">Different participation</button>
+  </div>
+  <div class="fp-stage">
+    <span id="fp-step" class="text-small tabular-nums"></span>
+    <h3 id="fp-heading"></h3>
+  </div>
+  <svg id="fp-figure" class="fp-figure" role="img" aria-labelledby="fp-title fp-description">
+    <title id="fp-title">Elena, David, and Ava: responding to a presentation worry</title>
+    <desc id="fp-description">An invented comparison of treating worry as incapacity and examining a specific difficulty.</desc>
+    <g id="fp-marks"></g>
+  </svg>
+  <div id="fp-exchange" aria-live="polite"></div>
+  <div class="viz-row">
+    <button class="btn" type="button" id="fp-back">Previous</button>
+    <button class="btn btn-primary" type="button" id="fp-next">Next moment</button>
+  </div>
+  <span class="text-small">Invented teaching illustration · A moment in a possible longer process, not a diagnosis. School supports remain available.</span>
+</div>
+<style>
+  #family-projection-process-v1 {display:grid;gap:calc(var(--font-size-base) * .8);color:var(--foreground);}
+  #family-projection-process-v1 > h3 {padding-right:90px;}
+  #family-projection-process-v1 .fp-stage {display:grid;gap:calc(var(--font-size-base) * .25);}
+  #family-projection-process-v1 .fp-figure {display:block;width:100%;}
+  #family-projection-process-v1 .fp-figure text {fill:var(--foreground);font-family:inherit;font-size:12px;font-weight:400;text-anchor:middle;}
+  #family-projection-process-v1 .fp-figure .fp-name {font-weight:500;}
+  #family-projection-process-v1 #fp-exchange {min-height:calc(var(--font-size-base) * 5);}
+</style>
+<script>
+(() => {
+  const root=document.getElementById('family-projection-process-v1');
+  const svg=root.querySelector('#fp-figure');
+  const layer=root.querySelector('#fp-marks');
+  const buttons=Array.from(root.querySelectorAll('[data-story]'));
+  const previous=root.querySelector('#fp-back');
+  const next=root.querySelector('#fp-next');
+  const opening={heading:'Ava names a worry',exchange:'Ava, 11: “I might forget my first line.” Both parents are under work strain. The presentation is still ahead.',top:['Work strain','unaddressed'],left:['Hears','the worry'],right:['Hears','the worry'],child:['Names a worry'],focus:false};
+  const stories={
+    usual:[
+      opening,
+      {heading:'The worry becomes evidence of incapacity',exchange:'Elena: “This is too much for you.” David: “We need to make sure you don’t get upset.” They assume what the worry means.',top:['Agree on','child focus'],left:['Assumes','incapacity'],right:['Joins the','protective focus'],child:['Hears their conclusion'],focus:true},
+      {heading:'Their help organizes the rehearsal',exchange:'The parents rewrite every line and repeatedly check the rehearsal. Ava: “Is this right?” Her checking seems to confirm their concern.',top:['Direct the','rehearsal'],left:['Rewrites','the speech'],right:['Checks','each line'],child:['Seeks approval'],focus:true},
+      {heading:'A polished speech; the original worry remains',exchange:'The parents approve the speech and feel relieved. Ava keeps asking whether she is ready. Their work strain is unaddressed; the presentation is still ahead.',top:['Work strain','unaddressed'],left:['Readiness =','adult approval'],right:['Readiness =','adult approval'],child:['Still asks if ready'],focus:true}
+    ],
+    different:[
+      opening,
+      {heading:'Elena asks what is actually difficult',exchange:'Elena: “Which part worries you?” Ava: “Forgetting the first line.” David notices his urge to jump to the worst outcome.',top:['Notice their','own reactions'],left:['Asks about','the difficulty'],right:['Pauses his','assumption'],child:['Names the difficulty'],focus:false},
+      {heading:'Help is specific; Ava still participates',exchange:'Elena: “I can listen once while you try your cue cards.” Cue cards are already permitted. Ava tries; she is still nervous.',top:['Keep help','specific'],left:['Listens to','one attempt'],right:['Does not take','over the speech'],child:['Tries the cue cards'],focus:false},
+      {heading:'The adults address their own concerns too',exchange:'Ava has practiced and remains nervous. The parents discuss their work pressures separately and stay attentive to her actual needs. The presentation is still ahead.',top:['Discuss their','work pressures'],left:['Available','for support'],right:['Available','for support'],child:['Still nervous'],focus:false}
+    ]
+  };
+  let state={article:'family-projection-process',story:'usual',step:0};
+  function restore(snapshot){
+    const s=snapshot && snapshot.modelContent;
+    if(s && s.article===state.article && Object.hasOwn(stories,s.story) && Number.isInteger(s.step) && s.step>=0 && s.step<4)state={article:state.article,story:s.story,step:s.step};
+  }
+  restore(window.openai && window.openai.widgetState);
+  function save(){
+    if(window.openai && typeof window.openai.setWidgetState==='function')Promise.resolve(window.openai.setWidgetState({modelContent:{...state},privateContent:null})).catch(()=>{});
+  }
+  function element(tag,attrs,parent){
+    const n=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    Object.entries(attrs||{}).forEach(([k,v])=>n.setAttribute(k,String(v)));
+    if(parent)parent.appendChild(n);
+    return n;
+  }
+  function label(x,y,lines,cls){
+    const n=element('text',{x,y,class:cls||''},layer);
+    lines.forEach((line,i)=>{const span=element('tspan',{x,dy:i?17:0},n);span.textContent=line;});
+    return n;
+  }
+  function person(x,y,name,role,top){
+    element('circle',{cx:x,cy:y,r:22,fill:'var(--muted)',stroke:'var(--border)','stroke-width':1},layer);
+    label(x,y+4,[name[0]],'fp-name');label(x,top?19:305,[name],'fp-name');label(x,top?38:324,[role]);
+  }
+  function draw(){
+    const frame=stories[state.story][state.step];
+    const width=Math.max(280,Math.round(svg.getBoundingClientRect().width||root.getBoundingClientRect().width||600));
+    svg.setAttribute('viewBox','0 0 '+width+' 370');svg.setAttribute('height',370);
+    layer.replaceChildren();
+    const left=width*.23,right=width*.77,mid=width*.5;
+    element('line',{x1:left+26,y1:75,x2:right-26,y2:75,stroke:'var(--muted-foreground)','stroke-width':1},layer);
+    for(const x of [left,right])element('line',{x1:x+(x===left?5:-5),y1:101,x2:mid+(x===left?-23:23),y2:246,stroke:frame.focus?'var(--viz-series-1)':'var(--muted-foreground)','stroke-width':frame.focus?2:1},layer);
+    label(mid,116,frame.top);label(width*.18,188,frame.left);label(width*.82,188,frame.right);
+    person(left,75,'Elena','Parent',true);person(right,75,'David','Parent',true);person(mid,265,'Ava','Child, 11',false);label(mid,355,frame.child);
+    root.querySelector('#fp-step').textContent='Moment '+(state.step+1)+' of 4';
+    root.querySelector('#fp-heading').textContent=frame.heading;
+    root.querySelector('#fp-exchange').textContent=frame.exchange;
+    root.querySelector('#fp-description').textContent=frame.heading+'. '+frame.exchange+' Elena–David: '+frame.top.join(' ')+'. Elena’s participation: '+frame.left.join(' ')+'. David’s participation: '+frame.right.join(' ')+'. Ava: '+frame.child.join(' ')+'. Line lengths and colors do not measure anxiety or predict outcomes.';
+    buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.story===state.story)));
+    previous.disabled=state.step===0;next.disabled=state.step===3;
+  }
+  buttons.forEach(b=>b.addEventListener('click',()=>{state.story=b.dataset.story;draw();save();}));
+  previous.addEventListener('click',()=>{if(state.step>0){state.step--;draw();save();}});
+  next.addEventListener('click',()=>{if(state.step<3){state.step++;draw();save();}});
+  window.addEventListener('openai:set_globals',event=>{if(event.detail && event.detail.globals && event.detail.globals.widgetState){restore(event.detail.globals.widgetState);draw();}});
+  new ResizeObserver(()=>draw()).observe(root);
+  draw();
+})();
+</script>
+
+</body></html>

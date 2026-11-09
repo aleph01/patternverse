@@ -48,31 +48,6 @@ Follow the Consequences is especially helpful when a belief sounds compelling in
 
 What the pattern contributes is an account of the belief in use. A statement stops being only a proposition and becomes part of an ongoing arrangement of attention, behavior, and response. Seeing that arrangement makes revision more exact. The team can preserve careful work while changing how errors are reported; the writer can preserve quality while choosing earlier readers; the friend can preserve consideration while making disagreement possible. Each change responds to a consequence that has been made visible.
 
-## Pattern details
-
-### Use when
-
-- A plausible rule has unexamined effects in use.
-- Immediate benefits obscure later costs.
-
-### Goals
-
-- Make intermediate causal steps inspectable.
-- Compare a rule’s intended purpose with its observed effects.
-
-### Mechanisms
-
-- consequence analysis
-- behavioral feedback
-
-### Not ideal when
-
-- Possible consequences are being presented as inevitable or used as threats.
-
-### Difficulty
-
-easy
-
 ## Related patterns
 
 - [[change-the-frame-size|Change the Frame Size]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Consequence; chapter 5, printed pages 127–130.
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask rule {
+rule = !ask {
     Name a working rule
 
     Choose an everyday belief or rule you act on. For example, 'I must agree to every request to be reliable'.
 }
-!ask benefit {
+benefit = !ask {
     Notice the immediate benefit
 
     What does following the rule provide or protect in the short term? What immediate costs have you observed?
 }
-!ask chain {
+chain = !ask {
     Trace the behavior
 
     If you follow it, what do you tend to do next, and what happens after that? Describe a concrete sequence rather than a worst-case story.
 }
-!ask later {
+later = !ask {
     Separate evidence from prediction
 
     Which later consequences have actually happened, and which are only anticipated? Include helpful as well as unhelpful effects.
 }
-!ask revision {
+revision = !ask {
     Consider a qualified rule
 
     Would a more flexible rule keep the legitimate benefit with fewer costs? Unwanted consequences alone do not prove a belief false.
 }
-!ask next {
+next = !ask {
     Choose a bounded test
 
     What small, safe action could help you compare the original and revised rules? Nothing has been carried out or scheduled for you.

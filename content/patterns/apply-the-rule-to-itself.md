@@ -48,31 +48,6 @@ Apply the Rule to Itself helps when a statement exempts itself without explanati
 
 The most useful outcome is often a better principle. The editor gains a standard that can accommodate clear complexity. The committee brings its own decisions within the transparency it expects. The person concerned about control can distinguish coercion from requests and advice. A rule that can explain its own application is easier to trust, partly because its boundaries are visible rather than being improvised whenever the rule becomes inconvenient.
 
-## Pattern details
-
-### Use when
-
-- A broad rule appears to exempt itself.
-- Self-application may reveal missing scope or inconsistency.
-
-### Goals
-
-- Clarify a principle’s boundaries.
-- Distinguish contradiction from noncompliance and useful qualification.
-
-### Mechanisms
-
-- self-reference
-- consistency checking
-
-### Not ideal when
-
-- A clever retort would misrepresent ordinary language or distract from a valid concern.
-
-### Difficulty
-
-medium
-
 ## Related patterns
 
 - [[look-for-the-exception|Look for the Exception]]
@@ -89,32 +64,32 @@ Robert Dilts, Sleight of Mouth, Apply to Self; chapter 8, printed pages 234–23
 !show {
     Choose a manageable, everyday situation. This is self-reflection, not treatment or emergency care. You can stop at any time. Do not use reframing to excuse harm, deny facts, or override a boundary. Your answers are not saved when you leave.
 }
-!ask rule {
+rule = !ask {
     State the principle fairly
 
     Choose an everyday rule or claim. Write its strongest reasonable version rather than a version designed to be easy to attack.
 }
-!ask scope {
+scope = !ask {
     Check its scope
 
     Does the rule actually apply to statements or actions like itself? Note any legitimate limitation or exception.
 }
-!ask test {
+test = !ask {
     Apply the same standard
 
     If it is within scope, how does the rule or the way it is being used meet its own standard? If not, describe why this test does not fit.
 }
-!ask meaning {
+meaning = !ask {
     Interpret the result carefully
 
     Is there a contradiction, inconsistent behavior, or a legitimate exception? Someone failing to follow a rule does not by itself make the rule false.
 }
-!ask revision {
+revision = !ask {
     Consider a fair qualification
 
     What more consistent or precise version would preserve the legitimate concern? Avoid using this as a gotcha against a person.
 }
-!ask next {
+next = !ask {
     Return to the practical issue
 
     What respectful question or action would help resolve the original issue rather than merely win the argument?
